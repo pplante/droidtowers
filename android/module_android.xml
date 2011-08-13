@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_android" default="compile.module.android">
+  <dirname property="module.android.basedir" file="${ant.file.module_android}"/>
+  
+  <property name="module.jdk.home.android" value="${jdk.home.android_2.3.3_platform}"/>
+  <property name="module.jdk.bin.android" value="${jdk.bin.android_2.3.3_platform}"/>
+  <property name="module.jdk.classpath.android" value="jdk.classpath.android_2.3.3_platform"/>
+  
+  <property name="compiler.args.android" value="${compiler.args}"/>
+  
+  <property name="android.output.dir" value="${module.android.basedir}/../../libgdx-skeleton/out/production/android"/>
+  <property name="android.testoutput.dir" value="${module.android.basedir}/../../libgdx-skeleton/out/test/android"/>
+  
+  <path id="android.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="android.module.production.classpath">
+    <path refid="${module.jdk.classpath.android}"/>
+    <path refid="library.android.classpath"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx.jar"/>
+  </path>
+  
+  <path id="android.runtime.production.module.classpath">
+    <pathelement location="${android.output.dir}"/>
+    <path refid="library.android.classpath"/>
+    <path refid="main.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="android.module.classpath">
+    <path refid="${module.jdk.classpath.android}"/>
+    <pathelement location="${android.output.dir}"/>
+    <path refid="library.android.classpath"/>
+    <pathelement location="${main.testoutput.dir}"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx.jar"/>
+  </path>
+  
+  <path id="android.runtime.module.classpath">
+    <pathelement location="${android.testoutput.dir}"/>
+    <pathelement location="${android.output.dir}"/>
+    <path refid="library.android.classpath"/>
+    <path refid="main.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.android">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.android">
+    <patternset refid="excluded.from.module.android"/>
+  </patternset>
+  
+  <path id="android.module.sourcepath">
+    <dirset dir="${module.android.basedir}">
+      <include name="source"/>
+      <include name="gen"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.android" depends="compile.module.android.production,compile.module.android.tests" description="Compile module android"/>
+  
+  <target name="compile.module.android.production" depends="compile.module.main" description="Compile module android; production classes">
+    <mkdir dir="${android.output.dir}"/>
+    <javac destdir="${android.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.android}/javac">
+      <compilerarg line="${compiler.args.android}"/>
+      <bootclasspath refid="android.module.bootclasspath"/>
+      <classpath refid="android.module.production.classpath"/>
+      <src refid="android.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.android"/>
+    </javac>
+    
+    <copy todir="${android.output.dir}">
+      <fileset dir="${module.android.basedir}/source">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.android.basedir}/gen">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.android.tests" depends="compile.module.android.production" description="compile module android; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.android" description="cleanup module">
+    <delete dir="${android.output.dir}"/>
+    <delete dir="${android.testoutput.dir}"/>
+  </target>
+</project>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_desktop" default="compile.module.desktop">
+  <dirname property="module.desktop.basedir" file="${ant.file.module_desktop}"/>
+  
+  <property name="module.jdk.home.desktop" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.desktop" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.desktop" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.desktop" value="${compiler.args}"/>
+  
+  <property name="desktop.output.dir" value="${module.desktop.basedir}/../../../libgdx-skeleton/out/production/desktop"/>
+  <property name="desktop.testoutput.dir" value="${module.desktop.basedir}/../../../libgdx-skeleton/out/test/desktop"/>
+  
+  <path id="desktop.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="desktop.module.production.classpath">
+    <path refid="${module.jdk.classpath.desktop}"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx.jar"/>
+  </path>
+  
+  <path id="desktop.runtime.production.module.classpath">
+    <pathelement location="${desktop.output.dir}"/>
+    <path refid="library.desktop.classpath"/>
+    <path refid="main.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="desktop.module.classpath">
+    <path refid="${module.jdk.classpath.desktop}"/>
+    <pathelement location="${desktop.output.dir}"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${main.testoutput.dir}"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx.jar"/>
+  </path>
+  
+  <path id="desktop.runtime.module.classpath">
+    <pathelement location="${desktop.testoutput.dir}"/>
+    <pathelement location="${desktop.output.dir}"/>
+    <path refid="library.desktop.classpath"/>
+    <path refid="main.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.desktop">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.desktop">
+    <patternset refid="excluded.from.module.desktop"/>
+  </patternset>
+  
+  <path id="desktop.module.sourcepath">
+    <dirset dir="${module.desktop.basedir}/../../desktop/desktop">
+      <include name="source"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.desktop" depends="compile.module.desktop.production,compile.module.desktop.tests" description="Compile module desktop"/>
+  
+  <target name="compile.module.desktop.production" depends="compile.module.main" description="Compile module desktop; production classes">
+    <mkdir dir="${desktop.output.dir}"/>
+    <javac destdir="${desktop.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.desktop}/javac">
+      <compilerarg line="${compiler.args.desktop}"/>
+      <bootclasspath refid="desktop.module.bootclasspath"/>
+      <classpath refid="desktop.module.production.classpath"/>
+      <src refid="desktop.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.desktop"/>
+    </javac>
+    
+    <copy todir="${desktop.output.dir}">
+      <fileset dir="${module.desktop.basedir}/../../desktop/desktop/source">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.desktop.tests" depends="compile.module.desktop.production" description="compile module desktop; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.desktop" description="cleanup module">
+    <delete dir="${desktop.output.dir}"/>
+    <delete dir="${desktop.testoutput.dir}"/>
+  </target>
+</project>
