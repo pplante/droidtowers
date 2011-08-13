@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="libgdx-skeleton" default="all">
-  
-  
+
+
   <property file="build.properties"/>
   <!-- Uncomment the following property if no tests compilation is needed -->
-  <!-- 
+  <!--
   <property name="skip.tests" value="true"/>
    -->
-  
+
   <!-- Compiler options -->
-  
+
   <property name="compiler.debug" value="on"/>
   <property name="compiler.generate.no.warnings" value="off"/>
   <property name="compiler.args" value=""/>
@@ -54,16 +54,16 @@
     <include name="**/?*.tld"/>
     <include name="**/?*.ftl"/>
   </patternset>
-  
+
   <!-- JDK definitions -->
-  
+
   <property name="jdk.bin.android_2.3.3_platform" value="${jdk.home.android_2.3.3_platform}/../../../../../System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin"/>
   <path id="jdk.classpath.android_2.3.3_platform">
     <fileset dir="${jdk.home.android_2.3.3_platform}">
       <include name="platforms/android-10/android.jar"/>
     </fileset>
   </path>
-  
+
   <property name="jdk.bin.1.6" value="${jdk.home.1.6}/bin"/>
   <path id="jdk.classpath.1.6">
     <fileset dir="${jdk.home.1.6}">
@@ -88,41 +88,41 @@
       <include name="lib/ext/sunpkcs11.jar"/>
     </fileset>
   </path>
-  
+
   <property name="project.jdk.home" value="${jdk.home.1.6}"/>
   <property name="project.jdk.bin" value="${jdk.bin.1.6}"/>
   <property name="project.jdk.classpath" value="jdk.classpath.1.6"/>
-  
-  
+
+
   <!-- Project Libraries -->
-  
+
   <path id="library.android.classpath">
     <fileset dir="${basedir}/../libgdx-skeleton/android/libs">
       <patternset refid="library.patterns"/>
     </fileset>
   </path>
-  
+
   <path id="library.desktop.classpath">
     <fileset dir="${basedir}/../libgdx-skeleton/desktop/libs">
       <patternset refid="library.patterns"/>
     </fileset>
   </path>
-  
+
   <!-- Modules -->
-  
+
   <import file="${basedir}/../libgdx-skeleton/main/module_main.xml"/>
-  
+
   <import file="${basedir}/../libgdx-skeleton/android/module_android.xml"/>
-  
+
   <import file="${basedir}/../libgdx-skeleton/desktop/module_desktop.xml"/>
-  
+
   <target name="init" description="Build initialization">
     <!-- Perform any build initialization in this target -->
   </target>
-  
+
   <target name="clean" depends="clean.module.main, clean.module.android, clean.module.desktop" description="cleanup all"/>
-  
+
   <target name="build.modules" depends="init, clean, compile.module.main, compile.module.android, compile.module.desktop" description="build all modules"/>
-  
+
   <target name="all" depends="build.modules" description="build all"/>
 </project>

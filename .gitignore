@@ -1,3 +1,4 @@
+out/
 main/libs/gdx.jar
 main/libs/gdx-sources.jar
 desktop/libs/gdx-natives.jar

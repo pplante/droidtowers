@@ -4,7 +4,9 @@
       <root url="file://$PROJECT_DIR$/main/libs" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/" />
+    </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/main/libs" recursive="false" />
   </library>
 </component>

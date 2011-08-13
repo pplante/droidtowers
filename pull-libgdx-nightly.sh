@@ -1,6 +1,6 @@
 #! /bin/bash
 
-TODAYS_DATE=`date +%C%y%m%d`
+TODAYS_DATE=`date -u +%C%y%m%d`
 NIGHTLY_NAME="libgdx-nightly-${TODAYS_DATE}"
 NIGHTLY_URL="http://libgdx.l33tlabs.org/${NIGHTLY_NAME}.zip"
 DOWNLOAD_PATH="/tmp/${NIGHTLY_NAME}.zip"
