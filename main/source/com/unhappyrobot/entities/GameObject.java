@@ -19,7 +19,7 @@ public class GameObject {
     private Sprite sprite;
     protected Body worldBody;
     private float angle;
-    private PhysicsShapes physicsShape;
+    protected PhysicsShapes physicsShape;
     protected float radius;
 
     public GameObject(float x, float y, float scaleX, float scaleY) {
@@ -63,7 +63,7 @@ public class GameObject {
         return position;
     }
 
-    private void setPosition(float x, float y) {
+    public void setPosition(float x, float y) {
         position.set(x, y);
         sprite.setPosition(x, y);
     }
@@ -74,6 +74,7 @@ public class GameObject {
 
         sprite.setOrigin(origin.x, origin.y);
         sprite.setSize(size.x, size.y);
+        sprite.setScale(scale.x, scale.y);
     }
 
     public Vector2 getSize() {

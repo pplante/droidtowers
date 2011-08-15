@@ -14,7 +14,7 @@ public class GameLayer {
     private Vector2 size;
 
     private List<GameObject> gameObjects;
-    private Matrix4 matrix;
+    protected Matrix4 matrix;
 
     public GameLayer() {
         gameObjects = new ArrayList<GameObject>();

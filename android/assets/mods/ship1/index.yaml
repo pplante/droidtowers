@@ -1,5 +1,0 @@
-name: Star Ship 1
-sprites:
-    main:
-        animated: no
-        filename: sprites/ship1.png

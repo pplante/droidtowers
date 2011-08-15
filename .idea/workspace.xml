@@ -24,6 +24,21 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <line_breakpoints>
+      <breakpoint url="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/Texture.java" line="161" class="com.badlogic.gdx.graphics.Texture" package="com.badlogic.gdx.graphics">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -64,11 +79,73 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Game.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Game.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="13" selection-start="2433" selection-end="2433" vertical-scroll-proportion="0.6549391">
+            <state line="175" column="58" selection-start="6154" selection-end="6154" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScriptScope.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/ScriptScope.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="68" selection-start="890" selection-end="890" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScriptedGameObject.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/ScriptedGameObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="42" selection-start="850" selection-end="850" vertical-scroll-proportion="0.44414893">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerShip.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/PlayerShip.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="11" selection-start="279" selection-end="279" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameObject.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="11" selection-start="1083" selection-end="1083" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ModList.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/mods/ModList.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="34" selection-start="113" selection-end="113" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ModListItem.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/mods/ModListItem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="31" selection-start="258" selection-end="258" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -87,19 +164,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/game.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/BaseLayer.java" />
-        <option value="$PROJECT_DIR$/build.xml" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/Random.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TextureManager.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/DeferredManager.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/NovaSprite.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameLayer.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Asteroid.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/layers/WorldContactPointLayer.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/HttpRequest.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/mods/ModPackage.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/mods/ModList.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/mods/ModListItem.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/JavascriptGameObject.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/ScriptableGameObject.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/GameObject.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/ScriptScope.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/WorldManager.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/PlayerShip.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Asteroid.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/DeferredManager.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/ScriptedGameObject.java" />
       </list>
     </option>
   </component>
@@ -133,6 +213,18 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="underwater-main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Favorites" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -181,54 +273,44 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Favorites" />
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="underwater-main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="false" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.General" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Android Logcat" />
     <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="true" />
     <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="underwater-main" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="AndroidTargetDevices" value="30324F52864200EC" />
     <property name="MemberChooser.showClasses" value="true" />
-    <property name="GoToClass.includeLibraries" value="false" />
     <property name="GenerateAntBuildDialog.backupFiles" value="true" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="GoToClass.includeLibraries" value="false" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="com.unhappyrobot.utils.Random" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.unhappyrobot.scripting" />
+      <recent name="com.unhappyrobot.mods" />
+      <recent name="com.unhappyrobot.layers" />
       <recent name="com.unhappyrobot.entities" />
       <recent name="com.unhappyrobot.graphics" />
-      <recent name="com.unhappyrobot" />
     </key>
   </component>
   <component name="RunManager" selected="Application.DesktopGame">
@@ -427,21 +509,21 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946082" sideWeight="0.6709347" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42893726" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290653" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290653" sideWeight="0.49173257" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3290653" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946082" sideWeight="0.6722151" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.24946082" sideWeight="0.6722151" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277849" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3277849" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290653" sideWeight="0.50251615" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -519,101 +601,117 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/physics/box2d/PolygonShape.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/HttpRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="11" selection-start="926" selection-end="926" vertical-scroll-proportion="-0.77925533" />
+        <state line="29" column="5" selection-start="609" selection-end="609" vertical-scroll-proportion="0.67287236" />
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/Camera.java">
+    <entry file="jar://$PROJECT_DIR$/main/libs/snakeyaml-1.8.jar!/org/yaml/snakeyaml/constructor/Constructor.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="16" selection-start="2959" selection-end="2959" vertical-scroll-proportion="0.3328823" />
+        <state line="64" column="0" selection-start="3365" selection-end="3517" vertical-scroll-proportion="0.72689074" />
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/OrthographicCamera.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/mods/ModList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="13" selection-start="1000" selection-end="1000" vertical-scroll-proportion="-2.0718086" />
+        <state line="5" column="34" selection-start="113" selection-end="113" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/Stage.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/mods/ModListItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="13" selection-start="2618" selection-end="2618" vertical-scroll-proportion="-8.00532" />
+        <state line="9" column="31" selection-start="258" selection-end="258" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/SpriteBatch.java">
+    <entry file="jar://$PROJECT_DIR$/main/libs/js.jar!/org/mozilla/javascript/Scriptable.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1205" column="16" selection-start="35589" selection-end="35589" vertical-scroll-proportion="3.5106382" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/math/Matrix4.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="298" column="19" selection-start="9246" selection-end="9246" vertical-scroll-proportion="0.3328823" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/Sprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="8" selection-start="3522" selection-end="3522" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/physics/box2d/Shape.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="16" selection-start="1702" selection-end="1702" vertical-scroll-proportion="0.3324468">
+        <state line="10" column="21" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/TextureDict.java">
+    <entry file="file://$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Scriptable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="36" selection-start="1867" selection-end="1887" vertical-scroll-proportion="0.42219216">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-3.305851">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Asteroid.java">
+    <entry file="file://$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ScriptRuntime.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="13" selection-start="487" selection-end="487" vertical-scroll-proportion="0.43882978">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/utils/Random.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="24" selection-start="312" selection-end="312" vertical-scroll-proportion="0.38031915">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="66" selection-start="2321" selection-end="2321" vertical-scroll-proportion="0.3617021">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="21" selection-start="743" selection-end="743" vertical-scroll-proportion="0.2925532">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/PlayerShip.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="262" selection-end="262" vertical-scroll-proportion="0.32180852">
+        <state line="3788" column="13" selection-start="133224" selection-end="133224" vertical-scroll-proportion="0.4519621">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/WorldManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="19" selection-start="2406" selection-end="2406" vertical-scroll-proportion="1.6143616">
+        <state line="39" column="66" selection-start="1181" selection-end="1181" vertical-scroll-proportion="0.2486702">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/desktop/libs/gdx-backend-lwjgl.jar!/org/lwjgl/opengl/GL11.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1371" column="0" selection-start="67263" selection-end="67263" vertical-scroll-proportion="0.34453782">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/Texture.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="161" column="0" selection-start="5228" selection-end="5228" vertical-scroll-proportion="1.044655">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="13" selection-start="2433" selection-end="2433" vertical-scroll-proportion="0.6549391">
+        <state line="175" column="58" selection-start="6154" selection-end="6154" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/DeferredManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="5" selection-start="835" selection-end="835" vertical-scroll-proportion="-1.3989362">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/ScriptScope.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="68" selection-start="890" selection-end="890" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/PlayerShip.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="11" selection-start="279" selection-end="279" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="11" selection-start="1083" selection-end="1083" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/ScriptedGameObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="42" selection-start="850" selection-end="850" vertical-scroll-proportion="0.44414893">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -681,7 +779,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>desktop</last-edited>
+          <last-edited>main</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

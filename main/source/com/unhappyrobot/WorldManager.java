@@ -36,8 +36,8 @@ public class WorldManager {
     }
 
     public static void update() {
-        float timeDelta = DeferredManager.getCurrentTime() - getInstance().lastRunTime;
-        getInstance().lastRunTime = DeferredManager.getCurrentTime();
+        float timeDelta = DeferredManager.onGameThread().getCurrentTime() - getInstance().lastRunTime;
+        getInstance().lastRunTime = DeferredManager.onGameThread().getCurrentTime();
 
         for (GameObject gameObject : getInstance().gameObjects) {
             gameObject.beforePhysicsUpdate();
