@@ -59,7 +59,7 @@ public class Particle {
         totalLifespan = randomInt(1) + randomFloat();
         scaleOverLife = 1.5f / totalLifespan;
         alphaOverLife = 1.0f / totalLifespan;
-        currentScale = 0.0f;
+        currentScale = 0.25f;
         currentAlpha = 0.5f;
         velocity = new Vector2(randomFloat(), randomFloat());
 

@@ -1,6 +1,5 @@
 package com.unhappyrobot.effects;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.TextureDict;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -33,7 +32,6 @@ public class ParticleEngine extends GameObject {
 
         setMaxParticles(100);
         setMinActive(10);
-        System.out.println("hello?");
     }
 
     public ParticleEngine(Vector2 position, float scale) {
@@ -103,19 +101,13 @@ public class ParticleEngine extends GameObject {
             }
         }
 
-        System.out.printf("active: %d, inactive: %d\n", activeParticles.size(), inactiveParticles.size());
+//        System.out.printf("active: %d, inactive: %d\n", activeParticles.size(), inactiveParticles.size());
     }
 
     public void render(SpriteBatch batch) {
         for (Particle activeParticle : activeParticles) {
             activeParticle.render(batch);
         }
-
-        defaultSprite.setPosition(getPosition().x, getPosition().y);
-        defaultSprite.setScale(0.5f);
-        defaultSprite.setColor(Color.RED);
-//        defaultSprite.setOrigin(origin.x, origin.y);
-        defaultSprite.draw(batch);
     }
 
     public void setMinActive(int minActive) {
