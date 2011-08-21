@@ -15,10 +15,12 @@ public class GameLayer {
 
     private List<GameObject> gameObjects;
     protected Matrix4 matrix;
+    private boolean visible;
 
     public GameLayer() {
         gameObjects = new ArrayList<GameObject>();
         matrix = new Matrix4();
+        visible = true;
     }
 
     public void addChild(GameObject gameObject) {
@@ -31,7 +33,7 @@ public class GameLayer {
 
 		spriteBatch.setTransformMatrix(matrix);
         spriteBatch.begin();
-
+        spriteBatch.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
         for (GameObject gameObject : gameObjects) {
             gameObject.render(spriteBatch);
         }
@@ -49,5 +51,13 @@ public class GameLayer {
         for (GameObject gameObject : gameObjects) {
             gameObject.setupPhysics();
         }
+    }
+
+    public boolean isVisible() {
+        return this.visible;
+    }
+
+    protected void toggleVisibility() {
+        visible = !visible;
     }
 }

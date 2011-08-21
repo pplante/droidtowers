@@ -1,5 +1,6 @@
 package com.unhappyrobot.scripting;
 
+import com.badlogic.gdx.math.Vector2;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.JavaScriptException;
 import org.mozilla.javascript.Scriptable;
@@ -20,6 +21,7 @@ public class ScriptScope {
             scriptContext.setOptimizationLevel(-1);
             scriptScope = scriptContext.initStandardObjects();
             ScriptableObject.defineClass(scriptScope, ScriptedGameObject.class);
+//            ScriptableObject.defineClass(scriptScope, ScriptedVector2.class);
 
             Object jsOut = Context.javaToJS(System.out, scriptScope);
             ScriptableObject.putProperty(scriptScope, "out", jsOut);

@@ -3,15 +3,15 @@ package com.unhappyrobot;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.unhappyrobot.entities.GameObject;
+import com.unhappyrobot.physics.PhysicsBody;
+import com.unhappyrobot.physics.PhysicsBodyPoint;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.unhappyrobot.entities.GameObject.PhysicsShapes;
-import static com.unhappyrobot.entities.GameObject.PhysicsShapes.*;
-
 public class WorldManager {
     private static WorldManager instance;
+    public static final float PIXEL_TO_METER_RATIO = 32.0f;
     private World world;
     private CircleShape circleShape;
     private List<GameObject> gameObjects;
@@ -39,46 +39,69 @@ public class WorldManager {
         float timeDelta = DeferredManager.onGameThread().getCurrentTime() - getInstance().lastRunTime;
         getInstance().lastRunTime = DeferredManager.onGameThread().getCurrentTime();
 
-        for (GameObject gameObject : getInstance().gameObjects) {
-            gameObject.beforePhysicsUpdate();
-        }
-
         getWorldInstance().step(timeDelta, 1, 1);
-
-        for (GameObject gameObject : getInstance().gameObjects) {
-            gameObject.afterPhysicsUpdate();
-        }
     }
 
-    public static Body addGameObject(GameObject gameObject) {
+    public static Body addGameObject(GameObject gameObject, PhysicsBody physicsBody) {
         WorldManager worldManager = WorldManager.getInstance();
         World world = worldManager.world;
 
         BodyDef def = new BodyDef();
+        def.allowSleep = true;
+        def.fixedRotation = true;
         def.type = BodyDef.BodyType.DynamicBody;
-        def.position.x = gameObject.getPosition().x;
-        def.position.y = gameObject.getPosition().y;
+
+        def.position.set(gameObject.getPosition());
 
         Body worldBody = world.createBody(def);
 
-        Shape objectShape = null;
         switch (gameObject.getPhysicsShape()) {
             case POLYGON:
-                objectShape = new PolygonShape();
-                ((PolygonShape)objectShape).setAsBox(gameObject.getSize().x, gameObject.getSize().y);
+
+                if (physicsBody != null) {
+                    for (PhysicsBodyPoint point : physicsBody.getPoints()) {
+                        addPolygonToWorldBody(worldBody, point.getVectorData(gameObject.getOrigin(), gameObject.getScale()), 1.0f);
+                    }
+                } else {
+                    PolygonShape poly = new PolygonShape();
+                    Vector2 gameObjectSize = gameObject.getSize();
+                    poly.setAsBox(gameObjectSize.x, gameObjectSize.y);
+                    worldBody.createFixture(poly, 1);
+                    poly.dispose();
+                }
                 break;
             case CIRCLE:
-                objectShape = new CircleShape();
-                objectShape.setRadius(gameObject.getRadius());
+                CircleShape shape = new CircleShape();
+                shape.setRadius(gameObject.getRadius() * 10.0f);
+                worldBody.createFixture(shape, 1);
+                shape.dispose();
                 break;
         }
-
-        worldBody.createFixture(objectShape, 1);
-        objectShape.dispose();
 
         worldManager.gameObjects.add(gameObject);
 
 
         return worldBody;
+    }
+
+    private static void addPolygonToWorldBody(Body worldBody, Vector2[] vectorData, float density) {
+        PolygonShape shape = new PolygonShape();
+        shape.set(vectorData);
+
+        worldBody.createFixture(shape, density);
+
+        shape.dispose();
+    }
+
+    public static Vector2 pixelsToMeters(Vector2 pixelSpace) {
+        Vector2 meterSpace = new Vector2(pixelSpace);
+        meterSpace.x = pixelSpace.x / PIXEL_TO_METER_RATIO;
+        meterSpace.y = pixelSpace.y / PIXEL_TO_METER_RATIO;
+
+        return meterSpace;
+    }
+
+    public static boolean isLocked() {
+        return getInstance().world.isLocked();
     }
 }
