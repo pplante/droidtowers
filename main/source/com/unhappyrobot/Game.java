@@ -1,5 +1,7 @@
 package com.unhappyrobot;
 
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -34,9 +36,16 @@ public class Game implements ApplicationListener {
   private InputSystem inputSystem;
   private GestureDetector gestureDetector;
   private CameraController cameraController;
+  private static TweenManager tweenManager;
+  private static Game instance;
 
   public void create() {
+    instance = this;
+
     Random.init();
+    Tween.setPoolEnabled(true);
+
+    tweenManager = new TweenManager();
 
     Gdx.graphics.setVSync(true);
 
@@ -121,6 +130,8 @@ public class Game implements ApplicationListener {
     for (GameLayer layer : layers) {
       layer.update(deltaTime);
     }
+
+    tweenManager.update();
   }
 
   public void resize(int width, int height) {
@@ -141,5 +152,13 @@ public class Game implements ApplicationListener {
 
   public static List<GameLayer> getLayers() {
     return layers;
+  }
+
+  public static TweenManager getTweenManager() {
+    return tweenManager;
+  }
+
+  public static Game getInstance() {
+    return instance;
   }
 }

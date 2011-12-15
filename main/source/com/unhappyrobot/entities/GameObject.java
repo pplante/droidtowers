@@ -1,12 +1,13 @@
 package com.unhappyrobot.entities;
 
+import aurelienribon.tweenengine.Tweenable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureDict;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class GameObject {
+public class GameObject implements Tweenable {
   protected Vector2 position;
   protected Vector2 velocity;
   protected Vector2 origin;
@@ -16,6 +17,7 @@ public class GameObject {
   protected Sprite sprite;
   protected float rotation;
   private boolean visible;
+  private float alpha;
 
   public GameObject(float x, float y, float scale) {
     sprite = new Sprite();
@@ -24,6 +26,7 @@ public class GameObject {
     size = new Vector2();
     velocity = new Vector2();
     visible = true;
+    alpha = 1.0f;
 
     setPosition(x, y);
     setScale(scale);
@@ -78,7 +81,7 @@ public class GameObject {
 
   public void render(SpriteBatch batch) {
     if (visible) {
-      sprite.draw(batch);
+      sprite.draw(batch, alpha);
     }
   }
 
@@ -115,4 +118,29 @@ public class GameObject {
   public void setVelocity(int x, int y) {
     velocity.set(x, y);
   }
+
+  public void setOpacity(float newAlpha) {
+    alpha = newAlpha;
+  }
+
+  public int getTweenValues(int tweenType, float[] returnValues) {
+    switch (tweenType) {
+      case TWEEN_OPACITY:
+        returnValues[0] = alpha;
+        return 1;
+    }
+
+    return 0;
+  }
+
+  public void onTweenUpdated(int tweenType, float[] newValues) {
+//    System.out.println("tweenType = " + tweenType + " newValues = " + Arrays.toString(newValues));
+    switch (tweenType) {
+      case TWEEN_OPACITY:
+        setOpacity(newValues[0]);
+        break;
+    }
+  }
+
+  public static final int TWEEN_OPACITY = 0;
 }

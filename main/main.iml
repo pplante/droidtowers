@@ -48,6 +48,15 @@
     <orderEntry type="library" name="main" level="project" />
     <orderEntry type="library" scope="TEST" name="desktop" level="project" />
     <orderEntry type="library" name="desktop" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/tween-engine-api.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 

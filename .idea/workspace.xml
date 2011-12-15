@@ -12,318 +12,13 @@
     <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/asteroids/big-01.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/asteroids/big-01.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/asteroids/mid-01.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/asteroids/small-01.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/asteroids/small-01.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/backgrounds/space-stars-1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/contact-point.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/fonts/16/ocr_a.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/fonts/16/ocr_a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/fonts/16/ocr_a_small.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/fonts/16/ocr_a_small.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/fonts/16/wellbutrin.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/fonts/16/wellbutrin.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/fonts/24/ocr_a.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/fonts/24/ocr_a.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/fonts/24/ocr_a_small.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/fonts/24/ocr_a_small.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/fonts/24/wellbutrin.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/fonts/24/wellbutrin.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/ships/scout1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/ships/scout2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/ships/ship 1.ai" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/ships/ship1.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/ships/ship1.json.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/ships/ship1.pes" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/ships/ship1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/ships/ship2.ai" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/ships/ship2.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/ships/ship2.pes" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/ships/ship2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx.gwt.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/Application.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/ApplicationListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/Audio.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/Files.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/Game.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/Gdx.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/Graphics.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/Input.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/InputAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/InputMultiplexer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/InputProcessor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/Preferences.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/Screen.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/Version.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/audio/AudioDevice.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/audio/AudioRecorder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/audio/Music.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/audio/Sound.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/audio/analysis/AudioTools.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/audio/analysis/DFT.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/audio/analysis/FFT.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/audio/analysis/FourierTransform.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/audio/analysis/KissFFT.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/audio/analysis/NativeFFT.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/audio/analysis/ThresholdFunction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/audio/io/Decoder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/audio/io/Mpg123Decoder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/audio/io/VorbisDecoder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/files/FileHandle.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/files/FileHandleStream.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/Camera.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/Color.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/FPSLogger.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/GL10.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/GL11.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/GL20.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/GLCommon.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/GLU.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/Mesh.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/OrthographicCamera.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/PerspectiveCamera.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/Pixmap.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/Texture.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/TextureData.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/TextureDict.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/TextureRef.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/VertexAttribute.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/VertexAttributes.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/Animation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/BitmapFont.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/BitmapFontCache.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/EmptyNinePatch.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/Gdx2DPixmap.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/NinePatch.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/ParticleEffect.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/ParticleEmitter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/Sprite.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/SpriteBatch.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/SpriteCache.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/TextureAtlas.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/TextureRegion.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/tiled/SimpleTileAtlas.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/tiled/TileAtlas.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/tiled/TileMapRenderer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/tiled/TileSet.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/tiled/TiledLayer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/tiled/TiledLoader.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/tiled/TiledMap.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/tiled/TiledObject.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g2d/tiled/TiledObjectGroup.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/Animation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/Animator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/Material.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/keyframed/Keyframe.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/keyframed/KeyframeAnimation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/keyframed/KeyframeAnimator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/keyframed/KeyframedModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/loaders/ModelLoaderOld.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/loaders/md5/MD5Animation.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/loaders/md5/MD5AnimationInfo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/loaders/md5/MD5Animator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/loaders/md5/MD5Jni.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/loaders/md5/MD5Joints.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/loaders/md5/MD5Loader.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/loaders/md5/MD5Mesh.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/loaders/md5/MD5Model.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/loaders/md5/MD5Quaternion.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/loaders/md5/MD5Renderer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/g3d/loaders/obj/ObjLoader.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/glutils/ETC1.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/glutils/FrameBuffer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/glutils/ImmediateModeRenderer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/glutils/ImmediateModeRenderer20.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/glutils/IndexBufferObject.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/glutils/IndexBufferObjectSubData.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/glutils/IndexData.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/glutils/ShaderProgram.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/glutils/VertexArray.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/glutils/VertexBufferObject.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/glutils/VertexBufferObjectSubData.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/graphics/glutils/VertexData.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/input/RemoteInput.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/input/RemoteSender.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/CatmullRomSpline.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/Circle.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/EarClippingTriangulator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/Frustum.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/Intersector.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/MathUtils.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/Matrix3.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/Matrix4.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/Plane.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/Polygon.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/Quaternion.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/Rectangle.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/Vector2.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/Vector3.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/WindowedMean.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/collision/BoundingBox.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/collision/Ray.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/collision/Segment.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/math/collision/Sphere.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/Body.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/BodyDef.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/Box2DDebugRenderer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/CircleShape.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/Contact.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/ContactFilter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/ContactImpulse.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/ContactListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/DestructionListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/Filter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/Fixture.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/FixtureDef.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/Joint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/JointDef.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/JointEdge.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/Manifold.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/MassData.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/PolygonShape.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/QueryCallback.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/RayCastCallback.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/Shape.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/Transform.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/World.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/WorldManifold.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/DistanceJoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/DistanceJointDef.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/FrictionJoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/FrictionJointDef.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/GearJoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/GearJointDef.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/LineJoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/LineJointDef.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/MouseJoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/MouseJointDef.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/PrismaticJoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/PrismaticJointDef.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/PulleyJoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/PulleyJointDef.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/RevoluteJoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/RevoluteJointDef.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/WeldJoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/physics/box2d/joints/WeldJointDef.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/Action.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/Actor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/AnimationAction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/CompositeAction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/Group.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/Interpolator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/Layout.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/OnActionCompleted.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/Stage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/TemporalAction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/ActionResetingPool.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/Delay.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/FadeIn.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/FadeOut.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/FadeTo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/Forever.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/MoveBy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/MoveTo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/Parallel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/Remove.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/Repeat.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/RotateBy.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/RotateTo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/ScaleTo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actions/Sequence.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actors/BoundGroup.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actors/Button.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actors/FastImage.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actors/Image.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actors/Label.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/actors/LinearGroup.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/interpolators/AccelerateDecelerateInterpolator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/interpolators/AccelerateInterpolator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/interpolators/AnticipateInterpolator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/interpolators/DecelerateInterpolator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/interpolators/LinearInterpolator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/interpolators/OvershootInterpolator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/Button.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/CheckBox.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/ComboBox.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/Container.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/FlickScrollPane.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/ImageButton.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/ImageToggleButton.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/Label.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/List.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/Pane.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/ScrollPane.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/Skin.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/Slider.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/SplitPane.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/TextField.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/ToggleButton.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/Widget.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/Window.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/tablelayout/BaseTableLayout.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/tablelayout/Cell.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/tablelayout/ParseException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/tablelayout/Table.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/tablelayout/TableLayout.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/tablelayout/TableLayoutParser.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/utils/AndroidClipboard.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/utils/Clipboard.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/utils/DesktopClipboard.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/scenes/scene2d/ui/utils/ScissorStack.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/Array.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/AtomicQueue.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/Base64Coder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/BufferUtils.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/ComparableTimSort.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/Disposable.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/FloatArray.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/GdxNativesLoader.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/GdxRuntimeException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/IdentityMap.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/IntArray.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/IntMap.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/LittleEndianInputStream.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/LongArray.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/LongMap.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/NumberUtils.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/ObjectMap.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/PauseableThread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/Pool.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/PooledLinkedList.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/ScreenUtils.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/Sort.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/TimSort.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/Xml.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/Xml.rl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/arial-15.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/libgdx/com/badlogic/gdx/utils/arial-15.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/WorldManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Asteroid.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/PlayerShip.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/layers/WorldContactPointLayer.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/pplante.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/pplante.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/desktop.xml" afterPath="$PROJECT_DIR$/.idea/libraries/desktop.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/main.xml" afterPath="$PROJECT_DIR$/.idea/libraries/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="cloud layer is working with fade in/out">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/android.iml" afterPath="$PROJECT_DIR$/android/android.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/gen/com/example/R.java" afterPath="$PROJECT_DIR$/android/gen/com/example/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/source/com/unhappyrobot/AndroidGame.java" afterPath="$PROJECT_DIR$/android/source/com/unhappyrobot/AndroidGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/DesktopGame.java" afterPath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/DesktopGame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/main.iml" afterPath="$PROJECT_DIR$/main/main.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameLayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputManager.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/ScriptedGameObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/ScriptedGameObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/Random.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/Random.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pull-libgdx-nightly.sh" afterPath="$PROJECT_DIR$/pull-libgdx-nightly.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pull-libgdx-stable.sh" afterPath="$PROJECT_DIR$/pull-libgdx-stable.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/CameraController.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/CameraController.java" />
     </list>
     <ignored path="underwater.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -386,19 +81,6 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java" line="86" class="com.unhappyrobot.entities.GameObject" package="com.unhappyrobot.entities">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
       <breakpoint url="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameLayer.java" line="35" class="com.unhappyrobot.entities.GameLayer" package="com.unhappyrobot.entities">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
@@ -412,7 +94,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java" line="120" class="com.unhappyrobot.Game" package="com.unhappyrobot">
+      <breakpoint url="file://$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java" line="129" class="com.unhappyrobot.Game" package="com.unhappyrobot">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -466,30 +148,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CloudLayer.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="CloudLayer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="55" selection-start="921" selection-end="921" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/android/res/layout/test.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="9" selection-start="221" selection-end="221" vertical-scroll-proportion="0.11340206">
+            <state line="74" column="51" selection-start="2184" selection-end="2184" vertical-scroll-proportion="0.9072165">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CameraController.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/CameraController.java">
+      <file leaf-file-name="GameObject.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="17" selection-start="1804" selection-end="1804" vertical-scroll-proportion="0.0">
+            <state line="137" column="24" selection-start="3163" selection-end="3163" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -519,14 +190,21 @@
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/ScriptedGameObject.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameLayer.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/Random.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Cloud.java" />
+        <option value="$PROJECT_DIR$/android/res/layout/test.xml" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/CameraController.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Cloud.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java" />
-        <option value="$PROJECT_DIR$/android/res/layout/test.xml" />
       </list>
     </option>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
   </component>
   <component name="ModuleEditorState">
     <option name="LAST_EDITED_MODULE_NAME" />
@@ -579,8 +257,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -747,15 +425,15 @@
     <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="false" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
-    <property name="project.structure.proportion" value="0.15" />
     <property name="OverrideImplement.combined" value="true" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="MemberChooser.sorted" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
     <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="true" />
-    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="underwater-main" />
     <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="underwater-main" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -773,8 +451,8 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLanguage" value="Java" />
     <property name="GenerateAntBuildDialog.backupFiles" value="true" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -801,7 +479,7 @@
       <recent name="com.unhappyrobot.spec.entities" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DesktopGame">
+  <component name="RunManager" selected="Android Application.Android">
     <configuration default="false" name="GameGridTest" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea" />
       <module name="main" />
@@ -1084,7 +762,9 @@
       <option name="NETWORK_SPEED" value="full" />
       <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="false" />
+      <RunnerSettings RunnerId="AndroidDebugRunner" />
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -1208,11 +888,11 @@
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3125" sideWeight="0.75587565" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3125" sideWeight="0.75587565" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32877752" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946082" sideWeight="0.6709347" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28549734" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28506443" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14052548" sideWeight="0.7141774" order="2" side_tool="true" content_ui="tabs" />
@@ -1318,118 +998,92 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="140" column="40" selection-start="3906" selection-end="3906" vertical-scroll-proportion="0.1590909">
-          <folding />
-        </state>
+        <state line="140" column="40" selection-start="3906" selection-end="3906" vertical-scroll-proportion="0.1590909" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/TextureDict.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="10" selection-start="2536" selection-end="2536" vertical-scroll-proportion="0.33264464">
-          <folding />
-        </state>
+        <state line="54" column="10" selection-start="2536" selection-end="2536" vertical-scroll-proportion="0.33264464" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/TextureRef.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="18" selection-start="1424" selection-end="1424" vertical-scroll-proportion="0.1590909">
-          <folding />
-        </state>
+        <state line="38" column="18" selection-start="1424" selection-end="1424" vertical-scroll-proportion="0.1590909" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/ScriptedGameObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="0" selection-start="1247" selection-end="1247" vertical-scroll-proportion="0.8863636">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/Sprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="490" column="14" selection-start="14876" selection-end="14876" vertical-scroll-proportion="0.022727273">
-          <folding />
-        </state>
+        <state line="43" column="0" selection-start="1247" selection-end="1247" vertical-scroll-proportion="0.8863636" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/BackgroundLayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="29" selection-start="647" selection-end="647" vertical-scroll-proportion="0.25">
-          <folding />
-        </state>
+        <state line="18" column="29" selection-start="647" selection-end="647" vertical-scroll-proportion="0.25" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/glutils/MipMapGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="0" selection-start="2108" selection-end="2108" vertical-scroll-proportion="0.6363636">
-          <folding />
-        </state>
+        <state line="49" column="0" selection-start="2108" selection-end="2108" vertical-scroll-proportion="0.6363636" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/TextureRegion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="14" selection-start="3447" selection-end="3447" vertical-scroll-proportion="0.37809917">
-          <folding />
-        </state>
+        <state line="85" column="14" selection-start="3447" selection-end="3447" vertical-scroll-proportion="0.37809917" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/TextureAtlas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="198" column="9" selection-start="6353" selection-end="6353" vertical-scroll-proportion="0.33264464">
-          <folding />
-        </state>
+        <state line="198" column="9" selection-start="6353" selection-end="6353" vertical-scroll-proportion="0.33264464" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameLayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="943" selection-end="943" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="38" column="0" selection-start="943" selection-end="943" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/utils/Random.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="41" selection-start="435" selection-end="435" vertical-scroll-proportion="0.4090909">
-          <folding />
-        </state>
+        <state line="18" column="41" selection-start="435" selection-end="435" vertical-scroll-proportion="0.4090909" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java">
+    <entry file="file://$PROJECT_DIR$/android/res/layout/test.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="3" selection-start="2101" selection-end="2101" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="5" column="9" selection-start="221" selection-end="221" vertical-scroll-proportion="0.08513932">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/CameraController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="17" selection-start="1804" selection-end="1804" vertical-scroll-proportion="0.0">
+        <state line="19" column="52" selection-start="809" selection-end="809" vertical-scroll-proportion="0.34020618">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="27" selection-start="2289" selection-end="2289" vertical-scroll-proportion="-0.92783505">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="157" column="16" selection-start="4544" selection-end="4544" vertical-scroll-proportion="1.0907216">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="396" column="30" selection-start="13108" selection-end="13108" vertical-scroll-proportion="0.26494846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="137" column="24" selection-start="3163" selection-end="3163" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="55" selection-start="921" selection-end="921" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/res/layout/test.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="9" selection-start="221" selection-end="221" vertical-scroll-proportion="0.11340206">
+        <state line="74" column="51" selection-start="2184" selection-end="2184" vertical-scroll-proportion="0.9072165">
           <folding />
         </state>
       </provider>
@@ -1498,7 +1152,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>main</last-edited>
+          <last-edited>Android|android</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

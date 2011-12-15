@@ -8,16 +8,16 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 
 public class CameraController implements GestureDetector.GestureListener {
   private OrthographicCamera camera;
+  private BoundingBox cameraBounds;
   private float initialScale = 1.0f;
   private boolean flinging = false;
   private float velX;
   private float velY;
-  private BoundingBox cameraBounds;
 
   public CameraController(OrthographicCamera camera, Vector2 gameGridPixelSize) {
     this.camera = camera;
     this.cameraBounds = new BoundingBox(new Vector3(0, 0, 0), new Vector3(gameGridPixelSize.x, gameGridPixelSize.y, 0));
-    this.camera.position.set(cameraBounds.getMax().cpy().mul(0.5f));
+    this.camera.position.set(gameGridPixelSize.x / 2, gameGridPixelSize.y / 2, 0);
   }
 
   public boolean touchDown(int x, int y, int pointer) {
