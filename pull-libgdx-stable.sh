@@ -1,6 +1,6 @@
 #! /bin/bash
 
-STABLE_NAME="libgdx-0.9.1"
+STABLE_NAME="libgdx-0.9.2"
 STABLE_URL="http://libgdx.googlecode.com/files/${STABLE_NAME}.zip"
 DOWNLOAD_PATH="/tmp/${STABLE_NAME}.zip"
 EXTRACT_PATH="/tmp/${STABLE_NAME}"
@@ -48,7 +48,12 @@ echo "* Copying desktop libs..."
 echo
 
 DESKTOP_LIBS_PATH="${PROJECT_DIR}/desktop/libs/."
+cp "${EXTRACT_PATH}/gdx-openal-sources.jar" $DESKTOP_LIBS_PATH
+cp "${EXTRACT_PATH}/gdx-backend-jogl-natives.jar" $DESKTOP_LIBS_PATH
+cp "${EXTRACT_PATH}/gdx-backend-jogl-sources.jar" $DESKTOP_LIBS_PATH
+cp "${EXTRACT_PATH}/gdx-backend-jogl.jar" $DESKTOP_LIBS_PATH
 cp "${EXTRACT_PATH}/gdx-backend-lwjgl-natives.jar" $DESKTOP_LIBS_PATH
+cp "${EXTRACT_PATH}/gdx-backend-lwjgl-sources.jar" $DESKTOP_LIBS_PATH
 cp "${EXTRACT_PATH}/gdx-backend-lwjgl.jar" $DESKTOP_LIBS_PATH
 cp "${EXTRACT_PATH}/gdx-natives.jar" $DESKTOP_LIBS_PATH
 

@@ -5,7 +5,9 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="file://$PROJECT_DIR$/main/libs/libgdx" />
+      <root url="jar://$PROJECT_DIR$/desktop/libs/gdx-backend-jogl-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/desktop/libs/gdx-backend-lwjgl-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/desktop/libs/gdx-openal-sources.jar!/" />
     </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/desktop/libs" recursive="false" />
   </library>

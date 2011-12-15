@@ -7,7 +7,6 @@
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/" />
       <root url="file://$PROJECT_DIR$/main/libs/rhino-js/src" />
-      <root url="jar://$PROJECT_DIR$/main/libs/flexjson-2.1-sources.jar!/" />
     </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/main/libs" recursive="false" />
   </library>

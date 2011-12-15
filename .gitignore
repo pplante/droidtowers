@@ -1,12 +1,1 @@
 out/
-main/libs/gdx.jar
-main/libs/gdx-sources.jar
-desktop/libs/gdx-natives.jar
-desktop/libs/gdx-backend-lwjgl.jar
-android/libs/armeabi-v7a/libandroidgl20.so
-android/libs/armeabi-v7a/libgdx.so
-android/libs/armeabi/libandroidgl20.so
-android/libs/armeabi/libgdx.so
-android/libs/gdx-backend-android-sources.jar
-android/libs/gdx-backend-android.jar
-desktop/libs/gdx-backend-lwjgl-natives.jar
