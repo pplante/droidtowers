@@ -1,11 +1,6 @@
 package com.unhappyrobot.entities;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer10;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.grid.GridPosition;
 
@@ -20,6 +15,7 @@ public class GameGrid {
 
   private HashSet<GridObject> children;
   private GridPosition[][] gridLayout;
+  private Vector2 worldSize;
 
   public GameGrid() {
     gridColor = Color.GREEN;
@@ -48,6 +44,7 @@ public class GameGrid {
     }
 
     gridLayout = newGrid;
+    worldSize = new Vector2(gridSize.x * unitSize.x, gridSize.y * unitSize.y);
   }
 
   public void setUnitSize(int width, int height) {
@@ -58,16 +55,16 @@ public class GameGrid {
     gridSize.set(width, height);
   }
 
-  public Renderer getRenderer() {
-    return new Renderer();
+  public GameGridRenderer getRenderer() {
+    return new GameGridRenderer(this);
   }
 
   public void setGridOrigin(float x, float y) {
     gridOrigin.set(x, y);
   }
 
-  public Vector2 getPixelSize() {
-    return new Vector2(gridSize.x * unitSize.x, gridSize.y * unitSize.y);
+  public Vector2 getWorldSize() {
+    return worldSize;
   }
 
   public boolean addObject(GridObject gridObject) {
@@ -120,52 +117,13 @@ public class GameGrid {
     gridColor.set(r, g, b, a);
   }
 
-  public class Renderer extends GameLayer {
-    private ImmediateModeRenderer10 gl;
+  public Vector2 convertScreenPointToGridPoint(float x, float y) {
+    float gridX = (float) Math.floor(x / unitSize.x);
+    float gridY = (float) Math.floor(y / unitSize.y);
 
-    public Renderer() {
-      gl = new ImmediateModeRenderer10();
-    }
+    gridX = Math.max(0, Math.min(gridX, gridSize.x - 1));
+    gridY = Math.max(0, Math.min(gridY, gridSize.y - 1));
 
-    @Override
-    public void render(SpriteBatch spriteBatch, Camera camera) {
-      spriteBatch.begin();
-      for (GridObject child : children) {
-        Sprite sprite = new Sprite(child.getTexture());
-
-        sprite.setPosition(gridOrigin.x + child.position.x * unitSize.x, gridOrigin.y + child.position.y * unitSize.y);
-        sprite.setSize(child.size.x * unitSize.x, child.size.y * unitSize.y);
-        sprite.setU(0f);
-        sprite.setV(0f);
-        sprite.setU2(sprite.getWidth() / sprite.getTexture().getWidth());
-        sprite.setV2(sprite.getHeight() / sprite.getTexture().getHeight());
-
-        sprite.draw(spriteBatch);
-      }
-      spriteBatch.end();
-
-      renderGridLines();
-    }
-
-    private void renderGridLines() {
-      gl.begin(GL10.GL_LINES);
-
-      for (int i = 0; i <= gridSize.x; i++) {
-        addPoint(gridOrigin.x + (i * unitSize.x), gridOrigin.y);
-        addPoint(gridOrigin.x + (i * unitSize.x), gridOrigin.y + gridSize.y * unitSize.y);
-      }
-
-      for (int i = 0; i <= gridSize.y; i++) {
-        addPoint(gridOrigin.x, gridOrigin.y + (i * unitSize.y));
-        addPoint(gridOrigin.x + gridSize.x * unitSize.x, gridOrigin.y + (i * unitSize.y));
-      }
-
-      gl.end();
-    }
-
-    private void addPoint(float x, float y) {
-      gl.color(gridColor.r, gridColor.g, gridColor.b, gridColor.a);
-      gl.vertex(x, y, 0.0f);
-    }
+    return new Vector2(gridX, gridY);
   }
 }

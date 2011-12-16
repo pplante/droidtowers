@@ -1,8 +1,6 @@
 package com.unhappyrobot.spec.entities;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
@@ -109,20 +107,12 @@ public class GameGridTest {
     }
 
     @Override
-    public void render(SpriteBatch spriteBatch, Camera camera) {
-    }
-
-    @Override
     public Texture getTexture() {
       return null;
     }
   }
 
   private class TestGridObject extends GridObject {
-    @Override
-    public void render(SpriteBatch spriteBatch, Camera camera) {
-    }
-
     @Override
     public Texture getTexture() {
       return null;

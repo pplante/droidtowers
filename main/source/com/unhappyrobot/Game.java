@@ -4,16 +4,17 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.TextureDict;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.Ray;
 import com.unhappyrobot.entities.CloudLayer;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GameLayer;
+import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.input.Action;
 import com.unhappyrobot.input.CameraController;
 import com.unhappyrobot.input.InputManager;
@@ -38,6 +39,7 @@ public class Game implements ApplicationListener {
   private CameraController cameraController;
   private static TweenManager tweenManager;
   private static Game instance;
+  private GridObject mouseRat;
 
   public void create() {
     instance = this;
@@ -72,13 +74,23 @@ public class Game implements ApplicationListener {
 //    backgroundLayer.size.set(20, 5);
 //
 //    gameGrid.addObject(backgroundLayer);
-    CloudLayer cloudLayer = new CloudLayer(gameGrid.getPixelSize());
+    CloudLayer cloudLayer = new CloudLayer(gameGrid.getWorldSize());
     layers.add(cloudLayer);
 
     layers.add(gameGrid.getRenderer());
 
+    mouseRat = new GridObject() {
+      private Texture texture = new Texture(Gdx.files.internal("particle.png"));
 
-    inputSystem = new InputSystem(camera, gameGrid.getPixelSize());
+      @Override
+      public Texture getTexture() {
+        return texture;
+      }
+    };
+    gameGrid.addObject(mouseRat);
+
+
+    inputSystem = new InputSystem(camera, gameGrid.getWorldSize());
     Gdx.input.setInputProcessor(inputSystem);
 
     InputManager.bind(InputManager.Keys.W, new Action() {
@@ -131,6 +143,12 @@ public class Game implements ApplicationListener {
       layer.update(deltaTime);
     }
 
+    if (Gdx.input.isTouched()) {
+      Ray pickRay = camera.getPickRay(Gdx.input.getX(), Gdx.input.getY());
+      Vector3 endPoint = pickRay.getEndPoint(1);
+      mouseRat.position.set(gameGrid.convertScreenPointToGridPoint(endPoint.x, endPoint.y));
+      System.out.println("mouseRat = " + mouseRat.position);
+    }
     tweenManager.update();
   }
 
