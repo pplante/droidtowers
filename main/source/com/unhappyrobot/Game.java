@@ -4,25 +4,21 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.TextureDict;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.collision.Ray;
-import com.unhappyrobot.entities.CloudLayer;
-import com.unhappyrobot.entities.GameGrid;
-import com.unhappyrobot.entities.GameLayer;
-import com.unhappyrobot.entities.GridObject;
-import com.unhappyrobot.input.Action;
-import com.unhappyrobot.input.CameraController;
-import com.unhappyrobot.input.InputManager;
-import com.unhappyrobot.input.InputSystem;
+import com.unhappyrobot.entities.*;
+import com.unhappyrobot.input.*;
 import com.unhappyrobot.utils.Random;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.unhappyrobot.input.InputSystem.Keys;
 
 public class Game implements ApplicationListener {
   private OrthographicCamera camera;
@@ -34,6 +30,7 @@ public class Game implements ApplicationListener {
 
   private Matrix4 hudProjectionMatrix;
   private final GameGrid gameGrid = new GameGrid();
+  private GameGridRenderer gameGridRenderer;
   private InputSystem inputSystem;
   private GestureDetector gestureDetector;
   private CameraController cameraController;
@@ -64,8 +61,8 @@ public class Game implements ApplicationListener {
     font = new BitmapFont(Gdx.files.internal("fonts/menlo_16.fnt"), Gdx.files.internal("fonts/menlo_16.png"), false);
 
     gameGrid.setGridOrigin(0, 0);
-    gameGrid.setUnitSize(32, 32);
-    gameGrid.setGridSize(20, 20);
+    gameGrid.setUnitSize(64, 64);
+    gameGrid.setGridSize(10, 10);
     gameGrid.resizeGrid();
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
 
@@ -77,31 +74,35 @@ public class Game implements ApplicationListener {
     CloudLayer cloudLayer = new CloudLayer(gameGrid.getWorldSize());
     layers.add(cloudLayer);
 
-    layers.add(gameGrid.getRenderer());
+    gameGridRenderer = gameGrid.getRenderer();
+    layers.add(gameGridRenderer);
 
-    mouseRat = new GridObject() {
-      private Texture texture = new Texture(Gdx.files.internal("particle.png"));
-
-      @Override
-      public Texture getTexture() {
-        return texture;
-      }
-    };
-    gameGrid.addObject(mouseRat);
-
-
-    inputSystem = new InputSystem(camera, gameGrid.getWorldSize());
+    inputSystem = new InputSystem(camera, gameGrid);
     Gdx.input.setInputProcessor(inputSystem);
 
-    InputManager.bind(InputManager.Keys.W, new Action() {
+    inputSystem.bind(Keys.W, new Action() {
       public void run(float timeDelta) {
         camera.position.add(0, 3, 0);
       }
     });
 
-    InputManager.bind(InputManager.Keys.S, new Action() {
+    inputSystem.bind(Keys.S, new Action() {
       public void run(float timeDelta) {
         camera.position.add(0, -3, 0);
+      }
+    });
+
+    inputSystem.bind(Keys.G, new Action() {
+      public void run(float timeDelta) {
+        gameGridRenderer.toggleGridLines();
+      }
+    });
+
+    inputSystem.bind(Keys.NUM_1, new Action() {
+      public void run(float timeDelta) {
+        inputSystem.switchTool(GestureTool.PLACEMENT);
+        PlacementTool placementTool = (PlacementTool) inputSystem.getCurrentTool();
+        placementTool.setup(camera, gameGrid);
       }
     });
   }
@@ -143,23 +144,20 @@ public class Game implements ApplicationListener {
       layer.update(deltaTime);
     }
 
-    if (Gdx.input.isTouched()) {
-      Ray pickRay = camera.getPickRay(Gdx.input.getX(), Gdx.input.getY());
-      Vector3 endPoint = pickRay.getEndPoint(1);
-      mouseRat.position.set(gameGrid.convertScreenPointToGridPoint(endPoint.x, endPoint.y));
-      System.out.println("mouseRat = " + mouseRat.position);
-    }
     tweenManager.update();
   }
 
   public void resize(int width, int height) {
+    Gdx.app.log("lifecycle", "resizing!");
     spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
   }
 
   public void pause() {
+    Gdx.app.log("lifecycle", "pausing!");
   }
 
   public void resume() {
+    Gdx.app.log("lifecycle", "resuming!");
   }
 
   public void dispose() {

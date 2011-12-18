@@ -1,12 +1,18 @@
 package com.unhappyrobot.input;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
+import com.unhappyrobot.entities.GameGrid;
 
 public class CameraController implements GestureDetector.GestureListener {
+  public static final float ZOOM_MAX = 2.0f;
+  public static final float ZOOM_MIN = (Gdx.app.getType() == Application.ApplicationType.Android ?  0.4f : 0.6f);
+
   private OrthographicCamera camera;
   private BoundingBox cameraBounds;
   private float initialScale = 1.0f;
@@ -14,10 +20,11 @@ public class CameraController implements GestureDetector.GestureListener {
   private float velX;
   private float velY;
 
-  public CameraController(OrthographicCamera camera, Vector2 gameGridPixelSize) {
+  public CameraController(OrthographicCamera camera, GameGrid gameGrid) {
+    Vector2 worldSize = gameGrid.getWorldSize();
     this.camera = camera;
-    this.cameraBounds = new BoundingBox(new Vector3(0, 0, 0), new Vector3(gameGridPixelSize.x, gameGridPixelSize.y, 0));
-    this.camera.position.set(gameGridPixelSize.x / 2, gameGridPixelSize.y / 2, 0);
+    this.cameraBounds = new BoundingBox(new Vector3(0, 0, 0), new Vector3(worldSize.x, worldSize.y, 0));
+    this.camera.position.set(worldSize.x / 2, worldSize.y / 2, 0);
   }
 
   public boolean touchDown(int x, int y, int pointer) {
@@ -53,13 +60,17 @@ public class CameraController implements GestureDetector.GestureListener {
     float ratio = originalDistance / currentDistance;
     camera.zoom = initialScale * ratio;
 
-    if (camera.zoom < 0.2f) {
-      camera.zoom = 0.2f;
-    } else if (camera.zoom > 2.0f) {
-      camera.zoom = 2.0f;
-    }
+    checkZoom();
 
-    return false;
+    return true;
+  }
+
+  public boolean scrolled(int amount) {
+    camera.zoom += (float) amount / 10;
+
+    checkZoom();
+
+    return true;
   }
 
   public void update(float deltaTime) {
@@ -72,6 +83,14 @@ public class CameraController implements GestureDetector.GestureListener {
       if (Math.abs(velY) < 0.01f) velY = 0;
 
       checkBounds(deltaX, deltaY);
+    }
+  }
+
+  private void checkZoom() {
+    if (camera.zoom < ZOOM_MIN) {
+      camera.zoom = ZOOM_MIN;
+    } else if (camera.zoom > ZOOM_MAX) {
+      camera.zoom = ZOOM_MAX;
     }
   }
 

@@ -11,4 +11,5 @@
             </intent-filter>
         </activity>
     </application>
+  <supports-screens android:anyDensity="true" />
 </manifest>

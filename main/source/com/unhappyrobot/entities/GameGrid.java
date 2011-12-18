@@ -64,7 +64,7 @@ public class GameGrid {
   }
 
   public Vector2 getWorldSize() {
-    return worldSize;
+    return worldSize.cpy();
   }
 
   public boolean addObject(GridObject gridObject) {
