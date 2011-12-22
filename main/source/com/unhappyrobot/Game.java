@@ -11,6 +11,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.entities.*;
 import com.unhappyrobot.input.*;
 import com.unhappyrobot.utils.Random;
@@ -23,7 +26,7 @@ import static com.unhappyrobot.input.InputSystem.Keys;
 public class Game implements ApplicationListener {
   private OrthographicCamera camera;
   private SpriteBatch spriteBatch;
-  private BitmapFont font;
+  private BitmapFont menloBitmapFont;
 
   private static List<GameLayer> layers;
   private Matrix4 matrix;
@@ -37,6 +40,10 @@ public class Game implements ApplicationListener {
   private static TweenManager tweenManager;
   private static Game instance;
   private GridObject mouseRat;
+  private Skin uiSkin;
+  private Button testButton;
+  private Stage uiLayer;
+  private BitmapFont defaultBitmapFont;
 
   public void create() {
     instance = this;
@@ -58,7 +65,8 @@ public class Game implements ApplicationListener {
 
     layers = new ArrayList<GameLayer>();
 
-    font = new BitmapFont(Gdx.files.internal("fonts/menlo_16.fnt"), Gdx.files.internal("fonts/menlo_16.png"), false);
+    menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_16.fnt"), Gdx.files.internal("fonts/menlo_16.png"), false);
+    defaultBitmapFont = new BitmapFont(Gdx.files.internal("default.fnt"), Gdx.files.internal("default.png"), false);
 
     gameGrid.setGridOrigin(0, 0);
     gameGrid.setUnitSize(64, 64);
@@ -66,11 +74,32 @@ public class Game implements ApplicationListener {
     gameGrid.resizeGrid();
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
 
-//    BackgroundLayer backgroundLayer = new BackgroundLayer("backgrounds/rock1.png");
-//    backgroundLayer.position.set(0, 0);
-//    backgroundLayer.size.set(20, 5);
-//
-//    gameGrid.addObject(backgroundLayer);
+    uiSkin = new Skin(Gdx.files.internal("uiskin.json"), Gdx.files.internal("uiskin.png"));
+    uiLayer = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
+
+    final Window window = new Window("Window!", uiSkin);
+    window.defaults().space(10).pad(10);
+    window.row().fill().expandX();
+
+    FlickScrollPane flickScrollPane = new FlickScrollPane();
+    Table table = new Table(uiSkin);
+    table.defaults();
+    for (int i = 1; i < 100; i++) {
+      Button button = new Button(uiSkin);
+      Label label = new Label("Some button " + i, uiSkin);
+      button.add(label).fill();
+      table.add(button).fill();
+      if (i % 5 == 0) {
+        table.row();
+      }
+    }
+    flickScrollPane.setWidget(table);
+
+    window.add(flickScrollPane).fill().maxHeight(300);
+    window.pack();
+
+    uiLayer.addActor(window);
+
     CloudLayer cloudLayer = new CloudLayer(gameGrid.getWorldSize());
     layers.add(cloudLayer);
 
@@ -78,7 +107,11 @@ public class Game implements ApplicationListener {
     layers.add(gameGridRenderer);
 
     inputSystem = new InputSystem(camera, gameGrid);
+    inputSystem.addInputProcessor(uiLayer, 10);
     Gdx.input.setInputProcessor(inputSystem);
+
+    Gdx.input.setCatchBackKey(true);
+    Gdx.input.setCatchMenuKey(true);
 
     inputSystem.bind(Keys.W, new Action() {
       public void run(float timeDelta) {
@@ -129,8 +162,15 @@ public class Game implements ApplicationListener {
     spriteBatch.setProjectionMatrix(hudProjectionMatrix);
     spriteBatch.begin();
     String infoText = String.format("fps: %d, camera(%.1f, %.1f, %.1f)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom);
-    font.draw(spriteBatch, infoText, 5, 23);
+    menloBitmapFont.draw(spriteBatch, infoText, 5, 23);
+
+    float javaHeapInBytes = Gdx.app.getJavaHeap() / 1048576.0f;
+    float nativeHeapInBytes = Gdx.app.getNativeHeap() / 1048576.0f;
+    menloBitmapFont.draw(spriteBatch, String.format("mem: (java %.2f Mb, native %.2f Mb)", javaHeapInBytes, nativeHeapInBytes), 5, 50);
+
     spriteBatch.end();
+
+    uiLayer.draw();
 
     update();
   }
@@ -145,6 +185,8 @@ public class Game implements ApplicationListener {
     }
 
     tweenManager.update();
+
+    uiLayer.act(deltaTime);
   }
 
   public void resize(int width, int height) {
@@ -163,7 +205,7 @@ public class Game implements ApplicationListener {
   public void dispose() {
     TextureDict.unloadAll();
     spriteBatch.dispose();
-    font.dispose();
+    menloBitmapFont.dispose();
   }
 
   public static List<GameLayer> getLayers() {

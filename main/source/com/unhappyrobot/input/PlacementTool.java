@@ -55,15 +55,11 @@ public class PlacementTool implements GestureListener {
   }
 
   public boolean tap(int x, int y, int count) {
-    return false;
-  }
+    if(count >= 2) {
+      gridObject = null;
+    }
 
-  public boolean longPress(int x, int y) {
     return false;
-  }
-
-  public boolean fling(float velocityX, float velocityY) {
-    return isDraggingGridObject;
   }
 
   public boolean pan(int x, int y, int deltaX, int deltaY) {
@@ -76,7 +72,15 @@ public class PlacementTool implements GestureListener {
     return false;
   }
 
+  public boolean longPress(int x, int y) {
+    return false;
+  }
+
   public boolean zoom(float originalDistance, float currentDistance) {
+    return false;
+  }
+
+  public boolean fling(float velocityX, float velocityY) {
     return false;
   }
 }

@@ -3,33 +3,51 @@ package com.unhappyrobot.input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Ordering;
 import com.unhappyrobot.entities.GameGrid;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 import static com.badlogic.gdx.input.GestureDetector.GestureListener;
 
 public class InputSystem extends InputAdapter {
-  public static class Keys extends Input.Keys {
-  }
+  private List<InputProcessorEntry> inputProcessors;
+  private List<InputProcessorEntry> inputProcessorsSorted;
 
+  private HashMap<Integer, ArrayList<Action>> keyBindings;
   private OrthographicCamera camera;
 
   private CameraController cameraController;
   private GestureDetector gestureDetector;
-  private final GestureDelegater delegater;
-  private HashMap<Integer, ArrayList<Action>> keyBindings;
+  private GestureDelegater delegater;
+
 
   public InputSystem(OrthographicCamera orthographicCamera, GameGrid gameGrid) {
-    keyBindings = new HashMap<Integer, ArrayList<Action>>();
+    inputProcessors = Lists.newArrayList();
+    keyBindings = Maps.newHashMap();
     camera = orthographicCamera;
     delegater = new GestureDelegater(camera, gameGrid);
     gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, delegater);
+
+    addInputProcessor(gestureDetector, 100);
   }
 
+  public void addInputProcessor(InputProcessor inputProcessor, int priority) {
+    inputProcessors.add(new InputProcessorEntry(inputProcessor, priority));
+    inputProcessorsSorted = Ordering.from(new Comparator<InputProcessorEntry>() {
+      public int compare(InputProcessorEntry entryA, InputProcessorEntry entryB) {
+        return entryA.getPriority() - entryB.getPriority();
+      }
+    }).sortedCopy(inputProcessors);
+  }
 
   public void switchTool(GestureTool selectedTool) {
     delegater.switchTool(selectedTool);
@@ -64,9 +82,15 @@ public class InputSystem extends InputAdapter {
   }
 
   public boolean keyDown(int keycode) {
-    float deltaTime = Gdx.graphics.getDeltaTime();
+    for (InputProcessorEntry entry : inputProcessorsSorted) {
+      if (entry.getInputProcessor().keyDown(keycode)) {
+        return true;
+      }
+    }
 
     if (keyBindings.containsKey(keycode)) {
+      float deltaTime = Gdx.graphics.getDeltaTime();
+
       ArrayList<Action> actions = keyBindings.get(keycode);
       for (Action action : actions) {
         action.run(deltaTime);
@@ -79,19 +103,43 @@ public class InputSystem extends InputAdapter {
   }
 
   public boolean touchDown(int x, int y, int pointer, int button) {
-    return gestureDetector.touchDown(x, y, pointer, button);
+    for (InputProcessorEntry entry : inputProcessorsSorted) {
+      if (entry.getInputProcessor().touchDown(x, y, pointer, button)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   public boolean touchUp(int x, int y, int pointer, int button) {
-    return gestureDetector.touchUp(x, y, pointer, button);
+    for (InputProcessorEntry entry : inputProcessorsSorted) {
+      if (entry.getInputProcessor().touchUp(x, y, pointer, button)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   public boolean touchDragged(int x, int y, int pointer) {
-    return gestureDetector.touchDragged(x, y, pointer);
+    for (InputProcessorEntry entry : inputProcessorsSorted) {
+      if (entry.getInputProcessor().touchDragged(x, y, pointer)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   public boolean touchMoved(int x, int y) {
-    return gestureDetector.touchMoved(x, y);
+    for (InputProcessorEntry entry : inputProcessorsSorted) {
+      if (entry.getInputProcessor().touchMoved(x, y)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   public boolean scrolled(int amount) {
@@ -100,5 +148,8 @@ public class InputSystem extends InputAdapter {
 
   public void update(float deltaTime) {
     delegater.update(deltaTime);
+  }
+
+  public static class Keys extends Input.Keys {
   }
 }
