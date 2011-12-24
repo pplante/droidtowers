@@ -1,8 +1,8 @@
 package com.unhappyrobot.entities;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.unhappyrobot.math.Bounds2;
+import com.unhappyrobot.math.Bounds2d;
 
 public abstract class GridObject {
   public Vector2 position;
@@ -21,9 +21,9 @@ public abstract class GridObject {
     return true;
   }
 
-  public Bounds2 getBounds() {
-    return new Bounds2(position, size);
+  public Bounds2d getBounds() {
+    return new Bounds2d(position, size);
   }
 
-  public abstract Texture getTexture();
+  public abstract Sprite getSprite();
 }

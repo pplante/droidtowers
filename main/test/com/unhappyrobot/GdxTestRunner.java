@@ -1,4 +1,4 @@
-package com.unhappyrobot.spec;
+package com.unhappyrobot;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.jogl.JoglApplication;
@@ -24,15 +24,12 @@ public class GdxTestRunner extends BlockJUnit4ClassRunner implements Application
     new JoglApplication(this, conf);
   }
 
-  @Override
   public void create() {
   }
 
-  @Override
   public void resume() {
   }
 
-  @Override
   public void render() {
     synchronized (invokeInRender) {
       for (Map.Entry<FrameworkMethod, RunNotifier> each : invokeInRender.entrySet()) {
@@ -42,20 +39,15 @@ public class GdxTestRunner extends BlockJUnit4ClassRunner implements Application
     }
   }
 
-
-  @Override
   public void resize(int width, int height) {
   }
 
-  @Override
   public void pause() {
   }
 
-  @Override
   public void dispose() {
   }
 
-  @Override
   protected void runChild(FrameworkMethod method, RunNotifier notifier) {
     synchronized (invokeInRender) {
       //add for invoking in render phase, where gl context is available

@@ -3,6 +3,7 @@ package com.unhappyrobot.entities;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.grid.GridPosition;
+import com.unhappyrobot.math.Bounds2d;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -72,6 +73,8 @@ public class GameGrid {
       return false;
     }
 
+    gridObject.position.set(clampPosition(gridObject.position, gridObject.size));
+
     children.add(gridObject);
 
     for (int x = (int) gridObject.position.x; x < gridObject.position.x + gridObject.size.x; x++) {
@@ -91,13 +94,12 @@ public class GameGrid {
     return children;
   }
 
-  public boolean canObjectBeAt(GridObject object, Vector2 otherPosition) {
-    for (int x = (int) otherPosition.x; x < otherPosition.x + object.size.x; x++) {
-      for (int y = (int) otherPosition.y; y < otherPosition.y + object.size.y; y++) {
-        for (GridObject otherObject : getObjectsAtPosition(x, y)) {
-          if (!otherObject.canShareSpace()) {
-            return false;
-          }
+  public boolean canObjectBeAt(GridObject gridObject) {
+    Bounds2d boundsOfGridObjectToCheck = gridObject.getBounds();
+    for (GridObject child : children) {
+      if (child != gridObject) {
+        if (child.getBounds().overlaps(boundsOfGridObjectToCheck) && !child.canShareSpace()) {
+          return false;
         }
       }
     }
@@ -125,5 +127,21 @@ public class GameGrid {
     gridY = Math.max(0, Math.min(gridY, gridSize.y - 1));
 
     return new Vector2(gridX, gridY);
+  }
+
+  public Vector2 clampPosition(Vector2 position, Vector2 size) {
+    if (position.x < 0) {
+      position.x = 0;
+    } else if (position.x + size.x > gridSize.x) {
+      position.x = gridSize.x - size.x;
+    }
+
+    if (position.y < 0) {
+      position.y = 0;
+    } else if (position.y + size.y > gridSize.y) {
+      position.y = gridSize.y - size.y;
+    }
+
+    return position;
   }
 }

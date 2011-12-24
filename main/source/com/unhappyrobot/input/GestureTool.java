@@ -8,6 +8,11 @@ public enum GestureTool {
     public GestureListener newInstance() {
       return new PlacementTool();
     }
+  }, NONE {
+    @Override
+    public GestureListener newInstance() {
+      return null;
+    }
   };
 
   public abstract GestureListener newInstance();

@@ -8,13 +8,20 @@ import static com.badlogic.gdx.input.GestureDetector.GestureListener;
 class GestureDelegater implements GestureListener {
   private GestureListener currentTool;
   private CameraController cameraController;
+  private Runnable beforeSwitchToolRunnable;
 
   public GestureDelegater(OrthographicCamera camera, GameGrid gameGrid) {
     this.cameraController = new CameraController(camera, gameGrid);
   }
 
-  public void switchTool(GestureTool tool) {
+  public void switchTool(GestureTool tool, Runnable switchToolRunnable) {
+    if (beforeSwitchToolRunnable != null) {
+      beforeSwitchToolRunnable.run();
+      beforeSwitchToolRunnable = null;
+    }
+
     this.currentTool = tool.newInstance();
+    beforeSwitchToolRunnable = switchToolRunnable;
   }
 
   public GestureListener getCurrentTool() {

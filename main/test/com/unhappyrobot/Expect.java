@@ -1,4 +1,4 @@
-package com.unhappyrobot.spec;
+package com.unhappyrobot;
 
 import com.badlogic.gdx.math.Vector2;
 import com.pivotallabs.greatexpectations.matchers.*;

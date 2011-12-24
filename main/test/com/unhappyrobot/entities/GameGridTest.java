@@ -1,13 +1,11 @@
-package com.unhappyrobot.spec.entities;
+package com.unhappyrobot.entities;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.unhappyrobot.entities.GameGrid;
-import com.unhappyrobot.entities.GridObject;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.unhappyrobot.spec.Expect.expect;
+import static com.unhappyrobot.Expect.expect;
 
 public class GameGridTest {
   private GameGrid grid;
@@ -84,7 +82,7 @@ public class GameGridTest {
     shareable.size = new Vector2(1, 1);
 
     grid.addObject(bastard);
-    expect(grid.canObjectBeAt(shareable, bastard.position)).toBeFalse();
+    expect(grid.canObjectBeAt(shareable)).toBeFalse();
   }
 
   @Test
@@ -97,7 +95,7 @@ public class GameGridTest {
     GridObject shareable2 = new TestGridObject();
     shareable2.size = new Vector2(1, 1);
 
-    expect(grid.canObjectBeAt(shareable2, shareable1.position)).toBeTrue();
+    expect(grid.canObjectBeAt(shareable2)).toBeTrue();
   }
 
   private class GreedyBastard extends GridObject {
@@ -107,14 +105,14 @@ public class GameGridTest {
     }
 
     @Override
-    public Texture getTexture() {
+    public Sprite getSprite() {
       return null;
     }
   }
 
   private class TestGridObject extends GridObject {
     @Override
-    public Texture getTexture() {
+    public Sprite getSprite() {
       return null;
     }
   }

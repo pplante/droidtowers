@@ -12,10 +12,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.unhappyrobot.entities.*;
-import com.unhappyrobot.input.*;
+import com.unhappyrobot.gui.HeadsUpDisplay;
+import com.unhappyrobot.input.Action;
+import com.unhappyrobot.input.CameraController;
+import com.unhappyrobot.input.GestureTool;
+import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.utils.Random;
 
 import java.util.ArrayList;
@@ -34,7 +38,6 @@ public class Game implements ApplicationListener {
   private Matrix4 hudProjectionMatrix;
   private final GameGrid gameGrid = new GameGrid();
   private GameGridRenderer gameGridRenderer;
-  private InputSystem inputSystem;
   private GestureDetector gestureDetector;
   private CameraController cameraController;
   private static TweenManager tweenManager;
@@ -44,6 +47,7 @@ public class Game implements ApplicationListener {
   private Button testButton;
   private Stage uiLayer;
   private BitmapFont defaultBitmapFont;
+  private HeadsUpDisplay headsUpDisplay;
 
   public void create() {
     instance = this;
@@ -77,28 +81,8 @@ public class Game implements ApplicationListener {
     uiSkin = new Skin(Gdx.files.internal("uiskin.json"), Gdx.files.internal("uiskin.png"));
     uiLayer = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
 
-    final Window window = new Window("Window!", uiSkin);
-    window.defaults().space(10).pad(10);
-    window.row().fill().expandX();
-
-    FlickScrollPane flickScrollPane = new FlickScrollPane();
-    Table table = new Table(uiSkin);
-    table.defaults();
-    for (int i = 1; i < 100; i++) {
-      Button button = new Button(uiSkin);
-      Label label = new Label("Some button " + i, uiSkin);
-      button.add(label).fill();
-      table.add(button).fill();
-      if (i % 5 == 0) {
-        table.row();
-      }
-    }
-    flickScrollPane.setWidget(table);
-
-    window.add(flickScrollPane).fill().maxHeight(300);
-    window.pack();
-
-    uiLayer.addActor(window);
+    headsUpDisplay = new HeadsUpDisplay(uiSkin, camera, gameGrid);
+    uiLayer.addActor(headsUpDisplay);
 
     CloudLayer cloudLayer = new CloudLayer(gameGrid.getWorldSize());
     layers.add(cloudLayer);
@@ -106,36 +90,34 @@ public class Game implements ApplicationListener {
     gameGridRenderer = gameGrid.getRenderer();
     layers.add(gameGridRenderer);
 
-    inputSystem = new InputSystem(camera, gameGrid);
-    inputSystem.addInputProcessor(uiLayer, 10);
-    Gdx.input.setInputProcessor(inputSystem);
+    InputSystem.getInstance().setup(camera, gameGrid);
+    InputSystem.getInstance().addInputProcessor(uiLayer, 10);
+    Gdx.input.setInputProcessor(InputSystem.getInstance());
 
     Gdx.input.setCatchBackKey(true);
     Gdx.input.setCatchMenuKey(true);
 
-    inputSystem.bind(Keys.W, new Action() {
+    InputSystem.getInstance().bind(Keys.W, new Action() {
       public void run(float timeDelta) {
         camera.position.add(0, 3, 0);
       }
     });
 
-    inputSystem.bind(Keys.S, new Action() {
+    InputSystem.getInstance().bind(Keys.S, new Action() {
       public void run(float timeDelta) {
         camera.position.add(0, -3, 0);
       }
     });
 
-    inputSystem.bind(Keys.G, new Action() {
+    InputSystem.getInstance().bind(Keys.G, new Action() {
       public void run(float timeDelta) {
         gameGridRenderer.toggleGridLines();
       }
     });
 
-    inputSystem.bind(Keys.NUM_1, new Action() {
+    InputSystem.getInstance().bind(Keys.ESCAPE, new Action() {
       public void run(float timeDelta) {
-        inputSystem.switchTool(GestureTool.PLACEMENT);
-        PlacementTool placementTool = (PlacementTool) inputSystem.getCurrentTool();
-        placementTool.setup(camera, gameGrid);
+        InputSystem.getInstance().switchTool(GestureTool.NONE, null);
       }
     });
   }
@@ -149,7 +131,7 @@ public class Game implements ApplicationListener {
 
     float deltaTime = Gdx.graphics.getDeltaTime();
 
-    inputSystem.update(deltaTime);
+    InputSystem.getInstance().update(deltaTime);
     camera.update();
 
     spriteBatch.setProjectionMatrix(camera.combined);

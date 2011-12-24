@@ -1,38 +1,31 @@
 package com.unhappyrobot.input;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
+import com.unhappyrobot.entities.GridObjectType;
 
 import static com.badlogic.gdx.input.GestureDetector.GestureListener;
 
 public class PlacementTool implements GestureListener {
   private OrthographicCamera camera;
   private GameGrid gameGrid;
+  private GridObjectType gridObjectType;
   private GridObject gridObject;
+  private Vector2 touchDownPointDelta;
   private boolean isDraggingGridObject;
 
-  public void setup(OrthographicCamera camera, GameGrid gameGrid) {
+  public void setup(OrthographicCamera camera, GameGrid gameGrid, GridObjectType gridObjectType) {
     this.camera = camera;
     this.gameGrid = gameGrid;
+    this.gridObjectType = gridObjectType;
 
-    makeGridObject();
-  }
-
-  private GridObject makeGridObject() {
-    return new GridObject() {
-      private Texture texture = new Texture(Gdx.files.internal("tiles/blank-tower.png"));
-
-      @Override
-      public Texture getTexture() {
-        return texture;
-      }
-    };
+    this.gridObjectType.makeGridObject();
   }
 
   private Vector2 findGameGridPointAtFinger() {
@@ -44,19 +37,23 @@ public class PlacementTool implements GestureListener {
   public boolean touchDown(int x, int y, int pointer) {
     Vector2 gridPointAtFinger = findGameGridPointAtFinger();
     if (gridObject == null) {
-      gridObject = makeGridObject();
+      gridObject = gridObjectType.makeGridObject();
+      gridObject.position.set(gameGrid.clampPosition(gridPointAtFinger, gridObject.size));
+
       gameGrid.addObject(gridObject);
-      gridObject.position.set(gridPointAtFinger);
+    } else {
+      touchDownPointDelta = gridPointAtFinger.cpy().sub(gridObject.position);
     }
 
-    isDraggingGridObject = gridObject.position.x == gridPointAtFinger.x && gridObject.position.y == gridPointAtFinger.y;
+    isDraggingGridObject = gridObject.getBounds().contains(gridPointAtFinger);
 
     return true;
   }
 
   public boolean tap(int x, int y, int count) {
-    if(count >= 2) {
+    if (count >= 2) {
       gridObject = null;
+      touchDownPointDelta = null;
     }
 
     return false;
@@ -64,7 +61,19 @@ public class PlacementTool implements GestureListener {
 
   public boolean pan(int x, int y, int deltaX, int deltaY) {
     if (isDraggingGridObject) {
-      gridObject.position.set(findGameGridPointAtFinger());
+      Vector2 gridPointAtFinger = findGameGridPointAtFinger();
+
+      if (touchDownPointDelta != null) {
+        gridPointAtFinger.sub(touchDownPointDelta);
+      }
+
+      gridObject.position.set(gameGrid.clampPosition(gridPointAtFinger, gridObject.size));
+
+      if(gameGrid.canObjectBeAt(gridObject)) {
+        gridObject.getSprite().setColor(Color.WHITE);
+      } else {
+        gridObject.getSprite().setColor(Color.RED);
+      }
 
       return true;
     }

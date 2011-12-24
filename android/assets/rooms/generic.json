@@ -1,0 +1,23 @@
+[
+  {
+    "name":"Generic 2x1",
+    "height":1,
+    "width":2,
+    "atlas":"rooms/generic.txt",
+    "image":"generic/generic_room_2x"
+  },
+  {
+    "name":"Generic 3x1",
+    "height":1,
+    "width":3,
+    "atlas":"rooms/generic.txt",
+    "image":"generic/generic_room_3x"
+  },
+  {
+    "name":"Generic 4x1",
+    "height":1,
+    "width":4,
+    "atlas":"rooms/generic.txt",
+    "image":"generic/generic_room_4x"
+  }
+]

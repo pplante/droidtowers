@@ -11,10 +11,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
 import com.unhappyrobot.entities.GameGrid;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static com.badlogic.gdx.input.GestureDetector.GestureListener;
 
@@ -23,14 +20,22 @@ public class InputSystem extends InputAdapter {
   private List<InputProcessorEntry> inputProcessorsSorted;
 
   private HashMap<Integer, ArrayList<Action>> keyBindings;
-  private OrthographicCamera camera;
 
+  private OrthographicCamera camera;
   private CameraController cameraController;
   private GestureDetector gestureDetector;
   private GestureDelegater delegater;
 
+  private static InputSystem instance;
+  public static InputSystem getInstance() {
+    if(instance == null) {
+      instance = new InputSystem();
+    }
 
-  public InputSystem(OrthographicCamera orthographicCamera, GameGrid gameGrid) {
+    return instance;
+  }
+
+  public void setup(OrthographicCamera orthographicCamera, GameGrid gameGrid) {
     inputProcessors = Lists.newArrayList();
     keyBindings = Maps.newHashMap();
     camera = orthographicCamera;
@@ -42,6 +47,11 @@ public class InputSystem extends InputAdapter {
 
   public void addInputProcessor(InputProcessor inputProcessor, int priority) {
     inputProcessors.add(new InputProcessorEntry(inputProcessor, priority));
+
+    sortInputProcessors();
+  }
+
+  private void sortInputProcessors() {
     inputProcessorsSorted = Ordering.from(new Comparator<InputProcessorEntry>() {
       public int compare(InputProcessorEntry entryA, InputProcessorEntry entryB) {
         return entryA.getPriority() - entryB.getPriority();
@@ -49,8 +59,21 @@ public class InputSystem extends InputAdapter {
     }).sortedCopy(inputProcessors);
   }
 
-  public void switchTool(GestureTool selectedTool) {
-    delegater.switchTool(selectedTool);
+  public void removeInputProcessor(InputProcessor inputProcessor) {
+    Iterator<InputProcessorEntry> iterator = inputProcessors.iterator();
+
+    while (iterator.hasNext()) {
+      InputProcessorEntry entry = iterator.next();
+      if(entry.getInputProcessor().equals(inputProcessor)) {
+        iterator.remove();
+      }
+    }
+
+    sortInputProcessors();
+  }
+
+  public void switchTool(GestureTool selectedTool, Runnable switchToolRunnable) {
+    delegater.switchTool(selectedTool, switchToolRunnable);
   }
 
   public GestureListener getCurrentTool() {
@@ -143,6 +166,12 @@ public class InputSystem extends InputAdapter {
   }
 
   public boolean scrolled(int amount) {
+    for (InputProcessorEntry entry : inputProcessorsSorted) {
+      if (entry.getInputProcessor().scrolled(amount)) {
+        return true;
+      }
+    }
+
     return delegater.getCameraController().scrolled(amount);
   }
 
