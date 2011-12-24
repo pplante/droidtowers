@@ -1,0 +1,11 @@
+buttons.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+add-thing
+  rotate: false
+  xy: 0, 0
+  size: 30, 30
+  orig: 30, 30
+  offset: 1, 1
+  index: -1

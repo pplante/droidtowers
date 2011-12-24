@@ -13,38 +13,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/All_in_main_lib.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/rooms/generic.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObjectType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/RoomType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelButton.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Menu.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/MenuCloser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/MenuItem.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/WheelScrollFlickScrollPane.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/types/RoomTypeFactoryTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/math/Bounds2Test.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/spec/input/GdxTestInput.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/math/Bounds2.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/math/Bounds2d.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/spec/Expect.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/Expect.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/spec/GdxTestRunner.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/GdxTestRunner.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/spec/Vector2Matcher.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/Vector2Matcher.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/spec/entities/GameGridTest.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/entities/GameGridTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/main.xml" afterPath="$PROJECT_DIR$/.idea/libraries/main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/main.iml" afterPath="$PROJECT_DIR$/main/main.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGridRenderer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGridRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/BackgroundLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/BackgroundLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureDelegater.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureDelegater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureTool.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureTool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputSystem.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputSystem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java" />
     </list>
     <ignored path="underwater.iws" />
     <ignored path=".idea/workspace.xml" />

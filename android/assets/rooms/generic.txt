@@ -1,0 +1,25 @@
+generic.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+generic/generic_room_2x
+  rotate: false
+  xy: 0, 128
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: 1
+generic/generic_room_3x
+  rotate: false
+  xy: 0, 64
+  size: 192, 64
+  orig: 192, 64
+  offset: 0, 0
+  index: 1
+generic/generic_room_4x
+  rotate: false
+  xy: 0, 0
+  size: 256, 64
+  orig: 256, 64
+  offset: 0, 0
+  index: 1
