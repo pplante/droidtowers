@@ -1,6 +1,8 @@
 [
   {
     "name":"Generic 2x1",
+    "coins":100,
+    "gold":0,
     "height":1,
     "width":2,
     "atlas":"rooms/generic.txt",
@@ -8,6 +10,8 @@
   },
   {
     "name":"Generic 3x1",
+    "coins":200,
+    "gold":0,
     "height":1,
     "width":3,
     "atlas":"rooms/generic.txt",
@@ -15,6 +19,7 @@
   },
   {
     "name":"Generic 4x1",
+    "coins":300,
     "height":1,
     "width":4,
     "atlas":"rooms/generic.txt",

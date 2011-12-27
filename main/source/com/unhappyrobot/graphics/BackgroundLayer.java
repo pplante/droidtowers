@@ -1,28 +1,48 @@
 package com.unhappyrobot.graphics;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector2;
-import com.unhappyrobot.entities.GridObject;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.unhappyrobot.entities.GameLayer;
 
 import static com.badlogic.gdx.graphics.Texture.TextureWrap;
 
-public class BackgroundLayer extends GridObject {
+public class BackgroundLayer extends GameLayer {
   private final Sprite sprite;
 
   public BackgroundLayer(String fileName) {
-    Texture texture = new Texture(Gdx.files.internal(fileName));
-    texture.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+    this(new Texture(Gdx.files.internal(fileName)));
+  }
 
+  public BackgroundLayer(Texture texture) {
     sprite = new Sprite(texture);
+  }
 
-    position = new Vector2(1, 1);
-    size = new Vector2(5, 5);
+  public void setPosition(int x, int y) {
+    sprite.setPosition(x, y);
+  }
+
+  public void setSize(float w, float h) {
+    sprite.setSize(w, h);
+  }
+
+  public void setWrap(TextureWrap mode) {
+    sprite.getTexture().setWrap(mode, mode);
+
+    if (mode == TextureWrap.Repeat) {
+      sprite.setU(0f);
+      sprite.setV(0f);
+      sprite.setU2(sprite.getWidth() / sprite.getTexture().getWidth());
+      sprite.setV2(sprite.getHeight() / sprite.getTexture().getHeight());
+    }
   }
 
   @Override
-  public Sprite getSprite() {
-    return sprite;
+  public void render(SpriteBatch spriteBatch, Camera camera) {
+    spriteBatch.begin();
+    sprite.draw(spriteBatch);
+    spriteBatch.end();
   }
 }

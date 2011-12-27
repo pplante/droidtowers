@@ -2,7 +2,7 @@ package com.unhappyrobot.scripting;
 
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.DeferredManager;
-import com.unhappyrobot.Game;
+import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.entities.GameObject;
 import org.mozilla.javascript.ScriptableObject;
 
@@ -24,7 +24,7 @@ public class ScriptedGameObject extends ScriptableObject {
     DeferredManager.onGameThread().runOnce(new Runnable() {
       public void run() {
         gameObject.useTexture(filename);
-        Game.getLayers().get(0).addChild(gameObject);
+        TowerGame.getLayers().get(0).addChild(gameObject);
       }
     });
   }

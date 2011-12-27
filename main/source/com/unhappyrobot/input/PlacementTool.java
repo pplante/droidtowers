@@ -8,7 +8,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
-import com.unhappyrobot.entities.GridObjectType;
+import com.unhappyrobot.money.PurchaseCheck;
+import com.unhappyrobot.types.GridObjectType;
 
 import static com.badlogic.gdx.input.GestureDetector.GestureListener;
 
@@ -16,14 +17,16 @@ public class PlacementTool implements GestureListener {
   private OrthographicCamera camera;
   private GameGrid gameGrid;
   private GridObjectType gridObjectType;
+  private PurchaseCheck purchaseCheck;
   private GridObject gridObject;
   private Vector2 touchDownPointDelta;
   private boolean isDraggingGridObject;
 
-  public void setup(OrthographicCamera camera, GameGrid gameGrid, GridObjectType gridObjectType) {
+  public void setup(OrthographicCamera camera, GameGrid gameGrid, GridObjectType gridObjectType, PurchaseCheck purchaseCheck) {
     this.camera = camera;
     this.gameGrid = gameGrid;
     this.gridObjectType = gridObjectType;
+    this.purchaseCheck = purchaseCheck;
 
     this.gridObjectType.makeGridObject();
   }
@@ -54,6 +57,10 @@ public class PlacementTool implements GestureListener {
     if (count >= 2) {
       gridObject = null;
       touchDownPointDelta = null;
+
+      if (!purchaseCheck.canPurchase(gridObjectType)) {
+        InputSystem.getInstance().switchTool(GestureTool.NONE, null);
+      }
     }
 
     return false;
@@ -69,7 +76,7 @@ public class PlacementTool implements GestureListener {
 
       gridObject.position.set(gameGrid.clampPosition(gridPointAtFinger, gridObject.size));
 
-      if(gameGrid.canObjectBeAt(gridObject)) {
+      if (gameGrid.canObjectBeAt(gridObject)) {
         gridObject.getSprite().setColor(Color.WHITE);
       } else {
         gridObject.getSprite().setColor(Color.RED);

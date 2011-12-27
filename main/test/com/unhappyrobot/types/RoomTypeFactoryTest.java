@@ -1,7 +1,6 @@
 package com.unhappyrobot.types;
 
 import com.unhappyrobot.GdxTestRunner;
-import com.unhappyrobot.entities.RoomType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

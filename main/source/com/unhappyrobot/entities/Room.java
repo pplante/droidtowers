@@ -3,6 +3,7 @@ package com.unhappyrobot.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.unhappyrobot.types.RoomType;
 
 public class Room extends GridObject {
   private static TextureAtlas roomAtlas;

@@ -3,7 +3,6 @@ package com.unhappyrobot.types;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.google.common.collect.Lists;
-import com.unhappyrobot.entities.RoomType;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.TypeFactory;
 

@@ -18,4 +18,8 @@ public class Random {
   public static int randomInt(int min, int max) {
     return min + random.nextInt(max - min);
   }
+
+  public static int randomInt(double min, double max) {
+    return randomInt((int) min, (int) max);
+  }
 }

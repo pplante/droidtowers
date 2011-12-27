@@ -13,8 +13,246 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/pplante.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/pplante.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Player.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/AlertDialog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/money/PurchaseCheck.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/build.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/manifest" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/classfile/ByteCode.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/classfile/ClassFileWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Arguments.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/BaseFunction.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/BoundFunction.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Callable.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ClassCache.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ClassShutter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/CodeGenerator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/CompilerEnvirons.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ConstProperties.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Context.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ContextAction.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ContextFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ContextListener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ContinuationPending.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/DToA.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Decompiler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/DefaultErrorReporter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/DefiningClassLoader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Delegator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/EcmaError.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ErrorReporter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Evaluator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/EvaluatorException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Function.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/FunctionObject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/GeneratedClassLoader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/IRFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Icode.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/IdFunctionCall.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/IdFunctionObject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/IdScriptableObject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ImporterTopLevel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/InterfaceAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/InterpretedFunction.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Interpreter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/InterpreterData.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/JavaAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/JavaMembers.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/JavaScriptException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Kit.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/LazilyLoadedCtor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/MemberBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeArray.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeBoolean.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeCall.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeContinuation.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeDate.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeError.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeFunction.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeGenerator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeGlobal.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeIterator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeJSON.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeJavaArray.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeJavaClass.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeJavaConstructor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeJavaMethod.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeJavaObject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeJavaPackage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeJavaTopPackage.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeMath.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeNumber.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeObject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeScript.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeString.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NativeWith.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Node.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/NodeTransformer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ObjArray.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ObjToIntMap.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Parser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/PolicySecurityController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Ref.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/RefCallable.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/RegExpProxy.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/RhinoException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/RhinoSecurityManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Script.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ScriptRuntime.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ScriptStackElement.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Scriptable.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ScriptableObject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/SecureCaller.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/SecurityController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/SecurityUtilities.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/SpecialRef.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Synchronizer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Token.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/TokenStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/TopLevel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/UintMap.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Undefined.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/UniqueTag.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/VMBridge.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/WrapFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/WrappedException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/Wrapper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/annotations/JSConstructor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/annotations/JSFunction.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/annotations/JSGetter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/annotations/JSSetter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/annotations/JSStaticFunction.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ArrayComprehension.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ArrayComprehensionLoop.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ArrayLiteral.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/Assignment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/AstNode.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/AstRoot.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/Block.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/BreakStatement.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/CatchClause.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/Comment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ConditionalExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ContinueStatement.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/DestructuringForm.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/DoLoop.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ElementGet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/EmptyExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ErrorCollector.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ErrorNode.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ExpressionStatement.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ForInLoop.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ForLoop.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/FunctionCall.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/FunctionNode.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/IdeErrorReporter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/IfStatement.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/InfixExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/Jump.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/KeywordLiteral.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/Label.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/LabeledStatement.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/LetNode.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/Loop.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/Name.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/NewExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/NodeVisitor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/NumberLiteral.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ObjectLiteral.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ObjectProperty.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ParenthesizedExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ParseProblem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/PropertyGet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/RegExpLiteral.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ReturnStatement.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/Scope.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ScriptNode.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/StringLiteral.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/SwitchCase.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/SwitchStatement.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/Symbol.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/ThrowStatement.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/TryStatement.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/UnaryExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/VariableDeclaration.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/VariableInitializer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/WhileLoop.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/WithStatement.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/XmlDotQuery.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/XmlElemRef.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/XmlExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/XmlFragment.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/XmlLiteral.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/XmlMemberGet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/XmlPropRef.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/XmlRef.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/XmlString.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/ast/Yield.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/ModuleScope.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/ModuleScript.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/ModuleScriptProvider.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/Require.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/RequireBuilder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/provider/CachingModuleScriptProviderBase.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/provider/DefaultUrlConnectionExpiryCalculator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/provider/ModuleSource.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/provider/ModuleSourceProvider.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/provider/ModuleSourceProviderBase.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/provider/MultiModuleScriptProvider.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/provider/ParsedContentType.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/provider/SoftCachingModuleScriptProvider.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/provider/StrongCachingModuleScriptProvider.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/provider/UrlConnectionExpiryCalculator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/provider/UrlConnectionSecurityDomainProvider.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/commonjs/module/provider/UrlModuleSourceProvider.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/debug/DebugFrame.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/debug/DebuggableObject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/debug/DebuggableScript.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/debug/Debugger.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/jdk13/VMBridge_jdk13.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/jdk15/VMBridge_jdk15.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/json/JsonParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/optimizer/Block.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/optimizer/ClassCompiler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/optimizer/Codegen.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/optimizer/DataFlowBitSet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/optimizer/OptFunctionNode.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/optimizer/OptRuntime.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/optimizer/OptTransformer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/optimizer/Optimizer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/regexp/NativeRegExp.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/regexp/NativeRegExpCtor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/regexp/RegExpImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/regexp/SubString.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/resources/Messages.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/resources/Messages_fr.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/serialize/ScriptableInputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/serialize/ScriptableOutputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/xml/XMLLib.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/rhino-js/src/org/mozilla/javascript/xml/XMLObject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/effects/Particle.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/effects/ParticleEngine.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObjectType.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/mods/ModList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/mods/ModListItem.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/RoomType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets-raw/psds/background1.psd" afterPath="$PROJECT_DIR$/android/assets-raw/psds/background1.psd" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/rooms/generic.json" afterPath="$PROJECT_DIR$/android/assets/rooms/generic.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/source/com/unhappyrobot/AndroidGame.java" afterPath="$PROJECT_DIR$/android/source/com/unhappyrobot/AndroidGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/DesktopGame.java" afterPath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/DesktopGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGridRenderer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGridRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/BackgroundLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/BackgroundLayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/ScriptedGameObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/scripting/ScriptedGameObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/Random.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/Random.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/types/RoomTypeFactoryTest.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/types/RoomTypeFactoryTest.java" />
     </list>
     <ignored path="underwater.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -108,22 +346,71 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Game.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java">
+      <file leaf-file-name="GridObjectType.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="81" column="82" selection-start="2896" selection-end="2896" vertical-scroll-proportion="0.0">
+            <state line="27" column="25" selection-start="514" selection-end="514" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlacementTool.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="60" column="28" selection-start="2090" selection-end="2090" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HeadsUpDisplay.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java">
+      <file leaf-file-name="PurchaseCheck.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/money/PurchaseCheck.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="36" selection-start="721" selection-end="721" vertical-scroll-proportion="0.10681114">
+            <state line="11" column="17" selection-start="305" selection-end="305" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TowerGame.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="83" column="47" selection-start="2940" selection-end="2963" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HeadsUpDisplay.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="52" column="14" selection-start="1552" selection-end="1552" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlertDialog.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/AlertDialog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="31" selection-start="875" selection-end="875" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WidgetGroup.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/ui/WidgetGroup.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="68" column="14" selection-start="1853" selection-end="1853" vertical-scroll-proportion="1.1706828">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -142,22 +429,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/BackgroundLayer.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGridRenderer.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/spec/entities/GameGridTest.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/math/Bounds2d.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureTool.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelButton.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureDelegater.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java" />
-        <option value="$PROJECT_DIR$/main/test/com/unhappyrobot/types/RoomTypeFactoryTest.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputSystem.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/Random.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java" />
+        <option value="$PROJECT_DIR$/android/assets/rooms/generic.json" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/money/PlacementVerifyier.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Player.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/money/PlacementVerifier.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/money/PurchaseLimiter.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/money/PurchaseCheck.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
-        <option value="$PROJECT_DIR$/main/test/com/unhappyrobot/GdxTestRunner.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/AlertDialog.java" />
       </list>
     </option>
   </component>
@@ -396,6 +683,194 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unhappyrobot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="types" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unhappyrobot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdx.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdx.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdx.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdx.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scene2d" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdx.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scene2d" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="android" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -463,7 +938,7 @@
     <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.YAML" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="10.0.1.7:2222" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="0146BF4F17012018" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLanguage" value="Java" />
@@ -486,10 +961,10 @@
     </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.unhappyrobot.gui" />
+      <recent name="com.unhappyrobot.money" />
       <recent name="com.unhappyrobot.entities" />
       <recent name="com.unhappyrobot.input" />
       <recent name="com.unhappyrobot.graphics" />
-      <recent name="com.unhappyrobot.spec" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.unhappyrobot.types" />
@@ -531,6 +1006,34 @@
       </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="RoomTypeFactoryTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.unhappyrobot.types.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="main" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="com.unhappyrobot.types" />
+      <option name="MAIN_CLASS_NAME" value="com.unhappyrobot.types.RoomTypeFactoryTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/android/assets" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -727,11 +1230,12 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Android Application.Android" />
       <item index="1" class="java.lang.String" itemvalue="Application.DesktopGame" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.All in main lib" />
       <item index="3" class="java.lang.String" itemvalue="JUnit.RoomTypeFactoryTest.all_returnsKnownRoomTypes" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.RoomTypeFactoryTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -792,6 +1296,7 @@
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946082" sideWeight="0.6709347" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28354815" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
@@ -805,14 +1310,13 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39971244" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.0883758" sideWeight="0.67702806" order="0" side_tool="true" content_ui="tabs" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22441243" sideWeight="0.9681529" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1397293" sideWeight="0.77558756" order="0" side_tool="true" content_ui="tabs" x="239" y="105" width="347" height="1319" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22441243" sideWeight="0.9681529" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24412434" sideWeight="0.28821656" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3125" sideWeight="0.75587565" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328279" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="JsTestDriver Server" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3297953" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -907,93 +1411,117 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="6" selection-start="2206" selection-end="2206" vertical-scroll-proportion="0.6124498" />
+        <state line="60" column="28" selection-start="2090" selection-end="2090" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGridRenderer.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/money/PurchaseCheck.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="28" selection-start="1383" selection-end="1383" vertical-scroll-proportion="0.4437751" />
+        <state line="11" column="17" selection-start="305" selection-end="305" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/BackgroundLayer.java">
+    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/ui/Label.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="10" selection-start="358" selection-end="358" vertical-scroll-proportion="0.11044177" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureTool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="18" selection-start="330" selection-end="330" vertical-scroll-proportion="0.2871486" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/test/com/unhappyrobot/Vector2Matcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="13" selection-start="227" selection-end="227" vertical-scroll-proportion="0.11044177" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/test/com/unhappyrobot/entities/GameGridTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="40" selection-start="2748" selection-end="2748" vertical-scroll-proportion="0.6787149" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/HttpRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="13" selection-start="210" selection-end="210" vertical-scroll-proportion="0.08835341" />
+        <state line="120" column="2" selection-start="4367" selection-end="4379" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="14" selection-start="378" selection-end="378" vertical-scroll-proportion="0.08835341" />
+        <state line="22" column="115" selection-start="742" selection-end="742" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/test/com/unhappyrobot/types/RoomTypeFactoryTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="19" selection-start="292" selection-end="292" vertical-scroll-proportion="0.11044177" />
+        <state line="23" column="0" selection-start="589" selection-end="589" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputSystem.java">
+    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/Group.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="38" selection-start="952" selection-end="952" vertical-scroll-proportion="0.3313253" />
+        <state line="36" column="13" selection-start="1417" selection-end="1417" vertical-scroll-proportion="-2.3634539">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureDelegater.java">
+    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/Stage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="38" selection-start="724" selection-end="724" vertical-scroll-proportion="0.35341364" />
+        <state line="194" column="36" selection-start="7630" selection-end="7630" vertical-scroll-proportion="0.44176707">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/ui/tablelayout/Table.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="269" column="14" selection-start="9102" selection-end="9102" vertical-scroll-proportion="0.33333334">
+        <state line="83" column="47" selection-start="2940" selection-end="2963" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="25" selection-start="461" selection-end="461" vertical-scroll-proportion="0.35341364">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="82" selection-start="2896" selection-end="2896" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/test/com/unhappyrobot/GdxTestRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="0" selection-start="1584" selection-end="1584" vertical-scroll-proportion="0.5402477">
+        <state line="6" column="13" selection-start="192" selection-end="192" vertical-scroll-proportion="0.08835341">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="36" selection-start="721" selection-end="721" vertical-scroll-proportion="0.10681114">
+        <state line="52" column="14" selection-start="1552" selection-end="1552" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/ui/tablelayout/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="13" selection-start="2704" selection-end="2704" vertical-scroll-proportion="-11.060241">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/ui/Window.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="30" selection-start="894" selection-end="894" vertical-scroll-proportion="0.22088353">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/ui/Skin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="200" column="13" selection-start="8358" selection-end="8358" vertical-scroll-proportion="2.4738955">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/esotericsoftware/tablelayout/Cell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="462" column="14" selection-start="11576" selection-end="11576" vertical-scroll-proportion="-5.7148595">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/AlertDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="31" selection-start="875" selection-end="875" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/ui/WidgetGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="14" selection-start="1853" selection-end="1853" vertical-scroll-proportion="1.1706828">
+          <folding />
         </state>
       </provider>
     </entry>
