@@ -51,15 +51,15 @@ public class HeadsUpDisplay extends Group {
 
   private void makeAddRoomButton() {
     addRoomButton = new LabelButton(skin, "Add Room");
-    addRoomButton.defaults().top().left();
+    addRoomButton.defaults();
     addRoomButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         addRoomMenu.show(addRoomButton);
       }
     });
-    addRoomButton.x = addRoomButton.width;
-    addRoomButton.y = 0;
     addRoomButton.pack();
+    addRoomButton.x = 10;
+    addRoomButton.y = Gdx.graphics.getHeight() - addRoomButton.height - 10;
     addActor(addRoomButton);
   }
 

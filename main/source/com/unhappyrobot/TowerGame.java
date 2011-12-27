@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.entities.*;
 import com.unhappyrobot.graphics.BackgroundLayer;
 import com.unhappyrobot.gui.HeadsUpDisplay;
@@ -168,6 +169,7 @@ public class TowerGame implements ApplicationListener {
     spriteBatch.end();
 
     uiLayer.draw();
+    Table.drawDebug(uiLayer);
 
     update();
   }
