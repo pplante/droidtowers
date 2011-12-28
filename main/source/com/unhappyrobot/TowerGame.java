@@ -7,7 +7,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.TextureDict;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
@@ -18,10 +17,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.entities.*;
 import com.unhappyrobot.graphics.BackgroundLayer;
+import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.HeadsUpDisplay;
+import com.unhappyrobot.gui.OnClickCallback;
 import com.unhappyrobot.input.Action;
 import com.unhappyrobot.input.CameraController;
-import com.unhappyrobot.input.GestureTool;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.utils.Random;
 
@@ -48,9 +48,9 @@ public class TowerGame implements ApplicationListener {
   private GridObject mouseRat;
   private Skin uiSkin;
   private Button testButton;
-  private Stage uiLayer;
+  private Stage guiLayer;
   private BitmapFont defaultBitmapFont;
-  private HeadsUpDisplay headsUpDisplay;
+  private Dialog exitDialog = null;
 
   public void create() {
     instance = this;
@@ -60,7 +60,6 @@ public class TowerGame implements ApplicationListener {
 
     tweenManager = new TweenManager();
 
-    Gdx.graphics.setVSync(true);
 
     int width = Gdx.graphics.getWidth();
     int height = Gdx.graphics.getHeight();
@@ -81,13 +80,10 @@ public class TowerGame implements ApplicationListener {
     gameGrid.resizeGrid();
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
 
-    uiSkin = new Skin(Gdx.files.internal("uiskin.json"), Gdx.files.internal("uiskin.png"));
-    uiLayer = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
+    uiSkin = new Skin(Gdx.files.internal("default-skin.ui"), Gdx.files.internal("default-skin.png"));
+    guiLayer = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
 
-    headsUpDisplay = new HeadsUpDisplay(uiSkin, camera, gameGrid);
-    uiLayer.addActor(headsUpDisplay);
-
-
+    HeadsUpDisplay.getInstance().initialize(guiLayer, uiSkin, camera, gameGrid);
 
     BackgroundLayer groundLayer = new BackgroundLayer("backgrounds/ground.png");
     groundLayer.setSize(gameGrid.getWorldSize().x, 256f);
@@ -107,7 +103,7 @@ public class TowerGame implements ApplicationListener {
     layers.add(gameGridRenderer);
 
     InputSystem.getInstance().setup(camera, gameGrid);
-    InputSystem.getInstance().addInputProcessor(uiLayer, 10);
+    InputSystem.getInstance().addInputProcessor(guiLayer, 10);
     Gdx.input.setInputProcessor(InputSystem.getInstance());
 
     Gdx.input.setCatchBackKey(true);
@@ -131,9 +127,26 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    InputSystem.getInstance().bind(Keys.ESCAPE, new Action() {
+    InputSystem.getInstance().bind(new int[]{Keys.BACK, Keys.ESCAPE}, new Action() {
       public void run(float timeDelta) {
-        InputSystem.getInstance().switchTool(GestureTool.NONE, null);
+        if (exitDialog != null) {
+          exitDialog.dismiss();
+          exitDialog = null;
+          return;
+        }
+
+        exitDialog = new Dialog().setTitle("Awww, don't leave me.").setMessage("Are you sure you want to exit the game?").addButton("Yes", new OnClickCallback() {
+          @Override
+          public void onClick(Dialog dialog) {
+            Gdx.app.exit();
+          }
+        }).addButton("No way!", new OnClickCallback() {
+          @Override
+          public void onClick(Dialog dialog) {
+            dialog.dismiss();
+            exitDialog = null;
+          }
+        }).centerOnScreen().show();
       }
     });
   }
@@ -168,8 +181,8 @@ public class TowerGame implements ApplicationListener {
 
     spriteBatch.end();
 
-    uiLayer.draw();
-    Table.drawDebug(uiLayer);
+    guiLayer.draw();
+    Table.drawDebug(guiLayer);
 
     update();
   }
@@ -185,7 +198,7 @@ public class TowerGame implements ApplicationListener {
 
     tweenManager.update();
 
-    uiLayer.act(deltaTime);
+    guiLayer.act(deltaTime);
   }
 
   public void resize(int width, int height) {
@@ -202,7 +215,6 @@ public class TowerGame implements ApplicationListener {
   }
 
   public void dispose() {
-    TextureDict.unloadAll();
     spriteBatch.dispose();
     menloBitmapFont.dispose();
   }

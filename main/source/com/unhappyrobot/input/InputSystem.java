@@ -27,8 +27,9 @@ public class InputSystem extends InputAdapter {
   private GestureDelegater delegater;
 
   private static InputSystem instance;
+
   public static InputSystem getInstance() {
-    if(instance == null) {
+    if (instance == null) {
       instance = new InputSystem();
     }
 
@@ -64,7 +65,7 @@ public class InputSystem extends InputAdapter {
 
     while (iterator.hasNext()) {
       InputProcessorEntry entry = iterator.next();
-      if(entry.getInputProcessor().equals(inputProcessor)) {
+      if (entry.getInputProcessor().equals(inputProcessor)) {
         iterator.remove();
       }
     }
@@ -85,6 +86,12 @@ public class InputSystem extends InputAdapter {
 
     actions.clear();
     actions.add(action);
+  }
+
+  public void bind(int[] keyCodes, Action action) {
+    for (int keyCode : keyCodes) {
+      bind(keyCode, action);
+    }
   }
 
   public void listen(int keyCode, Action action) {

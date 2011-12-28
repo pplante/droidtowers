@@ -32,4 +32,6 @@ public abstract class GridObjectType {
   public int getGold() {
     return gold;
   }
+
+  public abstract String getName();
 }

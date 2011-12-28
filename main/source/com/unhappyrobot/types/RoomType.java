@@ -5,6 +5,7 @@ import com.unhappyrobot.entities.Room;
 
 public class RoomType extends GridObjectType {
   private String name;
+  private boolean continuousPurchase;
   private int height;
   private int width;
   private String atlasFilename;
@@ -48,6 +49,15 @@ public class RoomType extends GridObjectType {
 
   public void setWidth(int width) {
     this.width = width;
+  }
+
+  @Override
+  public boolean continuousPlacement() {
+    return continuousPurchase;
+  }
+
+  public void setContinuousPurchase(boolean continuousPurchase) {
+    this.continuousPurchase = continuousPurchase;
   }
 
   public GridObject makeGridObject() {

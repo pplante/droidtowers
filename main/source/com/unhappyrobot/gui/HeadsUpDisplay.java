@@ -2,51 +2,71 @@ package com.unhappyrobot.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.unhappyrobot.entities.GameGrid;
+import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.input.GestureTool;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.input.PlacementTool;
-import com.unhappyrobot.money.PurchaseCheck;
 import com.unhappyrobot.types.RoomType;
 import com.unhappyrobot.types.RoomTypeFactory;
 
 public class HeadsUpDisplay extends Group {
-  private final TextureAtlas hudAtlas;
+  private TextureAtlas hudAtlas;
+  private Stage stage;
   private Skin skin;
   private OrthographicCamera camera;
   private GameGrid gameGrid;
   private LabelButton addRoomButton;
   private Menu addRoomMenu;
+  private Label moneyLabel;
+  private float updateMoneyLabel;
+  private static HeadsUpDisplay instance;
 
-  public HeadsUpDisplay(Skin skin, final OrthographicCamera camera, final GameGrid gameGrid) {
-    super();
+  public static HeadsUpDisplay getInstance() {
+    if (instance == null) {
+      instance = new HeadsUpDisplay();
+    }
+
+    return instance;
+  }
+
+  public void initialize(Stage stage, Skin skin, final OrthographicCamera camera, final GameGrid gameGrid) {
+    this.stage = stage;
     this.skin = skin;
     this.camera = camera;
     this.gameGrid = gameGrid;
 
-//    defaults();
-//    top().left();
-//
-//    x = 0;
-//    y = Gdx.graphics.getHeight();
-
     hudAtlas = new TextureAtlas(Gdx.files.internal("hud/buttons.txt"));
     makeAddRoomButton();
     makeAddRoomMenu();
+    makeMoneyLabel();
 
-    makeAlertDialog();
+    stage.addActor(this);
   }
 
-  private void makeAlertDialog() {
-    AlertDialog alertDialog = new AlertDialog(skin);
-    alertDialog.x = 100;
-    alertDialog.y = 100;
-    addActor(alertDialog);
+  private void makeMoneyLabel() {
+    moneyLabel = new Label(skin);
+    moneyLabel.setAlignment(Align.RIGHT | Align.TOP);
+    addActor(moneyLabel);
+
+    updateMoneyLabel();
+
+    BitmapFont.TextBounds textBounds = moneyLabel.getTextBounds();
+    moneyLabel.x = Gdx.graphics.getWidth() - 5;
+    moneyLabel.y = Gdx.graphics.getHeight() - 5;
+  }
+
+  private void updateMoneyLabel() {
+    moneyLabel.setText(String.format("%d coins / %d gold", Player.getInstance().getCoins(), Player.getInstance().getGold()));
   }
 
   private void makeAddRoomButton() {
@@ -71,18 +91,36 @@ public class HeadsUpDisplay extends Group {
     for (final RoomType roomType : RoomTypeFactory.all()) {
       addRoomMenu.add(new MenuItem(skin, roomType.getName(), new ClickListener() {
         public void click(Actor actor, float x, float y) {
+          addRoomButton.setText(roomType.getName());
+
           InputSystem.getInstance().switchTool(GestureTool.PLACEMENT, new Runnable() {
             public void run() {
               addRoomButton.setText("Add Room");
             }
           });
+
           PlacementTool placementTool = (PlacementTool) InputSystem.getInstance().getCurrentTool();
-          placementTool.setup(camera, gameGrid, roomType, new PurchaseCheck());
+          placementTool.setup(camera, gameGrid, roomType);
+          placementTool.enterPurchaseMode();
 
           addRoomMenu.close();
-          addRoomButton.setText(roomType.getName());
         }
       }));
     }
+  }
+
+  @Override
+  public void act(float delta) {
+    super.act(delta);
+
+    updateMoneyLabel += delta;
+    if (updateMoneyLabel > 0.5f) {
+      updateMoneyLabel = 0f;
+      updateMoneyLabel();
+    }
+  }
+
+  public Skin getSkin() {
+    return skin;
   }
 }

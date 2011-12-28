@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
-import com.unhappyrobot.money.PurchaseCheck;
+import com.unhappyrobot.money.PurchaseManager;
 import com.unhappyrobot.types.GridObjectType;
 
 import static com.badlogic.gdx.input.GestureDetector.GestureListener;
@@ -17,17 +17,15 @@ public class PlacementTool implements GestureListener {
   private OrthographicCamera camera;
   private GameGrid gameGrid;
   private GridObjectType gridObjectType;
-  private PurchaseCheck purchaseCheck;
   private GridObject gridObject;
   private Vector2 touchDownPointDelta;
   private boolean isDraggingGridObject;
+  private PurchaseManager purchaseManager;
 
-  public void setup(OrthographicCamera camera, GameGrid gameGrid, GridObjectType gridObjectType, PurchaseCheck purchaseCheck) {
+  public void setup(OrthographicCamera camera, GameGrid gameGrid, GridObjectType gridObjectType) {
     this.camera = camera;
     this.gameGrid = gameGrid;
     this.gridObjectType = gridObjectType;
-    this.purchaseCheck = purchaseCheck;
-
     this.gridObjectType.makeGridObject();
   }
 
@@ -55,15 +53,23 @@ public class PlacementTool implements GestureListener {
 
   public boolean tap(int x, int y, int count) {
     if (count >= 2) {
+      if (purchaseManager != null) {
+        purchaseManager.makePurchase();
+      }
+
       gridObject = null;
       touchDownPointDelta = null;
 
-      if (!purchaseCheck.canPurchase(gridObjectType)) {
-        InputSystem.getInstance().switchTool(GestureTool.NONE, null);
-      }
+      verifyAbilityToPurchase();
     }
 
     return false;
+  }
+
+  private void verifyAbilityToPurchase() {
+    if (purchaseManager != null && !purchaseManager.canPurchase()) {
+      InputSystem.getInstance().switchTool(GestureTool.NONE, null);
+    }
   }
 
   public boolean pan(int x, int y, int deltaX, int deltaY) {
@@ -98,5 +104,11 @@ public class PlacementTool implements GestureListener {
 
   public boolean fling(float velocityX, float velocityY) {
     return false;
+  }
+
+  public void enterPurchaseMode() {
+    purchaseManager = new PurchaseManager(gridObjectType);
+
+    verifyAbilityToPurchase();
   }
 }

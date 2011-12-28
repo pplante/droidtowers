@@ -1,6 +1,7 @@
 [
   {
     "name":"Generic 2x1",
+    "continuousPurchase":true,
     "coins":100,
     "gold":0,
     "height":1,
