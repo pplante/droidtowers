@@ -28,13 +28,16 @@ public class BackgroundLayer extends GameLayer {
     sprite.setSize(w, h);
   }
 
-  public void setWrap(TextureWrap mode) {
-    sprite.getTexture().setWrap(mode, mode);
+  public void setWrap(TextureWrap wrapX, TextureWrap wrapY) {
+    sprite.getTexture().setWrap(wrapX, wrapX);
 
-    if (mode == TextureWrap.Repeat) {
+    if (wrapX == TextureWrap.Repeat) {
       sprite.setU(0f);
-      sprite.setV(0f);
       sprite.setU2(sprite.getWidth() / sprite.getTexture().getWidth());
+    }
+
+    if (wrapY == TextureWrap.Repeat) {
+      sprite.setV(0f);
       sprite.setV2(sprite.getHeight() / sprite.getTexture().getHeight());
     }
   }

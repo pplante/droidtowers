@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.google.common.collect.Lists;
 import com.unhappyrobot.entities.*;
 import com.unhappyrobot.graphics.BackgroundLayer;
 import com.unhappyrobot.gui.Dialog;
@@ -25,7 +26,6 @@ import com.unhappyrobot.input.CameraController;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.utils.Random;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.unhappyrobot.input.InputSystem.Keys;
@@ -60,16 +60,13 @@ public class TowerGame implements ApplicationListener {
 
     tweenManager = new TweenManager();
 
-
-    int width = Gdx.graphics.getWidth();
-    int height = Gdx.graphics.getHeight();
-    camera = new OrthographicCamera(width, height);
+    camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     spriteBatch = new SpriteBatch(100);
     hudProjectionMatrix = spriteBatch.getProjectionMatrix().cpy();
 
     Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 
-    layers = new ArrayList<GameLayer>();
+    layers = Lists.newArrayList();
 
     menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_16.fnt"), Gdx.files.internal("fonts/menlo_16.png"), false);
     defaultBitmapFont = new BitmapFont(Gdx.files.internal("default.fnt"), Gdx.files.internal("default.png"), false);
@@ -81,19 +78,19 @@ public class TowerGame implements ApplicationListener {
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
 
     uiSkin = new Skin(Gdx.files.internal("default-skin.ui"), Gdx.files.internal("default-skin.png"));
-    guiLayer = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
+    guiLayer = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
 
     HeadsUpDisplay.getInstance().initialize(guiLayer, uiSkin, camera, gameGrid);
 
     BackgroundLayer groundLayer = new BackgroundLayer("backgrounds/ground.png");
     groundLayer.setSize(gameGrid.getWorldSize().x, 256f);
-    groundLayer.setWrap(Texture.TextureWrap.Repeat);
+    groundLayer.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
     layers.add(groundLayer);
 
     BackgroundLayer skyLayer = new BackgroundLayer("backgrounds/bluesky.png");
     skyLayer.setPosition(0, 256);
-    skyLayer.setSize(gameGrid.getWorldSize().x, 256f);
-    skyLayer.setWrap(Texture.TextureWrap.Repeat);
+    skyLayer.setSize(gameGrid.getWorldSize().x, gameGrid.getWorldSize().y - 256f);
+    skyLayer.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
     layers.add(skyLayer);
 
     CloudLayer cloudLayer = new CloudLayer(gameGrid.getWorldSize());
@@ -108,18 +105,6 @@ public class TowerGame implements ApplicationListener {
 
     Gdx.input.setCatchBackKey(true);
     Gdx.input.setCatchMenuKey(true);
-
-    InputSystem.getInstance().bind(Keys.W, new Action() {
-      public void run(float timeDelta) {
-        camera.position.add(0, 3, 0);
-      }
-    });
-
-    InputSystem.getInstance().bind(Keys.S, new Action() {
-      public void run(float timeDelta) {
-        camera.position.add(0, -3, 0);
-      }
-    });
 
     InputSystem.getInstance().bind(Keys.G, new Action() {
       public void run(float timeDelta) {
@@ -203,7 +188,11 @@ public class TowerGame implements ApplicationListener {
 
   public void resize(int width, int height) {
     Gdx.app.log("lifecycle", "resizing!");
+    camera.viewportWidth = width;
+    camera.viewportHeight = height;
     spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
+    hudProjectionMatrix.setToOrtho2D(0, 0, width, height);
+    Gdx.gl.glViewport(0, 0, width, height);
   }
 
   public void pause() {

@@ -2,7 +2,7 @@
 
 TODAYS_DATE=`date -u +%C%y%m%d`
 NIGHTLY_NAME="libgdx-nightly-latest"
-NIGHTLY_URL="http://libgdx.l33tlabs.org/${NIGHTLY_NAME}.zip"
+NIGHTLY_URL="http://libgdx.badlogicgames.com/nightlies/${NIGHTLY_NAME}.zip"
 DOWNLOAD_PATH="/tmp/${NIGHTLY_NAME}.zip"
 EXTRACT_PATH="/tmp/${NIGHTLY_NAME}"
 
@@ -16,7 +16,7 @@ curl -# -o $DOWNLOAD_PATH $NIGHTLY_URL
 DOWNLOAD_SUCCESS=$?
 
 if [[ $DOWNLOAD_SUCCESS != 0 ]]; then
-	echo 
+	echo
 	echo "Download failed, aborting."
 	exit $DOWNLOAD_SUCCESS
 fi;
@@ -29,7 +29,7 @@ unzip -qqo $DOWNLOAD_PATH -d $EXTRACT_PATH
 UNZIP_SUCCESS=$?
 
 if [[ $UNZIP_SUCCESS != 0 ]]; then
-	echo 
+	echo
 	echo "Unzip failed, aborting."
 	exit $UNZIP_SUCCESS
 fi;
