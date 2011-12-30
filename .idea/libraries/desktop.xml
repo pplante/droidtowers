@@ -1,14 +1,14 @@
 <component name="libraryTable">
   <library name="desktop">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/desktop/libs" />
+      <root url="file://$PROJECT_DIR$/desktop/libs/main" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/desktop/libs/gdx-backend-jogl-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/desktop/libs/gdx-backend-lwjgl-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/desktop/libs/gdx-openal-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/desktop/libs/sources/gdx-openal-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/desktop/libs/sources/gdx-backend-jogl-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/desktop/libs/sources/gdx-backend-lwjgl-sources.jar!/" />
     </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/desktop/libs" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/desktop/libs/main" recursive="false" />
   </library>
 </component>

@@ -26,7 +26,7 @@ public class CameraController implements GestureDetector.GestureListener {
     int halfWidth = Gdx.graphics.getWidth() / 2;
     int halfHeight = Gdx.graphics.getHeight() / 2;
     this.cameraBounds = new BoundingBox(new Vector3(halfWidth, halfHeight, 0), new Vector3(worldSize.x - halfWidth, worldSize.y - halfHeight, 0));
-    this.camera.position.set(worldSize.x / 2, worldSize.y / 2, 0);
+    this.camera.position.set(worldSize.x / 2, 384, 0);
   }
 
   public boolean touchDown(int x, int y, int pointer) {

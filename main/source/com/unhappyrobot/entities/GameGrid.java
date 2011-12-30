@@ -104,6 +104,10 @@ public class GameGrid {
       }
     }
 
+    if (gridObject.position.y > 4) {
+      return false;
+    }
+
     return true;
   }
 

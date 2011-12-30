@@ -1,14 +1,14 @@
 <component name="libraryTable">
   <library name="main">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/main/libs" />
+      <root url="file://$PROJECT_DIR$/main/libs/main" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/main/libs/gdx-sources.jar!/" />
-      <root url="file://$PROJECT_DIR$/main/libs/rhino-js/src" />
-      <root url="jar://$PROJECT_DIR$/main/libs/ini4j-0.5.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/" />
+      <root url="file://$PROJECT_DIR$/main/libs/sources/rhino-1.7R3" />
+      <root url="jar://$PROJECT_DIR$/main/libs/sources/tween-engine-api-sources.jar!/" />
     </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/main/libs" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/main/libs/main" recursive="false" />
   </library>
 </component>

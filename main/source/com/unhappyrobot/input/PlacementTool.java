@@ -42,6 +42,8 @@ public class PlacementTool implements GestureListener {
       gridObject.position.set(gameGrid.clampPosition(gridPointAtFinger, gridObject.size));
 
       gameGrid.addObject(gridObject);
+
+      updateGridObjectStatus();
     } else {
       touchDownPointDelta = gridPointAtFinger.cpy().sub(gridObject.position);
     }
@@ -82,16 +84,20 @@ public class PlacementTool implements GestureListener {
 
       gridObject.position.set(gameGrid.clampPosition(gridPointAtFinger, gridObject.size));
 
-      if (gameGrid.canObjectBeAt(gridObject)) {
-        gridObject.getSprite().setColor(Color.WHITE);
-      } else {
-        gridObject.getSprite().setColor(Color.RED);
-      }
+      updateGridObjectStatus();
 
       return true;
     }
 
     return false;
+  }
+
+  private void updateGridObjectStatus() {
+    if (gameGrid.canObjectBeAt(gridObject)) {
+      gridObject.getSprite().setColor(Color.WHITE);
+    } else {
+      gridObject.getSprite().setColor(Color.RED);
+    }
   }
 
   public boolean longPress(int x, int y) {
