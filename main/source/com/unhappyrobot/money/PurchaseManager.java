@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.OnClickCallback;
+import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.types.GridObjectType;
 
 public class PurchaseManager {
@@ -44,7 +45,7 @@ public class PurchaseManager {
         Player.getInstance().addCurrency(1000, 1);
         dialog.dismiss();
       }
-    }).addButton("No thanks!", new OnClickCallback() {
+    }).addButton(ResponseType.NEGATIVE, "No thanks!", new OnClickCallback() {
       @Override
       public void onClick(Dialog dialog) {
         dialog.dismiss();

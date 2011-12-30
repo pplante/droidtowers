@@ -84,8 +84,7 @@ public class InputSystem extends InputAdapter {
   public void bind(int keyCode, Action action) {
     ArrayList<Action> actions = getBindingsForKeyCode(keyCode);
 
-    actions.clear();
-    actions.add(action);
+    actions.add(0, action);
   }
 
   public void bind(int[] keyCodes, Action action) {
@@ -111,6 +110,7 @@ public class InputSystem extends InputAdapter {
     return actions;
   }
 
+  @SuppressWarnings("WhileLoopReplaceableByForEach")
   public boolean keyDown(int keycode) {
     for (InputProcessorEntry entry : inputProcessorsSorted) {
       if (entry.getInputProcessor().keyDown(keycode)) {
@@ -121,9 +121,12 @@ public class InputSystem extends InputAdapter {
     if (keyBindings.containsKey(keycode)) {
       float deltaTime = Gdx.graphics.getDeltaTime();
 
-      ArrayList<Action> actions = keyBindings.get(keycode);
-      for (Action action : actions) {
-        action.run(deltaTime);
+      Iterator<Action> actionsIterator = keyBindings.get(keycode).iterator();
+      while (actionsIterator.hasNext()) {
+        Action action = actionsIterator.next();
+        if (action.run(deltaTime)) {
+          break;
+        }
       }
 
       return true;
@@ -184,6 +187,26 @@ public class InputSystem extends InputAdapter {
 
   public void update(float deltaTime) {
     delegater.update(deltaTime);
+  }
+
+  public void unbind(int keyCode, Action actionToRemove) {
+    if (!keyBindings.containsKey(keyCode)) {
+      return;
+    }
+
+    Iterator<Action> iterator = keyBindings.get(keyCode).iterator();
+    while (iterator.hasNext()) {
+      Action action = iterator.next();
+      if (action == actionToRemove) {
+        iterator.remove();
+      }
+    }
+  }
+
+  public void unbind(int[] keyCodes, Action action) {
+    for (int keyCode : keyCodes) {
+      unbind(keyCode, action);
+    }
   }
 
   public static class Keys extends Input.Keys {

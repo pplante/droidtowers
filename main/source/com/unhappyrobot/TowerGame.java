@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Matrix4;
@@ -21,6 +22,7 @@ import com.unhappyrobot.graphics.BackgroundLayer;
 import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.HeadsUpDisplay;
 import com.unhappyrobot.gui.OnClickCallback;
+import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.input.Action;
 import com.unhappyrobot.input.CameraController;
 import com.unhappyrobot.input.InputSystem;
@@ -51,6 +53,7 @@ public class TowerGame implements ApplicationListener {
   private Stage guiLayer;
   private BitmapFont defaultBitmapFont;
   private Dialog exitDialog = null;
+  private Sprite particle;
 
   public void create() {
     instance = this;
@@ -70,6 +73,8 @@ public class TowerGame implements ApplicationListener {
 
     menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_16.fnt"), Gdx.files.internal("fonts/menlo_16.png"), false);
     defaultBitmapFont = new BitmapFont(Gdx.files.internal("default.fnt"), Gdx.files.internal("default.png"), false);
+
+    particle = new Sprite(new Texture(Gdx.files.internal("particle.png")));
 
     gameGrid.setGridOrigin(0, 0);
     gameGrid.setUnitSize(64, 64);
@@ -107,31 +112,39 @@ public class TowerGame implements ApplicationListener {
     Gdx.input.setCatchMenuKey(true);
 
     InputSystem.getInstance().bind(Keys.G, new Action() {
-      public void run(float timeDelta) {
+      public boolean run(float timeDelta) {
         gameGridRenderer.toggleGridLines();
+
+        return true;
       }
     });
 
     InputSystem.getInstance().bind(new int[]{Keys.BACK, Keys.ESCAPE}, new Action() {
-      public void run(float timeDelta) {
+      public boolean run(float timeDelta) {
         if (exitDialog != null) {
           exitDialog.dismiss();
-          exitDialog = null;
-          return;
-        }
+        } else {
+          exitDialog = new Dialog().setTitle("Awww, don't leave me.").setMessage("Are you sure you want to exit the game?").addButton("Yes", new OnClickCallback() {
+            @Override
+            public void onClick(Dialog dialog) {
+              dialog.dismiss();
+              Gdx.app.exit();
+            }
+          }).addButton(ResponseType.NEGATIVE, "No way!", new OnClickCallback() {
+            @Override
+            public void onClick(Dialog dialog) {
+              dialog.dismiss();
+            }
+          }).centerOnScreen().show();
 
-        exitDialog = new Dialog().setTitle("Awww, don't leave me.").setMessage("Are you sure you want to exit the game?").addButton("Yes", new OnClickCallback() {
-          @Override
-          public void onClick(Dialog dialog) {
-            Gdx.app.exit();
-          }
-        }).addButton("No way!", new OnClickCallback() {
-          @Override
-          public void onClick(Dialog dialog) {
-            dialog.dismiss();
-            exitDialog = null;
-          }
-        }).centerOnScreen().show();
+          exitDialog.onDismiss(new Action() {
+            public boolean run(float timeDelta) {
+              exitDialog = null;
+              return true;
+            }
+          });
+        }
+        return true;
       }
     });
   }
@@ -154,6 +167,11 @@ public class TowerGame implements ApplicationListener {
     for (GameLayer layer : layers) {
       layer.render(spriteBatch, camera);
     }
+
+    spriteBatch.begin();
+    particle.setPosition(camera.position.x, camera.position.y);
+    particle.draw(spriteBatch);
+    spriteBatch.end();
 
     spriteBatch.setProjectionMatrix(hudProjectionMatrix);
     spriteBatch.begin();
@@ -218,5 +236,9 @@ public class TowerGame implements ApplicationListener {
 
   public static TowerGame getInstance() {
     return instance;
+  }
+
+  public SpriteBatch getSpriteBatch() {
+    return spriteBatch;
   }
 }

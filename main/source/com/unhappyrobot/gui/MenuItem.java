@@ -6,10 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class MenuItem extends Button {
-  public MenuItem(Skin uiSkin, String labelText, ClickListener clickListener) {
-    super(uiSkin);
+  public MenuItem(Skin skin, String labelText, ClickListener clickListener) {
+    super(skin);
 
-    add(new Label(labelText, uiSkin)).fill();
+    Label label = new Label(labelText, skin);
+    left().add(label);
 
     setClickListener(clickListener);
   }

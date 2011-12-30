@@ -23,7 +23,7 @@ public class Menu extends Table {
 
   @Override
   public Cell add(Actor actor) {
-    row();
+    row().fill();
 
     return super.add(actor);
   }

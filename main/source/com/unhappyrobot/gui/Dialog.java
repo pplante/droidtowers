@@ -6,10 +6,13 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
+import com.unhappyrobot.input.Action;
+import com.unhappyrobot.input.InputSystem;
 
 import java.util.List;
 
 public class Dialog {
+  public static final int[] NEGATIVE_BUTTON_KEYS = new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE};
   private Group parent;
   private Skin skin;
   private List<LabelButton> buttons;
@@ -17,12 +20,22 @@ public class Dialog {
   private String messageText;
   private Window window;
   private boolean shouldDisplayCentered;
+  private LabelButton negativeButton;
+  private final Action negativeButtonAction;
+  private Action onDismissAction;
 
   public Dialog() {
     this.parent = HeadsUpDisplay.getInstance();
     this.skin = HeadsUpDisplay.getInstance().getSkin();
 
     buttons = Lists.newArrayList();
+    negativeButtonAction = new Action() {
+      public boolean run(float timeDelta) {
+        dismiss();
+
+        return true;
+      }
+    };
   }
 
   public Dialog setTitle(String title) {
@@ -37,8 +50,14 @@ public class Dialog {
     return this;
   }
 
-  public Dialog addButton(String labelText, final OnClickCallback onClickCallback) {
+  public Dialog addButton(ResponseType type, String labelText, final OnClickCallback onClickCallback) {
     LabelButton button = new LabelButton(skin, labelText);
+    button.setResponseType(type);
+
+    if (type == ResponseType.NEGATIVE) {
+      negativeButton = button;
+    }
+
     if (onClickCallback != null) {
       button.setClickListener(new ClickListener() {
         public void click(Actor actor, float x, float y) {
@@ -50,6 +69,10 @@ public class Dialog {
     buttons.add(button);
 
     return this;
+  }
+
+  public Dialog addButton(String buttonLabel, OnClickCallback onClickCallback) {
+    return addButton(ResponseType.NEUTRAL, buttonLabel, onClickCallback);
   }
 
   public Dialog show() {
@@ -90,12 +113,22 @@ public class Dialog {
       centerOnScreen();
     }
 
+    if (negativeButton != null) {
+      InputSystem.getInstance().bind(NEGATIVE_BUTTON_KEYS, negativeButtonAction);
+    }
+
     return this;
   }
 
   public void dismiss() {
     if (parent != null && window != null) {
       parent.removeActor(window);
+    }
+
+    InputSystem.getInstance().unbind(NEGATIVE_BUTTON_KEYS, negativeButtonAction);
+
+    if (onDismissAction != null) {
+      onDismissAction.run(0f);
     }
   }
 
@@ -113,4 +146,7 @@ public class Dialog {
     return this;
   }
 
+  public void onDismiss(Action action) {
+    onDismissAction = action;
+  }
 }

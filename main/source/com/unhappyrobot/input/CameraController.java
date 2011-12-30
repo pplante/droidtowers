@@ -11,7 +11,7 @@ import com.unhappyrobot.entities.GameGrid;
 
 public class CameraController implements GestureDetector.GestureListener {
   public static final float ZOOM_MAX = 2.0f;
-  public static final float ZOOM_MIN = (Gdx.app.getType() == Application.ApplicationType.Android ?  0.4f : 0.6f);
+  public static final float ZOOM_MIN = (Gdx.app.getType() == Application.ApplicationType.Android ? 0.4f : 0.6f);
 
   private OrthographicCamera camera;
   private BoundingBox cameraBounds;
@@ -23,7 +23,9 @@ public class CameraController implements GestureDetector.GestureListener {
   public CameraController(OrthographicCamera camera, GameGrid gameGrid) {
     Vector2 worldSize = gameGrid.getWorldSize();
     this.camera = camera;
-    this.cameraBounds = new BoundingBox(new Vector3(0, 0, 0), new Vector3(worldSize.x, worldSize.y, 0));
+    int halfWidth = Gdx.graphics.getWidth() / 2;
+    int halfHeight = Gdx.graphics.getHeight() / 2;
+    this.cameraBounds = new BoundingBox(new Vector3(halfWidth, halfHeight, 0), new Vector3(worldSize.x - halfWidth, worldSize.y - halfHeight, 0));
     this.camera.position.set(worldSize.x / 2, worldSize.y / 2, 0);
   }
 
@@ -104,5 +106,9 @@ public class CameraController implements GestureDetector.GestureListener {
     if (cameraBounds.contains(previousPosition.add(0, deltaY, 0))) {
       camera.position.add(0, deltaY, 0);
     }
+  }
+
+  public BoundingBox getCameraBounds() {
+    return cameraBounds;
   }
 }

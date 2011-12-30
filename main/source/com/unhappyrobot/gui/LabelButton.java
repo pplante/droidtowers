@@ -7,15 +7,25 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 public class LabelButton extends Button {
 
   private final Label label;
+  private ResponseType responseType;
 
   public LabelButton(Skin uiSkin, String labelText) {
     super(uiSkin);
 
     label = new Label(labelText, uiSkin);
-    add(label).fill();
+    add(label);
   }
 
   public void setText(String newText) {
     label.setText(newText);
+    pack();
+  }
+
+  public ResponseType getResponseType() {
+    return responseType;
+  }
+
+  public void setResponseType(ResponseType responseType) {
+    this.responseType = responseType;
   }
 }

@@ -1,5 +1,15 @@
 [
   {
+    "name":"Lobby 4x1",
+    "continuousPurchase":true,
+    "coins":100,
+    "gold":0,
+    "height":1,
+    "width":4,
+    "atlas":"rooms/generic.txt",
+    "image":"generic/generic_room_4x"
+  },
+  {
     "name":"Generic 2x1",
     "continuousPurchase":true,
     "coins":100,
