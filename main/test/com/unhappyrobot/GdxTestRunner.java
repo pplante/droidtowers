@@ -1,8 +1,8 @@
 package com.unhappyrobot;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.backends.jogl.JoglApplication;
-import com.badlogic.gdx.backends.jogl.JoglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
@@ -17,11 +17,11 @@ public class GdxTestRunner extends BlockJUnit4ClassRunner implements Application
 
   public GdxTestRunner(Class<?> klass) throws InitializationError {
     super(klass);
-    JoglApplicationConfiguration conf = new JoglApplicationConfiguration();
+    LwjglApplicationConfiguration conf = new LwjglApplicationConfiguration();
     conf.width = 800;
     conf.height = 600;
     conf.title = "Gdx Test Runner";
-    new JoglApplication(this, conf);
+    new LwjglApplication(this, conf);
   }
 
   public void create() {

@@ -1,8 +1,8 @@
 package com.unhappyrobot.entities;
 
 import aurelienribon.tweenengine.Tweenable;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.TextureDict;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -71,7 +71,7 @@ public class GameObject implements Tweenable {
   }
 
   public void useTexture(String filename) {
-    Texture texture = TextureDict.loadTexture(filename).get();
+    Texture texture = new Texture(Gdx.files.internal(filename));
 
     sprite.setTexture(texture);
     sprite.setRegion(0, 0, texture.getWidth(), texture.getHeight());

@@ -33,7 +33,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="android" level="project" />
     <orderEntry type="module" module-name="main" />
-    <orderEntry type="library" name="android" level="project" />
   </component>
 </module>
 

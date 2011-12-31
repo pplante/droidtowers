@@ -5,6 +5,7 @@ import com.pivotallabs.greatexpectations.matchers.*;
 
 import static com.pivotallabs.greatexpectations.GreatExpectations.wrapped;
 
+@SuppressWarnings("unchecked")
 public class Expect {
   public static <T extends Object, M extends ObjectMatcher<T, M>> ObjectMatcher<T, ?> expect(T actual) {
     return wrapped(ObjectMatcher.class, actual);

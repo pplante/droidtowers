@@ -15,7 +15,7 @@ curl -# -o $DOWNLOAD_PATH $STABLE_URL
 DOWNLOAD_SUCCESS=$?
 
 if [[ $DOWNLOAD_SUCCESS != 0 ]]; then
-	echo 
+	echo
 	echo "Download failed, aborting."
 	exit $DOWNLOAD_SUCCESS
 fi;
@@ -28,7 +28,7 @@ unzip -qqo $DOWNLOAD_PATH -d $EXTRACT_PATH
 UNZIP_SUCCESS=$?
 
 if [[ $UNZIP_SUCCESS != 0 ]]; then
-	echo 
+	echo
 	echo "Unzip failed, aborting."
 	exit $UNZIP_SUCCESS
 fi;
@@ -47,23 +47,20 @@ echo
 echo "* Copying desktop libs..."
 echo
 
-DESKTOP_LIBS_PATH="${PROJECT_DIR}/desktop/libs/."
-cp "${EXTRACT_PATH}/gdx-openal-sources.jar" $DESKTOP_LIBS_PATH
-cp "${EXTRACT_PATH}/gdx-backend-jogl-natives.jar" $DESKTOP_LIBS_PATH
-cp "${EXTRACT_PATH}/gdx-backend-jogl-sources.jar" $DESKTOP_LIBS_PATH
-cp "${EXTRACT_PATH}/gdx-backend-jogl.jar" $DESKTOP_LIBS_PATH
-cp "${EXTRACT_PATH}/gdx-backend-lwjgl-natives.jar" $DESKTOP_LIBS_PATH
-cp "${EXTRACT_PATH}/gdx-backend-lwjgl-sources.jar" $DESKTOP_LIBS_PATH
-cp "${EXTRACT_PATH}/gdx-backend-lwjgl.jar" $DESKTOP_LIBS_PATH
-cp "${EXTRACT_PATH}/gdx-natives.jar" $DESKTOP_LIBS_PATH
+DESKTOP_LIBS_PATH="${PROJECT_DIR}/desktop/libs"
+cp "${EXTRACT_PATH}/gdx-openal-sources.jar" "${DESKTOP_LIBS_PATH}/sources"
+cp "${EXTRACT_PATH}/gdx-backend-lwjgl-natives.jar" "${DESKTOP_LIBS_PATH}/main"
+cp "${EXTRACT_PATH}/gdx-backend-lwjgl-sources.jar" "${DESKTOP_LIBS_PATH}/sources"
+cp "${EXTRACT_PATH}/gdx-backend-lwjgl.jar" "${DESKTOP_LIBS_PATH}/main"
+cp "${EXTRACT_PATH}/gdx-natives.jar" "${DESKTOP_LIBS_PATH}/main"
 
 echo
 echo "* Copying shared libs..."
 echo
 
-SHARED_LIBS_PATH="${PROJECT_DIR}/main/libs/."
-cp "${EXTRACT_PATH}/gdx-sources.jar" $SHARED_LIBS_PATH
-cp "${EXTRACT_PATH}/gdx.jar" $SHARED_LIBS_PATH
+SHARED_LIBS_PATH="${PROJECT_DIR}/main/libs/"
+cp "${EXTRACT_PATH}/gdx-sources.jar" "${SHARED_LIBS_PATH}/sources"
+cp "${EXTRACT_PATH}/gdx.jar" "${SHARED_LIBS_PATH}/main"
 
 echo
 echo "Complete!"

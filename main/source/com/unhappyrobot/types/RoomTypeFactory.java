@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.google.common.collect.Lists;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.type.TypeFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class RoomTypeFactory {
     FileHandle fileHandle = Gdx.files.internal("rooms/generic.json");
     ObjectMapper mapper = new ObjectMapper();
     try {
-      roomTypes = mapper.readValue(fileHandle.reader(), TypeFactory.collectionType(ArrayList.class, RoomType.class));
+      roomTypes = mapper.readValue(fileHandle.reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, RoomType.class));
     } catch (IOException e) {
       e.printStackTrace();
     }
