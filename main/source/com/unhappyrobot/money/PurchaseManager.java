@@ -58,6 +58,7 @@ public class PurchaseManager {
     Player player = Player.getInstance();
 
     player.subtractCurrency(gridObjectType.getCoins(), gridObjectType.getGold());
+    player.addExperience(gridObjectType.getExperienceAward());
     purchaseCount++;
   }
 }

@@ -1,17 +1,20 @@
 package com.unhappyrobot.input;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.unhappyrobot.entities.GameGrid;
+
 public enum GestureTool {
   PLACEMENT() {
     @Override
-    public ToolBase newInstance() {
-      return new PlacementTool();
+    public ToolBase newInstance(OrthographicCamera camera, GameGrid gameGrid) {
+      return new PlacementTool(camera, gameGrid);
     }
-  }, NONE {
+  }, PICKER {
     @Override
-    public ToolBase newInstance() {
-      return null;
+    public ToolBase newInstance(OrthographicCamera camera, GameGrid gameGrid) {
+      return new PickerTool(camera, gameGrid);
     }
   };
 
-  public abstract ToolBase newInstance();
+  public abstract ToolBase newInstance(OrthographicCamera camera, GameGrid gameGrid);
 }

@@ -1,36 +1,39 @@
 package com.unhappyrobot.input;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.collision.Ray;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.money.PurchaseManager;
 import com.unhappyrobot.types.GridObjectType;
 
+import static com.unhappyrobot.input.InputSystem.Keys;
+
 public class PlacementTool extends ToolBase {
-  private OrthographicCamera camera;
-  private GameGrid gameGrid;
   private GridObjectType gridObjectType;
   private GridObject gridObject;
   private Vector2 touchDownPointDelta;
   private boolean isDraggingGridObject;
   private PurchaseManager purchaseManager;
+  private final Action cancelPlacementAction;
 
-  public void setup(OrthographicCamera camera, GameGrid gameGrid, GridObjectType gridObjectType) {
-    this.camera = camera;
-    this.gameGrid = gameGrid;
-    this.gridObjectType = gridObjectType;
+  public PlacementTool(OrthographicCamera camera, GameGrid gameGrid) {
+    super(camera, gameGrid);
+
+    cancelPlacementAction = new Action() {
+      public boolean run(float timeDelta) {
+        InputSystem.getInstance().switchTool(GestureTool.PICKER, null);
+        return false;
+      }
+    };
+
+    InputSystem.getInstance().bind(new int[]{Keys.ESCAPE, Keys.BACK}, cancelPlacementAction);
   }
 
-  private Vector2 findGameGridPointAtFinger() {
-    Ray pickRay = camera.getPickRay(Gdx.input.getX(), Gdx.input.getY());
-    Vector3 endPoint = pickRay.getEndPoint(1);
-    return gameGrid.convertScreenPointToGridPoint(endPoint.x, endPoint.y);
+  public void setup(GridObjectType gridObjectType) {
+    this.gridObjectType = gridObjectType;
   }
 
   public boolean touchDown(int x, int y, int pointer) {
@@ -78,7 +81,7 @@ public class PlacementTool extends ToolBase {
 
   private void verifyAbilityToPurchase() {
     if (purchaseManager != null && !purchaseManager.canPurchase()) {
-      InputSystem.getInstance().switchTool(GestureTool.NONE, null);
+      InputSystem.getInstance().switchTool(GestureTool.PICKER, null);
     }
   }
 
@@ -119,5 +122,7 @@ public class PlacementTool extends ToolBase {
     if (gridObject != null) {
       gameGrid.removeObject(gridObject);
     }
+
+    InputSystem.getInstance().unbind(new int[]{Keys.ESCAPE, Keys.BACK}, cancelPlacementAction);
   }
 }

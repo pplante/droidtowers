@@ -1,6 +1,7 @@
 package com.unhappyrobot.entities;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.math.Bounds2d;
 import com.unhappyrobot.types.GridObjectType;
@@ -38,5 +39,12 @@ public abstract class GridObject {
 
   public GameGrid getGameGrid() {
     return gameGrid;
+  }
+
+  public void render(SpriteBatch spriteBatch) {
+    Sprite sprite = getSprite();
+    sprite.setPosition(gameGrid.gridOrigin.x + position.x * gameGrid.unitSize.x, gameGrid.gridOrigin.y + position.y * gameGrid.unitSize.y);
+    sprite.setSize(size.x * gameGrid.unitSize.x, size.y * gameGrid.unitSize.y);
+    sprite.draw(spriteBatch);
   }
 }

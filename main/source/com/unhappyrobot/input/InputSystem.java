@@ -27,6 +27,7 @@ public class InputSystem extends InputAdapter {
   private GestureDelegater delegater;
 
   private static InputSystem instance;
+  private GameGrid gameGrid;
 
   public static InputSystem getInstance() {
     if (instance == null) {
@@ -37,6 +38,7 @@ public class InputSystem extends InputAdapter {
   }
 
   public void setup(OrthographicCamera orthographicCamera, GameGrid gameGrid) {
+    this.gameGrid = gameGrid;
     inputProcessors = Lists.newArrayList();
     keyBindings = Maps.newHashMap();
     camera = orthographicCamera;
@@ -74,7 +76,7 @@ public class InputSystem extends InputAdapter {
   }
 
   public void switchTool(GestureTool selectedTool, Runnable switchToolRunnable) {
-    delegater.switchTool(selectedTool, switchToolRunnable);
+    delegater.switchTool(camera, gameGrid, selectedTool, switchToolRunnable);
   }
 
   public GestureListener getCurrentTool() {

@@ -13,10 +13,10 @@ public class Room extends GridObject {
     super(roomType, gameGrid);
 
     if (roomAtlas == null) {
-      roomAtlas = new TextureAtlas(Gdx.files.internal(roomType.getAtlas()));
+      roomAtlas = new TextureAtlas(Gdx.files.internal(roomType.getAtlasFilename()));
     }
 
-    sprite = new Sprite(roomAtlas.findRegion(roomType.getImage()));
+    sprite = new Sprite(roomAtlas.findRegion(roomType.getImageFilename()));
 
     size.set(roomType.getWidth(), roomType.getHeight());
   }

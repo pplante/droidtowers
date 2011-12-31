@@ -3,7 +3,6 @@ package com.unhappyrobot.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer10;
 
@@ -30,18 +29,7 @@ public class GameGridRenderer extends GameLayer {
   private void renderGridObjects(SpriteBatch spriteBatch) {
     spriteBatch.begin();
     for (GridObject child : gameGrid.getObjects()) {
-      Sprite sprite = child.getSprite();
-
-      sprite.setPosition(gameGrid.gridOrigin.x + child.position.x * gameGrid.unitSize.x, gameGrid.gridOrigin.y + child.position.y * gameGrid.unitSize.y);
-      sprite.setSize(child.size.x * gameGrid.unitSize.x, child.size.y * gameGrid.unitSize.y);
-
-
-//      sprite.setU(0f);
-//      sprite.setV(0f);
-//      sprite.setU2(sprite.getWidth() / sprite.getTexture().getWidth());
-//      sprite.setV2(sprite.getHeight() / sprite.getTexture().getHeight());
-
-      sprite.draw(spriteBatch);
+      child.render(spriteBatch);
     }
     spriteBatch.end();
   }

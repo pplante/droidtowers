@@ -16,8 +16,7 @@ import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.input.GestureTool;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.input.PlacementTool;
-import com.unhappyrobot.types.RoomType;
-import com.unhappyrobot.types.RoomTypeFactory;
+import com.unhappyrobot.types.*;
 
 public class HeadsUpDisplay extends Group {
   private TextureAtlas hudAtlas;
@@ -66,7 +65,8 @@ public class HeadsUpDisplay extends Group {
   }
 
   private void updateMoneyLabel() {
-    moneyLabel.setText(String.format("%d coins / %d gold", Player.getInstance().getCoins(), Player.getInstance().getGold()));
+    Player player = Player.getInstance();
+    moneyLabel.setText(String.format("%d coins / %d gold\n %d exp", player.getCoins(), player.getGold(), player.getExperience()));
   }
 
   private void makeAddRoomButton() {
@@ -89,24 +89,32 @@ public class HeadsUpDisplay extends Group {
     addRoomMenu.top().left();
 
     for (final RoomType roomType : RoomTypeFactory.getInstance().all()) {
-      addRoomMenu.add(new MenuItem(skin, roomType.getName(), new ClickListener() {
-        public void click(Actor actor, float x, float y) {
-          InputSystem.getInstance().switchTool(GestureTool.PLACEMENT, new Runnable() {
-            public void run() {
-              addRoomButton.setText("Add Room");
-            }
-          });
-
-          addRoomButton.setText(roomType.getName());
-
-          PlacementTool placementTool = (PlacementTool) InputSystem.getInstance().getCurrentTool();
-          placementTool.setup(camera, gameGrid, roomType);
-          placementTool.enterPurchaseMode();
-
-          addRoomMenu.close();
-        }
-      }));
+      addRoomMenu.add(makeGridObjectMenuItem(roomType));
     }
+
+    for (final ElevatorType elevatorType : ElevatorTypeFactory.getInstance().all()) {
+      addRoomMenu.add(makeGridObjectMenuItem(elevatorType));
+    }
+  }
+
+  private MenuItem makeGridObjectMenuItem(final GridObjectType gridObjectType) {
+    return new MenuItem(skin, gridObjectType.getName(), new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        InputSystem.getInstance().switchTool(GestureTool.PLACEMENT, new Runnable() {
+          public void run() {
+            addRoomButton.setText("Add Room");
+          }
+        });
+
+        addRoomButton.setText(gridObjectType.getName());
+
+        PlacementTool placementTool = (PlacementTool) InputSystem.getInstance().getCurrentTool();
+        placementTool.setup(gridObjectType);
+        placementTool.enterPurchaseMode();
+
+        addRoomMenu.close();
+      }
+    });
   }
 
   @Override

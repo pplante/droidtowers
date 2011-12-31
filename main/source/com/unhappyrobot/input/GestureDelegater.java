@@ -14,7 +14,7 @@ class GestureDelegater implements GestureListener {
     this.cameraController = new CameraController(camera, gameGrid);
   }
 
-  public void switchTool(GestureTool tool, Runnable switchToolRunnable) {
+  public void switchTool(OrthographicCamera camera, GameGrid gameGrid, GestureTool tool, Runnable switchToolRunnable) {
     if (beforeSwitchToolRunnable != null) {
       beforeSwitchToolRunnable.run();
       beforeSwitchToolRunnable = null;
@@ -24,7 +24,7 @@ class GestureDelegater implements GestureListener {
       currentTool.cleanup();
     }
 
-    currentTool = tool.newInstance();
+    currentTool = tool.newInstance(camera, gameGrid);
     beforeSwitchToolRunnable = switchToolRunnable;
   }
 

@@ -11,6 +11,7 @@ public abstract class GridObjectType {
   private int width;
   private int coins;
   private int gold;
+  private int experienceAward;
   private String atlasFilename;
   private String imageFilename;
   private boolean continuousPlacement;
@@ -39,11 +40,15 @@ public abstract class GridObjectType {
     return gold;
   }
 
-  public String getImage() {
+  public int getExperienceAward() {
+    return experienceAward;
+  }
+
+  public String getImageFilename() {
     return imageFilename;
   }
 
-  public String getAtlas() {
+  public String getAtlasFilename() {
     return atlasFilename;
   }
 

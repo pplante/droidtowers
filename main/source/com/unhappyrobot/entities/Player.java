@@ -4,6 +4,7 @@ public class Player {
   private int coins;
   private static Player instance;
   private int gold;
+  private int experience;
 
   public static Player getInstance() {
     if (instance == null) {
@@ -34,5 +35,13 @@ public class Player {
   public void addCurrency(int coins, int gold) {
     this.coins += coins;
     this.gold += gold;
+  }
+
+  public void addExperience(int exp) {
+    experience = exp;
+  }
+
+  public int getExperience() {
+    return experience;
   }
 }
