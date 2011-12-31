@@ -6,7 +6,7 @@ import com.unhappyrobot.entities.GameGrid;
 import static com.badlogic.gdx.input.GestureDetector.GestureListener;
 
 class GestureDelegater implements GestureListener {
-  private GestureListener currentTool;
+  private ToolBase currentTool;
   private CameraController cameraController;
   private Runnable beforeSwitchToolRunnable;
 
@@ -20,7 +20,11 @@ class GestureDelegater implements GestureListener {
       beforeSwitchToolRunnable = null;
     }
 
-    this.currentTool = tool.newInstance();
+    if (currentTool != null) {
+      currentTool.cleanup();
+    }
+
+    currentTool = tool.newInstance();
     beforeSwitchToolRunnable = switchToolRunnable;
   }
 

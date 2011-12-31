@@ -1,28 +1,34 @@
 package com.unhappyrobot.types;
 
+import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
-import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public abstract class GridObjectType {
-  @JsonProperty
+  private String name;
+  private int height;
+  private int width;
   private int coins;
-  @JsonProperty
   private int gold;
+  private String atlasFilename;
+  private String imageFilename;
+  private boolean continuousPlacement;
 
-  public abstract GridObject makeGridObject();
+  public abstract GridObject makeGridObject(GameGrid gameGrid);
 
-  public boolean continuousPlacement() {
-    return false;
+  public abstract boolean canBeAt(GridObject gridObject);
+
+  public String getName() {
+    return name;
   }
 
-  @JsonProperty
-  public void setCoins(int c) {
-    coins = c;
+  public int getHeight() {
+    return height;
   }
 
-  @JsonProperty
-  public void setGold(int g) {
-    gold = g;
+  public int getWidth() {
+    return width;
   }
 
   public int getCoins() {
@@ -33,5 +39,15 @@ public abstract class GridObjectType {
     return gold;
   }
 
-  public abstract String getName();
+  public String getImage() {
+    return imageFilename;
+  }
+
+  public String getAtlas() {
+    return atlasFilename;
+  }
+
+  public boolean continuousPlacement() {
+    return continuousPlacement;
+  }
 }

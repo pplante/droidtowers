@@ -1,28 +1,14 @@
 package com.unhappyrobot.types;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.google.common.collect.Lists;
-import org.codehaus.jackson.map.ObjectMapper;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-public class RoomTypeFactory {
+public class RoomTypeFactory extends GridObjectTypeFactory<RoomType> {
   private static RoomTypeFactory instance;
-  private List<RoomType> roomTypes;
 
   private RoomTypeFactory() {
-    roomTypes = Lists.newArrayList();
+    super(RoomType.class);
 
-    FileHandle fileHandle = Gdx.files.internal("rooms/generic.json");
-    ObjectMapper mapper = new ObjectMapper();
-    try {
-      roomTypes = mapper.readValue(fileHandle.reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, RoomType.class));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    parseTypesFile(Gdx.files.internal("rooms/generic.json"));
   }
 
   public static RoomTypeFactory getInstance() {
@@ -31,9 +17,5 @@ public class RoomTypeFactory {
     }
 
     return instance;
-  }
-
-  public static List<RoomType> all() {
-    return getInstance().roomTypes;
   }
 }

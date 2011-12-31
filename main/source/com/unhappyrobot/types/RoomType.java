@@ -1,66 +1,37 @@
 package com.unhappyrobot.types;
 
+import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.Room;
+import com.unhappyrobot.math.Bounds2d;
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 
+import java.util.List;
+
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class RoomType extends GridObjectType {
-  private String name;
-  private boolean continuousPurchase;
-  private int height;
-  private int width;
-  private String atlasFilename;
-  private String imageFilename;
+  private boolean isLobby;
 
-  public int getHeight() {
-    return height;
-  }
-
-  public void setHeight(int height) {
-    this.height = height;
-  }
-
-  public String getImage() {
-    return imageFilename;
-  }
-
-  public void setImage(String imageFilename) {
-    this.imageFilename = imageFilename;
-  }
-
-  public String getAtlas() {
-    return atlasFilename;
-  }
-
-  public void setAtlas(String atlasFilename) {
-    this.atlasFilename = atlasFilename;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public int getWidth() {
-    return width;
-  }
-
-  public void setWidth(int width) {
-    this.width = width;
+  @Override
+  public GridObject makeGridObject(GameGrid gameGrid) {
+    return new Room(this, gameGrid);
   }
 
   @Override
-  public boolean continuousPlacement() {
-    return continuousPurchase;
-  }
+  public boolean canBeAt(GridObject gridObject) {
+    Room room = (Room) gridObject;
 
-  public void setContinuousPurchase(boolean continuousPurchase) {
-    this.continuousPurchase = continuousPurchase;
-  }
+    if (isLobby) {
+      return room.position.y == 4;
+    } else {
+      Bounds2d belowObject = new Bounds2d(room.position.cpy().sub(0, 1), room.size);
 
-  public GridObject makeGridObject() {
-    return new Room(this);
+      List<GridObject> position = room.getGameGrid().getObjectsAt(belowObject);
+      if (position.size() == 0) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }

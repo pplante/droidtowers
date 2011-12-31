@@ -9,8 +9,8 @@ public class Room extends GridObject {
   private static TextureAtlas roomAtlas;
   private Sprite sprite;
 
-  public Room(RoomType roomType) {
-    super();
+  public Room(RoomType roomType, GameGrid gameGrid) {
+    super(roomType, gameGrid);
 
     if (roomAtlas == null) {
       roomAtlas = new TextureAtlas(Gdx.files.internal(roomType.getAtlas()));

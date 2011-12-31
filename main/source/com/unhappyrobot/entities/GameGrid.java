@@ -2,10 +2,12 @@ package com.unhappyrobot.entities;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.collect.Lists;
 import com.unhappyrobot.entities.grid.GridPosition;
 import com.unhappyrobot.math.Bounds2d;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class GameGrid {
@@ -23,45 +25,35 @@ public class GameGrid {
     gridOrigin = new Vector2();
     gridSize = new Vector2(8, 8);
     unitSize = new Vector2(16, 16);
+    updateWorldSize();
 
     children = new HashSet<GridObject>();
-
-    resizeGrid();
   }
 
-  public void resizeGrid() {
-    GridPosition[][] newGrid = new GridPosition[(int) gridSize.x][(int) gridSize.y];
-    if (gridLayout != null) {
-      GridPosition[][] oldGrid = gridLayout;
-
-      for (int x = 0; x < Math.min(newGrid.length, oldGrid.length); x++) {
-        for (int y = 0; y < Math.min(newGrid[x].length, oldGrid[x].length); y++) {
-          if (oldGrid[x][y] != null) {
-            newGrid[x][y] = new GridPosition();
-            newGrid[x][y].addAll(oldGrid[x][y]);
-          }
-        }
-      }
-    }
-
-    gridLayout = newGrid;
+  public void updateWorldSize() {
     worldSize = new Vector2(gridSize.x * unitSize.x, gridSize.y * unitSize.y);
   }
 
   public void setUnitSize(int width, int height) {
     unitSize.set(width, height);
+    updateWorldSize();
   }
 
   public void setGridSize(int width, int height) {
     gridSize.set(width, height);
-  }
-
-  public GameGridRenderer getRenderer() {
-    return new GameGridRenderer(this);
+    updateWorldSize();
   }
 
   public void setGridOrigin(float x, float y) {
     gridOrigin.set(x, y);
+  }
+
+  public void setGridColor(float r, float g, float b, float a) {
+    gridColor.set(r, g, b, a);
+  }
+
+  public GameGridRenderer getRenderer() {
+    return new GameGridRenderer(this);
   }
 
   public Vector2 getWorldSize() {
@@ -77,16 +69,6 @@ public class GameGrid {
 
     children.add(gridObject);
 
-    for (int x = (int) gridObject.position.x; x < gridObject.position.x + gridObject.size.x; x++) {
-      for (int y = (int) gridObject.position.y; y < gridObject.position.y + gridObject.size.y; y++) {
-        if (gridLayout[x][y] == null) {
-          gridLayout[x][y] = new GridPosition();
-        }
-
-        gridLayout[x][y].add(gridObject);
-      }
-    }
-
     return true;
   }
 
@@ -95,6 +77,10 @@ public class GameGrid {
   }
 
   public boolean canObjectBeAt(GridObject gridObject) {
+    if (!gridObject.canBeAt()) {
+      return false;
+    }
+
     Bounds2d boundsOfGridObjectToCheck = gridObject.getBounds();
     for (GridObject child : children) {
       if (child != gridObject) {
@@ -104,23 +90,19 @@ public class GameGrid {
       }
     }
 
-    if (gridObject.position.y > 4) {
-      return false;
-    }
-
     return true;
   }
 
-  public GridPosition[][] getLayout() {
-    return gridLayout;
-  }
+  public List<GridObject> getObjectsAt(Bounds2d targetBounds) {
+    List<GridObject> objects = Lists.newArrayList();
 
-  public GridPosition getObjectsAtPosition(int x, int y) {
-    return gridLayout[x][y];
-  }
+    for (GridObject child : children) {
+      if (child.getBounds().overlaps(targetBounds)) {
+        objects.add(child);
+      }
+    }
 
-  public void setGridColor(float r, float g, float b, float a) {
-    gridColor.set(r, g, b, a);
+    return objects;
   }
 
   public Vector2 convertScreenPointToGridPoint(float x, float y) {
@@ -147,5 +129,9 @@ public class GameGrid {
     }
 
     return position;
+  }
+
+  public void removeObject(GridObject gridObject) {
+    children.remove(gridObject);
   }
 }

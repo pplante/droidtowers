@@ -8,12 +8,11 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
+import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.money.PurchaseManager;
 import com.unhappyrobot.types.GridObjectType;
 
-import static com.badlogic.gdx.input.GestureDetector.GestureListener;
-
-public class PlacementTool implements GestureListener {
+public class PlacementTool extends ToolBase {
   private OrthographicCamera camera;
   private GameGrid gameGrid;
   private GridObjectType gridObjectType;
@@ -26,7 +25,6 @@ public class PlacementTool implements GestureListener {
     this.camera = camera;
     this.gameGrid = gameGrid;
     this.gridObjectType = gridObjectType;
-    this.gridObjectType.makeGridObject();
   }
 
   private Vector2 findGameGridPointAtFinger() {
@@ -38,7 +36,7 @@ public class PlacementTool implements GestureListener {
   public boolean touchDown(int x, int y, int pointer) {
     Vector2 gridPointAtFinger = findGameGridPointAtFinger();
     if (gridObject == null) {
-      gridObject = gridObjectType.makeGridObject();
+      gridObject = gridObjectType.makeGridObject(gameGrid);
       gridObject.position.set(gameGrid.clampPosition(gridPointAtFinger, gridObject.size));
 
       gameGrid.addObject(gridObject);
@@ -55,6 +53,16 @@ public class PlacementTool implements GestureListener {
 
   public boolean tap(int x, int y, int count) {
     if (count >= 2) {
+      if (!gameGrid.canObjectBeAt(gridObject)) {
+        new Dialog()
+                .setTitle("Invalid Position")
+                .setMessage("This object cannot be placed here.")
+                .addButton("Okay")
+                .centerOnScreen()
+                .show();
+        return false;
+      }
+
       if (purchaseManager != null) {
         purchaseManager.makePurchase();
       }
@@ -100,21 +108,16 @@ public class PlacementTool implements GestureListener {
     }
   }
 
-  public boolean longPress(int x, int y) {
-    return false;
-  }
-
-  public boolean zoom(float originalDistance, float currentDistance) {
-    return false;
-  }
-
-  public boolean fling(float velocityX, float velocityY) {
-    return false;
-  }
-
   public void enterPurchaseMode() {
     purchaseManager = new PurchaseManager(gridObjectType);
 
     verifyAbilityToPurchase();
+  }
+
+  @Override
+  public void cleanup() {
+    if (gridObject != null) {
+      gameGrid.removeObject(gridObject);
+    }
   }
 }

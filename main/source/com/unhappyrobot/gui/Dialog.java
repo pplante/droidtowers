@@ -75,6 +75,15 @@ public class Dialog {
     return addButton(ResponseType.NEUTRAL, buttonLabel, onClickCallback);
   }
 
+  public Dialog addButton(String buttonText) {
+    return addButton(buttonText, new OnClickCallback() {
+      @Override
+      public void onClick(Dialog dialog) {
+        dialog.dismiss();
+      }
+    });
+  }
+
   public Dialog show() {
     if (window != null) {
       parent.removeActor(window);

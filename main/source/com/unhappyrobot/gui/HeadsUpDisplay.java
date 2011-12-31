@@ -88,16 +88,16 @@ public class HeadsUpDisplay extends Group {
     addRoomMenu.defaults();
     addRoomMenu.top().left();
 
-    for (final RoomType roomType : RoomTypeFactory.all()) {
+    for (final RoomType roomType : RoomTypeFactory.getInstance().all()) {
       addRoomMenu.add(new MenuItem(skin, roomType.getName(), new ClickListener() {
         public void click(Actor actor, float x, float y) {
-          addRoomButton.setText(roomType.getName());
-
           InputSystem.getInstance().switchTool(GestureTool.PLACEMENT, new Runnable() {
             public void run() {
               addRoomButton.setText("Add Room");
             }
           });
+
+          addRoomButton.setText(roomType.getName());
 
           PlacementTool placementTool = (PlacementTool) InputSystem.getInstance().getCurrentTool();
           placementTool.setup(camera, gameGrid, roomType);

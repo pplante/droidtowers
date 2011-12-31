@@ -79,7 +79,6 @@ public class TowerGame implements ApplicationListener {
     gameGrid.setGridOrigin(0, 0);
     gameGrid.setUnitSize(64, 64);
     gameGrid.setGridSize(20, 20);
-    gameGrid.resizeGrid();
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
 
     uiSkin = new Skin(Gdx.files.internal("default-skin.ui"), Gdx.files.internal("default-skin.png"));
@@ -168,10 +167,10 @@ public class TowerGame implements ApplicationListener {
       layer.render(spriteBatch, camera);
     }
 
-    spriteBatch.begin();
-    particle.setPosition(camera.position.x, camera.position.y);
-    particle.draw(spriteBatch);
-    spriteBatch.end();
+//    spriteBatch.begin();
+//    particle.setPosition(camera.position.x, camera.position.y);
+//    particle.draw(spriteBatch);
+//    spriteBatch.end();
 
     spriteBatch.setProjectionMatrix(hudProjectionMatrix);
     spriteBatch.begin();

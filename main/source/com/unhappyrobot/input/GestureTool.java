@@ -1,19 +1,17 @@
 package com.unhappyrobot.input;
 
-import static com.badlogic.gdx.input.GestureDetector.GestureListener;
-
 public enum GestureTool {
   PLACEMENT() {
     @Override
-    public GestureListener newInstance() {
+    public ToolBase newInstance() {
       return new PlacementTool();
     }
   }, NONE {
     @Override
-    public GestureListener newInstance() {
+    public ToolBase newInstance() {
       return null;
     }
   };
 
-  public abstract GestureListener newInstance();
+  public abstract ToolBase newInstance();
 }

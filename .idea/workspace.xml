@@ -13,30 +13,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/libs/test/junit-4.7.jar" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/desktop/libs/main" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/desktop/libs/main/gdx-backend-jogl-natives.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/desktop/libs/main/gdx-backend-jogl.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/desktop/libs/main/gdx-backend-lwjgl-natives.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/desktop/libs/main/gdx-backend-lwjgl.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/desktop/libs/sources/gdx-backend-jogl-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/desktop/libs/sources/gdx-backend-lwjgl-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/desktop/libs/sources/gdx-openal-sources.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Terrain.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/libs/gdx-backend-android.jar" afterPath="$PROJECT_DIR$/android/libs/gdx-backend-android.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/libs/main/gdx.jar" afterPath="$PROJECT_DIR$/main/libs/main/gdx.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/desktop.xml" afterPath="$PROJECT_DIR$/.idea/libraries/desktop.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/ToolBase.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectTypeFactory.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/entities/GameGridTest.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/android.iml" afterPath="$PROJECT_DIR$/android/android.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/source/com/unhappyrobot/AndroidGame.java" afterPath="$PROJECT_DIR$/android/source/com/unhappyrobot/AndroidGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/DesktopGame.java" afterPath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/DesktopGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/main.iml" afterPath="$PROJECT_DIR$/main/main.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/rooms/generic.json" afterPath="$PROJECT_DIR$/android/assets/rooms/generic.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Dialog.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Dialog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureDelegater.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureDelegater.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureTool.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureTool.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/Expect.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/Expect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/GdxTestRunner.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/GdxTestRunner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pull-libgdx-nightly.sh" afterPath="$PROJECT_DIR$/pull-libgdx-nightly.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pull-libgdx-stable.sh" afterPath="$PROJECT_DIR$/pull-libgdx-stable.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/types/RoomTypeFactoryTest.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/types/RoomTypeFactoryTest.java" />
     </list>
     <ignored path="underwater.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,7 +47,7 @@
     <splitter proportion="0.5" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/testgame$DesktopGame.ic" NAME="DesktopGame Coverage Results" MODIFIED="1324197678885" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/testgame$DesktopGame.ic" NAME="DesktopGame Coverage Results" MODIFIED="1325301740206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -63,7 +57,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/main/test/com/unhappyrobot/entities/GameGridTest.java" line="45" class="com.unhappyrobot.entities.GameGridTest" package="com.unhappyrobot.entities">
+      <breakpoint url="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" line="23" class="com.unhappyrobot.types.RoomType" package="com.unhappyrobot.types">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -117,88 +111,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GridObjectType.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java">
+      <file leaf-file-name="PlacementTool.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="0" selection-start="623" selection-end="623" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DesktopGame.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/desktop/source/com/unhappyrobot/DesktopGame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="4" selection-start="447" selection-end="447" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TowerGame.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="40" selection-start="1337" selection-end="1337" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameObject.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="62" selection-start="1718" selection-end="1718" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RoomTypeFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="104" selection-start="681" selection-end="681" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RoomTypeFactoryTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/test/com/unhappyrobot/types/RoomTypeFactoryTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="13" selection-start="85" selection-end="85" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GdxTestRunner.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/test/com/unhappyrobot/GdxTestRunner.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="13" selection-start="905" selection-end="905" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidGame.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/android/source/com/unhappyrobot/AndroidGame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="7" selection-start="97" selection-end="97" vertical-scroll-proportion="0.12775841">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pull-libgdx-nightly.sh" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pull-libgdx-nightly.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="4" selection-start="324" selection-end="497" vertical-scroll-proportion="0.0">
+            <state line="120" column="5" selection-start="3490" selection-end="3490" vertical-scroll-proportion="0.8977933">
               <folding />
             </state>
           </provider>
@@ -218,22 +134,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ResponseType.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/Action.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/money/PurchaseManager.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Dialog.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputSystem.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/CameraController.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java" />
-        <option value="$PROJECT_DIR$/main/test/com/unhappyrobot/Expect.java" />
-        <option value="$PROJECT_DIR$/pull-libgdx-stable.sh" />
-        <option value="$PROJECT_DIR$/pull-libgdx-nightly.sh" />
-        <option value="$PROJECT_DIR$/main/test/com/unhappyrobot/GdxTestRunner.java" />
-        <option value="$PROJECT_DIR$/android/source/com/unhappyrobot/AndroidGame.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" />
+        <option value="$PROJECT_DIR$/main/test/com/unhappyrobot/entities/GameGridTest.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGridRenderer.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
-        <option value="$PROJECT_DIR$/desktop/source/com/unhappyrobot/DesktopGame.java" />
+        <option value="$PROJECT_DIR$/android/assets/rooms/generic.json" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Dialog.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureDelegater.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureTool.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/ToolBase.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java" />
       </list>
     </option>
   </component>
@@ -445,28 +361,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="unhappyrobot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="entities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -533,6 +427,136 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdx.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdx.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdx.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdx.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gdx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Favorites" />
@@ -587,14 +611,17 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.unhappyrobot.spec" />
     </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.unhappyrobot.types" />
+    </key>
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="com.unhappyrobot.utils.Random" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.unhappyrobot.input" />
       <recent name="com.unhappyrobot.gui" />
       <recent name="com.unhappyrobot.money" />
       <recent name="com.unhappyrobot.entities" />
-      <recent name="com.unhappyrobot.input" />
       <recent name="com.unhappyrobot.graphics" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -877,6 +904,7 @@
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328279" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946082" sideWeight="0.6709347" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28203183" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
@@ -897,7 +925,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3125" sideWeight="0.75587565" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328279" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -993,98 +1020,118 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/money/PurchaseManager.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/grid/GridPosition.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="39" selection-start="1730" selection-end="1730" vertical-scroll-proportion="0.5279503" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ResponseType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="9" selection-start="91" selection-end="91" vertical-scroll-proportion="0.22177419" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputSystem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="207" column="28" selection-start="5683" selection-end="5683" vertical-scroll-proportion="0.6008065" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/CameraController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="22" selection-start="513" selection-end="513" vertical-scroll-proportion="0.12805589" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Dialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="78" selection-start="3292" selection-end="3292" vertical-scroll-proportion="0.20605356" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/test/com/unhappyrobot/Expect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="17" selection-start="370" selection-end="370" vertical-scroll-proportion="0.119195044" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pull-libgdx-stable.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="55" selection-start="1665" selection-end="1665" vertical-scroll-proportion="0.77003485" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="0" selection-start="623" selection-end="623" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="62" selection-start="1718" selection-end="1718" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="104" selection-start="681" selection-end="681" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/test/com/unhappyrobot/types/RoomTypeFactoryTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="13" selection-start="85" selection-end="85" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pull-libgdx-nightly.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="4" selection-start="324" selection-end="497" vertical-scroll-proportion="0.0">
+        <state line="6" column="13" selection-start="127" selection-end="127" vertical-scroll-proportion="0.10220674">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/test/com/unhappyrobot/GdxTestRunner.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectTypeFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="13" selection-start="905" selection-end="905" vertical-scroll-proportion="0.0">
+        <state line="20" column="0" selection-start="563" selection-end="563" vertical-scroll-proportion="0.47826087">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="0" selection-start="881" selection-end="881" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGridRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="39" selection-start="927" selection-end="927" vertical-scroll-proportion="0.33281735">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/assets/rooms/generic.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="19" selection-start="81" selection-end="81" vertical-scroll-proportion="0.10220674">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="33" selection-start="677" selection-end="677" vertical-scroll-proportion="0.4599303">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="19" selection-start="108" selection-end="108" vertical-scroll-proportion="0.12775841">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/ToolBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="4" selection-start="654" selection-end="654" vertical-scroll-proportion="0.76655054">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureDelegater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="5" selection-start="723" selection-end="723" vertical-scroll-proportion="0.43437862">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputSystem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="21" selection-start="2436" selection-end="2436" vertical-scroll-proportion="0.35888502">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="93" column="36" selection-start="3088" selection-end="3088" vertical-scroll-proportion="0.35191637">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="40" selection-start="1337" selection-end="1337" vertical-scroll-proportion="0.0">
+        <state line="173" column="0" selection-start="6103" selection-end="6103" vertical-scroll-proportion="1.2102207">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/source/com/unhappyrobot/DesktopGame.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Dialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="4" selection-start="447" selection-end="447" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="81" column="25" selection-start="2241" selection-end="2241" vertical-scroll-proportion="0.7189315">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/source/com/unhappyrobot/AndroidGame.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="7" selection-start="97" selection-end="97" vertical-scroll-proportion="0.12775841">
+        <state line="7" column="22" selection-start="262" selection-end="262" vertical-scroll-proportion="0.12775841">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="134" column="32" selection-start="3283" selection-end="3283" vertical-scroll-proportion="0.8211382">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="120" column="5" selection-start="3490" selection-end="3490" vertical-scroll-proportion="0.8977933">
           <folding />
         </state>
       </provider>

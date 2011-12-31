@@ -1,23 +1,24 @@
 [
   {
     "name":"Lobby 4x1",
-    "continuousPurchase":true,
+    "continuousPlacement":true,
+    "isLobby":true,
     "coins":100,
     "gold":0,
     "height":1,
     "width":4,
-    "atlas":"rooms/generic.txt",
-    "image":"generic/generic_room_4x"
+    "atlasFilename":"rooms/generic.txt",
+    "imageFilename":"generic/generic_room_4x"
   },
   {
     "name":"Generic 2x1",
-    "continuousPurchase":true,
+    "continuousPlacement":true,
     "coins":100,
     "gold":0,
     "height":1,
     "width":2,
-    "atlas":"rooms/generic.txt",
-    "image":"generic/generic_room_2x"
+    "atlasFilename":"rooms/generic.txt",
+    "imageFilename":"generic/generic_room_2x"
   },
   {
     "name":"Generic 3x1",
@@ -25,15 +26,15 @@
     "gold":0,
     "height":1,
     "width":3,
-    "atlas":"rooms/generic.txt",
-    "image":"generic/generic_room_3x"
+    "atlasFilename":"rooms/generic.txt",
+    "imageFilename":"generic/generic_room_3x"
   },
   {
     "name":"Generic 4x1",
     "coins":300,
     "height":1,
     "width":4,
-    "atlas":"rooms/generic.txt",
-    "image":"generic/generic_room_4x"
+    "atlasFilename":"rooms/generic.txt",
+    "imageFilename":"generic/generic_room_4x"
   }
 ]
