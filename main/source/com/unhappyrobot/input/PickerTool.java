@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.math.Bounds2d;
-import com.unhappyrobot.types.Elevator;
 
 import java.util.List;
 
@@ -22,8 +21,8 @@ public class PickerTool extends ToolBase {
 
     if (gridObjects.size() > 0) {
       for (GridObject gridObject : gridObjects) {
-        if (gridObject instanceof Elevator) {
-          gridObject.size.add(0, 1);
+        if (gridObject.tap(gridPointAtFinger, count)) {
+          return true;
         }
       }
     }

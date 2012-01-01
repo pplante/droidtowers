@@ -48,4 +48,9 @@ public class Bounds2d {
 
     return true;
   }
+
+  @Override
+  public String toString() {
+    return String.format("Bounds2d(%s, %s)", position.toString(), size.toString());
+  }
 }

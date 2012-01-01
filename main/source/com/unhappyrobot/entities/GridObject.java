@@ -47,4 +47,8 @@ public abstract class GridObject {
     sprite.setSize(size.x * gameGrid.unitSize.x, size.y * gameGrid.unitSize.y);
     sprite.draw(spriteBatch);
   }
+
+  public boolean tap(Vector2 gridPointAtFinger, int count) {
+    return false;
+  }
 }
