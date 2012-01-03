@@ -26,6 +26,8 @@ import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.input.Action;
 import com.unhappyrobot.input.CameraController;
 import com.unhappyrobot.input.InputSystem;
+import com.unhappyrobot.types.Elevator;
+import com.unhappyrobot.types.ElevatorTypeFactory;
 import com.unhappyrobot.utils.Random;
 
 import java.util.List;
@@ -102,6 +104,10 @@ public class TowerGame implements ApplicationListener {
 
     gameGridRenderer = gameGrid.getRenderer();
     layers.add(gameGridRenderer);
+
+    Elevator elevator = new Elevator(ElevatorTypeFactory.getInstance().all().get(0), gameGrid);
+    elevator.position.set(8, 3);
+    gameGrid.addObject(elevator);
 
     InputSystem.getInstance().setup(camera, gameGrid);
     InputSystem.getInstance().addInputProcessor(guiLayer, 10);

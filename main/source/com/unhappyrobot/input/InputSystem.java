@@ -44,6 +44,7 @@ public class InputSystem extends InputAdapter {
     camera = orthographicCamera;
     delegater = new GestureDelegater(camera, gameGrid);
     gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, delegater);
+    switchTool(GestureTool.PICKER, null);
 
     addInputProcessor(gestureDetector, 100);
   }

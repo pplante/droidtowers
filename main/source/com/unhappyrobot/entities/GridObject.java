@@ -51,4 +51,12 @@ public abstract class GridObject {
   public boolean tap(Vector2 gridPointAtFinger, int count) {
     return false;
   }
+
+  public boolean pan(Vector2 gridPointAtFinger, Vector2 gridPointDelta) {
+    return false;
+  }
+
+  public boolean touchDown(Vector2 gameGridPoint) {
+    return false;
+  }
 }

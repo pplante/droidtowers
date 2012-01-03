@@ -37,7 +37,7 @@ public class PlacementTool extends ToolBase {
   }
 
   public boolean touchDown(int x, int y, int pointer) {
-    Vector2 gridPointAtFinger = findGameGridPointAtFinger();
+    Vector2 gridPointAtFinger = gridPointAtFinger();
     if (gridObject == null) {
       gridObject = gridObjectType.makeGridObject(gameGrid);
       gridObject.position.set(gameGrid.clampPosition(gridPointAtFinger, gridObject.size));
@@ -87,7 +87,7 @@ public class PlacementTool extends ToolBase {
 
   public boolean pan(int x, int y, int deltaX, int deltaY) {
     if (isDraggingGridObject) {
-      Vector2 gridPointAtFinger = findGameGridPointAtFinger();
+      Vector2 gridPointAtFinger = gridPointAtFinger();
 
       if (touchDownPointDelta != null) {
         gridPointAtFinger.sub(touchDownPointDelta);

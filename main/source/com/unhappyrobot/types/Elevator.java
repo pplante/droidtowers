@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
+import com.unhappyrobot.math.GridPoint;
 
 public class Elevator extends GridObject {
   private Sprite topSprite;
@@ -17,6 +18,7 @@ public class Elevator extends GridObject {
   private final Texture shaftTexture;
   private TextureAtlas elevatorAtlas;
   private final BitmapFont floorFont;
+  private ResizeHandle selectedResizeHandle;
 
   public Elevator(ElevatorType elevatorType, GameGrid gameGrid) {
     super(elevatorType, gameGrid);
@@ -40,39 +42,63 @@ public class Elevator extends GridObject {
 
   @Override
   public void render(SpriteBatch spriteBatch) {
-    topSprite.setPosition(gameGrid.gridOrigin.x + position.x * gameGrid.unitSize.x, (gameGrid.gridOrigin.y + position.y + size.y - 1) * gameGrid.unitSize.y);
-    topSprite.setSize(gameGrid.unitSize.x, gameGrid.unitSize.y);
-    topSprite.draw(spriteBatch);
+    Vector2 renderPosition = position.cpy();
 
-    bottomSprite.setPosition(gameGrid.gridOrigin.x + position.x * gameGrid.unitSize.x, (gameGrid.gridOrigin.y + position.y) * gameGrid.unitSize.y);
-    bottomSprite.setSize(gameGrid.unitSize.x, gameGrid.unitSize.y);
+    GridPoint gridPoint = new GridPoint(gameGrid, position);
+
+    bottomSprite.setPosition(gridPoint.getX(), gridPoint.getY());
     bottomSprite.draw(spriteBatch);
 
-    for (int y = 1; y < size.y - 1; y++) {
-      shaftSprite.setPosition(gameGrid.gridOrigin.x + position.x * gameGrid.unitSize.x, (gameGrid.gridOrigin.y + position.y + y) * gameGrid.unitSize.y);
-      shaftSprite.setSize(size.x * gameGrid.unitSize.x, 1 * gameGrid.unitSize.y);
+    for (int y = (int) position.y + 1; y < position.y + size.y - 1; y++) {
+      gridPoint.add(0, 1);
+
+      shaftSprite.setPosition(gridPoint.getX(), gridPoint.getY());
       shaftSprite.draw(spriteBatch);
 
-      String labelText = String.format("%d", y);
+      String labelText = (y < 4 ? "B" + (4 - y) : "" + (y - 3));
       BitmapFont.TextBounds textBounds = floorFont.getBounds(labelText);
       floorFont.setColor(1, 1, 1, 0.5f);
-      floorFont.draw(spriteBatch, labelText, position.x * gameGrid.unitSize.x + ((shaftTexture.getWidth() - textBounds.width) / 2), ((position.y + y + 0.75f) * gameGrid.unitSize.y));
+      floorFont.draw(spriteBatch, labelText, gridPoint.getX() + ((gameGrid.unitSize.x - textBounds.width) / 2), gridPoint.getY() + ((gameGrid.unitSize.y - textBounds.height) / 2));
     }
+
+    gridPoint.add(0, 1);
+    topSprite.setPosition(gridPoint.getX(), gridPoint.getY());
+    topSprite.draw(spriteBatch);
   }
 
   @Override
-  public boolean tap(Vector2 gridPointAtFinger, int count) {
-    System.out.println("gridPointAtFinger = " + gridPointAtFinger);
-    System.out.println("getBounds() = " + getBounds());
-    if (gridPointAtFinger.y == position.y + size.y - 1) {
-      size.y += 1;
-
-      return true;
-    } else if (gridPointAtFinger.y == position.y) {
-      size.y += 1;
-      position.y -= 1;
+  public boolean touchDown(Vector2 gameGridPoint) {
+    if (gameGridPoint.y == position.y + size.y - 1) {
+      selectedResizeHandle = ResizeHandle.TOP;
+    } else if (gameGridPoint.y == position.y) {
+      selectedResizeHandle = ResizeHandle.BOTTOM;
+    } else {
+      selectedResizeHandle = null;
     }
 
-    return false;
+    return selectedResizeHandle != null;
+  }
+
+  @Override
+  public boolean pan(Vector2 gridPointAtFinger, Vector2 gridPointDelta) {
+    if (selectedResizeHandle == ResizeHandle.TOP) {
+      size.y = Math.max(gridPointDelta.y - position.y, 3);
+    } else if (selectedResizeHandle == ResizeHandle.BOTTOM) {
+      float newSize = Math.max(size.y + position.y - gridPointDelta.y, 3);
+      if (newSize >= 3) {
+        position.y = gridPointDelta.y;
+        size.y = newSize;
+      }
+    }
+
+    if (position.y < 0) {
+      position.y = 0;
+    }
+
+    if (size.y > 17) {
+      size.y = 17;
+    }
+
+    return true;
   }
 }

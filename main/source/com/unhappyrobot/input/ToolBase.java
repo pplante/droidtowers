@@ -45,8 +45,12 @@ public class ToolBase implements GestureDetector.GestureListener {
 
   }
 
-  protected Vector2 findGameGridPointAtFinger() {
-    Ray pickRay = camera.getPickRay(Gdx.input.getX(), Gdx.input.getY());
+  protected Vector2 gridPointAtFinger() {
+    return screenToGameGridPoint(Gdx.input.getX(), Gdx.input.getY());
+  }
+
+  protected Vector2 screenToGameGridPoint(int x, int y) {
+    Ray pickRay = camera.getPickRay(x, y);
     Vector3 endPoint = pickRay.getEndPoint(1);
     return gameGrid.convertScreenPointToGridPoint(endPoint.x, endPoint.y);
   }
