@@ -81,22 +81,28 @@ public class Elevator extends GridObject {
 
   @Override
   public boolean pan(Vector2 gridPointAtFinger, Vector2 gridPointDelta) {
+    float newSize = -1;
+    float newPosY = -1;
     if (selectedResizeHandle == ResizeHandle.TOP) {
-      size.y = Math.max(gridPointDelta.y - position.y, 3);
+      newSize = Math.max(gridPointDelta.y - position.y, 3);
     } else if (selectedResizeHandle == ResizeHandle.BOTTOM) {
-      float newSize = Math.max(size.y + position.y - gridPointDelta.y, 3);
-      if (newSize >= 3) {
-        position.y = gridPointDelta.y;
-        size.y = newSize;
-      }
+      newPosY = gridPointDelta.y;
+      newSize = position.y + size.y - gridPointDelta.y;
     }
 
-    if (position.y < 0) {
-      position.y = 0;
+    if (newSize < 3 || newSize > 17) {
+      return true;
     }
 
-    if (size.y > 17) {
-      size.y = 17;
+    newSize = Math.max(newSize, 3);
+    newSize = Math.min(newSize, 17);
+
+    if (newSize != -1 && newSize != size.y) {
+      size.y = newSize;
+    }
+
+    if (newPosY != -1) {
+      position.y = Math.max(newPosY, 0);
     }
 
     return true;

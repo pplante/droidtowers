@@ -19,46 +19,14 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/test/great-expectations-0.10.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="main" level="project" />
     <orderEntry type="library" scope="TEST" name="desktop" level="project" />
     <orderEntry type="library" name="desktop" level="project" />
     <orderEntry type="module-library" exported="">
-      <library>
+      <library name="jackson">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/jackson-core-asl-1.8.5.jar!/" />
-          <root url="jar://$MODULE_DIR$/libs/jackson-mapper-asl-1.8.5.jar!/" />
-          <root url="file://$MODULE_DIR$/libs" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/libs" />
-        </SOURCES>
-        <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
-        <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" type="SOURCES" />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/test/asm-commons-3.3.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/test/asm-3.3.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/main/jackson-core-asl-1.8.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/main/jackson-mapper-asl-1.8.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -85,7 +53,34 @@
     <orderEntry type="module-library" scope="TEST">
       <library>
         <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/test/asm-commons-3.3.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/test/asm-3.3.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
           <root url="jar://$MODULE_DIR$/libs/test/junit-4.7.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/test/great-expectations-0.10.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
