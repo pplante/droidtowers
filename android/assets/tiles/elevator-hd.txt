@@ -1,0 +1,18 @@
+elevator-hd.png
+format: RGBA8888
+filter: Nearest,Linear
+repeat: none
+elevator-top
+  rotate: false
+  xy: 0, 0
+  size: 65, 65
+  orig: 65, 65
+  offset: 0, 0
+  index: -1
+elevator-shaft
+  rotate: false
+  xy: 0, 65
+  size: 65, 65
+  orig: 65, 65
+  offset: 0, 0
+  index: -1
