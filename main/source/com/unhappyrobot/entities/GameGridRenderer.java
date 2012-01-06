@@ -28,7 +28,7 @@ public class GameGridRenderer extends GameLayer {
 
   private void renderGridObjects(SpriteBatch spriteBatch) {
     spriteBatch.begin();
-    for (GridObject child : gameGrid.getObjects()) {
+    for (GridObject child : gameGrid.getObjectsInRenderOrder()) {
       child.render(spriteBatch);
     }
     spriteBatch.end();

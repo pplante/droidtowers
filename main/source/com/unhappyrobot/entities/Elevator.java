@@ -1,38 +1,37 @@
-package com.unhappyrobot.types;
+package com.unhappyrobot.entities;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
-import com.unhappyrobot.entities.GameGrid;
-import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.math.GridPoint;
+import com.unhappyrobot.types.ElevatorType;
+import com.unhappyrobot.types.ResizeHandle;
 
 public class Elevator extends GridObject {
   private Sprite topSprite;
   private Sprite shaftSprite;
+  private Sprite emptyShaftSprite;
   private Sprite bottomSprite;
-  private final Texture shaftTexture;
-  private TextureAtlas elevatorAtlas;
   private final BitmapFont floorFont;
   private ResizeHandle selectedResizeHandle;
+  private boolean drawShaft;
 
   public Elevator(ElevatorType elevatorType, GameGrid gameGrid) {
     super(elevatorType, gameGrid);
 
     size.set(1, 3);
 
-    elevatorAtlas = new TextureAtlas(Gdx.files.internal("tiles/elevator.txt"));
+    TextureAtlas elevatorAtlas = new TextureAtlas(Gdx.files.internal("tiles/elevator.txt"));
 
     topSprite = elevatorAtlas.createSprite("elevator-top");
     bottomSprite = elevatorAtlas.createSprite("elevator-bottom");
     shaftSprite = elevatorAtlas.createSprite("elevator-shaft");
-    shaftTexture = shaftSprite.getTexture();
-    shaftTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-    floorFont = new BitmapFont(Gdx.files.internal("fonts/bank_gothic_64.fnt"), Gdx.files.internal("fonts/bank_gothic_64.png"), false);
+    emptyShaftSprite = elevatorAtlas.createSprite("empty");
+    floorFont = new BitmapFont(Gdx.files.internal("fonts/bank_gothic_32.fnt"), Gdx.files.internal("fonts/bank_gothic_32.png"), false);
+    drawShaft = true;
   }
 
   @Override
@@ -49,11 +48,12 @@ public class Elevator extends GridObject {
     bottomSprite.setPosition(gridPoint.getX(), gridPoint.getY());
     bottomSprite.draw(spriteBatch);
 
+    Sprite shaftToRender = drawShaft ? shaftSprite : emptyShaftSprite;
     for (int y = (int) position.y + 1; y < position.y + size.y - 1; y++) {
       gridPoint.add(0, 1);
 
-      shaftSprite.setPosition(gridPoint.getX(), gridPoint.getY());
-      shaftSprite.draw(spriteBatch);
+      shaftToRender.setPosition(gridPoint.getX(), gridPoint.getY());
+      shaftToRender.draw(spriteBatch);
 
       String labelText = (y < 4 ? "B" + (4 - y) : "" + (y - 3));
       BitmapFont.TextBounds textBounds = floorFont.getBounds(labelText);
@@ -74,6 +74,7 @@ public class Elevator extends GridObject {
       selectedResizeHandle = ResizeHandle.BOTTOM;
     } else {
       selectedResizeHandle = null;
+      drawShaft = !drawShaft;
     }
 
     return selectedResizeHandle != null;

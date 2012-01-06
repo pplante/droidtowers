@@ -26,7 +26,7 @@ import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.input.Action;
 import com.unhappyrobot.input.CameraController;
 import com.unhappyrobot.input.InputSystem;
-import com.unhappyrobot.types.Elevator;
+import com.unhappyrobot.entities.Elevator;
 import com.unhappyrobot.types.ElevatorTypeFactory;
 import com.unhappyrobot.utils.Random;
 
@@ -80,7 +80,7 @@ public class TowerGame implements ApplicationListener {
 
     gameGrid.setGridOrigin(0, 0);
     gameGrid.setUnitSize(64, 64);
-    gameGrid.setGridSize(20, 20);
+    gameGrid.setGridSize(50, 50);
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
 
     uiSkin = new Skin(Gdx.files.internal("default-skin.ui"), Gdx.files.internal("default-skin.png"));
@@ -106,7 +106,7 @@ public class TowerGame implements ApplicationListener {
     layers.add(gameGridRenderer);
 
     Elevator elevator = new Elevator(ElevatorTypeFactory.getInstance().all().get(0), gameGrid);
-    elevator.position.set(8, 3);
+    elevator.position.set(25, 3);
     gameGrid.addObject(elevator);
 
     InputSystem.getInstance().setup(camera, gameGrid);
@@ -124,12 +124,20 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
+    InputSystem.getInstance().bind(Keys.NUM_0, new Action() {
+      public boolean run(float timeDelta) {
+        camera.zoom = 1f;
+
+        return true;
+      }
+    });
+
     InputSystem.getInstance().bind(new int[]{Keys.BACK, Keys.ESCAPE}, new Action() {
       public boolean run(float timeDelta) {
         if (exitDialog != null) {
           exitDialog.dismiss();
         } else {
-          exitDialog = new Dialog().setTitle("Awww, don't leave me.").setMessage("Are you sure you want to exit the game?").addButton("Yes", new OnClickCallback() {
+          exitDialog = new Dialog().setTitle("Awww, don't leave me.").setMessage("Are you sure you want to exit the game?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
             @Override
             public void onClick(Dialog dialog) {
               dialog.dismiss();

@@ -7,9 +7,7 @@
     "gold":0,
     "experienceAward":1000,
     "height":1,
-    "width":4,
-    "atlasFilename":"rooms/generic.txt",
-    "imageFilename":"generic/generic_room_4x"
+    "width":4
   },
   {
     "name":"Generic 2x1",

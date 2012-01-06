@@ -16,7 +16,7 @@ public abstract class GridObject {
     this.gridObjectType = gridObjectType;
     this.gameGrid = gameGrid;
     this.position = new Vector2(0, 0);
-    this.size = new Vector2(1, 1);
+    this.size = new Vector2(gridObjectType.getWidth(), gridObjectType.getHeight());
   }
 
   public boolean canShareSpace() {
@@ -43,9 +43,11 @@ public abstract class GridObject {
 
   public void render(SpriteBatch spriteBatch) {
     Sprite sprite = getSprite();
-    sprite.setPosition(gameGrid.gridOrigin.x + position.x * gameGrid.unitSize.x, gameGrid.gridOrigin.y + position.y * gameGrid.unitSize.y);
-    sprite.setSize(size.x * gameGrid.unitSize.x, size.y * gameGrid.unitSize.y);
-    sprite.draw(spriteBatch);
+    if (sprite != null) {
+      sprite.setPosition(gameGrid.gridOrigin.x + position.x * gameGrid.unitSize.x, gameGrid.gridOrigin.y + position.y * gameGrid.unitSize.y);
+      sprite.setSize(size.x * gameGrid.unitSize.x, size.y * gameGrid.unitSize.y);
+      sprite.draw(spriteBatch);
+    }
   }
 
   public boolean tap(Vector2 gridPointAtFinger, int count) {

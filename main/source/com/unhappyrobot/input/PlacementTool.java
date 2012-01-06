@@ -2,6 +2,7 @@ package com.unhappyrobot.input;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
@@ -104,10 +105,13 @@ public class PlacementTool extends ToolBase {
   }
 
   private void updateGridObjectStatus() {
-    if (gameGrid.canObjectBeAt(gridObject)) {
-      gridObject.getSprite().setColor(Color.WHITE);
-    } else {
-      gridObject.getSprite().setColor(Color.RED);
+    Sprite sprite = gridObject.getSprite();
+    if (sprite != null) {
+      if (gameGrid.canObjectBeAt(gridObject)) {
+        sprite.setColor(Color.WHITE);
+      } else {
+        sprite.setColor(Color.RED);
+      }
     }
   }
 

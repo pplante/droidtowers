@@ -11,6 +11,7 @@ public class DesktopGame {
     config.width = 800;
     config.height = 600;
     config.useGL20 = false;
+//    config.vSyncEnabled = false;
 
     new LwjglApplication(new TowerGame(), config);
   }

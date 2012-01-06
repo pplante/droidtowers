@@ -2,8 +2,10 @@ package com.unhappyrobot.entities;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import com.unhappyrobot.entities.grid.GridPosition;
+import com.google.common.collect.Ordering;
+import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.math.Bounds2d;
 
 import java.util.HashSet;
@@ -16,8 +18,8 @@ public class GameGrid {
   public Vector2 gridOrigin;
   public Vector2 gridSize;
 
-  private HashSet<GridObject> children;
-  private GridPosition[][] gridLayout;
+  private HashSet<GridObject> objects;
+  private List<GridObject> objectsRenderOrder;
   private Vector2 worldSize;
 
   public GameGrid() {
@@ -27,7 +29,7 @@ public class GameGrid {
     unitSize = new Vector2(16, 16);
     updateWorldSize();
 
-    children = new HashSet<GridObject>();
+    objects = new HashSet<GridObject>();
   }
 
   public void updateWorldSize() {
@@ -67,13 +69,21 @@ public class GameGrid {
 
     gridObject.position.set(clampPosition(gridObject.position, gridObject.size));
 
-    children.add(gridObject);
+    objects.add(gridObject);
+    objectsRenderOrder = Ordering.natural().onResultOf(new Function<GridObject, Integer>() {
+      public Integer apply(@Nullable GridObject gridObject) {
+        if (gridObject != null) {
+          return gridObject.getGridObjectType().getZIndex();
+        }
+        return 1000000;
+      }
+    }).sortedCopy(objects);
 
     return true;
   }
 
   public Set<GridObject> getObjects() {
-    return children;
+    return objects;
   }
 
   public boolean canObjectBeAt(GridObject gridObject) {
@@ -82,7 +92,7 @@ public class GameGrid {
     }
 
     Bounds2d boundsOfGridObjectToCheck = gridObject.getBounds();
-    for (GridObject child : children) {
+    for (GridObject child : objects) {
       if (child != gridObject) {
         if (child.getBounds().overlaps(boundsOfGridObjectToCheck) && !child.canShareSpace()) {
           return false;
@@ -96,7 +106,7 @@ public class GameGrid {
   public List<GridObject> getObjectsAt(Bounds2d targetBounds) {
     List<GridObject> objects = Lists.newArrayList();
 
-    for (GridObject child : children) {
+    for (GridObject child : this.objects) {
       if (child.getBounds().overlaps(targetBounds)) {
         objects.add(child);
       }
@@ -132,6 +142,18 @@ public class GameGrid {
   }
 
   public void removeObject(GridObject gridObject) {
-    children.remove(gridObject);
+    objects.remove(gridObject);
+  }
+
+  public float gridScaleX(float x) {
+    return unitSize.x * x;
+  }
+
+  public float gridScaleY(float y) {
+    return unitSize.y * y;
+  }
+
+  public List<GridObject> getObjectsInRenderOrder() {
+    return objectsRenderOrder;
   }
 }

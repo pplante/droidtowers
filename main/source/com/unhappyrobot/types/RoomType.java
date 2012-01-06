@@ -29,6 +29,8 @@ public class RoomType extends GridObjectType {
       List<GridObject> position = room.getGameGrid().getObjectsAt(belowObject);
       if (position.size() == 0) {
         return false;
+      } else if (position.size() == 1) {
+        return !(position.get(0).getGridObjectType() instanceof ElevatorType);
       }
     }
 

@@ -20,7 +20,9 @@ public class Dialog {
   private String messageText;
   private Window window;
   private boolean shouldDisplayCentered;
+  private LabelButton positiveButton;
   private LabelButton negativeButton;
+  private final Action positiveButtonAction;
   private final Action negativeButtonAction;
   private Action onDismissAction;
 
@@ -29,6 +31,14 @@ public class Dialog {
     this.skin = HeadsUpDisplay.getInstance().getSkin();
 
     buttons = Lists.newArrayList();
+
+    positiveButtonAction = new Action() {
+      public boolean run(float timeDelta) {
+        positiveButton.click(1, 1);
+        return true;
+      }
+    };
+
     negativeButtonAction = new Action() {
       public boolean run(float timeDelta) {
         dismiss();
@@ -56,6 +66,8 @@ public class Dialog {
 
     if (type == ResponseType.NEGATIVE) {
       negativeButton = button;
+    } else if(type == ResponseType.POSITIVE) {
+      positiveButton = button;
     }
 
     if (onClickCallback != null) {
@@ -122,6 +134,10 @@ public class Dialog {
       centerOnScreen();
     }
 
+    if(positiveButton != null) {
+      InputSystem.getInstance().bind(InputSystem.Keys.ENTER, positiveButtonAction);
+    }
+
     if (negativeButton != null) {
       InputSystem.getInstance().bind(NEGATIVE_BUTTON_KEYS, negativeButtonAction);
     }
@@ -134,6 +150,7 @@ public class Dialog {
       parent.removeActor(window);
     }
 
+    InputSystem.getInstance().unbind(InputSystem.Keys.ENTER, positiveButtonAction);
     InputSystem.getInstance().unbind(NEGATIVE_BUTTON_KEYS, negativeButtonAction);
 
     if (onDismissAction != null) {
