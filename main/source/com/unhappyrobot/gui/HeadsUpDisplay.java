@@ -3,7 +3,9 @@ package com.unhappyrobot.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -20,8 +22,8 @@ import com.unhappyrobot.types.*;
 
 public class HeadsUpDisplay extends Group {
   private TextureAtlas hudAtlas;
-  private Stage stage;
-  private Skin skin;
+  private Stage guiStage;
+  private Skin guiSkin;
   private OrthographicCamera camera;
   private GameGrid gameGrid;
   private LabelButton addRoomButton;
@@ -29,6 +31,10 @@ public class HeadsUpDisplay extends Group {
   private Label statusLabel;
   private float updateMoneyLabel;
   private static HeadsUpDisplay instance;
+  private SpriteBatch spriteBatch;
+  private Matrix4 hudProjectionMatrix;
+  private BitmapFont defaultBitmapFont;
+  private BitmapFont menloBitmapFont;
 
   public static HeadsUpDisplay getInstance() {
     if (instance == null) {
@@ -38,22 +44,27 @@ public class HeadsUpDisplay extends Group {
     return instance;
   }
 
-  public void initialize(Stage stage, Skin skin, final OrthographicCamera camera, final GameGrid gameGrid) {
-    this.stage = stage;
-    this.skin = skin;
+  public void initialize(final OrthographicCamera camera, final GameGrid gameGrid, Stage guiStage, SpriteBatch spriteBatch) {
+    this.guiStage = guiStage;
+    this.spriteBatch = spriteBatch;
     this.camera = camera;
     this.gameGrid = gameGrid;
+    this.guiSkin = new Skin(Gdx.files.internal("default-skin.ui"), Gdx.files.internal("default-skin.png"));
 
+    menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_16.fnt"), Gdx.files.internal("fonts/menlo_16.png"), false);
+    defaultBitmapFont = new BitmapFont(Gdx.files.internal("default.fnt"), Gdx.files.internal("default.png"), false);
+
+    hudProjectionMatrix = spriteBatch.getProjectionMatrix().cpy();
     hudAtlas = new TextureAtlas(Gdx.files.internal("hud/buttons.txt"));
     makeAddRoomButton();
     makeAddRoomMenu();
     makeMoneyLabel();
 
-    stage.addActor(this);
+    this.guiStage.addActor(this);
   }
 
   private void makeMoneyLabel() {
-    statusLabel = new Label(skin);
+    statusLabel = new Label(guiSkin);
     statusLabel.setAlignment(Align.RIGHT | Align.TOP);
     addActor(statusLabel);
 
@@ -70,7 +81,7 @@ public class HeadsUpDisplay extends Group {
   }
 
   private void makeAddRoomButton() {
-    addRoomButton = new LabelButton(skin, "Add Room");
+    addRoomButton = new LabelButton(guiSkin, "Add Room");
     addRoomButton.defaults();
     addRoomButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
@@ -102,7 +113,7 @@ public class HeadsUpDisplay extends Group {
   }
 
   private MenuItem makeGridObjectMenuItem(final GridObjectType gridObjectType) {
-    return new MenuItem(skin, gridObjectType.getName(), new ClickListener() {
+    return new MenuItem(guiSkin, gridObjectType.getName(), new ClickListener() {
       public void click(Actor actor, float x, float y) {
         InputSystem.getInstance().switchTool(GestureTool.PLACEMENT, new Runnable() {
           public void run() {
@@ -121,6 +132,10 @@ public class HeadsUpDisplay extends Group {
     });
   }
 
+  public Skin getGuiSkin() {
+    return guiSkin;
+  }
+
   @Override
   public void act(float delta) {
     super.act(delta);
@@ -132,7 +147,23 @@ public class HeadsUpDisplay extends Group {
     }
   }
 
-  public Skin getSkin() {
-    return skin;
+  public void draw(SpriteBatch spriteBatch) {
+    spriteBatch.setProjectionMatrix(hudProjectionMatrix);
+    spriteBatch.begin();
+    String infoText = String.format("fps: %d, camera(%.1f, %.1f, %.1f)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom);
+    menloBitmapFont.draw(spriteBatch, infoText, 5, 23);
+
+    float javaHeapInBytes = Gdx.app.getJavaHeap() / 1048576.0f;
+    float nativeHeapInBytes = Gdx.app.getNativeHeap() / 1048576.0f;
+    menloBitmapFont.draw(spriteBatch, String.format("mem: (java %.2f Mb, native %.2f Mb)", javaHeapInBytes, nativeHeapInBytes), 5, 50);
+
+    spriteBatch.end();
+  }
+
+  public void resize(SpriteBatch spriteBatch, int width, int height) {
+    camera.viewportWidth = width;
+    camera.viewportHeight = height;
+    spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
+    hudProjectionMatrix.setToOrtho2D(0, 0, width, height);
   }
 }

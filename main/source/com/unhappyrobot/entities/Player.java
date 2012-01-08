@@ -17,7 +17,7 @@ public class Player {
   }
 
   private Player() {
-    coins = 400;
+    coins = 4000;
     gold = 1;
     population = 0;
   }

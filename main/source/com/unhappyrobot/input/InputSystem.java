@@ -124,14 +124,12 @@ public class InputSystem extends InputAdapter {
     if (keyBindings.containsKey(keycode)) {
       float deltaTime = Gdx.graphics.getDeltaTime();
 
-      Iterator<Action> actionsIterator = keyBindings.get(keycode).iterator();
-      while (actionsIterator.hasNext()) {
-        Action action = actionsIterator.next();
+      List<Action> actionsForKeyCode = Lists.newArrayList(keyBindings.get(keycode));
+      for (Action action : actionsForKeyCode) {
         if (action.run(deltaTime)) {
           break;
         }
       }
-
       return true;
     }
 

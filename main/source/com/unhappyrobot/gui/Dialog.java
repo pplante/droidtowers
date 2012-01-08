@@ -28,7 +28,7 @@ public class Dialog {
 
   public Dialog() {
     this.parent = HeadsUpDisplay.getInstance();
-    this.skin = HeadsUpDisplay.getInstance().getSkin();
+    this.skin = HeadsUpDisplay.getInstance().getGuiSkin();
 
     buttons = Lists.newArrayList();
 
@@ -66,7 +66,7 @@ public class Dialog {
 
     if (type == ResponseType.NEGATIVE) {
       negativeButton = button;
-    } else if(type == ResponseType.POSITIVE) {
+    } else if (type == ResponseType.POSITIVE) {
       positiveButton = button;
     }
 
@@ -134,7 +134,7 @@ public class Dialog {
       centerOnScreen();
     }
 
-    if(positiveButton != null) {
+    if (positiveButton != null) {
       InputSystem.getInstance().bind(InputSystem.Keys.ENTER, positiveButtonAction);
     }
 

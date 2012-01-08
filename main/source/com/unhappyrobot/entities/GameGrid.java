@@ -45,6 +45,8 @@ public class GameGrid {
         return 0;
       }
     };
+
+    updateRenderOrder();
   }
 
   public void updateWorldSize() {

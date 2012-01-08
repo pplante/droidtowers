@@ -26,7 +26,6 @@ import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.input.Action;
 import com.unhappyrobot.input.CameraController;
 import com.unhappyrobot.input.InputSystem;
-import com.unhappyrobot.types.ElevatorTypeFactory;
 import com.unhappyrobot.utils.Random;
 
 import java.util.List;
@@ -51,9 +50,8 @@ public class TowerGame implements ApplicationListener {
   private GridObject mouseRat;
   private Skin uiSkin;
   private Button testButton;
-  private Stage guiLayer;
+  private Stage guiStage;
   private BitmapFont defaultBitmapFont;
-  private Dialog exitDialog = null;
   private Sprite particle;
 
   public void create() {
@@ -66,25 +64,17 @@ public class TowerGame implements ApplicationListener {
 
     camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     spriteBatch = new SpriteBatch(100);
-    hudProjectionMatrix = spriteBatch.getProjectionMatrix().cpy();
+    guiStage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
 
     Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 
     layers = Lists.newArrayList();
 
-    menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_16.fnt"), Gdx.files.internal("fonts/menlo_16.png"), false);
-    defaultBitmapFont = new BitmapFont(Gdx.files.internal("default.fnt"), Gdx.files.internal("default.png"), false);
-
-    particle = new Sprite(new Texture(Gdx.files.internal("particle.png")));
-
     gameGrid.setUnitSize(64, 64);
     gameGrid.setGridSize(50, 50);
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
 
-    uiSkin = new Skin(Gdx.files.internal("default-skin.ui"), Gdx.files.internal("default-skin.png"));
-    guiLayer = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
-
-    HeadsUpDisplay.getInstance().initialize(guiLayer, uiSkin, camera, gameGrid);
+    HeadsUpDisplay.getInstance().initialize(camera, gameGrid, guiStage, spriteBatch);
 
     BackgroundLayer groundLayer = new BackgroundLayer("backgrounds/ground.png");
     groundLayer.setSize(gameGrid.getWorldSize().x, 256f);
@@ -103,17 +93,9 @@ public class TowerGame implements ApplicationListener {
     gameGridRenderer = gameGrid.getRenderer();
     layers.add(gameGridRenderer);
 
-    Elevator elevator = new Elevator(ElevatorTypeFactory.getInstance().all().get(0), gameGrid);
-    elevator.setPosition(25, 3);
-    elevator.setState(GridObjectState.PLACED);
-    gameGrid.addObject(elevator);
-
     InputSystem.getInstance().setup(camera, gameGrid);
-    InputSystem.getInstance().addInputProcessor(guiLayer, 10);
+    InputSystem.getInstance().addInputProcessor(guiStage, 10);
     Gdx.input.setInputProcessor(InputSystem.getInstance());
-
-    Gdx.input.setCatchBackKey(true);
-    Gdx.input.setCatchMenuKey(true);
 
     InputSystem.getInstance().bind(Keys.G, new Action() {
       public boolean run(float timeDelta) {
@@ -132,6 +114,8 @@ public class TowerGame implements ApplicationListener {
     });
 
     InputSystem.getInstance().bind(new int[]{Keys.BACK, Keys.ESCAPE}, new Action() {
+      private Dialog exitDialog;
+
       public boolean run(float timeDelta) {
         if (exitDialog != null) {
           exitDialog.dismiss();
@@ -171,59 +155,38 @@ public class TowerGame implements ApplicationListener {
     float deltaTime = Gdx.graphics.getDeltaTime();
 
     InputSystem.getInstance().update(deltaTime);
-    camera.update();
 
+    camera.update();
     spriteBatch.setProjectionMatrix(camera.combined);
+
+    update();
 
     gl.glColor4f(1, 1, 1, 1);
     for (GameLayer layer : layers) {
       layer.render(spriteBatch, camera);
     }
 
-//    spriteBatch.begin();
-//    particle.setPosition(camera.position.x, camera.position.y);
-//    particle.draw(spriteBatch);
-//    spriteBatch.end();
-
-    spriteBatch.setProjectionMatrix(hudProjectionMatrix);
-    spriteBatch.begin();
-    String infoText = String.format("fps: %d, camera(%.1f, %.1f, %.1f)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom);
-    menloBitmapFont.draw(spriteBatch, infoText, 5, 23);
-
-    float javaHeapInBytes = Gdx.app.getJavaHeap() / 1048576.0f;
-    float nativeHeapInBytes = Gdx.app.getNativeHeap() / 1048576.0f;
-    menloBitmapFont.draw(spriteBatch, String.format("mem: (java %.2f Mb, native %.2f Mb)", javaHeapInBytes, nativeHeapInBytes), 5, 50);
-
-    spriteBatch.end();
-
-    guiLayer.draw();
-    Table.drawDebug(guiLayer);
-
-    update();
+    guiStage.draw();
+    Table.drawDebug(guiStage);
   }
 
   public void update() {
     float deltaTime = Gdx.graphics.getDeltaTime();
 
-    DeferredManager.onGameThread().update(deltaTime);
+    tweenManager.update();
+    gameGrid.update(deltaTime);
+    guiStage.act(deltaTime);
 
     for (GameLayer layer : layers) {
       layer.update(deltaTime);
     }
 
-    gameGrid.update(deltaTime);
-
-    tweenManager.update();
-
-    guiLayer.act(deltaTime);
+    HeadsUpDisplay.getInstance().act(deltaTime);
   }
 
   public void resize(int width, int height) {
     Gdx.app.log("lifecycle", "resizing!");
-    camera.viewportWidth = width;
-    camera.viewportHeight = height;
-    spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
-    hudProjectionMatrix.setToOrtho2D(0, 0, width, height);
+    HeadsUpDisplay.getInstance().resize(spriteBatch, width, height);
     Gdx.gl.glViewport(0, 0, width, height);
   }
 
@@ -237,22 +200,10 @@ public class TowerGame implements ApplicationListener {
 
   public void dispose() {
     spriteBatch.dispose();
-    menloBitmapFont.dispose();
-  }
-
-  public static List<GameLayer> getLayers() {
-    return layers;
+    guiStage.dispose();
   }
 
   public static TweenManager getTweenManager() {
     return tweenManager;
-  }
-
-  public static TowerGame getInstance() {
-    return instance;
-  }
-
-  public SpriteBatch getSpriteBatch() {
-    return spriteBatch;
   }
 }
