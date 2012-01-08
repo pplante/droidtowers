@@ -5,8 +5,8 @@
     "canShareSpace":true,
     "coins":100,
     "gold":0,
-    "experienceAward":1000,
-    "height":2,
+    "experienceAward":500,
+    "height":1,
     "width":2,
     "imageFilename":"transport/stairs.png"
   }

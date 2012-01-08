@@ -2,6 +2,7 @@ package com.unhappyrobot.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.unhappyrobot.types.StairType;
 
 public class Stair extends GridObject {
@@ -22,5 +23,15 @@ public class Stair extends GridObject {
   @Override
   public Sprite getSprite() {
     return sprite;
+  }
+
+  @Override
+  public void render(SpriteBatch spriteBatch) {
+    // stairs need to support overflowing into ajacent cells.
+    if (sprite != null) {
+      sprite.setColor(renderColor);
+      sprite.setPosition(position.getWorldX(), position.getWorldY());
+      sprite.draw(spriteBatch);
+    }
   }
 }

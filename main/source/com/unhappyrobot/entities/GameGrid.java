@@ -23,8 +23,10 @@ public class GameGrid {
   private final Function<GridObject, Integer> objectRenderSortFunction;
   private long lastEarnoutTime;
   private static final long EARN_OUT_INTERVAL_MILLIS = 5000;
+  private final GameGridRenderer gameGridRenderer;
 
   public GameGrid() {
+    gameGridRenderer = new GameGridRenderer(this);
     gridColor = Color.GREEN;
     gridSize = new Vector2(8, 8);
     unitSize = new Vector2(16, 16);
@@ -68,7 +70,7 @@ public class GameGrid {
   }
 
   public GameGridRenderer getRenderer() {
-    return new GameGridRenderer(this);
+    return gameGridRenderer;
   }
 
   public Vector2 getWorldSize() {

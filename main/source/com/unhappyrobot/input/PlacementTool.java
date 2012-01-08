@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.GridObjectState;
-import com.unhappyrobot.gui.Dialog;
+import com.unhappyrobot.gui.HeadsUpDisplay;
 import com.unhappyrobot.money.PurchaseManager;
 import com.unhappyrobot.types.GridObjectType;
 
@@ -55,12 +55,7 @@ public class PlacementTool extends ToolBase {
   public boolean tap(int x, int y, int count) {
     if (count >= 2) {
       if (!gameGrid.canObjectBeAt(gridObject)) {
-        new Dialog()
-                .setTitle("Invalid Position")
-                .setMessage("This object cannot be placed here.")
-                .addButton("Okay")
-                .centerOnScreen()
-                .show();
+        HeadsUpDisplay.getInstance().showToast("This object cannot be placed here.");
         return false;
       } else {
         gridObject.setState(GridObjectState.PLACED);
@@ -93,8 +88,9 @@ public class PlacementTool extends ToolBase {
       if (touchDownPointDelta != null) {
         gridPointAtFinger.sub(touchDownPointDelta);
       }
-
-      gridObject.setPosition(gridPointAtFinger);
+      if (gridObject != null) {
+        gridObject.setPosition(gridPointAtFinger);
+      }
 
       return true;
     }

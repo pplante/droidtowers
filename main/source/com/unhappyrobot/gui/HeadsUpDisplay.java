@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -32,9 +31,9 @@ public class HeadsUpDisplay extends Group {
   private float updateMoneyLabel;
   private static HeadsUpDisplay instance;
   private SpriteBatch spriteBatch;
-  private Matrix4 hudProjectionMatrix;
   private BitmapFont defaultBitmapFont;
   private BitmapFont menloBitmapFont;
+  private Toast toast;
 
   public static HeadsUpDisplay getInstance() {
     if (instance == null) {
@@ -54,7 +53,6 @@ public class HeadsUpDisplay extends Group {
     menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_16.fnt"), Gdx.files.internal("fonts/menlo_16.png"), false);
     defaultBitmapFont = new BitmapFont(Gdx.files.internal("default.fnt"), Gdx.files.internal("default.png"), false);
 
-    hudProjectionMatrix = spriteBatch.getProjectionMatrix().cpy();
     hudAtlas = new TextureAtlas(Gdx.files.internal("hud/buttons.txt"));
     makeAddRoomButton();
     makeAddRoomMenu();
@@ -147,23 +145,25 @@ public class HeadsUpDisplay extends Group {
     }
   }
 
-  public void draw(SpriteBatch spriteBatch) {
-    spriteBatch.setProjectionMatrix(hudProjectionMatrix);
-    spriteBatch.begin();
+  @Override
+  public void draw(SpriteBatch batch, float parentAlpha) {
+    super.draw(batch, parentAlpha);
+
     String infoText = String.format("fps: %d, camera(%.1f, %.1f, %.1f)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom);
-    menloBitmapFont.draw(spriteBatch, infoText, 5, 23);
+    menloBitmapFont.draw(batch, infoText, 5, 23);
 
     float javaHeapInBytes = Gdx.app.getJavaHeap() / 1048576.0f;
     float nativeHeapInBytes = Gdx.app.getNativeHeap() / 1048576.0f;
-    menloBitmapFont.draw(spriteBatch, String.format("mem: (java %.2f Mb, native %.2f Mb)", javaHeapInBytes, nativeHeapInBytes), 5, 50);
-
-    spriteBatch.end();
+    menloBitmapFont.draw(batch, String.format("mem: (java %.2f Mb, native %.2f Mb)", javaHeapInBytes, nativeHeapInBytes), 5, 50);
   }
 
-  public void resize(SpriteBatch spriteBatch, int width, int height) {
-    camera.viewportWidth = width;
-    camera.viewportHeight = height;
-    spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
-    hudProjectionMatrix.setToOrtho2D(0, 0, width, height);
+  public void showToast(String message) {
+    if (toast == null) {
+      toast = new Toast();
+      addActor(toast);
+    }
+
+    toast.setMessage(message);
+    toast.show();
   }
 }
