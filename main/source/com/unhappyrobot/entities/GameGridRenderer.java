@@ -40,13 +40,13 @@ public class GameGridRenderer extends GameLayer {
     gl.begin(GL10.GL_LINES);
 
     for (int i = 0; i <= gameGrid.gridSize.x; i++) {
-      addPoint(gameGrid.gridOrigin.x + (i * gameGrid.unitSize.x), gameGrid.gridOrigin.y);
-      addPoint(gameGrid.gridOrigin.x + (i * gameGrid.unitSize.x), gameGrid.gridOrigin.y + gameGrid.gridSize.y * gameGrid.unitSize.y);
+      addPoint(i * gameGrid.unitSize.x, 0);
+      addPoint(i * gameGrid.unitSize.x, gameGrid.gridSize.y * gameGrid.unitSize.y);
     }
 
     for (int i = 0; i <= gameGrid.gridSize.y; i++) {
-      addPoint(gameGrid.gridOrigin.x, gameGrid.gridOrigin.y + (i * gameGrid.unitSize.y));
-      addPoint(gameGrid.gridOrigin.x + gameGrid.gridSize.x * gameGrid.unitSize.x, gameGrid.gridOrigin.y + (i * gameGrid.unitSize.y));
+      addPoint(0, i * gameGrid.unitSize.y);
+      addPoint(gameGrid.gridSize.x * gameGrid.unitSize.x, i * gameGrid.unitSize.y);
     }
 
     gl.end();

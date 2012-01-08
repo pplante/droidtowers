@@ -3,24 +3,33 @@ package com.unhappyrobot.math;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.GameGrid;
 
-public class GridPoint {
+public class GridPoint extends Vector2 {
   private final GameGrid gameGrid;
-  private final Vector2 position;
 
-  public GridPoint(GameGrid gameGrid, Vector2 position) {
+  public GridPoint(GameGrid gameGrid, float x, float y) {
+    super(x, y);
+
     this.gameGrid = gameGrid;
-    this.position = position.cpy();
   }
 
-  public float getX() {
-    return gameGrid.gridOrigin.x + position.x * gameGrid.unitSize.x;
+  public GridPoint(GameGrid gameGrid, GridPoint point) {
+    this(gameGrid, point.x, point.y);
   }
 
-  public float getY() {
-    return (gameGrid.gridOrigin.y + position.y) * gameGrid.unitSize.y;
+  public float getWorldX() {
+    return x * gameGrid.unitSize.x;
   }
 
-  public void add(int x, int y) {
-    position.add(x, y);
+  public float getWorldY() {
+    return y * gameGrid.unitSize.y;
+  }
+
+  @Override
+  public GridPoint cpy() {
+    return new GridPoint(gameGrid, x, y);
+  }
+
+  public Vector2 toVector2() {
+    return new Vector2(getWorldX(), getWorldY());
   }
 }

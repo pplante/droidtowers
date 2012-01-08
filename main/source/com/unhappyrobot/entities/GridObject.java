@@ -1,22 +1,24 @@
 package com.unhappyrobot.entities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.math.Bounds2d;
+import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.GridObjectType;
 
 public abstract class GridObject {
   protected final GridObjectType gridObjectType;
   protected final GameGrid gameGrid;
-  public Vector2 position;
-  public Vector2 size;
+  protected GridPoint position;
+  protected GridPoint size;
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
     this.gameGrid = gameGrid;
-    this.position = new Vector2(0, 0);
-    this.size = new Vector2(gridObjectType.getWidth(), gridObjectType.getHeight());
+    this.position = new GridPoint(gameGrid, 0, 0);
+    this.size = new GridPoint(gameGrid, gridObjectType.getWidth(), gridObjectType.getHeight());
   }
 
   public boolean canShareSpace() {
@@ -44,8 +46,8 @@ public abstract class GridObject {
   public void render(SpriteBatch spriteBatch) {
     Sprite sprite = getSprite();
     if (sprite != null) {
-      sprite.setPosition(gameGrid.gridOrigin.x + position.x * gameGrid.unitSize.x, gameGrid.gridOrigin.y + position.y * gameGrid.unitSize.y);
-      sprite.setSize(size.x * gameGrid.unitSize.x, size.y * gameGrid.unitSize.y);
+      sprite.setPosition(position.getWorldX(), position.getWorldY());
+      sprite.setSize(size.getWorldX(), size.getWorldY());
       sprite.draw(spriteBatch);
     }
   }
@@ -60,5 +62,48 @@ public abstract class GridObject {
 
   public boolean touchDown(Vector2 gameGridPoint) {
     return false;
+  }
+
+  public GridPoint getSize() {
+    return size;
+  }
+
+  public GridPoint getPosition() {
+    return position;
+  }
+
+  public void setPosition(Vector2 gridPointAtFinger) {
+    setPosition(gridPointAtFinger.x, gridPointAtFinger.y);
+  }
+
+  public void setPosition(float x, float y) {
+    position.set(x, y);
+    clampPosition();
+    updatePlacementStatus();
+  }
+
+  protected void clampPosition() {
+    if (position.x < 0) {
+      position.x = 0;
+    } else if (position.x + size.x > gameGrid.gridSize.x) {
+      position.x = gameGrid.gridSize.x - size.x;
+    }
+
+    if (position.y < 0) {
+      position.y = 0;
+    } else if (position.y + size.y > gameGrid.gridSize.y) {
+      position.y = gameGrid.gridSize.y - size.y;
+    }
+  }
+
+  private void updatePlacementStatus() {
+    Sprite sprite = getSprite();
+    if (sprite != null) {
+      if (gameGrid.canObjectBeAt(this)) {
+        sprite.setColor(Color.WHITE);
+      } else {
+        sprite.setColor(Color.RED);
+      }
+    }
   }
 }

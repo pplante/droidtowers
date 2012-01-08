@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.unhappyrobot.math.GridPoint;
+import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.types.RoomType;
 
 public class Room extends GridObject {
@@ -58,9 +58,10 @@ public class Room extends GridObject {
     super.render(spriteBatch);
 
     if (dynamicSprite) {
-      GridPoint gridPoint = new GridPoint(gameGrid, position);
       BitmapFont.TextBounds textBounds = labelFont.getBounds(gridObjectType.getName());
-      labelFont.draw(spriteBatch, gridObjectType.getName(), gridPoint.getX() + ((gameGrid.gridScaleX(size.x) - textBounds.width) / 2), gridPoint.getY() + ((gameGrid.gridScaleY(size.y) - textBounds.height) / 2));
+      Vector2 centerPoint = size.toVector2().sub(textBounds.width, textBounds.height).mul(0.5f);
+
+      labelFont.draw(spriteBatch, gridObjectType.getName(), position.getWorldX() + centerPoint.x, position.getWorldY() + centerPoint.y);
     }
   }
 }

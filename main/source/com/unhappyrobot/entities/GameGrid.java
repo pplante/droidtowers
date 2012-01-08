@@ -15,21 +15,28 @@ import java.util.Set;
 public class GameGrid {
   public Vector2 unitSize;
   public Color gridColor;
-  public Vector2 gridOrigin;
   public Vector2 gridSize;
 
   private HashSet<GridObject> objects;
   private List<GridObject> objectsRenderOrder;
   private Vector2 worldSize;
+  private final Function<GridObject, Integer> objectRenderSortFunction;
 
   public GameGrid() {
     gridColor = Color.GREEN;
-    gridOrigin = new Vector2();
     gridSize = new Vector2(8, 8);
     unitSize = new Vector2(16, 16);
     updateWorldSize();
 
-    objects = new HashSet<GridObject>();
+    objects = new HashSet<GridObject>(25);
+    objectRenderSortFunction = new Function<GridObject, Integer>() {
+      public Integer apply(@Nullable GridObject gridObject) {
+        if (gridObject != null) {
+          return gridObject.getGridObjectType().getZIndex();
+        }
+        return 0;
+      }
+    };
   }
 
   public void updateWorldSize() {
@@ -46,10 +53,6 @@ public class GameGrid {
     updateWorldSize();
   }
 
-  public void setGridOrigin(float x, float y) {
-    gridOrigin.set(x, y);
-  }
-
   public void setGridColor(float r, float g, float b, float a) {
     gridColor.set(r, g, b, a);
   }
@@ -63,23 +66,14 @@ public class GameGrid {
   }
 
   public boolean addObject(GridObject gridObject) {
-    if (gridObject.position == null) {
-      return false;
-    }
-
-    gridObject.position.set(clampPosition(gridObject.position, gridObject.size));
-
     objects.add(gridObject);
-    objectsRenderOrder = Ordering.natural().onResultOf(new Function<GridObject, Integer>() {
-      public Integer apply(@Nullable GridObject gridObject) {
-        if (gridObject != null) {
-          return gridObject.getGridObjectType().getZIndex();
-        }
-        return 1000000;
-      }
-    }).sortedCopy(objects);
+    updateRenderOrder();
 
     return true;
+  }
+
+  private void updateRenderOrder() {
+    objectsRenderOrder = Ordering.natural().onResultOf(objectRenderSortFunction).sortedCopy(objects);
   }
 
   public Set<GridObject> getObjects() {
@@ -143,14 +137,7 @@ public class GameGrid {
 
   public void removeObject(GridObject gridObject) {
     objects.remove(gridObject);
-  }
-
-  public float gridScaleX(float x) {
-    return unitSize.x * x;
-  }
-
-  public float gridScaleY(float y) {
-    return unitSize.y * y;
+    updateRenderOrder();
   }
 
   public List<GridObject> getObjectsInRenderOrder() {

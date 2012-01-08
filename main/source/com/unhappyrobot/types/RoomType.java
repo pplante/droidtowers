@@ -22,9 +22,9 @@ public class RoomType extends GridObjectType {
     Room room = (Room) gridObject;
 
     if (isLobby) {
-      return room.position.y == 4;
+      return room.getPosition().y == 4;
     } else {
-      Bounds2d belowObject = new Bounds2d(room.position.cpy().sub(0, 1), room.size);
+      Bounds2d belowObject = new Bounds2d(room.getPosition().cpy().sub(0, 1), room.getSize());
 
       List<GridObject> position = room.getGameGrid().getObjectsAt(belowObject);
       if (position.size() == 0) {

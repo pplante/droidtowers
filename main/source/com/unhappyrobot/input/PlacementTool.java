@@ -1,8 +1,6 @@
 package com.unhappyrobot.input;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
@@ -41,13 +39,11 @@ public class PlacementTool extends ToolBase {
     Vector2 gridPointAtFinger = gridPointAtFinger();
     if (gridObject == null) {
       gridObject = gridObjectType.makeGridObject(gameGrid);
-      gridObject.position.set(gameGrid.clampPosition(gridPointAtFinger, gridObject.size));
+      gridObject.setPosition(gridPointAtFinger);
 
       gameGrid.addObject(gridObject);
-
-      updateGridObjectStatus();
     } else {
-      touchDownPointDelta = gridPointAtFinger.cpy().sub(gridObject.position);
+      touchDownPointDelta = gridPointAtFinger.cpy().sub(gridObject.getPosition());
     }
 
     isDraggingGridObject = gridObject.getBounds().contains(gridPointAtFinger);
@@ -94,25 +90,12 @@ public class PlacementTool extends ToolBase {
         gridPointAtFinger.sub(touchDownPointDelta);
       }
 
-      gridObject.position.set(gameGrid.clampPosition(gridPointAtFinger, gridObject.size));
-
-      updateGridObjectStatus();
+      gridObject.setPosition(gridPointAtFinger);
 
       return true;
     }
 
     return false;
-  }
-
-  private void updateGridObjectStatus() {
-    Sprite sprite = gridObject.getSprite();
-    if (sprite != null) {
-      if (gameGrid.canObjectBeAt(gridObject)) {
-        sprite.setColor(Color.WHITE);
-      } else {
-        sprite.setColor(Color.RED);
-      }
-    }
   }
 
   public void enterPurchaseMode() {

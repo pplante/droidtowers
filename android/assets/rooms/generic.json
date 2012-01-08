@@ -13,7 +13,6 @@
     "name":"Generic 2x1",
     "continuousPlacement":true,
     "coins":100,
-    "gold":0,
     "experienceAward":1500,
     "height":1,
     "width":2,
@@ -23,7 +22,6 @@
   {
     "name":"Generic 3x1",
     "coins":200,
-    "gold":0,
     "experienceAward":2000,
     "height":1,
     "width":3,

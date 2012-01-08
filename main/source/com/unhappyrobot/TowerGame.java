@@ -26,7 +26,6 @@ import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.input.Action;
 import com.unhappyrobot.input.CameraController;
 import com.unhappyrobot.input.InputSystem;
-import com.unhappyrobot.entities.Elevator;
 import com.unhappyrobot.types.ElevatorTypeFactory;
 import com.unhappyrobot.utils.Random;
 
@@ -78,7 +77,6 @@ public class TowerGame implements ApplicationListener {
 
     particle = new Sprite(new Texture(Gdx.files.internal("particle.png")));
 
-    gameGrid.setGridOrigin(0, 0);
     gameGrid.setUnitSize(64, 64);
     gameGrid.setGridSize(50, 50);
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
@@ -106,7 +104,7 @@ public class TowerGame implements ApplicationListener {
     layers.add(gameGridRenderer);
 
     Elevator elevator = new Elevator(ElevatorTypeFactory.getInstance().all().get(0), gameGrid);
-    elevator.position.set(25, 3);
+    elevator.setPosition(25, 3);
     gameGrid.addObject(elevator);
 
     InputSystem.getInstance().setup(camera, gameGrid);
