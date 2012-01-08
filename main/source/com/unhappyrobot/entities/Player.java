@@ -1,10 +1,11 @@
 package com.unhappyrobot.entities;
 
 public class Player {
-  private int coins;
   private static Player instance;
-  private int gold;
-  private int experience;
+
+  private long coins;
+  private long gold;
+  private long experience;
 
   public static Player getInstance() {
     if (instance == null) {
@@ -19,11 +20,11 @@ public class Player {
     gold = 1;
   }
 
-  public int getCoins() {
+  public long getCoins() {
     return coins;
   }
 
-  public int getGold() {
+  public long getGold() {
     return gold;
   }
 
@@ -41,7 +42,7 @@ public class Player {
     experience = exp;
   }
 
-  public int getExperience() {
+  public long getExperience() {
     return experience;
   }
 }

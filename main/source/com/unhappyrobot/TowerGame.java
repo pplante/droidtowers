@@ -105,6 +105,7 @@ public class TowerGame implements ApplicationListener {
 
     Elevator elevator = new Elevator(ElevatorTypeFactory.getInstance().all().get(0), gameGrid);
     elevator.setPosition(25, 3);
+    elevator.setState(GridObjectState.PLACED);
     gameGrid.addObject(elevator);
 
     InputSystem.getInstance().setup(camera, gameGrid);
@@ -209,6 +210,8 @@ public class TowerGame implements ApplicationListener {
     for (GameLayer layer : layers) {
       layer.update(deltaTime);
     }
+
+    gameGrid.update(deltaTime);
 
     tweenManager.update();
 

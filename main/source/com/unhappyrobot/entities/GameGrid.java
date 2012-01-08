@@ -21,12 +21,16 @@ public class GameGrid {
   private List<GridObject> objectsRenderOrder;
   private Vector2 worldSize;
   private final Function<GridObject, Integer> objectRenderSortFunction;
+  private long lastEarnoutTime;
+  private static final long EARN_OUT_INTERVAL_MILLIS = 5000;
 
   public GameGrid() {
     gridColor = Color.GREEN;
     gridSize = new Vector2(8, 8);
     unitSize = new Vector2(16, 16);
     updateWorldSize();
+
+    lastEarnoutTime = System.currentTimeMillis();
 
     objects = new HashSet<GridObject>(25);
     objectRenderSortFunction = new Function<GridObject, Integer>() {
@@ -142,5 +146,24 @@ public class GameGrid {
 
   public List<GridObject> getObjectsInRenderOrder() {
     return objectsRenderOrder;
+  }
+
+  public void update(float deltaTime) {
+    if ((lastEarnoutTime + EARN_OUT_INTERVAL_MILLIS) < System.currentTimeMillis()) {
+      lastEarnoutTime = System.currentTimeMillis();
+
+      int coinsEarned = 0;
+      int goldEarned = 0;
+      for (GridObject object : objects) {
+        coinsEarned += object.getCoinsEarned();
+        goldEarned += object.getGoldEarned();
+      }
+      System.out.println(String.format("Player earned: %d coins and %d gold", coinsEarned, goldEarned));
+      Player.getInstance().addCurrency(coinsEarned, goldEarned);
+    }
+
+    for (GridObject gridObject : objects) {
+      gridObject.update(deltaTime);
+    }
   }
 }

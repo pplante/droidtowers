@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
+import com.unhappyrobot.entities.GridObjectState;
 import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.money.PurchaseManager;
 import com.unhappyrobot.types.GridObjectType;
@@ -61,6 +62,8 @@ public class PlacementTool extends ToolBase {
                 .centerOnScreen()
                 .show();
         return false;
+      } else {
+        gridObject.setState(GridObjectState.PLACED);
       }
 
       if (purchaseManager != null) {

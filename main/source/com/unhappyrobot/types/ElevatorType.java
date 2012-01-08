@@ -19,4 +19,14 @@ public class ElevatorType extends GridObjectType {
   public int getZIndex() {
     return 100;
   }
+
+  @Override
+  public int getCoinsEarned() {
+    return 0;
+  }
+
+  @Override
+  public int getGoldEarned() {
+    return 0;
+  }
 }

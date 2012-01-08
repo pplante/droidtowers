@@ -59,4 +59,12 @@ public abstract class GridObjectType {
   public int getZIndex() {
     return 0;
   }
+
+  public int getCoinsEarned() {
+    return coins / 4;
+  }
+
+  public int getGoldEarned() {
+    return gold / 10;
+  }
 }

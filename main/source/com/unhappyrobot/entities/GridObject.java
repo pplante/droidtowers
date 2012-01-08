@@ -13,12 +13,15 @@ public abstract class GridObject {
   protected final GameGrid gameGrid;
   protected GridPoint position;
   protected GridPoint size;
+  private boolean placedOnGrid;
+  private GridObjectState state;
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
     this.gameGrid = gameGrid;
     this.position = new GridPoint(gameGrid, 0, 0);
     this.size = new GridPoint(gameGrid, gridObjectType.getWidth(), gridObjectType.getHeight());
+    state = GridObjectState.INVALID;
   }
 
   public boolean canShareSpace() {
@@ -99,11 +102,40 @@ public abstract class GridObject {
   private void updatePlacementStatus() {
     Sprite sprite = getSprite();
     if (sprite != null) {
-      if (gameGrid.canObjectBeAt(this)) {
+      if (state.equals(GridObjectState.INVALID)) {
+        Color color = new Color(gameGrid.canObjectBeAt(this) ? Color.WHITE : Color.RED);
+        color.a = 0.85f;
+        sprite.setColor(color);
+      } else if (state.equals(GridObjectState.PLACED)) {
         sprite.setColor(Color.WHITE);
-      } else {
-        sprite.setColor(Color.RED);
       }
     }
+  }
+
+  public void update(float deltaTime) {
+
+  }
+
+  public int getCoinsEarned() {
+    if (state == GridObjectState.INVALID) {
+      return 0;
+    }
+
+    return gridObjectType.getCoinsEarned();
+  }
+
+
+  public int getGoldEarned() {
+    if (state == GridObjectState.INVALID) {
+      return 0;
+    }
+
+    return gridObjectType.getGoldEarned();
+  }
+
+  public void setState(GridObjectState state) {
+    this.state = state;
+
+    updatePlacementStatus();
   }
 }
