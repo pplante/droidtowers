@@ -14,6 +14,7 @@
     "continuousPlacement":true,
     "coins":100,
     "experienceAward":1500,
+    "maxPopulation":2,
     "height":1,
     "width":2,
     "atlasFilename":"rooms/generic.txt",
@@ -23,6 +24,7 @@
     "name":"Generic 3x1",
     "coins":200,
     "experienceAward":2000,
+    "maxPopulation":4,
     "height":1,
     "width":3,
     "atlasFilename":"rooms/generic.txt",
@@ -33,6 +35,7 @@
     "coins":300,
     "height":1,
     "experienceAward":2200,
+    "maxPopulation":6,
     "width":4,
     "atlasFilename":"rooms/generic.txt",
     "imageFilename":"generic/generic_room_4x"

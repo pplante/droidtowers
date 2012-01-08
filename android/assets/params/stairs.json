@@ -1,0 +1,13 @@
+[
+  {
+    "name":"Glass Stairs",
+    "continuousPlacement":true,
+    "canShareSpace":true,
+    "coins":100,
+    "gold":0,
+    "experienceAward":1000,
+    "height":2,
+    "width":2,
+    "imageFilename":"transport/stairs.png"
+  }
+]

@@ -6,6 +6,7 @@ public class Player {
   private long coins;
   private long gold;
   private long experience;
+  private int population;
 
   public static Player getInstance() {
     if (instance == null) {
@@ -18,6 +19,7 @@ public class Player {
   private Player() {
     coins = 400;
     gold = 1;
+    population = 0;
   }
 
   public long getCoins() {
@@ -44,5 +46,13 @@ public class Player {
 
   public long getExperience() {
     return experience;
+  }
+
+  public int getPopulation() {
+    return population;
+  }
+
+  public void setPopulation(int population) {
+    this.population = population;
   }
 }

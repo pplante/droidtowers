@@ -2,6 +2,7 @@
   {
     "name":"Elevator Shaft",
     "continuousPlacement":true,
+    "canShareSpace":true,
     "coins":100,
     "gold":0,
     "experienceAward":2000,

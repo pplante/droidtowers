@@ -45,10 +45,12 @@ public class Elevator extends GridObject {
 
     GridPoint gridPoint = new GridPoint(gameGrid, position);
 
+    bottomSprite.setColor(renderColor);
     bottomSprite.setPosition(gridPoint.getWorldX(), gridPoint.getWorldY());
     bottomSprite.draw(spriteBatch);
 
     Sprite shaftToRender = drawShaft ? shaftSprite : emptyShaftSprite;
+    shaftToRender.setColor(renderColor);
     for (int y = (int) position.y + 1; y < position.y + size.y - 1; y++) {
       gridPoint.add(0, 1);
 
@@ -62,6 +64,7 @@ public class Elevator extends GridObject {
     }
 
     gridPoint.add(0, 1);
+    topSprite.setColor(renderColor);
     topSprite.setPosition(gridPoint.getWorldX(), gridPoint.getWorldY());
     topSprite.draw(spriteBatch);
   }

@@ -26,7 +26,7 @@ public class HeadsUpDisplay extends Group {
   private GameGrid gameGrid;
   private LabelButton addRoomButton;
   private Menu addRoomMenu;
-  private Label moneyLabel;
+  private Label statusLabel;
   private float updateMoneyLabel;
   private static HeadsUpDisplay instance;
 
@@ -53,20 +53,20 @@ public class HeadsUpDisplay extends Group {
   }
 
   private void makeMoneyLabel() {
-    moneyLabel = new Label(skin);
-    moneyLabel.setAlignment(Align.RIGHT | Align.TOP);
-    addActor(moneyLabel);
+    statusLabel = new Label(skin);
+    statusLabel.setAlignment(Align.RIGHT | Align.TOP);
+    addActor(statusLabel);
 
-    updateMoneyLabel();
+    updateStatusLabel();
 
-    BitmapFont.TextBounds textBounds = moneyLabel.getTextBounds();
-    moneyLabel.x = Gdx.graphics.getWidth() - 5;
-    moneyLabel.y = Gdx.graphics.getHeight() - 5;
+    BitmapFont.TextBounds textBounds = statusLabel.getTextBounds();
+    statusLabel.x = Gdx.graphics.getWidth() - 5;
+    statusLabel.y = Gdx.graphics.getHeight() - 5;
   }
 
-  private void updateMoneyLabel() {
+  private void updateStatusLabel() {
     Player player = Player.getInstance();
-    moneyLabel.setText(String.format("%d coins / %d gold\n %d exp", player.getCoins(), player.getGold(), player.getExperience()));
+    statusLabel.setText(String.format("%d coins / %d gold\n %d exp\n%d pop", player.getCoins(), player.getGold(), player.getExperience(), player.getPopulation()));
   }
 
   private void makeAddRoomButton() {
@@ -94,6 +94,10 @@ public class HeadsUpDisplay extends Group {
 
     for (final ElevatorType elevatorType : ElevatorTypeFactory.getInstance().all()) {
       addRoomMenu.add(makeGridObjectMenuItem(elevatorType));
+    }
+
+    for (StairType stairType : StairTypeFactory.getInstance().all()) {
+      addRoomMenu.add(makeGridObjectMenuItem(stairType));
     }
   }
 
@@ -124,7 +128,7 @@ public class HeadsUpDisplay extends Group {
     updateMoneyLabel += delta;
     if (updateMoneyLabel > 0.5f) {
       updateMoneyLabel = 0f;
-      updateMoneyLabel();
+      updateStatusLabel();
     }
   }
 

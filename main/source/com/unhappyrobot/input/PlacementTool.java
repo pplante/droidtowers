@@ -64,6 +64,7 @@ public class PlacementTool extends ToolBase {
         return false;
       } else {
         gridObject.setState(GridObjectState.PLACED);
+        gameGrid.updateRenderOrder();
       }
 
       if (purchaseManager != null) {

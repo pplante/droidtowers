@@ -1,8 +1,6 @@
 package com.unhappyrobot.types;
 
-import com.unhappyrobot.entities.GameGrid;
-import com.unhappyrobot.entities.GridObject;
-import com.unhappyrobot.entities.Room;
+import com.unhappyrobot.entities.*;
 import com.unhappyrobot.math.Bounds2d;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
@@ -11,10 +9,16 @@ import java.util.List;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class RoomType extends GridObjectType {
   private boolean isLobby;
+  private int maxPopulation;
 
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {
     return new Room(this, gameGrid);
+  }
+
+  @Override
+  public boolean canShareSpace(GridObject gridObject) {
+    return gridObject instanceof Elevator || gridObject instanceof Stair;
   }
 
   @Override
@@ -29,11 +33,17 @@ public class RoomType extends GridObjectType {
       List<GridObject> position = room.getGameGrid().getObjectsAt(belowObject);
       if (position.size() == 0) {
         return false;
-      } else if (position.size() == 1) {
-        return !(position.get(0).getGridObjectType() instanceof ElevatorType);
       }
     }
 
     return true;
+  }
+
+  public boolean isLobby() {
+    return isLobby;
+  }
+
+  public int getMaxPopulation() {
+    return maxPopulation;
   }
 }

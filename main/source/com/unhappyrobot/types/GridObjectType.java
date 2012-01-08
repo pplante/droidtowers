@@ -2,7 +2,10 @@ package com.unhappyrobot.types;
 
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
+import com.unhappyrobot.math.Bounds2d;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
+
+import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public abstract class GridObjectType {
@@ -15,6 +18,7 @@ public abstract class GridObjectType {
   private String atlasFilename;
   private String imageFilename;
   private boolean continuousPlacement;
+  private boolean canShareSpace;
 
   public abstract GridObject makeGridObject(GameGrid gameGrid);
 
@@ -66,5 +70,20 @@ public abstract class GridObjectType {
 
   public int getGoldEarned() {
     return gold / 10;
+  }
+
+  public boolean canShareSpace(GridObject gridObject) {
+    return canShareSpace;
+  }
+
+  protected boolean checkBelowForOtherObject(GridObject gridObject) {
+    Bounds2d belowObject = new Bounds2d(gridObject.getPosition().cpy().sub(0, 1), gridObject.getSize());
+
+    List<GridObject> position = gridObject.getGameGrid().getObjectsAt(belowObject);
+    return position.size() == 0;
+  }
+
+  protected boolean checkBehindForOtherObject(GridObject gridObject) {
+    return gridObject.getGameGrid().getObjectsAt(gridObject.getBounds()).size() > 1;
   }
 }

@@ -36,7 +36,11 @@ public class GameGrid {
     objectRenderSortFunction = new Function<GridObject, Integer>() {
       public Integer apply(@Nullable GridObject gridObject) {
         if (gridObject != null) {
-          return gridObject.getGridObjectType().getZIndex();
+          if (gridObject.getState().equals(GridObjectState.PLACED)) {
+            return gridObject.getGridObjectType().getZIndex();
+          } else {
+            return Integer.MAX_VALUE;
+          }
         }
         return 0;
       }
@@ -76,7 +80,7 @@ public class GameGrid {
     return true;
   }
 
-  private void updateRenderOrder() {
+  public void updateRenderOrder() {
     objectsRenderOrder = Ordering.natural().onResultOf(objectRenderSortFunction).sortedCopy(objects);
   }
 
@@ -92,7 +96,7 @@ public class GameGrid {
     Bounds2d boundsOfGridObjectToCheck = gridObject.getBounds();
     for (GridObject child : objects) {
       if (child != gridObject) {
-        if (child.getBounds().overlaps(boundsOfGridObjectToCheck) && !child.canShareSpace()) {
+        if (child.getBounds().overlaps(boundsOfGridObjectToCheck) && !gridObject.canShareSpace(child)) {
           return false;
         }
       }
@@ -149,6 +153,7 @@ public class GameGrid {
   }
 
   public void update(float deltaTime) {
+    Player player = Player.getInstance();
     if ((lastEarnoutTime + EARN_OUT_INTERVAL_MILLIS) < System.currentTimeMillis()) {
       lastEarnoutTime = System.currentTimeMillis();
 
@@ -159,11 +164,18 @@ public class GameGrid {
         goldEarned += object.getGoldEarned();
       }
       System.out.println(String.format("Player earned: %d coins and %d gold", coinsEarned, goldEarned));
-      Player.getInstance().addCurrency(coinsEarned, goldEarned);
+      player.addCurrency(coinsEarned, goldEarned);
     }
 
+    int currentPopulation = 0;
     for (GridObject gridObject : objects) {
       gridObject.update(deltaTime);
+
+      if (gridObject instanceof Room) {
+        currentPopulation += ((Room) gridObject).getCurrentPopulation();
+      }
     }
+
+    player.setPopulation(currentPopulation);
   }
 }

@@ -13,8 +13,8 @@ public abstract class GridObject {
   protected final GameGrid gameGrid;
   protected GridPoint position;
   protected GridPoint size;
-  private boolean placedOnGrid;
-  private GridObjectState state;
+  protected GridObjectState state;
+  protected Color renderColor;
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
@@ -22,10 +22,11 @@ public abstract class GridObject {
     this.position = new GridPoint(gameGrid, 0, 0);
     this.size = new GridPoint(gameGrid, gridObjectType.getWidth(), gridObjectType.getHeight());
     state = GridObjectState.INVALID;
+    renderColor = Color.WHITE;
   }
 
-  public boolean canShareSpace() {
-    return true;
+  public boolean canShareSpace(GridObject gridObject) {
+    return gridObjectType.canShareSpace(gridObject);
   }
 
   public Bounds2d getBounds() {
@@ -49,6 +50,7 @@ public abstract class GridObject {
   public void render(SpriteBatch spriteBatch) {
     Sprite sprite = getSprite();
     if (sprite != null) {
+      sprite.setColor(renderColor);
       sprite.setPosition(position.getWorldX(), position.getWorldY());
       sprite.setSize(size.getWorldX(), size.getWorldY());
       sprite.draw(spriteBatch);
@@ -105,9 +107,9 @@ public abstract class GridObject {
       if (state.equals(GridObjectState.INVALID)) {
         Color color = new Color(gameGrid.canObjectBeAt(this) ? Color.WHITE : Color.RED);
         color.a = 0.85f;
-        sprite.setColor(color);
+        renderColor = color;
       } else if (state.equals(GridObjectState.PLACED)) {
-        sprite.setColor(Color.WHITE);
+        renderColor = Color.WHITE;
       }
     }
   }
@@ -137,5 +139,9 @@ public abstract class GridObject {
     this.state = state;
 
     updatePlacementStatus();
+  }
+
+  public GridObjectState getState() {
+    return state;
   }
 }

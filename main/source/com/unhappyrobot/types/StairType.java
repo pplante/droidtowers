@@ -1,19 +1,14 @@
 package com.unhappyrobot.types;
 
-import com.unhappyrobot.entities.Elevator;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
-import com.unhappyrobot.entities.Room;
+import com.unhappyrobot.entities.Stair;
 
-public class ElevatorType extends GridObjectType {
+public class StairType extends GridObjectType {
+
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {
-    return new Elevator(this, gameGrid);
-  }
-
-  @Override
-  public boolean canShareSpace(GridObject gridObject) {
-    return gridObject instanceof Room;
+    return new Stair(this, gameGrid);
   }
 
   @Override
@@ -23,7 +18,7 @@ public class ElevatorType extends GridObjectType {
 
   @Override
   public int getZIndex() {
-    return 100;
+    return 90;
   }
 
   @Override
