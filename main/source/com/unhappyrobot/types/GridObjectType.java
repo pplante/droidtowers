@@ -76,14 +76,27 @@ public abstract class GridObjectType {
     return canShareSpace;
   }
 
-  protected boolean checkBelowForOtherObject(GridObject gridObject) {
-    Bounds2d belowObject = new Bounds2d(gridObject.getPosition().cpy().sub(0, 1), gridObject.getSize());
+  protected boolean checkIfTouchingAnotherObject(GridObject gridObject) {
+    Bounds2d belowObject = new Bounds2d(gridObject.getPosition().toVector2().sub(0, 1), gridObject.getSize());
 
-    List<GridObject> position = gridObject.getGameGrid().getObjectsAt(belowObject);
-    return position.size() == 0;
+    List<GridObject> objectsBelow = gridObject.getGameGrid().getObjectsAt(belowObject, gridObject);
+    return objectsBelow.size() != 0;
+
   }
 
-  protected boolean checkBehindForOtherObject(GridObject gridObject) {
-    return gridObject.getGameGrid().getObjectsAt(gridObject.getBounds()).size() > 1;
+  protected boolean checkForOverlap(GridObject gridObject) {
+    List<GridObject> objectsOverlapped = gridObject.getGameGrid().getObjectsAt(gridObject.getBounds(), gridObject);
+    for (GridObject object : objectsOverlapped) {
+      if (!gridObject.canShareSpace(object)) {
+        return false;
+      }
+    }
+
+    return objectsOverlapped.size() > 0;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("%s@%s:%s", this.getClass().getName(), hashCode(), getName());
   }
 }

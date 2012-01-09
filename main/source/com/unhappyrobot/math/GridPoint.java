@@ -29,7 +29,11 @@ public class GridPoint extends Vector2 {
     return new GridPoint(gameGrid, x, y);
   }
 
-  public Vector2 toVector2() {
+  public Vector2 toWorldVector2() {
     return new Vector2(getWorldX(), getWorldY());
+  }
+
+  public Vector2 toVector2() {
+    return new Vector2(x, y);
   }
 }

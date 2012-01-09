@@ -3,28 +3,33 @@ package com.unhappyrobot.math;
 import com.badlogic.gdx.math.Vector2;
 
 public class Bounds2d {
-  private Vector2 position;
-  private Vector2 size;
+  private final Vector2 position;
+  private final Vector2 size;
 
   public Bounds2d(Vector2 position, Vector2 size) {
     this.position = position;
     this.size = size;
   }
 
-  public boolean contains(Bounds2d other) {
-    return (top() <= other.top()) && (left() <= other.left()) && (bottom() >= other.bottom()) && (right() >= other.right());
+  public boolean overlaps(Bounds2d other) {
+//    if (r1.x < r2.x + r2.width && r1.x + r1.width > r2.x && r1.y < r2.y + r2.height && r1.y + r1.height > r2.y)
+    return (left() < other.right()) && (right() > other.left()) && (bottom() < other.top()) && (top() > other.bottom());
   }
 
-  public boolean contains(Vector2 point) {
-    return (top() <= point.y) && (left() <= point.x) && (bottom() >= point.y) && (right() >= point.x);
+  public boolean containsPoint(Vector2 point) {
+    return (left() <= point.x) && (right() >= point.x) && (bottom() <= point.y) && (top() >= point.y);
+  }
+
+  public boolean intersects(Bounds2d other) {
+    return !(left() >= other.right() || right() <= other.left() || bottom() >= other.top() || bottom() <= other.top());
   }
 
   public float top() {
-    return position.y;
+    return position.y + size.y;
   }
 
   public float bottom() {
-    return position.y + size.y - 1;
+    return position.y;
   }
 
   public float left() {
@@ -32,21 +37,7 @@ public class Bounds2d {
   }
 
   public float right() {
-    return position.x + size.x - 1;
-  }
-
-  public boolean overlaps(Bounds2d other) {
-    if (bottom() < other.top()) {
-      return false;
-    } else if (top() > other.bottom()) {
-      return false;
-    } else if (right() < other.left()) {
-      return false;
-    } else if (left() > other.right()) {
-      return false;
-    }
-
-    return true;
+    return position.x + size.x;
   }
 
   @Override

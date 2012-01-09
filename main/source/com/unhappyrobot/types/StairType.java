@@ -13,7 +13,7 @@ public class StairType extends GridObjectType {
 
   @Override
   public boolean canBeAt(GridObject gridObject) {
-    return checkBehindForOtherObject(gridObject);
+    return checkForOverlap(gridObject);
   }
 
   @Override

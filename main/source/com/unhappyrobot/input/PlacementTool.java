@@ -47,9 +47,26 @@ public class PlacementTool extends ToolBase {
       touchDownPointDelta = gridPointAtFinger.cpy().sub(gridObject.getPosition());
     }
 
-    isDraggingGridObject = gridObject.getBounds().contains(gridPointAtFinger);
+    isDraggingGridObject = gridObject.getBounds().containsPoint(gridPointAtFinger);
 
     return true;
+  }
+
+  public boolean pan(int x, int y, int deltaX, int deltaY) {
+    if (isDraggingGridObject) {
+      Vector2 gridPointAtFinger = gridPointAtFinger();
+
+      if (touchDownPointDelta != null) {
+        gridPointAtFinger.sub(touchDownPointDelta);
+      }
+      if (gridObject != null) {
+        gridObject.setPosition(gridPointAtFinger);
+      }
+
+      return true;
+    }
+
+    return false;
   }
 
   public boolean tap(int x, int y, int count) {
@@ -79,23 +96,6 @@ public class PlacementTool extends ToolBase {
     if (purchaseManager != null && !purchaseManager.canPurchase()) {
       InputSystem.getInstance().switchTool(GestureTool.PICKER, null);
     }
-  }
-
-  public boolean pan(int x, int y, int deltaX, int deltaY) {
-    if (isDraggingGridObject) {
-      Vector2 gridPointAtFinger = gridPointAtFinger();
-
-      if (touchDownPointDelta != null) {
-        gridPointAtFinger.sub(touchDownPointDelta);
-      }
-      if (gridObject != null) {
-        gridObject.setPosition(gridPointAtFinger);
-      }
-
-      return true;
-    }
-
-    return false;
   }
 
   public void enterPurchaseMode() {

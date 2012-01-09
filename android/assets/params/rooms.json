@@ -39,5 +39,13 @@
     "width":4,
     "atlasFilename":"rooms/generic.txt",
     "imageFilename":"generic/generic_room_4x"
+  },
+  {
+    "name":"Generic 4x2",
+    "coins":400,
+    "height":2,
+    "experienceAward":2200,
+    "maxPopulation":6,
+    "width":4
   }
 ]

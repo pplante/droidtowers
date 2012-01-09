@@ -56,6 +56,10 @@ public class TowerGame implements ApplicationListener {
     gameGrid.setGridSize(50, 50);
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
 
+//    Room room = new Room(RoomTypeFactory.getInstance().findByName("Lobby 4x1"), gameGrid);
+//    room.setPosition(gameGrid.gridSize.x / 2, 4);
+//    gameGrid.addObject(room);
+
     HeadsUpDisplay.getInstance().initialize(camera, gameGrid, guiStage, spriteBatch);
 
     BackgroundLayer groundLayer = new BackgroundLayer("backgrounds/ground.png");

@@ -100,7 +100,7 @@ public class GameGrid {
     Bounds2d boundsOfGridObjectToCheck = gridObject.getBounds();
     for (GridObject child : objects) {
       if (child != gridObject) {
-        if (child.getBounds().overlaps(boundsOfGridObjectToCheck) && !gridObject.canShareSpace(child)) {
+        if (child.getBounds().intersects(boundsOfGridObjectToCheck) && !gridObject.canShareSpace(child)) {
           return false;
         }
       }
@@ -109,16 +109,20 @@ public class GameGrid {
     return true;
   }
 
-  public List<GridObject> getObjectsAt(Bounds2d targetBounds) {
-    List<GridObject> objects = Lists.newArrayList();
+  public List<GridObject> getObjectsAt(Bounds2d targetBounds, GridObject... objectsToIgnore) {
+    List<GridObject> objectsFound = Lists.newArrayList();
 
-    for (GridObject child : this.objects) {
-      if (child.getBounds().overlaps(targetBounds)) {
-        objects.add(child);
+    for (GridObject gridObject : objects) {
+      if (gridObject.getBounds().overlaps(targetBounds)) {
+        objectsFound.add(gridObject);
       }
     }
 
-    return objects;
+    if (objectsToIgnore != null) {
+      objectsFound.removeAll(Lists.newArrayList(objectsToIgnore));
+    }
+
+    return objectsFound;
   }
 
   public Vector2 convertScreenPointToGridPoint(float x, float y) {

@@ -1,7 +1,6 @@
 package com.unhappyrobot.types;
 
 import com.unhappyrobot.entities.*;
-import com.unhappyrobot.math.Bounds2d;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 import java.util.List;
@@ -23,20 +22,23 @@ public class RoomType extends GridObjectType {
 
   @Override
   public boolean canBeAt(GridObject gridObject) {
-    Room room = (Room) gridObject;
+    if (isLobby && gridObject.getPosition().y == 4) {
+      return checkForOverlap(gridObject);
+    }
 
-    if (isLobby) {
-      return room.getPosition().y == 4;
-    } else {
-      Bounds2d belowObject = new Bounds2d(room.getPosition().cpy().sub(0, 1), room.getSize());
+    return checkIfTouchingAnotherObject(gridObject) && checkForOverlap(gridObject);
+  }
 
-      List<GridObject> position = room.getGameGrid().getObjectsAt(belowObject);
-      if (position.size() == 0) {
+  @Override
+  protected boolean checkForOverlap(GridObject gridObject) {
+    List<GridObject> objectsOverlapped = gridObject.getGameGrid().getObjectsAt(gridObject.getBounds(), gridObject);
+    for (GridObject object : objectsOverlapped) {
+      if (!gridObject.canShareSpace(object)) {
         return false;
       }
     }
 
-    return true;
+    return objectsOverlapped.size() == 0;
   }
 
   public boolean isLobby() {

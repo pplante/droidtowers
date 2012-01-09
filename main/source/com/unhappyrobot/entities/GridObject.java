@@ -15,6 +15,7 @@ public abstract class GridObject {
   protected GridPoint size;
   protected GridObjectState state;
   protected Color renderColor;
+  private final Bounds2d bounds;
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
@@ -23,6 +24,7 @@ public abstract class GridObject {
     this.size = new GridPoint(gameGrid, gridObjectType.getWidth(), gridObjectType.getHeight());
     state = GridObjectState.INVALID;
     renderColor = Color.WHITE;
+    bounds = new Bounds2d(position, size);
   }
 
   public boolean canShareSpace(GridObject gridObject) {
@@ -30,7 +32,7 @@ public abstract class GridObject {
   }
 
   public Bounds2d getBounds() {
-    return new Bounds2d(position, size);
+    return bounds;
   }
 
   public GridObjectType getGridObjectType() {
@@ -143,5 +145,10 @@ public abstract class GridObject {
 
   public GridObjectState getState() {
     return state;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("%s@%s:[%s]", this.getClass().getName(), hashCode(), gridObjectType);
   }
 }
