@@ -4,6 +4,7 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,6 +16,7 @@ import com.google.common.collect.Lists;
 import com.unhappyrobot.entities.CloudLayer;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GameLayer;
+import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.graphics.BackgroundLayer;
 import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.HeadsUpDisplay;
@@ -22,8 +24,13 @@ import com.unhappyrobot.gui.OnClickCallback;
 import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.input.Action;
 import com.unhappyrobot.input.InputSystem;
+import com.unhappyrobot.types.ElevatorTypeFactory;
+import com.unhappyrobot.types.RoomTypeFactory;
+import com.unhappyrobot.types.StairTypeFactory;
 import com.unhappyrobot.utils.Random;
+import org.codehaus.jackson.map.ObjectMapper;
 
+import java.io.IOException;
 import java.util.List;
 
 import static com.unhappyrobot.input.InputSystem.Keys;
@@ -55,6 +62,22 @@ public class TowerGame implements ApplicationListener {
     gameGrid.setUnitSize(64, 64);
     gameGrid.setGridSize(50, 50);
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
+
+    RoomTypeFactory.getInstance();
+    ElevatorTypeFactory.getInstance();
+    StairTypeFactory.getInstance();
+
+    ObjectMapper objectMapper = new ObjectMapper();
+    try {
+      FileHandle fileHandle = Gdx.files.external("test.json");
+      GameState gameState = objectMapper.readValue(fileHandle.file(), GameState.class);
+      for (GridObjectState gridObjectState : gameState.gridObjects) {
+        System.out.println("gridObjectState.getTypeClass() = " + gridObjectState.getTypeClass());
+        System.out.println("gridObjectState = " + gridObjectState.materialize(gameGrid));
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
 //    Room room = new Room(RoomTypeFactory.getInstance().findByName("Lobby 4x1"), gameGrid);
 //    room.setPosition(gameGrid.gridSize.x / 2, 4);
@@ -104,6 +127,18 @@ public class TowerGame implements ApplicationListener {
             @Override
             public void onClick(Dialog dialog) {
               dialog.dismiss();
+
+
+              GameState gameState = new GameState(gameGrid, Player.getInstance());
+              ObjectMapper objectMapper = new ObjectMapper();
+              try {
+                FileHandle fileHandle = Gdx.files.external("test.json");
+                objectMapper.writeValue(fileHandle.file(), gameState);
+              } catch (IOException e) {
+                e.printStackTrace();
+              }
+
+
               Gdx.app.exit();
             }
           }).addButton(ResponseType.NEGATIVE, "No way!", new OnClickCallback() {

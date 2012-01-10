@@ -1,6 +1,6 @@
 package com.unhappyrobot.entities;
 
-public enum GridObjectState {
+public enum GridObjectPlacementState {
   INVALID,
   PLACED
 }

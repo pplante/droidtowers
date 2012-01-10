@@ -66,7 +66,7 @@ public class Room extends GridObject {
 
   @Override
   public void update(float deltaTime) {
-    if (state.equals(GridObjectState.PLACED)) {
+    if (placementState.equals(GridObjectPlacementState.PLACED)) {
       if ((lastPopulationUpdateTime + POPULATION_CHANGE_FREQUENCY) < System.currentTimeMillis()) {
         lastPopulationUpdateTime = System.currentTimeMillis();
         int maxPopulation = ((RoomType) getGridObjectType()).getMaxPopulation();

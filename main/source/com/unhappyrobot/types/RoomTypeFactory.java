@@ -18,14 +18,4 @@ public class RoomTypeFactory extends GridObjectTypeFactory<RoomType> {
 
     return instance;
   }
-
-  public RoomType findByName(String name) {
-    for (RoomType type : objectTypes) {
-      if (type.getName().equals(name)) {
-        return type;
-      }
-    }
-
-    return null;
-  }
 }

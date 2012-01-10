@@ -1,6 +1,11 @@
 package com.unhappyrobot.entities;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Player {
+  @JsonIgnore
   private static Player instance;
 
   private long coins;

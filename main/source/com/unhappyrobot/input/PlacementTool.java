@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
-import com.unhappyrobot.entities.GridObjectState;
+import com.unhappyrobot.entities.GridObjectPlacementState;
 import com.unhappyrobot.gui.HeadsUpDisplay;
 import com.unhappyrobot.money.PurchaseManager;
 import com.unhappyrobot.types.GridObjectType;
@@ -75,7 +75,7 @@ public class PlacementTool extends ToolBase {
         HeadsUpDisplay.getInstance().showToast("This object cannot be placed here.");
         return false;
       } else {
-        gridObject.setState(GridObjectState.PLACED);
+        gridObject.setPlacementState(GridObjectPlacementState.PLACED);
         gameGrid.updateRenderOrder();
       }
 

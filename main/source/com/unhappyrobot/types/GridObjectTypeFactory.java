@@ -7,12 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GridObjectTypeFactory<T> {
+public abstract class GridObjectTypeFactory<T extends GridObjectType> {
   protected List<T> objectTypes;
   private Class<T> gridObjectTypeClass;
+  private static List<GridObjectTypeFactory> typeFactories = new ArrayList<GridObjectTypeFactory>();
 
   public GridObjectTypeFactory(Class<T> gridObjectTypeClass) {
     this.gridObjectTypeClass = gridObjectTypeClass;
+
+    typeFactories.add(this);
   }
 
   protected boolean parseTypesFile(FileHandle fileHandle) {
@@ -30,5 +33,26 @@ public abstract class GridObjectTypeFactory<T> {
 
   public List<T> all() {
     return objectTypes;
+  }
+
+  @SuppressWarnings("unchecked")
+  public T findByName(String name) {
+    for (GridObjectType type : objectTypes) {
+      if (type.getName().equals(name)) {
+        return (T) type;
+      }
+    }
+
+    return null;
+  }
+
+  public static GridObjectTypeFactory getFactoryForType(Class<? extends GridObjectType> typeClass) {
+    for (GridObjectTypeFactory typeFactory : typeFactories) {
+      if (typeFactory.gridObjectTypeClass.equals(typeClass)) {
+        return typeFactory;
+      }
+    }
+
+    return null;
   }
 }

@@ -17,11 +17,12 @@ public class GameGrid {
   public Color gridColor;
   public Vector2 gridSize;
 
+  private long lastEarnoutTime;
+
   private HashSet<GridObject> objects;
   private List<GridObject> objectsRenderOrder;
   private Vector2 worldSize;
   private final Function<GridObject, Integer> objectRenderSortFunction;
-  private long lastEarnoutTime;
   private static final long EARN_OUT_INTERVAL_MILLIS = 5000;
   private final GameGridRenderer gameGridRenderer;
 
@@ -38,7 +39,7 @@ public class GameGrid {
     objectRenderSortFunction = new Function<GridObject, Integer>() {
       public Integer apply(@Nullable GridObject gridObject) {
         if (gridObject != null) {
-          if (gridObject.getState().equals(GridObjectState.PLACED)) {
+          if (gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
             return gridObject.getGridObjectType().getZIndex();
           } else {
             return Integer.MAX_VALUE;

@@ -13,16 +13,16 @@ public abstract class GridObject {
   protected final GameGrid gameGrid;
   protected GridPoint position;
   protected GridPoint size;
-  protected GridObjectState state;
+  protected GridObjectPlacementState placementState;
   protected Color renderColor;
-  private final Bounds2d bounds;
+  protected Bounds2d bounds;
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
     this.gameGrid = gameGrid;
     this.position = new GridPoint(gameGrid, 0, 0);
     this.size = new GridPoint(gameGrid, gridObjectType.getWidth(), gridObjectType.getHeight());
-    state = GridObjectState.INVALID;
+    placementState = GridObjectPlacementState.INVALID;
     renderColor = Color.WHITE;
     bounds = new Bounds2d(position, size);
   }
@@ -75,6 +75,14 @@ public abstract class GridObject {
     return size;
   }
 
+  public void setSize(GridPoint size) {
+    this.size = size;
+  }
+
+  public void setSize(float x, float y) {
+    size.set(x, y);
+  }
+
   public GridPoint getPosition() {
     return position;
   }
@@ -106,45 +114,45 @@ public abstract class GridObject {
   private void updatePlacementStatus() {
     Sprite sprite = getSprite();
     if (sprite != null) {
-      if (state.equals(GridObjectState.INVALID)) {
+      if (placementState.equals(GridObjectPlacementState.INVALID)) {
         Color color = new Color(gameGrid.canObjectBeAt(this) ? Color.WHITE : Color.RED);
         color.a = 0.85f;
         renderColor = color;
-      } else if (state.equals(GridObjectState.PLACED)) {
+      } else if (placementState.equals(GridObjectPlacementState.PLACED)) {
         renderColor = Color.WHITE;
       }
     }
   }
+
 
   public void update(float deltaTime) {
 
   }
 
   public int getCoinsEarned() {
-    if (state == GridObjectState.INVALID) {
+    if (placementState == GridObjectPlacementState.INVALID) {
       return 0;
     }
 
     return gridObjectType.getCoinsEarned();
   }
 
-
   public int getGoldEarned() {
-    if (state == GridObjectState.INVALID) {
+    if (placementState == GridObjectPlacementState.INVALID) {
       return 0;
     }
 
     return gridObjectType.getGoldEarned();
   }
 
-  public void setState(GridObjectState state) {
-    this.state = state;
+  public void setPlacementState(GridObjectPlacementState placementState) {
+    this.placementState = placementState;
 
     updatePlacementStatus();
   }
 
-  public GridObjectState getState() {
-    return state;
+  public GridObjectPlacementState getPlacementState() {
+    return placementState;
   }
 
   @Override
