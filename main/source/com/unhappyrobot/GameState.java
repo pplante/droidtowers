@@ -1,5 +1,7 @@
 package com.unhappyrobot;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector3;
 import com.google.common.collect.Lists;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
@@ -16,12 +18,17 @@ public class GameState {
   protected Player player;
   protected List<GridObjectState> gridObjects;
 
+  protected Vector3 cameraPosition;
+  protected float cameraZoom;
+
   public GameState() {
 
   }
 
-  public GameState(GameGrid gameGrid, Player player) {
+  public GameState(GameGrid gameGrid, OrthographicCamera camera, Player player) {
     this.player = player;
+    cameraPosition = camera.position;
+    cameraZoom = camera.zoom;
 
     gridObjects = Lists.newArrayList();
 

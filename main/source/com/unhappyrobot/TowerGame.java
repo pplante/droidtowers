@@ -24,11 +24,14 @@ import com.unhappyrobot.gui.OnClickCallback;
 import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.input.Action;
 import com.unhappyrobot.input.InputSystem;
+import com.unhappyrobot.json.Vector3Serializer;
 import com.unhappyrobot.types.ElevatorTypeFactory;
 import com.unhappyrobot.types.RoomTypeFactory;
 import com.unhappyrobot.types.StairTypeFactory;
 import com.unhappyrobot.utils.Random;
+import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.module.SimpleModule;
 
 import java.io.IOException;
 import java.util.List;
@@ -49,6 +52,10 @@ public class TowerGame implements ApplicationListener {
   public void create() {
     Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 
+    RoomTypeFactory.getInstance();
+    ElevatorTypeFactory.getInstance();
+    StairTypeFactory.getInstance();
+
     Random.init();
     Tween.setPoolEnabled(true);
 
@@ -62,26 +69,6 @@ public class TowerGame implements ApplicationListener {
     gameGrid.setUnitSize(64, 64);
     gameGrid.setGridSize(50, 50);
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
-
-    RoomTypeFactory.getInstance();
-    ElevatorTypeFactory.getInstance();
-    StairTypeFactory.getInstance();
-
-    ObjectMapper objectMapper = new ObjectMapper();
-    try {
-      FileHandle fileHandle = Gdx.files.external("test.json");
-      GameState gameState = objectMapper.readValue(fileHandle.file(), GameState.class);
-      for (GridObjectState gridObjectState : gameState.gridObjects) {
-        System.out.println("gridObjectState.getTypeClass() = " + gridObjectState.getTypeClass());
-        System.out.println("gridObjectState = " + gridObjectState.materialize(gameGrid));
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-//    Room room = new Room(RoomTypeFactory.getInstance().findByName("Lobby 4x1"), gameGrid);
-//    room.setPosition(gameGrid.gridSize.x / 2, 4);
-//    gameGrid.addObject(room);
 
     HeadsUpDisplay.getInstance().initialize(camera, gameGrid, guiStage, spriteBatch);
 
@@ -127,18 +114,6 @@ public class TowerGame implements ApplicationListener {
             @Override
             public void onClick(Dialog dialog) {
               dialog.dismiss();
-
-
-              GameState gameState = new GameState(gameGrid, Player.getInstance());
-              ObjectMapper objectMapper = new ObjectMapper();
-              try {
-                FileHandle fileHandle = Gdx.files.external("test.json");
-                objectMapper.writeValue(fileHandle.file(), gameState);
-              } catch (IOException e) {
-                e.printStackTrace();
-              }
-
-
               Gdx.app.exit();
             }
           }).addButton(ResponseType.NEGATIVE, "No way!", new OnClickCallback() {
@@ -158,6 +133,41 @@ public class TowerGame implements ApplicationListener {
         return true;
       }
     });
+
+    loadGameState();
+  }
+
+  private void saveGameState() {
+    GameState gameState = new GameState(gameGrid, camera, Player.getInstance());
+    ObjectMapper objectMapper = new ObjectMapper();
+    SimpleModule simpleModule = new SimpleModule("Specials", new Version(1, 0, 0, null));
+    simpleModule.addSerializer(new Vector3Serializer());
+    objectMapper.registerModule(simpleModule);
+    try {
+      FileHandle fileHandle = Gdx.files.external("test.json");
+      objectMapper.writeValue(fileHandle.file(), gameState);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void loadGameState() {
+    ObjectMapper objectMapper = new ObjectMapper();
+    try {
+      FileHandle fileHandle = Gdx.files.external("test.json");
+      GameState gameState = objectMapper.readValue(fileHandle.file(), GameState.class);
+
+      Player.setInstance(gameState.player);
+
+      camera.position.set(gameState.cameraPosition);
+      camera.zoom = gameState.cameraZoom;
+
+      for (GridObjectState gridObjectState : gameState.gridObjects) {
+        gridObjectState.materialize(gameGrid);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public void render() {
@@ -209,6 +219,8 @@ public class TowerGame implements ApplicationListener {
 
   public void pause() {
     Gdx.app.log("lifecycle", "pausing!");
+    saveGameState();
+    System.exit(0);
   }
 
   public void resume() {

@@ -27,6 +27,10 @@ public class Player {
     population = 0;
   }
 
+  public static void setInstance(Player newInstance) {
+    Player.instance = newInstance;
+  }
+
   public long getCoins() {
     return coins;
   }
