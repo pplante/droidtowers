@@ -4,10 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.types.RoomType;
 import com.unhappyrobot.utils.Random;
@@ -25,7 +22,7 @@ public class Room extends GridObject {
     super(roomType, gameGrid);
 
     if (labelFont == null) {
-      labelFont = new BitmapFont(Gdx.files.internal("fonts/bank_gothic_32.fnt"), Gdx.files.internal("fonts/bank_gothic_32.png"), false);
+      labelFont = new BitmapFont(Gdx.files.internal("fonts/bank_gothic_32.fnt"), false);
     }
 
     if (roomType.getAtlasFilename() != null) {
@@ -36,13 +33,20 @@ public class Room extends GridObject {
     } else {
       int width = (int) (gameGrid.unitSize.x * size.x);
       int height = (int) (gameGrid.unitSize.y * size.y);
-      Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGB888);
+      int pixmapSize = Math.max(width, height);
+      Pixmap pixmap = new Pixmap(pixmapSize, pixmapSize, Pixmap.Format.RGB565);
       pixmap.setColor(Color.BLACK);
       pixmap.fill();
       pixmap.setColor(Color.GRAY);
       pixmap.fillRectangle(1, 1, width - 2, height - 2);
 
-      sprite = new Sprite(new Texture(pixmap));
+      Texture texture = new Texture(pixmap, true);
+      texture.setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Nearest);
+      texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+
+      TextureRegion textureRegion = new TextureRegion(texture, 0, 0, width,  height);
+
+      sprite = new Sprite(textureRegion);
       dynamicSprite = true;
     }
   }

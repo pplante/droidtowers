@@ -19,11 +19,11 @@ public class GameGridRenderer extends GameLayer {
 
   @Override
   public void render(SpriteBatch spriteBatch, Camera camera) {
-    renderGridObjects(spriteBatch);
-
     if (shouldRenderGridLines) {
       renderGridLines();
     }
+
+    renderGridObjects(spriteBatch);
   }
 
   private void renderGridObjects(SpriteBatch spriteBatch) {
@@ -35,8 +35,8 @@ public class GameGridRenderer extends GameLayer {
   }
 
   private void renderGridLines() {
-    Gdx.gl10.glEnable(GL10.GL_BLEND);
-    Gdx.gl10.glDisable(GL10.GL_DEPTH_TEST);
+    Gdx.gl.glEnable(GL10.GL_BLEND);
+
     gl.begin(GL10.GL_LINES);
 
     for (int i = 0; i <= gameGrid.gridSize.x; i++) {

@@ -1,6 +1,6 @@
 elevator.png
 format: RGBA8888
-filter: Nearest,Linear
+filter: MipMapLinearNearest,Nearest
 repeat: none
 elevator-top
   rotate: false

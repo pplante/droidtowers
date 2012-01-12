@@ -39,7 +39,7 @@ import java.util.List;
 import static com.unhappyrobot.input.InputSystem.Keys;
 
 public class TowerGame implements ApplicationListener {
-  private OrthographicCamera camera;
+  private static OrthographicCamera camera;
   private SpriteBatch spriteBatch;
 
   private static List<GameLayer> layers;
@@ -171,11 +171,10 @@ public class TowerGame implements ApplicationListener {
   }
 
   public void render() {
-    GL10 gl = Gdx.graphics.getGL10();
-    gl.glClearColor(0.48f, 0.729f, 0.870f, 1.0f);
-    gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
-    gl.glEnable(GL10.GL_BLEND);
-    gl.glEnable(GL10.GL_TEXTURE_2D);
+    Gdx.gl.glClearColor(0.48f, 0.729f, 0.870f, 1.0f);
+    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
+    Gdx.gl.glEnable(GL10.GL_BLEND);
+    Gdx.gl.glEnable(GL10.GL_TEXTURE_2D);
 
     float deltaTime = Gdx.graphics.getDeltaTime();
 
@@ -186,7 +185,6 @@ public class TowerGame implements ApplicationListener {
 
     updateGameState();
 
-    gl.glColor4f(1, 1, 1, 1);
     for (GameLayer layer : layers) {
       layer.render(spriteBatch, camera);
     }
@@ -234,5 +232,9 @@ public class TowerGame implements ApplicationListener {
 
   public static TweenManager getTweenManager() {
     return tweenManager;
+  }
+
+  public static OrthographicCamera getCamera() {
+    return camera;
   }
 }
