@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.types.RoomType;
 import com.unhappyrobot.utils.Random;
@@ -14,9 +15,11 @@ public class Room extends GridObject {
   private static BitmapFont labelFont;
   private Sprite sprite;
   private boolean dynamicSprite;
-  private long lastPopulationUpdateTime;
-  private static final int POPULATION_CHANGE_FREQUENCY = 10000;
+
+  private static final int UPDATE_FREQUENCY = 10000;
+  private long lastUpdateTime;
   private int currentPopulation;
+  private int populationRequired;
 
   public Room(RoomType roomType, GameGrid gameGrid) {
     super(roomType, gameGrid);
@@ -33,7 +36,7 @@ public class Room extends GridObject {
     } else {
       int width = (int) (gameGrid.unitSize.x * size.x);
       int height = (int) (gameGrid.unitSize.y * size.y);
-      int pixmapSize = Math.max(width, height);
+      int pixmapSize = MathUtils.nextPowerOfTwo(Math.max(width, height));
       Pixmap pixmap = new Pixmap(pixmapSize, pixmapSize, Pixmap.Format.RGB565);
       pixmap.setColor(Color.BLACK);
       pixmap.fill();
@@ -44,7 +47,7 @@ public class Room extends GridObject {
       texture.setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Nearest);
       texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
-      TextureRegion textureRegion = new TextureRegion(texture, 0, 0, width,  height);
+      TextureRegion textureRegion = new TextureRegion(texture, 0, 0, width, height);
 
       sprite = new Sprite(textureRegion);
       dynamicSprite = true;
@@ -70,15 +73,23 @@ public class Room extends GridObject {
 
   @Override
   public void update(float deltaTime) {
-    if (placementState.equals(GridObjectPlacementState.PLACED)) {
-      if ((lastPopulationUpdateTime + POPULATION_CHANGE_FREQUENCY) < System.currentTimeMillis()) {
-        lastPopulationUpdateTime = System.currentTimeMillis();
-        int maxPopulation = ((RoomType) getGridObjectType()).getMaxPopulation();
-        if (maxPopulation > 0) {
-          currentPopulation = Random.randomInt(0, maxPopulation);
-        }
+    if (shouldUpdate()) {
+      int maxPopulation = ((RoomType) getGridObjectType()).getMaxPopulation();
+      if (maxPopulation > 0) {
+        currentPopulation = Random.randomInt(0, maxPopulation);
       }
     }
+  }
+
+  protected boolean shouldUpdate() {
+    if (placementState.equals(GridObjectPlacementState.PLACED)) {
+      if ((lastUpdateTime + UPDATE_FREQUENCY) < System.currentTimeMillis()) {
+        lastUpdateTime = System.currentTimeMillis();
+        return true;
+      }
+    }
+
+    return false;
   }
 
   public int getCurrentPopulation() {

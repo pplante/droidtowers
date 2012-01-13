@@ -25,6 +25,7 @@ import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.input.Action;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.json.Vector3Serializer;
+import com.unhappyrobot.types.CommercialTypeFactory;
 import com.unhappyrobot.types.ElevatorTypeFactory;
 import com.unhappyrobot.types.RoomTypeFactory;
 import com.unhappyrobot.types.StairTypeFactory;
@@ -53,8 +54,10 @@ public class TowerGame implements ApplicationListener {
     Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 
     RoomTypeFactory.getInstance();
+    CommercialTypeFactory.getInstance();
     ElevatorTypeFactory.getInstance();
     StairTypeFactory.getInstance();
+
 
     Random.init();
     Tween.setPoolEnabled(true);

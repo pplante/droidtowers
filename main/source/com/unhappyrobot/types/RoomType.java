@@ -9,6 +9,7 @@ import java.util.List;
 public class RoomType extends GridObjectType {
   private boolean isLobby;
   private int maxPopulation;
+  private int populationRequired;
 
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {
@@ -47,5 +48,9 @@ public class RoomType extends GridObjectType {
 
   public int getMaxPopulation() {
     return maxPopulation;
+  }
+
+  public int getPopulationRequired() {
+    return populationRequired;
   }
 }

@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.math.Bounds2d;
+import com.unhappyrobot.types.CommercialType;
 
 import java.util.HashSet;
 import java.util.List;
@@ -177,14 +178,21 @@ public class GameGrid {
     }
 
     int currentPopulation = 0;
+    int currentJobsFilled = 0;
+    int maxJobsProvided = 0;
     for (GridObject gridObject : objects) {
       gridObject.update(deltaTime);
 
-      if (gridObject instanceof Room) {
+      if (gridObject.getClass().equals(Room.class)) {
         currentPopulation += ((Room) gridObject).getCurrentPopulation();
+      } else if (gridObject.getClass().equals(CommercialSpace.class)) {
+        currentJobsFilled += ((CommercialSpace) gridObject).getJobsFilled();
+        maxJobsProvided += ((CommercialType) gridObject.getGridObjectType()).getJobsProvided();
       }
     }
 
     player.setPopulation(currentPopulation);
+    player.setJobsFilled(currentJobsFilled);
+    player.setJobsProvided(maxJobsProvided);
   }
 }

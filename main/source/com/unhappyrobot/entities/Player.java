@@ -12,6 +12,8 @@ public class Player {
   private long gold;
   private long experience;
   private int population;
+  private int jobsFilled;
+  private int jobsProvided;
 
   public static Player getInstance() {
     if (instance == null) {
@@ -63,5 +65,21 @@ public class Player {
 
   public void setPopulation(int population) {
     this.population = population;
+  }
+
+  public void setJobsFilled(int jobsFilled) {
+    this.jobsFilled = jobsFilled;
+  }
+
+  public void setJobsProvided(int jobsProvided) {
+    this.jobsProvided = jobsProvided;
+  }
+
+  public int getJobsProvided() {
+    return jobsProvided;
+  }
+
+  public int getJobsFilled() {
+    return jobsFilled;
   }
 }

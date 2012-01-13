@@ -99,4 +99,6 @@ public abstract class GridObjectType {
   public String toString() {
     return String.format("%s@%s:%s", this.getClass().getName(), hashCode(), getName());
   }
+
+
 }

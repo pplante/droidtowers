@@ -75,7 +75,7 @@ public class HeadsUpDisplay extends Group {
 
   private void updateStatusLabel() {
     Player player = Player.getInstance();
-    statusLabel.setText(String.format("%d coins / %d gold\n %d exp\n%d pop", player.getCoins(), player.getGold(), player.getExperience(), player.getPopulation()));
+    statusLabel.setText(String.format("%d coins / %d gold\n %d exp\n%d pop\n%d/%d jobs", player.getCoins(), player.getGold(), player.getExperience(), player.getPopulation(), player.getJobsFilled(), player.getJobsProvided()));
   }
 
   private void makeAddRoomButton() {
@@ -99,6 +99,10 @@ public class HeadsUpDisplay extends Group {
 
     for (final RoomType roomType : RoomTypeFactory.getInstance().all()) {
       addRoomMenu.add(makeGridObjectMenuItem(roomType));
+    }
+
+    for (final CommercialType commercialType : CommercialTypeFactory.getInstance().all()) {
+      addRoomMenu.add(makeGridObjectMenuItem(commercialType));
     }
 
     for (final ElevatorType elevatorType : ElevatorTypeFactory.getInstance().all()) {
