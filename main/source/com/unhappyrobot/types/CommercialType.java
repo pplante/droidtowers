@@ -8,6 +8,7 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class CommercialType extends RoomType {
   private int jobsProvided;
+  private int populationAttraction;
 
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {
@@ -16,5 +17,9 @@ public class CommercialType extends RoomType {
 
   public int getJobsProvided() {
     return jobsProvided;
+  }
+
+  public int getPopulationAttraction() {
+    return populationAttraction;
   }
 }

@@ -7,7 +7,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.math.Bounds2d;
-import com.unhappyrobot.types.CommercialType;
 
 import java.util.HashSet;
 import java.util.List;
@@ -24,7 +23,6 @@ public class GameGrid {
   private List<GridObject> objectsRenderOrder;
   private Vector2 worldSize;
   private final Function<GridObject, Integer> objectRenderSortFunction;
-  private static final long EARN_OUT_INTERVAL_MILLIS = 5000;
   private final GameGridRenderer gameGridRenderer;
 
   public GameGrid() {
@@ -163,36 +161,8 @@ public class GameGrid {
   }
 
   public void update(float deltaTime) {
-    Player player = Player.getInstance();
-    if ((lastEarnoutTime + EARN_OUT_INTERVAL_MILLIS) < System.currentTimeMillis()) {
-      lastEarnoutTime = System.currentTimeMillis();
-
-      int coinsEarned = 0;
-      int goldEarned = 0;
-      for (GridObject object : objects) {
-        coinsEarned += object.getCoinsEarned();
-        goldEarned += object.getGoldEarned();
-      }
-      System.out.println(String.format("Player earned: %d coins and %d gold", coinsEarned, goldEarned));
-      player.addCurrency(coinsEarned, goldEarned);
-    }
-
-    int currentPopulation = 0;
-    int currentJobsFilled = 0;
-    int maxJobsProvided = 0;
     for (GridObject gridObject : objects) {
       gridObject.update(deltaTime);
-
-      if (gridObject.getClass().equals(Room.class)) {
-        currentPopulation += ((Room) gridObject).getCurrentPopulation();
-      } else if (gridObject.getClass().equals(CommercialSpace.class)) {
-        currentJobsFilled += ((CommercialSpace) gridObject).getJobsFilled();
-        maxJobsProvided += ((CommercialType) gridObject.getGridObjectType()).getJobsProvided();
-      }
     }
-
-    player.setPopulation(currentPopulation);
-    player.setJobsFilled(currentJobsFilled);
-    player.setJobsProvided(maxJobsProvided);
   }
 }

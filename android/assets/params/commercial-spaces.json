@@ -5,7 +5,7 @@
     "height":1,
     "width":3,
     "experienceAward":2200,
-    "maxPopulation":6,
+    "populationAttraction":2,
     "populationRequired":4,
     "jobsProvided":4
   }

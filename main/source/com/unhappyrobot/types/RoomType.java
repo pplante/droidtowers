@@ -8,7 +8,7 @@ import java.util.List;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class RoomType extends GridObjectType {
   private boolean isLobby;
-  private int maxPopulation;
+  private int populationMax;
   private int populationRequired;
 
   @Override
@@ -46,8 +46,8 @@ public class RoomType extends GridObjectType {
     return isLobby;
   }
 
-  public int getMaxPopulation() {
-    return maxPopulation;
+  public int getPopulationMax() {
+    return populationMax;
   }
 
   public int getPopulationRequired() {

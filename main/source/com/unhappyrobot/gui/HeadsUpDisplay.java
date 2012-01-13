@@ -75,7 +75,7 @@ public class HeadsUpDisplay extends Group {
 
   private void updateStatusLabel() {
     Player player = Player.getInstance();
-    statusLabel.setText(String.format("%d coins / %d gold\n %d exp\n%d pop\n%d/%d jobs", player.getCoins(), player.getGold(), player.getExperience(), player.getPopulation(), player.getJobsFilled(), player.getJobsProvided()));
+    statusLabel.setText(String.format("%d coins / %d gold\n %d exp\n%d + %d pop\n%d/%d jobs", player.getCoins(), player.getGold(), player.getExperience(), player.getResidency(), player.getAttractedPopulation(), player.getJobsFilled(), player.getJobsProvided()));
   }
 
   private void makeAddRoomButton() {

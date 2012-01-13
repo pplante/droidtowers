@@ -18,7 +18,7 @@ public class Room extends GridObject {
 
   private static final int UPDATE_FREQUENCY = 10000;
   private long lastUpdateTime;
-  private int currentPopulation;
+  protected int currentResidency;
   private int populationRequired;
 
   public Room(RoomType roomType, GameGrid gameGrid) {
@@ -74,9 +74,9 @@ public class Room extends GridObject {
   @Override
   public void update(float deltaTime) {
     if (shouldUpdate()) {
-      int maxPopulation = ((RoomType) getGridObjectType()).getMaxPopulation();
+      int maxPopulation = ((RoomType) getGridObjectType()).getPopulationMax();
       if (maxPopulation > 0) {
-        currentPopulation = Random.randomInt(0, maxPopulation);
+        currentResidency = Random.randomInt(0, maxPopulation);
       }
     }
   }
@@ -92,15 +92,15 @@ public class Room extends GridObject {
     return false;
   }
 
-  public int getCurrentPopulation() {
-    return currentPopulation;
+  public int getCurrentResidency() {
+    return currentResidency;
   }
 
   @Override
   public int getCoinsEarned() {
-    if (currentPopulation > 0) {
+    if (currentResidency > 0) {
       RoomType roomType = (RoomType) gridObjectType;
-      return (roomType.getCoinsEarned() / roomType.getMaxPopulation()) * currentPopulation;
+      return (roomType.getCoinsEarned() / roomType.getPopulationMax()) * currentResidency;
     }
 
     return 0;
@@ -108,9 +108,9 @@ public class Room extends GridObject {
 
   @Override
   public int getGoldEarned() {
-    if (currentPopulation > 0) {
+    if (currentResidency > 0) {
       RoomType roomType = (RoomType) gridObjectType;
-      return (roomType.getGoldEarned() / roomType.getMaxPopulation()) * currentPopulation;
+      return (roomType.getGoldEarned() / roomType.getPopulationMax()) * currentResidency;
     }
 
     return 0;

@@ -186,7 +186,7 @@ public class TowerGame implements ApplicationListener {
 
     spriteBatch.setProjectionMatrix(camera.combined);
 
-    updateGameState();
+    updateGameObjects();
 
     for (GameLayer layer : layers) {
       layer.render(spriteBatch, camera);
@@ -196,11 +196,12 @@ public class TowerGame implements ApplicationListener {
     Table.drawDebug(guiStage);
   }
 
-  private void updateGameState() {
+  private void updateGameObjects() {
     float deltaTime = Gdx.graphics.getDeltaTime();
 
     tweenManager.update();
     gameGrid.update(deltaTime);
+    Player.getInstance().update(deltaTime, gameGrid);
     guiStage.act(deltaTime);
 
     for (GameLayer layer : layers) {
