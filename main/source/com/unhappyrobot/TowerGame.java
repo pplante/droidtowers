@@ -22,7 +22,7 @@ import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.HeadsUpDisplay;
 import com.unhappyrobot.gui.OnClickCallback;
 import com.unhappyrobot.gui.ResponseType;
-import com.unhappyrobot.input.Action;
+import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.json.Vector3Serializer;
 import com.unhappyrobot.types.CommercialTypeFactory;
@@ -90,7 +90,7 @@ public class TowerGame implements ApplicationListener {
 
     layers = Lists.newArrayList(groundLayer, skyLayer, new CloudLayer(gameGrid.getWorldSize()), gameGrid.getRenderer());
 
-    InputSystem.getInstance().bind(Keys.G, new Action() {
+    InputSystem.getInstance().bind(Keys.G, new InputCallback() {
       public boolean run(float timeDelta) {
         gameGrid.getRenderer().toggleGridLines();
 
@@ -98,7 +98,7 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    InputSystem.getInstance().bind(Keys.NUM_0, new Action() {
+    InputSystem.getInstance().bind(Keys.NUM_0, new InputCallback() {
       public boolean run(float timeDelta) {
         camera.zoom = 1f;
 
@@ -106,7 +106,7 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    InputSystem.getInstance().bind(new int[]{Keys.BACK, Keys.ESCAPE}, new Action() {
+    InputSystem.getInstance().bind(new int[]{Keys.BACK, Keys.ESCAPE}, new InputCallback() {
       private Dialog exitDialog;
 
       public boolean run(float timeDelta) {
@@ -126,7 +126,7 @@ public class TowerGame implements ApplicationListener {
             }
           }).centerOnScreen().show();
 
-          exitDialog.onDismiss(new Action() {
+          exitDialog.onDismiss(new InputCallback() {
             public boolean run(float timeDelta) {
               exitDialog = null;
               return true;

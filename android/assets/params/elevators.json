@@ -8,6 +8,7 @@
     "experienceAward":2000,
     "height":1,
     "width":1,
-    "imageFilename":"tiles/elevator-shaft.png"
+    "imageFilename":"tiles/elevator-shaft.png",
+    "noiseLevel":0.1
   }
 ]

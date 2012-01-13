@@ -7,6 +7,18 @@
     "experienceAward":2200,
     "populationAttraction":2,
     "populationRequired":4,
-    "jobsProvided":4
+    "jobsProvided":4,
+    "noiseLevel":0.2
+  },
+  {
+    "name":"Burger Joint",
+    "coins":1000,
+    "height":1,
+    "width":2,
+    "experienceAward":2200,
+    "populationAttraction":6,
+    "populationRequired":8,
+    "jobsProvided":4,
+    "noiseLevel":0.3
   }
 ]

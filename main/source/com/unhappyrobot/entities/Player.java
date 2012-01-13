@@ -1,6 +1,7 @@
 package com.unhappyrobot.entities;
 
 import com.unhappyrobot.types.CommercialType;
+import com.unhappyrobot.types.RoomType;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -15,11 +16,12 @@ public class Player {
   private long coins;
   private long gold;
   private long experience;
-  private int population;
+  private int residency;
   private int jobsFilled;
   private int jobsProvided;
   private long lastEarnoutTime;
   private int attractedPopulation;
+  private int maxPopulation;
 
   public static Player getInstance() {
     if (instance == null) {
@@ -32,7 +34,7 @@ public class Player {
   private Player() {
     coins = 4000;
     gold = 1;
-    population = 0;
+    residency = 0;
   }
 
   public static void setInstance(Player newInstance) {
@@ -66,27 +68,11 @@ public class Player {
   }
 
   public int getResidency() {
-    return population;
-  }
-
-  public void setResidency(int population) {
-    this.population = population;
-  }
-
-  public void setAttractedPopulation(int attractedPopulation) {
-    this.attractedPopulation = attractedPopulation;
+    return residency;
   }
 
   public int getAttractedPopulation() {
     return attractedPopulation;
-  }
-
-  public void setJobsFilled(int jobsFilled) {
-    this.jobsFilled = jobsFilled;
-  }
-
-  public void setJobsProvided(int jobsProvided) {
-    this.jobsProvided = jobsProvided;
   }
 
   public int getJobsProvided() {
@@ -113,32 +99,36 @@ public class Player {
       addCurrency(coinsEarned, goldEarned);
     }
 
-    int currentResidency = 0;
-    int currentJobsFilled = 0;
-    int maxJobsProvided = 0;
-    int attractedPopulation = 0;
+
+    residency = 0;
+    attractedPopulation = 0;
+    maxPopulation = 0;
+    jobsFilled = 0;
+    jobsProvided = 0;
+
     for (GridObject gridObject : gridObjects) {
       if (gridObject.getClass().equals(Room.class)) {
-        currentResidency += ((Room) gridObject).getCurrentResidency();
+        Room room = (Room) gridObject;
+        residency += room.getCurrentResidency();
+        maxPopulation += ((RoomType) room.getGridObjectType()).getPopulationMax();
       } else if (gridObject.getClass().equals(CommercialSpace.class)) {
-        attractedPopulation += ((CommercialSpace) gridObject).getAttractedPopulation();
-      }
-    }
-
-    int totalPopulation = currentResidency + attractedPopulation;
-
-    for (GridObject gridObject : gridObjects) {
-      if (gridObject instanceof CommercialSpace) {
         CommercialSpace commercialSpace = (CommercialSpace) gridObject;
-        commercialSpace.calculateJobs(totalPopulation, currentJobsFilled);
-        currentJobsFilled += commercialSpace.getJobsFilled();
-        maxJobsProvided += ((CommercialType) commercialSpace.getGridObjectType()).getJobsProvided();
+        CommercialType commercialType = (CommercialType) commercialSpace.getGridObjectType();
+        attractedPopulation += commercialSpace.getAttractedPopulation();
+        maxPopulation += commercialType.getPopulationAttraction();
+        jobsFilled += commercialSpace.getJobsFilled();
+        jobsProvided += commercialType.getJobsProvided();
       }
     }
+  }
 
-    setResidency(currentResidency);
-    setAttractedPopulation(attractedPopulation);
-    setJobsFilled(currentJobsFilled);
-    setJobsProvided(maxJobsProvided);
+  @JsonIgnore
+  public int getTotalPopulation() {
+    return residency + attractedPopulation;
+  }
+
+
+  public int getMaxPopulation() {
+    return maxPopulation;
   }
 }

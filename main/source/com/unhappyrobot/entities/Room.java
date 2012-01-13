@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.unhappyrobot.TowerConsts;
+import com.unhappyrobot.actions.TimeDelayedAction;
 import com.unhappyrobot.types.RoomType;
 import com.unhappyrobot.utils.Random;
 
@@ -20,6 +22,7 @@ public class Room extends GridObject {
   private long lastUpdateTime;
   protected int currentResidency;
   private int populationRequired;
+  private TimeDelayedAction populationUpdateAction;
 
   public Room(RoomType roomType, GameGrid gameGrid) {
     super(roomType, gameGrid);
@@ -52,6 +55,19 @@ public class Room extends GridObject {
       sprite = new Sprite(textureRegion);
       dynamicSprite = true;
     }
+
+    addAction(new TimeDelayedAction(TowerConsts.ROOM_UPDATE_FREQUENCY) {
+      public void run() {
+        updatePopulation();
+      }
+    });
+  }
+
+  protected void updatePopulation() {
+    int maxPopulation = ((RoomType) getGridObjectType()).getPopulationMax();
+    if (maxPopulation > 0) {
+      currentResidency = Random.randomInt(maxPopulation / 2, maxPopulation);
+    }
   }
 
   @Override
@@ -69,27 +85,6 @@ public class Room extends GridObject {
 
       labelFont.draw(spriteBatch, gridObjectType.getName(), position.getWorldX() + centerPoint.x, position.getWorldY() + centerPoint.y);
     }
-  }
-
-  @Override
-  public void update(float deltaTime) {
-    if (shouldUpdate()) {
-      int maxPopulation = ((RoomType) getGridObjectType()).getPopulationMax();
-      if (maxPopulation > 0) {
-        currentResidency = Random.randomInt(0, maxPopulation);
-      }
-    }
-  }
-
-  protected boolean shouldUpdate() {
-    if (placementState.equals(GridObjectPlacementState.PLACED)) {
-      if ((lastUpdateTime + UPDATE_FREQUENCY) < System.currentTimeMillis()) {
-        lastUpdateTime = System.currentTimeMillis();
-        return true;
-      }
-    }
-
-    return false;
   }
 
   public int getCurrentResidency() {

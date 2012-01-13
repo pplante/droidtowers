@@ -19,7 +19,7 @@ public class InputSystem extends InputAdapter {
   private List<InputProcessorEntry> inputProcessors;
   private List<InputProcessorEntry> inputProcessorsSorted;
 
-  private HashMap<Integer, ArrayList<Action>> keyBindings;
+  private HashMap<Integer, ArrayList<InputCallback>> keyBindings;
 
   private OrthographicCamera camera;
   private CameraController cameraController;
@@ -84,33 +84,33 @@ public class InputSystem extends InputAdapter {
     return delegater.getCurrentTool();
   }
 
-  public void bind(int keyCode, Action action) {
-    ArrayList<Action> actions = getBindingsForKeyCode(keyCode);
+  public void bind(int keyCode, InputCallback inputCallback) {
+    ArrayList<InputCallback> inputCallbacks = getBindingsForKeyCode(keyCode);
 
-    actions.add(0, action);
+    inputCallbacks.add(0, inputCallback);
   }
 
-  public void bind(int[] keyCodes, Action action) {
+  public void bind(int[] keyCodes, InputCallback inputCallback) {
     for (int keyCode : keyCodes) {
-      bind(keyCode, action);
+      bind(keyCode, inputCallback);
     }
   }
 
-  public void listen(int keyCode, Action action) {
-    getBindingsForKeyCode(keyCode).add(action);
+  public void listen(int keyCode, InputCallback inputCallback) {
+    getBindingsForKeyCode(keyCode).add(inputCallback);
   }
 
-  private ArrayList<Action> getBindingsForKeyCode(int keyCode) {
-    ArrayList<Action> actions;
+  private ArrayList<InputCallback> getBindingsForKeyCode(int keyCode) {
+    ArrayList<InputCallback> inputCallbacks;
 
     if (!keyBindings.containsKey(keyCode)) {
-      actions = new ArrayList<Action>();
-      keyBindings.put(keyCode, actions);
+      inputCallbacks = new ArrayList<InputCallback>();
+      keyBindings.put(keyCode, inputCallbacks);
     } else {
-      actions = keyBindings.get(keyCode);
+      inputCallbacks = keyBindings.get(keyCode);
     }
 
-    return actions;
+    return inputCallbacks;
   }
 
   @SuppressWarnings("WhileLoopReplaceableByForEach")
@@ -124,9 +124,9 @@ public class InputSystem extends InputAdapter {
     if (keyBindings.containsKey(keycode)) {
       float deltaTime = Gdx.graphics.getDeltaTime();
 
-      List<Action> actionsForKeyCode = Lists.newArrayList(keyBindings.get(keycode));
-      for (Action action : actionsForKeyCode) {
-        if (action.run(deltaTime)) {
+      List<InputCallback> actionsForKeyCode = Lists.newArrayList(keyBindings.get(keycode));
+      for (InputCallback inputCallback : actionsForKeyCode) {
+        if (inputCallback.run(deltaTime)) {
           break;
         }
       }
@@ -190,23 +190,23 @@ public class InputSystem extends InputAdapter {
     delegater.update(deltaTime);
   }
 
-  public void unbind(int keyCode, Action actionToRemove) {
+  public void unbind(int keyCode, InputCallback inputCallbackToRemove) {
     if (!keyBindings.containsKey(keyCode)) {
       return;
     }
 
-    Iterator<Action> iterator = keyBindings.get(keyCode).iterator();
+    Iterator<InputCallback> iterator = keyBindings.get(keyCode).iterator();
     while (iterator.hasNext()) {
-      Action action = iterator.next();
-      if (action == actionToRemove) {
+      InputCallback inputCallback = iterator.next();
+      if (inputCallback == inputCallbackToRemove) {
         iterator.remove();
       }
     }
   }
 
-  public void unbind(int[] keyCodes, Action action) {
+  public void unbind(int[] keyCodes, InputCallback inputCallback) {
     for (int keyCode : keyCodes) {
-      unbind(keyCode, action);
+      unbind(keyCode, inputCallback);
     }
   }
 

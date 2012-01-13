@@ -17,19 +17,19 @@ public class PlacementTool extends ToolBase {
   private Vector2 touchDownPointDelta;
   private boolean isDraggingGridObject;
   private PurchaseManager purchaseManager;
-  private final Action cancelPlacementAction;
+  private final InputCallback cancelPlacementInputCallback;
 
   public PlacementTool(OrthographicCamera camera, GameGrid gameGrid) {
     super(camera, gameGrid);
 
-    cancelPlacementAction = new Action() {
+    cancelPlacementInputCallback = new InputCallback() {
       public boolean run(float timeDelta) {
         InputSystem.getInstance().switchTool(GestureTool.PICKER, null);
         return false;
       }
     };
 
-    InputSystem.getInstance().bind(new int[]{Keys.ESCAPE, Keys.BACK}, cancelPlacementAction);
+    InputSystem.getInstance().bind(new int[]{Keys.ESCAPE, Keys.BACK}, cancelPlacementInputCallback);
   }
 
   public void setup(GridObjectType gridObjectType) {
@@ -110,6 +110,6 @@ public class PlacementTool extends ToolBase {
       gameGrid.removeObject(gridObject);
     }
 
-    InputSystem.getInstance().unbind(new int[]{Keys.ESCAPE, Keys.BACK}, cancelPlacementAction);
+    InputSystem.getInstance().unbind(new int[]{Keys.ESCAPE, Keys.BACK}, cancelPlacementInputCallback);
   }
 }

@@ -19,6 +19,7 @@ public abstract class GridObjectType {
   private String imageFilename;
   private boolean continuousPlacement;
   private boolean canShareSpace;
+  private float noiseLevel;
 
   public abstract GridObject makeGridObject(GameGrid gameGrid);
 
@@ -62,6 +63,10 @@ public abstract class GridObjectType {
 
   public int getZIndex() {
     return 0;
+  }
+
+  public float getNoiseLevel() {
+    return noiseLevel;
   }
 
   public int getCoinsEarned() {

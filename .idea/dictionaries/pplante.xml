@@ -2,6 +2,7 @@
   <dictionary name="pplante">
     <words>
       <w>async</w>
+      <w>consts</w>
       <w>deferrables</w>
       <w>delegater</w>
       <w>keycode</w>

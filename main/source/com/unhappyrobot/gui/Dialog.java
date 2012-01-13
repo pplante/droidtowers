@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
-import com.unhappyrobot.input.Action;
+import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
 
 import java.util.List;
@@ -22,9 +22,9 @@ public class Dialog {
   private boolean shouldDisplayCentered;
   private LabelButton positiveButton;
   private LabelButton negativeButton;
-  private final Action positiveButtonAction;
-  private final Action negativeButtonAction;
-  private Action onDismissAction;
+  private final InputCallback positiveButtonInputCallback;
+  private final InputCallback negativeButtonInputCallback;
+  private InputCallback onDismissInputCallback;
 
   public Dialog() {
     this.parent = HeadsUpDisplay.getInstance();
@@ -32,14 +32,14 @@ public class Dialog {
 
     buttons = Lists.newArrayList();
 
-    positiveButtonAction = new Action() {
+    positiveButtonInputCallback = new InputCallback() {
       public boolean run(float timeDelta) {
         positiveButton.click(1, 1);
         return true;
       }
     };
 
-    negativeButtonAction = new Action() {
+    negativeButtonInputCallback = new InputCallback() {
       public boolean run(float timeDelta) {
         dismiss();
 
@@ -135,11 +135,11 @@ public class Dialog {
     }
 
     if (positiveButton != null) {
-      InputSystem.getInstance().bind(InputSystem.Keys.ENTER, positiveButtonAction);
+      InputSystem.getInstance().bind(InputSystem.Keys.ENTER, positiveButtonInputCallback);
     }
 
     if (negativeButton != null) {
-      InputSystem.getInstance().bind(NEGATIVE_BUTTON_KEYS, negativeButtonAction);
+      InputSystem.getInstance().bind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
     }
 
     return this;
@@ -150,11 +150,11 @@ public class Dialog {
       parent.removeActor(window);
     }
 
-    InputSystem.getInstance().unbind(InputSystem.Keys.ENTER, positiveButtonAction);
-    InputSystem.getInstance().unbind(NEGATIVE_BUTTON_KEYS, negativeButtonAction);
+    InputSystem.getInstance().unbind(InputSystem.Keys.ENTER, positiveButtonInputCallback);
+    InputSystem.getInstance().unbind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
 
-    if (onDismissAction != null) {
-      onDismissAction.run(0f);
+    if (onDismissInputCallback != null) {
+      onDismissInputCallback.run(0f);
     }
   }
 
@@ -172,7 +172,7 @@ public class Dialog {
     return this;
   }
 
-  public void onDismiss(Action action) {
-    onDismissAction = action;
+  public void onDismiss(InputCallback inputCallback) {
+    onDismissInputCallback = inputCallback;
   }
 }

@@ -4,9 +4,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.unhappyrobot.actions.Action;
+import com.unhappyrobot.actions.TimeDelayedAction;
 import com.unhappyrobot.math.Bounds2d;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.GridObjectType;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class GridObject {
   protected final GridObjectType gridObjectType;
@@ -16,6 +21,7 @@ public abstract class GridObject {
   protected GridObjectPlacementState placementState;
   protected Color renderColor;
   protected Bounds2d bounds;
+  private Set<Action> actions;
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
@@ -25,6 +31,7 @@ public abstract class GridObject {
     placementState = GridObjectPlacementState.INVALID;
     renderColor = Color.WHITE;
     bounds = new Bounds2d(position, size);
+    actions = new HashSet<Action>();
   }
 
   public boolean canShareSpace(GridObject gridObject) {
@@ -126,7 +133,13 @@ public abstract class GridObject {
 
 
   public void update(float deltaTime) {
+    if (placementState.equals(GridObjectPlacementState.PLACED)) {
+      long currentTime = System.currentTimeMillis();
 
+      for (Action action : actions) {
+        action.call(currentTime);
+      }
+    }
   }
 
   public int getCoinsEarned() {
@@ -158,5 +171,9 @@ public abstract class GridObject {
   @Override
   public String toString() {
     return String.format("%s@%s:[%s]", this.getClass().getName(), hashCode(), gridObjectType);
+  }
+
+  protected void addAction(TimeDelayedAction action) {
+    actions.add(action);
   }
 }

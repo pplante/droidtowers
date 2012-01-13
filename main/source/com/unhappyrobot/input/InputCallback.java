@@ -1,5 +1,5 @@
 package com.unhappyrobot.input;
 
-public interface Action {
+public interface InputCallback {
   public boolean run(float timeDelta);
 }
