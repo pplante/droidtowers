@@ -15,6 +15,10 @@ import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.CommercialType;
 import com.unhappyrobot.types.RoomType;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
 import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class GameGridRenderer extends GameLayer {
@@ -22,17 +26,19 @@ public class GameGridRenderer extends GameLayer {
   private GameGrid gameGrid;
   private boolean shouldRenderGridLines;
   private final ShapeRenderer shapeRenderer;
-  private Overlays activeOverlay;
   private Function<GridObject, Color> employmentLevelOverlayFunc;
   private Function<GridObject, Color> populationLevelOverlayFunc;
   private Function<GridObject, Color> desirabilityLevelOverlayFunc;
+  private HashSet<Overlays> activeOverlays;
+  private Map<Overlays, Function<GridObject, Color>> overlayFunctions;
 
   public GameGridRenderer(GameGrid gameGrid) {
     this.gameGrid = gameGrid;
     shouldRenderGridLines = true;
     gl = new ImmediateModeRenderer10();
     shapeRenderer = new ShapeRenderer();
-    activeOverlay = Overlays.DESIRABLITY_LEVEL;
+
+    activeOverlays = new HashSet<Overlays>();
 
     makeOverlayFunctions();
   }
@@ -47,23 +53,23 @@ public class GameGridRenderer extends GameLayer {
 
     renderGridObjects(spriteBatch);
 
-    if (!activeOverlay.equals(Overlays.NONE)) {
+    if (activeOverlays.size() > 0) {
       Gdx.gl.glEnable(GL10.GL_BLEND);
 
-      if (activeOverlay.equals(Overlays.NOISE_LEVEL)) {
-        renderNoiseLevelOverlay();
-      } else if (activeOverlay.equals(Overlays.POPULATION_LEVEL)) {
-        renderGenericOverlay(populationLevelOverlayFunc);
-      } else if (activeOverlay.equals(Overlays.EMPLOYMENT_LEVEL)) {
-        renderGenericOverlay(employmentLevelOverlayFunc);
-      } else if (activeOverlay.equals(Overlays.DESIRABLITY_LEVEL)) {
-        renderGenericOverlay(desirabilityLevelOverlayFunc);
+      for (Overlays overlay : activeOverlays) {
+        if (overlay.equals(Overlays.NOISE_LEVEL)) {
+          renderNoiseLevelOverlay();
+        } else {
+          renderGenericOverlay(overlayFunctions.get(overlay));
+        }
       }
     }
   }
 
   private void makeOverlayFunctions() {
-    employmentLevelOverlayFunc = new Function<GridObject, Color>() {
+    overlayFunctions = new HashMap<Overlays, Function<GridObject, Color>>();
+
+    overlayFunctions.put(Overlays.EMPLOYMENT_LEVEL, new Function<GridObject, Color>() {
       public Color apply(@Nullable GridObject gridObject) {
         if (gridObject instanceof CommercialSpace) {
           float jobsProvided = ((CommercialType) gridObject.getGridObjectType()).getJobsProvided();
@@ -74,9 +80,9 @@ public class GameGridRenderer extends GameLayer {
 
         return null;
       }
-    };
+    });
 
-    populationLevelOverlayFunc = new Function<GridObject, Color>() {
+    overlayFunctions.put(Overlays.POPULATION_LEVEL, new Function<GridObject, Color>() {
       public Color apply(@Nullable GridObject gridObject) {
         if (gridObject instanceof Room) {
           float populationMax = ((RoomType) gridObject.getGridObjectType()).getPopulationMax();
@@ -87,9 +93,9 @@ public class GameGridRenderer extends GameLayer {
 
         return null;
       }
-    };
+    });
 
-    desirabilityLevelOverlayFunc = new Function<GridObject, Color>() {
+    overlayFunctions.put(Overlays.DESIRABLITY_LEVEL, new Function<GridObject, Color>() {
       public Color apply(@Nullable GridObject gridObject) {
         if (gridObject instanceof Room && !(gridObject instanceof CommercialSpace)) {
           float desirability = ((Room) gridObject).getDesirability();
@@ -98,7 +104,7 @@ public class GameGridRenderer extends GameLayer {
 
         return null;
       }
-    };
+    });
   }
 
   private void renderGenericOverlay(Function<GridObject, Color> function) {
@@ -169,7 +175,11 @@ public class GameGridRenderer extends GameLayer {
     shouldRenderGridLines = !shouldRenderGridLines;
   }
 
-  public void setActiveOverlay(Overlays activeOverlay) {
-    this.activeOverlay = activeOverlay;
+  public void addActiveOverlay(Overlays overlay) {
+    activeOverlays.add(overlay);
+  }
+
+  public void removeActiveOverlay(Overlays overlay) {
+    activeOverlays.remove(overlay);
   }
 }

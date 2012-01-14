@@ -8,10 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Align;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.unhappyrobot.Overlays;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.entities.GameGrid;
@@ -37,7 +34,7 @@ public class HeadsUpDisplay extends Group {
   private BitmapFont menloBitmapFont;
   private Toast toast;
   private LabelButton setOverlayButton;
-  private Menu overlayMenu;
+  private Window overlayWin;
 
   public static HeadsUpDisplay getInstance() {
     if (instance == null) {
@@ -105,26 +102,44 @@ public class HeadsUpDisplay extends Group {
     setOverlayButton.y = Gdx.graphics.getHeight() - setOverlayButton.height - 25;
 
     setOverlayButton.setClickListener(new ClickListener() {
+      boolean isShowing;
+
       public void click(Actor actor, float x, float y) {
-        overlayMenu.show(setOverlayButton);
+        if (!isShowing) {
+          guiStage.addActor(overlayWin);
+        } else {
+          guiStage.removeActor(overlayWin);
+        }
+
+        isShowing = !isShowing;
       }
     });
 
     addActor(setOverlayButton);
 
-    overlayMenu = new Menu();
-    overlayMenu.defaults();
-    overlayMenu.top().left();
+    overlayWin = new Window(guiSkin);
+    overlayWin.defaults();
+    overlayWin.top().left();
+    overlayWin.x = 400;
+    overlayWin.y = 400;
 
     for (final Overlays overlay : Overlays.values()) {
-      overlayMenu.add(new MenuItem(guiSkin, overlay.toString(), new ClickListener() {
+      final CheckBox checkBox = new CheckBox(overlay.toString(), guiSkin);
+      checkBox.align(Align.LEFT);
+      checkBox.setClickListener(new ClickListener() {
         public void click(Actor actor, float x, float y) {
-          TowerGame.getGameGridRenderer().setActiveOverlay(overlay);
-
-          overlayMenu.close();
+          if (checkBox.isChecked()) {
+            TowerGame.getGameGridRenderer().addActiveOverlay(overlay);
+          } else {
+            TowerGame.getGameGridRenderer().removeActiveOverlay(overlay);
+          }
         }
-      }));
+      });
+      overlayWin.row();
+      overlayWin.add(checkBox).expand();
     }
+
+    overlayWin.pack();
   }
 
   private void makeAddRoomMenu() {

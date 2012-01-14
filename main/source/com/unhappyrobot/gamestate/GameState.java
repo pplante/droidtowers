@@ -44,10 +44,10 @@ public class GameState extends EventListener {
     long currentTime = System.currentTimeMillis();
 
     calculateTransportConnectionsAction.act(currentTime);
-    calculateDesirablity.act(currentTime);
     calculatePopulation.act(currentTime);
     calculateJobs.act(currentTime);
     calculateEarnout.act(currentTime);
+    calculateDesirablity.act(currentTime);
   }
 
   public void receiveEvent(GridObjectAddedEvent e) {

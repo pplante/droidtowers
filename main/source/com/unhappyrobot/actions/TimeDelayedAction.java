@@ -13,8 +13,6 @@ public abstract class TimeDelayedAction implements Action {
   public TimeDelayedAction(long updateFrequency, boolean shouldRepeat) {
     this.updateFrequency = updateFrequency;
     this.shouldRepeat = shouldRepeat;
-
-    resetInterval();
   }
 
   public void act(long currentTime) {
