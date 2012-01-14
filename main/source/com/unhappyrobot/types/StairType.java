@@ -26,8 +26,4 @@ public class StairType extends GridObjectType {
     return 0;
   }
 
-  @Override
-  public int getGoldEarned() {
-    return 0;
-  }
 }

@@ -31,8 +31,4 @@ public class ElevatorType extends GridObjectType {
     return 0;
   }
 
-  @Override
-  public int getGoldEarned() {
-    return 0;
-  }
 }

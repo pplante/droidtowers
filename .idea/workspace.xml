@@ -13,14 +13,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/Overlays.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/pplante.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/pplante.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGridRenderer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGridRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/params/elevators.json" afterPath="$PROJECT_DIR$/android/assets/params/elevators.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/params/rooms.json" afterPath="$PROJECT_DIR$/android/assets/params/rooms.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/params/stairs.json" afterPath="$PROJECT_DIR$/android/assets/params/stairs.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Player.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Player.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelButton.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelButton.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/money/PurchaseManager.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/money/PurchaseManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ElevatorType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ElevatorType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/StairType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/StairType.java" />
     </list>
     <ignored path="underwater.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -100,17 +104,7 @@
     <favorites_list name="underwater" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="GameGridRenderer.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGridRenderer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="118" column="10" selection-start="4172" selection-end="4172" vertical-scroll-proportion="1.1668823">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -124,22 +118,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/actions/TimeDelayedAction.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/Action.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputCallback.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Player.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" />
         <option value="$PROJECT_DIR$/android/assets/params/commercial-spaces.json" />
-        <option value="$PROJECT_DIR$/android/assets/params/elevators.json" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelButton.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/Overlays.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CommercialSpace.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGridRenderer.java" />
+        <option value="$PROJECT_DIR$/android/assets/params/rooms.json" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/money/PurchaseManager.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
+        <option value="$PROJECT_DIR$/android/assets/params/elevators.json" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Player.java" />
+        <option value="$PROJECT_DIR$/android/assets/params/stairs.json" />
       </list>
     </option>
   </component>
@@ -854,11 +848,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="2560" height="1414" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32297194" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946082" sideWeight="0.6709347" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32145566" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
@@ -873,13 +868,12 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39971244" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18390805" sideWeight="0.6747536" order="0" side_tool="true" content_ui="tabs" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3934799" sideWeight="0.9482484" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3934799" sideWeight="0.9482484" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24412434" sideWeight="0.28821656" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3125" sideWeight="0.75587565" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32297194" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -920,7 +914,7 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="added actions to grid objects, refactored a few class name collisions, and added a renderer for noise level overlays." />
+    <option name="LAST_COMMIT_MESSAGE" value="some minor refactorings" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -957,6 +951,7 @@
     <MESSAGE value="added commercial space support and very basic employment calculation" />
     <MESSAGE value="split apart population calculation so it could be used in the jobs calculation, then moved both calculations to Player since they dont make sense in gamegrid." />
     <MESSAGE value="added actions to grid objects, refactored a few class name collisions, and added a renderer for noise level overlays." />
+    <MESSAGE value="some minor refactorings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -992,63 +987,9 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/math/GridPoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="19" selection-start="699" selection-end="699" vertical-scroll-proportion="0.4877102" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/GridObjectState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="1114" selection-end="1114" vertical-scroll-proportion="0.3329493" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/graphics/Color.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="28" selection-start="1304" selection-end="1304" vertical-scroll-proportion="0.3324709" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/Overlays.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="2" selection-start="453" selection-end="453" vertical-scroll-proportion="0.73997414" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="21" selection-start="772" selection-end="772" vertical-scroll-proportion="0.7723157" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/assets/params/elevators.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="47" selection-start="230" selection-end="230" vertical-scroll-proportion="0.28460544" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="118" column="40" selection-start="4060" selection-end="4060" vertical-scroll-proportion="0.28815788" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/assets/params/commercial-spaces.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="20" selection-start="424" selection-end="424" vertical-scroll-proportion="0.5976714" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="92" column="46" selection-start="3443" selection-end="3443" vertical-scroll-proportion="0.113842174" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CommercialSpace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="41" selection-start="250" selection-end="250" vertical-scroll-proportion="0.113842174">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="32" selection-start="507" selection-end="507" vertical-scroll-proportion="0.113842174">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java">
@@ -1082,6 +1023,76 @@
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGridRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="118" column="10" selection-start="4172" selection-end="4172" vertical-scroll-proportion="1.1668823">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/assets/params/rooms.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="8" selection-start="521" selection-end="521" vertical-scroll-proportion="0.73997414">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CommercialSpace.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="41" selection-start="250" selection-end="250" vertical-scroll-proportion="0.028460544">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/assets/params/commercial-spaces.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="8" selection-start="59" selection-end="59" vertical-scroll-proportion="0.113842174">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="152" column="32" selection-start="4005" selection-end="4005" vertical-scroll-proportion="0.4157044">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="2" selection-start="1399" selection-end="1399" vertical-scroll-proportion="0.085450344">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/money/PurchaseManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="0" selection-start="1739" selection-end="1739" vertical-scroll-proportion="0.68451244">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/assets/params/elevators.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="123" selection-end="123" vertical-scroll-proportion="0.17076325">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/assets/params/stairs.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="14" selection-start="165" selection-end="165" vertical-scroll-proportion="0.13622291">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="22" selection-start="602" selection-end="602" vertical-scroll-proportion="0.25541794">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="108" selection-start="2913" selection-end="2913" vertical-scroll-proportion="0.017200937">
           <folding />
         </state>
       </provider>

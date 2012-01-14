@@ -4,7 +4,6 @@
     "continuousPlacement":true,
     "canShareSpace":true,
     "coins":100,
-    "gold":0,
     "experienceAward":2000,
     "height":1,
     "width":1,

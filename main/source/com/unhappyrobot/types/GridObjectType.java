@@ -13,7 +13,6 @@ public abstract class GridObjectType {
   private int height;
   private int width;
   private int coins;
-  private int gold;
   private int experienceAward;
   private String atlasFilename;
   private String imageFilename;
@@ -39,10 +38,6 @@ public abstract class GridObjectType {
 
   public int getCoins() {
     return coins;
-  }
-
-  public int getGold() {
-    return gold;
   }
 
   public int getExperienceAward() {
@@ -71,10 +66,6 @@ public abstract class GridObjectType {
 
   public int getCoinsEarned() {
     return coins / 4;
-  }
-
-  public int getGoldEarned() {
-    return gold / 10;
   }
 
   public boolean canShareSpace(GridObject gridObject) {

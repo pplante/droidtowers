@@ -14,9 +14,8 @@ public class Player {
   private static final long EARN_OUT_INTERVAL_MILLIS = 5000;
 
   private long coins;
-  private long gold;
   private long experience;
-  private int residency;
+  private int currentResidency;
   private int jobsFilled;
   private int jobsProvided;
   private long lastEarnoutTime;
@@ -33,8 +32,7 @@ public class Player {
 
   private Player() {
     coins = 4000;
-    gold = 1;
-    residency = 0;
+    currentResidency = 0;
   }
 
   public static void setInstance(Player newInstance) {
@@ -45,18 +43,12 @@ public class Player {
     return coins;
   }
 
-  public long getGold() {
-    return gold;
-  }
-
-  public void subtractCurrency(int coins, int gold) {
+  public void subtractCurrency(int coins) {
     this.coins -= coins;
-    this.gold -= gold;
   }
 
-  public void addCurrency(int coins, int gold) {
+  public void addCurrency(int coins) {
     this.coins += coins;
-    this.gold += gold;
   }
 
   public void addExperience(int exp) {
@@ -67,8 +59,8 @@ public class Player {
     return experience;
   }
 
-  public int getResidency() {
-    return residency;
+  public int getCurrentResidency() {
+    return currentResidency;
   }
 
   public int getAttractedPopulation() {
@@ -90,17 +82,15 @@ public class Player {
       lastEarnoutTime = System.currentTimeMillis();
 
       int coinsEarned = 0;
-      int goldEarned = 0;
       for (GridObject object : gridObjects) {
         coinsEarned += object.getCoinsEarned();
-        goldEarned += object.getGoldEarned();
       }
-      System.out.println(String.format("Player earned: %d coins and %d gold", coinsEarned, goldEarned));
-      addCurrency(coinsEarned, goldEarned);
+      System.out.println(String.format("Player earned: %d coins", coinsEarned));
+      addCurrency(coinsEarned);
     }
 
 
-    residency = 0;
+    currentResidency = 0;
     attractedPopulation = 0;
     maxPopulation = 0;
     jobsFilled = 0;
@@ -109,7 +99,7 @@ public class Player {
     for (GridObject gridObject : gridObjects) {
       if (gridObject.getClass().equals(Room.class)) {
         Room room = (Room) gridObject;
-        residency += room.getCurrentResidency();
+        currentResidency += room.getCurrentResidency();
         maxPopulation += ((RoomType) room.getGridObjectType()).getPopulationMax();
       } else if (gridObject.getClass().equals(CommercialSpace.class)) {
         CommercialSpace commercialSpace = (CommercialSpace) gridObject;
@@ -124,7 +114,7 @@ public class Player {
 
   @JsonIgnore
   public int getTotalPopulation() {
-    return residency + attractedPopulation;
+    return currentResidency + attractedPopulation;
   }
 
 

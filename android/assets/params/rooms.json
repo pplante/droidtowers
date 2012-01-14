@@ -4,7 +4,6 @@
     "continuousPlacement":true,
     "isLobby":true,
     "coins":100,
-    "gold":0,
     "experienceAward":1000,
     "height":1,
     "width":4

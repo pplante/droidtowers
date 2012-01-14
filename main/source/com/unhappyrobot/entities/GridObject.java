@@ -150,14 +150,6 @@ public abstract class GridObject {
     return gridObjectType.getCoinsEarned();
   }
 
-  public int getGoldEarned() {
-    if (placementState == GridObjectPlacementState.INVALID) {
-      return 0;
-    }
-
-    return gridObjectType.getGoldEarned();
-  }
-
   public void setPlacementState(GridObjectPlacementState placementState) {
     this.placementState = placementState;
 

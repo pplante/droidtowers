@@ -101,13 +101,4 @@ public class Room extends GridObject {
     return 0;
   }
 
-  @Override
-  public int getGoldEarned() {
-    if (currentResidency > 0) {
-      RoomType roomType = (RoomType) gridObjectType;
-      return (roomType.getGoldEarned() / roomType.getPopulationMax()) * currentResidency;
-    }
-
-    return 0;
-  }
 }
