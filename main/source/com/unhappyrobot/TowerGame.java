@@ -4,7 +4,6 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,15 +21,11 @@ import com.unhappyrobot.gui.OnClickCallback;
 import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
-import com.unhappyrobot.json.Vector3Serializer;
 import com.unhappyrobot.types.CommercialTypeFactory;
 import com.unhappyrobot.types.ElevatorTypeFactory;
 import com.unhappyrobot.types.RoomTypeFactory;
 import com.unhappyrobot.types.StairTypeFactory;
 import com.unhappyrobot.utils.Random;
-import org.codehaus.jackson.Version;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.module.SimpleModule;
 
 import java.util.List;
 
@@ -61,7 +56,6 @@ public class TowerGame implements ApplicationListener {
     CommercialTypeFactory.getInstance();
     ElevatorTypeFactory.getInstance();
     StairTypeFactory.getInstance();
-
 
     Random.init();
     Tween.setPoolEnabled(true);
@@ -146,62 +140,12 @@ public class TowerGame implements ApplicationListener {
             }
           });
         }
+
         return true;
       }
     });
 
-    loadSavedGame();
-  }
-
-  private void saveGame() {
-    if (loadedSavedGame) {
-      GameSave gameSave = new GameSave(gameGrid, camera, Player.getInstance());
-      ObjectMapper objectMapper = new ObjectMapper();
-      SimpleModule simpleModule = new SimpleModule("Specials", new Version(1, 0, 0, null));
-      simpleModule.addSerializer(new Vector3Serializer());
-      objectMapper.registerModule(simpleModule);
-      try {
-        FileHandle fileHandle = Gdx.files.external("test.json");
-        objectMapper.writeValue(fileHandle.file(), gameSave);
-      } catch (Exception e) {
-        Gdx.app.log("GameSave", "Could not save game!", e);
-      }
-    }
-  }
-
-  private void loadSavedGame() {
-    final FileHandle fileHandle = Gdx.files.external("test.json");
-    try {
-      ObjectMapper objectMapper = new ObjectMapper();
-      GameSave gameSave = objectMapper.readValue(fileHandle.file(), GameSave.class);
-
-      Player.setInstance(gameSave.player);
-
-      camera.position.set(gameSave.cameraPosition);
-      camera.zoom = gameSave.cameraZoom;
-
-      for (GridObjectState gridObjectState : gameSave.gridObjects) {
-        gridObjectState.materialize(gameGrid);
-      }
-
-      loadedSavedGame = true;
-    } catch (Exception e) {
-      Gdx.app.log("GameSave", "Could not load saved game!", e);
-      new Dialog().setMessage("Saved game could not be loaded, want to reset?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
-        @Override
-        public void onClick(Dialog dialog) {
-          loadedSavedGame = true;
-          fileHandle.delete();
-          dialog.dismiss();
-        }
-      }).addButton(ResponseType.NEGATIVE, "No, exit game", new OnClickCallback() {
-        @Override
-        public void onClick(Dialog dialog) {
-          dialog.dismiss();
-          Gdx.app.exit();
-        }
-      }).centerOnScreen().show();
-    }
+    gameState.loadSavedGame(Gdx.files.external("test.json"), camera);
   }
 
   public void render() {
@@ -252,7 +196,7 @@ public class TowerGame implements ApplicationListener {
 
   public void pause() {
     Gdx.app.log("lifecycle", "pausing!");
-    saveGame();
+    gameState.saveGame(Gdx.files.external("test.json"), camera);
     System.exit(0);
   }
 

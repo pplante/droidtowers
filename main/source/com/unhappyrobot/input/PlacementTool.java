@@ -25,7 +25,7 @@ public class PlacementTool extends ToolBase {
     cancelPlacementInputCallback = new InputCallback() {
       public boolean run(float timeDelta) {
         InputSystem.getInstance().switchTool(GestureTool.PICKER, null);
-        return false;
+        return true;
       }
     };
 

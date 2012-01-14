@@ -38,4 +38,20 @@ public class GameSave {
       }
     }
   }
+
+  public Player getPlayer() {
+    return player;
+  }
+
+  public Vector3 getCameraPosition() {
+    return cameraPosition;
+  }
+
+  public float getCameraZoom() {
+    return cameraZoom;
+  }
+
+  public List<GridObjectState> getGridObjects() {
+    return gridObjects;
+  }
 }
