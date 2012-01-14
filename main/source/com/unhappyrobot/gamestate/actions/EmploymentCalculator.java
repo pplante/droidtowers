@@ -1,0 +1,34 @@
+package com.unhappyrobot.gamestate.actions;
+
+import com.unhappyrobot.entities.CommercialSpace;
+import com.unhappyrobot.entities.GameGrid;
+import com.unhappyrobot.entities.GridObject;
+import com.unhappyrobot.entities.Player;
+import com.unhappyrobot.types.CommercialType;
+
+import java.util.Set;
+
+public class EmploymentCalculator extends GameStateAction {
+  public EmploymentCalculator(GameGrid gameGrid, long frequency) {
+    super(gameGrid, frequency);
+  }
+
+  @Override
+  public void run() {
+    Set<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
+    int jobsFilled = 0;
+    int maxJobs = 0;
+    if (commercialSpaces != null) {
+      for (GridObject gridObject : commercialSpaces) {
+        CommercialSpace commercialSpace = (CommercialSpace) gridObject;
+        commercialSpace.updateJobs();
+
+        maxJobs += ((CommercialType) commercialSpace.getGridObjectType()).getJobsProvided();
+        jobsFilled += commercialSpace.getJobsFilled();
+      }
+    }
+
+    Player.getInstance().setJobsMax(maxJobs);
+    Player.getInstance().setJobsFilled(jobsFilled);
+  }
+}

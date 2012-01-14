@@ -179,14 +179,14 @@ public class GameGrid {
     }
   }
 
-  public Set<GridObject> getInstancesOf(Class<? extends GridObject> aClass, Class<? extends GridObject>... otherClasses) {
-    Set<GridObject> found = new HashSet<GridObject>();
-    if (gridObjectsByType.containsKey(aClass)) {
-      found.addAll(gridObjectsByType.get(aClass));
-    }
+  public Set<GridObject> getInstancesOf(Class aClass) {
+    return gridObjectsByType.get(aClass);
+  }
 
-    if (otherClasses != null) {
-      for (Class<? extends GridObject> otherClass : otherClasses) {
+  public Set<GridObject> getInstancesOf(Class[] classes) {
+    Set<GridObject> found = new HashSet<GridObject>();
+    if (classes != null) {
+      for (Class otherClass : classes) {
         if (gridObjectsByType.containsKey(otherClass)) {
           found.addAll(gridObjectsByType.get(otherClass));
         }

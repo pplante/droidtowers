@@ -2,7 +2,7 @@ package com.unhappyrobot.actions;
 
 public abstract class TimeDelayedAction implements Action {
   private final long updateFrequency;
-  private final boolean shouldRepeat;
+  protected boolean shouldRepeat;
   private long nextTimeToRun;
   private boolean hasRunBefore;
 
