@@ -34,12 +34,12 @@ public class RoomType extends GridObjectType {
   protected boolean checkForOverlap(GridObject gridObject) {
     List<GridObject> objectsOverlapped = gridObject.getGameGrid().getObjectsAt(gridObject.getBounds(), gridObject);
     for (GridObject object : objectsOverlapped) {
-      if (!gridObject.canShareSpace(object)) {
+      if (!object.canShareSpace(gridObject)) {
         return false;
       }
     }
 
-    return objectsOverlapped.size() == 0;
+    return true;
   }
 
   public boolean isLobby() {

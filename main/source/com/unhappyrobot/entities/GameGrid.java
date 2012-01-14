@@ -113,7 +113,7 @@ public class GameGrid {
     Bounds2d boundsOfGridObjectToCheck = gridObject.getBounds();
     for (GridObject child : objects) {
       if (child != gridObject) {
-        if (child.getBounds().intersects(boundsOfGridObjectToCheck) && !gridObject.canShareSpace(child)) {
+        if (child.getBounds().intersects(boundsOfGridObjectToCheck) && !child.canShareSpace(gridObject)) {
           return false;
         }
       }

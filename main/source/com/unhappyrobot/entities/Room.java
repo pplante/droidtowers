@@ -118,7 +118,7 @@ public class Room extends GridObject {
   }
 
   public boolean isConnectedToTransport() {
-    return connectedToTransport;
+    return connectedToTransport && placementState.equals(GridObjectPlacementState.PLACED);
   }
 
   @Override

@@ -77,7 +77,6 @@ public abstract class GridObjectType {
 
     List<GridObject> objectsBelow = gridObject.getGameGrid().getObjectsAt(belowObject, gridObject);
     return objectsBelow.size() != 0;
-
   }
 
   protected boolean checkForOverlap(GridObject gridObject) {
