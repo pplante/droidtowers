@@ -7,25 +7,27 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.unhappyrobot.TowerConsts;
-import com.unhappyrobot.actions.TimeDelayedAction;
 import com.unhappyrobot.types.RoomType;
 import com.unhappyrobot.utils.Random;
 
 public class Room extends GridObject {
   private static TextureAtlas roomAtlas;
   private static BitmapFont labelFont;
+  private static Texture roomDecals;
   private Sprite sprite;
-  private boolean dynamicSprite;
+  private Sprite decalSprite;
 
+  private boolean dynamicSprite;
   private static final int UPDATE_FREQUENCY = 10000;
   private long lastUpdateTime;
   protected int currentResidency;
   private int populationRequired;
-  private TimeDelayedAction populationUpdateAction;
+  private boolean connectedToTransport;
 
   public Room(RoomType roomType, GameGrid gameGrid) {
     super(roomType, gameGrid);
+
+    connectedToTransport = roomType.isLobby();
 
     if (labelFont == null) {
       labelFont = new BitmapFont(Gdx.files.internal("fonts/helvetica_neue_18.fnt"), false);
@@ -56,17 +58,21 @@ public class Room extends GridObject {
       dynamicSprite = true;
     }
 
-    addAction(new TimeDelayedAction(TowerConsts.ROOM_UPDATE_FREQUENCY) {
-      public void run() {
-        updatePopulation();
-      }
-    });
+    if (roomDecals == null) {
+      roomDecals = new Texture(Gdx.files.internal("decals.png"));
+    }
+
+    decalSprite = new Sprite(roomDecals);
   }
 
-  protected void updatePopulation() {
-    int maxPopulation = ((RoomType) getGridObjectType()).getPopulationMax();
-    if (maxPopulation > 0) {
-      currentResidency = Random.randomInt(maxPopulation / 2, maxPopulation);
+  public void updatePopulation() {
+    currentResidency = 0;
+
+    if (isConnectedToTransport()) {
+      int maxPopulation = ((RoomType) getGridObjectType()).getPopulationMax();
+      if (maxPopulation > 0) {
+        currentResidency = Random.randomInt(maxPopulation / 2, maxPopulation);
+      }
     }
   }
 
@@ -78,6 +84,11 @@ public class Room extends GridObject {
   @Override
   public void render(SpriteBatch spriteBatch) {
     super.render(spriteBatch);
+
+    if (!connectedToTransport) {
+      decalSprite.setPosition(sprite.getX(), sprite.getY());
+      decalSprite.draw(spriteBatch);
+    }
 
     if (dynamicSprite) {
       BitmapFont.TextBounds textBounds = labelFont.getBounds(gridObjectType.getName());
@@ -101,4 +112,21 @@ public class Room extends GridObject {
     return 0;
   }
 
+
+  public void setConnectedToTransport(boolean connectedToTransport) {
+    this.connectedToTransport = connectedToTransport;
+  }
+
+  public boolean isConnectedToTransport() {
+    return connectedToTransport;
+  }
+
+  @Override
+  public float getNoiseLevel() {
+    if (((RoomType) gridObjectType).getPopulationMax() > 0) {
+      return super.getNoiseLevel() * (currentResidency / ((RoomType) gridObjectType).getPopulationMax());
+    }
+
+    return 0;
+  }
 }

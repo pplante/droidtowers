@@ -14,18 +14,18 @@ import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.WRAPPER_OBJECT, property = "class")
-public class GameState {
+public class GameSave {
   protected Player player;
   protected List<GridObjectState> gridObjects;
 
   protected Vector3 cameraPosition;
   protected float cameraZoom;
 
-  public GameState() {
+  public GameSave() {
 
   }
 
-  public GameState(GameGrid gameGrid, OrthographicCamera camera, Player player) {
+  public GameSave(GameGrid gameGrid, OrthographicCamera camera, Player player) {
     this.player = player;
     cameraPosition = camera.position;
     cameraZoom = camera.zoom;

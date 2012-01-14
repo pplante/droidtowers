@@ -1,0 +1,32 @@
+droid.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+stationary
+  rotate: false
+  xy: 36, 0
+  size: 18, 32
+  orig: 18, 32
+  offset: 7, 1
+  index: -1
+walk
+  rotate: false
+  xy: 18, 0
+  size: 18, 32
+  orig: 18, 32
+  offset: 7, 1
+  index: 1
+walk
+  rotate: false
+  xy: 36, 0
+  size: 18, 32
+  orig: 18, 32
+  offset: 7, 1
+  index: 2
+walk
+  rotate: false
+  xy: 0, 0
+  size: 18, 32
+  orig: 18, 32
+  offset: 7, 1
+  index: 3

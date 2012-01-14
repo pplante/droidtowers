@@ -22,6 +22,7 @@ import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.json.Vector3Serializer;
+import com.unhappyrobot.managers.GameState;
 import com.unhappyrobot.types.CommercialTypeFactory;
 import com.unhappyrobot.types.ElevatorTypeFactory;
 import com.unhappyrobot.types.RoomTypeFactory;
@@ -31,7 +32,6 @@ import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.module.SimpleModule;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.unhappyrobot.input.InputSystem.Keys;
@@ -47,6 +47,8 @@ public class TowerGame implements ApplicationListener {
   private static TweenManager tweenManager;
   private Stage guiStage;
   private static GameGridRenderer gameGridRenderer;
+  private GameState gameState;
+  private boolean loadedSavedGame;
 
   public static GameGridRenderer getGameGridRenderer() {
     return gameGridRenderer;
@@ -75,6 +77,8 @@ public class TowerGame implements ApplicationListener {
     gameGrid.setGridSize(50, 50);
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
 
+    gameState = new GameState(gameGrid);
+
     HeadsUpDisplay.getInstance().initialize(camera, gameGrid, guiStage, spriteBatch);
 
     BackgroundLayer groundLayer = new BackgroundLayer("backgrounds/ground.png");
@@ -92,7 +96,12 @@ public class TowerGame implements ApplicationListener {
 
     gameGridRenderer = gameGrid.getRenderer();
 
-    layers = Lists.newArrayList(groundLayer, skyLayer, new CloudLayer(gameGrid.getWorldSize()), gameGridRenderer);
+    GameLayer testLayer = new GameLayer();
+    layers = Lists.newArrayList(groundLayer, skyLayer, new CloudLayer(gameGrid.getWorldSize()), gameGridRenderer, testLayer);
+
+    for (int i = 0; i < 30; i++) {
+      testLayer.addChild(new Avatar(gameGrid.getWorldSize()));
+    }
 
     InputSystem.getInstance().bind(Keys.G, new InputCallback() {
       public boolean run(float timeDelta) {
@@ -141,39 +150,57 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    loadGameState();
+    loadSavedGame();
   }
 
-  private void saveGameState() {
-    GameState gameState = new GameState(gameGrid, camera, Player.getInstance());
-    ObjectMapper objectMapper = new ObjectMapper();
-    SimpleModule simpleModule = new SimpleModule("Specials", new Version(1, 0, 0, null));
-    simpleModule.addSerializer(new Vector3Serializer());
-    objectMapper.registerModule(simpleModule);
-    try {
-      FileHandle fileHandle = Gdx.files.external("test.json");
-      objectMapper.writeValue(fileHandle.file(), gameState);
-    } catch (IOException e) {
-      e.printStackTrace();
+  private void saveGame() {
+    if (loadedSavedGame) {
+      GameSave gameSave = new GameSave(gameGrid, camera, Player.getInstance());
+      ObjectMapper objectMapper = new ObjectMapper();
+      SimpleModule simpleModule = new SimpleModule("Specials", new Version(1, 0, 0, null));
+      simpleModule.addSerializer(new Vector3Serializer());
+      objectMapper.registerModule(simpleModule);
+      try {
+        FileHandle fileHandle = Gdx.files.external("test.json");
+        objectMapper.writeValue(fileHandle.file(), gameSave);
+      } catch (Exception e) {
+        Gdx.app.log("GameSave", "Could not save game!", e);
+      }
     }
   }
 
-  private void loadGameState() {
-    ObjectMapper objectMapper = new ObjectMapper();
+  private void loadSavedGame() {
+    final FileHandle fileHandle = Gdx.files.external("test.json");
     try {
-      FileHandle fileHandle = Gdx.files.external("test.json");
-      GameState gameState = objectMapper.readValue(fileHandle.file(), GameState.class);
+      ObjectMapper objectMapper = new ObjectMapper();
+      GameSave gameSave = objectMapper.readValue(fileHandle.file(), GameSave.class);
 
-      Player.setInstance(gameState.player);
+      Player.setInstance(gameSave.player);
 
-      camera.position.set(gameState.cameraPosition);
-      camera.zoom = gameState.cameraZoom;
+      camera.position.set(gameSave.cameraPosition);
+      camera.zoom = gameSave.cameraZoom;
 
-      for (GridObjectState gridObjectState : gameState.gridObjects) {
+      for (GridObjectState gridObjectState : gameSave.gridObjects) {
         gridObjectState.materialize(gameGrid);
       }
-    } catch (IOException e) {
-      e.printStackTrace();
+
+      loadedSavedGame = true;
+    } catch (Exception e) {
+      Gdx.app.log("GameSave", "Could not load saved game!", e);
+      new Dialog().setMessage("Saved game could not be loaded, want to reset?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
+        @Override
+        public void onClick(Dialog dialog) {
+          loadedSavedGame = true;
+          fileHandle.delete();
+          dialog.dismiss();
+        }
+      }).addButton(ResponseType.NEGATIVE, "No, exit game", new OnClickCallback() {
+        @Override
+        public void onClick(Dialog dialog) {
+          dialog.dismiss();
+          Gdx.app.exit();
+        }
+      }).centerOnScreen().show();
     }
   }
 
@@ -205,7 +232,7 @@ public class TowerGame implements ApplicationListener {
 
     tweenManager.update();
     gameGrid.update(deltaTime);
-    Player.getInstance().update(deltaTime, gameGrid);
+    gameState.update(deltaTime, gameGrid);
     guiStage.act(deltaTime);
 
     for (GameLayer layer : layers) {
@@ -225,7 +252,7 @@ public class TowerGame implements ApplicationListener {
 
   public void pause() {
     Gdx.app.log("lifecycle", "pausing!");
-    saveGameState();
+    saveGame();
     System.exit(0);
   }
 

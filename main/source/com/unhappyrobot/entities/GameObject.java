@@ -40,6 +40,10 @@ public class GameObject implements Tweenable {
     this(position.x, position.y, scale);
   }
 
+  public GameObject() {
+    this(0, 0, 1);
+  }
+
   public void setScale(float scale) {
     this.scale = scale;
     sprite.setScale(this.scale, this.scale);
@@ -128,6 +132,10 @@ public class GameObject implements Tweenable {
       case TWEEN_OPACITY:
         returnValues[0] = alpha;
         return 1;
+      case TWEEN_POSITION:
+        returnValues[0] = position.x;
+        returnValues[1] = position.y;
+        return 1;
     }
 
     return 0;
@@ -139,8 +147,12 @@ public class GameObject implements Tweenable {
       case TWEEN_OPACITY:
         setOpacity(newValues[0]);
         break;
+      case TWEEN_POSITION:
+        setPosition(newValues[0], newValues[1]);
+        break;
     }
   }
 
   public static final int TWEEN_OPACITY = 0;
+  public static final int TWEEN_POSITION = 1;
 }

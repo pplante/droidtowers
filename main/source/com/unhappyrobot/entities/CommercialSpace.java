@@ -1,7 +1,5 @@
 package com.unhappyrobot.entities;
 
-import com.unhappyrobot.TowerConsts;
-import com.unhappyrobot.actions.TimeDelayedAction;
 import com.unhappyrobot.types.CommercialType;
 import com.unhappyrobot.utils.Random;
 
@@ -12,29 +10,29 @@ public class CommercialSpace extends Room {
 
   public CommercialSpace(CommercialType commercialType, GameGrid gameGrid) {
     super(commercialType, gameGrid);
-
-    addAction(makeEmploymentUpdateAction());
   }
 
-  private TimeDelayedAction makeEmploymentUpdateAction() {
-    return new TimeDelayedAction(TowerConsts.JOB_UPDATE_FREQUENCY) {
-      @Override
-      public void run() {
-        CommercialType commercialType = (CommercialType) getGridObjectType();
+  public void updateJobs() {
+    jobsFilled = 0;
+    if (isConnectedToTransport()) {
+      CommercialType commercialType = (CommercialType) getGridObjectType();
 
-        if (Player.getInstance().getTotalPopulation() > commercialType.getPopulationRequired()) {
-          int jobsProvided = commercialType.getJobsProvided();
-          jobsFilled = Random.randomInt(jobsProvided / 2, jobsProvided);
-        }
+      if (Player.getInstance().getTotalPopulation() > commercialType.getPopulationRequired()) {
+        int jobsProvided = commercialType.getJobsProvided();
+        jobsFilled = Random.randomInt(jobsProvided / 2, jobsProvided);
       }
-    };
+    }
   }
 
   @Override
-  protected void updatePopulation() {
-    CommercialType commercialType = (CommercialType) getGridObjectType();
-    int populationAttraction = commercialType.getPopulationAttraction();
-    attractedPopulation = Random.randomInt(populationAttraction / 2, populationAttraction);
+  public void updatePopulation() {
+    attractedPopulation = 0;
+
+    if (isConnectedToTransport()) {
+      CommercialType commercialType = (CommercialType) getGridObjectType();
+      int populationAttraction = commercialType.getPopulationAttraction();
+      attractedPopulation = Random.randomInt(populationAttraction / 2, populationAttraction);
+    }
   }
 
   public int getJobsFilled() {
@@ -43,5 +41,14 @@ public class CommercialSpace extends Room {
 
   public int getAttractedPopulation() {
     return attractedPopulation;
+  }
+
+  @Override
+  public float getNoiseLevel() {
+    if (jobsFilled > 0) {
+      return gridObjectType.getNoiseLevel() * ((float) jobsFilled / ((CommercialType) gridObjectType).getJobsProvided());
+    }
+
+    return 0;
   }
 }

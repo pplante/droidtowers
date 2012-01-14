@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.unhappyrobot.actions.Action;
+import com.unhappyrobot.events.GridObjectChangedEvent;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.ElevatorType;
 import com.unhappyrobot.types.ResizeHandle;
@@ -18,8 +20,9 @@ public class Elevator extends GridObject {
   private final BitmapFont floorFont;
   private ResizeHandle selectedResizeHandle;
   private boolean drawShaft;
+  private Action onResizeAction;
 
-  public Elevator(ElevatorType elevatorType, GameGrid gameGrid) {
+  public Elevator(ElevatorType elevatorType, final GameGrid gameGrid) {
     super(elevatorType, gameGrid);
 
     size.set(1, 3);
@@ -109,6 +112,18 @@ public class Elevator extends GridObject {
       position.y = Math.max(newPosY, 0);
     }
 
+    gameGrid.broadcastEvent(new GridObjectChangedEvent(Elevator.this));
+
     return true;
+  }
+
+  @Override
+  public Vector2 getContentSize() {
+    return size.cpy().sub(0, 3);
+  }
+
+  @Override
+  public Vector2 getContentPosition() {
+    return position.cpy().add(0, 1);
   }
 }

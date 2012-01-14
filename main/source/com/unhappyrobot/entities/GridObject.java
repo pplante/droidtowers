@@ -137,7 +137,7 @@ public abstract class GridObject {
       long currentTime = System.currentTimeMillis();
 
       for (Action action : actions) {
-        action.call(currentTime);
+        action.act(currentTime);
       }
     }
   }
@@ -167,5 +167,17 @@ public abstract class GridObject {
 
   protected void addAction(TimeDelayedAction action) {
     actions.add(action);
+  }
+
+  public float getNoiseLevel() {
+    return gridObjectType.getNoiseLevel();
+  }
+
+  public Vector2 getContentSize() {
+    return size;
+  }
+
+  public Vector2 getContentPosition() {
+    return position;
   }
 }

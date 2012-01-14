@@ -1,26 +1,21 @@
 package com.unhappyrobot.entities;
 
-import com.unhappyrobot.types.CommercialType;
-import com.unhappyrobot.types.RoomType;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnore;
-
-import java.util.Set;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Player {
   @JsonIgnore
   private static Player instance;
-  private static final long EARN_OUT_INTERVAL_MILLIS = 5000;
 
   private long coins;
   private long experience;
-  private int currentResidency;
   private int jobsFilled;
-  private int jobsProvided;
-  private long lastEarnoutTime;
-  private int attractedPopulation;
+  private int jobsMax;
+  private int populationAttracted;
   private int maxPopulation;
+  private int populationMax;
+  private int populationResidency;
 
   public static Player getInstance() {
     if (instance == null) {
@@ -32,7 +27,6 @@ public class Player {
 
   private Player() {
     coins = 4000;
-    currentResidency = 0;
   }
 
   public static void setInstance(Player newInstance) {
@@ -59,66 +53,48 @@ public class Player {
     return experience;
   }
 
-  public int getCurrentResidency() {
-    return currentResidency;
+  public int getPopulationResidency() {
+    return populationResidency;
   }
 
-  public int getAttractedPopulation() {
-    return attractedPopulation;
+  public int getPopulationAttracted() {
+    return populationAttracted;
   }
 
-  public int getJobsProvided() {
-    return jobsProvided;
+  public int getJobsMax() {
+    return this.jobsMax;
   }
 
   public int getJobsFilled() {
     return jobsFilled;
   }
 
-  public void update(float deltaTime, GameGrid gameGrid) {
-    Set<GridObject> gridObjects = gameGrid.getObjects();
-
-    if ((lastEarnoutTime + EARN_OUT_INTERVAL_MILLIS) < System.currentTimeMillis()) {
-      lastEarnoutTime = System.currentTimeMillis();
-
-      int coinsEarned = 0;
-      for (GridObject object : gridObjects) {
-        coinsEarned += object.getCoinsEarned();
-      }
-      System.out.println(String.format("Player earned: %d coins", coinsEarned));
-      addCurrency(coinsEarned);
-    }
-
-
-    currentResidency = 0;
-    attractedPopulation = 0;
-    maxPopulation = 0;
-    jobsFilled = 0;
-    jobsProvided = 0;
-
-    for (GridObject gridObject : gridObjects) {
-      if (gridObject.getClass().equals(Room.class)) {
-        Room room = (Room) gridObject;
-        currentResidency += room.getCurrentResidency();
-        maxPopulation += ((RoomType) room.getGridObjectType()).getPopulationMax();
-      } else if (gridObject.getClass().equals(CommercialSpace.class)) {
-        CommercialSpace commercialSpace = (CommercialSpace) gridObject;
-        CommercialType commercialType = (CommercialType) commercialSpace.getGridObjectType();
-        attractedPopulation += commercialSpace.getAttractedPopulation();
-        maxPopulation += commercialType.getPopulationAttraction();
-        jobsFilled += commercialSpace.getJobsFilled();
-        jobsProvided += commercialType.getJobsProvided();
-      }
-    }
-  }
-
   @JsonIgnore
   public int getTotalPopulation() {
-    return currentResidency + attractedPopulation;
+    return populationResidency + populationAttracted;
   }
 
-
   public int getMaxPopulation() {
-    return maxPopulation;
+    return populationMax;
+  }
+
+  public void setPopulationMax(int populationMax) {
+    this.populationMax = populationMax;
+  }
+
+  public void setPopulationResidency(int populationResidency) {
+    this.populationResidency = populationResidency;
+  }
+
+  public void setJobsMax(int jobsMax) {
+    this.jobsMax = jobsMax;
+  }
+
+  public void setPopulationAttracted(int populationAttracted) {
+    this.populationAttracted = populationAttracted;
+  }
+
+  public void setJobsFilled(int jobsFilled) {
+    this.jobsFilled = jobsFilled;
   }
 }

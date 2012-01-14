@@ -29,7 +29,7 @@ public class Dialog {
   public Dialog() {
     this.parent = HeadsUpDisplay.getInstance();
     this.skin = HeadsUpDisplay.getInstance().getGuiSkin();
-
+    title = "Dialog";
     buttons = Lists.newArrayList();
 
     positiveButtonInputCallback = new InputCallback() {

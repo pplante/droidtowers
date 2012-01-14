@@ -104,7 +104,7 @@ public class GameGridRenderer extends GameLayer {
   private void renderNoiseLevelOverlay() {
     shapeRenderer.begin(ShapeType.FilledRectangle);
     for (GridObject gridObject : gameGrid.getObjects()) {
-      float noiseLevel = gridObject.getGridObjectType().getNoiseLevel();
+      float noiseLevel = gridObject.getNoiseLevel();
 
       if (noiseLevel > 0) {
         GridPoint position = gridObject.position.cpy();

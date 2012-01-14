@@ -6,24 +6,25 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.sun.istack.internal.Nullable;
+import com.unhappyrobot.events.EventListener;
+import com.unhappyrobot.events.GridObjectAddedEvent;
 import com.unhappyrobot.math.Bounds2d;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 
 public class GameGrid {
   public Vector2 unitSize;
   public Color gridColor;
   public Vector2 gridSize;
 
-  private long lastEarnoutTime;
-
   private HashSet<GridObject> objects;
   private List<GridObject> objectsRenderOrder;
   private Vector2 worldSize;
   private final Function<GridObject, Integer> objectRenderSortFunction;
   private final GameGridRenderer gameGridRenderer;
+  private final Map<Class, Set<GridObject>> gridObjectsByType;
+  private final HashSet<EventListener> eventSubscribers;
 
   public GameGrid() {
     gameGridRenderer = new GameGridRenderer(this);
@@ -32,8 +33,8 @@ public class GameGrid {
     unitSize = new Vector2(16, 16);
     updateWorldSize();
 
-    lastEarnoutTime = System.currentTimeMillis();
-
+    gridObjectsByType = new HashMap<Class, Set<GridObject>>();
+    eventSubscribers = new HashSet<EventListener>();
     objects = new HashSet<GridObject>(25);
     objectRenderSortFunction = new Function<GridObject, Integer>() {
       public Integer apply(@Nullable GridObject gridObject) {
@@ -80,6 +81,18 @@ public class GameGrid {
   public boolean addObject(GridObject gridObject) {
     objects.add(gridObject);
     updateRenderOrder();
+
+    Set<GridObject> gridObjectHashSet;
+    if (!gridObjectsByType.containsKey(gridObject.getClass())) {
+      gridObjectHashSet = new HashSet<GridObject>();
+      gridObjectsByType.put(gridObject.getClass(), gridObjectHashSet);
+    } else {
+      gridObjectHashSet = gridObjectsByType.get(gridObject.getClass());
+    }
+
+    gridObjectHashSet.add(gridObject);
+
+    broadcastEvent(new GridObjectAddedEvent(gridObject));
 
     return true;
   }
@@ -163,6 +176,34 @@ public class GameGrid {
   public void update(float deltaTime) {
     for (GridObject gridObject : objects) {
       gridObject.update(deltaTime);
+    }
+  }
+
+  public Set<GridObject> getInstancesOf(Class<? extends GridObject> aClass, Class<? extends GridObject>... otherClasses) {
+    Set<GridObject> found = new HashSet<GridObject>();
+    if (gridObjectsByType.containsKey(aClass)) {
+      found.addAll(gridObjectsByType.get(aClass));
+    }
+
+    if (otherClasses != null) {
+      for (Class<? extends GridObject> otherClass : otherClasses) {
+        if (gridObjectsByType.containsKey(otherClass)) {
+          found.addAll(gridObjectsByType.get(otherClass));
+        }
+      }
+    }
+
+    return found;
+  }
+
+  public void addEventListener(EventListener newListener) {
+    eventSubscribers.add(newListener);
+  }
+
+  public void broadcastEvent(EventObject event) {
+    Class<? extends EventObject> eventClass = event.getClass();
+    for (EventListener subscriber : eventSubscribers) {
+      subscriber.receiveEvent(eventClass.cast(event));
     }
   }
 }
