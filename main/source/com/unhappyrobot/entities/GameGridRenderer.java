@@ -25,13 +25,14 @@ public class GameGridRenderer extends GameLayer {
   private Overlays activeOverlay;
   private Function<GridObject, Color> employmentLevelOverlayFunc;
   private Function<GridObject, Color> populationLevelOverlayFunc;
+  private Function<GridObject, Color> desirabilityLevelOverlayFunc;
 
   public GameGridRenderer(GameGrid gameGrid) {
     this.gameGrid = gameGrid;
     shouldRenderGridLines = true;
     gl = new ImmediateModeRenderer10();
     shapeRenderer = new ShapeRenderer();
-    activeOverlay = Overlays.NONE;
+    activeOverlay = Overlays.DESIRABLITY_LEVEL;
 
     makeOverlayFunctions();
   }
@@ -55,6 +56,8 @@ public class GameGridRenderer extends GameLayer {
         renderGenericOverlay(populationLevelOverlayFunc);
       } else if (activeOverlay.equals(Overlays.EMPLOYMENT_LEVEL)) {
         renderGenericOverlay(employmentLevelOverlayFunc);
+      } else if (activeOverlay.equals(Overlays.DESIRABLITY_LEVEL)) {
+        renderGenericOverlay(desirabilityLevelOverlayFunc);
       }
     }
   }
@@ -85,6 +88,17 @@ public class GameGridRenderer extends GameLayer {
         return null;
       }
     };
+
+    desirabilityLevelOverlayFunc = new Function<GridObject, Color>() {
+      public Color apply(@Nullable GridObject gridObject) {
+        if (gridObject instanceof Room && !(gridObject instanceof CommercialSpace)) {
+          float desirability = ((Room) gridObject).getDesirability();
+          return new Color(0, 0, 1, desirability);
+        }
+
+        return null;
+      }
+    };
   }
 
   private void renderGenericOverlay(Function<GridObject, Color> function) {
@@ -94,7 +108,7 @@ public class GameGridRenderer extends GameLayer {
       Color blockColor = function.apply(gridObject);
       if (blockColor != null) {
         shapeRenderer.setColor(blockColor);
-        shapeRenderer.filledRect(gridObject.position.getWorldX(), gridObject.position.getWorldY(), gridObject.size.getWorldX(), gridObject.size.getWorldY());
+        shapeRenderer.filledRect(gridObject.position.getWorldX(gameGrid), gridObject.position.getWorldY(gameGrid), gridObject.size.getWorldX(gameGrid), gridObject.size.getWorldY(gameGrid));
       }
     }
 
@@ -115,7 +129,7 @@ public class GameGridRenderer extends GameLayer {
           position.sub(i, i);
           size.add(i * 2, i * 2);
 
-          shapeRenderer.filledRect(position.getWorldX(), position.getWorldY(), size.getWorldX(), size.getWorldY());
+          shapeRenderer.filledRect(position.getWorldX(gameGrid), position.getWorldY(gameGrid), size.getWorldX(gameGrid), size.getWorldY(gameGrid));
           shapeRenderer.setColor(1, 0, 0, noiseLevel);
 
           noiseLevel -= colorStep;

@@ -46,10 +46,10 @@ public class Elevator extends GridObject {
   public void render(SpriteBatch spriteBatch) {
     Vector2 renderPosition = position.cpy();
 
-    GridPoint gridPoint = new GridPoint(gameGrid, position);
+    GridPoint gridPoint = new GridPoint(position.x, position.y);
 
     bottomSprite.setColor(renderColor);
-    bottomSprite.setPosition(gridPoint.getWorldX(), gridPoint.getWorldY());
+    bottomSprite.setPosition(gridPoint.getWorldX(gameGrid), gridPoint.getWorldY(gameGrid));
     bottomSprite.draw(spriteBatch);
 
     Sprite shaftToRender = drawShaft ? shaftSprite : emptyShaftSprite;
@@ -57,18 +57,18 @@ public class Elevator extends GridObject {
     for (int y = (int) position.y + 1; y < position.y + size.y - 1; y++) {
       gridPoint.add(0, 1);
 
-      shaftToRender.setPosition(gridPoint.getWorldX(), gridPoint.getWorldY());
+      shaftToRender.setPosition(gridPoint.getWorldX(gameGrid), gridPoint.getWorldY(gameGrid));
       shaftToRender.draw(spriteBatch);
 
       String labelText = (y < 4 ? "B" + (4 - y) : "" + (y - 3));
       BitmapFont.TextBounds textBounds = floorFont.getBounds(labelText);
       floorFont.setColor(1, 1, 1, 0.5f);
-      floorFont.draw(spriteBatch, labelText, gridPoint.getWorldX() + ((gameGrid.unitSize.x - textBounds.width) / 2), gridPoint.getWorldY() + ((gameGrid.unitSize.y - textBounds.height) / 2));
+      floorFont.draw(spriteBatch, labelText, gridPoint.getWorldX(gameGrid) + ((gameGrid.unitSize.x - textBounds.width) / 2), gridPoint.getWorldY(gameGrid) + ((gameGrid.unitSize.y - textBounds.height) / 2));
     }
 
     gridPoint.add(0, 1);
     topSprite.setColor(renderColor);
-    topSprite.setPosition(gridPoint.getWorldX(), gridPoint.getWorldY());
+    topSprite.setPosition(gridPoint.getWorldX(gameGrid), gridPoint.getWorldY(gameGrid));
     topSprite.draw(spriteBatch);
   }
 

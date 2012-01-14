@@ -23,6 +23,7 @@ public class Room extends GridObject {
   protected int currentResidency;
   private int populationRequired;
   private boolean connectedToTransport;
+  private float desirability;
 
   public Room(RoomType roomType, GameGrid gameGrid) {
     super(roomType, gameGrid);
@@ -92,9 +93,9 @@ public class Room extends GridObject {
 
     if (dynamicSprite) {
       BitmapFont.TextBounds textBounds = labelFont.getBounds(gridObjectType.getName());
-      Vector2 centerPoint = size.toWorldVector2().sub(textBounds.width, textBounds.height).mul(0.5f);
+      Vector2 centerPoint = size.toWorldVector2(gameGrid).sub(textBounds.width, textBounds.height).mul(0.5f);
 
-      labelFont.draw(spriteBatch, gridObjectType.getName(), position.getWorldX() + centerPoint.x, position.getWorldY() + centerPoint.y);
+      labelFont.draw(spriteBatch, gridObjectType.getName(), position.getWorldX(gameGrid) + centerPoint.x, position.getWorldY(gameGrid) + centerPoint.y);
     }
   }
 
@@ -128,5 +129,13 @@ public class Room extends GridObject {
     }
 
     return 0;
+  }
+
+  public void setDesirability(float desirability) {
+    this.desirability = desirability;
+  }
+
+  public float getDesirability() {
+    return desirability;
   }
 }

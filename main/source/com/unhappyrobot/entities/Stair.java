@@ -30,7 +30,7 @@ public class Stair extends GridObject {
     // stairs need to support overflowing into ajacent cells.
     if (sprite != null) {
       sprite.setColor(renderColor);
-      sprite.setPosition(position.getWorldX(), position.getWorldY());
+      sprite.setPosition(position.getWorldX(gameGrid), position.getWorldY(gameGrid));
       sprite.draw(spriteBatch);
     }
   }

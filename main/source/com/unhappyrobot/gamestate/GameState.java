@@ -26,7 +26,8 @@ public class GameState extends EventListener {
   private final GameStateAction calculatePopulation;
   private final GameStateAction calculateJobs;
   private final GameStateAction calculateEarnout;
-  private boolean allowSaveGame;
+  private final GameStateAction calculateDesirablity;
+  private boolean shouldSaveGame;
 
   public GameState(final GameGrid gameGrid) {
     this.gameGrid = gameGrid;
@@ -36,12 +37,14 @@ public class GameState extends EventListener {
     calculateEarnout = new EarnoutCalculator(this.gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
     calculateJobs = new EmploymentCalculator(this.gameGrid, TowerConsts.JOB_UPDATE_FREQUENCY);
     calculateTransportConnectionsAction = new TransportCalculator(this.gameGrid, 250);
+    calculateDesirablity = new DesirabilityCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
   }
 
   public void update(float deltaTime, GameGrid gameGrid) {
     long currentTime = System.currentTimeMillis();
 
     calculateTransportConnectionsAction.act(currentTime);
+    calculateDesirablity.act(currentTime);
     calculatePopulation.act(currentTime);
     calculateJobs.act(currentTime);
     calculateEarnout.act(currentTime);
@@ -56,7 +59,7 @@ public class GameState extends EventListener {
   }
 
   public void loadSavedGame(final FileHandle fileHandle, OrthographicCamera camera) {
-    allowSaveGame = true;
+    shouldSaveGame = true;
 
     if (!fileHandle.exists()) {
       return;
@@ -85,7 +88,7 @@ public class GameState extends EventListener {
       }).addButton(ResponseType.NEGATIVE, "No, exit game", new OnClickCallback() {
         @Override
         public void onClick(Dialog dialog) {
-          allowSaveGame = false;
+          shouldSaveGame = false;
           dialog.dismiss();
           Gdx.app.exit();
         }
@@ -94,7 +97,7 @@ public class GameState extends EventListener {
   }
 
   public void saveGame(FileHandle fileHandle, OrthographicCamera camera) {
-    if (allowSaveGame) {
+    if (shouldSaveGame) {
       GameSave gameSave = new GameSave(gameGrid, camera, Player.getInstance());
       ObjectMapper objectMapper = new ObjectMapper();
       SimpleModule simpleModule = new SimpleModule("Specials", new Version(1, 0, 0, null));

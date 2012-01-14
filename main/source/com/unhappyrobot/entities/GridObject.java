@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.collect.Lists;
 import com.unhappyrobot.actions.Action;
 import com.unhappyrobot.actions.TimeDelayedAction;
 import com.unhappyrobot.math.Bounds2d;
@@ -11,6 +12,7 @@ import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.GridObjectType;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public abstract class GridObject {
@@ -26,8 +28,8 @@ public abstract class GridObject {
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
     this.gameGrid = gameGrid;
-    this.position = new GridPoint(gameGrid, 0, 0);
-    this.size = new GridPoint(gameGrid, gridObjectType.getWidth(), gridObjectType.getHeight());
+    this.position = new GridPoint(0, 0);
+    this.size = new GridPoint(gridObjectType.getWidth(), gridObjectType.getHeight());
     placementState = GridObjectPlacementState.INVALID;
     renderColor = Color.WHITE;
     bounds = new Bounds2d(position, size);
@@ -60,8 +62,8 @@ public abstract class GridObject {
     Sprite sprite = getSprite();
     if (sprite != null) {
       sprite.setColor(renderColor);
-      sprite.setPosition(position.getWorldX(), position.getWorldY());
-      sprite.setSize(size.getWorldX(), size.getWorldY());
+      sprite.setPosition(position.getWorldX(gameGrid), position.getWorldY(gameGrid));
+      sprite.setSize(size.getWorldX(gameGrid), size.getWorldY(gameGrid));
       sprite.draw(spriteBatch);
     }
   }
@@ -179,5 +181,17 @@ public abstract class GridObject {
 
   public Vector2 getContentPosition() {
     return position;
+  }
+
+  public List<GridPoint> getGridPointsOccupied() {
+    List<GridPoint> points = Lists.newArrayList();
+
+    for (float x = position.x; x < position.x + size.x; x += 1f) {
+      for (float y = position.y; y < position.y + size.y; y += 1f) {
+        points.add(new GridPoint(x, y));
+      }
+    }
+
+    return points;
   }
 }

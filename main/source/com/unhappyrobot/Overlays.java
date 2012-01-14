@@ -10,19 +10,24 @@ public enum Overlays {
   NOISE_LEVEL {
     @Override
     public String toString() {
-      return "Noise Level";
+      return "Noise";
     }
   },
   POPULATION_LEVEL {
     @Override
     public String toString() {
-      return "Population Level";
+      return "Population";
     }
   },
   EMPLOYMENT_LEVEL {
     @Override
     public String toString() {
-      return "Employment Level";
+      return "Employment";
+    }
+  }, DESIRABLITY_LEVEL {
+    @Override
+    public String toString() {
+      return "Desirability";
     }
   };
 
