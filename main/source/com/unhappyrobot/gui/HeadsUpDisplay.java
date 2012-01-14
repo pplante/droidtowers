@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.unhappyrobot.Overlays;
+import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.input.GestureTool;
@@ -34,6 +36,8 @@ public class HeadsUpDisplay extends Group {
   private BitmapFont defaultBitmapFont;
   private BitmapFont menloBitmapFont;
   private Toast toast;
+  private LabelButton setOverlayButton;
+  private Menu overlayMenu;
 
   public static HeadsUpDisplay getInstance() {
     if (instance == null) {
@@ -56,6 +60,9 @@ public class HeadsUpDisplay extends Group {
     hudAtlas = new TextureAtlas(Gdx.files.internal("hud/buttons.txt"));
     makeAddRoomButton();
     makeAddRoomMenu();
+
+    makeOverlayButton();
+
     makeMoneyLabel();
 
     this.guiStage.addActor(this);
@@ -80,16 +87,44 @@ public class HeadsUpDisplay extends Group {
 
   private void makeAddRoomButton() {
     addRoomButton = new LabelButton(guiSkin, "Add Room");
-    addRoomButton.defaults();
+    addRoomButton.x = 10;
+    addRoomButton.y = Gdx.graphics.getHeight() - addRoomButton.height - 25;
+
     addRoomButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         addRoomMenu.show(addRoomButton);
       }
     });
-    addRoomButton.pack();
-    addRoomButton.x = 10;
-    addRoomButton.y = Gdx.graphics.getHeight() - addRoomButton.height - 10;
+
     addActor(addRoomButton);
+  }
+
+  private void makeOverlayButton() {
+    setOverlayButton = new LabelButton(guiSkin, "Overlays");
+    setOverlayButton.x = 150;
+    setOverlayButton.y = Gdx.graphics.getHeight() - setOverlayButton.height - 25;
+
+    setOverlayButton.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        overlayMenu.show(setOverlayButton);
+      }
+    });
+
+    addActor(setOverlayButton);
+
+    overlayMenu = new Menu();
+    overlayMenu.defaults();
+    overlayMenu.top().left();
+
+    for (final Overlays overlay : Overlays.values()) {
+      overlayMenu.add(new MenuItem(guiSkin, overlay.toString(), new ClickListener() {
+        public void click(Actor actor, float x, float y) {
+          TowerGame.getGameGridRenderer().setActiveOverlay(overlay);
+
+          overlayMenu.close();
+        }
+      }));
+    }
   }
 
   private void makeAddRoomMenu() {

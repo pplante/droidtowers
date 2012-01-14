@@ -28,7 +28,7 @@ public class Room extends GridObject {
     super(roomType, gameGrid);
 
     if (labelFont == null) {
-      labelFont = new BitmapFont(Gdx.files.internal("fonts/bank_gothic_32.fnt"), false);
+      labelFont = new BitmapFont(Gdx.files.internal("fonts/helvetica_neue_18.fnt"), false);
     }
 
     if (roomType.getAtlasFilename() != null) {

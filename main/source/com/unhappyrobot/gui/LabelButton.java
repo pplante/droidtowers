@@ -11,7 +11,7 @@ public class LabelButton extends Button {
 
   public LabelButton(Skin uiSkin, String labelText) {
     super(uiSkin);
-
+    defaults();
     label = new Label(labelText, uiSkin);
     add(label);
   }
@@ -27,5 +27,11 @@ public class LabelButton extends Button {
 
   public void setResponseType(ResponseType responseType) {
     this.responseType = responseType;
+  }
+
+  @Override
+  public void validate() {
+    pack();
+    super.validate();
   }
 }

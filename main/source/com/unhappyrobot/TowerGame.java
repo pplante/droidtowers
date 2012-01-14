@@ -13,10 +13,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
-import com.unhappyrobot.entities.CloudLayer;
-import com.unhappyrobot.entities.GameGrid;
-import com.unhappyrobot.entities.GameLayer;
-import com.unhappyrobot.entities.Player;
+import com.unhappyrobot.entities.*;
 import com.unhappyrobot.graphics.BackgroundLayer;
 import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.HeadsUpDisplay;
@@ -49,6 +46,11 @@ public class TowerGame implements ApplicationListener {
   private GameGrid gameGrid;
   private static TweenManager tweenManager;
   private Stage guiStage;
+  private static GameGridRenderer gameGridRenderer;
+
+  public static GameGridRenderer getGameGridRenderer() {
+    return gameGridRenderer;
+  }
 
   public void create() {
     Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
@@ -88,7 +90,9 @@ public class TowerGame implements ApplicationListener {
     InputSystem.getInstance().addInputProcessor(guiStage, 10);
     Gdx.input.setInputProcessor(InputSystem.getInstance());
 
-    layers = Lists.newArrayList(groundLayer, skyLayer, new CloudLayer(gameGrid.getWorldSize()), gameGrid.getRenderer());
+    gameGridRenderer = gameGrid.getRenderer();
+
+    layers = Lists.newArrayList(groundLayer, skyLayer, new CloudLayer(gameGrid.getWorldSize()), gameGridRenderer);
 
     InputSystem.getInstance().bind(Keys.G, new InputCallback() {
       public boolean run(float timeDelta) {
