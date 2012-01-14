@@ -26,7 +26,7 @@ public class GameState extends EventListener {
   private final GameStateAction calculatePopulation;
   private final GameStateAction calculateJobs;
   private final GameStateAction calculateEarnout;
-  private boolean loadedSavedGame;
+  private boolean allowSaveGame;
 
   public GameState(final GameGrid gameGrid) {
     this.gameGrid = gameGrid;
@@ -56,6 +56,12 @@ public class GameState extends EventListener {
   }
 
   public void loadSavedGame(final FileHandle fileHandle, OrthographicCamera camera) {
+    allowSaveGame = true;
+
+    if (!fileHandle.exists()) {
+      return;
+    }
+
     try {
       ObjectMapper objectMapper = new ObjectMapper();
       GameSave gameSave = objectMapper.readValue(fileHandle.file(), GameSave.class);
@@ -68,20 +74,18 @@ public class GameState extends EventListener {
       for (GridObjectState gridObjectState : gameSave.getGridObjects()) {
         gridObjectState.materialize(gameGrid);
       }
-
-      loadedSavedGame = true;
     } catch (Exception e) {
       Gdx.app.log("GameSave", "Could not load saved game!", e);
       new Dialog().setMessage("Saved game could not be loaded, want to reset?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
         @Override
         public void onClick(Dialog dialog) {
-          loadedSavedGame = true;
           fileHandle.delete();
           dialog.dismiss();
         }
       }).addButton(ResponseType.NEGATIVE, "No, exit game", new OnClickCallback() {
         @Override
         public void onClick(Dialog dialog) {
+          allowSaveGame = false;
           dialog.dismiss();
           Gdx.app.exit();
         }
@@ -90,7 +94,7 @@ public class GameState extends EventListener {
   }
 
   public void saveGame(FileHandle fileHandle, OrthographicCamera camera) {
-    if (loadedSavedGame) {
+    if (allowSaveGame) {
       GameSave gameSave = new GameSave(gameGrid, camera, Player.getInstance());
       ObjectMapper objectMapper = new ObjectMapper();
       SimpleModule simpleModule = new SimpleModule("Specials", new Version(1, 0, 0, null));

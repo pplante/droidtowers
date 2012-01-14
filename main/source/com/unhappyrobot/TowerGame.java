@@ -2,8 +2,10 @@ package com.unhappyrobot;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -44,6 +46,7 @@ public class TowerGame implements ApplicationListener {
   private static GameGridRenderer gameGridRenderer;
   private GameState gameState;
   private boolean loadedSavedGame;
+  private FileHandle gameSaveLocation;
 
   public static GameGridRenderer getGameGridRenderer() {
     return gameGridRenderer;
@@ -145,7 +148,8 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    gameState.loadSavedGame(Gdx.files.external("test.json"), camera);
+    gameSaveLocation = Gdx.files.external(Gdx.app.getType().equals(Application.ApplicationType.Desktop) ? ".towergame/test.json" : "test.json");
+    gameState.loadSavedGame(gameSaveLocation, camera);
   }
 
   public void render() {
@@ -196,7 +200,7 @@ public class TowerGame implements ApplicationListener {
 
   public void pause() {
     Gdx.app.log("lifecycle", "pausing!");
-    gameState.saveGame(Gdx.files.external("test.json"), camera);
+    gameState.saveGame(gameSaveLocation, camera);
     System.exit(0);
   }
 
