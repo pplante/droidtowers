@@ -1,24 +1,16 @@
 package com.unhappyrobot.gui;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
-public class LabelButton extends Button {
-
-  private final Label label;
+public class LabelButton extends TextButton {
   private ResponseType responseType;
 
   public LabelButton(Skin uiSkin, String labelText) {
-    super(uiSkin);
+    super(labelText, uiSkin);
     defaults();
-    label = new Label(labelText, uiSkin);
-    add(label);
-  }
-
-  public void setText(String newText) {
-    label.setText(newText);
-    pack();
+    getLabelCell().pad(4, 8, 4, 8);
+    invalidate();
   }
 
   public ResponseType getResponseType() {
@@ -27,11 +19,5 @@ public class LabelButton extends Button {
 
   public void setResponseType(ResponseType responseType) {
     this.responseType = responseType;
-  }
-
-  @Override
-  public void validate() {
-    pack();
-    super.validate();
   }
 }

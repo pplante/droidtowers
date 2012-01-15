@@ -1,7 +1,10 @@
 package com.unhappyrobot.gui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -9,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.Overlays;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.entities.GameGrid;
@@ -34,7 +38,8 @@ public class HeadsUpDisplay extends Group {
   private BitmapFont menloBitmapFont;
   private Toast toast;
   private LabelButton setOverlayButton;
-  private Window overlayWin;
+  private Menu overlayMenu;
+  private Table topBar;
 
   public static HeadsUpDisplay getInstance() {
     if (instance == null) {
@@ -55,12 +60,27 @@ public class HeadsUpDisplay extends Group {
     defaultBitmapFont = new BitmapFont(Gdx.files.internal("default.fnt"), false);
 
     hudAtlas = new TextureAtlas(Gdx.files.internal("hud/buttons.txt"));
+
+    topBar = new Table();
+    topBar.defaults();
+    topBar.top().left();
+    topBar.setBackground(guiSkin.getPatch("default-round"));
+
+    addActor(topBar);
+
+    topBar.row().top().left().pad(5);
+
     makeAddRoomButton();
     makeAddRoomMenu();
 
     makeOverlayButton();
 
     makeMoneyLabel();
+
+    topBar.pack();
+
+    topBar.x = 0;
+    topBar.y = Gdx.graphics.getHeight() - topBar.height;
 
     this.guiStage.addActor(this);
   }
@@ -84,48 +104,46 @@ public class HeadsUpDisplay extends Group {
 
   private void makeAddRoomButton() {
     addRoomButton = new LabelButton(guiSkin, "Add Room");
-    addRoomButton.x = 10;
-    addRoomButton.y = Gdx.graphics.getHeight() - addRoomButton.height - 25;
-
     addRoomButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         addRoomMenu.show(addRoomButton);
       }
     });
 
-    addActor(addRoomButton);
+    topBar.add(addRoomButton);
   }
 
   private void makeOverlayButton() {
     setOverlayButton = new LabelButton(guiSkin, "Overlays");
-    setOverlayButton.x = 150;
-    setOverlayButton.y = Gdx.graphics.getHeight() - setOverlayButton.height - 25;
+//    setOverlayButton.x = 150;
+//    setOverlayButton.y = Gdx.graphics.getHeight() - setOverlayButton.height - 25;
 
     setOverlayButton.setClickListener(new ClickListener() {
       boolean isShowing;
 
       public void click(Actor actor, float x, float y) {
-        if (!isShowing) {
-          guiStage.addActor(overlayWin);
-        } else {
-          guiStage.removeActor(overlayWin);
-        }
-
-        isShowing = !isShowing;
+//        if (!isShowing) {
+//          guiStage.addActor(overlayMenu);
+//        } else {
+//          guiStage.removeActor(overlayMenu);
+//        }
+//
+//        isShowing = !isShowing;
+        overlayMenu.show(setOverlayButton);
       }
     });
 
-    addActor(setOverlayButton);
+    topBar.add(setOverlayButton);
 
-    overlayWin = new Window(guiSkin);
-    overlayWin.defaults();
-    overlayWin.top().left();
-    overlayWin.x = 400;
-    overlayWin.y = 400;
+    overlayMenu = new Menu(guiSkin);
+    overlayMenu.defaults();
+    overlayMenu.top().left();
 
     for (final Overlays overlay : Overlays.values()) {
       final CheckBox checkBox = new CheckBox(overlay.toString(), guiSkin);
       checkBox.align(Align.LEFT);
+      checkBox.getLabelCell().pad(4);
+      checkBox.invalidate();
       checkBox.setClickListener(new ClickListener() {
         public void click(Actor actor, float x, float y) {
           if (checkBox.isChecked()) {
@@ -135,17 +153,42 @@ public class HeadsUpDisplay extends Group {
           }
         }
       });
-      overlayWin.row();
-      overlayWin.add(checkBox).expand();
+      overlayMenu.row().left().pad(2, 6, 2, 6);
+      overlayMenu.add(checkBox);
+      Pixmap pixmap = new Pixmap(16, 16, Pixmap.Format.RGB565);
+      pixmap.setColor(Color.GRAY);
+      pixmap.fill();
+      pixmap.setColor(overlay.getColor(1f));
+      pixmap.fillRectangle(1, 1, 14, 14);
+
+      Image image = new Image(new Texture(pixmap));
+      overlayMenu.add(image);
     }
 
-    overlayWin.pack();
+    overlayMenu.row().colspan(2).left().pad(6, 2, 2, 2);
+    LabelButton clearAllButton = new LabelButton(guiSkin, "Clear All");
+    clearAllButton.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        TowerGame.getGameGridRenderer().clearOverlays();
+
+        for (Actor child : overlayMenu.getActors()) {
+          if (child instanceof CheckBox) {
+            ((CheckBox) child).setChecked(false);
+          }
+        }
+      }
+    });
+
+    overlayMenu.add(clearAllButton).fill();
+
+    overlayMenu.pack();
   }
 
   private void makeAddRoomMenu() {
-    addRoomMenu = new Menu();
+    addRoomMenu = new Menu(guiSkin);
     addRoomMenu.defaults();
     addRoomMenu.top().left();
+    addRoomMenu.pad(0);
 
     for (final RoomType roomType : RoomTypeFactory.getInstance().all()) {
       addRoomMenu.add(makeGridObjectMenuItem(roomType));
@@ -162,24 +205,34 @@ public class HeadsUpDisplay extends Group {
     for (StairType stairType : StairTypeFactory.getInstance().all()) {
       addRoomMenu.add(makeGridObjectMenuItem(stairType));
     }
+
+    addRoomMenu.pack();
   }
 
   private MenuItem makeGridObjectMenuItem(final GridObjectType gridObjectType) {
+    addRoomMenu.row().padTop(-1).fill();
+
     return new MenuItem(guiSkin, gridObjectType.getName(), new ClickListener() {
       public void click(Actor actor, float x, float y) {
         InputSystem.getInstance().switchTool(GestureTool.PLACEMENT, new Runnable() {
           public void run() {
-            addRoomButton.setText("Add Room");
+            updateButtonText("Add Room");
           }
         });
 
-        addRoomButton.setText(gridObjectType.getName());
+        updateButtonText(gridObjectType.getName());
 
         PlacementTool placementTool = (PlacementTool) InputSystem.getInstance().getCurrentTool();
         placementTool.setup(gridObjectType);
         placementTool.enterPurchaseMode();
 
         addRoomMenu.close();
+      }
+
+      private void updateButtonText(String buttonText) {
+        addRoomButton.setText(buttonText);
+        addRoomButton.invalidate();
+        topBar.pack();
       }
     });
   }

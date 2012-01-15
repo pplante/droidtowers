@@ -30,7 +30,7 @@ public class GameGridRenderer extends GameLayer {
   private Function<GridObject, Color> populationLevelOverlayFunc;
   private Function<GridObject, Color> desirabilityLevelOverlayFunc;
   private HashSet<Overlays> activeOverlays;
-  private Map<Overlays, Function<GridObject, Color>> overlayFunctions;
+  private Map<Overlays, Function<GridObject, Float>> overlayFunctions;
 
   public GameGridRenderer(GameGrid gameGrid) {
     this.gameGrid = gameGrid;
@@ -60,21 +60,21 @@ public class GameGridRenderer extends GameLayer {
         if (overlay.equals(Overlays.NOISE_LEVEL)) {
           renderNoiseLevelOverlay();
         } else {
-          renderGenericOverlay(overlayFunctions.get(overlay));
+          renderGenericOverlay(overlay);
         }
       }
     }
   }
 
   private void makeOverlayFunctions() {
-    overlayFunctions = new HashMap<Overlays, Function<GridObject, Color>>();
+    overlayFunctions = new HashMap<Overlays, Function<GridObject, Float>>();
 
-    overlayFunctions.put(Overlays.EMPLOYMENT_LEVEL, new Function<GridObject, Color>() {
-      public Color apply(@Nullable GridObject gridObject) {
+    overlayFunctions.put(Overlays.EMPLOYMENT_LEVEL, new Function<GridObject, Float>() {
+      public Float apply(@Nullable GridObject gridObject) {
         if (gridObject instanceof CommercialSpace) {
           float jobsProvided = ((CommercialType) gridObject.getGridObjectType()).getJobsProvided();
           if (jobsProvided > 0f) {
-            return new Color(0, 1, 0, ((CommercialSpace) gridObject).getJobsFilled() / jobsProvided);
+            return ((CommercialSpace) gridObject).getJobsFilled() / jobsProvided;
           }
         }
 
@@ -82,12 +82,12 @@ public class GameGridRenderer extends GameLayer {
       }
     });
 
-    overlayFunctions.put(Overlays.POPULATION_LEVEL, new Function<GridObject, Color>() {
-      public Color apply(@Nullable GridObject gridObject) {
+    overlayFunctions.put(Overlays.POPULATION_LEVEL, new Function<GridObject, Float>() {
+      public Float apply(@Nullable GridObject gridObject) {
         if (gridObject instanceof Room) {
           float populationMax = ((RoomType) gridObject.getGridObjectType()).getPopulationMax();
           if (populationMax > 0f) {
-            return new Color(0, 0, 1, ((Room) gridObject).getCurrentResidency() / populationMax);
+            return ((Room) gridObject).getCurrentResidency() / populationMax;
           }
         }
 
@@ -95,11 +95,10 @@ public class GameGridRenderer extends GameLayer {
       }
     });
 
-    overlayFunctions.put(Overlays.DESIRABLITY_LEVEL, new Function<GridObject, Color>() {
-      public Color apply(@Nullable GridObject gridObject) {
+    overlayFunctions.put(Overlays.DESIRABILITY_LEVEL, new Function<GridObject, Float>() {
+      public Float apply(@Nullable GridObject gridObject) {
         if (gridObject instanceof Room && !(gridObject instanceof CommercialSpace)) {
-          float desirability = ((Room) gridObject).getDesirability();
-          return new Color(0, 0, 1, desirability);
+          return ((Room) gridObject).getDesirability();
         }
 
         return null;
@@ -107,13 +106,17 @@ public class GameGridRenderer extends GameLayer {
     });
   }
 
-  private void renderGenericOverlay(Function<GridObject, Color> function) {
+  private void renderGenericOverlay(Overlays overlay) {
+    Function<GridObject, Float> function = overlayFunctions.get(overlay);
+    Color baseColor = overlay.getColor(1f);
+
     shapeRenderer.begin(ShapeType.FilledRectangle);
 
     for (GridObject gridObject : gameGrid.getObjects()) {
-      Color blockColor = function.apply(gridObject);
-      if (blockColor != null) {
-        shapeRenderer.setColor(blockColor);
+      Float returnValue = function.apply(gridObject);
+      if (returnValue != null) {
+        baseColor.a = returnValue;
+        shapeRenderer.setColor(baseColor);
         shapeRenderer.filledRect(gridObject.position.getWorldX(gameGrid), gridObject.position.getWorldY(gameGrid), gridObject.size.getWorldX(gameGrid), gridObject.size.getWorldY(gameGrid));
       }
     }
@@ -136,7 +139,7 @@ public class GameGridRenderer extends GameLayer {
           size.add(i * 2, i * 2);
 
           shapeRenderer.filledRect(position.getWorldX(gameGrid), position.getWorldY(gameGrid), size.getWorldX(gameGrid), size.getWorldY(gameGrid));
-          shapeRenderer.setColor(1, 0, 0, noiseLevel);
+          shapeRenderer.setColor(Overlays.NOISE_LEVEL.getColor(noiseLevel));
 
           noiseLevel -= colorStep;
         }
@@ -181,5 +184,9 @@ public class GameGridRenderer extends GameLayer {
 
   public void removeActiveOverlay(Overlays overlay) {
     activeOverlays.remove(overlay);
+  }
+
+  public void clearOverlays() {
+    activeOverlays.clear();
   }
 }

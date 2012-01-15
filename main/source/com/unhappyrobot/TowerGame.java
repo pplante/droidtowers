@@ -53,7 +53,7 @@ public class TowerGame implements ApplicationListener {
   }
 
   public void create() {
-    Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
+    Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
 
     RoomTypeFactory.getInstance();
     CommercialTypeFactory.getInstance();
@@ -111,6 +111,14 @@ public class TowerGame implements ApplicationListener {
     InputSystem.getInstance().bind(Keys.NUM_0, new InputCallback() {
       public boolean run(float timeDelta) {
         camera.zoom = 1f;
+
+        return true;
+      }
+    });
+
+    InputSystem.getInstance().bind(Keys.R, new InputCallback() {
+      public boolean run(float timeDelta) {
+        Texture.invalidateAllTextures(Gdx.app);
 
         return true;
       }

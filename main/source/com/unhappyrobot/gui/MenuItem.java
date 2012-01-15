@@ -1,17 +1,15 @@
 package com.unhappyrobot.gui;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-public class MenuItem extends Button {
+public class MenuItem extends LabelButton {
   public MenuItem(Skin skin, String labelText, ClickListener clickListener) {
-    super(skin);
+    super(skin, labelText);
 
-    Label label = new Label(labelText, skin);
-    left().add(label);
-
+    getLabel().setAlignment(Align.LEFT);
+    setText(labelText);
     setClickListener(clickListener);
   }
 }

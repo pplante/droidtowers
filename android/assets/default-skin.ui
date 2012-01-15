@@ -173,7 +173,7 @@ default-rect-down: [
 { width: 1, height: 1, x: 9, y: 115 }
 ]
 },
-com.badlogic.gdx.graphics.g2d.BitmapFont: { default-font: { file: fonts/menlo_16.fnt } },
+com.badlogic.gdx.graphics.g2d.BitmapFont: { default-font: { file: fonts/helvetica_neue_12_white.fnt } },
 com.badlogic.gdx.graphics.Color: {
 green: { a: 1, b: 0, g: 1, r: 0 },
 white: { a: 1, b: 1, g: 1, r: 1 },

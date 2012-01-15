@@ -6,8 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.OnActionCompleted;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeOut;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.esotericsoftware.tablelayout.Cell;
 import com.unhappyrobot.input.InputSystem;
 
 public class Menu extends Table {
@@ -15,24 +15,18 @@ public class Menu extends Table {
   private MenuCloser menuCloser;
   private Actor parent;
 
-  public Menu() {
-    super();
+  public Menu(Skin guiSkin) {
+    super(guiSkin);
 
+    setBackground(guiSkin.getPatch("default-round"));
     menuCloser = new MenuCloser(this);
-  }
-
-  @Override
-  public Cell add(Actor actor) {
-    row().fill();
-
-    return super.add(actor);
   }
 
   public void show(Group parent) {
     this.parent = parent;
 
     x = 0;
-    y = 0;
+    y = -height + 1;
 
     parent.addActor(this);
     color.a = 0;
