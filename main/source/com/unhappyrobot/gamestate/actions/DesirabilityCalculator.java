@@ -42,25 +42,26 @@ public class DesirabilityCalculator extends GameStateAction {
     }
 
     Set<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
+    if (rooms != null) {
+      for (GridObject gridObject : rooms) {
+        Room room = (Room) gridObject;
 
-    for (GridObject gridObject : rooms) {
-      Room room = (Room) gridObject;
-
-      float total = 0;
-      int count = 0;
-      for (GridPoint gridPoint : gridObject.getGridPointsOccupied()) {
-        if (noisyPositions.containsKey(gridPoint)) {
-          List<Float> floats = noisyPositions.get(gridPoint);
-          count += floats.size();
-          for (Float val : floats) {
-            total += val;
+        float total = 0;
+        int count = 0;
+        for (GridPoint gridPoint : gridObject.getGridPointsOccupied()) {
+          if (noisyPositions.containsKey(gridPoint)) {
+            List<Float> floats = noisyPositions.get(gridPoint);
+            count += floats.size();
+            for (Float val : floats) {
+              total += val;
+            }
           }
         }
-      }
-      if (count > 0f) {
-        room.setDesirability(0.9f * (total / count));
-      } else {
-        room.setDesirability(0.9f);
+        if (count > 0f) {
+          room.setDesirability(0.9f * (total / count));
+        } else {
+          room.setDesirability(0.9f);
+        }
       }
     }
   }
