@@ -1,8 +1,9 @@
 package com.unhappyrobot.entities;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.unhappyrobot.types.StairType;
 
 public class Stair extends GridObject {
@@ -11,8 +12,8 @@ public class Stair extends GridObject {
   public Stair(StairType stairType, GameGrid gameGrid) {
     super(stairType, gameGrid);
 
-    Texture texture = new Texture(stairType.getImageFilename());
-    sprite = new Sprite(texture);
+    TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal(stairType.getAtlasFilename()));
+    sprite = textureAtlas.createSprite("stairs");
   }
 
   @Override

@@ -7,6 +7,6 @@
     "experienceAward":500,
     "height":1,
     "width":2,
-    "imageFilename":"transport/stairs.png"
+    "atlasFilename":"transport.txt"
   }
 ]

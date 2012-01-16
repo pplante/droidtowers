@@ -1,4 +1,4 @@
-package com.unhappyrobot.json;
+package com.unhappyrobot.jackson;
 
 import com.badlogic.gdx.math.Vector3;
 import org.codehaus.jackson.JsonGenerator;

@@ -17,6 +17,7 @@ public class Elevator extends GridObject {
   private Sprite shaftSprite;
   private Sprite emptyShaftSprite;
   private Sprite bottomSprite;
+  private Sprite carSprite;
   private final BitmapFont floorFont;
   private ResizeHandle selectedResizeHandle;
   private boolean drawShaft;
@@ -27,13 +28,14 @@ public class Elevator extends GridObject {
 
     size.set(1, 3);
 
-    TextureAtlas elevatorAtlas = new TextureAtlas(Gdx.files.internal("tiles/elevator.txt"));
+    TextureAtlas elevatorAtlas = new TextureAtlas(Gdx.files.internal(elevatorType.getAtlasFilename()));
 
-    topSprite = elevatorAtlas.createSprite("elevator-top");
-    bottomSprite = elevatorAtlas.createSprite("elevator-bottom");
-    shaftSprite = elevatorAtlas.createSprite("elevator-shaft");
-    emptyShaftSprite = elevatorAtlas.createSprite("empty");
-    floorFont = new BitmapFont(Gdx.files.internal("fonts/bank_gothic_32.fnt"), Gdx.files.internal("fonts/bank_gothic_32.png"), false);
+    topSprite = elevatorAtlas.createSprite("elevator/top");
+    bottomSprite = elevatorAtlas.createSprite("elevator/bottom");
+    shaftSprite = elevatorAtlas.createSprite("elevator/shaft");
+    emptyShaftSprite = elevatorAtlas.createSprite("elevator/empty");
+    carSprite = elevatorAtlas.createSprite("elevator/car");
+    floorFont = new BitmapFont(Gdx.files.internal("fonts/bank_gothic_32.fnt"), false);
     drawShaft = true;
   }
 
@@ -51,6 +53,9 @@ public class Elevator extends GridObject {
     bottomSprite.setColor(renderColor);
     bottomSprite.setPosition(gridPoint.getWorldX(gameGrid), gridPoint.getWorldY(gameGrid));
     bottomSprite.draw(spriteBatch);
+
+    carSprite.setPosition(gridPoint.getWorldX(gameGrid), gridPoint.getWorldY(gameGrid));
+    carSprite.draw(spriteBatch);
 
     Sprite shaftToRender = drawShaft ? shaftSprite : emptyShaftSprite;
     shaftToRender.setColor(renderColor);

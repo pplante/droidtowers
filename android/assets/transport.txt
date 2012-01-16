@@ -1,31 +1,45 @@
-elevator.png
+transport.png
 format: RGBA8888
 filter: MipMapLinearNearest,Nearest
 repeat: none
-elevator-top
+elevator/top
   rotate: false
-  xy: 64, 0
+  xy: 120, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-elevator-bottom
+elevator/car
   rotate: false
-  xy: 0, 64
+  xy: 184, 64
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-elevator-shaft
+elevator/shaft
   rotate: false
-  xy: 64, 64
+  xy: 184, 0
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-empty
+stairs
   rotate: false
   xy: 0, 0
+  size: 120, 78
+  orig: 120, 78
+  offset: 0, 50
+  index: -1
+elevator/empty
+  rotate: false
+  xy: 120, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+elevator/bottom
+  rotate: false
+  xy: 0, 78
   size: 64, 64
   orig: 64, 64
   offset: 0, 0

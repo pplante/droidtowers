@@ -15,7 +15,7 @@ import com.unhappyrobot.gamestate.actions.*;
 import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.OnClickCallback;
 import com.unhappyrobot.gui.ResponseType;
-import com.unhappyrobot.json.Vector3Serializer;
+import com.unhappyrobot.jackson.Vector3Serializer;
 import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.module.SimpleModule;
@@ -78,17 +78,19 @@ public class GameState extends EventListener {
         gridObjectState.materialize(gameGrid);
       }
     } catch (Exception e) {
+      shouldSaveGame = false;
+
       Gdx.app.log("GameSave", "Could not load saved game!", e);
       new Dialog().setMessage("Saved game could not be loaded, want to reset?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
         @Override
         public void onClick(Dialog dialog) {
           fileHandle.delete();
           dialog.dismiss();
+          shouldSaveGame = true;
         }
       }).addButton(ResponseType.NEGATIVE, "No, exit game", new OnClickCallback() {
         @Override
         public void onClick(Dialog dialog) {
-          shouldSaveGame = false;
           dialog.dismiss();
           Gdx.app.exit();
         }
