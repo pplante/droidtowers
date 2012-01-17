@@ -35,19 +35,4 @@ public class GridPoint extends Vector2 {
   public Vector2 toVector2() {
     return new Vector2(x, y);
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    GridPoint gridPoint = (GridPoint) o;
-
-    return x == gridPoint.x && y == gridPoint.y;
-  }
-
-  @Override
-  public int hashCode() {
-    return (int) (x + y);
-  }
 }

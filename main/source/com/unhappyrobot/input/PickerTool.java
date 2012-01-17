@@ -2,11 +2,12 @@ package com.unhappyrobot.input;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
+import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
-import com.unhappyrobot.math.Bounds2d;
+import com.unhappyrobot.math.GridPoint;
 
-import java.util.List;
+import java.util.Set;
 
 public class PickerTool extends ToolBase {
   private GridObject selectedGridObject;
@@ -17,10 +18,9 @@ public class PickerTool extends ToolBase {
 
   @Override
   public boolean tap(int x, int y, int count) {
-    Vector2 gridPointAtFinger = gridPointAtFinger();
+    GridPoint gridPointAtFinger = gridPointAtFinger();
 
-    List<GridObject> gridObjects = gameGrid.getObjectsAt(new Bounds2d(gridPointAtFinger, new Vector2(1, 1)));
-
+    Set<GridObject> gridObjects = GridPositionCache.instance().getObjectsAt(gridPointAtFinger, new Vector2(1, 1));
     for (GridObject gridObject : gridObjects) {
       if (gridObject.tap(gridPointAtFinger, count)) {
         return true;
@@ -32,12 +32,13 @@ public class PickerTool extends ToolBase {
 
   @Override
   public boolean touchDown(int x, int y, int pointer) {
-    Vector2 gameGridPoint = screenToGameGridPoint(x, y);
-    List<GridObject> gridObjects = gameGrid.getObjectsAt(new Bounds2d(gameGridPoint, new Vector2(1, 1)));
+    GridPoint gameGridPoint = screenToGameGridPoint(x, y);
 
+    Set<GridObject> gridObjects = GridPositionCache.instance().getObjectsAt(gameGridPoint, new Vector2(1, 1));
     for (GridObject gridObject : gridObjects) {
       if (gridObject.touchDown(gameGridPoint)) {
         selectedGridObject = gridObject;
+        System.out.println("selectedGridObject = " + selectedGridObject);
         return true;
       }
     }
@@ -51,8 +52,8 @@ public class PickerTool extends ToolBase {
   public boolean pan(int x, int y, int deltaX, int deltaY) {
 
     if (selectedGridObject != null) {
-      Vector2 gridPointAtFinger = gridPointAtFinger();
-      Vector2 gridPointDelta = screenToGameGridPoint(x + -deltaX, y + deltaY);
+      GridPoint gridPointAtFinger = gridPointAtFinger();
+      GridPoint gridPointDelta = screenToGameGridPoint(x + -deltaX, y + deltaY);
       if (selectedGridObject.pan(gridPointAtFinger, gridPointDelta)) {
         return true;
       }

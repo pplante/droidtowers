@@ -3,11 +3,12 @@ package com.unhappyrobot.entities;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.events.EventListener;
+import com.unhappyrobot.events.GameGridResizeEvent;
 import com.unhappyrobot.events.GridObjectAddedEvent;
+import com.unhappyrobot.events.GridObjectRemovedEvent;
 import com.unhappyrobot.math.Bounds2d;
 
 import java.util.*;
@@ -27,12 +28,6 @@ public class GameGrid {
   private final HashSet<EventListener> eventSubscribers;
 
   public GameGrid() {
-    gameGridRenderer = new GameGridRenderer(this);
-    gridColor = Color.GREEN;
-    gridSize = new Vector2(8, 8);
-    unitSize = new Vector2(16, 16);
-    updateWorldSize();
-
     gridObjectsByType = new HashMap<Class, Set<GridObject>>();
     eventSubscribers = new HashSet<EventListener>();
     objects = new HashSet<GridObject>(25);
@@ -49,11 +44,17 @@ public class GameGrid {
       }
     };
 
+    gameGridRenderer = new GameGridRenderer(this);
+    gridColor = Color.GREEN;
+    gridSize = new Vector2(8, 8);
+    unitSize = new Vector2(16, 16);
+    updateWorldSize();
     updateRenderOrder();
   }
 
   public void updateWorldSize() {
     worldSize = new Vector2(gridSize.x * unitSize.x, gridSize.y * unitSize.y);
+    broadcastEvent(new GameGridResizeEvent(this));
   }
 
   public void setUnitSize(int width, int height) {
@@ -122,51 +123,11 @@ public class GameGrid {
     return true;
   }
 
-  public List<GridObject> getObjectsAt(Bounds2d targetBounds, GridObject... objectsToIgnore) {
-    List<GridObject> objectsFound = Lists.newArrayList();
-
-    for (GridObject gridObject : objects) {
-      if (gridObject.getBounds().overlaps(targetBounds)) {
-        objectsFound.add(gridObject);
-      }
-    }
-
-    if (objectsToIgnore != null) {
-      objectsFound.removeAll(Lists.newArrayList(objectsToIgnore));
-    }
-
-    return objectsFound;
-  }
-
-  public Vector2 convertScreenPointToGridPoint(float x, float y) {
-    float gridX = (float) Math.floor(x / unitSize.x);
-    float gridY = (float) Math.floor(y / unitSize.y);
-
-    gridX = Math.max(0, Math.min(gridX, gridSize.x - 1));
-    gridY = Math.max(0, Math.min(gridY, gridSize.y - 1));
-
-    return new Vector2(gridX, gridY);
-  }
-
-  public Vector2 clampPosition(Vector2 position, Vector2 size) {
-    if (position.x < 0) {
-      position.x = 0;
-    } else if (position.x + size.x > gridSize.x) {
-      position.x = gridSize.x - size.x;
-    }
-
-    if (position.y < 0) {
-      position.y = 0;
-    } else if (position.y + size.y > gridSize.y) {
-      position.y = gridSize.y - size.y;
-    }
-
-    return position;
-  }
-
   public void removeObject(GridObject gridObject) {
     objects.remove(gridObject);
     updateRenderOrder();
+
+    broadcastEvent(new GridObjectRemovedEvent(gridObject));
   }
 
   public List<GridObject> getObjectsInRenderOrder() {
@@ -201,9 +162,11 @@ public class GameGrid {
   }
 
   public void broadcastEvent(EventObject event) {
-    Class<? extends EventObject> eventClass = event.getClass();
-    for (EventListener subscriber : eventSubscribers) {
-      subscriber.receiveEvent(eventClass.cast(event));
+    if (eventSubscribers != null) {
+      Class<? extends EventObject> eventClass = event.getClass();
+      for (EventListener subscriber : eventSubscribers) {
+        subscriber.receiveEvent(eventClass.cast(event));
+      }
     }
   }
 }

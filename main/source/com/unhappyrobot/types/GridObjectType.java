@@ -1,11 +1,13 @@
 package com.unhappyrobot.types;
 
+import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.math.Bounds2d;
+import com.unhappyrobot.math.GridPoint;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
-import java.util.List;
+import java.util.Set;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public abstract class GridObjectType {
@@ -73,14 +75,17 @@ public abstract class GridObjectType {
   }
 
   protected boolean checkIfTouchingAnotherObject(GridObject gridObject) {
-    Bounds2d belowObject = new Bounds2d(gridObject.getPosition().toVector2().sub(0, 1), gridObject.getSize());
+    Bounds2d belowObject = new Bounds2d(gridObject.getPosition().cpy().sub(0, 1), gridObject.getSize());
 
-    List<GridObject> objectsBelow = gridObject.getGameGrid().getObjectsAt(belowObject, gridObject);
+    GridPoint gridPoint = gridObject.getPosition().cpy();
+    gridPoint.sub(0, 1);
+
+    Set<GridObject> objectsBelow = GridPositionCache.instance().getObjectsAt(gridPoint, gridObject.getSize(), gridObject);
     return objectsBelow.size() != 0;
   }
 
   protected boolean checkForOverlap(GridObject gridObject) {
-    List<GridObject> objectsOverlapped = gridObject.getGameGrid().getObjectsAt(gridObject.getBounds(), gridObject);
+    Set<GridObject> objectsOverlapped = GridPositionCache.instance().getObjectsAt(gridObject.getPosition(), gridObject.getSize(), gridObject);
     for (GridObject object : objectsOverlapped) {
       if (!gridObject.canShareSpace(object)) {
         return false;

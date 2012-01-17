@@ -6,6 +6,7 @@ import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.GridObjectPlacementState;
 import com.unhappyrobot.gui.HeadsUpDisplay;
+import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.money.PurchaseManager;
 import com.unhappyrobot.types.GridObjectType;
 
@@ -37,7 +38,7 @@ public class PlacementTool extends ToolBase {
   }
 
   public boolean touchDown(int x, int y, int pointer) {
-    Vector2 gridPointAtFinger = gridPointAtFinger();
+    GridPoint gridPointAtFinger = gridPointAtFinger();
     if (gridObject == null) {
       gridObject = gridObjectType.makeGridObject(gameGrid);
       gridObject.setPosition(gridPointAtFinger);
@@ -54,7 +55,7 @@ public class PlacementTool extends ToolBase {
 
   public boolean pan(int x, int y, int deltaX, int deltaY) {
     if (isDraggingGridObject) {
-      Vector2 gridPointAtFinger = gridPointAtFinger();
+      GridPoint gridPointAtFinger = gridPointAtFinger();
 
       if (touchDownPointDelta != null) {
         gridPointAtFinger.sub(touchDownPointDelta);

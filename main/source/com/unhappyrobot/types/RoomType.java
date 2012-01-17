@@ -1,9 +1,10 @@
 package com.unhappyrobot.types;
 
+import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.entities.*;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
-import java.util.List;
+import java.util.Set;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class RoomType extends GridObjectType {
@@ -32,7 +33,7 @@ public class RoomType extends GridObjectType {
 
   @Override
   protected boolean checkForOverlap(GridObject gridObject) {
-    List<GridObject> objectsOverlapped = gridObject.getGameGrid().getObjectsAt(gridObject.getBounds(), gridObject);
+    Set<GridObject> objectsOverlapped = GridPositionCache.instance().getObjectsAt(gridObject.getPosition(), gridObject.getSize(), gridObject);
     for (GridObject object : objectsOverlapped) {
       if (!object.canShareSpace(gridObject)) {
         return false;
