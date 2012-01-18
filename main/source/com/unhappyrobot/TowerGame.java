@@ -14,10 +14,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
-import com.unhappyrobot.entities.CloudLayer;
-import com.unhappyrobot.entities.GameGrid;
-import com.unhappyrobot.entities.GameGridRenderer;
-import com.unhappyrobot.entities.GameLayer;
+import com.unhappyrobot.entities.*;
 import com.unhappyrobot.gamestate.GameState;
 import com.unhappyrobot.graphics.BackgroundLayer;
 import com.unhappyrobot.gui.Dialog;
@@ -101,7 +98,7 @@ public class TowerGame implements ApplicationListener {
     layers = Lists.newArrayList(groundLayer, skyLayer, new CloudLayer(gameGrid.getWorldSize()), gameGridRenderer, testLayer);
 
 //    for (int i = 0; i < 30; i++) {
-//      testLayer.addChild(new Avatar(gameGrid));
+    testLayer.addChild(new Avatar(gameGrid));
 //    }
 
     InputSystem.getInstance().bind(Keys.G, new InputCallback() {

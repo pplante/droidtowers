@@ -4,15 +4,12 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.equations.Linear;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.utils.Random;
-
-import java.util.Set;
 
 public class Avatar extends GameObject {
   public static final float FRAME_DURATION = 0.25f;
@@ -39,24 +36,12 @@ public class Avatar extends GameObject {
   private void setupNewMovement() {
     isMoving = true;
     int newX = Random.randomInt(0, gameGrid.getWorldSize().x);
-    getSprite().setColor(Color.WHITE);
-    Set<GridObject> stairs = gameGrid.getInstancesOf(Stair.class);
-
-    if (stairs != null) {
-      for (GridObject gridObject : stairs) {
-        Stair stair = (Stair) gridObject;
-
-        float distanceToStair = Math.abs(stair.getPosition().toWorldVector2(gameGrid).dst(position));
-        if (distanceToStair > 500 && distanceToStair <= 1000f) {
-          System.out.println("distanceToStair = " + distanceToStair);
-          newX = (int) stair.getPosition().getWorldX(gameGrid);
-          getSprite().setColor(Color.PINK);
-        }
-      }
-    }
-
     isFlipped = newX < position.x;
 
+    moveHorizontallyTo(newX);
+  }
+
+  private void moveHorizontallyTo(int newX) {
     int moveSpeed = (int) (Math.abs(position.x - newX) / 0.03f);
     Tween.to(this, TWEEN_POSITION, moveSpeed, Linear.INOUT).target(newX).addToManager(TowerGame.getTweenManager()).addCompleteCallback(new TweenCallback() {
       public void tweenEventOccured(Types eventType, Tween tween) {

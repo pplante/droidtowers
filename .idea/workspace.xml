@@ -12,22 +12,10 @@
     <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="made it so menus close when escape or back is pressed.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/GridPositionCache.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/ElevatorResizeEvent.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GameGridResizeEvent.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GridObjectRemovedEvent.java" />
+    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="added a grid position cache for eventual A* path finding, moved the responsibility of position tracking out of game grid and into this class.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Elevator.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Elevator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PickerTool.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PickerTool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/ToolBase.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/ToolBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/math/GridPoint.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/math/GridPoint.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" />
     </list>
     <ignored path="underwater.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,22 +81,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GridPositionCache.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/GridPositionCache.java">
+      <file leaf-file-name="Avatar.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="0" selection-start="191" selection-end="191" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#3056#3068#0" expanded="true" />
-                <element signature="e#3554#3566#0" expanded="true" />
-              </folding>
+            <state line="37" column="29" selection-start="1222" selection-end="1222" vertical-scroll-proportion="0.44262296">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameGrid.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java">
+      <file leaf-file-name="TowerGame.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="21" selection-start="2989" selection-end="2989" vertical-scroll-proportion="-1.0023338">
+            <state line="100" column="35" selection-start="3764" selection-end="3764" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -130,7 +115,6 @@
       <list>
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/events/ElevatorResizedEvent.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Elevator.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java" />
@@ -142,8 +126,9 @@
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GridObjectRemovedEvent.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GameGridResizeEvent.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/GridPositionCache.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java" />
       </list>
     </option>
   </component>
@@ -307,7 +292,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -560,6 +544,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Favorites" />
     </panes>
   </component>
@@ -927,12 +912,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="2560" height="1414" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31737453" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946082" sideWeight="0.6709347" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3178808" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
@@ -946,13 +930,14 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39971244" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.10151274" sideWeight="0.6826255" order="2" side_tool="false" content_ui="tabs" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22548263" sideWeight="0.83545816" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14367816" sideWeight="0.0" order="2" side_tool="false" content_ui="tabs" x="239" y="105" width="347" height="1319" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22548263" sideWeight="0.83545816" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36138996" sideWeight="0.28821656" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3125" sideWeight="0.75587565" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31737453" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -993,7 +978,7 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="made it so menus close when escape or back is pressed." />
+    <option name="LAST_COMMIT_MESSAGE" value="added a grid position cache for eventual A* path finding, moved the responsibility of position tracking out of game grid and into this class." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1006,7 +991,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="elevators work!" />
     <MESSAGE value="elevator resizing works great now." />
     <MESSAGE value="ZOMG ELEVATION" />
     <MESSAGE value="refactored a bunch of bullshit code away" />
@@ -1031,6 +1015,7 @@
     <MESSAGE value="desirability overlay works!" />
     <MESSAGE value="created some gui skin elements that look like similar to android ICS." />
     <MESSAGE value="made it so menus close when escape or back is pressed." />
+    <MESSAGE value="added a grid position cache for eventual A* path finding, moved the responsibility of position tracking out of game grid and into this class." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1066,11 +1051,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/classes.jar!/java/util/EventObject.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="147" selection-end="147" vertical-scroll-proportion="0.09025641" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/events/GridObjectAddedEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="43" selection-start="154" selection-end="154" vertical-scroll-proportion="0.09025641" />
@@ -1118,45 +1098,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/events/GridObjectRemovedEvent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="9" selection-start="178" selection-end="178" vertical-scroll-proportion="0.08675079">
-          <folding />
-        </state>
+        <state line="7" column="9" selection-start="178" selection-end="178" vertical-scroll-proportion="0.08675079" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/events/GameGridResizeEvent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="18" selection-start="232" selection-end="232" vertical-scroll-proportion="0.10410095">
-          <folding />
-        </state>
+        <state line="8" column="18" selection-start="232" selection-end="232" vertical-scroll-proportion="0.10410095" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/math/Vector2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="13" selection-start="960" selection-end="960" vertical-scroll-proportion="0.13880126">
-          <folding />
-        </state>
+        <state line="22" column="13" selection-start="960" selection-end="960" vertical-scroll-proportion="0.13880126" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="60" selection-start="2539" selection-end="2539" vertical-scroll-proportion="0.2602459">
+        <state line="139" column="5" selection-start="3997" selection-end="3997" vertical-scroll-proportion="0.54395604">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/GridPositionCache.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="191" selection-end="191" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#3056#3068#0" expanded="true" />
-            <element signature="e#3554#3566#0" expanded="true" />
-          </folding>
+        <state line="6" column="0" selection-start="191" selection-end="191" vertical-scroll-proportion="0.03021978">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="21" selection-start="2989" selection-end="2989" vertical-scroll-proportion="-1.0023338">
+        <state line="100" column="35" selection-start="3764" selection-end="3764" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="29" selection-start="1222" selection-end="1222" vertical-scroll-proportion="0.44262296">
           <folding />
         </state>
       </provider>
