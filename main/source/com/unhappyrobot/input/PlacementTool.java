@@ -2,13 +2,17 @@ package com.unhappyrobot.input;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.unhappyrobot.entities.GameGrid;
+import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.GridObjectPlacementState;
 import com.unhappyrobot.gui.HeadsUpDisplay;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.money.PurchaseManager;
 import com.unhappyrobot.types.GridObjectType;
+
+import java.util.List;
 
 import static com.unhappyrobot.input.InputSystem.Keys;
 
@@ -19,9 +23,12 @@ public class PlacementTool extends ToolBase {
   private boolean isDraggingGridObject;
   private PurchaseManager purchaseManager;
   private final InputCallback cancelPlacementInputCallback;
+  private final GameGrid gameGrid;
 
-  public PlacementTool(OrthographicCamera camera, GameGrid gameGrid) {
-    super(camera, gameGrid);
+  public PlacementTool(OrthographicCamera camera, List<GameLayer> gameLayers) {
+    super(camera, gameLayers);
+
+    gameGrid = getGameGrid();
 
     cancelPlacementInputCallback = new InputCallback() {
       public boolean run(float timeDelta) {
@@ -38,7 +45,8 @@ public class PlacementTool extends ToolBase {
   }
 
   public boolean touchDown(int x, int y, int pointer) {
-    GridPoint gridPointAtFinger = gridPointAtFinger();
+    Vector3 worldPoint = camera.getPickRay(x, y).getEndPoint(1);
+    GridPoint gridPointAtFinger = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
     if (gridObject == null) {
       gridObject = gridObjectType.makeGridObject(gameGrid);
       gridObject.setPosition(gridPointAtFinger);
@@ -55,7 +63,9 @@ public class PlacementTool extends ToolBase {
 
   public boolean pan(int x, int y, int deltaX, int deltaY) {
     if (isDraggingGridObject) {
-      GridPoint gridPointAtFinger = gridPointAtFinger();
+      Vector3 worldPoint = camera.getPickRay(x, y).getEndPoint(1);
+      Vector3 deltaPoint = camera.getPickRay(x + -deltaX, y + deltaY).getEndPoint(1);
+      GridPoint gridPointAtFinger = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
 
       if (touchDownPointDelta != null) {
         gridPointAtFinger.sub(touchDownPointDelta);
@@ -77,7 +87,6 @@ public class PlacementTool extends ToolBase {
         return false;
       } else {
         gridObject.setPlacementState(GridObjectPlacementState.PLACED);
-        gameGrid.updateRenderOrder();
       }
 
       if (purchaseManager != null) {

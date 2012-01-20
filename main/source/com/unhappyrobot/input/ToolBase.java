@@ -1,20 +1,29 @@
 package com.unhappyrobot.input;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.collision.Ray;
 import com.unhappyrobot.entities.GameGrid;
-import com.unhappyrobot.math.GridPoint;
+import com.unhappyrobot.entities.GameLayer;
+
+import java.util.List;
 
 public class ToolBase implements GestureDetector.GestureListener {
   protected final OrthographicCamera camera;
-  protected final GameGrid gameGrid;
+  protected final List<GameLayer> gameLayers;
 
-  public ToolBase(OrthographicCamera camera, GameGrid gameGrid) {
+  public ToolBase(OrthographicCamera camera, List<GameLayer> gameLayers) {
     this.camera = camera;
-    this.gameGrid = gameGrid;
+    this.gameLayers = gameLayers;
+  }
+
+  public GameGrid getGameGrid() {
+    for (GameLayer gameLayer : gameLayers) {
+      if (gameLayer instanceof GameGrid) {
+        return (GameGrid) gameLayer;
+      }
+    }
+
+    return null;
   }
 
   public boolean touchDown(int x, int y, int pointer) {
@@ -43,22 +52,5 @@ public class ToolBase implements GestureDetector.GestureListener {
 
   public void cleanup() {
 
-  }
-
-  protected GridPoint gridPointAtFinger() {
-    return screenToGameGridPoint(Gdx.input.getX(), Gdx.input.getY());
-  }
-
-  protected GridPoint screenToGameGridPoint(int x, int y) {
-    Ray pickRay = camera.getPickRay(x, y);
-    Vector3 endPoint = pickRay.getEndPoint(1);
-
-    float gridX = (float) Math.floor(endPoint.x / gameGrid.unitSize.x);
-    float gridY = (float) Math.floor(endPoint.y / gameGrid.unitSize.y);
-
-    gridX = Math.max(0, Math.min(gridX, gameGrid.gridSize.x - 1));
-    gridY = Math.max(0, Math.min(gridY, gameGrid.gridSize.y - 1));
-
-    return new GridPoint(gridX, gridY);
   }
 }

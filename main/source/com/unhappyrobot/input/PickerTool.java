@@ -1,28 +1,52 @@
 package com.unhappyrobot.input;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
-import com.unhappyrobot.GridPositionCache;
-import com.unhappyrobot.entities.GameGrid;
-import com.unhappyrobot.entities.GridObject;
-import com.unhappyrobot.math.GridPoint;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.Ray;
+import com.unhappyrobot.entities.GameLayer;
 
-import java.util.Set;
+import java.util.List;
 
 public class PickerTool extends ToolBase {
-  private GridObject selectedGridObject;
+  public PickerTool(OrthographicCamera camera, List<GameLayer> gameLayers) {
+    super(camera, gameLayers);
+  }
 
-  public PickerTool(OrthographicCamera camera, GameGrid gameGrid) {
-    super(camera, gameGrid);
+  @Override
+  public boolean longPress(int x, int y) {
+    Ray pickRay = camera.getPickRay(x, y);
+    Vector3 worldPoint = pickRay.getEndPoint(1);
+
+    for (GameLayer gameLayer : gameLayers) {
+      if (gameLayer.isTouchEnabled() && gameLayer.longPress(worldPoint)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  @Override
+  public boolean pan(int x, int y, int deltaX, int deltaY) {
+    Vector3 worldPoint = camera.getPickRay(x, y).getEndPoint(1);
+    Vector3 deltaPoint = camera.getPickRay(x + -deltaX, y + deltaY).getEndPoint(1);
+
+    for (GameLayer gameLayer : gameLayers) {
+      if (gameLayer.isTouchEnabled() && gameLayer.pan(worldPoint, deltaPoint)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   @Override
   public boolean tap(int x, int y, int count) {
-    GridPoint gridPointAtFinger = gridPointAtFinger();
+    Ray pickRay = camera.getPickRay(x, y);
+    Vector3 worldPoint = pickRay.getEndPoint(1);
 
-    Set<GridObject> gridObjects = GridPositionCache.instance().getObjectsAt(gridPointAtFinger, new Vector2(1, 1));
-    for (GridObject gridObject : gridObjects) {
-      if (gridObject.tap(gridPointAtFinger, count)) {
+    for (GameLayer gameLayer : gameLayers) {
+      if (gameLayer.isTouchEnabled() && gameLayer.tap(worldPoint, count)) {
         return true;
       }
     }
@@ -32,39 +56,15 @@ public class PickerTool extends ToolBase {
 
   @Override
   public boolean touchDown(int x, int y, int pointer) {
-    GridPoint gameGridPoint = screenToGameGridPoint(x, y);
+    Ray pickRay = camera.getPickRay(x, y);
+    Vector3 worldPoint = pickRay.getEndPoint(1);
 
-    Set<GridObject> gridObjects = GridPositionCache.instance().getObjectsAt(gameGridPoint, new Vector2(1, 1));
-    for (GridObject gridObject : gridObjects) {
-      if (gridObject.touchDown(gameGridPoint)) {
-        selectedGridObject = gridObject;
-        System.out.println("selectedGridObject = " + selectedGridObject);
+    for (GameLayer gameLayer : gameLayers) {
+      if (gameLayer.isTouchEnabled() && gameLayer.touchDown(worldPoint, pointer)) {
         return true;
       }
     }
 
-    selectedGridObject = null;
-
     return false;
-  }
-
-  @Override
-  public boolean pan(int x, int y, int deltaX, int deltaY) {
-
-    if (selectedGridObject != null) {
-      GridPoint gridPointAtFinger = gridPointAtFinger();
-      GridPoint gridPointDelta = screenToGameGridPoint(x + -deltaX, y + deltaY);
-      if (selectedGridObject.pan(gridPointAtFinger, gridPointDelta)) {
-        return true;
-      }
-    }
-
-    selectedGridObject = null;
-
-    return false;
-  }
-
-  private Vector2 screenToGameGridPoint(float x, float y) {
-    return screenToGameGridPoint((int) x, (int) y);
   }
 }

@@ -14,7 +14,11 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
-import com.unhappyrobot.entities.*;
+import com.unhappyrobot.controllers.AvatarLayer;
+import com.unhappyrobot.entities.CloudLayer;
+import com.unhappyrobot.entities.GameGrid;
+import com.unhappyrobot.entities.GameGridRenderer;
+import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.gamestate.GameState;
 import com.unhappyrobot.graphics.BackgroundLayer;
 import com.unhappyrobot.gui.Dialog;
@@ -37,7 +41,7 @@ public class TowerGame implements ApplicationListener {
   private static OrthographicCamera camera;
   private SpriteBatch spriteBatch;
 
-  private static List<GameLayer> layers;
+  private static List<GameLayer> gameLayers;
   private Matrix4 matrix;
 
   private GameGrid gameGrid;
@@ -69,8 +73,9 @@ public class TowerGame implements ApplicationListener {
     spriteBatch = new SpriteBatch(100);
     guiStage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true, spriteBatch);
 
+    GridPositionCache.instance();
+
     gameGrid = new GameGrid();
-    gameGrid.addEventListener(GridPositionCache.instance());
     gameGrid.setUnitSize(64, 64);
     gameGrid.setGridSize(50, 50);
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
@@ -88,18 +93,22 @@ public class TowerGame implements ApplicationListener {
     skyLayer.setSize(gameGrid.getWorldSize().x, gameGrid.getWorldSize().y - 256f);
     skyLayer.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
 
-    InputSystem.getInstance().setup(camera, gameGrid);
-    InputSystem.getInstance().addInputProcessor(guiStage, 10);
-    Gdx.input.setInputProcessor(InputSystem.getInstance());
-
     gameGridRenderer = gameGrid.getRenderer();
+    AvatarLayer.initialize(gameGrid);
 
     GameLayer testLayer = new GameLayer();
-    layers = Lists.newArrayList(groundLayer, skyLayer, new CloudLayer(gameGrid.getWorldSize()), gameGridRenderer, testLayer);
+    gameLayers = Lists.newArrayList();
+    gameLayers.add(groundLayer);
+    gameLayers.add(skyLayer);
+    gameLayers.add(new CloudLayer(gameGrid.getWorldSize()));
+    gameLayers.add(gameGridRenderer);
+    gameLayers.add(gameGrid);
+    gameLayers.add(AvatarLayer.instance());
 
-//    for (int i = 0; i < 30; i++) {
-    testLayer.addChild(new Avatar(gameGrid));
-//    }
+//    BEGIN INPUT SETUP:
+    InputSystem.getInstance().setup(camera, gameLayers);
+    InputSystem.getInstance().addInputProcessor(guiStage, 10);
+    Gdx.input.setInputProcessor(InputSystem.getInstance());
 
     InputSystem.getInstance().bind(Keys.G, new InputCallback() {
       public boolean run(float timeDelta) {
@@ -176,7 +185,7 @@ public class TowerGame implements ApplicationListener {
 
     updateGameObjects();
 
-    for (GameLayer layer : layers) {
+    for (GameLayer layer : gameLayers) {
       layer.render(spriteBatch, camera);
     }
 
@@ -192,7 +201,7 @@ public class TowerGame implements ApplicationListener {
     gameState.update(deltaTime, gameGrid);
     guiStage.act(deltaTime);
 
-    for (GameLayer layer : layers) {
+    for (GameLayer layer : gameLayers) {
       layer.update(deltaTime);
     }
 

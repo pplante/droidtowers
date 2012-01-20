@@ -2,59 +2,48 @@ package com.unhappyrobot.entities;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-import com.google.common.base.Function;
-import com.google.common.collect.Ordering;
-import com.sun.istack.internal.Nullable;
-import com.unhappyrobot.events.EventListener;
+import com.badlogic.gdx.math.Vector3;
+import com.unhappyrobot.GridPositionCache;
+import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GameGridResizeEvent;
 import com.unhappyrobot.events.GridObjectAddedEvent;
 import com.unhappyrobot.events.GridObjectRemovedEvent;
 import com.unhappyrobot.math.Bounds2d;
+import com.unhappyrobot.math.GridPoint;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 
-public class GameGrid {
+public class GameGrid extends GameLayer {
   public Vector2 unitSize;
   public Color gridColor;
   public Vector2 gridSize;
 
   private HashSet<GridObject> objects;
-  private List<GridObject> objectsRenderOrder;
   private Vector2 worldSize;
-  private final Function<GridObject, Integer> objectRenderSortFunction;
   private final GameGridRenderer gameGridRenderer;
   private final Map<Class, Set<GridObject>> gridObjectsByType;
-  private final HashSet<EventListener> eventSubscribers;
+  private GridObject selectedGridObject;
 
   public GameGrid() {
+    setTouchEnabled(true);
+
     gridObjectsByType = new HashMap<Class, Set<GridObject>>();
-    eventSubscribers = new HashSet<EventListener>();
     objects = new HashSet<GridObject>(25);
-    objectRenderSortFunction = new Function<GridObject, Integer>() {
-      public Integer apply(@Nullable GridObject gridObject) {
-        if (gridObject != null) {
-          if (gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
-            return gridObject.getGridObjectType().getZIndex();
-          } else {
-            return Integer.MAX_VALUE;
-          }
-        }
-        return 0;
-      }
-    };
 
     gameGridRenderer = new GameGridRenderer(this);
     gridColor = Color.GREEN;
     gridSize = new Vector2(8, 8);
     unitSize = new Vector2(16, 16);
     updateWorldSize();
-    updateRenderOrder();
   }
 
   public void updateWorldSize() {
     worldSize = new Vector2(gridSize.x * unitSize.x, gridSize.y * unitSize.y);
-    broadcastEvent(new GameGridResizeEvent(this));
+    GameEvents.post(new GameGridResizeEvent(this));
   }
 
   public void setUnitSize(int width, int height) {
@@ -81,7 +70,6 @@ public class GameGrid {
 
   public boolean addObject(GridObject gridObject) {
     objects.add(gridObject);
-    updateRenderOrder();
 
     Set<GridObject> gridObjectHashSet;
     if (!gridObjectsByType.containsKey(gridObject.getClass())) {
@@ -93,13 +81,9 @@ public class GameGrid {
 
     gridObjectHashSet.add(gridObject);
 
-    broadcastEvent(new GridObjectAddedEvent(gridObject));
+    GameEvents.post(new GridObjectAddedEvent(gridObject));
 
     return true;
-  }
-
-  public void updateRenderOrder() {
-    objectsRenderOrder = Ordering.natural().onResultOf(objectRenderSortFunction).sortedCopy(objects);
   }
 
   public Set<GridObject> getObjects() {
@@ -125,13 +109,8 @@ public class GameGrid {
 
   public void removeObject(GridObject gridObject) {
     objects.remove(gridObject);
-    updateRenderOrder();
 
-    broadcastEvent(new GridObjectRemovedEvent(gridObject));
-  }
-
-  public List<GridObject> getObjectsInRenderOrder() {
-    return objectsRenderOrder;
+    GameEvents.post(new GridObjectRemovedEvent(gridObject));
   }
 
   public void update(float deltaTime) {
@@ -144,7 +123,7 @@ public class GameGrid {
     return gridObjectsByType.get(aClass);
   }
 
-  public Set<GridObject> getInstancesOf(Class[] classes) {
+  public Set<GridObject> getInstancesOf(Class... classes) {
     Set<GridObject> found = new HashSet<GridObject>();
     if (classes != null) {
       for (Class otherClass : classes) {
@@ -157,16 +136,61 @@ public class GameGrid {
     return found;
   }
 
-  public void addEventListener(EventListener newListener) {
-    eventSubscribers.add(newListener);
-  }
+  @Override
+  public boolean tap(Vector3 worldPoint, int count) {
+    GridPoint gridPointAtFinger = closestGridPoint(worldPoint.x, worldPoint.y);
 
-  public void broadcastEvent(EventObject event) {
-    if (eventSubscribers != null) {
-      Class<? extends EventObject> eventClass = event.getClass();
-      for (EventListener subscriber : eventSubscribers) {
-        subscriber.receiveEvent(eventClass.cast(event));
+    Set<GridObject> gridObjects = GridPositionCache.instance().getObjectsAt(gridPointAtFinger, new Vector2(1, 1));
+    for (GridObject gridObject : gridObjects) {
+      if (gridObject.tap(gridPointAtFinger, count)) {
+        return true;
       }
     }
+
+    return false;
   }
+
+  @Override
+  public boolean touchDown(Vector3 worldPoint, int pointer) {
+    GridPoint gameGridPoint = closestGridPoint(worldPoint.x, worldPoint.y);
+
+    Set<GridObject> gridObjects = GridPositionCache.instance().getObjectsAt(gameGridPoint, new Vector2(1, 1));
+    for (GridObject gridObject : gridObjects) {
+      if (gridObject.touchDown(gameGridPoint)) {
+        selectedGridObject = gridObject;
+        System.out.println("selectedGridObject = " + selectedGridObject);
+        return true;
+      }
+    }
+
+    selectedGridObject = null;
+
+    return false;
+  }
+
+  @Override
+  public boolean pan(Vector3 worldPoint, Vector3 deltaPoint) {
+    if (selectedGridObject != null) {
+      GridPoint gridPointAtFinger = closestGridPoint(worldPoint.x, worldPoint.y);
+      GridPoint gridPointDelta = closestGridPoint(deltaPoint.x, deltaPoint.y);
+      if (selectedGridObject.pan(gridPointAtFinger, gridPointDelta)) {
+        return true;
+      }
+    }
+
+    selectedGridObject = null;
+
+    return false;
+  }
+
+  public GridPoint closestGridPoint(float x, float y) {
+    float gridX = (float) Math.floor((int) x / unitSize.x);
+    float gridY = (float) Math.floor((int) y / unitSize.y);
+
+    gridX = Math.max(0, Math.min(gridX, gridSize.x - 1));
+    gridY = Math.max(0, Math.min(gridY, gridSize.y - 1));
+
+    return new GridPoint(gridX, gridY);
+  }
+
 }

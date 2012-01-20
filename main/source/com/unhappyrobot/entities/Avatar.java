@@ -4,12 +4,22 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.equations.Linear;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Ordering;
+import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.TowerGame;
+import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.utils.Random;
+
+import java.util.List;
+import java.util.Set;
 
 public class Avatar extends GameObject {
   public static final float FRAME_DURATION = 0.25f;
@@ -19,9 +29,14 @@ public class Avatar extends GameObject {
   private boolean isFlipped;
   private final GameGrid gameGrid;
 
-  public Avatar(GameGrid gameGrid) {
+  private boolean isEmployed;
+  private boolean isResident;
+  private float satisfactionShops;
+  private float satisfactionFood;
+
+  public Avatar(AvatarLayer avatarLayer) {
     super();
-    this.gameGrid = gameGrid;
+    this.gameGrid = avatarLayer.getGameGrid();
 
     setPosition(Random.randomInt(0, gameGrid.getWorldSize().x), 256);
 
@@ -39,6 +54,30 @@ public class Avatar extends GameObject {
     isFlipped = newX < position.x;
 
     moveHorizontallyTo(newX);
+
+    Set<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
+    if (commercialSpaces != null) {
+      final CommercialSpace firstCommercialSpace = (CommercialSpace) Iterables.getFirst(commercialSpaces, null);
+      if (firstCommercialSpace != null) {
+        List<GridObject> transitObjects = Lists.newArrayList(gameGrid.getInstancesOf(Stair.class, Elevator.class));
+        List<GridObject> sortedTransitObjects = Ordering.natural().onResultOf(new Function<GridObject, Float>() {
+          public Float apply(@Nullable GridObject transitObject) {
+            if (transitObject != null && firstCommercialSpace.getPosition().y == transitObject.getPosition().y) {
+              return Math.abs(firstCommercialSpace.getPosition().x - transitObject.getPosition().x);
+            }
+
+            return Float.MAX_VALUE;
+          }
+        }).sortedCopy(transitObjects);
+        System.out.println("sortedTransitObjects = " + sortedTransitObjects);
+
+        GridObject closestTransit = Iterables.getFirst(sortedTransitObjects, null);
+        if (closestTransit != null) {
+          closestTransit.renderColor = Color.PINK;
+        }
+
+      }
+    }
   }
 
   private void moveHorizontallyTo(int newX) {
@@ -72,4 +111,6 @@ public class Avatar extends GameObject {
   public Sprite getSprite() {
     return sprite;
   }
+
+
 }

@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
 import com.unhappyrobot.actions.Action;
 import com.unhappyrobot.actions.TimeDelayedAction;
+import com.unhappyrobot.events.GameEvents;
+import com.unhappyrobot.events.GridObjectChangedEvent;
 import com.unhappyrobot.math.Bounds2d;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.GridObjectType;
@@ -154,7 +156,7 @@ public abstract class GridObject {
 
   public void setPlacementState(GridObjectPlacementState placementState) {
     this.placementState = placementState;
-
+    GameEvents.post(new GridObjectChangedEvent(this, "placementState"));
     updatePlacementStatus();
   }
 

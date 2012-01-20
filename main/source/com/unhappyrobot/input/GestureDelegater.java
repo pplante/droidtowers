@@ -2,6 +2,9 @@ package com.unhappyrobot.input;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.unhappyrobot.entities.GameGrid;
+import com.unhappyrobot.entities.GameLayer;
+
+import java.util.List;
 
 import static com.badlogic.gdx.input.GestureDetector.GestureListener;
 
@@ -9,12 +12,20 @@ class GestureDelegater implements GestureListener {
   private ToolBase currentTool;
   private CameraController cameraController;
   private Runnable beforeSwitchToolRunnable;
+  private GameGrid gameGrid;
 
-  public GestureDelegater(OrthographicCamera camera, GameGrid gameGrid) {
+  public GestureDelegater(OrthographicCamera camera, List<GameLayer> gameLayers) {
+    for (GameLayer gameLayer : gameLayers) {
+      if (gameLayer instanceof GameGrid) {
+        gameGrid = (GameGrid) gameLayer;
+        break;
+      }
+    }
+
     this.cameraController = new CameraController(camera, gameGrid);
   }
 
-  public void switchTool(OrthographicCamera camera, GameGrid gameGrid, GestureTool tool, Runnable switchToolRunnable) {
+  public void switchTool(OrthographicCamera camera, List<GameLayer> gameLayers, GestureTool tool, Runnable switchToolRunnable) {
     if (beforeSwitchToolRunnable != null) {
       beforeSwitchToolRunnable.run();
       beforeSwitchToolRunnable = null;
@@ -24,7 +35,7 @@ class GestureDelegater implements GestureListener {
       currentTool.cleanup();
     }
 
-    currentTool = tool.newInstance(camera, gameGrid);
+    currentTool = tool.newInstance(camera, gameLayers);
     beforeSwitchToolRunnable = switchToolRunnable;
   }
 

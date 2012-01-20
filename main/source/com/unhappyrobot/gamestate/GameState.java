@@ -9,6 +9,7 @@ import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.events.EventListener;
+import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectAddedEvent;
 import com.unhappyrobot.events.GridObjectChangedEvent;
 import com.unhappyrobot.gamestate.actions.*;
@@ -30,9 +31,9 @@ public class GameState extends EventListener {
   private boolean shouldSaveGame;
 
   public GameState(final GameGrid gameGrid) {
-    this.gameGrid = gameGrid;
+    GameEvents.register(this);
 
-    gameGrid.addEventListener(this);
+    this.gameGrid = gameGrid;
     calculatePopulation = new PopulationCalculator(this.gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
     calculateEarnout = new EarnoutCalculator(this.gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
     calculateJobs = new EmploymentCalculator(this.gameGrid, TowerConsts.JOB_UPDATE_FREQUENCY);

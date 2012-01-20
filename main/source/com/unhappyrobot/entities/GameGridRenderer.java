@@ -8,15 +8,23 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer10;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Ordering;
+import com.google.common.eventbus.Subscribe;
 import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.Overlays;
 import com.unhappyrobot.TowerGame;
+import com.unhappyrobot.events.GameEvents;
+import com.unhappyrobot.events.GridObjectAddedEvent;
+import com.unhappyrobot.events.GridObjectChangedEvent;
+import com.unhappyrobot.events.GridObjectRemovedEvent;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.CommercialType;
 import com.unhappyrobot.types.RoomType;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
 import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -31,14 +39,33 @@ public class GameGridRenderer extends GameLayer {
   private Function<GridObject, Color> desirabilityLevelOverlayFunc;
   private HashSet<Overlays> activeOverlays;
   private Map<Overlays, Function<GridObject, Float>> overlayFunctions;
+  private Function<GridObject, Integer> objectRenderSortFunction;
+  private List<GridObject> objectsRenderOrder;
 
   public GameGridRenderer(GameGrid gameGrid) {
     this.gameGrid = gameGrid;
+
+    GameEvents.register(this);
+
     shouldRenderGridLines = true;
     gl = new ImmediateModeRenderer10();
     shapeRenderer = new ShapeRenderer();
 
     activeOverlays = new HashSet<Overlays>();
+
+    objectsRenderOrder = Lists.newArrayList();
+    objectRenderSortFunction = new Function<GridObject, Integer>() {
+      public Integer apply(@Nullable GridObject gridObject) {
+        if (gridObject != null) {
+          if (gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
+            return gridObject.getGridObjectType().getZIndex();
+          } else {
+            return Integer.MAX_VALUE;
+          }
+        }
+        return 0;
+      }
+    };
 
     makeOverlayFunctions();
   }
@@ -151,9 +178,11 @@ public class GameGridRenderer extends GameLayer {
 
   private void renderGridObjects(SpriteBatch spriteBatch) {
     spriteBatch.begin();
-    for (GridObject child : gameGrid.getObjectsInRenderOrder()) {
+
+    for (GridObject child : objectsRenderOrder) {
       child.render(spriteBatch);
     }
+
     spriteBatch.end();
   }
 
@@ -188,5 +217,37 @@ public class GameGridRenderer extends GameLayer {
 
   public void clearOverlays() {
     activeOverlays.clear();
+  }
+
+  private void updateRenderOrder() {
+    objectsRenderOrder = null;
+    objectsRenderOrder = Ordering.natural().onResultOf(objectRenderSortFunction).sortedCopy(gameGrid.getObjects());
+  }
+
+  @Subscribe
+  public void handleEvent(GridObjectAddedEvent event) {
+    if (event.gridObject == null) {
+      return;
+    }
+
+    updateRenderOrder();
+  }
+
+  @Subscribe
+  public void handleEvent(GridObjectChangedEvent event) {
+    if (event.gridObject == null || !event.nameOfParamChanged.equals("placementState")) {
+      return;
+    }
+
+    updateRenderOrder();
+  }
+
+  @Subscribe
+  public void handleEvent(GridObjectRemovedEvent event) {
+    if (event.gridObject == null) {
+      return;
+    }
+
+    objectsRenderOrder.remove(event.gridObject);
   }
 }

@@ -2,10 +2,14 @@ package com.unhappyrobot.events;
 
 import com.unhappyrobot.entities.GameGrid;
 
-import java.util.EventObject;
+public class GameGridResizeEvent {
+  public final GameGrid gameGrid;
 
-public class GameGridResizeEvent extends EventObject {
   public GameGridResizeEvent(GameGrid gameGrid) {
-    super(gameGrid);
+    if (gameGrid == null) {
+      throw new RuntimeException("GameGridResizeEvent cannot be created with out a valid GameGrid");
+    }
+
+    this.gameGrid = gameGrid;
   }
 }

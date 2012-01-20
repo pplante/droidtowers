@@ -2,26 +2,25 @@ package com.unhappyrobot;
 
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
-import com.unhappyrobot.entities.Elevator;
-import com.unhappyrobot.entities.GameGrid;
+import com.google.common.eventbus.Subscribe;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.events.ElevatorResizeEvent;
-import com.unhappyrobot.events.EventListener;
+import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GameGridResizeEvent;
 import com.unhappyrobot.events.GridObjectAddedEvent;
 import com.unhappyrobot.math.GridPoint;
 
-import java.util.EventObject;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GridPositionCache extends EventListener {
+public class GridPositionCache {
   private GridPosition[][] gridPositions;
   private static GridPositionCache instance;
 
   private GridPositionCache() {
     gridPositions = new GridPosition[10][10];
+    GameEvents.register(this);
   }
 
   public static GridPositionCache instance() {
@@ -32,53 +31,40 @@ public class GridPositionCache extends EventListener {
     return instance;
   }
 
-  @Override
-  public void receiveEvent(EventObject event) {
-    if (event instanceof GridObjectAddedEvent) {
-      handleGridObjectAdded((GridObjectAddedEvent) event);
-    } else if (event instanceof ElevatorResizeEvent) {
-      handleElevatorResizeEvent((ElevatorResizeEvent) event);
-    } else if (event instanceof GameGridResizeEvent) {
-      handleGameGridResizeEvent((GameGridResizeEvent) event);
-    }
-  }
-
-  private void handleGameGridResizeEvent(GameGridResizeEvent event) {
+  @Subscribe
+  public void handleGameGridResizeEvent(GameGridResizeEvent event) {
     gridPositions = null;
 
-    GameGrid gameGrid = (GameGrid) event.getSource();
+    Vector2 gridSize = event.gameGrid.gridSize;
+    gridPositions = new GridPosition[(int) gridSize.x][(int) gridSize.y];
 
-    gridPositions = new GridPosition[(int) gameGrid.gridSize.x][(int) gameGrid.gridSize.y];
-
-    for (GridObject gridObject : gameGrid.getObjects()) {
+    for (GridObject gridObject : event.gameGrid.getObjects()) {
       getObjectSetForPosition(gridObject.getPosition()).objects.add(gridObject);
     }
   }
 
-  private void handleElevatorResizeEvent(ElevatorResizeEvent event) {
-    Elevator elevator = (Elevator) event.getSource();
-
+  @Subscribe
+  public void handleElevatorResizeEvent(ElevatorResizeEvent event) {
     GridPoint currentPos = event.prevPosition.cpy();
     for (float y = 0; y < event.prevSize.y; y++) {
-      getObjectSetForPosition(currentPos).objects.remove(elevator);
+      getObjectSetForPosition(currentPos).objects.remove(event.gridObject);
       currentPos.add(0, 1);
     }
 
-    for (GridPoint gridPoint : elevator.getGridPointsOccupied()) {
-      getObjectSetForPosition(gridPoint).objects.add(elevator);
+    for (GridPoint gridPoint : event.gridObject.getGridPointsOccupied()) {
+      getObjectSetForPosition(gridPoint).objects.add(event.gridObject);
     }
   }
 
-  private void handleGridObjectAdded(GridObjectAddedEvent event) {
-    GridObject gridObject = event.getSource();
-
-    if (gridObject == null) {
+  @Subscribe
+  public void handleGridObjectAdded(GridObjectAddedEvent event) {
+    if (event.gridObject == null) {
       return;
     }
 
-    List<GridPoint> pointsOccupied = gridObject.getGridPointsOccupied();
+    List<GridPoint> pointsOccupied = event.gridObject.getGridPointsOccupied();
     for (GridPoint gridPoint : pointsOccupied) {
-      getObjectSetForPosition(gridPoint).objects.add(gridObject);
+      getObjectSetForPosition(gridPoint).objects.add(event.gridObject);
     }
   }
 

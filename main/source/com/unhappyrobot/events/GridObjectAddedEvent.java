@@ -2,15 +2,14 @@ package com.unhappyrobot.events;
 
 import com.unhappyrobot.entities.GridObject;
 
-import java.util.EventObject;
+public class GridObjectAddedEvent {
+  public final GridObject gridObject;
 
-public class GridObjectAddedEvent extends EventObject {
-  public GridObjectAddedEvent(Object o) {
-    super(o);
-  }
+  public GridObjectAddedEvent(GridObject gridObject) {
+    if (gridObject == null) {
+      throw new RuntimeException("GridObjectAddedEvent cannot be created with out a valid GridObject");
+    }
 
-  @Override
-  public GridObject getSource() {
-    return (GridObject) super.getSource();
+    this.gridObject = gridObject;
   }
 }

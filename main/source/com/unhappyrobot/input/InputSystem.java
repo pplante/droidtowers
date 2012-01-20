@@ -9,7 +9,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
-import com.unhappyrobot.entities.GameGrid;
+import com.unhappyrobot.entities.GameLayer;
 
 import java.util.*;
 
@@ -27,7 +27,7 @@ public class InputSystem extends InputAdapter {
   private GestureDelegater delegater;
 
   private static InputSystem instance;
-  private GameGrid gameGrid;
+  private List<GameLayer> gameLayers;
 
   public static InputSystem getInstance() {
     if (instance == null) {
@@ -37,12 +37,12 @@ public class InputSystem extends InputAdapter {
     return instance;
   }
 
-  public void setup(OrthographicCamera orthographicCamera, GameGrid gameGrid) {
-    this.gameGrid = gameGrid;
+  public void setup(OrthographicCamera orthographicCamera, List<GameLayer> gameLayers) {
+    this.gameLayers = gameLayers;
     inputProcessors = Lists.newArrayList();
     keyBindings = Maps.newHashMap();
     camera = orthographicCamera;
-    delegater = new GestureDelegater(camera, gameGrid);
+    delegater = new GestureDelegater(camera, gameLayers);
     gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, delegater);
     switchTool(GestureTool.PICKER, null);
 
@@ -77,7 +77,7 @@ public class InputSystem extends InputAdapter {
   }
 
   public void switchTool(GestureTool selectedTool, Runnable switchToolRunnable) {
-    delegater.switchTool(camera, gameGrid, selectedTool, switchToolRunnable);
+    delegater.switchTool(camera, gameLayers, selectedTool, switchToolRunnable);
   }
 
   public GestureListener getCurrentTool() {
