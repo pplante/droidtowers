@@ -4,7 +4,7 @@ import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.Stair;
 
-public class StairType extends GridObjectType {
+public class StairType extends TransitType {
 
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {
@@ -17,13 +17,12 @@ public class StairType extends GridObjectType {
   }
 
   @Override
-  public int getZIndex() {
-    return 90;
-  }
-
-  @Override
   public int getCoinsEarned() {
     return 0;
   }
 
+  @Override
+  public boolean coversFloor(GridObject gridObject, float floor) {
+    return floor == gridObject.getPosition().y || floor == gridObject.getPosition().y + 1;
+  }
 }

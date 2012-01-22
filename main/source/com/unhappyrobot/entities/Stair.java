@@ -4,12 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.unhappyrobot.types.StairType;
+import com.unhappyrobot.types.TransitType;
 
-public class Stair extends GridObject {
+public class Stair extends TransitGridObject {
   private Sprite sprite;
 
-  public Stair(StairType stairType, GameGrid gameGrid) {
+  public Stair(TransitType stairType, GameGrid gameGrid) {
     super(stairType, gameGrid);
 
     TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal(stairType.getAtlasFilename()));
@@ -28,7 +28,7 @@ public class Stair extends GridObject {
 
   @Override
   public void render(SpriteBatch spriteBatch) {
-    // stairs need to support overflowing into ajacent cells.
+    // stairs need to support overflowing into adjacent cells.
     if (sprite != null) {
       sprite.setColor(renderColor);
       sprite.setPosition(position.getWorldX(gameGrid), position.getWorldY(gameGrid));

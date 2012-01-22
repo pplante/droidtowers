@@ -202,7 +202,7 @@ public class HeadsUpDisplay extends Group {
       addRoomMenu.add(makeGridObjectMenuItem(elevatorType));
     }
 
-    for (StairType stairType : StairTypeFactory.getInstance().all()) {
+    for (TransitType stairType : StairTypeFactory.getInstance().all()) {
       addRoomMenu.add(makeGridObjectMenuItem(stairType));
     }
 

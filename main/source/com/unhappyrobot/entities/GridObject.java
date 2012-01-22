@@ -196,4 +196,13 @@ public abstract class GridObject {
 
     return points;
   }
+
+
+  public float distanceToLobby() {
+    return position.y - 4;
+  }
+
+  public float distanceFromFloor(float originalFloor) {
+    return originalFloor - position.y;
+  }
 }

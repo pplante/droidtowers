@@ -5,7 +5,7 @@ import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.Room;
 
-public class ElevatorType extends GridObjectType {
+public class ElevatorType extends TransitType {
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {
     return new Elevator(this, gameGrid);
@@ -22,13 +22,12 @@ public class ElevatorType extends GridObjectType {
   }
 
   @Override
-  public int getZIndex() {
-    return 100;
-  }
-
-  @Override
   public int getCoinsEarned() {
     return 0;
   }
 
+  @Override
+  public boolean coversFloor(GridObject gridObject, float floor) {
+    return gridObject.getContentPosition().y <= floor && floor <= (gridObject.getContentPosition().y + gridObject.getContentSize().y);
+  }
 }

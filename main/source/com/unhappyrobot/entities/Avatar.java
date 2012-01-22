@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
@@ -57,27 +58,56 @@ public class Avatar extends GameObject {
 
     Set<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
     if (commercialSpaces != null) {
-      final CommercialSpace firstCommercialSpace = (CommercialSpace) Iterables.getFirst(commercialSpaces, null);
+      final CommercialSpace firstCommercialSpace = (CommercialSpace) Iterables.getLast(commercialSpaces, null);
       if (firstCommercialSpace != null) {
         List<GridObject> transitObjects = Lists.newArrayList(gameGrid.getInstancesOf(Stair.class, Elevator.class));
-        List<GridObject> sortedTransitObjects = Ordering.natural().onResultOf(new Function<GridObject, Float>() {
-          public Float apply(@Nullable GridObject transitObject) {
-            if (transitObject != null && firstCommercialSpace.getPosition().y == transitObject.getPosition().y) {
-              return Math.abs(firstCommercialSpace.getPosition().x - transitObject.getPosition().x);
-            }
+        List<GridObject> sortedTransitObjects = Lists.newArrayList();
 
-            return Float.MAX_VALUE;
+        float currentFloor = firstCommercialSpace.getContentPosition().y;
+        float originalFloor = currentFloor;
+        GridObject transitClosestToLobby;
+        do {
+          transitClosestToLobby = findTransitClosestToLobby(transitObjects, currentFloor, originalFloor);
+          System.out.println("transitClosestToLobby = " + transitClosestToLobby);
+          if (transitClosestToLobby == null) {
+            break;
           }
-        }).sortedCopy(transitObjects);
+          sortedTransitObjects.add(transitClosestToLobby);
+          transitObjects.remove(transitClosestToLobby);
+          currentFloor = transitClosestToLobby.getContentPosition().y;
+        } while (transitClosestToLobby.distanceToLobby() > 0);
+
+
         System.out.println("sortedTransitObjects = " + sortedTransitObjects);
 
-        GridObject closestTransit = Iterables.getFirst(sortedTransitObjects, null);
-        if (closestTransit != null) {
-          closestTransit.renderColor = Color.PINK;
+        for (GridObject sortedTransitObject : sortedTransitObjects) {
+          sortedTransitObject.renderColor = Color.BLUE;
         }
-
       }
     }
+  }
+
+  private GridObject findTransitClosestToLobby(List<GridObject> transitObjects, final float floor, final float originalFloor) {
+    List<GridObject> candidateObjects = Lists.newArrayList(transitObjects);
+
+    Iterables.removeIf(candidateObjects, new Predicate<GridObject>() {
+      public boolean apply(@Nullable GridObject gridObject) {
+        TransitGridObject transitGridObject = (TransitGridObject) gridObject;
+        return transitGridObject != null && !(transitGridObject.connectsToFloor(floor) && transitGridObject.connectsToFloor(floor - 1));
+      }
+    });
+
+    Ordering<GridObject> gridObjectOrdering = Ordering.natural().onResultOf(new Function<GridObject, Float>() {
+      public Float apply(@Nullable GridObject transitObject) {
+        if (transitObject != null) {
+          return transitObject.distanceFromFloor(originalFloor);
+        }
+
+        return Float.MIN_NORMAL;
+      }
+    });
+
+    return Iterables.getFirst(gridObjectOrdering.sortedCopy(candidateObjects), null);
   }
 
   private void moveHorizontallyTo(int newX) {
