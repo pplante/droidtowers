@@ -22,7 +22,7 @@ public class StairType extends TransitType {
   }
 
   @Override
-  public boolean coversFloor(GridObject gridObject, float floor) {
+  public boolean connectsToFloor(GridObject gridObject, float floor) {
     return floor == gridObject.getPosition().y || floor == gridObject.getPosition().y + 1;
   }
 }

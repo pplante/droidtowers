@@ -27,7 +27,7 @@ public class ElevatorType extends TransitType {
   }
 
   @Override
-  public boolean coversFloor(GridObject gridObject, float floor) {
+  public boolean connectsToFloor(GridObject gridObject, float floor) {
     return gridObject.getContentPosition().y <= floor && floor <= (gridObject.getContentPosition().y + gridObject.getContentSize().y);
   }
 }

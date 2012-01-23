@@ -8,5 +8,5 @@ public abstract class TransitType extends GridObjectType {
     return 90;
   }
 
-  public abstract boolean coversFloor(GridObject gridObject, float floor);
+  public abstract boolean connectsToFloor(GridObject gridObject, float floor);
 }

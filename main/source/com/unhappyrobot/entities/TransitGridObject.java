@@ -9,6 +9,6 @@ public abstract class TransitGridObject extends GridObject {
   }
 
   public boolean connectsToFloor(float floor) {
-    return ((TransitType) getGridObjectType()).coversFloor(this, floor);
+    return ((TransitType) getGridObjectType()).connectsToFloor(this, floor);
   }
 }
