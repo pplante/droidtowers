@@ -12,12 +12,8 @@
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="graphics" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="path finding works now from any commercial space to the lobby.  only can go down at the moment!">
+    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/TransitGridObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/TransitGridObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ElevatorType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ElevatorType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/StairType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/StairType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/TransitType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/TransitType.java" />
     </list>
     <ignored path="underwater.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -981,7 +977,7 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="path finding works now from any commercial space to the lobby.  only can go down at the moment!" />
+    <option name="LAST_COMMIT_MESSAGE" value="renamed a method" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -994,7 +990,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="refactored the placement status stuff into gridobject directly, made more sense!&#10;the game grid now gives players coins depending on what they've built." />
     <MESSAGE value="Stairs!" />
     <MESSAGE value="Some clean up" />
     <MESSAGE value="Toast notifications!" />
@@ -1019,6 +1014,7 @@
     <MESSAGE value="starting of avatar movement" />
     <MESSAGE value="refactored all of the events to use EventBus from guava.&#10;turned PickerTool into a touch delegation pump rather than interacting with the GameGrid directly, now all GameLayers will be sent an event until one swallows it.&#10;made the GameGrid into a GameLayer, moved picking into GG.&#10;" />
     <MESSAGE value="path finding works now from any commercial space to the lobby.  only can go down at the moment!" />
+    <MESSAGE value="renamed a method" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
