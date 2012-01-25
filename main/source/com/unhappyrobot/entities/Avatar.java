@@ -4,7 +4,6 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.equations.Linear;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -58,7 +57,7 @@ public class Avatar extends GameObject {
 
     Set<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
     if (commercialSpaces != null) {
-      final CommercialSpace firstCommercialSpace = (CommercialSpace) Iterables.getLast(commercialSpaces, null);
+      final CommercialSpace firstCommercialSpace = (CommercialSpace) Iterables.get(commercialSpaces, Random.randomInt(commercialSpaces.size()), null);
       if (firstCommercialSpace != null) {
         List<GridObject> transitObjects = Lists.newArrayList(gameGrid.getInstancesOf(Stair.class, Elevator.class));
         List<GridObject> sortedTransitObjects = Lists.newArrayList();
@@ -68,7 +67,6 @@ public class Avatar extends GameObject {
         GridObject transitClosestToLobby;
         do {
           transitClosestToLobby = findTransitClosestToLobby(transitObjects, currentFloor, originalFloor);
-          System.out.println("transitClosestToLobby = " + transitClosestToLobby);
           if (transitClosestToLobby == null) {
             break;
           }
@@ -76,13 +74,6 @@ public class Avatar extends GameObject {
           transitObjects.remove(transitClosestToLobby);
           currentFloor = transitClosestToLobby.getContentPosition().y;
         } while (transitClosestToLobby.distanceToLobby() > 0);
-
-
-        System.out.println("sortedTransitObjects = " + sortedTransitObjects);
-
-        for (GridObject sortedTransitObject : sortedTransitObjects) {
-          sortedTransitObject.renderColor = Color.BLUE;
-        }
       }
     }
   }

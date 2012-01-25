@@ -25,4 +25,9 @@ public class StairType extends TransitType {
   public boolean connectsToFloor(GridObject gridObject, float floor) {
     return floor == gridObject.getPosition().y || floor == gridObject.getPosition().y + 1;
   }
+
+  @Override
+  public int getZIndex() {
+    return 80;
+  }
 }

@@ -1,4 +1,4 @@
 out/
 android/gen
 libbullet.so
-.idea/*
+.idea/
