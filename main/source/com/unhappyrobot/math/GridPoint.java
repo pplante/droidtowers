@@ -13,6 +13,10 @@ public class GridPoint extends Vector2 {
     super(x, y);
   }
 
+  public GridPoint(Vector2 vec) {
+    this(vec.x, vec.y);
+  }
+
   @JsonIgnore
   public float getWorldX(GameGrid gameGrid) {
     return x * gameGrid.unitSize.x;
@@ -34,5 +38,15 @@ public class GridPoint extends Vector2 {
 
   public Vector2 toVector2() {
     return new Vector2(x, y);
+  }
+
+  @Override
+  public boolean equals(Object otherObject) {
+    if (otherObject != null && (otherObject instanceof GridPoint || otherObject instanceof Vector2)) {
+      GridPoint otherPoint = (GridPoint) otherObject;
+      return otherPoint.x == this.x && otherPoint.y == this.y;
+    }
+
+    return false;
   }
 }

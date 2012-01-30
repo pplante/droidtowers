@@ -18,6 +18,7 @@ import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectAddedEvent;
 import com.unhappyrobot.events.GridObjectChangedEvent;
 import com.unhappyrobot.events.GridObjectRemovedEvent;
+import com.unhappyrobot.graphics.TransitLine;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.CommercialType;
 import com.unhappyrobot.types.RoomType;
@@ -41,6 +42,7 @@ public class GameGridRenderer extends GameLayer {
   private Map<Overlays, Function<GridObject, Float>> overlayFunctions;
   private Function<GridObject, Integer> objectRenderSortFunction;
   private List<GridObject> objectsRenderOrder;
+  private TransitLine transitLine;
 
   public GameGridRenderer(GameGrid gameGrid) {
     this.gameGrid = gameGrid;
@@ -90,6 +92,11 @@ public class GameGridRenderer extends GameLayer {
           renderGenericOverlay(overlay);
         }
       }
+    }
+
+    if (transitLine != null) {
+      Gdx.gl.glEnable(GL10.GL_BLEND);
+      transitLine.render(shapeRenderer);
     }
   }
 
@@ -249,5 +256,9 @@ public class GameGridRenderer extends GameLayer {
     }
 
     objectsRenderOrder.remove(event.gridObject);
+  }
+
+  public void setTransitLine(TransitLine transitLine) {
+    this.transitLine = transitLine;
   }
 }

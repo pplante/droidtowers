@@ -8,17 +8,17 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Ordering;
-import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.controllers.AvatarLayer;
+import com.unhappyrobot.gamestate.actions.TransportCalculator;
+import com.unhappyrobot.graphics.TransitLine;
+import com.unhappyrobot.math.GridPoint;
+import com.unhappyrobot.pathfinding.TransitPathFinder;
 import com.unhappyrobot.utils.Random;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Set;
 
 public class Avatar extends GameObject {
@@ -33,12 +33,13 @@ public class Avatar extends GameObject {
   private boolean isResident;
   private float satisfactionShops;
   private float satisfactionFood;
+  private TransitPathFinder pathFinder;
 
   public Avatar(AvatarLayer avatarLayer) {
     super();
     this.gameGrid = avatarLayer.getGameGrid();
 
-    setPosition(Random.randomInt(0, gameGrid.getWorldSize().x), 256);
+    setPosition(Random.randomInt(1792, 2560), 256);
 
     TextureAtlas droidAtlas = new TextureAtlas(Gdx.files.internal("characters/droid.txt"));
 
@@ -50,55 +51,19 @@ public class Avatar extends GameObject {
 
   private void setupNewMovement() {
     isMoving = true;
-    int newX = Random.randomInt(0, gameGrid.getWorldSize().x);
+    int newX = Random.randomInt(1792, 2560);
     isFlipped = newX < position.x;
 
     moveHorizontallyTo(newX);
 
     Set<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
     if (commercialSpaces != null) {
-      final CommercialSpace firstCommercialSpace = (CommercialSpace) Iterables.get(commercialSpaces, Random.randomInt(commercialSpaces.size()), null);
-      if (firstCommercialSpace != null) {
-        List<GridObject> transitObjects = Lists.newArrayList(gameGrid.getInstancesOf(Stair.class, Elevator.class));
-        List<GridObject> sortedTransitObjects = Lists.newArrayList();
-
-        float currentFloor = firstCommercialSpace.getContentPosition().y;
-        float originalFloor = currentFloor;
-        GridObject transitClosestToLobby;
-        do {
-          transitClosestToLobby = findTransitClosestToLobby(transitObjects, currentFloor, originalFloor);
-          if (transitClosestToLobby == null) {
-            break;
-          }
-          sortedTransitObjects.add(transitClosestToLobby);
-          transitObjects.remove(transitClosestToLobby);
-          currentFloor = transitClosestToLobby.getContentPosition().y;
-        } while (transitClosestToLobby.distanceToLobby() > 0);
-      }
+      ArrayList<GridObject> commercials = Lists.newArrayList(commercialSpaces);
+      new TransportCalculator(gameGrid, 0).run();
+      System.out.println("commercials = " + commercials.get(0));
+      pathFinder = new TransitPathFinder(commercials.get(0).getPosition());
+      pathFinder.compute(gameGrid.closestGridPoint(position.x, position.y));
     }
-  }
-
-  private GridObject findTransitClosestToLobby(List<GridObject> transitObjects, final float floor, final float originalFloor) {
-    List<GridObject> candidateObjects = Lists.newArrayList(transitObjects);
-
-    Iterables.removeIf(candidateObjects, new Predicate<GridObject>() {
-      public boolean apply(@Nullable GridObject gridObject) {
-        TransitGridObject transitGridObject = (TransitGridObject) gridObject;
-        return transitGridObject != null && !(transitGridObject.connectsToFloor(floor) && transitGridObject.connectsToFloor(floor - 1));
-      }
-    });
-
-    Ordering<GridObject> gridObjectOrdering = Ordering.natural().onResultOf(new Function<GridObject, Float>() {
-      public Float apply(@Nullable GridObject transitObject) {
-        if (transitObject != null) {
-          return transitObject.distanceFromFloor(originalFloor);
-        }
-
-        return Float.MIN_NORMAL;
-      }
-    });
-
-    return Iterables.getFirst(gridObjectOrdering.sortedCopy(candidateObjects), null);
   }
 
   private void moveHorizontallyTo(int newX) {
@@ -126,6 +91,25 @@ public class Avatar extends GameObject {
 
     if (!isMoving) {
       setupNewMovement();
+    }
+
+    if (pathFinder != null) {
+      if (!pathFinder.isWorking()) {
+        LinkedList<GridPoint> discoveredPath = pathFinder.getDiscoveredPath();
+        if (discoveredPath != null) {
+          System.out.println("discoveredPath = " + discoveredPath);
+          TransitLine transitLine = new TransitLine(gameGrid);
+          for (GridPoint gridPoint : discoveredPath) {
+            transitLine.addPoint(gridPoint.toWorldVector2(gameGrid));
+          }
+
+          gameGrid.getRenderer().setTransitLine(transitLine);
+        }
+
+        pathFinder = null;
+      } else {
+        pathFinder.step();
+      }
     }
   }
 

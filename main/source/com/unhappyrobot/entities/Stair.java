@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.unhappyrobot.types.TransitType;
 
-public class Stair extends TransitGridObject {
+public class Stair extends Transit {
   private Sprite sprite;
 
   public Stair(TransitType stairType, GameGrid gameGrid) {

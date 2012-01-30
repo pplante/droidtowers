@@ -13,7 +13,7 @@ import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.ElevatorType;
 import com.unhappyrobot.types.ResizeHandle;
 
-public class Elevator extends TransitGridObject {
+public class Elevator extends Transit {
   private Sprite topSprite;
   private Sprite shaftSprite;
   private Sprite emptyShaftSprite;

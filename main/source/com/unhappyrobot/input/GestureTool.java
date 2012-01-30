@@ -16,6 +16,11 @@ public enum GestureTool {
     public ToolBase newInstance(OrthographicCamera camera, List<GameLayer> gameLayers) {
       return new PickerTool(camera, gameLayers);
     }
+  }, SELL {
+    @Override
+    public ToolBase newInstance(OrthographicCamera camera, List<GameLayer> gameLayers) {
+      return new SellTool(camera, gameLayers);
+    }
   };
 
   public abstract ToolBase newInstance(OrthographicCamera camera, List<GameLayer> gameLayers);

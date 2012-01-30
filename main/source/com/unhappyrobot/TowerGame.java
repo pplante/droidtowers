@@ -77,7 +77,7 @@ public class TowerGame implements ApplicationListener {
 
     gameGrid = new GameGrid();
     gameGrid.setUnitSize(64, 64);
-    gameGrid.setGridSize(50, 50);
+    gameGrid.setGridSize(50, 30);
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
 
     gameState = new GameState(gameGrid);

@@ -27,6 +27,8 @@ public class GameGrid extends GameLayer {
   private final GameGridRenderer gameGridRenderer;
   private final Map<Class, Set<GridObject>> gridObjectsByType;
   private GridObject selectedGridObject;
+  private GridObject transitGridObjectA;
+  private GridObject transitGridObjectB;
 
   public GameGrid() {
     setTouchEnabled(true);
@@ -158,7 +160,6 @@ public class GameGrid extends GameLayer {
     for (GridObject gridObject : gridObjects) {
       if (gridObject.touchDown(gameGridPoint)) {
         selectedGridObject = gridObject;
-        System.out.println("selectedGridObject = " + selectedGridObject);
         return true;
       }
     }
@@ -192,5 +193,4 @@ public class GameGrid extends GameLayer {
 
     return new GridPoint(gridX, gridY);
   }
-
 }

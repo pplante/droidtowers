@@ -55,7 +55,8 @@ public abstract class GridObjectType {
   }
 
   public boolean continuousPlacement() {
-    return continuousPlacement;
+//    return continuousPlacement;
+    return true;
   }
 
   public int getZIndex() {

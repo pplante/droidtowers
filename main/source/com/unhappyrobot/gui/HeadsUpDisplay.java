@@ -8,11 +8,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.unhappyrobot.GridPosition;
+import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.Overlays;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.entities.GameGrid;
@@ -20,6 +23,7 @@ import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.input.GestureTool;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.input.PlacementTool;
+import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.*;
 
 public class HeadsUpDisplay extends Group {
@@ -40,6 +44,7 @@ public class HeadsUpDisplay extends Group {
   private LabelButton setOverlayButton;
   private Menu overlayMenu;
   private Table topBar;
+  private ToolTip mouseToolTip;
 
   public static HeadsUpDisplay getInstance() {
     if (instance == null) {
@@ -82,7 +87,10 @@ public class HeadsUpDisplay extends Group {
     topBar.x = 0;
     topBar.y = Gdx.graphics.getHeight() - topBar.height;
 
-    this.guiStage.addActor(this);
+    mouseToolTip = new ToolTip();
+    addActor(mouseToolTip);
+
+    guiStage.addActor(this);
   }
 
   private void makeMoneyLabel() {
@@ -206,6 +214,22 @@ public class HeadsUpDisplay extends Group {
       addRoomMenu.add(makeGridObjectMenuItem(stairType));
     }
 
+    addRoomMenu.row().padTop(-1).fill();
+
+    addRoomMenu.add(new MenuItem(guiSkin, "Sell/Delete", new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        InputSystem.getInstance().switchTool(GestureTool.SELL, new Runnable() {
+          public void run() {
+            updateButtonText("Add Room");
+          }
+        });
+
+        updateButtonText("Sell/Delete");
+
+        addRoomMenu.close();
+      }
+    }));
+
     addRoomMenu.pack();
   }
 
@@ -228,13 +252,13 @@ public class HeadsUpDisplay extends Group {
 
         addRoomMenu.close();
       }
-
-      private void updateButtonText(String buttonText) {
-        addRoomButton.setText(buttonText);
-        addRoomButton.invalidate();
-        topBar.pack();
-      }
     });
+  }
+
+  private void updateButtonText(String buttonText) {
+    addRoomButton.setText(buttonText);
+    addRoomButton.invalidate();
+    topBar.pack();
   }
 
   public Skin getGuiSkin() {
@@ -262,6 +286,24 @@ public class HeadsUpDisplay extends Group {
     float javaHeapInBytes = Gdx.app.getJavaHeap() / 1048576.0f;
     float nativeHeapInBytes = Gdx.app.getNativeHeap() / 1048576.0f;
     menloBitmapFont.draw(batch, String.format("mem: (java %.2f Mb, native %.2f Mb)", javaHeapInBytes, nativeHeapInBytes), 5, 50);
+  }
+
+  @Override
+  public boolean touchMoved(float x, float y) {
+    Vector3 worldPoint = camera.getPickRay(Gdx.input.getX(), Gdx.input.getY()).getEndPoint(1);
+
+    GridPoint gridPoint = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
+    GridPosition gridPosition = GridPositionCache.instance().getPosition(gridPoint);
+    if (gridPosition != null) {
+      mouseToolTip.visible = true;
+      mouseToolTip.setText(String.format("%s\nobjects: %s\nelevator: %s\nstairs: %s", gridPoint, gridPosition.size(), gridPosition.containsElevator, gridPosition.containsStair));
+      mouseToolTip.x = x;
+      mouseToolTip.y = y;
+    } else {
+      mouseToolTip.visible = false;
+    }
+
+    return false;
   }
 
   public void showToast(String message) {

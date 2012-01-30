@@ -3,8 +3,8 @@ package com.unhappyrobot.entities;
 import com.unhappyrobot.types.GridObjectType;
 import com.unhappyrobot.types.TransitType;
 
-public abstract class TransitGridObject extends GridObject {
-  public TransitGridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
+public abstract class Transit extends GridObject {
+  public Transit(GridObjectType gridObjectType, GameGrid gameGrid) {
     super(gridObjectType, gameGrid);
   }
 

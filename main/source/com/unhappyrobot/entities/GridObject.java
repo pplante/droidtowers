@@ -205,4 +205,17 @@ public abstract class GridObject {
   public float distanceFromFloor(float originalFloor) {
     return originalFloor - position.y;
   }
+
+  public Vector2 getWorldCenter() {
+    Vector2 worldCenter = new Vector2();
+
+    worldCenter.x = position.getWorldX(gameGrid) + (size.getWorldX(gameGrid) / 2);
+    worldCenter.y = position.getWorldY(gameGrid) + (size.getWorldY(gameGrid) / 2);
+
+    return worldCenter;
+  }
+
+  public void setRenderColor(Color renderColor) {
+    this.renderColor = renderColor;
+  }
 }
