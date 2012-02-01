@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.GridPosition;
 import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.entities.*;
-import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.RoomType;
 
 import java.util.Set;
@@ -42,37 +41,33 @@ public class TransportCalculator extends GameStateAction {
       Vector2 size = transport.getContentSize();
       boolean isElevator = transport instanceof Elevator;
       boolean isStair = transport instanceof Stair;
-      for (int x = (int) position.x; x <= position.x + size.x; x++) {
-        for (int y = (int) position.y; y <= position.y + size.y; y++) {
-          GridPoint currentPoint = new GridPoint(x, y);
-          GridPosition gridPosition = GridPositionCache.instance().getPosition(currentPoint);
+      for (int x = (int) position.x; x < position.x + size.x; x++) {
+        for (int y = (int) position.y; y < position.y + size.y; y++) {
+          GridPosition gridPosition = GridPositionCache.instance().getPosition(x, y);
           if (gridPosition != null) {
             gridPosition.containsElevator = isElevator;
             gridPosition.containsStair = isStair;
           }
-          scanForRooms(currentPoint, -1);
-          scanForRooms(currentPoint, 1);
+          scanForRooms(x, y, -1);
+          scanForRooms(x, y, 1);
         }
       }
     }
   }
 
-  private void scanForRooms(GridPoint currentPoint, int stepX) {
-    GridPosition gridPosition = GridPositionCache.instance().getPosition(currentPoint);
+  private void scanForRooms(int x, int y, int stepX) {
+    GridPosition gridPosition = GridPositionCache.instance().getPosition(x, y);
     while (gridPosition != null && gridPosition.size() > 0) {
       gridPosition.connectedToTransit = true;
-      float longestWidth = 0;
       for (GridObject gridObject : gridPosition.getObjects()) {
         if (gridObject instanceof Room) {
           Room room = (Room) gridObject;
           room.setConnectedToTransport(true);
         }
-
-        longestWidth = Math.max(gridObject.getSize().x, longestWidth);
       }
 
-      currentPoint.add(longestWidth * stepX, 0);
-      gridPosition = GridPositionCache.instance().getPosition(currentPoint);
+      x += stepX;
+      gridPosition = GridPositionCache.instance().getPosition(x, y);
     }
   }
 }

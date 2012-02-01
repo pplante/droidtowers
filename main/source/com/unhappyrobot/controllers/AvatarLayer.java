@@ -1,8 +1,10 @@
 package com.unhappyrobot.controllers;
 
+import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.Avatar;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GameLayer;
+import com.unhappyrobot.entities.GameObject;
 
 public class AvatarLayer extends GameLayer {
   private static AvatarLayer instance;
@@ -32,5 +34,20 @@ public class AvatarLayer extends GameLayer {
     }
 
     super.update(timeDelta);
+  }
+
+  @Override
+  public boolean tap(Vector2 worldPoint, int count) {
+    for (GameObject gameObject : gameObjects) {
+      if (gameObject.getBounds().containsPoint(worldPoint)) {
+        Avatar avatar = (Avatar) gameObject;
+        avatar.findCommercialSpace();
+
+        return true;
+      }
+    }
+
+
+    return false;
   }
 }

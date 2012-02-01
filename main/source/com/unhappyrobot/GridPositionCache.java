@@ -123,8 +123,10 @@ public class GridPositionCache {
   }
 
   public GridPosition getPosition(Vector2 gridPoint) {
-    int x = (int) gridPoint.x;
-    int y = (int) gridPoint.y;
+    return getPosition((int) gridPoint.x, (int) gridPoint.y);
+  }
+
+  public GridPosition getPosition(int x, int y) {
     if (x == gridSize.x || x < 0) {
       return null;
     } else if (y == gridSize.y || y < 0) {

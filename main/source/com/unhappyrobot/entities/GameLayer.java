@@ -3,7 +3,7 @@ package com.unhappyrobot.entities;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,19 +48,19 @@ public class GameLayer {
     this.visible = visible;
   }
 
-  public boolean pan(Vector3 worldPoint, Vector3 deltaPoint) {
+  public boolean pan(Vector2 worldPoint, Vector2 deltaPoint) {
     return false;
   }
 
-  public boolean tap(Vector3 worldPoint, int count) {
+  public boolean tap(Vector2 worldPoint, int count) {
     return false;
   }
 
-  public boolean touchDown(Vector3 worldPoint, int pointer) {
+  public boolean touchDown(Vector2 worldPoint, int pointer) {
     return false;
   }
 
-  public boolean longPress(Vector3 worldPoint) {
+  public boolean longPress(Vector2 worldPoint) {
     return false;
   }
 

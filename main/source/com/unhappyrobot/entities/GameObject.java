@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.unhappyrobot.math.Bounds2d;
 
 public class GameObject implements Tweenable {
   protected Vector2 position;
@@ -155,4 +156,8 @@ public class GameObject implements Tweenable {
 
   public static final int TWEEN_OPACITY = 0;
   public static final int TWEEN_POSITION = 1;
+
+  public Bounds2d getBounds() {
+    return new Bounds2d(position, size);
+  }
 }

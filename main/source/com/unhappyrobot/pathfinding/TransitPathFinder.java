@@ -29,10 +29,12 @@ public class TransitPathFinder extends AStar<GridPoint> {
     GridPosition position = GridPositionCache.instance().getPosition(to);
     if (position != null) {
       if (position.containsElevator) {
-        return 1.0;
+        return 0.25;
       } else if (position.containsStair) {
         return 0.75;
       } else if (position.connectedToTransit) {
+        return 1.0;
+      } else if (to.y == 4.0f) {
         return 2.0;
       }
     }
@@ -53,20 +55,20 @@ public class TransitPathFinder extends AStar<GridPoint> {
     int x = (int) point.x;
     int y = (int) point.y;
 
-    checkGridPosition(successors, new GridPoint(x, y + 1));
-    checkGridPosition(successors, new GridPoint(x, y - 1));
+    checkGridPosition(successors, x, y + 1);
+    checkGridPosition(successors, x, y - 1);
 
-    checkGridPosition(successors, new GridPoint(x + 1, y));
-    checkGridPosition(successors, new GridPoint(x - 1, y));
+    checkGridPosition(successors, x + 1, y);
+    checkGridPosition(successors, x - 1, y);
 
     return successors;
   }
 
-  private void checkGridPosition(List<GridPoint> successors, GridPoint point) {
-    GridPosition position = GridPositionCache.instance().getPosition(point);
-    if (position != null && (position.connectedToTransit || point.y == 4)) {
-//      System.out.println("point = " + point);
-      successors.add(point);
+  private void checkGridPosition(List<GridPoint> successors, int x, int y) {
+    GridPosition position = GridPositionCache.instance().getPosition(x, y);
+    if (position != null && (position.connectedToTransit || y == 4)) {
+//      System.out.println("x: " + x + ", y: " + y);
+      successors.add(new GridPoint(x, y));
     }
   }
 

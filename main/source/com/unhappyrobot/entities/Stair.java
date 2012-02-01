@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.types.TransitType;
 
 public class Stair extends Transit {
@@ -34,5 +35,10 @@ public class Stair extends Transit {
       sprite.setPosition(position.getWorldX(gameGrid), position.getWorldY(gameGrid));
       sprite.draw(spriteBatch);
     }
+  }
+
+  @Override
+  public Vector2 getContentSize() {
+    return size.cpy().add(0, 1);
   }
 }

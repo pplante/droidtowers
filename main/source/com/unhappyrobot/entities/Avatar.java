@@ -4,6 +4,7 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.equations.Linear;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -11,7 +12,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.google.common.collect.Lists;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.controllers.AvatarLayer;
-import com.unhappyrobot.gamestate.actions.TransportCalculator;
 import com.unhappyrobot.graphics.TransitLine;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.pathfinding.TransitPathFinder;
@@ -44,7 +44,7 @@ public class Avatar extends GameObject {
     TextureAtlas droidAtlas = new TextureAtlas(Gdx.files.internal("characters/droid.txt"));
 
     setSprite(droidAtlas.createSprite("stationary"));
-
+    size.set(getSprite().getWidth(), getSprite().getHeight());
     animation = new Animation(FRAME_DURATION, droidAtlas.findRegions("walk"));
     animationTime = 0f;
   }
@@ -55,13 +55,23 @@ public class Avatar extends GameObject {
     isFlipped = newX < position.x;
 
     moveHorizontallyTo(newX);
+  }
+
+  public void findCommercialSpace() {
+    gameGrid.getRenderer().setTransitLine(null);
 
     Set<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
     if (commercialSpaces != null) {
+      for (GridObject space : commercialSpaces) {
+        space.setRenderColor(Color.WHITE);
+      }
+
       ArrayList<GridObject> commercials = Lists.newArrayList(commercialSpaces);
-      new TransportCalculator(gameGrid, 0).run();
-      System.out.println("commercials = " + commercials.get(0));
-      pathFinder = new TransitPathFinder(commercials.get(0).getPosition());
+//      new TransportCalculator(gameGrid, 0).run();
+      GridObject commercialSpace = commercials.get(Random.randomInt(commercials.size()));
+      commercialSpace.setRenderColor(Color.ORANGE);
+      System.out.println("commercials = " + commercialSpace);
+      pathFinder = new TransitPathFinder(commercialSpace.getPosition());
       pathFinder.compute(gameGrid.closestGridPoint(position.x, position.y));
     }
   }
@@ -106,8 +116,13 @@ public class Avatar extends GameObject {
           gameGrid.getRenderer().setTransitLine(transitLine);
         }
 
+        System.out.println("pathFinder.getCost() = " + pathFinder.getCost());
+        System.out.println("pathFinder.getExpandedCounter() = " + pathFinder.getExpandedCounter());
+
         pathFinder = null;
       } else {
+//        System.out.println("pathFinder.getCost() = " + pathFinder.getCost());
+//        System.out.println("pathFinder.getExpandedCounter() = " + pathFinder.getExpandedCounter());
         pathFinder.step();
       }
     }

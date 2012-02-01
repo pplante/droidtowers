@@ -128,7 +128,7 @@ public class Elevator extends Transit {
 
   @Override
   public Vector2 getContentSize() {
-    return size.cpy().sub(0, 3);
+    return size.cpy().sub(0, 2);
   }
 
   @Override

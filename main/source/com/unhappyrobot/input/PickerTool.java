@@ -1,6 +1,7 @@
 package com.unhappyrobot.input;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.unhappyrobot.entities.GameLayer;
@@ -14,8 +15,7 @@ public class PickerTool extends ToolBase {
 
   @Override
   public boolean longPress(int x, int y) {
-    Ray pickRay = camera.getPickRay(x, y);
-    Vector3 worldPoint = pickRay.getEndPoint(1);
+    Vector2 worldPoint = cameraPickRayToWorldPoint(x, y);
 
     for (GameLayer gameLayer : gameLayers) {
       if (gameLayer.isTouchEnabled() && gameLayer.longPress(worldPoint)) {
@@ -28,8 +28,8 @@ public class PickerTool extends ToolBase {
 
   @Override
   public boolean pan(int x, int y, int deltaX, int deltaY) {
-    Vector3 worldPoint = camera.getPickRay(x, y).getEndPoint(1);
-    Vector3 deltaPoint = camera.getPickRay(x + -deltaX, y + deltaY).getEndPoint(1);
+    Vector2 worldPoint = cameraPickRayToWorldPoint(x, y);
+    Vector2 deltaPoint = cameraPickRayToWorldPoint(x + -deltaX, y + deltaY);
 
     for (GameLayer gameLayer : gameLayers) {
       if (gameLayer.isTouchEnabled() && gameLayer.pan(worldPoint, deltaPoint)) {
@@ -42,8 +42,7 @@ public class PickerTool extends ToolBase {
 
   @Override
   public boolean tap(int x, int y, int count) {
-    Ray pickRay = camera.getPickRay(x, y);
-    Vector3 worldPoint = pickRay.getEndPoint(1);
+    Vector2 worldPoint = cameraPickRayToWorldPoint(x, y);
 
     for (GameLayer gameLayer : gameLayers) {
       if (gameLayer.isTouchEnabled() && gameLayer.tap(worldPoint, count)) {
@@ -56,8 +55,7 @@ public class PickerTool extends ToolBase {
 
   @Override
   public boolean touchDown(int x, int y, int pointer) {
-    Ray pickRay = camera.getPickRay(x, y);
-    Vector3 worldPoint = pickRay.getEndPoint(1);
+    Vector2 worldPoint = cameraPickRayToWorldPoint(x, y);
 
     for (GameLayer gameLayer : gameLayers) {
       if (gameLayer.isTouchEnabled() && gameLayer.touchDown(worldPoint, pointer)) {
@@ -66,5 +64,11 @@ public class PickerTool extends ToolBase {
     }
 
     return false;
+  }
+
+  private Vector2 cameraPickRayToWorldPoint(int x, int y) {
+    Ray pickRay = camera.getPickRay(x, y);
+    Vector3 pickRayEndPoint = pickRay.getEndPoint(1);
+    return new Vector2(pickRayEndPoint.x, pickRayEndPoint.y);
   }
 }

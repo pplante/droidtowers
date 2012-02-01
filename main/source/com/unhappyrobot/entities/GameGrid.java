@@ -2,7 +2,6 @@ package com.unhappyrobot.entities;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GameGridResizeEvent;
@@ -139,8 +138,8 @@ public class GameGrid extends GameLayer {
   }
 
   @Override
-  public boolean tap(Vector3 worldPoint, int count) {
-    GridPoint gridPointAtFinger = closestGridPoint(worldPoint.x, worldPoint.y);
+  public boolean tap(Vector2 worldPoint, int count) {
+    GridPoint gridPointAtFinger = closestGridPoint(worldPoint);
 
     Set<GridObject> gridObjects = GridPositionCache.instance().getObjectsAt(gridPointAtFinger, new Vector2(1, 1));
     for (GridObject gridObject : gridObjects) {
@@ -152,9 +151,13 @@ public class GameGrid extends GameLayer {
     return false;
   }
 
+  private GridPoint closestGridPoint(Vector2 worldPoint) {
+    return closestGridPoint(worldPoint.x, worldPoint.y);
+  }
+
   @Override
-  public boolean touchDown(Vector3 worldPoint, int pointer) {
-    GridPoint gameGridPoint = closestGridPoint(worldPoint.x, worldPoint.y);
+  public boolean touchDown(Vector2 worldPoint, int pointer) {
+    GridPoint gameGridPoint = closestGridPoint(worldPoint);
 
     Set<GridObject> gridObjects = GridPositionCache.instance().getObjectsAt(gameGridPoint, new Vector2(1, 1));
     for (GridObject gridObject : gridObjects) {
@@ -170,10 +173,10 @@ public class GameGrid extends GameLayer {
   }
 
   @Override
-  public boolean pan(Vector3 worldPoint, Vector3 deltaPoint) {
+  public boolean pan(Vector2 worldPoint, Vector2 deltaPoint) {
     if (selectedGridObject != null) {
-      GridPoint gridPointAtFinger = closestGridPoint(worldPoint.x, worldPoint.y);
-      GridPoint gridPointDelta = closestGridPoint(deltaPoint.x, deltaPoint.y);
+      GridPoint gridPointAtFinger = closestGridPoint(worldPoint);
+      GridPoint gridPointDelta = closestGridPoint(deltaPoint);
       if (selectedGridObject.pan(gridPointAtFinger, gridPointDelta)) {
         return true;
       }
