@@ -121,9 +121,12 @@ public class Avatar extends GameObject {
 
         pathFinder = null;
       } else {
-//        System.out.println("pathFinder.getCost() = " + pathFinder.getCost());
-//        System.out.println("pathFinder.getExpandedCounter() = " + pathFinder.getExpandedCounter());
         pathFinder.step();
+
+        if (pathFinder.getExpandedCounter() == 2000) {
+          System.out.println("Got bored looking for something, stopping A* search.");
+          pathFinder = null;
+        }
       }
     }
   }

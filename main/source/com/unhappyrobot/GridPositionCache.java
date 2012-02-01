@@ -135,4 +135,8 @@ public class GridPositionCache {
 
     return gridPositions[x][y];
   }
+
+  public GridPosition[][] getPositions() {
+    return gridPositions;
+  }
 }

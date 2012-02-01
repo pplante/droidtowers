@@ -36,6 +36,14 @@ public class TransportCalculator extends GameStateAction {
       }
     }
 
+    for (GridPosition[] gridPositions : GridPositionCache.instance().getPositions()) {
+      for (GridPosition gridPosition : gridPositions) {
+        gridPosition.containsStair = false;
+        gridPosition.containsElevator = false;
+        gridPosition.connectedToTransit = false;
+      }
+    }
+
     for (GridObject transport : transports) {
       Vector2 position = transport.getContentPosition();
       Vector2 size = transport.getContentSize();
@@ -45,8 +53,9 @@ public class TransportCalculator extends GameStateAction {
         for (int y = (int) position.y; y < position.y + size.y; y++) {
           GridPosition gridPosition = GridPositionCache.instance().getPosition(x, y);
           if (gridPosition != null) {
-            gridPosition.containsElevator = isElevator;
-            gridPosition.containsStair = isStair;
+            gridPosition.connectedToTransit = true;
+            if (isElevator) gridPosition.containsElevator = true;
+            if (isStair) gridPosition.containsStair = true;
           }
           scanForRooms(x, y, -1);
           scanForRooms(x, y, 1);
@@ -56,7 +65,7 @@ public class TransportCalculator extends GameStateAction {
   }
 
   private void scanForRooms(int x, int y, int stepX) {
-    GridPosition gridPosition = GridPositionCache.instance().getPosition(x, y);
+    GridPosition gridPosition = GridPositionCache.instance().getPosition(x + stepX, y);
     while (gridPosition != null && gridPosition.size() > 0) {
       gridPosition.connectedToTransit = true;
       for (GridObject gridObject : gridPosition.getObjects()) {

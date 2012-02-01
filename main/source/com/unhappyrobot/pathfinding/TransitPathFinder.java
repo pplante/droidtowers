@@ -55,8 +55,11 @@ public class TransitPathFinder extends AStar<GridPoint> {
     int x = (int) point.x;
     int y = (int) point.y;
 
-    checkGridPosition(successors, x, y + 1);
-    checkGridPosition(successors, x, y - 1);
+    GridPosition position = GridPositionCache.instance().getPosition(x, y);
+    if (position.containsElevator || position.containsStair) {
+      checkGridPosition(successors, x, y + 1);
+      checkGridPosition(successors, x, y - 1);
+    }
 
     checkGridPosition(successors, x + 1, y);
     checkGridPosition(successors, x - 1, y);
