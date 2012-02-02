@@ -2,10 +2,8 @@ package com.unhappyrobot.events;
 
 import com.unhappyrobot.entities.GridObject;
 
-public class GridObjectRemovedEvent {
-  public final GridObject gridObject;
-
+public class GridObjectRemovedEvent extends GridObjectEvent {
   public GridObjectRemovedEvent(GridObject gridObject) {
-    this.gridObject = gridObject;
+    super(gridObject);
   }
 }

@@ -296,7 +296,7 @@ public class HeadsUpDisplay extends Group {
     GridPosition gridPosition = GridPositionCache.instance().getPosition(gridPoint);
     if (gridPosition != null) {
       mouseToolTip.visible = true;
-      mouseToolTip.setText(String.format("%s\nobjects: %s\nelevator: %s\nstairs: %s", gridPoint, gridPosition.size(), gridPosition.containsElevator, gridPosition.containsStair));
+      mouseToolTip.setText(String.format("%s\nobjects: %s\nelevator: %s\nstairs: %s", gridPoint, gridPosition.size(), gridPosition.elevator != null, gridPosition.stair != null));
       mouseToolTip.x = x;
       mouseToolTip.y = y;
     } else {

@@ -28,9 +28,9 @@ public class TransitPathFinder extends AStar<GridPoint> {
 
     GridPosition position = GridPositionCache.instance().getPosition(to);
     if (position != null) {
-      if (position.containsElevator) {
+      if (position.elevator != null) {
         return 0.25;
-      } else if (position.containsStair) {
+      } else if (position.stair != null) {
         return 0.75;
       } else if (position.connectedToTransit) {
         return 1.0;
@@ -44,7 +44,6 @@ public class TransitPathFinder extends AStar<GridPoint> {
 
   @Override
   protected Double h(GridPoint from, GridPoint to) {
-//      return Math.sqrt(Math.pow((from.x - to.x), 2) + Math.pow((from.y - to.y), 2));
     /* Use the Manhattan distance heuristic.  */
     return (double) Math.abs(goal.x - to.x) + Math.abs(goal.y - to.y);
   }
@@ -56,7 +55,10 @@ public class TransitPathFinder extends AStar<GridPoint> {
     int y = (int) point.y;
 
     GridPosition position = GridPositionCache.instance().getPosition(x, y);
-    if (position.containsElevator || position.containsStair) {
+    if (position.elevator != null) {
+      checkGridPosition(successors, x, y + 1);
+      checkGridPosition(successors, x, y - 1);
+    } else if (position.stair != null) {
       checkGridPosition(successors, x, y + 1);
       checkGridPosition(successors, x, y - 1);
     }

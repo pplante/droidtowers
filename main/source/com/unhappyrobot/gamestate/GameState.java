@@ -10,8 +10,6 @@ import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.events.EventListener;
 import com.unhappyrobot.events.GameEvents;
-import com.unhappyrobot.events.GridObjectAddedEvent;
-import com.unhappyrobot.events.GridObjectChangedEvent;
 import com.unhappyrobot.gamestate.actions.*;
 import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.OnClickCallback;
@@ -23,40 +21,33 @@ import org.codehaus.jackson.map.module.SimpleModule;
 
 public class GameState extends EventListener {
   private final GameGrid gameGrid;
-  private final GameStateAction calculateTransportConnectionsAction;
   private final GameStateAction calculatePopulation;
   private final GameStateAction calculateJobs;
   private final GameStateAction calculateEarnout;
-  private final GameStateAction calculateDesirablity;
+  private final GameStateAction calculateDesirability;
   private boolean shouldSaveGame;
+  private final TransportCalculator transportCalculator;
 
   public GameState(final GameGrid gameGrid) {
-    GameEvents.register(this);
-
     this.gameGrid = gameGrid;
+
     calculatePopulation = new PopulationCalculator(this.gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
     calculateEarnout = new EarnoutCalculator(this.gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
     calculateJobs = new EmploymentCalculator(this.gameGrid, TowerConsts.JOB_UPDATE_FREQUENCY);
-    calculateTransportConnectionsAction = new TransportCalculator(this.gameGrid, 250);
-    calculateDesirablity = new DesirabilityCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
+    calculateDesirability = new DesirabilityCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
+
+    GameEvents.register(this);
+
+    transportCalculator = new TransportCalculator(gameGrid);
   }
 
   public void update(float deltaTime, GameGrid gameGrid) {
     long currentTime = System.currentTimeMillis();
 
-    calculateTransportConnectionsAction.act(currentTime);
     calculatePopulation.act(currentTime);
     calculateJobs.act(currentTime);
     calculateEarnout.act(currentTime);
-    calculateDesirablity.act(currentTime);
-  }
-
-  public void receiveEvent(GridObjectAddedEvent e) {
-    calculateTransportConnectionsAction.resetInterval();
-  }
-
-  public void receiveEvent(GridObjectChangedEvent e) {
-    calculateTransportConnectionsAction.resetInterval();
+    calculateDesirability.act(currentTime);
   }
 
   public void loadSavedGame(final FileHandle fileHandle, OrthographicCamera camera) {
@@ -67,6 +58,8 @@ public class GameState extends EventListener {
     }
 
     try {
+      transportCalculator.pause();
+
       ObjectMapper objectMapper = new ObjectMapper();
       GameSave gameSave = objectMapper.readValue(fileHandle.file(), GameSave.class);
 
@@ -96,6 +89,8 @@ public class GameState extends EventListener {
           Gdx.app.exit();
         }
       }).centerOnScreen().show();
+    } finally {
+      transportCalculator.unpause();
     }
   }
 

@@ -1,32 +1,39 @@
 package com.unhappyrobot.gamestate.actions;
 
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.eventbus.Subscribe;
 import com.unhappyrobot.GridPosition;
 import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.entities.*;
+import com.unhappyrobot.events.GameEvents;
+import com.unhappyrobot.events.GridObjectEvent;
 import com.unhappyrobot.types.RoomType;
 
-import java.util.Set;
-
-public class TransportCalculator extends GameStateAction {
+public class TransportCalculator {
   private final Class transportClasses[] = {Elevator.class, Stair.class};
   private final Class roomClasses[] = {Room.class, CommercialSpace.class};
+  private final GameGrid gameGrid;
+  private boolean paused;
 
-  public TransportCalculator(GameGrid gameGrid, long frequency) {
-    super(gameGrid, frequency);
-    shouldRepeat = false;
+  public TransportCalculator(GameGrid gameGrid) {
+    this.gameGrid = gameGrid;
+
+    GameEvents.register(this);
   }
 
-  @Override
-  public void run() {
-    Set<GridObject> transports = gameGrid.getInstancesOf(transportClasses);
-    Set<GridObject> rooms = gameGrid.getInstancesOf(roomClasses);
+  @Subscribe
+  public void update(GridObjectEvent event) {
+    if (paused) return;
 
-    if (transports == null || rooms == null) {
-      return;
+    System.out.println("running!!!!");
+
+    for (GridPosition[] gridPositions : GridPositionCache.instance().getPositions()) {
+      for (GridPosition gridPosition : gridPositions) {
+        gridPosition.connectedToTransit = false;
+      }
     }
 
-    for (GridObject gridObject : rooms) {
+    for (GridObject gridObject : gameGrid.getInstancesOf(roomClasses)) {
       Room room = (Room) gridObject;
       RoomType roomType = (RoomType) room.getGridObjectType();
       if (roomType.isLobby()) {
@@ -36,27 +43,18 @@ public class TransportCalculator extends GameStateAction {
       }
     }
 
-    for (GridPosition[] gridPositions : GridPositionCache.instance().getPositions()) {
-      for (GridPosition gridPosition : gridPositions) {
-        gridPosition.containsStair = false;
-        gridPosition.containsElevator = false;
-        gridPosition.connectedToTransit = false;
-      }
-    }
-
-    for (GridObject transport : transports) {
+    for (GridObject transport : gameGrid.getInstancesOf(transportClasses)) {
       Vector2 position = transport.getContentPosition();
       Vector2 size = transport.getContentSize();
-      boolean isElevator = transport instanceof Elevator;
-      boolean isStair = transport instanceof Stair;
+
       for (int x = (int) position.x; x < position.x + size.x; x++) {
         for (int y = (int) position.y; y < position.y + size.y; y++) {
           GridPosition gridPosition = GridPositionCache.instance().getPosition(x, y);
+
           if (gridPosition != null) {
             gridPosition.connectedToTransit = true;
-            if (isElevator) gridPosition.containsElevator = true;
-            if (isStair) gridPosition.containsStair = true;
           }
+
           scanForRooms(x, y, -1);
           scanForRooms(x, y, 1);
         }
@@ -65,7 +63,9 @@ public class TransportCalculator extends GameStateAction {
   }
 
   private void scanForRooms(int x, int y, int stepX) {
-    GridPosition gridPosition = GridPositionCache.instance().getPosition(x + stepX, y);
+    x += stepX;
+
+    GridPosition gridPosition = GridPositionCache.instance().getPosition(x, y);
     while (gridPosition != null && gridPosition.size() > 0) {
       gridPosition.connectedToTransit = true;
       for (GridObject gridObject : gridPosition.getObjects()) {
@@ -78,5 +78,15 @@ public class TransportCalculator extends GameStateAction {
       x += stepX;
       gridPosition = GridPositionCache.instance().getPosition(x, y);
     }
+  }
+
+  public void pause() {
+    GameEvents.unregister(this);
+  }
+
+  public void unpause() {
+    GameEvents.register(this);
+
+    update(null);
   }
 }

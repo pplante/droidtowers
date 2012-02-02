@@ -25,4 +25,8 @@ public class GameEvents {
   public static void register(Object listener) {
     getInstance().eventBus.register(listener);
   }
+
+  public static void unregister(Object listener) {
+    getInstance().eventBus.unregister(listener);
+  }
 }
