@@ -34,9 +34,12 @@ public class TransitPathFinder extends AStar<GridPoint> {
         return 0.75;
       } else if (position.connectedToTransit) {
         return 1.0;
-      } else if (to.y == 4.0f) {
-        return 2.0;
       }
+    }
+
+    if (to.y == 4.0f) {
+      // fail safe that an avatar that ran away will come back!
+      return 2.0;
     }
 
     return Double.MAX_VALUE;

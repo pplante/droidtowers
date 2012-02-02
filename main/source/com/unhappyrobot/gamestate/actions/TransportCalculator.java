@@ -9,22 +9,25 @@ import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectEvent;
 import com.unhappyrobot.types.RoomType;
 
-public class TransportCalculator {
+public class TransportCalculator extends GameStateAction {
   private final Class transportClasses[] = {Elevator.class, Stair.class};
   private final Class roomClasses[] = {Room.class, CommercialSpace.class};
-  private final GameGrid gameGrid;
-  private boolean paused;
 
-  public TransportCalculator(GameGrid gameGrid) {
-    this.gameGrid = gameGrid;
+  public TransportCalculator(GameGrid gameGrid, long frequency) {
+    super(gameGrid, frequency, false);
 
     GameEvents.register(this);
   }
 
   @Subscribe
   public void update(GridObjectEvent event) {
-    if (paused) return;
+    if (isPaused()) return;
 
+    resetInterval();
+  }
+
+  @Override
+  public void run() {
     System.out.println("running!!!!");
 
     for (GridPosition[] gridPositions : GridPositionCache.instance().getPositions()) {
@@ -50,7 +53,6 @@ public class TransportCalculator {
       for (int x = (int) position.x; x < position.x + size.x; x++) {
         for (int y = (int) position.y; y < position.y + size.y; y++) {
           GridPosition gridPosition = GridPositionCache.instance().getPosition(x, y);
-
           if (gridPosition != null) {
             gridPosition.connectedToTransit = true;
           }
@@ -80,13 +82,17 @@ public class TransportCalculator {
     }
   }
 
+  @Override
   public void pause() {
+    super.pause();
+
     GameEvents.unregister(this);
   }
 
+  @Override
   public void unpause() {
-    GameEvents.register(this);
+    super.unpause();
 
-    update(null);
+    GameEvents.register(this);
   }
 }

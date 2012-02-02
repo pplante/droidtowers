@@ -2,9 +2,10 @@ package com.unhappyrobot.actions;
 
 public abstract class TimeDelayedAction implements Action {
   private final long updateFrequency;
-  protected boolean shouldRepeat;
   private long nextTimeToRun;
+  private boolean shouldRepeat;
   private boolean hasRunBefore;
+  private boolean paused;
 
   public TimeDelayedAction(long updateFrequency) {
     this(updateFrequency, true);
@@ -18,10 +19,13 @@ public abstract class TimeDelayedAction implements Action {
   public void act(long currentTime) {
     if (hasRunBefore && !shouldRepeat) {
       return;
+    } else if (paused) {
+      return;
     }
 
     if (nextTimeToRun < currentTime) {
       nextTimeToRun = currentTime + updateFrequency;
+      hasRunBefore = true;
 
       run();
     }
@@ -30,6 +34,18 @@ public abstract class TimeDelayedAction implements Action {
   public void resetInterval() {
     nextTimeToRun = System.currentTimeMillis() + updateFrequency;
     hasRunBefore = false;
+  }
+
+  public boolean isPaused() {
+    return paused;
+  }
+
+  public void pause() {
+    paused = true;
+  }
+
+  public void unpause() {
+    paused = false;
   }
 
   public abstract void run();

@@ -9,7 +9,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.graphics.TransitLine;
@@ -17,8 +20,8 @@ import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.pathfinding.TransitPathFinder;
 import com.unhappyrobot.utils.Random;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class Avatar extends GameObject {
@@ -66,8 +69,12 @@ public class Avatar extends GameObject {
         space.setRenderColor(Color.WHITE);
       }
 
-      ArrayList<GridObject> commercials = Lists.newArrayList(commercialSpaces);
-//      new TransportCalculator(gameGrid, 0).run();
+      List<GridObject> commercials = Lists.newArrayList(Iterables.filter(commercialSpaces, new Predicate<GridObject>() {
+        public boolean apply(@Nullable GridObject gridObject) {
+          return gridObject instanceof CommercialSpace && ((CommercialSpace) gridObject).isConnectedToTransport();
+        }
+      }));
+
       GridObject commercialSpace = commercials.get(Random.randomInt(commercials.size()));
       commercialSpace.setRenderColor(Color.ORANGE);
       System.out.println("commercials = " + commercialSpace);

@@ -290,6 +290,12 @@ public class HeadsUpDisplay extends Group {
 
   @Override
   public boolean touchMoved(float x, float y) {
+    updateGridPointTooltip(x, y);
+
+    return false;
+  }
+
+  private void updateGridPointTooltip(float x, float y) {
     Vector3 worldPoint = camera.getPickRay(Gdx.input.getX(), Gdx.input.getY()).getEndPoint(1);
 
     GridPoint gridPoint = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
@@ -302,8 +308,6 @@ public class HeadsUpDisplay extends Group {
     } else {
       mouseToolTip.visible = false;
     }
-
-    return false;
   }
 
   public void showToast(String message) {

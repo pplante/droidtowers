@@ -35,15 +35,16 @@ public class GameState extends EventListener {
     calculateEarnout = new EarnoutCalculator(this.gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
     calculateJobs = new EmploymentCalculator(this.gameGrid, TowerConsts.JOB_UPDATE_FREQUENCY);
     calculateDesirability = new DesirabilityCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
+    transportCalculator = new TransportCalculator(gameGrid, TowerConsts.TRANSPORT_CALCULATOR_FREQUENCY);
 
     GameEvents.register(this);
 
-    transportCalculator = new TransportCalculator(gameGrid);
   }
 
   public void update(float deltaTime, GameGrid gameGrid) {
     long currentTime = System.currentTimeMillis();
 
+    transportCalculator.act(currentTime);
     calculatePopulation.act(currentTime);
     calculateJobs.act(currentTime);
     calculateEarnout.act(currentTime);
