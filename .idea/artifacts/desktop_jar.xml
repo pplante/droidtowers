@@ -1,0 +1,28 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="desktop:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/desktop_jar</output-path>
+    <root id="archive" name="desktop.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/desktop/source/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="desktop" />
+      <element id="module-output" name="main" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/tween-engine-api.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/desktop/libs/main/gdx-natives.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/desktop/libs/main/gdx-backend-lwjgl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/desktop/libs/main/gdx-backend-lwjgl-natives.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/gdx.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/guava-10.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/commons-codec-1.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/commons-logging-1.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/httpasyncclient-4.0-alpha2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/httpclient-4.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/httpcore-4.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/httpcore-nio-4.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/jackson-core-asl-1.8.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/jackson-mapper-asl-1.8.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/js.jar" path-in-jar="/" />
+      <element id="dir-copy" path="$PROJECT_DIR$/android/assets" />
+    </root>
+  </artifact>
+</component>
