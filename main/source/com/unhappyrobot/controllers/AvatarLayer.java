@@ -31,6 +31,14 @@ public class AvatarLayer extends GameLayer {
   public void update(float timeDelta) {
     if (gameObjects.size() == 0) {
       addChild(new Avatar(this));
+      addChild(new Avatar(this));
+      addChild(new Avatar(this));
+      addChild(new Avatar(this));
+      addChild(new Avatar(this));
+      addChild(new Avatar(this));
+      addChild(new Avatar(this));
+      addChild(new Avatar(this));
+      addChild(new Avatar(this));
     }
 
     super.update(timeDelta);

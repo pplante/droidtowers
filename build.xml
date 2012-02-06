@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="libgdx-skeleton" default="all">
 
-
   <property file="build.properties"/>
   <!-- Uncomment the following property if no tests compilation is needed -->
   <!--
@@ -57,7 +56,8 @@
 
   <!-- JDK definitions -->
 
-  <property name="jdk.bin.android_2.3.3_platform" value="${jdk.home.android_2.3.3_platform}/../../../../../System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin"/>
+  <property name="jdk.bin.android_2.3.3_platform"
+            value="${jdk.home.android_2.3.3_platform}/../../../../../System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin"/>
   <path id="jdk.classpath.android_2.3.3_platform">
     <fileset dir="${jdk.home.android_2.3.3_platform}">
       <include name="platforms/android-10/android.jar"/>
@@ -120,9 +120,13 @@
     <!-- Perform any build initialization in this target -->
   </target>
 
-  <target name="clean" depends="clean.module.main, clean.module.android, clean.module.desktop" description="cleanup all"/>
+  <target name="clean" depends="clean.module.main, clean.module.android, clean.module.desktop"
+          description="cleanup all"/>
 
-  <target name="build.modules" depends="init, clean, compile.module.main, compile.module.android, compile.module.desktop" description="build all modules"/>
+  <target name="build.modules"
+          depends="init, clean, compile.module.main, compile.module.android, compile.module.desktop"
+          description="build all modules"/>
 
   <target name="all" depends="build.modules" description="build all"/>
+
 </project>

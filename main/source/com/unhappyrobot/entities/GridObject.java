@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import com.unhappyrobot.actions.Action;
 import com.unhappyrobot.actions.TimeDelayedAction;
 import com.unhappyrobot.events.GameEvents;
+import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
 import com.unhappyrobot.events.GridObjectChangedEvent;
 import com.unhappyrobot.math.Bounds2d;
 import com.unhappyrobot.math.GridPoint;
@@ -103,9 +104,13 @@ public abstract class GridObject {
   }
 
   public void setPosition(float x, float y) {
+    GridPoint prevPosition = position.cpy();
+
     position.set(x, y);
     clampPosition();
     updatePlacementStatus();
+
+    GameEvents.post(new GridObjectBoundsChangeEvent(this, size, prevPosition));
   }
 
   protected void clampPosition() {
@@ -133,6 +138,8 @@ public abstract class GridObject {
         renderColor = Color.WHITE;
       }
     }
+
+    GameEvents.post(new GridObjectChangedEvent(this, "placementStatus"));
   }
 
 

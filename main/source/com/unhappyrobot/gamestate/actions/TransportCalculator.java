@@ -47,6 +47,8 @@ public class TransportCalculator extends GameStateAction {
     }
 
     for (GridObject transport : gameGrid.getInstancesOf(transportClasses)) {
+      if (transport.getPlacementState().equals(GridObjectPlacementState.INVALID)) continue;
+
       Vector2 position = transport.getContentPosition();
       Vector2 size = transport.getContentSize();
 
@@ -65,8 +67,6 @@ public class TransportCalculator extends GameStateAction {
   }
 
   private void scanForRooms(int x, int y, int stepX) {
-    x += stepX;
-
     GridPosition gridPosition = GridPositionCache.instance().getPosition(x, y);
     while (gridPosition != null && gridPosition.size() > 0) {
       gridPosition.connectedToTransit = true;

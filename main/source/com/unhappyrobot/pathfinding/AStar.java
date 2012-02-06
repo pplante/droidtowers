@@ -244,6 +244,8 @@ public abstract class AStar<T> {
   }
 
   public void step() {
+    if (!working) return;
+
     Path p = paths.poll();
 
     if (p == null) {
@@ -259,8 +261,16 @@ public abstract class AStar<T> {
     if (isGoal(last)) {
       discoveredPath = new LinkedList<T>();
 
+      T lastPoint = null;
       for (Path i = p; i != null; i = i.parent) {
-        discoveredPath.addFirst(i.getPoint());
+        T point = i.getPoint();
+
+        if (point.equals(lastPoint) || discoveredPath.contains(point)) {
+          continue;
+        }
+
+        discoveredPath.addFirst(point);
+        lastPoint = point;
       }
       working = false;
       return;

@@ -1,13 +1,14 @@
 package com.unhappyrobot.entities;
 
+import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
-import aurelienribon.tweenengine.equations.Linear;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.TowerGame;
+import com.unhappyrobot.controllers.GameObjectAccessor;
 import com.unhappyrobot.utils.Random;
 
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class CloudLayer extends GameLayer {
     cloud.setSprite(sprite);
     cloud.setOpacity(0);
 
-    Tween.to(cloud, GameObject.TWEEN_OPACITY, 2000, Linear.INOUT).target(1.0f).addToManager(TowerGame.getTweenManager());
+    Tween.to(cloud, GameObjectAccessor.OPACITY, 2000).target(1.0f).start(TowerGame.getTweenManager());
 
     addChild(cloud);
   }
@@ -76,11 +77,11 @@ public class CloudLayer extends GameLayer {
 
     for (final GameObject cloud : gameObjects) {
       if (cloud.position.x >= worldSize.x + PADDING) {
-        Tween.to(cloud, GameObject.TWEEN_OPACITY, 2000, Linear.INOUT).target(0f).addCompleteCallback(new TweenCallback() {
-          public void tweenEventOccured(Types types, Tween tween) {
+        Tween.to(cloud, GameObjectAccessor.OPACITY, 2000).target(0f).addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
+          public void onEvent(EventType eventType, BaseTween source) {
             markForRemoval(cloud);
           }
-        }).addToManager(TowerGame.getTweenManager());
+        }).start(TowerGame.getTweenManager());
       }
     }
   }

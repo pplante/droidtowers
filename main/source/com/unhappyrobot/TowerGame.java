@@ -15,16 +15,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
 import com.unhappyrobot.controllers.AvatarLayer;
-import com.unhappyrobot.entities.CloudLayer;
-import com.unhappyrobot.entities.GameGrid;
-import com.unhappyrobot.entities.GameGridRenderer;
-import com.unhappyrobot.entities.GameLayer;
+import com.unhappyrobot.controllers.GameObjectAccessor;
+import com.unhappyrobot.entities.*;
 import com.unhappyrobot.gamestate.GameState;
 import com.unhappyrobot.graphics.BackgroundLayer;
-import com.unhappyrobot.gui.Dialog;
-import com.unhappyrobot.gui.HeadsUpDisplay;
-import com.unhappyrobot.gui.OnClickCallback;
-import com.unhappyrobot.gui.ResponseType;
+import com.unhappyrobot.gui.*;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.types.CommercialTypeFactory;
@@ -65,9 +60,10 @@ public class TowerGame implements ApplicationListener {
     StairTypeFactory.getInstance();
 
     Random.init();
-    Tween.setPoolEnabled(true);
 
     tweenManager = new TweenManager();
+    Tween.registerAccessor(GameObject.class, new GameObjectAccessor());
+    Tween.registerAccessor(Toast.class, new ToastAccessor());
 
     camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     spriteBatch = new SpriteBatch(100);
@@ -112,7 +108,15 @@ public class TowerGame implements ApplicationListener {
 
     InputSystem.getInstance().bind(Keys.G, new InputCallback() {
       public boolean run(float timeDelta) {
-        gameGrid.getRenderer().toggleGridLines();
+        gameGridRenderer.toggleGridLines();
+
+        return true;
+      }
+    });
+
+    InputSystem.getInstance().bind(Keys.T, new InputCallback() {
+      public boolean run(float timeDelta) {
+        gameGridRenderer.toggleTransitLines();
 
         return true;
       }
@@ -196,7 +200,7 @@ public class TowerGame implements ApplicationListener {
   private void updateGameObjects() {
     float deltaTime = Gdx.graphics.getDeltaTime();
 
-    tweenManager.update();
+    tweenManager.update((int) (deltaTime * 1000));
     gameGrid.update(deltaTime);
     gameState.update(deltaTime, gameGrid);
     guiStage.act(deltaTime);

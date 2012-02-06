@@ -1,6 +1,5 @@
 package com.unhappyrobot.entities;
 
-import aurelienribon.tweenengine.Tweenable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -8,17 +7,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.math.Bounds2d;
 
-public class GameObject implements Tweenable {
+public class GameObject {
   protected Vector2 position;
   protected Vector2 velocity;
   protected Vector2 origin;
   protected Vector2 size;
   protected float scale;
-
   protected Sprite sprite;
+
   protected float rotation;
   private boolean visible;
-  private float alpha;
+  private float opacity;
 
   public GameObject(float x, float y, float scale) {
     sprite = new Sprite();
@@ -27,7 +26,7 @@ public class GameObject implements Tweenable {
     size = new Vector2();
     velocity = new Vector2();
     visible = true;
-    alpha = 1.0f;
+    opacity = 1.0f;
 
     setPosition(x, y);
     setScale(scale);
@@ -86,7 +85,7 @@ public class GameObject implements Tweenable {
 
   public void render(SpriteBatch batch) {
     if (visible) {
-      sprite.draw(batch, alpha);
+      sprite.draw(batch, opacity);
     }
   }
 
@@ -124,40 +123,15 @@ public class GameObject implements Tweenable {
     velocity.set(x, y);
   }
 
-  public void setOpacity(float newAlpha) {
-    alpha = newAlpha;
-  }
-
-  public int getTweenValues(int tweenType, float[] returnValues) {
-    switch (tweenType) {
-      case TWEEN_OPACITY:
-        returnValues[0] = alpha;
-        return 1;
-      case TWEEN_POSITION:
-        returnValues[0] = position.x;
-        returnValues[1] = position.y;
-        return 1;
-    }
-
-    return 0;
-  }
-
-  public void onTweenUpdated(int tweenType, float[] newValues) {
-//    System.out.println("tweenType = " + tweenType + " newValues = " + Arrays.toString(newValues));
-    switch (tweenType) {
-      case TWEEN_OPACITY:
-        setOpacity(newValues[0]);
-        break;
-      case TWEEN_POSITION:
-        setPosition(newValues[0], newValues[1]);
-        break;
-    }
-  }
-
-  public static final int TWEEN_OPACITY = 0;
-  public static final int TWEEN_POSITION = 1;
-
   public Bounds2d getBounds() {
     return new Bounds2d(position, size);
+  }
+
+  public float getOpacity() {
+    return opacity;
+  }
+
+  public void setOpacity(float newAlpha) {
+    opacity = newAlpha;
   }
 }

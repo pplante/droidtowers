@@ -42,7 +42,8 @@ public class GameGridRenderer extends GameLayer {
   private Map<Overlays, Function<GridObject, Float>> overlayFunctions;
   private Function<GridObject, Integer> objectRenderSortFunction;
   private List<GridObject> objectsRenderOrder;
-  private TransitLine transitLine;
+  private List<TransitLine> transitLines;
+  private boolean shouldRenderTransitLines;
 
   public GameGridRenderer(GameGrid gameGrid) {
     this.gameGrid = gameGrid;
@@ -52,6 +53,8 @@ public class GameGridRenderer extends GameLayer {
     shouldRenderGridLines = true;
     gl = new ImmediateModeRenderer10();
     shapeRenderer = new ShapeRenderer();
+
+    transitLines = Lists.newArrayList();
 
     activeOverlays = new HashSet<Overlays>();
 
@@ -94,9 +97,11 @@ public class GameGridRenderer extends GameLayer {
       }
     }
 
-    if (transitLine != null) {
+    if (shouldRenderTransitLines && transitLines.size() > 0) {
       Gdx.gl.glEnable(GL10.GL_BLEND);
-      transitLine.render(shapeRenderer);
+      for (TransitLine transitLine : transitLines) {
+        transitLine.render(shapeRenderer);
+      }
     }
   }
 
@@ -258,7 +263,15 @@ public class GameGridRenderer extends GameLayer {
     objectsRenderOrder.remove(event.gridObject);
   }
 
-  public void setTransitLine(TransitLine transitLine) {
-    this.transitLine = transitLine;
+  public void removeTransitLine(TransitLine transitLine) {
+    transitLines.remove(transitLine);
+  }
+
+  public void addTransitLine(TransitLine transitLine) {
+    transitLines.add(transitLine);
+  }
+
+  public void toggleTransitLines() {
+    shouldRenderTransitLines = !shouldRenderTransitLines;
   }
 }

@@ -8,7 +8,7 @@ import com.unhappyrobot.math.GridPoint;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TransitPathFinder extends AStar<GridPoint> {
+public class TransitPathFinder extends AStar<GridPosition> {
   private final Vector2 goal;
 
   public TransitPathFinder(GridPoint goal) {
@@ -16,28 +16,27 @@ public class TransitPathFinder extends AStar<GridPoint> {
   }
 
   @Override
-  protected boolean isGoal(GridPoint gridPoint) {
-    return goal.equals(gridPoint);
+  protected boolean isGoal(GridPosition gridPosition) {
+    return goal.x == gridPosition.x && goal.y == gridPosition.y;
   }
 
   @Override
-  protected Double g(GridPoint from, GridPoint to) {
+  protected Double g(GridPosition from, GridPosition to) {
     if (from.equals(to)) {
       return 0.0;
     }
 
-    GridPosition position = GridPositionCache.instance().getPosition(to);
-    if (position != null) {
-      if (position.elevator != null) {
+    if (to != null) {
+      if (to.elevator != null) {
         return 0.25;
-      } else if (position.stair != null) {
+      } else if (to.stair != null) {
         return 0.75;
-      } else if (position.connectedToTransit) {
+      } else if (to.connectedToTransit) {
         return 1.0;
       }
     }
 
-    if (to.y == 4.0f) {
+    if (to.y == 4) {
       // fail safe that an avatar that ran away will come back!
       return 2.0;
     }
@@ -46,22 +45,22 @@ public class TransitPathFinder extends AStar<GridPoint> {
   }
 
   @Override
-  protected Double h(GridPoint from, GridPoint to) {
+  protected Double h(GridPosition from, GridPosition to) {
     /* Use the Manhattan distance heuristic.  */
     return (double) Math.abs(goal.x - to.x) + Math.abs(goal.y - to.y);
   }
 
   @Override
-  protected List<GridPoint> generateSuccessors(GridPoint point) {
-    List<GridPoint> successors = new LinkedList<GridPoint>();
-    int x = (int) point.x;
-    int y = (int) point.y;
+  protected List<GridPosition> generateSuccessors(GridPosition point) {
+    List<GridPosition> successors = new LinkedList<GridPosition>();
 
-    GridPosition position = GridPositionCache.instance().getPosition(x, y);
-    if (position.elevator != null) {
+    int x = point.x;
+    int y = point.y;
+
+    if (point.elevator != null) {
       checkGridPosition(successors, x, y + 1);
       checkGridPosition(successors, x, y - 1);
-    } else if (position.stair != null) {
+    } else if (point.stair != null) {
       checkGridPosition(successors, x, y + 1);
       checkGridPosition(successors, x, y - 1);
     }
@@ -72,11 +71,10 @@ public class TransitPathFinder extends AStar<GridPoint> {
     return successors;
   }
 
-  private void checkGridPosition(List<GridPoint> successors, int x, int y) {
+  private void checkGridPosition(List<GridPosition> successors, int x, int y) {
     GridPosition position = GridPositionCache.instance().getPosition(x, y);
     if (position != null && (position.connectedToTransit || y == 4)) {
-//      System.out.println("x: " + x + ", y: " + y);
-      successors.add(new GridPoint(x, y));
+      successors.add(position);
     }
   }
 

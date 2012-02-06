@@ -10,11 +10,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class GridPosition {
+  public final int x;
+  public final int y;
   private Set<GridObject> objects = new HashSet<GridObject>();
   public boolean containsTransit;
   public boolean connectedToTransit;
   public Elevator elevator;
   public Stair stair;
+
+  public GridPosition(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
 
   public Set<GridObject> getObjects() {
     return objects;
@@ -54,5 +61,30 @@ public class GridPosition {
     }
 
     return new Vector2(Math.max(stair.getSize().x, elevator.getSize().x), Math.max(stair.getSize().y, elevator.getSize().y));
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    GridPosition that = (GridPosition) o;
+
+    return x == that.x && y == that.y;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = x;
+    result = 31 * result + y;
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "GridPosition{" +
+                   "y=" + y +
+                   ", x=" + x +
+                   '}';
   }
 }

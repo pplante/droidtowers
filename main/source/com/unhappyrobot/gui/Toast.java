@@ -1,9 +1,8 @@
 package com.unhappyrobot.gui;
 
+import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
-import aurelienribon.tweenengine.Tweenable;
-import aurelienribon.tweenengine.equations.Linear;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -14,11 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.TowerGame;
 
-public class Toast extends Table implements Tweenable {
+public class Toast extends Table {
   private static Pixmap pixmap;
   private static NinePatch background;
   private final Label label;
-  private float alpha;
+  float alpha;
 
   public Toast() {
     if (pixmap == null) {
@@ -28,6 +27,7 @@ public class Toast extends Table implements Tweenable {
 
       background = new NinePatch(new Texture(pixmap));
     }
+
 
     label = new Label(HeadsUpDisplay.getInstance().getGuiSkin());
 
@@ -51,15 +51,15 @@ public class Toast extends Table implements Tweenable {
 
     alpha = 0;
 
-    Tween.to(this, ALPHA, 500, Linear.INOUT).target(1.0f).addToManager(TowerGame.getTweenManager()).addCompleteCallback(new TweenCallback() {
-      public void tweenEventOccured(Types eventType, Tween tween) {
+    Tween.to(this, ToastAccessor.OPACITY, 500).target(1.0f).start(TowerGame.getTweenManager()).addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
+      public void onEvent(EventType eventType, BaseTween source) {
         fadeOut();
       }
     });
   }
 
   private void fadeOut() {
-    Tween.to(this, ALPHA, 250, Linear.INOUT).target(0f).delay(2000).addToManager(TowerGame.getTweenManager());
+    Tween.to(this, ToastAccessor.OPACITY, 250).target(0f).delay(2000).start(TowerGame.getTweenManager());
   }
 
   @Override

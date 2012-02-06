@@ -1,25 +1,30 @@
 package com.unhappyrobot.entities;
 
+import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
-import aurelienribon.tweenengine.equations.Linear;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.google.common.collect.UnmodifiableIterator;
 import com.sun.istack.internal.Nullable;
+import com.unhappyrobot.GridPosition;
+import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.controllers.AvatarLayer;
+import com.unhappyrobot.controllers.GameObjectAccessor;
 import com.unhappyrobot.graphics.TransitLine;
+import com.unhappyrobot.gui.SpeechBubble;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.pathfinding.TransitPathFinder;
 import com.unhappyrobot.utils.Random;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -37,12 +42,22 @@ public class Avatar extends GameObject {
   private float satisfactionShops;
   private float satisfactionFood;
   private TransitPathFinder pathFinder;
+  private TransitLine currentPath;
+  private UnmodifiableIterator<Vector2> currentPathIterator;
+  private GridObject lastCommercialSpace;
+  private TransitLine transitLine;
+  private static final Set<Color> colors = Sets.newHashSet(Color.DARK_GRAY, Color.GREEN, Color.RED, Color.ORANGE, Color.MAGENTA, Color.PINK, Color.YELLOW);
+  private static Iterator colorIterator;
+  private Color myColor;
+  private boolean isMovingX;
+  private final SpeechBubble speechBubble;
 
   public Avatar(AvatarLayer avatarLayer) {
     super();
     this.gameGrid = avatarLayer.getGameGrid();
 
-    setPosition(Random.randomInt(1792, 2560), 256);
+    pickColor();
+    setPosition(Random.randomInt(0, gameGrid.getWorldSize().x), 256);
 
     TextureAtlas droidAtlas = new TextureAtlas(Gdx.files.internal("characters/droid.txt"));
 
@@ -50,44 +65,90 @@ public class Avatar extends GameObject {
     size.set(getSprite().getWidth(), getSprite().getHeight());
     animation = new Animation(FRAME_DURATION, droidAtlas.findRegions("walk"));
     animationTime = 0f;
+
+    getSprite().setColor(myColor);
+
+    speechBubble = new SpeechBubble();
+
+    findCommercialSpace();
   }
 
-  private void setupNewMovement() {
-    isMoving = true;
-    int newX = Random.randomInt(1792, 2560);
-    isFlipped = newX < position.x;
+  private void pickColor() {
+    if (colorIterator == null || !colorIterator.hasNext()) {
+      colorIterator = colors.iterator();
+    }
 
-    moveHorizontallyTo(newX);
+    myColor = (Color) colorIterator.next();
   }
 
   public void findCommercialSpace() {
-    gameGrid.getRenderer().setTransitLine(null);
+    gameGrid.getRenderer().removeTransitLine(transitLine);
 
     Set<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
     if (commercialSpaces != null) {
-      for (GridObject space : commercialSpaces) {
-        space.setRenderColor(Color.WHITE);
+      if (lastCommercialSpace != null) {
+        lastCommercialSpace.setRenderColor(Color.WHITE);
       }
 
       List<GridObject> commercials = Lists.newArrayList(Iterables.filter(commercialSpaces, new Predicate<GridObject>() {
         public boolean apply(@Nullable GridObject gridObject) {
-          return gridObject instanceof CommercialSpace && ((CommercialSpace) gridObject).isConnectedToTransport();
+          return lastCommercialSpace != gridObject && gridObject instanceof CommercialSpace && ((CommercialSpace) gridObject).isConnectedToTransport();
         }
       }));
-
       GridObject commercialSpace = commercials.get(Random.randomInt(commercials.size()));
-      commercialSpace.setRenderColor(Color.ORANGE);
-      System.out.println("commercials = " + commercialSpace);
+      commercialSpace.setRenderColor(myColor);
+
       pathFinder = new TransitPathFinder(commercialSpace.getPosition());
-      pathFinder.compute(gameGrid.closestGridPoint(position.x, position.y));
+      GridPoint closestGridPoint = gameGrid.closestGridPoint(position.x, position.y);
+      pathFinder.compute(GridPositionCache.instance().getPosition(closestGridPoint));
+
+      lastCommercialSpace = commercialSpace;
     }
   }
 
-  private void moveHorizontallyTo(int newX) {
+  private void setupNextMovement() {
+    TowerGame.getTweenManager().killTarget(this);
+
+    if (currentPathIterator != null && currentPathIterator.hasNext()) {
+      isMoving = true;
+      Vector2 nextPoint = currentPathIterator.next();
+
+      if (nextPoint.y == position.y) {
+        moveHorizontallyTo(nextPoint.x);
+      } else {
+        moveVerticallyTo(nextPoint.y);
+      }
+    } else {
+      currentPath = null;
+      currentPathIterator = null;
+
+      findCommercialSpace();
+    }
+  }
+
+  private void moveHorizontallyTo(float newX) {
+    isFlipped = newX < position.x;
+    isMovingX = true;
+
     int moveSpeed = (int) (Math.abs(position.x - newX) / 0.03f);
-    Tween.to(this, TWEEN_POSITION, moveSpeed, Linear.INOUT).target(newX).addToManager(TowerGame.getTweenManager()).addCompleteCallback(new TweenCallback() {
-      public void tweenEventOccured(Types eventType, Tween tween) {
+    Tween.to(this, GameObjectAccessor.POSITION, moveSpeed).target(newX, position.y).start(TowerGame.getTweenManager()).addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
+      public void onEvent(EventType eventType, BaseTween source) {
         isMoving = false;
+
+        setupNextMovement();
+      }
+    });
+  }
+
+  private void moveVerticallyTo(float newY) {
+    isMovingX = false;
+
+    int moveSpeed = (int) (Math.abs(position.y - newY) / 0.03f);
+    Tween.to(this, GameObjectAccessor.POSITION, moveSpeed).target(position.x, newY).start(TowerGame.getTweenManager()).addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
+      public void onEvent(EventType eventType, BaseTween source) {
+        isMoving = false;
+
+        setupNextMovement();
       }
     });
   }
@@ -98,41 +159,44 @@ public class Avatar extends GameObject {
 
     animationTime += timeDelta;
 
-    TextureRegion keyFrame = animation.getKeyFrame(animationTime, true);
-    getSprite().setRegion(keyFrame);
+    if (isMoving && isMovingX) {
+      TextureRegion keyFrame = animation.getKeyFrame(animationTime, true);
+      getSprite().setRegion(keyFrame);
+    }
+
     getSprite().flip(isFlipped, false);
 
     if (animationTime >= FRAME_DURATION * 3) {
       animationTime = 0f;
     }
 
-    if (!isMoving) {
-      setupNewMovement();
-    }
-
     if (pathFinder != null) {
       if (!pathFinder.isWorking()) {
-        LinkedList<GridPoint> discoveredPath = pathFinder.getDiscoveredPath();
-        if (discoveredPath != null) {
-          System.out.println("discoveredPath = " + discoveredPath);
-          TransitLine transitLine = new TransitLine(gameGrid);
-          for (GridPoint gridPoint : discoveredPath) {
+        Double pathFinderCost = pathFinder.getCost();
+        LinkedList<GridPosition> discoveredPath = pathFinder.getDiscoveredPath();
+
+        pathFinder = null;
+
+        if (pathFinderCost == Double.MAX_VALUE) {
+          findCommercialSpace();
+        } else if (discoveredPath != null) {
+          transitLine = new TransitLine(gameGrid);
+          transitLine.setColor(myColor);
+          for (GridPosition gridPosition : discoveredPath) {
+            GridPoint gridPoint = new GridPoint(gridPosition.x, gridPosition.y);
             transitLine.addPoint(gridPoint.toWorldVector2(gameGrid));
           }
 
-          gameGrid.getRenderer().setTransitLine(transitLine);
+          gameGrid.getRenderer().addTransitLine(transitLine);
+
+          currentPath = transitLine;
+          currentPathIterator = currentPath.getPoints().iterator();
+
+          setupNextMovement();
         }
-
-        System.out.println("pathFinder.getCost() = " + pathFinder.getCost());
-        System.out.println("pathFinder.getExpandedCounter() = " + pathFinder.getExpandedCounter());
-
-        pathFinder = null;
       } else {
-        pathFinder.step();
-
-        if (pathFinder.getExpandedCounter() == 2000) {
-          System.out.println("Got bored looking for something, stopping A* search.");
-          pathFinder = null;
+        for (int i = 0; i < 50; i++) {
+          pathFinder.step();
         }
       }
     }
@@ -142,5 +206,12 @@ public class Avatar extends GameObject {
     return sprite;
   }
 
+  @Override
+  public void render(SpriteBatch batch) {
+    super.render(batch);
 
+    speechBubble.x = position.x;
+    speechBubble.y = position.y + size.y;
+    speechBubble.draw(batch, 1f);
+  }
 }

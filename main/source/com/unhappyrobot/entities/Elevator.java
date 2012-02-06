@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.actions.Action;
-import com.unhappyrobot.events.ElevatorResizeEvent;
 import com.unhappyrobot.events.GameEvents;
+import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.ElevatorType;
 import com.unhappyrobot.types.ResizeHandle;
@@ -121,7 +121,7 @@ public class Elevator extends Transit {
       position.y = Math.max(newPosY, 0);
     }
 
-    GameEvents.post(new ElevatorResizeEvent(this, prevSize, prevPosition));
+    GameEvents.post(new GridObjectBoundsChangeEvent(this, prevSize, prevPosition));
 
     return true;
   }
