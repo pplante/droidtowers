@@ -5,7 +5,10 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -19,6 +22,7 @@ import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.controllers.GameObjectAccessor;
 import com.unhappyrobot.graphics.TransitLine;
+import com.unhappyrobot.gui.HeadsUpDisplay;
 import com.unhappyrobot.gui.SpeechBubble;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.pathfinding.TransitPathFinder;
@@ -69,6 +73,8 @@ public class Avatar extends GameObject {
     getSprite().setColor(myColor);
 
     speechBubble = new SpeechBubble();
+    speechBubble.followObject(this);
+    HeadsUpDisplay.getInstance().addActor(speechBubble);
 
     findCommercialSpace();
   }
@@ -83,6 +89,8 @@ public class Avatar extends GameObject {
 
   public void findCommercialSpace() {
     gameGrid.getRenderer().removeTransitLine(transitLine);
+
+    displaySpeechBubble("Finding a new place...");
 
     Set<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
     if (commercialSpaces != null) {
@@ -104,6 +112,11 @@ public class Avatar extends GameObject {
 
       lastCommercialSpace = commercialSpace;
     }
+  }
+
+  private void displaySpeechBubble(String newText) {
+    speechBubble.setText(newText);
+    speechBubble.show();
   }
 
   private void setupNextMovement() {
@@ -204,14 +217,5 @@ public class Avatar extends GameObject {
 
   public Sprite getSprite() {
     return sprite;
-  }
-
-  @Override
-  public void render(SpriteBatch batch) {
-    super.render(batch);
-
-    speechBubble.x = position.x;
-    speechBubble.y = position.y + size.y;
-    speechBubble.draw(batch, 1f);
   }
 }

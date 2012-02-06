@@ -10,9 +10,11 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.unhappyrobot.entities.GameGrid;
 
 public class CameraController implements GestureDetector.GestureListener {
-  public static final float ZOOM_MAX = 2.0f;
-  public static final float ZOOM_MIN = (Gdx.app.getType() == Application.ApplicationType.Android ? 0.4f : 0.6f);
+  private static CameraController instance;
 
+  public static final float ZOOM_MAX = 2.0f;
+
+  public static final float ZOOM_MIN = (Gdx.app.getType() == Application.ApplicationType.Android ? 0.4f : 0.6f);
   private OrthographicCamera camera;
   private BoundingBox cameraBounds;
   private float initialScale = 1.0f;
@@ -20,7 +22,19 @@ public class CameraController implements GestureDetector.GestureListener {
   private float velX;
   private float velY;
 
-  public CameraController(OrthographicCamera camera, GameGrid gameGrid) {
+  public static void initialize(OrthographicCamera camera, GameGrid gameGrid) {
+    instance = new CameraController(camera, gameGrid);
+  }
+
+  public static CameraController instance() {
+    if (instance == null) {
+      throw new RuntimeException("Must call CameraController.initialize() before!");
+    }
+
+    return instance;
+  }
+
+  private CameraController(OrthographicCamera camera, GameGrid gameGrid) {
     Vector2 worldSize = gameGrid.getWorldSize();
     this.camera = camera;
     int halfWidth = Gdx.graphics.getWidth() / 2;
@@ -110,5 +124,9 @@ public class CameraController implements GestureDetector.GestureListener {
 
   public BoundingBox getCameraBounds() {
     return cameraBounds;
+  }
+
+  public OrthographicCamera getCamera() {
+    return camera;
   }
 }

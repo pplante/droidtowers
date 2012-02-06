@@ -22,7 +22,8 @@ class GestureDelegater implements GestureListener {
       }
     }
 
-    this.cameraController = new CameraController(camera, gameGrid);
+    CameraController.initialize(camera, gameGrid);
+    this.cameraController = CameraController.instance();
   }
 
   public void switchTool(OrthographicCamera camera, List<GameLayer> gameLayers, GestureTool tool, Runnable switchToolRunnable) {

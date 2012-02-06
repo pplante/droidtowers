@@ -51,6 +51,10 @@ public class Toast extends Table {
 
     alpha = 0;
 
+    fadeIn();
+  }
+
+  protected void fadeIn() {
     Tween.to(this, ToastAccessor.OPACITY, 500).target(1.0f).start(TowerGame.getTweenManager()).addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
       public void onEvent(EventType eventType, BaseTween source) {
         fadeOut();
@@ -64,7 +68,9 @@ public class Toast extends Table {
 
   @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
-    super.draw(batch, alpha);
+    if (alpha > 0.01f) {
+      super.draw(batch, alpha);
+    }
   }
 
   public int getTweenValues(int tweenType, float[] returnValues) {
