@@ -126,6 +126,19 @@ public class Avatar extends GameObject {
       isMoving = true;
       Vector2 nextPoint = currentPathIterator.next();
 
+      GridPoint gridPoint = gameGrid.closestGridPoint(nextPoint);
+      GridPosition gridPosition = GridPositionCache.instance().getPosition(gridPoint);
+      if (gridPosition.containsTransit) {
+        if (gridPosition.stair != null) {
+          System.out.println("Moving to stairs at: " + gridPosition);
+          displaySpeechBubble("Using stairs!");
+          nextPoint = gridPosition.stair.getFrontPosition().toWorldVector2(gameGrid);
+        } else if (gridPosition.elevator != null) {
+          System.out.println("Moving to elevator at: " + gridPosition);
+          displaySpeechBubble("Using elevator!");
+        }
+      }
+
       if (nextPoint.y == position.y) {
         moveHorizontallyTo(nextPoint.x);
       } else {

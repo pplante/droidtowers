@@ -62,7 +62,7 @@ public class Toast extends Table {
     });
   }
 
-  private void fadeOut() {
+  protected void fadeOut() {
     Tween.to(this, ToastAccessor.OPACITY, 250).target(0f).delay(2000).start(TowerGame.getTweenManager());
   }
 

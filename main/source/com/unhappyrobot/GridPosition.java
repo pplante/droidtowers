@@ -83,8 +83,12 @@ public class GridPosition {
   @Override
   public String toString() {
     return "GridPosition{" +
-                   "y=" + y +
+                   "connectedToTransit=" + connectedToTransit +
                    ", x=" + x +
+                   ", y=" + y +
+                   ", containsTransit=" + containsTransit +
+                   ", stair=" + stair +
+                   ", elevator=" + elevator +
                    '}';
   }
 }

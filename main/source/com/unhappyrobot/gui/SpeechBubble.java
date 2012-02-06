@@ -35,7 +35,7 @@ public class SpeechBubble extends Toast {
     setBackground(patch);
     pad(4);
     add(label);
-    row().align(Align.LEFT).padBottom(-10);
+    row().align(Align.LEFT).padBottom(-12);
     add(tip);
     pack();
   }
@@ -50,8 +50,8 @@ public class SpeechBubble extends Toast {
       Vector3 worldPoint = new Vector3(position.x, position.y + size.y, 1f);
 
       CameraController.instance().getCamera().project(worldPoint);
-      x = worldPoint.x - 4;
-      y = worldPoint.y + 4;
+      x = (int) worldPoint.x - 4;
+      y = (int) worldPoint.y + 4;
     }
   }
 

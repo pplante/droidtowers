@@ -151,7 +151,7 @@ public class GameGrid extends GameLayer {
     return false;
   }
 
-  private GridPoint closestGridPoint(Vector2 worldPoint) {
+  public GridPoint closestGridPoint(Vector2 worldPoint) {
     return closestGridPoint(worldPoint.x, worldPoint.y);
   }
 
