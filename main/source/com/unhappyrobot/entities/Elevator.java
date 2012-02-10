@@ -7,37 +7,41 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.actions.Action;
-import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.ElevatorType;
 import com.unhappyrobot.types.ResizeHandle;
+import com.unhappyrobot.utils.Random;
 
 public class Elevator extends Transit {
   private Sprite topSprite;
   private Sprite shaftSprite;
   private Sprite emptyShaftSprite;
   private Sprite bottomSprite;
-  private Sprite carSprite;
   private final BitmapFont floorFont;
   private ResizeHandle selectedResizeHandle;
   private boolean drawShaft;
   private Action onResizeAction;
+  private ElevatorCar elevatorCar;
+  static TextureAtlas elevatorAtlas;
 
   public Elevator(ElevatorType elevatorType, final GameGrid gameGrid) {
     super(elevatorType, gameGrid);
 
+
+    if (elevatorAtlas == null) {
+      elevatorAtlas = new TextureAtlas(Gdx.files.internal(elevatorType.getAtlasFilename()));
+    }
+
     size.set(1, 3);
-
-    TextureAtlas elevatorAtlas = new TextureAtlas(Gdx.files.internal(elevatorType.getAtlasFilename()));
-
     topSprite = elevatorAtlas.createSprite("elevator/top");
     bottomSprite = elevatorAtlas.createSprite("elevator/bottom");
     shaftSprite = elevatorAtlas.createSprite("elevator/shaft");
     emptyShaftSprite = elevatorAtlas.createSprite("elevator/empty");
-    carSprite = elevatorAtlas.createSprite("elevator/car");
     floorFont = new BitmapFont(Gdx.files.internal("fonts/bank_gothic_32.fnt"), false);
     drawShaft = true;
+
+    elevatorCar = new ElevatorCar(this, elevatorAtlas);
   }
 
   @Override
@@ -55,9 +59,6 @@ public class Elevator extends Transit {
     bottomSprite.setPosition(gridPoint.getWorldX(gameGrid), gridPoint.getWorldY(gameGrid));
     bottomSprite.draw(spriteBatch);
 
-    carSprite.setPosition(gridPoint.getWorldX(gameGrid), gridPoint.getWorldY(gameGrid));
-    carSprite.draw(spriteBatch);
-
     Sprite shaftToRender = drawShaft ? shaftSprite : emptyShaftSprite;
     shaftToRender.setColor(renderColor);
     for (int y = (int) position.y + 1; y < position.y + size.y - 1; y++) {
@@ -72,10 +73,23 @@ public class Elevator extends Transit {
       floorFont.draw(spriteBatch, labelText, gridPoint.getWorldX(gameGrid) + ((gameGrid.unitSize.x - textBounds.width) / 2), gridPoint.getWorldY(gameGrid) + ((gameGrid.unitSize.y - textBounds.height) / 2));
     }
 
+    elevatorCar.draw(spriteBatch);
+
     gridPoint.add(0, 1);
     topSprite.setColor(renderColor);
     topSprite.setPosition(gridPoint.getWorldX(gameGrid), gridPoint.getWorldY(gameGrid));
     topSprite.draw(spriteBatch);
+  }
+
+  @Override
+  public boolean tap(Vector2 gridPointAtFinger, int count) {
+    if (count >= 2) {
+      drawShaft = !drawShaft;
+    } else if (count == 1) {
+      elevatorCar.moveToFloor(Random.randomInt((int) getContentSize().y));
+    }
+
+    return true;
   }
 
   @Override
@@ -86,7 +100,6 @@ public class Elevator extends Transit {
       selectedResizeHandle = ResizeHandle.BOTTOM;
     } else {
       selectedResizeHandle = null;
-      drawShaft = !drawShaft;
     }
 
     return selectedResizeHandle != null;
@@ -121,18 +134,22 @@ public class Elevator extends Transit {
       position.y = Math.max(newPosY, 0);
     }
 
-    GameEvents.post(new GridObjectBoundsChangeEvent(this, prevSize, prevPosition));
+    broadcastEvent(new GridObjectBoundsChangeEvent(this, prevSize, prevPosition));
 
     return true;
   }
 
   @Override
-  public Vector2 getContentSize() {
-    return size.cpy().sub(0, 2);
+  public GridPoint getContentSize() {
+    GridPoint cpy = size.cpy();
+    cpy.sub(0, 2);
+    return cpy;
   }
 
   @Override
-  public Vector2 getContentPosition() {
-    return position.cpy().add(0, 1);
+  public GridPoint getContentPosition() {
+    GridPoint cpy = position.cpy();
+    cpy.add(0, 1);
+    return cpy;
   }
 }

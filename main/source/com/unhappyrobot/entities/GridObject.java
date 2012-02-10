@@ -5,11 +5,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
+import com.google.common.eventbus.EventBus;
 import com.unhappyrobot.actions.Action;
 import com.unhappyrobot.actions.TimeDelayedAction;
 import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
 import com.unhappyrobot.events.GridObjectChangedEvent;
+import com.unhappyrobot.events.GridObjectEvent;
 import com.unhappyrobot.math.Bounds2d;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.GridObjectType;
@@ -27,6 +29,7 @@ public abstract class GridObject {
   protected Color renderColor;
   protected Bounds2d bounds;
   private Set<Action> actions;
+  private EventBus myEventBus;
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
@@ -110,7 +113,7 @@ public abstract class GridObject {
     clampPosition();
     updatePlacementStatus();
 
-    GameEvents.post(new GridObjectBoundsChangeEvent(this, size, prevPosition));
+    broadcastEvent(new GridObjectBoundsChangeEvent(this, size, prevPosition));
   }
 
   protected void clampPosition() {
@@ -139,9 +142,8 @@ public abstract class GridObject {
       }
     }
 
-    GameEvents.post(new GridObjectChangedEvent(this, "placementStatus"));
+    broadcastEvent(new GridObjectChangedEvent(this, "placementStatus"));
   }
-
 
   public void update(float deltaTime) {
     if (placementState.equals(GridObjectPlacementState.PLACED)) {
@@ -153,6 +155,7 @@ public abstract class GridObject {
     }
   }
 
+
   public int getCoinsEarned() {
     if (placementState == GridObjectPlacementState.INVALID) {
       return 0;
@@ -163,7 +166,7 @@ public abstract class GridObject {
 
   public void setPlacementState(GridObjectPlacementState placementState) {
     this.placementState = placementState;
-    GameEvents.post(new GridObjectChangedEvent(this, "placementState"));
+    broadcastEvent(new GridObjectChangedEvent(this, "placementState"));
     updatePlacementStatus();
   }
 
@@ -171,10 +174,10 @@ public abstract class GridObject {
     return placementState;
   }
 
-
   protected void addAction(TimeDelayedAction action) {
     actions.add(action);
   }
+
 
   public float getNoiseLevel() {
     return gridObjectType.getNoiseLevel();
@@ -200,10 +203,10 @@ public abstract class GridObject {
     return points;
   }
 
-
   public float distanceToLobby() {
     return position.y - 4;
   }
+
 
   public float distanceFromFloor(float originalFloor) {
     return originalFloor - position.y;
@@ -228,5 +231,21 @@ public abstract class GridObject {
                    "position=" + position +
                    ", gridObjectType=" + gridObjectType +
                    '}';
+  }
+
+  public EventBus eventBus() {
+    if (myEventBus == null) {
+      myEventBus = new EventBus(this.getClass().getSimpleName());
+    }
+
+    return myEventBus;
+  }
+
+  protected void broadcastEvent(GridObjectEvent event) {
+    if (myEventBus != null) {
+      myEventBus.post(event);
+    }
+
+    GameEvents.post(event);
   }
 }

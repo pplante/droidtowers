@@ -37,6 +37,7 @@ public class AvatarSteeringManager {
   }
 
   public void start() {
+    System.out.println("\n\nstart!\n\n");
     running = true;
 
     transitLine = new TransitLine();
@@ -64,8 +65,9 @@ public class AvatarSteeringManager {
     System.out.println("currentPosition = " + currentPosition);
 
     if (discoveredPath.size() > 0 && currentPosition.stair != null) {
-      GridPosition nextPosition = discoveredPath.element();
-      if (nextPosition.y != currentPosition.y) {
+      GridPosition nextPosition = discoveredPath.peek();
+      System.out.println("nextPosition = " + nextPosition);
+      if (nextPosition != null && nextPosition.y != currentPosition.y) {
         traverseStair(nextPosition);
         return;
       }

@@ -43,11 +43,6 @@ public class Stair extends Transit {
     return size.cpy().add(0, 1);
   }
 
-//  @Override
-//  public List<GridPoint> getGridPointsOccupied() {
-//    return Lists.newArrayList(new GridPoint(position.x + 1, position.y));
-//  }
-
   public Vector2 getTopLeftWorldPoint() {
     GridPoint point = new GridPoint(position);
     point.add(0, 1);
