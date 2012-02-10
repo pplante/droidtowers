@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.Elevator;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.Stair;
-import com.unhappyrobot.entities.Transit;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +12,6 @@ public class GridPosition {
   public final int x;
   public final int y;
   private Set<GridObject> objects = new HashSet<GridObject>();
-  public boolean containsTransit;
   public boolean connectedToTransit;
   public Elevator elevator;
   public Stair stair;
@@ -29,7 +27,6 @@ public class GridPosition {
 
   public void add(GridObject gridObject) {
     if (objects.add(gridObject)) {
-      containsTransit = gridObject instanceof Transit;
 
       if (gridObject instanceof Elevator) {
         elevator = (Elevator) gridObject;
@@ -47,7 +44,6 @@ public class GridPosition {
         stair = null;
       }
 
-      containsTransit = stair != null || elevator != null;
     }
   }
 
@@ -86,7 +82,6 @@ public class GridPosition {
                    "connectedToTransit=" + connectedToTransit +
                    ", x=" + x +
                    ", y=" + y +
-                   ", containsTransit=" + containsTransit +
                    ", stair=" + stair +
                    ", elevator=" + elevator +
                    '}';

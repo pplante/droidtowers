@@ -19,12 +19,12 @@ public class GridPoint extends Vector2 {
 
   @JsonIgnore
   public float getWorldX(GameGrid gameGrid) {
-    return x * gameGrid.unitSize.x;
+    return gameGrid.unitSize.x * x;
   }
 
   @JsonIgnore
   public float getWorldY(GameGrid gameGrid) {
-    return y * gameGrid.unitSize.y;
+    return gameGrid.unitSize.y * y;
   }
 
   @Override

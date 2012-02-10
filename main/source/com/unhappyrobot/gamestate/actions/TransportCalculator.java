@@ -7,6 +7,7 @@ import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.entities.*;
 import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectEvent;
+import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.RoomType;
 
 public class TransportCalculator extends GameStateAction {
@@ -52,16 +53,17 @@ public class TransportCalculator extends GameStateAction {
       Vector2 position = transport.getContentPosition();
       Vector2 size = transport.getContentSize();
 
-      for (int x = (int) position.x; x < position.x + size.x; x++) {
-        for (int y = (int) position.y; y < position.y + size.y; y++) {
-          GridPosition gridPosition = GridPositionCache.instance().getPosition(x, y);
-          if (gridPosition != null) {
-            gridPosition.connectedToTransit = true;
-          }
+      for (GridPoint gridPoint : transport.getGridPointsOccupied()) {
+        int x = (int) gridPoint.x;
+        int y = (int) gridPoint.y;
 
-          scanForRooms(x, y, -1);
-          scanForRooms(x, y, 1);
+        GridPosition gridPosition = GridPositionCache.instance().getPosition(x, y);
+        if (gridPosition != null) {
+          gridPosition.connectedToTransit = true;
         }
+
+        scanForRooms(x, y, -1);
+        scanForRooms(x, y, 1);
       }
     }
   }

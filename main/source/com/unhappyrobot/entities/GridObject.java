@@ -171,10 +171,6 @@ public abstract class GridObject {
     return placementState;
   }
 
-  @Override
-  public String toString() {
-    return String.format("%s@%s:[%s]", this.getClass().getName(), hashCode(), gridObjectType);
-  }
 
   protected void addAction(TimeDelayedAction action) {
     actions.add(action);
@@ -224,5 +220,13 @@ public abstract class GridObject {
 
   public void setRenderColor(Color renderColor) {
     this.renderColor = renderColor;
+  }
+
+  @Override
+  public String toString() {
+    return "GridObject{" +
+                   "position=" + position +
+                   ", gridObjectType=" + gridObjectType +
+                   '}';
   }
 }

@@ -47,7 +47,8 @@ public class TransitPathFinder extends AStar<GridPosition> {
   @Override
   protected Double h(GridPosition from, GridPosition to) {
     /* Use the Manhattan distance heuristic.  */
-    return (double) Math.abs(goal.x - to.x) + Math.abs(goal.y - to.y);
+//    return (double) Math.abs(goal.x - to.x) + Math.abs(goal.y - to.y);
+    return Math.pow(goal.x - to.x, 2) + Math.pow(goal.y - to.y, 2);
   }
 
   @Override
@@ -57,10 +58,7 @@ public class TransitPathFinder extends AStar<GridPosition> {
     int x = point.x;
     int y = point.y;
 
-    if (point.elevator != null) {
-      checkGridPosition(successors, x, y + 1);
-      checkGridPosition(successors, x, y - 1);
-    } else if (point.stair != null) {
+    if (point.elevator != null || point.stair != null) {
       checkGridPosition(successors, x, y + 1);
       checkGridPosition(successors, x, y - 1);
     }
@@ -69,6 +67,10 @@ public class TransitPathFinder extends AStar<GridPosition> {
     checkGridPosition(successors, x - 1, y);
 
     return successors;
+  }
+
+  private void checkGridPosition(List<GridPosition> successors, float x, float y) {
+    checkGridPosition(successors, (int) x, (int) y);
   }
 
   private void checkGridPosition(List<GridPosition> successors, int x, int y) {

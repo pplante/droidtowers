@@ -261,16 +261,9 @@ public abstract class AStar<T> {
     if (isGoal(last)) {
       discoveredPath = new LinkedList<T>();
 
-      T lastPoint = null;
       for (Path i = p; i != null; i = i.parent) {
         T point = i.getPoint();
-
-        if (point.equals(lastPoint) || discoveredPath.contains(point)) {
-          continue;
-        }
-
         discoveredPath.addFirst(point);
-        lastPoint = point;
       }
       working = false;
       return;

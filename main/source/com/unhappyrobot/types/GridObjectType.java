@@ -98,8 +98,10 @@ public abstract class GridObjectType {
 
   @Override
   public String toString() {
-    return String.format("%s@%s:%s", this.getClass().getName(), hashCode(), getName());
+    return "GridObjectType{" +
+                   "name='" + name + '\'' +
+                   ", height=" + height +
+                   ", width=" + width +
+                   '}';
   }
-
-
 }

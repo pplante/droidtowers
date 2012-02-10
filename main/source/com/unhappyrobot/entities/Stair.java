@@ -43,9 +43,22 @@ public class Stair extends Transit {
     return size.cpy().add(0, 1);
   }
 
-  public GridPoint getFrontPosition() {
-    GridPoint point = new GridPoint(getContentPosition());
-    point.add(getContentSize());
-    return point;
+//  @Override
+//  public List<GridPoint> getGridPointsOccupied() {
+//    return Lists.newArrayList(new GridPoint(position.x + 1, position.y));
+//  }
+
+  public Vector2 getTopLeftWorldPoint() {
+    GridPoint point = new GridPoint(position);
+    point.add(0, 1);
+
+    return point.toWorldVector2(gameGrid);
+  }
+
+  public Vector2 getBottomRightWorldPoint() {
+    GridPoint point = new GridPoint(position);
+    point.add(2, 0);
+
+    return point.toWorldVector2(gameGrid);
   }
 }
