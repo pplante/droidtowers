@@ -107,7 +107,7 @@ public class HeadsUpDisplay extends Group {
 
   private void updateStatusLabel() {
     Player player = Player.getInstance();
-    statusLabel.setText(String.format("%d coins\n %d exp\n(%d + %d)/%d pop\n%d/%d jobs", player.getCoins(), player.getExperience(), player.getPopulationResidency(), player.getPopulationAttracted(), player.getMaxPopulation(), player.getJobsFilled(), player.getJobsMax()));
+    statusLabel.setText(String.format("%d coins\n %d exp\n(%d + %d)/%d pop\n%d/%d jobs\n%.1fX speed", player.getCoins(), player.getExperience(), player.getPopulationResidency(), player.getPopulationAttracted(), player.getMaxPopulation(), player.getJobsFilled(), player.getJobsMax(), TowerGame.getTimeMultiplier()));
   }
 
   private void makeAddRoomButton() {
@@ -290,7 +290,11 @@ public class HeadsUpDisplay extends Group {
 
   @Override
   public boolean touchMoved(float x, float y) {
-    updateGridPointTooltip(x, y);
+    if (hit(x, y) == null) {
+      updateGridPointTooltip(x, y);
+    } else {
+      mouseToolTip.visible = false;
+    }
 
     return false;
   }

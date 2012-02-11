@@ -13,7 +13,7 @@ import java.util.Set;
 public class DesirabilityCalculator extends GameStateAction {
   private HashMap<GridPoint, List<Float>> noisyPositions;
 
-  public DesirabilityCalculator(GameGrid gameGrid, long roomUpdateFrequency) {
+  public DesirabilityCalculator(GameGrid gameGrid, float roomUpdateFrequency) {
     super(gameGrid, roomUpdateFrequency);
 
     noisyPositions = new HashMap<GridPoint, List<Float>>();

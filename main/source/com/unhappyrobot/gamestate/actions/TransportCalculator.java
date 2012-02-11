@@ -14,7 +14,7 @@ public class TransportCalculator extends GameStateAction {
   private final Class transportClasses[] = {Elevator.class, Stair.class};
   private final Class roomClasses[] = {Room.class, CommercialSpace.class};
 
-  public TransportCalculator(GameGrid gameGrid, long frequency) {
+  public TransportCalculator(GameGrid gameGrid, float frequency) {
     super(gameGrid, frequency, false);
 
     GameEvents.register(this);

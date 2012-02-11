@@ -5,7 +5,7 @@ import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.Player;
 
 public class EarnoutCalculator extends GameStateAction {
-  public EarnoutCalculator(GameGrid gameGrid, long frequency) {
+  public EarnoutCalculator(GameGrid gameGrid, float frequency) {
     super(gameGrid, frequency);
   }
 

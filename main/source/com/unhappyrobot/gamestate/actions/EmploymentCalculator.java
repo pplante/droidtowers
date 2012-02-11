@@ -9,7 +9,7 @@ import com.unhappyrobot.types.CommercialType;
 import java.util.Set;
 
 public class EmploymentCalculator extends GameStateAction {
-  public EmploymentCalculator(GameGrid gameGrid, long frequency) {
+  public EmploymentCalculator(GameGrid gameGrid, float frequency) {
     super(gameGrid, frequency);
   }
 

@@ -2,8 +2,10 @@ package com.unhappyrobot;
 
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.Elevator;
+import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.Stair;
+import com.unhappyrobot.math.GridPoint;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -57,6 +59,14 @@ public class GridPosition {
     }
 
     return new Vector2(Math.max(stair.getSize().x, elevator.getSize().x), Math.max(stair.getSize().y, elevator.getSize().y));
+  }
+
+  public GridPoint toGridPoint() {
+    return new GridPoint(x, y);
+  }
+
+  public Vector2 toWorldVector2(GameGrid gameGrid) {
+    return toGridPoint().toWorldVector2(gameGrid);
   }
 
   @Override

@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 import com.unhappyrobot.GridPosition;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.entities.Avatar;
+import com.unhappyrobot.entities.ElevatorCar;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.Stair;
 import com.unhappyrobot.graphics.TransitLine;
@@ -64,12 +65,27 @@ public class AvatarSteeringManager {
     currentPosition = discoveredPath.poll();
     System.out.println("currentPosition = " + currentPosition);
 
-    if (discoveredPath.size() > 0 && currentPosition.stair != null) {
-      GridPosition nextPosition = discoveredPath.peek();
-      System.out.println("nextPosition = " + nextPosition);
-      if (nextPosition != null && nextPosition.y != currentPosition.y) {
-        traverseStair(nextPosition);
-        return;
+    if (discoveredPath.size() > 0) {
+      if (currentPosition.stair != null) {
+        GridPosition nextPosition = discoveredPath.peek();
+        if (nextPosition != null && nextPosition.y != currentPosition.y) {
+          traverseStair(nextPosition);
+          return;
+        }
+      } else if (currentPosition.elevator != null) {
+        GridPosition positionToCheck;
+        while ((positionToCheck = discoveredPath.peek()) != null) {
+          if (positionToCheck.elevator == currentPosition.elevator) {
+            nextPosition = discoveredPath.poll();
+          } else {
+            break;
+          }
+        }
+
+        if (nextPosition != null) {
+          traverseElevator();
+          return;
+        }
       }
     }
 
@@ -79,6 +95,24 @@ public class AvatarSteeringManager {
         advancePosition();
       }
     });
+  }
+
+  private void traverseElevator() {
+    final TransitLine elevatorLine = new TransitLine();
+    elevatorLine.addPoint(currentPosition.toGridPoint().toWorldVector2(gameGrid));
+    elevatorLine.addPoint(nextPosition.toGridPoint().toWorldVector2(gameGrid));
+
+    gameGrid.getRenderer().addTransitLine(elevatorLine);
+
+    final ElevatorCar elevatorCar = currentPosition.elevator.getCar();
+    elevatorCar.addPassenger(this)
+            .addCallback(new Runnable() {
+              public void run() {
+                elevatorCar.removePassenger(AvatarSteeringManager.this);
+                gameGrid.getRenderer().removeTransitLine(elevatorLine);
+                advancePosition();
+              }
+            });
   }
 
   private void stop() {
@@ -120,7 +154,6 @@ public class AvatarSteeringManager {
 
   private void moveAvatarTo(Vector2 endPoint, TweenCallback endCallback) {
     Tween.to(avatar, POSITION, 1000)
-            .delay(50)
             .target(endPoint.x, endPoint.y)
             .addCallback(END, endCallback)
             .start(TowerGame.getTweenManager());
@@ -128,5 +161,21 @@ public class AvatarSteeringManager {
 
   public boolean isRunning() {
     return running;
+  }
+
+  public GridPosition getCurrentPosition() {
+    return currentPosition;
+  }
+
+  public GridPosition getNextPosition() {
+    return nextPosition;
+  }
+
+  public Avatar getAvatar() {
+    return avatar;
+  }
+
+  public void moveAvatarTo(GridPosition gridPosition, TweenCallback endCallback) {
+    moveAvatarTo(gridPosition.toWorldVector2(gameGrid), endCallback);
   }
 }

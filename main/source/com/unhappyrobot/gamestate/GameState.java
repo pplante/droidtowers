@@ -42,13 +42,13 @@ public class GameState extends EventListener {
   }
 
   public void update(float deltaTime, GameGrid gameGrid) {
-    long currentTime = System.currentTimeMillis();
+    gameGrid.update(deltaTime);
 
-    transportCalculator.act(currentTime);
-    calculatePopulation.act(currentTime);
-    calculateJobs.act(currentTime);
-    calculateEarnout.act(currentTime);
-    calculateDesirability.act(currentTime);
+    transportCalculator.act(deltaTime);
+    calculatePopulation.act(deltaTime);
+    calculateJobs.act(deltaTime);
+    calculateEarnout.act(deltaTime);
+    calculateDesirability.act(deltaTime);
   }
 
   public void loadSavedGame(final FileHandle fileHandle, OrthographicCamera camera) {

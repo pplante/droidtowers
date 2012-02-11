@@ -1,8 +1,8 @@
 package com.unhappyrobot.actions;
 
 public abstract class TimeDelayedAction implements Action {
-  private final long updateFrequency;
-  private long nextTimeToRun;
+  private float currentTime;
+  private final float updateFrequency;
   private boolean shouldRepeat;
   private boolean hasRunBefore;
   private boolean paused;
@@ -11,20 +11,23 @@ public abstract class TimeDelayedAction implements Action {
     this(updateFrequency, true);
   }
 
-  public TimeDelayedAction(long updateFrequency, boolean shouldRepeat) {
+  public TimeDelayedAction(float updateFrequency, boolean shouldRepeat) {
     this.updateFrequency = updateFrequency;
+    currentTime = updateFrequency;
     this.shouldRepeat = shouldRepeat;
   }
 
-  public void act(long currentTime) {
+  public void act(float deltaTime) {
     if (hasRunBefore && !shouldRepeat) {
       return;
     } else if (paused) {
       return;
     }
 
-    if (nextTimeToRun < currentTime) {
-      nextTimeToRun = currentTime + updateFrequency;
+    currentTime += deltaTime;
+
+    if (currentTime >= updateFrequency) {
+      currentTime = 0.0f;
       hasRunBefore = true;
 
       run();
@@ -32,7 +35,7 @@ public abstract class TimeDelayedAction implements Action {
   }
 
   public void resetInterval() {
-    nextTimeToRun = System.currentTimeMillis() + updateFrequency;
+    currentTime = 0.0f;
     hasRunBefore = false;
   }
 

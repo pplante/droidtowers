@@ -11,7 +11,6 @@ import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.ElevatorType;
 import com.unhappyrobot.types.ResizeHandle;
-import com.unhappyrobot.utils.Random;
 
 public class Elevator extends Transit {
   private Sprite topSprite;
@@ -27,7 +26,6 @@ public class Elevator extends Transit {
 
   public Elevator(ElevatorType elevatorType, final GameGrid gameGrid) {
     super(elevatorType, gameGrid);
-
 
     if (elevatorAtlas == null) {
       elevatorAtlas = new TextureAtlas(Gdx.files.internal(elevatorType.getAtlasFilename()));
@@ -47,6 +45,13 @@ public class Elevator extends Transit {
   @Override
   public Sprite getSprite() {
     return shaftSprite;
+  }
+
+  @Override
+  public void update(float deltaTime) {
+    super.update(deltaTime);
+
+    elevatorCar.update(deltaTime);
   }
 
   @Override
@@ -85,8 +90,6 @@ public class Elevator extends Transit {
   public boolean tap(Vector2 gridPointAtFinger, int count) {
     if (count >= 2) {
       drawShaft = !drawShaft;
-    } else if (count == 1) {
-      elevatorCar.moveToFloor(Random.randomInt((int) getContentSize().y));
     }
 
     return true;
@@ -142,7 +145,7 @@ public class Elevator extends Transit {
   @Override
   public GridPoint getContentSize() {
     GridPoint cpy = size.cpy();
-    cpy.sub(0, 2);
+    cpy.sub(0, 3);
     return cpy;
   }
 
@@ -151,5 +154,9 @@ public class Elevator extends Transit {
     GridPoint cpy = position.cpy();
     cpy.add(0, 1);
     return cpy;
+  }
+
+  public ElevatorCar getCar() {
+    return elevatorCar;
   }
 }

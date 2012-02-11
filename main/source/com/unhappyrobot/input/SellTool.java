@@ -3,6 +3,9 @@ package com.unhappyrobot.input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.google.common.base.Function;
+import com.google.common.collect.Ordering;
+import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GameLayer;
@@ -28,11 +31,17 @@ public class SellTool extends ToolBase {
     Set<GridObject> gridObjects = GridPositionCache.instance().getObjectsAt(gridPointAtFinger, new Vector2(1, 1));
 
     if (gridObjects != null) {
-      for (GridObject gridObject : gridObjects) {
-        gameGrid.removeObject(gridObject);
-      }
+      List<GridObject> zIndexSorted = Ordering.natural().reverse().onResultOf(new Function<GridObject, Integer>() {
+        public Integer apply(@Nullable GridObject o) {
+          return o.getGridObjectType().getZIndex();
+        }
+      }).sortedCopy(gridObjects);
 
-      return true;
+      if (zIndexSorted != null && zIndexSorted.size() > 0) {
+        gameGrid.removeObject(zIndexSorted.get(0));
+
+        return true;
+      }
     }
 
     return false;

@@ -6,7 +6,7 @@ import com.unhappyrobot.types.RoomType;
 import java.util.Set;
 
 public class PopulationCalculator extends GameStateAction {
-  public PopulationCalculator(GameGrid gameGrid, long frequency) {
+  public PopulationCalculator(GameGrid gameGrid, float frequency) {
     super(gameGrid, frequency);
   }
 

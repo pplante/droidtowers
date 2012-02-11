@@ -95,13 +95,15 @@ public class Avatar extends GameObject {
           return lastCommercialSpace != gridObject && gridObject instanceof CommercialSpace && ((CommercialSpace) gridObject).isConnectedToTransport();
         }
       }));
-      GridObject commercialSpace = commercials.get(Random.randomInt(commercials.size()));
-      commercialSpace.setRenderColor(myColor);
+      if (commercials.size() > 0) {
+        GridObject commercialSpace = commercials.get(Random.randomInt(commercials.size()));
+        commercialSpace.setRenderColor(myColor);
 
-      pathFinder = new TransitPathFinder(commercialSpace.getPosition());
-      pathFinder.compute(GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(position.x, position.y)));
+        pathFinder = new TransitPathFinder(commercialSpace.getPosition());
+        pathFinder.compute(GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(position.x, position.y)));
 
-      lastCommercialSpace = commercialSpace;
+        lastCommercialSpace = commercialSpace;
+      }
     }
   }
 

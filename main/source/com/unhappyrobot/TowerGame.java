@@ -46,6 +46,7 @@ public class TowerGame implements ApplicationListener {
   private GameState gameState;
   private boolean loadedSavedGame;
   private FileHandle gameSaveLocation;
+  private static float timeMultiplier;
 
   public static GameGridRenderer getGameGridRenderer() {
     return gameGridRenderer;
@@ -60,6 +61,8 @@ public class TowerGame implements ApplicationListener {
     StairTypeFactory.getInstance();
 
     Random.init();
+
+    timeMultiplier = 1f;
 
     tweenManager = new TweenManager();
     Tween.registerAccessor(GameObject.class, new GameObjectAccessor());
@@ -105,6 +108,24 @@ public class TowerGame implements ApplicationListener {
     InputSystem.getInstance().setup(camera, gameLayers);
     InputSystem.getInstance().addInputProcessor(guiStage, 10);
     Gdx.input.setInputProcessor(InputSystem.getInstance());
+
+    InputSystem.getInstance().bind(Keys.PLUS, new InputCallback() {
+      public boolean run(float timeDelta) {
+        timeMultiplier += 0.5f;
+        timeMultiplier = Math.min(timeMultiplier, 4);
+
+        return true;
+      }
+    });
+
+    InputSystem.getInstance().bind(Keys.MINUS, new InputCallback() {
+      public boolean run(float timeDelta) {
+        timeMultiplier -= 0.5f;
+        timeMultiplier = Math.max(timeMultiplier, 0.5f);
+
+        return true;
+      }
+    });
 
     InputSystem.getInstance().bind(Keys.G, new InputCallback() {
       public boolean run(float timeDelta) {
@@ -200,8 +221,9 @@ public class TowerGame implements ApplicationListener {
   private void updateGameObjects() {
     float deltaTime = Gdx.graphics.getDeltaTime();
 
+    deltaTime *= timeMultiplier;
+
     tweenManager.update((int) (deltaTime * 1000));
-    gameGrid.update(deltaTime);
     gameState.update(deltaTime, gameGrid);
     guiStage.act(deltaTime);
 
@@ -241,5 +263,9 @@ public class TowerGame implements ApplicationListener {
 
   public static OrthographicCamera getCamera() {
     return camera;
+  }
+
+  public static float getTimeMultiplier() {
+    return timeMultiplier;
   }
 }
