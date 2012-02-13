@@ -28,7 +28,7 @@ public class GameLayer {
     spriteBatch.begin();
     spriteBatch.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
     for (GameObject gameObject : gameObjects) {
-      gameObject.render(spriteBatch);
+      gameObject.draw(spriteBatch);
     }
 
     spriteBatch.end();

@@ -1,114 +1,33 @@
 package com.unhappyrobot.entities;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.unhappyrobot.math.Bounds2d;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
-public class GameObject {
-  protected Vector2 position;
-  protected Vector2 velocity;
-  protected Vector2 origin;
-  protected Vector2 size;
-  protected float scale;
-  protected Sprite sprite;
+public class GameObject extends Sprite {
+  private boolean visible = true;
+  private float opacity = 1f;
+  private float velocityX;
+  private float velocityY;
 
-  protected float rotation;
-  private boolean visible;
-  private float opacity;
-
-  public GameObject(float x, float y, float scale) {
-    sprite = new Sprite();
-    position = new Vector2();
-    origin = new Vector2();
-    size = new Vector2();
-    velocity = new Vector2();
-    visible = true;
-    opacity = 1.0f;
-
-    setPosition(x, y);
-    setScale(scale);
-  }
-
-  public GameObject(float x, float y) {
-    this(x, y, 1.0f);
-  }
-
-  public GameObject(Vector2 position, float scale) {
-    this(position.x, position.y, scale);
+  public GameObject(TextureAtlas.AtlasRegion region) {
+    super(region);
   }
 
   public GameObject() {
-    this(0, 0, 1);
+    super();
   }
 
-  public void setScale(float scale) {
-    this.scale = scale;
-    sprite.setScale(this.scale, this.scale);
-  }
-
-  public Vector2 getPosition() {
-    return position;
-  }
-
-  public void setPosition(float x, float y) {
-    setPosition(new Vector2(x, y));
-  }
-
-  public void setPosition(Vector2 vec) {
-    position.set(vec);
-  }
-
-  public void setSize(float width, float height) {
-    size.set(width, height);
-    origin.set(size);
-    origin.mul(0.5f);
-
-    sprite.setOrigin(origin.x, origin.y);
-    sprite.setSize(size.x, size.y);
-  }
-
-  public Vector2 getSize() {
-    return size;
-  }
-
-  public void useTexture(String filename) {
-    Texture texture = new Texture(Gdx.files.internal(filename));
-
-    sprite.setTexture(texture);
-    sprite.setRegion(0, 0, texture.getWidth(), texture.getHeight());
-
-    setSize(sprite.getWidth(), sprite.getHeight());
-  }
-
-  public void render(SpriteBatch batch) {
+  @Override
+  public void draw(SpriteBatch spriteBatch, float alphaModulation) {
     if (visible) {
-      sprite.draw(batch, opacity);
+      super.draw(spriteBatch, alphaModulation);
     }
   }
 
   public void update(float timeDelta) {
-    position.add(velocity.x * timeDelta, velocity.y * timeDelta);
-    sprite.setPosition(position.x - origin.x, position.y - origin.y);
-    sprite.setRotation(rotation);
-  }
-
-  public Vector2 getOrigin() {
-    return origin;
-  }
-
-  public float getScale() {
-    return scale;
-  }
-
-  public void setSprite(Sprite sprite) {
-    sprite.setPosition(position.x, position.y);
-    sprite.setScale(scale);
-    sprite.setOrigin(origin.x, origin.y);
-
-    this.sprite = sprite;
+    setX(getX() + (velocityX * timeDelta));
+    setY(getY() + (velocityY * timeDelta));
   }
 
   public void setVisible(boolean state) {
@@ -120,18 +39,15 @@ public class GameObject {
   }
 
   public void setVelocity(int x, int y) {
-    velocity.set(x, y);
+    velocityX = x;
+    velocityY = y;
   }
 
-  public Bounds2d getBounds() {
-    return new Bounds2d(position, size);
+  public void setOpacity(float opacity) {
+    this.opacity = opacity;
   }
 
   public float getOpacity() {
     return opacity;
-  }
-
-  public void setOpacity(float newAlpha) {
-    opacity = newAlpha;
   }
 }

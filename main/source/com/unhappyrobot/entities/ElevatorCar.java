@@ -3,17 +3,15 @@ package com.unhappyrobot.entities;
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.Subscribe;
+import com.unhappyrobot.GridPosition;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.controllers.AvatarSteeringManager;
 import com.unhappyrobot.controllers.GameObjectAccessor;
 import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
-import com.unhappyrobot.math.GridPoint;
 
 import java.util.Map;
 
@@ -22,7 +20,6 @@ import static aurelienribon.tweenengine.TweenCallback.EventType.COMPLETE;
 public class ElevatorCar extends GameObject {
   private int floor;
   private final Elevator elevator;
-  private final Sprite sprite;
   private Map<AvatarSteeringManager, PassengerEntry> passengers;
 
   public ElevatorCar(Elevator elevator, TextureAtlas elevatorAtlas) {
@@ -30,7 +27,7 @@ public class ElevatorCar extends GameObject {
     elevator.eventBus().register(this);
 
     passengers = Maps.newHashMap();
-    sprite = elevatorAtlas.createSprite("elevator/car");
+    setRegion(elevatorAtlas.findRegion("elevator/car"));
   }
 
   @Override
@@ -44,35 +41,26 @@ public class ElevatorCar extends GameObject {
 
   @Subscribe
   public void Elevator_boundsChanged(GridObjectBoundsChangeEvent event) {
-    position = elevator.getContentPosition().toWorldVector2(elevator.gameGrid);
+    Vector2 elevatorPos = elevator.getContentPosition().toWorldVector2(elevator.gameGrid);
+    setPosition(elevatorPos.x, elevatorPos.y);
   }
 
-  public void moveToFloor(int nextFloor, TweenCallback tweenCallback) {
-    nextFloor = Math.max(0, Math.min((int) elevator.getContentSize().y, nextFloor));
-    int numFloors = Math.abs(nextFloor - floor);
-    System.out.println("numFloors = " + numFloors);
-    if (numFloors > 0) {
-      GridPoint gridPoint = elevator.getContentPosition().cpy();
-      gridPoint.y += nextFloor;
+  public void moveToFloor(GridPosition nextFloor, TweenCallback tweenCallback) {
+    Vector2 finalPosition = nextFloor.toWorldVector2(elevator.gameGrid);
 
-      Vector2 finalPosition = gridPoint.toWorldVector2(elevator.gameGrid);
+    float dst = finalPosition.dst(getX(), getY());
 
-      Tween.to(this, GameObjectAccessor.POSITION, 300 * numFloors)
-              .target(finalPosition.x, finalPosition.y)
-              .addCallback(COMPLETE, tweenCallback)
-              .start(TowerGame.getTweenManager());
-
-      floor = nextFloor;
-    } else {
-      tweenCallback.onEvent(null, null);
-    }
+    Tween.to(this, GameObjectAccessor.POSITION, (int) (dst * 0.03f))
+            .target(finalPosition.x, finalPosition.y)
+            .addCallback(COMPLETE, tweenCallback)
+            .start(TowerGame.getTweenManager());
   }
 
   @Override
   public void update(float timeDelta) {
     for (final PassengerEntry entry : passengers.values()) {
       if (entry.hasBoarded) {
-        entry.steeringManager.getAvatar().setPosition(position);
+        entry.steeringManager.getAvatar().setPosition(getX(), getY());
       } else if (!entry.isQueued) {
         entry.isQueued = true;
         moveToFloor(entry.boardingFloor, new TweenCallback() {
@@ -94,16 +82,8 @@ public class ElevatorCar extends GameObject {
     }
   }
 
-  public void draw(SpriteBatch spriteBatch) {
-    sprite.setPosition(position.x, position.y);
-    sprite.draw(spriteBatch);
-  }
-
   public PassengerEntry addPassenger(AvatarSteeringManager steeringManager) {
-    int boardingFloor = steeringManager.getCurrentPosition().y - 4;
-    final int destinationFloor = steeringManager.getNextPosition().y - 4;
-
-    final PassengerEntry entry = new PassengerEntry(steeringManager, boardingFloor, destinationFloor);
+    final PassengerEntry entry = new PassengerEntry(steeringManager, steeringManager.getCurrentPosition(), steeringManager.getNextPosition());
     passengers.put(steeringManager, entry);
 
     return entry;
@@ -115,13 +95,13 @@ public class ElevatorCar extends GameObject {
 
   public class PassengerEntry {
     private final AvatarSteeringManager steeringManager;
-    private final int boardingFloor;
-    private final int destinationFloor;
+    private final GridPosition boardingFloor;
+    private final GridPosition destinationFloor;
     private Runnable runnable;
     public boolean hasBoarded;
     public boolean isQueued;
 
-    public PassengerEntry(AvatarSteeringManager steeringManager, int boardingFloor, int destinationFloor) {
+    public PassengerEntry(AvatarSteeringManager steeringManager, GridPosition boardingFloor, GridPosition destinationFloor) {
       this.steeringManager = steeringManager;
       this.boardingFloor = boardingFloor;
       this.destinationFloor = destinationFloor;

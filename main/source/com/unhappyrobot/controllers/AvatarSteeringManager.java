@@ -1,7 +1,6 @@
 package com.unhappyrobot.controllers;
 
 import aurelienribon.tweenengine.BaseTween;
-import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.math.Vector2;
@@ -14,15 +13,16 @@ import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.Stair;
 import com.unhappyrobot.graphics.TransitLine;
 import com.unhappyrobot.math.Direction;
-import com.unhappyrobot.math.GridPoint;
 
 import java.util.LinkedList;
 
 import static aurelienribon.tweenengine.TweenCallback.EventType.END;
 import static com.unhappyrobot.controllers.GameObjectAccessor.POSITION;
-import static com.unhappyrobot.math.Direction.UP;
+import static com.unhappyrobot.math.Direction.*;
 
 public class AvatarSteeringManager {
+  public static final float MOVEMENT_SPEED = 30;
+
   private final Avatar avatar;
   private final GameGrid gameGrid;
   private final LinkedList<GridPosition> discoveredPath;
@@ -30,6 +30,9 @@ public class AvatarSteeringManager {
   private GridPosition currentPosition;
   private GridPosition nextPosition;
   private TransitLine transitLine;
+  private boolean movingHorizontally;
+  private Direction horizontalDirection;
+  private Direction verticalDirection;
 
   public AvatarSteeringManager(Avatar avatar, GameGrid gameGrid, LinkedList<GridPosition> discoveredPath) {
     this.avatar = avatar;
@@ -38,15 +41,12 @@ public class AvatarSteeringManager {
   }
 
   public void start() {
-    System.out.println("\n\nstart!\n\n");
     running = true;
 
     transitLine = new TransitLine();
     transitLine.setColor(avatar.getColor());
     for (GridPosition position : Lists.newArrayList(discoveredPath)) {
-      GridPoint gridPoint = new GridPoint(position.x, position.y);
-
-      transitLine.addPoint(gridPoint.toWorldVector2(gameGrid));
+      transitLine.addPoint(position.toWorldVector2(gameGrid));
     }
 
     gameGrid.getRenderer().addTransitLine(transitLine);
@@ -54,32 +54,30 @@ public class AvatarSteeringManager {
     advancePosition();
   }
 
-  private void advancePosition() {
-    TowerGame.getTweenManager().killTarget(avatar);
+  private void stop() {
+    running = false;
+    gameGrid.getRenderer().removeTransitLine(transitLine);
+  }
 
+  private void advancePosition() {
     if (discoveredPath.peek() == null) {
       stop();
       return;
     }
 
     currentPosition = discoveredPath.poll();
-    System.out.println("currentPosition = " + currentPosition);
 
     if (discoveredPath.size() > 0) {
       if (currentPosition.stair != null) {
-        GridPosition nextPosition = discoveredPath.peek();
-        if (nextPosition != null && nextPosition.y != currentPosition.y) {
-          traverseStair(nextPosition);
+        GridPosition positionToCheck = discoveredPath.peek();
+        if (positionToCheck != null && positionToCheck.y != currentPosition.y) {
+          traverseStair(positionToCheck);
           return;
         }
       } else if (currentPosition.elevator != null) {
         GridPosition positionToCheck;
-        while ((positionToCheck = discoveredPath.peek()) != null) {
-          if (positionToCheck.elevator == currentPosition.elevator) {
-            nextPosition = discoveredPath.poll();
-          } else {
-            break;
-          }
+        while ((positionToCheck = discoveredPath.peek()) != null && positionToCheck.elevator == currentPosition.elevator) {
+          nextPosition = discoveredPath.poll();
         }
 
         if (nextPosition != null) {
@@ -89,8 +87,7 @@ public class AvatarSteeringManager {
       }
     }
 
-    GridPoint gridPoint = new GridPoint(currentPosition.x, currentPosition.y);
-    moveAvatarTo(gridPoint.toWorldVector2(gameGrid), new TweenCallback() {
+    moveAvatarTo(currentPosition, new TweenCallback() {
       public void onEvent(EventType eventType, BaseTween source) {
         advancePosition();
       }
@@ -99,8 +96,8 @@ public class AvatarSteeringManager {
 
   private void traverseElevator() {
     final TransitLine elevatorLine = new TransitLine();
-    elevatorLine.addPoint(currentPosition.toGridPoint().toWorldVector2(gameGrid));
-    elevatorLine.addPoint(nextPosition.toGridPoint().toWorldVector2(gameGrid));
+    elevatorLine.addPoint(currentPosition.toWorldVector2(gameGrid));
+    elevatorLine.addPoint(nextPosition.toWorldVector2(gameGrid));
 
     gameGrid.getRenderer().addTransitLine(elevatorLine);
 
@@ -115,26 +112,14 @@ public class AvatarSteeringManager {
             });
   }
 
-  private void stop() {
-    running = false;
-    gameGrid.getRenderer().removeTransitLine(transitLine);
-  }
-
   private void traverseStair(GridPosition nextPosition) {
-    System.out.println("traverse stair!");
     Stair stair = currentPosition.stair;
-    Vector2 bottomRight = stair.getBottomRightWorldPoint();
-    Vector2 topLeft = stair.getTopLeftWorldPoint();
-    Direction verticalDir = nextPosition.y < currentPosition.y ? Direction.DOWN : UP;
+    Direction verticalDir = nextPosition.y < currentPosition.y ? DOWN : UP;
 
-    Timeline sequence = Timeline.createSequence();
+    final Vector2 start = verticalDir.equals(UP) ? stair.getBottomRightWorldPoint() : stair.getTopLeftWorldPoint();
+    final Vector2 goal = verticalDir.equals(UP) ? stair.getTopLeftWorldPoint() : stair.getBottomRightWorldPoint();
+
     final TransitLine stairLine = new TransitLine();
-
-    sequence.push(Tween.set(avatar, POSITION).target(avatar.getPosition().x, avatar.getPosition().y));
-
-    final Vector2 start = verticalDir.equals(UP) ? bottomRight : topLeft;
-    final Vector2 goal = verticalDir.equals(UP) ? topLeft : bottomRight;
-
     stairLine.addPoint(start);
     stairLine.addPoint(goal);
 
@@ -152,8 +137,15 @@ public class AvatarSteeringManager {
     });
   }
 
+  public void moveAvatarTo(GridPosition gridPosition, TweenCallback endCallback) {
+    moveAvatarTo(gridPosition.toWorldVector2(gameGrid), endCallback);
+  }
+
   private void moveAvatarTo(Vector2 endPoint, TweenCallback endCallback) {
-    Tween.to(avatar, POSITION, 1000)
+    horizontalDirection = endPoint.x < avatar.getX() ? LEFT : RIGHT;
+    verticalDirection = endPoint.y < avatar.getY() ? DOWN : UP;
+    float distanceBetweenPoints = endPoint.dst(avatar.getX(), avatar.getY());
+    Tween.to(avatar, POSITION, (int) (distanceBetweenPoints * MOVEMENT_SPEED))
             .target(endPoint.x, endPoint.y)
             .addCallback(END, endCallback)
             .start(TowerGame.getTweenManager());
@@ -175,7 +167,7 @@ public class AvatarSteeringManager {
     return avatar;
   }
 
-  public void moveAvatarTo(GridPosition gridPosition, TweenCallback endCallback) {
-    moveAvatarTo(gridPosition.toWorldVector2(gameGrid), endCallback);
+  public Direction horizontalDirection() {
+    return horizontalDirection;
   }
 }

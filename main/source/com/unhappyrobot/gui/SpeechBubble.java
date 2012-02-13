@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -45,9 +44,7 @@ public class SpeechBubble extends Toast {
     super.act(delta);
 
     if (following != null) {
-      Vector2 position = following.getPosition();
-      Vector2 size = following.getSize();
-      Vector3 worldPoint = new Vector3(position.x, position.y + size.y, 1f);
+      Vector3 worldPoint = new Vector3(following.getX(), following.getY() + following.getHeight(), 1f);
 
       CameraController.instance().getCamera().project(worldPoint);
       x = (int) worldPoint.x - 4;

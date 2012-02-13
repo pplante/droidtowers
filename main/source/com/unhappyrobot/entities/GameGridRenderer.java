@@ -51,7 +51,6 @@ public class GameGridRenderer extends GameLayer {
     GameEvents.register(this);
 
     shouldRenderGridLines = true;
-    shouldRenderTransitLines = true;
     gl = new ImmediateModeRenderer10();
     shapeRenderer = new ShapeRenderer();
 

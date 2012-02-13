@@ -19,8 +19,8 @@ public class GameObjectAccessor implements TweenAccessor<GameObject> {
         return 1;
 
       case POSITION:
-        returnValues[0] = target.getPosition().x;
-        returnValues[1] = target.getPosition().y;
+        returnValues[0] = target.getX();
+        returnValues[1] = target.getY();
         return 2;
 
       default:

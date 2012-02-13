@@ -27,6 +27,7 @@ import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.*;
 
 public class HeadsUpDisplay extends Group {
+  public static final float ONE_MEGABYTE = 1048576.0f;
   private TextureAtlas hudAtlas;
   private Stage guiStage;
   private Skin guiSkin;
@@ -280,23 +281,28 @@ public class HeadsUpDisplay extends Group {
   public void draw(SpriteBatch batch, float parentAlpha) {
     super.draw(batch, parentAlpha);
 
-    String infoText = String.format("fps: %d, camera(%.1f, %.1f, %.1f)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom);
-    menloBitmapFont.draw(batch, infoText, 5, 23);
+    float javaHeapInBytes = Gdx.app.getJavaHeap() / ONE_MEGABYTE;
+    float nativeHeapInBytes = Gdx.app.getNativeHeap() / ONE_MEGABYTE;
 
-    float javaHeapInBytes = Gdx.app.getJavaHeap() / 1048576.0f;
-    float nativeHeapInBytes = Gdx.app.getNativeHeap() / 1048576.0f;
-    menloBitmapFont.draw(batch, String.format("mem: (java %.2f Mb, native %.2f Mb)", javaHeapInBytes, nativeHeapInBytes), 5, 50);
+    String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f)\nmem: (java %.1f Mb, native %.1f Mb)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom, javaHeapInBytes, nativeHeapInBytes);
+    menloBitmapFont.drawMultiLine(batch, infoText, 5, 45);
   }
 
   @Override
   public boolean touchMoved(float x, float y) {
-    if (hit(x, y) == null) {
+    if (hit(x, y) != mouseToolTip) {
       updateGridPointTooltip(x, y);
     } else {
       mouseToolTip.visible = false;
     }
 
-    return false;
+    return super.touchMoved(x, y);
+  }
+
+  @Override
+  public boolean touchDown(float x, float y, int pointer) {
+    mouseToolTip.visible = false;
+    return super.touchDown(x, y, pointer);
   }
 
   private void updateGridPointTooltip(float x, float y) {
@@ -307,8 +313,8 @@ public class HeadsUpDisplay extends Group {
     if (gridPosition != null) {
       mouseToolTip.visible = true;
       mouseToolTip.setText(String.format("%s\nobjects: %s\nelevator: %s\nstairs: %s", gridPoint, gridPosition.size(), gridPosition.elevator != null, gridPosition.stair != null));
-      mouseToolTip.x = x;
-      mouseToolTip.y = y;
+      mouseToolTip.x = x + 5;
+      mouseToolTip.y = y + 5;
     } else {
       mouseToolTip.visible = false;
     }

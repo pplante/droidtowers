@@ -4,7 +4,6 @@ import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.TowerGame;
@@ -13,6 +12,8 @@ import com.unhappyrobot.utils.Random;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
 public class CloudLayer extends GameLayer {
   public static final int PADDING = 20;
@@ -54,14 +55,15 @@ public class CloudLayer extends GameLayer {
   }
 
   private void spawnCloudNow() {
-    Sprite sprite = textureAtlas.createSprite("cloud", Random.randomInt(1) + 1);
+    AtlasRegion cloudRegion = textureAtlas.findRegion("cloud", Random.randomInt(1) + 1);
 
     float scale = Math.max(0.4f, Random.randomFloat());
-    float cloudX = (sprite.getWidth() * scale) + PADDING;
+    float cloudX = (cloudRegion.getRegionWidth() * scale) + PADDING;
 
-    GameObject cloud = new GameObject(-cloudX, Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX), scale);
+    GameObject cloud = new GameObject(cloudRegion);
+    cloud.setPosition(-cloudX, Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX));
+    cloud.setScale(scale, scale);
     cloud.setVelocity(Random.randomInt(5, 25), 0);
-    cloud.setSprite(sprite);
     cloud.setOpacity(0);
 
     Tween.to(cloud, GameObjectAccessor.OPACITY, 2000).target(1.0f).start(TowerGame.getTweenManager());
@@ -76,7 +78,7 @@ public class CloudLayer extends GameLayer {
     }
 
     for (final GameObject cloud : gameObjects) {
-      if (cloud.position.x >= worldSize.x + PADDING) {
+      if (cloud.getX() >= worldSize.x + PADDING) {
         Tween.to(cloud, GameObjectAccessor.OPACITY, 2000).target(0f).addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
           public void onEvent(EventType eventType, BaseTween source) {
             markForRemoval(cloud);

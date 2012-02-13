@@ -3,12 +3,11 @@ package com.unhappyrobot.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.GridPosition;
@@ -22,49 +21,45 @@ import com.unhappyrobot.utils.Random;
 
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
+
+import static com.unhappyrobot.math.Direction.LEFT;
 
 public class Avatar extends GameObject {
   public static final float FRAME_DURATION = 0.25f;
-  //  public static final float MOVEMENT_SPEED = 0.03f;
-  public static final float MOVEMENT_SPEED = 0.1f;
-  private final Animation animation;
-  private float animationTime;
-  private boolean isMoving;
-  private boolean isFlipped;
-  private final GameGrid gameGrid;
+  public static final float WALKING_ANIMATION_DURATION = FRAME_DURATION * 3;
+  private static final Set<Color> colors = Sets.newHashSet(Color.DARK_GRAY, Color.GREEN, Color.RED, Color.ORANGE, Color.MAGENTA, Color.PINK, Color.YELLOW);
+  private static Iterator colorIterator;
 
+  private final Animation walkAnimation;
+  private float walkAnimationTime;
+
+  private TransitPathFinder pathFinder;
+  private AvatarSteeringManager steeringManager;
+
+  private final GameGrid gameGrid;
   private boolean isEmployed;
   private boolean isResident;
   private float satisfactionShops;
   private float satisfactionFood;
-  private TransitPathFinder pathFinder;
-  private GridObject lastCommercialSpace;
-  private static final Set<Color> colors = Sets.newHashSet(Color.DARK_GRAY, Color.GREEN, Color.RED, Color.ORANGE, Color.MAGENTA, Color.PINK, Color.YELLOW);
-  private static Iterator colorIterator;
   private Color myColor;
-  private boolean isMovingX;
   private final SpeechBubble speechBubble;
-  private GridPosition currentPosition;
-  private AvatarSteeringManager steeringManager;
 
   public Avatar(AvatarLayer avatarLayer) {
     super();
-    this.gameGrid = avatarLayer.getGameGrid();
+
+    gameGrid = avatarLayer.getGameGrid();
+    setPosition(-Random.randomInt(10, 200), 256);
 
     pickColor();
-    float worldWidth = gameGrid.getWorldSize().x;
-    setPosition(Random.randomInt(worldWidth * 0.25f, worldWidth * 0.75f), 256);
 
     TextureAtlas droidAtlas = new TextureAtlas(Gdx.files.internal("characters/droid.txt"));
+    TextureAtlas.AtlasRegion stationary = droidAtlas.findRegion("stationary");
+    setSize(stationary.originalWidth, stationary.originalHeight);
+    setRegion(stationary);
 
-    setSprite(droidAtlas.createSprite("stationary"));
-    size.set(getSprite().getWidth(), getSprite().getHeight());
-    animation = new Animation(FRAME_DURATION, droidAtlas.findRegions("walk"));
-    animationTime = 0f;
-
-    getSprite().setColor(myColor);
+    walkAnimation = new Animation(FRAME_DURATION, droidAtlas.findRegions("walk"));
+    walkAnimationTime = 0f;
 
     speechBubble = new SpeechBubble();
     speechBubble.followObject(this);
@@ -73,61 +68,30 @@ public class Avatar extends GameObject {
     findCommercialSpace();
   }
 
-  private void pickColor() {
-    if (colorIterator == null || !colorIterator.hasNext()) {
-      colorIterator = colors.iterator();
-    }
-
-    myColor = (Color) colorIterator.next();
-  }
-
-  public void findCommercialSpace() {
-    displaySpeechBubble("Finding a new place...");
-
-    Set<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
-    if (commercialSpaces != null) {
-      if (lastCommercialSpace != null) {
-        lastCommercialSpace.setRenderColor(Color.WHITE);
-      }
-
-      List<GridObject> commercials = Lists.newArrayList(Iterables.filter(commercialSpaces, new Predicate<GridObject>() {
-        public boolean apply(@Nullable GridObject gridObject) {
-          return lastCommercialSpace != gridObject && gridObject instanceof CommercialSpace && ((CommercialSpace) gridObject).isConnectedToTransport();
-        }
-      }));
-      if (commercials.size() > 0) {
-        GridObject commercialSpace = commercials.get(Random.randomInt(commercials.size()));
-        commercialSpace.setRenderColor(myColor);
-
-        pathFinder = new TransitPathFinder(commercialSpace.getPosition());
-        pathFinder.compute(GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(position.x, position.y)));
-
-        lastCommercialSpace = commercialSpace;
-      }
-    }
-  }
-
   private void displaySpeechBubble(String newText) {
     speechBubble.setText(newText);
     speechBubble.show();
+  }
+
+  public void findCommercialSpace() {
+    Set<GridObject> commercialSpaces = Sets.newHashSet(Iterables.filter(gameGrid.getInstancesOf(CommercialSpace.class), new Predicate<GridObject>() {
+      public boolean apply(@Nullable GridObject gridObject) {
+        return ((CommercialSpace) gridObject).isConnectedToTransport();
+      }
+    }));
+
+    if (commercialSpaces != null && commercialSpaces.size() > 0) {
+      GridObject commercialSpace = Iterables.get(commercialSpaces, Random.randomInt(commercialSpaces.size()));
+
+      pathFinder = new TransitPathFinder(commercialSpace.getPosition());
+      pathFinder.compute(GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY())));
+    }
   }
 
   @Override
   public void update(float timeDelta) {
     super.update(timeDelta);
 
-    animationTime += timeDelta;
-
-    if (isMoving && isMovingX) {
-      TextureRegion keyFrame = animation.getKeyFrame(animationTime, true);
-      getSprite().setRegion(keyFrame);
-    }
-
-    getSprite().flip(isFlipped, false);
-
-    if (animationTime >= FRAME_DURATION * 3) {
-      animationTime = 0f;
-    }
 
     if (pathFinder != null) {
       if (pathFinder.isWorking()) {
@@ -149,17 +113,33 @@ public class Avatar extends GameObject {
       }
     }
 
-    if (steeringManager != null && !steeringManager.isRunning()) {
-      steeringManager = null;
-      findCommercialSpace();
+    if (steeringManager != null) {
+      if (steeringManager.isRunning()) {
+        if (steeringManager.horizontalDirection() != null) {
+          walkAnimationTime += timeDelta;
+          if (walkAnimationTime >= WALKING_ANIMATION_DURATION) {
+            walkAnimationTime = 0f;
+          }
+          TextureRegion keyFrame = walkAnimation.getKeyFrame(walkAnimationTime, true);
+          setRegion(keyFrame);
+          flip(steeringManager.horizontalDirection() == LEFT, false);
+        }
+      } else {
+        steeringManager = null;
+        findCommercialSpace();
+      }
     }
   }
 
-  public Sprite getSprite() {
-    return sprite;
+  private void pickColor() {
+    if (colorIterator == null || !colorIterator.hasNext()) {
+      colorIterator = colors.iterator();
+    }
+
+    setColor((Color) colorIterator.next());
   }
 
-  public Color getColor() {
-    return myColor;
+  public void tap(Vector2 worldPoint, int count) {
+    displaySpeechBubble("Hello!");
   }
 }
