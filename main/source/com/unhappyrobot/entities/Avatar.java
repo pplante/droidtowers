@@ -29,7 +29,7 @@ import static com.unhappyrobot.math.Direction.LEFT;
 public class Avatar extends GameObject {
   public static final float FRAME_DURATION = 0.25f;
   public static final float WALKING_ANIMATION_DURATION = FRAME_DURATION * 3;
-  private static final Set<Color> colors = Sets.newHashSet(Color.DARK_GRAY, Color.GREEN, Color.RED, Color.ORANGE, Color.MAGENTA, Color.PINK, Color.YELLOW);
+  private static final Set<Color> colors = Sets.newHashSet(Color.GREEN, Color.RED, Color.ORANGE, Color.MAGENTA, Color.PINK, Color.YELLOW);
   private static Iterator colorIterator;
 
   private final Animation walkAnimation;
@@ -45,6 +45,8 @@ public class Avatar extends GameObject {
   private float satisfactionFood;
   private Color myColor;
   private final SpeechBubble speechBubble;
+  private float lastPathFinderSearch;
+  private static final float PATH_SEARCH_DELAY = 25f;
 
   public Avatar(AvatarLayer avatarLayer) {
     super();
@@ -95,6 +97,16 @@ public class Avatar extends GameObject {
   public void update(float timeDelta) {
     super.update(timeDelta);
 
+    if (pathFinder == null && steeringManager == null) {
+      lastPathFinderSearch += timeDelta;
+      if (lastPathFinderSearch >= PATH_SEARCH_DELAY) {
+        lastPathFinderSearch = 0f;
+
+        findCommercialSpace();
+      }
+      return;
+    }
+
     if (pathFinder != null) {
       if (pathFinder.isWorking()) {
         for (int i = 0; i < 50; i++) {
@@ -106,9 +118,7 @@ public class Avatar extends GameObject {
 
         pathFinder = null;
 
-        if (pathFinderCost == Double.MAX_VALUE) {
-          findCommercialSpace();
-        } else if (discoveredPath != null) {
+        if (discoveredPath != null) {
           steeringManager = new AvatarSteeringManager(this, gameGrid, discoveredPath);
           steeringManager.start();
         }
@@ -130,7 +140,6 @@ public class Avatar extends GameObject {
         }
       } else {
         steeringManager = null;
-        findCommercialSpace();
       }
     }
   }

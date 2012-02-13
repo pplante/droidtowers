@@ -1,8 +1,7 @@
 package com.unhappyrobot.gui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
@@ -13,7 +12,7 @@ import java.util.List;
 
 public class Dialog {
   public static final int[] NEGATIVE_BUTTON_KEYS = new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE};
-  private Group parent;
+  private Stage parent;
   private Skin skin;
   private List<LabelButton> buttons;
   private String title;
@@ -27,8 +26,8 @@ public class Dialog {
   private InputCallback onDismissInputCallback;
 
   public Dialog() {
-    this.parent = HeadsUpDisplay.getInstance();
-    this.skin = HeadsUpDisplay.getInstance().getGuiSkin();
+    parent = HeadsUpDisplay.getInstance().getStage();
+    skin = HeadsUpDisplay.getInstance().getGuiSkin();
     title = "Dialog";
     buttons = Lists.newArrayList();
 
@@ -116,7 +115,7 @@ public class Dialog {
     messageLabel.setAlignment(Align.TOP | Align.LEFT);
     messageLabel.setText(messageText);
 
-    table.add(messageLabel).top().left().width(Gdx.graphics.getWidth() / 2).minWidth(400).maxWidth(600).fill().colspan(buttons.size());
+    table.add(messageLabel).top().left().width((int) (parent.width() / 2)).minWidth(400).maxWidth(600).fill().colspan(buttons.size());
 
     table.row().space(4);
     for (LabelButton button : buttons) {
@@ -160,11 +159,9 @@ public class Dialog {
 
   public Dialog centerOnScreen() {
     if (window != null) {
-      float parentWidth = parent.width > 0 ? parent.width : Gdx.graphics.getWidth();
-      float parentHeight = parent.height > 0 ? parent.height : Gdx.graphics.getHeight();
 
-      window.x = (parentWidth - window.width) / 2;
-      window.y = (parentHeight - window.height) / 2;
+      window.x = (parent.width() - window.width) / 2;
+      window.y = (parent.height() - window.height) / 2;
     } else {
       shouldDisplayCentered = true;
     }

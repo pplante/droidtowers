@@ -86,7 +86,7 @@ public class HeadsUpDisplay extends Group {
     topBar.pack();
 
     topBar.x = 0;
-    topBar.y = Gdx.graphics.getHeight() - topBar.height;
+    topBar.y = guiStage.height() - topBar.height;
 
     mouseToolTip = new ToolTip();
     addActor(mouseToolTip);
@@ -102,8 +102,8 @@ public class HeadsUpDisplay extends Group {
     updateStatusLabel();
 
     BitmapFont.TextBounds textBounds = statusLabel.getTextBounds();
-    statusLabel.x = Gdx.graphics.getWidth() - 5;
-    statusLabel.y = Gdx.graphics.getHeight() - 5;
+    statusLabel.x = guiStage.width() - 5;
+    statusLabel.y = guiStage.height() - 5;
   }
 
   private void updateStatusLabel() {

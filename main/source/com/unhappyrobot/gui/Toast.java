@@ -3,7 +3,6 @@ package com.unhappyrobot.gui;
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -46,8 +45,8 @@ public class Toast extends Table {
   public void show() {
     pack();
 
-    x = (Gdx.graphics.getWidth() - width) / 2;
-    y = Gdx.graphics.getHeight() - height - 10;
+    x = (HeadsUpDisplay.getInstance().getStage().width() - width) / 2;
+    y = HeadsUpDisplay.getInstance().getStage().height() - height - 10;
 
     alpha = 0;
 
