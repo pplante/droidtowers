@@ -5,6 +5,7 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.unhappyrobot.GridPosition;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.entities.Avatar;
@@ -15,6 +16,7 @@ import com.unhappyrobot.graphics.TransitLine;
 import com.unhappyrobot.math.Direction;
 
 import java.util.LinkedList;
+import java.util.Set;
 
 import static aurelienribon.tweenengine.TweenCallback.EventType.END;
 import static com.unhappyrobot.controllers.GameObjectAccessor.POSITION;
@@ -33,6 +35,7 @@ public class AvatarSteeringManager {
   private boolean movingHorizontally;
   private Direction horizontalDirection;
   private Direction verticalDirection;
+  private Set<AvatarState> currentState;
 
   public AvatarSteeringManager(Avatar avatar, GameGrid gameGrid, LinkedList<GridPosition> discoveredPath) {
     this.avatar = avatar;
@@ -43,6 +46,7 @@ public class AvatarSteeringManager {
   public void start() {
     running = true;
 
+    currentState = Sets.newHashSet();
     transitLine = new TransitLine();
     transitLine.setColor(avatar.getColor());
     for (GridPosition position : Lists.newArrayList(discoveredPath)) {
@@ -65,12 +69,14 @@ public class AvatarSteeringManager {
       return;
     }
 
+    currentState.clear();
     currentPosition = discoveredPath.poll();
 
     if (discoveredPath.size() > 0) {
       if (currentPosition.stair != null) {
         GridPosition positionToCheck = discoveredPath.peek();
         if (positionToCheck != null && positionToCheck.y != currentPosition.y) {
+          currentState.add(AvatarState.USING_STAIRS);
           traverseStair(positionToCheck);
           return;
         }
@@ -81,6 +87,7 @@ public class AvatarSteeringManager {
         }
 
         if (nextPosition != null) {
+          currentState.add(AvatarState.USING_ELEVATOR);
           traverseElevator();
           return;
         }
@@ -105,7 +112,6 @@ public class AvatarSteeringManager {
     elevatorCar.addPassenger(this)
             .addCallback(new Runnable() {
               public void run() {
-                elevatorCar.removePassenger(AvatarSteeringManager.this);
                 gameGrid.getRenderer().removeTransitLine(elevatorLine);
                 advancePosition();
               }
@@ -141,9 +147,13 @@ public class AvatarSteeringManager {
     moveAvatarTo(gridPosition.toWorldVector2(gameGrid), endCallback);
   }
 
-  private void moveAvatarTo(Vector2 endPoint, TweenCallback endCallback) {
-    horizontalDirection = endPoint.x < avatar.getX() ? LEFT : RIGHT;
-    verticalDirection = endPoint.y < avatar.getY() ? DOWN : UP;
+  public void moveAvatarTo(Vector2 endPoint, TweenCallback endCallback) {
+    currentState.add(AvatarState.MOVING);
+
+    TowerGame.getTweenManager().killTarget(this);
+
+    horizontalDirection = (int) endPoint.x < (int) avatar.getX() ? LEFT : RIGHT;
+    verticalDirection = (int) endPoint.y < (int) avatar.getY() ? DOWN : UP;
     float distanceBetweenPoints = endPoint.dst(avatar.getX(), avatar.getY());
     Tween.to(avatar, POSITION, (int) (distanceBetweenPoints * MOVEMENT_SPEED))
             .target(endPoint.x, endPoint.y)
@@ -169,5 +179,9 @@ public class AvatarSteeringManager {
 
   public Direction horizontalDirection() {
     return horizontalDirection;
+  }
+
+  public Set<AvatarState> getCurrentState() {
+    return currentState;
   }
 }

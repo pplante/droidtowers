@@ -24,7 +24,7 @@ public class GameGrid extends GameLayer {
   private HashSet<GridObject> objects;
   private Vector2 worldSize;
   private final GameGridRenderer gameGridRenderer;
-  private final Map<Class, Set<GridObject>> gridObjectsByType;
+  private final Map<Class, GuavaSet<GridObject>> gridObjectsByType;
   private GridObject selectedGridObject;
   private GridObject transitGridObjectA;
   private GridObject transitGridObjectB;
@@ -32,8 +32,8 @@ public class GameGrid extends GameLayer {
   public GameGrid() {
     setTouchEnabled(true);
 
-    gridObjectsByType = new HashMap<Class, Set<GridObject>>();
-    objects = new HashSet<GridObject>(25);
+    gridObjectsByType = new HashMap<Class, GuavaSet<GridObject>>();
+    objects = new GuavaSet<GridObject>(25);
 
     gameGridRenderer = new GameGridRenderer(this);
     gridColor = Color.GREEN;
@@ -72,9 +72,9 @@ public class GameGrid extends GameLayer {
   public boolean addObject(GridObject gridObject) {
     objects.add(gridObject);
 
-    Set<GridObject> gridObjectHashSet;
+    GuavaSet<GridObject> gridObjectHashSet;
     if (!gridObjectsByType.containsKey(gridObject.getClass())) {
-      gridObjectHashSet = new HashSet<GridObject>();
+      gridObjectHashSet = new GuavaSet<GridObject>();
       gridObjectsByType.put(gridObject.getClass(), gridObjectHashSet);
     } else {
       gridObjectHashSet = gridObjectsByType.get(gridObject.getClass());
@@ -120,12 +120,12 @@ public class GameGrid extends GameLayer {
     }
   }
 
-  public Set<GridObject> getInstancesOf(Class aClass) {
+  public GuavaSet<GridObject> getInstancesOf(Class aClass) {
     return gridObjectsByType.get(aClass);
   }
 
-  public Set<GridObject> getInstancesOf(Class... classes) {
-    Set<GridObject> found = new HashSet<GridObject>();
+  public GuavaSet<GridObject> getInstancesOf(Class... classes) {
+    GuavaSet<GridObject> found = new GuavaSet<GridObject>();
     if (classes != null) {
       for (Class otherClass : classes) {
         if (gridObjectsByType.containsKey(otherClass)) {

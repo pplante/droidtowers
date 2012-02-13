@@ -5,29 +5,36 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 import com.unhappyrobot.GridPosition;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.controllers.AvatarSteeringManager;
 import com.unhappyrobot.controllers.GameObjectAccessor;
 import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
+import com.unhappyrobot.utils.Random;
 
-import java.util.Map;
+import java.util.LinkedList;
 
 import static aurelienribon.tweenengine.TweenCallback.EventType.COMPLETE;
 
 public class ElevatorCar extends GameObject {
   private int floor;
   private final Elevator elevator;
-  private Map<AvatarSteeringManager, PassengerEntry> passengers;
+  private LinkedList<PassengerEntry> passengers;
+  private boolean isInUse;
+  private PassengerEntry currentPassenger;
+  private final GameGrid gameGrid;
 
-  public ElevatorCar(Elevator elevator, TextureAtlas elevatorAtlas) {
-    this.elevator = elevator;
+  public ElevatorCar(Elevator parent, TextureAtlas elevatorAtlas) {
+    elevator = parent;
     elevator.eventBus().register(this);
+    gameGrid = elevator.gameGrid;
+    passengers = Lists.newLinkedList();
 
-    passengers = Maps.newHashMap();
-    setRegion(elevatorAtlas.findRegion("elevator/car"));
+    TextureAtlas.AtlasRegion carRegion = elevatorAtlas.findRegion("elevator/car");
+    setRegion(carRegion);
+    setSize(carRegion.originalWidth, carRegion.originalHeight);
   }
 
   @Override
@@ -46,32 +53,54 @@ public class ElevatorCar extends GameObject {
   }
 
   public void moveToFloor(GridPosition nextFloor, TweenCallback tweenCallback) {
+    TowerGame.getTweenManager().killTarget(this);
+
     Vector2 finalPosition = nextFloor.toWorldVector2(elevator.gameGrid);
 
-    float dst = finalPosition.dst(getX(), getY());
+    int distanceBetweenStops = (int) (Math.abs(getY() - finalPosition.y) * 5);
 
-    Tween.to(this, GameObjectAccessor.POSITION, (int) (dst * 0.03f))
-            .target(finalPosition.x, finalPosition.y)
+    Tween.to(this, GameObjectAccessor.POSITION_Y, distanceBetweenStops)
+            .delay(500)
+            .target(finalPosition.y)
             .addCallback(COMPLETE, tweenCallback)
             .start(TowerGame.getTweenManager());
   }
 
   @Override
   public void update(float timeDelta) {
-    for (final PassengerEntry entry : passengers.values()) {
-      if (entry.hasBoarded) {
-        entry.steeringManager.getAvatar().setPosition(getX(), getY());
-      } else if (!entry.isQueued) {
-        entry.isQueued = true;
-        moveToFloor(entry.boardingFloor, new TweenCallback() {
-          public void onEvent(EventType eventType, BaseTween source) {
-            entry.steeringManager.moveAvatarTo(entry.steeringManager.getCurrentPosition(), new TweenCallback() {
-              public void onEvent(EventType eventType, BaseTween source) {
-                entry.hasBoarded = true;
+    if (currentPassenger == null && passengers.size() > 0) {
+      currentPassenger = passengers.poll();
+    }
 
-                moveToFloor(entry.destinationFloor, new TweenCallback() {
+    if (currentPassenger != null) {
+      if (currentPassenger.hasBoarded) {
+        currentPassenger.steeringManager.getAvatar().setPosition(getX() + currentPassenger.offsetX, getY());
+      } else if (!currentPassenger.isQueued && !isInUse) {
+        currentPassenger.isQueued = true;
+        beginCarMovement();
+      }
+    }
+  }
+
+  private void beginCarMovement() {
+    final AvatarSteeringManager steeringManager = currentPassenger.steeringManager;
+    moveToFloor(currentPassenger.boardingFloor, new TweenCallback() {
+      public void onEvent(EventType eventType, BaseTween source) {
+        // add a bit of padding to move avatar into middle of car.
+
+        Vector2 avatarWalkToElevator = steeringManager.getCurrentPosition().toWorldVector2(gameGrid);
+        avatarWalkToElevator.x += currentPassenger.offsetX;
+
+        steeringManager.moveAvatarTo(avatarWalkToElevator, new TweenCallback() {
+          public void onEvent(EventType eventType, BaseTween source) {
+            currentPassenger.hasBoarded = true;
+
+            moveToFloor(currentPassenger.destinationFloor, new TweenCallback() {
+              public void onEvent(EventType eventType, BaseTween source) {
+                steeringManager.moveAvatarTo(steeringManager.getNextPosition().toWorldVector2(gameGrid), new TweenCallback() {
                   public void onEvent(EventType eventType, BaseTween source) {
-                    entry.runnable.run();
+                    currentPassenger.runCompleteCallback();
+                    currentPassenger = null;
                   }
                 });
               }
@@ -79,18 +108,14 @@ public class ElevatorCar extends GameObject {
           }
         });
       }
-    }
+    });
   }
 
   public PassengerEntry addPassenger(AvatarSteeringManager steeringManager) {
     final PassengerEntry entry = new PassengerEntry(steeringManager, steeringManager.getCurrentPosition(), steeringManager.getNextPosition());
-    passengers.put(steeringManager, entry);
+    passengers.add(entry);
 
     return entry;
-  }
-
-  public void removePassenger(AvatarSteeringManager steeringManager) {
-    passengers.remove(steeringManager);
   }
 
   public class PassengerEntry {
@@ -100,15 +125,22 @@ public class ElevatorCar extends GameObject {
     private Runnable runnable;
     public boolean hasBoarded;
     public boolean isQueued;
+    public float offsetX;
 
     public PassengerEntry(AvatarSteeringManager steeringManager, GridPosition boardingFloor, GridPosition destinationFloor) {
       this.steeringManager = steeringManager;
       this.boardingFloor = boardingFloor;
       this.destinationFloor = destinationFloor;
+
+      offsetX = Random.randomInt(8, 36);
     }
 
     public void addCallback(Runnable runnable) {
       this.runnable = runnable;
+    }
+
+    public void runCompleteCallback() {
+      runnable.run();
     }
   }
 }

@@ -3,6 +3,7 @@ package com.unhappyrobot.entities;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 
 public class GameObject extends Sprite {
   private boolean visible = true;
@@ -49,5 +50,9 @@ public class GameObject extends Sprite {
 
   public float getOpacity() {
     return opacity;
+  }
+
+  public void setPosition(Vector2 position) {
+    setPosition(position.x, position.y);
   }
 }

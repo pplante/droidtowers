@@ -183,11 +183,11 @@ public abstract class GridObject {
     return gridObjectType.getNoiseLevel();
   }
 
-  public Vector2 getContentSize() {
+  public GridPoint getContentSize() {
     return size;
   }
 
-  public Vector2 getContentPosition() {
+  public GridPoint getContentPosition() {
     return position;
   }
 

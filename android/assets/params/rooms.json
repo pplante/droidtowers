@@ -16,6 +16,7 @@
     "populationMax":2,
     "height":1,
     "width":2,
+    "provides":"HOUSING",
     "atlasFilename":"rooms/generic.txt",
     "imageFilename":"generic/generic_room_2x"
   },
@@ -26,6 +27,7 @@
     "populationMax":4,
     "height":1,
     "width":3,
+    "provides":"HOUSING",
     "atlasFilename":"rooms/generic.txt",
     "imageFilename":"generic/generic_room_3x"
   },
@@ -36,6 +38,7 @@
     "experienceAward":2200,
     "populationMax":6,
     "width":4,
+    "provides":"HOUSING",
     "atlasFilename":"rooms/generic.txt",
     "imageFilename":"generic/generic_room_4x"
   },
@@ -45,6 +48,7 @@
     "height":2,
     "experienceAward":2200,
     "populationMax":6,
-    "width":4
+    "width":4,
+    "provides":"HOUSING"
   }
 ]

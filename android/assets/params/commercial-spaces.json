@@ -8,7 +8,8 @@
     "populationAttraction":2,
     "populationRequired":4,
     "jobsProvided":4,
-    "noiseLevel":0.2
+    "noiseLevel":0.2,
+    "provides": "OFFICE_SERVICES"
   },
   {
     "name":"Burger Joint",
@@ -19,6 +20,7 @@
     "populationAttraction":6,
     "populationRequired":8,
     "jobsProvided":4,
-    "noiseLevel":0.3
+    "noiseLevel":0.3,
+    "provides": "FOOD"
   }
 ]

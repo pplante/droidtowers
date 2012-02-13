@@ -39,8 +39,10 @@ public class Stair extends Transit {
   }
 
   @Override
-  public Vector2 getContentSize() {
-    return size.cpy().add(0, 1);
+  public GridPoint getContentSize() {
+    GridPoint point = size.cpy();
+    point.add(0, 1);
+    return point;
   }
 
   public Vector2 getTopLeftWorldPoint() {

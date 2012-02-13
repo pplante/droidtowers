@@ -13,6 +13,7 @@ import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.GridPosition;
 import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.controllers.AvatarLayer;
+import com.unhappyrobot.controllers.AvatarState;
 import com.unhappyrobot.controllers.AvatarSteeringManager;
 import com.unhappyrobot.gui.HeadsUpDisplay;
 import com.unhappyrobot.gui.SpeechBubble;
@@ -49,6 +50,7 @@ public class Avatar extends GameObject {
     super();
 
     gameGrid = avatarLayer.getGameGrid();
+
     setPosition(-Random.randomInt(10, 200), 256);
 
     pickColor();
@@ -64,8 +66,6 @@ public class Avatar extends GameObject {
     speechBubble = new SpeechBubble();
     speechBubble.followObject(this);
     HeadsUpDisplay.getInstance().addActor(speechBubble);
-
-    findCommercialSpace();
   }
 
   private void displaySpeechBubble(String newText) {
@@ -74,24 +74,26 @@ public class Avatar extends GameObject {
   }
 
   public void findCommercialSpace() {
-    Set<GridObject> commercialSpaces = Sets.newHashSet(Iterables.filter(gameGrid.getInstancesOf(CommercialSpace.class), new Predicate<GridObject>() {
-      public boolean apply(@Nullable GridObject gridObject) {
-        return ((CommercialSpace) gridObject).isConnectedToTransport();
+    GuavaSet<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
+    if (commercialSpaces != null) {
+      commercialSpaces.filterBy(new Predicate<GridObject>() {
+        public boolean apply(@Nullable GridObject gridObject) {
+          return ((CommercialSpace) gridObject).isConnectedToTransport();
+        }
+      });
+
+      if (commercialSpaces.size() > 0) {
+        GridObject commercialSpace = Iterables.get(commercialSpaces, Random.randomInt(commercialSpaces.size()));
+
+        pathFinder = new TransitPathFinder(commercialSpace.getPosition());
+        pathFinder.compute(GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY())));
       }
-    }));
-
-    if (commercialSpaces != null && commercialSpaces.size() > 0) {
-      GridObject commercialSpace = Iterables.get(commercialSpaces, Random.randomInt(commercialSpaces.size()));
-
-      pathFinder = new TransitPathFinder(commercialSpace.getPosition());
-      pathFinder.compute(GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY())));
     }
   }
 
   @Override
   public void update(float timeDelta) {
     super.update(timeDelta);
-
 
     if (pathFinder != null) {
       if (pathFinder.isWorking()) {
@@ -115,11 +117,13 @@ public class Avatar extends GameObject {
 
     if (steeringManager != null) {
       if (steeringManager.isRunning()) {
-        if (steeringManager.horizontalDirection() != null) {
+        Set<AvatarState> steeringState = steeringManager.getCurrentState();
+        if (steeringState.contains(AvatarState.MOVING) && !steeringState.contains(AvatarState.USING_ELEVATOR)) {
           walkAnimationTime += timeDelta;
           if (walkAnimationTime >= WALKING_ANIMATION_DURATION) {
             walkAnimationTime = 0f;
           }
+
           TextureRegion keyFrame = walkAnimation.getKeyFrame(walkAnimationTime, true);
           setRegion(keyFrame);
           flip(steeringManager.horizontalDirection() == LEFT, false);

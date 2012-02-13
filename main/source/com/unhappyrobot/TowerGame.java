@@ -70,7 +70,7 @@ public class TowerGame implements ApplicationListener {
 
     camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     spriteBatch = new SpriteBatch(100);
-    guiStage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true, spriteBatch);
+    guiStage = new Stage(800, 480, false, spriteBatch);
 
     GridPositionCache.instance();
 

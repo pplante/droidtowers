@@ -11,6 +11,7 @@ public class RoomType extends GridObjectType {
   private boolean isLobby;
   private int populationMax;
   private int populationRequired;
+  private ProviderType provides;
 
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {
@@ -53,5 +54,9 @@ public class RoomType extends GridObjectType {
 
   public int getPopulationRequired() {
     return populationRequired;
+  }
+
+  public ProviderType serviceProvided() {
+    return provides;
   }
 }

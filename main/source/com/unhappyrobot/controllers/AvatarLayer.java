@@ -1,10 +1,11 @@
 package com.unhappyrobot.controllers;
 
 import com.badlogic.gdx.math.Vector2;
-import com.unhappyrobot.entities.Avatar;
-import com.unhappyrobot.entities.GameGrid;
-import com.unhappyrobot.entities.GameLayer;
-import com.unhappyrobot.entities.GameObject;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.sun.istack.internal.Nullable;
+import com.unhappyrobot.entities.*;
+import com.unhappyrobot.utils.Random;
 
 public class AvatarLayer extends GameLayer {
   private static AvatarLayer instance;
@@ -35,11 +36,25 @@ public class AvatarLayer extends GameLayer {
   public void update(float timeDelta) {
     super.update(timeDelta);
 
-    timeSinceLastSpawn += timeDelta;
+    if (gameObjects.size() < MAX_AVATARS) {
+      for (int i = 0; i < MAX_AVATARS - gameObjects.size(); i++) {
+        Avatar avatar = new Avatar(this);
 
-    if (gameObjects.size() < MAX_AVATARS && timeSinceLastSpawn >= SPAWN_RATE) {
-      timeSinceLastSpawn = 0;
-      addChild(new Avatar(this));
+        GuavaSet<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
+        if (rooms != null) {
+          rooms.filterBy(new Predicate<GridObject>() {
+            public boolean apply(@Nullable GridObject gridObject) {
+              return ((Room) gridObject).isConnectedToTransport();
+            }
+          });
+          GridObject randomRoom = Iterables.get(rooms, Random.randomInt(rooms.size() - 1));
+          avatar.setPosition(randomRoom.getContentPosition().toWorldVector2(gameGrid));
+        }
+
+        avatar.findCommercialSpace();
+
+        addChild(avatar);
+      }
     }
   }
 

@@ -124,20 +124,10 @@ public class HeadsUpDisplay extends Group {
 
   private void makeOverlayButton() {
     setOverlayButton = new LabelButton(guiSkin, "Overlays");
-//    setOverlayButton.x = 150;
-//    setOverlayButton.y = Gdx.graphics.getHeight() - setOverlayButton.height - 25;
-
     setOverlayButton.setClickListener(new ClickListener() {
       boolean isShowing;
 
       public void click(Actor actor, float x, float y) {
-//        if (!isShowing) {
-//          guiStage.addActor(overlayMenu);
-//        } else {
-//          guiStage.removeActor(overlayMenu);
-//        }
-//
-//        isShowing = !isShowing;
         overlayMenu.show(setOverlayButton);
       }
     });
@@ -290,19 +280,14 @@ public class HeadsUpDisplay extends Group {
 
   @Override
   public boolean touchMoved(float x, float y) {
-    if (hit(x, y) != mouseToolTip) {
+    Actor hit = hit(x, y);
+    if (hit == null) {
       updateGridPointTooltip(x, y);
     } else {
       mouseToolTip.visible = false;
     }
 
     return super.touchMoved(x, y);
-  }
-
-  @Override
-  public boolean touchDown(float x, float y, int pointer) {
-    mouseToolTip.visible = false;
-    return super.touchDown(x, y, pointer);
   }
 
   private void updateGridPointTooltip(float x, float y) {
