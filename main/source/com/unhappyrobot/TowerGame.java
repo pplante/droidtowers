@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
@@ -67,6 +68,7 @@ public class TowerGame implements ApplicationListener {
     tweenManager = new TweenManager();
     Tween.registerAccessor(GameObject.class, new GameObjectAccessor());
     Tween.registerAccessor(Toast.class, new ToastAccessor());
+    Tween.registerAccessor(Actor.class, new WidgetAccessor());
 
     camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     spriteBatch = new SpriteBatch(100);

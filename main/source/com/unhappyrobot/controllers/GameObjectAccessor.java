@@ -1,14 +1,9 @@
 package com.unhappyrobot.controllers;
 
-import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenAccessor;
 import com.unhappyrobot.entities.GameObject;
 
 public class GameObjectAccessor implements TweenAccessor<GameObject> {
-  static {
-    Tween.registerAccessor(GameObject.class, new GameObjectAccessor());
-  }
-
   public static final int POSITION = 1;
   public static final int POSITION_X = 2;
   public static final int POSITION_Y = 3;

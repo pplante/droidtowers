@@ -101,6 +101,8 @@ public class Dialog {
       window = null;
     }
 
+    ModalOverlay.instance().show();
+
     window = new Window(title, skin);
 
     window.defaults();
@@ -155,6 +157,8 @@ public class Dialog {
     if (onDismissInputCallback != null) {
       onDismissInputCallback.run(0f);
     }
+
+    ModalOverlay.instance().hide();
   }
 
   public Dialog centerOnScreen() {

@@ -46,6 +46,7 @@ public class HeadsUpDisplay extends Group {
   private Menu overlayMenu;
   private Table topBar;
   private ToolTip mouseToolTip;
+  private RadialMenu radialMenu;
 
   public static HeadsUpDisplay getInstance() {
     if (instance == null) {
@@ -55,12 +56,14 @@ public class HeadsUpDisplay extends Group {
     return instance;
   }
 
-  public void initialize(final OrthographicCamera camera, final GameGrid gameGrid, Stage guiStage, SpriteBatch spriteBatch) {
+  public void initialize(final OrthographicCamera camera, final GameGrid gameGrid, final Stage guiStage, SpriteBatch spriteBatch) {
     this.guiStage = guiStage;
     this.spriteBatch = spriteBatch;
     this.camera = camera;
     this.gameGrid = gameGrid;
     this.guiSkin = new Skin(Gdx.files.internal("default-skin.ui"), Gdx.files.internal("default-skin.png"));
+
+    ModalOverlay.initialize(this);
 
     menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_16.fnt"), false);
     defaultBitmapFont = new BitmapFont(Gdx.files.internal("default.fnt"), false);
@@ -90,6 +93,38 @@ public class HeadsUpDisplay extends Group {
 
     mouseToolTip = new ToolTip();
     addActor(mouseToolTip);
+
+
+    TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("hud/test.txt"));
+
+    addActorAt(0, ModalOverlay.instance());
+
+    radialMenu = new RadialMenu();
+    radialMenu.addActor(new Image(atlas.findRegion("calendar")));
+    radialMenu.addActor(new Image(atlas.findRegion("clock")));
+    radialMenu.addActor(new Image(atlas.findRegion("color-swatch")));
+    radialMenu.addActor(new Image(atlas.findRegion("color")));
+    radialMenu.addActor(new Image(atlas.findRegion("database")));
+
+    final TextButton clicky = new TextButton("Clicky", guiSkin);
+    clicky.x = 400;
+    clicky.y = 400;
+    clicky.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        radialMenu.x = clicky.x;
+        radialMenu.y = clicky.y;
+
+        addActorBefore(clicky, radialMenu);
+
+        if (!radialMenu.visible) {
+          radialMenu.show();
+        } else {
+          radialMenu.hide();
+        }
+      }
+    });
+
+    addActor(clicky);
 
     guiStage.addActor(this);
   }
