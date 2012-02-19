@@ -1,6 +1,7 @@
 package com.unhappyrobot.input;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GameLayer;
 
@@ -71,6 +72,10 @@ class GestureDelegater implements GestureListener {
 
   public boolean zoom(float originalDistance, float currentDistance) {
     return currentTool != null && currentTool.zoom(originalDistance, currentDistance) || cameraController.zoom(originalDistance, currentDistance);
+  }
+
+  public boolean pinch(Vector2 vector2, Vector2 vector21, Vector2 vector22, Vector2 vector23) {
+    return false;
   }
 
   public void update(float deltaTime) {

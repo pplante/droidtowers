@@ -1,6 +1,5 @@
 package com.unhappyrobot.gui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 
@@ -12,7 +11,6 @@ public class AudioControl extends ImageButton {
   @Override
   public void layout() {
     super.layout();
-    scaleX = scaleY = Gdx.graphics.getDensity();
     x = stage.width() - width - 100;
     y = stage.height() - height - 10;
   }

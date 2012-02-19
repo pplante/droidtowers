@@ -1,6 +1,6 @@
 housing.png
 format: RGBA4444
-filter: MipMapNearestNearest,Linear
+filter: MipMapLinearNearest,Linear
 repeat: none
 3x1-small-apartment
   rotate: false

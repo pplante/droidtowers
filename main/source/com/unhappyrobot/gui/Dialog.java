@@ -1,10 +1,13 @@
 package com.unhappyrobot.gui;
 
+import aurelienribon.tweenengine.Timeline;
+import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
+import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
 
@@ -142,6 +145,13 @@ public class Dialog {
     if (negativeButton != null) {
       InputSystem.getInstance().bind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
     }
+
+    window.color.a = 0f;
+
+    Timeline.createSequence()
+            .push(Tween.set(window, WidgetAccessor.OPACITY).target(0f))
+            .push(Tween.to(window, WidgetAccessor.OPACITY, 200).delay(100).target(1.0f))
+            .start(TowerGame.getTweenManager());
 
     return this;
   }

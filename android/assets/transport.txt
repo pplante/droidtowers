@@ -1,6 +1,6 @@
 transport.png
 format: RGBA8888
-filter: MipMapNearestNearest,Linear
+filter: MipMapLinearNearest,Linear
 repeat: none
 elevator/top
   rotate: false

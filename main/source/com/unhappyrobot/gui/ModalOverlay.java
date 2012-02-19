@@ -71,7 +71,7 @@ public class ModalOverlay extends WidgetGroup {
             .push(Tween.to(background, WidgetAccessor.OPACITY, 200).target(0f))
             .addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
               public void onEvent(EventType eventType, BaseTween source) {
-                headsUpDisplay.removeActor(background);
+                markToRemove(true);
               }
             })
             .start(TowerGame.getTweenManager());
