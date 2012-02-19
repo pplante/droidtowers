@@ -1,0 +1,39 @@
+test.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+color-swatch
+  rotate: false
+  xy: 32, 0
+  size: 32, 30
+  orig: 32, 30
+  offset: 0, 1
+  index: -1
+clock
+  rotate: false
+  xy: 0, 32
+  size: 30, 32
+  orig: 30, 32
+  offset: 1, 0
+  index: -1
+calendar
+  rotate: false
+  xy: 0, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+database
+  rotate: false
+  xy: 30, 62
+  size: 26, 32
+  orig: 26, 32
+  offset: 3, 0
+  index: -1
+color
+  rotate: false
+  xy: 32, 30
+  size: 30, 32
+  orig: 30, 32
+  offset: 1, 0
+  index: -1

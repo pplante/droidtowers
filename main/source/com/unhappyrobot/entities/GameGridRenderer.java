@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer10;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -31,7 +30,6 @@ import java.util.Map;
 import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class GameGridRenderer extends GameLayer {
-  private ImmediateModeRenderer10 gl;
   private GameGrid gameGrid;
   private boolean shouldRenderGridLines;
   private final ShapeRenderer shapeRenderer;
@@ -51,7 +49,6 @@ public class GameGridRenderer extends GameLayer {
     GameEvents.register(this);
 
     shouldRenderGridLines = true;
-    gl = new ImmediateModeRenderer10();
     shapeRenderer = new ShapeRenderer();
 
     transitLines = Lists.newArrayList();

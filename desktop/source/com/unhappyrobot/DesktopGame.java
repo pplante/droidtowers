@@ -10,7 +10,7 @@ public class DesktopGame {
     config.resizable = true;
     config.width = 800;
     config.height = 600;
-    config.useGL20 = false;
+    config.useGL20 = true;
 //    config.vSyncEnabled = false;
 
     new LwjglApplication(new TowerGame(), config);

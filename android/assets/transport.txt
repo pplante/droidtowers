@@ -4,42 +4,42 @@ filter: MipMapNearestNearest,Linear
 repeat: none
 elevator/top
   rotate: false
-  xy: 124, 2
+  xy: 122, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 elevator/car
   rotate: false
-  xy: 190, 68
+  xy: 187, 66
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 elevator/shaft
   rotate: false
-  xy: 190, 2
+  xy: 187, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 stairs
   rotate: false
-  xy: 2, 2
+  xy: 1, 1
   size: 120, 78
   orig: 120, 78
   offset: 0, 50
   index: -1
 elevator/empty
   rotate: false
-  xy: 124, 68
+  xy: 122, 66
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 elevator/bottom
   rotate: false
-  xy: 2, 82
+  xy: 1, 80
   size: 64, 64
   orig: 64, 64
   offset: 0, 0

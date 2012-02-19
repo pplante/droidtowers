@@ -18,7 +18,7 @@ import static com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 public class CloudLayer extends GameLayer {
   public static final int PADDING = 20;
   public static final int CLOUD_SPAWN_DELAY = 2;
-  public static final double CLOUD_SPAWN_MIN = 0.8;
+  public static final double CLOUD_SPAWN_MIN = 0.6;
   public static final double CLOUD_SPAWN_MAX = 0.98;
   public static final int MAX_ACTIVE_CLOUDS = 20;
   private final TextureAtlas textureAtlas;

@@ -1,0 +1,18 @@
+housing.png
+format: RGBA4444
+filter: MipMapNearestNearest,Linear
+repeat: none
+3x1-small-apartment
+  rotate: false
+  xy: 0, 0
+  size: 192, 64
+  orig: 192, 64
+  offset: 0, 0
+  index: -1
+2x1-hotel-room
+  rotate: false
+  xy: 0, 64
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
