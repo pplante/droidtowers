@@ -9,7 +9,7 @@
     "width":4
   },
   {
-    "name":"Generic 2x1",
+    "name":"Hotel Room",
     "continuousPlacement":true,
     "coins":100,
     "experienceAward":1500,
@@ -17,19 +17,19 @@
     "height":1,
     "width":2,
     "provides":"HOUSING",
-    "atlasFilename":"rooms/generic.txt",
-    "imageFilename":"generic/generic_room_2x"
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"2x1-hotel-room"
   },
   {
-    "name":"Generic 3x1",
+    "name":"Small Apartment",
     "coins":200,
     "experienceAward":2000,
     "populationMax":4,
     "height":1,
     "width":3,
     "provides":"HOUSING",
-    "atlasFilename":"rooms/generic.txt",
-    "imageFilename":"generic/generic_room_3x"
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"3x1-small-apartment"
   },
   {
     "name":"Generic 4x1",

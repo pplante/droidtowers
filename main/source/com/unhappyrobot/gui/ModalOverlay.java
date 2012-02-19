@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.unhappyrobot.TowerGame;
 
 public class ModalOverlay extends WidgetGroup {
-  public static final float TARGET_OPACITY = 0.8f;
+  public static final float TARGET_OPACITY = 0.5f;
   private HeadsUpDisplay headsUpDisplay;
   private Image background;
 
@@ -62,11 +62,6 @@ public class ModalOverlay extends WidgetGroup {
     Timeline.createSequence()
             .push(Tween.set(background, WidgetAccessor.OPACITY).target(0f))
             .push(Tween.to(background, WidgetAccessor.OPACITY, 200).target(TARGET_OPACITY))
-            .addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
-              public void onEvent(EventType eventType, BaseTween source) {
-                System.out.println("background = " + background.color);
-              }
-            })
             .start(TowerGame.getTweenManager());
   }
 
@@ -80,5 +75,15 @@ public class ModalOverlay extends WidgetGroup {
               }
             })
             .start(TowerGame.getTweenManager());
+  }
+
+  @Override
+  public boolean touchDown(float x, float y, int pointer) {
+    return true;
+  }
+
+  @Override
+  public boolean touchMoved(float x, float y) {
+    return true;
   }
 }

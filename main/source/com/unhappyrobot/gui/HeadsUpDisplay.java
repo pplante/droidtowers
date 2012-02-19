@@ -21,15 +21,14 @@ import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.input.GestureTool;
+import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
-import com.unhappyrobot.input.PlacementTool;
 import com.unhappyrobot.math.GridPoint;
-import com.unhappyrobot.types.*;
+import com.unhappyrobot.types.RoomTypeFactory;
 
 public class HeadsUpDisplay extends Group {
   public static final float ONE_MEGABYTE = 1048576.0f;
   private TextureAtlas hudAtlas;
-  private Stage guiStage;
   private Skin guiSkin;
   private OrthographicCamera camera;
   private GameGrid gameGrid;
@@ -46,7 +45,9 @@ public class HeadsUpDisplay extends Group {
   private Menu overlayMenu;
   private Table topBar;
   private ToolTip mouseToolTip;
-  private RadialMenu radialMenu;
+  private final TextureAtlas radialMenuAtlas = new TextureAtlas(Gdx.files.internal("hud/test.txt"));
+  private GridObjectPurchaseMenu roomPurchaseMenu;
+  private InputCallback closeDialogCallback = null;
 
   public static HeadsUpDisplay getInstance() {
     if (instance == null) {
@@ -56,8 +57,8 @@ public class HeadsUpDisplay extends Group {
     return instance;
   }
 
-  public void initialize(final OrthographicCamera camera, final GameGrid gameGrid, final Stage guiStage, SpriteBatch spriteBatch) {
-    this.guiStage = guiStage;
+  public void initialize(final OrthographicCamera camera, final GameGrid gameGrid, final Stage stage, SpriteBatch spriteBatch) {
+    this.stage = stage;
     this.spriteBatch = spriteBatch;
     this.camera = camera;
     this.gameGrid = gameGrid;
@@ -69,6 +70,8 @@ public class HeadsUpDisplay extends Group {
     defaultBitmapFont = new BitmapFont(Gdx.files.internal("default.fnt"), false);
 
     hudAtlas = new TextureAtlas(Gdx.files.internal("hud/buttons.txt"));
+    final TextureAtlas radialMenuAtlas = new TextureAtlas(Gdx.files.internal("hud/test.txt"));
+
 
     topBar = new Table();
     topBar.defaults();
@@ -79,9 +82,6 @@ public class HeadsUpDisplay extends Group {
 
     topBar.row().top().left().pad(5);
 
-    makeAddRoomButton();
-    makeAddRoomMenu();
-
     makeOverlayButton();
 
     makeMoneyLabel();
@@ -89,44 +89,80 @@ public class HeadsUpDisplay extends Group {
     topBar.pack();
 
     topBar.x = 0;
-    topBar.y = guiStage.height() - topBar.height;
+    topBar.y = stage.height() - topBar.height;
 
     mouseToolTip = new ToolTip();
     addActor(mouseToolTip);
 
 
-    TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("hud/test.txt"));
-
     addActorAt(0, ModalOverlay.instance());
 
-    radialMenu = new RadialMenu();
-    radialMenu.addActor(new Image(atlas.findRegion("calendar")));
-    radialMenu.addActor(new Image(atlas.findRegion("clock")));
-    radialMenu.addActor(new Image(atlas.findRegion("color-swatch")));
-    radialMenu.addActor(new Image(atlas.findRegion("color")));
-    radialMenu.addActor(new Image(atlas.findRegion("database")));
 
-    final TextButton clicky = new TextButton("Clicky", guiSkin);
-    clicky.x = 400;
-    clicky.y = 400;
-    clicky.setClickListener(new ClickListener() {
+    final ImageButton toolButton = new ImageButton(hudAtlas.findRegion("tool-sprite"));
+    toolButton.x = stage.width() - toolButton.width - 5;
+    toolButton.y = 5;
+
+    final RadialMenu toolMenu = new RadialMenu();
+    toolMenu.arc = 30f;
+    toolMenu.radius = 120f;
+
+    ImageButton housingButton = new ImageButton(hudAtlas.findRegion("tool-housing"));
+    housingButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        radialMenu.x = clicky.x;
-        radialMenu.y = clicky.y;
+        toolMenu.hide();
 
-        addActorBefore(clicky, radialMenu);
-
-        if (!radialMenu.visible) {
-          radialMenu.show();
+        if (roomPurchaseMenu == null) {
+          makeRoomPurchaseDialog();
         } else {
-          radialMenu.hide();
+          roomPurchaseMenu.dismiss();
+          roomPurchaseMenu = null;
+        }
+      }
+    });
+    toolMenu.addActor(housingButton);
+    toolMenu.addActor(new ImageButton(hudAtlas.findRegion("tool-transit")));
+    toolMenu.addActor(new ImageButton(hudAtlas.findRegion("tool-commerce")));
+
+    toolButton.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        if (InputSystem.getInstance().getCurrentTool() != GestureTool.PLACEMENT) {
+          InputSystem.getInstance().switchTool(GestureTool.PICKER, null);
+        }
+
+        if (!toolMenu.visible) {
+          toolButton.add(toolMenu);
+          toolMenu.x = -200f;
+          toolMenu.y = -100f;
+          toolMenu.show();
+        } else {
+          toolMenu.hide();
         }
       }
     });
 
-    addActor(clicky);
+    addActor(toolButton);
 
-    guiStage.addActor(this);
+    AudioControl audioControl = new AudioControl(hudAtlas);
+    addActor(audioControl);
+
+    stage.addActor(this);
+  }
+
+  private void makeRoomPurchaseDialog() {
+    roomPurchaseMenu = new GridObjectPurchaseMenu("Rooms", RoomTypeFactory.getInstance());
+    roomPurchaseMenu.x = 100;
+    roomPurchaseMenu.y = 100;
+    roomPurchaseMenu.visible = true;
+
+    roomPurchaseMenu.setDismissCallback(new Runnable() {
+      public void run() {
+        roomPurchaseMenu = null;
+      }
+    });
+
+    stage.addActor(roomPurchaseMenu);
+
+    roomPurchaseMenu.centerOnStage().modal(true).show();
   }
 
   private void makeMoneyLabel() {
@@ -137,24 +173,13 @@ public class HeadsUpDisplay extends Group {
     updateStatusLabel();
 
     BitmapFont.TextBounds textBounds = statusLabel.getTextBounds();
-    statusLabel.x = guiStage.width() - 5;
-    statusLabel.y = guiStage.height() - 5;
+    statusLabel.x = stage.width() - 5;
+    statusLabel.y = stage.height() - 5;
   }
 
   private void updateStatusLabel() {
     Player player = Player.getInstance();
     statusLabel.setText(String.format("%d coins\n %d exp\n(%d + %d)/%d pop\n%d/%d jobs\n%.1fX speed", player.getCoins(), player.getExperience(), player.getPopulationResidency(), player.getPopulationAttracted(), player.getMaxPopulation(), player.getJobsFilled(), player.getJobsMax(), TowerGame.getTimeMultiplier()));
-  }
-
-  private void makeAddRoomButton() {
-    addRoomButton = new LabelButton(guiSkin, "Add Room");
-    addRoomButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        addRoomMenu.show(addRoomButton);
-      }
-    });
-
-    topBar.add(addRoomButton);
   }
 
   private void makeOverlayButton() {
@@ -216,75 +241,6 @@ public class HeadsUpDisplay extends Group {
     overlayMenu.add(clearAllButton).fill();
 
     overlayMenu.pack();
-  }
-
-  private void makeAddRoomMenu() {
-    addRoomMenu = new Menu(guiSkin);
-    addRoomMenu.defaults();
-    addRoomMenu.top().left();
-    addRoomMenu.pad(0);
-
-    for (final RoomType roomType : RoomTypeFactory.getInstance().all()) {
-      addRoomMenu.add(makeGridObjectMenuItem(roomType));
-    }
-
-    for (final CommercialType commercialType : CommercialTypeFactory.getInstance().all()) {
-      addRoomMenu.add(makeGridObjectMenuItem(commercialType));
-    }
-
-    for (final ElevatorType elevatorType : ElevatorTypeFactory.getInstance().all()) {
-      addRoomMenu.add(makeGridObjectMenuItem(elevatorType));
-    }
-
-    for (TransitType stairType : StairTypeFactory.getInstance().all()) {
-      addRoomMenu.add(makeGridObjectMenuItem(stairType));
-    }
-
-    addRoomMenu.row().padTop(-1).fill();
-
-    addRoomMenu.add(new MenuItem(guiSkin, "Sell/Delete", new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        InputSystem.getInstance().switchTool(GestureTool.SELL, new Runnable() {
-          public void run() {
-            updateButtonText("Add Room");
-          }
-        });
-
-        updateButtonText("Sell/Delete");
-
-        addRoomMenu.close();
-      }
-    }));
-
-    addRoomMenu.pack();
-  }
-
-  private MenuItem makeGridObjectMenuItem(final GridObjectType gridObjectType) {
-    addRoomMenu.row().padTop(-1).fill();
-
-    return new MenuItem(guiSkin, gridObjectType.getName(), new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        InputSystem.getInstance().switchTool(GestureTool.PLACEMENT, new Runnable() {
-          public void run() {
-            updateButtonText("Add Room");
-          }
-        });
-
-        updateButtonText(gridObjectType.getName());
-
-        PlacementTool placementTool = (PlacementTool) InputSystem.getInstance().getCurrentTool();
-        placementTool.setup(gridObjectType);
-        placementTool.enterPurchaseMode();
-
-        addRoomMenu.close();
-      }
-    });
-  }
-
-  private void updateButtonText(String buttonText) {
-    addRoomButton.setText(buttonText);
-    addRoomButton.invalidate();
-    topBar.pack();
   }
 
   public Skin getGuiSkin() {

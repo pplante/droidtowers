@@ -1,13 +1,18 @@
 package com.unhappyrobot.types;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.math.Bounds2d;
 import com.unhappyrobot.math.GridPoint;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import java.util.Set;
+import java.util.WeakHashMap;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public abstract class GridObjectType {
@@ -21,6 +26,9 @@ public abstract class GridObjectType {
   private boolean continuousPlacement;
   private boolean canShareSpace;
   private float noiseLevel;
+
+  @JsonIgnore
+  private static WeakHashMap<String, TextureAtlas> atlases;
 
   public abstract GridObject makeGridObject(GameGrid gameGrid);
 
@@ -103,5 +111,23 @@ public abstract class GridObjectType {
                    ", height=" + height +
                    ", width=" + width +
                    '}';
+  }
+
+  public TextureRegion getTextureRegion() {
+    if (atlasFilename != null) {
+      if (atlases == null) {
+        atlases = new WeakHashMap<String, TextureAtlas>();
+      }
+
+      TextureAtlas objectAtlas = atlases.get(atlasFilename);
+      if (objectAtlas == null) {
+        objectAtlas = new TextureAtlas(Gdx.files.internal(atlasFilename));
+        atlases.put(atlasFilename, objectAtlas);
+      }
+
+      return objectAtlas.findRegion(imageFilename);
+    }
+
+    return null;
   }
 }

@@ -4,17 +4,23 @@ import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
-import aurelienribon.tweenengine.equations.Cubic;
-import aurelienribon.tweenengine.equations.Quad;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.unhappyrobot.TowerGame;
+import com.unhappyrobot.input.GestureTool;
+import com.unhappyrobot.input.InputCallback;
+import com.unhappyrobot.input.InputSystem;
 
 import static com.unhappyrobot.gui.WidgetAccessor.*;
 
 public class RadialMenu extends WidgetGroup {
+  public float radius;
+  public float arc;
+
   public RadialMenu() {
     visible = false;
+    arc = 60f;
   }
 
   public float getPrefWidth() {
@@ -26,29 +32,45 @@ public class RadialMenu extends WidgetGroup {
   }
 
   public void show() {
+    InputSystem.getInstance().bind(InputSystem.Keys.ESCAPE, new InputCallback() {
+      public boolean run(float timeDelta) {
+        InputSystem.getInstance().switchTool(GestureTool.PICKER, null);
+        hide();
+        unbind();
+        return true;
+      }
+    });
+    InputSystem.getInstance().addInputProcessor(new InputAdapter() {
+      @Override
+      public boolean touchDown(int x, int y, int pointer, int button) {
+        hide();
+        InputSystem.getInstance().removeInputProcessor(this);
+        return true;
+      }
+    }, 100000);
+
+
     visible = true;
 
-    float radius = 12f * children.size();
-    float angle = 15f;
-    float step = 180f / children.size();
+    float angle = arc / children.size();
 
     color.a = 1f;
 
     Timeline timeline = Timeline.createParallel();
-
     int index = 0;
     for (Actor child : children) {
       child.color.a = 0;
       child.x = child.y = 0;
       child.scaleX = child.scaleY = 0;
 
-      float newX = (float) (-radius * Math.cos(Math.toRadians(angle)));
-      float newY = (float) (radius * Math.sin(Math.toRadians(angle)));
-      timeline.push(Tween.to(child, POSITION, 200).delay(10 * index++).ease(Cubic.INOUT).target(newX, newY));
-      timeline.push(Tween.to(child, SCALE, 200).delay(10 * index++).ease(Quad.INOUT).target(1f, 1f));
-      timeline.push(Tween.to(child, OPACITY, 200).delay(10 * index++).target(1f));
+      float radian = (float) ((angle * index + angle / 2) * (Math.PI / 180f));
 
-      angle += step;
+      float newX = (float) (-radius * Math.cos(radian));
+      float newY = (float) (radius * Math.sin(radian));
+
+      timeline.push(Tween.to(child, POSITION, 200).delay(10 * index++).target(newX, newY));
+      timeline.push(Tween.to(child, SCALE, 200).delay(10 * index++).target(1f, 1f));
+      timeline.push(Tween.to(child, OPACITY, 200).delay(10 * index++).target(1f));
     }
 
     timeline.start(TowerGame.getTweenManager());

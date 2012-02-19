@@ -86,7 +86,7 @@ public class InputSystem extends InputAdapter {
 
   public void bind(int keyCode, InputCallback inputCallback) {
     ArrayList<InputCallback> inputCallbacks = getBindingsForKeyCode(keyCode);
-
+    inputCallback.addBoundKey(keyCode);
     inputCallbacks.add(0, inputCallback);
   }
 

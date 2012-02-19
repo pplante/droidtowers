@@ -4,14 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.types.RoomType;
 import com.unhappyrobot.utils.Random;
 
 public class Room extends GridObject {
-  private static TextureAtlas roomAtlas;
   private static BitmapFont labelFont;
   private static Texture roomDecals;
   private Sprite sprite;
@@ -34,11 +36,8 @@ public class Room extends GridObject {
       labelFont = new BitmapFont(Gdx.files.internal("fonts/helvetica_neue_18.fnt"), false);
     }
 
-    if (roomType.getAtlasFilename() != null) {
-      if (roomAtlas == null) {
-        roomAtlas = new TextureAtlas(Gdx.files.internal(roomType.getAtlasFilename()));
-      }
-      sprite = new Sprite(roomAtlas.findRegion(roomType.getImageFilename()));
+    if (roomType.getTextureRegion() != null) {
+      sprite = new Sprite(roomType.getTextureRegion());
     } else {
       int width = (int) (gameGrid.unitSize.x * size.x);
       int height = (int) (gameGrid.unitSize.y * size.y);

@@ -55,4 +55,12 @@ public abstract class GridObjectTypeFactory<T extends GridObjectType> {
 
     return null;
   }
+
+  public Class<T> getObjectType() {
+    return gridObjectTypeClass;
+  }
+
+  public T castToObjectType(Object o) {
+    return gridObjectTypeClass.cast(o);
+  }
 }
