@@ -8,6 +8,7 @@
     "height":1,
     "width":1,
     "atlasFilename":"transport.txt",
+    "imageFilename":"elevator/car",
     "noiseLevel":0.1
   }
 ]

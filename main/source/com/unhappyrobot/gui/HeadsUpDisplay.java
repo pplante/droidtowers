@@ -24,7 +24,9 @@ import com.unhappyrobot.input.GestureTool;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.math.GridPoint;
+import com.unhappyrobot.types.GridObjectTypeFactory;
 import com.unhappyrobot.types.RoomTypeFactory;
+import com.unhappyrobot.types.TransitTypeFactory;
 
 public class HeadsUpDisplay extends Group {
   public static final float ONE_MEGABYTE = 1048576.0f;
@@ -46,7 +48,7 @@ public class HeadsUpDisplay extends Group {
   private Table topBar;
   private ToolTip mouseToolTip;
   private final TextureAtlas radialMenuAtlas = new TextureAtlas(Gdx.files.internal("hud/test.txt"));
-  private GridObjectPurchaseMenu roomPurchaseMenu;
+  private GridObjectPurchaseMenu purchaseDialog;
   private InputCallback closeDialogCallback = null;
 
   public static HeadsUpDisplay getInstance() {
@@ -111,21 +113,40 @@ public class HeadsUpDisplay extends Group {
       public void click(Actor actor, float x, float y) {
         toolMenu.hide();
 
-        if (roomPurchaseMenu == null) {
-          makeRoomPurchaseDialog();
+        if (purchaseDialog == null) {
+          makePurchaseDialog("Rooms", RoomTypeFactory.getInstance());
         } else {
-          roomPurchaseMenu.dismiss();
-          roomPurchaseMenu = null;
+          purchaseDialog.dismiss();
+          purchaseDialog = null;
         }
       }
     });
     toolMenu.addActor(housingButton);
-    toolMenu.addActor(new ImageButton(hudAtlas.findRegion("tool-transit")));
+
+    ImageButton transitButton = new ImageButton(hudAtlas.findRegion("tool-transit"));
+    transitButton.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        toolMenu.hide();
+
+        if (purchaseDialog == null) {
+          makePurchaseDialog("Transit", TransitTypeFactory.getInstance());
+        } else {
+          purchaseDialog.dismiss();
+          purchaseDialog = null;
+        }
+      }
+    });
+    toolMenu.addActor(transitButton);
+
     toolMenu.addActor(new ImageButton(hudAtlas.findRegion("tool-commerce")));
 
     toolButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         if (InputSystem.getInstance().getCurrentTool() != GestureTool.PLACEMENT) {
+          if (purchaseDialog != null) {
+            purchaseDialog.dismiss();
+            purchaseDialog = null;
+          }
           InputSystem.getInstance().switchTool(GestureTool.PICKER, null);
         }
 
@@ -148,21 +169,18 @@ public class HeadsUpDisplay extends Group {
     stage.addActor(this);
   }
 
-  private void makeRoomPurchaseDialog() {
-    roomPurchaseMenu = new GridObjectPurchaseMenu("Rooms", RoomTypeFactory.getInstance());
-    roomPurchaseMenu.x = 100;
-    roomPurchaseMenu.y = 100;
-    roomPurchaseMenu.visible = true;
+  private void makePurchaseDialog(String title, GridObjectTypeFactory typeFactory) {
+    purchaseDialog = new GridObjectPurchaseMenu(title, typeFactory);
 
-    roomPurchaseMenu.setDismissCallback(new Runnable() {
+    purchaseDialog.setDismissCallback(new Runnable() {
       public void run() {
-        roomPurchaseMenu = null;
+        purchaseDialog = null;
       }
     });
 
-    stage.addActor(roomPurchaseMenu);
+    stage.addActor(purchaseDialog);
 
-    roomPurchaseMenu.centerOnStage().modal(true).show();
+    purchaseDialog.centerOnStage().modal(true).show();
   }
 
   private void makeMoneyLabel() {

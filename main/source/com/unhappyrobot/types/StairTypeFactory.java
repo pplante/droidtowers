@@ -11,7 +11,7 @@ public class StairTypeFactory extends GridObjectTypeFactory<StairType> {
     parseTypesFile(Gdx.files.internal("params/stairs.json"));
   }
 
-  public static StairTypeFactory getInstance() {
+  public static StairTypeFactory instance() {
     if (instance == null) {
       instance = new StairTypeFactory();
     }

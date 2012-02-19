@@ -5,7 +5,6 @@ import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.Stair;
 
 public class StairType extends TransitType {
-
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {
     return new Stair(this, gameGrid);

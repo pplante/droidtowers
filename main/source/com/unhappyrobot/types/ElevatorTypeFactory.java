@@ -11,7 +11,7 @@ public class ElevatorTypeFactory extends GridObjectTypeFactory<ElevatorType> {
     parseTypesFile(Gdx.files.internal("params/elevators.json"));
   }
 
-  public static ElevatorTypeFactory getInstance() {
+  public static ElevatorTypeFactory instance() {
     if (instance == null) {
       instance = new ElevatorTypeFactory();
     }

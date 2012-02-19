@@ -58,8 +58,8 @@ public class TowerGame implements ApplicationListener {
 
     RoomTypeFactory.getInstance();
     CommercialTypeFactory.getInstance();
-    ElevatorTypeFactory.getInstance();
-    StairTypeFactory.getInstance();
+    ElevatorTypeFactory.instance();
+    StairTypeFactory.instance();
 
     Random.init();
 
