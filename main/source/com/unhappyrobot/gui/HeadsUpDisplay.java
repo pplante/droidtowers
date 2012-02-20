@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
@@ -19,16 +18,16 @@ import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.Overlays;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.entities.GameGrid;
-import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.input.GestureTool;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.math.GridPoint;
+import com.unhappyrobot.types.CommercialTypeFactory;
 import com.unhappyrobot.types.GridObjectTypeFactory;
 import com.unhappyrobot.types.RoomTypeFactory;
 import com.unhappyrobot.types.TransitTypeFactory;
 
-public class HeadsUpDisplay extends Group {
+public class HeadsUpDisplay extends WidgetGroup {
   public static final float ONE_MEGABYTE = 1048576.0f;
   private TextureAtlas hudAtlas;
   private Skin guiSkin;
@@ -72,26 +71,13 @@ public class HeadsUpDisplay extends Group {
     defaultBitmapFont = new BitmapFont(Gdx.files.internal("default.fnt"), false);
 
     hudAtlas = new TextureAtlas(Gdx.files.internal("hud/buttons.txt"));
-    final TextureAtlas radialMenuAtlas = new TextureAtlas(Gdx.files.internal("hud/test.txt"));
 
-
-    topBar = new Table();
-    topBar.defaults();
-    topBar.top().left();
-    topBar.setBackground(guiSkin.getPatch("default-round"));
-
-    addActor(topBar);
-
-    topBar.row().top().left().pad(5);
+    StatusBarPanel statusBarPanel = new StatusBarPanel(guiSkin);
+    statusBarPanel.x = 0;
+    statusBarPanel.y = stage.height() - statusBarPanel.height;
+    addActor(statusBarPanel);
 
     makeOverlayButton();
-
-    makeMoneyLabel();
-
-    topBar.pack();
-
-    topBar.x = 0;
-    topBar.y = stage.height() - topBar.height;
 
     mouseToolTip = new ToolTip();
     addActor(mouseToolTip);
@@ -138,7 +124,20 @@ public class HeadsUpDisplay extends Group {
     });
     toolMenu.addActor(transitButton);
 
-    toolMenu.addActor(new ImageButton(hudAtlas.findRegion("tool-commerce")));
+    ImageButton commerceButton = new ImageButton(hudAtlas.findRegion("tool-commerce"));
+    commerceButton.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        toolMenu.hide();
+
+        if (purchaseDialog == null) {
+          makePurchaseDialog("Commerce", CommercialTypeFactory.getInstance());
+        } else {
+          purchaseDialog.dismiss();
+          purchaseDialog = null;
+        }
+      }
+    });
+    toolMenu.addActor(commerceButton);
 
     toolButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
@@ -183,23 +182,6 @@ public class HeadsUpDisplay extends Group {
     purchaseDialog.centerOnStage().modal(true).show();
   }
 
-  private void makeMoneyLabel() {
-    statusLabel = new Label(guiSkin);
-    statusLabel.setAlignment(Align.RIGHT | Align.TOP);
-    addActor(statusLabel);
-
-    updateStatusLabel();
-
-    BitmapFont.TextBounds textBounds = statusLabel.getTextBounds();
-    statusLabel.x = stage.width() - 5;
-    statusLabel.y = stage.height() - 5;
-  }
-
-  private void updateStatusLabel() {
-    Player player = Player.getInstance();
-    statusLabel.setText(String.format("%d coins\n %d exp\n(%d + %d)/%d pop\n%d/%d jobs\n%.1fX speed", player.getCoins(), player.getExperience(), player.getPopulationResidency(), player.getPopulationAttracted(), player.getMaxPopulation(), player.getJobsFilled(), player.getJobsMax(), TowerGame.getTimeMultiplier()));
-  }
-
   private void makeOverlayButton() {
     setOverlayButton = new LabelButton(guiSkin, "Overlays");
     setOverlayButton.setClickListener(new ClickListener() {
@@ -209,8 +191,6 @@ public class HeadsUpDisplay extends Group {
         overlayMenu.show(setOverlayButton);
       }
     });
-
-    topBar.add(setOverlayButton);
 
     overlayMenu = new Menu(guiSkin);
     overlayMenu.defaults();
@@ -266,17 +246,6 @@ public class HeadsUpDisplay extends Group {
   }
 
   @Override
-  public void act(float delta) {
-    super.act(delta);
-
-    updateMoneyLabel += delta;
-    if (updateMoneyLabel > 0.5f) {
-      updateMoneyLabel = 0f;
-      updateStatusLabel();
-    }
-  }
-
-  @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
     super.draw(batch, parentAlpha);
 
@@ -322,5 +291,13 @@ public class HeadsUpDisplay extends Group {
 
     toast.setMessage(message);
     toast.show();
+  }
+
+  public float getPrefWidth() {
+    return 0;
+  }
+
+  public float getPrefHeight() {
+    return 0;
   }
 }

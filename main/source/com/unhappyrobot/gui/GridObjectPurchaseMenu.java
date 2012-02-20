@@ -12,6 +12,8 @@ import com.unhappyrobot.input.PlacementTool;
 import com.unhappyrobot.types.GridObjectType;
 import com.unhappyrobot.types.GridObjectTypeFactory;
 
+import java.text.NumberFormat;
+
 public class GridObjectPurchaseMenu extends Window {
   private Class gridObjectTypeClass;
   private final Skin skin;
@@ -132,7 +134,7 @@ public class GridObjectPurchaseMenu extends Window {
 
       row().fill();
       add(new Label(gridObjectType.getName(), skin)).minWidth(200);
-      add(new Label(String.format("¢ %d", gridObjectType.getCoins()), skin)).align(Align.RIGHT);
+      add(new Label("¢" + NumberFormat.getInstance().format(gridObjectType.getCoins()), skin)).align(Align.RIGHT);
 
       row().align(Align.LEFT);
       TextureRegion textureRegion = gridObjectType.getTextureRegion();
