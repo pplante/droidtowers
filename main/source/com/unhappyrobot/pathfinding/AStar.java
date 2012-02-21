@@ -32,27 +32,34 @@ public abstract class AStar<T> {
 
   private LinkedList<T> discoveredPath;
   protected boolean working;
+  private Runnable completeCallback;
+  private final T start;
+  protected final T goal;
+
+  public boolean isWorking() {
+    return working;
+  }
+
+  public void runCompleteCallback() {
+    if (completeCallback != null) {
+      completeCallback.run();
+    }
+  }
 
   private class Path implements Comparable {
+
     public T point;
+
     public Double f;
     public Double g;
     public Path parent;
 
-    /**
-     * Default c'tor.
-     */
     public Path() {
       parent = null;
       point = null;
       g = f = 0.0;
     }
 
-    /**
-     * C'tor by copy another object.
-     *
-     * @param p The path object to clone.
-     */
     public Path(Path p) {
       this();
       parent = p;
@@ -62,13 +69,6 @@ public abstract class AStar<T> {
 
     /**
      * Compare to another object using the total cost f.
-     *
-     * @param o The object to compare to.
-     * @return <code>less than 0</code> This object is smaller
-     *         than <code>0</code>;
-     *         <code>0</code> Object are the same.
-     *         <code>bigger than 0</code> This object is bigger
-     *         than o.
      */
     @SuppressWarnings("unchecked")
     public int compareTo(Object o) {
@@ -78,8 +78,6 @@ public abstract class AStar<T> {
 
     /**
      * Get the last point on the path.
-     *
-     * @return The last point visited by the path.
      */
     public T getPoint() {
       return point;
@@ -93,23 +91,17 @@ public abstract class AStar<T> {
     public void setPoint(T p) {
       point = p;
     }
+
   }
 
   /**
    * Check if the current node is a goal for the problem.
-   *
-   * @param node The node to check.
-   * @return <code>true</code> if it is a goal, <code>false</else> otherwise.
    */
   protected abstract boolean isGoal(T node);
 
   /**
    * Cost for the operation to go to <code>to</code> from
    * <code>from</from>.
-   *
-   * @param from The node we are leaving.
-   * @param to   The node we are reaching.
-   * @return The cost of the operation.
    */
   protected abstract Double g(T from, T to);
 
@@ -118,59 +110,37 @@ public abstract class AStar<T> {
    * An admissible heuristic never gives a cost bigger than the real
    * one.
    * <code>from</from>.
-   *
-   * @param from The node we are leaving.
-   * @param to   The node we are reaching.
-   * @return The estimated cost to reach an object.
    */
   protected abstract Double h(T from, T to);
 
-
   /**
    * Generate the successors for a given node.
-   *
-   * @param node The node we want to expand.
-   * @return A list of possible next steps.
    */
   protected abstract List<T> generateSuccessors(T node);
 
-
   private PriorityQueue<Path> paths;
+
+
   private HashMap<T, Double> mindists;
+
+
   private Double lastCost;
   private int expandedCounter;
 
-  /**
-   * Check how many times a node was expanded.
-   *
-   * @return A counter of how many times a node was expanded.
-   */
   public int getExpandedCounter() {
     return expandedCounter;
   }
 
-  /**
-   * Default c'tor.
-   */
-  public AStar() {
+  public AStar(T start, T goal) {
+    this.start = start;
+    this.goal = goal;
+
     paths = new PriorityQueue<Path>();
     mindists = new HashMap<T, Double>();
     expandedCounter = 0;
     lastCost = 0.0;
   }
 
-
-  /**
-   * Total cost function to reach the node <code>to</code> from
-   * <code>from</code>.
-   * <p/>
-   * The total cost is defined as: f(x) = g(x) + h(x).
-   *
-   * @param p    The path.
-   * @param from The node we are leaving.
-   * @param to   The node we are reaching.
-   * @return The total cost.
-   */
   protected Double f(Path p, T from, T to) {
     Double g = g(from, to) + ((p.parent != null) ? p.parent.g : 0.0);
     Double h = h(from, to);
@@ -181,11 +151,6 @@ public abstract class AStar<T> {
     return p.f;
   }
 
-  /**
-   * Expand a path.
-   *
-   * @param path The path to expand.
-   */
   private void expand(Path path) {
     T p = path.getPoint();
     Double min = mindists.get(path.getPoint());
@@ -211,23 +176,12 @@ public abstract class AStar<T> {
     expandedCounter++;
   }
 
-  /**
-   * Get the cost to reach the last node in the path.
-   *
-   * @return The cost for the found path.
-   */
+
   public Double getCost() {
     return lastCost;
   }
 
-
-  /**
-   * Find the shortest path to a goal starting from
-   * <code>start</code>.
-   *
-   * @param start The initial node.
-   */
-  public void compute(T start) {
+  public void start() {
     try {
       working = true;
       Path root = new Path();
@@ -270,6 +224,14 @@ public abstract class AStar<T> {
     }
 
     expand(p);
+  }
+
+  public void setCompleteCallback(Runnable completeCallback) {
+    this.completeCallback = completeCallback;
+  }
+
+  public boolean wasSuccessful() {
+    return lastCost != Double.MAX_VALUE;
   }
 
   public LinkedList<T> getDiscoveredPath() {

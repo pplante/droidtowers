@@ -9,8 +9,6 @@ public class AvatarLayer extends GameLayer {
   private static AvatarLayer instance;
   private final GameGrid gameGrid;
   private static final int MAX_AVATARS = 20;
-  private static final float SPAWN_RATE = 0.5f;
-  private float timeSinceLastSpawn;
 
   public static void initialize(GameGrid gameGrid) {
     instance = new AvatarLayer(gameGrid);
@@ -21,8 +19,9 @@ public class AvatarLayer extends GameLayer {
   }
 
   AvatarLayer(GameGrid gameGrid) {
+    super();
+
     this.gameGrid = gameGrid;
-    timeSinceLastSpawn = SPAWN_RATE;
     setTouchEnabled(true);
   }
 
@@ -35,6 +34,7 @@ public class AvatarLayer extends GameLayer {
     super.update(timeDelta);
 
     if (gameObjects.size() < MAX_AVATARS) {
+      System.out.println("gameObjects = " + gameObjects.size());
       GuavaSet<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
       if (rooms != null) {
         rooms.filterBy(new Predicate<GridObject>() {
@@ -44,25 +44,27 @@ public class AvatarLayer extends GameLayer {
         });
       }
 
-      for (int i = 0; i < MAX_AVATARS - gameObjects.size(); i++) {
+      int numToSpawn = MAX_AVATARS - gameObjects.size();
+      for (int i = 0; i <= numToSpawn; i++) {
         Avatar avatar = new Avatar(this);
 
-        if (rooms != null) {
-          avatar.setPosition(rooms.getRandomEntry().getContentPosition().toWorldVector2(gameGrid));
-        }
-
-        avatar.findCommercialSpace();
-
-        addChild(avatar);
+        setupAvatar(rooms, avatar);
       }
 
       Janitor janitor = new Janitor(this);
-      if (rooms != null) {
-        janitor.setPosition(rooms.getRandomEntry().getContentPosition().toWorldVector2(gameGrid));
-      }
-      addChild(janitor);
+      setupAvatar(rooms, janitor);
     }
 
+  }
+
+  private void setupAvatar(GuavaSet<GridObject> rooms, Avatar avatar) {
+    if (rooms != null) {
+      avatar.setPosition(rooms.getRandomEntry().getContentPosition().toWorldVector2(gameGrid));
+    }
+
+    avatar.beginNextAction();
+
+    addChild(avatar);
   }
 
   @Override

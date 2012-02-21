@@ -1,18 +1,14 @@
 package com.unhappyrobot.pathfinding;
 
-import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.GridPosition;
 import com.unhappyrobot.GridPositionCache;
-import com.unhappyrobot.math.GridPoint;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class TransitPathFinder extends AStar<GridPosition> {
-  private final Vector2 goal;
-
-  public TransitPathFinder(GridPoint goal) {
-    this.goal = goal;
+  public TransitPathFinder(GridPosition start, GridPosition goal) {
+    super(start, goal);
   }
 
   @Override
@@ -78,9 +74,5 @@ public class TransitPathFinder extends AStar<GridPosition> {
     if (position != null && (position.connectedToTransit || y == 4)) {
       successors.add(position);
     }
-  }
-
-  public boolean isWorking() {
-    return working;
   }
 }

@@ -174,7 +174,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   @Override
   public boolean touchMoved(float x, float y) {
     Actor hit = hit(x, y);
-    if (hit == null) {
+    if (hit == null || hit == mouseToolTip) {
       updateGridPointTooltip(x, y);
     } else {
       mouseToolTip.visible = false;

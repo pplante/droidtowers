@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
 import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.controllers.GameObjectAccessor;
+import com.unhappyrobot.controllers.PathSearchManager;
 import com.unhappyrobot.entities.*;
 import com.unhappyrobot.gamestate.GameState;
 import com.unhappyrobot.graphics.BackgroundLayer;
@@ -207,6 +208,7 @@ public class TowerGame implements ApplicationListener {
 
     camera.update();
     InputSystem.getInstance().update(deltaTime);
+    PathSearchManager.instance().update(deltaTime);
 
     spriteBatch.setProjectionMatrix(camera.combined);
 

@@ -81,6 +81,10 @@ public class CameraController implements GestureDetector.GestureListener {
     return true;
   }
 
+  public boolean pinch(Vector2 vector2, Vector2 vector21, Vector2 vector22, Vector2 vector23) {
+    return false;
+  }
+
   public boolean scrolled(int amount) {
     camera.zoom += (float) amount / 10;
 

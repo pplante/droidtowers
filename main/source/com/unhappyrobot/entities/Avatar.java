@@ -14,13 +14,13 @@ import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.controllers.AvatarState;
 import com.unhappyrobot.controllers.AvatarSteeringManager;
+import com.unhappyrobot.controllers.PathSearchManager;
 import com.unhappyrobot.gui.HeadsUpDisplay;
 import com.unhappyrobot.gui.SpeechBubble;
 import com.unhappyrobot.pathfinding.TransitPathFinder;
 import com.unhappyrobot.utils.Random;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Set;
 
 import static com.unhappyrobot.math.Direction.LEFT;
@@ -28,16 +28,16 @@ import static com.unhappyrobot.math.Direction.LEFT;
 public class Avatar extends GameObject {
   public static final float FRAME_DURATION = 0.25f;
   public static final float WALKING_ANIMATION_DURATION = FRAME_DURATION * 3;
+  private static final float PATH_SEARCH_DELAY = 25f;
   private static final Set<Color> colors = Sets.newHashSet(Color.GREEN, Color.RED, Color.ORANGE, Color.MAGENTA, Color.PINK, Color.YELLOW);
-  private static Iterator colorIterator;
 
+  private static Iterator colorIterator;
   private final Animation walkAnimation;
+
   private float walkAnimationTime;
 
-  private TransitPathFinder pathFinder;
   private AvatarSteeringManager steeringManager;
-
-  private final GameGrid gameGrid;
+  protected final GameGrid gameGrid;
   private boolean isEmployed;
   private boolean isResident;
   private float satisfactionShops;
@@ -45,8 +45,7 @@ public class Avatar extends GameObject {
   private Color myColor;
   private final SpeechBubble speechBubble;
   private float lastPathFinderSearch;
-  private static final float PATH_SEARCH_DELAY = 25f;
-  private CommercialSpace currentCommercialSpace;
+  protected GridObject movingTo;
 
   public Avatar(AvatarLayer avatarLayer) {
     super();
@@ -79,7 +78,7 @@ public class Avatar extends GameObject {
     speechBubble.show();
   }
 
-  public void findCommercialSpace() {
+  public void beginNextAction() {
     GuavaSet<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
     if (commercialSpaces != null) {
       commercialSpaces.filterBy(new Predicate<GridObject>() {
@@ -89,51 +88,56 @@ public class Avatar extends GameObject {
       });
 
       if (commercialSpaces.size() > 0) {
-        GridObject commercialSpace = commercialSpaces.getRandomEntry();
-
-        currentCommercialSpace = (CommercialSpace) commercialSpace;
-        pathFinder = new TransitPathFinder(commercialSpace.getPosition());
-        pathFinder.compute(GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY())));
+        navigateToGridObject(commercialSpaces.getRandomEntry());
       }
     }
+  }
+
+  protected void navigateToGridObject(GridObject gridObject) {
+    if (gridObject == null) {
+      return;
+    }
+
+    movingTo = gridObject;
+
+    GridPosition start = GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY()));
+    GridPosition goal = GridPositionCache.instance().getPosition(gridObject.getPosition());
+
+    final TransitPathFinder pathFinder = new TransitPathFinder(start, goal);
+    pathFinder.setCompleteCallback(new Runnable() {
+      public void run() {
+        createSteeringManagerFromPath(pathFinder);
+      }
+    });
+
+    PathSearchManager.instance().queue(pathFinder);
+  }
+
+  private void createSteeringManagerFromPath(TransitPathFinder pathFinder) {
+    if (pathFinder.wasSuccessful()) {
+      steeringManager = new AvatarSteeringManager(this, gameGrid, pathFinder.getDiscoveredPath());
+      steeringManager.setCompleteCallback(new Runnable() {
+        public void run() {
+          afterReachingTarget();
+        }
+      });
+      steeringManager.start();
+    }
+  }
+
+  private void afterReachingTarget() {
+    if (movingTo instanceof CommercialSpace) {
+      CommercialSpace.class.cast(movingTo).recordVisitor(this);
+    }
+
+    movingTo = null;
   }
 
   @Override
   public void update(float timeDelta) {
     super.update(timeDelta);
 
-    if (pathFinder == null && steeringManager == null) {
-      lastPathFinderSearch += timeDelta;
-      if (lastPathFinderSearch >= PATH_SEARCH_DELAY) {
-        lastPathFinderSearch = 0f;
-
-        findCommercialSpace();
-      }
-      return;
-    }
-
-    if (pathFinder != null) {
-      if (pathFinder.isWorking()) {
-        for (int i = 0; i < 50; i++) {
-          pathFinder.step();
-        }
-      } else {
-        Double pathFinderCost = pathFinder.getCost();
-        LinkedList<GridPosition> discoveredPath = pathFinder.getDiscoveredPath();
-
-        pathFinder = null;
-
-        if (discoveredPath != null) {
-          steeringManager = new AvatarSteeringManager(this, gameGrid, discoveredPath);
-          steeringManager.start();
-          steeringManager.setCompleteCallback(new Runnable() {
-            public void run() {
-              currentCommercialSpace.recordVisitor(Avatar.this);
-            }
-          });
-        }
-      }
-    }
+    lastPathFinderSearch += timeDelta;
 
     if (steeringManager != null) {
       if (steeringManager.isRunning()) {
@@ -150,6 +154,12 @@ public class Avatar extends GameObject {
         }
       } else {
         steeringManager = null;
+      }
+    } else {
+      if (lastPathFinderSearch >= PATH_SEARCH_DELAY) {
+        lastPathFinderSearch = 0f;
+
+        beginNextAction();
       }
     }
   }
