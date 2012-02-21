@@ -30,6 +30,7 @@ public abstract class GridObject {
   protected Bounds2d bounds;
   private Set<Action> actions;
   private EventBus myEventBus;
+  protected float desirability;
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
@@ -247,5 +248,9 @@ public abstract class GridObject {
     }
 
     GameEvents.post(event);
+  }
+
+  public float getDesirability() {
+    return desirability;
   }
 }

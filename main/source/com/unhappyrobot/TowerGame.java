@@ -111,7 +111,7 @@ public class TowerGame implements ApplicationListener {
     InputSystem.getInstance().addInputProcessor(guiStage, 10);
     Gdx.input.setInputProcessor(InputSystem.getInstance());
 
-    InputSystem.getInstance().bind(Keys.PLUS, new InputCallback() {
+    InputSystem.getInstance().bind(new int[]{Keys.PLUS, Keys.UP}, new InputCallback() {
       public boolean run(float timeDelta) {
         timeMultiplier += 0.5f;
         timeMultiplier = Math.min(timeMultiplier, 4);
@@ -120,7 +120,7 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    InputSystem.getInstance().bind(Keys.MINUS, new InputCallback() {
+    InputSystem.getInstance().bind(new int[]{Keys.MINUS, Keys.DOWN}, new InputCallback() {
       public boolean run(float timeDelta) {
         timeMultiplier -= 0.5f;
         timeMultiplier = Math.max(timeMultiplier, 0.5f);

@@ -25,7 +25,7 @@ public class Room extends GridObject {
   protected int currentResidency;
   private int populationRequired;
   private boolean connectedToTransport;
-  private float desirability;
+  private float surroundingNoiseLevel;
 
   public Room(RoomType roomType, GameGrid gameGrid) {
     super(roomType, gameGrid);
@@ -63,6 +63,8 @@ public class Room extends GridObject {
     }
 
     decalSprite = new Sprite(roomDecals);
+
+    desirability = 1f;
   }
 
   public void updatePopulation() {
@@ -130,11 +132,16 @@ public class Room extends GridObject {
     return 0;
   }
 
-  public void setDesirability(float desirability) {
-    this.desirability = desirability;
+  @Override
+  public float getDesirability() {
+    return desirability - (surroundingNoiseLevel * 0.5f);
   }
 
-  public float getDesirability() {
-    return desirability;
+  public void setSurroundingNoiseLevel(float desirability) {
+    this.surroundingNoiseLevel = desirability;
+  }
+
+  public float getSurroundingNoiseLevel() {
+    return surroundingNoiseLevel;
   }
 }

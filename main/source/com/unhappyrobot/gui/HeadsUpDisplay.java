@@ -1,10 +1,7 @@
 package com.unhappyrobot.gui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -15,9 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.GridPosition;
 import com.unhappyrobot.GridPositionCache;
-import com.unhappyrobot.Overlays;
-import com.unhappyrobot.TowerGame;
+import com.unhappyrobot.entities.CommercialSpace;
 import com.unhappyrobot.entities.GameGrid;
+import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.input.GestureTool;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
@@ -38,17 +35,15 @@ public class HeadsUpDisplay extends WidgetGroup {
   private Label statusLabel;
   private float updateMoneyLabel;
   private static HeadsUpDisplay instance;
-  private SpriteBatch spriteBatch;
-  private BitmapFont defaultBitmapFont;
   private BitmapFont menloBitmapFont;
   private Toast toast;
   private LabelButton setOverlayButton;
   private Menu overlayMenu;
   private Table topBar;
   private ToolTip mouseToolTip;
-  private final TextureAtlas radialMenuAtlas = new TextureAtlas(Gdx.files.internal("hud/test.txt"));
   private GridObjectPurchaseMenu purchaseDialog;
   private InputCallback closeDialogCallback = null;
+  private RadialMenu toolMenu;
 
   public static HeadsUpDisplay getInstance() {
     if (instance == null) {
@@ -60,85 +55,44 @@ public class HeadsUpDisplay extends WidgetGroup {
 
   public void initialize(final OrthographicCamera camera, final GameGrid gameGrid, final Stage stage, SpriteBatch spriteBatch) {
     this.stage = stage;
-    this.spriteBatch = spriteBatch;
     this.camera = camera;
     this.gameGrid = gameGrid;
     this.guiSkin = new Skin(Gdx.files.internal("default-skin.ui"), Gdx.files.internal("default-skin.png"));
 
     ModalOverlay.initialize(this);
 
-    menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_16.fnt"), false);
-    defaultBitmapFont = new BitmapFont(Gdx.files.internal("default.fnt"), false);
+    menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_14_bold_white.fnt"), false);
 
     hudAtlas = new TextureAtlas(Gdx.files.internal("hud/buttons.txt"));
 
     StatusBarPanel statusBarPanel = new StatusBarPanel(guiSkin);
-    statusBarPanel.x = 0;
-    statusBarPanel.y = stage.height() - statusBarPanel.height;
+    statusBarPanel.x = -1;
+    statusBarPanel.y = stage.height() - statusBarPanel.height + 1;
     addActor(statusBarPanel);
-
-    makeOverlayButton();
 
     mouseToolTip = new ToolTip();
     addActor(mouseToolTip);
 
-
-    addActorAt(0, ModalOverlay.instance());
-
-
-    final ImageButton toolButton = new ImageButton(hudAtlas.findRegion("tool-sprite"));
-    toolButton.x = stage.width() - toolButton.width - 5;
-    toolButton.y = 5;
-
-    final RadialMenu toolMenu = new RadialMenu();
+    toolMenu = new RadialMenu();
     toolMenu.arc = 30f;
     toolMenu.radius = 120f;
 
     ImageButton housingButton = new ImageButton(hudAtlas.findRegion("tool-housing"));
-    housingButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        toolMenu.hide();
-
-        if (purchaseDialog == null) {
-          makePurchaseDialog("Rooms", RoomTypeFactory.getInstance());
-        } else {
-          purchaseDialog.dismiss();
-          purchaseDialog = null;
-        }
-      }
-    });
+    housingButton.setClickListener(makePurchaseButtonClickListener("Housing", RoomTypeFactory.getInstance()));
     toolMenu.addActor(housingButton);
 
     ImageButton transitButton = new ImageButton(hudAtlas.findRegion("tool-transit"));
-    transitButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        toolMenu.hide();
-
-        if (purchaseDialog == null) {
-          makePurchaseDialog("Transit", TransitTypeFactory.getInstance());
-        } else {
-          purchaseDialog.dismiss();
-          purchaseDialog = null;
-        }
-      }
-    });
+    transitButton.setClickListener(makePurchaseButtonClickListener("Transit", TransitTypeFactory.getInstance()));
     toolMenu.addActor(transitButton);
 
     ImageButton commerceButton = new ImageButton(hudAtlas.findRegion("tool-commerce"));
-    commerceButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        toolMenu.hide();
-
-        if (purchaseDialog == null) {
-          makePurchaseDialog("Commerce", CommercialTypeFactory.getInstance());
-        } else {
-          purchaseDialog.dismiss();
-          purchaseDialog = null;
-        }
-      }
-    });
+    commerceButton.setClickListener(makePurchaseButtonClickListener("Commerce", CommercialTypeFactory.getInstance()));
     toolMenu.addActor(commerceButton);
 
+    final ImageButton toolButton = new ImageButton(hudAtlas.findRegion("tool-sprite"));
+    toolButton.x = stage.width() - toolButton.width - 5;
+    toolButton.y = 5;
+    addActor(toolButton);
     toolButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         if (InputSystem.getInstance().getCurrentTool() != GestureTool.PLACEMENT) {
@@ -160,12 +114,32 @@ public class HeadsUpDisplay extends WidgetGroup {
       }
     });
 
-    addActor(toolButton);
-
     AudioControl audioControl = new AudioControl(hudAtlas);
+    audioControl.x = stage.width() - audioControl.width - 5;
+    audioControl.y = stage.height() - audioControl.height - 5;
     addActor(audioControl);
 
+    OverlayControl overlayControl = new OverlayControl(hudAtlas, guiSkin);
+    overlayControl.x = audioControl.x - audioControl.width - 5;
+    overlayControl.y = stage.height() - overlayControl.height - 5;
+    addActor(overlayControl);
+
     stage.addActor(this);
+  }
+
+  private ClickListener makePurchaseButtonClickListener(final String dialogTitle, final GridObjectTypeFactory typeFactory) {
+    return new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        toolMenu.hide();
+
+        if (purchaseDialog == null) {
+          makePurchaseDialog(dialogTitle, typeFactory);
+        } else {
+          purchaseDialog.dismiss();
+          purchaseDialog = null;
+        }
+      }
+    };
   }
 
   private void makePurchaseDialog(String title, GridObjectTypeFactory typeFactory) {
@@ -182,65 +156,6 @@ public class HeadsUpDisplay extends WidgetGroup {
     purchaseDialog.centerOnStage().modal(true).show();
   }
 
-  private void makeOverlayButton() {
-    setOverlayButton = new LabelButton(guiSkin, "Overlays");
-    setOverlayButton.setClickListener(new ClickListener() {
-      boolean isShowing;
-
-      public void click(Actor actor, float x, float y) {
-        overlayMenu.show(setOverlayButton);
-      }
-    });
-
-    overlayMenu = new Menu(guiSkin);
-    overlayMenu.defaults();
-    overlayMenu.top().left();
-
-    for (final Overlays overlay : Overlays.values()) {
-      final CheckBox checkBox = new CheckBox(overlay.toString(), guiSkin);
-      checkBox.align(Align.LEFT);
-      checkBox.getLabelCell().pad(4);
-      checkBox.invalidate();
-      checkBox.setClickListener(new ClickListener() {
-        public void click(Actor actor, float x, float y) {
-          if (checkBox.isChecked()) {
-            TowerGame.getGameGridRenderer().addActiveOverlay(overlay);
-          } else {
-            TowerGame.getGameGridRenderer().removeActiveOverlay(overlay);
-          }
-        }
-      });
-      overlayMenu.row().left().pad(2, 6, 2, 6);
-      overlayMenu.add(checkBox);
-      Pixmap pixmap = new Pixmap(16, 16, Pixmap.Format.RGB565);
-      pixmap.setColor(Color.GRAY);
-      pixmap.fill();
-      pixmap.setColor(overlay.getColor(1f));
-      pixmap.fillRectangle(1, 1, 14, 14);
-
-      Image image = new Image(new Texture(pixmap));
-      overlayMenu.add(image);
-    }
-
-    overlayMenu.row().colspan(2).left().pad(6, 2, 2, 2);
-    LabelButton clearAllButton = new LabelButton(guiSkin, "Clear All");
-    clearAllButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        TowerGame.getGameGridRenderer().clearOverlays();
-
-        for (Actor child : overlayMenu.getActors()) {
-          if (child instanceof CheckBox) {
-            ((CheckBox) child).setChecked(false);
-          }
-        }
-      }
-    });
-
-    overlayMenu.add(clearAllButton).fill();
-
-    overlayMenu.pack();
-  }
-
   public Skin getGuiSkin() {
     return guiSkin;
   }
@@ -253,7 +168,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     float nativeHeapInBytes = Gdx.app.getNativeHeap() / ONE_MEGABYTE;
 
     String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f)\nmem: (java %.1f Mb, native %.1f Mb)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom, javaHeapInBytes, nativeHeapInBytes);
-    menloBitmapFont.drawMultiLine(batch, infoText, 5, 45);
+    menloBitmapFont.drawMultiLine(batch, infoText, 5, 35);
   }
 
   @Override
@@ -271,11 +186,19 @@ public class HeadsUpDisplay extends WidgetGroup {
   private void updateGridPointTooltip(float x, float y) {
     Vector3 worldPoint = camera.getPickRay(Gdx.input.getX(), Gdx.input.getY()).getEndPoint(1);
 
-    GridPoint gridPoint = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
-    GridPosition gridPosition = GridPositionCache.instance().getPosition(gridPoint);
+    GridPoint gridPointAtMouse = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
+    GridPosition gridPosition = GridPositionCache.instance().getPosition(gridPointAtMouse);
     if (gridPosition != null) {
+      int totalVisitors = 0;
+      for (GridObject gridObject : gridPosition.getObjects()) {
+        if (gridObject instanceof CommercialSpace) {
+          totalVisitors = ((CommercialSpace) gridObject).getNumVisitors();
+        }
+      }
+
+
       mouseToolTip.visible = true;
-      mouseToolTip.setText(String.format("%s\nobjects: %s\nelevator: %s\nstairs: %s", gridPoint, gridPosition.size(), gridPosition.elevator != null, gridPosition.stair != null));
+      mouseToolTip.setText(String.format("%s\nobjects: %s\nelevator: %s\nstairs: %s\nvisitors: %d", gridPointAtMouse, gridPosition.size(), gridPosition.elevator != null, gridPosition.stair != null, totalVisitors));
       mouseToolTip.x = x + 5;
       mouseToolTip.y = y + 5;
     } else {

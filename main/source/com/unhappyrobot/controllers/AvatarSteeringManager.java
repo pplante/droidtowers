@@ -36,6 +36,7 @@ public class AvatarSteeringManager {
   private Direction horizontalDirection;
   private Direction verticalDirection;
   private Set<AvatarState> currentState;
+  private Runnable completeCallback;
 
   public AvatarSteeringManager(Avatar avatar, GameGrid gameGrid, LinkedList<GridPosition> discoveredPath) {
     this.avatar = avatar;
@@ -61,6 +62,11 @@ public class AvatarSteeringManager {
   private void stop() {
     running = false;
     gameGrid.getRenderer().removeTransitLine(transitLine);
+
+    if (completeCallback != null) {
+      completeCallback.run();
+      completeCallback = null;
+    }
   }
 
   private void advancePosition() {
@@ -183,5 +189,9 @@ public class AvatarSteeringManager {
 
   public Set<AvatarState> getCurrentState() {
     return currentState;
+  }
+
+  public void setCompleteCallback(Runnable runnable) {
+    completeCallback = runnable;
   }
 }

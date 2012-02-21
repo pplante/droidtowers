@@ -7,6 +7,7 @@ public class CommercialSpace extends Room {
   private int attractedPopulation;
   private int jobsFilled;
   private long lastJobUpdateTime;
+  private int numVisitors;
 
   public CommercialSpace(CommercialType commercialType, GameGrid gameGrid) {
     super(commercialType, gameGrid);
@@ -50,5 +51,18 @@ public class CommercialSpace extends Room {
     }
 
     return 0;
+  }
+
+  public void recordVisitor(Avatar avatar) {
+    numVisitors += 1;
+  }
+
+  public int getNumVisitors() {
+    return numVisitors;
+  }
+
+  @Override
+  public float getDesirability() {
+    return super.getDesirability() - (0.1f * numVisitors);
   }
 }

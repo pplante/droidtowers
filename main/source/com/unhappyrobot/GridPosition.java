@@ -1,19 +1,13 @@
 package com.unhappyrobot;
 
 import com.badlogic.gdx.math.Vector2;
-import com.unhappyrobot.entities.Elevator;
-import com.unhappyrobot.entities.GameGrid;
-import com.unhappyrobot.entities.GridObject;
-import com.unhappyrobot.entities.Stair;
+import com.unhappyrobot.entities.*;
 import com.unhappyrobot.math.GridPoint;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class GridPosition {
   public final int x;
   public final int y;
-  private Set<GridObject> objects = new HashSet<GridObject>();
+  private GuavaSet<GridObject> objects = new GuavaSet<GridObject>();
   public boolean connectedToTransit;
   public Elevator elevator;
   public Stair stair;
@@ -23,7 +17,7 @@ public class GridPosition {
     this.y = y;
   }
 
-  public Set<GridObject> getObjects() {
+  public GuavaSet<GridObject> getObjects() {
     return objects;
   }
 

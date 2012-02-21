@@ -58,9 +58,9 @@ public class DesirabilityCalculator extends GameStateAction {
           }
         }
         if (count > 0f) {
-          room.setDesirability(0.9f * (total / count));
+          room.setSurroundingNoiseLevel(0.9f * (total / count));
         } else {
-          room.setDesirability(0.9f);
+          room.setSurroundingNoiseLevel(0.9f);
         }
       }
     }

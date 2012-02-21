@@ -34,7 +34,7 @@ public class GridObjectPurchaseMenu extends Window {
 
     WheelScrollFlickScrollPane scrollPane = new WheelScrollFlickScrollPane();
     scrollPane.setWidget(container);
-    add(scrollPane).maxWidth(500).maxHeight(300);
+    add(scrollPane).maxWidth(500).maxHeight(300).minWidth(400);
 
     float biggestWidth = 0;
     for (Object o : typeFactory.all()) {
@@ -133,7 +133,7 @@ public class GridObjectPurchaseMenu extends Window {
       defaults().align(Align.LEFT | Align.TOP).pad(2);
 
       row().fill();
-      add(new Label(gridObjectType.getName(), skin)).minWidth(200);
+      add(new Label(gridObjectType.getName(), skin)).minWidth(350);
       add(new Label("¢" + NumberFormat.getInstance().format(gridObjectType.getCoins()), skin)).align(Align.RIGHT);
 
       row().align(Align.LEFT);

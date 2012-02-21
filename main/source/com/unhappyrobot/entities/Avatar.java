@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.GridPosition;
@@ -47,6 +46,7 @@ public class Avatar extends GameObject {
   private final SpeechBubble speechBubble;
   private float lastPathFinderSearch;
   private static final float PATH_SEARCH_DELAY = 25f;
+  private CommercialSpace currentCommercialSpace;
 
   public Avatar(AvatarLayer avatarLayer) {
     super();
@@ -57,7 +57,7 @@ public class Avatar extends GameObject {
 
     pickColor();
 
-    TextureAtlas droidAtlas = new TextureAtlas(Gdx.files.internal("characters/droid.txt"));
+    TextureAtlas droidAtlas = getTextureAtlas();
     TextureAtlas.AtlasRegion stationary = droidAtlas.findRegion("stationary");
     setSize(stationary.originalWidth, stationary.originalHeight);
     setRegion(stationary);
@@ -68,6 +68,10 @@ public class Avatar extends GameObject {
     speechBubble = new SpeechBubble();
     speechBubble.followObject(this);
     HeadsUpDisplay.getInstance().addActor(speechBubble);
+  }
+
+  protected TextureAtlas getTextureAtlas() {
+    return new TextureAtlas(Gdx.files.internal("characters/droid.txt"));
   }
 
   private void displaySpeechBubble(String newText) {
@@ -85,8 +89,9 @@ public class Avatar extends GameObject {
       });
 
       if (commercialSpaces.size() > 0) {
-        GridObject commercialSpace = Iterables.get(commercialSpaces, Random.randomInt(commercialSpaces.size()));
+        GridObject commercialSpace = commercialSpaces.getRandomEntry();
 
+        currentCommercialSpace = (CommercialSpace) commercialSpace;
         pathFinder = new TransitPathFinder(commercialSpace.getPosition());
         pathFinder.compute(GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY())));
       }
@@ -121,6 +126,11 @@ public class Avatar extends GameObject {
         if (discoveredPath != null) {
           steeringManager = new AvatarSteeringManager(this, gameGrid, discoveredPath);
           steeringManager.start();
+          steeringManager.setCompleteCallback(new Runnable() {
+            public void run() {
+              currentCommercialSpace.recordVisitor(Avatar.this);
+            }
+          });
         }
       }
     }
@@ -144,7 +154,7 @@ public class Avatar extends GameObject {
     }
   }
 
-  private void pickColor() {
+  protected void pickColor() {
     if (colorIterator == null || !colorIterator.hasNext()) {
       colorIterator = colors.iterator();
     }

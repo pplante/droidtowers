@@ -2,10 +2,8 @@ package com.unhappyrobot.controllers;
 
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.entities.*;
-import com.unhappyrobot.utils.Random;
 
 public class AvatarLayer extends GameLayer {
   private static AvatarLayer instance;
@@ -37,25 +35,34 @@ public class AvatarLayer extends GameLayer {
     super.update(timeDelta);
 
     if (gameObjects.size() < MAX_AVATARS) {
+      GuavaSet<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
+      if (rooms != null) {
+        rooms.filterBy(new Predicate<GridObject>() {
+          public boolean apply(@Nullable GridObject gridObject) {
+            return ((Room) gridObject).isConnectedToTransport();
+          }
+        });
+      }
+
       for (int i = 0; i < MAX_AVATARS - gameObjects.size(); i++) {
         Avatar avatar = new Avatar(this);
 
-        GuavaSet<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
         if (rooms != null) {
-          rooms.filterBy(new Predicate<GridObject>() {
-            public boolean apply(@Nullable GridObject gridObject) {
-              return ((Room) gridObject).isConnectedToTransport();
-            }
-          });
-          GridObject randomRoom = Iterables.get(rooms, Random.randomInt(rooms.size() - 1));
-          avatar.setPosition(randomRoom.getContentPosition().toWorldVector2(gameGrid));
+          avatar.setPosition(rooms.getRandomEntry().getContentPosition().toWorldVector2(gameGrid));
         }
 
         avatar.findCommercialSpace();
 
         addChild(avatar);
       }
+
+      Janitor janitor = new Janitor(this);
+      if (rooms != null) {
+        janitor.setPosition(rooms.getRandomEntry().getContentPosition().toWorldVector2(gameGrid));
+      }
+      addChild(janitor);
     }
+
   }
 
   @Override

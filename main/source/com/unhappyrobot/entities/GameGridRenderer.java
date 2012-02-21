@@ -133,8 +133,8 @@ public class GameGridRenderer extends GameLayer {
 
     overlayFunctions.put(Overlays.DESIRABILITY_LEVEL, new Function<GridObject, Float>() {
       public Float apply(@Nullable GridObject gridObject) {
-        if (gridObject instanceof Room && !(gridObject instanceof CommercialSpace)) {
-          return ((Room) gridObject).getDesirability();
+        if (gridObject != null) {
+          return gridObject.getDesirability();
         }
 
         return null;
