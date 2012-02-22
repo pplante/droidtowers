@@ -53,6 +53,9 @@ public class AvatarLayer extends GameLayer {
 
       Janitor janitor = new Janitor(this);
       setupAvatar(rooms, janitor);
+
+      Maid maid = new Maid(this);
+      setupAvatar(rooms, maid);
     }
 
   }

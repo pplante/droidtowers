@@ -22,9 +22,27 @@
     <bookmark url="file://$PROJECT_DIR$/.idea/workspace.xml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
+    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="janitors now janitate commercial spaces!">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/params/services.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Maid.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/ServiceRoom.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ServiceRoomType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ServiceRoomTypeFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets-raw/hud/buttons.tps" afterPath="$PROJECT_DIR$/android/assets-raw/hud/buttons.tps" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets-raw/hud/tool sprite.psd" afterPath="$PROJECT_DIR$/android/assets-raw/hud/tool sprite.psd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/hud/buttons.png" afterPath="$PROJECT_DIR$/android/assets/hud/buttons.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/AStar.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/AStar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/hud/buttons.txt" afterPath="$PROJECT_DIR$/android/assets/hud/buttons.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/params/commercial-spaces.json" afterPath="$PROJECT_DIR$/android/assets/params/commercial-spaces.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/params/rooms.json" afterPath="$PROJECT_DIR$/android/assets/params/rooms.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarLayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CommercialSpace.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CommercialSpace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GuavaSet.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GuavaSet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Janitor.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Janitor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ProviderType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ProviderType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -91,46 +109,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CommercialSpace.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CommercialSpace.java">
+      <file leaf-file-name="commercial-spaces.json" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/android/assets/params/commercial-spaces.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="34" selection-start="1979" selection-end="1979" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AvatarLayer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarLayer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="25" selection-start="1133" selection-end="1133" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HeadsUpDisplay.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="176" column="42" selection-start="6407" selection-end="6407" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AStar.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/AStar.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="143" column="0" selection-start="3121" selection-end="3121" vertical-scroll-proportion="0.81558937">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TowerGame.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="43" selection-start="4310" selection-end="4310" vertical-scroll-proportion="0.0">
+            <state line="23" column="21" selection-start="481" selection-end="481" vertical-scroll-proportion="0.5641026">
               <folding />
             </state>
           </provider>
@@ -149,22 +131,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarSteeringManager.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/TransitPathFinder.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/PathSearchManager.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/ToolBase.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/CameraController.java" />
+        <option value="$PROJECT_DIR$/android/assets/params/services.json" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/ServiceSpace.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ServiceRoomType.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/ServiceRoom.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ServiceRoomTypeFactory.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarLayer.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ProviderType.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GuavaSet.java" />
+        <option value="$PROJECT_DIR$/android/assets/params/rooms.json" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CommercialSpace.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GuavaSet.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarLayer.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Janitor.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/AStar.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Maid.java" />
+        <option value="$PROJECT_DIR$/android/assets/params/commercial-spaces.json" />
       </list>
     </option>
   </component>
@@ -183,9 +165,8 @@
     <option name="LAST_EDITED_TAB_NAME" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1280" />
     <option name="y" value="22" />
-    <option name="width" value="1280" />
+    <option name="width" value="2560" />
     <option name="height" value="1414" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -359,7 +340,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages ProjectPane="false" />
       <showMembers />
       <showModules />
@@ -371,6 +352,69 @@
       <sortByType ProjectPane="false" />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="params" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Favorites" />
     </panes>
   </component>
@@ -391,13 +435,13 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="Downloaded.Files.Path" value="$PROJECT_DIR$/lib" />
+    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="download.sources.last.used.dir" value="$PROJECT_DIR$/main/libs/sources" />
     <property name="options.lastSelected" value="project.propVCSSupport.Background" />
-    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="download.sources.last.used.dir" value="$PROJECT_DIR$/main/libs/sources" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$/main/libs/test" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
@@ -427,8 +471,8 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="0146BF4F17012018" />
     <property name="GenerateAntBuildDialog.backupFiles" value="true" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -453,10 +497,10 @@
       <recent name="com.unhappyrobot.utils.Random" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.unhappyrobot.controllers" />
       <recent name="com.unhappyrobot.entities" />
-      <recent name="com.unhappyrobot.gui" />
       <recent name="com.unhappyrobot.types" />
+      <recent name="com.unhappyrobot.controllers" />
+      <recent name="com.unhappyrobot.gui" />
       <recent name="com.unhappyrobot.math" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -835,7 +879,11 @@
       <created>1329803952596</created>
       <updated>1329803952596</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="janitors now janitate commercial spaces!">
+      <created>1329810587449</created>
+      <updated>1329810587449</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -859,7 +907,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1280" y="22" width="1280" height="1414" extended-state="0" />
+    <frame x="0" y="22" width="2560" height="1414" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -873,14 +921,14 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18318966" sideWeight="0.22649007" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32997844" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947233" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18071374" sideWeight="0.80294585" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18071374" sideWeight="0.80294585" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32904884" sideWeight="0.49748382" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32961783" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3994253" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13721265" sideWeight="0.7001287" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29840547" sideWeight="0.9490446" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11464968" sideWeight="0.70159453" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29840547" sideWeight="0.9490446" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36066818" sideWeight="0.28821656" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1001,110 +1049,118 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="27" selection-start="2914" selection-end="2914" vertical-scroll-proportion="0.39932126">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="22" selection-start="2333" selection-end="2333" vertical-scroll-proportion="0.34851485" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarSteeringManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="22" selection-start="2172" selection-end="2172" vertical-scroll-proportion="0.2972973" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/TransitPathFinder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="0" selection-start="2100" selection-end="2100" vertical-scroll-proportion="0.8528428">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameGrid.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="41" selection-start="3361" selection-end="3361" vertical-scroll-proportion="0.5316742">
+        <state line="86" column="2" selection-start="1947" selection-end="1947" vertical-scroll-proportion="0.3768116">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/CameraController.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="4" selection-start="2600" selection-end="2613" vertical-scroll-proportion="1.1255656">
+        <state line="53" column="21" selection-start="1810" selection-end="1810" vertical-scroll-proportion="0.33333334">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/input/ToolBase.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="4" selection-start="1354" selection-end="1367" vertical-scroll-proportion="1.1237458">
+        <state line="63" column="20" selection-start="1625" selection-end="1625" vertical-scroll-proportion="0.8283166">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/ProviderType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="14" selection-start="101" selection-end="101" vertical-scroll-proportion="0.14715719">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/PathSearchManager.java">
+    <entry file="jar://$PROJECT_DIR$/main/libs/sources/guava-10.0.1-sources.jar!/com/google/common/collect/Iterables.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="31" selection-start="975" selection-end="975" vertical-scroll-proportion="0.75473803">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CommercialSpace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="34" selection-start="1979" selection-end="1979" vertical-scroll-proportion="0.0">
+        <state line="574" column="32" selection-start="21044" selection-end="21044" vertical-scroll-proportion="0.33333334">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GuavaSet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="16" selection-start="825" selection-end="825" vertical-scroll-proportion="0.75473803">
+        <state line="48" column="13" selection-start="960" selection-end="960" vertical-scroll-proportion="0.75473803">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/assets/params/rooms.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="4" selection-start="161" selection-end="161" vertical-scroll-proportion="0.22073579">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CommercialSpace.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="9" selection-start="870" selection-end="870" vertical-scroll-proportion="0.40691194">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="20" selection-start="4416" selection-end="4416" vertical-scroll-proportion="0.29864255">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="9" selection-start="393" selection-end="393" vertical-scroll-proportion="0.22073579">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="43" selection-start="4310" selection-end="4310" vertical-scroll-proportion="0.0">
+        <state line="92" column="5" selection-start="3232" selection-end="3232" vertical-scroll-proportion="0.6599777">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarLayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="25" selection-start="1133" selection-end="1133" vertical-scroll-proportion="0.0">
+        <state line="67" column="22" selection-start="1776" selection-end="1776" vertical-scroll-proportion="0.38684505">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Janitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="502" selection-end="502" vertical-scroll-proportion="0.17168339">
+        <state line="47" column="28" selection-start="1717" selection-end="1717" vertical-scroll-proportion="0.7792642">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Maid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="176" column="42" selection-start="6407" selection-end="6407" vertical-scroll-proportion="0.0">
+        <state line="18" column="29" selection-start="491" selection-end="491" vertical-scroll-proportion="0.44147158">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/assets/params/stairs.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/AStar.java">
+    <entry file="file://$PROJECT_DIR$/android/assets/params/commercial-spaces.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="0" selection-start="3121" selection-end="3121" vertical-scroll-proportion="0.81558937">
+        <state line="23" column="21" selection-start="481" selection-end="481" vertical-scroll-proportion="0.5641026">
           <folding />
         </state>
       </provider>

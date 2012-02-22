@@ -8,6 +8,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.controllers.AvatarLayer;
+import com.unhappyrobot.types.ProviderType;
+import com.unhappyrobot.types.RoomType;
 
 import java.util.List;
 
@@ -26,13 +28,13 @@ public class Janitor extends Avatar {
   public void beginNextAction() {
     GuavaSet<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
     if (commercialSpaces != null) {
-      commercialSpaces.filterBy(new Predicate<GridObject>() {
+      List<GridObject> sortedObjects = commercialSpaces.filterBy(new Predicate<GridObject>() {
         public boolean apply(@Nullable GridObject input) {
-          return CommercialSpace.class.cast(input).getLastCleanedAt() > 0;
+          ProviderType providerType = RoomType.class.cast(input.getGridObjectType()).provides();
+          int numVisitors = CommercialSpace.class.cast(input).getNumVisitors();
+          return numVisitors > 0 && checkProviderType(providerType);
         }
-      });
-
-      List<GridObject> sortedObjects = commercialSpaces.sortedBy(new Function<GridObject, Long>() {
+      }).sortedBy(new Function<GridObject, Long>() {
         public Long apply(@Nullable GridObject gridObject) {
           return ((CommercialSpace) gridObject).getLastCleanedAt();
         }
@@ -40,5 +42,9 @@ public class Janitor extends Avatar {
 
       navigateToGridObject(Iterables.getFirst(sortedObjects, null));
     }
+  }
+
+  protected boolean checkProviderType(ProviderType providerType) {
+    return providerType.equals(ProviderType.FOOD) || providerType.equals(ProviderType.OFFICE_SERVICES);
   }
 }

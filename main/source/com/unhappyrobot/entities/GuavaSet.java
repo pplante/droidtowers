@@ -18,8 +18,16 @@ public class GuavaSet<T> extends HashSet<T> {
     super(initialCapacity);
   }
 
-  public void filterBy(Predicate<T> predicate) {
-    Iterables.filter(this, predicate);
+  public GuavaSet(Iterable<T> iterable) {
+    this();
+
+    for (T t : iterable) {
+      add(t);
+    }
+  }
+
+  public GuavaSet<T> filterBy(Predicate<T> predicate) {
+    return new GuavaSet<T>(Iterables.filter(this, predicate));
   }
 
   public T getRandomEntry() {

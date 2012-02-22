@@ -21,7 +21,9 @@ public class CommercialSpace extends Room {
 
       if (Player.getInstance().getTotalPopulation() > commercialType.getPopulationRequired()) {
         int jobsProvided = commercialType.getJobsProvided();
-        jobsFilled = Random.randomInt(jobsProvided / 2, jobsProvided);
+        if (jobsProvided > 0) {
+          jobsFilled = Random.randomInt(jobsProvided / 2, jobsProvided);
+        }
       }
     }
   }
@@ -33,7 +35,9 @@ public class CommercialSpace extends Room {
     if (isConnectedToTransport()) {
       CommercialType commercialType = (CommercialType) getGridObjectType();
       int populationAttraction = commercialType.getPopulationAttraction();
-      attractedPopulation = Random.randomInt(populationAttraction / 2, populationAttraction);
+      if (populationAttraction > 0) {
+        attractedPopulation = Random.randomInt(populationAttraction / 2, populationAttraction);
+      }
     }
   }
 
@@ -55,7 +59,7 @@ public class CommercialSpace extends Room {
   }
 
   public void recordVisitor(Avatar avatar) {
-    if (avatar instanceof Janitor) {
+    if (avatar instanceof Janitor || avatar instanceof Maid) {
       numVisitors = 0;
       lastCleanedAt = System.currentTimeMillis();
     } else {

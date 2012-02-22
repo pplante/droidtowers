@@ -81,7 +81,7 @@ public class Avatar extends GameObject {
   public void beginNextAction() {
     GuavaSet<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
     if (commercialSpaces != null) {
-      commercialSpaces.filterBy(new Predicate<GridObject>() {
+      commercialSpaces = commercialSpaces.filterBy(new Predicate<GridObject>() {
         public boolean apply(@Nullable GridObject gridObject) {
           return ((CommercialSpace) gridObject).isConnectedToTransport();
         }
@@ -95,9 +95,10 @@ public class Avatar extends GameObject {
 
   protected void navigateToGridObject(GridObject gridObject) {
     if (gridObject == null) {
+      System.out.println(String.format("%s is bored.", this.getClass().getSimpleName()));
       return;
     }
-
+    System.out.println(String.format("%s moving to %s", this.getClass().getSimpleName(), gridObject.getGridObjectType().getName()));
     movingTo = gridObject;
 
     GridPosition start = GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY()));

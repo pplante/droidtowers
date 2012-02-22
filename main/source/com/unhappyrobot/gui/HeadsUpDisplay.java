@@ -19,10 +19,7 @@ import com.unhappyrobot.input.GestureTool;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.math.GridPoint;
-import com.unhappyrobot.types.CommercialTypeFactory;
-import com.unhappyrobot.types.GridObjectTypeFactory;
-import com.unhappyrobot.types.RoomTypeFactory;
-import com.unhappyrobot.types.TransitTypeFactory;
+import com.unhappyrobot.types.*;
 
 public class HeadsUpDisplay extends WidgetGroup {
   public static final float ONE_MEGABYTE = 1048576.0f;
@@ -74,8 +71,8 @@ public class HeadsUpDisplay extends WidgetGroup {
     addActor(mouseToolTip);
 
     toolMenu = new RadialMenu();
-    toolMenu.arc = 30f;
-    toolMenu.radius = 120f;
+    toolMenu.arc = 33f;
+    toolMenu.radius = 140f;
 
     ImageButton housingButton = new ImageButton(hudAtlas.findRegion("tool-housing"));
     housingButton.setClickListener(makePurchaseButtonClickListener("Housing", RoomTypeFactory.getInstance()));
@@ -88,6 +85,10 @@ public class HeadsUpDisplay extends WidgetGroup {
     ImageButton commerceButton = new ImageButton(hudAtlas.findRegion("tool-commerce"));
     commerceButton.setClickListener(makePurchaseButtonClickListener("Commerce", CommercialTypeFactory.getInstance()));
     toolMenu.addActor(commerceButton);
+
+    ImageButton servicesButton = new ImageButton(hudAtlas.findRegion("tool-services"));
+    servicesButton.setClickListener(makePurchaseButtonClickListener("Services", ServiceRoomTypeFactory.getInstance()));
+    toolMenu.addActor(servicesButton);
 
     final ImageButton toolButton = new ImageButton(hudAtlas.findRegion("tool-sprite"));
     toolButton.x = stage.width() - toolButton.width - 5;
@@ -195,7 +196,6 @@ public class HeadsUpDisplay extends WidgetGroup {
           totalVisitors = ((CommercialSpace) gridObject).getNumVisitors();
         }
       }
-
 
       mouseToolTip.visible = true;
       mouseToolTip.setText(String.format("%s\nobjects: %s\nelevator: %s\nstairs: %s\nvisitors: %d", gridPointAtMouse, gridPosition.size(), gridPosition.elevator != null, gridPosition.stair != null, totalVisitors));

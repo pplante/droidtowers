@@ -1,0 +1,26 @@
+[
+  {
+    "name":"Janitors Closet",
+    "coins":1000,
+    "height":1,
+    "width":3,
+    "experienceAward":2200,
+    "populationAttraction":0,
+    "populationRequired":20,
+    "jobsProvided":4,
+    "noiseLevel":0.2,
+    "provides":"JANITORS"
+  },
+  {
+    "name":"Maids Office",
+    "coins":1000,
+    "height":1,
+    "width":3,
+    "experienceAward":2200,
+    "populationAttraction":0,
+    "populationRequired":20,
+    "jobsProvided":4,
+    "noiseLevel":0.3,
+    "provides":"MAIDS"
+  }
+]

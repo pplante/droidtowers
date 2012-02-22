@@ -4,5 +4,8 @@ public enum ProviderType {
   NONE,
   FOOD,
   HOUSING,
-  OFFICE_SERVICES
+  HOTEL_ROOMS,
+  OFFICE_SERVICES,
+  JANITORS,
+  MAIDS
 }

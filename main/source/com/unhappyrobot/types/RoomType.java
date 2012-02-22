@@ -59,4 +59,8 @@ public class RoomType extends GridObjectType {
   public ProviderType serviceProvided() {
     return provides;
   }
+
+  public ProviderType provides() {
+    return provides;
+  }
 }

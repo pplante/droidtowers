@@ -8,8 +8,8 @@
     "populationAttraction":2,
     "populationRequired":4,
     "jobsProvided":4,
-    "noiseLevel":0.2,
-    "provides": "OFFICE_SERVICES"
+    "noiseLevel":0.4,
+    "provides":"OFFICE_SERVICES"
   },
   {
     "name":"Burger Joint",
@@ -21,6 +21,19 @@
     "populationRequired":8,
     "jobsProvided":4,
     "noiseLevel":0.3,
-    "provides": "FOOD"
+    "provides":"FOOD"
+  },
+  {
+    "name":"Hotel Room",
+    "continuousPlacement":true,
+    "coins":100,
+    "experienceAward":1500,
+    "populationMax":2,
+    "height":1,
+    "width":2,
+    "noiseLevel":0.2,
+    "provides":"HOTEL_ROOMS",
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"2x1-hotel-room"
   }
 ]
