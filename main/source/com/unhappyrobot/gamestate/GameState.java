@@ -97,7 +97,7 @@ public class GameState extends EventListener {
 
   public void saveGame(FileHandle fileHandle, OrthographicCamera camera) {
     if (shouldSaveGame) {
-      GameSave gameSave = new GameSave(gameGrid, camera, Player.getInstance());
+      GameSave gameSave = new GameSave(gameGrid, camera, Player.instance());
       ObjectMapper objectMapper = new ObjectMapper();
       SimpleModule simpleModule = new SimpleModule("Specials", new Version(1, 0, 0, null));
       simpleModule.addSerializer(new Vector3Serializer());

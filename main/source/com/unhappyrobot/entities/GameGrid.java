@@ -11,7 +11,6 @@ import com.unhappyrobot.math.Bounds2d;
 import com.unhappyrobot.math.GridPoint;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,7 +20,7 @@ public class GameGrid extends GameLayer {
   public Color gridColor;
   public Vector2 gridSize;
 
-  private HashSet<GridObject> objects;
+  private GuavaSet<GridObject> objects;
   private Vector2 worldSize;
   private final GameGridRenderer gameGridRenderer;
   private final Map<Class, GuavaSet<GridObject>> gridObjectsByType;
@@ -87,7 +86,7 @@ public class GameGrid extends GameLayer {
     return true;
   }
 
-  public Set<GridObject> getObjects() {
+  public GuavaSet<GridObject> getObjects() {
     return objects;
   }
 

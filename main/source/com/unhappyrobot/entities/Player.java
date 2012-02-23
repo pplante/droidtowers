@@ -17,7 +17,7 @@ public class Player {
   private int populationMax;
   private int populationResidency;
 
-  public static Player getInstance() {
+  public static Player instance() {
     if (instance == null) {
       instance = new Player();
     }

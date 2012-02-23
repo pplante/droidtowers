@@ -15,8 +15,7 @@ public class Maid extends Janitor {
     return new TextureAtlas(Gdx.files.internal("characters/maid.txt"));
   }
 
-  @Override
-  protected boolean checkProviderType(ProviderType providerType) {
+  public static boolean checkProviderType(ProviderType providerType) {
     return providerType.equals(ProviderType.HOTEL_ROOMS);
   }
 }

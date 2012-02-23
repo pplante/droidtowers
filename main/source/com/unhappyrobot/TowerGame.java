@@ -15,6 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
+import com.unhappyrobot.achievements.Achievement;
+import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.controllers.GameObjectAccessor;
 import com.unhappyrobot.controllers.PathSearchManager;
@@ -41,7 +43,7 @@ public class TowerGame implements ApplicationListener {
   private static List<GameLayer> gameLayers;
   private Matrix4 matrix;
 
-  private GameGrid gameGrid;
+  private static GameGrid gameGrid;
   private static TweenManager tweenManager;
   private Stage guiStage;
   private static GameGridRenderer gameGridRenderer;
@@ -56,6 +58,12 @@ public class TowerGame implements ApplicationListener {
 
   public void create() {
     Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+
+    AchievementEngine.instance();
+
+    for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
+      System.out.println("achievement = " + achievement);
+    }
 
     RoomTypeFactory.getInstance();
     CommercialTypeFactory.getInstance();
@@ -157,6 +165,22 @@ public class TowerGame implements ApplicationListener {
     InputSystem.getInstance().bind(Keys.R, new InputCallback() {
       public boolean run(float timeDelta) {
         Texture.invalidateAllTextures(Gdx.app);
+
+        return true;
+      }
+    });
+
+    InputSystem.getInstance().bind(Keys.A, new InputCallback() {
+      public boolean run(float timeDelta) {
+        for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
+          System.out.println("achievement = " + achievement);
+          System.out.println("achievement.isCompleted() = " + achievement.isCompleted());
+          System.out.println("\n\n");
+
+          if (achievement.isCompleted()) {
+            achievement.giveReward();
+          }
+        }
 
         return true;
       }
@@ -271,5 +295,9 @@ public class TowerGame implements ApplicationListener {
 
   public static float getTimeMultiplier() {
     return timeMultiplier;
+  }
+
+  public static GameGrid getGameGrid() {
+    return gameGrid;
   }
 }

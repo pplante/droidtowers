@@ -37,8 +37,8 @@ public class PopulationCalculator extends GameStateAction {
       }
     }
 
-    Player.getInstance().setPopulationMax(maxPopulation);
-    Player.getInstance().setPopulationResidency(currentResidency);
-    Player.getInstance().setPopulationAttracted(currentResidency);
+    Player.instance().setPopulationMax(maxPopulation);
+    Player.instance().setPopulationResidency(currentResidency);
+    Player.instance().setPopulationAttracted(currentResidency);
   }
 }

@@ -117,18 +117,22 @@ public class GridObjectPurchaseMenu extends Window {
   private class GridObjectPurchaseItem extends Table {
     public GridObjectPurchaseItem(final GridObjectType gridObjectType) {
       TextButton buyButton = new TextButton("Buy", skin);
-      buyButton.setClickListener(new ClickListener() {
-        public void click(Actor actor, float x, float y) {
-          InputSystem.getInstance().switchTool(GestureTool.PLACEMENT, null);
 
-          PlacementTool placementTool = (PlacementTool) InputSystem.getInstance().getCurrentTool();
-          placementTool.setup(gridObjectType);
-          placementTool.enterPurchaseMode();
+      if (gridObjectType.isLocked()) {
+        buyButton.setText("LOCKED");
+      } else {
+        buyButton.setClickListener(new ClickListener() {
+          public void click(Actor actor, float x, float y) {
+            InputSystem.getInstance().switchTool(GestureTool.PLACEMENT, null);
 
-          GridObjectPurchaseMenu.this.dismiss();
-        }
-      });
+            PlacementTool placementTool = (PlacementTool) InputSystem.getInstance().getCurrentTool();
+            placementTool.setup(gridObjectType);
+            placementTool.enterPurchaseMode();
 
+            GridObjectPurchaseMenu.this.dismiss();
+          }
+        });
+      }
 
       defaults().align(Align.LEFT | Align.TOP).pad(2);
 

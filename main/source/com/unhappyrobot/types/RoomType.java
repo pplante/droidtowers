@@ -56,10 +56,6 @@ public class RoomType extends GridObjectType {
     return populationRequired;
   }
 
-  public ProviderType serviceProvided() {
-    return provides;
-  }
-
   public ProviderType provides() {
     return provides;
   }

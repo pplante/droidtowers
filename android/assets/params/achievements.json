@@ -1,0 +1,34 @@
+[
+  {
+    "name":"YOU ROCK.",
+    "requirements":[
+      {
+        "type":"POPULATION",
+        "amount":10
+      }
+    ],
+    "rewards":[
+      {
+        "type":"GIVE",
+        "thing":"MONEY",
+        "amount":1000
+      }
+    ]
+  },
+  {
+    "name":"Build 1 Hotel Room.",
+    "requirements":[
+      {
+        "type":"BUILD",
+        "thing":"HOTEL_ROOM",
+        "amount":1
+      }
+    ],
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"MAID_CLOSET"
+      }
+    ]
+  }
+]

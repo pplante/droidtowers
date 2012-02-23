@@ -28,7 +28,7 @@ public class EmploymentCalculator extends GameStateAction {
       }
     }
 
-    Player.getInstance().setJobsMax(maxJobs);
-    Player.getInstance().setJobsFilled(jobsFilled);
+    Player.instance().setJobsMax(maxJobs);
+    Player.instance().setJobsFilled(jobsFilled);
   }
 }

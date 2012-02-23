@@ -25,6 +25,7 @@ public abstract class GridObjectType {
   private String imageFilename;
   private boolean continuousPlacement;
   private boolean canShareSpace;
+  private boolean locked;
   private float noiseLevel;
 
   @JsonIgnore
@@ -129,5 +130,13 @@ public abstract class GridObjectType {
     }
 
     return null;
+  }
+
+  public boolean isLocked() {
+    return locked;
+  }
+
+  public void setLocked(boolean locked) {
+    this.locked = locked;
   }
 }

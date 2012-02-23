@@ -206,13 +206,13 @@ public class HeadsUpDisplay extends WidgetGroup {
     }
   }
 
-  public void showToast(String message) {
+  public void showToast(String message, Object... objects) {
     if (toast == null) {
       toast = new Toast();
       addActor(toast);
     }
 
-    toast.setMessage(message);
+    toast.setMessage(String.format(message, objects));
     toast.show();
   }
 

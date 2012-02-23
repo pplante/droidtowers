@@ -15,6 +15,7 @@ public class StatusBarPanel extends Table {
   private final Label moneyLabel;
   private final Label experienceLabel;
   private final Label gameSpeedLabel;
+  private final Label populationLabel;
   private float lastUpdated = TowerConsts.HUD_UPDATE_FREQUENCY;
 
   public StatusBarPanel(Skin guiSkin) {
@@ -23,6 +24,7 @@ public class StatusBarPanel extends Table {
 
     moneyLabel = makeLabel("0", null);
     experienceLabel = makeLabel("0", null);
+    populationLabel = makeLabel("0", null);
     gameSpeedLabel = makeLabel("0x", null);
 
     setBackground(guiSkin.getPatch("default-round"));
@@ -33,11 +35,13 @@ public class StatusBarPanel extends Table {
     row().center();
     add(makeLabel("EXPERIENCE", helvetica_neue_10_bold_white)).minWidth(100);
     add(makeLabel("COINS", helvetica_neue_10_bold_white)).minWidth(100);
+    add(makeLabel("POPULATION", helvetica_neue_10_bold_white)).minWidth(100);
     add(makeLabel("GAME SPEED", helvetica_neue_10_bold_white)).minWidth(100);
 
     row().center();
     add(experienceLabel);
     add(moneyLabel);
+    add(populationLabel);
     add(gameSpeedLabel);
 
     pack();
@@ -51,9 +55,10 @@ public class StatusBarPanel extends Table {
 
     if (lastUpdated >= TowerConsts.HUD_UPDATE_FREQUENCY) {
       lastUpdated = 0f;
-      Player player = Player.getInstance();
-      moneyLabel.setText("¢ " + NumberFormat.getInstance().format(player.getCoins()));
+      Player player = Player.instance();
       experienceLabel.setText(NumberFormat.getInstance().format(player.getExperience()));
+      moneyLabel.setText("¢ " + NumberFormat.getInstance().format(player.getCoins()));
+      populationLabel.setText(NumberFormat.getInstance().format(player.getTotalPopulation()));
 
       gameSpeedLabel.setText(TowerGame.getTimeMultiplier() + "x");
 

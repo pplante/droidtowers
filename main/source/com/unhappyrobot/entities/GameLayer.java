@@ -71,4 +71,10 @@ public class GameLayer {
   public boolean isTouchEnabled() {
     return touchEnabled;
   }
+
+  protected void removeChild(GameObject gameObject) {
+    if (gameObjects != null) {
+      gameObjects.remove(gameObject);
+    }
+  }
 }

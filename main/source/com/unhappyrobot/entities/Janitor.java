@@ -44,7 +44,7 @@ public class Janitor extends Avatar {
     }
   }
 
-  protected boolean checkProviderType(ProviderType providerType) {
+  public static boolean checkProviderType(ProviderType providerType) {
     return providerType.equals(ProviderType.FOOD) || providerType.equals(ProviderType.OFFICE_SERVICES);
   }
 }

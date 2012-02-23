@@ -24,7 +24,7 @@ public class PurchaseManager {
       return false;
     }
 
-    if (gridObjectType.getCoins() != 0 && Player.getInstance().getCoins() < gridObjectType.getCoins()) {
+    if (gridObjectType.getCoins() != 0 && Player.instance().getCoins() < gridObjectType.getCoins()) {
       displayCurrencyDialog();
       return false;
     }
@@ -39,7 +39,7 @@ public class PurchaseManager {
     new Dialog().setTitle("Not enough money :(").setMessage("Would you like to purchase more monies?").addButton("Yes", new OnClickCallback() {
       @Override
       public void onClick(Dialog dialog) {
-        Player.getInstance().addCurrency(1000);
+        Player.instance().addCurrency(1000);
         dialog.dismiss();
       }
     }).addButton(ResponseType.NEGATIVE, "No thanks!", new OnClickCallback() {
@@ -52,7 +52,7 @@ public class PurchaseManager {
 
   public void makePurchase() {
     Gdx.app.log(LOG_TAG, "Made purchase: " + gridObjectType.getName());
-    Player player = Player.getInstance();
+    Player player = Player.instance();
 
     player.subtractCurrency(gridObjectType.getCoins());
     player.addExperience(gridObjectType.getExperienceAward());

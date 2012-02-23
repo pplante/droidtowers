@@ -17,6 +17,6 @@ public class EarnoutCalculator extends GameStateAction {
     }
 
     System.out.println(String.format("Player earned: %d coins", coinsEarned));
-    Player.getInstance().addCurrency(coinsEarned);
+    Player.instance().addCurrency(coinsEarned);
   }
 }

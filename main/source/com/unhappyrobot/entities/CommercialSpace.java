@@ -19,7 +19,7 @@ public class CommercialSpace extends Room {
     if (isConnectedToTransport()) {
       CommercialType commercialType = (CommercialType) getGridObjectType();
 
-      if (Player.getInstance().getTotalPopulation() > commercialType.getPopulationRequired()) {
+      if (Player.instance().getTotalPopulation() > commercialType.getPopulationRequired()) {
         int jobsProvided = commercialType.getJobsProvided();
         if (jobsProvided > 0) {
           jobsFilled = Random.randomInt(jobsProvided / 2, jobsProvided);
