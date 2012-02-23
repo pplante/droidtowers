@@ -125,6 +125,11 @@ public class HeadsUpDisplay extends WidgetGroup {
     overlayControl.y = stage.height() - overlayControl.height - 5;
     addActor(overlayControl);
 
+//    AchievementNotification notification = new AchievementNotification();
+//    notification.x = 300;
+//    notification.y = 300;
+//    addActor(notification);
+
     stage.addActor(this);
   }
 
