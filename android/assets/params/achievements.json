@@ -1,5 +1,6 @@
 [
   {
+    "id":"yourock",
     "name":"YOU ROCK.",
     "requirements":[
       {
@@ -16,6 +17,7 @@
     ]
   },
   {
+    "id":"build1hotelroom",
     "name":"Build 1 Hotel Room.",
     "requirements":[
       {

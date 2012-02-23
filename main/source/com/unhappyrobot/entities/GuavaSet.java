@@ -32,7 +32,7 @@ public class GuavaSet<T> extends HashSet<T> {
 
   public T getRandomEntry() {
     if (!isEmpty()) {
-      return Iterables.get(this, Random.randomInt(size() - 1));
+      return Iterables.get(this, Random.randomInt(size()));
     }
 
     return null;
@@ -46,6 +46,7 @@ public class GuavaSet<T> extends HashSet<T> {
     return Iterables.getFirst(this, null);
   }
 
+  @SuppressWarnings("unchecked")
   public List<T> sortedBy(Function function) {
     return Ordering.natural().onResultOf(function).sortedCopy(this);
   }

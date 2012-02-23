@@ -1,12 +1,12 @@
 package com.unhappyrobot.achievements;
 
-import com.unhappyrobot.gui.HeadsUpDisplay;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 import java.util.Set;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Achievement {
+  private String id;
   private String name;
   private Set<AchievementRequirement> requirements;
   private Set<AchievementReward> rewards;
@@ -34,7 +34,7 @@ public class Achievement {
                    '}';
   }
 
-  public void giveReward() {
+  public String giveReward() {
     if (!gaveRewards) {
       gaveRewards = true;
       StringBuilder summary = new StringBuilder();
@@ -48,7 +48,21 @@ public class Achievement {
       }
 
 
-      HeadsUpDisplay.getInstance().showToast("Achievement Completed!\n\n%s", summary);
+      return String.format("Complete: %s!\n%s", name, summary);
     }
+
+    return null;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  void setCompleted(boolean completed) {
+    this.completed = completed;
+  }
+
+  public boolean alreadyGaveReward() {
+    return gaveRewards;
   }
 }

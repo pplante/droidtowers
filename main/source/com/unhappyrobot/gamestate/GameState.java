@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.unhappyrobot.GameSave;
 import com.unhappyrobot.GridObjectState;
 import com.unhappyrobot.TowerConsts;
+import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.events.EventListener;
@@ -68,6 +69,8 @@ public class GameState extends EventListener {
 
       camera.position.set(gameSave.getCameraPosition());
       camera.zoom = gameSave.getCameraZoom();
+
+      AchievementEngine.instance().loadCompletedAchievements(gameSave.getCompletedAchievements());
 
       for (GridObjectState gridObjectState : gameSave.getGridObjects()) {
         gridObjectState.materialize(gameGrid);
