@@ -12,7 +12,9 @@ import com.google.common.collect.Ordering;
 import com.google.common.eventbus.Subscribe;
 import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.TowerGame;
-import com.unhappyrobot.entities.*;
+import com.unhappyrobot.entities.GameLayer;
+import com.unhappyrobot.entities.GridObject;
+import com.unhappyrobot.entities.GridObjectPlacementState;
 import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectAddedEvent;
 import com.unhappyrobot.events.GridObjectChangedEvent;
@@ -20,8 +22,6 @@ import com.unhappyrobot.events.GridObjectRemovedEvent;
 import com.unhappyrobot.graphics.Overlays;
 import com.unhappyrobot.graphics.TransitLine;
 import com.unhappyrobot.math.GridPoint;
-import com.unhappyrobot.types.CommercialType;
-import com.unhappyrobot.types.RoomType;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -106,41 +106,9 @@ public class GameGridRenderer extends GameLayer {
   private void makeOverlayFunctions() {
     overlayFunctions = new HashMap<Overlays, Function<GridObject, Float>>();
 
-    overlayFunctions.put(Overlays.EMPLOYMENT_LEVEL, new Function<GridObject, Float>() {
-      public Float apply(@Nullable GridObject gridObject) {
-        if (gridObject instanceof CommercialSpace) {
-          float jobsProvided = ((CommercialType) gridObject.getGridObjectType()).getJobsProvided();
-          if (jobsProvided > 0f) {
-            return ((CommercialSpace) gridObject).getJobsFilled() / jobsProvided;
-          }
-        }
-
-        return null;
-      }
-    });
-
-    overlayFunctions.put(Overlays.POPULATION_LEVEL, new Function<GridObject, Float>() {
-      public Float apply(@Nullable GridObject gridObject) {
-        if (gridObject instanceof Room) {
-          float populationMax = ((RoomType) gridObject.getGridObjectType()).getPopulationMax();
-          if (populationMax > 0f) {
-            return ((Room) gridObject).getCurrentResidency() / populationMax;
-          }
-        }
-
-        return null;
-      }
-    });
-
-    overlayFunctions.put(Overlays.DESIRABILITY_LEVEL, new Function<GridObject, Float>() {
-      public Float apply(@Nullable GridObject gridObject) {
-        if (gridObject != null) {
-          return gridObject.getDesirability();
-        }
-
-        return null;
-      }
-    });
+    overlayFunctions.put(Overlays.EMPLOYMENT_LEVEL, Overlays.EMPLOYMENT_LEVEL.getMethod());
+    overlayFunctions.put(Overlays.POPULATION_LEVEL, Overlays.POPULATION_LEVEL.getMethod());
+    overlayFunctions.put(Overlays.DESIRABILITY_LEVEL, Overlays.DESIRABILITY_LEVEL.getMethod());
   }
 
   private void renderGenericOverlay(Overlays overlay) {
