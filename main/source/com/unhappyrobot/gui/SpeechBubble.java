@@ -28,7 +28,7 @@ public class SpeechBubble extends Toast {
 
     NinePatch patch = new NinePatch(textureAtlas.findRegion("speech-bubble-box"), 4, 4, 4, 4);
     Image tip = new Image(textureAtlas.findRegion("speech-bubble-tip"), Scaling.none);
-    label = new Label("hello! i am an avatar!\nthis is another line!\n\nand another way down here!!", new Label.LabelStyle(labelFont, Color.WHITE));
+    label = new Label("", new Label.LabelStyle(labelFont, Color.WHITE));
 
     defaults();
     setBackground(patch);

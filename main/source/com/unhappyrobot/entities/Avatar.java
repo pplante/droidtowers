@@ -9,12 +9,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 import com.sun.istack.internal.Nullable;
-import com.unhappyrobot.GridPosition;
-import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.controllers.AvatarState;
 import com.unhappyrobot.controllers.AvatarSteeringManager;
 import com.unhappyrobot.controllers.PathSearchManager;
+import com.unhappyrobot.grid.GameGrid;
+import com.unhappyrobot.grid.GridPosition;
+import com.unhappyrobot.grid.GridPositionCache;
 import com.unhappyrobot.gui.HeadsUpDisplay;
 import com.unhappyrobot.gui.SpeechBubble;
 import com.unhappyrobot.pathfinding.TransitPathFinder;
@@ -66,7 +67,7 @@ public class Avatar extends GameObject {
 
     speechBubble = new SpeechBubble();
     speechBubble.followObject(this);
-    HeadsUpDisplay.getInstance().addActor(speechBubble);
+    HeadsUpDisplay.instance().addActor(speechBubble);
   }
 
   protected TextureAtlas getTextureAtlas() {
@@ -95,10 +96,10 @@ public class Avatar extends GameObject {
 
   protected void navigateToGridObject(GridObject gridObject) {
     if (gridObject == null) {
-      System.out.println(String.format("%s is bored.", this.getClass().getSimpleName()));
+//      System.out.println(String.format("%s is bored.", this.getClass().getSimpleName()));
       return;
     }
-    System.out.println(String.format("%s moving to %s", this.getClass().getSimpleName(), gridObject.getGridObjectType().getName()));
+//    System.out.println(String.format("%s moving to %s", this.getClass().getSimpleName(), gridObject.getGridObjectType().getName()));
     movingTo = gridObject;
 
     GridPosition start = GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY()));

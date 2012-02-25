@@ -1,8 +1,8 @@
 package com.unhappyrobot.types;
 
 import com.unhappyrobot.entities.CommercialSpace;
-import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
+import com.unhappyrobot.grid.GameGrid;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)

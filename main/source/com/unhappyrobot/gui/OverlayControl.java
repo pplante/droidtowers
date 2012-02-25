@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.unhappyrobot.Overlays;
 import com.unhappyrobot.TowerGame;
+import com.unhappyrobot.graphics.Overlays;
 
 public class OverlayControl extends ImageButton {
   private Menu overlayMenu;

@@ -1,7 +1,5 @@
 package com.unhappyrobot;
 
-import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -11,21 +9,27 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
 import com.unhappyrobot.achievements.Achievement;
 import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.controllers.AvatarLayer;
-import com.unhappyrobot.controllers.GameObjectAccessor;
 import com.unhappyrobot.controllers.PathSearchManager;
-import com.unhappyrobot.entities.*;
+import com.unhappyrobot.entities.CloudLayer;
+import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.gamestate.GameState;
 import com.unhappyrobot.graphics.BackgroundLayer;
-import com.unhappyrobot.gui.*;
+import com.unhappyrobot.grid.GameGrid;
+import com.unhappyrobot.grid.GameGridRenderer;
+import com.unhappyrobot.grid.GridPositionCache;
+import com.unhappyrobot.gui.Dialog;
+import com.unhappyrobot.gui.HeadsUpDisplay;
+import com.unhappyrobot.gui.OnClickCallback;
+import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
+import com.unhappyrobot.tween.TweenSystem;
 import com.unhappyrobot.types.CommercialTypeFactory;
 import com.unhappyrobot.types.ElevatorTypeFactory;
 import com.unhappyrobot.types.RoomTypeFactory;
@@ -44,7 +48,6 @@ public class TowerGame implements ApplicationListener {
   private Matrix4 matrix;
 
   private static GameGrid gameGrid;
-  private static TweenManager tweenManager;
   private Stage guiStage;
   private static GameGridRenderer gameGridRenderer;
   private GameState gameState;
@@ -59,25 +62,16 @@ public class TowerGame implements ApplicationListener {
   public void create() {
     Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
 
+    TweenSystem.getTweenManager();
     AchievementEngine.instance();
-
-    for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
-      System.out.println("achievement = " + achievement);
-    }
-
-    RoomTypeFactory.getInstance();
-    CommercialTypeFactory.getInstance();
+    RoomTypeFactory.instance();
+    CommercialTypeFactory.instance();
     ElevatorTypeFactory.instance();
     StairTypeFactory.instance();
 
     Random.init();
 
     timeMultiplier = 1f;
-
-    tweenManager = new TweenManager();
-    Tween.registerAccessor(GameObject.class, new GameObjectAccessor());
-    Tween.registerAccessor(Toast.class, new ToastAccessor());
-    Tween.registerAccessor(Actor.class, new WidgetAccessor());
 
     camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     spriteBatch = new SpriteBatch(100);
@@ -87,12 +81,12 @@ public class TowerGame implements ApplicationListener {
 
     gameGrid = new GameGrid();
     gameGrid.setUnitSize(64, 64);
-    gameGrid.setGridSize(50, 30);
+    gameGrid.setGridSize(50, 40);
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
 
     gameState = new GameState(gameGrid);
 
-    HeadsUpDisplay.getInstance().initialize(camera, gameGrid, guiStage, spriteBatch);
+    HeadsUpDisplay.instance().initialize(camera, gameGrid, guiStage, spriteBatch);
 
     BackgroundLayer groundLayer = new BackgroundLayer("backgrounds/ground.png");
     groundLayer.setSize(gameGrid.getWorldSize().x, 256f);
@@ -116,11 +110,11 @@ public class TowerGame implements ApplicationListener {
     gameLayers.add(AvatarLayer.instance());
 
 //    BEGIN INPUT SETUP:
-    InputSystem.getInstance().setup(camera, gameLayers);
-    InputSystem.getInstance().addInputProcessor(guiStage, 10);
-    Gdx.input.setInputProcessor(InputSystem.getInstance());
+    InputSystem.instance().setup(camera, gameLayers);
+    InputSystem.instance().addInputProcessor(guiStage, 10);
+    Gdx.input.setInputProcessor(InputSystem.instance());
 
-    InputSystem.getInstance().bind(new int[]{Keys.PLUS, Keys.UP}, new InputCallback() {
+    InputSystem.instance().bind(new int[]{Keys.PLUS, Keys.UP}, new InputCallback() {
       public boolean run(float timeDelta) {
         timeMultiplier += 0.5f;
         timeMultiplier = Math.min(timeMultiplier, 4);
@@ -129,7 +123,7 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    InputSystem.getInstance().bind(new int[]{Keys.MINUS, Keys.DOWN}, new InputCallback() {
+    InputSystem.instance().bind(new int[]{Keys.MINUS, Keys.DOWN}, new InputCallback() {
       public boolean run(float timeDelta) {
         timeMultiplier -= 0.5f;
         timeMultiplier = Math.max(timeMultiplier, 0.5f);
@@ -138,7 +132,7 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    InputSystem.getInstance().bind(Keys.G, new InputCallback() {
+    InputSystem.instance().bind(Keys.G, new InputCallback() {
       public boolean run(float timeDelta) {
         gameGridRenderer.toggleGridLines();
 
@@ -146,7 +140,7 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    InputSystem.getInstance().bind(Keys.T, new InputCallback() {
+    InputSystem.instance().bind(Keys.T, new InputCallback() {
       public boolean run(float timeDelta) {
         gameGridRenderer.toggleTransitLines();
 
@@ -154,7 +148,7 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    InputSystem.getInstance().bind(Keys.NUM_0, new InputCallback() {
+    InputSystem.instance().bind(Keys.NUM_0, new InputCallback() {
       public boolean run(float timeDelta) {
         camera.zoom = 1f;
 
@@ -162,7 +156,7 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    InputSystem.getInstance().bind(Keys.R, new InputCallback() {
+    InputSystem.instance().bind(Keys.R, new InputCallback() {
       public boolean run(float timeDelta) {
         Texture.invalidateAllTextures(Gdx.app);
 
@@ -170,7 +164,7 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    InputSystem.getInstance().bind(Keys.A, new InputCallback() {
+    InputSystem.instance().bind(Keys.A, new InputCallback() {
       public boolean run(float timeDelta) {
         for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
           System.out.println("achievement = " + achievement);
@@ -186,7 +180,7 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    InputSystem.getInstance().bind(new int[]{Keys.BACK, Keys.ESCAPE}, new InputCallback() {
+    InputSystem.instance().bind(new int[]{Keys.BACK, Keys.ESCAPE}, new InputCallback() {
       private Dialog exitDialog;
 
       public boolean run(float timeDelta) {
@@ -231,7 +225,7 @@ public class TowerGame implements ApplicationListener {
     float deltaTime = Gdx.graphics.getDeltaTime();
 
     camera.update();
-    InputSystem.getInstance().update(deltaTime);
+    InputSystem.instance().update(deltaTime);
     PathSearchManager.instance().update(deltaTime);
 
     spriteBatch.setProjectionMatrix(camera.combined);
@@ -251,7 +245,7 @@ public class TowerGame implements ApplicationListener {
 
     deltaTime *= timeMultiplier;
 
-    tweenManager.update((int) (deltaTime * 1000));
+    TweenSystem.getTweenManager().update((int) (deltaTime * 1000));
     gameState.update(deltaTime, gameGrid);
     guiStage.act(deltaTime);
 
@@ -259,7 +253,7 @@ public class TowerGame implements ApplicationListener {
       layer.update(deltaTime);
     }
 
-    HeadsUpDisplay.getInstance().act(deltaTime);
+    HeadsUpDisplay.instance().act(deltaTime);
   }
 
   public void resize(int width, int height) {
@@ -283,10 +277,6 @@ public class TowerGame implements ApplicationListener {
   public void dispose() {
     spriteBatch.dispose();
     guiStage.dispose();
-  }
-
-  public static TweenManager getTweenManager() {
-    return tweenManager;
   }
 
   public static OrthographicCamera getCamera() {

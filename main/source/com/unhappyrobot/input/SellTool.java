@@ -6,10 +6,10 @@ import com.badlogic.gdx.math.Vector3;
 import com.google.common.base.Function;
 import com.google.common.collect.Ordering;
 import com.sun.istack.internal.Nullable;
-import com.unhappyrobot.GridPositionCache;
-import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.entities.GridObject;
+import com.unhappyrobot.grid.GameGrid;
+import com.unhappyrobot.grid.GridPositionCache;
 import com.unhappyrobot.math.GridPoint;
 
 import java.util.List;

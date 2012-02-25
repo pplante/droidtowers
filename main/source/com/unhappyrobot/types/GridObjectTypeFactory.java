@@ -52,7 +52,7 @@ public abstract class GridObjectTypeFactory<T extends GridObjectType> {
     return null;
   }
 
-  public static GridObjectTypeFactory getFactoryForType(Class<? extends GridObjectType> typeClass) {
+  public static GridObjectTypeFactory factoryForType(Class<? extends GridObjectType> typeClass) {
     for (GridObjectTypeFactory typeFactory : typeFactories) {
       if (typeFactory.gridObjectTypeClass.equals(typeClass)) {
         return typeFactory;

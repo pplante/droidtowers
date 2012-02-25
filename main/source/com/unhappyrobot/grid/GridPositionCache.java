@@ -1,4 +1,4 @@
-package com.unhappyrobot;
+package com.unhappyrobot.grid;
 
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;

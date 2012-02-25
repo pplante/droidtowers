@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.types.RoomType;
 import com.unhappyrobot.utils.Random;
 

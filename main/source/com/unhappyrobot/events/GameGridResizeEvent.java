@@ -1,6 +1,6 @@
 package com.unhappyrobot.events;
 
-import com.unhappyrobot.entities.GameGrid;
+import com.unhappyrobot.grid.GameGrid;
 
 public class GameGridResizeEvent {
   public final GameGrid gameGrid;

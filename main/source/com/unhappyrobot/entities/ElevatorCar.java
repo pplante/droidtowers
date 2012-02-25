@@ -7,11 +7,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
-import com.unhappyrobot.GridPosition;
-import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.controllers.AvatarSteeringManager;
-import com.unhappyrobot.controllers.GameObjectAccessor;
 import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
+import com.unhappyrobot.grid.GameGrid;
+import com.unhappyrobot.grid.GridPosition;
+import com.unhappyrobot.tween.GameObjectAccessor;
+import com.unhappyrobot.tween.TweenSystem;
 import com.unhappyrobot.utils.Random;
 
 import java.util.LinkedList;
@@ -53,7 +54,7 @@ public class ElevatorCar extends GameObject {
   }
 
   public void moveToFloor(GridPosition nextFloor, TweenCallback tweenCallback) {
-    TowerGame.getTweenManager().killTarget(this);
+    TweenSystem.getTweenManager().killTarget(this);
 
     Vector2 finalPosition = nextFloor.toWorldVector2(elevator.gameGrid);
 
@@ -63,7 +64,7 @@ public class ElevatorCar extends GameObject {
             .delay(500)
             .target(finalPosition.y)
             .addCallback(COMPLETE, tweenCallback)
-            .start(TowerGame.getTweenManager());
+            .start(TweenSystem.getTweenManager());
   }
 
   @Override

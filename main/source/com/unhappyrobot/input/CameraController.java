@@ -7,7 +7,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
-import com.unhappyrobot.entities.GameGrid;
+import com.unhappyrobot.grid.GameGrid;
 
 public class CameraController implements GestureDetector.GestureListener {
   private static CameraController instance;

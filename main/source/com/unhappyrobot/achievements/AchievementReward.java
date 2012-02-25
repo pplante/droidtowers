@@ -12,6 +12,16 @@ public class AchievementReward {
   private AchievementThing thing;
   private double amount;
 
+  public AchievementReward() {
+
+  }
+
+  public AchievementReward(RewardType type, AchievementThing thing, int amount) {
+    this.type = type;
+    this.thing = thing;
+    this.amount = amount;
+  }
+
   public void give() {
     switch (type) {
       case GIVE:
@@ -30,7 +40,7 @@ public class AchievementReward {
     System.out.println("thing = " + thing);
     switch (thing) {
       case MAID_CLOSET:
-        for (ServiceRoomType serviceRoomType : ServiceRoomTypeFactory.getInstance().all()) {
+        for (ServiceRoomType serviceRoomType : ServiceRoomTypeFactory.instance().all()) {
           if (serviceRoomType.provides() == ProviderType.MAIDS) {
             serviceRoomType.setLocked(false);
           }
@@ -67,5 +77,9 @@ public class AchievementReward {
 
   public AchievementThing getThing() {
     return thing;
+  }
+
+  public double getAmount() {
+    return amount;
   }
 }

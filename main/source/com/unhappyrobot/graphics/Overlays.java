@@ -1,4 +1,4 @@
-package com.unhappyrobot;
+package com.unhappyrobot.graphics;
 
 import com.badlogic.gdx.graphics.Color;
 

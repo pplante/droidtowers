@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.TransitType;
 

@@ -1,8 +1,8 @@
 package com.unhappyrobot.gamestate.actions;
 
-import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.Player;
+import com.unhappyrobot.grid.GameGrid;
 
 public class EarnoutCalculator extends GameStateAction {
   public EarnoutCalculator(GameGrid gameGrid, float frequency) {

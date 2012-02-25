@@ -13,7 +13,7 @@ public class TransitTypeFactory extends GridObjectTypeFactory<TransitType> {
     objectTypes.addAll(StairTypeFactory.instance().all());
   }
 
-  public static TransitTypeFactory getInstance() {
+  public static TransitTypeFactory instance() {
     if (instance == null) {
       instance = new TransitTypeFactory();
     }

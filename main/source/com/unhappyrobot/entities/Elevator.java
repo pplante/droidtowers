@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.unhappyrobot.actions.Action;
 import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
+import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.ElevatorType;
 import com.unhappyrobot.types.ResizeHandle;

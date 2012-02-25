@@ -7,9 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
-import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
+import com.unhappyrobot.tween.TweenSystem;
 
 import java.util.List;
 
@@ -29,8 +29,8 @@ public class Dialog {
   private InputCallback onDismissInputCallback;
 
   public Dialog() {
-    parent = HeadsUpDisplay.getInstance().getStage();
-    skin = HeadsUpDisplay.getInstance().getGuiSkin();
+    parent = HeadsUpDisplay.instance().getStage();
+    skin = HeadsUpDisplay.instance().getGuiSkin();
     title = "Dialog";
     buttons = Lists.newArrayList();
 
@@ -139,11 +139,11 @@ public class Dialog {
     }
 
     if (positiveButton != null) {
-      InputSystem.getInstance().bind(InputSystem.Keys.ENTER, positiveButtonInputCallback);
+      InputSystem.instance().bind(InputSystem.Keys.ENTER, positiveButtonInputCallback);
     }
 
     if (negativeButton != null) {
-      InputSystem.getInstance().bind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
+      InputSystem.instance().bind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
     }
 
     window.color.a = 0f;
@@ -151,7 +151,7 @@ public class Dialog {
     Timeline.createSequence()
             .push(Tween.set(window, WidgetAccessor.OPACITY).target(0f))
             .push(Tween.to(window, WidgetAccessor.OPACITY, 200).delay(100).target(1.0f))
-            .start(TowerGame.getTweenManager());
+            .start(TweenSystem.getTweenManager());
 
     return this;
   }
@@ -161,8 +161,8 @@ public class Dialog {
       parent.removeActor(window);
     }
 
-    InputSystem.getInstance().unbind(InputSystem.Keys.ENTER, positiveButtonInputCallback);
-    InputSystem.getInstance().unbind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
+    InputSystem.instance().unbind(InputSystem.Keys.ENTER, positiveButtonInputCallback);
+    InputSystem.instance().unbind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
 
     if (onDismissInputCallback != null) {
       onDismissInputCallback.run(0f);

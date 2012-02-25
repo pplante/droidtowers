@@ -2,11 +2,12 @@ package com.unhappyrobot.gamestate.actions;
 
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.eventbus.Subscribe;
-import com.unhappyrobot.GridPosition;
-import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.entities.*;
 import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectEvent;
+import com.unhappyrobot.grid.GameGrid;
+import com.unhappyrobot.grid.GridPosition;
+import com.unhappyrobot.grid.GridPositionCache;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.RoomType;
 

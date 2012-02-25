@@ -8,6 +8,7 @@ public class WidgetAccessor implements TweenAccessor<Actor> {
   public static final int OPACITY = 2;
   public static final int SCALE = 3;
   public static final int ROTATION = 4;
+  public static final int SIZE = 5;
 
   public int getValues(Actor target, int tweenType, float[] returnValues) {
     switch (tweenType) {
@@ -27,6 +28,11 @@ public class WidgetAccessor implements TweenAccessor<Actor> {
       case SCALE:
         returnValues[0] = target.scaleX;
         returnValues[1] = target.scaleY;
+        return 2;
+
+      case SIZE:
+        returnValues[0] = target.width;
+        returnValues[1] = target.height;
         return 2;
 
       default:
@@ -53,6 +59,13 @@ public class WidgetAccessor implements TweenAccessor<Actor> {
       case SCALE:
         target.scaleX = newValues[0];
         target.scaleY = newValues[1];
+        break;
+
+      case SIZE:
+        target.x += target.width - newValues[0];
+        target.y += target.height - newValues[1];
+        target.width = newValues[0];
+        target.height = newValues[1];
         break;
 
       default:

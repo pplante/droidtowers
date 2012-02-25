@@ -1,7 +1,11 @@
 package com.unhappyrobot.types;
 
-import com.unhappyrobot.GridPositionCache;
-import com.unhappyrobot.entities.*;
+import com.unhappyrobot.entities.Elevator;
+import com.unhappyrobot.entities.GridObject;
+import com.unhappyrobot.entities.Room;
+import com.unhappyrobot.entities.Stair;
+import com.unhappyrobot.grid.GameGrid;
+import com.unhappyrobot.grid.GridPositionCache;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 import java.util.Set;

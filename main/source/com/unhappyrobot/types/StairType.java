@@ -1,8 +1,8 @@
 package com.unhappyrobot.types;
 
-import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.Stair;
+import com.unhappyrobot.grid.GameGrid;
 
 public class StairType extends TransitType {
   @Override

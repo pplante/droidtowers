@@ -23,8 +23,8 @@ public class GridObjectPurchaseMenu extends Window {
   private static final int[] DIALOG_CLOSE_KEYCODES = new int[]{InputSystem.Keys.ESCAPE, InputSystem.Keys.BACK};
 
   public GridObjectPurchaseMenu(String objectTypeName, GridObjectTypeFactory typeFactory) {
-    super("Purchase " + objectTypeName, HeadsUpDisplay.getInstance().getGuiSkin());
-    skin = HeadsUpDisplay.getInstance().getGuiSkin();
+    super("Purchase " + objectTypeName, HeadsUpDisplay.instance().getGuiSkin());
+    skin = HeadsUpDisplay.instance().getGuiSkin();
 
     defaults().align(Align.LEFT);
     row().pad(10);
@@ -67,12 +67,12 @@ public class GridObjectPurchaseMenu extends Window {
       }
     };
 
-    InputSystem.getInstance().bind(DIALOG_CLOSE_KEYCODES, closeDialogCallback);
+    InputSystem.instance().bind(DIALOG_CLOSE_KEYCODES, closeDialogCallback);
   }
 
   public void dismiss() {
     if (closeDialogCallback != null) {
-      InputSystem.getInstance().unbind(DIALOG_CLOSE_KEYCODES, closeDialogCallback);
+      InputSystem.instance().unbind(DIALOG_CLOSE_KEYCODES, closeDialogCallback);
       closeDialogCallback = null;
     }
 
@@ -123,9 +123,9 @@ public class GridObjectPurchaseMenu extends Window {
       } else {
         buyButton.setClickListener(new ClickListener() {
           public void click(Actor actor, float x, float y) {
-            InputSystem.getInstance().switchTool(GestureTool.PLACEMENT, null);
+            InputSystem.instance().switchTool(GestureTool.PLACEMENT, null);
 
-            PlacementTool placementTool = (PlacementTool) InputSystem.getInstance().getCurrentTool();
+            PlacementTool placementTool = (PlacementTool) InputSystem.instance().getCurrentTool();
             placementTool.setup(gridObjectType);
             placementTool.enterPurchaseMode();
 

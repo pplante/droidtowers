@@ -1,0 +1,20 @@
+package com.unhappyrobot;
+
+import com.unhappyrobot.tween.TweenSystem;
+import org.junit.runners.model.InitializationError;
+
+public class TowerGameTestRunner extends GdxTestRunner {
+  public TowerGameTestRunner(Class<?> klass) throws InitializationError {
+    super(klass);
+  }
+
+  @Override
+  protected void beforeTestRun() {
+    TweenSystem.getTweenManager();
+  }
+
+  @Override
+  protected void afterTestRun() {
+    TweenSystem.setTweenManager(null);
+  }
+}

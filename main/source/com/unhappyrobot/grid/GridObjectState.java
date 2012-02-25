@@ -1,6 +1,5 @@
-package com.unhappyrobot;
+package com.unhappyrobot.grid;
 
-import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.GridObjectPlacementState;
 import com.unhappyrobot.math.GridPoint;
@@ -31,7 +30,7 @@ public class GridObjectState {
   }
 
   public GridObject materialize(GameGrid gameGrid) {
-    GridObjectTypeFactory factoryForType = GridObjectTypeFactory.getFactoryForType(typeClass);
+    GridObjectTypeFactory factoryForType = GridObjectTypeFactory.factoryForType(typeClass);
 
     if (factoryForType != null) {
       GridObjectType objectType = factoryForType.findByName(typeName);

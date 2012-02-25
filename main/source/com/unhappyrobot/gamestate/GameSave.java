@@ -1,14 +1,15 @@
-package com.unhappyrobot;
+package com.unhappyrobot.gamestate;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.google.common.collect.Lists;
 import com.unhappyrobot.achievements.Achievement;
 import com.unhappyrobot.achievements.AchievementEngine;
-import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.GridObjectPlacementState;
 import com.unhappyrobot.entities.Player;
+import com.unhappyrobot.grid.GameGrid;
+import com.unhappyrobot.grid.GridObjectState;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 

@@ -11,7 +11,7 @@ public class RoomTypeFactory extends GridObjectTypeFactory<RoomType> {
     parseTypesFile(Gdx.files.internal("params/rooms.json"));
   }
 
-  public static RoomTypeFactory getInstance() {
+  public static RoomTypeFactory instance() {
     if (instance == null) {
       instance = new RoomTypeFactory();
     }

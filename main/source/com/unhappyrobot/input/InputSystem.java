@@ -29,7 +29,7 @@ public class InputSystem extends InputAdapter {
   private static InputSystem instance;
   private List<GameLayer> gameLayers;
 
-  public static InputSystem getInstance() {
+  public static InputSystem instance() {
     if (instance == null) {
       instance = new InputSystem();
     }

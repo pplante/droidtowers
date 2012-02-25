@@ -45,13 +45,13 @@ public class Menu extends Table {
     color.a = 0;
     action(FadeIn.$(FADE_DURATION));
 
-    InputSystem.getInstance().addInputProcessor(menuCloser, 0);
-    InputSystem.getInstance().bind(closeKeys, keyCloser);
+    InputSystem.instance().addInputProcessor(menuCloser, 0);
+    InputSystem.instance().bind(closeKeys, keyCloser);
   }
 
   public void close() {
-    InputSystem.getInstance().removeInputProcessor(menuCloser);
-    InputSystem.getInstance().unbind(closeKeys, keyCloser);
+    InputSystem.instance().removeInputProcessor(menuCloser);
+    InputSystem.instance().unbind(closeKeys, keyCloser);
 
     action(FadeOut.$(FADE_DURATION).setCompletionListener(new OnActionCompleted() {
       public void completed(Action action) {

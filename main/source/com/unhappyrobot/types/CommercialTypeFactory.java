@@ -11,7 +11,7 @@ public class CommercialTypeFactory extends GridObjectTypeFactory<CommercialType>
     parseTypesFile(Gdx.files.internal("params/commercial-spaces.json"));
   }
 
-  public static CommercialTypeFactory getInstance() {
+  public static CommercialTypeFactory instance() {
     if (instance == null) {
       instance = new CommercialTypeFactory();
     }

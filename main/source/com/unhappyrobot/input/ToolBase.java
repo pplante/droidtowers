@@ -3,8 +3,8 @@ package com.unhappyrobot.input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
-import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GameLayer;
+import com.unhappyrobot.grid.GameGrid;
 
 import java.util.List;
 

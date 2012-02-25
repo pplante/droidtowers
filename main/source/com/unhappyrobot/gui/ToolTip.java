@@ -21,7 +21,7 @@ public class ToolTip extends Table {
       background = new NinePatch(new Texture(pixmap));
     }
     visible = false;
-    label = new Label(HeadsUpDisplay.getInstance().getGuiSkin());
+    label = new Label(HeadsUpDisplay.instance().getGuiSkin());
 
     defaults();
     setBackground(background);

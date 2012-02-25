@@ -3,10 +3,10 @@ package com.unhappyrobot.input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.GridObjectPlacementState;
+import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.gui.HeadsUpDisplay;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.money.PurchaseManager;
@@ -32,12 +32,12 @@ public class PlacementTool extends ToolBase {
 
     cancelPlacementInputCallback = new InputCallback() {
       public boolean run(float timeDelta) {
-        InputSystem.getInstance().switchTool(GestureTool.PICKER, null);
+        InputSystem.instance().switchTool(GestureTool.PICKER, null);
         return true;
       }
     };
 
-    InputSystem.getInstance().bind(new int[]{Keys.ESCAPE, Keys.BACK}, cancelPlacementInputCallback);
+    InputSystem.instance().bind(new int[]{Keys.ESCAPE, Keys.BACK}, cancelPlacementInputCallback);
   }
 
   public void setup(GridObjectType gridObjectType) {
@@ -83,7 +83,7 @@ public class PlacementTool extends ToolBase {
   public boolean tap(int x, int y, int count) {
     if (count >= 2) {
       if (!gameGrid.canObjectBeAt(gridObject)) {
-        HeadsUpDisplay.getInstance().showToast("This object cannot be placed here.");
+        HeadsUpDisplay.instance().showToast("This object cannot be placed here.");
         return false;
       } else {
         gridObject.setPlacementState(GridObjectPlacementState.PLACED);
@@ -104,7 +104,7 @@ public class PlacementTool extends ToolBase {
 
   private void verifyAbilityToPurchase() {
     if (purchaseManager != null && !purchaseManager.canPurchase()) {
-      InputSystem.getInstance().switchTool(GestureTool.PICKER, null);
+      InputSystem.instance().switchTool(GestureTool.PICKER, null);
     }
   }
 
@@ -120,6 +120,6 @@ public class PlacementTool extends ToolBase {
       gameGrid.removeObject(gridObject);
     }
 
-    InputSystem.getInstance().unbind(new int[]{Keys.ESCAPE, Keys.BACK}, cancelPlacementInputCallback);
+    InputSystem.instance().unbind(new int[]{Keys.ESCAPE, Keys.BACK}, cancelPlacementInputCallback);
   }
 }

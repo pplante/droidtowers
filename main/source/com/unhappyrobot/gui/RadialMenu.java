@@ -7,10 +7,10 @@ import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
-import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.input.GestureTool;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
+import com.unhappyrobot.tween.TweenSystem;
 
 import static com.unhappyrobot.gui.WidgetAccessor.*;
 
@@ -32,19 +32,19 @@ public class RadialMenu extends WidgetGroup {
   }
 
   public void show() {
-    InputSystem.getInstance().bind(InputSystem.Keys.ESCAPE, new InputCallback() {
+    InputSystem.instance().bind(InputSystem.Keys.ESCAPE, new InputCallback() {
       public boolean run(float timeDelta) {
-        InputSystem.getInstance().switchTool(GestureTool.PICKER, null);
+        InputSystem.instance().switchTool(GestureTool.PICKER, null);
         hide();
         unbind();
         return true;
       }
     });
-    InputSystem.getInstance().addInputProcessor(new InputAdapter() {
+    InputSystem.instance().addInputProcessor(new InputAdapter() {
       @Override
       public boolean touchDown(int x, int y, int pointer, int button) {
         hide();
-        InputSystem.getInstance().removeInputProcessor(this);
+        InputSystem.instance().removeInputProcessor(this);
         return true;
       }
     }, 100000);
@@ -73,7 +73,7 @@ public class RadialMenu extends WidgetGroup {
       timeline.push(Tween.to(child, OPACITY, 200).delay(10 * index++).target(1f));
     }
 
-    timeline.start(TowerGame.getTweenManager());
+    timeline.start(TweenSystem.getTweenManager());
   }
 
   public void hide() {
@@ -84,6 +84,6 @@ public class RadialMenu extends WidgetGroup {
                 visible = false;
               }
             })
-            .start(TowerGame.getTweenManager());
+            .start(TweenSystem.getTweenManager());
   }
 }

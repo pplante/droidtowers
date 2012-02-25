@@ -11,7 +11,7 @@ public class ServiceRoomTypeFactory extends GridObjectTypeFactory<ServiceRoomTyp
     parseTypesFile(Gdx.files.internal("params/services.json"));
   }
 
-  public static ServiceRoomTypeFactory getInstance() {
+  public static ServiceRoomTypeFactory instance() {
     if (instance == null) {
       instance = new ServiceRoomTypeFactory();
     }

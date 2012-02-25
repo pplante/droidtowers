@@ -6,8 +6,8 @@ import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
-import com.unhappyrobot.TowerGame;
-import com.unhappyrobot.controllers.GameObjectAccessor;
+import com.unhappyrobot.tween.GameObjectAccessor;
+import com.unhappyrobot.tween.TweenSystem;
 import com.unhappyrobot.utils.Random;
 
 import java.util.ArrayList;
@@ -66,7 +66,7 @@ public class CloudLayer extends GameLayer {
     cloud.setVelocity(Random.randomInt(5, 25), 0);
     cloud.setOpacity(0);
 
-    Tween.to(cloud, GameObjectAccessor.OPACITY, 2000).target(1.0f).start(TowerGame.getTweenManager());
+    Tween.to(cloud, GameObjectAccessor.OPACITY, 2000).target(1.0f).start(TweenSystem.getTweenManager());
 
     addChild(cloud);
   }
@@ -83,7 +83,7 @@ public class CloudLayer extends GameLayer {
           public void onEvent(EventType eventType, BaseTween source) {
             markForRemoval(cloud);
           }
-        }).start(TowerGame.getTweenManager());
+        }).start(TweenSystem.getTweenManager());
       }
     }
   }

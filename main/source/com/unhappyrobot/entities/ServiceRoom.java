@@ -1,5 +1,6 @@
 package com.unhappyrobot.entities;
 
+import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.types.ServiceRoomType;
 
 public class ServiceRoom extends CommercialSpace {

@@ -10,6 +10,7 @@ import com.unhappyrobot.entities.*;
 import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectAddedEvent;
 import com.unhappyrobot.events.GridObjectRemovedEvent;
+import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.types.RoomType;
 
 import java.util.Set;
@@ -101,6 +102,7 @@ public class AvatarLayer extends GameLayer {
   }
 
 
+  @SuppressWarnings("SuspiciousMethodCalls")
   @Override
   public void removeChild(GameObject gameObject) {
     super.removeChild(gameObject);

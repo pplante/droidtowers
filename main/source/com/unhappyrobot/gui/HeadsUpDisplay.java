@@ -10,11 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.unhappyrobot.GridPosition;
-import com.unhappyrobot.GridPositionCache;
 import com.unhappyrobot.entities.CommercialSpace;
-import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
+import com.unhappyrobot.grid.GameGrid;
+import com.unhappyrobot.grid.GridPosition;
+import com.unhappyrobot.grid.GridPositionCache;
 import com.unhappyrobot.input.GestureTool;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
@@ -42,7 +42,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   private InputCallback closeDialogCallback = null;
   private RadialMenu toolMenu;
 
-  public static HeadsUpDisplay getInstance() {
+  public static HeadsUpDisplay instance() {
     if (instance == null) {
       instance = new HeadsUpDisplay();
     }
@@ -50,11 +50,14 @@ public class HeadsUpDisplay extends WidgetGroup {
     return instance;
   }
 
+  private HeadsUpDisplay() {
+    this.guiSkin = new Skin(Gdx.files.internal("default-skin.ui"), Gdx.files.internal("default-skin.png"));
+  }
+
   public void initialize(final OrthographicCamera camera, final GameGrid gameGrid, final Stage stage, SpriteBatch spriteBatch) {
     this.stage = stage;
     this.camera = camera;
     this.gameGrid = gameGrid;
-    this.guiSkin = new Skin(Gdx.files.internal("default-skin.ui"), Gdx.files.internal("default-skin.png"));
 
     ModalOverlay.initialize(this);
 
@@ -75,19 +78,19 @@ public class HeadsUpDisplay extends WidgetGroup {
     toolMenu.radius = 140f;
 
     ImageButton housingButton = new ImageButton(hudAtlas.findRegion("tool-housing"));
-    housingButton.setClickListener(makePurchaseButtonClickListener("Housing", RoomTypeFactory.getInstance()));
+    housingButton.setClickListener(makePurchaseButtonClickListener("Housing", RoomTypeFactory.instance()));
     toolMenu.addActor(housingButton);
 
     ImageButton transitButton = new ImageButton(hudAtlas.findRegion("tool-transit"));
-    transitButton.setClickListener(makePurchaseButtonClickListener("Transit", TransitTypeFactory.getInstance()));
+    transitButton.setClickListener(makePurchaseButtonClickListener("Transit", TransitTypeFactory.instance()));
     toolMenu.addActor(transitButton);
 
     ImageButton commerceButton = new ImageButton(hudAtlas.findRegion("tool-commerce"));
-    commerceButton.setClickListener(makePurchaseButtonClickListener("Commerce", CommercialTypeFactory.getInstance()));
+    commerceButton.setClickListener(makePurchaseButtonClickListener("Commerce", CommercialTypeFactory.instance()));
     toolMenu.addActor(commerceButton);
 
     ImageButton servicesButton = new ImageButton(hudAtlas.findRegion("tool-services"));
-    servicesButton.setClickListener(makePurchaseButtonClickListener("Services", ServiceRoomTypeFactory.getInstance()));
+    servicesButton.setClickListener(makePurchaseButtonClickListener("Services", ServiceRoomTypeFactory.instance()));
     toolMenu.addActor(servicesButton);
 
     final ImageButton toolButton = new ImageButton(hudAtlas.findRegion("tool-sprite"));
@@ -96,12 +99,12 @@ public class HeadsUpDisplay extends WidgetGroup {
     addActor(toolButton);
     toolButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        if (InputSystem.getInstance().getCurrentTool() != GestureTool.PLACEMENT) {
+        if (InputSystem.instance().getCurrentTool() != GestureTool.PLACEMENT) {
           if (purchaseDialog != null) {
             purchaseDialog.dismiss();
             purchaseDialog = null;
           }
-          InputSystem.getInstance().switchTool(GestureTool.PICKER, null);
+          InputSystem.instance().switchTool(GestureTool.PICKER, null);
         }
 
         if (!toolMenu.visible) {
@@ -111,6 +114,7 @@ public class HeadsUpDisplay extends WidgetGroup {
           toolMenu.show();
         } else {
           toolMenu.hide();
+          toolMenu.markToRemove(true);
         }
       }
     });
@@ -124,11 +128,6 @@ public class HeadsUpDisplay extends WidgetGroup {
     overlayControl.x = audioControl.x - audioControl.width - 5;
     overlayControl.y = stage.height() - overlayControl.height - 5;
     addActor(overlayControl);
-
-//    AchievementNotification notification = new AchievementNotification();
-//    notification.x = 300;
-//    notification.y = 300;
-//    addActor(notification);
 
     stage.addActor(this);
   }

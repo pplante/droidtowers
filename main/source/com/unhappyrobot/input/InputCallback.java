@@ -12,7 +12,7 @@ public abstract class InputCallback {
   protected void unbind() {
     if (keysBound != null) {
       for (Integer integer : keysBound) {
-        InputSystem.getInstance().unbind(integer, this);
+        InputSystem.instance().unbind(integer, this);
       }
     }
   }

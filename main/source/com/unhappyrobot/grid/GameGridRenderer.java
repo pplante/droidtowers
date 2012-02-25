@@ -1,4 +1,4 @@
-package com.unhappyrobot.entities;
+package com.unhappyrobot.grid;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -11,12 +11,13 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.eventbus.Subscribe;
 import com.sun.istack.internal.Nullable;
-import com.unhappyrobot.Overlays;
 import com.unhappyrobot.TowerGame;
+import com.unhappyrobot.entities.*;
 import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectAddedEvent;
 import com.unhappyrobot.events.GridObjectChangedEvent;
 import com.unhappyrobot.events.GridObjectRemovedEvent;
+import com.unhappyrobot.graphics.Overlays;
 import com.unhappyrobot.graphics.TransitLine;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.CommercialType;
@@ -153,7 +154,7 @@ public class GameGridRenderer extends GameLayer {
       if (returnValue != null) {
         baseColor.a = returnValue;
         shapeRenderer.setColor(baseColor);
-        shapeRenderer.filledRect(gridObject.position.getWorldX(gameGrid), gridObject.position.getWorldY(gameGrid), gridObject.size.getWorldX(gameGrid), gridObject.size.getWorldY(gameGrid));
+        shapeRenderer.filledRect(gridObject.getPosition().getWorldX(gameGrid), gridObject.getPosition().getWorldY(gameGrid), gridObject.getSize().getWorldX(gameGrid), gridObject.getSize().getWorldY(gameGrid));
       }
     }
 
@@ -166,8 +167,8 @@ public class GameGridRenderer extends GameLayer {
       float noiseLevel = gridObject.getNoiseLevel();
 
       if (noiseLevel > 0) {
-        GridPoint position = gridObject.position.cpy();
-        GridPoint size = gridObject.size.cpy();
+        GridPoint position = gridObject.getPosition().cpy();
+        GridPoint size = gridObject.getSize().cpy();
         float colorStep = noiseLevel / 2f;
 
         for (int i = 0; i < 2; i++) {

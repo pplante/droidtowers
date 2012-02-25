@@ -1,13 +1,15 @@
 package com.unhappyrobot;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.pivotallabs.greatexpectations.matchers.*;
 
 import static com.pivotallabs.greatexpectations.GreatExpectations.wrapped;
 
 @SuppressWarnings("unchecked")
 public class Expect {
-  public static <T extends Object, M extends ObjectMatcher<T, M>> ObjectMatcher<T, ?> expect(T actual) {
+  public static <T, M extends ObjectMatcher<T, M>> ObjectMatcher<T, ?> expect(T actual) {
     return wrapped(ObjectMatcher.class, actual);
   }
 
@@ -37,5 +39,13 @@ public class Expect {
 
   public static <T extends Vector2, M extends Vector2Matcher<T, M>> Vector2Matcher<T, ?> expect(T actual) {
     return wrapped(Vector2Matcher.class, actual);
+  }
+
+  public static <T extends Actor, M> ActorMatcher<T, ?> expect(T actual) {
+    return wrapped(ActorMatcher.class, actual);
+  }
+
+  public static <T extends Group, M> GroupMatcher<T, ?> expect(T actual) {
+    return wrapped(GroupMatcher.class, actual);
   }
 }

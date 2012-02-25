@@ -1,7 +1,7 @@
 package com.unhappyrobot.pathfinding;
 
-import com.unhappyrobot.GridPosition;
-import com.unhappyrobot.GridPositionCache;
+import com.unhappyrobot.grid.GridPosition;
+import com.unhappyrobot.grid.GridPositionCache;
 
 import java.util.LinkedList;
 import java.util.List;

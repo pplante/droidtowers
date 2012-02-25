@@ -1,5 +1,6 @@
 package com.unhappyrobot.achievements;
 
+import com.google.common.collect.Sets;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 import java.util.Set;
@@ -12,6 +13,16 @@ public class Achievement {
   private Set<AchievementReward> rewards;
   private boolean completed;
   private boolean gaveRewards;
+
+  public Achievement() {
+
+  }
+
+  public Achievement(String name) {
+    this.name = name;
+    rewards = Sets.newHashSet();
+    requirements = Sets.newHashSet();
+  }
 
   public boolean isCompleted() {
     for (AchievementRequirement requirement : requirements) {
@@ -37,21 +48,26 @@ public class Achievement {
   public String giveReward() {
     if (!gaveRewards) {
       gaveRewards = true;
-      StringBuilder summary = new StringBuilder();
-      for (AchievementReward reward : rewards) {
-        reward.give();
-
-        summary.append(reward.getType());
-        summary.append(" ");
-        summary.append(reward.getThing());
-        summary.append("\n");
-      }
-
-
-      return String.format("Complete: %s!\n%s", name, summary);
+      return toRewardString();
     }
 
     return null;
+  }
+
+  public String toRewardString() {
+    StringBuilder summary = new StringBuilder();
+    for (AchievementReward reward : rewards) {
+      reward.give();
+
+      summary.append(reward.getType());
+      summary.append(" ");
+      summary.append(reward.getThing());
+      summary.append(" ");
+      summary.append(reward.getAmount());
+    }
+
+
+    return String.format("Complete: %s!\n%s", name, summary);
   }
 
   public String getId() {
@@ -64,5 +80,13 @@ public class Achievement {
 
   public boolean alreadyGaveReward() {
     return gaveRewards;
+  }
+
+  public void addReward(AchievementReward reward) {
+    rewards.add(reward);
+  }
+
+  public String getName() {
+    return name;
   }
 }

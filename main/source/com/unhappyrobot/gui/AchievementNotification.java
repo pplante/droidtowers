@@ -1,42 +1,81 @@
 package com.unhappyrobot.gui;
 
+import aurelienribon.tweenengine.BaseTween;
+import aurelienribon.tweenengine.Timeline;
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
+import com.unhappyrobot.achievements.Achievement;
+import com.unhappyrobot.tween.TweenSystem;
 
 public class AchievementNotification extends Table {
-  public AchievementNotification() {
-    Pixmap pixmap = new Pixmap(2, 2, Pixmap.Format.RGB565);
-    pixmap.setColor(Color.DARK_GRAY);
-    pixmap.drawLine(1, 1, 2, 1);
-    pixmap.setColor(Color.BLACK);
-    pixmap.drawLine(1, 2, 2, 2);
+  private final Achievement achievement;
 
-    defaults();
-    pad(5);
-    add(new Image(new Texture(Gdx.files.internal("hud/trophy.png")), Scaling.none)).minWidth(64).pad(5);
-    add(new Label("This is a test label.", HeadsUpDisplay.getInstance().getGuiSkin()));
-    row();
-    add();
-    add(new Label("You unlocked THE WORLD.", HeadsUpDisplay.getInstance().getGuiSkin()));
+  public AchievementNotification(Achievement achievement) {
+    this.achievement = achievement;
+
+    setBackground(HeadsUpDisplay.instance().getGuiSkin().getPatch("default-round"));
+
+    defaults().top().left().pad(4);
+
+    add(new Image(new Texture(Gdx.files.internal("hud/trophy.png")), Scaling.none)).minWidth(64).padRight(8);
+
+    Table textTable = new Table();
+    textTable.defaults().left().top();
+    add(textTable);
+
+    textTable.add(new Label(achievement.getName(), HeadsUpDisplay.instance().getGuiSkin())).top();
+    textTable.row();
+    textTable.add(new Label(achievement.toRewardString(), HeadsUpDisplay.instance().getGuiSkin())).top();
+    textTable.pack();
+    setClip(true);
     pack();
+  }
 
-    Texture texture = new Texture(pixmap);
-    texture.setWrap(Texture.TextureWrap.ClampToEdge, Texture.TextureWrap.ClampToEdge);
-    texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-    TextureRegion textureRegion = new TextureRegion(texture, 0, 0, width, height);
-    textureRegion.setV(0);
-    textureRegion.setV2(height / MathUtils.nextPowerOfTwo((int) height));
+  public void show() {
+    Timeline.createSequence()
+            .push(Tween.set(this, WidgetAccessor.OPACITY).target(0.0f))
+            .push(Tween.to(this, WidgetAccessor.OPACITY, 200).target(1.0f))
+            .addCallback(TweenCallback.EventType.END, new TweenCallback() {
+              public void onEvent(EventType eventType, BaseTween source) {
+                hide(true);
+              }
+            })
+            .start(TweenSystem.getTweenManager());
+  }
 
-    NinePatch ninePatch = new NinePatch(textureRegion);
-    setBackground(ninePatch);
+  public void hide(final boolean useDelay) {
+    TweenSystem.getTweenManager().killTarget(this);
+
+    final WidgetGroup targetParent = (WidgetGroup) AchievementNotification.this.parent;
+
+    Timeline.createSequence()
+            .push(Tween.set(this, WidgetAccessor.SIZE).target(this.width, this.height).delay(useDelay ? 4000 : 0))
+            .beginParallel()
+            .push(Tween.to(this, WidgetAccessor.SIZE, 300).target(this.width, 0))
+            .push(Tween.to(this, WidgetAccessor.OPACITY, 300).target(0))
+            .end()
+            .addCallback(TweenCallback.EventType.END, new TweenCallback() {
+              public void onEvent(EventType eventType, BaseTween source) {
+                if (targetParent != null) {
+                  targetParent.removeActor(AchievementNotification.this);
+                  targetParent.invalidate();
+                  targetParent.layout();
+                }
+              }
+            })
+            .start(TweenSystem.getTweenManager());
+  }
+
+  @Override
+  public boolean touchDown(float x, float y, int pointer) {
+    hide(false);
+    return true;
   }
 }

@@ -1,5 +1,6 @@
 package com.unhappyrobot.entities;
 
+import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.types.CommercialType;
 import com.unhappyrobot.utils.Random;
 

@@ -7,13 +7,14 @@ import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
+import org.junit.runners.model.Statement;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class GdxTestRunner extends BlockJUnit4ClassRunner implements ApplicationListener {
 
-  private Map<FrameworkMethod, RunNotifier> invokeInRender = new HashMap<FrameworkMethod, RunNotifier>();
+  private final Map<FrameworkMethod, RunNotifier> invokeInRender = new HashMap<FrameworkMethod, RunNotifier>();
 
   public GdxTestRunner(Class<?> klass) throws InitializationError {
     super(klass);
@@ -21,7 +22,31 @@ public class GdxTestRunner extends BlockJUnit4ClassRunner implements Application
     conf.width = 800;
     conf.height = 600;
     conf.title = "Gdx Test Runner";
+    conf.useGL20 = true;
     new LwjglApplication(this, conf);
+  }
+
+  @Override
+  protected Statement methodBlock(FrameworkMethod method) {
+    beforeTestRun();
+
+    final Statement statement = super.methodBlock(method);
+    return new Statement() {
+      @Override
+      public void evaluate() throws Throwable {
+        try {
+          statement.evaluate();
+        } finally {
+          afterTestRun();
+        }
+      }
+    };
+  }
+
+  protected void beforeTestRun() {
+  }
+
+  protected void afterTestRun() {
   }
 
   public void create() {
@@ -63,7 +88,7 @@ public class GdxTestRunner extends BlockJUnit4ClassRunner implements Application
   private void waitUntilInvokedInRenderMethod() {
     try {
       while (true) {
-        Thread.sleep(10);
+        Thread.sleep(1);
         synchronized (invokeInRender) {
           if (invokeInRender.isEmpty()) break;
         }
@@ -72,5 +97,4 @@ public class GdxTestRunner extends BlockJUnit4ClassRunner implements Application
       e.printStackTrace();
     }
   }
-
 }

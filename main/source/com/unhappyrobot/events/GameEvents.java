@@ -10,7 +10,7 @@ public class GameEvents {
     eventBus = new EventBus("GameEvents");
   }
 
-  static GameEvents getInstance() {
+  static GameEvents instance() {
     if (instance == null) {
       instance = new GameEvents();
     }
@@ -19,14 +19,14 @@ public class GameEvents {
   }
 
   public static void post(Object event) {
-    getInstance().eventBus.post(event);
+    instance().eventBus.post(event);
   }
 
   public static void register(Object listener) {
-    getInstance().eventBus.register(listener);
+    instance().eventBus.register(listener);
   }
 
   public static void unregister(Object listener) {
-    getInstance().eventBus.unregister(listener);
+    instance().eventBus.unregister(listener);
   }
 }

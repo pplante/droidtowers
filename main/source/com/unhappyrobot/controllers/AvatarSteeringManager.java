@@ -6,21 +6,21 @@ import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.unhappyrobot.GridPosition;
-import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.entities.Avatar;
 import com.unhappyrobot.entities.ElevatorCar;
-import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.Stair;
 import com.unhappyrobot.graphics.TransitLine;
+import com.unhappyrobot.grid.GameGrid;
+import com.unhappyrobot.grid.GridPosition;
 import com.unhappyrobot.math.Direction;
+import com.unhappyrobot.tween.TweenSystem;
 
 import java.util.LinkedList;
 import java.util.Set;
 
 import static aurelienribon.tweenengine.TweenCallback.EventType.END;
-import static com.unhappyrobot.controllers.GameObjectAccessor.POSITION;
 import static com.unhappyrobot.math.Direction.*;
+import static com.unhappyrobot.tween.GameObjectAccessor.POSITION;
 
 public class AvatarSteeringManager {
   public static final float MOVEMENT_SPEED = 30;
@@ -156,7 +156,7 @@ public class AvatarSteeringManager {
   public void moveAvatarTo(Vector2 endPoint, TweenCallback endCallback) {
     currentState.add(AvatarState.MOVING);
 
-    TowerGame.getTweenManager().killTarget(this);
+    TweenSystem.getTweenManager().killTarget(this);
 
     horizontalDirection = (int) endPoint.x < (int) avatar.getX() ? LEFT : RIGHT;
     verticalDirection = (int) endPoint.y < (int) avatar.getY() ? DOWN : UP;
@@ -164,7 +164,7 @@ public class AvatarSteeringManager {
     Tween.to(avatar, POSITION, (int) (distanceBetweenPoints * MOVEMENT_SPEED))
             .target(endPoint.x, endPoint.y)
             .addCallback(END, endCallback)
-            .start(TowerGame.getTweenManager());
+            .start(TweenSystem.getTweenManager());
   }
 
   public boolean isRunning() {

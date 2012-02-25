@@ -1,4 +1,4 @@
-package com.unhappyrobot.controllers;
+package com.unhappyrobot.tween;
 
 import aurelienribon.tweenengine.TweenAccessor;
 import com.unhappyrobot.entities.GameObject;

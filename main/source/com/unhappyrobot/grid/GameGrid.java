@@ -1,8 +1,10 @@
-package com.unhappyrobot.entities;
+package com.unhappyrobot.grid;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-import com.unhappyrobot.GridPositionCache;
+import com.unhappyrobot.entities.GameLayer;
+import com.unhappyrobot.entities.GridObject;
+import com.unhappyrobot.entities.GuavaSet;
 import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GameGridResizeEvent;
 import com.unhappyrobot.events.GridObjectAddedEvent;

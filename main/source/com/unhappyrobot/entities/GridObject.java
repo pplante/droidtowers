@@ -12,6 +12,7 @@ import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
 import com.unhappyrobot.events.GridObjectChangedEvent;
 import com.unhappyrobot.events.GridObjectEvent;
+import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.math.Bounds2d;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.GridObjectType;

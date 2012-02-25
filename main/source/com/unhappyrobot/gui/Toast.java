@@ -10,13 +10,12 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.unhappyrobot.TowerGame;
+import com.unhappyrobot.tween.TweenSystem;
 
 public class Toast extends Table {
   private static Pixmap pixmap;
   private static NinePatch background;
   private final Label label;
-  float alpha;
 
   public Toast() {
     if (pixmap == null) {
@@ -27,8 +26,8 @@ public class Toast extends Table {
       background = new NinePatch(new Texture(pixmap));
     }
 
-
-    label = new Label(HeadsUpDisplay.getInstance().getGuiSkin());
+    visible = false;
+    label = new Label(HeadsUpDisplay.instance().getGuiSkin());
 
     defaults();
     setBackground(background);
@@ -45,51 +44,32 @@ public class Toast extends Table {
   public void show() {
     pack();
 
-    x = (HeadsUpDisplay.getInstance().getStage().width() - width) / 2;
-    y = HeadsUpDisplay.getInstance().getStage().height() - height - 10;
+    x = (HeadsUpDisplay.instance().getStage().width() - width) / 2;
+    y = HeadsUpDisplay.instance().getStage().height() - height - 10;
 
-    alpha = 0;
+    color.a = 0f;
+    visible = true;
 
     fadeIn();
   }
 
   protected void fadeIn() {
-    Tween.to(this, ToastAccessor.OPACITY, 500).target(1.0f).start(TowerGame.getTweenManager()).addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
+    Tween.to(this, WidgetAccessor.OPACITY, 500).target(1.0f).start(TweenSystem.getTweenManager()).addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
       public void onEvent(EventType eventType, BaseTween source) {
         fadeOut();
+        visible = false;
       }
     });
   }
 
   protected void fadeOut() {
-    Tween.to(this, ToastAccessor.OPACITY, 250).target(0f).delay(2000).start(TowerGame.getTweenManager());
+    Tween.to(this, WidgetAccessor.OPACITY, 250).target(0f).delay(2000).start(TweenSystem.getTweenManager());
   }
 
   @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
-    if (alpha > 0.01f) {
-      super.draw(batch, alpha);
+    if (color.a > 0.01f) {
+      super.draw(batch, color.a);
     }
   }
-
-  public int getTweenValues(int tweenType, float[] returnValues) {
-    switch (tweenType) {
-      case ALPHA:
-        returnValues[0] = alpha;
-        return 1;
-    }
-
-    return 0;
-  }
-
-
-  public void onTweenUpdated(int tweenType, float[] newValues) {
-    switch (tweenType) {
-      case ALPHA:
-        alpha = newValues[0];
-        break;
-    }
-  }
-
-  private static final int ALPHA = 1;
 }

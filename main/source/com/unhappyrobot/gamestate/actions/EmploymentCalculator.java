@@ -1,9 +1,9 @@
 package com.unhappyrobot.gamestate.actions;
 
 import com.unhappyrobot.entities.CommercialSpace;
-import com.unhappyrobot.entities.GameGrid;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.Player;
+import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.types.CommercialType;
 
 import java.util.Set;

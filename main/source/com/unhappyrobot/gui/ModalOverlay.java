@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
-import com.unhappyrobot.TowerGame;
+import com.unhappyrobot.tween.TweenSystem;
 
 public class ModalOverlay extends WidgetGroup {
   public static final float TARGET_OPACITY = 0.5f;
@@ -62,7 +62,7 @@ public class ModalOverlay extends WidgetGroup {
     Timeline.createSequence()
             .push(Tween.set(background, WidgetAccessor.OPACITY).target(0f))
             .push(Tween.to(background, WidgetAccessor.OPACITY, 200).target(TARGET_OPACITY))
-            .start(TowerGame.getTweenManager());
+            .start(TweenSystem.getTweenManager());
   }
 
   public void hide() {
@@ -74,7 +74,7 @@ public class ModalOverlay extends WidgetGroup {
                 markToRemove(true);
               }
             })
-            .start(TowerGame.getTweenManager());
+            .start(TweenSystem.getTweenManager());
   }
 
   @Override

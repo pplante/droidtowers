@@ -7,7 +7,6 @@ import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectChangedEvent;
-import com.unhappyrobot.gui.HeadsUpDisplay;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.util.ArrayList;
@@ -76,7 +75,7 @@ public class AchievementEngine {
         formattedSummary += "\n" + s;
       }
 
-      HeadsUpDisplay.getInstance().showToast("Awesome Job!\n%s", formattedSummary);
+//      HeadsUpDisplay.instance().showToast("Awesome Job!\n%s", formattedSummary);
     }
   }
 
@@ -97,5 +96,9 @@ public class AchievementEngine {
         achievement.giveReward();
       }
     }
+  }
+
+  public void add(Achievement achievement) {
+    achievements.add(achievement);
   }
 }

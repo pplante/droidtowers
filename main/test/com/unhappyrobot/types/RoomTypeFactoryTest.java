@@ -12,7 +12,7 @@ import static com.unhappyrobot.Expect.expect;
 public class RoomTypeFactoryTest {
   @Test
   public void all_returnsKnownRoomTypes() {
-    List<RoomType> types = RoomTypeFactory.getInstance().all();
+    List<RoomType> types = RoomTypeFactory.instance().all();
 
     expect(types.size()).toEqual(3);
 
