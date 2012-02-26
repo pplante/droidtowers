@@ -92,7 +92,7 @@ public class TowerGame implements ApplicationListener {
     groundLayer.setSize(gameGrid.getWorldSize().x, 256f);
     groundLayer.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
 
-    BackgroundLayer skyLayer = new BackgroundLayer("backgrounds/bluesky.png");
+    BackgroundLayer skyLayer = new BackgroundLayer("backgrounds/stormysky.png");
     skyLayer.setPosition(0, 256);
     skyLayer.setSize(gameGrid.getWorldSize().x, gameGrid.getWorldSize().y - 256f);
     skyLayer.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
@@ -102,9 +102,9 @@ public class TowerGame implements ApplicationListener {
 
     GameLayer testLayer = new GameLayer();
     gameLayers = Lists.newArrayList();
-    gameLayers.add(groundLayer);
     gameLayers.add(skyLayer);
     gameLayers.add(new CloudLayer(gameGrid.getWorldSize()));
+    gameLayers.add(groundLayer);
     gameLayers.add(gameGridRenderer);
     gameLayers.add(gameGrid);
     gameLayers.add(AvatarLayer.instance());

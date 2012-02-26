@@ -8,6 +8,8 @@ public class GameObjectAccessor implements TweenAccessor<GameObject> {
   public static final int POSITION_X = 2;
   public static final int POSITION_Y = 3;
   public static final int OPACITY = 4;
+  public static final int TEXTURE_UV = 5;
+  public static final int TEXTURE_VV2 = 6;
 
   public int getValues(GameObject target, int tweenType, float[] returnValues) {
     switch (tweenType) {
@@ -27,6 +29,16 @@ public class GameObjectAccessor implements TweenAccessor<GameObject> {
       case POSITION_Y:
         returnValues[0] = target.getY();
         return 1;
+
+      case TEXTURE_UV:
+        returnValues[0] = target.getU();
+        returnValues[1] = target.getV();
+        return 2;
+
+      case TEXTURE_VV2:
+        returnValues[0] = target.getV();
+        returnValues[1] = target.getV2();
+        return 2;
 
       default:
         assert false;
@@ -50,6 +62,16 @@ public class GameObjectAccessor implements TweenAccessor<GameObject> {
 
       case POSITION_Y:
         target.setY(newValues[0]);
+        break;
+
+      case TEXTURE_UV:
+        target.setU(newValues[0]);
+        target.setV(newValues[1]);
+        break;
+
+      case TEXTURE_VV2:
+        target.setV(newValues[0]);
+        target.setV2(newValues[1]);
         break;
 
       default:

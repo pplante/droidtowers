@@ -1,5 +1,6 @@
 package com.unhappyrobot.entities;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -17,6 +18,14 @@ public class GameObject extends Sprite {
 
   public GameObject() {
     super();
+  }
+
+  public GameObject(Texture texture) {
+    super(texture);
+  }
+
+  public GameObject(Texture texture, int u, int v, int u2, int v2) {
+    super(texture, u, v, u2, v2);
   }
 
   @Override

@@ -42,16 +42,16 @@ ANDROID_LIBS_PATH="${PROJECT_DIR}/android/libs/."
 cp -R "${EXTRACT_PATH}/armeabi" $ANDROID_LIBS_PATH
 cp -R "${EXTRACT_PATH}/armeabi-v7a" $ANDROID_LIBS_PATH
 cp "${EXTRACT_PATH}/gdx-backend-android.jar" $ANDROID_LIBS_PATH
-cp "${EXTRACT_PATH}/gdx-backend-android-sources.jar" $ANDROID_LIBS_PATH
+cp "${EXTRACT_PATH}/sources/gdx-backend-android-sources.jar" $ANDROID_LIBS_PATH
 
 echo
 echo "* Copying desktop libs..."
 echo
 
 DESKTOP_LIBS_PATH="${PROJECT_DIR}/desktop/libs"
-cp "${EXTRACT_PATH}/gdx-openal-sources.jar" "${DESKTOP_LIBS_PATH}/sources"
+cp "${EXTRACT_PATH}/sources/gdx-openal-sources.jar" "${DESKTOP_LIBS_PATH}/sources"
 cp "${EXTRACT_PATH}/gdx-backend-lwjgl-natives.jar" "${DESKTOP_LIBS_PATH}/main"
-cp "${EXTRACT_PATH}/gdx-backend-lwjgl-sources.jar" "${DESKTOP_LIBS_PATH}/sources"
+cp "${EXTRACT_PATH}/sources/gdx-backend-lwjgl-sources.jar" "${DESKTOP_LIBS_PATH}/sources"
 cp "${EXTRACT_PATH}/gdx-backend-lwjgl.jar" "${DESKTOP_LIBS_PATH}/main"
 cp "${EXTRACT_PATH}/gdx-natives.jar" "${DESKTOP_LIBS_PATH}/main"
 
@@ -60,7 +60,7 @@ echo "* Copying shared libs..."
 echo
 
 SHARED_LIBS_PATH="${PROJECT_DIR}/main/libs/"
-cp "${EXTRACT_PATH}/gdx-sources.jar" "${SHARED_LIBS_PATH}/sources"
+cp "${EXTRACT_PATH}/sources/gdx-sources.jar" "${SHARED_LIBS_PATH}/sources"
 cp "${EXTRACT_PATH}/gdx.jar" "${SHARED_LIBS_PATH}/main"
 
 echo
