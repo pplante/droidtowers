@@ -12,9 +12,9 @@ import com.unhappyrobot.grid.GameGrid;
 public class CameraController implements GestureDetector.GestureListener {
   private static CameraController instance;
 
-  public static final float ZOOM_MAX = 2.0f;
-
+  public static final float ZOOM_MAX = 3.0f;
   public static final float ZOOM_MIN = (Gdx.app.getType() == Application.ApplicationType.Android ? 0.4f : 0.6f);
+
   private OrthographicCamera camera;
   private BoundingBox cameraBounds;
   private float initialScale = 1.0f;

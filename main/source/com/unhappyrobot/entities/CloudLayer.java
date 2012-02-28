@@ -36,10 +36,13 @@ public class CloudLayer extends GameLayer {
     numberOfCloudTypes = textureAtlas.getRegions().size();
     cloudsToRemove = new ArrayList<GameObject>(5);
 
-    addChild(new Rain(worldSize));
-    addChild(new Rain(worldSize));
+    for (int i = 0; i < MAX_ACTIVE_CLOUDS; i++) {
+      spawnCloudNow();
+    }
 
-    spawnCloudNow();
+    for (GameObject cloud : gameObjects) {
+      cloud.setX(Random.randomInt(0, worldSize.x));
+    }
   }
 
   @Override

@@ -21,6 +21,7 @@ import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.gamestate.GameState;
 import com.unhappyrobot.graphics.BackgroundLayer;
 import com.unhappyrobot.graphics.CityScapeLayer;
+import com.unhappyrobot.graphics.RainLayer;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GameGridRenderer;
 import com.unhappyrobot.grid.GridPositionCache;
@@ -105,6 +106,7 @@ public class TowerGame implements ApplicationListener {
     gameLayers = Lists.newArrayList();
     gameLayers.add(skyLayer);
     gameLayers.add(new CityScapeLayer(gameGrid));
+    gameLayers.add(new RainLayer(gameGrid));
     gameLayers.add(new CloudLayer(gameGrid.getWorldSize()));
     gameLayers.add(groundLayer);
     gameLayers.add(gameGridRenderer);
