@@ -21,6 +21,8 @@ public class CameraController implements GestureDetector.GestureListener {
   private boolean flinging = false;
   private float velX;
   private float velY;
+  private final int halfHeight;
+  private final int halfWidth;
 
   public static void initialize(OrthographicCamera camera, GameGrid gameGrid) {
     instance = new CameraController(camera, gameGrid);
@@ -37,9 +39,9 @@ public class CameraController implements GestureDetector.GestureListener {
   private CameraController(OrthographicCamera camera, GameGrid gameGrid) {
     Vector2 worldSize = gameGrid.getWorldSize();
     this.camera = camera;
-    int halfWidth = Gdx.graphics.getWidth() / 2;
-    int halfHeight = Gdx.graphics.getHeight() / 2;
-    this.cameraBounds = new BoundingBox(new Vector3(halfWidth, halfHeight, 0), new Vector3(worldSize.x - halfWidth, worldSize.y - halfHeight, 0));
+    halfWidth = Gdx.graphics.getWidth() / 2;
+    halfHeight = Gdx.graphics.getHeight() / 2;
+    this.cameraBounds = new BoundingBox(new Vector3(0, 0, 0), new Vector3(worldSize.x, worldSize.y, 0));
     this.camera.position.set(worldSize.x / 2, 384, 0);
   }
 
@@ -68,7 +70,8 @@ public class CameraController implements GestureDetector.GestureListener {
     float deltaX = -changeX * camera.zoom;
     float deltaY = changeY * camera.zoom;
 
-    checkBounds(deltaX, deltaY);
+    camera.position.add(deltaX, deltaY, 0);
+    checkBounds();
     return false;
   }
 
@@ -77,6 +80,7 @@ public class CameraController implements GestureDetector.GestureListener {
     camera.zoom = initialScale * ratio;
 
     checkZoom();
+    checkBounds();
 
     return true;
   }
@@ -89,6 +93,7 @@ public class CameraController implements GestureDetector.GestureListener {
     camera.zoom += (float) amount / 10;
 
     checkZoom();
+    checkBounds();
 
     return true;
   }
@@ -102,7 +107,8 @@ public class CameraController implements GestureDetector.GestureListener {
       if (Math.abs(velX) < 0.01f) velX = 0;
       if (Math.abs(velY) < 0.01f) velY = 0;
 
-      checkBounds(deltaX, deltaY);
+      camera.position.add(deltaX, deltaY, 0);
+      checkBounds();
     }
   }
 
@@ -114,16 +120,15 @@ public class CameraController implements GestureDetector.GestureListener {
     }
   }
 
-  private void checkBounds(float deltaX, float deltaY) {
-    Vector3 previousPosition = camera.position.cpy();
+  private void checkBounds() {
+    Vector3 min = cameraBounds.getMin().cpy().add(halfWidth * camera.zoom, halfHeight * camera.zoom, 0);
+    Vector3 max = cameraBounds.getMax().cpy().sub(halfWidth * camera.zoom, halfHeight * camera.zoom, 0);
 
-    if (cameraBounds.contains(previousPosition.add(deltaX, 0, 0))) {
-      camera.position.add(deltaX, 0, 0);
-    }
+    camera.position.x = Math.max(min.x, camera.position.x);
+    camera.position.x = Math.min(max.x, camera.position.x);
 
-    if (cameraBounds.contains(previousPosition.add(0, deltaY, 0))) {
-      camera.position.add(0, deltaY, 0);
-    }
+    camera.position.y = Math.max(min.y, camera.position.y);
+    camera.position.y = Math.min(max.y, camera.position.y);
   }
 
   public BoundingBox getCameraBounds() {

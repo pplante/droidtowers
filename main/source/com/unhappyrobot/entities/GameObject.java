@@ -1,5 +1,6 @@
 package com.unhappyrobot.entities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,7 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 
 public class GameObject extends Sprite {
   private boolean visible = true;
-  private float opacity = 1f;
   private float velocityX;
   private float velocityY;
 
@@ -54,11 +54,13 @@ public class GameObject extends Sprite {
   }
 
   public void setOpacity(float opacity) {
-    this.opacity = opacity;
+    Color color = getColor();
+    color.a = opacity;
+    setColor(color);
   }
 
   public float getOpacity() {
-    return opacity;
+    return getColor().a;
   }
 
   public void setPosition(Vector2 position) {

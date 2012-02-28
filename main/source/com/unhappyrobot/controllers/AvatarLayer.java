@@ -58,6 +58,9 @@ public class AvatarLayer extends GameLayer {
   private void maintainAvatars() {
     if (avatars.size() < MAX_AVATARS) {
       GuavaSet<GridObject> rooms = getAllRooms();
+      if (rooms == null || rooms.isEmpty()) {
+        return;
+      }
 
       int numToSpawn = MAX_AVATARS - avatars.size();
       for (int i = 0; i <= numToSpawn; i++) {

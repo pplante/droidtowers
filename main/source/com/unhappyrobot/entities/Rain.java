@@ -11,6 +11,9 @@ import com.unhappyrobot.tween.TweenSystem;
 import com.unhappyrobot.utils.Random;
 
 public class Rain extends GameObject {
+
+  public static final int RAIN_TEXURE_SIZE = 128;
+
   public Rain(Vector2 worldSize) {
     super();
 
@@ -19,20 +22,25 @@ public class Rain extends GameObject {
 
     setTexture(rainDropTexture);
 
-    setSize(worldSize.x, worldSize.y);
-    setRegion(0, 0, worldSize.x / 64, worldSize.y / 64);
+    float width = worldSize.x + (RAIN_TEXURE_SIZE * 2);
+    float height = worldSize.y + (RAIN_TEXURE_SIZE * 2);
+    setPosition(-RAIN_TEXURE_SIZE, -RAIN_TEXURE_SIZE);
+    setSize(width, height);
+    setRegion(0, 0, width / RAIN_TEXURE_SIZE, height / RAIN_TEXURE_SIZE);
 
-    setV(0f);
-    setV2(20.0f);
+    setOpacity(Math.max(Random.randomFloat(), 0.5f));
+
+    Tween.to(this, GameObjectAccessor.OPACITY, Random.randomInt(1000, 3000))
+            .target(1f)
+            .repeatYoyo(Tween.INFINITY, 500)
+            .start(TweenSystem.getTweenManager());
 
     Tween.to(this, GameObjectAccessor.TEXTURE_VV2, Random.randomInt(8000, 10000))
-            .target(-20f, 0f)
+            .target(-getV2(), 0f)
             .repeat(Tween.INFINITY, 0)
             .addCallback(TweenCallback.EventType.BEGIN, new TweenCallback() {
               public void onEvent(EventType eventType, BaseTween source) {
-                System.out.println("source = " + source);
-                setPosition(Random.randomInt(0, 32), 0);
-                setOpacity(Random.randomFloat());
+                setPosition(Random.randomInt(-RAIN_TEXURE_SIZE / 2, RAIN_TEXURE_SIZE / 2), 0);
               }
             })
             .start(TweenSystem.getTweenManager());

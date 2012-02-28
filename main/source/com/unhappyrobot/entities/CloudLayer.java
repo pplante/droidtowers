@@ -69,7 +69,6 @@ public class CloudLayer extends GameLayer {
     GameObject cloud = new GameObject(cloudRegion);
     cloud.setColor(Color.DARK_GRAY);
     cloud.setPosition(-cloudX, Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX));
-//    cloud.setScale(scale, scale);
     cloud.setVelocity(Random.randomInt(5, 25), 0);
     cloud.setOpacity(0);
 

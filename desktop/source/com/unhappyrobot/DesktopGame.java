@@ -7,7 +7,7 @@ public class DesktopGame {
   public static void main(String[] args) {
     LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
     config.title = "TowerSim";
-    config.resizable = true;
+    config.resizable = false;
     config.width = 800;
     config.height = 600;
     config.useGL20 = true;

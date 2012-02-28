@@ -53,7 +53,7 @@ public class Avatar extends GameObject {
 
     gameGrid = avatarLayer.getGameGrid();
 
-    setPosition(-Random.randomInt(10, 200), 256);
+    setPosition(-Random.randomInt(50, 200), 256);
 
     pickColor();
 
