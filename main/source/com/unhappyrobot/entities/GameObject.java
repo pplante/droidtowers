@@ -66,4 +66,20 @@ public class GameObject extends Sprite {
   public void setPosition(Vector2 position) {
     setPosition(position.x, position.y);
   }
+
+  public void setWrap(Texture.TextureWrap wrapX, Texture.TextureWrap wrapY) {
+    Texture texture = getTexture();
+
+    texture.setWrap(wrapX, wrapX);
+
+    if (wrapX == Texture.TextureWrap.Repeat) {
+      setU(0f);
+      setU2(getWidth() / texture.getWidth());
+    }
+
+    if (wrapY == Texture.TextureWrap.Repeat) {
+      setV(0f);
+      setV2(getHeight() / texture.getHeight());
+    }
+  }
 }

@@ -23,8 +23,10 @@ public class AvatarLayer extends GameLayer {
   private Set<Janitor> janitors;
   private Set<Maid> maids;
 
-  public static void initialize(GameGrid gameGrid) {
+  public static AvatarLayer initialize(GameGrid gameGrid) {
     instance = new AvatarLayer(gameGrid);
+
+    return instance;
   }
 
   public static AvatarLayer instance() {

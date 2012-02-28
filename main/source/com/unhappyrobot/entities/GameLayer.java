@@ -77,4 +77,18 @@ public class GameLayer {
       gameObjects.remove(gameObject);
     }
   }
+
+  protected void removeAllChildren() {
+    gameObjects.clear();
+  }
+
+  protected float width() {
+    float w = 0;
+
+    for (GameObject gameObject : gameObjects) {
+      w += gameObject.getWidth();
+    }
+
+    return w;
+  }
 }

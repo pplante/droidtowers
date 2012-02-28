@@ -7,6 +7,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.eventbus.Subscribe;
+import com.unhappyrobot.events.GameEvents;
+import com.unhappyrobot.events.GameGridResizeEvent;
 import com.unhappyrobot.tween.GameObjectAccessor;
 import com.unhappyrobot.tween.TweenSystem;
 import com.unhappyrobot.utils.Random;
@@ -28,13 +31,22 @@ public class CloudLayer extends GameLayer {
   private List<GameObject> cloudsToRemove;
   private final int numberOfCloudTypes;
 
-  public CloudLayer(Vector2 worldSize) {
+  public CloudLayer() {
     super();
-    this.worldSize = worldSize;
 
     textureAtlas = new TextureAtlas(Gdx.files.internal("backgrounds/clouds.txt"));
     numberOfCloudTypes = textureAtlas.getRegions().size();
     cloudsToRemove = new ArrayList<GameObject>(5);
+
+    GameEvents.register(this);
+  }
+
+  @Subscribe
+  public void GameGrid_onResize(GameGridResizeEvent event) {
+    worldSize = event.gameGrid.getWorldSize();
+
+    removeAllChildren();
+    cloudsToRemove.clear();
 
     for (int i = 0; i < MAX_ACTIVE_CLOUDS; i++) {
       spawnCloudNow();

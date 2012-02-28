@@ -19,9 +19,10 @@ import com.unhappyrobot.controllers.PathSearchManager;
 import com.unhappyrobot.entities.CloudLayer;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.gamestate.GameState;
-import com.unhappyrobot.graphics.BackgroundLayer;
 import com.unhappyrobot.graphics.CityScapeLayer;
+import com.unhappyrobot.graphics.GroundLayer;
 import com.unhappyrobot.graphics.RainLayer;
+import com.unhappyrobot.graphics.SkyLayer;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GameGridRenderer;
 import com.unhappyrobot.grid.GridPositionCache;
@@ -82,36 +83,28 @@ public class TowerGame implements ApplicationListener {
     GridPositionCache.instance();
 
     gameGrid = new GameGrid();
-    gameGrid.setUnitSize(64, 64);
-    gameGrid.setGridSize(60, 40);
-    gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
 
     gameState = new GameState(gameGrid);
 
     HeadsUpDisplay.instance().initialize(camera, gameGrid, guiStage, spriteBatch);
 
-    BackgroundLayer groundLayer = new BackgroundLayer("backgrounds/ground.png");
-    groundLayer.setSize(gameGrid.getWorldSize().x, 256f);
-    groundLayer.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
-
-    BackgroundLayer skyLayer = new BackgroundLayer("backgrounds/stormysky.png");
-    skyLayer.setPosition(0, 256);
-    skyLayer.setSize(gameGrid.getWorldSize().x, gameGrid.getWorldSize().y - 256f);
-    skyLayer.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
-
     gameGridRenderer = gameGrid.getRenderer();
-    AvatarLayer.initialize(gameGrid);
 
-    GameLayer testLayer = new GameLayer();
     gameLayers = Lists.newArrayList();
-    gameLayers.add(skyLayer);
-    gameLayers.add(new CityScapeLayer(gameGrid));
-    gameLayers.add(new RainLayer(gameGrid));
-    gameLayers.add(new CloudLayer(gameGrid.getWorldSize()));
-    gameLayers.add(groundLayer);
+    gameLayers.add(new SkyLayer());
+    gameLayers.add(new CityScapeLayer());
+    gameLayers.add(new RainLayer());
+    gameLayers.add(new CloudLayer());
+    gameLayers.add(new GroundLayer());
     gameLayers.add(gameGridRenderer);
     gameLayers.add(gameGrid);
-    gameLayers.add(AvatarLayer.instance());
+    gameLayers.add(AvatarLayer.initialize(gameGrid));
+
+    gameGrid.setUnitSize(64, 64);
+    gameGrid.setGridSize(60, 40);
+    gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
+
+    new WeatherService();
 
 //    BEGIN INPUT SETUP:
     InputSystem.instance().setup(camera, gameLayers);

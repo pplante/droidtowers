@@ -1,0 +1,25 @@
+cityscape.png
+format: RGBA4444
+filter: MipMapNearestLinear,Linear
+repeat: none
+small
+  rotate: false
+  xy: 2, 179
+  size: 248, 134
+  orig: 248, 134
+  offset: 0, 2
+  index: -1
+medium
+  rotate: false
+  xy: 544, 2
+  size: 320, 118
+  orig: 320, 118
+  offset: 0, 0
+  index: -1
+large
+  rotate: false
+  xy: 2, 2
+  size: 540, 175
+  orig: 540, 175
+  offset: 0, 0
+  index: -1
