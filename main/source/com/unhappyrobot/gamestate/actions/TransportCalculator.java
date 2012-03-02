@@ -1,9 +1,7 @@
 package com.unhappyrobot.gamestate.actions;
 
-import com.badlogic.gdx.math.Vector2;
 import com.google.common.eventbus.Subscribe;
 import com.unhappyrobot.entities.*;
-import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectEvent;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridPosition;
@@ -18,7 +16,7 @@ public class TransportCalculator extends GameStateAction {
   public TransportCalculator(GameGrid gameGrid, float frequency) {
     super(gameGrid, frequency, false);
 
-    GameEvents.register(this);
+    GameGrid.events().register(this);
   }
 
   @Subscribe
@@ -51,10 +49,7 @@ public class TransportCalculator extends GameStateAction {
     for (GridObject transport : gameGrid.getInstancesOf(transportClasses)) {
       if (transport.getPlacementState().equals(GridObjectPlacementState.INVALID)) continue;
 
-      Vector2 position = transport.getContentPosition();
-      Vector2 size = transport.getContentSize();
-
-      for (GridPoint gridPoint : transport.getGridPointsOccupied()) {
+      for (GridPoint gridPoint : transport.getGridPointsTouched()) {
         int x = (int) gridPoint.x;
         int y = (int) gridPoint.y;
 
@@ -89,13 +84,13 @@ public class TransportCalculator extends GameStateAction {
   public void pause() {
     super.pause();
 
-    GameEvents.unregister(this);
+    GameGrid.events().unregister(this);
   }
 
   @Override
   public void unpause() {
     super.unpause();
 
-    GameEvents.register(this);
+    GameGrid.events().register(this);
   }
 }

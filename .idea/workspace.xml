@@ -17,23 +17,48 @@
     </artifacts-to-build>
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/GameState.java" line="95" />
+    <bookmark url="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/GameState.java" line="94" />
     <bookmark url="file://$PROJECT_DIR$/android" />
     <bookmark url="file://$PROJECT_DIR$/.idea/workspace.xml" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/WeatherService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/GroundLayer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/SkyLayer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/WeatherState.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/WeatherStateChangeEvent.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/WanderPathFinder.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/backgrounds/background1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/backgrounds/background1.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/backgrounds/bluesky.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/backgrounds/stormysky.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GameEvents.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/WeatherService.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/WeatherService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementEngine.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementEngine.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarLayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarSteeringManager.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarSteeringManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameLayer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Janitor.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Janitor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Stair.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Stair.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/GameState.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/GameState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/TransportCalculator.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/TransportCalculator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/CityScapeLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/CityScapeLayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/GroundLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/GroundLayer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/RainLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/RainLayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/SkyLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/SkyLayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GameGrid.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GameGrid.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GameGridRenderer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GameGridRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridPositionCache.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridPositionCache.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/RadialMenu.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/RadialMenu.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/AStar.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/AStar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/TransitPathFinder.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/TransitPathFinder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/tween/GameObjectAccessor.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/tween/GameObjectAccessor.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -104,21 +129,99 @@
     <breakpoint_rules />
     <ui_properties />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="testgame" />
+  </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TowerGame.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
+      <file leaf-file-name="HeadsUpDisplay.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="103" column="8" selection-start="3528" selection-end="3528" vertical-scroll-proportion="0.0">
+            <state line="78" column="25" selection-start="2712" selection-end="2712" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WeatherService.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/WeatherService.java">
+      <file leaf-file-name="AvatarLayer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarLayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="27" selection-start="219" selection-end="219" vertical-scroll-proportion="0.15112856">
+            <state line="88" column="5" selection-start="2306" selection-end="2306" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Avatar.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="100" column="109" selection-start="3516" selection-end="3516" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Stair.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Stair.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="3" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.639843">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TransportCalculator.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/TransportCalculator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="51" column="43" selection-start="1676" selection-end="1676" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GridObject.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="206" column="25" selection-start="5506" selection-end="5506" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AvatarSteeringManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarSteeringManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="83" column="39" selection-start="2553" selection-end="2553" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TransitPathFinder.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/TransitPathFinder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="59" column="12" selection-start="1583" selection-end="1583" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WanderPathFinder.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/WanderPathFinder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="48" column="36" selection-start="1589" selection-end="1589" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1419#1433#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RadialMenu.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/RadialMenu.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="71" column="26" selection-start="2017" selection-end="2017" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -137,22 +240,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/desktop/source/com/unhappyrobot/DesktopGame.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/CameraController.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/RainLayer.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Rain.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/RainLayer.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/SkyLayer.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/GroundLayer.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/RadialMenu.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarLayer.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/CityScapeLayer.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/events/Events.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/events/EventBusWrapper.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GameEvents.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/WeatherService.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Janitor.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridPositionCache.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/AStar.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/WanderPathFinder.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarSteeringManager.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/TransitPathFinder.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/TransportCalculator.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Stair.java" />
       </list>
     </option>
   </component>
@@ -358,17 +461,6 @@
       <sortByType ProjectPane="false" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Ignored" />
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -527,6 +619,17 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Ignored" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Favorites" />
     </panes>
   </component>
@@ -611,11 +714,11 @@
       <recent name="com.unhappyrobot.utils.Random" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.unhappyrobot.pathfinding" />
+      <recent name="com.unhappyrobot.events" />
       <recent name="com.unhappyrobot" />
       <recent name="com.unhappyrobot.graphics" />
       <recent name="com.unhappyrobot.entities" />
-      <recent name="com.unhappyrobot.gui" />
-      <recent name="com.unhappyrobot.achievements" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.unhappyrobot.graphics" />
@@ -1093,7 +1196,11 @@
       <created>1330394404283</created>
       <updated>1330394404283</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="weather service is starting">
+      <created>1330396456576</created>
+      <updated>1330396456576</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1125,7 +1232,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30447987" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946082" sideWeight="0.6709347" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4105534" sideWeight="0.51508623" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41002277" sideWeight="0.51508623" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3151101" sideWeight="0.47988507" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16281848" sideWeight="0.6689446" order="1" side_tool="true" content_ui="tabs" />
@@ -1188,7 +1295,7 @@
     <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
     <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value=" moved the rain into its own layer so the clouds would be on top." />
+    <option name="LAST_COMMIT_MESSAGE" value="weather service is starting" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1201,7 +1308,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="made all of the grid object events inherit from the same base class, and then turned transport calculator into an event listener" />
     <MESSAGE value="avatars follow the path now and A* is like 100x faster!!!!!" />
     <MESSAGE value="started working on avatar speech bubbles" />
     <MESSAGE value="made speech bubbles get rendered by the HUD so they do not scale with camera" />
@@ -1226,6 +1332,7 @@
     <MESSAGE value="cleaned up some of the overlay codes" />
     <MESSAGE value="fixed camera bounds checking, added city scape background!" />
     <MESSAGE value=" moved the rain into its own layer so the clouds would be on top." />
+    <MESSAGE value="weather service is starting" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1261,118 +1368,117 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/Sprite.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="105" selection-start="2315" selection-end="2315" vertical-scroll-proportion="0.60451424">
+        <state line="78" column="25" selection-start="2712" selection-end="2712" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/events/GameGridResizeEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="87" selection-end="87" vertical-scroll-proportion="0.08635917">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GameGrid.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="14" selection-start="1387" selection-end="1387" vertical-scroll-proportion="0.3326791">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="4" selection-start="1618" selection-end="1618" vertical-scroll-proportion="0.6977429">
+        <state line="9" column="13" selection-start="316" selection-end="316" vertical-scroll-proportion="0.08635917">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/BackgroundLayer.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Janitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="3" selection-start="768" selection-end="1162" vertical-scroll-proportion="0.67615306">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/RainLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="28" selection-start="504" selection-end="504" vertical-scroll-proportion="0.3454367">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/SkyLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="550" selection-end="550" vertical-scroll-proportion="0.43179587">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/GroundLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="557" selection-end="557" vertical-scroll-proportion="0.45338568">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="24" selection-start="1612" selection-end="1612" vertical-scroll-proportion="0.50147206">
+        <state line="44" column="6" selection-start="1630" selection-end="1630" vertical-scroll-proportion="0.7124632">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarLayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="19" selection-start="955" selection-end="955" vertical-scroll-proportion="0.3238469">
+        <state line="88" column="5" selection-start="2306" selection-end="2306" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/AStar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="14" selection-start="1945" selection-end="1945" vertical-scroll-proportion="0.333002">
+        <state line="32" column="11" selection-start="1047" selection-end="1047" vertical-scroll-proportion="0.11678116">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/CityScapeLayer.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/PathSearchManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="46" selection-start="1059" selection-end="1059" vertical-scroll-proportion="0.60451424">
+        <state line="36" column="45" selection-start="898" selection-end="898" vertical-scroll-proportion="0.67615306">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/classes.jar!/java/util/HashSet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="13" selection-start="826" selection-end="826" vertical-scroll-proportion="0.45338568">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="109" selection-start="3516" selection-end="3516" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridPositionCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="48" selection-start="2207" selection-end="2207" vertical-scroll-proportion="0.33295837">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/WanderPathFinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="36" selection-start="1589" selection-end="1589" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#797#823#0" expanded="true" />
+            <element signature="e#1419#1433#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/TransitPathFinder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="8" selection-start="3528" selection-end="3528" vertical-scroll-proportion="0.0">
+        <state line="59" column="12" selection-start="1583" selection-end="1583" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/events/GameEvents.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarSteeringManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="3" selection-start="657" selection-end="657" vertical-scroll-proportion="0.6476938">
+        <state line="83" column="39" selection-start="2553" selection-end="2553" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/WeatherService.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/ElevatorType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="27" selection-start="219" selection-end="219" vertical-scroll-proportion="0.15112856">
+        <state line="30" column="114" selection-start="841" selection-end="841" vertical-scroll-proportion="0.4604651">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="206" column="25" selection-start="5506" selection-end="5506" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/TransportCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="43" selection-start="1676" selection-end="1676" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Stair.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="3" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.639843">
           <folding />
         </state>
       </provider>

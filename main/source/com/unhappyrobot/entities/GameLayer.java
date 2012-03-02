@@ -4,8 +4,9 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.collect.Lists;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class GameLayer {
@@ -14,8 +15,8 @@ public class GameLayer {
   private boolean touchEnabled;
 
   public GameLayer() {
-    gameObjects = new ArrayList<GameObject>();
     visible = true;
+    gameObjects = Lists.newArrayList();
   }
 
   public void addChild(GameObject gameObject) {
@@ -35,8 +36,15 @@ public class GameLayer {
   }
 
   public void update(float timeDelta) {
-    for (GameObject gameObject : gameObjects) {
-      gameObject.update(timeDelta);
+    Iterator<GameObject> gameObjectIterator = gameObjects.iterator();
+    while (gameObjectIterator.hasNext()) {
+      GameObject gameObject = gameObjectIterator.next();
+
+      if (gameObject.isMarkedForRemoval()) {
+        gameObjectIterator.remove();
+      } else {
+        gameObject.update(timeDelta);
+      }
     }
   }
 

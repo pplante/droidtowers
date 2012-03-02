@@ -41,6 +41,8 @@ public class Janitor extends Avatar {
       });
 
       navigateToGridObject(Iterables.getFirst(sortedObjects, null));
+    } else {
+      wanderAround();
     }
   }
 

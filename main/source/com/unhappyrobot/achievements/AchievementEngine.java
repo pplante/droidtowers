@@ -5,8 +5,8 @@ import com.badlogic.gdx.files.FileHandle;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
-import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectChangedEvent;
+import com.unhappyrobot.grid.GameGrid;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class AchievementEngine {
     }
 
     completedAchievements = Sets.newHashSet();
-    GameEvents.register(this);
+    GameGrid.events().register(this);
   }
 
   public List<Achievement> getAchievements() {

@@ -91,9 +91,9 @@ public class TowerGame implements ApplicationListener {
     gameGridRenderer = gameGrid.getRenderer();
 
     gameLayers = Lists.newArrayList();
-    gameLayers.add(new SkyLayer());
+    gameLayers.add(new SkyLayer(gameGrid));
     gameLayers.add(new CityScapeLayer());
-    gameLayers.add(new RainLayer());
+    gameLayers.add(new RainLayer(gameGrid));
     gameLayers.add(new CloudLayer());
     gameLayers.add(new GroundLayer());
     gameLayers.add(gameGridRenderer);
@@ -103,8 +103,6 @@ public class TowerGame implements ApplicationListener {
     gameGrid.setUnitSize(64, 64);
     gameGrid.setGridSize(60, 40);
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
-
-    new WeatherService();
 
 //    BEGIN INPUT SETUP:
     InputSystem.instance().setup(camera, gameLayers);
@@ -251,6 +249,7 @@ public class TowerGame implements ApplicationListener {
     }
 
     HeadsUpDisplay.instance().act(deltaTime);
+    WeatherService.instance().update(deltaTime);
   }
 
   public void resize(int width, int height) {

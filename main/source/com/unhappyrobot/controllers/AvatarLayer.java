@@ -7,11 +7,11 @@ import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.entities.*;
-import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectAddedEvent;
 import com.unhappyrobot.events.GridObjectRemovedEvent;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.types.RoomType;
+import com.unhappyrobot.utils.Random;
 
 import java.util.Set;
 
@@ -43,7 +43,7 @@ public class AvatarLayer extends GameLayer {
     janitors = Sets.newHashSet();
     maids = Sets.newHashSet();
 
-    GameEvents.register(this);
+    GameGrid.events().register(this);
   }
 
   public GameGrid getGameGrid() {
@@ -86,7 +86,7 @@ public class AvatarLayer extends GameLayer {
 
   private void setupAvatar(GuavaSet<GridObject> rooms, Avatar avatar) {
     if (rooms != null) {
-      avatar.setPosition(rooms.getRandomEntry().getContentPosition().toWorldVector2(gameGrid));
+      avatar.setPosition(Random.randomInt(-64, gameGrid.getWorldSize().x + 64), 256f);
     }
 
     avatar.beginNextAction();

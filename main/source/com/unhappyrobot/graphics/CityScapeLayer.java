@@ -6,8 +6,8 @@ import com.google.common.eventbus.Subscribe;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.entities.GameObject;
 import com.unhappyrobot.entities.GuavaSet;
-import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GameGridResizeEvent;
+import com.unhappyrobot.grid.GameGrid;
 
 public class CityScapeLayer extends GameLayer {
   private final TextureAtlas cityScapeAtlas;
@@ -15,7 +15,7 @@ public class CityScapeLayer extends GameLayer {
   public CityScapeLayer() {
     cityScapeAtlas = new TextureAtlas(Gdx.files.internal("backgrounds/cityscape.txt"));
 
-    GameEvents.register(this);
+    GameGrid.events().register(this);
   }
 
   @Subscribe

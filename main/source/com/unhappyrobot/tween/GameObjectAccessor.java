@@ -1,6 +1,7 @@
 package com.unhappyrobot.tween;
 
 import aurelienribon.tweenengine.TweenAccessor;
+import com.badlogic.gdx.graphics.Color;
 import com.unhappyrobot.entities.GameObject;
 
 public class GameObjectAccessor implements TweenAccessor<GameObject> {
@@ -10,9 +11,18 @@ public class GameObjectAccessor implements TweenAccessor<GameObject> {
   public static final int OPACITY = 4;
   public static final int TEXTURE_UV = 5;
   public static final int TEXTURE_VV2 = 6;
+  public static final int COLOR = 7;
 
   public int getValues(GameObject target, int tweenType, float[] returnValues) {
     switch (tweenType) {
+      case COLOR:
+        Color color = target.getColor();
+        returnValues[0] = color.r;
+        returnValues[1] = color.g;
+        returnValues[2] = color.b;
+        returnValues[3] = color.a;
+        return 4;
+
       case OPACITY:
         returnValues[0] = target.getOpacity();
         return 1;
@@ -48,6 +58,10 @@ public class GameObjectAccessor implements TweenAccessor<GameObject> {
 
   public void setValues(GameObject target, int tweenType, float[] newValues) {
     switch (tweenType) {
+      case COLOR:
+        target.setColor(newValues[0], newValues[1], newValues[2], newValues[3]);
+        break;
+
       case OPACITY:
         target.setOpacity(newValues[0]);
         break;

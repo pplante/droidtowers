@@ -5,7 +5,10 @@ import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.GridObjectPlacementState;
-import com.unhappyrobot.events.*;
+import com.unhappyrobot.events.GameGridResizeEvent;
+import com.unhappyrobot.events.GridObjectAddedEvent;
+import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
+import com.unhappyrobot.events.GridObjectRemovedEvent;
 import com.unhappyrobot.math.GridPoint;
 
 import java.util.HashSet;
@@ -19,7 +22,7 @@ public class GridPositionCache {
   private Vector2 gridSize;
 
   private GridPositionCache() {
-    GameEvents.register(this);
+    GameGrid.events().register(this);
   }
 
   public static GridPositionCache instance() {
@@ -155,5 +158,9 @@ public class GridPositionCache {
 
   public GridPosition[][] getPositions() {
     return gridPositions;
+  }
+
+  public Vector2 getGridSize() {
+    return gridSize;
   }
 }

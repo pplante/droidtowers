@@ -9,6 +9,8 @@ import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.TransitType;
 
+import java.util.List;
+
 public class Stair extends Transit {
   private Sprite sprite;
 
@@ -37,6 +39,15 @@ public class Stair extends Transit {
       sprite.setPosition(position.getWorldX(gameGrid), position.getWorldY(gameGrid));
       sprite.draw(spriteBatch);
     }
+  }
+
+  @Override
+  public List<GridPoint> getGridPointsTouched() {
+    List<GridPoint> points = super.getGridPointsTouched();
+    points.add(new GridPoint(position.x, position.y + 2));
+    points.add(new GridPoint(position.x + 1, position.y + 2));
+
+    return points;
   }
 
   @Override

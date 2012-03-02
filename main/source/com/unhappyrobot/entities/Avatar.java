@@ -19,6 +19,7 @@ import com.unhappyrobot.grid.GridPositionCache;
 import com.unhappyrobot.gui.HeadsUpDisplay;
 import com.unhappyrobot.gui.SpeechBubble;
 import com.unhappyrobot.pathfinding.TransitPathFinder;
+import com.unhappyrobot.pathfinding.WanderPathFinder;
 import com.unhappyrobot.utils.Random;
 
 import java.util.Iterator;
@@ -91,21 +92,35 @@ public class Avatar extends GameObject {
       if (commercialSpaces.size() > 0) {
         navigateToGridObject(commercialSpaces.getRandomEntry());
       }
+    } else {
+      wanderAround();
     }
+  }
+
+  protected void wanderAround() {
+    GridPosition start = GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY()));
+    System.out.println(String.format("%s is bored.", this.getClass().getSimpleName()));
+
+    WanderPathFinder pathFinder = new WanderPathFinder(start);
+    setupPathFinder(pathFinder);
   }
 
   protected void navigateToGridObject(GridObject gridObject) {
     if (gridObject == null) {
-//      System.out.println(String.format("%s is bored.", this.getClass().getSimpleName()));
+      System.out.println(String.format("%s is bored.", this.getClass().getSimpleName()));
+      wanderAround();
       return;
     }
-//    System.out.println(String.format("%s moving to %s", this.getClass().getSimpleName(), gridObject.getGridObjectType().getName()));
     movingTo = gridObject;
 
     GridPosition start = GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY()));
     GridPosition goal = GridPositionCache.instance().getPosition(gridObject.getPosition());
 
     final TransitPathFinder pathFinder = new TransitPathFinder(start, goal);
+    setupPathFinder(pathFinder);
+  }
+
+  private void setupPathFinder(final TransitPathFinder pathFinder) {
     pathFinder.setCompleteCallback(new Runnable() {
       public void run() {
         createSteeringManagerFromPath(pathFinder);

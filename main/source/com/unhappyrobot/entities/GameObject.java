@@ -11,6 +11,7 @@ public class GameObject extends Sprite {
   private boolean visible = true;
   private float velocityX;
   private float velocityY;
+  private boolean markedForRemoval;
 
   public GameObject(TextureAtlas.AtlasRegion region) {
     super(region);
@@ -81,5 +82,13 @@ public class GameObject extends Sprite {
       setV(0f);
       setV2(getHeight() / texture.getHeight());
     }
+  }
+
+  public void markToRemove(boolean b) {
+    markedForRemoval = b;
+  }
+
+  public boolean isMarkedForRemoval() {
+    return markedForRemoval;
   }
 }

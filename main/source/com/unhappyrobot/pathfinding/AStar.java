@@ -30,10 +30,10 @@ import java.util.PriorityQueue;
  */
 public abstract class AStar<T> {
 
-  private LinkedList<T> discoveredPath;
+  protected LinkedList<T> discoveredPath;
   protected boolean working;
   private Runnable completeCallback;
-  private final T start;
+  protected final T start;
   protected final T goal;
 
   public boolean isWorking() {

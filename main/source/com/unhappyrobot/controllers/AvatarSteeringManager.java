@@ -37,6 +37,7 @@ public class AvatarSteeringManager {
   private Direction verticalDirection;
   private Set<AvatarState> currentState;
   private Runnable completeCallback;
+  private Set<Stair> stairsUsed;
 
   public AvatarSteeringManager(Avatar avatar, GameGrid gameGrid, LinkedList<GridPosition> discoveredPath) {
     this.avatar = avatar;
@@ -48,6 +49,7 @@ public class AvatarSteeringManager {
     running = true;
 
     currentState = Sets.newHashSet();
+    stairsUsed = Sets.newHashSet();
     transitLine = new TransitLine();
     transitLine.setColor(avatar.getColor());
     for (GridPosition position : Lists.newArrayList(discoveredPath)) {
@@ -147,6 +149,8 @@ public class AvatarSteeringManager {
         });
       }
     });
+
+    stairsUsed.add(stair);
   }
 
   public void moveAvatarTo(GridPosition gridPosition, TweenCallback endCallback) {

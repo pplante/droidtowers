@@ -5,14 +5,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.google.common.eventbus.Subscribe;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.entities.GameObject;
-import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GameGridResizeEvent;
+import com.unhappyrobot.grid.GameGrid;
 
 public class GroundLayer extends GameLayer {
   public GroundLayer() {
     super();
 
-    GameEvents.register(this);
+    GameGrid.events().register(this);
   }
 
   @Subscribe

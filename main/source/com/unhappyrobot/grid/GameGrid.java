@@ -2,10 +2,10 @@ package com.unhappyrobot.grid;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.eventbus.EventBus;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.GuavaSet;
-import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GameGridResizeEvent;
 import com.unhappyrobot.events.GridObjectAddedEvent;
 import com.unhappyrobot.events.GridObjectRemovedEvent;
@@ -18,10 +18,12 @@ import java.util.Set;
 
 
 public class GameGrid extends GameLayer {
+  private static EventBus eventBus = new EventBus(GameGrid.class.getSimpleName());
+
   public Vector2 unitSize;
   public Color gridColor;
-  public Vector2 gridSize;
 
+  public Vector2 gridSize;
   private GuavaSet<GridObject> objects;
   private Vector2 worldSize;
   private final GameGridRenderer gameGridRenderer;
@@ -45,7 +47,7 @@ public class GameGrid extends GameLayer {
 
   public void updateWorldSize() {
     worldSize = new Vector2(gridSize.x * unitSize.x, gridSize.y * unitSize.y);
-    GameEvents.post(new GameGridResizeEvent(this));
+    events().post(new GameGridResizeEvent(this));
   }
 
   public void setUnitSize(int width, int height) {
@@ -83,7 +85,7 @@ public class GameGrid extends GameLayer {
 
     gridObjectHashSet.add(gridObject);
 
-    GameEvents.post(new GridObjectAddedEvent(gridObject));
+    events().post(new GridObjectAddedEvent(gridObject));
 
     return true;
   }
@@ -112,7 +114,7 @@ public class GameGrid extends GameLayer {
   public void removeObject(GridObject gridObject) {
     objects.remove(gridObject);
 
-    GameEvents.post(new GridObjectRemovedEvent(gridObject));
+    events().post(new GridObjectRemovedEvent(gridObject));
   }
 
   public void update(float deltaTime) {
@@ -196,5 +198,9 @@ public class GameGrid extends GameLayer {
     gridY = Math.max(0, Math.min(gridY, gridSize.y - 1));
 
     return new GridPoint(gridX, gridY);
+  }
+
+  public static EventBus events() {
+    return eventBus;
   }
 }

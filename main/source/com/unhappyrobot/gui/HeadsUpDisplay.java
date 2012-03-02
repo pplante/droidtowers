@@ -74,8 +74,9 @@ public class HeadsUpDisplay extends WidgetGroup {
     addActor(mouseToolTip);
 
     toolMenu = new RadialMenu();
-    toolMenu.arc = 33f;
+    toolMenu.arc = 35f;
     toolMenu.radius = 140f;
+    toolMenu.rotation = 3f;
 
     ImageButton housingButton = new ImageButton(hudAtlas.findRegion("tool-housing"));
     housingButton.setClickListener(makePurchaseButtonClickListener("Housing", RoomTypeFactory.instance()));
@@ -108,9 +109,9 @@ public class HeadsUpDisplay extends WidgetGroup {
         }
 
         if (!toolMenu.visible) {
-          toolButton.add(toolMenu);
-          toolMenu.x = -200f;
-          toolMenu.y = -100f;
+          stage.addActor(toolMenu);
+          toolMenu.x = toolButton.x + 20f;
+          toolMenu.y = toolButton.y;
           toolMenu.show();
         } else {
           toolMenu.hide();

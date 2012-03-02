@@ -61,7 +61,7 @@ public class RadialMenu extends WidgetGroup {
     for (Actor child : children) {
       child.color.a = 0;
       child.x = child.y = 0;
-      child.scaleX = child.scaleY = 0;
+//      child.scaleX = child.scaleY = 0;
 
       float radian = (float) ((angle * index + angle / 2) * (Math.PI / 180f));
 

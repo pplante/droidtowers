@@ -7,7 +7,6 @@ import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.events.EventListener;
-import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.gamestate.actions.*;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridObjectState;
@@ -37,7 +36,7 @@ public class GameState extends EventListener {
     calculateDesirability = new DesirabilityCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
     transportCalculator = new TransportCalculator(gameGrid, TowerConsts.TRANSPORT_CALCULATOR_FREQUENCY);
 
-    GameEvents.register(this);
+    GameGrid.events().register(this);
 
   }
 

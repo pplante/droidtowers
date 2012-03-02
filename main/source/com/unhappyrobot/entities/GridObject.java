@@ -8,7 +8,6 @@ import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.unhappyrobot.actions.Action;
 import com.unhappyrobot.actions.TimeDelayedAction;
-import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
 import com.unhappyrobot.events.GridObjectChangedEvent;
 import com.unhappyrobot.events.GridObjectEvent;
@@ -205,10 +204,14 @@ public abstract class GridObject {
     return points;
   }
 
+  public List<GridPoint> getGridPointsTouched() {
+    return getGridPointsOccupied();
+  }
+
+
   public float distanceToLobby() {
     return position.y - 4;
   }
-
 
   public float distanceFromFloor(float originalFloor) {
     return originalFloor - position.y;
@@ -248,7 +251,7 @@ public abstract class GridObject {
       myEventBus.post(event);
     }
 
-    GameEvents.post(event);
+    GameGrid.events().post(event);
   }
 
   public float getDesirability() {

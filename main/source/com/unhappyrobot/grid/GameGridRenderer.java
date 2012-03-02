@@ -15,7 +15,6 @@ import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.GridObjectPlacementState;
-import com.unhappyrobot.events.GameEvents;
 import com.unhappyrobot.events.GridObjectAddedEvent;
 import com.unhappyrobot.events.GridObjectChangedEvent;
 import com.unhappyrobot.events.GridObjectRemovedEvent;
@@ -47,7 +46,7 @@ public class GameGridRenderer extends GameLayer {
   public GameGridRenderer(GameGrid gameGrid) {
     this.gameGrid = gameGrid;
 
-    GameEvents.register(this);
+    GameGrid.events().register(this);
 
     shouldRenderGridLines = true;
     shapeRenderer = new ShapeRenderer();
