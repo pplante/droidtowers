@@ -9,4 +9,5 @@ public class TowerConsts {
   public static final float TRANSPORT_CALCULATOR_FREQUENCY = 0.25f;
   public static final float WEATHER_SERVICE_STATE_CHANGE_FREQUENCY = 60f;
   public static final int WEATHER_SERVICE_STATE_CHANGE_DURATION = 5000;
+  public static final int GAME_SAVE_FREQUENCY = 15000;
 }

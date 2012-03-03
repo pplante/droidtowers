@@ -57,13 +57,20 @@ public class Toast extends Table {
     Tween.to(this, WidgetAccessor.OPACITY, 500).target(1.0f).start(TweenSystem.getTweenManager()).addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
       public void onEvent(EventType eventType, BaseTween source) {
         fadeOut();
-        visible = false;
       }
     });
   }
 
   protected void fadeOut() {
-    Tween.to(this, WidgetAccessor.OPACITY, 250).target(0f).delay(2000).start(TweenSystem.getTweenManager());
+    Tween.to(this, WidgetAccessor.OPACITY, 250)
+            .target(0f)
+            .delay(3000)
+            .addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
+              public void onEvent(EventType eventType, BaseTween source) {
+                visible = false;
+              }
+            })
+            .start(TweenSystem.getTweenManager());
   }
 
   @Override
@@ -71,5 +78,12 @@ public class Toast extends Table {
     if (color.a > 0.01f) {
       super.draw(batch, color.a);
     }
+  }
+
+  @Override
+  public boolean touchDown(float x, float y, int pointer) {
+    visible = false;
+
+    return true;
   }
 }

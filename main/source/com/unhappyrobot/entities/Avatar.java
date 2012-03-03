@@ -48,6 +48,7 @@ public class Avatar extends GameObject {
   private final SpeechBubble speechBubble;
   private float lastPathFinderSearch;
   protected GridObject movingTo;
+  private TransitPathFinder pathFinder;
 
   public Avatar(AvatarLayer avatarLayer) {
     super();
@@ -81,11 +82,11 @@ public class Avatar extends GameObject {
   }
 
   public void beginNextAction() {
-    GuavaSet<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
+    GuavaSet<GridObject> commercialSpaces = gameGrid.getInstancesOf(Room.class);
     if (commercialSpaces != null) {
       commercialSpaces = commercialSpaces.filterBy(new Predicate<GridObject>() {
         public boolean apply(@Nullable GridObject gridObject) {
-          return ((CommercialSpace) gridObject).isConnectedToTransport();
+          return ((Room) gridObject).isConnectedToTransport();
         }
       });
 
@@ -101,8 +102,7 @@ public class Avatar extends GameObject {
     GridPosition start = GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY()));
     System.out.println(String.format("%s is bored.", this.getClass().getSimpleName()));
 
-    WanderPathFinder pathFinder = new WanderPathFinder(start);
-    setupPathFinder(pathFinder);
+    setupPathFinder(new WanderPathFinder(start));
   }
 
   protected void navigateToGridObject(GridObject gridObject) {
@@ -116,21 +116,21 @@ public class Avatar extends GameObject {
     GridPosition start = GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY()));
     GridPosition goal = GridPositionCache.instance().getPosition(gridObject.getPosition());
 
-    final TransitPathFinder pathFinder = new TransitPathFinder(start, goal);
-    setupPathFinder(pathFinder);
+    setupPathFinder(new TransitPathFinder(start, goal));
   }
 
-  private void setupPathFinder(final TransitPathFinder pathFinder) {
+  private void setupPathFinder(final TransitPathFinder finder) {
+    pathFinder = finder;
     pathFinder.setCompleteCallback(new Runnable() {
       public void run() {
-        createSteeringManagerFromPath(pathFinder);
+        createSteeringManagerFromPath();
       }
     });
 
     PathSearchManager.instance().queue(pathFinder);
   }
 
-  private void createSteeringManagerFromPath(TransitPathFinder pathFinder) {
+  private void createSteeringManagerFromPath() {
     if (pathFinder.wasSuccessful()) {
       steeringManager = new AvatarSteeringManager(this, gameGrid, pathFinder.getDiscoveredPath());
       steeringManager.setCompleteCallback(new Runnable() {
@@ -140,6 +140,8 @@ public class Avatar extends GameObject {
       });
       steeringManager.start();
     }
+
+    pathFinder = null;
   }
 
   private void afterReachingTarget() {
@@ -172,7 +174,7 @@ public class Avatar extends GameObject {
       } else {
         steeringManager = null;
       }
-    } else {
+    } else if (pathFinder == null) {
       if (lastPathFinderSearch >= PATH_SEARCH_DELAY) {
         lastPathFinderSearch = 0f;
 

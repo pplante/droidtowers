@@ -15,6 +15,7 @@ import com.google.common.collect.Lists;
 import com.unhappyrobot.achievements.Achievement;
 import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.controllers.AvatarLayer;
+import com.unhappyrobot.controllers.GameTips;
 import com.unhappyrobot.controllers.PathSearchManager;
 import com.unhappyrobot.entities.CloudLayer;
 import com.unhappyrobot.entities.GameLayer;
@@ -26,10 +27,7 @@ import com.unhappyrobot.graphics.SkyLayer;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GameGridRenderer;
 import com.unhappyrobot.grid.GridPositionCache;
-import com.unhappyrobot.gui.Dialog;
-import com.unhappyrobot.gui.HeadsUpDisplay;
-import com.unhappyrobot.gui.OnClickCallback;
-import com.unhappyrobot.gui.ResponseType;
+import com.unhappyrobot.gui.*;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.tween.TweenSystem;
@@ -57,6 +55,7 @@ public class TowerGame implements ApplicationListener {
   private boolean loadedSavedGame;
   private FileHandle gameSaveLocation;
   private static float timeMultiplier;
+  private long nextGameStateSaveTime;
 
   public static GameGridRenderer getGameGridRenderer() {
     return gameGridRenderer;
@@ -67,6 +66,7 @@ public class TowerGame implements ApplicationListener {
 
     TweenSystem.getTweenManager();
     AchievementEngine.instance();
+    GameTips.instance();
     RoomTypeFactory.instance();
     CommercialTypeFactory.instance();
     ElevatorTypeFactory.instance();
@@ -87,6 +87,10 @@ public class TowerGame implements ApplicationListener {
     gameState = new GameState(gameGrid);
 
     HeadsUpDisplay.instance().initialize(camera, gameGrid, guiStage, spriteBatch);
+
+    MainMenu mainMenu = new MainMenu();
+    mainMenu.show().centerOnStage();
+
 
     gameGridRenderer = gameGrid.getRenderer();
 
@@ -154,8 +158,8 @@ public class TowerGame implements ApplicationListener {
     InputSystem.instance().bind(Keys.R, new InputCallback() {
       public boolean run(float timeDelta) {
         Texture.invalidateAllTextures(Gdx.app);
-
-        return true;
+        throw new RuntimeException("asdf");
+//        return true;
       }
     });
 
@@ -209,6 +213,7 @@ public class TowerGame implements ApplicationListener {
 
     gameSaveLocation = Gdx.files.external(Gdx.app.getType().equals(Application.ApplicationType.Desktop) ? ".towergame/test.json" : "test.json");
     gameState.loadSavedGame(gameSaveLocation, camera);
+    nextGameStateSaveTime = System.currentTimeMillis() + TowerConsts.GAME_SAVE_FREQUENCY;
   }
 
   public void render() {
@@ -250,6 +255,11 @@ public class TowerGame implements ApplicationListener {
 
     HeadsUpDisplay.instance().act(deltaTime);
     WeatherService.instance().update(deltaTime);
+
+    if (nextGameStateSaveTime <= System.currentTimeMillis()) {
+      nextGameStateSaveTime = System.currentTimeMillis() + TowerConsts.GAME_SAVE_FREQUENCY;
+      gameState.saveGame(gameSaveLocation, camera);
+    }
   }
 
   public void resize(int width, int height) {

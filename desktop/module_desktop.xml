@@ -8,8 +8,8 @@
   
   <property name="compiler.args.desktop" value="${compiler.args}"/>
   
-  <property name="desktop.output.dir" value="${module.desktop.basedir}/../../../libgdx-skeleton/out/production/desktop"/>
-  <property name="desktop.testoutput.dir" value="${module.desktop.basedir}/../../../libgdx-skeleton/out/test/desktop"/>
+  <property name="desktop.output.dir" value="${module.desktop.basedir}/../out/production/desktop"/>
+  <property name="desktop.testoutput.dir" value="${module.desktop.basedir}/../out/test/desktop"/>
   
   <path id="desktop.module.bootclasspath">
     <!-- Paths to be included in compilation bootclasspath -->
@@ -17,31 +17,60 @@
   
   <path id="desktop.module.production.classpath">
     <path refid="${module.jdk.classpath.desktop}"/>
-    <path refid="library.desktop.classpath"/>
     <pathelement location="${main.output.dir}"/>
-    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/android/assets"/>
   </path>
   
   <path id="desktop.runtime.production.module.classpath">
     <pathelement location="${desktop.output.dir}"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
     <path refid="library.desktop.classpath"/>
-    <path refid="main.runtime.production.module.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/android/assets"/>
   </path>
   
   <path id="desktop.module.classpath">
     <path refid="${module.jdk.classpath.desktop}"/>
     <pathelement location="${desktop.output.dir}"/>
-    <path refid="library.desktop.classpath"/>
     <pathelement location="${main.testoutput.dir}"/>
     <pathelement location="${main.output.dir}"/>
-    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/android/assets"/>
   </path>
   
   <path id="desktop.runtime.module.classpath">
     <pathelement location="${desktop.testoutput.dir}"/>
     <pathelement location="${desktop.output.dir}"/>
+    <pathelement location="${main.testoutput.dir}"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
     <path refid="library.desktop.classpath"/>
-    <path refid="main.runtime.module.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-commons-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/junit-4.7.jar"/>
+    <pathelement location="${basedir}/main/libs/test/great-expectations-0.10.jar"/>
+    <pathelement location="${basedir}/android/assets"/>
   </path>
   
   
@@ -50,11 +79,12 @@
   </patternset>
   
   <patternset id="excluded.from.compilation.desktop">
+    <patternset refid="compiler.excluded"/>
     <patternset refid="excluded.from.module.desktop"/>
   </patternset>
   
   <path id="desktop.module.sourcepath">
-    <dirset dir="${module.desktop.basedir}/../../desktop/desktop">
+    <dirset dir="${module.desktop.basedir}">
       <include name="source"/>
     </dirset>
   </path>
@@ -73,9 +103,10 @@
     </javac>
     
     <copy todir="${desktop.output.dir}">
-      <fileset dir="${module.desktop.basedir}/../../desktop/desktop/source">
+      <fileset dir="${module.desktop.basedir}/source">
         <patternset refid="compiler.resources"/>
         <type type="file"/>
+        <patternset refid="excluded.from.compilation.desktop"/>
       </fileset>
     </copy>
   </target>

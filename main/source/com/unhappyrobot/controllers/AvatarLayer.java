@@ -22,6 +22,7 @@ public class AvatarLayer extends GameLayer {
   private Set<Avatar> avatars;
   private Set<Janitor> janitors;
   private Set<Maid> maids;
+  private static final float AVATAR_POPULATION_SCALE = 0.25f;
 
   public static AvatarLayer initialize(GameGrid gameGrid) {
     instance = new AvatarLayer(gameGrid);
@@ -58,18 +59,17 @@ public class AvatarLayer extends GameLayer {
   }
 
   private void maintainAvatars() {
-    if (avatars.size() < MAX_AVATARS) {
-      GuavaSet<GridObject> rooms = getAllRooms();
-      if (rooms == null || rooms.isEmpty()) {
-        return;
-      }
-
-      int numToSpawn = MAX_AVATARS - avatars.size();
+    if (avatars.size() < maxAvatars()) {
+      int numToSpawn = maxAvatars() - avatars.size();
       for (int i = 0; i <= numToSpawn; i++) {
         Avatar avatar = new Avatar(this);
-        setupAvatar(rooms, avatar);
+        setupAvatar(avatar);
       }
     }
+  }
+
+  private int maxAvatars() {
+    return (int) Math.min(Player.instance().getTotalPopulation() * AVATAR_POPULATION_SCALE, MAX_AVATARS);
   }
 
   private GuavaSet<GridObject> getAllRooms() {
@@ -84,10 +84,8 @@ public class AvatarLayer extends GameLayer {
     return rooms;
   }
 
-  private void setupAvatar(GuavaSet<GridObject> rooms, Avatar avatar) {
-    if (rooms != null) {
-      avatar.setPosition(Random.randomInt(-64, gameGrid.getWorldSize().x + 64), 256f);
-    }
+  private void setupAvatar(Avatar avatar) {
+    avatar.setPosition(Random.randomInt(-64, gameGrid.getWorldSize().x + 64), 256f);
 
     avatar.beginNextAction();
     addChild(avatar);
@@ -140,19 +138,17 @@ public class AvatarLayer extends GameLayer {
     if (event.gridObject instanceof Room) {
       RoomType roomType = (RoomType) event.gridObject.getGridObjectType();
       if (roomType.provides() != null) {
-        GuavaSet<GridObject> rooms = getAllRooms();
-
         switch (roomType.provides()) {
           case JANITORS:
-            setupAvatar(rooms, new Janitor(this));
-            setupAvatar(rooms, new Janitor(this));
-            setupAvatar(rooms, new Janitor(this));
+            setupAvatar(new Janitor(this));
+            setupAvatar(new Janitor(this));
+            setupAvatar(new Janitor(this));
             break;
 
           case MAIDS:
-            setupAvatar(rooms, new Maid(this));
-            setupAvatar(rooms, new Maid(this));
-            setupAvatar(rooms, new Maid(this));
+            setupAvatar(new Maid(this));
+            setupAvatar(new Maid(this));
+            setupAvatar(new Maid(this));
             break;
         }
       }

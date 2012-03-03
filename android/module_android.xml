@@ -8,8 +8,8 @@
   
   <property name="compiler.args.android" value="${compiler.args}"/>
   
-  <property name="android.output.dir" value="${module.android.basedir}/../../libgdx-skeleton/out/production/android"/>
-  <property name="android.testoutput.dir" value="${module.android.basedir}/../../libgdx-skeleton/out/test/android"/>
+  <property name="android.output.dir" value="${module.android.basedir}/../out/production/android"/>
+  <property name="android.testoutput.dir" value="${module.android.basedir}/../out/test/android"/>
   
   <path id="android.module.bootclasspath">
     <!-- Paths to be included in compilation bootclasspath -->
@@ -19,13 +19,24 @@
     <path refid="${module.jdk.classpath.android}"/>
     <path refid="library.android.classpath"/>
     <pathelement location="${main.output.dir}"/>
-    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
   </path>
   
   <path id="android.runtime.production.module.classpath">
     <pathelement location="${android.output.dir}"/>
     <path refid="library.android.classpath"/>
-    <path refid="main.runtime.production.module.classpath"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
   </path>
   
   <path id="android.module.classpath">
@@ -34,14 +45,30 @@
     <path refid="library.android.classpath"/>
     <pathelement location="${main.testoutput.dir}"/>
     <pathelement location="${main.output.dir}"/>
-    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
   </path>
   
   <path id="android.runtime.module.classpath">
     <pathelement location="${android.testoutput.dir}"/>
     <pathelement location="${android.output.dir}"/>
     <path refid="library.android.classpath"/>
-    <path refid="main.runtime.module.classpath"/>
+    <pathelement location="${main.testoutput.dir}"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-commons-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/junit-4.7.jar"/>
+    <pathelement location="${basedir}/main/libs/test/great-expectations-0.10.jar"/>
   </path>
   
   
@@ -50,6 +77,7 @@
   </patternset>
   
   <patternset id="excluded.from.compilation.android">
+    <patternset refid="compiler.excluded"/>
     <patternset refid="excluded.from.module.android"/>
   </patternset>
   
@@ -77,10 +105,12 @@
       <fileset dir="${module.android.basedir}/source">
         <patternset refid="compiler.resources"/>
         <type type="file"/>
+        <patternset refid="excluded.from.compilation.android"/>
       </fileset>
       <fileset dir="${module.android.basedir}/gen">
         <patternset refid="compiler.resources"/>
         <type type="file"/>
+        <patternset refid="excluded.from.compilation.android"/>
       </fileset>
     </copy>
   </target>

@@ -8,8 +8,8 @@
   
   <property name="compiler.args.main" value="${compiler.args}"/>
   
-  <property name="main.output.dir" value="${module.main.basedir}/../../libgdx-skeleton/out/production/main"/>
-  <property name="main.testoutput.dir" value="${module.main.basedir}/../../libgdx-skeleton/out/test/main"/>
+  <property name="main.output.dir" value="${module.main.basedir}/../out/production/main"/>
+  <property name="main.testoutput.dir" value="${module.main.basedir}/../out/test/main"/>
   
   <path id="main.module.bootclasspath">
     <!-- Paths to be included in compilation bootclasspath -->
@@ -17,28 +17,56 @@
   
   <path id="main.module.production.classpath">
     <path refid="${module.jdk.classpath.main}"/>
-    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx-sources.jar"/>
-    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
   </path>
   
   <path id="main.runtime.production.module.classpath">
     <pathelement location="${main.output.dir}"/>
-    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx-sources.jar"/>
-    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
   </path>
   
   <path id="main.module.classpath">
     <path refid="${module.jdk.classpath.main}"/>
     <pathelement location="${main.output.dir}"/>
-    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx-sources.jar"/>
-    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-commons-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/junit-4.7.jar"/>
+    <pathelement location="${basedir}/main/libs/test/great-expectations-0.10.jar"/>
   </path>
   
   <path id="main.runtime.module.classpath">
     <pathelement location="${main.testoutput.dir}"/>
     <pathelement location="${main.output.dir}"/>
-    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx-sources.jar"/>
-    <pathelement location="${basedir}/../libgdx-skeleton/main/libs/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-commons-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/junit-4.7.jar"/>
+    <pathelement location="${basedir}/main/libs/test/great-expectations-0.10.jar"/>
   </path>
   
   
@@ -47,12 +75,19 @@
   </patternset>
   
   <patternset id="excluded.from.compilation.main">
+    <patternset refid="compiler.excluded"/>
     <patternset refid="excluded.from.module.main"/>
   </patternset>
   
   <path id="main.module.sourcepath">
     <dirset dir="${module.main.basedir}">
       <include name="source"/>
+    </dirset>
+  </path>
+  
+  <path id="main.module.test.sourcepath">
+    <dirset dir="${module.main.basedir}">
+      <include name="test"/>
     </dirset>
   </path>
   
@@ -73,11 +108,29 @@
       <fileset dir="${module.main.basedir}/source">
         <patternset refid="compiler.resources"/>
         <type type="file"/>
+        <patternset refid="excluded.from.compilation.main"/>
       </fileset>
     </copy>
   </target>
   
-  <target name="compile.module.main.tests" depends="compile.module.main.production" description="compile module main; test classes" unless="skip.tests"/>
+  <target name="compile.module.main.tests" depends="compile.module.main.production" description="compile module main; test classes" unless="skip.tests">
+    <mkdir dir="${main.testoutput.dir}"/>
+    <javac destdir="${main.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.main}/javac">
+      <compilerarg line="${compiler.args.main}"/>
+      <bootclasspath refid="main.module.bootclasspath"/>
+      <classpath refid="main.module.classpath"/>
+      <src refid="main.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.main"/>
+    </javac>
+    
+    <copy todir="${main.testoutput.dir}">
+      <fileset dir="${module.main.basedir}/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.main"/>
+      </fileset>
+    </copy>
+  </target>
   
   <target name="clean.module.main" description="cleanup module">
     <delete dir="${main.output.dir}"/>

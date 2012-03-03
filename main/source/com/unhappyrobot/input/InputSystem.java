@@ -183,7 +183,7 @@ public class InputSystem extends InputAdapter {
       }
     }
 
-    return delegater.getCameraController().scrolled(amount);
+    return delegater.scrolled(amount);
   }
 
   public void update(float deltaTime) {

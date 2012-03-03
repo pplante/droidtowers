@@ -38,10 +38,10 @@ public class GridPositionCache {
     gridPositions = null;
 
     gridSize = event.gameGrid.gridSize;
-    gridPositions = new GridPosition[(int) gridSize.x][(int) gridSize.y];
+    gridPositions = new GridPosition[(int) gridSize.x + 1][(int) gridSize.y + 1];
 
-    for (int x = 0; x < gridSize.x; x++) {
-      for (int y = 0; y < gridSize.y; y++) {
+    for (int x = 0; x <= gridSize.x; x++) {
+      for (int y = 0; y <= gridSize.y; y++) {
         gridPositions[x][y] = new GridPosition(x, y);
       }
     }
@@ -110,6 +110,8 @@ public class GridPositionCache {
     int x = (int) gridPoint.x;
     int y = (int) gridPoint.y;
 
+    if (!checkBounds(x, y)) return null;
+
     if (gridPositions[x][y] == null) {
       gridPositions[x][y] = new GridPosition(x, y);
     }
@@ -147,13 +149,18 @@ public class GridPositionCache {
   }
 
   public GridPosition getPosition(int x, int y) {
-    if (x == gridSize.x || x < 0) {
-      return null;
-    } else if (y == gridSize.y || y < 0) {
-      return null;
-    }
+    if (!checkBounds(x, y)) return null;
 
     return gridPositions[x][y];
+  }
+
+  private boolean checkBounds(int x, int y) {
+    if (x >= gridSize.x || x < 0) {
+      return false;
+    } else if (y >= gridSize.y || y < 0) {
+      return false;
+    }
+    return true;
   }
 
   public GridPosition[][] getPositions() {

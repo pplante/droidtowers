@@ -32,7 +32,7 @@ public class GuavaSet<T> extends HashSet<T> {
 
   public T getRandomEntry() {
     if (!isEmpty()) {
-      return Iterables.get(this, Random.randomInt(size()));
+      return Iterables.get(this, Random.randomInt(size()), null);
     }
 
     return null;

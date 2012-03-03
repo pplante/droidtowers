@@ -28,8 +28,6 @@ public class TransportCalculator extends GameStateAction {
 
   @Override
   public void run() {
-    System.out.println("running!!!!");
-
     for (GridPosition[] gridPositions : GridPositionCache.instance().getPositions()) {
       for (GridPosition gridPosition : gridPositions) {
         gridPosition.connectedToTransit = false;

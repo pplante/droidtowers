@@ -5,8 +5,6 @@ import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
@@ -34,16 +32,15 @@ public class ModalOverlay extends WidgetGroup {
   }
 
   private ModalOverlay(HeadsUpDisplay headsUpDisplay) {
-    this.headsUpDisplay = headsUpDisplay;
+    super();
 
-    Pixmap pixmap = new Pixmap(2, 2, Pixmap.Format.RGBA4444);
-    pixmap.setColor(new Color(0, 0, 0, 1));
-    pixmap.fill();
+    this.headsUpDisplay = headsUpDisplay;
 
     final Texture texture = new Texture(Gdx.files.internal("hud/modal-noise.png"));
     texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
     background = new TiledImage(texture);
+    addActor(background);
   }
 
   public float getPrefWidth() {
@@ -55,7 +52,7 @@ public class ModalOverlay extends WidgetGroup {
   }
 
   public void show() {
-    headsUpDisplay.addActor(background);
+    headsUpDisplay.addActor(this);
     background.width = Gdx.graphics.getWidth();
     background.height = Gdx.graphics.getHeight();
 
@@ -85,5 +82,10 @@ public class ModalOverlay extends WidgetGroup {
   @Override
   public boolean touchMoved(float x, float y) {
     return true;
+  }
+
+  @Override
+  public void touchDragged(float x, float y, int pointer) {
+
   }
 }

@@ -51,6 +51,10 @@ public class ToolBase implements GestureDetector.GestureListener {
     return false;
   }
 
+  public boolean scrolled(int amount) {
+    return false;
+  }
+
   public boolean pinch(Vector2 vector2, Vector2 vector21, Vector2 vector22, Vector2 vector23) {
     return false;
   }

@@ -79,6 +79,7 @@ public class Elevator extends Transit {
       floorFont.draw(spriteBatch, labelText, gridPoint.getWorldX(gameGrid) + ((gameGrid.unitSize.x - textBounds.width) / 2), gridPoint.getWorldY(gameGrid) + ((gameGrid.unitSize.y - textBounds.height) / 2));
     }
 
+    elevatorCar.setColor(renderColor);
     elevatorCar.draw(spriteBatch);
 
     gridPoint.add(0, 1);

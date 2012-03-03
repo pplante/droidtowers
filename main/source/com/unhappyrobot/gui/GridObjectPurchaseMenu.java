@@ -84,6 +84,9 @@ public class GridObjectPurchaseMenu extends Window {
       ModalOverlay.instance().hide();
     }
 
+    stage.setScrollFocus(null);
+    stage.setKeyboardFocus(null);
+
     markToRemove(true);
   }
 

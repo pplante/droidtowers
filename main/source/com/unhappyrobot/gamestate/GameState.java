@@ -5,6 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.achievements.AchievementEngine;
+import com.unhappyrobot.controllers.GameTips;
 import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.events.EventListener;
 import com.unhappyrobot.gamestate.actions.*;
@@ -37,7 +38,6 @@ public class GameState extends EventListener {
     transportCalculator = new TransportCalculator(gameGrid, TowerConsts.TRANSPORT_CALCULATOR_FREQUENCY);
 
     GameGrid.events().register(this);
-
   }
 
   public void update(float deltaTime, GameGrid gameGrid) {
@@ -93,11 +93,16 @@ public class GameState extends EventListener {
       }).centerOnScreen().show();
     } finally {
       transportCalculator.unpause();
+      GameTips.instance().enable();
     }
   }
 
   public void saveGame(FileHandle fileHandle, OrthographicCamera camera) {
     if (shouldSaveGame) {
+      if (!fileHandle.exists()) {
+        fileHandle.parent().mkdirs();
+      }
+
       GameSave gameSave = new GameSave(gameGrid, camera, Player.instance());
       ObjectMapper objectMapper = new ObjectMapper();
       SimpleModule simpleModule = new SimpleModule("Specials", new Version(1, 0, 0, null));

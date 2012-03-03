@@ -28,6 +28,7 @@ class GestureDelegater implements GestureListener {
   }
 
   public void switchTool(OrthographicCamera camera, List<GameLayer> gameLayers, GestureTool tool, Runnable switchToolRunnable) {
+    System.out.println("tool = " + tool);
     if (beforeSwitchToolRunnable != null) {
       beforeSwitchToolRunnable.run();
       beforeSwitchToolRunnable = null;
@@ -72,6 +73,10 @@ class GestureDelegater implements GestureListener {
 
   public boolean zoom(float originalDistance, float currentDistance) {
     return currentTool != null && currentTool.zoom(originalDistance, currentDistance) || cameraController.zoom(originalDistance, currentDistance);
+  }
+
+  public boolean scrolled(int amount) {
+    return currentTool != null && currentTool.scrolled(amount) || cameraController.scrolled(amount);
   }
 
   public boolean pinch(Vector2 vector2, Vector2 vector21, Vector2 vector22, Vector2 vector23) {

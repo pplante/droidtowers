@@ -228,4 +228,13 @@ public class HeadsUpDisplay extends WidgetGroup {
   public float getPrefHeight() {
     return 0;
   }
+
+  public void showTipBubble(GridObject gridObject, String message) {
+    SpeechBubble bubble = new SpeechBubble();
+    bubble.setText(message);
+    bubble.followObject(gridObject);
+    bubble.show();
+
+    addActor(bubble);
+  }
 }

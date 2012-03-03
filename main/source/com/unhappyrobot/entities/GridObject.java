@@ -135,9 +135,7 @@ public abstract class GridObject {
     Sprite sprite = getSprite();
     if (sprite != null) {
       if (placementState.equals(GridObjectPlacementState.INVALID)) {
-        Color color = new Color(gameGrid.canObjectBeAt(this) ? Color.WHITE : Color.RED);
-        color.a = 0.85f;
-        renderColor = color;
+        renderColor = gameGrid.canObjectBeAt(this) ? Color.CYAN : Color.RED;
       } else if (placementState.equals(GridObjectPlacementState.PLACED)) {
         renderColor = Color.WHITE;
       }
@@ -222,6 +220,15 @@ public abstract class GridObject {
 
     worldCenter.x = position.getWorldX(gameGrid) + (size.getWorldX(gameGrid) / 2);
     worldCenter.y = position.getWorldY(gameGrid) + (size.getWorldY(gameGrid) / 2);
+
+    return worldCenter;
+  }
+
+  public Vector2 getWorldTop() {
+    Vector2 worldCenter = new Vector2();
+
+    worldCenter.x = position.getWorldX(gameGrid) + (size.getWorldX(gameGrid) / 2);
+    worldCenter.y = position.getWorldY(gameGrid) + size.getWorldY(gameGrid);
 
     return worldCenter;
   }
