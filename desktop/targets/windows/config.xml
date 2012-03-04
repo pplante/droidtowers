@@ -1,0 +1,18 @@
+<launch4jConfig>
+  <headerType>gui</headerType>
+  <jar>../../../out/artifacts/desktop_jar/desktop.jar</jar>
+  <outfile>../../../out/DroidTowers.exe</outfile>
+  <errTitle>DroidTowers</errTitle>
+  <chdir>.</chdir>
+  <customProcName>true</customProcName>
+  <icon>DroidTowers.ico</icon>
+  <jre>
+    <minVersion>1.4.0</minVersion>
+  </jre>
+  <!--<splash>-->
+    <!--<file>splash.bmp</file>-->
+    <!--<waitForWindow>true</waitForWindow>-->
+    <!--<timeout>60</timeout>-->
+    <!--<timeoutErr>true</timeoutErr>-->
+  <!--</splash>-->
+</launch4jConfig>

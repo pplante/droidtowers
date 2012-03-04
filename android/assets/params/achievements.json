@@ -18,18 +18,35 @@
   },
   {
     "id":"build1hotelroom",
-    "name":"Build 1 Hotel Room.",
+    "name":"Build 3 Hotel Rooms.",
     "requirements":[
       {
         "type":"BUILD",
         "thing":"HOTEL_ROOM",
-        "amount":1
+        "amount":3
       }
     ],
     "rewards":[
       {
         "type":"UNLOCK",
-        "thing":"MAID_CLOSET"
+        "thing":"MAIDS_OFFICE"
+      }
+    ]
+  },
+  {
+    "id":"build3commercialspaces",
+    "name":"Build 3 Commercial Spaces.",
+    "requirements":[
+      {
+        "type":"BUILD",
+        "thing":"COMMERCIAL_SPACE",
+        "amount":3
+      }
+    ],
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"JANITORS_CLOSET"
       }
     ]
   }

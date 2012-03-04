@@ -41,6 +41,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   private GridObjectPurchaseMenu purchaseDialog;
   private InputCallback closeDialogCallback = null;
   private RadialMenu toolMenu;
+  private final StackGroup notificationStack;
 
   public static HeadsUpDisplay instance() {
     if (instance == null) {
@@ -52,6 +53,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
   private HeadsUpDisplay() {
     this.guiSkin = new Skin(Gdx.files.internal("default-skin.ui"), Gdx.files.internal("default-skin.png"));
+    notificationStack = new StackGroup();
   }
 
   public void initialize(final OrthographicCamera camera, final GameGrid gameGrid, final Stage stage, SpriteBatch spriteBatch) {
@@ -94,6 +96,16 @@ public class HeadsUpDisplay extends WidgetGroup {
     servicesButton.setClickListener(makePurchaseButtonClickListener("Services", ServiceRoomTypeFactory.instance()));
     toolMenu.addActor(servicesButton);
 
+    ImageButton sellButton = new ImageButton(hudAtlas.findRegion("tool-sell"));
+    sellButton.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        toolMenu.hide();
+        InputSystem.instance().switchTool(GestureTool.SELL, null);
+      }
+    });
+
+    toolMenu.addActor(sellButton);
+
     final ImageButton toolButton = new ImageButton(hudAtlas.findRegion("tool-sprite"));
     toolButton.x = stage.width() - toolButton.width - 5;
     toolButton.y = 5;
@@ -129,6 +141,11 @@ public class HeadsUpDisplay extends WidgetGroup {
     overlayControl.x = audioControl.x - audioControl.width - 5;
     overlayControl.y = stage.height() - overlayControl.height - 5;
     addActor(overlayControl);
+
+    notificationStack.pad(10);
+    notificationStack.x = 0;
+    notificationStack.y = 0;
+    addActor(notificationStack);
 
     stage.addActor(this);
   }
@@ -236,5 +253,9 @@ public class HeadsUpDisplay extends WidgetGroup {
     bubble.show();
 
     addActor(bubble);
+  }
+
+  public StackGroup getNotificationStack() {
+    return notificationStack;
   }
 }

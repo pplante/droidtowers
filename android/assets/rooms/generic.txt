@@ -1,6 +1,6 @@
 generic.png
 format: RGBA8888
-filter: MipMapLinearNearest,Nearest
+filter: Linear,Nearest
 repeat: none
 generic/generic_room_2x
   rotate: false

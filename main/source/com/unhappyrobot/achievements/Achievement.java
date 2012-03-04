@@ -58,14 +58,8 @@ public class Achievement {
     StringBuilder summary = new StringBuilder();
     for (AchievementReward reward : rewards) {
       reward.give();
-
-      summary.append(reward.getType());
-      summary.append(" ");
-      summary.append(reward.getThing());
-      summary.append(" ");
-      summary.append(reward.getAmount());
+      summary.append(reward.getFormattedString());
     }
-
 
     return String.format("Complete: %s!\n%s", name, summary);
   }

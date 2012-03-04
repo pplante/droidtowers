@@ -4,15 +4,13 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import org.junit.runner.notification.RunNotifier;
-import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
-import org.junit.runners.model.Statement;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class GdxTestRunner extends BlockJUnit4ClassRunner implements ApplicationListener {
+public class GdxTestRunner extends NonGLTestRunner implements ApplicationListener {
 
   private final Map<FrameworkMethod, RunNotifier> invokeInRender = new HashMap<FrameworkMethod, RunNotifier>();
 
@@ -24,29 +22,6 @@ public class GdxTestRunner extends BlockJUnit4ClassRunner implements Application
     conf.title = "Gdx Test Runner";
     conf.useGL20 = true;
     new LwjglApplication(this, conf);
-  }
-
-  @Override
-  protected Statement methodBlock(FrameworkMethod method) {
-    beforeTestRun();
-
-    final Statement statement = super.methodBlock(method);
-    return new Statement() {
-      @Override
-      public void evaluate() throws Throwable {
-        try {
-          statement.evaluate();
-        } finally {
-          afterTestRun();
-        }
-      }
-    };
-  }
-
-  protected void beforeTestRun() {
-  }
-
-  protected void afterTestRun() {
   }
 
   public void create() {
@@ -82,9 +57,6 @@ public class GdxTestRunner extends BlockJUnit4ClassRunner implements Application
     waitUntilInvokedInRenderMethod();
   }
 
-  /**
-   *
-   */
   private void waitUntilInvokedInRenderMethod() {
     try {
       while (true) {

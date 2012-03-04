@@ -57,7 +57,7 @@ public class StatusBarPanel extends Table {
       lastUpdated = 0f;
       Player player = Player.instance();
       experienceLabel.setText(NumberFormat.getInstance().format(player.getExperience()));
-      moneyLabel.setText("¢ " + NumberFormat.getInstance().format(player.getCoins()));
+      moneyLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + NumberFormat.getInstance().format(player.getCoins()));
       populationLabel.setText(NumberFormat.getInstance().format(player.getTotalPopulation()));
 
       gameSpeedLabel.setText(TowerGame.getTimeMultiplier() + "x");

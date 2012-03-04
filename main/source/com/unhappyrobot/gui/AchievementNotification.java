@@ -39,6 +39,8 @@ public class AchievementNotification extends Table {
   }
 
   public void show() {
+    HeadsUpDisplay.instance().getNotificationStack().addActor(this);
+
     Timeline.createSequence()
             .push(Tween.set(this, WidgetAccessor.OPACITY).target(0.0f))
             .push(Tween.to(this, WidgetAccessor.OPACITY, 200).target(1.0f))

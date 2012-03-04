@@ -37,6 +37,7 @@
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
     <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
     <pathelement location="${basedir}/android/assets"/>
   </path>
   
@@ -66,6 +67,7 @@
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
     <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
     <pathelement location="${basedir}/main/libs/test/asm-commons-3.3.1.jar"/>
     <pathelement location="${basedir}/main/libs/test/asm-3.3.1.jar"/>
     <pathelement location="${basedir}/main/libs/test/junit-4.7.jar"/>

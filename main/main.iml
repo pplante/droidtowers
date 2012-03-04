@@ -25,8 +25,8 @@
     <orderEntry type="module-library" exported="">
       <library name="jackson">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/main/jackson-core-asl-1.8.5.jar!/" />
-          <root url="jar://$MODULE_DIR$/libs/main/jackson-mapper-asl-1.8.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/main/jackson-core-asl-1.9.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/main/jackson-mapper-asl-1.9.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -50,6 +50,15 @@
         <SOURCES>
           <root url="jar://$MODULE_DIR$/libs/sources/guava-10.0.1-sources.jar!/" />
         </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/main/commons-lang3-3.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library" scope="TEST">
@@ -86,6 +95,17 @@
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/test/mockito-all-1.9.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/libs/test/mockito-all-1.9.0.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
   </component>

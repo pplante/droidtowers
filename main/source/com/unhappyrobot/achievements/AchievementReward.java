@@ -1,10 +1,14 @@
 package com.unhappyrobot.achievements;
 
+import com.google.common.collect.Lists;
 import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.types.ProviderType;
 import com.unhappyrobot.types.ServiceRoomType;
 import com.unhappyrobot.types.ServiceRoomTypeFactory;
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
+
+import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class AchievementReward {
@@ -14,6 +18,10 @@ public class AchievementReward {
 
   public AchievementReward() {
 
+  }
+
+  public AchievementReward(RewardType type, AchievementThing thing) {
+    this(type, thing, 0);
   }
 
   public AchievementReward(RewardType type, AchievementThing thing, int amount) {
@@ -37,11 +45,18 @@ public class AchievementReward {
     if (thing == null) {
       throw new RuntimeException(String.format("AchievementReward %s does not contain 'thing' parameter.", type));
     }
-    System.out.println("thing = " + thing);
+
     switch (thing) {
-      case MAID_CLOSET:
+      case MAIDS_OFFICE:
         for (ServiceRoomType serviceRoomType : ServiceRoomTypeFactory.instance().all()) {
           if (serviceRoomType.provides() == ProviderType.MAIDS) {
+            serviceRoomType.setLocked(false);
+          }
+        }
+        break;
+      case JANITORS_CLOSET:
+        for (ServiceRoomType serviceRoomType : ServiceRoomTypeFactory.instance().all()) {
+          if (serviceRoomType.provides() == ProviderType.JANITORS) {
             serviceRoomType.setLocked(false);
           }
         }
@@ -81,5 +96,22 @@ public class AchievementReward {
 
   public double getAmount() {
     return amount;
+  }
+
+  public String getFormattedString() {
+    List<String> parts = Lists.newArrayList();
+    if (type != null) {
+      parts.add(type.displayString);
+    }
+
+    if (thing != null) {
+      parts.add(thing.displayString);
+    }
+
+    if (amount > 0) {
+      parts.add("" + (int) amount);
+    }
+
+    return StringUtils.join(parts, " ") + "\n";
   }
 }

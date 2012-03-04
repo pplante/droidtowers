@@ -57,12 +57,9 @@ public class TowerGame implements ApplicationListener {
   private static float timeMultiplier;
   private long nextGameStateSaveTime;
 
-  public static GameGridRenderer getGameGridRenderer() {
-    return gameGridRenderer;
-  }
-
   public void create() {
     Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+    Random.init();
 
     TweenSystem.getTweenManager();
     AchievementEngine.instance();
@@ -71,8 +68,6 @@ public class TowerGame implements ApplicationListener {
     CommercialTypeFactory.instance();
     ElevatorTypeFactory.instance();
     StairTypeFactory.instance();
-
-    Random.init();
 
     timeMultiplier = 1f;
 
@@ -88,8 +83,8 @@ public class TowerGame implements ApplicationListener {
 
     HeadsUpDisplay.instance().initialize(camera, gameGrid, guiStage, spriteBatch);
 
-    MainMenu mainMenu = new MainMenu();
-    mainMenu.show().centerOnStage();
+//    MainMenu mainMenu = new MainMenu();
+//    mainMenu.show().centerOnStage();
 
 
     gameGridRenderer = gameGrid.getRenderer();
@@ -158,8 +153,7 @@ public class TowerGame implements ApplicationListener {
     InputSystem.instance().bind(Keys.R, new InputCallback() {
       public boolean run(float timeDelta) {
         Texture.invalidateAllTextures(Gdx.app);
-        throw new RuntimeException("asdf");
-//        return true;
+        return true;
       }
     });
 
@@ -295,5 +289,9 @@ public class TowerGame implements ApplicationListener {
 
   public static GameGrid getGameGrid() {
     return gameGrid;
+  }
+
+  public static GameGridRenderer getGameGridRenderer() {
+    return gameGridRenderer;
   }
 }

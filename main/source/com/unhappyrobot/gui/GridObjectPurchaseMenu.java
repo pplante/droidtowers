@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.input.GestureTool;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
@@ -141,7 +142,7 @@ public class GridObjectPurchaseMenu extends Window {
 
       row().fill();
       add(new Label(gridObjectType.getName(), skin)).minWidth(350);
-      add(new Label("¢" + NumberFormat.getInstance().format(gridObjectType.getCoins()), skin)).align(Align.RIGHT);
+      add(new Label(TowerConsts.CURRENCY_SYMBOL + NumberFormat.getInstance().format(gridObjectType.getCoins()), skin)).align(Align.RIGHT);
 
       row().align(Align.LEFT);
       TextureRegion textureRegion = gridObjectType.getTextureRegion();

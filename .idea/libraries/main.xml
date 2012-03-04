@@ -9,6 +9,7 @@
       <root url="file://$PROJECT_DIR$/main/libs/sources/rhino-1.7R3" />
       <root url="jar://$PROJECT_DIR$/main/libs/sources/tween-engine-api-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/main/libs/sources/guava-10.0.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/main/libs/sources/commons-codec-1.4-sources.jar!/" />
     </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/main/libs/main" recursive="false" />
   </library>

@@ -7,6 +7,7 @@ import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 import com.unhappyrobot.events.GridObjectChangedEvent;
 import com.unhappyrobot.grid.GameGrid;
+import com.unhappyrobot.gui.AchievementNotification;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.util.ArrayList;
@@ -55,27 +56,20 @@ public class AchievementEngine {
     Iterator<Achievement> achievementIterator = achievements.iterator();
     while (achievementIterator.hasNext()) {
       Achievement achievement = achievementIterator.next();
-      if (achievement.isCompleted() && !achievement.alreadyGaveReward()) {
+      if (achievement.isCompleted() && !completedAchievements.contains(achievement)) {
         String rewardSummary = achievement.giveReward();
 
         if (rewardSummary != null) {
           summary.add(rewardSummary);
         }
 
+        AchievementNotification notification = new AchievementNotification(achievement);
+        notification.show();
+
         completedAchievements.add(achievement);
 
         achievementIterator.remove();
       }
-    }
-
-    if (!summary.isEmpty()) {
-      String formattedSummary = "";
-
-      for (String s : summary) {
-        formattedSummary += "\n" + s;
-      }
-
-//      HeadsUpDisplay.instance().showToast("Awesome Job!\n%s", formattedSummary);
     }
   }
 
@@ -83,17 +77,18 @@ public class AchievementEngine {
     return completedAchievements;
   }
 
-  public void loadCompletedAchievements(List<String> completedAchievements) {
-    if (completedAchievements == null) {
+  public void loadCompletedAchievements(List<String> achievementIds) {
+    if (achievementIds == null) {
       return;
     }
 
     Iterator<Achievement> achievementIterator = achievements.iterator();
     while (achievementIterator.hasNext()) {
       Achievement achievement = achievementIterator.next();
-      if (completedAchievements.contains(achievement.getId())) {
+      if (achievementIds.contains(achievement.getId())) {
         achievement.setCompleted(true);
         achievement.giveReward();
+        completedAchievements.add(achievement);
       }
     }
   }

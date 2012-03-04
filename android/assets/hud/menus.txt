@@ -1,0 +1,18 @@
+menus.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+happy-droids-logo
+  rotate: false
+  xy: 0, 86
+  size: 94, 60
+  orig: 94, 60
+  offset: 3, 5
+  index: -1
+droid-towers-logo
+  rotate: false
+  xy: 0, 0
+  size: 506, 86
+  orig: 506, 86
+  offset: 4, 4
+  index: -1

@@ -1,6 +1,6 @@
 cityscape.png
 format: RGBA4444
-filter: MipMapNearestLinear,Linear
+filter: Linear,Linear
 repeat: none
 small
   rotate: false

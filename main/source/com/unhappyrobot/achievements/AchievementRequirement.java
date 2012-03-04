@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.entities.*;
+import com.unhappyrobot.types.CommercialType;
 import com.unhappyrobot.types.ProviderType;
 import com.unhappyrobot.types.RoomType;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
@@ -46,6 +47,17 @@ class AchievementRequirement {
             return gridObject instanceof Room && ((RoomType) gridObject.getGridObjectType()).provides() == ProviderType.HOTEL_ROOMS;
           }
         };
+        break;
+
+      case COMMERCIAL_SPACE:
+        gridObjects = TowerGame.getGameGrid().getInstancesOf(CommercialSpace.class);
+        gridObjectPredicate = new Predicate<GridObject>() {
+          public boolean apply(@Nullable GridObject gridObject) {
+            ProviderType providerType = ((CommercialType) gridObject.getGridObjectType()).provides();
+            return gridObject instanceof CommercialSpace && (providerType == ProviderType.OFFICE_SERVICES || providerType == ProviderType.FOOD);
+          }
+        };
+        break;
     }
 
     return gridObjects != null && gridObjectPredicate != null && gridObjects.filterBy(gridObjectPredicate).size() >= amount;
