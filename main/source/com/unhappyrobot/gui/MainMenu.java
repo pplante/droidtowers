@@ -6,12 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.Scaling;
 
-public class MainMenu extends Window {
+public class MainMenu extends TowerWindow {
   public MainMenu() {
-    super(HeadsUpDisplay.instance().getGuiSkin());
+    super("Welcome to DroidTowers!");
     visible = false;
     setModal(true);
     setMovable(false);
@@ -28,7 +27,7 @@ public class MainMenu extends Window {
     TextButton playGameButton = new TextButton("Play Game", HeadsUpDisplay.instance().getGuiSkin());
     playGameButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        resumeGame();
+        dismiss();
       }
     });
     add(playGameButton).center().colspan(2);
@@ -45,27 +44,5 @@ public class MainMenu extends Window {
     add(new Image(atlas.findRegion("happy-droids-logo"), Scaling.none)).bottom().right();
 
     pack();
-  }
-
-  private void resumeGame() {
-    ModalOverlay.instance().hide();
-    markToRemove(true);
-  }
-
-
-  public MainMenu centerOnStage() {
-    x = (stage.width() - width) / 2;
-    y = (stage.height() - height) / 2;
-
-    return this;
-  }
-
-  public MainMenu show() {
-    visible = true;
-    ModalOverlay.instance().show();
-
-    HeadsUpDisplay.instance().addActor(this);
-
-    return this;
   }
 }

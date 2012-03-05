@@ -11,4 +11,5 @@ public class TowerConsts {
   public static final int WEATHER_SERVICE_STATE_CHANGE_DURATION = 5000;
   public static final int GAME_SAVE_FREQUENCY = 15000;
   public static final String CURRENCY_SYMBOL = "¢";
+  public static final long FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK = 3500;
 }

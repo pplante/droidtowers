@@ -15,11 +15,10 @@ public class TemporaryToken {
 
   public static TemporaryToken create() {
     try {
-      HttpResponse response = HttpRequest.makeRequest(HttpRequest.REQUEST_TYPE.GET, "http://127.0.0.1:8000/api/v1/temporarytoken/create-token/?format=json");
+      HttpResponse response = HttpRequest.makeRequest(HttpRequest.REQUEST_TYPE.GET, Consts.API_V1_TEMPORARYTOKEN_CREATE_TOKEN);
       ObjectMapper mapper = new ObjectMapper();
       return mapper.readValue(response.getBodyString(), TemporaryToken.class);
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (IOException ignored) {
     }
 
     return null;
@@ -42,14 +41,13 @@ public class TemporaryToken {
 
   public boolean validate() {
     try {
-      HttpResponse response = HttpRequest.makeRequest(HttpRequest.REQUEST_TYPE.GET, "http://127.0.0.1:8000" + resource_uri);
+      HttpResponse response = HttpRequest.makeRequest(HttpRequest.REQUEST_TYPE.GET, Consts.HAPPYDROIDS_SERVER + resource_uri + "?format=json");
       ObjectMapper mapper = new ObjectMapper();
       TemporaryToken temporaryToken = mapper.readValue(response.getBodyString(), TemporaryToken.class);
       if (temporaryToken.hasSessionToken()) {
         session = temporaryToken.session;
       }
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (IOException ignored) {
     }
 
     return hasSessionToken();

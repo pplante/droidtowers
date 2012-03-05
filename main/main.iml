@@ -19,9 +19,8 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="library" name="main" level="project" />
     <orderEntry type="library" scope="TEST" name="desktop" level="project" />
-    <orderEntry type="library" name="desktop" level="project" />
+    <orderEntry type="library" name="main" level="project" />
     <orderEntry type="module-library" exported="">
       <library name="jackson">
         <CLASSES>
@@ -56,6 +55,42 @@
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/libs/main/commons-lang3-3.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/main/httpasyncclient-4.0-beta1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/main/httpclient-4.2-beta1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/main/httpcore-4.2-beta1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/main/httpcore-nio-4.2-beta1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

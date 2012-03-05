@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="DroidTowers" default="upload-alpha">
+  <property name="skip.tests" value="true"/>
+
   <import file="idea-build.xml"/>
 
   <property file="build.properties"/>

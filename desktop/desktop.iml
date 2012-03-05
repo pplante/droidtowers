@@ -8,7 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="main" />
-    <orderEntry type="library" name="desktop" level="project" />
+    <orderEntry type="library" exported="" name="desktop" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>

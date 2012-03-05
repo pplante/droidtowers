@@ -1,10 +1,3 @@
 Manifest-Version: 1.0
-Class-Path: gdx.jar gdx-natives.jar gdx-backend-lwjgl.jar gdx-backend-
- lwjgl-natives.jar commons-codec-1.4.jar commons-logging-1.1.1.jar gdx
- .jar guava-10.0.1.jar httpasyncclient-4.0-alpha2.jar httpclient-4.1.1
- .jar httpcore-4.1.1.jar httpcore-nio-4.1.1.jar jackson-core-asl-1.8.5
- .jar jackson-mapper-asl-1.8.5.jar tween-engine-api.jar js.jar commons
- -lang3-3.1.jar jackson-core-asl-1.8.5.jar jackson-mapper-asl-1.8.5.ja
- r guava-10.0.1.jar tween-engine-api.jar commons-lang3-3.1.jar
 Main-Class: com.unhappyrobot.DesktopGame
 

@@ -1,11 +1,15 @@
 package com.unhappyrobot.http;
 
+import com.badlogic.gdx.Gdx;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
 public class HttpRequest {
+  private static final String TAG = HttpRequest.class.getSimpleName();
+
   protected static HttpRequest instance;
 
   public static HttpRequest instance() {
@@ -43,6 +47,7 @@ public class HttpRequest {
       return null;
     }
     try {
+      Gdx.app.log(TAG, "GET: "+ urlString);
       URL url = new URL(urlString);
       URLConnection urlConnection = url.openConnection();
       int contentLength = urlConnection.getContentLength();

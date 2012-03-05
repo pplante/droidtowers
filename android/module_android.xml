@@ -2,9 +2,9 @@
 <project name="module_android" default="compile.module.android">
   <dirname property="module.android.basedir" file="${ant.file.module_android}"/>
   
-  <property name="module.jdk.home.android" value="${jdk.home.android_2.3.3_platform}"/>
-  <property name="module.jdk.bin.android" value="${jdk.bin.android_2.3.3_platform}"/>
-  <property name="module.jdk.classpath.android" value="jdk.classpath.android_2.3.3_platform"/>
+  <property name="module.jdk.home.android" value="${jdk.home.android_2.3.3_google_apis}"/>
+  <property name="module.jdk.bin.android" value="${jdk.bin.android_2.3.3_google_apis}"/>
+  <property name="module.jdk.classpath.android" value="jdk.classpath.android_2.3.3_google_apis"/>
   
   <property name="compiler.args.android" value="${compiler.args}"/>
   
@@ -16,14 +16,14 @@
   </path>
   
   <path id="android.module.production.classpath">
-    <path refid="${module.jdk.classpath.android}"/>
     <path refid="library.android.classpath"/>
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
-    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
-    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
     <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <path refid="${module.jdk.classpath.android}"/>
   </path>
   
   <path id="android.runtime.production.module.classpath">
@@ -32,25 +32,25 @@
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
     <path refid="library.main.classpath"/>
-    <path refid="library.desktop.classpath"/>
-    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
-    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
     <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
     <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
   </path>
   
   <path id="android.module.classpath">
-    <path refid="${module.jdk.classpath.android}"/>
     <pathelement location="${android.output.dir}"/>
     <path refid="library.android.classpath"/>
     <pathelement location="${main.testoutput.dir}"/>
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
-    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
-    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
     <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/junit-4.9.jar"/>
+    <path refid="${module.jdk.classpath.android}"/>
   </path>
   
   <path id="android.runtime.module.classpath">
@@ -60,10 +60,10 @@
     <pathelement location="${main.testoutput.dir}"/>
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
-    <path refid="library.main.classpath"/>
     <path refid="library.desktop.classpath"/>
-    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
-    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
+    <path refid="library.main.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
     <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
     <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
@@ -71,6 +71,8 @@
     <pathelement location="${basedir}/main/libs/test/asm-3.3.1.jar"/>
     <pathelement location="${basedir}/main/libs/test/junit-4.7.jar"/>
     <pathelement location="${basedir}/main/libs/test/great-expectations-0.10.jar"/>
+    <pathelement location="${basedir}/main/libs/test/mockito-all-1.9.0.jar"/>
+    <pathelement location="${basedir}/main/libs/test/junit-4.9.jar"/>
   </path>
   
   

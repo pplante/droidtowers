@@ -83,9 +83,6 @@ public class TowerGame implements ApplicationListener {
 
     HeadsUpDisplay.instance().initialize(camera, gameGrid, guiStage, spriteBatch);
 
-//    MainMenu mainMenu = new MainMenu();
-//    mainMenu.show().centerOnStage();
-
 
     gameGridRenderer = gameGrid.getRenderer();
 
@@ -208,6 +205,10 @@ public class TowerGame implements ApplicationListener {
     gameSaveLocation = Gdx.files.external(Gdx.app.getType().equals(Application.ApplicationType.Desktop) ? ".towergame/test.json" : "test.json");
     gameState.loadSavedGame(gameSaveLocation, camera);
     nextGameStateSaveTime = System.currentTimeMillis() + TowerConsts.GAME_SAVE_FREQUENCY;
+
+
+    ConnectToFacebook mainMenu = new ConnectToFacebook();
+    mainMenu.show().centerOnStage();
   }
 
   public void render() {

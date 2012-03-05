@@ -43,17 +43,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../main/libs/test/robolectric-1.1-20120302.195122-93-jar-with-dependencies.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/../main/libs/test/robolectric-1.1-20120302.195122-93-jar-with-dependencies.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
     <orderEntry type="jdk" jdkName="Android 2.3.3 Google APIs" jdkType="Android SDK" />
   </component>
 </module>

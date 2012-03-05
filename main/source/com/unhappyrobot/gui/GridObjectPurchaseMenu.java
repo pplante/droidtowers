@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.input.GestureTool;
-import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.input.PlacementTool;
 import com.unhappyrobot.types.GridObjectType;
@@ -15,17 +14,11 @@ import com.unhappyrobot.types.GridObjectTypeFactory;
 
 import java.text.NumberFormat;
 
-public class GridObjectPurchaseMenu extends Window {
+public class GridObjectPurchaseMenu extends TowerWindow {
   private Class gridObjectTypeClass;
-  private final Skin skin;
-  private InputCallback closeDialogCallback;
-  private Runnable dismissCallback;
-  private boolean modalState;
-  private static final int[] DIALOG_CLOSE_KEYCODES = new int[]{InputSystem.Keys.ESCAPE, InputSystem.Keys.BACK};
 
   public GridObjectPurchaseMenu(String objectTypeName, GridObjectTypeFactory typeFactory) {
-    super("Purchase " + objectTypeName, HeadsUpDisplay.instance().getGuiSkin());
-    skin = HeadsUpDisplay.instance().getGuiSkin();
+    super("Purchase " + objectTypeName);
 
     defaults().align(Align.LEFT);
     row().pad(10);
@@ -58,64 +51,6 @@ public class GridObjectPurchaseMenu extends Window {
     container.pack();
     scrollPane.pack();
     pack();
-  }
-
-  public void show() {
-    closeDialogCallback = new InputCallback() {
-      public boolean run(float timeDelta) {
-        GridObjectPurchaseMenu.this.dismiss();
-        return true;
-      }
-    };
-
-    InputSystem.instance().bind(DIALOG_CLOSE_KEYCODES, closeDialogCallback);
-  }
-
-  public void dismiss() {
-    if (closeDialogCallback != null) {
-      InputSystem.instance().unbind(DIALOG_CLOSE_KEYCODES, closeDialogCallback);
-      closeDialogCallback = null;
-    }
-
-    if (dismissCallback != null) {
-      dismissCallback.run();
-    }
-
-    if (modalState) {
-      ModalOverlay.instance().hide();
-    }
-
-    stage.setScrollFocus(null);
-    stage.setKeyboardFocus(null);
-
-    markToRemove(true);
-  }
-
-  public void setDismissCallback(Runnable dismissCallback) {
-    this.dismissCallback = dismissCallback;
-  }
-
-  public GridObjectPurchaseMenu centerOnStage() {
-    x = (stage.width() - width) / 2;
-    y = (stage.height() - height) / 2;
-
-    return this;
-  }
-
-  public GridObjectPurchaseMenu modal(boolean newState) {
-    this.modalState = newState;
-
-    if (modalState) {
-      setModal(true);
-      setMovable(false);
-      ModalOverlay.instance().show();
-    } else {
-      setModal(false);
-      setMovable(true);
-      ModalOverlay.instance().hide();
-    }
-
-    return this;
   }
 
   private class GridObjectPurchaseItem extends Table {

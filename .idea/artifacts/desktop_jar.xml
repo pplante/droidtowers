@@ -1,22 +1,23 @@
 <component name="ArtifactManager">
-  <artifact name="desktop:jar">
+  <artifact type="jar" name="desktop:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/desktop_jar</output-path>
-    <root id="root">
-      <element id="archive" name="desktop.jar">
-        <element id="directory" name="META-INF">
-          <element id="file-copy" path="$PROJECT_DIR$/desktop/source/META-INF/MANIFEST.MF" />
-        </element>
-        <element id="module-output" name="desktop" />
-        <element id="module-output" name="main" />
-        <element id="dir-copy" path="$PROJECT_DIR$/android/assets" />
+    <root id="archive" name="desktop.jar">
+      <element id="module-output" name="desktop" />
+      <element id="module-output" name="main" />
+      <element id="dir-copy" path="$PROJECT_DIR$/android/assets" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/gdx.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/desktop/libs/main/gdx-natives.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/desktop/libs/main/gdx-backend-lwjgl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/desktop/libs/main/gdx-backend-lwjgl-natives.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/guava-10.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/tween-engine-api.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/js.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/commons-lang3-3.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/jackson-mapper-asl-1.9.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/jackson-core-asl-1.9.5.jar" path-in-jar="/" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/desktop/source/META-INF/MANIFEST.MF" />
       </element>
-      <element id="file-copy" path="$PROJECT_DIR$/main/libs/main/gdx.jar" />
-      <element id="library" level="project" name="desktop" />
-      <element id="library" level="project" name="main" />
-      <element id="library" level="module" name="jackson" module-name="main" />
-      <element id="file-copy" path="$PROJECT_DIR$/main/libs/main/guava-10.0.1.jar" />
-      <element id="file-copy" path="$PROJECT_DIR$/main/libs/main/tween-engine-api.jar" />
-      <element id="file-copy" path="$PROJECT_DIR$/main/libs/main/commons-lang3-3.1.jar" />
     </root>
   </artifact>
 </component>

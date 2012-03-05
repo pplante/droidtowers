@@ -116,6 +116,12 @@
     </fileset>
   </path>
   
+  <path id="library.http_async_client.classpath">
+    <fileset dir="${basedir}/main/libs/main/httpcomponents-asyncclient-4.0-beta1/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
   <path id="library.main.classpath">
     <fileset dir="${basedir}/main/libs/main">
       <patternset refid="library.patterns"/>
@@ -147,7 +153,7 @@
     <path refid="${module.jdk.classpath.main}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
     <path refid="library.main.classpath"/>
-    <path refid="library.desktop.classpath"/>
+    <path refid="library.http_async_client.classpath"/>
     <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
@@ -159,7 +165,7 @@
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
     <path refid="library.main.classpath"/>
-    <path refid="library.desktop.classpath"/>
+    <path refid="library.http_async_client.classpath"/>
     <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
@@ -171,8 +177,9 @@
     <path refid="${module.jdk.classpath.main}"/>
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
-    <path refid="library.main.classpath"/>
     <path refid="library.desktop.classpath"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.http_async_client.classpath"/>
     <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
@@ -189,8 +196,9 @@
     <pathelement location="${main.testoutput.dir}"/>
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
-    <path refid="library.main.classpath"/>
     <path refid="library.desktop.classpath"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.http_async_client.classpath"/>
     <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
@@ -294,6 +302,7 @@
     <path refid="library.android.classpath"/>
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.http_async_client.classpath"/>
     <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
@@ -307,7 +316,7 @@
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
     <path refid="library.main.classpath"/>
-    <path refid="library.desktop.classpath"/>
+    <path refid="library.http_async_client.classpath"/>
     <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
@@ -321,12 +330,12 @@
     <pathelement location="${main.testoutput.dir}"/>
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.http_async_client.classpath"/>
     <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
     <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
     <pathelement location="${basedir}/main/libs/test/junit-4.9.jar"/>
-    <pathelement location="${basedir}/main/libs/test/robolectric-1.1-20120302.195122-93-jar-with-dependencies.jar"/>
     <path refid="${module.jdk.classpath.android}"/>
   </path>
   
@@ -337,8 +346,9 @@
     <pathelement location="${main.testoutput.dir}"/>
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
-    <path refid="library.main.classpath"/>
     <path refid="library.desktop.classpath"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.http_async_client.classpath"/>
     <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
@@ -350,7 +360,6 @@
     <pathelement location="${basedir}/main/libs/test/great-expectations-0.10.jar"/>
     <pathelement location="${basedir}/main/libs/test/mockito-all-1.9.0.jar"/>
     <pathelement location="${basedir}/main/libs/test/junit-4.9.jar"/>
-    <pathelement location="${basedir}/main/libs/test/robolectric-1.1-20120302.195122-93-jar-with-dependencies.jar"/>
   </path>
   
   
@@ -427,6 +436,7 @@
     <path refid="${module.jdk.classpath.desktop}"/>
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.http_async_client.classpath"/>
     <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
@@ -440,12 +450,13 @@
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
     <path refid="library.main.classpath"/>
-    <path refid="library.desktop.classpath"/>
+    <path refid="library.http_async_client.classpath"/>
     <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
     <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
     <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
+    <path refid="library.desktop.classpath"/>
     <pathelement location="${basedir}/android/assets"/>
   </path>
   
@@ -455,6 +466,7 @@
     <pathelement location="${main.testoutput.dir}"/>
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.http_async_client.classpath"/>
     <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
@@ -469,8 +481,9 @@
     <pathelement location="${main.testoutput.dir}"/>
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
-    <path refid="library.main.classpath"/>
     <path refid="library.desktop.classpath"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.http_async_client.classpath"/>
     <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
@@ -533,7 +546,7 @@
     <!-- Perform any build initialization in this target -->
   </target>
   
-  <target name="clean" depends="clean.module.main, clean.module.android, clean.module.desktop, clean.artifact.desktop:jar" description="cleanup all"/>
+  <target name="clean" depends="clean.module.main, clean.module.android, clean.module.desktop" description="cleanup all"/>
   
   <target name="build.modules" depends="init, clean, compile.module.main, compile.module.android, compile.module.desktop" description="build all modules"/>
   
@@ -544,44 +557,33 @@
     <property name="temp.jar.path.desktop.jar" value="${artifacts.temp.dir}/desktop.jar"/>
   </target>
   
-  <target name="clean.artifact.desktop:jar" description="clean desktop:jar artifact output">
-    <delete dir="${artifact.output.desktop:jar}"/>
-  </target>
-  
   <target name="artifact.desktop:jar" depends="init.artifacts, compile.module.desktop, compile.module.main" description="Build &#39;desktop:jar&#39; artifact">
-    <mkdir dir="${artifact.output.desktop:jar}"/>
+    <property name="artifact.temp.output.desktop:jar" value="${artifacts.temp.dir}/desktop_jar"/>
+    <mkdir dir="${artifact.temp.output.desktop:jar}"/>
     <jar destfile="${temp.jar.path.desktop.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
-      <zipfileset file="${basedir}/desktop/source/META-INF/MANIFEST.MF" prefix="META-INF"/>
       <zipfileset dir="${desktop.output.dir}"/>
       <zipfileset dir="${main.output.dir}"/>
       <zipfileset dir="${basedir}/android/assets"/>
+      <zipfileset src="${basedir}/main/libs/main/gdx.jar"/>
+      <zipfileset src="${basedir}/desktop/libs/main/gdx-natives.jar"/>
+      <zipfileset src="${basedir}/desktop/libs/main/gdx-backend-lwjgl.jar"/>
+      <zipfileset src="${basedir}/desktop/libs/main/gdx-backend-lwjgl-natives.jar"/>
+      <zipfileset src="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+      <zipfileset src="${basedir}/main/libs/main/tween-engine-api.jar"/>
+      <zipfileset src="${basedir}/main/libs/main/js.jar"/>
+      <zipfileset src="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
+      <zipfileset src="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
+      <zipfileset src="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+      <zipfileset file="${basedir}/desktop/source/META-INF/MANIFEST.MF" prefix="META-INF"/>
     </jar>
-    <copy file="${temp.jar.path.desktop.jar}" tofile="${artifact.output.desktop:jar}/desktop.jar"/>
-    <copy file="${basedir}/main/libs/main/gdx.jar" tofile="${artifact.output.desktop:jar}/gdx.jar"/>
-    <copy file="${basedir}/desktop/libs/main/gdx-natives.jar" tofile="${artifact.output.desktop:jar}/gdx-natives.jar"/>
-    <copy file="${basedir}/desktop/libs/main/gdx-backend-lwjgl.jar" tofile="${artifact.output.desktop:jar}/gdx-backend-lwjgl.jar"/>
-    <copy file="${basedir}/desktop/libs/main/gdx-backend-lwjgl-natives.jar" tofile="${artifact.output.desktop:jar}/gdx-backend-lwjgl-natives.jar"/>
-    <copy file="${basedir}/main/libs/main/commons-codec-1.4.jar" tofile="${artifact.output.desktop:jar}/commons-codec-1.4.jar"/>
-    <copy file="${basedir}/main/libs/main/commons-logging-1.1.1.jar" tofile="${artifact.output.desktop:jar}/commons-logging-1.1.1.jar"/>
-    <copy file="${basedir}/main/libs/main/gdx.jar" tofile="${artifact.output.desktop:jar}/gdx.jar"/>
-    <copy file="${basedir}/main/libs/main/guava-10.0.1.jar" tofile="${artifact.output.desktop:jar}/guava-10.0.1.jar"/>
-    <copy file="${basedir}/main/libs/main/httpasyncclient-4.0-alpha2.jar" tofile="${artifact.output.desktop:jar}/httpasyncclient-4.0-alpha2.jar"/>
-    <copy file="${basedir}/main/libs/main/httpclient-4.1.1.jar" tofile="${artifact.output.desktop:jar}/httpclient-4.1.1.jar"/>
-    <copy file="${basedir}/main/libs/main/httpcore-4.1.1.jar" tofile="${artifact.output.desktop:jar}/httpcore-4.1.1.jar"/>
-    <copy file="${basedir}/main/libs/main/httpcore-nio-4.1.1.jar" tofile="${artifact.output.desktop:jar}/httpcore-nio-4.1.1.jar"/>
-    <copy file="${basedir}/main/libs/main/tween-engine-api.jar" tofile="${artifact.output.desktop:jar}/tween-engine-api.jar"/>
-    <copy file="${basedir}/main/libs/main/js.jar" tofile="${artifact.output.desktop:jar}/js.jar"/>
-    <copy file="${basedir}/main/libs/main/commons-lang3-3.1.jar" tofile="${artifact.output.desktop:jar}/commons-lang3-3.1.jar"/>
-    <copy file="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar" tofile="${artifact.output.desktop:jar}/jackson-mapper-asl-1.9.5.jar"/>
-    <copy file="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar" tofile="${artifact.output.desktop:jar}/jackson-core-asl-1.9.5.jar"/>
-    <copy file="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar" tofile="${artifact.output.desktop:jar}/jackson-core-asl-1.9.5.jar"/>
-    <copy file="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar" tofile="${artifact.output.desktop:jar}/jackson-mapper-asl-1.9.5.jar"/>
-    <copy file="${basedir}/main/libs/main/guava-10.0.1.jar" tofile="${artifact.output.desktop:jar}/guava-10.0.1.jar"/>
-    <copy file="${basedir}/main/libs/main/tween-engine-api.jar" tofile="${artifact.output.desktop:jar}/tween-engine-api.jar"/>
-    <copy file="${basedir}/main/libs/main/commons-lang3-3.1.jar" tofile="${artifact.output.desktop:jar}/commons-lang3-3.1.jar"/>
+    <copy file="${temp.jar.path.desktop.jar}" tofile="${artifact.temp.output.desktop:jar}/desktop.jar"/>
   </target>
   
   <target name="build.all.artifacts" depends="artifact.desktop:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.desktop:jar}"/>
+    <copy todir="${artifact.output.desktop:jar}">
+      <fileset dir="${artifact.temp.output.desktop:jar}"/>
+    </copy>
     
     <!-- Delete temporary files -->
     <delete dir="${artifacts.temp.dir}"/>

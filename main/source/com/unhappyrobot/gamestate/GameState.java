@@ -9,15 +9,13 @@ import com.unhappyrobot.controllers.GameTips;
 import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.events.EventListener;
 import com.unhappyrobot.gamestate.actions.*;
+import com.unhappyrobot.gamestate.server.HappyDroidService;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridObjectState;
 import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.OnClickCallback;
 import com.unhappyrobot.gui.ResponseType;
-import com.unhappyrobot.jackson.Vector3Serializer;
-import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.module.SimpleModule;
 
 public class GameState extends EventListener {
   private final GameGrid gameGrid;
@@ -104,12 +102,13 @@ public class GameState extends EventListener {
       }
 
       GameSave gameSave = new GameSave(gameGrid, camera, Player.instance());
-      ObjectMapper objectMapper = new ObjectMapper();
-      SimpleModule simpleModule = new SimpleModule("Specials", new Version(1, 0, 0, null));
-      simpleModule.addSerializer(new Vector3Serializer());
-      objectMapper.registerModule(simpleModule);
       try {
-        objectMapper.writeValue(fileHandle.file(), gameSave);
+        String cloudSaveUri = HappyDroidService.uploadGameSave(gameSave);
+        if(cloudSaveUri != null) {
+          gameSave.setCloudSaveUri(cloudSaveUri);
+        }
+
+        GameSave.getObjectMapper().writeValue(fileHandle.file(), gameSave);
       } catch (Exception e) {
         Gdx.app.log("GameSave", "Could not save game!", e);
       }
