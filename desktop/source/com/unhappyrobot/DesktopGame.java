@@ -3,12 +3,9 @@ package com.unhappyrobot;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
-
 public class DesktopGame {
   public static void main(String[] args) {
+    /*
     Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
       public void uncaughtException(Thread thread, Throwable throwable) {
         StringSelection errorText = new StringSelection(throwable.toString());
@@ -17,6 +14,7 @@ public class DesktopGame {
         System.exit(100);
       }
     });
+    */
 
     LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
     config.title = "TowerSim";

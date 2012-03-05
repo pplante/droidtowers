@@ -57,10 +57,10 @@ public class TransitPathFinder extends AStar<GridPosition> {
     if (point.elevator != null || point.stair != null) {
       checkGridPosition(successors, x, y + 1);
       checkGridPosition(successors, x, y - 1);
-    } else {
-      checkGridPosition(successors, x + 1, y);
-      checkGridPosition(successors, x - 1, y);
     }
+
+    checkGridPosition(successors, x + 1, y);
+    checkGridPosition(successors, x - 1, y);
 
     return successors;
   }

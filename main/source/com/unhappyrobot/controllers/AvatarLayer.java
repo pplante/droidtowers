@@ -163,9 +163,13 @@ public class AvatarLayer extends GameLayer {
         switch (roomType.provides()) {
           case JANITORS:
             removeChild(Iterables.getFirst(janitors, null));
+            removeChild(Iterables.getFirst(janitors, null));
+            removeChild(Iterables.getFirst(janitors, null));
             break;
 
           case MAIDS:
+            removeChild(Iterables.getFirst(maids, null));
+            removeChild(Iterables.getFirst(maids, null));
             removeChild(Iterables.getFirst(maids, null));
             break;
         }

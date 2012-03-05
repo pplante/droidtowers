@@ -20,7 +20,7 @@ public class WanderPathFinder extends TransitPathFinder {
   @Override
   public void start() {
     working = false;
-
+    lastCost = 1.0;
     discoveredPath = Lists.newLinkedList();
 
     Vector2 gridSize = GridPositionCache.instance().getGridSize();

@@ -107,7 +107,6 @@ public class Avatar extends GameObject {
 
   protected void navigateToGridObject(GridObject gridObject) {
     if (gridObject == null) {
-      System.out.println(String.format("%s is bored.", this.getClass().getSimpleName()));
       wanderAround();
       return;
     }

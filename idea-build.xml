@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="DroidTowers" default="all">
-
-
-  <property file="build.properties"/>
+<project name="testgame" default="all">
+  
+  
+  <property file="idea-build.properties"/>
   <!-- Uncomment the following property if no tests compilation is needed -->
-  <!--
+  <!-- 
   <property name="skip.tests" value="true"/>
    -->
-
+  
   <!-- Compiler options -->
-
+  
   <property name="compiler.debug" value="on"/>
   <property name="compiler.generate.no.warnings" value="off"/>
   <property name="compiler.args" value=""/>
@@ -59,9 +59,9 @@
     <include name="**/?*.tld"/>
     <include name="**/?*.ftl"/>
   </patternset>
-
+  
   <!-- JDK definitions -->
-
+  
   <property name="jdk.bin.1.6" value="${jdk.home.1.6}/bin"/>
   <path id="jdk.classpath.1.6">
     <fileset dir="${jdk.home.1.6}">
@@ -86,110 +86,506 @@
       <include name="lib/ext/sunpkcs11.jar"/>
     </fileset>
   </path>
-
-  <property name="jdk.bin.android_2.3.3_platform"
-            value="${jdk.home.android_2.3.3_platform}/../../../../../System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin"/>
-  <path id="jdk.classpath.android_2.3.3_platform">
-    <fileset dir="${jdk.home.android_2.3.3_platform}">
+  
+  <property name="jdk.bin.android_2.3.3_google_apis" value="${jdk.home.android_2.3.3_google_apis}/../../../../../System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin"/>
+  <path id="jdk.classpath.android_2.3.3_google_apis">
+    <fileset dir="${jdk.home.android_2.3.3_google_apis}">
       <include name="platforms/android-10/android.jar"/>
+      <include name="add-ons/addon-google_apis-google_inc_-10/libs/usb.jar"/>
+      <include name="add-ons/addon-google_apis-google_inc_-10/libs/maps.jar"/>
       <include name="platforms/android-10/data/res"/>
     </fileset>
   </path>
-
+  
   <property name="project.jdk.home" value="${jdk.home.1.6}"/>
   <property name="project.jdk.bin" value="${jdk.bin.1.6}"/>
   <property name="project.jdk.classpath" value="jdk.classpath.1.6"/>
-
-
+  
+  
   <!-- Project Libraries -->
-
+  
   <path id="library.android.classpath">
     <fileset dir="${basedir}/android/libs">
       <patternset refid="library.patterns"/>
     </fileset>
   </path>
-
+  
   <path id="library.desktop.classpath">
     <fileset dir="${basedir}/desktop/libs/main">
       <patternset refid="library.patterns"/>
     </fileset>
   </path>
-
+  
   <path id="library.main.classpath">
     <fileset dir="${basedir}/main/libs/main">
       <patternset refid="library.patterns"/>
     </fileset>
   </path>
-
+  
   <!-- Modules -->
-
-  <import file="${basedir}/main/module_main.xml"/>
-
-  <import file="${basedir}/android/module_android.xml"/>
-
-  <import file="${basedir}/desktop/module_desktop.xml"/>
-
+  
+  
+  <!-- Module main -->
+  
+  <dirname property="module.main.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.main" value="${jdk.home.1.6}"/>
+  <property name="module.jdk.bin.main" value="${jdk.bin.1.6}"/>
+  <property name="module.jdk.classpath.main" value="jdk.classpath.1.6"/>
+  
+  <property name="compiler.args.main" value="${compiler.args}"/>
+  
+  <property name="main.output.dir" value="${module.main.basedir}/out/production/main"/>
+  <property name="main.testoutput.dir" value="${module.main.basedir}/out/test/main"/>
+  
+  <path id="main.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="main.module.production.classpath">
+    <path refid="${module.jdk.classpath.main}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
+  </path>
+  
+  <path id="main.runtime.production.module.classpath">
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
+  </path>
+  
+  <path id="main.module.classpath">
+    <path refid="${module.jdk.classpath.main}"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-commons-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/junit-4.7.jar"/>
+    <pathelement location="${basedir}/main/libs/test/great-expectations-0.10.jar"/>
+    <pathelement location="${basedir}/main/libs/test/mockito-all-1.9.0.jar"/>
+  </path>
+  
+  <path id="main.runtime.module.classpath">
+    <pathelement location="${main.testoutput.dir}"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-commons-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/junit-4.7.jar"/>
+    <pathelement location="${basedir}/main/libs/test/great-expectations-0.10.jar"/>
+    <pathelement location="${basedir}/main/libs/test/mockito-all-1.9.0.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.main">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.main">
+    <patternset refid="compiler.excluded"/>
+    <patternset refid="excluded.from.module.main"/>
+  </patternset>
+  
+  <path id="main.module.sourcepath">
+    <dirset dir="${module.main.basedir}/main">
+      <include name="source"/>
+    </dirset>
+  </path>
+  
+  <path id="main.module.test.sourcepath">
+    <dirset dir="${module.main.basedir}/main">
+      <include name="test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.main" depends="compile.module.main.production,compile.module.main.tests" description="Compile module main"/>
+  
+  <target name="compile.module.main.production" description="Compile module main; production classes">
+    <mkdir dir="${main.output.dir}"/>
+    <javac destdir="${main.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.main}/javac">
+      <compilerarg line="${compiler.args.main}"/>
+      <bootclasspath refid="main.module.bootclasspath"/>
+      <classpath refid="main.module.production.classpath"/>
+      <src refid="main.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.main"/>
+    </javac>
+    
+    <copy todir="${main.output.dir}">
+      <fileset dir="${module.main.basedir}/main/source">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.main"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.main.tests" depends="compile.module.main.production" description="compile module main; test classes" unless="skip.tests">
+    <mkdir dir="${main.testoutput.dir}"/>
+    <javac destdir="${main.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.main}/javac">
+      <compilerarg line="${compiler.args.main}"/>
+      <bootclasspath refid="main.module.bootclasspath"/>
+      <classpath refid="main.module.classpath"/>
+      <src refid="main.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.main"/>
+    </javac>
+    
+    <copy todir="${main.testoutput.dir}">
+      <fileset dir="${module.main.basedir}/main/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.main"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.main" description="cleanup module">
+    <delete dir="${main.output.dir}"/>
+    <delete dir="${main.testoutput.dir}"/>
+  </target>
+  
+  
+  <!-- Module android -->
+  
+  <dirname property="module.android.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.android" value="${jdk.home.android_2.3.3_google_apis}"/>
+  <property name="module.jdk.bin.android" value="${jdk.bin.android_2.3.3_google_apis}"/>
+  <property name="module.jdk.classpath.android" value="jdk.classpath.android_2.3.3_google_apis"/>
+  
+  <property name="compiler.args.android" value="${compiler.args}"/>
+  
+  <property name="android.output.dir" value="${module.android.basedir}/out/production/android"/>
+  <property name="android.testoutput.dir" value="${module.android.basedir}/out/test/android"/>
+  
+  <path id="android.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="android.module.production.classpath">
+    <path refid="library.android.classpath"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <path refid="${module.jdk.classpath.android}"/>
+  </path>
+  
+  <path id="android.runtime.production.module.classpath">
+    <pathelement location="${android.output.dir}"/>
+    <path refid="library.android.classpath"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
+  </path>
+  
+  <path id="android.module.classpath">
+    <pathelement location="${android.output.dir}"/>
+    <path refid="library.android.classpath"/>
+    <pathelement location="${main.testoutput.dir}"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/junit-4.9.jar"/>
+    <pathelement location="${basedir}/main/libs/test/robolectric-1.1-20120302.195122-93-jar-with-dependencies.jar"/>
+    <path refid="${module.jdk.classpath.android}"/>
+  </path>
+  
+  <path id="android.runtime.module.classpath">
+    <pathelement location="${android.testoutput.dir}"/>
+    <pathelement location="${android.output.dir}"/>
+    <path refid="library.android.classpath"/>
+    <pathelement location="${main.testoutput.dir}"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-commons-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/junit-4.7.jar"/>
+    <pathelement location="${basedir}/main/libs/test/great-expectations-0.10.jar"/>
+    <pathelement location="${basedir}/main/libs/test/mockito-all-1.9.0.jar"/>
+    <pathelement location="${basedir}/main/libs/test/junit-4.9.jar"/>
+    <pathelement location="${basedir}/main/libs/test/robolectric-1.1-20120302.195122-93-jar-with-dependencies.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.android">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.android">
+    <patternset refid="compiler.excluded"/>
+    <patternset refid="excluded.from.module.android"/>
+  </patternset>
+  
+  <path id="android.module.sourcepath">
+    <dirset dir="${module.android.basedir}/android">
+      <include name="source"/>
+      <include name="gen"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.android" depends="compile.module.android.production,compile.module.android.tests" description="Compile module android"/>
+  
+  <target name="compile.module.android.production" depends="compile.module.main" description="Compile module android; production classes">
+    <mkdir dir="${android.output.dir}"/>
+    <javac destdir="${android.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.android}/javac">
+      <compilerarg line="${compiler.args.android}"/>
+      <bootclasspath refid="android.module.bootclasspath"/>
+      <classpath refid="android.module.production.classpath"/>
+      <src refid="android.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.android"/>
+    </javac>
+    
+    <copy todir="${android.output.dir}">
+      <fileset dir="${module.android.basedir}/android/source">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.android"/>
+      </fileset>
+      <fileset dir="${module.android.basedir}/android/gen">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.android"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.android.tests" depends="compile.module.android.production" description="compile module android; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.android" description="cleanup module">
+    <delete dir="${android.output.dir}"/>
+    <delete dir="${android.testoutput.dir}"/>
+  </target>
+  
+  
+  <!-- Module desktop -->
+  
+  <dirname property="module.desktop.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.desktop" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.desktop" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.desktop" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.desktop" value="${compiler.args}"/>
+  
+  <property name="desktop.output.dir" value="${module.desktop.basedir}/out/production/desktop"/>
+  <property name="desktop.testoutput.dir" value="${module.desktop.basedir}/out/test/desktop"/>
+  
+  <path id="desktop.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="desktop.module.production.classpath">
+    <path refid="${module.jdk.classpath.desktop}"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/android/assets"/>
+  </path>
+  
+  <path id="desktop.runtime.production.module.classpath">
+    <pathelement location="${desktop.output.dir}"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
+    <pathelement location="${basedir}/android/assets"/>
+  </path>
+  
+  <path id="desktop.module.classpath">
+    <path refid="${module.jdk.classpath.desktop}"/>
+    <pathelement location="${desktop.output.dir}"/>
+    <pathelement location="${main.testoutput.dir}"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/android/assets"/>
+  </path>
+  
+  <path id="desktop.runtime.module.classpath">
+    <pathelement location="${desktop.testoutput.dir}"/>
+    <pathelement location="${desktop.output.dir}"/>
+    <pathelement location="${main.testoutput.dir}"/>
+    <pathelement location="${main.output.dir}"/>
+    <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
+    <path refid="library.main.classpath"/>
+    <path refid="library.desktop.classpath"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
+    <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
+    <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-commons-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/asm-3.3.1.jar"/>
+    <pathelement location="${basedir}/main/libs/test/junit-4.7.jar"/>
+    <pathelement location="${basedir}/main/libs/test/great-expectations-0.10.jar"/>
+    <pathelement location="${basedir}/main/libs/test/mockito-all-1.9.0.jar"/>
+    <pathelement location="${basedir}/android/assets"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.desktop">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.desktop">
+    <patternset refid="compiler.excluded"/>
+    <patternset refid="excluded.from.module.desktop"/>
+  </patternset>
+  
+  <path id="desktop.module.sourcepath">
+    <dirset dir="${module.desktop.basedir}/desktop">
+      <include name="source"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.desktop" depends="compile.module.desktop.production,compile.module.desktop.tests" description="Compile module desktop"/>
+  
+  <target name="compile.module.desktop.production" depends="compile.module.main" description="Compile module desktop; production classes">
+    <mkdir dir="${desktop.output.dir}"/>
+    <javac destdir="${desktop.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.desktop}/javac">
+      <compilerarg line="${compiler.args.desktop}"/>
+      <bootclasspath refid="desktop.module.bootclasspath"/>
+      <classpath refid="desktop.module.production.classpath"/>
+      <src refid="desktop.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.desktop"/>
+    </javac>
+    
+    <copy todir="${desktop.output.dir}">
+      <fileset dir="${module.desktop.basedir}/desktop/source">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.desktop"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.desktop.tests" depends="compile.module.desktop.production" description="compile module desktop; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.desktop" description="cleanup module">
+    <delete dir="${desktop.output.dir}"/>
+    <delete dir="${desktop.testoutput.dir}"/>
+  </target>
+  
   <target name="init" description="Build initialization">
     <!-- Perform any build initialization in this target -->
   </target>
-
-  <target name="clean" depends="clean.module.main, clean.module.android, clean.module.desktop"
-          description="cleanup all"/>
-
-  <target name="build.modules"
-          depends="init, clean, compile.module.main, compile.module.android, compile.module.desktop"
-          description="build all modules"/>
-
+  
+  <target name="clean" depends="clean.module.main, clean.module.android, clean.module.desktop, clean.artifact.desktop:jar" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.main, compile.module.android, compile.module.desktop" description="build all modules"/>
+  
   <target name="init.artifacts">
     <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
     <property name="artifact.output.desktop:jar" value="${basedir}/out/artifacts/desktop_jar"/>
     <mkdir dir="${artifacts.temp.dir}"/>
     <property name="temp.jar.path.desktop.jar" value="${artifacts.temp.dir}/desktop.jar"/>
   </target>
-
-  <target name="artifact.desktop:jar" depends="init.artifacts, compile.module.desktop, compile.module.main"
-          description="Build &#39;desktop:jar&#39; artifact">
-    <property name="artifact.temp.output.desktop:jar" value="${artifacts.temp.dir}/desktop_jar"/>
-    <mkdir dir="${artifact.temp.output.desktop:jar}"/>
+  
+  <target name="clean.artifact.desktop:jar" description="clean desktop:jar artifact output">
+    <delete dir="${artifact.output.desktop:jar}"/>
+  </target>
+  
+  <target name="artifact.desktop:jar" depends="init.artifacts, compile.module.desktop, compile.module.main" description="Build &#39;desktop:jar&#39; artifact">
+    <mkdir dir="${artifact.output.desktop:jar}"/>
     <jar destfile="${temp.jar.path.desktop.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
       <zipfileset file="${basedir}/desktop/source/META-INF/MANIFEST.MF" prefix="META-INF"/>
       <zipfileset dir="${desktop.output.dir}"/>
       <zipfileset dir="${main.output.dir}"/>
-      <zipfileset src="${basedir}/main/libs/main/tween-engine-api.jar"/>
-      <zipfileset src="${basedir}/desktop/libs/main/gdx-natives.jar"/>
-      <zipfileset src="${basedir}/desktop/libs/main/gdx-backend-lwjgl.jar"/>
-      <zipfileset src="${basedir}/desktop/libs/main/gdx-backend-lwjgl-natives.jar"/>
-      <zipfileset src="${basedir}/main/libs/main/gdx.jar"/>
-      <zipfileset src="${basedir}/main/libs/main/guava-10.0.1.jar"/>
-      <zipfileset src="${basedir}/main/libs/main/commons-codec-1.4.jar"/>
-      <zipfileset src="${basedir}/main/libs/main/commons-logging-1.1.1.jar"/>
-      <zipfileset src="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
-      <zipfileset src="${basedir}/main/libs/main/httpasyncclient-4.0-alpha2.jar"/>
-      <zipfileset src="${basedir}/main/libs/main/httpclient-4.1.1.jar"/>
-      <zipfileset src="${basedir}/main/libs/main/httpcore-4.1.1.jar"/>
-      <zipfileset src="${basedir}/main/libs/main/httpcore-nio-4.1.1.jar"/>
-      <zipfileset src="${basedir}/main/libs/main/jackson-core-asl-1.8.5.jar"/>
-      <zipfileset src="${basedir}/main/libs/main/jackson-mapper-asl-1.8.5.jar"/>
-      <zipfileset src="${basedir}/main/libs/main/js.jar"/>
       <zipfileset dir="${basedir}/android/assets"/>
-      <!-- MOST IMPORTANT THING EVER FOR launch4j (mozilla rhino will take this over!) -->
-      <manifest>
-        <attribute name="Main-Class" value="com.unhappyrobot.DesktopGame"/>
-        <attribute name="Class-Path" value="."/>
-      </manifest>
     </jar>
-    <copy file="${temp.jar.path.desktop.jar}" tofile="${artifact.temp.output.desktop:jar}/desktop.jar"/>
+    <copy file="${temp.jar.path.desktop.jar}" tofile="${artifact.output.desktop:jar}/desktop.jar"/>
+    <copy file="${basedir}/main/libs/main/gdx.jar" tofile="${artifact.output.desktop:jar}/gdx.jar"/>
+    <copy file="${basedir}/desktop/libs/main/gdx-natives.jar" tofile="${artifact.output.desktop:jar}/gdx-natives.jar"/>
+    <copy file="${basedir}/desktop/libs/main/gdx-backend-lwjgl.jar" tofile="${artifact.output.desktop:jar}/gdx-backend-lwjgl.jar"/>
+    <copy file="${basedir}/desktop/libs/main/gdx-backend-lwjgl-natives.jar" tofile="${artifact.output.desktop:jar}/gdx-backend-lwjgl-natives.jar"/>
+    <copy file="${basedir}/main/libs/main/commons-codec-1.4.jar" tofile="${artifact.output.desktop:jar}/commons-codec-1.4.jar"/>
+    <copy file="${basedir}/main/libs/main/commons-logging-1.1.1.jar" tofile="${artifact.output.desktop:jar}/commons-logging-1.1.1.jar"/>
+    <copy file="${basedir}/main/libs/main/gdx.jar" tofile="${artifact.output.desktop:jar}/gdx.jar"/>
+    <copy file="${basedir}/main/libs/main/guava-10.0.1.jar" tofile="${artifact.output.desktop:jar}/guava-10.0.1.jar"/>
+    <copy file="${basedir}/main/libs/main/httpasyncclient-4.0-alpha2.jar" tofile="${artifact.output.desktop:jar}/httpasyncclient-4.0-alpha2.jar"/>
+    <copy file="${basedir}/main/libs/main/httpclient-4.1.1.jar" tofile="${artifact.output.desktop:jar}/httpclient-4.1.1.jar"/>
+    <copy file="${basedir}/main/libs/main/httpcore-4.1.1.jar" tofile="${artifact.output.desktop:jar}/httpcore-4.1.1.jar"/>
+    <copy file="${basedir}/main/libs/main/httpcore-nio-4.1.1.jar" tofile="${artifact.output.desktop:jar}/httpcore-nio-4.1.1.jar"/>
+    <copy file="${basedir}/main/libs/main/tween-engine-api.jar" tofile="${artifact.output.desktop:jar}/tween-engine-api.jar"/>
+    <copy file="${basedir}/main/libs/main/js.jar" tofile="${artifact.output.desktop:jar}/js.jar"/>
+    <copy file="${basedir}/main/libs/main/commons-lang3-3.1.jar" tofile="${artifact.output.desktop:jar}/commons-lang3-3.1.jar"/>
+    <copy file="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar" tofile="${artifact.output.desktop:jar}/jackson-mapper-asl-1.9.5.jar"/>
+    <copy file="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar" tofile="${artifact.output.desktop:jar}/jackson-core-asl-1.9.5.jar"/>
+    <copy file="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar" tofile="${artifact.output.desktop:jar}/jackson-core-asl-1.9.5.jar"/>
+    <copy file="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar" tofile="${artifact.output.desktop:jar}/jackson-mapper-asl-1.9.5.jar"/>
+    <copy file="${basedir}/main/libs/main/guava-10.0.1.jar" tofile="${artifact.output.desktop:jar}/guava-10.0.1.jar"/>
+    <copy file="${basedir}/main/libs/main/tween-engine-api.jar" tofile="${artifact.output.desktop:jar}/tween-engine-api.jar"/>
+    <copy file="${basedir}/main/libs/main/commons-lang3-3.1.jar" tofile="${artifact.output.desktop:jar}/commons-lang3-3.1.jar"/>
   </target>
-
+  
   <target name="build.all.artifacts" depends="artifact.desktop:jar" description="Build all artifacts">
-    <mkdir dir="${artifact.output.desktop:jar}"/>
-    <copy todir="${artifact.output.desktop:jar}">
-      <fileset dir="${artifact.temp.output.desktop:jar}"/>
-    </copy>
-
+    
     <!-- Delete temporary files -->
     <delete dir="${artifacts.temp.dir}"/>
   </target>
-
+  
   <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
 </project>

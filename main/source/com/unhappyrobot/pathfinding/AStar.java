@@ -124,7 +124,7 @@ public abstract class AStar<T> {
   private HashMap<T, Double> mindists;
 
 
-  private Double lastCost;
+  protected Double lastCost;
   private int expandedCounter;
 
   public int getExpandedCounter() {

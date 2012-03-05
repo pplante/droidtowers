@@ -47,7 +47,10 @@ public class GridPositionCache {
     }
 
     for (GridObject gridObject : event.gameGrid.getObjects()) {
-      getObjectSetForPosition(gridObject.getPosition()).add(gridObject);
+      GridPosition position = getObjectSetForPosition(gridObject.getPosition());
+      if (position != null) {
+        position.add(gridObject);
+      }
     }
   }
 
@@ -55,12 +58,18 @@ public class GridPositionCache {
   public void handleElevatorResizeEvent(GridObjectBoundsChangeEvent event) {
     GridPoint currentPos = event.prevPosition.cpy();
     for (float y = 0; y < event.prevSize.y; y++) {
-      getObjectSetForPosition(currentPos).remove(event.gridObject);
+      GridPosition position = getObjectSetForPosition(currentPos);
+      if (position != null) {
+        position.remove(event.gridObject);
+      }
       currentPos.add(0, 1);
     }
 
     for (GridPoint gridPoint : event.gridObject.getGridPointsOccupied()) {
-      getObjectSetForPosition(gridPoint).add(event.gridObject);
+      GridPosition position = getObjectSetForPosition(gridPoint);
+      if (position != null) {
+        position.add(event.gridObject);
+      }
     }
   }
 
@@ -77,7 +86,10 @@ public class GridPositionCache {
   private void addGridObjectToPosition(GridObject gridObject) {
     List<GridPoint> pointsOccupied = gridObject.getGridPointsOccupied();
     for (GridPoint gridPoint : pointsOccupied) {
-      getObjectSetForPosition(gridPoint).add(gridObject);
+      GridPosition position = getObjectSetForPosition(gridPoint);
+      if (position != null) {
+        position.add(gridObject);
+      }
     }
   }
 
@@ -100,7 +112,10 @@ public class GridPositionCache {
   public void handleGridObjectRemoved(GridObjectRemovedEvent event) {
     List<GridPoint> pointsOccupied = event.gridObject.getGridPointsOccupied();
     for (GridPoint gridPoint : pointsOccupied) {
-      getObjectSetForPosition(gridPoint).remove(event.gridObject);
+      GridPosition position = getObjectSetForPosition(gridPoint);
+      if (position != null) {
+        position.remove(event.gridObject);
+      }
     }
   }
 
@@ -129,7 +144,11 @@ public class GridPositionCache {
     for (float x = position.x; x < maxX; x++) {
       for (float y = position.y; y < maxY; y++) {
         currentPos.set(x, y);
-        objects.addAll(getObjectSetForPosition(currentPos).getObjects());
+
+        GridPosition forPosition = getObjectSetForPosition(currentPos);
+        if (forPosition != null) {
+          objects.addAll(forPosition.getObjects());
+        }
       }
     }
 
