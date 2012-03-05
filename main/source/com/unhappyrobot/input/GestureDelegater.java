@@ -84,6 +84,10 @@ class GestureDelegater implements GestureListener {
   }
 
   public void update(float deltaTime) {
+    if (currentTool != null) {
+      currentTool.update(deltaTime);
+    }
+
     cameraController.update(deltaTime);
   }
 }

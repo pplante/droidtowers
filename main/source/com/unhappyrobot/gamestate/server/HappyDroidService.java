@@ -9,6 +9,7 @@ import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -45,6 +46,8 @@ public class HappyDroidService {
       EntityUtils.consume(response.getEntity());
 
       return response;
+    } catch (HttpHostConnectException ignored) {
+      System.out.println("Connection failed for: " + uri);
     } catch (Exception e) {
       e.printStackTrace();
     } finally {

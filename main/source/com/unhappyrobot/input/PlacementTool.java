@@ -1,5 +1,7 @@
 package com.unhappyrobot.input;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -47,6 +49,14 @@ public class PlacementTool extends ToolBase {
   public boolean touchDown(int x, int y, int pointer) {
     Vector3 worldPoint = camera.getPickRay(x, y).getEndPoint(1);
     GridPoint gridPointAtFinger = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
+    makeGridObjectAtFinger_whenGridObjectIsNull(gridPointAtFinger);
+
+    isDraggingGridObject = gridObject.getBounds().containsPoint(gridPointAtFinger);
+
+    return true;
+  }
+
+  private void makeGridObjectAtFinger_whenGridObjectIsNull(GridPoint gridPointAtFinger) {
     if (gridObject == null) {
       gridObject = gridObjectType.makeGridObject(gameGrid);
       gridObject.setPosition(gridPointAtFinger);
@@ -55,10 +65,6 @@ public class PlacementTool extends ToolBase {
     } else {
       touchDownPointDelta = gridPointAtFinger.cpy().sub(gridObject.getPosition());
     }
-
-    isDraggingGridObject = gridObject.getBounds().containsPoint(gridPointAtFinger);
-
-    return true;
   }
 
   public boolean pan(int x, int y, int deltaX, int deltaY) {
@@ -78,6 +84,20 @@ public class PlacementTool extends ToolBase {
     }
 
     return false;
+  }
+
+  @Override
+  public void update(float deltaTime) {
+    if (Gdx.app.getType().equals(Application.ApplicationType.Desktop)) {
+      Vector3 worldPoint = camera.getPickRay(Gdx.input.getX(), Gdx.input.getY()).getEndPoint(1);
+      GridPoint gridPointAtFinger = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
+
+      makeGridObjectAtFinger_whenGridObjectIsNull(gridPointAtFinger);
+
+      if (gridObject != null) {
+        gridObject.setPosition(gridPointAtFinger);
+      }
+    }
   }
 
   public boolean tap(int x, int y, int count) {

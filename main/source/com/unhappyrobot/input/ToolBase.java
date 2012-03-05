@@ -62,4 +62,8 @@ public class ToolBase implements GestureDetector.GestureListener {
   public void cleanup() {
 
   }
+
+  public void update(float deltaTime) {
+
+  }
 }

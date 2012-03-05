@@ -53,6 +53,7 @@ public class PickerTool extends ToolBase {
     return false;
   }
 
+
   @Override
   public boolean touchDown(int x, int y, int pointer) {
     Vector2 worldPoint = cameraPickRayToWorldPoint(x, y);
