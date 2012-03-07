@@ -1,6 +1,6 @@
 package com.unhappyrobot.gamestate.server;
 
-import com.unhappyrobot.NonGLTestRunner;
+import com.unhappyrobot.TowerGameTestRunner;
 import com.unhappyrobot.utils.TestHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import static com.unhappyrobot.Expect.expect;
 
 
-@RunWith(NonGLTestRunner.class)
+@RunWith(TowerGameTestRunner.class)
 public class TemporaryTokenTest {
   @Test
   public void create_shouldReturnATempToken() throws Exception {

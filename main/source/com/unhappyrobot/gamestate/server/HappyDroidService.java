@@ -8,16 +8,46 @@ import com.unhappyrobot.gamestate.GameSave;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import java.util.UUID;
+
 public class HappyDroidService {
-  public static String uploadGameSave(GameSave gameSave) {
+  private static HappyDroidService _instance;
+  private String deviceType;
+  private String deviceOSVersion;
+  private Preferences preferences;
+  private String deviceId;
+
+  public static HappyDroidService instance() {
+    if (_instance == null) {
+      _instance = new HappyDroidService();
+    }
+
+    return _instance;
+  }
+
+  public static void setInstance(HappyDroidService instance) {
+    HappyDroidService._instance = instance;
+  }
+
+  protected HappyDroidService() {
+    preferences = Gdx.app.getPreferences("CONNECT");
+    if (!preferences.contains("DEVICE_ID")) {
+      preferences.putString("DEVICE_ID", UUID.randomUUID().toString().replaceAll("-", ""));
+      preferences.flush();
+    }
+
+    deviceId = preferences.getString("DEVICE_ID");
+  }
+
+  public String uploadGameSave(GameSave gameSave) {
     String gameSaveUri = Consts.API_V1_GAMESAVE_LIST;
     if (gameSave.getCloudSaveUri() != null) {
       gameSaveUri = Consts.HAPPYDROIDS_SERVER + gameSave.getCloudSaveUri();
@@ -33,19 +63,19 @@ public class HappyDroidService {
     return null;
   }
 
-  private static HttpResponse makePostRequest(String uri, Object objectForServer) {
+  public HttpResponse makePostRequest(String uri, Object objectForServer) {
     HttpClient client = new DefaultHttpClient();
     try {
       HttpPost request = new HttpPost(uri);
       request.setHeader("Content-Type", "application/json");
-      request.setHeader("X-Token", getSessionToken());
+      if (getSessionToken() != null) {
+        request.setHeader("X-Token", getSessionToken());
+      }
 
       ObjectMapper mapper = new ObjectMapper();
       request.setEntity(new StringEntity(mapper.writeValueAsString(objectForServer), ContentType.MULTIPART_FORM_DATA));
-      HttpResponse response = client.execute(request);
-      EntityUtils.consume(response.getEntity());
 
-      return response;
+      return client.execute(request);
     } catch (HttpHostConnectException ignored) {
       System.out.println("Connection failed for: " + uri);
     } catch (Exception e) {
@@ -57,9 +87,48 @@ public class HappyDroidService {
     return null;
   }
 
-  public static String getSessionToken() {
-    Preferences connect = Gdx.app.getPreferences("CONNECT");
+  public HttpResponse makeGetRequest(String uri) {
+    HttpClient client = new DefaultHttpClient();
+    try {
+      HttpGet request = new HttpGet(uri);
+      request.setHeader("Content-Type", "application/json");
+      if (getSessionToken() != null) {
+        request.setHeader("X-Token", getSessionToken());
+      }
 
-    return connect.getString("SESSION_TOKEN");
+      return client.execute(request);
+    } catch (HttpHostConnectException ignored) {
+      System.out.println("Connection failed for: " + uri);
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      client.getConnectionManager().shutdown();
+    }
+
+    return null;
+  }
+
+  public String getSessionToken() {
+    return preferences.getString("SESSION_TOKEN");
+  }
+
+  public void setDeviceOSName(String deviceType) {
+    this.deviceType = deviceType;
+  }
+
+  public void setDeviceOSVersion(String deviceOSVersion) {
+    this.deviceOSVersion = deviceOSVersion;
+  }
+
+  public String getDeviceId() {
+    return deviceId;
+  }
+
+  public String getDeviceOSVersion() {
+    return deviceOSVersion;
+  }
+
+  public String getDeviceType() {
+    return deviceType;
   }
 }

@@ -1,10 +1,10 @@
 package com.unhappyrobot.utils;
 
-import com.unhappyrobot.gamestate.server.TestHttpRequest;
-import com.unhappyrobot.http.HttpRequest;
+import com.unhappyrobot.gamestate.server.HappyDroidService;
+import com.unhappyrobot.gamestate.server.TestHappyDroidService;
 
 public class TestHelper {
   public static void queueFakeRequest(final String content) {
-    ((TestHttpRequest) HttpRequest.instance()).queueResponse(content);
+    ((TestHappyDroidService) HappyDroidService.instance()).queueResponse(content);
   }
 }

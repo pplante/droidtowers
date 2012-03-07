@@ -20,6 +20,7 @@ import com.unhappyrobot.controllers.PathSearchManager;
 import com.unhappyrobot.entities.CloudLayer;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.gamestate.GameState;
+import com.unhappyrobot.gamestate.server.HappyDroidService;
 import com.unhappyrobot.graphics.CityScapeLayer;
 import com.unhappyrobot.graphics.GroundLayer;
 import com.unhappyrobot.graphics.RainLayer;
@@ -56,10 +57,21 @@ public class TowerGame implements ApplicationListener {
   private FileHandle gameSaveLocation;
   private static float timeMultiplier;
   private long nextGameStateSaveTime;
+  private final String operatingSystemName;
+  private final String operatingSystemVersion;
+
+  public TowerGame(String operatingSystemName, String operatingSystemVersion) {
+    this.operatingSystemName = operatingSystemName;
+    this.operatingSystemVersion = operatingSystemVersion;
+  }
+
 
   public void create() {
     Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
     Random.init();
+
+    HappyDroidService.instance().setDeviceOSName(operatingSystemName);
+    HappyDroidService.instance().setDeviceOSVersion(operatingSystemVersion);
 
     TweenSystem.getTweenManager();
     AchievementEngine.instance();

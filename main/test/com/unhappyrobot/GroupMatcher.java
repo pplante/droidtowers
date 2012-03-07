@@ -25,7 +25,7 @@ public class GroupMatcher<T extends Group, M extends GroupMatcher<T, M>> extends
         Label label = (Label) actor;
         if (label.getText().equals(text)) {
           return true;
-        } else if (label.getText().contains(text)) {
+        } else if (label.getText().toString().contains(text)) {
           throw new RuntimeException("Found potential match: " + label.getText());
         }
       } else if (actor instanceof Group) {

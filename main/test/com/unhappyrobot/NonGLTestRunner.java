@@ -1,7 +1,5 @@
 package com.unhappyrobot;
 
-import com.unhappyrobot.gamestate.server.TestHttpRequest;
-import com.unhappyrobot.http.HttpRequest;
 import com.unhappyrobot.tween.TweenSystem;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
@@ -31,7 +29,6 @@ public class NonGLTestRunner extends BlockJUnit4ClassRunner {
   }
 
   protected void beforeTestRun() {
-    HttpRequest.setInstance(new TestHttpRequest());
     TweenSystem.getTweenManager();
   }
 

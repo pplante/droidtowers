@@ -1,30 +1,40 @@
 package com.unhappyrobot.gamestate.server;
 
-import com.unhappyrobot.http.HttpRequest;
-import com.unhappyrobot.http.HttpResponse;
+import com.google.common.collect.Maps;
+import org.apache.http.HttpResponse;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-import java.io.IOException;
+import java.util.HashMap;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class TemporaryToken {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class TemporaryToken extends HappyDroidServiceObject {
   private int value;
-  private String resource_uri;
+  private String check_token_uri;
   private SessionToken session;
 
-  public static TemporaryToken create() {
-    try {
-      HttpResponse response = HttpRequest.makeRequest(HttpRequest.REQUEST_TYPE.GET, Consts.API_V1_TEMPORARYTOKEN_CREATE_TOKEN);
-      ObjectMapper mapper = new ObjectMapper();
-      return mapper.readValue(response.getBodyString(), TemporaryToken.class);
-    } catch (IOException ignored) {
-    }
-
-    return null;
+  private TemporaryToken() {
   }
 
-  public TemporaryToken() {
+  public static TemporaryToken create() {
+    HashMap<String, String> deviceInfo = Maps.newHashMap();
+    deviceInfo.put("uuid", HappyDroidService.instance().getDeviceId());
+    deviceInfo.put("type", HappyDroidService.instance().getDeviceType());
+    deviceInfo.put("os_version", HappyDroidService.instance().getDeviceOSVersion());
+    HttpResponse response = HappyDroidService.instance().makePostRequest(Consts.API_V1_TEMPORARYTOKEN_CREATE_TOKEN, deviceInfo);
+
+    return materializeObject(response, TemporaryToken.class);
+  }
+
+  public boolean validate() {
+    HttpResponse response = HappyDroidService.instance().makeGetRequest(Consts.HAPPYDROIDS_SERVER + check_token_uri);
+    TemporaryToken token = materializeObject(response, TemporaryToken.class);
+    if (token != null && token.hasSessionToken()) {
+      session = token.session;
+    }
+
+    return hasSessionToken();
   }
 
   public int getValue() {
@@ -39,23 +49,7 @@ public class TemporaryToken {
     return session != null && session.token != null;
   }
 
-  public boolean validate() {
-    try {
-      HttpResponse response = HttpRequest.makeRequest(HttpRequest.REQUEST_TYPE.GET, Consts.HAPPYDROIDS_SERVER + resource_uri + "?format=json");
-      ObjectMapper mapper = new ObjectMapper();
-      TemporaryToken temporaryToken = mapper.readValue(response.getBodyString(), TemporaryToken.class);
-      if (temporaryToken.hasSessionToken()) {
-        session = temporaryToken.session;
-      }
-    } catch (IOException ignored) {
-    }
-
-    return hasSessionToken();
-  }
-
-  public class SessionToken {
+  private class SessionToken {
     public String token;
   }
-
-
 }

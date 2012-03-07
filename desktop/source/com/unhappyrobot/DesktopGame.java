@@ -2,9 +2,11 @@ package com.unhappyrobot;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.unhappyrobot.utils.OSValidator;
 
 public class DesktopGame {
   public static void main(String[] args) {
+
     /*
     Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
       public void uncaughtException(Thread thread, Throwable throwable) {
@@ -24,6 +26,6 @@ public class DesktopGame {
     config.useGL20 = true;
 //    config.vSyncEnabled = false;
 
-    new LwjglApplication(new TowerGame(), config);
+    new LwjglApplication(new TowerGame(OSValidator.getOSType(), System.getProperty("os.version")), config);
   }
 }

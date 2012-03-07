@@ -25,31 +25,32 @@ public class ConnectToFacebook extends TowerWindow {
     add(sessionStatus);
 
     final Preferences connectPrefs = Gdx.app.getPreferences("CONNECT");
-    if (!connectPrefs.contains("SESSION_TOKEN")) {
-      new Thread() {
-        @Override
-        public void run() {
-          TemporaryToken token = TemporaryToken.create();
-          codeLabel.setText("CODE: " + token.getValue());
-          sessionStatus.visible = true;
+//    if (!connectPrefs.contains("SESSION_TOKEN")) {
+    new Thread() {
+      @Override
+      public void run() {
 
-          long timeSinceCheck = System.currentTimeMillis();
-          do {
-            try {
-              Thread.sleep(TowerConsts.FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK);
-              token.validate();
-            } catch (InterruptedException ignored) {
+        TemporaryToken token = TemporaryToken.create();
+        codeLabel.setText("CODE: " + token.getValue());
+        sessionStatus.visible = true;
 
-            }
-          } while (!token.hasSessionToken());
+        long timeSinceCheck = System.currentTimeMillis();
+        do {
+          try {
+            Thread.sleep(TowerConsts.FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK);
+            token.validate();
+          } catch (InterruptedException ignored) {
 
-          sessionStatus.setText("Login successful!");
+          }
+        } while (!token.hasSessionToken());
 
-          connectPrefs.putString("SESSION_TOKEN", token.getSessionToken());
-          connectPrefs.flush();
-        }
-      }.start();
-    }
+        sessionStatus.setText("Login successful!");
+
+        connectPrefs.putString("SESSION_TOKEN", token.getSessionToken());
+        connectPrefs.flush();
+      }
+    }.start();
+//    }
   }
 
   private Label makeLabel(String text) {

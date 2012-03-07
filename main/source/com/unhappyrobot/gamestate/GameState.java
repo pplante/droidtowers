@@ -103,8 +103,8 @@ public class GameState extends EventListener {
 
       GameSave gameSave = new GameSave(gameGrid, camera, Player.instance());
       try {
-        String cloudSaveUri = HappyDroidService.uploadGameSave(gameSave);
-        if(cloudSaveUri != null) {
+        String cloudSaveUri = HappyDroidService.instance().uploadGameSave(gameSave);
+        if (cloudSaveUri != null) {
           gameSave.setCloudSaveUri(cloudSaveUri);
         }
 
