@@ -37,6 +37,24 @@ public class TestHappyDroidService extends HappyDroidService {
     return null;
   }
 
+  @Override
+  public HttpResponse makePostRequest(String uri, Object forServerDoNotCare) {
+    try {
+      String responseString = responses.poll();
+      byte[] bytes = responseString.getBytes();
+
+      HttpEntity entity = mock(HttpEntity.class);
+      when(entity.getContent()).thenReturn(new ByteArrayInputStream(bytes));
+      when(entity.getContentLength()).thenReturn((long) bytes.length);
+      HttpResponse response = mock(HttpResponse.class);
+      when(response.getEntity()).thenReturn(entity);
+      return response;
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   public void queueResponse(String content) {
     responses.add(content);
   }

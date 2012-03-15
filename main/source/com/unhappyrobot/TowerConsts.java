@@ -1,6 +1,10 @@
 package com.unhappyrobot;
 
 public class TowerConsts {
+  private TowerConsts() {
+
+  }
+
   public static final float HUD_UPDATE_FREQUENCY = 1f;
 
   public static final float ROOM_UPDATE_FREQUENCY = 10f;

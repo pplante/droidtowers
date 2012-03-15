@@ -65,10 +65,6 @@ public class TransitPathFinder extends AStar<GridPosition> {
     return successors;
   }
 
-  private void checkGridPosition(List<GridPosition> successors, float x, float y) {
-    checkGridPosition(successors, (int) x, (int) y);
-  }
-
   private void checkGridPosition(List<GridPosition> successors, int x, int y) {
     GridPosition position = GridPositionCache.instance().getPosition(x, y);
     if (position != null && (position.connectedToTransit || y == 4)) {

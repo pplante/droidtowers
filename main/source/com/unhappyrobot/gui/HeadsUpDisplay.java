@@ -80,6 +80,17 @@ public class HeadsUpDisplay extends WidgetGroup {
     toolMenu.radius = 140f;
     toolMenu.rotation = 3f;
 
+    TextButton connectFacebookButton = new TextButton("Connect to Facebook", guiSkin);
+    connectFacebookButton.x = 100;
+    connectFacebookButton.y = 100;
+    connectFacebookButton.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        ConnectToFacebook mainMenu = new ConnectToFacebook();
+        mainMenu.show().centerOnStage();
+      }
+    });
+    addActor(connectFacebookButton);
+
     ImageButton housingButton = new ImageButton(hudAtlas.findRegion("tool-housing"));
     housingButton.setClickListener(makePurchaseButtonClickListener("Housing", RoomTypeFactory.instance()));
     toolMenu.addActor(housingButton);

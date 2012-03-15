@@ -1,6 +1,10 @@
 package com.unhappyrobot.utils;
 
 public class OSValidator {
+  private OSValidator() {
+
+  }
+
   public static String getOSType() {
     if (isMac())
       return "macosx";

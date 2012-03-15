@@ -12,19 +12,19 @@ import static com.unhappyrobot.Expect.expect;
 public class TemporaryTokenTest {
   @Test
   public void create_shouldReturnATempToken() throws Exception {
-    TestHelper.queueFakeRequest("{\"resource_uri\": \"/api/v1/temporarytoken/1/\", \"session\": {\"token\": \"asdfasdfasdfsd\"}, \"value\": 1}");
+    TestHelper.queueFakeRequest("{\"resource_uri\": \"/api/v1/temporarytoken/1/\", \"session\": {\"token\": \"asdfasdfasdfsd\"}, \"value\": 86672}");
 
     TemporaryToken token = TemporaryToken.create();
-    expect(token.getValue()).toEqual(1);
+    expect(token.getValue()).toEqual(86672L);
     expect(token.getSessionToken()).toEqual("asdfasdfasdfsd");
   }
 
   @Test
   public void hasSessionToken_shouldReturnFalse_whenTokenIsNull() throws Exception {
-    TestHelper.queueFakeRequest("{\"session\": {\"token\": null}, \"value\": 1}");
+    TestHelper.queueFakeRequest("{\"session\": {\"token\": null}, \"value\": 86672}");
 
     TemporaryToken token = TemporaryToken.create();
-    expect(token.getValue()).toEqual(1);
+    expect(token.getValue()).toEqual(86672L);
     expect(token.getSessionToken()).toBeNull();
 
     expect(token.hasSessionToken()).toBeFalse();

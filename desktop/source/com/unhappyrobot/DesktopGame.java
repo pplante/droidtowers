@@ -5,6 +5,10 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.unhappyrobot.utils.OSValidator;
 
 public class DesktopGame {
+  private DesktopGame() {
+
+  }
+
   public static void main(String[] args) {
 
     /*

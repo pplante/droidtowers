@@ -8,12 +8,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 import com.unhappyrobot.controllers.AvatarSteeringManager;
+import com.unhappyrobot.entities.elevator.ElevatorPassengerEntry;
 import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridPosition;
 import com.unhappyrobot.tween.GameObjectAccessor;
 import com.unhappyrobot.tween.TweenSystem;
-import com.unhappyrobot.utils.Random;
 
 import java.util.LinkedList;
 
@@ -22,16 +22,16 @@ import static aurelienribon.tweenengine.TweenCallback.EventType.COMPLETE;
 public class ElevatorCar extends GameObject {
   private int floor;
   private final Elevator elevator;
-  private LinkedList<PassengerEntry> passengers;
+  private LinkedList<ElevatorPassengerEntry> elevatorPassengers;
   private boolean isInUse;
-  private PassengerEntry currentPassenger;
+  private ElevatorPassengerEntry currentElevatorPassenger;
   private final GameGrid gameGrid;
 
   public ElevatorCar(Elevator parent, TextureAtlas elevatorAtlas) {
     elevator = parent;
     elevator.eventBus().register(this);
     gameGrid = elevator.gameGrid;
-    passengers = Lists.newLinkedList();
+    elevatorPassengers = Lists.newLinkedList();
 
     TextureAtlas.AtlasRegion carRegion = elevatorAtlas.findRegion("elevator/car");
     setRegion(carRegion);
@@ -69,39 +69,39 @@ public class ElevatorCar extends GameObject {
 
   @Override
   public void update(float timeDelta) {
-    if (currentPassenger == null && passengers.size() > 0) {
-      currentPassenger = passengers.poll();
+    if (currentElevatorPassenger == null && elevatorPassengers.size() > 0) {
+      currentElevatorPassenger = elevatorPassengers.poll();
     }
 
-    if (currentPassenger != null) {
-      if (currentPassenger.hasBoarded) {
-        currentPassenger.steeringManager.getAvatar().setPosition(getX() + currentPassenger.offsetX, getY());
-      } else if (!currentPassenger.isQueued && !isInUse) {
-        currentPassenger.isQueued = true;
+    if (currentElevatorPassenger != null) {
+      if (currentElevatorPassenger.hasBoarded) {
+        currentElevatorPassenger.getSteeringManager().getAvatar().setPosition(getX() + currentElevatorPassenger.offsetX, getY());
+      } else if (!currentElevatorPassenger.isQueued && !isInUse) {
+        currentElevatorPassenger.isQueued = true;
         beginCarMovement();
       }
     }
   }
 
   private void beginCarMovement() {
-    final AvatarSteeringManager steeringManager = currentPassenger.steeringManager;
-    moveToFloor(currentPassenger.boardingFloor, new TweenCallback() {
+    final AvatarSteeringManager steeringManager = currentElevatorPassenger.getSteeringManager();
+    moveToFloor(currentElevatorPassenger.getBoardingFloor(), new TweenCallback() {
       public void onEvent(EventType eventType, BaseTween source) {
         // add a bit of padding to move avatar into middle of car.
 
         Vector2 avatarWalkToElevator = steeringManager.getCurrentPosition().toWorldVector2(gameGrid);
-        avatarWalkToElevator.x += currentPassenger.offsetX;
+        avatarWalkToElevator.x += currentElevatorPassenger.offsetX;
 
         steeringManager.moveAvatarTo(avatarWalkToElevator, new TweenCallback() {
           public void onEvent(EventType eventType, BaseTween source) {
-            currentPassenger.hasBoarded = true;
+            currentElevatorPassenger.hasBoarded = true;
 
-            moveToFloor(currentPassenger.destinationFloor, new TweenCallback() {
+            moveToFloor(currentElevatorPassenger.getDestinationFloor(), new TweenCallback() {
               public void onEvent(EventType eventType, BaseTween source) {
                 steeringManager.moveAvatarTo(steeringManager.getNextPosition().toWorldVector2(gameGrid), new TweenCallback() {
                   public void onEvent(EventType eventType, BaseTween source) {
-                    currentPassenger.runCompleteCallback();
-                    currentPassenger = null;
+                    currentElevatorPassenger.runCompleteCallback();
+                    currentElevatorPassenger = null;
                   }
                 });
               }
@@ -112,36 +112,11 @@ public class ElevatorCar extends GameObject {
     });
   }
 
-  public PassengerEntry addPassenger(AvatarSteeringManager steeringManager) {
-    final PassengerEntry entry = new PassengerEntry(steeringManager, steeringManager.getCurrentPosition(), steeringManager.getNextPosition());
-    passengers.add(entry);
+  public ElevatorPassengerEntry addPassenger(AvatarSteeringManager steeringManager) {
+    final ElevatorPassengerEntry entryElevator = new ElevatorPassengerEntry(steeringManager, steeringManager.getCurrentPosition(), steeringManager.getNextPosition());
+    elevatorPassengers.add(entryElevator);
 
-    return entry;
+    return entryElevator;
   }
 
-  public class PassengerEntry {
-    private final AvatarSteeringManager steeringManager;
-    private final GridPosition boardingFloor;
-    private final GridPosition destinationFloor;
-    private Runnable runnable;
-    public boolean hasBoarded;
-    public boolean isQueued;
-    public float offsetX;
-
-    public PassengerEntry(AvatarSteeringManager steeringManager, GridPosition boardingFloor, GridPosition destinationFloor) {
-      this.steeringManager = steeringManager;
-      this.boardingFloor = boardingFloor;
-      this.destinationFloor = destinationFloor;
-
-      offsetX = Random.randomInt(8, 36);
-    }
-
-    public void addCallback(Runnable runnable) {
-      this.runnable = runnable;
-    }
-
-    public void runCompleteCallback() {
-      runnable.run();
-    }
-  }
 }

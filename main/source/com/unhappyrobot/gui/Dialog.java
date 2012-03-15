@@ -14,7 +14,7 @@ import com.unhappyrobot.tween.TweenSystem;
 import java.util.List;
 
 public class Dialog {
-  public static final int[] NEGATIVE_BUTTON_KEYS = new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE};
+  static final int[] NEGATIVE_BUTTON_KEYS = new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE};
   private Stage parent;
   private Skin skin;
   private List<LabelButton> buttons;

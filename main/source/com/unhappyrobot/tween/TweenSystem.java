@@ -7,6 +7,10 @@ import com.unhappyrobot.entities.GameObject;
 import com.unhappyrobot.gui.WidgetAccessor;
 
 public class TweenSystem {
+  private TweenSystem() {
+
+  }
+
   static TweenManager tweenManager;
 
   static {

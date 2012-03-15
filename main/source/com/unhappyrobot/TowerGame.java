@@ -28,7 +28,10 @@ import com.unhappyrobot.graphics.SkyLayer;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GameGridRenderer;
 import com.unhappyrobot.grid.GridPositionCache;
-import com.unhappyrobot.gui.*;
+import com.unhappyrobot.gui.Dialog;
+import com.unhappyrobot.gui.HeadsUpDisplay;
+import com.unhappyrobot.gui.OnClickCallback;
+import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.tween.TweenSystem;
@@ -36,7 +39,7 @@ import com.unhappyrobot.types.CommercialTypeFactory;
 import com.unhappyrobot.types.ElevatorTypeFactory;
 import com.unhappyrobot.types.RoomTypeFactory;
 import com.unhappyrobot.types.StairTypeFactory;
-import com.unhappyrobot.utils.Random;
+import com.unhappyrobot.utils.AsyncTask;
 
 import java.util.List;
 
@@ -68,10 +71,15 @@ public class TowerGame implements ApplicationListener {
 
   public void create() {
     Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-    Random.init();
 
-    HappyDroidService.instance().setDeviceOSName(operatingSystemName);
-    HappyDroidService.instance().setDeviceOSVersion(operatingSystemVersion);
+    new AsyncTask() {
+      @Override
+      public void execute() {
+        HappyDroidService.instance().setDeviceOSName(operatingSystemName);
+        HappyDroidService.instance().setDeviceOSVersion(operatingSystemVersion);
+        HappyDroidService.instance().registerDevice();
+      }
+    }.run();
 
     TweenSystem.getTweenManager();
     AchievementEngine.instance();
@@ -217,10 +225,6 @@ public class TowerGame implements ApplicationListener {
     gameSaveLocation = Gdx.files.external(Gdx.app.getType().equals(Application.ApplicationType.Desktop) ? ".towergame/test.json" : "test.json");
     gameState.loadSavedGame(gameSaveLocation, camera);
     nextGameStateSaveTime = System.currentTimeMillis() + TowerConsts.GAME_SAVE_FREQUENCY;
-
-
-    ConnectToFacebook mainMenu = new ConnectToFacebook();
-    mainMenu.show().centerOnStage();
   }
 
   public void render() {

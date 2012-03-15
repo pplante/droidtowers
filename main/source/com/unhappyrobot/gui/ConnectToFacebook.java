@@ -1,10 +1,10 @@
 package com.unhappyrobot.gui;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.unhappyrobot.TowerConsts;
+import com.unhappyrobot.gamestate.server.HappyDroidService;
 import com.unhappyrobot.gamestate.server.TemporaryToken;
+import com.unhappyrobot.utils.PeriodicAsyncTask;
 
 public class ConnectToFacebook extends TowerWindow {
   public ConnectToFacebook() {
@@ -24,33 +24,36 @@ public class ConnectToFacebook extends TowerWindow {
     sessionStatus.visible = false;
     add(sessionStatus);
 
-    final Preferences connectPrefs = Gdx.app.getPreferences("CONNECT");
-//    if (!connectPrefs.contains("SESSION_TOKEN")) {
-    new Thread() {
-      @Override
-      public void run() {
+    if (HappyDroidService.instance().getSessionToken() == null) {
+      new PeriodicAsyncTask(TowerConsts.FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK) {
+        private TemporaryToken token;
 
-        TemporaryToken token = TemporaryToken.create();
-        codeLabel.setText("CODE: " + token.getValue());
-        sessionStatus.visible = true;
+        @Override
+        public synchronized void beforeExecute() {
+          token = TemporaryToken.create();
+          codeLabel.setText("CODE: " + token.getValue());
+          sessionStatus.visible = true;
+        }
 
-        long timeSinceCheck = System.currentTimeMillis();
-        do {
-          try {
-            Thread.sleep(TowerConsts.FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK);
-            token.validate();
-          } catch (InterruptedException ignored) {
+        @Override
+        public boolean update() {
+          if (token == null) return false;
 
+          token.validate();
+          System.out.println("token = " + token);
+          return !token.hasSessionToken();
+        }
+
+        @Override
+        public synchronized void afterExecute() {
+          if (token != null && token.hasSessionToken()) {
+            sessionStatus.setText("Login successful!");
+          } else {
+            sessionStatus.setText("Login failed!");
           }
-        } while (!token.hasSessionToken());
-
-        sessionStatus.setText("Login successful!");
-
-        connectPrefs.putString("SESSION_TOKEN", token.getSessionToken());
-        connectPrefs.flush();
-      }
-    }.start();
-//    }
+        }
+      }.run();
+    }
   }
 
   private Label makeLabel(String text) {
