@@ -9,23 +9,21 @@ import java.util.HashMap;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TemporaryToken {
-  private long value;
-  private String check_token_uri;
+  private String value;
+  private String resource_uri;
+  private String clickable_uri;
   private SessionToken session;
 
   private TemporaryToken() {
   }
 
   public static TemporaryToken create() {
-    HashMap<String, String> map = new HashMap<String, String>();
-
-    HttpResponse response = HappyDroidService.instance().makePostRequest(Consts.API_V1_TEMPORARY_TOKEN_CREATE, map);
-
+    HttpResponse response = HappyDroidService.instance().makePostRequest(Consts.API_V1_TEMPORARY_TOKEN_CREATE, new HashMap<String, String>());
     return HappyDroidServiceObject.materializeObject(response, TemporaryToken.class);
   }
 
   public boolean validate() {
-    HttpResponse response = HappyDroidService.instance().makeGetRequest(Consts.HAPPYDROIDS_SERVER + check_token_uri);
+    HttpResponse response = HappyDroidService.instance().makeGetRequest(Consts.HAPPYDROIDS_SERVER + resource_uri);
     TemporaryToken token = HappyDroidServiceObject.materializeObject(response, TemporaryToken.class);
     if (token != null && token.hasSessionToken()) {
       session = token.session;
@@ -35,7 +33,7 @@ public class TemporaryToken {
     return hasSessionToken();
   }
 
-  public long getValue() {
+  public String getValue() {
     return value;
   }
 
@@ -45,6 +43,10 @@ public class TemporaryToken {
 
   public boolean hasSessionToken() {
     return session != null && session.token != null;
+  }
+
+  public String getClickableUri() {
+    return clickable_uri;
   }
 
   public class SessionToken {
@@ -61,7 +63,7 @@ public class TemporaryToken {
   @Override
   public String toString() {
     return "TemporaryToken{" +
-                   "check_token_uri='" + check_token_uri + '\'' +
+                   "resource_uri='" + resource_uri + '\'' +
                    ", value=" + value +
                    ", session=" + session +
                    '}';

@@ -1,7 +1,7 @@
 package com.unhappyrobot.gamestate.server;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -16,8 +16,7 @@ public class HappyDroidServiceObject {
     ObjectMapper mapper = new ObjectMapper();
     if (response != null) {
       try {
-        BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
-        String content = EntityUtils.toString(entity);
+        String content = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
         System.out.println("\tResponse: " + content);
         return mapper.readValue(content, aClazz);
       } catch (IOException e) {

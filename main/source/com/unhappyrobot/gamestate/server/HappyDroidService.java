@@ -13,10 +13,15 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.conn.HttpHostConnectException;
+import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -57,17 +62,25 @@ public class HappyDroidService {
     deviceInfo.put("os_version", HappyDroidService.instance().getDeviceOSVersion());
     HttpResponse response = HappyDroidService.instance().makePostRequest(Consts.API_V1_REGISTER_DEVICE, deviceInfo);
 
-    HashMap hashMap = HappyDroidServiceObject.materializeObject(response, HashMap.class);
-    if (hashMap.containsKey("is_authed")) {
-      isAuthenticated = (Boolean) hashMap.get("is_authed");
-      if (!isAuthenticated) {
-        preferences.remove("SESSION_TOKEN");
-        preferences.flush();
+    if (response.getStatusLine().getStatusCode() == 201) {
+      HashMap hashMap = HappyDroidServiceObject.materializeObject(response, HashMap.class);
+      if (hashMap.containsKey("is_authed")) {
+        isAuthenticated = (Boolean) hashMap.get("is_authed");
+        if (!isAuthenticated) {
+          preferences.remove("SESSION_TOKEN");
+          preferences.flush();
+        }
       }
+    } else {
+      isAuthenticated = false;
     }
   }
 
   public String uploadGameSave(GameSave gameSave) {
+    if (!isAuthenticated) {
+      return null;
+    }
+
     String gameSaveUri = Consts.API_V1_GAMESAVE_LIST;
     if (gameSave.getCloudSaveUri() != null) {
       gameSaveUri = Consts.HAPPYDROIDS_SERVER + gameSave.getCloudSaveUri();
@@ -75,6 +88,14 @@ public class HappyDroidService {
 
     HttpResponse response = makePostRequest(gameSaveUri, new CloudGameSave(gameSave));
     if (response != null) {
+
+      try {
+        BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
+        String content = EntityUtils.toString(entity, HTTP.UTF_8);
+        System.out.println("\tResponse: " + content);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
       Header location = Iterables.getFirst(Lists.newArrayList(response.getHeaders("Location")), null);
       if (location != null) {
         return location.toString();
@@ -97,7 +118,10 @@ public class HappyDroidService {
         request.setEntity(entity);
       }
 
-      return client.execute(request);
+      HttpResponse response = client.execute(request);
+      System.out.println(response.getStatusLine());
+      System.out.println("response.getHeaders() = " + Arrays.toString(response.getAllHeaders()));
+      return response;
     } catch (HttpHostConnectException ignored) {
       System.out.println("Connection failed for: " + uri);
     } catch (Exception e) {
@@ -122,7 +146,9 @@ public class HappyDroidService {
       HttpGet request = new HttpGet(uri);
       addDefaultHeaders(request);
 
-      return client.execute(request);
+      HttpResponse response = client.execute(request);
+      System.out.println(response.getStatusLine());
+      return response;
     } catch (HttpHostConnectException ignored) {
       System.out.println("Connection failed for: " + uri);
     } catch (Exception e) {

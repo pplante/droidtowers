@@ -15,7 +15,7 @@ public class TemporaryTokenTest {
     TestHelper.queueFakeRequest("{\"resource_uri\": \"/api/v1/temporarytoken/1/\", \"session\": {\"token\": \"asdfasdfasdfsd\"}, \"value\": 86672}");
 
     TemporaryToken token = TemporaryToken.create();
-    expect(token.getValue()).toEqual(86672L);
+    expect(token.getValue()).toEqual("");
     expect(token.getSessionToken()).toEqual("asdfasdfasdfsd");
   }
 
@@ -24,7 +24,7 @@ public class TemporaryTokenTest {
     TestHelper.queueFakeRequest("{\"session\": {\"token\": null}, \"value\": 86672}");
 
     TemporaryToken token = TemporaryToken.create();
-    expect(token.getValue()).toEqual(86672L);
+    expect(token.getValue()).toEqual("");
     expect(token.getSessionToken()).toBeNull();
 
     expect(token.hasSessionToken()).toBeFalse();
