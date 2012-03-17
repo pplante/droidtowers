@@ -4,12 +4,14 @@
       <w>accessor</w>
       <w>async</w>
       <w>bundler</w>
+      <w>clickable</w>
       <w>consts</w>
       <w>deferrables</w>
       <w>delegater</w>
       <w>earnout</w>
       <w>iterable</w>
       <w>jarbundler</w>
+      <w>keybindings</w>
       <w>keycode</w>
       <w>millis</w>
       <w>pixmap</w>

@@ -89,7 +89,7 @@ public class HeadsUpDisplay extends WidgetGroup {
         mainMenu.show().centerOnStage();
       }
     });
-    addActor(connectFacebookButton);
+//    addActor(connectFacebookButton);
 
     ImageButton housingButton = new ImageButton(hudAtlas.findRegion("tool-housing"));
     housingButton.setClickListener(makePurchaseButtonClickListener("Housing", RoomTypeFactory.instance()));

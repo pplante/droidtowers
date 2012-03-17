@@ -44,7 +44,7 @@ public class ConnectToFacebook extends TowerWindow {
             try {
               Class<?> d = Class.forName("java.awt.Desktop");
               Method browseMethod = d.getDeclaredMethod("browse", new Class[]{URI.class});
-              browseMethod.invoke(d.getDeclaredMethod("getDesktop").invoke(null), new Object[]{java.net.URI.create(token.getClickableUri())});
+              browseMethod.invoke(d.getDeclaredMethod("getDesktop").invoke(null), new URI[]{java.net.URI.create(token.getClickableUri())});
             } catch (Exception ignored) {
 
             }

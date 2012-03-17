@@ -10,8 +10,8 @@ import java.util.HashMap;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TemporaryToken {
   private String value;
-  private String resource_uri;
-  private String clickable_uri;
+  private String resourceUri;
+  private String clickableUri;
   private SessionToken session;
 
   private TemporaryToken() {
@@ -23,7 +23,7 @@ public class TemporaryToken {
   }
 
   public boolean validate() {
-    HttpResponse response = HappyDroidService.instance().makeGetRequest(Consts.HAPPYDROIDS_SERVER + resource_uri);
+    HttpResponse response = HappyDroidService.instance().makeGetRequest(Consts.HAPPYDROIDS_URI + resourceUri);
     TemporaryToken token = HappyDroidServiceObject.materializeObject(response, TemporaryToken.class);
     if (token != null && token.hasSessionToken()) {
       session = token.session;
@@ -46,7 +46,7 @@ public class TemporaryToken {
   }
 
   public String getClickableUri() {
-    return clickable_uri;
+    return clickableUri;
   }
 
   public class SessionToken {
@@ -63,7 +63,7 @@ public class TemporaryToken {
   @Override
   public String toString() {
     return "TemporaryToken{" +
-                   "resource_uri='" + resource_uri + '\'' +
+                   "resourceUri='" + resourceUri + '\'' +
                    ", value=" + value +
                    ", session=" + session +
                    '}';

@@ -6,13 +6,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
-import com.unhappyrobot.achievements.Achievement;
 import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.controllers.GameTips;
@@ -28,11 +26,8 @@ import com.unhappyrobot.graphics.SkyLayer;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GameGridRenderer;
 import com.unhappyrobot.grid.GridPositionCache;
-import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.HeadsUpDisplay;
-import com.unhappyrobot.gui.OnClickCallback;
-import com.unhappyrobot.gui.ResponseType;
-import com.unhappyrobot.input.InputCallback;
+import com.unhappyrobot.input.DefaultKeybindings;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.tween.TweenSystem;
 import com.unhappyrobot.types.CommercialTypeFactory;
@@ -42,8 +37,6 @@ import com.unhappyrobot.types.StairTypeFactory;
 import com.unhappyrobot.utils.AsyncTask;
 
 import java.util.List;
-
-import static com.unhappyrobot.input.InputSystem.Keys;
 
 public class TowerGame implements ApplicationListener {
   private static OrthographicCamera camera;
@@ -58,7 +51,7 @@ public class TowerGame implements ApplicationListener {
   private GameState gameState;
   private boolean loadedSavedGame;
   private FileHandle gameSaveLocation;
-  private static float timeMultiplier;
+  public static float timeMultiplier;
   private long nextGameStateSaveTime;
   private final String operatingSystemName;
   private final String operatingSystemVersion;
@@ -125,102 +118,7 @@ public class TowerGame implements ApplicationListener {
     InputSystem.instance().addInputProcessor(guiStage, 10);
     Gdx.input.setInputProcessor(InputSystem.instance());
 
-    InputSystem.instance().bind(new int[]{Keys.PLUS, Keys.UP}, new InputCallback() {
-      public boolean run(float timeDelta) {
-        timeMultiplier += 0.5f;
-        timeMultiplier = Math.min(timeMultiplier, 4);
-
-        return true;
-      }
-    });
-
-    InputSystem.instance().bind(new int[]{Keys.MINUS, Keys.DOWN}, new InputCallback() {
-      public boolean run(float timeDelta) {
-        timeMultiplier -= 0.5f;
-        timeMultiplier = Math.max(timeMultiplier, 0.5f);
-
-        return true;
-      }
-    });
-
-    InputSystem.instance().bind(Keys.G, new InputCallback() {
-      public boolean run(float timeDelta) {
-        gameGridRenderer.toggleGridLines();
-
-        return true;
-      }
-    });
-
-    InputSystem.instance().bind(Keys.T, new InputCallback() {
-      public boolean run(float timeDelta) {
-        gameGridRenderer.toggleTransitLines();
-
-        return true;
-      }
-    });
-
-    InputSystem.instance().bind(Keys.NUM_0, new InputCallback() {
-      public boolean run(float timeDelta) {
-        camera.zoom = 1f;
-
-        return true;
-      }
-    });
-
-    InputSystem.instance().bind(Keys.R, new InputCallback() {
-      public boolean run(float timeDelta) {
-        Texture.invalidateAllTextures(Gdx.app);
-        return true;
-      }
-    });
-
-    InputSystem.instance().bind(Keys.A, new InputCallback() {
-      public boolean run(float timeDelta) {
-        for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
-          System.out.println("achievement = " + achievement);
-          System.out.println("achievement.isCompleted() = " + achievement.isCompleted());
-          System.out.println("\n\n");
-
-          if (achievement.isCompleted()) {
-            achievement.giveReward();
-          }
-        }
-
-        return true;
-      }
-    });
-
-    InputSystem.instance().bind(new int[]{Keys.BACK, Keys.ESCAPE}, new InputCallback() {
-      private Dialog exitDialog;
-
-      public boolean run(float timeDelta) {
-        if (exitDialog != null) {
-          exitDialog.dismiss();
-        } else {
-          exitDialog = new Dialog().setTitle("Awww, don't leave me.").setMessage("Are you sure you want to exit the game?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
-            @Override
-            public void onClick(Dialog dialog) {
-              dialog.dismiss();
-              Gdx.app.exit();
-            }
-          }).addButton(ResponseType.NEGATIVE, "No way!", new OnClickCallback() {
-            @Override
-            public void onClick(Dialog dialog) {
-              dialog.dismiss();
-            }
-          }).centerOnScreen().show();
-
-          exitDialog.onDismiss(new InputCallback() {
-            public boolean run(float timeDelta) {
-              exitDialog = null;
-              return true;
-            }
-          });
-        }
-
-        return true;
-      }
-    });
+    DefaultKeybindings.initialize(this);
 
     gameSaveLocation = Gdx.files.external(Gdx.app.getType().equals(Application.ApplicationType.Desktop) ? ".towergame/test.json" : "test.json");
     gameState.loadSavedGame(gameSaveLocation, camera);

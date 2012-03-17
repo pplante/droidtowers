@@ -6,6 +6,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.unhappyrobot.gamestate.GameSave;
+import com.unhappyrobot.utils.AsyncTask;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -21,7 +22,7 @@ import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -32,6 +33,7 @@ public class HappyDroidService {
   private Preferences preferences;
   private String deviceId;
   private boolean isAuthenticated;
+  private boolean hasNetworkConnection;
 
   public static HappyDroidService instance() {
     if (_instance == null) {
@@ -53,19 +55,21 @@ public class HappyDroidService {
     }
 
     deviceId = preferences.getString("DEVICE_ID");
+
+    checkForNetwork();
   }
 
   public void registerDevice() {
     HashMap<String, String> deviceInfo = Maps.newHashMap();
     deviceInfo.put("uuid", HappyDroidService.instance().getDeviceId());
     deviceInfo.put("type", HappyDroidService.instance().getDeviceType());
-    deviceInfo.put("os_version", HappyDroidService.instance().getDeviceOSVersion());
+    deviceInfo.put("osVersion", HappyDroidService.instance().getDeviceOSVersion());
     HttpResponse response = HappyDroidService.instance().makePostRequest(Consts.API_V1_REGISTER_DEVICE, deviceInfo);
 
     if (response.getStatusLine().getStatusCode() == 201) {
       HashMap hashMap = HappyDroidServiceObject.materializeObject(response, HashMap.class);
-      if (hashMap.containsKey("is_authed")) {
-        isAuthenticated = (Boolean) hashMap.get("is_authed");
+      if (hashMap.containsKey("isAuthenticated")) {
+        isAuthenticated = (Boolean) hashMap.get("isAuthenticated");
         if (!isAuthenticated) {
           preferences.remove("SESSION_TOKEN");
           preferences.flush();
@@ -83,7 +87,7 @@ public class HappyDroidService {
 
     String gameSaveUri = Consts.API_V1_GAMESAVE_LIST;
     if (gameSave.getCloudSaveUri() != null) {
-      gameSaveUri = Consts.HAPPYDROIDS_SERVER + gameSave.getCloudSaveUri();
+      gameSaveUri = Consts.HAPPYDROIDS_URI + gameSave.getCloudSaveUri();
     }
 
     HttpResponse response = makePostRequest(gameSaveUri, new CloudGameSave(gameSave));
@@ -119,8 +123,13 @@ public class HappyDroidService {
       }
 
       HttpResponse response = client.execute(request);
-      System.out.println(response.getStatusLine());
-      System.out.println("response.getHeaders() = " + Arrays.toString(response.getAllHeaders()));
+      System.out.println("\t" + response.getStatusLine());
+
+      if (response.getStatusLine().getStatusCode() == 500) {
+        String content = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
+        System.out.println("\tResponse: " + content);
+      }
+
       return response;
     } catch (HttpHostConnectException ignored) {
       System.out.println("Connection failed for: " + uri);
@@ -156,6 +165,20 @@ public class HappyDroidService {
     }
 
     return null;
+  }
+
+  public void checkForNetwork() {
+    new AsyncTask() {
+      @Override
+      public void execute() {
+        try {
+          InetAddress remote = InetAddress.getByName(Consts.HAPPYDROIDS_SERVER);
+          hasNetworkConnection = remote.isReachable(1500);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    };
   }
 
   public String getSessionToken() {
