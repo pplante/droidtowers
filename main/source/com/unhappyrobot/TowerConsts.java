@@ -5,6 +5,10 @@ public class TowerConsts {
 
   }
 
+  public static final int GAME_WORLD_PADDING = 200;
+
+  public static final int GAME_GRID_EXPAND_SIZE = 5;
+
   public static final float HUD_UPDATE_FREQUENCY = 1f;
 
   public static final float ROOM_UPDATE_FREQUENCY = 10f;

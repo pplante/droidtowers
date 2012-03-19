@@ -15,6 +15,7 @@ import com.unhappyrobot.grid.GridObjectState;
 import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.OnClickCallback;
 import com.unhappyrobot.gui.ResponseType;
+import com.unhappyrobot.input.CameraController;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public class GameState extends EventListener {
@@ -61,10 +62,15 @@ public class GameState extends EventListener {
       ObjectMapper objectMapper = new ObjectMapper();
       GameSave gameSave = objectMapper.readValue(fileHandle.file(), GameSave.class);
 
+      gameGrid.setGridSize(gameSave.getGridSize().x, gameSave.getGridSize().y);
+      gameGrid.updateWorldSize();
+
       Player.setInstance(gameSave.getPlayer());
 
       camera.position.set(gameSave.getCameraPosition());
       camera.zoom = gameSave.getCameraZoom();
+      CameraController.instance().panTo(gameSave.getCameraPosition(), false);
+      CameraController.instance().checkBounds();
 
       AchievementEngine.instance().loadCompletedAchievements(gameSave.getCompletedAchievements());
 

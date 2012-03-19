@@ -1,5 +1,6 @@
 package com.unhappyrobot.input;
 
+import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -7,22 +8,30 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
+import com.unhappyrobot.TowerConsts;
+import com.unhappyrobot.events.GameGridResizeEvent;
 import com.unhappyrobot.grid.GameGrid;
+import com.unhappyrobot.gui.events.CameraControllerEvent;
+import com.unhappyrobot.tween.TweenSystem;
 
 public class CameraController implements GestureDetector.GestureListener {
+  private static EventBus events = new EventBus(CameraController.class.getSimpleName());
+
   private static CameraController instance;
 
   public static final float ZOOM_MAX = 3.0f;
-  public static final float ZOOM_MIN = (Gdx.app.getType() == Application.ApplicationType.Android ? 0.4f : 0.6f);
 
+  public static final float ZOOM_MIN = (Gdx.app.getType() == Application.ApplicationType.Android ? 0.4f : 0.6f);
   private OrthographicCamera camera;
   private BoundingBox cameraBounds;
   private float initialScale = 1.0f;
   private boolean flinging = false;
   private float velX;
   private float velY;
-  private final int halfHeight;
-  private final int halfWidth;
+  private Vector2 worldSize;
+  private Vector3 lastCameraPosition;
 
   public static void initialize(OrthographicCamera camera, GameGrid gameGrid) {
     instance = new CameraController(camera, gameGrid);
@@ -36,13 +45,19 @@ public class CameraController implements GestureDetector.GestureListener {
     return instance;
   }
 
-  private CameraController(OrthographicCamera camera, GameGrid gameGrid) {
-    Vector2 worldSize = gameGrid.getWorldSize();
-    this.camera = camera;
-    halfWidth = Gdx.graphics.getWidth() / 2;
-    halfHeight = Gdx.graphics.getHeight() / 2;
-    this.cameraBounds = new BoundingBox(new Vector3(0, 0, 0), new Vector3(worldSize.x, worldSize.y, 0));
-    this.camera.position.set(worldSize.x / 2, 384, 0);
+  private CameraController(OrthographicCamera camera_, GameGrid gameGrid) {
+    GameGrid.events().register(this);
+
+    camera = camera_;
+    worldSize = gameGrid.getWorldSize();
+    camera.position.set(worldSize.x / 2, 384, 0);
+    lastCameraPosition = new Vector3(camera.position);
+    updateCameraConstraints();
+  }
+
+  private void updateCameraConstraints() {
+    this.cameraBounds = new BoundingBox(new Vector3(-TowerConsts.GAME_WORLD_PADDING, 0, 0), new Vector3(worldSize.x + TowerConsts.GAME_WORLD_PADDING, worldSize.y + TowerConsts.GAME_WORLD_PADDING, 0));
+    checkBounds();
   }
 
   public boolean touchDown(int x, int y, int pointer) {
@@ -110,6 +125,11 @@ public class CameraController implements GestureDetector.GestureListener {
       camera.position.add(deltaX, deltaY, 0);
       checkBounds();
     }
+
+    if (!lastCameraPosition.equals(camera.position)) {
+      events.post(new CameraControllerEvent(camera.position, lastCameraPosition.sub(camera.position), camera.zoom));
+      lastCameraPosition.set(camera.position);
+    }
   }
 
   private void checkZoom() {
@@ -120,9 +140,12 @@ public class CameraController implements GestureDetector.GestureListener {
     }
   }
 
-  private void checkBounds() {
-    Vector3 min = cameraBounds.getMin().cpy().add(halfWidth * camera.zoom, halfHeight * camera.zoom, 0);
-    Vector3 max = cameraBounds.getMax().cpy().sub(halfWidth * camera.zoom, halfHeight * camera.zoom, 0);
+  public void checkBounds() {
+    float halfWidth = Gdx.graphics.getWidth() / 2 * camera.zoom;
+    float halfHeight = Gdx.graphics.getHeight() / 2 * camera.zoom;
+
+    Vector3 min = cameraBounds.getMin().cpy().add(halfWidth, halfHeight, 0);
+    Vector3 max = cameraBounds.getMax().cpy().sub(halfWidth, halfHeight, 0);
 
     camera.position.x = Math.max(min.x, camera.position.x);
     camera.position.x = Math.min(max.x, camera.position.x);
@@ -137,5 +160,30 @@ public class CameraController implements GestureDetector.GestureListener {
 
   public OrthographicCamera getCamera() {
     return camera;
+  }
+
+  public static EventBus events() {
+    return events;
+  }
+
+  @Subscribe
+  public void GameGrid_onGridResize(GameGridResizeEvent event) {
+    worldSize = event.gameGrid.getWorldSize();
+    updateCameraConstraints();
+  }
+
+  public void panTo(float x, float y, boolean animate) {
+    if (animate) {
+      TweenSystem.getTweenManager().killTarget(this);
+      Tween.to(this, CameraControllerAccessor.PAN, 500)
+              .target(x, y)
+              .start(TweenSystem.getTweenManager());
+    } else {
+      camera.position.set(x, y, 0f);
+    }
+  }
+
+  public void panTo(Vector3 position, boolean animate) {
+    panTo(position.x, position.y, animate);
   }
 }

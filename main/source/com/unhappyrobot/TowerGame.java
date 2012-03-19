@@ -110,8 +110,9 @@ public class TowerGame implements ApplicationListener {
     gameLayers.add(AvatarLayer.initialize(gameGrid));
 
     gameGrid.setUnitSize(64, 64);
-    gameGrid.setGridSize(60, 40);
+    gameGrid.setGridSize(40, 10);
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
+    gameGrid.updateWorldSize();
 
 //    BEGIN INPUT SETUP:
     InputSystem.instance().setup(camera, gameLayers);

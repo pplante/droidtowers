@@ -42,6 +42,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   private InputCallback closeDialogCallback = null;
   private RadialMenu toolMenu;
   private final StackGroup notificationStack;
+  private TextButton expandLandButton;
 
   public static HeadsUpDisplay instance() {
     if (instance == null) {
@@ -90,6 +91,7 @@ public class HeadsUpDisplay extends WidgetGroup {
       }
     });
 //    addActor(connectFacebookButton);
+    addActor(new ExpandLandOverlay(gameGrid, guiSkin));
 
     ImageButton housingButton = new ImageButton(hudAtlas.findRegion("tool-housing"));
     housingButton.setClickListener(makePurchaseButtonClickListener("Housing", RoomTypeFactory.instance()));
@@ -201,7 +203,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     float javaHeapInBytes = Gdx.app.getJavaHeap() / ONE_MEGABYTE;
     float nativeHeapInBytes = Gdx.app.getNativeHeap() / ONE_MEGABYTE;
 
-    String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f)\nmem: (java %.1f Mb, native %.1f Mb)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom, javaHeapInBytes, nativeHeapInBytes);
+    String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f), grid(%.0f, %.0f)\nmem: (java %.1f Mb, native %.1f Mb)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom, gameGrid.getGridSize().x, gameGrid.getGridSize().y, javaHeapInBytes, nativeHeapInBytes);
     menloBitmapFont.drawMultiLine(batch, infoText, 5, 35);
   }
 

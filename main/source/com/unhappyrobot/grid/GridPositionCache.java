@@ -189,4 +189,13 @@ public class GridPositionCache {
   public Vector2 getGridSize() {
     return gridSize;
   }
+
+  public void pauseEvents() {
+    GameGrid.events().unregister(this);
+  }
+
+
+  public void resumeEvents() {
+    GameGrid.events().register(this);
+  }
 }

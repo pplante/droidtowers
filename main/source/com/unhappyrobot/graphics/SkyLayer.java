@@ -28,9 +28,7 @@ public class SkyLayer extends GameLayer {
 
     Texture texture = new Texture(Gdx.files.internal("backgrounds/sky-gradient.png"));
     sky = new GameObject(texture);
-    sky.setPosition(0, 256);
-    sky.setSize(gameGrid.getWorldSize().x, gameGrid.getWorldSize().y - 256f);
-    sky.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
+    GameGrid_onResize(null);
     sky.setColor(WeatherService.instance().currentState().color);
 
     addChild(sky);
@@ -38,8 +36,8 @@ public class SkyLayer extends GameLayer {
 
   @Subscribe
   public void GameGrid_onResize(GameGridResizeEvent event) {
-    sky.setPosition(0, 256);
-    sky.setSize(gameGrid.getWorldSize().x, gameGrid.getWorldSize().y - 256f);
+    sky.setPosition(-TowerConsts.GAME_WORLD_PADDING, 256);
+    sky.setSize(gameGrid.getWorldSize().x + (TowerConsts.GAME_WORLD_PADDING * 2), gameGrid.getWorldSize().y + TowerConsts.GAME_WORLD_PADDING);
     sky.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
   }
 

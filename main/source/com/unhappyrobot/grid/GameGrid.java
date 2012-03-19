@@ -3,6 +3,7 @@ package com.unhappyrobot.grid;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.eventbus.EventBus;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.GuavaSet;
@@ -31,6 +32,7 @@ public class GameGrid extends GameLayer {
   private GridObject selectedGridObject;
   private GridObject transitGridObjectA;
   private GridObject transitGridObjectB;
+  private float tallestPoint;
 
   public GameGrid() {
     setTouchEnabled(true);
@@ -52,12 +54,14 @@ public class GameGrid extends GameLayer {
 
   public void setUnitSize(int width, int height) {
     unitSize.set(width, height);
-    updateWorldSize();
   }
 
   public void setGridSize(int width, int height) {
     gridSize.set(width, height);
-    updateWorldSize();
+  }
+
+  public void setGridSize(float x, float y) {
+    setGridSize((int) x, (int) y);
   }
 
   public void setGridColor(float r, float g, float b, float a) {
@@ -72,6 +76,14 @@ public class GameGrid extends GameLayer {
     return worldSize.cpy();
   }
 
+  public Vector2 getGridSize() {
+    return gridSize;
+  }
+
+  public Vector2 getUnitSize() {
+    return unitSize;
+  }
+
   public boolean addObject(GridObject gridObject) {
     objects.add(gridObject);
 
@@ -84,6 +96,12 @@ public class GameGrid extends GameLayer {
     }
 
     gridObjectHashSet.add(gridObject);
+
+    if (gridObject.getPosition().y + gridObject.getSize().y > tallestPoint) {
+      tallestPoint = gridSize.y;
+      gridSize.y += TowerConsts.GAME_GRID_EXPAND_SIZE;
+      updateWorldSize();
+    }
 
     events().post(new GridObjectAddedEvent(gridObject));
 
@@ -189,6 +207,7 @@ public class GameGrid extends GameLayer {
 
     return false;
   }
+
 
   public GridPoint closestGridPoint(float x, float y) {
     float gridX = (float) Math.floor((int) x / unitSize.x);

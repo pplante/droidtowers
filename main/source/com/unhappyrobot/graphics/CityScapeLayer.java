@@ -3,6 +3,7 @@ package com.unhappyrobot.graphics;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.google.common.eventbus.Subscribe;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.entities.GameObject;
 import com.unhappyrobot.entities.GuavaSet;
@@ -20,15 +21,16 @@ public class CityScapeLayer extends GameLayer {
 
   @Subscribe
   public void GameGrid_onResize(GameGridResizeEvent event) {
-    removeAllChildren();
-
     GuavaSet<TextureAtlas.AtlasRegion> regions = new GuavaSet<TextureAtlas.AtlasRegion>(cityScapeAtlas.getRegions());
-    float worldWidth = event.gameGrid.getWorldSize().x;
+    float worldWidth = event.gameGrid.getWorldSize().x + (TowerConsts.GAME_WORLD_PADDING * 2);
+    float nextX = width() - TowerConsts.GAME_WORLD_PADDING - (5f * gameObjects.size());
     while (width() < worldWidth) {
       GameObject sprite = new GameObject(regions.getRandomEntry());
-      sprite.setX(width() - gameObjects.size());
+      sprite.setX(nextX);
       sprite.setY(250f);
       addChild(sprite);
+
+      nextX += sprite.getWidth() - 5f;
     }
   }
 }
