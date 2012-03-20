@@ -116,17 +116,6 @@ public class CloudLayer extends GameLayer {
   @Subscribe
   public void GameGrid_onResize(GameGridResizeEvent event) {
     worldSize = event.gameGrid.getWorldSize();
-
-    removeAllChildren();
-    cloudsToRemove.clear();
-
-    for (int i = 0; i < MAX_ACTIVE_CLOUDS; i++) {
-      spawnCloudNow();
-    }
-
-    for (GameObject cloud : gameObjects) {
-      cloud.setX(Random.randomInt(0, worldSize.x));
-    }
   }
 
   @Subscribe

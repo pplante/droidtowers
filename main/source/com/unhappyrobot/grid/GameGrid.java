@@ -32,7 +32,7 @@ public class GameGrid extends GameLayer {
   private GridObject selectedGridObject;
   private GridObject transitGridObjectA;
   private GridObject transitGridObjectB;
-  private float tallestPoint;
+  private float highestPoint;
 
   public GameGrid() {
     setTouchEnabled(true);
@@ -97,10 +97,13 @@ public class GameGrid extends GameLayer {
 
     gridObjectHashSet.add(gridObject);
 
-    if (gridObject.getPosition().y + gridObject.getSize().y > tallestPoint) {
-      tallestPoint = gridSize.y;
-      gridSize.y += TowerConsts.GAME_GRID_EXPAND_SIZE;
-      updateWorldSize();
+    float objectYPos = gridObject.getPosition().y;
+    if (objectYPos > highestPoint) {
+      highestPoint = objectYPos;
+      if (highestPoint + TowerConsts.GAME_GRID_EXPAND_SIZE > gridSize.y) {
+        gridSize.y = highestPoint + TowerConsts.GAME_GRID_EXPAND_SIZE;
+        updateWorldSize();
+      }
     }
 
     events().post(new GridObjectAddedEvent(gridObject));

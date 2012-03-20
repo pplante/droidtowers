@@ -29,8 +29,8 @@ public class RoomType extends GridObjectType {
 
   @Override
   public boolean canBeAt(GridObject gridObject) {
-    if (isLobby && gridObject.getPosition().y == 4) {
-      return checkForOverlap(gridObject);
+    if (isLobby) {
+      return gridObject.getPosition().y == 4 && checkForOverlap(gridObject);
     }
 
     return checkIfTouchingAnotherObject(gridObject) && checkForOverlap(gridObject);

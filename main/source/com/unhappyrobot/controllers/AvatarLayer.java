@@ -1,5 +1,7 @@
 package com.unhappyrobot.controllers;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -18,7 +20,7 @@ import java.util.Set;
 public class AvatarLayer extends GameLayer {
   private static AvatarLayer instance;
   private final GameGrid gameGrid;
-  private static final int MAX_AVATARS = 20;
+  private static final int MAX_AVATARS = (Gdx.app.getType() == Application.ApplicationType.Android ? 20 : 60);
   private Set<Avatar> avatars;
   private Set<Janitor> janitors;
   private Set<Maid> maids;
