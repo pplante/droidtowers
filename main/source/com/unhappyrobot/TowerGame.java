@@ -172,7 +172,8 @@ public class TowerGame implements ApplicationListener {
       }
 
       System.out.println("Switching scene to: " + sceneClass.getSimpleName());
-      activeScene = sceneClass.newInstance();
+      Scene scene = sceneClass.newInstance();
+      activeScene = scene;
       activeScene.create();
       activeScene.resume();
       InputSystem.instance().addInputProcessor(activeScene.getStage(), 10);
