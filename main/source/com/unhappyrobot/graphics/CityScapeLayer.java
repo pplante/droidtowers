@@ -13,10 +13,10 @@ import com.unhappyrobot.grid.GameGrid;
 public class CityScapeLayer extends GameLayer {
   private final TextureAtlas cityScapeAtlas;
 
-  public CityScapeLayer() {
+  public CityScapeLayer(GameGrid gameGrid) {
     cityScapeAtlas = new TextureAtlas(Gdx.files.internal("backgrounds/cityscape.txt"));
 
-    GameGrid.events().register(this);
+    gameGrid.events().register(this);
   }
 
   @Subscribe

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.google.common.base.Function;
@@ -11,7 +12,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.eventbus.Subscribe;
 import com.sun.istack.internal.Nullable;
-import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.GridObjectPlacementState;
@@ -31,6 +31,7 @@ import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class GameGridRenderer extends GameLayer {
   private GameGrid gameGrid;
+  private final OrthographicCamera camera;
   private boolean shouldRenderGridLines;
   private final ShapeRenderer shapeRenderer;
   private Function<GridObject, Color> employmentLevelOverlayFunc;
@@ -43,10 +44,11 @@ public class GameGridRenderer extends GameLayer {
   private List<TransitLine> transitLines;
   private boolean shouldRenderTransitLines;
 
-  public GameGridRenderer(GameGrid gameGrid) {
+  public GameGridRenderer(GameGrid gameGrid, OrthographicCamera camera) {
     this.gameGrid = gameGrid;
+    this.camera = camera;
 
-    GameGrid.events().register(this);
+    gameGrid.events().register(this);
 
     shouldRenderGridLines = true;
     shapeRenderer = new ShapeRenderer();
@@ -74,7 +76,7 @@ public class GameGridRenderer extends GameLayer {
 
   @Override
   public void render(SpriteBatch spriteBatch, Camera camera) {
-    shapeRenderer.setProjectionMatrix(TowerGame.getCamera().combined);
+    shapeRenderer.setProjectionMatrix(camera.combined);
 
     if (shouldRenderGridLines) {
       renderGridLines();

@@ -46,7 +46,7 @@ public class CameraController implements GestureDetector.GestureListener {
   }
 
   private CameraController(OrthographicCamera camera_, GameGrid gameGrid) {
-    GameGrid.events().register(this);
+    gameGrid.events().register(this);
 
     camera = camera_;
     worldSize = gameGrid.getWorldSize();

@@ -1,6 +1,8 @@
 package com.unhappyrobot;
 
 public class TowerConsts {
+  public static final float ONE_MEGABYTE = 1048576.0f;
+
   private TowerConsts() {
 
   }

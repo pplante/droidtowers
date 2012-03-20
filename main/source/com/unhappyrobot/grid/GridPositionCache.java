@@ -20,16 +20,14 @@ public class GridPositionCache {
   private GridPosition[][] gridPositions;
   private static GridPositionCache instance;
   private Vector2 gridSize;
+  private final GameGrid gameGrid;
 
-  private GridPositionCache() {
-    GameGrid.events().register(this);
+  private GridPositionCache(GameGrid gameGrid) {
+    this.gameGrid = gameGrid;
+    gameGrid.events().register(this);
   }
 
   public static GridPositionCache instance() {
-    if (instance == null) {
-      instance = new GridPositionCache();
-    }
-
     return instance;
   }
 
@@ -191,11 +189,16 @@ public class GridPositionCache {
   }
 
   public void pauseEvents() {
-    GameGrid.events().unregister(this);
+    gameGrid.events().unregister(this);
   }
 
 
   public void resumeEvents() {
-    GameGrid.events().register(this);
+    gameGrid.events().register(this);
+  }
+
+  public static void reset(GameGrid gameGrid) {
+    instance = null;
+    instance = new GridPositionCache(gameGrid);
   }
 }

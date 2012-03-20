@@ -6,55 +6,36 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.google.common.collect.Lists;
 import com.unhappyrobot.achievements.AchievementEngine;
-import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.controllers.GameTips;
 import com.unhappyrobot.controllers.PathSearchManager;
-import com.unhappyrobot.entities.CloudLayer;
-import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.gamestate.GameState;
 import com.unhappyrobot.gamestate.server.HappyDroidService;
-import com.unhappyrobot.graphics.CityScapeLayer;
-import com.unhappyrobot.graphics.GroundLayer;
-import com.unhappyrobot.graphics.RainLayer;
-import com.unhappyrobot.graphics.SkyLayer;
-import com.unhappyrobot.grid.GameGrid;
-import com.unhappyrobot.grid.GameGridRenderer;
-import com.unhappyrobot.grid.GridPositionCache;
-import com.unhappyrobot.gui.HeadsUpDisplay;
 import com.unhappyrobot.input.DefaultKeybindings;
 import com.unhappyrobot.input.InputSystem;
+import com.unhappyrobot.scenes.GameScreen;
+import com.unhappyrobot.scenes.SplashScreen;
 import com.unhappyrobot.tween.TweenSystem;
-import com.unhappyrobot.types.CommercialTypeFactory;
-import com.unhappyrobot.types.ElevatorTypeFactory;
-import com.unhappyrobot.types.RoomTypeFactory;
-import com.unhappyrobot.types.StairTypeFactory;
 import com.unhappyrobot.utils.AsyncTask;
-
-import java.util.List;
 
 public class TowerGame implements ApplicationListener {
   private static OrthographicCamera camera;
   private SpriteBatch spriteBatch;
 
-  private static List<GameLayer> gameLayers;
   private Matrix4 matrix;
 
-  private static GameGrid gameGrid;
-  private Stage guiStage;
-  private static GameGridRenderer gameGridRenderer;
   private GameState gameState;
   private boolean loadedSavedGame;
   private FileHandle gameSaveLocation;
-  public static float timeMultiplier;
   private long nextGameStateSaveTime;
   private final String operatingSystemName;
   private final String operatingSystemVersion;
+  private SplashScreen splashScreen;
+  private GameScreen gameScreen;
+  private BitmapFont menloBitmapFont;
 
   public TowerGame(String operatingSystemName, String operatingSystemVersion) {
     this.operatingSystemName = operatingSystemName;
@@ -74,56 +55,29 @@ public class TowerGame implements ApplicationListener {
       }
     }.run();
 
+
     TweenSystem.getTweenManager();
     AchievementEngine.instance();
     GameTips.instance();
-    RoomTypeFactory.instance();
-    CommercialTypeFactory.instance();
-    ElevatorTypeFactory.instance();
-    StairTypeFactory.instance();
 
-    timeMultiplier = 1f;
+    menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_14_bold_white.fnt"), false);
+    gameSaveLocation = Gdx.files.external(Gdx.app.getType().equals(Application.ApplicationType.Desktop) ? ".towergame/test.json" : "test.json");
 
     camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     spriteBatch = new SpriteBatch(100);
-    guiStage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false, spriteBatch);
+    gameScreen = new GameScreen(spriteBatch, camera, gameSaveLocation);
 
-    GridPositionCache.instance();
-
-    gameGrid = new GameGrid();
-
-    gameState = new GameState(gameGrid);
-
-    HeadsUpDisplay.instance().initialize(camera, gameGrid, guiStage, spriteBatch);
-
-
-    gameGridRenderer = gameGrid.getRenderer();
-
-    gameLayers = Lists.newArrayList();
-    gameLayers.add(new SkyLayer(gameGrid));
-    gameLayers.add(new CityScapeLayer());
-    gameLayers.add(new RainLayer(gameGrid));
-    gameLayers.add(new CloudLayer());
-    gameLayers.add(new GroundLayer());
-    gameLayers.add(gameGridRenderer);
-    gameLayers.add(gameGrid);
-    gameLayers.add(AvatarLayer.initialize(gameGrid));
-
-    gameGrid.setUnitSize(64, 64);
-    gameGrid.setGridSize(40, 40);
-    gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
-    gameGrid.updateWorldSize();
+    splashScreen = new SplashScreen(spriteBatch);
+    splashScreen.create();
 
 //    BEGIN INPUT SETUP:
-    InputSystem.instance().setup(camera, gameLayers);
-    InputSystem.instance().addInputProcessor(guiStage, 10);
+    InputSystem.instance().setup(camera, null);
     Gdx.input.setInputProcessor(InputSystem.instance());
 
     DefaultKeybindings.initialize(this);
 
-    gameSaveLocation = Gdx.files.external(Gdx.app.getType().equals(Application.ApplicationType.Desktop) ? ".towergame/test.json" : "test.json");
-    gameState.loadSavedGame(gameSaveLocation, camera);
-    nextGameStateSaveTime = System.currentTimeMillis() + TowerConsts.GAME_SAVE_FREQUENCY;
+
+    gameScreen.create();
   }
 
   public void render() {
@@ -137,40 +91,22 @@ public class TowerGame implements ApplicationListener {
     camera.update();
     InputSystem.instance().update(deltaTime);
     PathSearchManager.instance().update(deltaTime);
-
+    TweenSystem.getTweenManager().update((int) (deltaTime * 1000));
     spriteBatch.setProjectionMatrix(camera.combined);
 
-    updateGameObjects();
+    gameScreen.render(deltaTime);
+    gameScreen.getStage().draw();
+//    splashScreen.render(deltaTime);
 
-    for (GameLayer layer : gameLayers) {
-      layer.render(spriteBatch, camera);
-    }
+    float javaHeapInBytes = Gdx.app.getJavaHeap() / TowerConsts.ONE_MEGABYTE;
+    float nativeHeapInBytes = Gdx.app.getNativeHeap() / TowerConsts.ONE_MEGABYTE;
 
-    guiStage.draw();
-    Table.drawDebug(guiStage);
+    String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f)\nmem: (java %.1f Mb, native %.1f Mb)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom, javaHeapInBytes, nativeHeapInBytes);
+    spriteBatch.begin();
+    menloBitmapFont.drawMultiLine(spriteBatch, infoText, 5, 35);
+    spriteBatch.end();
   }
 
-  private void updateGameObjects() {
-    float deltaTime = Gdx.graphics.getDeltaTime();
-
-    deltaTime *= timeMultiplier;
-
-    TweenSystem.getTweenManager().update((int) (deltaTime * 1000));
-    gameState.update(deltaTime, gameGrid);
-    guiStage.act(deltaTime);
-
-    for (GameLayer layer : gameLayers) {
-      layer.update(deltaTime);
-    }
-
-    HeadsUpDisplay.instance().act(deltaTime);
-    WeatherService.instance().update(deltaTime);
-
-    if (nextGameStateSaveTime <= System.currentTimeMillis()) {
-      nextGameStateSaveTime = System.currentTimeMillis() + TowerConsts.GAME_SAVE_FREQUENCY;
-      gameState.saveGame(gameSaveLocation, camera);
-    }
-  }
 
   public void resize(int width, int height) {
     Gdx.app.log("lifecycle", "resizing!");
@@ -182,7 +118,7 @@ public class TowerGame implements ApplicationListener {
 
   public void pause() {
     Gdx.app.log("lifecycle", "pausing!");
-    gameState.saveGame(gameSaveLocation, camera);
+    gameScreen.pause();
     System.exit(0);
   }
 
@@ -192,22 +128,6 @@ public class TowerGame implements ApplicationListener {
 
   public void dispose() {
     spriteBatch.dispose();
-    guiStage.dispose();
   }
 
-  public static OrthographicCamera getCamera() {
-    return camera;
-  }
-
-  public static float getTimeMultiplier() {
-    return timeMultiplier;
-  }
-
-  public static GameGrid getGameGrid() {
-    return gameGrid;
-  }
-
-  public static GameGridRenderer getGameGridRenderer() {
-    return gameGridRenderer;
-  }
 }

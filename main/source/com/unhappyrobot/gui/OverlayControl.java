@@ -6,14 +6,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.graphics.Overlays;
+import com.unhappyrobot.grid.GameGridRenderer;
 
 public class OverlayControl extends ImageButton {
   private Menu overlayMenu;
+  private final GameGridRenderer gameGridRenderer;
 
-  public OverlayControl(TextureAtlas hudAtlas, Skin guiSkin) {
+  public OverlayControl(TextureAtlas hudAtlas, Skin guiSkin, final GameGridRenderer gameGridRenderer) {
     super(hudAtlas.findRegion("overlay-button"));
+    this.gameGridRenderer = gameGridRenderer;
 
     setClickListener(new ClickListener() {
       boolean isShowing;
@@ -36,9 +38,9 @@ public class OverlayControl extends ImageButton {
       checkBox.setClickListener(new ClickListener() {
         public void click(Actor actor, float x, float y) {
           if (checkBox.isChecked()) {
-            TowerGame.getGameGridRenderer().addActiveOverlay(overlay);
+            gameGridRenderer.addActiveOverlay(overlay);
           } else {
-            TowerGame.getGameGridRenderer().removeActiveOverlay(overlay);
+            gameGridRenderer.removeActiveOverlay(overlay);
           }
         }
       });
@@ -58,7 +60,7 @@ public class OverlayControl extends ImageButton {
     LabelButton clearAllButton = new LabelButton(guiSkin, "Clear All");
     clearAllButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        TowerGame.getGameGridRenderer().clearOverlays();
+        gameGridRenderer.clearOverlays();
 
         for (Actor child : overlayMenu.getActors()) {
           if (child instanceof CheckBox) {

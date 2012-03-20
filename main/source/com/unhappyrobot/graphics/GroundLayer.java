@@ -10,10 +10,10 @@ import com.unhappyrobot.events.GameGridResizeEvent;
 import com.unhappyrobot.grid.GameGrid;
 
 public class GroundLayer extends GameLayer {
-  public GroundLayer() {
+  public GroundLayer(GameGrid gameGrid) {
     super();
 
-    GameGrid.events().register(this);
+    gameGrid.events().register(this);
   }
 
   @Subscribe

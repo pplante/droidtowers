@@ -11,10 +11,12 @@ public class TowerWindow extends Window {
   private Runnable dismissCallback;
   private boolean modalState;
   protected final Skin skin;
+  private final HeadsUpDisplay headsUpDisplay;
 
-  public TowerWindow(String title) {
-    super(title, HeadsUpDisplay.instance().getGuiSkin());
-    skin = HeadsUpDisplay.instance().getGuiSkin();
+  public TowerWindow(String title, HeadsUpDisplay headsUpDisplay) {
+    super(title, headsUpDisplay.getGuiSkin());
+    this.headsUpDisplay = headsUpDisplay;
+    skin = headsUpDisplay.getGuiSkin();
 
     defaults().top().left();
   }
@@ -30,7 +32,7 @@ public class TowerWindow extends Window {
     InputSystem.instance().bind(DIALOG_CLOSE_KEYCODES, closeDialogCallback);
 
     pack();
-    HeadsUpDisplay.instance().getStage().addActor(this);
+    headsUpDisplay.getStage().addActor(this);
 
     return this;
   }

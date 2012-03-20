@@ -3,7 +3,6 @@ package com.unhappyrobot.controllers;
 import com.google.common.eventbus.Subscribe;
 import com.unhappyrobot.entities.Elevator;
 import com.unhappyrobot.events.GridObjectAddedEvent;
-import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.gui.HeadsUpDisplay;
 
 public class GameTips {
@@ -11,7 +10,8 @@ public class GameTips {
   private boolean enabled;
 
   private GameTips() {
-    GameGrid.events().register(this);
+//    TODO: FIX
+//    GameGrid.events().register(this);
   }
 
   public static GameTips instance() {

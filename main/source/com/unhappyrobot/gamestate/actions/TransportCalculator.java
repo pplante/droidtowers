@@ -16,7 +16,7 @@ public class TransportCalculator extends GameStateAction {
   public TransportCalculator(GameGrid gameGrid, float frequency) {
     super(gameGrid, frequency, false);
 
-    GameGrid.events().register(this);
+    gameGrid.events().register(this);
   }
 
   @Subscribe
@@ -82,13 +82,13 @@ public class TransportCalculator extends GameStateAction {
   public void pause() {
     super.pause();
 
-    GameGrid.events().unregister(this);
+    gameGrid.events().unregister(this);
   }
 
   @Override
   public void unpause() {
     super.unpause();
 
-    GameGrid.events().register(this);
+    gameGrid.events().register(this);
   }
 }

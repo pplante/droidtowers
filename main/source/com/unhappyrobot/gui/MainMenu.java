@@ -9,8 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Scaling;
 
 public class MainMenu extends TowerWindow {
-  public MainMenu() {
-    super("Welcome to DroidTowers!");
+  public MainMenu(HeadsUpDisplay headsUpDisplay) {
+    super("Welcome to DroidTowers!", headsUpDisplay);
     visible = false;
     setModal(true);
     setMovable(false);

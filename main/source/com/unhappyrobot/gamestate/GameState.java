@@ -19,40 +19,49 @@ import com.unhappyrobot.input.CameraController;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public class GameState extends EventListener {
+  private final OrthographicCamera camera;
   private final GameGrid gameGrid;
+  private final FileHandle gameSaveLocation;
   private final GameStateAction calculatePopulation;
   private final GameStateAction calculateJobs;
   private final GameStateAction calculateEarnout;
   private final GameStateAction calculateDesirability;
   private boolean shouldSaveGame;
   private final TransportCalculator transportCalculator;
+  private long nextTimeToSave;
 
-  public GameState(final GameGrid gameGrid) {
+  public GameState(OrthographicCamera camera, final GameGrid gameGrid, FileHandle gameSaveLocation) {
+    this.camera = camera;
     this.gameGrid = gameGrid;
+    this.gameSaveLocation = gameSaveLocation;
 
+    nextTimeToSave = System.currentTimeMillis() + TowerConsts.GAME_SAVE_FREQUENCY;
     calculatePopulation = new PopulationCalculator(this.gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
     calculateEarnout = new EarnoutCalculator(this.gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
     calculateJobs = new EmploymentCalculator(this.gameGrid, TowerConsts.JOB_UPDATE_FREQUENCY);
     calculateDesirability = new DesirabilityCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
     transportCalculator = new TransportCalculator(gameGrid, TowerConsts.TRANSPORT_CALCULATOR_FREQUENCY);
 
-    GameGrid.events().register(this);
+    gameGrid.events().register(this);
   }
 
   public void update(float deltaTime, GameGrid gameGrid) {
-    gameGrid.update(deltaTime);
-
     transportCalculator.act(deltaTime);
     calculatePopulation.act(deltaTime);
     calculateJobs.act(deltaTime);
     calculateEarnout.act(deltaTime);
     calculateDesirability.act(deltaTime);
+
+    if (nextTimeToSave <= System.currentTimeMillis()) {
+      nextTimeToSave = System.currentTimeMillis() + TowerConsts.GAME_SAVE_FREQUENCY;
+      saveGame();
+    }
   }
 
-  public void loadSavedGame(final FileHandle fileHandle, OrthographicCamera camera) {
+  public void loadSavedGame() {
     shouldSaveGame = true;
 
-    if (!fileHandle.exists()) {
+    if (!gameSaveLocation.exists()) {
       return;
     }
 
@@ -60,7 +69,7 @@ public class GameState extends EventListener {
       transportCalculator.pause();
 
       ObjectMapper objectMapper = new ObjectMapper();
-      GameSave gameSave = objectMapper.readValue(fileHandle.file(), GameSave.class);
+      GameSave gameSave = objectMapper.readValue(gameSaveLocation.file(), GameSave.class);
 
       gameGrid.setGridSize(gameSave.getGridSize().x, gameSave.getGridSize().y);
       gameGrid.updateWorldSize();
@@ -84,7 +93,7 @@ public class GameState extends EventListener {
       new Dialog().setMessage("Saved game could not be loaded, want to reset?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
         @Override
         public void onClick(Dialog dialog) {
-          fileHandle.delete();
+          gameSaveLocation.delete();
           dialog.dismiss();
           shouldSaveGame = true;
         }
@@ -101,10 +110,10 @@ public class GameState extends EventListener {
     }
   }
 
-  public void saveGame(FileHandle fileHandle, OrthographicCamera camera) {
+  public void saveGame() {
     if (shouldSaveGame) {
-      if (!fileHandle.exists()) {
-        fileHandle.parent().mkdirs();
+      if (!gameSaveLocation.exists()) {
+        gameSaveLocation.parent().mkdirs();
       }
 
       GameSave gameSave = new GameSave(gameGrid, camera, Player.instance());
@@ -115,7 +124,7 @@ public class GameState extends EventListener {
           gameSave.setCloudSaveUri(cloudSaveUri);
         }
 
-        GameSave.getObjectMapper().writeValue(fileHandle.file(), gameSave);
+        GameSave.getObjectMapper().writeValue(gameSaveLocation.file(), gameSave);
       } catch (Exception e) {
         Gdx.app.log("GameSave", "Could not save game!", e);
       }

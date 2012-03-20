@@ -1,10 +1,6 @@
 package com.unhappyrobot.gamestate.server;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.unhappyrobot.TowerGameTestRunner;
-import com.unhappyrobot.entities.Player;
-import com.unhappyrobot.gamestate.GameSave;
-import com.unhappyrobot.grid.GameGrid;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -17,6 +13,6 @@ public class HappyDroidServiceTest {
     HappyDroidService.instance().setDeviceOSVersion("1.0");
 
     HappyDroidService.instance().registerDevice();
-    HappyDroidService.instance().uploadGameSave(new GameSave(new GameGrid(), new OrthographicCamera(), Player.instance()));
+//    HappyDroidService.instance().uploadGameSave(new GameSave(new GameGrid(camera), new OrthographicCamera(), Player.instance()));
   }
 }

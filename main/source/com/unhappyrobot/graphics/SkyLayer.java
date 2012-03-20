@@ -17,19 +17,21 @@ import com.unhappyrobot.tween.TweenSystem;
 
 public class SkyLayer extends GameLayer {
   private final GameGrid gameGrid;
+  private final WeatherService weatherService;
   private final GameObject sky;
 
-  public SkyLayer(GameGrid gameGrid) {
+  public SkyLayer(GameGrid gameGrid, WeatherService weatherService) {
     super();
     this.gameGrid = gameGrid;
+    this.weatherService = weatherService;
 
-    GameGrid.events().register(this);
-    WeatherService.events().register(this);
+    gameGrid.events().register(this);
+    weatherService.events().register(this);
 
     Texture texture = new Texture(Gdx.files.internal("backgrounds/sky-gradient.png"));
     sky = new GameObject(texture);
     GameGrid_onResize(null);
-    sky.setColor(WeatherService.instance().currentState().color);
+    sky.setColor(weatherService.currentState().color);
 
     addChild(sky);
   }
@@ -43,7 +45,7 @@ public class SkyLayer extends GameLayer {
 
   @Subscribe
   public void WeatherService_onWeatherChange(WeatherStateChangeEvent event) {
-    Color tweenColor = WeatherService.instance().currentState().color;
+    Color tweenColor = weatherService.currentState().color;
 
     Tween.to(sky, GameObjectAccessor.COLOR, TowerConsts.WEATHER_SERVICE_STATE_CHANGE_DURATION)
             .target(tweenColor.r, tweenColor.g, tweenColor.b, tweenColor.a)

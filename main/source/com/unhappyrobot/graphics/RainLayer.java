@@ -11,17 +11,19 @@ import com.unhappyrobot.grid.GameGrid;
 
 public class RainLayer extends GameLayer {
   private final GameGrid gameGrid;
+  private final WeatherService weatherService;
 
-  public RainLayer(GameGrid gameGrid) {
+  public RainLayer(GameGrid gameGrid, WeatherService weatherService) {
     this.gameGrid = gameGrid;
-    GameGrid.events().register(this);
-    WeatherService.events().register(this);
+    this.weatherService = weatherService;
+    gameGrid.events().register(this);
+    weatherService.events().register(this);
   }
 
   private void updateRain() {
     removeAllChildren();
 
-    if (WeatherService.instance().currentState() == WeatherState.RAINING) {
+    if (weatherService.currentState() == WeatherState.RAINING) {
       addChild(new Rain(gameGrid));
       addChild(new Rain(gameGrid));
     }

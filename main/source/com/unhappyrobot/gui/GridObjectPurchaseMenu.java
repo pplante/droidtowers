@@ -17,8 +17,8 @@ import java.text.NumberFormat;
 public class GridObjectPurchaseMenu extends TowerWindow {
   private Class gridObjectTypeClass;
 
-  public GridObjectPurchaseMenu(String objectTypeName, GridObjectTypeFactory typeFactory) {
-    super("Purchase " + objectTypeName);
+  public GridObjectPurchaseMenu(HeadsUpDisplay headsUpDisplay, String objectTypeName, GridObjectTypeFactory typeFactory) {
+    super("Purchase " + objectTypeName, headsUpDisplay);
 
     defaults().align(Align.LEFT);
     row().pad(10);

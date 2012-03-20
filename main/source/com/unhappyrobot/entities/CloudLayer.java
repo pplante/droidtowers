@@ -33,16 +33,18 @@ public class CloudLayer extends GameLayer {
   private Vector2 worldSize;
   private List<GameObject> cloudsToRemove;
   private final int numberOfCloudTypes;
+  private final WeatherService weatherService;
 
-  public CloudLayer() {
+  public CloudLayer(GameGrid gameGrid, WeatherService weatherService) {
     super();
+    this.weatherService = weatherService;
 
     textureAtlas = new TextureAtlas(Gdx.files.internal("backgrounds/clouds.txt"));
     numberOfCloudTypes = textureAtlas.getRegions().size();
     cloudsToRemove = new ArrayList<GameObject>(5);
 
-    GameGrid.events().register(this);
-    WeatherService.events().register(this);
+    gameGrid.events().register(this);
+    weatherService.events().register(this);
   }
 
   @Override
@@ -71,7 +73,7 @@ public class CloudLayer extends GameLayer {
 
     GameObject cloud = new GameObject(cloudRegion);
 
-    switch (WeatherService.instance().currentState()) {
+    switch (weatherService.currentState()) {
       case RAINING:
         cloud.setColor(Color.DARK_GRAY);
         break;
@@ -122,7 +124,7 @@ public class CloudLayer extends GameLayer {
   public void WeatherService_onWeatherChange(WeatherStateChangeEvent event) {
     Color cloudColor = null;
 
-    switch (WeatherService.instance().currentState()) {
+    switch (weatherService.currentState()) {
       case RAINING:
         cloudColor = Color.DARK_GRAY;
         break;

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.entities.CommercialSpace;
@@ -19,10 +18,10 @@ import com.unhappyrobot.input.GestureTool;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.math.GridPoint;
+import com.unhappyrobot.scenes.GameScreen;
 import com.unhappyrobot.types.*;
 
 public class HeadsUpDisplay extends WidgetGroup {
-  public static final float ONE_MEGABYTE = 1048576.0f;
   private TextureAtlas hudAtlas;
   private Skin guiSkin;
   private OrthographicCamera camera;
@@ -44,23 +43,15 @@ public class HeadsUpDisplay extends WidgetGroup {
   private final StackGroup notificationStack;
   private TextButton expandLandButton;
 
-  public static HeadsUpDisplay instance() {
-    if (instance == null) {
-      instance = new HeadsUpDisplay();
-    }
+  public HeadsUpDisplay(GameScreen gameScreen) {
+    instance = this;
 
-    return instance;
-  }
-
-  private HeadsUpDisplay() {
-    this.guiSkin = new Skin(Gdx.files.internal("default-skin.ui"), Gdx.files.internal("default-skin.png"));
     notificationStack = new StackGroup();
-  }
 
-  public void initialize(final OrthographicCamera camera, final GameGrid gameGrid, final Stage stage, SpriteBatch spriteBatch) {
-    this.stage = stage;
-    this.camera = camera;
-    this.gameGrid = gameGrid;
+    this.stage = gameScreen.getStage();
+    this.camera = gameScreen.getCamera();
+    this.gameGrid = gameScreen.getGameGrid();
+    guiSkin = gameScreen.getGuiSkin();
 
     ModalOverlay.initialize(this);
 
@@ -68,12 +59,12 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     hudAtlas = new TextureAtlas(Gdx.files.internal("hud/buttons.txt"));
 
-    StatusBarPanel statusBarPanel = new StatusBarPanel(guiSkin);
+    StatusBarPanel statusBarPanel = new StatusBarPanel(guiSkin, gameScreen);
     statusBarPanel.x = -1;
     statusBarPanel.y = stage.height() - statusBarPanel.height + 1;
     addActor(statusBarPanel);
 
-    mouseToolTip = new ToolTip();
+    mouseToolTip = new ToolTip(guiSkin);
     addActor(mouseToolTip);
 
     toolMenu = new RadialMenu();
@@ -86,7 +77,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     connectFacebookButton.y = 100;
     connectFacebookButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        ConnectToFacebook mainMenu = new ConnectToFacebook();
+        ConnectToFacebook mainMenu = new ConnectToFacebook(HeadsUpDisplay.this);
         mainMenu.show().centerOnStage();
       }
     });
@@ -150,7 +141,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     audioControl.y = stage.height() - audioControl.height - 5;
     addActor(audioControl);
 
-    OverlayControl overlayControl = new OverlayControl(hudAtlas, guiSkin);
+    OverlayControl overlayControl = new OverlayControl(hudAtlas, guiSkin, gameGrid.getRenderer());
     overlayControl.x = audioControl.x - audioControl.width - 5;
     overlayControl.y = stage.height() - overlayControl.height - 5;
     addActor(overlayControl);
@@ -179,7 +170,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   }
 
   private void makePurchaseDialog(String title, GridObjectTypeFactory typeFactory) {
-    purchaseDialog = new GridObjectPurchaseMenu(title, typeFactory);
+    purchaseDialog = new GridObjectPurchaseMenu(this, title, typeFactory);
 
     purchaseDialog.setDismissCallback(new Runnable() {
       public void run() {
@@ -199,12 +190,6 @@ public class HeadsUpDisplay extends WidgetGroup {
   @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
     super.draw(batch, parentAlpha);
-
-    float javaHeapInBytes = Gdx.app.getJavaHeap() / ONE_MEGABYTE;
-    float nativeHeapInBytes = Gdx.app.getNativeHeap() / ONE_MEGABYTE;
-
-    String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f), grid(%.0f, %.0f)\nmem: (java %.1f Mb, native %.1f Mb)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom, gameGrid.getGridSize().x, gameGrid.getGridSize().y, javaHeapInBytes, nativeHeapInBytes);
-    menloBitmapFont.drawMultiLine(batch, infoText, 5, 35);
   }
 
   @Override
@@ -243,7 +228,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
   public void showToast(String message, Object... objects) {
     if (toast == null) {
-      toast = new Toast();
+      toast = new Toast(this);
       addActor(toast);
     }
 
@@ -270,5 +255,9 @@ public class HeadsUpDisplay extends WidgetGroup {
 
   public StackGroup getNotificationStack() {
     return notificationStack;
+  }
+
+  public static HeadsUpDisplay instance() {
+    return instance;
   }
 }

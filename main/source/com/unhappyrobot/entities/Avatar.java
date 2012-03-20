@@ -16,7 +16,6 @@ import com.unhappyrobot.controllers.PathSearchManager;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridPosition;
 import com.unhappyrobot.grid.GridPositionCache;
-import com.unhappyrobot.gui.HeadsUpDisplay;
 import com.unhappyrobot.gui.SpeechBubble;
 import com.unhappyrobot.pathfinding.TransitPathFinder;
 import com.unhappyrobot.pathfinding.WanderPathFinder;
@@ -45,7 +44,7 @@ public class Avatar extends GameObject {
   private float satisfactionShops;
   private float satisfactionFood;
   private Color myColor;
-  private final SpeechBubble speechBubble;
+  private SpeechBubble speechBubble;
   private float lastPathFinderSearch;
   protected GridObject movingTo;
   private TransitPathFinder pathFinder;
@@ -67,9 +66,9 @@ public class Avatar extends GameObject {
     walkAnimation = new Animation(FRAME_DURATION, droidAtlas.findRegions("walk"));
     walkAnimationTime = 0f;
 
-    speechBubble = new SpeechBubble();
-    speechBubble.followObject(this);
-    HeadsUpDisplay.instance().addActor(speechBubble);
+//    speechBubble = new SpeechBubble();
+//    speechBubble.followObject(this);
+//    HeadsUpDisplay.instance().addActor(speechBubble);
   }
 
   protected TextureAtlas getTextureAtlas() {
@@ -77,8 +76,8 @@ public class Avatar extends GameObject {
   }
 
   private void displaySpeechBubble(String newText) {
-    speechBubble.setText(newText);
-    speechBubble.show();
+//    speechBubble.setText(newText);
+//    speechBubble.show();
   }
 
   public void beginNextAction() {

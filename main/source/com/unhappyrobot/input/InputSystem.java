@@ -42,11 +42,13 @@ public class InputSystem extends InputAdapter {
     inputProcessors = Lists.newArrayList();
     keyBindings = Maps.newHashMap();
     camera = orthographicCamera;
-    delegater = new GestureDelegater(camera, gameLayers);
-    gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, delegater);
-    switchTool(GestureTool.PICKER, null);
+    if (gameLayers != null) {
+      delegater = new GestureDelegater(camera, gameLayers);
+      gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, delegater);
+      switchTool(GestureTool.PICKER, null);
 
-    addInputProcessor(gestureDetector, 100);
+      addInputProcessor(gestureDetector, 100);
+    }
   }
 
   public void addInputProcessor(InputProcessor inputProcessor, int priority) {
@@ -77,11 +79,13 @@ public class InputSystem extends InputAdapter {
   }
 
   public void switchTool(GestureTool selectedTool, Runnable switchToolRunnable) {
-    delegater.switchTool(camera, gameLayers, selectedTool, switchToolRunnable);
+    if(delegater != null) {
+      delegater.switchTool(camera, gameLayers, selectedTool, switchToolRunnable);
+    }
   }
 
   public GestureListener getCurrentTool() {
-    return delegater.getCurrentTool();
+    return delegater != null ? delegater.getCurrentTool() : null;
   }
 
   public void bind(int keyCode, InputCallback inputCallback) {
@@ -183,11 +187,13 @@ public class InputSystem extends InputAdapter {
       }
     }
 
-    return delegater.scrolled(amount);
+    return delegater != null && delegater.scrolled(amount);
   }
 
   public void update(float deltaTime) {
-    delegater.update(deltaTime);
+    if (delegater != null) {
+      delegater.update(deltaTime);
+    }
   }
 
   public void unbind(int keyCode, InputCallback inputCallbackToRemove) {

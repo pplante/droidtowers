@@ -13,8 +13,8 @@ public class DefaultKeybindings {
   public static void initialize(TowerGame towerGame) {
     InputSystem.instance().bind(new int[]{InputSystem.Keys.PLUS, InputSystem.Keys.UP}, new InputCallback() {
       public boolean run(float timeDelta) {
-        TowerGame.timeMultiplier += 0.5f;
-        TowerGame.timeMultiplier = Math.min(TowerGame.timeMultiplier, 4);
+//        GameScreen.timeMultiplier += 0.5f;
+//        GameScreen.timeMultiplier = Math.min(GameScreen.timeMultiplier, 4);
 
         return true;
       }
@@ -22,8 +22,8 @@ public class DefaultKeybindings {
 
     InputSystem.instance().bind(new int[]{InputSystem.Keys.MINUS, InputSystem.Keys.DOWN}, new InputCallback() {
       public boolean run(float timeDelta) {
-        TowerGame.timeMultiplier -= 0.5f;
-        TowerGame.timeMultiplier = Math.max(TowerGame.timeMultiplier, 0.5f);
+//        GameScreen.timeMultiplier -= 0.5f;
+//        GameScreen.timeMultiplier = Math.max(GameScreen.timeMultiplier, 0.5f);
 
         return true;
       }
@@ -31,7 +31,7 @@ public class DefaultKeybindings {
 
     InputSystem.instance().bind(InputSystem.Keys.G, new InputCallback() {
       public boolean run(float timeDelta) {
-        TowerGame.getGameGridRenderer().toggleGridLines();
+//        GameScreen.getGameGridRenderer().toggleGridLines();
 
         return true;
       }
@@ -39,7 +39,7 @@ public class DefaultKeybindings {
 
     InputSystem.instance().bind(InputSystem.Keys.T, new InputCallback() {
       public boolean run(float timeDelta) {
-        TowerGame.getGameGridRenderer().toggleTransitLines();
+//        GameScreen.getGameGridRenderer().toggleTransitLines();
 
         return true;
       }
@@ -47,7 +47,7 @@ public class DefaultKeybindings {
 
     InputSystem.instance().bind(InputSystem.Keys.NUM_0, new InputCallback() {
       public boolean run(float timeDelta) {
-        TowerGame.getCamera().zoom = 1f;
+//        GameScreen.getCamera().zoom = 1f;
 
         return true;
       }

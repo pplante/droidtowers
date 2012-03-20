@@ -258,7 +258,7 @@ public abstract class GridObject {
       myEventBus.post(event);
     }
 
-    GameGrid.events().post(event);
+    gameGrid.events().post(event);
   }
 
   public float getDesirability() {

@@ -12,8 +12,8 @@ import java.lang.reflect.Method;
 import java.net.URI;
 
 public class ConnectToFacebook extends TowerWindow {
-  public ConnectToFacebook() {
-    super("Connect to Facebook");
+  public ConnectToFacebook(HeadsUpDisplay headsUpDisplay) {
+    super("Connect to Facebook", headsUpDisplay);
 
     row().pad(10);
     add(makeLabel("Connecting to Facebook will enable:\n\n* Towers to be stored in the cloud\n* Sharing towers with friends\n* Other stuff!"));
@@ -44,7 +44,7 @@ public class ConnectToFacebook extends TowerWindow {
             try {
               Class<?> d = Class.forName("java.awt.Desktop");
               Method browseMethod = d.getDeclaredMethod("browse", new Class[]{URI.class});
-              browseMethod.invoke(d.getDeclaredMethod("getDesktop").invoke(null), new URI[]{java.net.URI.create(token.getClickableUri())});
+              browseMethod.invoke(d.getDeclaredMethod("getDesktop").invoke(null), new Object[]{new URI[]{URI.create(token.getClickableUri())}});
             } catch (Exception ignored) {
 
             }

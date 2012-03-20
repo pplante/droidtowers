@@ -16,8 +16,10 @@ public class Toast extends Table {
   private static Pixmap pixmap;
   private static NinePatch background;
   private final Label label;
+  private final HeadsUpDisplay headsUpDisplay;
 
-  public Toast() {
+  public Toast(HeadsUpDisplay headsUpDisplay) {
+    this.headsUpDisplay = headsUpDisplay;
     if (pixmap == null) {
       pixmap = new Pixmap(2, 2, Pixmap.Format.RGBA4444);
       pixmap.setColor(new Color(0, 0, 0, 0.65f));
@@ -27,7 +29,7 @@ public class Toast extends Table {
     }
 
     visible = false;
-    label = new Label(HeadsUpDisplay.instance().getGuiSkin());
+    label = new Label(headsUpDisplay.getGuiSkin());
 
     defaults();
     setBackground(background);
@@ -44,8 +46,8 @@ public class Toast extends Table {
   public void show() {
     pack();
 
-    x = (HeadsUpDisplay.instance().getStage().width() - width) / 2;
-    y = HeadsUpDisplay.instance().getStage().height() - height - 10;
+    x = (headsUpDisplay.getStage().width() - width) / 2;
+    y = headsUpDisplay.getStage().height() - height - 10;
 
     color.a = 0f;
     visible = true;

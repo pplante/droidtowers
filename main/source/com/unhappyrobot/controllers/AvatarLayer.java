@@ -46,7 +46,7 @@ public class AvatarLayer extends GameLayer {
     janitors = Sets.newHashSet();
     maids = Sets.newHashSet();
 
-    GameGrid.events().register(this);
+    gameGrid.events().register(this);
   }
 
   public GameGrid getGameGrid() {

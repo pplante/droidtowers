@@ -38,7 +38,8 @@ public class AchievementEngine {
     }
 
     completedAchievements = Sets.newHashSet();
-    GameGrid.events().register(this);
+//    TODO: FIX
+//    GameGrid.events().register(this);
   }
 
   public List<Achievement> getAchievements() {

@@ -1,6 +1,7 @@
 package com.unhappyrobot.grid;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.eventbus.EventBus;
 import com.unhappyrobot.TowerConsts;
@@ -19,7 +20,7 @@ import java.util.Set;
 
 
 public class GameGrid extends GameLayer {
-  private static EventBus eventBus = new EventBus(GameGrid.class.getSimpleName());
+  private EventBus eventBus = new EventBus(GameGrid.class.getSimpleName());
 
   public Vector2 unitSize;
   public Color gridColor;
@@ -34,13 +35,13 @@ public class GameGrid extends GameLayer {
   private GridObject transitGridObjectB;
   private float highestPoint;
 
-  public GameGrid() {
+  public GameGrid(OrthographicCamera camera) {
     setTouchEnabled(true);
 
     gridObjectsByType = new HashMap<Class, GuavaSet<GridObject>>();
     objects = new GuavaSet<GridObject>(25);
 
-    gameGridRenderer = new GameGridRenderer(this);
+    gameGridRenderer = new GameGridRenderer(this, camera);
     gridColor = Color.GREEN;
     gridSize = new Vector2(8, 8);
     unitSize = new Vector2(16, 16);
@@ -222,7 +223,7 @@ public class GameGrid extends GameLayer {
     return new GridPoint(gridX, gridY);
   }
 
-  public static EventBus events() {
+  public EventBus events() {
     return eventBus;
   }
 }
