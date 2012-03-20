@@ -24,7 +24,7 @@ public class InputSystem extends InputAdapter {
   private OrthographicCamera camera;
   private CameraController cameraController;
   private GestureDetector gestureDetector;
-  private GestureDelegater delegater;
+  private GestureDelegater gestureDelegater;
 
   private static InputSystem instance;
   private List<GameLayer> gameLayers;
@@ -37,24 +37,18 @@ public class InputSystem extends InputAdapter {
     return instance;
   }
 
-  public void setup(OrthographicCamera orthographicCamera, List<GameLayer> gameLayers) {
-    this.gameLayers = gameLayers;
+  public void setup(OrthographicCamera orthographicCamera) {
     inputProcessors = Lists.newArrayList();
     keyBindings = Maps.newHashMap();
     camera = orthographicCamera;
-    if (gameLayers != null) {
-      delegater = new GestureDelegater(camera, gameLayers);
-      gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, delegater);
-      switchTool(GestureTool.PICKER, null);
-
-      addInputProcessor(gestureDetector, 100);
-    }
   }
 
   public void addInputProcessor(InputProcessor inputProcessor, int priority) {
-    inputProcessors.add(new InputProcessorEntry(inputProcessor, priority));
+    if (inputProcessors != null) {
+      inputProcessors.add(new InputProcessorEntry(inputProcessor, priority));
 
-    sortInputProcessors();
+      sortInputProcessors();
+    }
   }
 
   private void sortInputProcessors() {
@@ -66,32 +60,36 @@ public class InputSystem extends InputAdapter {
   }
 
   public void removeInputProcessor(InputProcessor inputProcessor) {
-    Iterator<InputProcessorEntry> iterator = inputProcessors.iterator();
+    if (inputProcessors != null) {
+      Iterator<InputProcessorEntry> iterator = inputProcessors.iterator();
 
-    while (iterator.hasNext()) {
-      InputProcessorEntry entry = iterator.next();
-      if (entry.getInputProcessor().equals(inputProcessor)) {
-        iterator.remove();
+      while (iterator.hasNext()) {
+        InputProcessorEntry entry = iterator.next();
+        if (entry.getInputProcessor().equals(inputProcessor)) {
+          iterator.remove();
+        }
       }
-    }
 
-    sortInputProcessors();
+      sortInputProcessors();
+    }
   }
 
   public void switchTool(GestureTool selectedTool, Runnable switchToolRunnable) {
-    if(delegater != null) {
-      delegater.switchTool(camera, gameLayers, selectedTool, switchToolRunnable);
+    if (gestureDelegater != null) {
+      gestureDelegater.switchTool(camera, gestureDelegater.getGameLayers(), selectedTool, switchToolRunnable);
     }
   }
 
   public GestureListener getCurrentTool() {
-    return delegater != null ? delegater.getCurrentTool() : null;
+    return gestureDelegater != null ? gestureDelegater.getCurrentTool() : null;
   }
 
   public void bind(int keyCode, InputCallback inputCallback) {
     ArrayList<InputCallback> inputCallbacks = getBindingsForKeyCode(keyCode);
-    inputCallback.addBoundKey(keyCode);
-    inputCallbacks.add(0, inputCallback);
+    if (inputCallbacks != null) {
+      inputCallback.addBoundKey(keyCode);
+      inputCallbacks.add(0, inputCallback);
+    }
   }
 
   public void bind(int[] keyCodes, InputCallback inputCallback) {
@@ -107,6 +105,10 @@ public class InputSystem extends InputAdapter {
   private ArrayList<InputCallback> getBindingsForKeyCode(int keyCode) {
     ArrayList<InputCallback> inputCallbacks;
 
+    if (keyBindings == null) {
+      keyBindings = Maps.newHashMap();
+    }
+
     if (!keyBindings.containsKey(keyCode)) {
       inputCallbacks = new ArrayList<InputCallback>();
       keyBindings.put(keyCode, inputCallbacks);
@@ -119,13 +121,15 @@ public class InputSystem extends InputAdapter {
 
   @SuppressWarnings("WhileLoopReplaceableByForEach")
   public boolean keyDown(int keycode) {
-    for (InputProcessorEntry entry : inputProcessorsSorted) {
-      if (entry.getInputProcessor().keyDown(keycode)) {
-        return true;
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().keyDown(keycode)) {
+          return true;
+        }
       }
     }
 
-    if (keyBindings.containsKey(keycode)) {
+    if (keyBindings != null && keyBindings.containsKey(keycode)) {
       float deltaTime = Gdx.graphics.getDeltaTime();
 
       List<InputCallback> actionsForKeyCode = Lists.newArrayList(keyBindings.get(keycode));
@@ -141,9 +145,11 @@ public class InputSystem extends InputAdapter {
   }
 
   public boolean touchDown(int x, int y, int pointer, int button) {
-    for (InputProcessorEntry entry : inputProcessorsSorted) {
-      if (entry.getInputProcessor().touchDown(x, y, pointer, button)) {
-        return true;
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().touchDown(x, y, pointer, button)) {
+          return true;
+        }
       }
     }
 
@@ -151,9 +157,11 @@ public class InputSystem extends InputAdapter {
   }
 
   public boolean touchUp(int x, int y, int pointer, int button) {
-    for (InputProcessorEntry entry : inputProcessorsSorted) {
-      if (entry.getInputProcessor().touchUp(x, y, pointer, button)) {
-        return true;
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().touchUp(x, y, pointer, button)) {
+          return true;
+        }
       }
     }
 
@@ -161,9 +169,11 @@ public class InputSystem extends InputAdapter {
   }
 
   public boolean touchDragged(int x, int y, int pointer) {
-    for (InputProcessorEntry entry : inputProcessorsSorted) {
-      if (entry.getInputProcessor().touchDragged(x, y, pointer)) {
-        return true;
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().touchDragged(x, y, pointer)) {
+          return true;
+        }
       }
     }
 
@@ -171,9 +181,11 @@ public class InputSystem extends InputAdapter {
   }
 
   public boolean touchMoved(int x, int y) {
-    for (InputProcessorEntry entry : inputProcessorsSorted) {
-      if (entry.getInputProcessor().touchMoved(x, y)) {
-        return true;
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().touchMoved(x, y)) {
+          return true;
+        }
       }
     }
 
@@ -181,23 +193,25 @@ public class InputSystem extends InputAdapter {
   }
 
   public boolean scrolled(int amount) {
-    for (InputProcessorEntry entry : inputProcessorsSorted) {
-      if (entry.getInputProcessor().scrolled(amount)) {
-        return true;
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().scrolled(amount)) {
+          return true;
+        }
       }
     }
 
-    return delegater != null && delegater.scrolled(amount);
+    return gestureDelegater != null && gestureDelegater.scrolled(amount);
   }
 
   public void update(float deltaTime) {
-    if (delegater != null) {
-      delegater.update(deltaTime);
+    if (gestureDelegater != null) {
+      gestureDelegater.update(deltaTime);
     }
   }
 
   public void unbind(int keyCode, InputCallback inputCallbackToRemove) {
-    if (!keyBindings.containsKey(keyCode)) {
+    if (keyBindings == null || !keyBindings.containsKey(keyCode)) {
       return;
     }
 
@@ -214,6 +228,10 @@ public class InputSystem extends InputAdapter {
     for (int keyCode : keyCodes) {
       unbind(keyCode, inputCallback);
     }
+  }
+
+  public void setGestureDelegator(GestureDelegater gestureDelegator) {
+    this.gestureDelegater = gestureDelegator;
   }
 
   public static class Keys extends Input.Keys {

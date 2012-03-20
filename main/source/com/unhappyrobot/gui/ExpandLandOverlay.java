@@ -74,7 +74,7 @@ public class ExpandLandOverlay extends WidgetGroup {
 
   @Subscribe
   public void CameraController_onPan(CameraControllerEvent event) {
-    leftButton.visible = event.position.x <= PADDING;
-    rightButton.visible = event.position.x + PADDING >= gameGrid.getWorldSize().x;
+    leftButton.visible = event.position.x <= PADDING * event.zoom;
+    rightButton.visible = event.position.x + (PADDING * event.zoom) >= gameGrid.getWorldSize().x;
   }
 }

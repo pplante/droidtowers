@@ -23,14 +23,14 @@ import java.util.List;
 import static com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
 public class CloudLayer extends GameLayer {
-  public static final int PADDING = 20;
+  public static final int PADDING = TowerConsts.GAME_WORLD_PADDING;
   public static final int CLOUD_SPAWN_DELAY = 2;
   public static final double CLOUD_SPAWN_MIN = 0.6;
   public static final double CLOUD_SPAWN_MAX = 0.98;
   public static final int MAX_ACTIVE_CLOUDS = 40;
   private final TextureAtlas textureAtlas;
   private float timeSinceSpawn;
-  private Vector2 worldSize;
+  protected Vector2 worldSize;
   private List<GameObject> cloudsToRemove;
   private final int numberOfCloudTypes;
   private final WeatherService weatherService;
@@ -43,8 +43,13 @@ public class CloudLayer extends GameLayer {
     numberOfCloudTypes = textureAtlas.getRegions().size();
     cloudsToRemove = new ArrayList<GameObject>(5);
 
-    gameGrid.events().register(this);
-    weatherService.events().register(this);
+    if (gameGrid != null) {
+      gameGrid.events().register(this);
+    }
+
+    if (weatherService != null) {
+      weatherService.events().register(this);
+    }
   }
 
   @Override
@@ -65,7 +70,7 @@ public class CloudLayer extends GameLayer {
     }
   }
 
-  private void spawnCloudNow() {
+  protected void spawnCloudNow() {
     AtlasRegion cloudRegion = textureAtlas.findRegion("cloud", Random.randomInt(1, numberOfCloudTypes));
 
     float scale = Math.max(0.4f, Random.randomFloat());
@@ -73,23 +78,23 @@ public class CloudLayer extends GameLayer {
 
     GameObject cloud = new GameObject(cloudRegion);
 
-    switch (weatherService.currentState()) {
-      case RAINING:
-        cloud.setColor(Color.DARK_GRAY);
-        break;
+    if (weatherService != null) {
+      switch (weatherService.currentState()) {
+        case RAINING:
+          cloud.setColor(Color.DARK_GRAY);
+          break;
 
-      case SUNNY:
-        cloud.setColor(Color.WHITE);
-        break;
+        case SUNNY:
+          cloud.setColor(Color.WHITE);
+          break;
+      }
     }
 
     cloud.setPosition(-cloudX, Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX));
     cloud.setVelocity(Random.randomInt(5, 25), 0);
 
-    if (cloud.getX() > 0) {
-      cloud.setOpacity(0);
-      Tween.to(cloud, GameObjectAccessor.OPACITY, 2000).target(1.0f).start(TweenSystem.getTweenManager());
-    }
+    cloud.setOpacity(0);
+    Tween.to(cloud, GameObjectAccessor.OPACITY, 2000).target(1.0f).start(TweenSystem.getTweenManager());
 
     addChild(cloud);
   }
@@ -141,5 +146,9 @@ public class CloudLayer extends GameLayer {
                 .start(TweenSystem.getTweenManager());
       }
     }
+  }
+
+  public void setWorldSize(Vector2 worldSize) {
+    this.worldSize = worldSize;
   }
 }

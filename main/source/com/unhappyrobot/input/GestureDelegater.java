@@ -9,13 +9,16 @@ import java.util.List;
 
 import static com.badlogic.gdx.input.GestureDetector.GestureListener;
 
-class GestureDelegater implements GestureListener {
+public class GestureDelegater implements GestureListener {
   private ToolBase currentTool;
   private CameraController cameraController;
   private Runnable beforeSwitchToolRunnable;
   private GameGrid gameGrid;
+  private List<GameLayer> gameLayers;
 
   public GestureDelegater(OrthographicCamera camera, List<GameLayer> gameLayers) {
+    this.gameLayers = gameLayers;
+
     for (GameLayer gameLayer : gameLayers) {
       if (gameLayer instanceof GameGrid) {
         gameGrid = (GameGrid) gameLayer;
@@ -89,5 +92,9 @@ class GestureDelegater implements GestureListener {
     }
 
     cameraController.update(deltaTime);
+  }
+
+  public List<GameLayer> getGameLayers() {
+    return gameLayers;
   }
 }

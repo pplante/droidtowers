@@ -1,22 +1,23 @@
 package com.unhappyrobot.scenes;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public abstract class Scene {
-  private final SpriteBatch spriteBatch;
+  private static SpriteBatch spriteBatch;
   private final Stage stage;
   private static Skin skin;
+  protected static OrthographicCamera camera;
 
-  public Scene(SpriteBatch spriteBatch_) {
-    if (skin == null) {
-      skin = new Skin(Gdx.files.internal("default-skin.ui"), Gdx.files.internal("default-skin.png"));
-    }
+  public Scene() {
+    stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true, getSpriteBatch());
+  }
 
-    spriteBatch = spriteBatch_;
-    stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true, spriteBatch);
+  public static void setGuiSkin(Skin guiSkin) {
+    Scene.skin = guiSkin;
   }
 
   public abstract void create();
@@ -31,11 +32,23 @@ public abstract class Scene {
     return spriteBatch;
   }
 
+  public static void setSpriteBatch(SpriteBatch spriteBatch) {
+    Scene.spriteBatch = spriteBatch;
+  }
+
   public Stage getStage() {
     return stage;
   }
 
-  public Skin getGuiSkin() {
+  public static Skin getGuiSkin() {
     return skin;
+  }
+
+  public OrthographicCamera getCamera() {
+    return camera;
+  }
+
+  public static void setCamera(OrthographicCamera camera) {
+    Scene.camera = camera;
   }
 }

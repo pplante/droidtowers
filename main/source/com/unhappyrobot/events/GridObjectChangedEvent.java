@@ -10,4 +10,11 @@ public class GridObjectChangedEvent extends GridObjectEvent {
 
     this.nameOfParamChanged = nameOfParamChanged;
   }
+
+  @Override
+  public String toString() {
+    return "GridObjectChangedEvent{" +
+                   "nameOfParamChanged='" + nameOfParamChanged + '\'' +
+                   '}';
+  }
 }

@@ -5,7 +5,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.achievements.AchievementEngine;
-import com.unhappyrobot.controllers.GameTips;
 import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.events.EventListener;
 import com.unhappyrobot.gamestate.actions.*;
@@ -36,16 +35,16 @@ public class GameState extends EventListener {
     this.gameSaveLocation = gameSaveLocation;
 
     nextTimeToSave = System.currentTimeMillis() + TowerConsts.GAME_SAVE_FREQUENCY;
-    calculatePopulation = new PopulationCalculator(this.gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
-    calculateEarnout = new EarnoutCalculator(this.gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
-    calculateJobs = new EmploymentCalculator(this.gameGrid, TowerConsts.JOB_UPDATE_FREQUENCY);
+    calculatePopulation = new PopulationCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
+    calculateEarnout = new EarnoutCalculator(gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
+    calculateJobs = new EmploymentCalculator(gameGrid, TowerConsts.JOB_UPDATE_FREQUENCY);
     calculateDesirability = new DesirabilityCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
     transportCalculator = new TransportCalculator(gameGrid, TowerConsts.TRANSPORT_CALCULATOR_FREQUENCY);
 
     gameGrid.events().register(this);
   }
 
-  public void update(float deltaTime, GameGrid gameGrid) {
+  public void update(float deltaTime) {
     transportCalculator.act(deltaTime);
     calculatePopulation.act(deltaTime);
     calculateJobs.act(deltaTime);
@@ -106,7 +105,6 @@ public class GameState extends EventListener {
       }).centerOnScreen().show();
     } finally {
       transportCalculator.unpause();
-      GameTips.instance().enable();
     }
   }
 

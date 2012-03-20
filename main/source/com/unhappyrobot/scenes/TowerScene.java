@@ -1,11 +1,14 @@
 package com.unhappyrobot.scenes;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.input.GestureDetector;
 import com.google.common.collect.Lists;
 import com.unhappyrobot.WeatherService;
+import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.controllers.AvatarLayer;
+import com.unhappyrobot.controllers.GameTips;
 import com.unhappyrobot.entities.CloudLayer;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.gamestate.GameState;
@@ -17,6 +20,9 @@ import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GameGridRenderer;
 import com.unhappyrobot.grid.GridPositionCache;
 import com.unhappyrobot.gui.HeadsUpDisplay;
+import com.unhappyrobot.input.DefaultKeybindings;
+import com.unhappyrobot.input.GestureDelegater;
+import com.unhappyrobot.input.GestureTool;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.types.CommercialTypeFactory;
 import com.unhappyrobot.types.ElevatorTypeFactory;
@@ -25,21 +31,21 @@ import com.unhappyrobot.types.StairTypeFactory;
 
 import java.util.List;
 
-public class GameScreen extends Scene {
+public class TowerScene extends Scene {
   private List<GameLayer> gameLayers;
-  private GameGrid gameGrid;
+  private static GameGrid gameGrid;
   private GameGridRenderer gameGridRenderer;
   private GameState gameState;
   private float timeMultiplier;
-  private final OrthographicCamera camera;
   private FileHandle gameSaveLocation;
   private WeatherService weatherService;
   private HeadsUpDisplay headsUpDisplay;
+  private GameTips gameTips;
+  private GestureDetector gestureDetector;
+  private GestureDelegater gestureDelegater;
 
-  public GameScreen(SpriteBatch spriteBatch_, OrthographicCamera camera_, FileHandle gameSaveLocation_) {
-    super(spriteBatch_);
-    camera = camera_;
-    gameSaveLocation = gameSaveLocation_;
+  public TowerScene() {
+    gameSaveLocation = Gdx.files.external(Gdx.app.getType().equals(Application.ApplicationType.Desktop) ? ".towergame/test.json" : "test.json");
     timeMultiplier = 1f;
   }
 
@@ -50,9 +56,9 @@ public class GameScreen extends Scene {
     ElevatorTypeFactory.instance();
     StairTypeFactory.instance();
 
-    gameGrid = new GameGrid(camera);
+    gameGrid = new GameGrid(getCamera());
     gameGridRenderer = gameGrid.getRenderer();
-    gameState = new GameState(camera, gameGrid, gameSaveLocation);
+    gameState = new GameState(getCamera(), gameGrid, gameSaveLocation);
 
     GridPositionCache.reset(gameGrid);
 
@@ -74,19 +80,27 @@ public class GameScreen extends Scene {
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
     gameGrid.updateWorldSize();
 
-    InputSystem.instance().setup(camera, gameLayers);
-    InputSystem.instance().addInputProcessor(getStage(), 10);
+    gameTips = new GameTips(gameGrid);
 
-    gameState.loadSavedGame();
+    gestureDelegater = new GestureDelegater(camera, gameLayers);
+    gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, gestureDelegater);
   }
 
   @Override
   public void pause() {
     gameState.saveGame();
+    InputSystem.instance().removeInputProcessor(gestureDetector);
+    AchievementEngine.instance().unregisterGameGrid();
   }
 
   @Override
   public void resume() {
+    InputSystem.instance().addInputProcessor(gestureDetector, 100);
+    InputSystem.instance().setGestureDelegator(gestureDelegater);
+    InputSystem.instance().switchTool(GestureTool.PICKER, null);
+    DefaultKeybindings.initialize(this);
+    gameState.loadSavedGame();
+    AchievementEngine.instance().registerGameGrid(gameGrid);
   }
 
   @Override
@@ -107,13 +121,18 @@ public class GameScreen extends Scene {
 
     headsUpDisplay.act(deltaTime);
     weatherService.update(deltaTime);
+    gameState.update(deltaTime);
   }
 
   public float getTimeMultiplier() {
     return timeMultiplier;
   }
 
-  public GameGrid getGameGrid() {
+  public void setTimeMultiplier(float timeMultiplier) {
+    this.timeMultiplier = timeMultiplier;
+  }
+
+  public static GameGrid getGameGrid() {
     return gameGrid;
   }
 
@@ -127,9 +146,5 @@ public class GameScreen extends Scene {
 
   public void setGameSaveLocation(FileHandle gameSaveLocation) {
     this.gameSaveLocation = gameSaveLocation;
-  }
-
-  public OrthographicCamera getCamera() {
-    return camera;
   }
 }

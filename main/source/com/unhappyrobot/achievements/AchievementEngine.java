@@ -19,6 +19,7 @@ public class AchievementEngine {
   private static AchievementEngine instance;
   private List<Achievement> achievements;
   private Set<Achievement> completedAchievements;
+  private GameGrid gameGrid;
 
   public static AchievementEngine instance() {
     if (instance == null) {
@@ -38,8 +39,6 @@ public class AchievementEngine {
     }
 
     completedAchievements = Sets.newHashSet();
-//    TODO: FIX
-//    GameGrid.events().register(this);
   }
 
   public List<Achievement> getAchievements() {
@@ -96,5 +95,24 @@ public class AchievementEngine {
 
   public void add(Achievement achievement) {
     achievements.add(achievement);
+  }
+
+  public boolean hasGameGrid() {
+    return gameGrid != null;
+  }
+
+  public void unregisterGameGrid() {
+    if (gameGrid != null) {
+      gameGrid.events().unregister(AchievementEngine.instance());
+    }
+
+    gameGrid = null;
+  }
+
+  public void registerGameGrid(GameGrid gameGrid) {
+    this.gameGrid = gameGrid;
+    if (gameGrid != null) {
+      gameGrid.events().register(AchievementEngine.instance());
+    }
   }
 }

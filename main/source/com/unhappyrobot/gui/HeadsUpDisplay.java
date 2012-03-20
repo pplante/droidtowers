@@ -18,7 +18,8 @@ import com.unhappyrobot.input.GestureTool;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.math.GridPoint;
-import com.unhappyrobot.scenes.GameScreen;
+import com.unhappyrobot.scenes.Scene;
+import com.unhappyrobot.scenes.TowerScene;
 import com.unhappyrobot.types.*;
 
 public class HeadsUpDisplay extends WidgetGroup {
@@ -43,23 +44,21 @@ public class HeadsUpDisplay extends WidgetGroup {
   private final StackGroup notificationStack;
   private TextButton expandLandButton;
 
-  public HeadsUpDisplay(GameScreen gameScreen) {
+  public HeadsUpDisplay(TowerScene towerScene) {
     instance = this;
 
     notificationStack = new StackGroup();
 
-    this.stage = gameScreen.getStage();
-    this.camera = gameScreen.getCamera();
-    this.gameGrid = gameScreen.getGameGrid();
-    guiSkin = gameScreen.getGuiSkin();
-
-    ModalOverlay.initialize(this);
+    this.stage = towerScene.getStage();
+    this.camera = towerScene.getCamera();
+    this.gameGrid = TowerScene.getGameGrid();
+    guiSkin = Scene.getGuiSkin();
 
     menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_14_bold_white.fnt"), false);
 
     hudAtlas = new TextureAtlas(Gdx.files.internal("hud/buttons.txt"));
 
-    StatusBarPanel statusBarPanel = new StatusBarPanel(guiSkin, gameScreen);
+    StatusBarPanel statusBarPanel = new StatusBarPanel(guiSkin, towerScene);
     statusBarPanel.x = -1;
     statusBarPanel.y = stage.height() - statusBarPanel.height + 1;
     addActor(statusBarPanel);
@@ -228,7 +227,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
   public void showToast(String message, Object... objects) {
     if (toast == null) {
-      toast = new Toast(this);
+      toast = new Toast();
       addActor(toast);
     }
 

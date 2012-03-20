@@ -6,22 +6,22 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.Player;
-import com.unhappyrobot.scenes.GameScreen;
+import com.unhappyrobot.scenes.TowerScene;
 
 import java.text.NumberFormat;
 
 public class StatusBarPanel extends Table {
   private final Skin guiSkin;
-  private final GameScreen gameScreen;
+  private final TowerScene towerScene;
   private final Label moneyLabel;
   private final Label experienceLabel;
   private final Label gameSpeedLabel;
   private final Label populationLabel;
   private float lastUpdated = TowerConsts.HUD_UPDATE_FREQUENCY;
 
-  public StatusBarPanel(Skin guiSkin, GameScreen gameScreen) {
+  public StatusBarPanel(Skin guiSkin, TowerScene towerScene) {
     this.guiSkin = guiSkin;
-    this.gameScreen = gameScreen;
+    this.towerScene = towerScene;
     Label.LabelStyle helvetica_neue_10_bold_white = this.guiSkin.getStyle("helvetica_neue_10_bold_white", Label.LabelStyle.class);
 
     moneyLabel = makeLabel("0", null);
@@ -62,7 +62,7 @@ public class StatusBarPanel extends Table {
       moneyLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + NumberFormat.getInstance().format(player.getCoins()));
       populationLabel.setText(NumberFormat.getInstance().format(player.getTotalPopulation()));
 
-      gameSpeedLabel.setText(gameScreen.getTimeMultiplier() + "x");
+      gameSpeedLabel.setText(towerScene.getTimeMultiplier() + "x");
 
       pack();
     }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
+import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.tween.TweenSystem;
 
 public class ModalOverlay extends WidgetGroup {
@@ -17,24 +18,16 @@ public class ModalOverlay extends WidgetGroup {
 
   private static ModalOverlay instance;
 
-  public static void initialize(HeadsUpDisplay headsUpDisplay) {
-    if (instance == null) {
-      instance = new ModalOverlay(headsUpDisplay);
-    }
-  }
-
   public static ModalOverlay instance() {
     if (instance == null) {
-      throw new RuntimeException("Must call initialize first!");
+      instance = new ModalOverlay();
     }
 
     return instance;
   }
 
-  private ModalOverlay(HeadsUpDisplay headsUpDisplay) {
+  private ModalOverlay() {
     super();
-
-    this.headsUpDisplay = headsUpDisplay;
 
     final Texture texture = new Texture(Gdx.files.internal("hud/modal-noise.png"));
     texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -52,7 +45,7 @@ public class ModalOverlay extends WidgetGroup {
   }
 
   public void show() {
-    headsUpDisplay.addActor(this);
+    TowerGame.getActiveScene().getStage().addActor(this);
     background.width = Gdx.graphics.getWidth();
     background.height = Gdx.graphics.getHeight();
 

@@ -7,8 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
+import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
+import com.unhappyrobot.scenes.Scene;
 import com.unhappyrobot.tween.TweenSystem;
 
 import java.util.List;
@@ -29,8 +31,12 @@ public class Dialog {
   private InputCallback onDismissInputCallback;
 
   public Dialog() {
-    parent = HeadsUpDisplay.instance().getStage();
-    skin = HeadsUpDisplay.instance().getGuiSkin();
+    this(TowerGame.getActiveScene().getStage());
+  }
+
+  public Dialog(Stage stage) {
+    parent = stage;
+    skin = Scene.getGuiSkin();
     title = "Dialog";
     buttons = Lists.newArrayList();
 

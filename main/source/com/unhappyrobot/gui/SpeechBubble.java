@@ -24,7 +24,7 @@ public class SpeechBubble extends Toast {
   private GridObject gridObjectToFollow;
 
   public SpeechBubble() {
-    super(null);
+    super();
     if (textureAtlas == null) {
       textureAtlas = new TextureAtlas(Gdx.files.internal("hud/misc.txt"));
       labelFont = new BitmapFont(Gdx.files.internal("fonts/helvetica_neue_14_black.fnt"), false);

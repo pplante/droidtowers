@@ -7,7 +7,7 @@ public class TowerConsts {
 
   }
 
-  public static final int GAME_WORLD_PADDING = 200;
+  public static final int GAME_WORLD_PADDING = 400;
 
   public static final int GAME_GRID_EXPAND_SIZE = 5;
 

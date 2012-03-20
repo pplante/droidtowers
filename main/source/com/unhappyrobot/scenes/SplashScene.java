@@ -4,16 +4,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.unhappyrobot.TowerGame;
+import com.unhappyrobot.entities.CloudLayer;
 import com.unhappyrobot.gui.TiledImage;
 
-public class SplashScreen extends Scene {
+public class SplashScene extends Scene {
+  private static final int SPLASH_DURATION = 500;
 
-  public SplashScreen(SpriteBatch spriteBatch_) {
-    super(spriteBatch_);
-  }
+  private long launchTime;
+  private CloudLayer cloudLayer;
 
   @Override
   public void create() {
@@ -21,7 +22,7 @@ public class SplashScreen extends Scene {
     texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
     TiledImage background = new TiledImage(texture);
-    background.color.a = 0.85f;
+    background.color.a = 0.75f;
     background.width = Gdx.graphics.getWidth();
     background.height = Gdx.graphics.getHeight();
     getStage().addActor(background);
@@ -32,6 +33,15 @@ public class SplashScreen extends Scene {
     label.width = getStage().width();
     label.y = getStage().centerY() * 1.66f;
     getStage().addActor(label);
+
+    Label loadingMessage = new Label("Reticulating Splines...", getGuiSkin());
+    loadingMessage.setAlignment(Align.CENTER);
+    loadingMessage.width = getStage().width();
+    loadingMessage.y = getStage().centerY();
+    getStage().addActor(loadingMessage);
+
+    launchTime = System.currentTimeMillis() + SPLASH_DURATION;
+    cloudLayer = new SplashCloudLayer();
   }
 
   @Override
@@ -44,7 +54,11 @@ public class SplashScreen extends Scene {
 
   @Override
   public void render(float deltaTime) {
-    getStage().act(deltaTime);
-    getStage().draw();
+    cloudLayer.update(deltaTime);
+    cloudLayer.render(getSpriteBatch(), getCamera());
+
+    if (launchTime <= System.currentTimeMillis()) {
+      TowerGame.pushScene(TowerScene.class);
+    }
   }
 }
