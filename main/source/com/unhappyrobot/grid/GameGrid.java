@@ -101,8 +101,8 @@ public class GameGrid extends GameLayer {
     float objectYPos = gridObject.getPosition().y;
     if (objectYPos > highestPoint) {
       highestPoint = objectYPos;
-      if (highestPoint + TowerConsts.GAME_GRID_EXPAND_SIZE > gridSize.y) {
-        gridSize.y = highestPoint + TowerConsts.GAME_GRID_EXPAND_SIZE;
+      if (highestPoint + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE > gridSize.y) {
+        gridSize.y = highestPoint + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE;
         updateWorldSize();
       }
     }

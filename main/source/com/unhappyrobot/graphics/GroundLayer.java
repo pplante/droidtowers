@@ -24,7 +24,7 @@ public class GroundLayer extends GameLayer {
 
     GameObject gameObject = new GameObject(texture);
     gameObject.setPosition(-TowerConsts.GAME_WORLD_PADDING, 0);
-    gameObject.setSize(event.gameGrid.getWorldSize().x + (TowerConsts.GAME_WORLD_PADDING * 2), 256f);
+    gameObject.setSize(event.gameGrid.getWorldSize().x + (TowerConsts.GAME_WORLD_PADDING * 2), TowerConsts.GROUND_HEIGHT);
     gameObject.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
 
     addChild(gameObject);

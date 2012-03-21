@@ -2,6 +2,7 @@ package com.unhappyrobot.pathfinding;
 
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.GuavaSet;
 import com.unhappyrobot.grid.GridPosition;
 import com.unhappyrobot.grid.GridPositionCache;
@@ -25,9 +26,9 @@ public class WanderPathFinder extends TransitPathFinder {
 
     Vector2 gridSize = GridPositionCache.instance().getGridSize();
 
-    if (start.y == 4) {
-      discoveredPath.add(GridPositionCache.instance().getPosition(Random.randomInt(0, gridSize.x), 4));
-      discoveredPath.add(GridPositionCache.instance().getPosition(Random.randomInt(0, gridSize.x), 4));
+    if (start.y == TowerConsts.LOBBY_FLOOR) {
+      discoveredPath.add(GridPositionCache.instance().getPosition(Random.randomInt(0, gridSize.x), TowerConsts.LOBBY_FLOOR));
+      discoveredPath.add(GridPositionCache.instance().getPosition(Random.randomInt(0, gridSize.x), TowerConsts.LOBBY_FLOOR));
     } else {
       for (int i = 1; i < 5; i++) {
         GridPosition positionRight = GridPositionCache.instance().getPosition(start.x + i, start.y);

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.actions.Action;
 import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
 import com.unhappyrobot.grid.GameGrid;
@@ -73,10 +74,16 @@ public class Elevator extends Transit {
       shaftToRender.setPosition(gridPoint.getWorldX(gameGrid), gridPoint.getWorldY(gameGrid));
       shaftToRender.draw(spriteBatch);
 
-      String labelText = (y < 4 ? "B" + (4 - y) : "" + (y - 3));
+      String labelText = String.valueOf(y - TowerConsts.LOBBY_FLOOR + 1);
+      if (y == TowerConsts.LOBBY_FLOOR) {
+        labelText = "L";
+      } else if (y < TowerConsts.LOBBY_FLOOR) {
+        labelText = "B" + (TowerConsts.LOBBY_FLOOR - y);
+      }
+
       BitmapFont.TextBounds textBounds = floorFont.getBounds(labelText);
       floorFont.setColor(1, 1, 1, 0.5f);
-      floorFont.draw(spriteBatch, labelText, gridPoint.getWorldX(gameGrid) + ((gameGrid.unitSize.x - textBounds.width) / 2), gridPoint.getWorldY(gameGrid) + ((gameGrid.unitSize.y - textBounds.height) / 2));
+      floorFont.draw(spriteBatch, labelText, gridPoint.getWorldX(gameGrid) + ((TowerConsts.GRID_UNIT_SIZE - textBounds.width) / 2), gridPoint.getWorldY(gameGrid) + ((TowerConsts.GRID_UNIT_SIZE - textBounds.height) / 2));
     }
 
     elevatorCar.setColor(renderColor);

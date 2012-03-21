@@ -38,7 +38,7 @@ public class SkyLayer extends GameLayer {
 
   @Subscribe
   public void GameGrid_onResize(GameGridResizeEvent event) {
-    sky.setPosition(-TowerConsts.GAME_WORLD_PADDING, 256);
+    sky.setPosition(-TowerConsts.GAME_WORLD_PADDING, TowerConsts.GROUND_HEIGHT);
     sky.setSize(gameGrid.getWorldSize().x + (TowerConsts.GAME_WORLD_PADDING * 2), gameGrid.getWorldSize().y + TowerConsts.GAME_WORLD_PADDING);
     sky.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
   }

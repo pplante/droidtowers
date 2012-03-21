@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.types.RoomType;
 import com.unhappyrobot.utils.Random;
@@ -40,8 +41,8 @@ public class Room extends GridObject {
     if (roomType.getTextureRegion() != null) {
       sprite = new Sprite(roomType.getTextureRegion());
     } else {
-      int width = (int) (gameGrid.unitSize.x * size.x);
-      int height = (int) (gameGrid.unitSize.y * size.y);
+      int width = (int) (TowerConsts.GRID_UNIT_SIZE * size.x);
+      int height = (int) (TowerConsts.GRID_UNIT_SIZE * size.y);
       int pixmapSize = MathUtils.nextPowerOfTwo(Math.max(width, height));
       Pixmap pixmap = new Pixmap(pixmapSize, pixmapSize, Pixmap.Format.RGB565);
       pixmap.setColor(Color.BLACK);

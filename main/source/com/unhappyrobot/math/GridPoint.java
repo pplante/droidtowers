@@ -1,6 +1,7 @@
 package com.unhappyrobot.math;
 
 import com.badlogic.gdx.math.Vector2;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.grid.GameGrid;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -19,12 +20,12 @@ public class GridPoint extends Vector2 {
 
   @JsonIgnore
   public float getWorldX(GameGrid gameGrid) {
-    return gameGrid.unitSize.x * x;
+    return TowerConsts.GRID_UNIT_SIZE * x;
   }
 
   @JsonIgnore
   public float getWorldY(GameGrid gameGrid) {
-    return gameGrid.unitSize.y * y;
+    return TowerConsts.GRID_UNIT_SIZE * y;
   }
 
   @Override

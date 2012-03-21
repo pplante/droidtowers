@@ -1,5 +1,6 @@
 package com.unhappyrobot.types;
 
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.Elevator;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.Room;
@@ -30,7 +31,7 @@ public class RoomType extends GridObjectType {
   @Override
   public boolean canBeAt(GridObject gridObject) {
     if (isLobby) {
-      return gridObject.getPosition().y == 4 && checkForOverlap(gridObject);
+      return gridObject.getPosition().y == TowerConsts.LOBBY_FLOOR && checkForOverlap(gridObject);
     }
 
     return checkIfTouchingAnotherObject(gridObject) && checkForOverlap(gridObject);

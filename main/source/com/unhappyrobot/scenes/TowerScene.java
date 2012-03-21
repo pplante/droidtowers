@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.input.GestureDetector;
 import com.google.common.collect.Lists;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.WeatherService;
 import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.controllers.AvatarLayer;
@@ -75,8 +76,8 @@ public class TowerScene extends Scene {
     gameLayers.add(gameGrid);
     gameLayers.add(AvatarLayer.initialize(gameGrid));
 
-    gameGrid.setUnitSize(64, 64);
-    gameGrid.setGridSize(40, 40);
+    gameGrid.setUnitSize(TowerConsts.GRID_UNIT_SIZE, TowerConsts.GRID_UNIT_SIZE);
+    gameGrid.setGridSize(TowerConsts.GAME_GRID_START_SIZE, TowerConsts.GAME_GRID_START_SIZE);
     gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
     gameGrid.updateWorldSize();
 

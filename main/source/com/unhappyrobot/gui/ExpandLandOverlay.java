@@ -40,24 +40,24 @@ public class ExpandLandOverlay extends WidgetGroup {
 
     leftButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        gameGrid.setGridSize(gameGrid.getGridSize().x + TowerConsts.GAME_GRID_EXPAND_SIZE, gameGrid.getGridSize().y);
+        gameGrid.setGridSize(gameGrid.getGridSize().x + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE, gameGrid.getGridSize().y);
         gameGrid.updateWorldSize();
 
         GridPositionCache.instance().pauseEvents();
         for (GridObject gridObject : gameGrid.getObjects()) {
-          gridObject.setPosition(gridObject.getPosition().x + TowerConsts.GAME_GRID_EXPAND_SIZE, gridObject.getPosition().y);
+          gridObject.setPosition(gridObject.getPosition().x + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE, gridObject.getPosition().y);
         }
         GridPositionCache.instance().resumeEvents();
 
         Vector3 cameraPosition = CameraController.instance().getCamera().position.cpy();
-        CameraController.instance().getCamera().position.set(cameraPosition.x + (gameGrid.getUnitSize().x * TowerConsts.GAME_GRID_EXPAND_SIZE), cameraPosition.y, cameraPosition.z);
+        CameraController.instance().getCamera().position.set(cameraPosition.x + (gameGrid.getUnitSize().x * TowerConsts.GAME_GRID_EXPAND_LAND_SIZE), cameraPosition.y, cameraPosition.z);
         CameraController.instance().panTo(0, CameraController.instance().getCamera().position.y, true);
       }
     });
 
     rightButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        gameGrid.setGridSize(gameGrid.getGridSize().x + TowerConsts.GAME_GRID_EXPAND_SIZE, gameGrid.getGridSize().y);
+        gameGrid.setGridSize(gameGrid.getGridSize().x + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE, gameGrid.getGridSize().y);
         gameGrid.updateWorldSize();
         CameraController.instance().panTo(gameGrid.getWorldSize().x - 10, CameraController.instance().getCamera().position.y, true);
       }

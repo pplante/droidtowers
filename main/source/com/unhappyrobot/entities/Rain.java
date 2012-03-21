@@ -5,6 +5,7 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.tween.GameObjectAccessor;
 import com.unhappyrobot.tween.TweenSystem;
@@ -22,9 +23,9 @@ public class Rain extends GameObject {
 
     setTexture(rainDropTexture);
 
-    float width = gameGrid.getWorldSize().x + (RAIN_TEXURE_SIZE * 2);
-    float height = gameGrid.getWorldSize().y + (RAIN_TEXURE_SIZE * 2);
-    setPosition(-RAIN_TEXURE_SIZE, -RAIN_TEXURE_SIZE);
+    float width = gameGrid.getWorldSize().x + (TowerConsts.GAME_WORLD_PADDING * 2) + (RAIN_TEXURE_SIZE * 2);
+    float height = gameGrid.getWorldSize().y + TowerConsts.GAME_WORLD_PADDING + (RAIN_TEXURE_SIZE * 2);
+    setX(-TowerConsts.GAME_WORLD_PADDING);
     setSize(width, height);
     setRegion(0, 0, width / RAIN_TEXURE_SIZE, height / RAIN_TEXURE_SIZE);
 

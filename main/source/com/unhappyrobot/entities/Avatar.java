@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 import com.sun.istack.internal.Nullable;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.controllers.AvatarState;
 import com.unhappyrobot.controllers.AvatarSteeringManager;
@@ -54,7 +55,7 @@ public class Avatar extends GameObject {
 
     gameGrid = avatarLayer.getGameGrid();
 
-    setPosition(-Random.randomInt(50, 200), 256);
+    setPosition(-Random.randomInt(50, 200), TowerConsts.GROUND_HEIGHT);
 
     pickColor();
 

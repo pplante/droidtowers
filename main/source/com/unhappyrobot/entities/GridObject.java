@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.actions.Action;
 import com.unhappyrobot.actions.TimeDelayedAction;
 import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
@@ -208,7 +209,7 @@ public abstract class GridObject {
 
 
   public float distanceToLobby() {
-    return position.y - 4;
+    return position.y - TowerConsts.LOBBY_FLOOR;
   }
 
   public float distanceFromFloor(float originalFloor) {

@@ -8,6 +8,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 import com.sun.istack.internal.Nullable;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.*;
 import com.unhappyrobot.events.GridObjectAddedEvent;
 import com.unhappyrobot.events.GridObjectRemovedEvent;
@@ -87,7 +88,7 @@ public class AvatarLayer extends GameLayer {
   }
 
   private void setupAvatar(Avatar avatar) {
-    avatar.setPosition(Random.randomInt(-64, gameGrid.getWorldSize().x + 64), 256f);
+    avatar.setPosition(Random.randomInt(-64, gameGrid.getWorldSize().x + 64), TowerConsts.GROUND_HEIGHT);
 
     avatar.beginNextAction();
     addChild(avatar);

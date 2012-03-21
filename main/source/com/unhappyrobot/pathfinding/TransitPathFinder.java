@@ -1,5 +1,6 @@
 package com.unhappyrobot.pathfinding;
 
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.grid.GridPosition;
 import com.unhappyrobot.grid.GridPositionCache;
 
@@ -32,7 +33,7 @@ public class TransitPathFinder extends AStar<GridPosition> {
       }
     }
 
-    if (to.y == 4) {
+    if (to.y == TowerConsts.LOBBY_FLOOR) {
       // fail safe that an avatar that ran away will come back!
       return 2.0;
     }
@@ -67,7 +68,7 @@ public class TransitPathFinder extends AStar<GridPosition> {
 
   private void checkGridPosition(List<GridPosition> successors, int x, int y) {
     GridPosition position = GridPositionCache.instance().getPosition(x, y);
-    if (position != null && (position.connectedToTransit || y == 4)) {
+    if (position != null && (position.connectedToTransit || y == TowerConsts.LOBBY_FLOOR)) {
       successors.add(position);
     }
   }
