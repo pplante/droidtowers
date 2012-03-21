@@ -59,11 +59,12 @@ public class ModalOverlay extends WidgetGroup {
     Timeline.createSequence()
             .push(Tween.set(background, WidgetAccessor.OPACITY).target(TARGET_OPACITY))
             .push(Tween.to(background, WidgetAccessor.OPACITY, 200).target(0f))
-            .addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
-              public void onEvent(EventType eventType, BaseTween source) {
+            .setCallback(new TweenCallback() {
+              public void onEvent(int eventType, BaseTween source) {
                 markToRemove(true);
               }
             })
+            .setCallbackTriggers(TweenCallback.COMPLETE)
             .start(TweenSystem.getTweenManager());
   }
 

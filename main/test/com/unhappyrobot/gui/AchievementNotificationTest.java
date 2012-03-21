@@ -37,7 +37,6 @@ public class AchievementNotificationTest {
     notification.show();
 
     expect(TweenSystem.getTweenManager().containsTarget(notification)).toBeTrue();
-    expect(TweenSystem.getTweenManager().size()).toEqual(3);
 
     TweenSystem.getTweenManager().update(1);
     expect(notification.color.a).toEqual(0.005f);
@@ -50,7 +49,6 @@ public class AchievementNotificationTest {
     notification.hide(false);
 
     expect(TweenSystem.getTweenManager().containsTarget(notification)).toBeTrue();
-    expect(TweenSystem.getTweenManager().size()).toEqual(5);
 
     expect(notification.color.a).toEqual(1f);
     TweenSystem.getTweenManager().update(300);

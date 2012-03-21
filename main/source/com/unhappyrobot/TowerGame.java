@@ -56,6 +56,7 @@ public class TowerGame implements ApplicationListener {
 
 
     AchievementEngine.instance();
+    Tween.setCombinedAttributesLimit(4);
     Tween.registerAccessor(CameraController.class, new CameraControllerAccessor());
     Tween.registerAccessor(GameObject.class, new GameObjectAccessor());
     Tween.registerAccessor(Actor.class, new WidgetAccessor());
@@ -104,7 +105,7 @@ public class TowerGame implements ApplicationListener {
     Scene.setCamera(camera);
     Scene.setSpriteBatch(spriteBatch);
 
-    pushScene(SplashScene.class);
+    changeScene(SplashScene.class);
   }
 
 
@@ -119,7 +120,7 @@ public class TowerGame implements ApplicationListener {
     camera.update();
     InputSystem.instance().update(deltaTime);
     PathSearchManager.instance().update(deltaTime);
-    TweenSystem.getTweenManager().update((int) (deltaTime * 1000));
+    TweenSystem.getTweenManager().update((int) (deltaTime * 1000 * activeScene.getTimeMultiplier()));
     spriteBatch.setProjectionMatrix(camera.combined);
 
     activeScene.render(deltaTime);
@@ -164,7 +165,7 @@ public class TowerGame implements ApplicationListener {
     spriteBatch.dispose();
   }
 
-  public static void pushScene(Class<? extends Scene> sceneClass) {
+  public static void changeScene(Class<? extends Scene> sceneClass) {
     try {
       if (activeScene != null) {
         InputSystem.instance().removeInputProcessor(activeScene.getStage());
@@ -172,8 +173,7 @@ public class TowerGame implements ApplicationListener {
       }
 
       System.out.println("Switching scene to: " + sceneClass.getSimpleName());
-      Scene scene = sceneClass.newInstance();
-      activeScene = scene;
+      activeScene = sceneClass.newInstance();
       activeScene.create();
       activeScene.resume();
       InputSystem.instance().addInputProcessor(activeScene.getStage(), 10);

@@ -20,6 +20,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.module.SimpleModule;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
@@ -27,6 +28,7 @@ import java.util.List;
 public class GameSave {
   protected Player player;
   protected List<GridObjectState> gridObjects;
+  protected HashMap<String, Integer> objectCounts;
 
   protected Vector3 cameraPosition;
   protected float cameraZoom;
@@ -50,6 +52,13 @@ public class GameSave {
     for (GridObject gridObject : gameGrid.getObjects()) {
       if (gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
         gridObjects.add(new GridObjectState(gridObject));
+
+        String objectName = gridObject.getGridObjectType().getName();
+        if (!objectCounts.containsKey(objectName)) {
+          objectCounts.put(objectName, 0);
+        }
+
+        objectCounts.put(objectName, objectCounts.get(objectName) + 1);
       }
     }
 

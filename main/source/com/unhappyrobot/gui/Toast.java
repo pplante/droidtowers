@@ -56,22 +56,27 @@ public class Toast extends Table {
   }
 
   protected void fadeIn() {
-    Tween.to(this, WidgetAccessor.OPACITY, 500).target(1.0f).start(TweenSystem.getTweenManager()).addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
-      public void onEvent(EventType eventType, BaseTween source) {
-        fadeOut();
-      }
-    });
+    Tween.to(this, WidgetAccessor.OPACITY, 500)
+            .target(1.0f)
+            .start(TweenSystem.getTweenManager())
+            .setCallback(new TweenCallback() {
+              public void onEvent(int eventType, BaseTween source) {
+                fadeOut();
+              }
+            })
+            .setCallbackTriggers(TweenCallback.COMPLETE);
   }
 
   protected void fadeOut() {
     Tween.to(this, WidgetAccessor.OPACITY, 250)
             .target(0f)
             .delay(3000)
-            .addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
-              public void onEvent(EventType eventType, BaseTween source) {
+            .setCallback(new TweenCallback() {
+              public void onEvent(int eventType, BaseTween source) {
                 visible = false;
               }
             })
+            .setCallbackTriggers(TweenCallback.COMPLETE)
             .start(TweenSystem.getTweenManager());
   }
 

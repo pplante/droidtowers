@@ -3,6 +3,7 @@ package com.unhappyrobot.controllers;
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
+import aurelienribon.tweenengine.equations.Linear;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -18,7 +19,6 @@ import com.unhappyrobot.tween.TweenSystem;
 import java.util.LinkedList;
 import java.util.Set;
 
-import static aurelienribon.tweenengine.TweenCallback.EventType.END;
 import static com.unhappyrobot.math.Direction.*;
 import static com.unhappyrobot.tween.GameObjectAccessor.POSITION;
 
@@ -103,7 +103,7 @@ public class AvatarSteeringManager {
     }
 
     moveAvatarTo(currentPosition, new TweenCallback() {
-      public void onEvent(EventType eventType, BaseTween source) {
+      public void onEvent(int type, BaseTween source) {
         advancePosition();
       }
     });
@@ -140,9 +140,9 @@ public class AvatarSteeringManager {
     gameGrid.getRenderer().addTransitLine(stairLine);
 
     moveAvatarTo(start, new TweenCallback() {
-      public void onEvent(EventType eventType, BaseTween source) {
+      public void onEvent(int type, BaseTween source) {
         moveAvatarTo(goal, new TweenCallback() {
-          public void onEvent(EventType eventType, BaseTween source) {
+          public void onEvent(int type, BaseTween source) {
             gameGrid.getRenderer().removeTransitLine(stairLine);
             advancePosition();
           }
@@ -166,8 +166,10 @@ public class AvatarSteeringManager {
     verticalDirection = (int) endPoint.y < (int) avatar.getY() ? DOWN : UP;
     float distanceBetweenPoints = endPoint.dst(avatar.getX(), avatar.getY());
     Tween.to(avatar, POSITION, (int) (distanceBetweenPoints * MOVEMENT_SPEED))
+            .ease(Linear.INOUT)
             .target(endPoint.x, endPoint.y)
-            .addCallback(END, endCallback)
+            .setCallback(endCallback)
+            .setCallbackTriggers(TweenCallback.END)
             .start(TweenSystem.getTweenManager());
   }
 

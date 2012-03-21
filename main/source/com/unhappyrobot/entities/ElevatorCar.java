@@ -17,8 +17,6 @@ import com.unhappyrobot.tween.TweenSystem;
 
 import java.util.LinkedList;
 
-import static aurelienribon.tweenengine.TweenCallback.EventType.COMPLETE;
-
 public class ElevatorCar extends GameObject {
   private int floor;
   private final Elevator elevator;
@@ -63,7 +61,8 @@ public class ElevatorCar extends GameObject {
     Tween.to(this, GameObjectAccessor.POSITION_Y, distanceBetweenStops)
             .delay(500)
             .target(finalPosition.y)
-            .addCallback(COMPLETE, tweenCallback)
+            .setCallback(tweenCallback)
+            .setCallbackTriggers(TweenCallback.COMPLETE)
             .start(TweenSystem.getTweenManager());
   }
 
@@ -86,20 +85,20 @@ public class ElevatorCar extends GameObject {
   private void beginCarMovement() {
     final AvatarSteeringManager steeringManager = currentElevatorPassenger.getSteeringManager();
     moveToFloor(currentElevatorPassenger.getBoardingFloor(), new TweenCallback() {
-      public void onEvent(EventType eventType, BaseTween source) {
+      public void onEvent(int type, BaseTween source) {
         // add a bit of padding to move avatar into middle of car.
 
         Vector2 avatarWalkToElevator = steeringManager.getCurrentPosition().toWorldVector2(gameGrid);
         avatarWalkToElevator.x += currentElevatorPassenger.offsetX;
 
         steeringManager.moveAvatarTo(avatarWalkToElevator, new TweenCallback() {
-          public void onEvent(EventType eventType, BaseTween source) {
+          public void onEvent(int type, BaseTween source) {
             currentElevatorPassenger.hasBoarded = true;
 
             moveToFloor(currentElevatorPassenger.getDestinationFloor(), new TweenCallback() {
-              public void onEvent(EventType eventType, BaseTween source) {
+              public void onEvent(int type, BaseTween source) {
                 steeringManager.moveAvatarTo(steeringManager.getNextPosition().toWorldVector2(gameGrid), new TweenCallback() {
-                  public void onEvent(EventType eventType, BaseTween source) {
+                  public void onEvent(int type, BaseTween source) {
                     currentElevatorPassenger.runCompleteCallback();
                     currentElevatorPassenger = null;
                   }

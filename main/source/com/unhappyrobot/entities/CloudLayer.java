@@ -107,11 +107,15 @@ public class CloudLayer extends GameLayer {
 
     for (final GameObject cloud : gameObjects) {
       if (cloud.getX() >= worldSize.x + PADDING) {
-        Tween.to(cloud, GameObjectAccessor.OPACITY, 2000).target(0f).addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
-          public void onEvent(EventType eventType, BaseTween source) {
-            markForRemoval(cloud);
-          }
-        }).start(TweenSystem.getTweenManager());
+        Tween.to(cloud, GameObjectAccessor.OPACITY, 2000)
+                .target(0f)
+                .setCallback(new TweenCallback() {
+                  public void onEvent(int eventType, BaseTween source) {
+                    markForRemoval(cloud);
+                  }
+                })
+                .setCallbackTriggers(TweenCallback.COMPLETE)
+                .start(TweenSystem.getTweenManager());
       }
     }
   }

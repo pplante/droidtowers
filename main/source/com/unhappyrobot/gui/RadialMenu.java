@@ -79,11 +79,12 @@ public class RadialMenu extends WidgetGroup {
   public void hide() {
     Tween.to(this, OPACITY, 150)
             .target(0.0f)
-            .addCallback(TweenCallback.EventType.COMPLETE, new TweenCallback() {
-              public void onEvent(EventType eventType, BaseTween source) {
+            .setCallback(new TweenCallback() {
+              public void onEvent(int eventType, BaseTween source) {
                 visible = false;
               }
             })
+            .setCallbackTriggers(TweenCallback.COMPLETE)
             .start(TweenSystem.getTweenManager());
   }
 }

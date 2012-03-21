@@ -11,7 +11,7 @@ import com.unhappyrobot.entities.CloudLayer;
 import com.unhappyrobot.gui.TiledImage;
 
 public class SplashScene extends Scene {
-  private static final int SPLASH_DURATION = 500;
+  private static final int SPLASH_DURATION = 50;
 
   private long launchTime;
   private CloudLayer cloudLayer;
@@ -58,7 +58,7 @@ public class SplashScene extends Scene {
     cloudLayer.render(getSpriteBatch(), getCamera());
 
     if (launchTime <= System.currentTimeMillis()) {
-      TowerGame.pushScene(TowerScene.class);
+      TowerGame.changeScene(TowerScene.class);
     }
   }
 }

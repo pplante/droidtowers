@@ -28,6 +28,10 @@ public abstract class Scene {
 
   public abstract void render(float deltaTime);
 
+  public float getTimeMultiplier() {
+    return 1f;
+  }
+
   public SpriteBatch getSpriteBatch() {
     return spriteBatch;
   }

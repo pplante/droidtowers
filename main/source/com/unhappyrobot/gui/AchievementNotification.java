@@ -44,11 +44,12 @@ public class AchievementNotification extends Table {
     Timeline.createSequence()
             .push(Tween.set(this, WidgetAccessor.OPACITY).target(0.0f))
             .push(Tween.to(this, WidgetAccessor.OPACITY, 200).target(1.0f))
-            .addCallback(TweenCallback.EventType.END, new TweenCallback() {
-              public void onEvent(EventType eventType, BaseTween source) {
+            .setCallback(new TweenCallback() {
+              public void onEvent(int eventType, BaseTween source) {
                 hide(true);
               }
             })
+            .setCallbackTriggers(TweenCallback.END)
             .start(TweenSystem.getTweenManager());
   }
 
@@ -63,8 +64,8 @@ public class AchievementNotification extends Table {
             .push(Tween.to(this, WidgetAccessor.SIZE, 300).target(this.width, 0))
             .push(Tween.to(this, WidgetAccessor.OPACITY, 300).target(0))
             .end()
-            .addCallback(TweenCallback.EventType.END, new TweenCallback() {
-              public void onEvent(EventType eventType, BaseTween source) {
+            .setCallback(new TweenCallback() {
+              public void onEvent(int eventType, BaseTween source) {
                 if (targetParent != null) {
                   targetParent.removeActor(AchievementNotification.this);
                   targetParent.invalidate();
@@ -72,6 +73,7 @@ public class AchievementNotification extends Table {
                 }
               }
             })
+            .setCallbackTriggers(TweenCallback.END)
             .start(TweenSystem.getTweenManager());
   }
 

@@ -50,7 +50,7 @@ public class CameraController implements GestureDetector.GestureListener {
 
     camera = camera_;
     worldSize = gameGrid.getWorldSize();
-    camera.position.set(worldSize.x / 2, 384, 0);
+    camera.position.set(worldSize.x / 2, TowerConsts.GROUND_HEIGHT + (TowerConsts.GRID_UNIT_SIZE * 2), 0);
     lastCameraPosition = new Vector3(camera.position);
     updateCameraConstraints();
   }
