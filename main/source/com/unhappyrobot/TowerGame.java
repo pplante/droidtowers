@@ -10,7 +10,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.achievements.AchievementEngine;
+import com.unhappyrobot.actions.ActionManager;
 import com.unhappyrobot.controllers.PathSearchManager;
 import com.unhappyrobot.entities.GameObject;
 import com.unhappyrobot.gamestate.server.HappyDroidService;
@@ -68,6 +70,7 @@ public class TowerGame implements ApplicationListener {
 
     InputSystem.instance().setup(camera);
     Gdx.input.setInputProcessor(InputSystem.instance());
+    InputSystem.instance().addInputProcessor(rootUiStage, 0);
 
     InputSystem.instance().bind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, new InputCallback() {
       private Dialog exitDialog;
@@ -118,9 +121,11 @@ public class TowerGame implements ApplicationListener {
     float deltaTime = Gdx.graphics.getDeltaTime();
 
     camera.update();
+    ActionManager.instance().update(deltaTime);
     InputSystem.instance().update(deltaTime);
     PathSearchManager.instance().update(deltaTime);
     TweenSystem.getTweenManager().update((int) (deltaTime * 1000 * activeScene.getTimeMultiplier()));
+
     spriteBatch.setProjectionMatrix(camera.combined);
 
     activeScene.render(deltaTime);
@@ -130,6 +135,8 @@ public class TowerGame implements ApplicationListener {
     rootUiStage.act(deltaTime);
     rootUiStage.draw();
 
+    Table.drawDebug(activeScene.getStage());
+    Table.drawDebug(rootUiStage);
 
     float javaHeapInBytes = Gdx.app.getJavaHeap() / TowerConsts.ONE_MEGABYTE;
     float nativeHeapInBytes = Gdx.app.getNativeHeap() / TowerConsts.ONE_MEGABYTE;
@@ -153,7 +160,6 @@ public class TowerGame implements ApplicationListener {
   public void pause() {
     Gdx.app.log("lifecycle", "pausing!");
     activeScene.pause();
-    System.exit(0);
   }
 
   public void resume() {

@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
@@ -16,16 +17,17 @@ import java.util.*;
 import static com.badlogic.gdx.input.GestureDetector.GestureListener;
 
 public class InputSystem extends InputAdapter {
+  private static final String TAG = InputSystem.class.getSimpleName();
+
   private List<InputProcessorEntry> inputProcessors;
   private List<InputProcessorEntry> inputProcessorsSorted;
 
   private HashMap<Integer, ArrayList<InputCallback>> keyBindings;
-
   private OrthographicCamera camera;
   private CameraController cameraController;
   private GestureDetector gestureDetector;
-  private GestureDelegater gestureDelegater;
 
+  private GestureDelegater gestureDelegater;
   private static InputSystem instance;
   private List<GameLayer> gameLayers;
 
@@ -144,6 +146,32 @@ public class InputSystem extends InputAdapter {
     return false;
   }
 
+  @Override
+  public boolean keyTyped(char character) {
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().keyTyped(character)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  @Override
+  public boolean keyUp(int keycode) {
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().keyUp(keycode)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
   public boolean touchDown(int x, int y, int pointer, int button) {
     if (inputProcessorsSorted != null) {
       for (InputProcessorEntry entry : inputProcessorsSorted) {
@@ -232,6 +260,20 @@ public class InputSystem extends InputAdapter {
 
   public void setGestureDelegator(GestureDelegater gestureDelegator) {
     this.gestureDelegater = gestureDelegator;
+  }
+
+  public void unfocusAll() {
+    Gdx.app.debug(TAG, "unfocusAll()");
+
+    if (gestureDetector != null) {
+      gestureDetector.reset();
+    }
+
+    for (InputProcessorEntry entry : inputProcessors) {
+      if (entry.getInputProcessor() instanceof Stage) {
+        ((Stage) entry.getInputProcessor()).unfocusAll();
+      }
+    }
   }
 
   public static class Keys extends Input.Keys {

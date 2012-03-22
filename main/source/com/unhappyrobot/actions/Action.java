@@ -1,5 +1,15 @@
 package com.unhappyrobot.actions;
 
-public interface Action {
-  void act(float deltaTime);
+public abstract class Action {
+  protected boolean markedForRemoval;
+
+  protected void markToRemove() {
+    markedForRemoval = true;
+  }
+
+  public boolean isMarkedForRemoval() {
+    return markedForRemoval;
+  }
+
+  public abstract void act(float deltaTime);
 }

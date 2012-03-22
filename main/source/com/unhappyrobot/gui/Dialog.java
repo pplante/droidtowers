@@ -110,7 +110,7 @@ public class Dialog {
       window = null;
     }
 
-    ModalOverlay.instance().show();
+    ModalOverlay.instance().show(parent);
 
     window = new Window(title, skin);
 

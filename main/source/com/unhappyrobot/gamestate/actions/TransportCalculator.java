@@ -23,7 +23,7 @@ public class TransportCalculator extends GameStateAction {
   public void update(GridObjectEvent event) {
     if (isPaused()) return;
 
-    resetInterval();
+    reset();
   }
 
   @Override

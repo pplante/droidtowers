@@ -1,14 +1,10 @@
 package com.unhappyrobot.scenes;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.entities.CloudLayer;
-import com.unhappyrobot.gui.TiledImage;
+import com.unhappyrobot.gui.LabelStyles;
 
 public class SplashScene extends Scene {
   private static final int SPLASH_DURATION = 50;
@@ -18,27 +14,19 @@ public class SplashScene extends Scene {
 
   @Override
   public void create() {
-    final Texture texture = new Texture(Gdx.files.internal("hud/modal-noise.png"));
-    texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+    addModalBackground();
 
-    TiledImage background = new TiledImage(texture);
-    background.color.a = 0.75f;
-    background.width = Gdx.graphics.getWidth();
-    background.height = Gdx.graphics.getHeight();
-    getStage().addActor(background);
-
-    Label label = new Label("Droid Towers", getGuiSkin());
-    label.setStyle(new Label.LabelStyle(new BitmapFont(Gdx.files.internal("fonts/bank_gothic_64.fnt"), false), Color.WHITE));
+    Label label = LabelStyles.BankGothic64.makeLabel("Droid Towers");
     label.setAlignment(Align.CENTER);
     label.width = getStage().width();
     label.y = getStage().centerY() * 1.66f;
-    getStage().addActor(label);
+    addActor(label);
 
-    Label loadingMessage = new Label("Reticulating Splines...", getGuiSkin());
+    Label loadingMessage = LabelStyles.Default.makeLabel("Reticulating Splines...");
     loadingMessage.setAlignment(Align.CENTER);
     loadingMessage.width = getStage().width();
     loadingMessage.y = getStage().centerY();
-    getStage().addActor(loadingMessage);
+    addActor(loadingMessage);
 
     launchTime = System.currentTimeMillis() + SPLASH_DURATION;
     cloudLayer = new SplashCloudLayer();
@@ -58,7 +46,7 @@ public class SplashScene extends Scene {
     cloudLayer.render(getSpriteBatch(), getCamera());
 
     if (launchTime <= System.currentTimeMillis()) {
-      TowerGame.changeScene(TowerScene.class);
+      TowerGame.changeScene(MainMenuScene.class);
     }
   }
 }

@@ -1,19 +1,19 @@
 package com.unhappyrobot.gui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.gamestate.server.TemporaryToken;
 import com.unhappyrobot.utils.PeriodicAsyncTask;
-
-import java.lang.reflect.Method;
-import java.net.URI;
+import com.unhappyrobot.utils.Platform;
 
 public class ConnectToFacebook extends TowerWindow {
-  public ConnectToFacebook(HeadsUpDisplay headsUpDisplay) {
-    super("Connect to Facebook", headsUpDisplay);
+  public ConnectToFacebook(Stage stage, Skin skin) {
+    super("Connect to Facebook", stage, skin);
 
     row().pad(10);
     add(makeLabel("Connecting to Facebook will enable:\n\n* Towers to be stored in the cloud\n* Sharing towers with friends\n* Other stuff!"));
@@ -41,13 +41,9 @@ public class ConnectToFacebook extends TowerWindow {
 
         codeLabel.setClickListener(new ClickListener() {
           public void click(Actor actor, float x, float y) {
-            try {
-              Class<?> d = Class.forName("java.awt.Desktop");
-              Method browseMethod = d.getDeclaredMethod("browse", new Class[]{URI.class});
-              browseMethod.invoke(d.getDeclaredMethod("getDesktop").invoke(null), new Object[]{new URI[]{URI.create(token.getClickableUri())}});
-            } catch (Exception ignored) {
+            String uri = token.getClickableUri();
 
-            }
+            Platform.launchWebBrowser(uri);
           }
         });
       }

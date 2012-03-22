@@ -30,6 +30,7 @@ public class DesktopGame {
     config.useGL20 = true;
 //    config.vSyncEnabled = false;
 
-    new LwjglApplication(new TowerGame(OSValidator.getOSType(), System.getProperty("os.version")), config);
+    LwjglApplicationShim applicationShim = new LwjglApplicationShim(new TowerGame(OSValidator.getOSType(), System.getProperty("os.version")));
+    new LwjglApplication(applicationShim, config);
   }
 }

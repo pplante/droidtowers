@@ -2,9 +2,12 @@ package com.unhappyrobot.scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.unhappyrobot.gui.TiledImage;
 
 public abstract class Scene {
   private static SpriteBatch spriteBatch;
@@ -54,5 +57,24 @@ public abstract class Scene {
 
   public static void setCamera(OrthographicCamera camera) {
     Scene.camera = camera;
+  }
+
+  protected void addModalBackground() {
+    final Texture texture = new Texture(Gdx.files.internal("hud/modal-noise.png"));
+    texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+
+    TiledImage background = new TiledImage(texture);
+    background.color.a = 0.75f;
+    background.width = Gdx.graphics.getWidth();
+    background.height = Gdx.graphics.getHeight();
+    getStage().addActor(background);
+  }
+
+  protected void addActor(Actor actor) {
+    getStage().addActor(actor);
+  }
+
+  protected void centerHorizontally(Actor actor) {
+    actor.x = (getStage().width() - actor.width) / 2;
   }
 }

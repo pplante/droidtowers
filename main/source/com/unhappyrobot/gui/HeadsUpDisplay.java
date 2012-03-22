@@ -76,7 +76,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     connectFacebookButton.y = 100;
     connectFacebookButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        ConnectToFacebook mainMenu = new ConnectToFacebook(HeadsUpDisplay.this);
+        ConnectToFacebook mainMenu = new ConnectToFacebook(getStage(), getGuiSkin());
         mainMenu.show().centerOnStage();
       }
     });
@@ -169,7 +169,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   }
 
   private void makePurchaseDialog(String title, GridObjectTypeFactory typeFactory) {
-    purchaseDialog = new GridObjectPurchaseMenu(this, title, typeFactory);
+    purchaseDialog = new GridObjectPurchaseMenu(getStage(), getGuiSkin(), title, typeFactory);
 
     purchaseDialog.setDismissCallback(new Runnable() {
       public void run() {

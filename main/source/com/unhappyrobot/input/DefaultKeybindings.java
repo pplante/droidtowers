@@ -5,6 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.unhappyrobot.scenes.TowerScene;
 
 public class DefaultKeybindings {
+  private DefaultKeybindings() {
+
+  }
+
   public static void initialize(final TowerScene towerScene) {
     InputSystem.instance().bind(new int[]{InputSystem.Keys.PLUS, InputSystem.Keys.UP}, new InputCallback() {
       public boolean run(float timeDelta) {

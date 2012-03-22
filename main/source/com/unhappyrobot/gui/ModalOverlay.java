@@ -6,6 +6,7 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.unhappyrobot.TowerGame;
@@ -44,8 +45,12 @@ public class ModalOverlay extends WidgetGroup {
     return Gdx.graphics.getHeight();
   }
 
-  public void show() {
-    TowerGame.getActiveScene().getStage().addActor(this);
+  public void show(Stage stage) {
+    if (stage == null) {
+      stage = TowerGame.getActiveScene().getStage();
+    }
+
+    stage.addActor(this);
     background.width = Gdx.graphics.getWidth();
     background.height = Gdx.graphics.getHeight();
 

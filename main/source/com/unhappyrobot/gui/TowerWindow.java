@@ -1,5 +1,6 @@
 package com.unhappyrobot.gui;
 
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.unhappyrobot.input.InputCallback;
@@ -10,13 +11,13 @@ public class TowerWindow extends Window {
   private InputCallback closeDialogCallback;
   private Runnable dismissCallback;
   private boolean modalState;
+  private final Stage stage;
   protected final Skin skin;
-  private final HeadsUpDisplay headsUpDisplay;
 
-  public TowerWindow(String title, HeadsUpDisplay headsUpDisplay) {
-    super(title, headsUpDisplay.getGuiSkin());
-    this.headsUpDisplay = headsUpDisplay;
-    skin = headsUpDisplay.getGuiSkin();
+  public TowerWindow(String title, Stage stage, Skin skin) {
+    super(title, skin);
+    this.stage = stage;
+    this.skin = skin;
 
     defaults().top().left();
   }
@@ -32,7 +33,7 @@ public class TowerWindow extends Window {
     InputSystem.instance().bind(DIALOG_CLOSE_KEYCODES, closeDialogCallback);
 
     pack();
-    headsUpDisplay.getStage().addActor(this);
+    stage.addActor(this);
 
     return this;
   }
@@ -74,7 +75,7 @@ public class TowerWindow extends Window {
     if (modalState) {
       setModal(true);
       setMovable(false);
-      ModalOverlay.instance().show();
+      ModalOverlay.instance().show(stage);
     } else {
       setModal(false);
       setMovable(true);

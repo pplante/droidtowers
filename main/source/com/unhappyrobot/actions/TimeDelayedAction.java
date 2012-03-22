@@ -1,13 +1,13 @@
 package com.unhappyrobot.actions;
 
-public abstract class TimeDelayedAction implements Action {
+public abstract class TimeDelayedAction extends Action {
   private float currentTime;
   private final float updateFrequency;
   private boolean shouldRepeat;
   private boolean hasRunBefore;
   private boolean paused;
 
-  public TimeDelayedAction(long updateFrequency) {
+  public TimeDelayedAction(float updateFrequency) {
     this(updateFrequency, true);
   }
 
@@ -34,9 +34,10 @@ public abstract class TimeDelayedAction implements Action {
     }
   }
 
-  public void resetInterval() {
+  public void reset() {
     currentTime = 0.0f;
     hasRunBefore = false;
+    markedForRemoval = false;
   }
 
   public boolean isPaused() {

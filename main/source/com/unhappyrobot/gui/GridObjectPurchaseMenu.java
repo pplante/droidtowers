@@ -2,6 +2,7 @@ package com.unhappyrobot.gui;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
@@ -17,8 +18,8 @@ import java.text.NumberFormat;
 public class GridObjectPurchaseMenu extends TowerWindow {
   private Class gridObjectTypeClass;
 
-  public GridObjectPurchaseMenu(HeadsUpDisplay headsUpDisplay, String objectTypeName, GridObjectTypeFactory typeFactory) {
-    super("Purchase " + objectTypeName, headsUpDisplay);
+  public GridObjectPurchaseMenu(Stage stage, Skin skin, String objectTypeName, GridObjectTypeFactory typeFactory) {
+    super("Purchase " + objectTypeName, stage, skin);
 
     defaults().align(Align.LEFT);
     row().pad(10);
