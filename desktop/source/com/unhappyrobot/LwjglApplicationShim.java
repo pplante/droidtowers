@@ -1,9 +1,6 @@
 package com.unhappyrobot;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.*;
 import com.unhappyrobot.actions.ActionManager;
 import com.unhappyrobot.actions.TimeDelayedAction;
 import com.unhappyrobot.input.InputSystem;
@@ -29,39 +26,7 @@ public class LwjglApplicationShim implements ApplicationListener {
         markToRemove();
       }
     };
-    dummyInputAdapter = new InputProcessor() {
-      public boolean keyDown(int keycode) {
-        return true;
-      }
-
-      public boolean keyUp(int keycode) {
-        return true;
-      }
-
-      public boolean keyTyped(char character) {
-        return true;
-      }
-
-      public boolean touchDown(int x, int y, int pointer, int button) {
-        return true;
-      }
-
-      public boolean touchUp(int x, int y, int pointer, int button) {
-        return true;
-      }
-
-      public boolean touchDragged(int x, int y, int pointer) {
-        return true;
-      }
-
-      public boolean touchMoved(int x, int y) {
-        return true;
-      }
-
-      public boolean scrolled(int amount) {
-        return true;
-      }
-    };
+    dummyInputAdapter = new InputAdapter();
   }
 
   public void create() {

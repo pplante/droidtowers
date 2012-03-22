@@ -14,6 +14,8 @@ import com.unhappyrobot.gui.WidgetAccessor;
 import com.unhappyrobot.tween.TweenSystem;
 import com.unhappyrobot.utils.Platform;
 
+import java.text.NumberFormat;
+
 public class MainMenuScene extends Scene {
   private SplashCloudLayer cloudLayer;
 
@@ -80,18 +82,66 @@ public class MainMenuScene extends Scene {
 
 
     newGameButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
+      public void click(final Actor actor, float x, float y) {
 //        TowerGame.changeScene(TowerScene.class);
         TowerWindow window = new TowerWindow("Start a new Tower", getStage(), getGuiSkin());
+        window.defaults().top().left().pad(5);
         window.add(LabelStyles.Default.makeLabel("Please provide a name for your Tower:"));
-        window.row();
+        window.row().colspan(2);
 
-        TextField nameField = new TextField("", "test", getGuiSkin());
+        TextField nameField = new TextField("", "Tower Name", getGuiSkin());
         window.add(nameField);
-        window.debug();
-        window.show().centerOnStage();
+        window.row().padTop(15).colspan(2);
+
+        window.add(LabelStyles.Default.makeLabel("Select level of difficulty:"));
+        window.row().colspan(2);
+
+        TextButton easy = new CheckBox(" Easy", getGuiSkin());
+        TextButton medium = new CheckBox(" Medium", getGuiSkin());
+        TextButton hard = new CheckBox(" Hard", getGuiSkin());
+
+        Table buttonContainer = new Table(getGuiSkin());
+        buttonContainer.row().pad(4);
+        buttonContainer.add(easy).expand();
+        buttonContainer.add(medium).expand();
+        buttonContainer.add(hard).expand();
+
+        window.add(buttonContainer).center().fill();
+        window.row().padTop(15).colspan(2);
+
+        final String moneyLabelPrefix = "Starting money: ";
+        final Label moneyLabel = LabelStyles.Default.makeLabel(moneyLabelPrefix);
+        window.add(moneyLabel);
+
+        final ButtonGroup difficultyGroup = new ButtonGroup(easy, medium, hard);
+        difficultyGroup.setClickListener(new ClickListener() {
+          public void click(Actor actor, float x, float y) {
+            Button checked = difficultyGroup.getChecked();
+            if (checked != null) {
+              String buttonText = ((TextButton) checked).getText().toString();
+              int amountOfMoney = 50000;
+              if (buttonText.contains("Medium")) {
+                amountOfMoney = 35000;
+              } else if (buttonText.contains("Hard")) {
+                amountOfMoney = 10000;
+              }
+
+              moneyLabel.setText(moneyLabelPrefix + NumberFormat.getCurrencyInstance().format(amountOfMoney));
+            }
+          }
+        });
+
+        difficultyGroup.setChecked(" Easy");
+
+        window.row().padTop(25);
+        window.add(new TextButton("Cancel", getGuiSkin())).right();
+        window.add(new TextButton("Begin building!", getGuiSkin())).right();
+
+        window.modal(true).show().centerOnStage();
       }
     });
+
+    newGameButton.click(0, 0);
   }
 
   private void center(Actor actor) {
