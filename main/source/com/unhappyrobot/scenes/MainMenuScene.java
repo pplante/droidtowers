@@ -1,28 +1,24 @@
 package com.unhappyrobot.scenes;
 
-import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.equations.Bounce;
-import aurelienribon.tweenengine.equations.Quad;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveBy;
+import com.badlogic.gdx.scenes.scene2d.actions.ScaleTo;
+import com.badlogic.gdx.scenes.scene2d.actions.Sequence;
+import com.badlogic.gdx.scenes.scene2d.interpolators.OvershootInterpolator;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.gui.LabelStyles;
-import com.unhappyrobot.gui.TowerWindow;
-import com.unhappyrobot.gui.WidgetAccessor;
-import com.unhappyrobot.tween.TweenSystem;
+import com.unhappyrobot.gui.NewGameWindow;
 import com.unhappyrobot.utils.Platform;
-
-import java.text.NumberFormat;
 
 public class MainMenuScene extends Scene {
   private SplashCloudLayer cloudLayer;
 
   @Override
   public void create() {
-    addModalBackground();
-
     Table container = new Table(getGuiSkin());
     container.defaults().center().left();
 
@@ -60,11 +56,8 @@ public class MainMenuScene extends Scene {
     });
     addActor(happyDroidsLogo);
 
-    Tween.to(happyDroidsLogo, WidgetAccessor.SCALE, 1000)
-            .delay(250)
-            .ease(Bounce.OUT)
-            .target(1f, 1f)
-            .start(TweenSystem.getTweenManager());
+    happyDroidsLogo.action(ScaleTo.$(1f, 1f, 0.55f)
+                                   .setInterpolator(OvershootInterpolator.$(1.75f)));
 
     container.pack();
     addActor(container);
@@ -72,11 +65,12 @@ public class MainMenuScene extends Scene {
 
     container.color.a = 0f;
 
-    Tween.to(container, WidgetAccessor.OPACITY, 550)
-            .delay(150)
-            .ease(Quad.INOUT)
-            .target(1f)
-            .start(TweenSystem.getTweenManager());
+    container.action(FadeIn.$(0.85f));
+    container.action(Sequence.$(
+                                       MoveBy.$(0, -container.height, 0f),
+                                       MoveBy.$(0, container.height, 0.75f)
+                                               .setInterpolator(OvershootInterpolator.$(3f)
+                                               )));
 
     cloudLayer = new SplashCloudLayer();
 
@@ -84,64 +78,12 @@ public class MainMenuScene extends Scene {
     newGameButton.setClickListener(new ClickListener() {
       public void click(final Actor actor, float x, float y) {
 //        TowerGame.changeScene(TowerScene.class);
-        TowerWindow window = new TowerWindow("Start a new Tower", getStage(), getGuiSkin());
-        window.defaults().top().left().pad(5);
-        window.add(LabelStyles.Default.makeLabel("Please provide a name for your Tower:"));
-        window.row().colspan(2);
-
-        TextField nameField = new TextField("", "Tower Name", getGuiSkin());
-        window.add(nameField);
-        window.row().padTop(15).colspan(2);
-
-        window.add(LabelStyles.Default.makeLabel("Select level of difficulty:"));
-        window.row().colspan(2);
-
-        TextButton easy = new CheckBox(" Easy", getGuiSkin());
-        TextButton medium = new CheckBox(" Medium", getGuiSkin());
-        TextButton hard = new CheckBox(" Hard", getGuiSkin());
-
-        Table buttonContainer = new Table(getGuiSkin());
-        buttonContainer.row().pad(4);
-        buttonContainer.add(easy).expand();
-        buttonContainer.add(medium).expand();
-        buttonContainer.add(hard).expand();
-
-        window.add(buttonContainer).center().fill();
-        window.row().padTop(15).colspan(2);
-
-        final String moneyLabelPrefix = "Starting money: ";
-        final Label moneyLabel = LabelStyles.Default.makeLabel(moneyLabelPrefix);
-        window.add(moneyLabel);
-
-        final ButtonGroup difficultyGroup = new ButtonGroup(easy, medium, hard);
-        difficultyGroup.setClickListener(new ClickListener() {
-          public void click(Actor actor, float x, float y) {
-            Button checked = difficultyGroup.getChecked();
-            if (checked != null) {
-              String buttonText = ((TextButton) checked).getText().toString();
-              int amountOfMoney = 50000;
-              if (buttonText.contains("Medium")) {
-                amountOfMoney = 35000;
-              } else if (buttonText.contains("Hard")) {
-                amountOfMoney = 10000;
-              }
-
-              moneyLabel.setText(moneyLabelPrefix + NumberFormat.getCurrencyInstance().format(amountOfMoney));
-            }
-          }
-        });
-
-        difficultyGroup.setChecked(" Easy");
-
-        window.row().padTop(25);
-        window.add(new TextButton("Cancel", getGuiSkin())).right();
-        window.add(new TextButton("Begin building!", getGuiSkin())).right();
-
+        NewGameWindow window = new NewGameWindow("Start a new Tower", getStage(), getGuiSkin());
         window.modal(true).show().centerOnStage();
       }
     });
 
-    newGameButton.click(0, 0);
+//    newGameButton.click(0, 0);
   }
 
   private void center(Actor actor) {

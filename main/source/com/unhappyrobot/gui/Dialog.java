@@ -1,41 +1,39 @@
 package com.unhappyrobot.gui;
 
-import aurelienribon.tweenengine.Timeline;
-import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Align;
+import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.google.common.collect.Lists;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
 import com.unhappyrobot.scenes.Scene;
-import com.unhappyrobot.tween.TweenSystem;
 
 import java.util.List;
 
 public class Dialog {
   static final int[] NEGATIVE_BUTTON_KEYS = new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE};
-  private Stage parent;
+  private Stage stage;
   private Skin skin;
   private List<LabelButton> buttons;
   private String title;
   private String messageText;
-  private Window window;
+  private TowerWindow window;
   private boolean shouldDisplayCentered;
   private LabelButton positiveButton;
   private LabelButton negativeButton;
   private final InputCallback positiveButtonInputCallback;
   private final InputCallback negativeButtonInputCallback;
-  private InputCallback onDismissInputCallback;
 
   public Dialog() {
     this(TowerGame.getActiveScene().getStage());
   }
 
   public Dialog(Stage stage) {
-    parent = stage;
+    this.stage = stage;
     skin = Scene.getGuiSkin();
     title = "Dialog";
     buttons = Lists.newArrayList();
@@ -105,44 +103,22 @@ public class Dialog {
   }
 
   public Dialog show() {
-    if (window != null) {
-      parent.removeActor(window);
-      window = null;
-    }
+    ModalOverlay.instance().show(stage);
 
-    ModalOverlay.instance().show(parent);
-
-    window = new Window(title, skin);
-
-    window.defaults();
-    window.setMovable(false);
-    window.setModal(true);
-
-    Table table = new Table(skin);
-    table.defaults();
-    table.row().pad(10).space(4);
-    Label messageLabel = new Label(skin);
+    window = new TowerWindow(title, stage, skin);
+    window.row().pad(10).space(4);
+    Label messageLabel = LabelStyles.Default.makeLabel(messageText);
     messageLabel.setWrap(true);
     messageLabel.setAlignment(Align.TOP | Align.LEFT);
-    messageLabel.setText(messageText);
 
-    table.add(messageLabel).top().left().width((int) (parent.width() / 2)).minWidth(400).maxWidth(600).fill().colspan(buttons.size());
+    window.add(messageLabel).top().left().width((int) (stage.width() / 2)).minWidth(400).maxWidth(600).fill().colspan(buttons.size());
 
-    table.row().space(4);
+    window.row().space(4);
     for (LabelButton button : buttons) {
-      table.add(button).fill().minWidth(80);
+      window.add(button).fill().minWidth(80);
     }
 
-    table.pack();
-
-    window.add(table);
-    window.pack();
-
-    parent.addActor(window);
-
-    if (shouldDisplayCentered) {
-      centerOnScreen();
-    }
+    window.modal(true).show().centerOnStage();
 
     if (positiveButton != null) {
       InputSystem.instance().bind(InputSystem.Keys.ENTER, positiveButtonInputCallback);
@@ -152,44 +128,16 @@ public class Dialog {
       InputSystem.instance().bind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
     }
 
-    window.color.a = 0f;
-
-    Timeline.createSequence()
-            .push(Tween.set(window, WidgetAccessor.OPACITY).target(0f))
-            .push(Tween.to(window, WidgetAccessor.OPACITY, 200).delay(100).target(1.0f))
-            .start(TweenSystem.getTweenManager());
-
     return this;
   }
 
   public void dismiss() {
-    if (parent != null && window != null) {
-      parent.removeActor(window);
-    }
-
-    InputSystem.instance().unbind(InputSystem.Keys.ENTER, positiveButtonInputCallback);
-    InputSystem.instance().unbind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
-
-    if (onDismissInputCallback != null) {
-      onDismissInputCallback.run(0f);
-    }
-
-    ModalOverlay.instance().hide();
-  }
-
-  public Dialog centerOnScreen() {
     if (window != null) {
-
-      window.x = (parent.width() - window.width) / 2;
-      window.y = (parent.height() - window.height) / 2;
-    } else {
-      shouldDisplayCentered = true;
+      window.dismiss();
+      window = null;
+      InputSystem.instance().unbind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
+      ModalOverlay.instance().hide();
     }
-
-    return this;
   }
 
-  public void onDismiss(InputCallback inputCallback) {
-    onDismissInputCallback = inputCallback;
-  }
 }

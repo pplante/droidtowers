@@ -102,7 +102,7 @@ public class GameState extends EventListener {
           dialog.dismiss();
           Gdx.app.exit();
         }
-      }).centerOnScreen().show();
+      }).show();
     } finally {
       transportCalculator.unpause();
     }

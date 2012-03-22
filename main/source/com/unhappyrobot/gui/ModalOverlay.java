@@ -1,16 +1,15 @@
 package com.unhappyrobot.gui;
 
-import aurelienribon.tweenengine.BaseTween;
-import aurelienribon.tweenengine.Timeline;
-import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.OnActionCompleted;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.FadeOut;
+import com.badlogic.gdx.scenes.scene2d.actions.FadeTo;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.unhappyrobot.TowerGame;
-import com.unhappyrobot.tween.TweenSystem;
 
 public class ModalOverlay extends WidgetGroup {
   public static final float TARGET_OPACITY = 0.5f;
@@ -54,23 +53,18 @@ public class ModalOverlay extends WidgetGroup {
     background.width = Gdx.graphics.getWidth();
     background.height = Gdx.graphics.getHeight();
 
-    Timeline.createSequence()
-            .push(Tween.set(background, WidgetAccessor.OPACITY).target(0f))
-            .push(Tween.to(background, WidgetAccessor.OPACITY, 200).target(TARGET_OPACITY))
-            .start(TweenSystem.getTweenManager());
+    background.color.a = 0f;
+    background.clearActions();
+    background.action(FadeTo.$(TARGET_OPACITY, 0.25f));
   }
 
   public void hide() {
-    Timeline.createSequence()
-            .push(Tween.set(background, WidgetAccessor.OPACITY).target(TARGET_OPACITY))
-            .push(Tween.to(background, WidgetAccessor.OPACITY, 200).target(0f))
-            .setCallback(new TweenCallback() {
-              public void onEvent(int eventType, BaseTween source) {
-                markToRemove(true);
-              }
-            })
-            .setCallbackTriggers(TweenCallback.COMPLETE)
-            .start(TweenSystem.getTweenManager());
+    background.clearActions();
+    background.action(FadeOut.$(0.25f).setCompletionListener(new OnActionCompleted() {
+      public void completed(Action action) {
+        markToRemove(true);
+      }
+    }));
   }
 
   @Override

@@ -73,32 +73,19 @@ public class TowerGame implements ApplicationListener {
     InputSystem.instance().addInputProcessor(rootUiStage, 0);
 
     InputSystem.instance().bind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, new InputCallback() {
-      private Dialog exitDialog;
-
       public boolean run(float timeDelta) {
-        if (exitDialog != null) {
-          exitDialog.dismiss();
-        } else {
-          exitDialog = new Dialog(rootUiStage).setTitle("Awww, don't leave me.").setMessage("Are you sure you want to exit the game?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
-            @Override
-            public void onClick(Dialog dialog) {
-              dialog.dismiss();
-              Gdx.app.exit();
-            }
-          }).addButton(ResponseType.NEGATIVE, "No way!", new OnClickCallback() {
-            @Override
-            public void onClick(Dialog dialog) {
-              dialog.dismiss();
-            }
-          }).centerOnScreen().show();
-
-          exitDialog.onDismiss(new InputCallback() {
-            public boolean run(float timeDelta) {
-              exitDialog = null;
-              return true;
-            }
-          });
-        }
+        new Dialog(rootUiStage).setTitle("Awww, don't leave me.").setMessage("Are you sure you want to exit the game?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
+          @Override
+          public void onClick(Dialog dialog) {
+            dialog.dismiss();
+            Gdx.app.exit();
+          }
+        }).addButton(ResponseType.NEGATIVE, "No way!", new OnClickCallback() {
+          @Override
+          public void onClick(Dialog dialog) {
+            dialog.dismiss();
+          }
+        }).show();
 
         return true;
       }
@@ -153,6 +140,7 @@ public class TowerGame implements ApplicationListener {
     camera.viewportHeight = height;
     spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
     Gdx.gl.glViewport(0, 0, width, height);
+    rootUiStage.setViewport(width, height, rootUiStage.isStretched());
     activeScene.getStage().setViewport(width, height, activeScene.getStage().isStretched());
   }
 

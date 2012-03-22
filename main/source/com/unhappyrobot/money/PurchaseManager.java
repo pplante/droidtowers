@@ -47,7 +47,7 @@ public class PurchaseManager {
       public void onClick(Dialog dialog) {
         dialog.dismiss();
       }
-    }).centerOnScreen().show();
+    }).show();
   }
 
   public void makePurchase() {
