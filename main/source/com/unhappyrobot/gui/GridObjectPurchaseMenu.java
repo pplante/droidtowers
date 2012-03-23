@@ -17,9 +17,11 @@ import java.text.NumberFormat;
 
 public class GridObjectPurchaseMenu extends TowerWindow {
   private Class gridObjectTypeClass;
+  private final Runnable toolCleanupRunnable;
 
-  public GridObjectPurchaseMenu(Stage stage, Skin skin, String objectTypeName, GridObjectTypeFactory typeFactory) {
+  public GridObjectPurchaseMenu(Stage stage, Skin skin, String objectTypeName, GridObjectTypeFactory typeFactory, Runnable toolCleanupRunnable) {
     super("Purchase " + objectTypeName, stage, skin);
+    this.toolCleanupRunnable = toolCleanupRunnable;
 
     defaults().align(Align.LEFT);
     row().pad(10);
@@ -63,7 +65,7 @@ public class GridObjectPurchaseMenu extends TowerWindow {
       } else {
         buyButton.setClickListener(new ClickListener() {
           public void click(Actor actor, float x, float y) {
-            InputSystem.instance().switchTool(GestureTool.PLACEMENT, null);
+            InputSystem.instance().switchTool(GestureTool.PLACEMENT, toolCleanupRunnable);
 
             PlacementTool placementTool = (PlacementTool) InputSystem.instance().getCurrentTool();
             placementTool.setup(gridObjectType);

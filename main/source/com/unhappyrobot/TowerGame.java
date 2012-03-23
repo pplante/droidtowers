@@ -38,10 +38,20 @@ public class TowerGame implements ApplicationListener {
   private BitmapFont menloBitmapFont;
   private static Scene activeScene;
   private Stage rootUiStage;
+  private static boolean audioEnabled;
 
   public TowerGame(String operatingSystemName, String operatingSystemVersion) {
     this.operatingSystemName = operatingSystemName;
     this.operatingSystemVersion = operatingSystemVersion;
+    audioEnabled = true;
+  }
+
+  public static boolean isAudioEnabled() {
+    return audioEnabled;
+  }
+
+  public static void setAudioEnabled(boolean audioEnabled) {
+    TowerGame.audioEnabled = audioEnabled;
   }
 
   public void create() {
@@ -140,8 +150,8 @@ public class TowerGame implements ApplicationListener {
     camera.viewportHeight = height;
     spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
     Gdx.gl.glViewport(0, 0, width, height);
-    rootUiStage.setViewport(width, height, rootUiStage.isStretched());
-    activeScene.getStage().setViewport(width, height, activeScene.getStage().isStretched());
+//    rootUiStage.setViewport(width, height, rootUiStage.isStretched());
+//    activeScene.getStage().setViewport(width, height, activeScene.getStage().isStretched());
   }
 
 

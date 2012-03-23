@@ -11,7 +11,6 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/desktop/libs/main/gdx-backend-lwjgl-natives.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/guava-10.0.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/tween-engine-api.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/js.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/commons-lang3-3.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/jackson-mapper-asl-1.9.5.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/jackson-core-asl-1.9.5.jar" path-in-jar="/" />

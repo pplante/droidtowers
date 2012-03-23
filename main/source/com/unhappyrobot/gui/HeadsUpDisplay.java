@@ -43,6 +43,8 @@ public class HeadsUpDisplay extends WidgetGroup {
   private RadialMenu toolMenu;
   private final StackGroup notificationStack;
   private TextButton expandLandButton;
+  private final ImageButton toolButton;
+  private final ImageButton.ImageButtonStyle toolButtonStyle;
 
   public HeadsUpDisplay(TowerScene towerScene) {
     instance = this;
@@ -51,7 +53,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     this.stage = towerScene.getStage();
     this.camera = towerScene.getCamera();
-    this.gameGrid = TowerScene.getGameGrid();
+    this.gameGrid = towerScene.getGameGrid();
     guiSkin = Scene.getGuiSkin();
 
     menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_14_bold_white.fnt"), false);
@@ -99,30 +101,28 @@ public class HeadsUpDisplay extends WidgetGroup {
     servicesButton.setClickListener(makePurchaseButtonClickListener("Services", ServiceRoomTypeFactory.instance()));
     toolMenu.addActor(servicesButton);
 
-    ImageButton sellButton = new ImageButton(hudAtlas.findRegion("tool-sell"));
+    final ImageButton sellButton = new ImageButton(hudAtlas.findRegion("tool-sell"));
     sellButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         toolMenu.hide();
-        InputSystem.instance().switchTool(GestureTool.SELL, null);
+        toolButton.setStyle(sellButton.getStyle());
+        InputSystem.instance().switchTool(GestureTool.SELL, new Runnable() {
+          public void run() {
+            toolButton.setStyle(toolButtonStyle);
+          }
+        });
       }
     });
 
     toolMenu.addActor(sellButton);
 
-    final ImageButton toolButton = new ImageButton(hudAtlas.findRegion("tool-sprite"));
+    toolButton = new ImageButton(hudAtlas.findRegion("tool-sprite"));
     toolButton.x = stage.width() - toolButton.width - 5;
     toolButton.y = 5;
     addActor(toolButton);
+    toolButtonStyle = toolButton.getStyle();
     toolButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        if (InputSystem.instance().getCurrentTool() != GestureTool.PLACEMENT) {
-          if (purchaseDialog != null) {
-            purchaseDialog.dismiss();
-            purchaseDialog = null;
-          }
-          InputSystem.instance().switchTool(GestureTool.PICKER, null);
-        }
-
         if (!toolMenu.visible) {
           stage.addActor(toolMenu);
           toolMenu.x = toolButton.x + 20f;
@@ -159,7 +159,8 @@ public class HeadsUpDisplay extends WidgetGroup {
         toolMenu.hide();
 
         if (purchaseDialog == null) {
-          makePurchaseDialog(dialogTitle, typeFactory);
+          makePurchaseDialog(dialogTitle, typeFactory, ((ImageButton) actor).getStyle());
+          toolButton.setStyle(((ImageButton) actor).getStyle());
         } else {
           purchaseDialog.dismiss();
           purchaseDialog = null;
@@ -168,12 +169,19 @@ public class HeadsUpDisplay extends WidgetGroup {
     };
   }
 
-  private void makePurchaseDialog(String title, GridObjectTypeFactory typeFactory) {
-    purchaseDialog = new GridObjectPurchaseMenu(getStage(), getGuiSkin(), title, typeFactory);
+  private void makePurchaseDialog(String title, GridObjectTypeFactory typeFactory, ImageButton.ImageButtonStyle style) {
+    purchaseDialog = new GridObjectPurchaseMenu(getStage(), getGuiSkin(), title, typeFactory, new Runnable() {
+      public void run() {
+        toolButton.setStyle(toolButtonStyle);
+      }
+    });
 
     purchaseDialog.setDismissCallback(new Runnable() {
       public void run() {
         purchaseDialog = null;
+        if (InputSystem.instance().getCurrentTool() == GestureTool.PICKER) {
+          toolButton.setStyle(toolButtonStyle);
+        }
       }
     });
 

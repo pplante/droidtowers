@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.WeatherService;
 import com.unhappyrobot.achievements.AchievementEngine;
+import com.unhappyrobot.audio.GameGridSoundDispatcher;
 import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.controllers.GameTips;
 import com.unhappyrobot.entities.CloudLayer;
@@ -34,7 +35,7 @@ import java.util.List;
 
 public class TowerScene extends Scene {
   private List<GameLayer> gameLayers;
-  private static GameGrid gameGrid;
+  private GameGrid gameGrid;
   private GameGridRenderer gameGridRenderer;
   private GameState gameState;
   private float timeMultiplier;
@@ -44,6 +45,7 @@ public class TowerScene extends Scene {
   private GameTips gameTips;
   private GestureDetector gestureDetector;
   private GestureDelegater gestureDelegater;
+  private GameGridSoundDispatcher gridSoundDispatcher;
 
   public TowerScene() {
     gameSaveLocation = Gdx.files.external(Gdx.app.getType().equals(Application.ApplicationType.Desktop) ? ".towergame/test.json" : "test.json");
@@ -76,15 +78,15 @@ public class TowerScene extends Scene {
     gameLayers.add(gameGrid);
     gameLayers.add(AvatarLayer.initialize(gameGrid));
 
-    gameGrid.setUnitSize(TowerConsts.GRID_UNIT_SIZE, TowerConsts.GRID_UNIT_SIZE);
     gameGrid.setGridSize(TowerConsts.GAME_GRID_START_SIZE, TowerConsts.GAME_GRID_START_SIZE);
-    gameGrid.setGridColor(0.1f, 0.1f, 0.1f, 0.1f);
     gameGrid.updateWorldSize();
 
     gameTips = new GameTips(gameGrid);
 
     gestureDelegater = new GestureDelegater(camera, gameLayers);
     gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, gestureDelegater);
+
+    gridSoundDispatcher = new GameGridSoundDispatcher();
   }
 
   @Override
@@ -92,6 +94,8 @@ public class TowerScene extends Scene {
     gameState.saveGame();
     InputSystem.instance().removeInputProcessor(gestureDetector);
     AchievementEngine.instance().unregisterGameGrid();
+    gameGrid.events().unregister(gridSoundDispatcher);
+    gridSoundDispatcher.setGameGrid(null);
   }
 
   @Override
@@ -102,6 +106,7 @@ public class TowerScene extends Scene {
     DefaultKeybindings.initialize(this);
     gameState.loadSavedGame();
     AchievementEngine.instance().registerGameGrid(gameGrid);
+    gridSoundDispatcher.setGameGrid(gameGrid);
   }
 
   @Override
@@ -133,7 +138,7 @@ public class TowerScene extends Scene {
     this.timeMultiplier = timeMultiplier;
   }
 
-  public static GameGrid getGameGrid() {
+  public GameGrid getGameGrid() {
     return gameGrid;
   }
 

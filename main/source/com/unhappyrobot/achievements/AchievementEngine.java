@@ -115,4 +115,8 @@ public class AchievementEngine {
       gameGrid.events().register(AchievementEngine.instance());
     }
   }
+
+  public GameGrid getGameGrid() {
+    return gameGrid;
+  }
 }

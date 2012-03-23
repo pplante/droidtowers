@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.unhappyrobot.achievements.Achievement;
 import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.entities.GridObject;
@@ -48,6 +49,7 @@ public class GameSave {
 
     gridSize = gameGrid.gridSize;
     gridObjects = Lists.newArrayList();
+    objectCounts = Maps.newHashMap();
 
     for (GridObject gridObject : gameGrid.getObjects()) {
       if (gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {

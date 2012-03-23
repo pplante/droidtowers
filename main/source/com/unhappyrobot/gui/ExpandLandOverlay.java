@@ -50,7 +50,7 @@ public class ExpandLandOverlay extends WidgetGroup {
         GridPositionCache.instance().resumeEvents();
 
         Vector3 cameraPosition = CameraController.instance().getCamera().position.cpy();
-        CameraController.instance().getCamera().position.set(cameraPosition.x + (gameGrid.getUnitSize().x * TowerConsts.GAME_GRID_EXPAND_LAND_SIZE), cameraPosition.y, cameraPosition.z);
+        CameraController.instance().getCamera().position.set(cameraPosition.x + (TowerConsts.GRID_UNIT_SIZE * TowerConsts.GAME_GRID_EXPAND_LAND_SIZE), cameraPosition.y, cameraPosition.z);
         CameraController.instance().panTo(0, CameraController.instance().getCamera().position.y, true);
       }
     });

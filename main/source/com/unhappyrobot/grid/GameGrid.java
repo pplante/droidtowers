@@ -1,6 +1,5 @@
 package com.unhappyrobot.grid;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.eventbus.EventBus;
@@ -22,9 +21,6 @@ import java.util.Set;
 public class GameGrid extends GameLayer {
   private EventBus eventBus = new EventBus(GameGrid.class.getSimpleName());
 
-  public Vector2 unitSize;
-  public Color gridColor;
-
   public Vector2 gridSize;
   private GuavaSet<GridObject> objects;
   private Vector2 worldSize;
@@ -42,19 +38,13 @@ public class GameGrid extends GameLayer {
     objects = new GuavaSet<GridObject>(25);
 
     gameGridRenderer = new GameGridRenderer(this, camera);
-    gridColor = Color.GREEN;
     gridSize = new Vector2(8, 8);
-    unitSize = new Vector2(16, 16);
     updateWorldSize();
   }
 
   public void updateWorldSize() {
-    worldSize = new Vector2(gridSize.x * unitSize.x, gridSize.y * unitSize.y);
+    worldSize = new Vector2(gridSize.x * TowerConsts.GRID_UNIT_SIZE, gridSize.y * TowerConsts.GRID_UNIT_SIZE);
     events().post(new GameGridResizeEvent(this));
-  }
-
-  public void setUnitSize(int width, int height) {
-    unitSize.set(width, height);
   }
 
   public void setGridSize(int width, int height) {
@@ -63,10 +53,6 @@ public class GameGrid extends GameLayer {
 
   public void setGridSize(float x, float y) {
     setGridSize((int) x, (int) y);
-  }
-
-  public void setGridColor(float r, float g, float b, float a) {
-    gridColor.set(r, g, b, a);
   }
 
   public GameGridRenderer getRenderer() {
@@ -79,10 +65,6 @@ public class GameGrid extends GameLayer {
 
   public Vector2 getGridSize() {
     return gridSize;
-  }
-
-  public Vector2 getUnitSize() {
-    return unitSize;
   }
 
   public boolean addObject(GridObject gridObject) {
@@ -214,8 +196,8 @@ public class GameGrid extends GameLayer {
 
 
   public GridPoint closestGridPoint(float x, float y) {
-    float gridX = (float) Math.floor((int) x / unitSize.x);
-    float gridY = (float) Math.floor((int) y / unitSize.y);
+    float gridX = (float) Math.floor((int) x / TowerConsts.GRID_UNIT_SIZE);
+    float gridY = (float) Math.floor((int) y / TowerConsts.GRID_UNIT_SIZE);
 
     gridX = Math.max(0, Math.min(gridX, gridSize.x - 1));
     gridY = Math.max(0, Math.min(gridY, gridSize.y - 1));

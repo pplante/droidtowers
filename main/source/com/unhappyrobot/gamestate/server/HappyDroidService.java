@@ -66,7 +66,7 @@ public class HappyDroidService {
     deviceInfo.put("osVersion", HappyDroidService.instance().getDeviceOSVersion());
     HttpResponse response = HappyDroidService.instance().makePostRequest(Consts.API_V1_REGISTER_DEVICE, deviceInfo);
 
-    if (response.getStatusLine().getStatusCode() == 201) {
+    if (response != null && response.getStatusLine().getStatusCode() == 201) {
       HashMap hashMap = HappyDroidServiceObject.materializeObject(response, HashMap.class);
       if (hashMap.containsKey("isAuthenticated")) {
         isAuthenticated = (Boolean) hashMap.get("isAuthenticated");

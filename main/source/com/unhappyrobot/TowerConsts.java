@@ -8,8 +8,8 @@ public class TowerConsts {
   public static final int GAME_GRID_EXPAND_LAND_SIZE = 5;
   public static final int GAME_WORLD_PADDING = GRID_UNIT_SIZE * 7;
 
-  public static final float GROUND_HEIGHT = GRID_UNIT_SIZE * 10;
   public static final int LOBBY_FLOOR = 10;
+  public static final float GROUND_HEIGHT = GRID_UNIT_SIZE * LOBBY_FLOOR;
 
   public static final String CURRENCY_SYMBOL = "$";
 

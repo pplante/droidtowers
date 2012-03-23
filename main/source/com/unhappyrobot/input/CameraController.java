@@ -1,7 +1,6 @@
 package com.unhappyrobot.input;
 
 import aurelienribon.tweenengine.Tween;
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
@@ -22,8 +21,8 @@ public class CameraController implements GestureDetector.GestureListener {
   private static CameraController instance;
 
   public static final float ZOOM_MAX = 3.0f;
+  public static final float ZOOM_MIN = 0.6f;
 
-  public static final float ZOOM_MIN = (Gdx.app.getType() == Application.ApplicationType.Android ? 0.4f : 0.6f);
   private OrthographicCamera camera;
   private BoundingBox cameraBounds;
   private float initialScale = 1.0f;

@@ -3,7 +3,7 @@ package com.unhappyrobot.achievements;
 import com.google.common.base.Predicate;
 import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.entities.*;
-import com.unhappyrobot.scenes.TowerScene;
+import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.types.CommercialType;
 import com.unhappyrobot.types.ProviderType;
 import com.unhappyrobot.types.RoomType;
@@ -39,13 +39,14 @@ class AchievementRequirement {
     if (!AchievementEngine.instance().hasGameGrid()) {
       return false;
     }
+    GameGrid gameGrid = AchievementEngine.instance().getGameGrid();
 
     GuavaSet<GridObject> gridObjects = null;
     Predicate<GridObject> gridObjectPredicate = null;
 
     switch (thing) {
       case HOTEL_ROOM:
-        gridObjects = TowerScene.getGameGrid().getInstancesOf(Room.class, CommercialSpace.class);
+        gridObjects = gameGrid.getInstancesOf(Room.class, CommercialSpace.class);
         gridObjectPredicate = new Predicate<GridObject>() {
           public boolean apply(@Nullable GridObject gridObject) {
             return gridObject instanceof Room && ((RoomType) gridObject.getGridObjectType()).provides() == ProviderType.HOTEL_ROOMS;
@@ -54,7 +55,7 @@ class AchievementRequirement {
         break;
 
       case COMMERCIAL_SPACE:
-        gridObjects = TowerScene.getGameGrid().getInstancesOf(CommercialSpace.class);
+        gridObjects = gameGrid.getInstancesOf(CommercialSpace.class);
         gridObjectPredicate = new Predicate<GridObject>() {
           public boolean apply(@Nullable GridObject gridObject) {
             ProviderType providerType = ((CommercialType) gridObject.getGridObjectType()).provides();

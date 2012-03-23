@@ -71,7 +71,6 @@ public class GameObject extends Sprite {
   public void setWrap(Texture.TextureWrap wrapX, Texture.TextureWrap wrapY) {
     Texture texture = getTexture();
 
-    texture.setWrap(wrapX, wrapX);
 
     if (wrapX == Texture.TextureWrap.Repeat) {
       setU(0f);
@@ -82,6 +81,7 @@ public class GameObject extends Sprite {
       setV(0f);
       setV2(getHeight() / texture.getHeight());
     }
+    texture.setWrap(wrapX, wrapX);
   }
 
   public void markToRemove(boolean b) {

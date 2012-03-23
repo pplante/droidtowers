@@ -170,7 +170,7 @@ public class GameGridRenderer extends GameLayer {
     Gdx.gl.glEnable(GL10.GL_BLEND);
 
     shapeRenderer.begin(ShapeType.Line);
-    shapeRenderer.setColor(gameGrid.gridColor);
+    shapeRenderer.setColor(0.1f, 0.1f, 0.1f, 0.1f);
 
     for (int i = 0; i <= gameGrid.gridSize.x; i++) {
       shapeRenderer.line(i * TowerConsts.GRID_UNIT_SIZE, 0, i * TowerConsts.GRID_UNIT_SIZE, gameGrid.gridSize.y * TowerConsts.GRID_UNIT_SIZE);

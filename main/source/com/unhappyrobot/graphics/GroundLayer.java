@@ -20,13 +20,24 @@ public class GroundLayer extends GameLayer {
   public void GameGrid_onResize(GameGridResizeEvent event) {
     removeAllChildren();
 
-    Texture texture = new Texture(Gdx.files.internal("backgrounds/ground.png"));
+    Texture topTexture = new Texture(Gdx.files.internal("backgrounds/ground-top.png"));
 
-    GameObject gameObject = new GameObject(texture);
-    gameObject.setPosition(-TowerConsts.GAME_WORLD_PADDING, 0);
-    gameObject.setSize(event.gameGrid.getWorldSize().x + (TowerConsts.GAME_WORLD_PADDING * 2), TowerConsts.GROUND_HEIGHT);
-    gameObject.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
+    float tiledHeight = TowerConsts.GROUND_HEIGHT - topTexture.getHeight();
 
-    addChild(gameObject);
+    GameObject top = new GameObject(topTexture);
+    top.setPosition(-TowerConsts.GAME_WORLD_PADDING, tiledHeight);
+    top.setSize(event.gameGrid.getWorldSize().x + (TowerConsts.GAME_WORLD_PADDING * 2), topTexture.getHeight());
+    top.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
+
+    addChild(top);
+
+    Texture tileTexture = new Texture(Gdx.files.internal("backgrounds/ground-tile.png"));
+
+    GameObject tile = new GameObject(tileTexture);
+    tile.setPosition(-TowerConsts.GAME_WORLD_PADDING, 0);
+    tile.setSize(event.gameGrid.getWorldSize().x + (TowerConsts.GAME_WORLD_PADDING * 2), tiledHeight);
+    tile.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+
+    addChild(tile);
   }
 }
