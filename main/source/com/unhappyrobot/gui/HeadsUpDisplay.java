@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.entities.CommercialSpace;
 import com.unhappyrobot.entities.GridObject;
+import com.unhappyrobot.gamestate.server.HappyDroidService;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridPosition;
 import com.unhappyrobot.grid.GridPositionCache;
@@ -73,16 +74,6 @@ public class HeadsUpDisplay extends WidgetGroup {
     toolMenu.radius = 140f;
     toolMenu.rotation = 3f;
 
-    TextButton connectFacebookButton = new TextButton("Connect to Facebook", guiSkin);
-    connectFacebookButton.x = 100;
-    connectFacebookButton.y = 100;
-    connectFacebookButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        ConnectToFacebook mainMenu = new ConnectToFacebook(getStage(), getGuiSkin());
-        mainMenu.show().centerOnStage();
-      }
-    });
-//    addActor(connectFacebookButton);
     addActor(new ExpandLandOverlay(gameGrid, guiSkin));
 
     ImageButton housingButton = new ImageButton(hudAtlas.findRegion("tool-housing"));
@@ -135,15 +126,30 @@ public class HeadsUpDisplay extends WidgetGroup {
       }
     });
 
-    AudioControl audioControl = new AudioControl(hudAtlas);
-    audioControl.x = stage.width() - audioControl.width - 5;
-    audioControl.y = stage.height() - audioControl.height - 5;
-    addActor(audioControl);
+    final AudioControl audioControl = new AudioControl(hudAtlas);
+    final OverlayControl overlayControl = new OverlayControl(hudAtlas, guiSkin, gameGrid.getRenderer());
+    final TextButton connectFacebookButton = new TextButton("Connect to Facebook", guiSkin);
+    connectFacebookButton.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        ConnectToFacebook mainMenu = new ConnectToFacebook(getStage(), getGuiSkin());
+        mainMenu.show().centerOnStage();
+      }
+    });
 
-    OverlayControl overlayControl = new OverlayControl(hudAtlas, guiSkin, gameGrid.getRenderer());
-    overlayControl.x = audioControl.x - audioControl.width - 5;
-    overlayControl.y = stage.height() - overlayControl.height - 5;
-    addActor(overlayControl);
+    final Table topLeftButtons = new Table(getGuiSkin());
+    topLeftButtons.defaults().center().right().space(5);
+    HappyDroidService.instance().withNetworkConnection(new Runnable() {
+      public void run() {
+        System.out.println("have a network connection?");
+        layoutTopLeftButtons(topLeftButtons, connectFacebookButton, audioControl, overlayControl);
+      }
+    });
+
+    layoutTopLeftButtons(topLeftButtons, connectFacebookButton, audioControl, overlayControl);
+
+    topLeftButtons.x = stage.width() - topLeftButtons.width - 5;
+    topLeftButtons.y = stage.height() - topLeftButtons.height - 5;
+    addActor(topLeftButtons);
 
     notificationStack.pad(10);
     notificationStack.x = 0;
@@ -151,6 +157,14 @@ public class HeadsUpDisplay extends WidgetGroup {
     addActor(notificationStack);
 
     stage.addActor(this);
+  }
+
+  private void layoutTopLeftButtons(Table topLeftButtons, TextButton connectFacebookButton, AudioControl audioControl, OverlayControl overlayControl) {
+    topLeftButtons.clear();
+    topLeftButtons.add(connectFacebookButton);
+    topLeftButtons.add(audioControl);
+    topLeftButtons.add(overlayControl);
+    topLeftButtons.pack();
   }
 
   private ClickListener makePurchaseButtonClickListener(final String dialogTitle, final GridObjectTypeFactory typeFactory) {

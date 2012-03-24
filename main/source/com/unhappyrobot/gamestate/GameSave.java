@@ -42,8 +42,9 @@ public class GameSave {
 
   }
 
-  public GameSave(GameGrid gameGrid, OrthographicCamera camera, Player player) {
+  public GameSave(GameGrid gameGrid, OrthographicCamera camera, Player player, String cloudSaveUri) {
     this.player = player;
+    this.cloudSaveUri = cloudSaveUri;
     cameraPosition = camera.position;
     cameraZoom = camera.zoom;
 
@@ -70,6 +71,8 @@ public class GameSave {
       completedAchievements.add(achievement.getId());
     }
   }
+
+
 
   public static ObjectMapper getObjectMapper() {
     ObjectMapper objectMapper = new ObjectMapper();

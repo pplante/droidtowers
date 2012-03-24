@@ -16,11 +16,4 @@ public class AudioControl extends ImageButton {
       }
     });
   }
-
-  @Override
-  public void layout() {
-    super.layout();
-    x = stage.width() - width - 5;
-    y = stage.height() - height - 5;
-  }
 }

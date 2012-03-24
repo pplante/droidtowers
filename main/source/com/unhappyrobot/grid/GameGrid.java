@@ -2,6 +2,7 @@ package com.unhappyrobot.grid;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.GameLayer;
@@ -25,7 +26,7 @@ public class GameGrid extends GameLayer {
   private GuavaSet<GridObject> objects;
   private Vector2 worldSize;
   private final GameGridRenderer gameGridRenderer;
-  private final Map<Class, GuavaSet<GridObject>> gridObjectsByType;
+  private Map<Class, GuavaSet<GridObject>> gridObjectsByType;
   private GridObject selectedGridObject;
   private GridObject transitGridObjectA;
   private GridObject transitGridObjectB;
@@ -207,5 +208,14 @@ public class GameGrid extends GameLayer {
 
   public EventBus events() {
     return eventBus;
+  }
+
+  public void clearObjects() {
+    gridObjectsByType = Maps.newHashMap();
+    objects = new GuavaSet<GridObject>();
+  }
+
+  public boolean isEmpty() {
+    return objects.isEmpty();
   }
 }

@@ -25,4 +25,8 @@ public abstract class PeriodicAsyncTask extends AsyncTask {
   }
 
   public abstract boolean update();
+
+  protected void cancel() {
+    thread.interrupt();
+  }
 }

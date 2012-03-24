@@ -22,12 +22,15 @@ public class GameState extends EventListener {
   private final GameGrid gameGrid;
   private final FileHandle gameSaveLocation;
   private final GameStateAction calculatePopulation;
+  private static final String TAG = GameState.class.getSimpleName();
   private final GameStateAction calculateJobs;
   private final GameStateAction calculateEarnout;
   private final GameStateAction calculateDesirability;
   private boolean shouldSaveGame;
   private final TransportCalculator transportCalculator;
   private long nextTimeToSave;
+  private String cloudGameSaveUri;
+  private boolean loadedSavedGame;
 
   public GameState(OrthographicCamera camera, final GameGrid gameGrid, FileHandle gameSaveLocation) {
     this.camera = camera;
@@ -69,7 +72,7 @@ public class GameState extends EventListener {
 
       ObjectMapper objectMapper = new ObjectMapper();
       GameSave gameSave = objectMapper.readValue(gameSaveLocation.file(), GameSave.class);
-
+      cloudGameSaveUri = gameSave.getCloudSaveUri();
       gameGrid.setGridSize(gameSave.getGridSize().x, gameSave.getGridSize().y);
       gameGrid.updateWorldSize();
 
@@ -85,6 +88,8 @@ public class GameState extends EventListener {
       for (GridObjectState gridObjectState : gameSave.getGridObjects()) {
         gridObjectState.materialize(gameGrid);
       }
+
+      loadedSavedGame = true;
     } catch (Exception e) {
       shouldSaveGame = false;
 
@@ -105,6 +110,7 @@ public class GameState extends EventListener {
       }).show();
     } finally {
       transportCalculator.unpause();
+      Gdx.app.debug(TAG, "loadGameSave - finished");
     }
   }
 
@@ -114,18 +120,25 @@ public class GameState extends EventListener {
         gameSaveLocation.parent().mkdirs();
       }
 
-      GameSave gameSave = new GameSave(gameGrid, camera, Player.instance());
-      try {
-        String cloudSaveUri = HappyDroidService.instance().uploadGameSave(gameSave);
-        System.out.println("cloudSaveUri = " + cloudSaveUri);
-        if (cloudSaveUri != null) {
-          gameSave.setCloudSaveUri(cloudSaveUri);
-        }
+      if (!gameGrid.isEmpty()) {
+        GameSave gameSave = new GameSave(gameGrid, camera, Player.instance(), cloudGameSaveUri);
+        try {
+          String cloudSaveUri = HappyDroidService.instance().uploadGameSave(gameSave);
+          System.out.println("cloudSaveUri = " + cloudSaveUri);
+          if (cloudSaveUri != null) {
+            cloudGameSaveUri = cloudSaveUri;
+            gameSave.setCloudSaveUri(cloudSaveUri);
+          }
 
-        GameSave.getObjectMapper().writeValue(gameSaveLocation.file(), gameSave);
-      } catch (Exception e) {
-        Gdx.app.log("GameSave", "Could not save game!", e);
+          GameSave.getObjectMapper().writeValue(gameSaveLocation.file(), gameSave);
+        } catch (Exception e) {
+          Gdx.app.log("GameSave", "Could not save game!", e);
+        }
       }
     }
+  }
+
+  public boolean hasLoadedSavedGame() {
+    return loadedSavedGame;
   }
 }

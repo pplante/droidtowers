@@ -19,7 +19,11 @@ public class TemporaryToken {
 
   public static TemporaryToken create() {
     HttpResponse response = HappyDroidService.instance().makePostRequest(Consts.API_V1_TEMPORARY_TOKEN_CREATE, new HashMap<String, String>());
-    return HappyDroidServiceObject.materializeObject(response, TemporaryToken.class);
+    if (response != null && response.getStatusLine().getStatusCode() == 201) {
+      return HappyDroidServiceObject.materializeObject(response, TemporaryToken.class);
+    }
+
+    return null;
   }
 
   public boolean validate() {

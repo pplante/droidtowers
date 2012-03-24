@@ -36,6 +36,12 @@ public class ConnectToFacebook extends TowerWindow {
       @Override
       public synchronized void beforeExecute() {
         token = TemporaryToken.create();
+        if(token == null) {
+          codeLabel.setText("Could not contact server.");
+          cancel();
+          return;
+        }
+
         codeLabel.setText("CODE: " + token.getValue());
         sessionStatus.visible = true;
 

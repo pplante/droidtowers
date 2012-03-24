@@ -94,7 +94,6 @@ public class TowerScene extends Scene {
     gameState.saveGame();
     InputSystem.instance().removeInputProcessor(gestureDetector);
     AchievementEngine.instance().unregisterGameGrid();
-    gameGrid.events().unregister(gridSoundDispatcher);
     gridSoundDispatcher.setGameGrid(null);
   }
 
@@ -104,7 +103,9 @@ public class TowerScene extends Scene {
     InputSystem.instance().setGestureDelegator(gestureDelegater);
     InputSystem.instance().switchTool(GestureTool.PICKER, null);
     DefaultKeybindings.initialize(this);
-    gameState.loadSavedGame();
+    if (!gameState.hasLoadedSavedGame()) {
+      gameState.loadSavedGame();
+    }
     AchievementEngine.instance().registerGameGrid(gameGrid);
     gridSoundDispatcher.setGameGrid(gameGrid);
   }
