@@ -9,6 +9,10 @@ import com.unhappyrobot.utils.Random;
 public class SplashCloudLayer extends CloudLayer {
   public SplashCloudLayer() {
     super(null, null);
+
+    CLOUD_SPAWN_MIN = 0;
+    CLOUD_SPAWN_MAX = 1;
+
     worldSize = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() / 2);
 
     for (int i = 0; i < MAX_ACTIVE_CLOUDS; i++) {

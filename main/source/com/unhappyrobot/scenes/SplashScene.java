@@ -7,7 +7,7 @@ import com.unhappyrobot.entities.CloudLayer;
 import com.unhappyrobot.gui.LabelStyles;
 
 public class SplashScene extends Scene {
-  private static final int SPLASH_DURATION = 50;
+  private static final int SPLASH_DURATION = 500;
 
   private long launchTime;
   private CloudLayer cloudLayer;
@@ -47,7 +47,6 @@ public class SplashScene extends Scene {
 
     if (launchTime <= System.currentTimeMillis()) {
       TowerGame.changeScene(MainMenuScene.class);
-//      TowerGame.changeScene(TowerScene.class);
     }
   }
 

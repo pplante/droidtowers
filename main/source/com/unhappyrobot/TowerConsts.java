@@ -1,5 +1,8 @@
 package com.unhappyrobot;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
+
 public class TowerConsts {
   public static final float ONE_MEGABYTE = 1048576.0f;
 
@@ -23,6 +26,7 @@ public class TowerConsts {
   public static final float GAME_SAVE_FREQUENCY = 15f;
   public static final long FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK = 3500;
   public static final float MINI_MAP_REDRAW_FREQUENCY = 1f;
+  public static final String GAME_SAVE_DIRECTORY = Gdx.app.getType() == Application.ApplicationType.Android ? "towergame/" : ".towergame/";
 
   private TowerConsts() {
 

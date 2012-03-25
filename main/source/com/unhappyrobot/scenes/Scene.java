@@ -76,16 +76,16 @@ public abstract class Scene {
     getStage().addActor(actor);
   }
 
-  protected void centerHorizontally(Actor actor) {
-    actor.x = (getStage().width() - actor.width) / 2;
-  }
-
   protected void center(Actor actor) {
     centerHorizontally(actor);
     centerVertically(actor);
   }
 
+  protected void centerHorizontally(Actor actor) {
+    actor.x = (int) (getStage().width() - actor.width) / 2;
+  }
+
   private void centerVertically(Actor actor) {
-    actor.y = (getStage().height() - actor.height) / 2;
+    actor.y = (int) (getStage().height() - actor.height) / 2;
   }
 }

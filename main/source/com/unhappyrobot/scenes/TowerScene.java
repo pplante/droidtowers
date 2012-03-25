@@ -1,6 +1,5 @@
 package com.unhappyrobot.scenes;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.input.GestureDetector;
@@ -60,7 +59,7 @@ public class TowerScene extends Scene {
   private TowerMetadata towerMetadata;
 
   public TowerScene() {
-    gameSaveLocation = Gdx.files.external(Gdx.app.getType().equals(Application.ApplicationType.Desktop) ? ".towergame/" : "");
+    gameSaveLocation = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
     timeMultiplier = 1f;
   }
 

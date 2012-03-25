@@ -25,7 +25,9 @@ public enum LabelStyles {
   private Label.LabelStyle labelStyle() {
     if (labelStyle == null) {
       if (!bitmapFonts.containsKey(fontPath)) {
-        bitmapFonts.put(fontPath, new BitmapFont(Gdx.files.internal(fontPath), false));
+        BitmapFont font = new BitmapFont(Gdx.files.internal(fontPath), false);
+        font.setUseIntegerPositions(true);
+        bitmapFonts.put(fontPath, font);
       }
 
       labelStyle = new Label.LabelStyle(bitmapFonts.get(fontPath), color);

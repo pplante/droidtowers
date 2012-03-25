@@ -63,8 +63,8 @@ public class TowerWindow extends Window {
   }
 
   public TowerWindow centerOnStage() {
-    x = (stage.width() - width) / 2;
-    y = (stage.height() - height) / 2;
+    x = (int) (stage.width() - width) / 2;
+    y = (int) (stage.height() - height) / 2;
 
     return this;
   }

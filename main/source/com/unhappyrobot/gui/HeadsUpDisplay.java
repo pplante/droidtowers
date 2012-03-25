@@ -133,6 +133,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     topLeftButtons.clear();
     topLeftButtons.add(audioControl);
     topLeftButtons.add(overlayControl);
+    topLeftButtons.pack();
 
     topLeftButtons.x = stage.width() - topLeftButtons.width - 5;
     topLeftButtons.y = stage.height() - topLeftButtons.height - 5;

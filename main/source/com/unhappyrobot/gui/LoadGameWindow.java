@@ -8,11 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.scenes.TowerScene;
-
-import java.io.File;
-import java.io.FilenameFilter;
 
 public class LoadGameWindow extends TowerWindow {
   public LoadGameWindow(Stage stage, Skin skin) {
@@ -20,26 +18,28 @@ public class LoadGameWindow extends TowerWindow {
 
     defaults().top().left().pad(5);
 
-    File storage = new File(Gdx.files.getExternalStoragePath(), ".towergame/");
-    File[] files = storage.listFiles(new FilenameFilter() {
-      public boolean accept(File file, String fileName) {
-        return fileName.endsWith(".json");
-      }
-    });
+    FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
+    FileHandle[] files = storage.list();
 
     Table gameFiles = new Table();
     gameFiles.defaults();
 
-    for (File file : files) {
-      gameFiles.row();
-      gameFiles.add(makeGameFileRow(Gdx.files.absolute(file.getAbsolutePath())));
+    if (files != null && files.length > 0) {
+      for (FileHandle file : files) {
+        if (file.name().endsWith(".json")) {
+          gameFiles.row();
+          gameFiles.add(makeGameFileRow(file));
+        }
+      }
+    } else {
+      gameFiles.add(LabelStyles.Default.makeLabel("No saved games were found on this device."));
     }
 
     add(gameFiles).fill();
   }
 
   private Table makeGameFileRow(final FileHandle gameSave) {
-    FileHandle imageFile = Gdx.files.absolute(gameSave.path() + ".png");
+    FileHandle imageFile = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY + gameSave.name() + ".png");
 
 
     Actor imageActor;
@@ -71,9 +71,8 @@ public class LoadGameWindow extends TowerWindow {
     Table box = new Table();
     box.defaults().top().left().expand();
     box.row();
-    box.add(LabelStyles.Default.makeLabel(gameSave.name())).top().left();
-    box.row();
-    box.add(launchButton).bottom().right();
+    box.add(LabelStyles.Default.makeLabel(gameSave.nameWithoutExtension())).top().left();
+    box.add(launchButton).top().right();
 
     return box;
   }

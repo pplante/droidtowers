@@ -15,10 +15,11 @@ import com.unhappyrobot.gui.*;
 import com.unhappyrobot.utils.Platform;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 public class MainMenuScene extends Scene {
+  private static final String TAG = MainMenuScene.class.getSimpleName();
   public static final int BUTTON_WIDTH = 200;
+
   private SplashCloudLayer cloudLayer;
 
   @Override
@@ -49,7 +50,6 @@ public class MainMenuScene extends Scene {
     TextButton optionsButton = new TextButton("options", getGuiSkin());
     container.add(optionsButton).fill().maxWidth(BUTTON_WIDTH);
     container.row().padTop(40);
-
 
     TextButton exitGameButton = new TextButton("exit game", getGuiSkin());
     container.add(exitGameButton).fill().maxWidth(BUTTON_WIDTH);
@@ -126,17 +126,12 @@ public class MainMenuScene extends Scene {
 
     public void click(Actor actor, float x, float y) {
       try {
+        System.out.println("aClass = " + aClass);
         Constructor<? extends TowerWindow> constructor = aClass.getConstructor(Stage.class, Skin.class);
         TowerWindow window = constructor.newInstance(getStage(), getGuiSkin());
         window.modal(true).show().centerOnStage();
-      } catch (NoSuchMethodException e) {
-        e.printStackTrace();
-      } catch (InvocationTargetException e) {
-        e.printStackTrace();
-      } catch (InstantiationException e) {
-        e.printStackTrace();
-      } catch (IllegalAccessException e) {
-        e.printStackTrace();
+      } catch (Exception e) {
+        Gdx.app.error(TAG, "Error loading dialog: " + aClass.getSimpleName(), e);
       }
     }
   }

@@ -18,18 +18,19 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
 
   public ConnectToHappyDroidsWindow(Stage stage, Skin skin) {
     super("Connect to Facebook", stage, skin);
+    defaults().top().left().pad(5);
 
     row().pad(10);
-    add(makeLabel("Connecting to Facebook will enable:\n\n* Towers to be stored in the cloud\n* Sharing towers with friends\n* Other stuff!"));
+    add(LabelStyles.Default.makeLabel("Connecting to Facebook will enable:\n\n* Towers to be stored in the cloud\n* Sharing towers with friends\n* Other stuff!"));
     row().pad(10);
-    add(makeLabel("To get started, goto happydroids.com\n then click the \"Connect to Facebook\" button."));
+    add(LabelStyles.Default.makeLabel("To get started, goto happydroids.com\n then click the \"Connect to Facebook\" button."));
     row().pad(10);
-    add(makeLabel("After logging in, type the code below to connect your game."));
+    add(LabelStyles.Default.makeLabel("After logging in, type the code below to connect your game."));
     row().pad(10);
     final TextButton codeLabel = new TextButton("CODE: Reticulating splines...", skin);
     add(codeLabel);
 
-    final Label sessionStatus = makeLabel("Waiting for You to login...");
+    final Label sessionStatus = LabelStyles.Default.makeLabel("Waiting for You to login...");
     sessionStatus.visible = false;
     add(sessionStatus);
 
@@ -78,9 +79,5 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
         }
       }.run();
     }
-  }
-
-  private Label makeLabel(String text) {
-    return new Label(text, skin);
   }
 }
