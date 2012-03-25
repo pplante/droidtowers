@@ -6,6 +6,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.input.GestureDetector;
 import com.google.common.collect.Lists;
 import com.unhappyrobot.TowerConsts;
+import com.unhappyrobot.TowerMetadata;
 import com.unhappyrobot.WeatherService;
 import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.actions.ActionManager;
@@ -15,6 +16,7 @@ import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.controllers.GameTips;
 import com.unhappyrobot.entities.CloudLayer;
 import com.unhappyrobot.entities.GameLayer;
+import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.gamestate.GameState;
 import com.unhappyrobot.gamestate.actions.*;
 import com.unhappyrobot.graphics.*;
@@ -55,6 +57,7 @@ public class TowerScene extends Scene {
   private DesirabilityCalculator desirabilityCalculator;
   private GameSaveAction saveAction;
   private DefaultKeybindings keybindings;
+  private TowerMetadata towerMetadata;
 
   public TowerScene() {
     gameSaveLocation = Gdx.files.external(Gdx.app.getType().equals(Application.ApplicationType.Desktop) ? ".towergame/" : "");
@@ -64,7 +67,14 @@ public class TowerScene extends Scene {
   @Override
   public void create(Object... args) {
     if (args != null && args.length > 0) {
-      gameSaveFilename = (String) args[0];
+      if (args[0] instanceof String) {
+        gameSaveFilename = (String) args[0];
+      } else if (args[0] instanceof TowerMetadata) {
+        towerMetadata = ((TowerMetadata) args[0]);
+        gameSaveFilename = towerMetadata.generateFilename();
+
+        Player.setInstance(new Player(towerMetadata.getDifficulty().getStartingMoney()));
+      }
     } else {
       gameSaveFilename = "test.json";
     }
@@ -84,9 +94,9 @@ public class TowerScene extends Scene {
     headsUpDisplay = new HeadsUpDisplay(this);
     weatherService = new WeatherService();
 
-    towerMiniMap.x = 100;
-    towerMiniMap.y = 100;
-    headsUpDisplay.addActor(towerMiniMap);
+//    towerMiniMap.x = 100;
+//    towerMiniMap.y = 100;
+//    headsUpDisplay.addActor(towerMiniMap);
 
     gameLayers = Lists.newArrayList();
     gameLayers.add(new SkyLayer(gameGrid, weatherService));

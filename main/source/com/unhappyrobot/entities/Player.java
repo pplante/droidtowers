@@ -29,6 +29,10 @@ public class Player {
     coins = 4000;
   }
 
+  public Player(int startingMoney) {
+    coins = startingMoney;
+  }
+
   public static void setInstance(Player newInstance) {
     Player.instance = newInstance;
   }

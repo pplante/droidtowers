@@ -37,11 +37,11 @@ public class MainMenuScene extends Scene {
 
     TextButton loadGameButton = new TextButton("load game", getGuiSkin());
     container.add(loadGameButton).fill().maxWidth(150);
-    container.row().padTop(60);
+    container.row().padTop(40);
 
     TextButton optionsButton = new TextButton("options", getGuiSkin());
     container.add(optionsButton).fill().maxWidth(150);
-    container.row();
+    container.row().padTop(60);
 
     TextButton exitGameButton = new TextButton("exit game", getGuiSkin());
     container.add(exitGameButton).fill().maxWidth(150);
@@ -93,6 +93,8 @@ public class MainMenuScene extends Scene {
         window.modal(true).show().centerOnStage();
       }
     });
+
+    loadGameButton.click(0, 0);
 
     exitGameButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {

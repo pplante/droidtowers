@@ -5,10 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.unhappyrobot.TowerGame;
@@ -31,24 +28,53 @@ public class LoadGameWindow extends TowerWindow {
     });
 
     Table gameFiles = new Table();
+    gameFiles.defaults();
 
     for (File file : files) {
-      final FileHandle gameSave = Gdx.files.absolute(file.getAbsolutePath());
-
-      TextButton launchButton = new TextButton(file.getName(), skin);
-      launchButton.setClickListener(new ClickListener() {
-        public void click(Actor actor, float x, float y) {
-          dismiss();
-          TowerGame.changeScene(TowerScene.class, gameSave.name());
-        }
-      });
-
       gameFiles.row();
-      Image towerImage = new Image(new Texture(Gdx.files.absolute(gameSave.path() + ".png")), Scaling.fit);
-      gameFiles.add(towerImage).size(100, 100);
-      gameFiles.add(launchButton).fill();
+      gameFiles.add(makeGameFileRow(Gdx.files.absolute(file.getAbsolutePath())));
     }
 
     add(gameFiles).fill();
+  }
+
+  private Table makeGameFileRow(final FileHandle gameSave) {
+    FileHandle imageFile = Gdx.files.absolute(gameSave.path() + ".png");
+
+
+    Actor imageActor;
+    if (imageFile.exists()) {
+      imageActor = new Image(new Texture(imageFile), Scaling.fit, Align.TOP);
+    } else {
+      imageActor = LabelStyles.Default.makeLabel("No image.");
+    }
+
+
+    Table fileRow = new Table();
+    fileRow.defaults().pad(5).width(360);
+    fileRow.row().top().left();
+    fileRow.add(imageActor).top().left().width(100);
+    fileRow.add(makeGameFileInfoBox(gameSave)).top().left().fill();
+
+    return fileRow;
+  }
+
+  private Table makeGameFileInfoBox(final FileHandle gameSave) {
+    TextButton launchButton = new TextButton("Play", skin);
+    launchButton.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        dismiss();
+        TowerGame.changeScene(TowerScene.class, gameSave.name());
+      }
+    });
+
+    Table box = new Table();
+    box.defaults().top().left().expand();
+    box.row();
+    box.add(LabelStyles.Default.makeLabel(gameSave.name())).top().left();
+    box.row();
+    box.add(launchButton).bottom().right();
+
+    return box;
   }
 }
