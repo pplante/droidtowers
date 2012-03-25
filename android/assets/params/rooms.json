@@ -3,15 +3,15 @@
     "name":"Lobby 4x1",
     "continuousPlacement":true,
     "isLobby":true,
-    "coins":100,
+    "coins":5000,
     "experienceAward":1000,
     "height":1,
     "width":4
   },
   {
     "name":"Small Apartment",
-    "coins":200,
-    "experienceAward":2000,
+    "coins":8000,
+    "experienceAward":1000,
     "populationMax":4,
     "height":1,
     "width":3,
@@ -21,7 +21,7 @@
   },
   {
     "name":"Large Apartment",
-    "coins":300,
+    "coins":14000,
     "height":1,
     "experienceAward":2200,
     "populationMax":6,
@@ -31,17 +31,19 @@
     "imageFilename":"generic/generic_room_4x"
   },
   {
-    "name":"Condo",
-    "coins":400,
+    "name":"Small Condo",
+    "coins":16000,
     "height":1,
     "experienceAward":2200,
-    "populationMax":6,
-    "width":4,
-    "provides":"HOUSING"
+    "populationMax":4,
+    "width":3,
+    "provides":"HOUSING",
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"3x1-small-condo"
   },
   {
     "name":"Penthouse",
-    "coins":40000,
+    "coins":60000,
     "height":1,
     "experienceAward":5000,
     "populationMax":6,

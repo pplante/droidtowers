@@ -1,10 +1,10 @@
 [
   {
     "name":"Small Office",
-    "coins":1000,
+    "coins":25000,
     "height":1,
     "width":3,
-    "experienceAward":2200,
+    "experienceAward":1400,
     "populationAttraction":2,
     "populationRequired":4,
     "jobsProvided":4,
@@ -13,7 +13,7 @@
   },
   {
     "name":"Burger Joint",
-    "coins":1000,
+    "coins":10000,
     "height":1,
     "width":3,
     "experienceAward":2200,
@@ -27,7 +27,7 @@
   },
   {
     "name":"Pizza Place",
-    "coins":1000,
+    "coins":12500,
     "height":1,
     "width":3,
     "experienceAward":2200,
@@ -42,7 +42,7 @@
   {
     "name":"Hotel Room",
     "continuousPlacement":true,
-    "coins":100,
+    "coins":8000,
     "experienceAward":1500,
     "populationMax":2,
     "height":1,
@@ -55,7 +55,7 @@
   {
     "name":"Sushi",
     "continuousPlacement":true,
-    "coins":100,
+    "coins":19599,
     "experienceAward":1500,
     "populationMax":2,
     "height":1,
@@ -68,7 +68,7 @@
   {
     "name":"Cocktail Bar",
     "continuousPlacement":true,
-    "coins":100,
+    "coins":22399,
     "experienceAward":1500,
     "populationMax":2,
     "height":1,

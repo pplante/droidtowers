@@ -1,7 +1,7 @@
 [
   {
     "name":"Janitors Closet",
-    "coins":1000,
+    "coins":20000,
     "height":1,
     "width":3,
     "locked": true,
@@ -14,7 +14,7 @@
   },
   {
     "name":"Maids Office",
-    "coins":1000,
+    "coins":20000,
     "height":1,
     "width":3,
     "locked": true,

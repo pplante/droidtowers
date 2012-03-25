@@ -77,7 +77,7 @@ public abstract class GridObjectType {
   }
 
   public int getCoinsEarned() {
-    return coins / 4;
+    return (int) Math.round(coins * 0.0025);
   }
 
   public boolean canShareSpace(GridObject gridObject) {

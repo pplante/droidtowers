@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
-import com.google.common.eventbus.Subscribe;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.events.WeatherState;
 import com.unhappyrobot.gamestate.actions.GameGridTransportCalculationComplete;
@@ -85,7 +84,7 @@ public class TowerMiniMap extends Table {
     return pixmap;
   }
 
-  @Subscribe
+//  @Subscribe
   public void GameGrid_onGameGridTransportCalculationComplete(GameGridTransportCalculationComplete event) {
     Gdx.app.debug(TAG, "Requesting redraw because the game grid recalculated transport.");
     if (pixmap != null) {

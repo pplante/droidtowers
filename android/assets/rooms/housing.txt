@@ -1,12 +1,19 @@
 housing.png
-format: RGBA4444
+format: RGBA8888
 filter: MipMapNearestNearest,Linear
 repeat: none
 2x1-sushi
   rotate: false
-  xy: 384, 0
+  xy: 0, 256
   size: 128, 64
   orig: 128, 64
+  offset: 0, 0
+  index: -1
+3x1-small-condo
+  rotate: false
+  xy: 0, 128
+  size: 192, 64
+  orig: 192, 64
   offset: 0, 0
   index: -1
 3x1-burger-joint
@@ -18,14 +25,14 @@ repeat: none
   index: -1
 3x1-small-apartment
   rotate: false
-  xy: 192, 0
+  xy: 0, 192
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
 2x1-hotel-room
   rotate: false
-  xy: 320, 64
+  xy: 0, 320
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
@@ -39,7 +46,7 @@ repeat: none
   index: -1
 2x1-bar
   rotate: false
-  xy: 192, 64
+  xy: 128, 256
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
