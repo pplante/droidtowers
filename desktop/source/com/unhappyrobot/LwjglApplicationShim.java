@@ -20,7 +20,11 @@ public class LwjglApplicationShim implements ApplicationListener {
       @Override
       public void run() {
         Gdx.app.debug(TAG, "Reattaching input processor.");
-        Gdx.input.setInputProcessor(inputProcessor);
+        if (inputProcessor != dummyInputAdapter) {
+          Gdx.input.setInputProcessor(inputProcessor);
+        } else {
+          Gdx.app.error(TAG, "Got a dummy input processor some how?", new RuntimeException("Got a dummy input processor some how?"));
+        }
         inputProcessor = null;
 
         markToRemove();

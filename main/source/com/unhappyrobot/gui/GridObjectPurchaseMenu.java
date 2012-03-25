@@ -38,7 +38,7 @@ public class GridObjectPurchaseMenu extends TowerWindow {
       GridObjectType casted = typeFactory.castToObjectType(o);
 
       container.row();
-      container.add(new GridObjectPurchaseItem(casted)).align(Align.LEFT | Align.TOP).padBottom(4);
+      container.add(new GridObjectPurchaseItem(casted)).align(Align.LEFT | Align.TOP).padBottom(4).expand();
     }
 
     TextButton closeButton = new TextButton("Close", skin);

@@ -94,8 +94,6 @@ public class MainMenuScene extends Scene {
       }
     });
 
-    loadGameButton.click(0, 0);
-
     exitGameButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         Gdx.app.exit();

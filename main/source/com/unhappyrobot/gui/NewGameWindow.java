@@ -2,6 +2,8 @@ package com.unhappyrobot.gui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
+import com.badlogic.gdx.scenes.scene2d.actions.FadeTo;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.DifficultyLevel;
@@ -14,6 +16,7 @@ import java.text.NumberFormat;
 public class NewGameWindow extends TowerWindow {
 
   private DifficultyLevel difficultyLevel;
+  private final TextButton beginButton;
 
   public NewGameWindow(Stage stage, Skin skin) {
     super("Start a new Tower", stage, skin);
@@ -23,6 +26,17 @@ public class NewGameWindow extends TowerWindow {
     row().colspan(2);
 
     final TextField nameField = new TextField("", "Tower Name", skin);
+    nameField.setTextFieldListener(new TextField.TextFieldListener() {
+      public void keyTyped(TextField textField, char key) {
+        beginButton.touchable = !textField.getText().isEmpty();
+
+        if (beginButton.touchable) {
+          beginButton.action(FadeIn.$(0.125f));
+        } else {
+          beginButton.action(FadeTo.$(0.6f, 0.125f));
+        }
+      }
+    });
     add(nameField);
     row().padTop(15).colspan(2);
 
@@ -61,8 +75,17 @@ public class NewGameWindow extends TowerWindow {
     difficultyGroup.setChecked(" Easy");
 
     row().padTop(25);
-    add(new TextButton("Cancel", skin)).right();
-    TextButton beginButton = new TextButton("Begin building!", skin);
+    TextButton cancel = new TextButton("Cancel", skin);
+    cancel.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        dismiss();
+      }
+    });
+
+    add(cancel).right();
+    beginButton = new TextButton("Begin building!", skin);
+    beginButton.touchable = false;
+    beginButton.action(FadeTo.$(0.6f, 0f));
     add(beginButton).right();
 
     beginButton.setClickListener(new ClickListener() {
