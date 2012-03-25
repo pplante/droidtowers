@@ -18,7 +18,7 @@ import java.lang.reflect.Constructor;
 
 public class MainMenuScene extends Scene {
   private static final String TAG = MainMenuScene.class.getSimpleName();
-  public static final int BUTTON_WIDTH = 200;
+  public static final int BUTTON_WIDTH = 220;
 
   private SplashCloudLayer cloudLayer;
 

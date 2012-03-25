@@ -2,7 +2,6 @@ package com.unhappyrobot.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector3;
@@ -27,14 +26,11 @@ public class HeadsUpDisplay extends WidgetGroup {
   private Skin guiSkin;
   private OrthographicCamera camera;
   private GameGrid gameGrid;
-  private LabelButton addRoomButton;
   private Menu addRoomMenu;
   private Label statusLabel;
   private float updateMoneyLabel;
   private static HeadsUpDisplay instance;
-  private BitmapFont menloBitmapFont;
   private Toast toast;
-  private LabelButton setOverlayButton;
   private Menu overlayMenu;
   private Table topBar;
   private ToolTip mouseToolTip;
@@ -55,8 +51,6 @@ public class HeadsUpDisplay extends WidgetGroup {
     this.camera = towerScene.getCamera();
     this.gameGrid = towerScene.getGameGrid();
     guiSkin = Scene.getGuiSkin();
-
-    menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_14_bold_white.fnt"), false);
 
     hudAtlas = new TextureAtlas(Gdx.files.internal("hud/buttons.txt"));
 

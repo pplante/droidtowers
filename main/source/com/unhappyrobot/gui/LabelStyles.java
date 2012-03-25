@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public enum LabelStyles {
   BankGothic64("fonts/bank_gothic_64.fnt", Color.WHITE),
-  Default("fonts/helvetica_neue_12_white.fnt", Color.WHITE);
+  Default("fonts/hiragino_maru_14_white.fnt", Color.WHITE);
 
   private static HashMap<String, BitmapFont> bitmapFonts = Maps.newHashMap();
   private Label.LabelStyle labelStyle;

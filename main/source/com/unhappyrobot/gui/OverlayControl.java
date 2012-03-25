@@ -11,11 +11,9 @@ import com.unhappyrobot.grid.GameGridRenderer;
 
 public class OverlayControl extends ImageButton {
   private Menu overlayMenu;
-  private final GameGridRenderer gameGridRenderer;
 
-  public OverlayControl(TextureAtlas hudAtlas, Skin guiSkin, final GameGridRenderer gameGridRenderer) {
+  public OverlayControl(TextureAtlas hudAtlas, Skin skin, final GameGridRenderer gameGridRenderer) {
     super(hudAtlas.findRegion("overlay-button"));
-    this.gameGridRenderer = gameGridRenderer;
 
     setClickListener(new ClickListener() {
       boolean isShowing;
@@ -26,12 +24,12 @@ public class OverlayControl extends ImageButton {
       }
     });
 
-    overlayMenu = new Menu(guiSkin);
+    overlayMenu = new Menu(skin);
     overlayMenu.defaults();
     overlayMenu.top().left();
 
     for (final Overlays overlay : Overlays.values()) {
-      final CheckBox checkBox = new CheckBox(overlay.toString(), guiSkin);
+      final CheckBox checkBox = new CheckBox(overlay.toString(), skin);
       checkBox.align(Align.LEFT);
       checkBox.getLabelCell().pad(4);
       checkBox.invalidate();
@@ -57,7 +55,7 @@ public class OverlayControl extends ImageButton {
     }
 
     overlayMenu.row().colspan(2).left().pad(6, 2, 2, 2);
-    LabelButton clearAllButton = new LabelButton(guiSkin, "Clear All");
+    TextButton clearAllButton = new TextButton("Clear All", skin);
     clearAllButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         gameGridRenderer.clearOverlays();

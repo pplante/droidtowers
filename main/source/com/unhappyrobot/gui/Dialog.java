@@ -2,10 +2,11 @@ package com.unhappyrobot.gui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.input.InputCallback;
@@ -18,13 +19,13 @@ public class Dialog {
   static final int[] NEGATIVE_BUTTON_KEYS = new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE};
   private Stage stage;
   private Skin skin;
-  private List<LabelButton> buttons;
+  private List<TextButton> buttons;
+  private TextButton positiveButton;
+  private TextButton negativeButton;
   private String title;
   private String messageText;
   private TowerWindow window;
   private boolean shouldDisplayCentered;
-  private LabelButton positiveButton;
-  private LabelButton negativeButton;
   private final InputCallback positiveButtonInputCallback;
   private final InputCallback negativeButtonInputCallback;
 
@@ -67,8 +68,7 @@ public class Dialog {
   }
 
   public Dialog addButton(ResponseType type, String labelText, final OnClickCallback onClickCallback) {
-    LabelButton button = new LabelButton(skin, labelText);
-    button.setResponseType(type);
+    TextButton button = new TextButton(labelText, skin);
 
     if (type == ResponseType.NEGATIVE) {
       negativeButton = button;
@@ -106,18 +106,22 @@ public class Dialog {
     ModalOverlay.instance().show(stage);
 
     window = new TowerWindow(title, stage, skin);
-    window.row().pad(10).space(4);
+
+    Table container = new Table(skin);
+    container.defaults().pad(5).top().left().minWidth(400).maxWidth(600).expand();
     Label messageLabel = LabelStyles.Default.makeLabel(messageText);
     messageLabel.setWrap(true);
-    messageLabel.setAlignment(Align.TOP | Align.LEFT);
 
-    window.add(messageLabel).top().left().width((int) (stage.width() / 2)).minWidth(400).maxWidth(600).fill().colspan(buttons.size());
+    container.row();
+    container.add(messageLabel).colspan(buttons.size());
 
-    window.row().space(4);
-    for (LabelButton button : buttons) {
-      window.add(button).fill().minWidth(80);
+    container.row();
+    for (TextButton button : buttons) {
+      container.add(button).fill();
     }
+    container.pack();
 
+    window.add(container).expand();
     window.modal(true).show().centerOnStage();
 
     if (positiveButton != null) {

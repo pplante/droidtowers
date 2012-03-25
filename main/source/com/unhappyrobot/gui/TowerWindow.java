@@ -31,7 +31,7 @@ public class TowerWindow extends Window {
     };
 
     InputSystem.instance().bind(DIALOG_CLOSE_KEYCODES, closeDialogCallback);
-
+    invalidate();
     pack();
     stage.addActor(this);
 
