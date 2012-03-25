@@ -38,7 +38,7 @@ public class GridObjectPurchaseMenu extends TowerWindow {
       GridObjectType casted = typeFactory.castToObjectType(o);
 
       container.row();
-      container.add(new GridObjectPurchaseItem(casted)).align(Align.LEFT | Align.TOP).padBottom(4).expand();
+      container.add(new GridObjectPurchaseItem(casted)).align(Align.LEFT | Align.TOP).padBottom(4).fill();
     }
 
     TextButton closeButton = new TextButton("Close", skin);
@@ -76,11 +76,13 @@ public class GridObjectPurchaseMenu extends TowerWindow {
         });
       }
 
-      defaults().align(Align.LEFT | Align.TOP).pad(2);
+      defaults().align(Align.LEFT | Align.TOP).pad(2).expand();
 
       row().fill();
       add(new Label(gridObjectType.getName(), skin)).minWidth(350);
-      add(new Label(TowerConsts.CURRENCY_SYMBOL + NumberFormat.getInstance().format(gridObjectType.getCoins()), skin)).align(Align.RIGHT);
+      Label priceLabel = new Label(TowerConsts.CURRENCY_SYMBOL + NumberFormat.getInstance().format(gridObjectType.getCoins()), skin);
+      priceLabel.setAlignment(Align.RIGHT);
+      add(priceLabel).right().fill();
 
       row().align(Align.LEFT);
       TextureRegion textureRegion = gridObjectType.getTextureRegion();
@@ -91,7 +93,7 @@ public class GridObjectPurchaseMenu extends TowerWindow {
         actor = new Label("No image found.", skin);
       }
       add(actor).maxHeight(40).maxWidth(200);
-      add(buyButton).align(Align.RIGHT).scaling("none");
+      add(buyButton).align(Align.RIGHT).width(80);
     }
   }
 }

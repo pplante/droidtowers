@@ -46,7 +46,8 @@ public class SplashScene extends Scene {
     cloudLayer.render(getSpriteBatch(), getCamera());
 
     if (launchTime <= System.currentTimeMillis()) {
-      TowerGame.changeScene(MainMenuScene.class);
+//      TowerGame.changeScene(MainMenuScene.class);
+      TowerGame.changeScene(TowerScene.class);
     }
   }
 
