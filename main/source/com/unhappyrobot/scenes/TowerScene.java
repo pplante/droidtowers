@@ -87,18 +87,7 @@ public class TowerScene extends Scene {
     gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, gestureDelegater);
 
     gridSoundDispatcher = new GameGridSoundDispatcher();
-  }
 
-  @Override
-  public void pause() {
-    gameState.saveGame();
-    InputSystem.instance().removeInputProcessor(gestureDetector);
-    AchievementEngine.instance().unregisterGameGrid();
-    gridSoundDispatcher.setGameGrid(null);
-  }
-
-  @Override
-  public void resume() {
     InputSystem.instance().addInputProcessor(gestureDetector, 100);
     InputSystem.instance().setGestureDelegator(gestureDelegater);
     InputSystem.instance().switchTool(GestureTool.PICKER, null);
@@ -107,6 +96,16 @@ public class TowerScene extends Scene {
       gameState.loadSavedGame();
     }
     AchievementEngine.instance().registerGameGrid(gameGrid);
+  }
+
+  @Override
+  public void pause() {
+    gameState.saveGame();
+    gridSoundDispatcher.setGameGrid(null);
+  }
+
+  @Override
+  public void resume() {
     gridSoundDispatcher.setGameGrid(gameGrid);
   }
 
@@ -118,6 +117,13 @@ public class TowerScene extends Scene {
       layer.render(getSpriteBatch(), getCamera());
     }
   }
+
+  @Override
+  public void dispose() {
+    InputSystem.instance().removeInputProcessor(gestureDetector);
+    AchievementEngine.instance().unregisterGameGrid();
+  }
+
 
   private void updateGameObjects(float deltaTime) {
     deltaTime *= timeMultiplier;

@@ -150,8 +150,6 @@ public class TowerGame implements ApplicationListener {
     camera.viewportHeight = height;
     spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
     Gdx.gl.glViewport(0, 0, width, height);
-//    rootUiStage.setViewport(width, height, rootUiStage.isStretched());
-//    activeScene.getStage().setViewport(width, height, activeScene.getStage().isStretched());
   }
 
 

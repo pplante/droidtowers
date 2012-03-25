@@ -3,6 +3,8 @@ package com.unhappyrobot.gamestate.server;
 import com.google.common.collect.Lists;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.ProtocolVersion;
+import org.apache.http.message.BasicStatusLine;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -30,6 +32,7 @@ public class TestHappyDroidService extends HappyDroidService {
       when(entity.getContentLength()).thenReturn((long) bytes.length);
       HttpResponse response = mock(HttpResponse.class);
       when(response.getEntity()).thenReturn(entity);
+      when(response.getStatusLine()).thenReturn(new BasicStatusLine(new ProtocolVersion("http", 1, 1), 200, "OK"));
       return response;
     } catch (IOException e) {
       e.printStackTrace();
@@ -48,6 +51,7 @@ public class TestHappyDroidService extends HappyDroidService {
       when(entity.getContentLength()).thenReturn((long) bytes.length);
       HttpResponse response = mock(HttpResponse.class);
       when(response.getEntity()).thenReturn(entity);
+      when(response.getStatusLine()).thenReturn(new BasicStatusLine(new ProtocolVersion("http", 1, 1), 201, "OK"));
       return response;
     } catch (IOException e) {
       e.printStackTrace();

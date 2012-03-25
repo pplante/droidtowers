@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.unhappyrobot.TowerConsts;
+import com.unhappyrobot.gamestate.server.HappyDroidService;
 import com.unhappyrobot.gamestate.server.TemporaryToken;
 import com.unhappyrobot.utils.PeriodicAsyncTask;
 import com.unhappyrobot.utils.Platform;
@@ -35,13 +36,8 @@ public class ConnectToFacebook extends TowerWindow {
 
       @Override
       public synchronized void beforeExecute() {
-        token = TemporaryToken.create();
-        if(token == null) {
-          codeLabel.setText("Could not contact server.");
-          cancel();
-          return;
-        }
-
+        token = new TemporaryToken();
+        token.save();
         codeLabel.setText("CODE: " + token.getValue());
         sessionStatus.visible = true;
 
@@ -67,6 +63,7 @@ public class ConnectToFacebook extends TowerWindow {
       public synchronized void afterExecute() {
         if (token != null && token.hasSessionToken()) {
           sessionStatus.setText("Login successful!");
+          HappyDroidService.instance().setSessionToken(token.getSessionToken());
         } else {
           sessionStatus.setText("Login failed!");
         }

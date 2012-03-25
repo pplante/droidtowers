@@ -2,13 +2,9 @@ package com.unhappyrobot.gamestate.server;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.unhappyrobot.gamestate.GameSave;
 import com.unhappyrobot.utils.AsyncTask;
-import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -16,7 +12,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.conn.HttpHostConnectException;
-import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
@@ -84,42 +79,7 @@ public class HappyDroidService {
     }
   }
 
-  public String uploadGameSave(GameSave gameSave) {
-    if (!isAuthenticated) {
-      return null;
-    }
-
-    HttpResponse response;
-
-    String gameSaveUri = Consts.API_V1_GAMESAVE_LIST;
-    if (gameSave.getCloudSaveUri() != null) {
-      gameSaveUri = gameSave.getCloudSaveUri();
-      response = makePutRequest(gameSaveUri, new CloudGameSave(gameSave));
-
-      return gameSaveUri;
-    } else {
-      response = makePostRequest(gameSaveUri, new CloudGameSave(gameSave));
-
-      if (response != null) {
-        try {
-          BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
-          String content = EntityUtils.toString(entity, HTTP.UTF_8);
-          System.out.println("\tResponse: " + content);
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-        Header location = Iterables.getFirst(Lists.newArrayList(response.getHeaders("Location")), null);
-        if (location != null) {
-          return location.getValue();
-        }
-      }
-    }
-
-
-    return null;
-  }
-
-  public HttpResponse makePutRequest(String uri, Object objectForServer) {
+  public boolean makePutRequest(String uri, Object objectForServer) {
     HttpClient client = new DefaultHttpClient();
     try {
       System.out.println("PUT " + uri);
@@ -136,19 +96,19 @@ public class HappyDroidService {
       HttpResponse response = client.execute(request);
       System.out.println("\t" + response.getStatusLine());
 
-      if (response.getStatusLine().getStatusCode() == 500) {
+      if (response.getStatusLine().getStatusCode() == 204) {
+        return true;
+      } else {
         String content = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
         System.out.println("\tResponse: " + content);
       }
-
-      return response;
     } catch (HttpHostConnectException ignored) {
       System.out.println("Connection failed for: " + uri);
     } catch (Exception e) {
       e.printStackTrace();
     }
 
-    return null;
+    return false;
   }
 
   public HttpResponse makePostRequest(String uri, Object objectForServer) {

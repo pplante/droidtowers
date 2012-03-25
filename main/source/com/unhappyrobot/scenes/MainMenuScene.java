@@ -77,13 +77,11 @@ public class MainMenuScene extends Scene {
 
     newGameButton.setClickListener(new ClickListener() {
       public void click(final Actor actor, float x, float y) {
-//        TowerGame.changeScene(TowerScene.class);
         NewGameWindow window = new NewGameWindow("Start a new Tower", getStage(), getGuiSkin());
         window.modal(true).show().centerOnStage();
       }
     });
 
-//    newGameButton.click(0, 0);
   }
 
   private void center(Actor actor) {
@@ -107,5 +105,9 @@ public class MainMenuScene extends Scene {
   public void render(float deltaTime) {
     cloudLayer.update(deltaTime);
     cloudLayer.render(getSpriteBatch(), getCamera());
+  }
+
+  @Override
+  public void dispose() {
   }
 }

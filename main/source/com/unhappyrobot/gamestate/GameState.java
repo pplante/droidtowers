@@ -8,7 +8,7 @@ import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.events.EventListener;
 import com.unhappyrobot.gamestate.actions.*;
-import com.unhappyrobot.gamestate.server.HappyDroidService;
+import com.unhappyrobot.gamestate.server.CloudGameSave;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridObjectState;
 import com.unhappyrobot.gui.Dialog;
@@ -123,11 +123,11 @@ public class GameState extends EventListener {
       if (!gameGrid.isEmpty()) {
         GameSave gameSave = new GameSave(gameGrid, camera, Player.instance(), cloudGameSaveUri);
         try {
-          String cloudSaveUri = HappyDroidService.instance().uploadGameSave(gameSave);
-          System.out.println("cloudSaveUri = " + cloudSaveUri);
-          if (cloudSaveUri != null) {
-            cloudGameSaveUri = cloudSaveUri;
-            gameSave.setCloudSaveUri(cloudSaveUri);
+          CloudGameSave cloudGameSave = new CloudGameSave(gameSave);
+          cloudGameSave.save();
+
+          if (cloudGameSave.isSaved() && cloudGameSaveUri == null) {
+            gameSave.setCloudSaveUri(cloudGameSave.getResourceUri());
           }
 
           GameSave.getObjectMapper().writeValue(gameSaveLocation.file(), gameSave);

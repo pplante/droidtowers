@@ -1,39 +1,29 @@
 package com.unhappyrobot.gamestate.server;
 
-import org.apache.http.HttpResponse;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-import java.util.HashMap;
-
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TemporaryToken {
+public class TemporaryToken extends HappyDroidServiceObject {
   private String value;
-  private String resourceUri;
   private String clickableUri;
   private SessionToken session;
 
-  private TemporaryToken() {
+  public void setResourceUri(String uri) {
+    resourceUri = uri;
   }
 
-  public static TemporaryToken create() {
-    HttpResponse response = HappyDroidService.instance().makePostRequest(Consts.API_V1_TEMPORARY_TOKEN_CREATE, new HashMap<String, String>());
-    if (response != null && response.getStatusLine().getStatusCode() == 201) {
-      return HappyDroidServiceObject.materializeObject(response, TemporaryToken.class);
-    }
+  @Override
+  protected String getResourceBaseUri() {
+    return Consts.HAPPYDROIDS_URI + "/api/v1/temporarytoken/";
+  }
 
-    return null;
+  public TemporaryToken() {
   }
 
   public boolean validate() {
-    HttpResponse response = HappyDroidService.instance().makeGetRequest(Consts.HAPPYDROIDS_URI + resourceUri);
-    TemporaryToken token = HappyDroidServiceObject.materializeObject(response, TemporaryToken.class);
-    if (token != null && token.hasSessionToken()) {
-      session = token.session;
-      HappyDroidService.instance().setSessionToken(session.token);
-    }
-
+    reload();
     return hasSessionToken();
   }
 
@@ -42,7 +32,7 @@ public class TemporaryToken {
   }
 
   public String getSessionToken() {
-    return session.token;
+    return session != null ? session.token : null;
   }
 
   public boolean hasSessionToken() {

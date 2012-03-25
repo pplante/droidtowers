@@ -12,19 +12,21 @@ import static com.unhappyrobot.Expect.expect;
 public class TemporaryTokenTest {
   @Test
   public void create_shouldReturnATempToken() throws Exception {
-    TestHelper.queueFakeRequest("{\"resource_uri\": \"/api/v1/temporarytoken/1/\", \"session\": {\"token\": \"asdfasdfasdfsd\"}, \"value\": 86672}");
+    TestHelper.queueFakeRequest("{\"resourceUri\": \"/api/v1/temporarytoken/1/\", \"session\": {\"token\": \"MYSESSIONTOKEN\"}, \"value\": \"TOK3N\"}");
 
-    TemporaryToken token = TemporaryToken.create();
-    expect(token.getValue()).toEqual("");
-    expect(token.getSessionToken()).toEqual("asdfasdfasdfsd");
+    TemporaryToken token = new TemporaryToken();
+    token.save();
+    expect(token.getValue()).toEqual("TOK3N");
+    expect(token.getSessionToken()).toEqual("MYSESSIONTOKEN");
   }
 
   @Test
   public void hasSessionToken_shouldReturnFalse_whenTokenIsNull() throws Exception {
-    TestHelper.queueFakeRequest("{\"session\": {\"token\": null}, \"value\": 86672}");
+    TestHelper.queueFakeRequest("{\"resourceUri\": \"/api/v1/temporarytoken/1/\", \"session\": {\"token\": null}, \"value\": \"TOK3N\"}");
 
-    TemporaryToken token = TemporaryToken.create();
-    expect(token.getValue()).toEqual("");
+    TemporaryToken token = new TemporaryToken();
+    token.save();
+    expect(token.getValue()).toEqual("TOK3N");
     expect(token.getSessionToken()).toBeNull();
 
     expect(token.hasSessionToken()).toBeFalse();
@@ -32,16 +34,18 @@ public class TemporaryTokenTest {
 
   @Test
   public void validate_shouldRequestTokenUpdates() {
-    TestHelper.queueFakeRequest("{\"resource_uri\": \"/api/v1/temporarytoken/1/\", \"session\": null, \"value\": 1}");
+    TestHelper.queueFakeRequest("{\"resourceUri\": \"/api/v1/temporarytoken/1/\", \"session\": null, \"value\": \"TOK123\"}");
 
-    TemporaryToken token = TemporaryToken.create();
+    TemporaryToken token = new TemporaryToken();
+    token.save();
+    expect(token.getResourceUri()).toEqual("/api/v1/temporarytoken/1/");
     expect(token.hasSessionToken()).toBeFalse();
 
-    TestHelper.queueFakeRequest("{\"resource_uri\": \"/api/v1/temporarytoken/1/\", \"session\": null, \"value\": 1}");
-
+    TestHelper.queueFakeRequest("{\"resourceUri\": \"/api/v1/temporarytoken/1/\", \"session\": null, \"value\": \"TOK123\"}");
+    expect(token.getResourceUri()).toEqual("/api/v1/temporarytoken/1/");
     expect(token.validate()).toBeFalse();
 
-    TestHelper.queueFakeRequest("{\"resource_uri\": \"/api/v1/temporarytoken/1/\", \"session\": {\"token\": \"asdfasdfasdfsd\"}, \"value\": 1}");
+    TestHelper.queueFakeRequest("{\"resourceUri\": \"/api/v1/temporarytoken/1/\", \"session\": {\"token\": \"asdfasdfasdfsd\"}, \"value\": \"TOK123\"}");
     expect(token.validate()).toBeTrue();
   }
 }

@@ -31,6 +31,8 @@ public abstract class Scene {
 
   public abstract void render(float deltaTime);
 
+  public abstract void dispose();
+
   public float getTimeMultiplier() {
     return 1f;
   }
