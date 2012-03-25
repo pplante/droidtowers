@@ -21,23 +21,7 @@
     <bookmark url="file://$PROJECT_DIR$/.idea/workspace.xml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/RuntimeExceptionDialog.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelButton.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/fonts/helvetica_neue_12_white.fnt" afterPath="$PROJECT_DIR$/android/assets/fonts/helvetica_neue_12_white.fnt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/fonts/helvetica_neue_12_white.png" afterPath="$PROJECT_DIR$/android/assets/fonts/helvetica_neue_12_white.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/pplante.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/pplante.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/LwjglApplicationShim.java" afterPath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/LwjglApplicationShim.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Dialog.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Dialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelStyles.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelStyles.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/MenuItem.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/MenuItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/OverlayControl.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/OverlayControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/TowerWindow.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/TowerWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java" />
-    </list>
+    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="" />
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -153,10 +137,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LabelStyles.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelStyles.java">
+      <file leaf-file-name="GridObjectPurchaseMenu.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/GridObjectPurchaseMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="26" selection-start="374" selection-end="374" vertical-scroll-proportion="-0.3561644">
+            <state line="64" column="14" selection-start="2201" selection-end="2201" vertical-scroll-proportion="0.22942206">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SplashScene.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashScene.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="49" column="38" selection-start="1427" selection-end="1427" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -175,8 +170,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ConnectToHappyDroidsWindow.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/Scene.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/TowerScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LoadGameWindow.java" />
@@ -191,6 +184,8 @@
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelStyles.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashScene.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/GridObjectPurchaseMenu.java" />
       </list>
     </option>
   </component>
@@ -400,7 +395,7 @@
     </ignored-problems>
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator proportions="" version="1" splitterProportion="0.5">
       <flattenPackages ProjectPane="false" />
       <showMembers />
       <showModules />
@@ -412,77 +407,6 @@
       <sortByType ProjectPane="false" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="unhappyrobot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="unhappyrobot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graphics" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Favorites" />
     </panes>
   </component>
@@ -1224,7 +1148,11 @@
       <created>1332673904546</created>
       <updated>1332673904546</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="fixed alignment in grid object purchase menu">
+      <created>1332717773098</created>
+      <updated>1332717773098</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1323,7 +1251,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the font rounding errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed alignment in grid object purchase menu" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1336,7 +1264,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="fixed camera bounds checking, added city scape background!" />
     <MESSAGE value=" moved the rain into its own layer so the clouds would be on top." />
     <MESSAGE value="weather service is starting" />
     <MESSAGE value="weather service now changes weather every minute, fixed stair movement, added wander ability to avatars." />
@@ -1361,6 +1288,7 @@
     <MESSAGE value="cleaned up the UI a bit." />
     <MESSAGE value="moved the connect to happy droids window to the main menu now" />
     <MESSAGE value="fixed the font rounding errors" />
+    <MESSAGE value="fixed alignment in grid object purchase menu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1379,16 +1307,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/TowerScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="73" selection-start="2508" selection-end="2508" vertical-scroll-proportion="0.63419485" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/files/FileHandle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="16" selection-start="2968" selection-end="2968" vertical-scroll-proportion="0.33333334" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LoadGameWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="74" column="14" selection-start="2400" selection-end="2400" vertical-scroll-proportion="0.75944334" />
@@ -1463,13 +1381,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="43" selection-start="881" selection-end="881" vertical-scroll-proportion="0.2260274">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="147" column="12" selection-start="5749" selection-end="5749" vertical-scroll-proportion="0.32749563">
@@ -1486,8 +1397,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelStyles.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="26" selection-start="374" selection-end="374" vertical-scroll-proportion="-0.3561644">
+        <state line="12" column="26" selection-start="374" selection-end="374" vertical-scroll-proportion="-0.056">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="43" selection-start="881" selection-end="881" vertical-scroll-proportion="-1.6693333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashScene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="38" selection-start="1427" selection-end="1427" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/GridObjectPurchaseMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="14" selection-start="2201" selection-end="2201" vertical-scroll-proportion="0.22942206">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
