@@ -3,6 +3,7 @@ package com.unhappyrobot.scenes;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveBy;
 import com.badlogic.gdx.scenes.scene2d.actions.ScaleTo;
@@ -10,12 +11,14 @@ import com.badlogic.gdx.scenes.scene2d.actions.Sequence;
 import com.badlogic.gdx.scenes.scene2d.interpolators.OvershootInterpolator;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.unhappyrobot.gui.LabelStyles;
-import com.unhappyrobot.gui.LoadGameWindow;
-import com.unhappyrobot.gui.NewGameWindow;
+import com.unhappyrobot.gui.*;
 import com.unhappyrobot.utils.Platform;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 public class MainMenuScene extends Scene {
+  public static final int BUTTON_WIDTH = 200;
   private SplashCloudLayer cloudLayer;
 
   @Override
@@ -31,20 +34,25 @@ public class MainMenuScene extends Scene {
     container.add(loadingMessage).align(Align.RIGHT);
     container.row().padTop(50);
 
+    TextButton connectFacebookButton = new TextButton("login to happydroids.com", getGuiSkin());
+    container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
+    container.row().padTop(30);
+
     TextButton newGameButton = new TextButton("new game", getGuiSkin());
-    container.add(newGameButton).fill().maxWidth(150);
+    container.add(newGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row().padTop(15);
 
     TextButton loadGameButton = new TextButton("load game", getGuiSkin());
-    container.add(loadGameButton).fill().maxWidth(150);
-    container.row().padTop(40);
+    container.add(loadGameButton).fill().maxWidth(BUTTON_WIDTH);
+    container.row().padTop(15);
 
     TextButton optionsButton = new TextButton("options", getGuiSkin());
-    container.add(optionsButton).fill().maxWidth(150);
-    container.row().padTop(60);
+    container.add(optionsButton).fill().maxWidth(BUTTON_WIDTH);
+    container.row().padTop(40);
+
 
     TextButton exitGameButton = new TextButton("exit game", getGuiSkin());
-    container.add(exitGameButton).fill().maxWidth(150);
+    container.add(exitGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row();
 
 
@@ -80,19 +88,9 @@ public class MainMenuScene extends Scene {
     cloudLayer = new SplashCloudLayer();
 
 
-    newGameButton.setClickListener(new ClickListener() {
-      public void click(final Actor actor, float x, float y) {
-        NewGameWindow window = new NewGameWindow(getStage(), getGuiSkin());
-        window.modal(true).show().centerOnStage();
-      }
-    });
-
-    loadGameButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        LoadGameWindow window = new LoadGameWindow(getStage(), getGuiSkin());
-        window.modal(true).show().centerOnStage();
-      }
-    });
+    connectFacebookButton.setClickListener(new LaunchWindowClickListener(ConnectToHappyDroidsWindow.class));
+    newGameButton.setClickListener(new LaunchWindowClickListener(NewGameWindow.class));
+    loadGameButton.setClickListener(new LaunchWindowClickListener(LoadGameWindow.class));
 
     exitGameButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
@@ -117,5 +115,29 @@ public class MainMenuScene extends Scene {
 
   @Override
   public void dispose() {
+  }
+
+  private class LaunchWindowClickListener implements ClickListener {
+    private final Class<? extends TowerWindow> aClass;
+
+    public LaunchWindowClickListener(Class<? extends TowerWindow> aClass) {
+      this.aClass = aClass;
+    }
+
+    public void click(Actor actor, float x, float y) {
+      try {
+        Constructor<? extends TowerWindow> constructor = aClass.getConstructor(Stage.class, Skin.class);
+        TowerWindow window = constructor.newInstance(getStage(), getGuiSkin());
+        window.modal(true).show().centerOnStage();
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (InstantiationException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      }
+    }
   }
 }
