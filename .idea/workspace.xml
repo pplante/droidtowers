@@ -21,7 +21,15 @@
     <bookmark url="file://$PROJECT_DIR$/.idea/workspace.xml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="" />
+    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets-raw/fonts/hiragino_maru_14.GlyphProject" afterPath="$PROJECT_DIR$/android/assets-raw/fonts/hiragino_maru_14.GlyphProject" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/fonts/hiragino_maru_14_white.fnt" afterPath="$PROJECT_DIR$/android/assets/fonts/hiragino_maru_14_white.fnt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/fonts/hiragino_maru_14_white.png" afterPath="$PROJECT_DIR$/android/assets/fonts/hiragino_maru_14_white.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/idea-build.xml" afterPath="$PROJECT_DIR$/idea-build.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashScene.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashScene.java" />
+    </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -137,10 +145,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GridObjectPurchaseMenu.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="GridObjectPurchaseMenu.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/GridObjectPurchaseMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="14" selection-start="2201" selection-end="2201" vertical-scroll-proportion="0.22942206">
+            <state line="64" column="14" selection-start="2201" selection-end="2201" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -151,7 +159,16 @@
       <file leaf-file-name="SplashScene.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashScene.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="38" selection-start="1427" selection-end="1427" vertical-scroll-proportion="0.0">
+            <state line="50" column="5" selection-start="1441" selection-end="1441" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainMenuScene.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="40" column="0" selection-start="1581" selection-end="1581" vertical-scroll-proportion="0.4520548">
               <folding />
             </state>
           </provider>
@@ -182,10 +199,10 @@
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/TowerWindow.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Dialog.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelStyles.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/GridObjectPurchaseMenu.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashScene.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java" />
       </list>
     </option>
   </component>
@@ -1177,7 +1194,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3257403" sideWeight="0.9677548" order="7" side_tool="false" content_ui="tabs" />
@@ -1199,7 +1216,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283046" sideWeight="0.7441154" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39853895" sideWeight="0.7441154" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.6716196" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21364221" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21364221" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32975337" sideWeight="0.649962" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1402,26 +1419,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/GridObjectPurchaseMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="43" selection-start="881" selection-end="881" vertical-scroll-proportion="-1.6693333">
-          <folding />
+        <state line="64" column="14" selection-start="2201" selection-end="2201" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="38" selection-start="1427" selection-end="1427" vertical-scroll-proportion="0.0">
+        <state line="50" column="5" selection-start="1441" selection-end="1441" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/GridObjectPurchaseMenu.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="14" selection-start="2201" selection-end="2201" vertical-scroll-proportion="0.22942206">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="40" column="0" selection-start="1581" selection-end="1581" vertical-scroll-proportion="0.4520548">
+          <folding />
         </state>
       </provider>
     </entry>

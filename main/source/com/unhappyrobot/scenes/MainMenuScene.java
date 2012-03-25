@@ -36,8 +36,8 @@ public class MainMenuScene extends Scene {
     container.row().padTop(50);
 
     TextButton connectFacebookButton = new TextButton("login to happydroids.com", getGuiSkin());
-    container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
-    container.row().padTop(30);
+//    container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
+//    container.row().padTop(30);
 
     TextButton newGameButton = new TextButton("new game", getGuiSkin());
     container.add(newGameButton).fill().maxWidth(BUTTON_WIDTH);

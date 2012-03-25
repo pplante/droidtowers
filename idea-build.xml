@@ -12,7 +12,7 @@
   
   <property name="compiler.debug" value="on"/>
   <property name="compiler.generate.no.warnings" value="off"/>
-  <property name="compiler.args" value=""/>
+  <property name="compiler.args" value="-target 1.5"/>
   <property name="compiler.max.memory" value="128m"/>
   <patternset id="ignored.files">
     <exclude name="**/CVS/**"/>
@@ -320,6 +320,7 @@
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
     <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
     <pathelement location="${basedir}/main/libs/main/commons-codec-1.4.jar"/>
     <pathelement location="${basedir}/main/libs/main/httpclient-4.1.3.jar"/>
     <pathelement location="${basedir}/main/libs/main/httpclient-cache-4.1.3.jar"/>
@@ -357,6 +358,7 @@
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
     <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
     <pathelement location="${basedir}/main/libs/main/commons-codec-1.4.jar"/>
     <pathelement location="${basedir}/main/libs/main/httpclient-4.1.3.jar"/>
     <pathelement location="${basedir}/main/libs/main/httpclient-cache-4.1.3.jar"/>
@@ -472,6 +474,7 @@
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
     <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
     <pathelement location="${basedir}/main/libs/main/commons-codec-1.4.jar"/>
     <pathelement location="${basedir}/main/libs/main/httpclient-4.1.3.jar"/>
     <pathelement location="${basedir}/main/libs/main/httpclient-cache-4.1.3.jar"/>
@@ -511,6 +514,7 @@
     <pathelement location="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
     <pathelement location="${basedir}/main/libs/main/tween-engine-api.jar"/>
     <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
+    <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
     <pathelement location="${basedir}/main/libs/main/commons-codec-1.4.jar"/>
     <pathelement location="${basedir}/main/libs/main/httpclient-4.1.3.jar"/>
     <pathelement location="${basedir}/main/libs/main/httpclient-cache-4.1.3.jar"/>
@@ -620,7 +624,6 @@
       <zipfileset src="${basedir}/desktop/libs/main/gdx-backend-lwjgl-natives.jar"/>
       <zipfileset src="${basedir}/main/libs/main/guava-10.0.1.jar"/>
       <zipfileset src="${basedir}/main/libs/main/tween-engine-api.jar"/>
-      <zipfileset src="${basedir}/main/libs/main/js.jar"/>
       <zipfileset src="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
       <zipfileset src="${basedir}/main/libs/main/jackson-mapper-asl-1.9.5.jar"/>
       <zipfileset src="${basedir}/main/libs/main/jackson-core-asl-1.9.5.jar"/>
