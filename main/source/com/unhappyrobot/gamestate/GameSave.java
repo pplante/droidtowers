@@ -48,7 +48,7 @@ public class GameSave {
     cameraPosition = camera.position;
     cameraZoom = camera.zoom;
 
-    gridSize = gameGrid.gridSize;
+    gridSize = gameGrid.getGridSize();
     gridObjects = Lists.newArrayList();
     objectCounts = Maps.newHashMap();
 
@@ -71,7 +71,6 @@ public class GameSave {
       completedAchievements.add(achievement.getId());
     }
   }
-
 
 
   public static ObjectMapper getObjectMapper() {

@@ -3,75 +3,55 @@ package com.unhappyrobot.gamestate;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.entities.Player;
-import com.unhappyrobot.events.EventListener;
-import com.unhappyrobot.gamestate.actions.*;
 import com.unhappyrobot.gamestate.server.CloudGameSave;
+import com.unhappyrobot.graphics.TowerMiniMap;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridObjectState;
 import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.OnClickCallback;
 import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.input.CameraController;
+import com.unhappyrobot.utils.PNG;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class GameState extends EventListener {
+import java.io.OutputStream;
+
+public class GameState {
+  private static final String TAG = GameState.class.getSimpleName();
+
   private final OrthographicCamera camera;
   private final GameGrid gameGrid;
   private final FileHandle gameSaveLocation;
-  private final GameStateAction calculatePopulation;
-  private static final String TAG = GameState.class.getSimpleName();
-  private final GameStateAction calculateJobs;
-  private final GameStateAction calculateEarnout;
-  private final GameStateAction calculateDesirability;
+  private final String gameSaveFilename;
+  private final FileHandle gameFile;
+  private final TowerMiniMap towerMiniMap;
   private boolean shouldSaveGame;
-  private final TransportCalculator transportCalculator;
-  private long nextTimeToSave;
   private String cloudGameSaveUri;
   private boolean loadedSavedGame;
+  private FileHandle pngFile;
 
-  public GameState(OrthographicCamera camera, final GameGrid gameGrid, FileHandle gameSaveLocation) {
+  public GameState(OrthographicCamera camera, final GameGrid gameGrid, FileHandle gameSaveLocation, String gameSaveFilename, TowerMiniMap towerMiniMap) {
     this.camera = camera;
     this.gameGrid = gameGrid;
     this.gameSaveLocation = gameSaveLocation;
-
-    nextTimeToSave = System.currentTimeMillis() + TowerConsts.GAME_SAVE_FREQUENCY;
-    calculatePopulation = new PopulationCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
-    calculateEarnout = new EarnoutCalculator(gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
-    calculateJobs = new EmploymentCalculator(gameGrid, TowerConsts.JOB_UPDATE_FREQUENCY);
-    calculateDesirability = new DesirabilityCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
-    transportCalculator = new TransportCalculator(gameGrid, TowerConsts.TRANSPORT_CALCULATOR_FREQUENCY);
-
-    gameGrid.events().register(this);
-  }
-
-  public void update(float deltaTime) {
-    transportCalculator.act(deltaTime);
-    calculatePopulation.act(deltaTime);
-    calculateJobs.act(deltaTime);
-    calculateEarnout.act(deltaTime);
-    calculateDesirability.act(deltaTime);
-
-    if (nextTimeToSave <= System.currentTimeMillis()) {
-      nextTimeToSave = System.currentTimeMillis() + TowerConsts.GAME_SAVE_FREQUENCY;
-      saveGame();
-    }
+    this.gameSaveFilename = gameSaveFilename;
+    this.gameFile = gameSaveLocation.child(gameSaveFilename);
+    this.pngFile = gameSaveLocation.child(gameSaveFilename + ".png");
+    this.towerMiniMap = towerMiniMap;
   }
 
   public void loadSavedGame() {
     shouldSaveGame = true;
-
-    if (!gameSaveLocation.exists()) {
+    Gdx.app.debug(TAG, "Loading: " + gameFile.path());
+    if (!gameFile.exists()) {
       return;
     }
 
     try {
-      transportCalculator.pause();
-
       ObjectMapper objectMapper = new ObjectMapper();
-      GameSave gameSave = objectMapper.readValue(gameSaveLocation.file(), GameSave.class);
+      GameSave gameSave = objectMapper.readValue(gameFile.file(), GameSave.class);
       cloudGameSaveUri = gameSave.getCloudSaveUri();
       gameGrid.setGridSize(gameSave.getGridSize().x, gameSave.getGridSize().y);
       gameGrid.updateWorldSize();
@@ -97,7 +77,12 @@ public class GameState extends EventListener {
       new Dialog().setMessage("Saved game could not be loaded, want to reset?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
         @Override
         public void onClick(Dialog dialog) {
-          gameSaveLocation.delete();
+          if (gameFile.exists()) {
+            gameFile.delete();
+          }
+          if (pngFile.exists()) {
+            pngFile.delete();
+          }
           dialog.dismiss();
           shouldSaveGame = true;
         }
@@ -109,7 +94,6 @@ public class GameState extends EventListener {
         }
       }).show();
     } finally {
-      transportCalculator.unpause();
       Gdx.app.debug(TAG, "loadGameSave - finished");
     }
   }
@@ -117,7 +101,7 @@ public class GameState extends EventListener {
   public void saveGame() {
     if (shouldSaveGame) {
       if (!gameSaveLocation.exists()) {
-        gameSaveLocation.parent().mkdirs();
+        gameSaveLocation.mkdirs();
       }
 
       if (!gameGrid.isEmpty()) {
@@ -130,7 +114,12 @@ public class GameState extends EventListener {
             gameSave.setCloudSaveUri(cloudGameSave.getResourceUri());
           }
 
-          GameSave.getObjectMapper().writeValue(gameSaveLocation.file(), gameSave);
+          GameSave.getObjectMapper().writeValue(gameFile.file(), gameSave);
+
+          OutputStream stream = pngFile.write(false);
+          stream.write(PNG.toPNG(towerMiniMap.redrawMiniMap(true, 2f)));
+          stream.flush();
+          stream.close();
         } catch (Exception e) {
           Gdx.app.log("GameSave", "Could not save game!", e);
         }

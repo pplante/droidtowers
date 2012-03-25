@@ -35,7 +35,7 @@ public class GridPositionCache {
   public void handleGameGridResizeEvent(GameGridResizeEvent event) {
     gridPositions = null;
 
-    gridSize = event.gameGrid.gridSize;
+    gridSize = gameGrid.getGridSize();
     gridPositions = new GridPosition[(int) gridSize.x + 1][(int) gridSize.y + 1];
 
     for (int x = 0; x <= gridSize.x; x++) {
@@ -44,11 +44,8 @@ public class GridPositionCache {
       }
     }
 
-    for (GridObject gridObject : event.gameGrid.getObjects()) {
-      GridPosition position = getObjectSetForPosition(gridObject.getPosition());
-      if (position != null) {
-        position.add(gridObject);
-      }
+    for (GridObject gridObject : gameGrid.getObjects()) {
+      addGridObjectToPosition(gridObject);
     }
   }
 

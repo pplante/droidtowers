@@ -121,14 +121,14 @@ public abstract class GridObject {
   protected void clampPosition() {
     if (position.x < 0) {
       position.x = 0;
-    } else if (position.x + size.x > gameGrid.gridSize.x) {
-      position.x = gameGrid.gridSize.x - size.x;
+    } else if (position.x + size.x > gameGrid.getGridSize().x) {
+      position.x = gameGrid.getGridSize().x - size.x;
     }
 
     if (position.y < 0) {
       position.y = 0;
-    } else if (position.y + size.y > gameGrid.gridSize.y) {
-      position.y = gameGrid.gridSize.y - size.y;
+    } else if (position.y + size.y > gameGrid.getGridSize().y) {
+      position.y = gameGrid.getGridSize().y - size.y;
     }
   }
 
@@ -166,7 +166,6 @@ public abstract class GridObject {
 
   public void setPlacementState(GridObjectPlacementState placementState) {
     this.placementState = placementState;
-    broadcastEvent(new GridObjectChangedEvent(this, "placementState"));
     updatePlacementStatus();
   }
 

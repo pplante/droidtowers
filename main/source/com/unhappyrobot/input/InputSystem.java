@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
+import com.google.common.collect.Sets;
 import com.unhappyrobot.entities.GameLayer;
 
 import java.util.*;
@@ -273,6 +274,17 @@ public class InputSystem extends InputAdapter {
       if (entry.getInputProcessor() instanceof Stage) {
         ((Stage) entry.getInputProcessor()).unfocusAll();
       }
+    }
+  }
+
+  public void unbind(InputCallback... callbacks) {
+    if (callbacks == null || callbacks.length == 0) {
+      return;
+    }
+
+    HashSet<InputCallback> callbackHashSet = Sets.newHashSet(callbacks);
+    for (Map.Entry<Integer, ArrayList<InputCallback>> entry : keyBindings.entrySet()) {
+      entry.getValue().removeAll(callbackHashSet);
     }
   }
 

@@ -37,4 +37,8 @@ public class ActionManager {
       }
     }
   }
+
+  public void removeAction(Action action) {
+    actions.remove(action);
+  }
 }

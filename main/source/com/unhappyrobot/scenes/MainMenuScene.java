@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.interpolators.OvershootInterpolator;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.gui.LabelStyles;
+import com.unhappyrobot.gui.LoadGameWindow;
 import com.unhappyrobot.gui.NewGameWindow;
 import com.unhappyrobot.utils.Platform;
 
@@ -18,7 +19,7 @@ public class MainMenuScene extends Scene {
   private SplashCloudLayer cloudLayer;
 
   @Override
-  public void create() {
+  public void create(Object... args) {
     Table container = new Table(getGuiSkin());
     container.defaults().center().left();
 
@@ -40,6 +41,10 @@ public class MainMenuScene extends Scene {
 
     TextButton optionsButton = new TextButton("options", getGuiSkin());
     container.add(optionsButton).fill().maxWidth(150);
+    container.row();
+
+    TextButton exitGameButton = new TextButton("exit game", getGuiSkin());
+    container.add(exitGameButton).fill().maxWidth(150);
     container.row();
 
 
@@ -77,20 +82,23 @@ public class MainMenuScene extends Scene {
 
     newGameButton.setClickListener(new ClickListener() {
       public void click(final Actor actor, float x, float y) {
-        NewGameWindow window = new NewGameWindow("Start a new Tower", getStage(), getGuiSkin());
+        NewGameWindow window = new NewGameWindow(getStage(), getGuiSkin());
         window.modal(true).show().centerOnStage();
       }
     });
 
-  }
+    loadGameButton.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        LoadGameWindow window = new LoadGameWindow(getStage(), getGuiSkin());
+        window.modal(true).show().centerOnStage();
+      }
+    });
 
-  private void center(Actor actor) {
-    centerHorizontally(actor);
-    centerVertically(actor);
-  }
-
-  private void centerVertically(Actor actor) {
-    actor.y = (getStage().height() - actor.height) / 2;
+    exitGameButton.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        Gdx.app.exit();
+      }
+    });
   }
 
   @Override

@@ -9,15 +9,18 @@
       <w>deferrables</w>
       <w>delegater</w>
       <w>earnout</w>
+      <w>gamesave</w>
       <w>iterable</w>
       <w>jarbundler</w>
       <w>keybindings</w>
       <w>keycode</w>
       <w>millis</w>
+      <w>minimap</w>
       <w>pixmap</w>
       <w>placeable</w>
       <w>temporarytoken</w>
       <w>unhappyrobot</w>
+      <w>unpause</w>
       <w>unregister</w>
       <w>vert</w>
       <w>yaml</w>

@@ -22,7 +22,7 @@ import java.util.Set;
 public class GameGrid extends GameLayer {
   private EventBus eventBus = new EventBus(GameGrid.class.getSimpleName());
 
-  public Vector2 gridSize;
+  private Vector2 gridSize;
   private GuavaSet<GridObject> objects;
   private Vector2 worldSize;
   private final GameGridRenderer gameGridRenderer;
@@ -40,6 +40,7 @@ public class GameGrid extends GameLayer {
 
     gameGridRenderer = new GameGridRenderer(this, camera);
     gridSize = new Vector2(8, 8);
+
     updateWorldSize();
   }
 

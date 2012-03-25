@@ -39,9 +39,9 @@ public class GridObjectState {
         GridObject object = objectType.makeGridObject(gameGrid);
 
         if (object != null) {
-          object.setPlacementState(GridObjectPlacementState.PLACED);
           object.setPosition(position.x, position.y);
           object.setSize(size.x, size.y);
+          object.setPlacementState(GridObjectPlacementState.PLACED);
 
           gameGrid.addObject(object);
 

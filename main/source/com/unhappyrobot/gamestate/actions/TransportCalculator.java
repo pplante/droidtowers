@@ -1,5 +1,6 @@
 package com.unhappyrobot.gamestate.actions;
 
+import com.badlogic.gdx.Gdx;
 import com.google.common.eventbus.Subscribe;
 import com.unhappyrobot.entities.*;
 import com.unhappyrobot.events.GridObjectEvent;
@@ -10,6 +11,8 @@ import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.RoomType;
 
 public class TransportCalculator extends GameStateAction {
+  private static final String TAG = TransportCalculator.class.getSimpleName();
+
   private final Class transportClasses[] = {Elevator.class, Stair.class};
   private final Class roomClasses[] = {Room.class, CommercialSpace.class};
 
@@ -28,6 +31,7 @@ public class TransportCalculator extends GameStateAction {
 
   @Override
   public void run() {
+    Gdx.app.debug(TAG, "running.");
     for (GridPosition[] gridPositions : GridPositionCache.instance().getPositions()) {
       for (GridPosition gridPosition : gridPositions) {
         gridPosition.connectedToTransit = false;
@@ -38,9 +42,9 @@ public class TransportCalculator extends GameStateAction {
       Room room = (Room) gridObject;
       RoomType roomType = (RoomType) room.getGridObjectType();
       if (roomType.isLobby()) {
-        room.setConnectedToTransport(true);
+        room.setConnectedToTransport(true, false);
       } else {
-        room.setConnectedToTransport(false);
+        room.setConnectedToTransport(false, false);
       }
     }
 
@@ -60,6 +64,8 @@ public class TransportCalculator extends GameStateAction {
         scanForRooms(x, y, 1);
       }
     }
+
+    gameGrid.events().post(new GameGridTransportCalculationComplete(gameGrid));
   }
 
   private void scanForRooms(int x, int y, int stepX) {
@@ -69,7 +75,7 @@ public class TransportCalculator extends GameStateAction {
       for (GridObject gridObject : gridPosition.getObjects()) {
         if (gridObject instanceof Room) {
           Room room = (Room) gridObject;
-          room.setConnectedToTransport(true);
+          room.setConnectedToTransport(true, true);
         }
       }
 

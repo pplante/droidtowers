@@ -13,7 +13,7 @@ public class SplashScene extends Scene {
   private CloudLayer cloudLayer;
 
   @Override
-  public void create() {
+  public void create(Object... args) {
     addModalBackground();
 
     Label label = LabelStyles.BankGothic64.makeLabel("Droid Towers");

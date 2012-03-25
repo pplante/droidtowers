@@ -10,8 +10,8 @@ import com.unhappyrobot.scenes.TowerScene;
 import java.text.NumberFormat;
 
 public class NewGameWindow extends TowerWindow {
-  public NewGameWindow(String title, Stage stage, Skin skin) {
-    super(title, stage, skin);
+  public NewGameWindow(Stage stage, Skin skin) {
+    super("Start a new Tower", stage, skin);
 
     defaults().top().left().pad(5);
     add(LabelStyles.Default.makeLabel("Please provide a name for your Tower:"));
@@ -68,6 +68,7 @@ public class NewGameWindow extends TowerWindow {
 
     beginButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
+        dismiss();
         TowerGame.changeScene(TowerScene.class);
       }
     });

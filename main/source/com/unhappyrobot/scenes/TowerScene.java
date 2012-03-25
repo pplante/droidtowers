@@ -8,16 +8,16 @@ import com.google.common.collect.Lists;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.WeatherService;
 import com.unhappyrobot.achievements.AchievementEngine;
+import com.unhappyrobot.actions.ActionManager;
+import com.unhappyrobot.actions.GameSaveAction;
 import com.unhappyrobot.audio.GameGridSoundDispatcher;
 import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.controllers.GameTips;
 import com.unhappyrobot.entities.CloudLayer;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.gamestate.GameState;
-import com.unhappyrobot.graphics.CityScapeLayer;
-import com.unhappyrobot.graphics.GroundLayer;
-import com.unhappyrobot.graphics.RainLayer;
-import com.unhappyrobot.graphics.SkyLayer;
+import com.unhappyrobot.gamestate.actions.*;
+import com.unhappyrobot.graphics.*;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GameGridRenderer;
 import com.unhappyrobot.grid.GridPositionCache;
@@ -40,20 +40,35 @@ public class TowerScene extends Scene {
   private GameState gameState;
   private float timeMultiplier;
   private FileHandle gameSaveLocation;
+  private String gameSaveFilename;
   private WeatherService weatherService;
   private HeadsUpDisplay headsUpDisplay;
   private GameTips gameTips;
   private GestureDetector gestureDetector;
   private GestureDelegater gestureDelegater;
   private GameGridSoundDispatcher gridSoundDispatcher;
+  private TowerMiniMap towerMiniMap;
+  private TransportCalculator transportCalculator;
+  private PopulationCalculator populationCalculator;
+  private EarnoutCalculator earnoutCalculator;
+  private EmploymentCalculator employmentCalculator;
+  private DesirabilityCalculator desirabilityCalculator;
+  private GameSaveAction saveAction;
+  private DefaultKeybindings keybindings;
 
   public TowerScene() {
-    gameSaveLocation = Gdx.files.external(Gdx.app.getType().equals(Application.ApplicationType.Desktop) ? ".towergame/test.json" : "test.json");
+    gameSaveLocation = Gdx.files.external(Gdx.app.getType().equals(Application.ApplicationType.Desktop) ? ".towergame/" : "");
     timeMultiplier = 1f;
   }
 
   @Override
-  public void create() {
+  public void create(Object... args) {
+    if (args != null && args.length > 0) {
+      gameSaveFilename = (String) args[0];
+    } else {
+      gameSaveFilename = "test.json";
+    }
+
     RoomTypeFactory.instance();
     CommercialTypeFactory.instance();
     ElevatorTypeFactory.instance();
@@ -61,12 +76,17 @@ public class TowerScene extends Scene {
 
     gameGrid = new GameGrid(getCamera());
     gameGridRenderer = gameGrid.getRenderer();
-    gameState = new GameState(getCamera(), gameGrid, gameSaveLocation);
+    towerMiniMap = new TowerMiniMap(gameGrid);
+    gameState = new GameState(getCamera(), gameGrid, gameSaveLocation, gameSaveFilename, towerMiniMap);
 
     GridPositionCache.reset(gameGrid);
 
     headsUpDisplay = new HeadsUpDisplay(this);
     weatherService = new WeatherService();
+
+    towerMiniMap.x = 100;
+    towerMiniMap.y = 100;
+    headsUpDisplay.addActor(towerMiniMap);
 
     gameLayers = Lists.newArrayList();
     gameLayers.add(new SkyLayer(gameGrid, weatherService));
@@ -91,11 +111,34 @@ public class TowerScene extends Scene {
     InputSystem.instance().addInputProcessor(gestureDetector, 100);
     InputSystem.instance().setGestureDelegator(gestureDelegater);
     InputSystem.instance().switchTool(GestureTool.PICKER, null);
-    DefaultKeybindings.initialize(this);
+    keybindings = new DefaultKeybindings(this);
+    keybindings.bindKeys();
+
     if (!gameState.hasLoadedSavedGame()) {
       gameState.loadSavedGame();
     }
     AchievementEngine.instance().registerGameGrid(gameGrid);
+
+    populationCalculator = new PopulationCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
+    earnoutCalculator = new EarnoutCalculator(gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
+    employmentCalculator = new EmploymentCalculator(gameGrid, TowerConsts.JOB_UPDATE_FREQUENCY);
+    desirabilityCalculator = new DesirabilityCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
+    saveAction = new GameSaveAction(gameState);
+    transportCalculator = new TransportCalculator(gameGrid, TowerConsts.TRANSPORT_CALCULATOR_FREQUENCY);
+    transportCalculator.run();
+
+    attachActions();
+  }
+
+  private void attachActions() {
+    ActionManager.instance().addAction(transportCalculator);
+    ActionManager.instance().addAction(populationCalculator);
+    ActionManager.instance().addAction(earnoutCalculator);
+    ActionManager.instance().addAction(employmentCalculator);
+    ActionManager.instance().addAction(desirabilityCalculator);
+
+    // SHOULD ALWAYS BE LAST.
+    ActionManager.instance().addAction(saveAction);
   }
 
   @Override
@@ -121,7 +164,19 @@ public class TowerScene extends Scene {
   @Override
   public void dispose() {
     InputSystem.instance().removeInputProcessor(gestureDetector);
+    InputSystem.instance().setGestureDelegator(null);
+    keybindings.unbindKeys();
+
     AchievementEngine.instance().unregisterGameGrid();
+
+    ActionManager.instance().removeAction(transportCalculator);
+    ActionManager.instance().removeAction(populationCalculator);
+    ActionManager.instance().removeAction(earnoutCalculator);
+    ActionManager.instance().removeAction(employmentCalculator);
+    ActionManager.instance().removeAction(desirabilityCalculator);
+
+    // SHOULD ALWAYS BE LAST.
+    ActionManager.instance().removeAction(saveAction);
   }
 
 
@@ -134,7 +189,6 @@ public class TowerScene extends Scene {
 
     headsUpDisplay.act(deltaTime);
     weatherService.update(deltaTime);
-    gameState.update(deltaTime);
   }
 
   public float getTimeMultiplier() {

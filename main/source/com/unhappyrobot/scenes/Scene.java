@@ -23,7 +23,7 @@ public abstract class Scene {
     Scene.skin = guiSkin;
   }
 
-  public abstract void create();
+  public abstract void create(Object... args);
 
   public abstract void pause();
 
@@ -78,5 +78,14 @@ public abstract class Scene {
 
   protected void centerHorizontally(Actor actor) {
     actor.x = (getStage().width() - actor.width) / 2;
+  }
+
+  protected void center(Actor actor) {
+    centerHorizontally(actor);
+    centerVertically(actor);
+  }
+
+  private void centerVertically(Actor actor) {
+    actor.y = (getStage().height() - actor.height) / 2;
   }
 }

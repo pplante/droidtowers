@@ -68,6 +68,10 @@ public abstract class HappyDroidServiceObject {
   }
 
   public void save(ApiRunnable afterSave) {
+    if (!HappyDroidService.instance().haveNetworkConnection() || !HappyDroidService.instance().hasAuthenticated()) {
+      return;
+    }
+
     if (resourceUri == null) {
       HttpResponse response = HappyDroidService.instance().makePostRequest(getResourceBaseUri(), this);
       if (response != null && response.getStatusLine().getStatusCode() == 201) {

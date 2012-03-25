@@ -117,7 +117,7 @@ public class Room extends GridObject {
   }
 
 
-  public void setConnectedToTransport(boolean connectedToTransport) {
+  public void setConnectedToTransport(boolean connectedToTransport, boolean broadcastEvent) {
     this.connectedToTransport = connectedToTransport;
   }
 

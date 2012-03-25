@@ -24,6 +24,7 @@ import com.unhappyrobot.input.CameraController;
 import com.unhappyrobot.input.CameraControllerAccessor;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
+import com.unhappyrobot.scenes.MainMenuScene;
 import com.unhappyrobot.scenes.Scene;
 import com.unhappyrobot.scenes.SplashScene;
 import com.unhappyrobot.tween.GameObjectAccessor;
@@ -88,7 +89,11 @@ public class TowerGame implements ApplicationListener {
           @Override
           public void onClick(Dialog dialog) {
             dialog.dismiss();
-            Gdx.app.exit();
+            if (activeScene instanceof MainMenuScene) {
+              Gdx.app.exit();
+            } else {
+              changeScene(MainMenuScene.class);
+            }
           }
         }).addButton(ResponseType.NEGATIVE, "No way!", new OnClickCallback() {
           @Override
@@ -167,16 +172,17 @@ public class TowerGame implements ApplicationListener {
     spriteBatch.dispose();
   }
 
-  public static void changeScene(Class<? extends Scene> sceneClass) {
+  public static void changeScene(Class<? extends Scene> sceneClass, Object... args) {
     try {
       if (activeScene != null) {
         InputSystem.instance().removeInputProcessor(activeScene.getStage());
         activeScene.pause();
+        activeScene.dispose();
       }
 
       System.out.println("Switching scene to: " + sceneClass.getSimpleName());
       activeScene = sceneClass.newInstance();
-      activeScene.create();
+      activeScene.create(args);
       activeScene.resume();
       InputSystem.instance().addInputProcessor(activeScene.getStage(), 10);
     } catch (InstantiationException e) {

@@ -228,4 +228,12 @@ public class HappyDroidService {
       withNetworkConnectionRunnables.add(runnable);
     }
   }
+
+  public boolean haveNetworkConnection() {
+    return hasNetworkConnection;
+  }
+
+  public boolean hasAuthenticated() {
+    return isAuthenticated;
+  }
 }

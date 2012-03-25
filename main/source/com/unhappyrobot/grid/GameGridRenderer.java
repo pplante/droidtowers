@@ -172,12 +172,12 @@ public class GameGridRenderer extends GameLayer {
     shapeRenderer.begin(ShapeType.Line);
     shapeRenderer.setColor(0.1f, 0.1f, 0.1f, 0.1f);
 
-    for (int i = 0; i <= gameGrid.gridSize.x; i++) {
-      shapeRenderer.line(i * TowerConsts.GRID_UNIT_SIZE, 0, i * TowerConsts.GRID_UNIT_SIZE, gameGrid.gridSize.y * TowerConsts.GRID_UNIT_SIZE);
+    for (int i = 0; i <= gameGrid.getGridSize().x; i++) {
+      shapeRenderer.line(i * TowerConsts.GRID_UNIT_SIZE, 0, i * TowerConsts.GRID_UNIT_SIZE, gameGrid.getGridSize().y * TowerConsts.GRID_UNIT_SIZE);
     }
 
-    for (int i = 0; i <= gameGrid.gridSize.y; i++) {
-      shapeRenderer.line(0, i * TowerConsts.GRID_UNIT_SIZE, gameGrid.gridSize.x * TowerConsts.GRID_UNIT_SIZE, i * TowerConsts.GRID_UNIT_SIZE);
+    for (int i = 0; i <= gameGrid.getGridSize().y; i++) {
+      shapeRenderer.line(0, i * TowerConsts.GRID_UNIT_SIZE, gameGrid.getGridSize().x * TowerConsts.GRID_UNIT_SIZE, i * TowerConsts.GRID_UNIT_SIZE);
     }
 
     shapeRenderer.end();

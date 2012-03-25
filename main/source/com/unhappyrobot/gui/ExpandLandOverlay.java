@@ -11,7 +11,6 @@ import com.google.common.eventbus.Subscribe;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.grid.GameGrid;
-import com.unhappyrobot.grid.GridPositionCache;
 import com.unhappyrobot.gui.events.CameraControllerEvent;
 import com.unhappyrobot.input.CameraController;
 
@@ -43,11 +42,9 @@ public class ExpandLandOverlay extends WidgetGroup {
         gameGrid.setGridSize(gameGrid.getGridSize().x + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE, gameGrid.getGridSize().y);
         gameGrid.updateWorldSize();
 
-        GridPositionCache.instance().pauseEvents();
         for (GridObject gridObject : gameGrid.getObjects()) {
           gridObject.setPosition(gridObject.getPosition().x + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE, gridObject.getPosition().y);
         }
-        GridPositionCache.instance().resumeEvents();
 
         Vector3 cameraPosition = CameraController.instance().getCamera().position.cpy();
         CameraController.instance().getCamera().position.set(cameraPosition.x + (TowerConsts.GRID_UNIT_SIZE * TowerConsts.GAME_GRID_EXPAND_LAND_SIZE), cameraPosition.y, cameraPosition.z);
