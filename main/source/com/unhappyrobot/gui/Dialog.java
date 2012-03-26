@@ -108,12 +108,12 @@ public class Dialog {
     window = new TowerWindow(title, stage, skin);
 
     Table container = new Table(skin);
-    container.defaults().pad(5).top().left().minWidth(400).maxWidth(600).expand();
+    container.defaults().pad(5).top().left();
     Label messageLabel = LabelStyles.Default.makeLabel(messageText);
     messageLabel.setWrap(true);
 
     container.row();
-    container.add(messageLabel).colspan(buttons.size());
+    container.add(messageLabel).colspan(buttons.size()).width(600);
 
     container.row();
     for (TextButton button : buttons) {
@@ -121,7 +121,7 @@ public class Dialog {
     }
     container.pack();
 
-    window.add(container).expand();
+    window.add(container);
     window.modal(true).show().centerOnStage();
 
     if (positiveButton != null) {

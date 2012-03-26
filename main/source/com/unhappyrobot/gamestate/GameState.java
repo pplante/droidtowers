@@ -107,7 +107,12 @@ public class GameState {
       if (!gameGrid.isEmpty()) {
         GameSave gameSave = new GameSave(gameGrid, camera, Player.instance(), cloudGameSaveUri);
         try {
-          CloudGameSave cloudGameSave = new CloudGameSave(gameSave);
+          OutputStream stream = pngFile.write(false);
+          stream.write(PNG.toPNG(towerMiniMap.redrawMiniMap(true, 2f)));
+          stream.flush();
+          stream.close();
+
+          CloudGameSave cloudGameSave = new CloudGameSave(gameSave, pngFile);
           cloudGameSave.save();
 
           if (cloudGameSave.isSaved() && cloudGameSaveUri == null) {
@@ -115,11 +120,6 @@ public class GameState {
           }
 
           GameSave.getObjectMapper().writeValue(gameFile.file(), gameSave);
-
-          OutputStream stream = pngFile.write(false);
-          stream.write(PNG.toPNG(towerMiniMap.redrawMiniMap(true, 2f)));
-          stream.flush();
-          stream.close();
         } catch (Exception e) {
           Gdx.app.log("GameSave", "Could not save game!", e);
         }

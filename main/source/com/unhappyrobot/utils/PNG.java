@@ -1,6 +1,7 @@
 package com.unhappyrobot.utils;
 
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 
 import java.io.ByteArrayOutputStream;
@@ -65,7 +66,7 @@ public class PNG {
     chunk.writeInt(width);
     chunk.writeInt(height);
     chunk.writeByte(8); // Bitdepth
-    chunk.writeByte(6); // Colortype ARGB
+    chunk.writeByte(2); // Colortype ARGB
     chunk.writeByte(0); // Compression
     chunk.writeByte(0); // Filter
     chunk.writeByte(0); // Interlace
@@ -77,19 +78,21 @@ public class PNG {
     int height = pixmap.getHeight();
     int source = 0;
     int dest = 0;
-    byte[] raw = new byte[4 * (width * height) + height];
+    byte[] raw = new byte[3 * (width * height) + height];
+    Color color8888 = new Color();
     for (int y = 0; y < height; y++) {
       raw[dest++] = 0; // No filter
       for (int x = 0; x < width; x++) {
 
         // 32-bit RGBA8888
         int pixel = pixmap.getPixel(x, y);
+        Color.rgba8888ToColor(color8888, pixel);
+        pixel = Color.rgb888(color8888);
 
-        int mask = pixel & 0xFFFFFFFF;
-        int rr = (mask >> 24) & 0xff;
-        int gg = (mask >> 16) & 0xff;
-        int bb = (mask >> 8) & 0xff;
-        int aa = (mask) & 0xff;
+        int mask = pixel & 0xFFFFFF;
+        int rr = (mask >> 16) & 0xff;
+        int gg = (mask >> 8) & 0xff;
+        int bb = (mask) & 0xff;
 
         if (rr < 0 || rr > 255 || gg < 0 || gg > 255 || bb < 0
                     || bb > 255) {
@@ -102,7 +105,6 @@ public class PNG {
         raw[dest++] = (byte) rr;
         raw[dest++] = (byte) gg;
         raw[dest++] = (byte) bb;
-        raw[dest++] = (byte) aa;
         source++;
       }
     }
