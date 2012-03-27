@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.DifficultyLevel;
 import com.unhappyrobot.TowerGame;
-import com.unhappyrobot.TowerMetadata;
+import com.unhappyrobot.gamestate.GameSave;
 import com.unhappyrobot.scenes.TowerScene;
 
 import java.text.NumberFormat;
@@ -91,11 +91,7 @@ public class NewGameWindow extends TowerWindow {
     beginButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         dismiss();
-        TowerMetadata towerMetadata = new TowerMetadata();
-        towerMetadata.setName(nameField.getText());
-        towerMetadata.setDifficulty(difficultyLevel);
-
-        TowerGame.changeScene(TowerScene.class, towerMetadata);
+        TowerGame.changeScene(TowerScene.class, new GameSave(nameField.getText(), difficultyLevel));
       }
     });
   }

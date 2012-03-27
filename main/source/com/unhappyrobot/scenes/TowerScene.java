@@ -5,7 +5,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.input.GestureDetector;
 import com.google.common.collect.Lists;
 import com.unhappyrobot.TowerConsts;
-import com.unhappyrobot.TowerMetadata;
 import com.unhappyrobot.WeatherService;
 import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.actions.ActionManager;
@@ -15,7 +14,7 @@ import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.controllers.GameTips;
 import com.unhappyrobot.entities.CloudLayer;
 import com.unhappyrobot.entities.GameLayer;
-import com.unhappyrobot.entities.Player;
+import com.unhappyrobot.gamestate.GameSave;
 import com.unhappyrobot.gamestate.GameState;
 import com.unhappyrobot.gamestate.actions.*;
 import com.unhappyrobot.graphics.*;
@@ -41,7 +40,7 @@ public class TowerScene extends Scene {
   private GameState gameState;
   private float timeMultiplier;
   private FileHandle gameSaveLocation;
-  private String gameSaveFilename;
+  private GameSave gameSave;
   private WeatherService weatherService;
   private HeadsUpDisplay headsUpDisplay;
   private GameTips gameTips;
@@ -56,7 +55,6 @@ public class TowerScene extends Scene {
   private DesirabilityCalculator desirabilityCalculator;
   private GameSaveAction saveAction;
   private DefaultKeybindings keybindings;
-  private TowerMetadata towerMetadata;
 
   public TowerScene() {
     gameSaveLocation = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
@@ -66,16 +64,13 @@ public class TowerScene extends Scene {
   @Override
   public void create(Object... args) {
     if (args != null && args.length > 0) {
-      if (args[0] instanceof String) {
-        gameSaveFilename = (String) args[0];
-      } else if (args[0] instanceof TowerMetadata) {
-        towerMetadata = ((TowerMetadata) args[0]);
-        gameSaveFilename = towerMetadata.generateFilename();
-
-        Player.setInstance(new Player(towerMetadata.getDifficulty().getStartingMoney()));
+      if (args[0] instanceof GameSave) {
+        gameSave = (GameSave) args[0];
       }
-    } else {
-      gameSaveFilename = "test.json";
+    }
+
+    if (gameSave == null) {
+      throw new RuntimeException("Cannot load game with no GameSave passed.");
     }
 
     RoomTypeFactory.instance();
@@ -83,10 +78,9 @@ public class TowerScene extends Scene {
     ElevatorTypeFactory.instance();
     StairTypeFactory.instance();
 
-    gameGrid = new GameGrid(getCamera());
+    gameGrid = new GameGrid(camera);
     gameGridRenderer = gameGrid.getRenderer();
-    towerMiniMap = new TowerMiniMap(gameGrid);
-    gameState = new GameState(getCamera(), gameGrid, gameSaveLocation, gameSaveFilename, towerMiniMap);
+    gameState = new GameState(camera, gameSaveLocation, gameSave, gameGrid);
 
     GridPositionCache.reset(gameGrid);
 
@@ -107,9 +101,6 @@ public class TowerScene extends Scene {
     gameLayers.add(gameGrid);
     gameLayers.add(AvatarLayer.initialize(gameGrid));
 
-    gameGrid.setGridSize(TowerConsts.GAME_GRID_START_SIZE, TowerConsts.GAME_GRID_START_SIZE);
-    gameGrid.updateWorldSize();
-
     gameTips = new GameTips(gameGrid);
 
     gestureDelegater = new GestureDelegater(camera, gameLayers);
@@ -123,9 +114,7 @@ public class TowerScene extends Scene {
     keybindings = new DefaultKeybindings(this);
     keybindings.bindKeys();
 
-    if (!gameState.hasLoadedSavedGame()) {
-      gameState.loadSavedGame();
-    }
+    gameState.loadSavedGame();
     AchievementEngine.instance().registerGameGrid(gameGrid);
 
     populationCalculator = new PopulationCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);

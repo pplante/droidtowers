@@ -9,6 +9,7 @@ public class GameSaveAction extends TimeDelayedAction {
   public GameSaveAction(GameState gameState) {
     super(TowerConsts.GAME_SAVE_FREQUENCY);
     this.gameState = gameState;
+    reset();
   }
 
   @Override

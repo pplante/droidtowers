@@ -3,18 +3,14 @@ package com.unhappyrobot.gamestate;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.unhappyrobot.achievements.AchievementEngine;
-import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.gamestate.server.CloudGameSave;
 import com.unhappyrobot.graphics.TowerMiniMap;
 import com.unhappyrobot.grid.GameGrid;
-import com.unhappyrobot.grid.GridObjectState;
 import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.OnClickCallback;
 import com.unhappyrobot.gui.ResponseType;
-import com.unhappyrobot.input.CameraController;
+import com.unhappyrobot.utils.AsyncTask;
 import com.unhappyrobot.utils.PNG;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.OutputStream;
 
@@ -24,52 +20,31 @@ public class GameState {
   private final OrthographicCamera camera;
   private final GameGrid gameGrid;
   private final FileHandle gameSaveLocation;
-  private final String gameSaveFilename;
+  private final GameSave currentGameSave;
   private final FileHandle gameFile;
-  private final TowerMiniMap towerMiniMap;
   private boolean shouldSaveGame;
-  private String cloudGameSaveUri;
-  private boolean loadedSavedGame;
   private FileHandle pngFile;
+  private int fileGeneration;
 
-  public GameState(OrthographicCamera camera, final GameGrid gameGrid, FileHandle gameSaveLocation, String gameSaveFilename, TowerMiniMap towerMiniMap) {
+  public GameState(OrthographicCamera camera, FileHandle gameSaveLocation, GameSave currentGameSave, final GameGrid gameGrid) {
     this.camera = camera;
     this.gameGrid = gameGrid;
     this.gameSaveLocation = gameSaveLocation;
-    this.gameSaveFilename = gameSaveFilename;
-    this.gameFile = gameSaveLocation.child(gameSaveFilename);
-    this.pngFile = gameSaveLocation.child(gameSaveFilename + ".png");
-    this.towerMiniMap = towerMiniMap;
+    this.currentGameSave = currentGameSave;
+    this.gameFile = gameSaveLocation.child(currentGameSave.getBaseFilename());
+    this.pngFile = gameSaveLocation.child(currentGameSave.getBaseFilename() + ".png");
   }
 
   public void loadSavedGame() {
     shouldSaveGame = true;
-    Gdx.app.debug(TAG, "Loading: " + gameFile.path());
-    if (!gameFile.exists()) {
-      return;
+    if (currentGameSave == null) {
+      throw new RuntimeException("Unknown GameSave to load.");
     }
 
     try {
-      ObjectMapper objectMapper = new ObjectMapper();
-      GameSave gameSave = objectMapper.readValue(gameFile.file(), GameSave.class);
-      cloudGameSaveUri = gameSave.getCloudSaveUri();
-      gameGrid.setGridSize(gameSave.getGridSize().x, gameSave.getGridSize().y);
-      gameGrid.updateWorldSize();
+      Gdx.app.debug(TAG, "Loading: " + currentGameSave.getBaseFilename());
+      currentGameSave.attachToGame(gameGrid, camera);
 
-      Player.setInstance(gameSave.getPlayer());
-
-      camera.position.set(gameSave.getCameraPosition());
-      camera.zoom = gameSave.getCameraZoom();
-      CameraController.instance().panTo(gameSave.getCameraPosition(), false);
-      CameraController.instance().checkBounds();
-
-      AchievementEngine.instance().loadCompletedAchievements(gameSave.getCompletedAchievements());
-
-      for (GridObjectState gridObjectState : gameSave.getGridObjects()) {
-        gridObjectState.materialize(gameGrid);
-      }
-
-      loadedSavedGame = true;
     } catch (Exception e) {
       shouldSaveGame = false;
 
@@ -100,34 +75,47 @@ public class GameState {
 
   public void saveGame() {
     if (shouldSaveGame) {
-      if (!gameSaveLocation.exists()) {
-        gameSaveLocation.mkdirs();
-      }
-
       if (!gameGrid.isEmpty()) {
-        GameSave gameSave = new GameSave(gameGrid, camera, Player.instance(), cloudGameSaveUri);
-        try {
-          OutputStream stream = pngFile.write(false);
-          stream.write(PNG.toPNG(towerMiniMap.redrawMiniMap(true, 2f)));
-          stream.flush();
-          stream.close();
+        currentGameSave.update();
 
-          CloudGameSave cloudGameSave = new CloudGameSave(gameSave, pngFile);
-          cloudGameSave.save();
-
-          if (cloudGameSave.isSaved() && cloudGameSaveUri == null) {
-            gameSave.setCloudSaveUri(cloudGameSave.getResourceUri());
+        new AsyncTask() {
+          @Override
+          public synchronized void afterExecute() {
+            Gdx.app.debug(TAG, "After save.");
           }
 
-          GameSave.getObjectMapper().writeValue(gameFile.file(), gameSave);
-        } catch (Exception e) {
-          Gdx.app.log("GameSave", "Could not save game!", e);
-        }
+          @Override
+          public synchronized void beforeExecute() {
+            Gdx.app.debug(TAG, "Before save.");
+            if (!gameSaveLocation.exists()) {
+              gameSaveLocation.mkdirs();
+            }
+
+          }
+
+          @Override
+          public void execute() {
+            try {
+              OutputStream stream = pngFile.write(false);
+              stream.write(PNG.toPNG(TowerMiniMap.redrawMiniMap(gameGrid, true, 2f)));
+              stream.flush();
+              stream.close();
+
+              if (currentGameSave.getCloudSaveUri() == null || currentGameSave.getFileGeneration() % 4 == 0) {
+                CloudGameSave cloudGameSave = new CloudGameSave(currentGameSave, pngFile);
+                cloudGameSave.save();
+                if (cloudGameSave.isSaved()) {
+                  currentGameSave.setCloudSaveUri(cloudGameSave.getResourceUri());
+                }
+              }
+
+              currentGameSave.save(gameFile);
+            } catch (Exception e) {
+              Gdx.app.log("GameSave", "Could not save game!", e);
+            }
+          }
+        }.run();
       }
     }
-  }
-
-  public boolean hasLoadedSavedGame() {
-    return loadedSavedGame;
   }
 }

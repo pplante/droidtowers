@@ -10,7 +10,7 @@ import com.unhappyrobot.grid.GridPositionCache;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.RoomType;
 
-public class TransportCalculator extends GameStateAction {
+public class TransportCalculator extends GameGridAction {
   private static final String TAG = TransportCalculator.class.getSimpleName();
 
   private final Class transportClasses[] = {Elevator.class, Stair.class};

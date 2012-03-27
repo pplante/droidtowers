@@ -50,7 +50,7 @@ public class Player {
   }
 
   public void addExperience(int exp) {
-    experience = exp;
+    experience += exp;
   }
 
   public long getExperience() {

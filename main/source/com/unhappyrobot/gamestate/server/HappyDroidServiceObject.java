@@ -36,7 +36,7 @@ public abstract class HappyDroidServiceObject {
     if (response != null) {
       try {
         BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
-        if (entity != null) {
+        if (entity != null && entity.getContentLength() > 0) {
           String content = EntityUtils.toString(entity, HTTP.UTF_8);
           System.out.println("\tResponse: " + content);
           return mapper.readValue(content, aClazz);

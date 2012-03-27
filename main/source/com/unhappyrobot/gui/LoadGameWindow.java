@@ -10,7 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.TowerGame;
+import com.unhappyrobot.gamestate.GameSave;
 import com.unhappyrobot.scenes.TowerScene;
+
+import java.io.IOException;
 
 public class LoadGameWindow extends TowerWindow {
   public LoadGameWindow(Stage stage, Skin skin) {
@@ -59,19 +62,23 @@ public class LoadGameWindow extends TowerWindow {
     return fileRow;
   }
 
-  private Table makeGameFileInfoBox(final FileHandle gameSave) {
+  private Table makeGameFileInfoBox(final FileHandle savedGameFile) {
     TextButton launchButton = new TextButton("Play", skin);
     launchButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         dismiss();
-        TowerGame.changeScene(TowerScene.class, gameSave.name());
+        try {
+          TowerGame.changeScene(TowerScene.class, GameSave.readFile(savedGameFile));
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
       }
     });
 
     Table box = new Table();
     box.defaults().top().left().expand();
     box.row();
-    box.add(LabelStyles.Default.makeLabel(gameSave.nameWithoutExtension())).top().left();
+    box.add(LabelStyles.Default.makeLabel(savedGameFile.nameWithoutExtension())).top().left();
     box.add(launchButton).top().right();
 
     return box;

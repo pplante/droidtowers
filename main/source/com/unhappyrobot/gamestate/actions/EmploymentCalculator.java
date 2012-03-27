@@ -8,7 +8,7 @@ import com.unhappyrobot.types.CommercialType;
 
 import java.util.Set;
 
-public class EmploymentCalculator extends GameStateAction {
+public class EmploymentCalculator extends GameGridAction {
   public EmploymentCalculator(GameGrid gameGrid, float frequency) {
     super(gameGrid, frequency);
   }

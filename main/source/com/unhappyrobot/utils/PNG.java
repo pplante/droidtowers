@@ -56,6 +56,7 @@ public class PNG {
     png.write(header);
     png.write(data);
     png.write(trailer);
+    pixmap.dispose();
     return png.toByteArray();
   }
 

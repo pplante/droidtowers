@@ -14,7 +14,7 @@ import java.util.zip.GZIPOutputStream;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class CloudGameSave extends HappyDroidServiceObject {
   private String blob;
-  private GZIPImage image;
+  private String image;
   private Date syncedOn;
 
   @Override
@@ -30,29 +30,25 @@ public class CloudGameSave extends HappyDroidServiceObject {
     try {
       resourceUri = gameSave.getCloudSaveUri();
       blob = GameSave.getObjectMapper().writeValueAsString(gameSave);
-      image = new GZIPImage(pngFile);
-      System.out.println("image = " + image);
+      image = GZIPImage.compress(pngFile);
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
-  @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
   public static class GZIPImage {
-    public String name;
-    public String file;
-
-    public GZIPImage(FileHandle pngFile) {
+    public static String compress(FileHandle pngFile) {
       try {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         GZIPOutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream);
         gzipOutputStream.write(pngFile.readBytes());
         gzipOutputStream.close();
-        name = pngFile.name();
-        file = Base64.encodeBase64String(byteArrayOutputStream.toByteArray());
+        return Base64.encodeBase64String(byteArrayOutputStream.toByteArray());
       } catch (IOException e) {
         e.printStackTrace();
       }
+
+      return null;
     }
   }
 }
