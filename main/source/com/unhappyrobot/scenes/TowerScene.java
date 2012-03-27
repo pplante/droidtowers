@@ -141,7 +141,7 @@ public class TowerScene extends Scene {
 
   @Override
   public void pause() {
-    gameState.saveGame();
+    gameState.saveGame(true);
     gridSoundDispatcher.setGameGrid(null);
   }
 

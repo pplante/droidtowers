@@ -73,7 +73,7 @@ public class GameState {
     }
   }
 
-  public void saveGame() {
+  public void saveGame(final boolean shouldForceCloudSave) {
     if (shouldSaveGame) {
       if (!gameGrid.isEmpty()) {
         currentGameSave.update();
@@ -101,7 +101,7 @@ public class GameState {
               stream.flush();
               stream.close();
 
-              if (currentGameSave.getCloudSaveUri() == null || currentGameSave.getFileGeneration() % 4 == 0) {
+              if (shouldForceCloudSave || currentGameSave.getCloudSaveUri() == null || currentGameSave.getFileGeneration() % 4 == 0) {
                 CloudGameSave cloudGameSave = new CloudGameSave(currentGameSave, pngFile);
                 cloudGameSave.save();
                 if (cloudGameSave.isSaved()) {

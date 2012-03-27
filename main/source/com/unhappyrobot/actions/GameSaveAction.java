@@ -14,6 +14,6 @@ public class GameSaveAction extends TimeDelayedAction {
 
   @Override
   public void run() {
-    gameState.saveGame();
+    gameState.saveGame(false);
   }
 }
