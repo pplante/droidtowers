@@ -1,7 +1,7 @@
 package com.unhappyrobot.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.types.ProviderType;
 
@@ -12,7 +12,7 @@ public class Maid extends Janitor {
 
   @Override
   protected TextureAtlas getTextureAtlas() {
-    return new TextureAtlas(Gdx.files.internal("characters/maid.txt"));
+    return TowerAssetManager.textureAtlas("characters/maid.txt");
   }
 
   public static boolean checkProviderType(ProviderType providerType) {

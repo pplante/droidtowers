@@ -32,7 +32,7 @@ public class StatusBarPanel extends Table {
     setBackground(guiSkin.getPatch("default-round"));
 
     defaults();
-    top().left();
+    top().left().padTop(8).padLeft(8);
 
     row().center();
     add(makeLabel("EXPERIENCE", helvetica_neue_10_bold_white)).minWidth(100);

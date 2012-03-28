@@ -35,7 +35,7 @@ public class LoadGameWindow extends TowerWindow {
         }
       }
     } else {
-      gameFiles.add(LabelStyles.Default.makeLabel("No saved games were found on this device."));
+      gameFiles.add(LabelStyle.Default.makeLabel("No saved games were found on this device."));
     }
 
     add(gameFiles).fill();
@@ -49,7 +49,7 @@ public class LoadGameWindow extends TowerWindow {
     if (imageFile.exists()) {
       imageActor = new Image(new Texture(imageFile), Scaling.fit, Align.TOP);
     } else {
-      imageActor = LabelStyles.Default.makeLabel("No image.");
+      imageActor = LabelStyle.Default.makeLabel("No image.");
     }
 
 
@@ -78,7 +78,7 @@ public class LoadGameWindow extends TowerWindow {
     Table box = new Table();
     box.defaults().top().left().expand();
     box.row();
-    box.add(LabelStyles.Default.makeLabel(savedGameFile.nameWithoutExtension())).top().left();
+    box.add(LabelStyle.Default.makeLabel(savedGameFile.nameWithoutExtension())).top().left();
     box.add(launchButton).top().right();
 
     return box;

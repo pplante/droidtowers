@@ -1,11 +1,11 @@
 package com.unhappyrobot.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.actions.Action;
 import com.unhappyrobot.events.GridObjectBoundsChangeEvent;
@@ -30,7 +30,7 @@ public class Elevator extends Transit {
     super(elevatorType, gameGrid);
 
     if (elevatorAtlas == null) {
-      elevatorAtlas = new TextureAtlas(Gdx.files.internal(elevatorType.getAtlasFilename()));
+      elevatorAtlas = TowerAssetManager.textureAtlas(elevatorType.getAtlasFilename());
     }
 
     size.set(1, 3);
@@ -38,7 +38,7 @@ public class Elevator extends Transit {
     bottomSprite = elevatorAtlas.createSprite("elevator/bottom");
     shaftSprite = elevatorAtlas.createSprite("elevator/shaft");
     emptyShaftSprite = elevatorAtlas.createSprite("elevator/empty");
-    floorFont = new BitmapFont(Gdx.files.internal("fonts/bank_gothic_32.fnt"), false);
+    floorFont = TowerAssetManager.bitmapFont("fonts/bank_gothic_32.fnt");
     drawShaft = true;
 
     elevatorCar = new ElevatorCar(this, elevatorAtlas);

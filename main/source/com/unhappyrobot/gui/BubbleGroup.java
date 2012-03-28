@@ -1,6 +1,5 @@
 package com.unhappyrobot.gui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -10,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.google.common.collect.Sets;
+import com.unhappyrobot.TowerAssetManager;
 
 import java.util.Set;
 
@@ -23,7 +23,7 @@ public class BubbleGroup extends WidgetGroup {
 
   public BubbleGroup() {
     if (textureAtlas == null) {
-      textureAtlas = new TextureAtlas(Gdx.files.internal("hud/misc.txt"));
+      textureAtlas = TowerAssetManager.textureAtlas("hud/misc.txt");
     }
 
 //    visible = false;

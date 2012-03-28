@@ -2,34 +2,33 @@ package com.unhappyrobot.scenes;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.TowerGame;
-import com.unhappyrobot.entities.CloudLayer;
-import com.unhappyrobot.gui.LabelStyles;
+import com.unhappyrobot.gui.LabelStyle;
 
 public class SplashScene extends Scene {
-  private static final int SPLASH_DURATION = 500;
-
-  private long launchTime;
-  private CloudLayer cloudLayer;
+  private Label progressBar;
 
   @Override
   public void create(Object... args) {
     addModalBackground();
 
-    Label label = LabelStyles.BankGothic64.makeLabel("Droid Towers");
-    label.setAlignment(Align.CENTER);
-    label.width = getStage().width();
-    label.y = getStage().centerY() * 1.66f;
-    addActor(label);
+    Label titleLabel = LabelStyle.BankGothic64.makeLabel("Droid Towers");
+    titleLabel.setAlignment(Align.CENTER);
+    titleLabel.y = getStage().centerY() * 1.66f;
+    centerHorizontally(titleLabel);
+    addActor(titleLabel);
 
-    Label loadingMessage = LabelStyles.Default.makeLabel("Reticulating Splines...");
+    Label loadingMessage = LabelStyle.Default.makeLabel("reticulating splines...");
     loadingMessage.setAlignment(Align.CENTER);
-    loadingMessage.width = getStage().width();
-    loadingMessage.y = getStage().centerY();
+    center(loadingMessage);
     addActor(loadingMessage);
 
-    launchTime = System.currentTimeMillis() + SPLASH_DURATION;
-    cloudLayer = new SplashCloudLayer();
+    progressBar = LabelStyle.BankGothic64.makeLabel(null);
+    progressBar.setAlignment(Align.CENTER);
+    centerHorizontally(progressBar);
+    progressBar.y = loadingMessage.y - 20;
+    addActor(progressBar);
   }
 
   @Override
@@ -42,12 +41,13 @@ public class SplashScene extends Scene {
 
   @Override
   public void render(float deltaTime) {
-    cloudLayer.update(deltaTime);
-    cloudLayer.render(getSpriteBatch(), getCamera());
+    TowerAssetManager.assetManager().update();
 
-    if (launchTime <= System.currentTimeMillis()) {
+    String progressText = String.format("%.1f%%", (TowerAssetManager.assetManager().getProgress() * 100f));
+    progressBar.setText(progressText);
+
+    if (TowerAssetManager.assetManager().getProgress() == 1.0f) {
       TowerGame.changeScene(MainMenuScene.class);
-//      TowerGame.changeScene(TowerScene.class);
     }
   }
 

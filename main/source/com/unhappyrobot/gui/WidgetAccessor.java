@@ -1,7 +1,9 @@
 package com.unhappyrobot.gui;
 
 import aurelienribon.tweenengine.TweenAccessor;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class WidgetAccessor implements TweenAccessor<Actor> {
   public static final int POSITION = 1;
@@ -9,11 +11,24 @@ public class WidgetAccessor implements TweenAccessor<Actor> {
   public static final int SCALE = 3;
   public static final int ROTATION = 4;
   public static final int SIZE = 5;
+  public static final int COLOR = 6;
 
   public int getValues(Actor target, int tweenType, float[] returnValues) {
+    Color color = target.color;
     switch (tweenType) {
+      case COLOR:
+        if (target instanceof Label) {
+          color = ((Label) target).getColor();
+        }
+
+        returnValues[0] = color.r;
+        returnValues[1] = color.g;
+        returnValues[2] = color.b;
+        returnValues[3] = color.a;
+        return 4;
+
       case OPACITY:
-        returnValues[0] = target.color.a;
+        returnValues[0] = color.a;
         return 1;
 
       case POSITION:
@@ -43,6 +58,14 @@ public class WidgetAccessor implements TweenAccessor<Actor> {
 
   public void setValues(Actor target, int tweenType, float[] newValues) {
     switch (tweenType) {
+      case COLOR:
+        if (target instanceof Label) {
+          ((Label) target).setColor(newValues[0], newValues[1], newValues[2], newValues[3]);
+        } else {
+          target.color.set(newValues[0], newValues[1], newValues[2], newValues[3]);
+        }
+        break;
+
       case OPACITY:
         target.color.a = newValues[0];
         break;

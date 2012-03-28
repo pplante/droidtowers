@@ -8,10 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.unhappyrobot.TowerConsts;
+import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.gamestate.server.HappyDroidService;
 import com.unhappyrobot.gamestate.server.TemporaryToken;
-import com.unhappyrobot.utils.PeriodicAsyncTask;
-import com.unhappyrobot.utils.Platform;
+import com.unhappyrobot.utils.PeriodicBackgroundTask;
 
 public class ConnectToHappyDroidsWindow extends TowerWindow {
   private static final String TAG = ConnectToHappyDroidsWindow.class.getSimpleName();
@@ -21,27 +21,38 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
     defaults().top().left().pad(5);
 
     row().pad(10);
-    add(LabelStyles.Default.makeLabel("Connecting to Facebook will enable:\n\n* Towers to be stored in the cloud\n* Sharing towers with friends\n* Other stuff!"));
+    add(LabelStyle.Default.makeLabel("Connecting to Facebook will enable:\n\n* Towers to be stored in the cloud\n* Sharing towers with friends\n* Other stuff!"));
     row().pad(10);
-    add(LabelStyles.Default.makeLabel("To get started, goto happydroids.com\n then click the \"Connect to Facebook\" button."));
+    add(LabelStyle.Default.makeLabel("To get started, goto happydroids.com\n then click the \"Connect to Facebook\" button."));
     row().pad(10);
-    add(LabelStyles.Default.makeLabel("After logging in, type the code below to connect your game."));
+    add(LabelStyle.Default.makeLabel("After logging in, type the code below to connect your game."));
     row().pad(10);
     final TextButton codeLabel = new TextButton("CODE: Reticulating splines...", skin);
     add(codeLabel);
 
-    final Label sessionStatus = LabelStyles.Default.makeLabel("Waiting for You to login...");
+    final Label sessionStatus = LabelStyle.Default.makeLabel("Waiting for You to login...");
     sessionStatus.visible = false;
     add(sessionStatus);
 
     if (HappyDroidService.instance().getSessionToken() == null) {
-      new PeriodicAsyncTask(TowerConsts.FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK) {
+      new PeriodicBackgroundTask(TowerConsts.FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK) {
         private TemporaryToken token;
 
         @Override
         public synchronized void beforeExecute() {
           token = new TemporaryToken();
           token.save();
+          if (!token.isSaved()) {
+            new Dialog().setMessage("Could not contact happydroids.com, please check that you have internet access and try again.").addButton("Dismiss", new OnClickCallback() {
+              @Override
+              public void onClick(Dialog dialog) {
+                dialog.dismiss();
+                ConnectToHappyDroidsWindow.this.dismiss();
+              }
+            });
+
+            cancel();
+          }
           codeLabel.setText("CODE: " + token.getValue());
           sessionStatus.visible = true;
 
@@ -49,7 +60,7 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
             public void click(Actor actor, float x, float y) {
               String uri = token.getClickableUri();
 
-              Platform.launchWebBrowser(uri);
+              TowerGame.getPlatformBrowserUtil().launchWebBrowser(uri);
             }
           });
         }

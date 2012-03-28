@@ -1,10 +1,10 @@
 package com.unhappyrobot.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.TransitType;
@@ -17,7 +17,7 @@ public class Stair extends Transit {
   public Stair(TransitType stairType, GameGrid gameGrid) {
     super(stairType, gameGrid);
 
-    TextureAtlas textureAtlas = new TextureAtlas(Gdx.files.internal(stairType.getAtlasFilename()));
+    TextureAtlas textureAtlas = TowerAssetManager.textureAtlas(stairType.getAtlasFilename());
     sprite = textureAtlas.createSprite("stairs");
   }
 

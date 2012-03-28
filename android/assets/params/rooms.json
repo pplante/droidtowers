@@ -42,6 +42,17 @@
     "imageFilename":"3x1-small-condo"
   },
   {
+    "name":"Large Condo",
+    "coins":28000,
+    "height":1,
+    "experienceAward":5000,
+    "populationMax":6,
+    "width":4,
+    "provides":"HOUSING",
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"4x1-large-condo"
+  },
+  {
     "name":"Penthouse",
     "coins":60000,
     "height":1,

@@ -1,5 +1,6 @@
 package com.unhappyrobot.scenes;
 
+import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -11,8 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.actions.Sequence;
 import com.badlogic.gdx.scenes.scene2d.interpolators.OvershootInterpolator;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.unhappyrobot.TowerAssetManager;
+import com.unhappyrobot.TowerConsts;
+import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.gui.*;
-import com.unhappyrobot.utils.Platform;
+import com.unhappyrobot.tween.TweenSystem;
 
 import java.lang.reflect.Constructor;
 
@@ -27,17 +31,21 @@ public class MainMenuScene extends Scene {
     Table container = new Table(getGuiSkin());
     container.defaults().center().left();
 
-    Label label = LabelStyles.BankGothic64.makeLabel("Droid Towers");
+    Label label = LabelStyle.BankGothic64.makeLabel("Droid Towers");
     container.add(label).align(Align.CENTER);
     container.row();
 
-    Label loadingMessage = LabelStyles.Default.makeLabel("Reticulating Splines...");
-    container.add(loadingMessage).align(Align.RIGHT);
-    container.row().padTop(50);
+    Tween.to(label, WidgetAccessor.COLOR, 500)
+            .target(1, 1, 1, 0.65f)
+            .repeatYoyo(Tween.INFINITY, 250)
+            .start(TweenSystem.getTweenManager());
 
-    TextButton connectFacebookButton = new TextButton("login to happydroids.com", getGuiSkin());
-//    container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
-//    container.row().padTop(30);
+    if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT) {
+      TextButton connectFacebookButton = new TextButton("login to happydroids.com", getGuiSkin());
+      connectFacebookButton.setClickListener(new LaunchWindowClickListener(ConnectToHappyDroidsWindow.class));
+      container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
+      container.row().padTop(30);
+    }
 
     TextButton newGameButton = new TextButton("new game", getGuiSkin());
     container.add(newGameButton).fill().maxWidth(BUTTON_WIDTH);
@@ -56,7 +64,7 @@ public class MainMenuScene extends Scene {
     container.row();
 
 
-    TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("hud/menus.txt"));
+    TextureAtlas atlas = TowerAssetManager.textureAtlas("hud/menus.txt");
     Image happyDroidsLogo = new Image(atlas.findRegion("happy-droids-logo"));
     happyDroidsLogo.setAlign(Align.CENTER);
     happyDroidsLogo.x = getStage().width() - happyDroidsLogo.width - 5;
@@ -64,7 +72,7 @@ public class MainMenuScene extends Scene {
     happyDroidsLogo.scaleX = happyDroidsLogo.scaleY = 0f;
     happyDroidsLogo.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        Platform.launchWebBrowser("http://www.happydroids.com");
+        TowerGame.getPlatformBrowserUtil().launchWebBrowser("http://www.happydroids.com");
       }
     });
     addActor(happyDroidsLogo);
@@ -87,8 +95,6 @@ public class MainMenuScene extends Scene {
 
     cloudLayer = new SplashCloudLayer();
 
-
-    connectFacebookButton.setClickListener(new LaunchWindowClickListener(ConnectToHappyDroidsWindow.class));
     newGameButton.setClickListener(new LaunchWindowClickListener(NewGameWindow.class));
     loadGameButton.setClickListener(new LaunchWindowClickListener(LoadGameWindow.class));
 

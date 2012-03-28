@@ -8,7 +8,7 @@ import com.google.common.collect.Maps;
 
 import java.util.HashMap;
 
-public enum LabelStyles {
+public enum LabelStyle {
   BankGothic64("fonts/bank_gothic_64.fnt", Color.WHITE),
   Default("fonts/hiragino_maru_14_white.fnt", Color.WHITE);
 
@@ -17,7 +17,7 @@ public enum LabelStyles {
   private final String fontPath;
   private final Color color;
 
-  LabelStyles(String fontPath, Color color) {
+  LabelStyle(String fontPath, Color color) {
     this.fontPath = fontPath;
     this.color = color;
   }
@@ -38,5 +38,10 @@ public enum LabelStyles {
 
   public Label makeLabel(String text) {
     return new Label(text, labelStyle());
+  }
+
+  public void reset() {
+    bitmapFonts.remove(fontPath);
+    labelStyle = null;
   }
 }

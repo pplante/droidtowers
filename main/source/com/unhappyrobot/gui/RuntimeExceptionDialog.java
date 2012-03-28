@@ -1,18 +1,30 @@
 package com.unhappyrobot.gui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.unhappyrobot.TowerConsts;
 
 public class RuntimeExceptionDialog extends Dialog {
-  public RuntimeExceptionDialog(Stage stage, RuntimeException error) {
+  private static final String TAG = RuntimeExceptionDialog.class.getSimpleName();
+
+  public RuntimeExceptionDialog(Stage stage, Throwable error) {
     super(stage);
 
     setTitle("An unexpected error occurred!");
-    setMessage("Sorry, but something has gone wrong.\nSome anonymous data detailing the error has been sent to happydroids for analysis.\n\n" + error.toString());
+
+    String message = "Sorry, but something has gone wrong.\nSome anonymous data detailing the error has been sent to happydroids for analysis.\n\n";
+    if (TowerConsts.DEBUG) {
+      message += error;
+    }
+
+    setMessage(message);
     addButton(ResponseType.POSITIVE, "Dismiss", new OnClickCallback() {
       @Override
       public void onClick(Dialog dialog) {
         dialog.dismiss();
       }
     });
+
+    Gdx.app.error(TAG, "Uncaught Exception!", error);
   }
 }

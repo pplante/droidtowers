@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.types.RoomType;
@@ -35,7 +36,7 @@ public class Room extends GridObject {
     connectedToTransport = roomType.isLobby();
 
     if (labelFont == null) {
-      labelFont = new BitmapFont(Gdx.files.internal("fonts/helvetica_neue_18.fnt"), false);
+      labelFont = TowerAssetManager.bitmapFont("fonts/helvetica_neue_18.fnt");
     }
 
     if (roomType.getTextureRegion() != null) {

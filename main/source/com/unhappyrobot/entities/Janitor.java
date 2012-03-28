@@ -1,12 +1,12 @@
 package com.unhappyrobot.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.sun.istack.internal.Nullable;
+import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.types.ProviderType;
 import com.unhappyrobot.types.RoomType;
@@ -21,7 +21,7 @@ public class Janitor extends Avatar {
 
   @Override
   protected TextureAtlas getTextureAtlas() {
-    return new TextureAtlas(Gdx.files.internal("characters/janitor.txt"));
+    return TowerAssetManager.textureAtlas("characters/janitor.txt");
   }
 
   @Override

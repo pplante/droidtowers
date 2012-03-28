@@ -9,7 +9,7 @@ import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.OnClickCallback;
 import com.unhappyrobot.gui.ResponseType;
-import com.unhappyrobot.utils.AsyncTask;
+import com.unhappyrobot.utils.BackgroundTask;
 import com.unhappyrobot.utils.PNG;
 
 import java.io.OutputStream;
@@ -78,7 +78,7 @@ public class GameState {
       if (!gameGrid.isEmpty()) {
         currentGameSave.update();
 
-        new AsyncTask() {
+        new BackgroundTask() {
           @Override
           public synchronized void afterExecute() {
             Gdx.app.debug(TAG, "After save.");

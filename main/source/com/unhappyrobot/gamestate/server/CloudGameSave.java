@@ -26,6 +26,11 @@ public class CloudGameSave extends HappyDroidServiceObject {
 
   }
 
+  @Override
+  protected boolean requireAuthentication() {
+    return true;
+  }
+
   public CloudGameSave(GameSave gameSave, FileHandle pngFile) {
     try {
       resourceUri = gameSave.getCloudSaveUri();

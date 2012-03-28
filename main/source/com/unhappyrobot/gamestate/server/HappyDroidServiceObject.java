@@ -27,6 +27,8 @@ public abstract class HappyDroidServiceObject {
     return resourceUri;
   }
 
+  protected abstract boolean requireAuthentication();
+
   public void setResourceUri(String resourceUri) {
     this.resourceUri = resourceUri;
   }
@@ -56,10 +58,7 @@ public abstract class HappyDroidServiceObject {
 
     HttpResponse response = HappyDroidService.instance().makeGetRequest(Consts.HAPPYDROIDS_URI + resourceUri);
     if (response != null && response.getStatusLine().getStatusCode() == 200) {
-      HappyDroidServiceObject serverInstance = materializeObject(response, getClass());
-      if (serverInstance != null) {
-        copyValuesFromResponse(response);
-      }
+      copyValuesFromResponse(response);
     }
   }
 
@@ -68,7 +67,9 @@ public abstract class HappyDroidServiceObject {
   }
 
   public void save(ApiRunnable afterSave) {
-    if (!HappyDroidService.instance().haveNetworkConnection() || !HappyDroidService.instance().hasAuthenticated()) {
+    if (!HappyDroidService.instance().haveNetworkConnection()) {
+      return;
+    } else if (requireAuthentication() && !HappyDroidService.instance().hasAuthenticated()) {
       return;
     }
 

@@ -1,6 +1,7 @@
 package com.unhappyrobot;
 
 import aurelienribon.tweenengine.Tween;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -15,32 +16,32 @@ import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.actions.ActionManager;
 import com.unhappyrobot.controllers.PathSearchManager;
 import com.unhappyrobot.entities.GameObject;
+import com.unhappyrobot.gamestate.server.CrashReport;
 import com.unhappyrobot.gamestate.server.HappyDroidService;
 import com.unhappyrobot.gui.*;
 import com.unhappyrobot.input.CameraController;
 import com.unhappyrobot.input.CameraControllerAccessor;
 import com.unhappyrobot.input.InputCallback;
 import com.unhappyrobot.input.InputSystem;
+import com.unhappyrobot.platform.PlatformBrowserUtil;
 import com.unhappyrobot.scenes.MainMenuScene;
 import com.unhappyrobot.scenes.Scene;
 import com.unhappyrobot.scenes.SplashScene;
 import com.unhappyrobot.tween.GameObjectAccessor;
 import com.unhappyrobot.tween.TweenSystem;
-import com.unhappyrobot.utils.AsyncTask;
+import com.unhappyrobot.utils.BackgroundTask;
 
 public class TowerGame implements ApplicationListener {
   private static OrthographicCamera camera;
   private SpriteBatch spriteBatch;
-  private final String operatingSystemName;
-  private final String operatingSystemVersion;
   private BitmapFont menloBitmapFont;
   private static Scene activeScene;
-  private Stage rootUiStage;
+  private static Stage rootUiStage;
   private static boolean audioEnabled;
+  private Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
+  private static PlatformBrowserUtil platformBrowserUtil;
 
-  public TowerGame(String operatingSystemName, String operatingSystemVersion) {
-    this.operatingSystemName = operatingSystemName;
-    this.operatingSystemVersion = operatingSystemVersion;
+  public TowerGame() {
     audioEnabled = true;
   }
 
@@ -53,13 +54,21 @@ public class TowerGame implements ApplicationListener {
   }
 
   public void create() {
+    if (TowerConsts.DEBUG) {
+      Gdx.app.error("DEBUG", "Debug mode is enabled!");
+      Gdx.app.setLogLevel(Application.LOG_DEBUG);
+    } else {
+      Gdx.app.setLogLevel(Application.LOG_ERROR);
+    }
+
+    Thread.currentThread().setUncaughtExceptionHandler(uncaughtExceptionHandler);
     Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
 
-    new AsyncTask() {
+    TowerAssetManager.assetManager();
+
+    new BackgroundTask() {
       @Override
       public void execute() {
-        HappyDroidService.instance().setDeviceOSName(operatingSystemName);
-        HappyDroidService.instance().setDeviceOSVersion(operatingSystemVersion);
         HappyDroidService.instance().registerDevice();
       }
     }.run();
@@ -79,6 +88,10 @@ public class TowerGame implements ApplicationListener {
     InputSystem.instance().setup(camera);
     Gdx.input.setInputProcessor(InputSystem.instance());
     InputSystem.instance().addInputProcessor(rootUiStage, 0);
+
+    if (TowerConsts.DEBUG) {
+      InputSystem.instance().addInputProcessor(new DebugInputAdapter(), 1000);
+    }
 
     InputSystem.instance().bind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, new InputCallback() {
       public boolean run(float timeDelta) {
@@ -103,7 +116,8 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    Scene.setGuiSkin(new Skin(Gdx.files.internal("default-skin.ui"), Gdx.files.internal("default-skin.png")));
+    Skin skin = new Skin(Gdx.files.internal("default-skin.ui"));
+    Scene.setGuiSkin(skin);
     Scene.setCamera(camera);
     Scene.setSpriteBatch(spriteBatch);
 
@@ -113,6 +127,8 @@ public class TowerGame implements ApplicationListener {
 
   public void render() {
     try {
+      TowerAssetManager.assetManager().update();
+
       Gdx.gl.glClearColor(0.48f, 0.729f, 0.870f, 1.0f);
       Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
       Gdx.gl.glEnable(GL10.GL_BLEND);
@@ -135,17 +151,20 @@ public class TowerGame implements ApplicationListener {
       rootUiStage.act(deltaTime);
       rootUiStage.draw();
 
-      Table.drawDebug(activeScene.getStage());
-      Table.drawDebug(rootUiStage);
+      if (TowerConsts.DEBUG) {
+        Table.drawDebug(activeScene.getStage());
+        Table.drawDebug(rootUiStage);
 
-      float javaHeapInBytes = Gdx.app.getJavaHeap() / TowerConsts.ONE_MEGABYTE;
-      float nativeHeapInBytes = Gdx.app.getNativeHeap() / TowerConsts.ONE_MEGABYTE;
+        float javaHeapInBytes = Gdx.app.getJavaHeap() / TowerConsts.ONE_MEGABYTE;
+        float nativeHeapInBytes = Gdx.app.getNativeHeap() / TowerConsts.ONE_MEGABYTE;
 
-      String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f)\nmem: (java %.1f Mb, native %.1f Mb)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom, javaHeapInBytes, nativeHeapInBytes);
-      spriteBatch.begin();
-      menloBitmapFont.drawMultiLine(spriteBatch, infoText, 5, 35);
-      spriteBatch.end();
+        String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f)\nmem: (java %.1f Mb, native %.1f Mb)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom, javaHeapInBytes, nativeHeapInBytes);
+        spriteBatch.begin();
+        menloBitmapFont.drawMultiLine(spriteBatch, infoText, 5, 35);
+        spriteBatch.end();
+      }
     } catch (RuntimeException e) {
+      new CrashReport(e).save();
       new RuntimeExceptionDialog(rootUiStage, e).show();
     }
   }
@@ -171,6 +190,11 @@ public class TowerGame implements ApplicationListener {
 
   public void dispose() {
     spriteBatch.dispose();
+    TowerAssetManager.reset();
+
+    for (LabelStyle labelStyle : LabelStyle.values()) {
+      labelStyle.reset();
+    }
   }
 
   public static void changeScene(Class<? extends Scene> sceneClass, Object... args) {
@@ -195,5 +219,22 @@ public class TowerGame implements ApplicationListener {
 
   public static Scene getActiveScene() {
     return activeScene;
+  }
+
+  public static Stage getRootUiStage() {
+    return rootUiStage;
+  }
+
+
+  public void setUncaughtExceptionHandler(Thread.UncaughtExceptionHandler uncaughtExceptionHandler) {
+    this.uncaughtExceptionHandler = uncaughtExceptionHandler;
+  }
+
+  public void setPlatformBrowserUtil(PlatformBrowserUtil platformBrowserUtil) {
+    TowerGame.platformBrowserUtil = platformBrowserUtil;
+  }
+
+  public static PlatformBrowserUtil getPlatformBrowserUtil() {
+    return platformBrowserUtil;
   }
 }

@@ -3,11 +3,11 @@ package com.unhappyrobot.entities;
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.eventbus.Subscribe;
+import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.WeatherService;
 import com.unhappyrobot.events.GameGridResizeEvent;
@@ -25,6 +25,7 @@ import static com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 public class CloudLayer extends GameLayer {
   public static final int PADDING = TowerConsts.GAME_WORLD_PADDING;
   public static final int CLOUD_SPAWN_DELAY = 2;
+  public static final String CLOUDS_ATLAS = "backgrounds/clouds.txt";
   public double CLOUD_SPAWN_MIN = 0.6;
   public double CLOUD_SPAWN_MAX = 0.98;
   public static final int MAX_ACTIVE_CLOUDS = 40;
@@ -39,7 +40,7 @@ public class CloudLayer extends GameLayer {
     super();
     this.weatherService = weatherService;
 
-    textureAtlas = new TextureAtlas(Gdx.files.internal("backgrounds/clouds.txt"));
+    textureAtlas = TowerAssetManager.textureAtlas(CLOUDS_ATLAS);
     numberOfCloudTypes = textureAtlas.getRegions().size();
     cloudsToRemove = new ArrayList<GameObject>(5);
 

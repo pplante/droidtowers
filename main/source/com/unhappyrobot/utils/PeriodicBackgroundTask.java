@@ -3,10 +3,10 @@ package com.unhappyrobot.utils;
 import static java.lang.Thread.sleep;
 import static java.lang.Thread.yield;
 
-public abstract class PeriodicAsyncTask extends AsyncTask {
+public abstract class PeriodicBackgroundTask extends BackgroundTask {
   private final long updateFrequency;
 
-  protected PeriodicAsyncTask(long updateFrequency) {
+  protected PeriodicBackgroundTask(long updateFrequency) {
     super();
 
     this.updateFrequency = updateFrequency;

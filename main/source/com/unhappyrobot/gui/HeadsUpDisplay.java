@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.unhappyrobot.TowerAssetManager;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.CommercialSpace;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.grid.GameGrid;
@@ -52,11 +54,11 @@ public class HeadsUpDisplay extends WidgetGroup {
     this.gameGrid = towerScene.getGameGrid();
     guiSkin = Scene.getGuiSkin();
 
-    hudAtlas = new TextureAtlas(Gdx.files.internal("hud/buttons.txt"));
+    hudAtlas = TowerAssetManager.textureAtlas("hud/buttons.txt");
 
     StatusBarPanel statusBarPanel = new StatusBarPanel(guiSkin, towerScene);
-    statusBarPanel.x = -1;
-    statusBarPanel.y = stage.height() - statusBarPanel.height + 1;
+    statusBarPanel.x = -4;
+    statusBarPanel.y = stage.height() - statusBarPanel.height + 4;
     addActor(statusBarPanel);
 
     mouseToolTip = new ToolTip(guiSkin);
@@ -208,24 +210,26 @@ public class HeadsUpDisplay extends WidgetGroup {
   }
 
   private void updateGridPointTooltip(float x, float y) {
-    Vector3 worldPoint = camera.getPickRay(Gdx.input.getX(), Gdx.input.getY()).getEndPoint(1);
+    if (TowerConsts.DEBUG) {
+      Vector3 worldPoint = camera.getPickRay(Gdx.input.getX(), Gdx.input.getY()).getEndPoint(1);
 
-    GridPoint gridPointAtMouse = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
-    GridPosition gridPosition = GridPositionCache.instance().getPosition(gridPointAtMouse);
-    if (gridPosition != null) {
-      int totalVisitors = 0;
-      for (GridObject gridObject : gridPosition.getObjects()) {
-        if (gridObject instanceof CommercialSpace) {
-          totalVisitors = ((CommercialSpace) gridObject).getNumVisitors();
+      GridPoint gridPointAtMouse = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
+      GridPosition gridPosition = GridPositionCache.instance().getPosition(gridPointAtMouse);
+      if (gridPosition != null) {
+        int totalVisitors = 0;
+        for (GridObject gridObject : gridPosition.getObjects()) {
+          if (gridObject instanceof CommercialSpace) {
+            totalVisitors = ((CommercialSpace) gridObject).getNumVisitors();
+          }
         }
-      }
 
-      mouseToolTip.visible = true;
-      mouseToolTip.setText(String.format("%s\nobjects: %s\nelevator: %s\nstairs: %s\nvisitors: %d", gridPointAtMouse, gridPosition.size(), gridPosition.elevator != null, gridPosition.stair != null, totalVisitors));
-      mouseToolTip.x = x + 5;
-      mouseToolTip.y = y + 5;
-    } else {
-      mouseToolTip.visible = false;
+        mouseToolTip.visible = true;
+        mouseToolTip.setText(String.format("%s\nobjects: %s\nelevator: %s\nstairs: %s\nvisitors: %d", gridPointAtMouse, gridPosition.size(), gridPosition.elevator != null, gridPosition.stair != null, totalVisitors));
+        mouseToolTip.x = x + 5;
+        mouseToolTip.y = y + 5;
+      } else {
+        mouseToolTip.visible = false;
+      }
     }
   }
 

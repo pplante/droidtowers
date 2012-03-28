@@ -4,10 +4,28 @@
 
   <import file="idea-build.xml"/>
 
+  <property name="compiler.debug" value="off"/>
   <property file="build.properties"/>
   <property name="project.version" value="0.9.1"/>
 
-  <target name="osx" depends="build.all.artifacts" description="Build an OSX target">
+  <target name="process-template">
+    <replaceregexp flags="s" match="(public static boolean DEBUG = )(true|false);" replace="\1${project.debug};">
+      <file file="${basedir}/main/source/com/unhappyrobot/TowerConsts.java"/>
+    </replaceregexp>
+  </target>
+
+  <target name="release-build" description="build a full release build">
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="./tools/ant-contrib-0.6.jar"/>
+    <var name="project.debug" value="false" />
+    <antcall target="process-template"/>
+    <antcall target="build.all.artifacts"/>
+
+    <var name="project.debug" value="true"  />
+    <loadproperties srcfile="debug.properties"/>
+    <antcall target="process-template"/>
+  </target>
+
+  <target name="osx" depends="release-build" description="Build an OSX target">
     <taskdef name="jarbundler"
              classpath="./tools/jarbundler-2.2.0.jar"
              classname="net.sourceforge.jarbundler.JarBundler"/>
@@ -24,7 +42,7 @@
 
   <property name="launch4j.dir" location="./tools/launch4j"/>
 
-  <target name="exe" depends="build.all.artifacts" description="Build a Windows target">
+  <target name="exe" depends="release-build" description="Build a Windows target">
     <taskdef name="launch4j"
              classname="net.sf.launch4j.ant.Launch4jTask"
              classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar"/>

@@ -82,12 +82,15 @@ public class GameSave {
     gameGrid.clearObjects();
     gameGrid.setGridSize(gridSize.x, gridSize.y);
     gameGrid.updateWorldSize();
+    System.out.println("gridSize = " + gridSize);
 
     Player.setInstance(player);
 
-    camera.zoom = cameraZoom;
-    CameraController.instance().panTo(cameraPosition, false);
-    CameraController.instance().checkBounds();
+    if (cameraPosition != null) {
+      camera.zoom = cameraZoom;
+      CameraController.instance().panTo(cameraPosition, false);
+      CameraController.instance().checkBounds();
+    }
 
     AchievementEngine.instance().loadCompletedAchievements(completedAchievements);
 
@@ -147,7 +150,7 @@ public class GameSave {
 
   public static GameSave readFile(FileHandle fileHandle) throws IOException {
     GameSave gameSave = GameSave.getObjectMapper().readValue(fileHandle.read(), GameSave.class);
-    if(gameSave != null) {
+    if (gameSave != null) {
       gameSave.baseFilename = fileHandle.name();
     }
 

@@ -143,6 +143,7 @@ public class TowerScene extends Scene {
   public void pause() {
     gameState.saveGame(true);
     gridSoundDispatcher.setGameGrid(null);
+    throw new RuntimeException("WTFBBQ!");
   }
 
   @Override
@@ -211,5 +212,9 @@ public class TowerScene extends Scene {
 
   public void setGameSaveLocation(FileHandle gameSaveLocation) {
     this.gameSaveLocation = gameSaveLocation;
+  }
+
+  public GameSave getCurrentGameSave() {
+    return gameSave;
   }
 }

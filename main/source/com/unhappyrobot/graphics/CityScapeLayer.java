@@ -1,9 +1,9 @@
 package com.unhappyrobot.graphics;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.google.common.collect.Iterables;
 import com.google.common.eventbus.Subscribe;
+import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.entities.GameObject;
@@ -17,7 +17,7 @@ public class CityScapeLayer extends GameLayer {
   private final Iterator<TextureAtlas.AtlasRegion> regions;
 
   public CityScapeLayer(GameGrid gameGrid) {
-    cityScapeAtlas = new TextureAtlas(Gdx.files.internal("backgrounds/cityscape.txt"));
+    cityScapeAtlas = TowerAssetManager.textureAtlas("backgrounds/cityscape.txt");
     regions = Iterables.cycle(cityScapeAtlas.getRegions()).iterator();
 
     gameGrid.events().register(this);

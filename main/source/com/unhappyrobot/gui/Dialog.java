@@ -109,7 +109,7 @@ public class Dialog {
 
     Table container = new Table(skin);
     container.defaults().pad(5).top().left();
-    Label messageLabel = LabelStyles.Default.makeLabel(messageText);
+    Label messageLabel = LabelStyle.Default.makeLabel(messageText);
     messageLabel.setWrap(true);
 
     container.row();

@@ -1,8 +1,8 @@
 package com.unhappyrobot.types;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridPositionCache;
@@ -77,7 +77,7 @@ public abstract class GridObjectType {
   }
 
   public int getCoinsEarned() {
-    return (int) Math.round(coins * 0.0025);
+    return (int) Math.round(coins * 0.0125);
   }
 
   public boolean canShareSpace(GridObject gridObject) {
@@ -122,7 +122,7 @@ public abstract class GridObjectType {
 
       TextureAtlas objectAtlas = atlases.get(atlasFilename);
       if (objectAtlas == null) {
-        objectAtlas = new TextureAtlas(Gdx.files.internal(atlasFilename));
+        objectAtlas = TowerAssetManager.textureAtlas(atlasFilename);
         atlases.put(atlasFilename, objectAtlas);
       }
 

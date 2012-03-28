@@ -1,9 +1,9 @@
 package com.unhappyrobot.utils;
 
-public abstract class AsyncTask {
+public abstract class BackgroundTask {
   protected Thread thread;
 
-  public AsyncTask() {
+  public BackgroundTask() {
     thread = new Thread() {
       @Override
       public void run() {

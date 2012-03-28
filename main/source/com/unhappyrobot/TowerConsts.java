@@ -4,6 +4,9 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 
 public class TowerConsts {
+  public static boolean DEBUG = true;
+  public static boolean ENABLE_HAPPYDROIDS_CONNECT = true;
+
   public static final float ONE_MEGABYTE = 1048576.0f;
 
   public static final int GRID_UNIT_SIZE = 64;

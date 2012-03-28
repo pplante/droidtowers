@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.unhappyrobot.utils.AsyncTask;
+import com.unhappyrobot.utils.BackgroundTask;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -25,9 +25,10 @@ import java.util.Set;
 import java.util.UUID;
 
 public class HappyDroidService {
+  private static final String TAG = HappyDroidService.class.getSimpleName();
   private static HappyDroidService _instance;
-  private String deviceType;
-  private String deviceOSVersion;
+  private static String deviceType;
+  private static String deviceOSVersion;
   private Preferences preferences;
   private String deviceId;
   private boolean isAuthenticated;
@@ -61,8 +62,8 @@ public class HappyDroidService {
   public void registerDevice() {
     HashMap<String, String> deviceInfo = Maps.newHashMap();
     deviceInfo.put("uuid", HappyDroidService.instance().getDeviceId());
-    deviceInfo.put("type", HappyDroidService.instance().getDeviceType());
-    deviceInfo.put("osVersion", HappyDroidService.instance().getDeviceOSVersion());
+    deviceInfo.put("type", HappyDroidService.getDeviceType());
+    deviceInfo.put("osVersion", HappyDroidService.getDeviceOSVersion());
     HttpResponse response = HappyDroidService.instance().makePostRequest(Consts.API_V1_REGISTER_DEVICE, deviceInfo);
 
     if (response != null && response.getStatusLine().getStatusCode() == 201) {
@@ -171,13 +172,14 @@ public class HappyDroidService {
   }
 
   public void checkForNetwork() {
-    new AsyncTask() {
+    Gdx.app.debug(TAG, "Checking for network connection...");
+    new BackgroundTask() {
       @Override
       public void execute() {
         try {
           InetAddress remote = InetAddress.getByName(Consts.HAPPYDROIDS_SERVER);
           hasNetworkConnection = remote.isReachable(1500);
-
+          Gdx.app.debug(TAG, "Network status: " + hasNetworkConnection);
           synchronized (withNetworkConnectionRunnables) {
             for (Runnable runnable : withNetworkConnectionRunnables) {
               runnable.run();
@@ -186,7 +188,7 @@ public class HappyDroidService {
             withNetworkConnectionRunnables.clear();
           }
         } catch (IOException e) {
-          e.printStackTrace();
+          Gdx.app.debug(TAG, "Network error!", e);
         }
       }
     }.run();
@@ -196,23 +198,23 @@ public class HappyDroidService {
     return preferences.getString("SESSION_TOKEN", null);
   }
 
-  public void setDeviceOSName(String deviceType) {
-    this.deviceType = deviceType;
+  public static void setDeviceOSName(String deviceType) {
+    HappyDroidService.deviceType = deviceType;
   }
 
-  public void setDeviceOSVersion(String deviceOSVersion) {
-    this.deviceOSVersion = deviceOSVersion;
+  public static void setDeviceOSVersion(String deviceOSVersion) {
+    HappyDroidService.deviceOSVersion = deviceOSVersion;
   }
 
   public String getDeviceId() {
     return deviceId;
   }
 
-  public String getDeviceOSVersion() {
+  public static String getDeviceOSVersion() {
     return deviceOSVersion;
   }
 
-  public String getDeviceType() {
+  public static String getDeviceType() {
     return deviceType;
   }
 

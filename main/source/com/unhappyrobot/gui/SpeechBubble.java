@@ -1,6 +1,5 @@
 package com.unhappyrobot.gui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
@@ -11,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Scaling;
+import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.entities.GameObject;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.input.CameraController;
@@ -26,8 +26,8 @@ public class SpeechBubble extends Toast {
   public SpeechBubble() {
     super();
     if (textureAtlas == null) {
-      textureAtlas = new TextureAtlas(Gdx.files.internal("hud/misc.txt"));
-      labelFont = new BitmapFont(Gdx.files.internal("fonts/helvetica_neue_14_black.fnt"), false);
+      textureAtlas = TowerAssetManager.textureAtlas("hud/misc.txt");
+      labelFont = TowerAssetManager.bitmapFont("fonts/helvetica_neue_14_black.fnt");
     }
 
     NinePatch patch = new NinePatch(textureAtlas.findRegion("speech-bubble-box"), 4, 4, 4, 4);

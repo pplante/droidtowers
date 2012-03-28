@@ -22,6 +22,11 @@ public class TemporaryToken extends HappyDroidServiceObject {
   public TemporaryToken() {
   }
 
+  @Override
+  protected boolean requireAuthentication() {
+    return false;
+  }
+
   public boolean validate() {
     reload();
     return hasSessionToken();

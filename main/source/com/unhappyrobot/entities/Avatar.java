@@ -1,6 +1,5 @@
 package com.unhappyrobot.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -9,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 import com.sun.istack.internal.Nullable;
+import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.controllers.AvatarState;
@@ -73,7 +73,7 @@ public class Avatar extends GameObject {
   }
 
   protected TextureAtlas getTextureAtlas() {
-    return new TextureAtlas(Gdx.files.internal("characters/droid.txt"));
+    return TowerAssetManager.textureAtlas("characters/droid.txt");
   }
 
   private void displaySpeechBubble(String newText) {

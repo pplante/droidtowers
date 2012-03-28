@@ -22,7 +22,7 @@ public class NewGameWindow extends TowerWindow {
     super("Start a new Tower", stage, skin);
 
     defaults().top().left().pad(5);
-    add(LabelStyles.Default.makeLabel("Please provide a name for your Tower:"));
+    add(LabelStyle.Default.makeLabel("Please provide a name for your Tower:"));
     row().colspan(2);
 
     final TextField nameField = new TextField("", "Tower Name", skin);
@@ -40,7 +40,7 @@ public class NewGameWindow extends TowerWindow {
     add(nameField);
     row().padTop(15).colspan(2);
 
-    add(LabelStyles.Default.makeLabel("Select level of difficulty:"));
+    add(LabelStyle.Default.makeLabel("Select level of difficulty:"));
     row().colspan(2);
 
     TextButton easy = new CheckBox(" Easy", skin);
@@ -57,7 +57,7 @@ public class NewGameWindow extends TowerWindow {
     row().padTop(15).colspan(2);
 
     final String moneyLabelPrefix = "Starting money: ";
-    final Label moneyLabel = LabelStyles.Default.makeLabel(moneyLabelPrefix);
+    final Label moneyLabel = LabelStyle.Default.makeLabel(moneyLabelPrefix);
     add(moneyLabel);
 
     final ButtonGroup difficultyGroup = new ButtonGroup(easy, medium, hard);
