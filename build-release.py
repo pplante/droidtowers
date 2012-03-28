@@ -13,10 +13,10 @@ version_re = re.compile(r'(public static String VERSION = "(?:\w+)?";)')
 git_sha_re = re.compile(r'(public static String GIT_SHA = "(?:\w+)?";)')
 
 def retrieve_git_revision():
-#    git_status = git('status', '--porcelain').strip()
-#    if len(git_status) > 0:
-#        raise Exception("Git status reports there are changes to be committed.")
-#
+    git_status = git.status('--porcelain').strip()
+    if len(git_status) > 0:
+        raise Exception("Git status reports there are changes to be committed.")
+
     return git('rev-parse', '--short', 'HEAD').strip()
 
 
@@ -25,7 +25,7 @@ def retreive_build_number():
 
 
 def git_check_for_tag_collision(new_build_number):
-    existing_tags = git('tag').split('\n')
+    existing_tags = git.tag().split('\n')
     for tag in existing_tags:
         if tag == new_build_number:
             raise Exception('Build number has already been used as a tag in git, aborting.')
@@ -57,7 +57,7 @@ if __name__ == '__main__':
         git_check_for_tag_collision(new_build_number)
 
         tower_consts = open(TOWER_CONSTS_JAVA).read()
-        tower_consts = debug_flag_re.sub('public static boolean DEBUG = true;', tower_consts)
+        tower_consts = debug_flag_re.sub('public static boolean DEBUG = false;', tower_consts)
         tower_consts = version_re.sub('public static String VERSION = "%s";' % (new_build_number,), tower_consts)
         tower_consts = git_sha_re.sub('public static String GIT_SHA = "%s";' % (revision,), tower_consts)
 
@@ -81,6 +81,11 @@ if __name__ == '__main__':
 
         print "http://www.happydroids.com/alphas/DroidTowers-%s.exe" % (new_build_number,)
         print "http://www.happydroids.com/alphas/DroidTowers-%s.zip" % (new_build_number,)
+
+        tower_consts = open(TOWER_CONSTS_JAVA).read()
+        tower_consts = debug_flag_re.sub('public static boolean DEBUG = false;', tower_consts)
+        with open(TOWER_CONSTS_JAVA, 'w') as fp:
+            fp.write(tower_consts)
 
     except Exception, e:
         print e
