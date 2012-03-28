@@ -9,7 +9,7 @@ SCP_TARGET_PATH = 'pplante@happydroids.com:/var/www/happydroids.com/public/alpha
 TOWER_CONSTS_JAVA = './main/source/com/unhappyrobot/TowerConsts.java'
 
 debug_flag_re = re.compile(r'(public static boolean DEBUG = (?:true|false);)')
-server_url_re = re.compile(r'(public static boolean HAPPYDROIDS_SERVER = "(?:\w+)?";)')
+server_url_re = re.compile(r'(public static String HAPPYDROIDS_SERVER = "(?:\w+)?";)')
 version_re = re.compile(r'(public static String VERSION = "(?:\w+)?";)')
 git_sha_re = re.compile(r'(public static String GIT_SHA = "(?:\w+)?";)')
 
@@ -59,7 +59,7 @@ if __name__ == '__main__':
 
         tower_consts = open(TOWER_CONSTS_JAVA).read()
         tower_consts = debug_flag_re.sub('public static boolean DEBUG = false;', tower_consts)
-        tower_consts = server_url_re.sub('public static boolean HAPPYDROIDS_SERVER = "www.happydroids.com";',
+        tower_consts = server_url_re.sub('public static String HAPPYDROIDS_SERVER = "www.happydroids.com";',
             tower_consts)
         tower_consts = version_re.sub('public static String VERSION = "%s";' % (new_build_number,), tower_consts)
         tower_consts = git_sha_re.sub('public static String GIT_SHA = "%s";' % (revision,), tower_consts)
