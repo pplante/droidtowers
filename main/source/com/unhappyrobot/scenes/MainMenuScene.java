@@ -36,6 +36,10 @@ public class MainMenuScene extends Scene {
     container.add(label).align(Align.CENTER);
     container.row();
 
+    Label versionlabel = LabelStyle.Default.makeLabel(String.format("%s (%s)", TowerConsts.VERSION, TowerConsts.GIT_SHA));
+    container.add(versionlabel).right().padTop(-16);
+    container.row();
+
     Tween.to(label, WidgetAccessor.COLOR, 500)
             .target(1, 1, 1, 0.65f)
             .repeatYoyo(Tween.INFINITY, 250)
@@ -104,8 +108,6 @@ public class MainMenuScene extends Scene {
         Gdx.app.exit();
       }
     });
-
-    throw new RuntimeException("WTFBBQ!?!");
   }
 
   @Override

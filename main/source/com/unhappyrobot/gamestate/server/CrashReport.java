@@ -12,6 +12,7 @@ import java.io.IOException;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class CrashReport extends HappyDroidServiceObject {
   private final String name;
+  private final String version = TowerConsts.VERSION;
   private final String gitSha = TowerConsts.GIT_SHA;
   private final String deviceOsVersion;
   private final String deviceType;

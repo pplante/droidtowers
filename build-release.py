@@ -9,9 +9,9 @@ SCP_TARGET_PATH = 'pplante@happydroids.com:/var/www/happydroids.com/public/alpha
 TOWER_CONSTS_JAVA = './main/source/com/unhappyrobot/TowerConsts.java'
 
 debug_flag_re = re.compile(r'(public static boolean DEBUG = (?:true|false);)')
-server_url_re = re.compile(r'(public static final String HAPPYDROIDS_SERVER = "(?:\w+)?";)')
-version_re = re.compile(r'(public static String VERSION = "(?:\w+)?";)')
-git_sha_re = re.compile(r'(public static String GIT_SHA = "(?:\w+)?";)')
+server_url_re = re.compile(r'(public static final String HAPPYDROIDS_SERVER = "(?:.+?)";)')
+version_re = re.compile(r'(public static String VERSION = "(?:.+?)";)')
+git_sha_re = re.compile(r'(public static String GIT_SHA = "(?:.+?)";)')
 
 def retrieve_git_revision():
     git_status = git.status('--porcelain').strip()
@@ -63,8 +63,8 @@ if __name__ == '__main__':
             tower_consts)
         tower_consts = version_re.sub('public static String VERSION = "%s";' % (new_build_number,), tower_consts)
         tower_consts = git_sha_re.sub('public static String GIT_SHA = "%s";' % (revision,), tower_consts)
-
-        with open(TOWER_CONSTS_JAVA, 'w') as fp:
+        print tower_consts
+        with open(TOWER_CONSTS_JAVA, 'w+') as fp:
             fp.write(tower_consts)
 
         with open('build.ver', 'w') as fp:
