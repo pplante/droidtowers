@@ -19,26 +19,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/rooms/housing/4x1-large-condo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/libs/main/guava-11.0.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/libs/sources/guava-11.0.2-sources.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build-release.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Device.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HttpStatusCode.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/StackTraceSerializer.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/release.properties" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/android.iml" afterPath="$PROJECT_DIR$/android/android.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-release.py" afterPath="$PROJECT_DIR$/build-release.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.ver" afterPath="$PROJECT_DIR$/build.ver" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/targets/windows/config.xml" afterPath="$PROJECT_DIR$/desktop/targets/windows/config.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/ApiRunnable.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/ApiRunnable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CloudGameSave.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CloudGameSave.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Consts.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Consts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CrashReport.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CrashReport.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/Scene.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/Scene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/BackgroundTask.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/BackgroundTask.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -141,19 +128,10 @@
       <file leaf-file-name="build-release.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/build-release.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="37" selection-start="2515" selection-end="2515" vertical-scroll-proportion="0.91317827">
+            <state line="77" column="0" selection-start="2895" selection-end="2895" vertical-scroll-proportion="0.7612403">
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="semver.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/semver.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="155" column="4" selection-start="5945" selection-end="5945" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -171,8 +149,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/BackgroundTask.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CloudGameSave.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/Scene.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
@@ -186,6 +162,8 @@
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CrashReport.java" />
         <option value="$PROJECT_DIR$/build.ver" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
+        <option value="$PROJECT_DIR$/desktop/targets/windows/config.xml" />
+        <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/build-release.py" />
       </list>
     </option>
@@ -1382,21 +1360,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/ApiRunnable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="38" selection-start="668" selection-end="668" vertical-scroll-proportion="0.45921788" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Device.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="182" selection-end="182" vertical-scroll-proportion="0.14748603" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/main/jackson-mapper-asl-1.9.5.jar!/org/codehaus/jackson/map/ObjectMapper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="162" selection-end="162" vertical-scroll-proportion="0.10268378" />
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Throwable.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="42" column="39" selection-start="1759" selection-end="1759" vertical-scroll-proportion="0.5821229" />
@@ -1446,16 +1409,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
+    <entry file="file://$PROJECT_DIR$/build.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="42" selection-start="1075" selection-end="1075" vertical-scroll-proportion="0.4604651">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/semver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="155" column="4" selection-start="5945" selection-end="5945" vertical-scroll-proportion="0.0">
+        <state line="155" column="4" selection-start="5945" selection-end="5945" vertical-scroll-proportion="0.9658915">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/release.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1467,9 +1437,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/desktop/targets/windows/config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="19" selection-start="310" selection-end="310" vertical-scroll-proportion="0.15348837">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="42" selection-start="81" selection-end="81" vertical-scroll-proportion="0.017054264">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/build-release.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="37" selection-start="2515" selection-end="2515" vertical-scroll-proportion="0.91317827">
+        <state line="77" column="0" selection-start="2895" selection-end="2895" vertical-scroll-proportion="0.7612403">
           <folding>
             <element signature="e#24#33#0" expanded="true" />
           </folding>

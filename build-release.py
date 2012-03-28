@@ -3,8 +3,9 @@
 import re
 import sys
 import semver
-from pbs import git
+from pbs import git, ant, scp, pwd
 
+SCP_TARGET_PATH = 'pplante@happydroids.com:/var/www/happydroids.com/public/alphas'
 TOWER_CONSTS_JAVA = './main/source/com/unhappyrobot/TowerConsts.java'
 
 debug_flag_re = re.compile(r'(public static boolean DEBUG = (?:true|false);)')
@@ -66,6 +67,20 @@ if __name__ == '__main__':
         with open('build.ver', 'w') as fp:
             fp.write(new_build_number)
 
+        with open('release.properties', 'w') as fp:
+            fp.write('project.version=%s' % (new_build_number))
+
+        git('tag', 'release-%s' % (new_build_number,))
+
+        ant('build-alpha', _fg=True)
+
+        upload = scp.bake(i='/Users/pplante/.ssh/id_rsa', _fg=True)
+
+        upload('./out/DroidTowers.exe', '%s/DroidTowers-%s.exe' % (SCP_TARGET_PATH, new_build_number,))
+        upload('./out/DroidTowers.zip', '%s/DroidTowers-%s.zip' % (SCP_TARGET_PATH, new_build_number,))
+
+        print "http://www.happydroids.com/alphas/DroidTowers-%s.exe" % (new_build_number,)
+        print "http://www.happydroids.com/alphas/DroidTowers-%s.zip" % (new_build_number,)
 
     except Exception, e:
         print e

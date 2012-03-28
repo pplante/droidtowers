@@ -1,31 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="DroidTowers" default="upload-alpha">
+<project name="DroidTowers" default="build-alpha">
   <property name="skip.tests" value="true"/>
 
   <import file="idea-build.xml"/>
 
   <property name="compiler.debug" value="off"/>
   <property file="build.properties"/>
-  <property name="project.version" value="0.9.1"/>
 
-  <target name="process-template">
-    <replaceregexp flags="s" match="(public static boolean DEBUG = )(true|false);" replace="\1${project.debug};">
-      <file file="${basedir}/main/source/com/unhappyrobot/TowerConsts.java"/>
-    </replaceregexp>
-  </target>
+  <target name="osx" depends="build.all.artifacts" description="Build an OSX target">
+    <property file="release.properties"/>
 
-  <target name="release-build" description="build a full release build">
-    <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="./tools/ant-contrib-0.6.jar"/>
-    <var name="project.debug" value="false" />
-    <antcall target="process-template"/>
-    <antcall target="build.all.artifacts"/>
-
-    <var name="project.debug" value="true"  />
-    <loadproperties srcfile="debug.properties"/>
-    <antcall target="process-template"/>
-  </target>
-
-  <target name="osx" depends="release-build" description="Build an OSX target">
     <taskdef name="jarbundler"
              classpath="./tools/jarbundler-2.2.0.jar"
              classname="net.sourceforge.jarbundler.JarBundler"/>
@@ -42,30 +26,22 @@
 
   <property name="launch4j.dir" location="./tools/launch4j"/>
 
-  <target name="exe" depends="release-build" description="Build a Windows target">
+  <target name="exe" depends="build.all.artifacts" description="Build a Windows target">
+    <property file="release.properties"/>
+
     <taskdef name="launch4j"
              classname="net.sf.launch4j.ant.Launch4jTask"
              classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar"/>
 
-    <launch4j configfile="./desktop/targets/windows/config.xml"/>
+    <launch4j configfile="./desktop/targets/windows/config.xml" />
   </target>
 
-  <target name="upload-alpha" depends="clean,exe,osx">
+  <target name="build-alpha" depends="clean,exe,osx">
     <delete file="${basedir}/out/${ant.project.name}.zip" failonerror="false"/>
     <exec executable="zip" dir="${basedir}/out" output="/dev/null">
       <arg value="-rX"/>
       <arg value="DroidTowers.zip"/>
       <arg value="DroidTowers.app"/>
     </exec>
-
-    <input message="Please enter password:" addproperty="scp.password">
-      <handler type="secure"/>
-    </input>
-
-    <scp todir="pplante@happydroids.com:/var/www/happydroids.com/public/alphas/" password="${scp.password}"
-         trust="true">
-      <fileset file="${basedir}/out/DroidTowers.zip"/>
-      <fileset file="${basedir}/out/DroidTowers.exe"/>
-    </scp>
   </target>
 </project>
