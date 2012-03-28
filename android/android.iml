@@ -35,7 +35,7 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="android" level="project" />
-    <orderEntry type="module" module-name="main" />
+    <orderEntry type="module" module-name="main" exported="" />
     <orderEntry type="module-library" scope="TEST">
       <library>
         <CLASSES>

@@ -3,6 +3,7 @@ package com.unhappyrobot.gamestate.server;
 import com.badlogic.gdx.files.FileHandle;
 import com.unhappyrobot.gamestate.GameSave;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.StringUtils;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 import java.io.ByteArrayOutputStream;
@@ -48,12 +49,10 @@ public class CloudGameSave extends HappyDroidServiceObject {
         GZIPOutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream);
         gzipOutputStream.write(pngFile.readBytes());
         gzipOutputStream.close();
-        return Base64.encodeBase64String(byteArrayOutputStream.toByteArray());
+        return StringUtils.newStringUtf8(Base64.encodeBase64(byteArrayOutputStream.toByteArray(), true));
       } catch (IOException e) {
-        e.printStackTrace();
+        throw new RuntimeException(e);
       }
-
-      return null;
     }
   }
 }

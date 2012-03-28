@@ -2,7 +2,6 @@ package com.unhappyrobot.gamestate.server;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.unhappyrobot.utils.BackgroundTask;
 import org.apache.http.HttpResponse;
@@ -20,7 +19,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.HashMap;
 import java.util.Set;
 import java.util.UUID;
 
@@ -60,27 +58,21 @@ public class HappyDroidService {
   }
 
   public void registerDevice() {
-    HashMap<String, String> deviceInfo = Maps.newHashMap();
-    deviceInfo.put("uuid", HappyDroidService.instance().getDeviceId());
-    deviceInfo.put("type", HappyDroidService.getDeviceType());
-    deviceInfo.put("osVersion", HappyDroidService.getDeviceOSVersion());
-    HttpResponse response = HappyDroidService.instance().makePostRequest(Consts.API_V1_REGISTER_DEVICE, deviceInfo);
+    Device device = new Device();
+    device.save(new ApiRunnable<Device>() {
+      @Override
+      public void onSuccess(HttpResponse response, Device object) {
+        isAuthenticated = object.isAuthenticated;
 
-    if (response != null && response.getStatusLine().getStatusCode() == 201) {
-      HashMap hashMap = HappyDroidServiceObject.materializeObject(response, HashMap.class);
-      if (hashMap.containsKey("isAuthenticated")) {
-        isAuthenticated = (Boolean) hashMap.get("isAuthenticated");
         if (!isAuthenticated) {
           preferences.remove("SESSION_TOKEN");
           preferences.flush();
         }
       }
-    } else {
-      isAuthenticated = false;
-    }
+    });
   }
 
-  public boolean makePutRequest(String uri, Object objectForServer) {
+  public HttpResponse makePutRequest(String uri, Object objectForServer) {
     HttpClient client = new DefaultHttpClient();
     try {
       System.out.println("PUT " + uri);
@@ -88,28 +80,20 @@ public class HappyDroidService {
       addDefaultHeaders(request);
 
       if (objectForServer != null) {
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = HappyDroidServiceObject.getObjectMapper();
         StringEntity entity = new StringEntity(mapper.writeValueAsString(objectForServer));
         entity.setContentType("multipart/form-data");
         request.setEntity(entity);
       }
 
-      HttpResponse response = client.execute(request);
-      System.out.println("\t" + response.getStatusLine());
-
-      if (response.getStatusLine().getStatusCode() == 204) {
-        return true;
-      } else {
-        String content = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
-        System.out.println("\tResponse: " + content);
-      }
+      return client.execute(request);
     } catch (HttpHostConnectException ignored) {
       System.out.println("Connection failed for: " + uri);
     } catch (Exception e) {
       e.printStackTrace();
     }
 
-    return false;
+    return null;
   }
 
   public HttpResponse makePostRequest(String uri, Object objectForServer) {
@@ -120,7 +104,8 @@ public class HappyDroidService {
       addDefaultHeaders(request);
 
       if (objectForServer != null) {
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = HappyDroidServiceObject.getObjectMapper();
+        System.out.println(mapper.writeValueAsString(objectForServer));
         StringEntity entity = new StringEntity(mapper.writeValueAsString(objectForServer));
         entity.setContentType("multipart/form-data");
         request.setEntity(entity);

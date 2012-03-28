@@ -1,18 +1,22 @@
 package com.unhappyrobot.gamestate.server;
 
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.gamestate.GameSave;
 import com.unhappyrobot.scenes.TowerScene;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
+import java.io.IOException;
+
 @SuppressWarnings("ALL")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class CrashReport extends HappyDroidServiceObject {
   private final String name;
+  private final String gitSha = TowerConsts.GIT_SHA;
   private final String deviceOsVersion;
   private final String deviceType;
   private final String message;
-  private final StackTraceElement[] stackTrace;
+  private String stackTrace;
   private GameSave gameState;
 
   public CrashReport(Throwable error) {
@@ -20,7 +24,11 @@ public class CrashReport extends HappyDroidServiceObject {
     deviceOsVersion = HappyDroidService.getDeviceOSVersion();
     name = error.getClass().getCanonicalName();
     message = error.getMessage();
-    stackTrace = error.getStackTrace();
+    try {
+      stackTrace = getObjectMapper().writeValueAsString(error.getStackTrace());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     gameState = null;
 
     if (TowerGame.getActiveScene() instanceof TowerScene) {

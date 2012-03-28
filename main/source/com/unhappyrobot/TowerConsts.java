@@ -5,6 +5,9 @@ import com.badlogic.gdx.Gdx;
 
 public class TowerConsts {
   public static boolean DEBUG = true;
+  public static String VERSION = "v0.1.21";
+  public static String GIT_SHA = "067fa21";
+
   public static boolean ENABLE_HAPPYDROIDS_CONNECT = true;
 
   public static final float ONE_MEGABYTE = 1048576.0f;

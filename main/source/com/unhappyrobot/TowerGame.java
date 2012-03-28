@@ -38,7 +38,7 @@ public class TowerGame implements ApplicationListener {
   private static Scene activeScene;
   private static Stage rootUiStage;
   private static boolean audioEnabled;
-  private Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
+  private static Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
   private static PlatformBrowserUtil platformBrowserUtil;
 
   public TowerGame() {
@@ -62,7 +62,7 @@ public class TowerGame implements ApplicationListener {
     }
 
     Thread.currentThread().setUncaughtExceptionHandler(uncaughtExceptionHandler);
-    Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+    Thread.currentThread().setPriority(Thread.NORM_PRIORITY);
 
     TowerAssetManager.assetManager();
 
@@ -83,7 +83,7 @@ public class TowerGame implements ApplicationListener {
     menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_14_bold_white.fnt"), false);
     camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     spriteBatch = new SpriteBatch(100);
-    rootUiStage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true, spriteBatch);
+    rootUiStage = new Stage(800, 480, true, spriteBatch);
 
     InputSystem.instance().setup(camera);
     Gdx.input.setInputProcessor(InputSystem.instance());
@@ -227,7 +227,11 @@ public class TowerGame implements ApplicationListener {
 
 
   public void setUncaughtExceptionHandler(Thread.UncaughtExceptionHandler uncaughtExceptionHandler) {
-    this.uncaughtExceptionHandler = uncaughtExceptionHandler;
+    TowerGame.uncaughtExceptionHandler = uncaughtExceptionHandler;
+  }
+
+  public static Thread.UncaughtExceptionHandler getUncaughtExceptionHandler() {
+    return uncaughtExceptionHandler;
   }
 
   public void setPlatformBrowserUtil(PlatformBrowserUtil platformBrowserUtil) {

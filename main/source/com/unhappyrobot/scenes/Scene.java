@@ -16,7 +16,7 @@ public abstract class Scene {
   protected static OrthographicCamera camera;
 
   public Scene() {
-    stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false, getSpriteBatch());
+    stage = new Stage(800, 480, true, getSpriteBatch());
   }
 
   public static void setGuiSkin(Skin guiSkin) {

@@ -1,5 +1,7 @@
 package com.unhappyrobot.utils;
 
+import com.unhappyrobot.TowerGame;
+
 public abstract class BackgroundTask {
   protected Thread thread;
 
@@ -12,7 +14,7 @@ public abstract class BackgroundTask {
         afterExecute();
       }
     };
-
+    thread.setUncaughtExceptionHandler(TowerGame.getUncaughtExceptionHandler());
     thread.setPriority(Thread.MIN_PRIORITY);
     thread.setDaemon(true);
   }

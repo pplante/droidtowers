@@ -2,19 +2,31 @@ package com.unhappyrobot.gamestate.server;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.unhappyrobot.jackson.Vector2Serializer;
+import com.unhappyrobot.jackson.Vector3Serializer;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.codehaus.jackson.Version;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.module.SimpleModule;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public abstract class HappyDroidServiceObject {
+  private static final ApiRunnable DUMMY_AFTER_SAVE = new ApiRunnable() {
+    @Override
+    void handleResponse(HttpResponse response, HappyDroidServiceObject ignored) {
+      // stub this so we do not waste cycles.
+    }
+  };
+
   protected String resourceUri;
 
   protected abstract String getResourceBaseUri();
@@ -33,8 +45,18 @@ public abstract class HappyDroidServiceObject {
     this.resourceUri = resourceUri;
   }
 
+  public static ObjectMapper getObjectMapper() {
+    ObjectMapper objectMapper = new ObjectMapper();
+    SimpleModule simpleModule = new SimpleModule("Specials", new Version(1, 0, 0, null));
+    simpleModule.addSerializer(new Vector3Serializer());
+    simpleModule.addSerializer(new Vector2Serializer());
+    simpleModule.addSerializer(new StackTraceSerializer());
+    objectMapper.registerModule(simpleModule);
+    return objectMapper;
+  }
+
   public static <T> T materializeObject(HttpResponse response, Class<T> aClazz) {
-    ObjectMapper mapper = new ObjectMapper();
+    ObjectMapper mapper = getObjectMapper();
     if (response != null) {
       try {
         BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
@@ -63,18 +85,22 @@ public abstract class HappyDroidServiceObject {
   }
 
   public void save() {
-    save(null);
+    save(DUMMY_AFTER_SAVE);
   }
 
+  @SuppressWarnings("unchecked")
   public void save(ApiRunnable afterSave) {
     if (!HappyDroidService.instance().haveNetworkConnection()) {
+      afterSave.onError(null, HttpStatusCode.ClientClosedRequest, this);
       return;
     } else if (requireAuthentication() && !HappyDroidService.instance().hasAuthenticated()) {
+      afterSave.onError(null, HttpStatusCode.NetworkAuthenticationRequired, this);
       return;
     }
 
+    HttpResponse response;
     if (resourceUri == null) {
-      HttpResponse response = HappyDroidService.instance().makePostRequest(getResourceBaseUri(), this);
+      response = HappyDroidService.instance().makePostRequest(getResourceBaseUri(), this);
       if (response != null && response.getStatusLine().getStatusCode() == 201) {
         Header location = Iterables.getFirst(Lists.newArrayList(response.getHeaders("Location")), null);
         if (location != null) {
@@ -84,8 +110,10 @@ public abstract class HappyDroidServiceObject {
         copyValuesFromResponse(response);
       }
     } else {
-      HappyDroidService.instance().makePutRequest(resourceUri, this);
+      response = HappyDroidService.instance().makePutRequest(resourceUri, this);
     }
+
+    afterSave.handleResponse(response, this);
   }
 
   private void copyValuesFromResponse(HttpResponse response) {
@@ -106,8 +134,10 @@ public abstract class HappyDroidServiceObject {
 
   private void copyValueFromField(HappyDroidServiceObject serverInstance, Field field) {
     try {
-      field.setAccessible(true);
-      field.set(this, field.get(serverInstance));
+      if (!Modifier.isFinal(field.getModifiers())) {
+        field.setAccessible(true);
+        field.set(this, field.get(serverInstance));
+      }
     } catch (IllegalAccessException e) {
       throw new RuntimeException(e);
     }
