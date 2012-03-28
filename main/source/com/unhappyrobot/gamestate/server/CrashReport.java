@@ -39,7 +39,7 @@ public class CrashReport extends HappyDroidServiceObject {
 
   @Override
   protected String getResourceBaseUri() {
-    return Consts.HAPPYDROIDS_URI + "/api/v1/crashreport/";
+    return TowerConsts.HAPPYDROIDS_URI + "/api/v1/crashreport/";
   }
 
   @Override

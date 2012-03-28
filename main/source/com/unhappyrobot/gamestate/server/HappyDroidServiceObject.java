@@ -2,6 +2,7 @@ package com.unhappyrobot.gamestate.server;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.jackson.Vector2Serializer;
 import com.unhappyrobot.jackson.Vector3Serializer;
 import org.apache.http.Header;
@@ -78,7 +79,7 @@ public abstract class HappyDroidServiceObject {
       throw new RuntimeException("resourceUri must not be null when using reload()");
     }
 
-    HttpResponse response = HappyDroidService.instance().makeGetRequest(Consts.HAPPYDROIDS_URI + resourceUri);
+    HttpResponse response = HappyDroidService.instance().makeGetRequest(TowerConsts.HAPPYDROIDS_URI + resourceUri);
     if (response != null && response.getStatusLine().getStatusCode() == 200) {
       copyValuesFromResponse(response);
     }

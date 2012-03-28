@@ -3,6 +3,7 @@ package com.unhappyrobot.gamestate.server;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.google.common.collect.Sets;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.utils.BackgroundTask;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -162,7 +163,7 @@ public class HappyDroidService {
       @Override
       public void execute() {
         try {
-          InetAddress remote = InetAddress.getByName(Consts.HAPPYDROIDS_SERVER);
+          InetAddress remote = InetAddress.getByName(TowerConsts.HAPPYDROIDS_SERVER);
           hasNetworkConnection = remote.isReachable(1500);
           Gdx.app.debug(TAG, "Network status: " + hasNetworkConnection);
           synchronized (withNetworkConnectionRunnables) {

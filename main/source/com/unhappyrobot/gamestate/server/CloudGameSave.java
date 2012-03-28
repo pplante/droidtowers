@@ -1,6 +1,7 @@
 package com.unhappyrobot.gamestate.server;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.gamestate.GameSave;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.StringUtils;
@@ -20,7 +21,7 @@ public class CloudGameSave extends HappyDroidServiceObject {
 
   @Override
   protected String getResourceBaseUri() {
-    return Consts.HAPPYDROIDS_URI + "/api/v1/gamesave/";
+    return TowerConsts.HAPPYDROIDS_URI + "/api/v1/gamesave/";
   }
 
   public CloudGameSave() {

@@ -1,5 +1,6 @@
 package com.unhappyrobot.gamestate.server;
 
+import com.unhappyrobot.TowerConsts;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
@@ -16,7 +17,7 @@ public class TemporaryToken extends HappyDroidServiceObject {
 
   @Override
   protected String getResourceBaseUri() {
-    return Consts.HAPPYDROIDS_URI + "/api/v1/temporarytoken/";
+    return TowerConsts.HAPPYDROIDS_URI + "/api/v1/temporarytoken/";
   }
 
   public TemporaryToken() {
