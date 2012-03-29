@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.gamestate.server.ApiRunnable;
@@ -20,6 +21,7 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
   private static final String TAG = ConnectToHappyDroidsWindow.class.getSimpleName();
   private TemporaryToken token;
   private PeriodicBackgroundTask periodicBackgroundTask;
+  private final TextButton accessTokenButton;
 
   public ConnectToHappyDroidsWindow(Stage stage, Skin skin) {
     super("Connect to Facebook", stage, skin);
@@ -32,18 +34,32 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
     row().pad(10);
     add(LabelStyle.Default.makeLabel("After logging in, type the code below to connect your game."));
     row().pad(10);
-    final TextButton codeLabel = new TextButton("CODE: Reticulating splines...", skin);
-    add(codeLabel);
+
+    accessTokenButton = new TextButton("CODE: Reticulating splines...", skin);
+    TextButton close = new TextButton("close", skin);
+    close.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        dismiss();
+      }
+    });
 
     final Label sessionStatus = LabelStyle.Default.makeLabel("Waiting for You to login...");
-    sessionStatus.visible = false;
-    add(sessionStatus);
+
+    final Table bottom = new Table();
+    bottom.defaults().top().left().expand();
+    bottom.add(accessTokenButton);
+    bottom.add(sessionStatus).fill().center();
+    bottom.add(close).right();
+    add(bottom).width(500);
 
     token = new TemporaryToken();
     token.save(new ApiRunnable() {
       @Override
       public void onError(HttpResponse response, int statusCode, HappyDroidServiceObject object) {
-        new Dialog().setMessage("Could not contact happydroids.com, please check that you have internet access and try again.\n\nERROR:ETFAIL2FONHOME").addButton("Dismiss", new OnClickCallback() {
+        sessionStatus.setText("Login failed!");
+        bottom.pack();
+
+        new Dialog(TowerGame.getRootUiStage()).setMessage("Could not contact happydroids.com, please check that you have internet access and try again.\n\nERROR:ETFAIL2FONHOME").addButton("Dismiss", new OnClickCallback() {
           @Override
           public void onClick(Dialog dialog) {
             dialog.dismiss();
@@ -54,10 +70,10 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
 
       @Override
       public void onSuccess(HttpResponse response, HappyDroidServiceObject object) {
-        codeLabel.setText("CODE: " + token.getValue());
+        accessTokenButton.setText("CODE: " + token.getValue());
         sessionStatus.visible = true;
 
-        codeLabel.setClickListener(new ClickListener() {
+        accessTokenButton.setClickListener(new ClickListener() {
           public void click(Actor actor, float x, float y) {
             String uri = token.getClickableUri();
 

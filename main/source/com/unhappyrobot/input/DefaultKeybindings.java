@@ -1,7 +1,6 @@
 package com.unhappyrobot.input;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.scenes.TowerScene;
 
 public class DefaultKeybindings {
@@ -12,7 +11,6 @@ public class DefaultKeybindings {
   private InputCallback toggleGridLines;
   private InputCallback toggleTransitLines;
   private InputCallback resetCameraZoom;
-  private InputCallback reloadAllTextures;
 
   public DefaultKeybindings(final TowerScene towerScene) {
     this.towerScene = towerScene;
@@ -31,48 +29,49 @@ public class DefaultKeybindings {
       }
     };
 
-    toggleGridLines = new InputCallback() {
-      public boolean run(float timeDelta) {
-        towerScene.getGameGridRenderer().toggleGridLines();
+    if (TowerConsts.DEBUG) {
+      toggleGridLines = new InputCallback() {
+        public boolean run(float timeDelta) {
+          towerScene.getGameGridRenderer().toggleGridLines();
 
-        return true;
-      }
-    };
+          return true;
+        }
+      };
 
-    toggleTransitLines = new InputCallback() {
-      public boolean run(float timeDelta) {
-        towerScene.getGameGridRenderer().toggleTransitLines();
+      toggleTransitLines = new InputCallback() {
+        public boolean run(float timeDelta) {
+          towerScene.getGameGridRenderer().toggleTransitLines();
 
-        return true;
-      }
-    };
+          return true;
+        }
+      };
 
-    resetCameraZoom = new InputCallback() {
-      public boolean run(float timeDelta) {
-        towerScene.getCamera().zoom = 1f;
+      resetCameraZoom = new InputCallback() {
+        public boolean run(float timeDelta) {
+          towerScene.getCamera().zoom = 1f;
 
-        return true;
-      }
-    };
-
-    reloadAllTextures = new InputCallback() {
-      public boolean run(float timeDelta) {
-        Texture.invalidateAllTextures(Gdx.app);
-        return true;
-      }
-    };
+          return true;
+        }
+      };
+    }
   }
 
   public void bindKeys() {
     InputSystem.instance().bind(new int[]{InputSystem.Keys.PLUS, InputSystem.Keys.UP}, speedUpTime);
     InputSystem.instance().bind(new int[]{InputSystem.Keys.MINUS, InputSystem.Keys.DOWN}, slowDownTime);
-    InputSystem.instance().bind(InputSystem.Keys.G, toggleGridLines);
-    InputSystem.instance().bind(InputSystem.Keys.T, toggleTransitLines);
-    InputSystem.instance().bind(InputSystem.Keys.NUM_0, resetCameraZoom);
-    InputSystem.instance().bind(InputSystem.Keys.R, reloadAllTextures);
+
+    if (TowerConsts.DEBUG) {
+      InputSystem.instance().bind(InputSystem.Keys.G, toggleGridLines);
+      InputSystem.instance().bind(InputSystem.Keys.T, toggleTransitLines);
+      InputSystem.instance().bind(InputSystem.Keys.NUM_0, resetCameraZoom);
+    }
   }
 
   public void unbindKeys() {
-    InputSystem.instance().unbind(speedUpTime, slowDownTime, toggleGridLines, toggleTransitLines, resetCameraZoom, reloadAllTextures);
+    InputSystem.instance().unbind(speedUpTime, slowDownTime);
+
+    if (TowerConsts.DEBUG) {
+      InputSystem.instance().unbind(toggleGridLines, toggleTransitLines, resetCameraZoom);
+    }
   }
 }

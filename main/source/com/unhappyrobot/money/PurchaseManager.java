@@ -1,11 +1,15 @@
 package com.unhappyrobot.money;
 
 import com.badlogic.gdx.Gdx;
+import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.gui.Dialog;
 import com.unhappyrobot.gui.OnClickCallback;
 import com.unhappyrobot.gui.ResponseType;
 import com.unhappyrobot.types.GridObjectType;
+import com.unhappyrobot.utils.Random;
+
+import java.text.NumberFormat;
 
 public class PurchaseManager {
   public static final String LOG_TAG = "PurchaseManager";
@@ -36,10 +40,12 @@ public class PurchaseManager {
   private void displayCurrencyDialog() {
     Gdx.app.log(LOG_TAG, "Out of money for purchase: " + gridObjectType.getName());
 
-    new Dialog().setTitle("Not enough money :(").setMessage("Would you like to purchase more monies?").addButton("Yes", new OnClickCallback() {
+    final int moneyFromVinnie = Random.randomInt(1000, 10000);
+    String message = String.format("So it looks like you ran out of money.\n\nLuckily, Cousin Vinnie has offered to loan you %s%s.\n\nSo, how about it?", TowerConsts.CURRENCY_SYMBOL, NumberFormat.getInstance().format(moneyFromVinnie));
+    new Dialog().setTitle("Not enough money :(").setMessage(message).addButton("Yes", new OnClickCallback() {
       @Override
       public void onClick(Dialog dialog) {
-        Player.instance().addCurrency(1000);
+        Player.instance().addCurrency(moneyFromVinnie);
         dialog.dismiss();
       }
     }).addButton(ResponseType.NEGATIVE, "No thanks!", new OnClickCallback() {
