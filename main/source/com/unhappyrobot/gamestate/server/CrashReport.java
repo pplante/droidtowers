@@ -19,12 +19,14 @@ public class CrashReport extends HappyDroidServiceObject {
   private final String message;
   private String stackTrace;
   private GameSave gameState;
+  private final String cause;
 
   public CrashReport(Throwable error) {
     deviceType = HappyDroidService.getDeviceType();
     deviceOsVersion = HappyDroidService.getDeviceOSVersion();
     name = error.getClass().getCanonicalName();
     message = error.getMessage();
+    cause = error.getCause().toString();
     try {
       stackTrace = getObjectMapper().writeValueAsString(error.getStackTrace());
     } catch (IOException e) {

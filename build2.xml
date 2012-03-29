@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="DroidTowers" default="build-all-platforms">
-  <property name="compiler.debug" value="off"/>
-  <property file="build.properties"/>
-
+<project name="DroidTowers" basedir="." default="help">
   <property name="root.dir" value="."/>
   <property name="src.dir" value="source"/>
   <property name="build.dir" value="out/desktop-jar"/>
   <property name="classes.dir" value="${build.dir}/classes"/>
+
+  <property name="main-class" value="com.unhappyrobot.DesktopGame"/>
 
   <path id="classpath">
     <fileset dir="${root.dir}/main/libs/main" includes="**/*.jar"/>
@@ -47,41 +45,4 @@
 
   <target name="build" depends="clean,jar"/>
 
-  <target name="osx" depends="build" description="Build an OSX target">
-    <property file="release.properties"/>
-
-    <taskdef name="jarbundler"
-             classpath="./tools/jarbundler-2.2.0.jar"
-             classname="net.sourceforge.jarbundler.JarBundler"/>
-
-    <jarbundler dir="${basedir}/out/" verbose="false" showPlist="false"
-                name="${ant.project.name}"
-                mainclass="com.unhappyrobot.DesktopGame"
-                jar="${build.dir}/${ant.project.name}-release.jar"
-                icon="icons/${ant.project.name}.icns"
-                version="${project.version}"/>
-
-    <delete dir="${artifacts.temp.dir}"/>
-  </target>
-
-  <property name="launch4j.dir" location="./tools/launch4j"/>
-
-  <target name="exe" depends="build" description="Build a Windows target">
-    <property file="release.properties"/>
-
-    <taskdef name="launch4j"
-             classname="net.sf.launch4j.ant.Launch4jTask"
-             classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar"/>
-
-    <launch4j configfile="./desktop/targets/windows/config.xml"/>
-  </target>
-
-  <target name="build-all-platforms" depends="clean,exe,osx">
-    <delete file="${basedir}/out/${ant.project.name}.zip" failonerror="false"/>
-    <exec executable="zip" dir="${basedir}/out" output="/dev/null">
-      <arg value="-rX"/>
-      <arg value="DroidTowers.zip"/>
-      <arg value="DroidTowers.app"/>
-    </exec>
-  </target>
 </project>

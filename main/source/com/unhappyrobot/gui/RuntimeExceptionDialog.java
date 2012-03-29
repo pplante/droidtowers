@@ -3,9 +3,14 @@ package com.unhappyrobot.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.unhappyrobot.TowerConsts;
+import com.unhappyrobot.TowerGame;
 
 public class RuntimeExceptionDialog extends Dialog {
   private static final String TAG = RuntimeExceptionDialog.class.getSimpleName();
+
+  public RuntimeExceptionDialog(Throwable error) {
+    this(TowerGame.getRootUiStage(), error);
+  }
 
   public RuntimeExceptionDialog(Stage stage, Throwable error) {
     super(stage);

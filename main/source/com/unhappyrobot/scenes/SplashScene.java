@@ -41,12 +41,12 @@ public class SplashScene extends Scene {
 
   @Override
   public void render(float deltaTime) {
-    TowerAssetManager.assetManager().update();
+    boolean assetManagerFinished = TowerAssetManager.assetManager().update();
 
     String progressText = String.format("%.1f%%", (TowerAssetManager.assetManager().getProgress() * 100f));
     progressBar.setText(progressText);
 
-    if (TowerAssetManager.assetManager().getProgress() == 1.0f) {
+    if (assetManagerFinished) {
       TowerGame.changeScene(MainMenuScene.class);
     }
   }

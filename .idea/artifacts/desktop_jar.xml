@@ -4,7 +4,6 @@
     <root id="archive" name="desktop.jar">
       <element id="module-output" name="desktop" />
       <element id="module-output" name="main" />
-      <element id="dir-copy" path="$PROJECT_DIR$/android/assets" />
       <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/gdx.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/desktop/libs/main/gdx-natives.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/desktop/libs/main/gdx-backend-lwjgl.jar" path-in-jar="/" />
@@ -23,6 +22,7 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/httpcore-4.1.4.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/httpmime-4.1.3.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/guava-11.0.2.jar" path-in-jar="/" />
+      <element id="dir-copy" path="$PROJECT_DIR$/android/assets" />
     </root>
   </artifact>
 </component>

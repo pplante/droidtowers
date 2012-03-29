@@ -24,6 +24,7 @@ public class LoadGameWindow extends TowerWindow {
     FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
     FileHandle[] files = storage.list();
 
+
     Table gameFiles = new Table();
     gameFiles.defaults();
 
@@ -38,7 +39,9 @@ public class LoadGameWindow extends TowerWindow {
       gameFiles.add(LabelStyle.Default.makeLabel("No saved games were found on this device."));
     }
 
-    add(gameFiles).fill();
+    WheelScrollFlickScrollPane scrollPane = new WheelScrollFlickScrollPane();
+    scrollPane.setWidget(gameFiles);
+    add(scrollPane).maxWidth(500).maxHeight(300).minWidth(400);
   }
 
   private Table makeGameFileRow(final FileHandle gameSave) {

@@ -16,7 +16,6 @@ import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.actions.ActionManager;
 import com.unhappyrobot.controllers.PathSearchManager;
 import com.unhappyrobot.entities.GameObject;
-import com.unhappyrobot.gamestate.server.CrashReport;
 import com.unhappyrobot.gamestate.server.HappyDroidService;
 import com.unhappyrobot.gui.*;
 import com.unhappyrobot.input.CameraController;
@@ -126,46 +125,39 @@ public class TowerGame implements ApplicationListener {
 
 
   public void render() {
-    try {
-      TowerAssetManager.assetManager().update();
+    Gdx.gl.glClearColor(0.48f, 0.729f, 0.870f, 1.0f);
+    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
+    Gdx.gl.glEnable(GL10.GL_BLEND);
+    Gdx.gl.glEnable(GL10.GL_TEXTURE_2D);
 
-      Gdx.gl.glClearColor(0.48f, 0.729f, 0.870f, 1.0f);
-      Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
-      Gdx.gl.glEnable(GL10.GL_BLEND);
-      Gdx.gl.glEnable(GL10.GL_TEXTURE_2D);
+    float deltaTime = Gdx.graphics.getDeltaTime();
 
-      float deltaTime = Gdx.graphics.getDeltaTime();
+    camera.update();
+    ActionManager.instance().update(deltaTime);
+    InputSystem.instance().update(deltaTime);
+    PathSearchManager.instance().update(deltaTime);
+    TweenSystem.getTweenManager().update((int) (deltaTime * 1000 * activeScene.getTimeMultiplier()));
 
-      camera.update();
-      ActionManager.instance().update(deltaTime);
-      InputSystem.instance().update(deltaTime);
-      PathSearchManager.instance().update(deltaTime);
-      TweenSystem.getTweenManager().update((int) (deltaTime * 1000 * activeScene.getTimeMultiplier()));
+    spriteBatch.setProjectionMatrix(camera.combined);
 
-      spriteBatch.setProjectionMatrix(camera.combined);
+    activeScene.render(deltaTime);
+    activeScene.getStage().act(deltaTime);
+    activeScene.getStage().draw();
 
-      activeScene.render(deltaTime);
-      activeScene.getStage().act(deltaTime);
-      activeScene.getStage().draw();
+    rootUiStage.act(deltaTime);
+    rootUiStage.draw();
 
-      rootUiStage.act(deltaTime);
-      rootUiStage.draw();
+    if (TowerConsts.DEBUG) {
+      Table.drawDebug(activeScene.getStage());
+      Table.drawDebug(rootUiStage);
 
-      if (TowerConsts.DEBUG) {
-        Table.drawDebug(activeScene.getStage());
-        Table.drawDebug(rootUiStage);
+      float javaHeapInBytes = Gdx.app.getJavaHeap() / TowerConsts.ONE_MEGABYTE;
+      float nativeHeapInBytes = Gdx.app.getNativeHeap() / TowerConsts.ONE_MEGABYTE;
 
-        float javaHeapInBytes = Gdx.app.getJavaHeap() / TowerConsts.ONE_MEGABYTE;
-        float nativeHeapInBytes = Gdx.app.getNativeHeap() / TowerConsts.ONE_MEGABYTE;
-
-        String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f)\nmem: (java %.1f Mb, native %.1f Mb)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom, javaHeapInBytes, nativeHeapInBytes);
-        spriteBatch.begin();
-        menloBitmapFont.drawMultiLine(spriteBatch, infoText, 5, 35);
-        spriteBatch.end();
-      }
-    } catch (RuntimeException e) {
-      new CrashReport(e).save();
-      new RuntimeExceptionDialog(rootUiStage, e).show();
+      String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f)\nmem: (java %.1f Mb, native %.1f Mb)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom, javaHeapInBytes, nativeHeapInBytes);
+      spriteBatch.begin();
+      menloBitmapFont.drawMultiLine(spriteBatch, infoText, 5, 35);
+      spriteBatch.end();
     }
   }
 
@@ -190,11 +182,11 @@ public class TowerGame implements ApplicationListener {
 
   public void dispose() {
     spriteBatch.dispose();
-    TowerAssetManager.reset();
-
     for (LabelStyle labelStyle : LabelStyle.values()) {
       labelStyle.reset();
     }
+    BackgroundTask.dispose();
+    TowerAssetManager.reset();
   }
 
   public static void changeScene(Class<? extends Scene> sceneClass, Object... args) {
