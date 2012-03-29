@@ -4,13 +4,13 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 
 public class TowerConsts {
-  public static boolean DEBUG = false;
+  public static boolean DEBUG = true;
   public static String VERSION = "v0.10.41";
   public static String GIT_SHA = "554972c";
-  public static final String HAPPYDROIDS_SERVER = "www.happydroids.com";
+  public static final String HAPPYDROIDS_SERVER = "local.happydroids.com";
   public static final String HAPPYDROIDS_URI = "http://" + HAPPYDROIDS_SERVER;
 
-  public static boolean ENABLE_HAPPYDROIDS_CONNECT = false;
+  public static boolean ENABLE_HAPPYDROIDS_CONNECT = true;
 
   public static final float ONE_MEGABYTE = 1048576.0f;
 
