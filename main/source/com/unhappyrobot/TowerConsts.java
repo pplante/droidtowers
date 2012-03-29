@@ -4,9 +4,9 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 
 public class TowerConsts {
-  public static boolean DEBUG = true;
-  public static String VERSION = "v0.10.39";
-  public static String GIT_SHA = "e045519";
+  public static boolean DEBUG = false;
+  public static String VERSION = "v0.10.40";
+  public static String GIT_SHA = "d0efb9b";
   public static final String HAPPYDROIDS_SERVER = "www.happydroids.com";
   public static final String HAPPYDROIDS_URI = "http://" + HAPPYDROIDS_SERVER;
 
