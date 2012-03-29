@@ -6,7 +6,9 @@
     "coins":5000,
     "experienceAward":1000,
     "height":1,
-    "width":4
+    "width":4,
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"4x1-lobby"
   },
   {
     "name":"Small Apartment",

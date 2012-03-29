@@ -4,7 +4,7 @@ filter: MipMapNearestNearest,Linear
 repeat: none
 2x1-sushi
   rotate: false
-  xy: 0, 320
+  xy: 384, 192
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
@@ -18,43 +18,71 @@ repeat: none
   index: -1
 3x1-burger-joint
   rotate: false
-  xy: 0, 128
+  xy: 192, 128
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
 3x1-small-apartment
   rotate: false
-  xy: 0, 256
+  xy: 192, 192
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
-4x1-large-condo
+generic_room_2x
+  rotate: false
+  xy: 384, 128
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: 1
+generic_room_3x
+  rotate: false
+  xy: 256, 64
+  size: 192, 64
+  orig: 192, 64
+  offset: 0, 0
+  index: 1
+generic_room_4x
   rotate: false
   xy: 0, 0
+  size: 256, 64
+  orig: 256, 64
+  offset: 0, 0
+  index: 1
+4x1-large-condo
+  rotate: false
+  xy: 0, 64
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
 2x1-hotel-room
   rotate: false
-  xy: 0, 384
+  xy: 0, 320
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 3x1-pizza-place
   rotate: false
-  xy: 0, 64
+  xy: 0, 128
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
 2x1-bar
   rotate: false
-  xy: 128, 320
+  xy: 0, 256
   size: 128, 64
   orig: 128, 64
+  offset: 0, 0
+  index: -1
+4x1-lobby
+  rotate: false
+  xy: 256, 0
+  size: 256, 64
+  orig: 256, 64
   offset: 0, 0
   index: -1

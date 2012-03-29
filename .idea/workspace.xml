@@ -19,15 +19,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManager.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets-raw/texturepacker/housing.tps" afterPath="$PROJECT_DIR$/android/assets-raw/texturepacker/housing.tps" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/rooms/housing.png" afterPath="$PROJECT_DIR$/android/assets/rooms/housing.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/params/rooms.json" afterPath="$PROJECT_DIR$/android/assets/params/rooms.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/rooms/housing.txt" afterPath="$PROJECT_DIR$/android/assets/rooms/housing.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/TemporaryToken.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/TemporaryToken.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ConnectToHappyDroidsWindow.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ConnectToHappyDroidsWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/PeriodicBackgroundTask.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/PeriodicBackgroundTask.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -118,10 +114,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ConnectToHappyDroidsWindow.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ConnectToHappyDroidsWindow.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ConnectToHappyDroidsWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="36" selection-start="3990" selection-end="3990" vertical-scroll-proportion="0.88786954">
+            <state line="96" column="36" selection-start="3990" selection-end="3990" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2233#2430#0" expanded="true" />
@@ -131,6 +127,15 @@
                 <element signature="e#3907#4020#0" expanded="true" />
                 <element signature="e#4009#4010#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rooms.json" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/android/assets/params/rooms.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="30" selection-start="230" selection-end="230" vertical-scroll-proportion="0.22132796">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -191,7 +196,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LoadGameWindow.java" />
         <option value="$PROJECT_DIR$/build2.xml" />
         <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/desktop/targets/windows/config.xml" />
@@ -207,6 +211,7 @@
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceObject.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ConnectToHappyDroidsWindow.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/PeriodicBackgroundTask.java" />
+        <option value="$PROJECT_DIR$/android/assets/params/rooms.json" />
       </list>
     </option>
   </component>
@@ -1498,13 +1503,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LoadGameWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="51" selection-start="1998" selection-end="1998" vertical-scroll-proportion="0.44668007">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/assets/AssetManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="487" column="6" selection-start="18451" selection-end="18513" vertical-scroll-proportion="0.44366196">
@@ -1614,7 +1612,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ConnectToHappyDroidsWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="36" selection-start="3990" selection-end="3990" vertical-scroll-proportion="0.88786954">
+        <state line="96" column="36" selection-start="3990" selection-end="3990" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2233#2430#0" expanded="true" />
@@ -1624,6 +1622,13 @@
             <element signature="e#3907#4020#0" expanded="true" />
             <element signature="e#4009#4010#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/assets/params/rooms.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="30" selection-start="230" selection-end="230" vertical-scroll-proportion="0.22132796">
+          <folding />
         </state>
       </provider>
     </entry>
