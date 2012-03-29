@@ -90,31 +90,35 @@ public abstract class HappyDroidServiceObject {
   }
 
   @SuppressWarnings("unchecked")
-  public void save(ApiRunnable afterSave) {
-    if (!HappyDroidService.instance().haveNetworkConnection()) {
-      afterSave.onError(null, HttpStatusCode.ClientClosedRequest, this);
-      return;
-    } else if (requireAuthentication() && !HappyDroidService.instance().hasAuthenticated()) {
-      afterSave.onError(null, HttpStatusCode.NetworkAuthenticationRequired, this);
-      return;
-    }
-
-    HttpResponse response;
-    if (resourceUri == null) {
-      response = HappyDroidService.instance().makePostRequest(getResourceBaseUri(), this);
-      if (response != null && response.getStatusLine().getStatusCode() == 201) {
-        Header location = Iterables.getFirst(Lists.newArrayList(response.getHeaders("Location")), null);
-        if (location != null) {
-          resourceUri = location.getValue();
+  public void save(final ApiRunnable afterSave) {
+    HappyDroidService.instance().withNetworkConnection(new Runnable() {
+      public void run() {
+        if (!HappyDroidService.instance().haveNetworkConnection()) {
+          afterSave.onError(null, HttpStatusCode.ClientClosedRequest, HappyDroidServiceObject.this);
+          return;
+        } else if (requireAuthentication() && !HappyDroidService.instance().hasAuthenticated()) {
+          afterSave.onError(null, HttpStatusCode.NetworkAuthenticationRequired, HappyDroidServiceObject.this);
+          return;
         }
 
-        copyValuesFromResponse(response);
-      }
-    } else {
-      response = HappyDroidService.instance().makePutRequest(resourceUri, this);
-    }
+        HttpResponse response;
+        if (resourceUri == null) {
+          response = HappyDroidService.instance().makePostRequest(getResourceBaseUri(), HappyDroidServiceObject.this);
+          if (response != null && response.getStatusLine().getStatusCode() == 201) {
+            Header location = Iterables.getFirst(Lists.newArrayList(response.getHeaders("Location")), null);
+            if (location != null) {
+              resourceUri = location.getValue();
+            }
 
-    afterSave.handleResponse(response, this);
+            copyValuesFromResponse(response);
+          }
+        } else {
+          response = HappyDroidService.instance().makePutRequest(resourceUri, HappyDroidServiceObject.this);
+        }
+
+        afterSave.handleResponse(response, HappyDroidServiceObject.this);
+      }
+    });
   }
 
   private void copyValuesFromResponse(HttpResponse response) {

@@ -20,7 +20,7 @@ public class TowerAssetManager {
     if (assetManager == null) {
       assetManager = new AssetManager();
       if (TowerConsts.DEBUG) {
-        assetManager.getLogger().setLevel(Logger.DEBUG);
+        assetManager.getLogger().setLevel(Logger.ERROR);
       }
 
       Texture.setAssetManager(assetManager);

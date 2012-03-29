@@ -9,12 +9,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.TowerGame;
+import com.unhappyrobot.gamestate.server.ApiRunnable;
 import com.unhappyrobot.gamestate.server.HappyDroidService;
+import com.unhappyrobot.gamestate.server.HappyDroidServiceObject;
 import com.unhappyrobot.gamestate.server.TemporaryToken;
 import com.unhappyrobot.utils.PeriodicBackgroundTask;
+import org.apache.http.HttpResponse;
 
 public class ConnectToHappyDroidsWindow extends TowerWindow {
   private static final String TAG = ConnectToHappyDroidsWindow.class.getSimpleName();
+  private TemporaryToken token;
+  private PeriodicBackgroundTask periodicBackgroundTask;
 
   public ConnectToHappyDroidsWindow(Stage stage, Skin skin) {
     super("Connect to Facebook", stage, skin);
@@ -34,61 +39,65 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
     sessionStatus.visible = false;
     add(sessionStatus);
 
-    if (HappyDroidService.instance().getSessionToken() == null) {
-      new PeriodicBackgroundTask(TowerConsts.FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK) {
-        private TemporaryToken token;
-
-        @Override
-        public synchronized void beforeExecute() {
-          token = new TemporaryToken();
-          token.save();
-          if (!token.isSaved()) {
-            new Dialog().setMessage("Could not contact happydroids.com, please check that you have internet access and try again.").addButton("Dismiss", new OnClickCallback() {
-              @Override
-              public void onClick(Dialog dialog) {
-                dialog.dismiss();
-                ConnectToHappyDroidsWindow.this.dismiss();
-              }
-            });
-
-            cancel();
+    token = new TemporaryToken();
+    token.save(new ApiRunnable() {
+      @Override
+      public void onError(HttpResponse response, int statusCode, HappyDroidServiceObject object) {
+        new Dialog().setMessage("Could not contact happydroids.com, please check that you have internet access and try again.\n\nERROR:ETFAIL2FONHOME").addButton("Dismiss", new OnClickCallback() {
+          @Override
+          public void onClick(Dialog dialog) {
+            dialog.dismiss();
+            ConnectToHappyDroidsWindow.this.dismiss();
           }
-          codeLabel.setText("CODE: " + token.getValue());
-          sessionStatus.visible = true;
+        }).show();
+      }
 
-          codeLabel.setClickListener(new ClickListener() {
-            public void click(Actor actor, float x, float y) {
-              String uri = token.getClickableUri();
+      @Override
+      public void onSuccess(HttpResponse response, HappyDroidServiceObject object) {
+        codeLabel.setText("CODE: " + token.getValue());
+        sessionStatus.visible = true;
 
-              TowerGame.getPlatformBrowserUtil().launchWebBrowser(uri);
+        codeLabel.setClickListener(new ClickListener() {
+          public void click(Actor actor, float x, float y) {
+            String uri = token.getClickableUri();
+
+            TowerGame.getPlatformBrowserUtil().launchWebBrowser(uri);
+          }
+        });
+
+        periodicBackgroundTask = new PeriodicBackgroundTask(TowerConsts.FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK) {
+          @Override
+          public boolean update() {
+            if (token == null) return false;
+            try {
+              token.validate();
+              System.out.println("token = " + token);
+              return !token.hasSessionToken();
+            } catch (RuntimeException e) {
+              Gdx.app.error(TAG, "Error validating the temporary token.", e);
             }
-          });
-        }
 
-        @Override
-        public boolean update() {
-          if (token == null) return false;
-          try {
-            token.validate();
-            System.out.println("token = " + token);
-            return !token.hasSessionToken();
-          } catch (RuntimeException e) {
-            Gdx.app.error(TAG, "Error validating the temporary token.", e);
+            return false;
           }
 
-          return false;
-        }
-
-        @Override
-        public synchronized void afterExecute() {
-          if (token != null && token.hasSessionToken()) {
-            sessionStatus.setText("Login successful!");
-            HappyDroidService.instance().setSessionToken(token.getSessionToken());
-          } else {
-            sessionStatus.setText("Login failed!");
+          @Override
+          public synchronized void afterExecute() {
+            if (token != null && token.hasSessionToken()) {
+              sessionStatus.setText("Login successful!");
+              HappyDroidService.instance().setSessionToken(token.getSessionToken());
+            } else {
+              sessionStatus.setText("Login failed!");
+            }
           }
-        }
-      }.run();
-    }
+        };
+        periodicBackgroundTask.run();
+
+        setDismissCallback(new Runnable() {
+          public void run() {
+            periodicBackgroundTask.cancel();
+          }
+        });
+      }
+    });
   }
 }

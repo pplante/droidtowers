@@ -5,6 +5,7 @@ import static java.lang.Thread.yield;
 
 public abstract class PeriodicBackgroundTask extends BackgroundTask {
   private final long updateFrequency;
+  private boolean canceled;
 
   protected PeriodicBackgroundTask(long updateFrequency) {
     super();
@@ -14,7 +15,7 @@ public abstract class PeriodicBackgroundTask extends BackgroundTask {
 
   @Override
   public final void execute() {
-    while (update()) {
+    while (update() && !canceled) {
       try {
         System.out.println("updateFrequency = " + updateFrequency);
         sleep(updateFrequency);
@@ -26,7 +27,7 @@ public abstract class PeriodicBackgroundTask extends BackgroundTask {
 
   public abstract boolean update();
 
-  protected void cancel() {
-    thread.interrupt();
+  public void cancel() {
+    canceled = true;
   }
 }

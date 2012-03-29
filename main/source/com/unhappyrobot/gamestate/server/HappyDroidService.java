@@ -59,16 +59,25 @@ public class HappyDroidService {
   }
 
   public void registerDevice() {
-    Device device = new Device();
-    device.save(new ApiRunnable<Device>() {
-      @Override
-      public void onSuccess(HttpResponse response, Device object) {
-        isAuthenticated = object.isAuthenticated;
+    withNetworkConnection(new Runnable() {
+      public void run() {
+        Device device = new Device();
+        device.save(new ApiRunnable<Device>() {
+          @Override
+          public void onError(HttpResponse response, int statusCode, Device object) {
+            Gdx.app.error(TAG, "Error registering device :(, status: " + statusCode);
+          }
 
-        if (!isAuthenticated) {
-          preferences.remove("SESSION_TOKEN");
-          preferences.flush();
-        }
+          @Override
+          public void onSuccess(HttpResponse response, Device object) {
+            isAuthenticated = object.isAuthenticated;
+
+            if (!isAuthenticated) {
+              preferences.remove("SESSION_TOKEN");
+              preferences.flush();
+            }
+          }
+        });
       }
     });
   }

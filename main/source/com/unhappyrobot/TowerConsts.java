@@ -4,7 +4,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 
 public class TowerConsts {
-  public static boolean DEBUG = false;
+  public static boolean DEBUG = true;
   public static String VERSION = "v0.10.42";
   public static String GIT_SHA = "b22bdd0";
   public static final String HAPPYDROIDS_SERVER = "www.happydroids.com";

@@ -11,10 +11,6 @@ public class TemporaryToken extends HappyDroidServiceObject {
   private String clickableUri;
   private SessionToken session;
 
-  public void setResourceUri(String uri) {
-    resourceUri = uri;
-  }
-
   @Override
   protected String getResourceBaseUri() {
     return TowerConsts.HAPPYDROIDS_URI + "/api/v1/temporarytoken/";
