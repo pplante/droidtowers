@@ -76,7 +76,7 @@ if __name__ == '__main__':
         git.commit(a=True, m='Artifacts from release-%s' % (new_build_number,))
         git.tag('release-%s' % (new_build_number,))
 
-        ant('build-alpha', _fg=True)
+        ant('build-all-platforms', _fg=True)
 
         upload = scp.bake(i='/Users/pplante/.ssh/id_rsa', _fg=True)
 

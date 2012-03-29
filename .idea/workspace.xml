@@ -19,29 +19,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="switched to using the asset manager for all assets.&#10;added platform specific clases for uncaught exceptions and browser utils">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/templates/TowerAssetManagerFilesList-template.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManagerFilesList.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/platform/HappyDroidUncaughtExceptionHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pipeline/pipeline.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pipeline/src/com/unhappyrobot/pipeline/GenerateAssetManagerFileList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/desktop_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/desktop_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/source/com/unhappyrobot/platform/AndroidUncaughtExceptionHandler.java" afterPath="$PROJECT_DIR$/android/source/com/unhappyrobot/platform/AndroidUncaughtExceptionHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/platform/DesktopUncaughtExceptionHandler.java" afterPath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/platform/DesktopUncaughtExceptionHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/targets/windows/config.xml" afterPath="$PROJECT_DIR$/desktop/targets/windows/config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/idea-build.properties" afterPath="$PROJECT_DIR$/idea-build.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/idea-build.xml" afterPath="$PROJECT_DIR$/idea-build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManager.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CrashReport.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CrashReport.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LoadGameWindow.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LoadGameWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/RuntimeExceptionDialog.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/RuntimeExceptionDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashScene.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/BackgroundTask.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/BackgroundTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-release.py" afterPath="$PROJECT_DIR$/build-release.py" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -145,10 +123,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LoadGameWindow.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LoadGameWindow.java">
+      <file leaf-file-name="build-release.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build-release.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="51" selection-start="1998" selection-end="1998" vertical-scroll-proportion="0.44668007">
+            <state line="78" column="32" selection-start="3149" selection-end="3149" vertical-scroll-proportion="0.60160965">
               <folding />
             </state>
           </provider>
@@ -167,7 +145,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManagerFilesList.java" />
         <option value="$PROJECT_DIR$/android/assets-raw/templates/TowerAssetManagerFilesList-template.java" />
@@ -183,6 +160,7 @@
         <option value="$PROJECT_DIR$/build2.xml" />
         <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/desktop/targets/windows/config.xml" />
+        <option value="$PROJECT_DIR$/build-release.py" />
       </list>
     </option>
   </component>
@@ -1470,15 +1448,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pipeline/src/com/unhappyrobot/pipeline/GenerateAssetManagerFileList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/sun/misc/Unsafe.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="295" column="21" selection-start="8676" selection-end="8676" vertical-scroll-proportion="0.8465116" />
@@ -1576,6 +1545,13 @@
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LoadGameWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="61" column="51" selection-start="1998" selection-end="1998" vertical-scroll-proportion="0.44668007">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build-release.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="78" column="32" selection-start="3149" selection-end="3149" vertical-scroll-proportion="0.60160965">
           <folding />
         </state>
       </provider>
