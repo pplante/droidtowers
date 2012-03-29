@@ -143,7 +143,6 @@ public class TowerScene extends Scene {
   public void pause() {
     gameState.saveGame(true);
     gridSoundDispatcher.setGameGrid(null);
-    throw new RuntimeException("WTFBBQ!");
   }
 
   @Override

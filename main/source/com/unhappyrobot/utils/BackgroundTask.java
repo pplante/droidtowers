@@ -1,14 +1,18 @@
 package com.unhappyrobot.utils;
 
+import com.badlogic.gdx.Gdx;
 import com.unhappyrobot.TowerGame;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 
 public abstract class BackgroundTask {
-  protected Thread thread;
+  private static final String TAG = BackgroundTask.class.getSimpleName();
   protected static ExecutorService threadPool;
+
+  protected Thread thread;
 
   static {
     threadPool = Executors.newFixedThreadPool(1, new ThreadFactory() {
@@ -47,6 +51,11 @@ public abstract class BackgroundTask {
   public static void dispose() {
     if (threadPool != null) {
       threadPool.shutdown();
+      Gdx.app.debug(TAG, "Shutting down background tasks...");
+      try {
+        threadPool.awaitTermination(5, TimeUnit.SECONDS);
+      } catch (InterruptedException ignored) {
+      }
     }
   }
 }

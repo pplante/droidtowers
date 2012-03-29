@@ -19,7 +19,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="switched to using the asset manager for all assets.&#10;added platform specific clases for uncaught exceptions and browser utils">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-release.py" afterPath="$PROJECT_DIR$/build-release.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/TowerScene.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/TowerScene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/BackgroundTask.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/BackgroundTask.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -122,17 +125,7 @@
     <favorites_list name="testgame" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="build-release.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/build-release.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="32" selection-start="3149" selection-end="3149" vertical-scroll-proportion="0.60160965">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -145,22 +138,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManagerFilesList.java" />
         <option value="$PROJECT_DIR$/android/assets-raw/templates/TowerAssetManagerFilesList-template.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/platform/HappyDroidUncaughtExceptionHandler.java" />
-        <option value="$PROJECT_DIR$/desktop/source/com/unhappyrobot/platform/DesktopUncaughtExceptionHandler.java" />
         <option value="$PROJECT_DIR$/android/source/com/unhappyrobot/platform/AndroidUncaughtExceptionHandler.java" />
         <option value="$PROJECT_DIR$/pipeline/src/GenerateAssetManagerFileList.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/GameState.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManager.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/BackgroundTask.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LoadGameWindow.java" />
         <option value="$PROJECT_DIR$/build2.xml" />
         <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/desktop/targets/windows/config.xml" />
         <option value="$PROJECT_DIR$/build-release.py" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/BackgroundTask.java" />
+        <option value="$PROJECT_DIR$/desktop/source/com/unhappyrobot/platform/DesktopUncaughtExceptionHandler.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/TowerScene.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
       </list>
     </option>
   </component>
@@ -1314,7 +1307,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="2560" height="1414" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3257403" sideWeight="0.9677548" order="7" side_tool="false" content_ui="tabs" />
@@ -1336,7 +1329,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283046" sideWeight="0.7441154" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39853895" sideWeight="0.7441154" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2356688" sideWeight="0.7752468" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22475323" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22475323" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32975337" sideWeight="0.649962" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1448,58 +1441,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/sun/misc/Unsafe.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="295" column="21" selection-start="8676" selection-end="8676" vertical-scroll-proportion="0.8465116" />
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Object.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="27" selection-start="684" selection-end="684" vertical-scroll-proportion="0.40930232" />
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/concurrent/ExecutorService.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="17" selection-start="162" selection-end="162" vertical-scroll-proportion="0.06891151" />
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/concurrent/TimeUnit.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="127" selection-start="304" selection-end="304" vertical-scroll-proportion="0.11213048">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/assets/AssetManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="487" column="61" selection-start="18506" selection-end="18506" vertical-scroll-proportion="0.44366196">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="30" selection-start="1960" selection-end="1960" vertical-scroll-proportion="0.77867204">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/utils/BackgroundTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="5" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.889336">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="183" column="26" selection-start="6474" selection-end="6474" vertical-scroll-proportion="0.61875635">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/GameState.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="83" column="46" selection-start="2845" selection-end="2845" vertical-scroll-proportion="0.026156941">
@@ -1552,6 +1493,66 @@
     <entry file="file://$PROJECT_DIR$/build-release.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="78" column="32" selection-start="3149" selection-end="3149" vertical-scroll-proportion="0.60160965">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="21" selection-start="1951" selection-end="1951" vertical-scroll-proportion="0.77867204">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/assets/AssetManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="487" column="6" selection-start="18451" selection-end="18513" vertical-scroll-proportion="0.44366196">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="54" selection-start="302" selection-end="302" vertical-scroll-proportion="0.17706238">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/concurrent/ExecutorService.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="37" selection-start="280" selection-end="280" vertical-scroll-proportion="0.17940877">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desktop/source/com/unhappyrobot/platform/DesktopUncaughtExceptionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="19" selection-start="632" selection-end="632" vertical-scroll-proportion="0.28772637">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/utils/BackgroundTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="33" selection-start="969" selection-end="969" vertical-scroll-proportion="0.2917505">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1070#1194#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/TowerScene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="144" column="42" selection-start="5494" selection-end="5494" vertical-scroll-proportion="0.55331993">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="188" column="22" selection-start="6615" selection-end="6615" vertical-scroll-proportion="0.5963303">
           <folding />
         </state>
       </provider>
