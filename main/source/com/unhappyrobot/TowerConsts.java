@@ -5,8 +5,8 @@ import com.badlogic.gdx.Gdx;
 
 public class TowerConsts {
   public static boolean DEBUG = false;
-  public static String VERSION = "v0.10.40";
-  public static String GIT_SHA = "d0efb9b";
+  public static String VERSION = "v0.10.41";
+  public static String GIT_SHA = "554972c";
   public static final String HAPPYDROIDS_SERVER = "www.happydroids.com";
   public static final String HAPPYDROIDS_URI = "http://" + HAPPYDROIDS_SERVER;
 
