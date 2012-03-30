@@ -3,6 +3,9 @@
 import re
 import sys
 import semver
+import requests
+import json
+from getpass import getpass
 from pbs import git, ant, scp, pwd
 
 SCP_TARGET_PATH = 'pplante@happydroids.com:/var/www/happydroids.com/public/alphas'
@@ -92,7 +95,30 @@ if __name__ == '__main__':
             tower_consts)
         with open(TOWER_CONSTS_JAVA, 'w') as fp:
             fp.write(tower_consts)
+        
+        
+        notes = unicode(git.log('--no-decorate', '--pretty=format:[%h]  %s', '--no-merges', 'release-v%s..' % (previous_build_number,)))
 
+        blob = json.dumps(dict(
+            version=new_build_number,
+            git_sha=revision,
+            released_on=datetime.now().isoformat(),
+            notes=notes
+        ))
+
+        headers = {'content-type': 'application/json'}
+
+        r = requests.post('http://www.happydroids.com/api/v1/gameupdate/?format=json', auth=('pplante', getpass('Please enter password for game update: ')), data=blob, headers=headers)
+
+        if r.status_code == 201:
+            print 'Game update successfully posted!'
+            print r.headers['location']
+        else:
+            print 'Failure posting game update:'
+            print r.status_code
+            print r.text
+        
+        
     except Exception, e:
         print e
         sys.exit(1)

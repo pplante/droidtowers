@@ -20,7 +20,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Lobby.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Lobby.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Device.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Device.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -111,31 +111,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Room.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java">
+      <file leaf-file-name="HappyDroidService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="72" column="53" selection-start="2519" selection-end="2519" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Lobby.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Lobby.java">
+      <file leaf-file-name="build-release.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build-release.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="25" selection-start="1001" selection-end="1001" vertical-scroll-proportion="0.5975855">
+            <state line="2" column="0" selection-start="24" selection-end="24" vertical-scroll-proportion="0.044265594">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GridObjectType.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java">
+      <file leaf-file-name="Device.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Device.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="13" selection-start="3236" selection-end="3236" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="10" column="32" selection-start="302" selection-end="302" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -153,12 +151,10 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/build-release.py" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/TemporaryToken.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManager.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceObject.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/PeriodicBackgroundTask.java" />
         <option value="$PROJECT_DIR$/android/assets/params/rooms.json" />
@@ -169,6 +165,8 @@
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Lobby.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Device.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java" />
       </list>
     </option>
   </component>
@@ -1229,7 +1227,11 @@
       <created>1333093856535</created>
       <updated>1333093856535</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="added new art for the lobby">
+      <created>1333093881780</created>
+      <updated>1333093881780</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1388,21 +1390,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LoadGameWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="7" selection-start="577" selection-end="577" vertical-scroll-proportion="0.068217054" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/TowerScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="33" selection-start="4325" selection-end="4325" vertical-scroll-proportion="0.23100775" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/ServiceRoom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="136" selection-end="136" vertical-scroll-proportion="0.068217054" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="23" column="22" selection-start="843" selection-end="843" vertical-scroll-proportion="0.068217054" />
@@ -1454,22 +1441,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="13" selection-start="3236" selection-end="3236" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridPositionCache.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="30" selection-start="655" selection-end="655" vertical-scroll-proportion="0.11066398">
@@ -1479,7 +1450,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Lobby.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="25" selection-start="1001" selection-end="1001" vertical-scroll-proportion="0.5975855">
+        <state line="22" column="57" selection-start="748" selection-end="748" vertical-scroll-proportion="0.33199194">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="127" column="13" selection-start="3236" selection-end="3236" vertical-scroll-proportion="0.4024145">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Device.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="32" selection-start="302" selection-end="302" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="53" selection-start="2519" selection-end="2519" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build-release.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="24" selection-end="24" vertical-scroll-proportion="0.044265594">
           <folding />
         </state>
       </provider>

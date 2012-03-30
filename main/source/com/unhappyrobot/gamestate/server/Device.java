@@ -6,12 +6,15 @@ public class Device extends HappyDroidServiceObject {
   public String uuid;
   public String type;
   public String osVersion;
+  private String appVersion;
   public boolean isAuthenticated;
+  public boolean updateAvailable;
 
   public Device() {
     uuid = HappyDroidService.instance().getDeviceId();
     type = HappyDroidService.getDeviceType();
     osVersion = HappyDroidService.getDeviceOSVersion();
+    appVersion = TowerConsts.VERSION;
   }
 
   @Override
