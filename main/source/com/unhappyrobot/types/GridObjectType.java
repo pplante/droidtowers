@@ -30,6 +30,7 @@ public abstract class GridObjectType {
 
   @JsonIgnore
   private static WeakHashMap<String, TextureAtlas> atlases;
+  private TextureAtlas textureAtlas;
 
   public abstract GridObject makeGridObject(GameGrid gameGrid);
 
@@ -116,20 +117,26 @@ public abstract class GridObjectType {
 
   public TextureRegion getTextureRegion() {
     if (atlasFilename != null) {
-      if (atlases == null) {
-        atlases = new WeakHashMap<String, TextureAtlas>();
-      }
-
-      TextureAtlas objectAtlas = atlases.get(atlasFilename);
-      if (objectAtlas == null) {
-        objectAtlas = TowerAssetManager.textureAtlas(atlasFilename);
-        atlases.put(atlasFilename, objectAtlas);
-      }
+      TextureAtlas objectAtlas = getTextureAtlas();
 
       return objectAtlas.findRegion(imageFilename);
     }
 
     return null;
+  }
+
+  @JsonIgnore
+  public TextureAtlas getTextureAtlas() {
+    if (atlases == null) {
+      atlases = new WeakHashMap<String, TextureAtlas>();
+    }
+
+    TextureAtlas objectAtlas = atlases.get(atlasFilename);
+    if (objectAtlas == null) {
+      objectAtlas = TowerAssetManager.textureAtlas(atlasFilename);
+      atlases.put(atlasFilename, objectAtlas);
+    }
+    return objectAtlas;
   }
 
   public boolean isLocked() {

@@ -16,6 +16,20 @@ repeat: none
   orig: 192, 64
   offset: 0, 0
   index: -1
+lobby-left
+  rotate: false
+  xy: 0, 384
+  size: 36, 64
+  orig: 36, 64
+  offset: 0, 0
+  index: -1
+lobby-right
+  rotate: false
+  xy: 448, 64
+  size: 36, 64
+  orig: 36, 64
+  offset: 0, 0
+  index: -1
 3x1-burger-joint
   rotate: false
   xy: 192, 128

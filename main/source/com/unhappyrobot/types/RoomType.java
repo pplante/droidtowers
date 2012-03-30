@@ -1,10 +1,7 @@
 package com.unhappyrobot.types;
 
 import com.unhappyrobot.TowerConsts;
-import com.unhappyrobot.entities.Elevator;
-import com.unhappyrobot.entities.GridObject;
-import com.unhappyrobot.entities.Room;
-import com.unhappyrobot.entities.Stair;
+import com.unhappyrobot.entities.*;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridPositionCache;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
@@ -20,6 +17,10 @@ public class RoomType extends GridObjectType {
 
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {
+    if (isLobby) {
+      return new Lobby(this, gameGrid);
+    }
+
     return new Room(this, gameGrid);
   }
 
