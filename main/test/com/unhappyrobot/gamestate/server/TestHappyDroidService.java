@@ -62,4 +62,9 @@ public class TestHappyDroidService extends HappyDroidService {
   public void queueResponse(String content) {
     responses.add(content);
   }
+
+  @Override
+  public void withNetworkConnection(Runnable runnable) {
+    runnable.run();
+  }
 }

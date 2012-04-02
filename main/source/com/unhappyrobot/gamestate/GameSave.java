@@ -4,6 +4,8 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.unhappyrobot.DifficultyLevel;
@@ -17,19 +19,14 @@ import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridObjectState;
 import com.unhappyrobot.grid.GridPositionCache;
 import com.unhappyrobot.input.CameraController;
-import com.unhappyrobot.jackson.Vector2Serializer;
-import com.unhappyrobot.jackson.Vector3Serializer;
-import org.codehaus.jackson.Version;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.module.SimpleModule;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+
+import static com.unhappyrobot.gamestate.server.HappyDroidServiceObject.getObjectMapper;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.WRAPPER_OBJECT, property = "class")
@@ -63,16 +60,6 @@ public class GameSave {
     player = new Player(difficultyLevel.getStartingMoney());
     gridSize = new Vector2(TowerConsts.GAME_GRID_START_SIZE, TowerConsts.GAME_GRID_START_SIZE);
   }
-
-  public static ObjectMapper getObjectMapper() {
-    ObjectMapper objectMapper = new ObjectMapper();
-    SimpleModule simpleModule = new SimpleModule("Specials", new Version(1, 0, 0, null));
-    simpleModule.addSerializer(new Vector3Serializer());
-    simpleModule.addSerializer(new Vector2Serializer());
-    objectMapper.registerModule(simpleModule);
-    return objectMapper;
-  }
-
 
   public void attachToGame(GameGrid gameGrid, OrthographicCamera camera) {
     this.gameGrid = gameGrid;
@@ -149,7 +136,7 @@ public class GameSave {
   }
 
   public static GameSave readFile(FileHandle fileHandle) throws IOException {
-    GameSave gameSave = GameSave.getObjectMapper().readValue(fileHandle.read(), GameSave.class);
+    GameSave gameSave = getObjectMapper().readValue(fileHandle.read(), GameSave.class);
     if (gameSave != null) {
       gameSave.baseFilename = fileHandle.name();
     }

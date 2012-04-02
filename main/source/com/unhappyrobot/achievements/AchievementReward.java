@@ -1,12 +1,12 @@
 package com.unhappyrobot.achievements;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.google.common.collect.Lists;
 import com.unhappyrobot.entities.Player;
 import com.unhappyrobot.types.ProviderType;
 import com.unhappyrobot.types.ServiceRoomType;
 import com.unhappyrobot.types.ServiceRoomTypeFactory;
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 import java.util.List;
 

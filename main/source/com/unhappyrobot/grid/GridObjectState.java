@@ -1,11 +1,11 @@
 package com.unhappyrobot.grid;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.GridObjectPlacementState;
 import com.unhappyrobot.math.GridPoint;
 import com.unhappyrobot.types.GridObjectType;
 import com.unhappyrobot.types.GridObjectTypeFactory;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class GridObjectState {

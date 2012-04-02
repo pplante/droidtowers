@@ -1,10 +1,10 @@
 package com.unhappyrobot.gamestate.server;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.gamestate.GameSave;
 import com.unhappyrobot.scenes.TowerScene;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 import java.io.IOException;
 
@@ -41,7 +41,7 @@ public class CrashReport extends HappyDroidServiceObject {
   }
 
   @Override
-  protected String getResourceBaseUri() {
+  public String getBaseResourceUri() {
     return TowerConsts.HAPPYDROIDS_URI + "/api/v1/crashreport/";
   }
 

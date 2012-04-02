@@ -1,7 +1,7 @@
 package com.unhappyrobot.achievements;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.google.common.collect.Sets;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 import java.util.Set;
 

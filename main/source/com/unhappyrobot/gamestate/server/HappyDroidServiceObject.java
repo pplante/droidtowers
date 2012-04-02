@@ -1,5 +1,8 @@
 package com.unhappyrobot.gamestate.server;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.unhappyrobot.TowerConsts;
@@ -10,10 +13,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.codehaus.jackson.Version;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.module.SimpleModule;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -30,7 +29,7 @@ public abstract class HappyDroidServiceObject {
 
   protected String resourceUri;
 
-  protected abstract String getResourceBaseUri();
+  public abstract String getBaseResourceUri();
 
   protected HappyDroidServiceObject() {
 
@@ -48,7 +47,7 @@ public abstract class HappyDroidServiceObject {
 
   public static ObjectMapper getObjectMapper() {
     ObjectMapper objectMapper = new ObjectMapper();
-    SimpleModule simpleModule = new SimpleModule("Specials", new Version(1, 0, 0, null));
+    SimpleModule simpleModule = new SimpleModule("Specials");
     simpleModule.addSerializer(new Vector3Serializer());
     simpleModule.addSerializer(new Vector2Serializer());
     simpleModule.addSerializer(new StackTraceSerializer());
@@ -103,7 +102,7 @@ public abstract class HappyDroidServiceObject {
 
         HttpResponse response;
         if (resourceUri == null) {
-          response = HappyDroidService.instance().makePostRequest(getResourceBaseUri(), HappyDroidServiceObject.this);
+          response = HappyDroidService.instance().makePostRequest(getBaseResourceUri(), HappyDroidServiceObject.this);
           if (response != null && response.getStatusLine().getStatusCode() == 201) {
             Header location = Iterables.getFirst(Lists.newArrayList(response.getHeaders("Location")), null);
             if (location != null) {

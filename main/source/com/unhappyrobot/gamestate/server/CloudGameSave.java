@@ -1,11 +1,11 @@
 package com.unhappyrobot.gamestate.server;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.gamestate.GameSave;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.StringUtils;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class CloudGameSave extends HappyDroidServiceObject {
   private Date syncedOn;
 
   @Override
-  protected String getResourceBaseUri() {
+  public String getBaseResourceUri() {
     return TowerConsts.HAPPYDROIDS_URI + "/api/v1/gamesave/";
   }
 
@@ -36,7 +36,7 @@ public class CloudGameSave extends HappyDroidServiceObject {
   public CloudGameSave(GameSave gameSave, FileHandle pngFile) {
     try {
       resourceUri = gameSave.getCloudSaveUri();
-      blob = GameSave.getObjectMapper().writeValueAsString(gameSave);
+      blob = getObjectMapper().writeValueAsString(gameSave);
       image = GZIPImage.compress(pngFile);
     } catch (IOException e) {
       e.printStackTrace();

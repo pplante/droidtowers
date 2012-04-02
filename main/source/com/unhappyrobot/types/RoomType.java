@@ -1,10 +1,10 @@
 package com.unhappyrobot.types;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.*;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridPositionCache;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 import java.util.Set;
 

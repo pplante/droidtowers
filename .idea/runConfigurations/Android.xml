@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Android" type="AndroidRunConfigurationType" factoryName="Android Application">
     <module name="android" />
-    <option name="ACTIVITY_CLASS" value="" />
+    <option name="ACTIVITY_CLASS" />
     <option name="MODE" value="default_activity" />
     <option name="DEPLOY" value="true" />
     <option name="TARGET_SELECTION_MODE" value="USB_DEVICE" />

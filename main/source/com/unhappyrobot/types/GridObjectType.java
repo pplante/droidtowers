@@ -2,14 +2,14 @@ package com.unhappyrobot.types;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridPositionCache;
 import com.unhappyrobot.math.Bounds2d;
 import com.unhappyrobot.math.GridPoint;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
 import java.util.Set;
 import java.util.WeakHashMap;

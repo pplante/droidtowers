@@ -19,8 +19,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/ApiCollectionRunnable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceCollection.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/gamestate/server/HappyDroidServiceCollectionTest.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/main/jackson-core-asl-1.9.5.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/libs/main/jackson-mapper-asl-1.9.5.jar" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/pplante.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/pplante.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/Android.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Android.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/main.iml" afterPath="$PROJECT_DIR$/main/main.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/Achievement.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/Achievement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementEngine.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementEngine.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementRequirement.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementRequirement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementReward.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementReward.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Player.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/GameSave.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/GameSave.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CloudGameSave.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CloudGameSave.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CrashReport.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CrashReport.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Device.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Device.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/StackTraceSerializer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/StackTraceSerializer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/TemporaryToken.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/TemporaryToken.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridObjectState.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridObjectState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/jackson/Vector2Serializer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/jackson/Vector2Serializer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/jackson/Vector3Serializer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/jackson/Vector3Serializer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/math/GridPoint.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/math/GridPoint.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/CommercialType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/CommercialType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectTypeFactory.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectTypeFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/gamestate/server/TestHappyDroidService.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/gamestate/server/TestHappyDroidService.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -58,6 +89,19 @@
   <component name="DebuggerManager">
     <line_breakpoints>
       <breakpoint url="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/ui/TextField.java" line="217" class="com.badlogic.gdx.scenes.scene2d.ui.TextField" package="com.badlogic.gdx.scenes.scene2d.ui">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/TowerScene.java" line="65" class="com.unhappyrobot.scenes.TowerScene" package="com.unhappyrobot.scenes">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -110,35 +154,7 @@
     <favorites_list name="testgame" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="HappyDroidService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="53" selection-start="2519" selection-end="2519" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build-release.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/build-release.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="24" selection-end="24" vertical-scroll-proportion="0.044265594">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Device.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Device.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="32" selection-start="302" selection-end="302" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -151,22 +167,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/TemporaryToken.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManager.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceObject.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/PeriodicBackgroundTask.java" />
-        <option value="$PROJECT_DIR$/android/assets/params/rooms.json" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/input/DefaultKeybindings.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ConnectToHappyDroidsWindow.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/money/PurchaseManager.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementEngine.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/StackTraceSerializer.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/CommercialType.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/math/GridPoint.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Lobby.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Device.java" />
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridObjectState.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Player.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/Achievement.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementReward.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CloudGameSave.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/TemporaryToken.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/GameState.java" />
+        <option value="$PROJECT_DIR$/main/test/com/unhappyrobot/gamestate/server/HappyDroidServiceCollectionTest.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectTypeFactory.java" />
       </list>
     </option>
   </component>
@@ -379,6 +395,7 @@
   <component name="ProjectStructureProblems">
     <ignored-problems>
       <problem id="unused-library(library:project:examples)" />
+      <problem id="unused-library(library:project:gwt-user)" />
     </ignored-problems>
   </component>
   <component name="ProjectView">
@@ -412,14 +429,70 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unhappyrobot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unhappyrobot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gamestate" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unhappyrobot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gamestate" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -431,6 +504,16 @@
             <PATH_ELEMENT USER_OBJECT="Root">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -466,7 +549,7 @@
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$/main/libs/test" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLanguage" value="Java" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="OverrideImplement.combined" value="true" />
@@ -485,7 +568,7 @@
     <property name="AndroidTargetDevices" value="30324F52864200EC" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="Repository.Attach.Sources" value="true" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/pipeline/src" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/main/test/com/unhappyrobot/gamestate/server" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
@@ -524,13 +607,6 @@
       <recent name="com.unhappyrobot.entities" />
       <recent name="com.unhappyrobot.types" />
     </key>
-    <key name="MoveMembersDialog.RECENTS_KEY">
-      <recent name="com.unhappyrobot.TowerConsts" />
-      <recent name="com.unhappyrobot.utils.Platform" />
-      <recent name="com.unhappyrobot.utils.Browser" />
-      <recent name="com.unhappyrobot.scenes.GameScreen" />
-      <recent name="com.unhappyrobot.utils.TestHelper" />
-    </key>
     <key name="IntroduceConstantDialog.RECENTS_KEY">
       <recent name="com.unhappyrobot.entities.Lobby" />
       <recent name="com.unhappyrobot.gamestate.server.HappyDroidServiceObject" />
@@ -538,10 +614,17 @@
       <recent name="com.unhappyrobot.scenes.MainMenuScene" />
       <recent name="com.unhappyrobot.TowerConsts" />
     </key>
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="com.unhappyrobot.TowerConsts" />
+      <recent name="com.unhappyrobot.utils.Platform" />
+      <recent name="com.unhappyrobot.utils.Browser" />
+      <recent name="com.unhappyrobot.scenes.GameScreen" />
+      <recent name="com.unhappyrobot.utils.TestHelper" />
+    </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.unhappyrobot.gamestate.server" />
       <recent name="com.unhappyrobot.entities" />
       <recent name="com.unhappyrobot.platform" />
-      <recent name="com.unhappyrobot.gamestate.server" />
       <recent name="com.unhappyrobot.gui" />
       <recent name="com.unhappyrobot" />
     </key>
@@ -554,26 +637,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.DesktopGame">
-    <configuration default="false" name="DroidTowerGame" type="AndroidRunConfigurationType" factoryName="Android Application" temporary="true">
-      <module name="android" />
-      <option name="ACTIVITY_CLASS" value="com.unhappyrobot.DroidTowerGame" />
-      <option name="MODE" value="specific_activity" />
-      <option name="DEPLOY" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="USB_DEVICE" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <RunnerSettings RunnerId="Profile ">
-        <option name="myExternalizedOptions" value="&#10;additional-options2=onexit\=snapshot&#10;" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
     <configuration default="false" name="TemporaryTokenTest" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
@@ -675,6 +738,74 @@
       <method>
         <option name="AntTarget" enabled="false" />
       </method>
+    </configuration>
+    <configuration default="false" name="HappyDroidServiceCollectionTest.shouldWOrk" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.unhappyrobot.gamestate.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="main" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="com.unhappyrobot.gamestate.server" />
+      <option name="MAIN_CLASS_NAME" value="com.unhappyrobot.gamestate.server.HappyDroidServiceCollectionTest" />
+      <option name="METHOD_NAME" value="shouldWOrk" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/android/assets" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Profile ">
+        <option name="myExternalizedOptions" value="&#10;additional-options2=onexit\=snapshot&#10;" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="HappyDroidServiceCollectionTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.unhappyrobot.gamestate.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="main" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="com.unhappyrobot.gamestate.server" />
+      <option name="MAIN_CLASS_NAME" value="com.unhappyrobot.gamestate.server.HappyDroidServiceCollectionTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/android/assets" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Profile ">
+        <option name="myExternalizedOptions" value="&#10;additional-options2=onexit\=snapshot&#10;" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
     </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
@@ -947,15 +1078,16 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="8">
+    <list size="9">
       <item index="0" class="java.lang.String" itemvalue="Android Application.Android" />
-      <item index="1" class="java.lang.String" itemvalue="Android Application.DroidTowerGame" />
-      <item index="2" class="java.lang.String" itemvalue="Application.DesktopGame" />
-      <item index="3" class="java.lang.String" itemvalue="Application.GenerateAssetManagerFileList" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.All in main lib" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.TemporaryTokenTest" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.TemporaryTokenTest.create_shouldReturnATempToken" />
-      <item index="7" class="java.lang.String" itemvalue="JUnit.HappyDroidServiceTest.uploadGameSave" />
+      <item index="1" class="java.lang.String" itemvalue="Application.DesktopGame" />
+      <item index="2" class="java.lang.String" itemvalue="Application.GenerateAssetManagerFileList" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.All in main lib" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.TemporaryTokenTest" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.TemporaryTokenTest.create_shouldReturnATempToken" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.HappyDroidServiceTest.uploadGameSave" />
+      <item index="7" class="java.lang.String" itemvalue="JUnit.HappyDroidServiceCollectionTest.shouldWOrk" />
+      <item index="8" class="java.lang.String" itemvalue="JUnit.HappyDroidServiceCollectionTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -1256,29 +1388,29 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="2560" height="1414" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3257403" sideWeight="0.9677548" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28397873" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28314027" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24918832" sideWeight="0.7441154" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29081246" sideWeight="0.5113636" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28777525" sideWeight="0.5113636" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2919762" sideWeight="0.48295453" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18175288" sideWeight="0.74903476" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.7441154" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32877752" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24829157" sideWeight="0.80294585" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14578588" sideWeight="0.80294585" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32801822" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19362187" sideWeight="0.49748382" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.08979885" sideWeight="0.74388677" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283046" sideWeight="0.7441154" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39853895" sideWeight="0.7441154" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14808917" sideWeight="0.7752468" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22475323" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.07183908" sideWeight="0.7752468" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3621868" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32975337" sideWeight="0.649962" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1390,104 +1522,120 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/GameState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="22" selection-start="843" selection-end="843" vertical-scroll-proportion="0.068217054" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="18" selection-start="4278" selection-end="4278" vertical-scroll-proportion="0.3797964" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="57" selection-start="2711" selection-end="2711" vertical-scroll-proportion="0.3007752" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/assets/params/achievements.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="7" selection-start="432" selection-end="432" vertical-scroll-proportion="0.4372093" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/math/Bounds2d.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="31" selection-end="31" vertical-scroll-proportion="0.017054264" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/WidgetAccessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="13" selection-start="228" selection-end="228" vertical-scroll-proportion="0.068217054" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="16" column="23" selection-start="561" selection-end="561" vertical-scroll-proportion="-0.40590405">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="4" selection-start="643" selection-end="643" vertical-scroll-proportion="0.27286822">
+        <state line="6" column="36" selection-start="157" selection-end="157" vertical-scroll-proportion="0.13530135">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/Sprite.java">
+    <entry file="file://$PROJECT_DIR$/main/test/com/unhappyrobot/gamestate/server/HappyDroidServiceCollectionTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="181" column="14" selection-start="7038" selection-end="7038" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridPositionCache.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="30" selection-start="655" selection-end="655" vertical-scroll-proportion="0.11066398">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Lobby.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="57" selection-start="748" selection-end="748" vertical-scroll-proportion="0.33199194">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="13" selection-start="3236" selection-end="3236" vertical-scroll-proportion="0.4024145">
+        <state line="36" column="0" selection-start="933" selection-end="933" vertical-scroll-proportion="0.8376384">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/TemporaryToken.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="7" column="2" selection-start="267" selection-end="267" vertical-scroll-proportion="0.13530135">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Device.java">
+    <entry file="file://$PROJECT_DIR$/main/test/com/unhappyrobot/achievements/AchievementTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="32" selection-start="302" selection-end="302" vertical-scroll-proportion="0.0">
+        <state line="30" column="30" selection-start="1168" selection-end="1168" vertical-scroll-proportion="0.703567">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java">
+    <entry file="file://$PROJECT_DIR$/main/test/com/unhappyrobot/gui/AchievementNotificationTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="53" selection-start="2519" selection-end="2519" vertical-scroll-proportion="0.0">
+        <state line="24" column="23" selection-start="815" selection-end="815" vertical-scroll-proportion="0.4501845">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CloudGameSave.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="13" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.75768757">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build-release.py">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementReward.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="24" selection-end="24" vertical-scroll-proportion="0.044265594">
+        <state line="12" column="1" selection-start="393" selection-end="393" vertical-scroll-proportion="0.32472324">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/Achievement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="7" selection-start="166" selection-end="166" vertical-scroll-proportion="0.10824108">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/desktop/libs/sources/gdx-backend-lwjgl-sources.jar!/com/badlogic/gdx/backends/lwjgl/LwjglInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="181" column="27" selection-start="4933" selection-end="4933" vertical-scroll-proportion="0.13255814">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desktop/source/com/unhappyrobot/platform/DesktopUncaughtExceptionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="0" selection-start="641" selection-end="641" vertical-scroll-proportion="0.43296432">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectTypeFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="10" selection-start="685" selection-end="685" vertical-scroll-proportion="0.4600246">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="15" selection-start="251" selection-end="251" vertical-scroll-proportion="0.2706027">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/TowerScene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="23" selection-start="2786" selection-end="2786" vertical-scroll-proportion="0.34563345">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="214" column="36" selection-start="7598" selection-end="7598" vertical-scroll-proportion="3.6703568">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LoadGameWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="49" selection-start="619" selection-end="619" vertical-scroll-proportion="-1.0565805">
           <folding />
         </state>
       </provider>
@@ -1499,8 +1647,8 @@
         <settings>
           <artifact-editor>
             <show-content>
-              <type id="library" />
               <type id="artifact" />
+              <type id="library" />
             </show-content>
           </artifact-editor>
           <last-edited>desktop:jar</last-edited>
@@ -1563,7 +1711,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>android</last-edited>
+          <last-edited>main</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

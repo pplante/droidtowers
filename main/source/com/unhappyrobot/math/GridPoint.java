@@ -1,9 +1,9 @@
 package com.unhappyrobot.math;
 
 import com.badlogic.gdx.math.Vector2;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.grid.GameGrid;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
 public class GridPoint extends Vector2 {
   public GridPoint() {

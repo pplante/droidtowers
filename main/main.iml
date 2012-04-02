@@ -24,8 +24,9 @@
     <orderEntry type="module-library" exported="">
       <library name="jackson">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/main/jackson-core-asl-1.9.5.jar!/" />
-          <root url="jar://$MODULE_DIR$/libs/main/jackson-mapper-asl-1.9.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/main/jackson-annotations-2.0.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/main/jackson-core-2.0.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/main/jackson-databind-2.0.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

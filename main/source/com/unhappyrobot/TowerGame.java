@@ -94,7 +94,7 @@ public class TowerGame implements ApplicationListener {
 
     InputSystem.instance().bind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, new InputCallback() {
       public boolean run(float timeDelta) {
-        new Dialog(rootUiStage).setTitle("Awww, don't leave me.").setMessage("Are you sure you want to exit the game?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
+        new Dialog(rootUiStage).setTitle("Awe, don't leave me.").setMessage("Are you sure you want to exit the game?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
           @Override
           public void onClick(Dialog dialog) {
             dialog.dismiss();
@@ -115,10 +115,17 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    Skin skin = new Skin(Gdx.files.internal("default-skin.ui"));
-    Scene.setGuiSkin(skin);
+    Scene.setGuiSkin(new Skin(Gdx.files.internal("default-skin.ui")));
     Scene.setCamera(camera);
     Scene.setSpriteBatch(spriteBatch);
+
+    new BackgroundTask() {
+      @Override
+      public void execute() {
+//        HappyDroidServiceCollection<GameUpdate> updates = new HappyDroidServiceCollection<GameUpdate>();
+//        updates.fetch(GameUpdate.class, new ApiRunnable<GameState>());
+      }
+    }.run();
 
     changeScene(SplashScene.class);
   }
@@ -180,6 +187,7 @@ public class TowerGame implements ApplicationListener {
   }
 
   public void dispose() {
+    activeScene.dispose();
     spriteBatch.dispose();
     for (LabelStyle labelStyle : LabelStyle.values()) {
       labelStyle.reset();
@@ -202,9 +210,9 @@ public class TowerGame implements ApplicationListener {
       activeScene.resume();
       InputSystem.instance().addInputProcessor(activeScene.getStage(), 10);
     } catch (InstantiationException e) {
-      e.printStackTrace();
+      throw new RuntimeException(e);
     } catch (IllegalAccessException e) {
-      e.printStackTrace();
+      throw new RuntimeException(e);
     }
   }
 

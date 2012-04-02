@@ -8,7 +8,6 @@ public class Device extends HappyDroidServiceObject {
   public String osVersion;
   private String appVersion;
   public boolean isAuthenticated;
-  public boolean updateAvailable;
 
   public Device() {
     uuid = HappyDroidService.instance().getDeviceId();
@@ -18,7 +17,7 @@ public class Device extends HappyDroidServiceObject {
   }
 
   @Override
-  protected String getResourceBaseUri() {
+  public String getBaseResourceUri() {
     return TowerConsts.HAPPYDROIDS_URI + "/api/v1/register-device/";
   }
 

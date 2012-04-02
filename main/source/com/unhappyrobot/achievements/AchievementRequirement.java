@@ -1,5 +1,6 @@
 package com.unhappyrobot.achievements;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.google.common.base.Predicate;
 import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.entities.*;
@@ -7,7 +8,6 @@ import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.types.CommercialType;
 import com.unhappyrobot.types.ProviderType;
 import com.unhappyrobot.types.RoomType;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 class AchievementRequirement {
