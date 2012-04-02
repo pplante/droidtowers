@@ -14,9 +14,7 @@ public class HappyDroidServiceCollectionTest {
 
   @Before
   public void setUp() throws Exception {
-    collection = new HappyDroidServiceCollection<GameUpdate>() {
-
-    };
+    collection = new GameUpdateCollection();
   }
 
   @Test

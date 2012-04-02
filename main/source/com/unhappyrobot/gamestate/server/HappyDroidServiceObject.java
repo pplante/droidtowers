@@ -27,6 +27,7 @@ public abstract class HappyDroidServiceObject {
     }
   };
 
+  protected int id;
   protected String resourceUri;
 
   public abstract String getBaseResourceUri();

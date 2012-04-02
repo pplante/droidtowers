@@ -15,7 +15,7 @@ public abstract class BackgroundTask {
   protected Thread thread;
 
   static {
-    threadPool = Executors.newFixedThreadPool(1, new ThreadFactory() {
+    threadPool = Executors.newCachedThreadPool(new ThreadFactory() {
       public Thread newThread(Runnable r) {
         Thread thread = new Thread(r, "BackgroundTaskThread");
         thread.setUncaughtExceptionHandler(TowerGame.getUncaughtExceptionHandler());

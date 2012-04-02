@@ -16,7 +16,7 @@ import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.actions.ActionManager;
 import com.unhappyrobot.controllers.PathSearchManager;
 import com.unhappyrobot.entities.GameObject;
-import com.unhappyrobot.gamestate.server.HappyDroidService;
+import com.unhappyrobot.gamestate.server.*;
 import com.unhappyrobot.gui.*;
 import com.unhappyrobot.input.CameraController;
 import com.unhappyrobot.input.CameraControllerAccessor;
@@ -29,6 +29,7 @@ import com.unhappyrobot.scenes.SplashScene;
 import com.unhappyrobot.tween.GameObjectAccessor;
 import com.unhappyrobot.tween.TweenSystem;
 import com.unhappyrobot.utils.BackgroundTask;
+import org.apache.http.HttpResponse;
 
 public class TowerGame implements ApplicationListener {
   private static OrthographicCamera camera;
@@ -115,15 +116,30 @@ public class TowerGame implements ApplicationListener {
       }
     });
 
-    Scene.setGuiSkin(new Skin(Gdx.files.internal("default-skin.ui")));
+    final Skin skin = new Skin(Gdx.files.internal("default-skin.ui"));
+    Scene.setGuiSkin(skin);
     Scene.setCamera(camera);
     Scene.setSpriteBatch(spriteBatch);
 
     new BackgroundTask() {
       @Override
       public void execute() {
-//        HappyDroidServiceCollection<GameUpdate> updates = new HappyDroidServiceCollection<GameUpdate>();
-//        updates.fetch(GameUpdate.class, new ApiRunnable<GameState>());
+        HappyDroidServiceCollection<GameUpdate> updates = new GameUpdateCollection();
+        updates.fetch(new ApiCollectionRunnable<HappyDroidServiceCollection<GameUpdate>>() {
+          @Override
+          public void onError(HttpResponse response, int statusCode, HappyDroidServiceCollection<GameUpdate> collection) {
+            System.out.println("statusCode = " + statusCode);
+          }
+
+          @Override
+          public void onSuccess(HttpResponse response, HappyDroidServiceCollection<GameUpdate> collection) {
+            GameUpdateWindow gameUpdateWindow = new GameUpdateWindow(rootUiStage, skin);
+            gameUpdateWindow.setUpdateCollection(collection);
+            gameUpdateWindow.show().centerOnStage();
+
+            System.out.println("Game update window showing?");
+          }
+        });
       }
     }.run();
 

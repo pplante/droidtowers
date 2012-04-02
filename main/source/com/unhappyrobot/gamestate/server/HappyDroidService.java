@@ -150,12 +150,11 @@ public class HappyDroidService {
   public HttpResponse makeGetRequest(String uri) {
     HttpClient client = new DefaultHttpClient();
     try {
-      System.out.println("GET " + uri);
       HttpGet request = new HttpGet(uri);
       addDefaultHeaders(request);
 
       HttpResponse response = client.execute(request);
-      System.out.println(response.getStatusLine());
+      System.out.println("GET " + uri + ", " + response.getStatusLine());
       return response;
     } catch (HttpHostConnectException ignored) {
       System.out.println("Connection failed for: " + uri);
