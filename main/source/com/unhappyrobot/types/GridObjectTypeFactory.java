@@ -31,10 +31,8 @@ public abstract class GridObjectTypeFactory<T extends GridObjectType> {
 
       return true;
     } catch (IOException e) {
-      e.printStackTrace();
+      throw new RuntimeException(e);
     }
-
-    return false;
   }
 
   public List<T> all() {
