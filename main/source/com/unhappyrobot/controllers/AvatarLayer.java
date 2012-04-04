@@ -11,7 +11,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
-import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.*;
 import com.unhappyrobot.events.GridObjectAddedEvent;
@@ -20,6 +19,7 @@ import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.types.RoomType;
 import com.unhappyrobot.utils.Random;
 
+import javax.annotation.Nullable;
 import java.util.Set;
 
 public class AvatarLayer extends GameLayer {

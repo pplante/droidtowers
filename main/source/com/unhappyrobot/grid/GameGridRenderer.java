@@ -15,7 +15,6 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.eventbus.Subscribe;
-import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.entities.GridObject;
@@ -27,6 +26,7 @@ import com.unhappyrobot.graphics.Overlays;
 import com.unhappyrobot.graphics.TransitLine;
 import com.unhappyrobot.math.GridPoint;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;

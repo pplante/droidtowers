@@ -6,12 +6,13 @@ package com.unhappyrobot.graphics;
 
 import com.badlogic.gdx.graphics.Color;
 import com.google.common.base.Function;
-import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.entities.CommercialSpace;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.Room;
 import com.unhappyrobot.types.CommercialType;
 import com.unhappyrobot.types.RoomType;
+
+import javax.annotation.Nullable;
 
 public enum Overlays {
   NOISE_LEVEL {

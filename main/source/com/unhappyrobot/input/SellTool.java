@@ -9,13 +9,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.google.common.base.Function;
 import com.google.common.collect.Ordering;
-import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.entities.GameLayer;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridPositionCache;
 import com.unhappyrobot.math.GridPoint;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
 

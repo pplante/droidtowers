@@ -9,12 +9,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.controllers.AvatarLayer;
 import com.unhappyrobot.types.ProviderType;
 import com.unhappyrobot.types.RoomType;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class Janitor extends Avatar {

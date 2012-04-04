@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
-import com.sun.istack.internal.Nullable;
 import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.controllers.AvatarLayer;
@@ -26,6 +25,7 @@ import com.unhappyrobot.pathfinding.TransitPathFinder;
 import com.unhappyrobot.pathfinding.WanderPathFinder;
 import com.unhappyrobot.utils.Random;
 
+import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.Set;
 
