@@ -1,5 +1,7 @@
 <component name="CopyrightManager">
-  <settings default="">
-    <module2copyright />
+  <settings default="happydroids llc">
+    <module2copyright>
+      <element module="Project Files" copyright="happydroids llc" />
+    </module2copyright>
   </settings>
 </component>

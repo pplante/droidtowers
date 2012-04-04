@@ -1,7 +1,10 @@
+/*
+ * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+ */
+
 package com.unhappyrobot.gamestate.server;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
@@ -9,7 +12,7 @@ import java.io.IOException;
 
 public class StackTraceSerializer extends JsonSerializer<StackTraceElement> {
   @Override
-  public void serialize(StackTraceElement stackTraceElement, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
+  public void serialize(StackTraceElement stackTraceElement, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
     jsonGenerator.writeStartObject();
     jsonGenerator.writeStringField("declaringClass", stackTraceElement.getClassName());
     jsonGenerator.writeStringField("methodName", stackTraceElement.getMethodName());

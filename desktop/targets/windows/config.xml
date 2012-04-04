@@ -1,3 +1,7 @@
+<!--
+  ~ Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+  -->
+
 <launch4jConfig>
   <headerType>gui</headerType>
   <jar>../../../out/desktop-jar/DroidTowers-release.jar</jar>

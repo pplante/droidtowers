@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+ */
+
 package com.unhappyrobot.input;
 
 import com.google.common.collect.Sets;

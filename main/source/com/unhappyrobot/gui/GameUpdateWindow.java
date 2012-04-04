@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+ */
+
 package com.unhappyrobot.gui;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -19,7 +23,6 @@ public class GameUpdateWindow extends TowerWindow {
     WheelScrollFlickScrollPane scrollPane = new WheelScrollFlickScrollPane();
     scrollPane.setWidget(updatePane);
     add(scrollPane).maxWidth(500).maxHeight(300).minWidth(400);
-
 
 
     pack();

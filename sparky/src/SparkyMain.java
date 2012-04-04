@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+ */
+
 import jodd.util.ClassLoaderUtil;
 
 import javax.imageio.ImageIO;
@@ -39,7 +43,6 @@ public class SparkyMain extends JDialog {
         onCancel();
       }
     }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-
 
 
     new Thread() {

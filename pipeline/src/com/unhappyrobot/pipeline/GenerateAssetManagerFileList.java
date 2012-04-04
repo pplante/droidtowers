@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+ */
+
 package com.unhappyrobot.pipeline;
 
 import com.badlogic.gdx.audio.Sound;
@@ -37,7 +41,7 @@ public class GenerateAssetManagerFileList {
     FileHandle outputFile = new FileHandle("../main/source/com/unhappyrobot/TowerAssetManagerFilesList.java");
     outputFile.writeString(javaFileContent, false);
 
-    System.out.println("Generated: "+ outputFile.path());
+    System.out.println("Generated: " + outputFile.path());
   }
 
   private static void addDirectoryToAssetManager(String folder, String suffix, Class clazz) {

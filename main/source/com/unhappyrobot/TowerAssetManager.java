@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+ */
+
 package com.unhappyrobot;
 
 import com.badlogic.gdx.assets.AssetErrorListener;
@@ -31,7 +35,7 @@ public class TowerAssetManager {
 
       assetManager.setErrorListener(new AssetErrorListener() {
         public void error(String fileName, Class type, Throwable throwable) {
-          throw new RuntimeException("Error loading: "+ fileName, throwable);
+          throw new RuntimeException("Error loading: " + fileName, throwable);
         }
       });
     }

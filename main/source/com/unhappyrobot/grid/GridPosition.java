@@ -1,7 +1,14 @@
+/*
+ * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+ */
+
 package com.unhappyrobot.grid;
 
 import com.badlogic.gdx.math.Vector2;
-import com.unhappyrobot.entities.*;
+import com.unhappyrobot.entities.Elevator;
+import com.unhappyrobot.entities.GridObject;
+import com.unhappyrobot.entities.GuavaSet;
+import com.unhappyrobot.entities.Stair;
 import com.unhappyrobot.math.GridPoint;
 
 public class GridPosition {

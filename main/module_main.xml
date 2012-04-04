@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+  -->
+
 <project name="module_main" default="compile.module.main">
   <dirname property="module.main.basedir" file="${ant.file.module_main}"/>
-  
+
   <property name="module.jdk.home.main" value="${jdk.home.1.6}"/>
   <property name="module.jdk.bin.main" value="${jdk.bin.1.6}"/>
   <property name="module.jdk.classpath.main" value="jdk.classpath.1.6"/>
-  
+
   <property name="compiler.args.main" value="${compiler.args}"/>
-  
+
   <property name="main.output.dir" value="${module.main.basedir}/../out/production/main"/>
   <property name="main.testoutput.dir" value="${module.main.basedir}/../out/test/main"/>
-  
+
   <path id="main.module.bootclasspath">
     <!-- Paths to be included in compilation bootclasspath -->
   </path>
-  
+
   <path id="main.module.production.classpath">
     <path refid="${module.jdk.classpath.main}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
@@ -25,7 +29,7 @@
     <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
     <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
   </path>
-  
+
   <path id="main.runtime.production.module.classpath">
     <pathelement location="${main.output.dir}"/>
     <pathelement location="${basedir}/main/libs/main/gdx.jar"/>
@@ -36,7 +40,7 @@
     <pathelement location="${basedir}/main/libs/main/guava-10.0.1.jar"/>
     <pathelement location="${basedir}/main/libs/main/commons-lang3-3.1.jar"/>
   </path>
-  
+
   <path id="main.module.classpath">
     <path refid="${module.jdk.classpath.main}"/>
     <pathelement location="${main.output.dir}"/>
@@ -54,7 +58,7 @@
     <pathelement location="${basedir}/main/libs/test/great-expectations-0.10.jar"/>
     <pathelement location="${basedir}/main/libs/test/mockito-all-1.9.0.jar"/>
   </path>
-  
+
   <path id="main.runtime.module.classpath">
     <pathelement location="${main.testoutput.dir}"/>
     <pathelement location="${main.output.dir}"/>
@@ -72,42 +76,44 @@
     <pathelement location="${basedir}/main/libs/test/great-expectations-0.10.jar"/>
     <pathelement location="${basedir}/main/libs/test/mockito-all-1.9.0.jar"/>
   </path>
-  
-  
+
+
   <patternset id="excluded.from.module.main">
     <patternset refid="ignored.files"/>
   </patternset>
-  
+
   <patternset id="excluded.from.compilation.main">
     <patternset refid="compiler.excluded"/>
     <patternset refid="excluded.from.module.main"/>
   </patternset>
-  
+
   <path id="main.module.sourcepath">
     <dirset dir="${module.main.basedir}">
       <include name="source"/>
     </dirset>
   </path>
-  
+
   <path id="main.module.test.sourcepath">
     <dirset dir="${module.main.basedir}">
       <include name="test"/>
     </dirset>
   </path>
-  
-  
-  <target name="compile.module.main" depends="compile.module.main.production,compile.module.main.tests" description="Compile module main"/>
-  
+
+
+  <target name="compile.module.main" depends="compile.module.main.production,compile.module.main.tests"
+          description="Compile module main"/>
+
   <target name="compile.module.main.production" description="Compile module main; production classes">
     <mkdir dir="${main.output.dir}"/>
-    <javac destdir="${main.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.main}/javac">
+    <javac destdir="${main.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+           memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.main}/javac">
       <compilerarg line="${compiler.args.main}"/>
       <bootclasspath refid="main.module.bootclasspath"/>
       <classpath refid="main.module.production.classpath"/>
       <src refid="main.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.main"/>
     </javac>
-    
+
     <copy todir="${main.output.dir}">
       <fileset dir="${module.main.basedir}/source">
         <patternset refid="compiler.resources"/>
@@ -116,17 +122,19 @@
       </fileset>
     </copy>
   </target>
-  
-  <target name="compile.module.main.tests" depends="compile.module.main.production" description="compile module main; test classes" unless="skip.tests">
+
+  <target name="compile.module.main.tests" depends="compile.module.main.production"
+          description="compile module main; test classes" unless="skip.tests">
     <mkdir dir="${main.testoutput.dir}"/>
-    <javac destdir="${main.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.main}/javac">
+    <javac destdir="${main.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+           memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.main}/javac">
       <compilerarg line="${compiler.args.main}"/>
       <bootclasspath refid="main.module.bootclasspath"/>
       <classpath refid="main.module.classpath"/>
       <src refid="main.module.test.sourcepath"/>
       <patternset refid="excluded.from.compilation.main"/>
     </javac>
-    
+
     <copy todir="${main.testoutput.dir}">
       <fileset dir="${module.main.basedir}/test">
         <patternset refid="compiler.resources"/>
@@ -135,7 +143,7 @@
       </fileset>
     </copy>
   </target>
-  
+
   <target name="clean.module.main" description="cleanup module">
     <delete dir="${main.output.dir}"/>
     <delete dir="${main.testoutput.dir}"/>
