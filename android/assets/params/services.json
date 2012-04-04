@@ -4,7 +4,7 @@
     "coins":20000,
     "height":1,
     "width":3,
-    "locked": true,
+    "locked":true,
     "experienceAward":2200,
     "populationAttraction":0,
     "populationRequired":20,
@@ -13,16 +13,18 @@
     "provides":"JANITORS"
   },
   {
-    "name":"Maids Office",
+    "name":"Maids Closet",
     "coins":20000,
     "height":1,
     "width":3,
-    "locked": true,
+    "locked":true,
     "experienceAward":2200,
     "populationAttraction":0,
     "populationRequired":20,
     "jobsProvided":4,
     "noiseLevel":0.3,
-    "provides":"MAIDS"
+    "provides":"MAIDS",
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"2x1-maids-closet"
   }
 ]
