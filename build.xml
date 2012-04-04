@@ -20,7 +20,6 @@
   <target name="compile">
     <mkdir dir="${classes.dir}"/>
     <mkdir dir="${build.dir}/tool-classes"/>
-    <mkdir dir="${build.dir}/proguard"/>
 
     <javac srcdir="${root.dir}/pipeline/src" destdir="${build.dir}/tool-classes/" classpathref="classpath"
            failonerror="true"/>
@@ -41,6 +40,29 @@
       <fileset dir="${build.dir}/classes"/>
       <zipgroupfileset dir="${root.dir}/main/libs/main" includes="**/*.jar"/>
       <zipgroupfileset dir="${root.dir}/desktop/libs/main" includes="**/*.jar"/>
+      <zipfileset dir="${root.dir}/android/assets/"/>
+    </jar>
+  </target>
+
+  <target name="multi-jar" depends="compile">
+    <jar destfile="${build.dir}/${ant.project.name}-gamecode.jar" basedir="${build.dir}/classes"
+         filesetmanifest="mergewithoutmain" level="9">
+      <manifest>
+        <attribute name="Main-Class" value="com.unhappyrobot.DesktopGame"/>
+        <attribute name="Class-Path" value="."/>
+      </manifest>
+      <fileset dir="${build.dir}/classes"/>
+    </jar>
+    <jar destfile="${build.dir}/${ant.project.name}-libs-main.jar"
+         filesetmanifest="mergewithoutmain" level="9">
+      <zipgroupfileset dir="${root.dir}/main/libs/main" includes="**/*.jar"/>
+    </jar>
+    <jar destfile="${build.dir}/${ant.project.name}-libs-desktop.jar"
+         filesetmanifest="mergewithoutmain" level="9">
+      <zipgroupfileset dir="${root.dir}/desktop/libs/main" includes="**/*.jar"/>
+    </jar>
+    <jar destfile="${build.dir}/${ant.project.name}-assets.jar"
+         filesetmanifest="mergewithoutmain" level="9">
       <zipfileset dir="${root.dir}/android/assets/"/>
     </jar>
   </target>

@@ -19,214 +19,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="added copyright to all files.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/happydroids_llc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets-raw/templates/TowerAssetManagerFilesList-template.java" afterPath="$PROJECT_DIR$/android/assets-raw/templates/TowerAssetManagerFilesList-template.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/default.properties" afterPath="$PROJECT_DIR$/android/default.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/module_android.xml" afterPath="$PROJECT_DIR$/android/module_android.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/layout/test.xml" afterPath="$PROJECT_DIR$/android/res/layout/test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/values/strings.xml" afterPath="$PROJECT_DIR$/android/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/source/com/unhappyrobot/DroidTowerGame.java" afterPath="$PROJECT_DIR$/android/source/com/unhappyrobot/DroidTowerGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/source/com/unhappyrobot/platform/AndroidBrowserUtil.java" afterPath="$PROJECT_DIR$/android/source/com/unhappyrobot/platform/AndroidBrowserUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/source/com/unhappyrobot/platform/AndroidUncaughtExceptionHandler.java" afterPath="$PROJECT_DIR$/android/source/com/unhappyrobot/platform/AndroidUncaughtExceptionHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/module_desktop.xml" afterPath="$PROJECT_DIR$/desktop/module_desktop.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/DesktopGame.java" afterPath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/DesktopGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/LwjglApplicationShim.java" afterPath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/LwjglApplicationShim.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/platform/DesktopBrowserUtil.java" afterPath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/platform/DesktopBrowserUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/platform/DesktopUncaughtExceptionHandler.java" afterPath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/platform/DesktopUncaughtExceptionHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/utils/OSValidator.java" afterPath="$PROJECT_DIR$/desktop/source/com/unhappyrobot/utils/OSValidator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/targets/windows/config.xml" afterPath="$PROJECT_DIR$/desktop/targets/windows/config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/module_main.xml" afterPath="$PROJECT_DIR$/main/module_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/DebugInputAdapter.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/DebugInputAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/DifficultyLevel.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/DifficultyLevel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManager.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManagerFilesList.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerAssetManagerFilesList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/WeatherService.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/WeatherService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/Achievement.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/Achievement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementEngine.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementRequirement.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementRequirement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementReward.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementReward.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementThing.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/AchievementThing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/RequirementType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/RequirementType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/RewardType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/achievements/RewardType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/actions/Action.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/actions/Action.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/actions/ActionManager.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/actions/ActionManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/actions/GameSaveAction.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/actions/GameSaveAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/actions/TimeDelayedAction.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/actions/TimeDelayedAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/audio/GameGridSoundDispatcher.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/audio/GameGridSoundDispatcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarState.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarSteeringManager.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/AvatarSteeringManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/GameTips.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/GameTips.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/PathSearchManager.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/controllers/PathSearchManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Avatar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CloudLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CommercialSpace.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/CommercialSpace.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Elevator.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Elevator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/ElevatorCar.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/ElevatorCar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GameObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObjectPlacementState.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GridObjectPlacementState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GuavaSet.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/GuavaSet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Janitor.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Janitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Lobby.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Lobby.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Maid.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Maid.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Player.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Rain.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Rain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Room.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/ServiceRoom.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/ServiceRoom.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Stair.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Stair.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Transit.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/Transit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/elevator/ElevatorPassengerEntry.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/entities/elevator/ElevatorPassengerEntry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GameGridResizeEvent.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GameGridResizeEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GridObjectAddedEvent.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GridObjectAddedEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GridObjectBoundsChangeEvent.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GridObjectBoundsChangeEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GridObjectChangedEvent.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GridObjectChangedEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GridObjectEvent.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GridObjectEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GridObjectRemovedEvent.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/GridObjectRemovedEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/WeatherState.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/WeatherState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/WeatherStateChangeEvent.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/events/WeatherStateChangeEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/GameSave.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/GameSave.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/GameState.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/GameState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/DesirabilityCalculator.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/DesirabilityCalculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/EarnoutCalculator.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/EarnoutCalculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/EmploymentCalculator.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/EmploymentCalculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/GameGridAction.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/GameGridAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/GameGridTransportCalculationComplete.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/GameGridTransportCalculationComplete.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/PopulationCalculator.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/PopulationCalculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/TransportCalculator.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/actions/TransportCalculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/ApiCollectionRunnable.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/ApiCollectionRunnable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/ApiRunnable.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/ApiRunnable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CloudGameSave.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CloudGameSave.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CrashReport.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/CrashReport.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Device.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/Device.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/GameUpdate.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/GameUpdate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/GameUpdateCollection.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/GameUpdateCollection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceCollection.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceCollection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceObject.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HttpStatusCode.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HttpStatusCode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/StackTraceSerializer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/StackTraceSerializer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/TemporaryToken.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/TemporaryToken.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/CityScapeLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/CityScapeLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/GroundLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/GroundLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/Overlays.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/Overlays.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/RainLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/RainLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/SkyLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/SkyLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/TowerMiniMap.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/TowerMiniMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/TransitLine.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/TransitLine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GameGrid.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GameGrid.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GameGridRenderer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GameGridRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridObjectState.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridObjectState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridPosition.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridPosition.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridPositionCache.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/grid/GridPositionCache.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/AchievementNotification.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/AchievementNotification.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/AudioControl.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/AudioControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/BubbleGroup.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/BubbleGroup.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ConnectToHappyDroidsWindow.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ConnectToHappyDroidsWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Dialog.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Dialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ExpandLandOverlay.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ExpandLandOverlay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/GameUpdateWindow.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/GameUpdateWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/GridObjectPurchaseMenu.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/GridObjectPurchaseMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/HeadsUpDisplay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelStyle.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LabelStyle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LoadGameWindow.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/LoadGameWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Menu.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Menu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/MenuCloser.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/MenuCloser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/MenuItem.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/MenuItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ModalOverlay.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ModalOverlay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/NewGameWindow.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/NewGameWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/OnClickCallback.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/OnClickCallback.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/OverlayControl.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/OverlayControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ProgressBar.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ProgressBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/RadialMenu.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/RadialMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ResponseType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ResponseType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/RuntimeExceptionDialog.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/RuntimeExceptionDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/SpeechBubble.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/SpeechBubble.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/StackGroup.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/StackGroup.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/StatusBarPanel.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/StatusBarPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/TiledImage.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/TiledImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Toast.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/Toast.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ToolTip.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/ToolTip.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/TowerWindow.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/TowerWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/WheelScrollFlickScrollPane.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/WheelScrollFlickScrollPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/WidgetAccessor.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/WidgetAccessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/events/CameraControllerEvent.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/events/CameraControllerEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/CameraController.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/CameraController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/CameraControllerAccessor.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/CameraControllerAccessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/DefaultKeybindings.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/DefaultKeybindings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureDelegater.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureDelegater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureTool.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/GestureTool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputCallback.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputCallback.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputProcessorEntry.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputProcessorEntry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputSystem.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/InputSystem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PickerTool.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PickerTool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/PlacementTool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/SellTool.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/SellTool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/ToolBase.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/input/ToolBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/jackson/Vector2Serializer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/jackson/Vector2Serializer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/jackson/Vector3Serializer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/jackson/Vector3Serializer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/math/Bounds2d.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/math/Bounds2d.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/math/Direction.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/math/Direction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/math/GridPoint.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/math/GridPoint.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/money/PurchaseManager.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/money/PurchaseManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/AStar.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/AStar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/TransitPathFinder.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/TransitPathFinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/WanderPathFinder.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/pathfinding/WanderPathFinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/platform/HappyDroidUncaughtExceptionHandler.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/platform/HappyDroidUncaughtExceptionHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/platform/PlatformBrowserUtil.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/platform/PlatformBrowserUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/MainMenuScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/Scene.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/Scene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashCloudLayer.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashCloudLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashScene.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/SplashScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/TowerScene.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/scenes/TowerScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/tween/GameObjectAccessor.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/tween/GameObjectAccessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/tween/TweenSystem.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/tween/TweenSystem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/CommercialType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/CommercialType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/CommercialTypeFactory.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/CommercialTypeFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ElevatorType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ElevatorType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ElevatorTypeFactory.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ElevatorTypeFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectTypeFactory.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/GridObjectTypeFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ProviderType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ProviderType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ResizeHandle.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ResizeHandle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/RoomTypeFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ServiceRoomType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ServiceRoomType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ServiceRoomTypeFactory.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/ServiceRoomTypeFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/StairType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/StairType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/StairTypeFactory.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/StairTypeFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/TransitType.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/TransitType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/TransitTypeFactory.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/types/TransitTypeFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/BackgroundTask.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/BackgroundTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/IO.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/IO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/PNG.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/PNG.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/PeriodicBackgroundTask.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/PeriodicBackgroundTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/Platform.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/Platform.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/Random.java" afterPath="$PROJECT_DIR$/main/source/com/unhappyrobot/utils/Random.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/ActorMatcher.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/ActorMatcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/Expect.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/Expect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/GdxTestRunner.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/GdxTestRunner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/GroupMatcher.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/GroupMatcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/NonGLTestRunner.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/NonGLTestRunner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/TowerGameTestRunner.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/TowerGameTestRunner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/Vector2Matcher.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/Vector2Matcher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/achievements/AchievementTest.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/achievements/AchievementTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/gamestate/server/HappyDroidServiceCollectionTest.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/gamestate/server/HappyDroidServiceCollectionTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/gamestate/server/HappyDroidServiceTest.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/gamestate/server/HappyDroidServiceTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/gamestate/server/TemporaryTokenTest.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/gamestate/server/TemporaryTokenTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/gamestate/server/TestHappyDroidService.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/gamestate/server/TestHappyDroidService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/gui/AchievementNotificationTest.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/gui/AchievementNotificationTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/gui/StackGroupTest.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/gui/StackGroupTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/types/RoomTypeFactoryTest.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/types/RoomTypeFactoryTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/unhappyrobot/utils/TestHelper.java" afterPath="$PROJECT_DIR$/main/test/com/unhappyrobot/utils/TestHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline/src/com/unhappyrobot/pipeline/GenerateAssetManagerFileList.java" afterPath="$PROJECT_DIR$/pipeline/src/com/unhappyrobot/pipeline/GenerateAssetManagerFileList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sparky/src/SparkyMain.java" afterPath="$PROJECT_DIR$/sparky/src/SparkyMain.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -343,41 +138,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TowerAssetManagerFilesList-template.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android/assets-raw/templates/TowerAssetManagerFilesList-template.java">
+      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="13" selection-start="399" selection-end="399" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#525#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OSValidator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/desktop/source/com/unhappyrobot/utils/OSValidator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="1" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0">
+            <state line="38" column="17" selection-start="1643" selection-end="1643" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StackTraceSerializer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/StackTraceSerializer.java">
+      <file leaf-file-name="Overlays.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/Overlays.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="37" selection-start="431" selection-end="431" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SparkyMain.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sparky/src/SparkyMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="74" selection-start="1654" selection-end="1654" vertical-scroll-proportion="0.33333334">
+            <state line="8" column="39" selection-start="224" selection-end="224" vertical-scroll-proportion="0.140255">
               <folding>
-                <element signature="e#0#2501#0" expanded="true" />
+                <element signature="e#0#2910#0" expanded="true" />
+                <element signature="e#1041#1466#0" expanded="true" />
+                <element signature="e#1457#1458#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -396,7 +173,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/GameUpdateCollection.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/ApiCollectionRunnable.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/HappyDroidServiceObject.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/GameUpdate.java" />
@@ -406,12 +182,13 @@
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gui/GameUpdateWindow.java" />
         <option value="$PROJECT_DIR$/sparky/src/com/unhappyrobot/sparky/SparkyClassLoader.java" />
-        <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/sparky/src/SparkyMain.form" />
         <option value="$PROJECT_DIR$/sparky/src/SparkyMain.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/TowerConsts.java" />
         <option value="$PROJECT_DIR$/desktop/source/com/unhappyrobot/utils/OSValidator.java" />
         <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/StackTraceSerializer.java" />
+        <option value="$PROJECT_DIR$/build.xml" />
+        <option value="$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/Overlays.java" />
       </list>
     </option>
   </component>
@@ -1556,7 +1333,11 @@
       <created>1333517509963</created>
       <updated>1333517509963</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="added copyright to all files.">
+      <created>1333518194859</created>
+      <updated>1333518194859</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1719,16 +1500,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/TowerGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="136" column="61" selection-start="5255" selection-end="5255" vertical-scroll-proportion="0.2792128" />
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/ClassLoader.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="28" selection-start="1492" selection-end="1492" vertical-scroll-proportion="0.3325" />
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Class.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="35" selection-start="2352" selection-end="2352" vertical-scroll-proportion="0.33333334" />
@@ -1742,11 +1513,6 @@
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/awt/Dialog.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="93" column="14" selection-start="3694" selection-end="3694" vertical-scroll-proportion="0.33333334" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="9" selection-start="559" selection-end="559" vertical-scroll-proportion="0.05116279" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/desktop/source/com/unhappyrobot/DesktopGame.java">
@@ -1784,34 +1550,59 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sparky/src/SparkyMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="74" selection-start="1654" selection-end="1654" vertical-scroll-proportion="0.33333334">
+          <folding>
+            <element signature="e#0#2501#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/StackTraceSerializer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="37" selection-start="431" selection-end="431" vertical-scroll-proportion="0.16029143">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desktop/source/com/unhappyrobot/utils/OSValidator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="1" selection-start="511" selection-end="511" vertical-scroll-proportion="0.48087433">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/android/assets-raw/templates/TowerAssetManagerFilesList-template.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="13" selection-start="399" selection-end="399" vertical-scroll-proportion="0.0">
+        <state line="15" column="13" selection-start="399" selection-end="399" vertical-scroll-proportion="0.26047358">
           <folding>
             <element signature="e#0#525#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/source/com/unhappyrobot/utils/OSValidator.java">
+    <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="1" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0">
+        <state line="38" column="17" selection-start="1643" selection-end="1643" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/gamestate/server/StackTraceSerializer.java">
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/com/sun/istack/internal/Nullable.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="37" selection-start="431" selection-end="431" vertical-scroll-proportion="0.0">
+        <state line="8" column="18" selection-start="480" selection-end="480" vertical-scroll-proportion="0.140255">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sparky/src/SparkyMain.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/unhappyrobot/graphics/Overlays.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="74" selection-start="1654" selection-end="1654" vertical-scroll-proportion="0.33333334">
+        <state line="8" column="39" selection-start="224" selection-end="224" vertical-scroll-proportion="0.140255">
           <folding>
-            <element signature="e#0#2501#0" expanded="true" />
+            <element signature="e#0#2910#0" expanded="true" />
+            <element signature="e#1041#1466#0" expanded="true" />
+            <element signature="e#1457#1458#0" expanded="true" />
           </folding>
         </state>
       </provider>
