@@ -4,7 +4,7 @@
 
 package com.unhappyrobot.utils;
 
-import com.unhappyrobot.gamestate.server.HappyDroidService;
+import com.happydroids.server.HappyDroidService;
 import com.unhappyrobot.gamestate.server.TestHappyDroidService;
 
 public class TestHelper {

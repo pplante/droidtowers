@@ -2,9 +2,9 @@
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
 
-package com.unhappyrobot.gamestate.server;
+package com.happydroids.server;
 
-import com.unhappyrobot.TowerConsts;
+import com.happydroids.HappyDroidConsts;
 
 import java.util.Date;
 
@@ -16,7 +16,7 @@ public class GameUpdate extends HappyDroidServiceObject {
 
   @Override
   public String getBaseResourceUri() {
-    return TowerConsts.HAPPYDROIDS_URI + "/api/v1/gameupdate/";
+    return HappyDroidConsts.HAPPYDROIDS_URI + "/api/v1/gameupdate/";
   }
 
   @Override

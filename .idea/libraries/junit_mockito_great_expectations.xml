@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="junit-mockito-great-expectations">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/main/libs/test/mockito-all-1.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/main/libs/test/asm-commons-3.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/main/libs/test/junit-4.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/main/libs/test/great-expectations-0.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/main/libs/test/asm-3.3.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/main/libs/test/mockito-all-1.9.0.jar!/" />
+    </SOURCES>
+  </library>
+</component>

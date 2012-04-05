@@ -4,6 +4,8 @@
 
 package com.unhappyrobot.utils;
 
+import com.happydroids.utils.BackgroundTask;
+
 import static java.lang.Thread.sleep;
 import static java.lang.Thread.yield;
 

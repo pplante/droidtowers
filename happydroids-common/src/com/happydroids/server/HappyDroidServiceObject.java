@@ -2,23 +2,16 @@
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
 
-package com.unhappyrobot.gamestate.server;
+package com.happydroids.server;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.unhappyrobot.TowerConsts;
-import com.unhappyrobot.jackson.Vector2Serializer;
-import com.unhappyrobot.jackson.Vector3Serializer;
+import com.happydroids.HappyDroidConsts;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
-import org.apache.http.entity.BufferedHttpEntity;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
@@ -50,40 +43,12 @@ public abstract class HappyDroidServiceObject {
     this.resourceUri = resourceUri;
   }
 
-  public static ObjectMapper getObjectMapper() {
-    ObjectMapper objectMapper = new ObjectMapper();
-    SimpleModule simpleModule = new SimpleModule("Specials");
-    simpleModule.addSerializer(new Vector3Serializer());
-    simpleModule.addSerializer(new Vector2Serializer());
-    simpleModule.addSerializer(new StackTraceSerializer());
-    objectMapper.registerModule(simpleModule);
-    return objectMapper;
-  }
-
-  public static <T> T materializeObject(HttpResponse response, Class<T> aClazz) {
-    ObjectMapper mapper = getObjectMapper();
-    if (response != null) {
-      try {
-        BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
-        if (entity != null && entity.getContentLength() > 0) {
-          String content = EntityUtils.toString(entity, HTTP.UTF_8);
-          System.out.println("\tResponse: " + content);
-          return mapper.readValue(content, aClazz);
-        }
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-
-    return null;
-  }
-
   public void reload() {
     if (resourceUri == null) {
       throw new RuntimeException("resourceUri must not be null when using reload()");
     }
 
-    HttpResponse response = HappyDroidService.instance().makeGetRequest(TowerConsts.HAPPYDROIDS_URI + resourceUri);
+    HttpResponse response = HappyDroidService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + resourceUri);
     if (response != null && response.getStatusLine().getStatusCode() == 200) {
       copyValuesFromResponse(response);
     }
@@ -126,7 +91,7 @@ public abstract class HappyDroidServiceObject {
   }
 
   private void copyValuesFromResponse(HttpResponse response) {
-    HappyDroidServiceObject serverInstance = materializeObject(response, getClass());
+    HappyDroidServiceObject serverInstance = HappyDroidService.materializeObject(response, getClass());
     if (serverInstance != null) {
       Class<?> currentClass = serverInstance.getClass();
 
@@ -154,5 +119,9 @@ public abstract class HappyDroidServiceObject {
 
   public boolean isSaved() {
     return resourceUri != null;
+  }
+
+  protected ObjectMapper getObjectMapper() {
+    return HappyDroidService.instance().getObjectMapper();
   }
 }

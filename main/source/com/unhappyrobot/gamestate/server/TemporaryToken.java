@@ -10,7 +10,7 @@ import com.unhappyrobot.TowerConsts;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TemporaryToken extends HappyDroidServiceObject {
+public class TemporaryToken extends TowerGameServiceObject {
   private String value;
   private String clickableUri;
   private SessionToken session;

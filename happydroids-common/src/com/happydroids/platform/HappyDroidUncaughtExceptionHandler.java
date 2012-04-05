@@ -2,9 +2,10 @@
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
 
-package com.unhappyrobot.platform;
+package com.happydroids.platform;
 
-import com.unhappyrobot.TowerConsts;
+
+import com.happydroids.HappyDroidConsts;
 
 public abstract class HappyDroidUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
   protected StringBuilder generateExceptionErrorString(Throwable throwable) {
@@ -13,7 +14,7 @@ public abstract class HappyDroidUncaughtExceptionHandler implements Thread.Uncau
     message.append("Some anonymous data about this crash has been sent to happydroids.com for analysis.\n\n");
     message.append("The game will now exit.");
 
-    if (TowerConsts.DEBUG) {
+    if (HappyDroidConsts.DEBUG) {
       message.append("\n\nERROR:\n\n");
       message.append(throwable.toString());
     }

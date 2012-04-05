@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android/android.iml" filepath="$PROJECT_DIR$/android/android.iml" />
       <module fileurl="file://$PROJECT_DIR$/desktop/desktop.iml" filepath="$PROJECT_DIR$/desktop/desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/happydroids-common/happydroids-common.iml" filepath="$PROJECT_DIR$/happydroids-common/happydroids-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/main/main.iml" filepath="$PROJECT_DIR$/main/main.iml" />
       <module fileurl="file://$PROJECT_DIR$/pipeline/pipeline.iml" filepath="$PROJECT_DIR$/pipeline/pipeline.iml" />
       <module fileurl="file://$PROJECT_DIR$/sparky/sparky.iml" filepath="$PROJECT_DIR$/sparky/sparky.iml" />

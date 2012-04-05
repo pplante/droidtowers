@@ -29,6 +29,8 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" scope="TEST" name="junit-mockito-great-expectations" level="project" />
+    <orderEntry type="library" name="commons-io" level="project" />
   </component>
 </module>
 

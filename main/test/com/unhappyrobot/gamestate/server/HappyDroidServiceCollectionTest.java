@@ -4,6 +4,8 @@
 
 package com.unhappyrobot.gamestate.server;
 
+import com.happydroids.server.GameUpdateCollection;
+import com.happydroids.server.HappyDroidServiceCollection;
 import com.unhappyrobot.TowerGameTestRunner;
 import org.junit.Before;
 import org.junit.Test;

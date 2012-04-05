@@ -2,7 +2,7 @@
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
 
-package com.unhappyrobot.gamestate.server;
+package com.happydroids.server;
 
 public class HttpStatusCode {
   public static int Success = 200;

@@ -2,10 +2,10 @@
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
 
-package com.unhappyrobot.gamestate.server;
+package com.happydroids.server;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.unhappyrobot.TowerConsts;
+import com.happydroids.HappyDroidConsts;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class GameUpdateCollection extends HappyDroidServiceCollection<GameUpdate> {
@@ -15,7 +15,7 @@ public class GameUpdateCollection extends HappyDroidServiceCollection<GameUpdate
 
   @Override
   public String getBaseResourceUri() {
-    return TowerConsts.HAPPYDROIDS_URI + "/api/v1/gameupdate/";
+    return HappyDroidConsts.HAPPYDROIDS_URI + "/api/v1/gameupdate/";
   }
 
   @Override

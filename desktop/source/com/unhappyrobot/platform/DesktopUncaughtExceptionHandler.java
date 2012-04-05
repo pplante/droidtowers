@@ -5,6 +5,7 @@
 package com.unhappyrobot.platform;
 
 import com.badlogic.gdx.Gdx;
+import com.happydroids.platform.HappyDroidUncaughtExceptionHandler;
 import com.unhappyrobot.gamestate.server.CrashReport;
 
 import javax.swing.*;

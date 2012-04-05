@@ -4,6 +4,8 @@
 
 package com.unhappyrobot.gamestate.server;
 
+import com.happydroids.HappyDroidConsts;
+import com.happydroids.server.HappyDroidServiceObject;
 import com.unhappyrobot.TowerConsts;
 
 public class Device extends HappyDroidServiceObject {
@@ -14,15 +16,15 @@ public class Device extends HappyDroidServiceObject {
   public boolean isAuthenticated;
 
   public Device() {
-    uuid = HappyDroidService.instance().getDeviceId();
-    type = HappyDroidService.getDeviceType();
-    osVersion = HappyDroidService.getDeviceOSVersion();
+    uuid = TowerGameService.instance().getDeviceId();
+    type = TowerGameService.getDeviceType();
+    osVersion = TowerGameService.getDeviceOSVersion();
     appVersion = TowerConsts.VERSION;
   }
 
   @Override
   public String getBaseResourceUri() {
-    return TowerConsts.HAPPYDROIDS_URI + "/api/v1/register-device/";
+    return HappyDroidConsts.HAPPYDROIDS_URI + "/api/v1/register-device/";
   }
 
   @Override

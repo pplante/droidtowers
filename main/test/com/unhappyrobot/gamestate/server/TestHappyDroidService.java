@@ -5,6 +5,7 @@
 package com.unhappyrobot.gamestate.server;
 
 import com.google.common.collect.Lists;
+import com.happydroids.server.HappyDroidService;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.ProtocolVersion;

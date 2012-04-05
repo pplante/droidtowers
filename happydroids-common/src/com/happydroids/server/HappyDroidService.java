@@ -2,14 +2,13 @@
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
 
-package com.unhappyrobot.gamestate.server;
+package com.happydroids.server;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.google.common.collect.Sets;
-import com.unhappyrobot.TowerConsts;
-import com.unhappyrobot.utils.BackgroundTask;
+import com.happydroids.HappyDroidConsts;
+import com.happydroids.utils.BackgroundTask;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -17,6 +16,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.conn.HttpHostConnectException;
+import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
@@ -25,16 +25,12 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Set;
-import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class HappyDroidService {
   private static final String TAG = HappyDroidService.class.getSimpleName();
-  private static HappyDroidService _instance;
-  private static String deviceType;
-  private static String deviceOSVersion;
-  private Preferences preferences;
-  private String deviceId;
-  private boolean isAuthenticated;
+  protected static HappyDroidService _instance;
   private boolean hasNetworkConnection;
   private final Set<Runnable> withNetworkConnectionRunnables;
 
@@ -51,39 +47,38 @@ public class HappyDroidService {
   }
 
   protected HappyDroidService() {
-    preferences = Gdx.app.getPreferences("CONNECT");
-    if (!preferences.contains("DEVICE_ID")) {
-      preferences.putString("DEVICE_ID", UUID.randomUUID().toString().replaceAll("-", ""));
-      preferences.flush();
-    }
-    deviceId = preferences.getString("DEVICE_ID");
-
     withNetworkConnectionRunnables = Sets.newHashSet();
     checkForNetwork();
   }
 
-  public void registerDevice() {
-    withNetworkConnection(new Runnable() {
-      public void run() {
-        Device device = new Device();
-        device.save(new ApiRunnable<Device>() {
-          @Override
-          public void onError(HttpResponse response, int statusCode, Device object) {
-            Gdx.app.error(TAG, "Error registering device :(, status: " + statusCode);
-          }
+  public ObjectMapper getObjectMapper() {
+    ObjectMapper objectMapper = new ObjectMapper();
+    SimpleModule simpleModule = new SimpleModule("Specials");
+    addCustomSerializers(simpleModule);
+    objectMapper.registerModule(simpleModule);
+    return objectMapper;
+  }
 
-          @Override
-          public void onSuccess(HttpResponse response, Device object) {
-            isAuthenticated = object.isAuthenticated;
+  protected void addCustomSerializers(SimpleModule simpleModule) {
+    simpleModule.addSerializer(new StackTraceSerializer());
+  }
 
-            if (!isAuthenticated) {
-              preferences.remove("SESSION_TOKEN");
-              preferences.flush();
-            }
-          }
-        });
+  public static <T> T materializeObject(HttpResponse response, Class<T> aClazz) {
+    ObjectMapper mapper = instance().getObjectMapper();
+    if (response != null) {
+      try {
+        BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
+        if (entity != null && entity.getContentLength() > 0) {
+          String content = EntityUtils.toString(entity, HTTP.UTF_8);
+          System.out.println("\tResponse: " + content);
+          return mapper.readValue(content, aClazz);
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
       }
-    });
+    }
+
+    return null;
   }
 
   public HttpResponse makePutRequest(String uri, Object objectForServer) {
@@ -94,7 +89,7 @@ public class HappyDroidService {
       addDefaultHeaders(request);
 
       if (objectForServer != null) {
-        ObjectMapper mapper = HappyDroidServiceObject.getObjectMapper();
+        ObjectMapper mapper = getObjectMapper();
         StringEntity entity = new StringEntity(mapper.writeValueAsString(objectForServer));
         entity.setContentType("multipart/form-data");
         request.setEntity(entity);
@@ -118,7 +113,7 @@ public class HappyDroidService {
       addDefaultHeaders(request);
 
       if (objectForServer != null) {
-        ObjectMapper mapper = HappyDroidServiceObject.getObjectMapper();
+        ObjectMapper mapper = getObjectMapper();
         System.out.println(mapper.writeValueAsString(objectForServer));
         StringEntity entity = new StringEntity(mapper.writeValueAsString(objectForServer));
         entity.setContentType("multipart/form-data");
@@ -143,12 +138,8 @@ public class HappyDroidService {
     return null;
   }
 
-  private void addDefaultHeaders(HttpRequestBase request) {
+  protected void addDefaultHeaders(HttpRequestBase request) {
     request.setHeader("Content-Type", "application/json");
-    request.setHeader("X-Device-UUID", HappyDroidService.instance().getDeviceId());
-    if (getSessionToken() != null) {
-      request.setHeader("X-Token", getSessionToken());
-    }
   }
 
   public HttpResponse makeGetRequest(String uri) {
@@ -170,14 +161,15 @@ public class HappyDroidService {
   }
 
   public void checkForNetwork() {
-    Gdx.app.debug(TAG, "Checking for network connection...");
+    Logger.getLogger(TAG).info("Checking for network connection...");
+
     new BackgroundTask() {
       @Override
       public void execute() {
         try {
-          InetAddress remote = InetAddress.getByName(TowerConsts.HAPPYDROIDS_SERVER);
+          InetAddress remote = InetAddress.getByName(HappyDroidConsts.HAPPYDROIDS_SERVER);
           hasNetworkConnection = remote.isReachable(1500);
-          Gdx.app.debug(TAG, "Network status: " + hasNetworkConnection);
+          Logger.getLogger(TAG).info("Network status: " + hasNetworkConnection);
           synchronized (withNetworkConnectionRunnables) {
             for (Runnable runnable : withNetworkConnectionRunnables) {
               runnable.run();
@@ -186,39 +178,10 @@ public class HappyDroidService {
             withNetworkConnectionRunnables.clear();
           }
         } catch (IOException e) {
-          Gdx.app.debug(TAG, "Network error!", e);
+          Logger.getLogger(TAG).log(Level.ALL, "Network error!", e);
         }
       }
     }.run();
-  }
-
-  public String getSessionToken() {
-    return preferences.getString("SESSION_TOKEN", null);
-  }
-
-  public static void setDeviceOSName(String deviceType) {
-    HappyDroidService.deviceType = deviceType;
-  }
-
-  public static void setDeviceOSVersion(String deviceOSVersion) {
-    HappyDroidService.deviceOSVersion = deviceOSVersion;
-  }
-
-  public String getDeviceId() {
-    return deviceId;
-  }
-
-  public static String getDeviceOSVersion() {
-    return deviceOSVersion;
-  }
-
-  public static String getDeviceType() {
-    return deviceType;
-  }
-
-  public synchronized void setSessionToken(String token) {
-    preferences.putString("SESSION_TOKEN", token);
-    preferences.flush();
   }
 
   public void withNetworkConnection(Runnable runnable) {
@@ -233,7 +196,11 @@ public class HappyDroidService {
     return hasNetworkConnection;
   }
 
+  public String getDeviceId() {
+    return null;
+  }
+
   public boolean hasAuthenticated() {
-    return isAuthenticated;
+    return false;
   }
 }

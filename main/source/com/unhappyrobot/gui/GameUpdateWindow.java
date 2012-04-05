@@ -8,8 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.unhappyrobot.gamestate.server.GameUpdate;
-import com.unhappyrobot.gamestate.server.HappyDroidServiceCollection;
+import com.happydroids.server.GameUpdate;
+import com.happydroids.server.HappyDroidServiceCollection;
 
 public class GameUpdateWindow extends TowerWindow {
   private final Table updatePane;

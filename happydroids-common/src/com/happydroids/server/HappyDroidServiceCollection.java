@@ -2,7 +2,7 @@
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
 
-package com.unhappyrobot.gamestate.server;
+package com.happydroids.server;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,7 +30,7 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
       public void run() {
         HttpResponse response = HappyDroidService.instance().makeGetRequest(getBaseResourceUri());
         if (response != null && response.getStatusLine() != null && response.getStatusLine().getStatusCode() == 200) {
-          ObjectMapper objectMapper = HappyDroidServiceObject.getObjectMapper();
+          ObjectMapper objectMapper = HappyDroidService.instance().getObjectMapper();
           try {
             copyValuesFromResponse(response);
           } catch (IOException e) {
@@ -45,7 +45,7 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
   }
 
   private void copyValuesFromResponse(HttpResponse response) throws IOException {
-    HappyDroidServiceCollection collection = HappyDroidServiceObject.getObjectMapper().readValue(new BufferedHttpEntity(response.getEntity()).getContent(), getClass());
+    HappyDroidServiceCollection collection = HappyDroidService.instance().getObjectMapper().readValue(new BufferedHttpEntity(response.getEntity()).getContent(), getClass());
     if (collection != null) {
       Class<?> currentClass = collection.getClass();
 

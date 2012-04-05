@@ -5,6 +5,9 @@
 package com.unhappyrobot.gamestate.server;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.happydroids.HappyDroidConsts;
+import com.happydroids.server.HappyDroidService;
+import com.happydroids.server.HappyDroidServiceObject;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.TowerGame;
 import com.unhappyrobot.gamestate.GameSave;
@@ -26,13 +29,13 @@ public class CrashReport extends HappyDroidServiceObject {
   private final String cause;
 
   public CrashReport(Throwable error) {
-    deviceType = HappyDroidService.getDeviceType();
-    deviceOsVersion = HappyDroidService.getDeviceOSVersion();
+    deviceType = TowerGameService.getDeviceType();
+    deviceOsVersion = TowerGameService.getDeviceOSVersion();
     name = error.getClass().getCanonicalName();
     message = error.getMessage();
     cause = error.getCause().toString();
     try {
-      stackTrace = getObjectMapper().writeValueAsString(error.getStackTrace());
+      stackTrace = HappyDroidService.instance().getObjectMapper().writeValueAsString(error.getStackTrace());
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -46,7 +49,7 @@ public class CrashReport extends HappyDroidServiceObject {
 
   @Override
   public String getBaseResourceUri() {
-    return TowerConsts.HAPPYDROIDS_URI + "/api/v1/crashreport/";
+    return HappyDroidConsts.HAPPYDROIDS_URI + "/api/v1/crashreport/";
   }
 
   @Override

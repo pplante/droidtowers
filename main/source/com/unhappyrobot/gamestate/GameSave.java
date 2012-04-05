@@ -19,6 +19,7 @@ import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.entities.GridObjectPlacementState;
 import com.unhappyrobot.entities.Player;
+import com.unhappyrobot.gamestate.server.TowerGameService;
 import com.unhappyrobot.grid.GameGrid;
 import com.unhappyrobot.grid.GridObjectState;
 import com.unhappyrobot.grid.GridPositionCache;
@@ -29,8 +30,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
-
-import static com.unhappyrobot.gamestate.server.HappyDroidServiceObject.getObjectMapper;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.WRAPPER_OBJECT, property = "class")
@@ -124,7 +123,7 @@ public class GameSave {
   }
 
   public void save(FileHandle gameFile) throws IOException {
-    getObjectMapper().writeValue(gameFile.file(), this);
+    TowerGameService.instance().getObjectMapper().writeValue(gameFile.file(), this);
   }
 
   public String getCloudSaveUri() {
@@ -140,7 +139,7 @@ public class GameSave {
   }
 
   public static GameSave readFile(FileHandle fileHandle) throws IOException {
-    GameSave gameSave = getObjectMapper().readValue(fileHandle.read(), GameSave.class);
+    GameSave gameSave = TowerGameService.instance().getObjectMapper().readValue(fileHandle.read(), GameSave.class);
     if (gameSave != null) {
       gameSave.baseFilename = fileHandle.name();
     }

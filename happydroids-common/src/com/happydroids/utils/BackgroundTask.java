@@ -2,27 +2,28 @@
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
 
-package com.unhappyrobot.utils;
-
-import com.badlogic.gdx.Gdx;
-import com.unhappyrobot.TowerGame;
+package com.happydroids.utils;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 public abstract class BackgroundTask {
   private static final String TAG = BackgroundTask.class.getSimpleName();
   protected static ExecutorService threadPool;
 
   protected Thread thread;
+  private static Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
 
   static {
     threadPool = Executors.newCachedThreadPool(new ThreadFactory() {
       public Thread newThread(Runnable r) {
         Thread thread = new Thread(r, "BackgroundTaskThread");
-        thread.setUncaughtExceptionHandler(TowerGame.getUncaughtExceptionHandler());
+        if (uncaughtExceptionHandler != null) {
+          thread.setUncaughtExceptionHandler(uncaughtExceptionHandler);
+        }
         thread.setPriority(Thread.MIN_PRIORITY);
         thread.setDaemon(true);
         return thread;
@@ -55,11 +56,15 @@ public abstract class BackgroundTask {
   public static void dispose() {
     if (threadPool != null) {
       threadPool.shutdown();
-      Gdx.app.debug(TAG, "Shutting down background tasks...");
+      Logger.getLogger(TAG).info("Shutting down background tasks...");
       try {
         threadPool.awaitTermination(5, TimeUnit.SECONDS);
       } catch (InterruptedException ignored) {
       }
     }
+  }
+
+  public static void setUncaughtExceptionHandler(Thread.UncaughtExceptionHandler uncaughtExceptionHandler) {
+    BackgroundTask.uncaughtExceptionHandler = uncaughtExceptionHandler;
   }
 }

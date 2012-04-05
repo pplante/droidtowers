@@ -4,7 +4,7 @@
 
 package com.unhappyrobot;
 
-import com.unhappyrobot.gamestate.server.HappyDroidService;
+import com.happydroids.server.HappyDroidService;
 import com.unhappyrobot.gamestate.server.TestHappyDroidService;
 import com.unhappyrobot.tween.TweenSystem;
 import org.junit.runners.model.InitializationError;

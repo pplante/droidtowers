@@ -6,13 +6,12 @@ package com.unhappyrobot;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.happydroids.HappyDroidConsts;
 
-public class TowerConsts {
+public class TowerConsts extends HappyDroidConsts {
   public static boolean DEBUG = true;
-  public static String VERSION = "v0.10.47";
+  public static String VERSION = "v0.10.50";
   public static String GIT_SHA = "c82b6e1";
-  public static final String HAPPYDROIDS_SERVER = "local.happydroids.com";
-  public static final String HAPPYDROIDS_URI = "http://" + HAPPYDROIDS_SERVER;
 
   public static boolean ENABLE_HAPPYDROIDS_CONNECT = true;
 

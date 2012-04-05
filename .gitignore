@@ -2,3 +2,4 @@ sparky/bin/
 out/
 android/gen
 libbullet.so
+sparky/tmp/

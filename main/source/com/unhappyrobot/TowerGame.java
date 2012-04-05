@@ -16,11 +16,16 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.happydroids.server.ApiCollectionRunnable;
+import com.happydroids.server.GameUpdate;
+import com.happydroids.server.GameUpdateCollection;
+import com.happydroids.server.HappyDroidServiceCollection;
+import com.happydroids.utils.BackgroundTask;
 import com.unhappyrobot.achievements.AchievementEngine;
 import com.unhappyrobot.actions.ActionManager;
 import com.unhappyrobot.controllers.PathSearchManager;
 import com.unhappyrobot.entities.GameObject;
-import com.unhappyrobot.gamestate.server.*;
+import com.unhappyrobot.gamestate.server.TowerGameService;
 import com.unhappyrobot.gui.*;
 import com.unhappyrobot.input.CameraController;
 import com.unhappyrobot.input.CameraControllerAccessor;
@@ -32,7 +37,6 @@ import com.unhappyrobot.scenes.Scene;
 import com.unhappyrobot.scenes.SplashScene;
 import com.unhappyrobot.tween.GameObjectAccessor;
 import com.unhappyrobot.tween.TweenSystem;
-import com.unhappyrobot.utils.BackgroundTask;
 import org.apache.http.HttpResponse;
 
 public class TowerGame implements ApplicationListener {
@@ -70,10 +74,12 @@ public class TowerGame implements ApplicationListener {
 
     TowerAssetManager.assetManager();
 
+    BackgroundTask.setUncaughtExceptionHandler(uncaughtExceptionHandler);
+
     new BackgroundTask() {
       @Override
       public void execute() {
-        HappyDroidService.instance().registerDevice();
+        TowerGameService.instance().registerDevice();
       }
     }.run();
 

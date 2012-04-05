@@ -19,7 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.TowerGame;
-import com.unhappyrobot.gamestate.server.HappyDroidService;
+import com.unhappyrobot.gamestate.server.TowerGameService;
 import com.unhappyrobot.gui.*;
 import com.unhappyrobot.tween.TweenSystem;
 
@@ -49,7 +49,7 @@ public class MainMenuScene extends Scene {
             .repeatYoyo(Tween.INFINITY, 250)
             .start(TweenSystem.getTweenManager());
 
-    if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT && !HappyDroidService.instance().hasAuthenticated()) {
+    if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT && !TowerGameService.instance().hasAuthenticated()) {
       TextButton connectFacebookButton = new TextButton("login to happydroids.com", getGuiSkin());
       connectFacebookButton.setClickListener(new LaunchWindowClickListener(ConnectToHappyDroidsWindow.class));
       container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);

@@ -6,15 +6,15 @@ package com.unhappyrobot;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.unhappyrobot.gamestate.server.HappyDroidService;
+import com.unhappyrobot.gamestate.server.TowerGameService;
 import com.unhappyrobot.platform.DesktopBrowserUtil;
 import com.unhappyrobot.platform.DesktopUncaughtExceptionHandler;
 import com.unhappyrobot.utils.OSValidator;
 
 public class DesktopGame {
   public static void main(String[] args) {
-    HappyDroidService.setDeviceOSName(OSValidator.getOSType());
-    HappyDroidService.setDeviceOSVersion(System.getProperty("os.version"));
+    TowerGameService.setDeviceOSName(OSValidator.getOSType());
+    TowerGameService.setDeviceOSVersion(System.getProperty("os.version"));
 
     LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
     config.title = "TowerSim";
