@@ -36,17 +36,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="android" level="project" />
     <orderEntry type="module" module-name="main" exported="" />
-    <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../main/libs/test/junit-4.9.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="jdk" jdkName="Android 2.3.3 Google APIs" jdkType="Android SDK" />
     <orderEntry type="module" module-name="happydroids-common" />
+    <orderEntry type="library" scope="TEST" name="junit-mockito-great-expectations" level="project" />
   </component>
 </module>
 

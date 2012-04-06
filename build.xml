@@ -4,13 +4,40 @@
   <property file="build.properties"/>
 
   <property name="root.dir" value="."/>
+  <property name="tools.dir" value="${root.dir}/tools"/>
   <property name="src.dir" value="source"/>
   <property name="build.dir" value="out/desktop-jar"/>
   <property name="classes.dir" value="${build.dir}/classes"/>
 
+  <property name="release-jar" value="${build.dir}/${ant.project.name}-release.jar"/>
+
+  <property name="happydroids.common" value="${root.dir}/happydroids-common"/>
+  <property name="happydroids.common.source" value="${happydroids.common}/src"/>
+  <property name="happydroids.common.libs" value="${happydroids.common}/libs/main"/>
+
+  <property name="droidtowers.main" value="${root.dir}/main"/>
+  <property name="droidtowers.main.source" value="${droidtowers.main}/source"/>
+  <property name="droidtowers.main.libs" value="${droidtowers.main}/libs/main"/>
+
+  <property name="droidtowers.desktop" value="${root.dir}/desktop"/>
+  <property name="droidtowers.desktop.source" value="${droidtowers.desktop}/source"/>
+  <property name="droidtowers.desktop.libs" value="${droidtowers.desktop}/libs/main"/>
+
+  <path id="javac2.class.path">
+    <pathelement location="${tools.dir}/intellij/asm.jar"/>
+    <pathelement location="${tools.dir}/intellij/asm-commons.jar"/>
+    <pathelement location="${tools.dir}/intellij/asm-tree-3.0.jar"/>
+    <pathelement location="${tools.dir}/intellij/jdom.jar"/>
+    <pathelement location="${tools.dir}/intellij/forms_rt.jar"/>
+    <pathelement location="${tools.dir}/intellij/javac2.jar"/>
+    <pathelement location="${tools.dir}/intellij/annotations.jar"/>
+  </path>
+  <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.class.path"/>
+
   <path id="classpath">
-    <fileset dir="${root.dir}/main/libs/main" includes="**/*.jar"/>
-    <fileset dir="${root.dir}/desktop/libs/main" includes="**/*.jar"/>
+    <fileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
+    <fileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
+    <fileset dir="${droidtowers.desktop.libs}" includes="**/*.jar"/>
   </path>
 
   <target name="clean">
@@ -23,51 +50,37 @@
 
     <javac srcdir="${root.dir}/pipeline/src" destdir="${build.dir}/tool-classes/" classpathref="classpath"
            failonerror="true"/>
-    <java classname="com.unhappyrobot.pipeline.GenerateAssetManagerFileList" classpath="${build.dir}/tool-classes/"
+    <java classname="com.happydroids.droidtowers.pipeline.GenerateAssetManagerFileList" classpath="${build.dir}/tool-classes/"
           failonerror="true" classpathref="classpath" fork="true" dir="${root.dir}/android"/>
 
-    <javac srcdir="${root.dir}/main/${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
-    <javac srcdir="${root.dir}/desktop/${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+    <javac2 destdir="${classes.dir}">
+      <classpath refid="classpath"/>
+      <src path="${happydroids.common.source}"/>
+      <src path="${droidtowers.main.source}"/>
+      <src path="${droidtowers.desktop.source}"/>
+    </javac2>
   </target>
 
   <target name="jar" depends="compile">
-    <jar destfile="${build.dir}/${ant.project.name}-release.jar" basedir="${build.dir}/classes"
+    <jar destfile="${release-jar}" basedir="${build.dir}/classes"
          filesetmanifest="mergewithoutmain">
       <manifest>
         <attribute name="Main-Class" value="com.unhappyrobot.DesktopGame"/>
         <attribute name="Class-Path" value="."/>
       </manifest>
       <fileset dir="${build.dir}/classes"/>
-      <zipgroupfileset dir="${root.dir}/main/libs/main" includes="**/*.jar"/>
-      <zipgroupfileset dir="${root.dir}/desktop/libs/main" includes="**/*.jar"/>
-      <zipfileset dir="${root.dir}/android/assets/"/>
-    </jar>
-  </target>
-
-  <target name="multi-jar" depends="compile">
-    <jar destfile="${build.dir}/${ant.project.name}-gamecode.jar" basedir="${build.dir}/classes"
-         filesetmanifest="mergewithoutmain" level="9">
-      <manifest>
-        <attribute name="Main-Class" value="com.unhappyrobot.DesktopGame"/>
-        <attribute name="Class-Path" value="."/>
-      </manifest>
-      <fileset dir="${build.dir}/classes"/>
-    </jar>
-    <jar destfile="${build.dir}/${ant.project.name}-libs-main.jar"
-         filesetmanifest="mergewithoutmain" level="9">
-      <zipgroupfileset dir="${root.dir}/main/libs/main" includes="**/*.jar"/>
-    </jar>
-    <jar destfile="${build.dir}/${ant.project.name}-libs-desktop.jar"
-         filesetmanifest="mergewithoutmain" level="9">
-      <zipgroupfileset dir="${root.dir}/desktop/libs/main" includes="**/*.jar"/>
-    </jar>
-    <jar destfile="${build.dir}/${ant.project.name}-assets.jar"
-         filesetmanifest="mergewithoutmain" level="9">
+      <zipgroupfileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
+      <zipgroupfileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
+      <zipgroupfileset dir="${droidtowers.desktop.libs}" includes="**/*.jar"/>
       <zipfileset dir="${root.dir}/android/assets/"/>
     </jar>
   </target>
 
   <target name="build" depends="clean,jar"/>
+
+  <target name="run" depends="build">
+    <java jar="${release-jar}" fork="true"/>
+  </target>
 
   <target name="osx" depends="build" description="Build an OSX target">
     <property file="release.properties"/>

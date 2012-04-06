@@ -13,7 +13,6 @@ import com.happydroids.utils.BackgroundTask;
 import jodd.util.ClassLoaderUtil;
 import org.apache.http.HttpResponse;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -164,7 +163,7 @@ public class SparkyMain extends JFrame {
     try {
       ClassLoaderUtil.addUrlToClassPath(mergedJarFile.toURI().toURL());
 
-      Class aClass = ClassLoaderUtil.loadClass("com.unhappyrobot.DesktopGame");
+      Class aClass = ClassLoaderUtil.loadClass("com.happydroids.droidtowers.unhappyrobot.DesktopGame");
       Method main = aClass.getDeclaredMethod("main", String[].class);
       Object instance = aClass.newInstance();
       main.invoke(instance, new Object[]{null});
@@ -197,25 +196,21 @@ public class SparkyMain extends JFrame {
   }
 
   public static void main(String[] args) {
-    setDefaultLookAndFeelDecorated(true);
+    SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        setDefaultLookAndFeelDecorated(true);
 
-    SparkyMain window = new SparkyMain();
-    window.addWindowStateListener(new WindowStateListener() {
-      public void windowStateChanged(WindowEvent windowEvent) {
-        System.out.println("windowEvent = " + windowEvent);
+        SparkyMain window = new SparkyMain();
+        window.addWindowStateListener(new WindowStateListener() {
+          public void windowStateChanged(WindowEvent windowEvent) {
+            System.out.println("windowEvent = " + windowEvent);
+          }
+        });
+        window.pack();
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
       }
     });
-    window.pack();
-    window.setLocationRelativeTo(null);
-    window.setVisible(true);
-  }
-
-  private void createUIComponents() {
-    try {
-      happyDroidsLogo = new JLabel(new ImageIcon(ImageIO.read(new File("assets/happy-droids-logo.png"))));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
 
 }

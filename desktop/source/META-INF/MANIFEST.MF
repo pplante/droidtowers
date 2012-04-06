@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: com.unhappyrobot.DesktopGame
+Main-Class: com.happydroids.droidtowers.unhappyrobot.DesktopGame
 

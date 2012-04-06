@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
   ~ Copyright (c) 2012. HappyDroids LLC, All rights reserved.
   -->
@@ -24,6 +25,7 @@
 
   <path id="jdk.classpath.1.6">
     <fileset dir="${jdk.home.1.6}">
+      <include name="../Classes/classes.jar"/>
       <include name="lib/deploy.jar"/>
       <include name="lib/dt.jar"/>
       <include name="lib/javaws.jar"/>
@@ -35,7 +37,6 @@
       <include name="../Classes/alt-rt.jar"/>
       <include name="../Classes/alt-string.jar"/>
       <include name="../Classes/charsets.jar"/>
-      <include name="../Classes/classes.jar"/>
       <include name="../Classes/jsse.jar"/>
       <include name="../Classes/ui.jar"/>
       <include name="lib/ext/apple_provider.jar"/>
@@ -46,10 +47,41 @@
     </fileset>
   </path>
 
+  <pathconvert targetos="unix" property="jdk.classpath.1.6.unix" refid="jdk.classpath.1.6"/>
+  <pathconvert targetos="unix" property="classpath.unix" refid="classpath"/>
+
+  <path id="javac2.class.path">
+    <pathelement location="../tools/intellij/asm.jar"/>
+    <pathelement location="../tools/intellij/asm-commons.jar"/>
+    <pathelement location="../tools/intellij/asm-tree-3.0.jar"/>
+    <pathelement location="../tools/intellij/jdom.jar"/>
+    <pathelement location="../tools/intellij/forms_rt.jar"/>
+    <pathelement location="../tools/intellij/javac2.jar"/>
+    <pathelement location="../tools/intellij/annotations.jar"/>
+  </path>
+  <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.class.path"/>
+
   <target name="compile">
     <mkdir dir="${classes.dir}"/>
-    <javac srcdir="${root.dir}/../happydroids-common/src" destdir="${classes.dir}" classpathref="classpath"/>
-    <javac srcdir="${root.dir}/${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+
+    <javac2 destdir="${classes.dir}" debug="${compiler.debug}" fork="true" executable="javac">
+      <!--<compilerarg line="${compiler.args.suite}"/>-->
+      <!--<bootclasspath refid="suite.module.bootclasspath"/>-->
+      <src path="${root.dir}/../happydroids-common/src"/>
+      <classpath refid="classpath"/>
+      <src path="${root.dir}/${src.dir}"/>
+    </javac2>
+
+    <!--<javac destdir="${classes.dir}" source="1.6">-->
+    <!--<src path="${root.dir}/../happydroids-common/src"/>-->
+    <!--<src path="${root.dir}/${src.dir}"/>-->
+    <!--<classpath refid="classpath"/>-->
+    <!--</javac>-->
+    <copy todir="${classes.dir}/com/intellij">
+      <fileset dir="intellij/intellij">
+        <include name="**/*"/>
+      </fileset>
+    </copy>
   </target>
 
   <target name="jar" depends="compile">
@@ -61,42 +93,50 @@
       </manifest>
       <fileset dir="${build.dir}/classes"/>
       <zipfileset dir="${root.dir}/assets/"/>
-      <zipgroupfileset dir="${root.dir}/../happydroids-common/libs/main" includes="**/*.jar"/>
-      <zipgroupfileset dir="${root.dir}/libs" includes="**/*.jar"/>
+      <!--<zipgroupfileset dir="${root.dir}/../happydroids-common/libs/main" includes="**/*.jar"/>-->
+      <!--<zipgroupfileset dir="${root.dir}/libs" includes="**/*.jar"/>-->
     </jar>
   </target>
 
-  <target name="yguard" depends="jar">
-    <taskdef name="yguard"
-             classname="com.yworks.yguard.YGuardTask"
-             classpath="../tools/yguard.jar"/>
-    <yguard>
-      <inoutpair in="${release-jar}" out="${obfuscated-jar}"/>
-      <externalclasses>
-        <pathelement location="${root.dir}/../happydroids-common/libs/main"/>
-        <pathelement location="${root.dir}/libs"/>
-        <pathelement location="${root.dir}/src/jodd"/>
-      </externalclasses>
-      <shrink logfile="shrinklog.xml" createstubs="true">
-        <property name="error-checking" value="pedantic"/>
-        <keep>
-          <method name="void main(java.lang.String[])" class="com.happydroids.sparky.SparkyMain"/>
-          <class classes="public"/>
-        </keep>
-      </shrink>
+  <target name="proguard" depends="jar">
+    <taskdef resource="proguard/ant/task.properties"
+             classpath="../tools/proguard/lib/proguard.jar"/>
+    <proguard allowaccessmodification="true"
+              usemixedcaseclassnames="false"
+              skipnonpubliclibraryclasses="false"
+              preverify="true"
+              optimize="false"
+              obfuscate="false"
+              verbose="true"
+              printmapping="sparky.map"
+              defaultpackage=""
+              mergeinterfacesaggressively="false">
+      <injar path="${release-jar}"/>
+      <injar refid="classpath" filter="!META-INF/**,!extras.manifest,!**/*.jj"/>
+      <outjar path="${obfuscated-jar}"/>
+      <libraryjar path="${jdk.classpath.1.6.unix}"/>
+      <libraryjar path="../tools/jsr305-2.0.0.jar"/>
 
-      <rename mainclass="com.happydroids.sparky.SparkyMain" logfile="renamelog.xml">
-        <property name="error-checking" value="pedantic"/>
-        <keep>
-          <class classes="public"/>
-          <package>
-            <patternset>
-              <include name="jodd.**"/>
-            </patternset>
-          </package>
-        </keep>
-      </rename>
-    </yguard>
+      <optimizations filter="!code/simplification/arithmetic"/>
+      <keepattributes name="*Annotation*"/>
+      <keep name="com.happydroids.sparky.SparkyMain" allowobfuscation="false">
+        <method name="main"/>
+        <constructor/>
+        <method name="*"/>
+        <field/>
+      </keep>
+      <dontwarn/>
+      <dontnote name="com.google.common.base.FinalizableReferenceQueue"/>
+      <dontnote name="com.google.common.base.internal.Finalizer"/>
+      <dontnote name="jodd.**"/>
+      <dontnote name="org.apache.**"/>
+      <dontnote name="javax.**"/>
+      <dontnote name="com.fasterxml.jackson.databind.deser.BasicDeserializerFactory"/>
+    </proguard>
+  </target>
+
+  <target name="run" depends="jar">
+    <java jar="${release-jar}" fork="true"/>
   </target>
 
   <target name="build" depends="jar"/>
@@ -110,7 +150,7 @@
 
   <!--<jarbundler dir="${basedir}/out/" verbose="false" showPlist="false"-->
   <!--name="${ant.project.name}"-->
-  <!--mainclass="com.unhappyrobot.DesktopGame"-->
+  <!--mainclass="com.happydroids.droidtowers.unhappyrobot.DesktopGame"-->
   <!--jar="${build.dir}/${ant.project.name}-release.jar"-->
   <!--icon="icons/${ant.project.name}.icns"-->
   <!--version="${project.version}"/>-->

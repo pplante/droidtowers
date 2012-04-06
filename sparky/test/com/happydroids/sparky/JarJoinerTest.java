@@ -19,7 +19,7 @@ import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import static com.unhappyrobot.Expect.expect;
+import static com.happydroids.droidtowers.unhappyrobot.Expect.expect;
 
 
 public class JarJoinerTest {
