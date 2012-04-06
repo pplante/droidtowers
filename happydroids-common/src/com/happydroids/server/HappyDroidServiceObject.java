@@ -62,13 +62,7 @@ public abstract class HappyDroidServiceObject {
   public void save(final ApiRunnable afterSave) {
     HappyDroidService.instance().withNetworkConnection(new Runnable() {
       public void run() {
-        if (!HappyDroidService.instance().haveNetworkConnection()) {
-          afterSave.onError(null, HttpStatusCode.ClientClosedRequest, HappyDroidServiceObject.this);
-          return;
-        } else if (requireAuthentication() && !HappyDroidService.instance().hasAuthenticated()) {
-          afterSave.onError(null, HttpStatusCode.NetworkAuthenticationRequired, HappyDroidServiceObject.this);
-          return;
-        }
+        if (!beforeSaveValidation(afterSave)) return;
 
         HttpResponse response;
         if (resourceUri == null) {
@@ -88,6 +82,16 @@ public abstract class HappyDroidServiceObject {
         afterSave.handleResponse(response, HappyDroidServiceObject.this);
       }
     });
+  }
+
+  @SuppressWarnings("unchecked")
+  protected boolean beforeSaveValidation(ApiRunnable afterSave) {
+    if (!HappyDroidService.instance().haveNetworkConnection()) {
+      afterSave.onError(null, HttpStatusCode.ClientClosedRequest, this);
+      return false;
+    }
+
+    return true;
   }
 
   private void copyValuesFromResponse(HttpResponse response) {

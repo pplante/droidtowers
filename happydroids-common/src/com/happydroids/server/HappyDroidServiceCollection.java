@@ -29,6 +29,7 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
     HappyDroidService.instance().withNetworkConnection(new Runnable() {
       public void run() {
         HttpResponse response = HappyDroidService.instance().makeGetRequest(getBaseResourceUri());
+        System.out.println("response = " + response);
         if (response != null && response.getStatusLine() != null && response.getStatusLine().getStatusCode() == 200) {
           ObjectMapper objectMapper = HappyDroidService.instance().getObjectMapper();
           try {

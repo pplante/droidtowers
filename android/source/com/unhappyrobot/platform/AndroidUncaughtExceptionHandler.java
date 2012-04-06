@@ -8,8 +8,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import com.badlogic.gdx.Gdx;
-import com.unhappyrobot.gamestate.server.CrashReport;
-import com.unhappyrobot.utils.BackgroundTask;
+import com.happydroids.platform.HappyDroidUncaughtExceptionHandler;
+import com.happydroids.server.CrashReport;
+import com.happydroids.utils.BackgroundTask;
 
 public class AndroidUncaughtExceptionHandler extends HappyDroidUncaughtExceptionHandler {
   private static final String TAG = AndroidUncaughtExceptionHandler.class.getSimpleName();

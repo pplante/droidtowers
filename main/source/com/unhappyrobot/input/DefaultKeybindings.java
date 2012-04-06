@@ -4,7 +4,7 @@
 
 package com.unhappyrobot.input;
 
-import com.unhappyrobot.TowerConsts;
+import com.happydroids.HappyDroidConsts;
 import com.unhappyrobot.scenes.TowerScene;
 
 public class DefaultKeybindings {
@@ -33,7 +33,7 @@ public class DefaultKeybindings {
       }
     };
 
-    if (TowerConsts.DEBUG) {
+    if (HappyDroidConsts.DEBUG) {
       toggleGridLines = new InputCallback() {
         public boolean run(float timeDelta) {
           towerScene.getGameGridRenderer().toggleGridLines();
@@ -64,7 +64,7 @@ public class DefaultKeybindings {
     InputSystem.instance().bind(new int[]{InputSystem.Keys.PLUS, InputSystem.Keys.UP}, speedUpTime);
     InputSystem.instance().bind(new int[]{InputSystem.Keys.MINUS, InputSystem.Keys.DOWN}, slowDownTime);
 
-    if (TowerConsts.DEBUG) {
+    if (HappyDroidConsts.DEBUG) {
       InputSystem.instance().bind(InputSystem.Keys.G, toggleGridLines);
       InputSystem.instance().bind(InputSystem.Keys.T, toggleTransitLines);
       InputSystem.instance().bind(InputSystem.Keys.NUM_0, resetCameraZoom);
@@ -74,7 +74,7 @@ public class DefaultKeybindings {
   public void unbindKeys() {
     InputSystem.instance().unbind(speedUpTime, slowDownTime);
 
-    if (TowerConsts.DEBUG) {
+    if (HappyDroidConsts.DEBUG) {
       InputSystem.instance().unbind(toggleGridLines, toggleTransitLines, resetCameraZoom);
     }
   }

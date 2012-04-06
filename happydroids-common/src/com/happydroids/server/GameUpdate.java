@@ -13,6 +13,8 @@ public class GameUpdate extends HappyDroidServiceObject {
   public String gitSha;
   public String version;
   public String notes;
+  public String fullRelease;
+  public String patchFile;
 
   @Override
   public String getBaseResourceUri() {
@@ -22,5 +24,17 @@ public class GameUpdate extends HappyDroidServiceObject {
   @Override
   protected boolean requireAuthentication() {
     return false;
+  }
+
+  @Override
+  public String toString() {
+    return "GameUpdate{" +
+                   "fullRelease='" + fullRelease + '\'' +
+                   ", releasedOn=" + releasedOn +
+                   ", gitSha='" + gitSha + '\'' +
+                   ", version='" + version + '\'' +
+                   ", notes='" + notes + '\'' +
+                   ", patchFile='" + patchFile + '\'' +
+                   '}';
   }
 }

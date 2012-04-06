@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jackson">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/jackson-annotations-2.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/jackson-core-2.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/jackson-databind-2.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -7,7 +7,6 @@
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/main/libs/sources/tween-engine-api-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/main/libs/sources/commons-codec-1.4-sources.jar!/" />
     </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/main/libs/main" recursive="false" />
   </library>

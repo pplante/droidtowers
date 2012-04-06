@@ -6,7 +6,7 @@ package com.unhappyrobot.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.unhappyrobot.TowerConsts;
+import com.happydroids.HappyDroidConsts;
 import com.unhappyrobot.TowerGame;
 
 public class RuntimeExceptionDialog extends Dialog {
@@ -22,7 +22,7 @@ public class RuntimeExceptionDialog extends Dialog {
     setTitle("An unexpected error occurred!");
 
     String message = "Sorry, but something has gone wrong.\nSome anonymous data detailing the error has been sent to happydroids for analysis.\n\n";
-    if (TowerConsts.DEBUG) {
+    if (HappyDroidConsts.DEBUG) {
       message += error;
     }
 

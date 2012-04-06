@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+  -->
+<project name="HappyDroids-Sparky" default="jar">
+  <property name="compiler.debug" value="off"/>
+  <property file="build.properties"/>
+
+  <property name="root.dir" value="."/>
+  <property name="src.dir" value="src"/>
+  <property name="build.dir" value="out/desktop-jar"/>
+  <property name="classes.dir" value="${build.dir}/classes"/>
+  <property name="release-jar" value="${build.dir}/${ant.project.name}-release.jar"/>
+  <property name="obfuscated-jar" value="${build.dir}/${ant.project.name}-obfuscated.jar"/>
+
+  <path id="classpath">
+    <fileset dir="${root.dir}/../happydroids-common/libs/main" includes="**/*.jar"/>
+    <fileset dir="${root.dir}/libs" includes="**/*.jar"/>
+  </path>
+
+  <target name="clean">
+    <delete dir="${build.dir}"/>
+  </target>
+
+  <path id="jdk.classpath.1.6">
+    <fileset dir="${jdk.home.1.6}">
+      <include name="lib/deploy.jar"/>
+      <include name="lib/dt.jar"/>
+      <include name="lib/javaws.jar"/>
+      <include name="lib/jce.jar"/>
+      <include name="lib/jconsole.jar"/>
+      <include name="lib/management-agent.jar"/>
+      <include name="lib/plugin.jar"/>
+      <include name="lib/sa-jdi.jar"/>
+      <include name="../Classes/alt-rt.jar"/>
+      <include name="../Classes/alt-string.jar"/>
+      <include name="../Classes/charsets.jar"/>
+      <include name="../Classes/classes.jar"/>
+      <include name="../Classes/jsse.jar"/>
+      <include name="../Classes/ui.jar"/>
+      <include name="lib/ext/apple_provider.jar"/>
+      <include name="lib/ext/dnsns.jar"/>
+      <include name="lib/ext/localedata.jar"/>
+      <include name="lib/ext/sunjce_provider.jar"/>
+      <include name="lib/ext/sunpkcs11.jar"/>
+    </fileset>
+  </path>
+
+  <target name="compile">
+    <mkdir dir="${classes.dir}"/>
+    <javac srcdir="${root.dir}/../happydroids-common/src" destdir="${classes.dir}" classpathref="classpath"/>
+    <javac srcdir="${root.dir}/${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+  </target>
+
+  <target name="jar" depends="compile">
+    <jar destfile="${release-jar}" basedir="${build.dir}/classes"
+         filesetmanifest="mergewithoutmain" duplicate="preserve">
+      <manifest>
+        <attribute name="Main-Class" value="com.happydroids.sparky.SparkyMain"/>
+        <attribute name="Class-Path" value="."/>
+      </manifest>
+      <fileset dir="${build.dir}/classes"/>
+      <zipfileset dir="${root.dir}/assets/"/>
+      <zipgroupfileset dir="${root.dir}/../happydroids-common/libs/main" includes="**/*.jar"/>
+      <zipgroupfileset dir="${root.dir}/libs" includes="**/*.jar"/>
+    </jar>
+  </target>
+
+  <target name="yguard" depends="jar">
+    <taskdef name="yguard"
+             classname="com.yworks.yguard.YGuardTask"
+             classpath="../tools/yguard.jar"/>
+    <yguard>
+      <inoutpair in="${release-jar}" out="${obfuscated-jar}"/>
+      <externalclasses>
+        <pathelement location="${root.dir}/../happydroids-common/libs/main"/>
+        <pathelement location="${root.dir}/libs"/>
+        <pathelement location="${root.dir}/src/jodd"/>
+      </externalclasses>
+      <shrink logfile="shrinklog.xml" createstubs="true">
+        <property name="error-checking" value="pedantic"/>
+        <keep>
+          <method name="void main(java.lang.String[])" class="com.happydroids.sparky.SparkyMain"/>
+          <class classes="public"/>
+        </keep>
+      </shrink>
+
+      <rename mainclass="com.happydroids.sparky.SparkyMain" logfile="renamelog.xml">
+        <property name="error-checking" value="pedantic"/>
+        <keep>
+          <class classes="public"/>
+          <package>
+            <patternset>
+              <include name="jodd.**"/>
+            </patternset>
+          </package>
+        </keep>
+      </rename>
+    </yguard>
+  </target>
+
+  <target name="build" depends="jar"/>
+
+  <!--<target name="osx" depends="build" description="Build an OSX target">-->
+  <!--<property file="release.properties"/>-->
+
+  <!--<taskdef name="jarbundler"-->
+  <!--classpath="../tools/jarbundler-2.2.0.jar"-->
+  <!--classname="net.sourceforge.jarbundler.JarBundler"/>-->
+
+  <!--<jarbundler dir="${basedir}/out/" verbose="false" showPlist="false"-->
+  <!--name="${ant.project.name}"-->
+  <!--mainclass="com.unhappyrobot.DesktopGame"-->
+  <!--jar="${build.dir}/${ant.project.name}-release.jar"-->
+  <!--icon="icons/${ant.project.name}.icns"-->
+  <!--version="${project.version}"/>-->
+
+  <!--<delete dir="${artifacts.temp.dir}"/>-->
+  <!--</target>-->
+
+  <!--<property name="launch4j.dir" location="./tools/launch4j"/>-->
+
+  <!--<target name="exe" depends="build" description="Build a Windows target">-->
+  <!--<property file="release.properties"/>-->
+
+  <!--<taskdef name="launch4j"-->
+  <!--classname="net.sf.launch4j.ant.Launch4jTask"-->
+  <!--classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar"/>-->
+
+  <!--<launch4j configfile="./desktop/targets/windows/config.xml"/>-->
+  <!--</target>-->
+
+  <!--<target name="build-all-platforms" depends="clean,exe,osx">-->
+  <!--<delete file="${basedir}/out/${ant.project.name}.zip" failonerror="false"/>-->
+  <!--<exec executable="zip" dir="${basedir}/out" output="/dev/null">-->
+  <!--<arg value="-rX"/>-->
+  <!--<arg value="DroidTowers.zip"/>-->
+  <!--<arg value="DroidTowers.app"/>-->
+  <!--</exec>-->
+  <!--</target>-->
+</project>

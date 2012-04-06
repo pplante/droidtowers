@@ -6,15 +6,15 @@ package com.unhappyrobot;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.unhappyrobot.gamestate.server.TowerGameService;
+import com.happydroids.server.HappyDroidService;
 import com.unhappyrobot.platform.DesktopBrowserUtil;
-import com.unhappyrobot.platform.DesktopUncaughtExceptionHandler;
+import com.happydroids.platform.HappyDroidsDesktopUncaughtExceptionHandler;
 import com.unhappyrobot.utils.OSValidator;
 
 public class DesktopGame {
   public static void main(String[] args) {
-    TowerGameService.setDeviceOSName(OSValidator.getOSType());
-    TowerGameService.setDeviceOSVersion(System.getProperty("os.version"));
+    HappyDroidService.setDeviceOSName(OSValidator.getOSType());
+    HappyDroidService.setDeviceOSVersion(System.getProperty("os.version"));
 
     LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
     config.title = "TowerSim";
@@ -25,7 +25,7 @@ public class DesktopGame {
 //    config.vSyncEnabled = false;
 
     TowerGame towerGame = new TowerGame();
-    towerGame.setUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
+    towerGame.setUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
     towerGame.setPlatformBrowserUtil(new DesktopBrowserUtil());
 
     new LwjglApplication(new LwjglApplicationShim(towerGame), config);

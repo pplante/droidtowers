@@ -1,15 +1,13 @@
 <component name="libraryTable">
   <library name="junit-mockito-great-expectations">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/main/libs/test/mockito-all-1.9.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/main/libs/test/asm-commons-3.3.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/main/libs/test/junit-4.9.jar!/" />
-      <root url="jar://$PROJECT_DIR$/main/libs/test/great-expectations-0.10.jar!/" />
-      <root url="jar://$PROJECT_DIR$/main/libs/test/asm-3.3.1.jar!/" />
+      <root url="file://$PROJECT_DIR$/happydroids-common/libs/test" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/main/libs/test/mockito-all-1.9.0.jar!/" />
+      <root url="file://$PROJECT_DIR$/happydroids-common/libs/test" />
     </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/happydroids-common/libs/test" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/happydroids-common/libs/test" recursive="false" type="SOURCES" />
   </library>
 </component>

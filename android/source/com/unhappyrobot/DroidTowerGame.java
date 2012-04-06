@@ -7,7 +7,7 @@ package com.unhappyrobot;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
-import com.unhappyrobot.gamestate.server.HappyDroidService;
+import com.happydroids.server.HappyDroidService;
 import com.unhappyrobot.platform.AndroidBrowserUtil;
 import com.unhappyrobot.platform.AndroidUncaughtExceptionHandler;
 

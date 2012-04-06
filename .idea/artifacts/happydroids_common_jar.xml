@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="happydroids-common:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/happydroids_common_jar</output-path>
+    <root id="archive" name="happydroids-common.jar">
+      <element id="module-output" name="happydroids-common" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/guava-11.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/jsr305-2.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/httpclient-4.1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/httpclient-cache-4.1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/httpcore-4.1.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/httpmime-4.1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/jackson-annotations-2.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/jackson-core-2.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/jackson-databind-2.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/commons-codec-1.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/commons-lang3-3.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/commons-logging-1.1.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

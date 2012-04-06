@@ -19,8 +19,6 @@ import java.util.UUID;
 public class TowerGameService extends HappyDroidService {
   private static final String TAG = TowerGameService.class.getSimpleName();
 
-  private static String deviceType;
-  private static String deviceOSVersion;
   private Preferences preferences;
   private String deviceId;
   private boolean isAuthenticated;
@@ -42,22 +40,6 @@ public class TowerGameService extends HappyDroidService {
     }
 
     return (TowerGameService) _instance;
-  }
-
-  public static void setDeviceOSName(String deviceType) {
-    TowerGameService.deviceType = deviceType;
-  }
-
-  public static void setDeviceOSVersion(String deviceOSVersion) {
-    TowerGameService.deviceOSVersion = deviceOSVersion;
-  }
-
-  public static String getDeviceOSVersion() {
-    return deviceOSVersion;
-  }
-
-  public static String getDeviceType() {
-    return deviceType;
   }
 
   public void registerDevice() {

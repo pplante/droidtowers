@@ -9,10 +9,6 @@ import com.badlogic.gdx.Gdx;
 import com.happydroids.HappyDroidConsts;
 
 public class TowerConsts extends HappyDroidConsts {
-  public static boolean DEBUG = true;
-  public static String VERSION = "v0.10.50";
-  public static String GIT_SHA = "c82b6e1";
-
   public static boolean ENABLE_HAPPYDROIDS_CONNECT = true;
 
   public static final float ONE_MEGABYTE = 1048576.0f;

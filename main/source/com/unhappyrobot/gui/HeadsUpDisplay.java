@@ -12,8 +12,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.happydroids.HappyDroidConsts;
 import com.unhappyrobot.TowerAssetManager;
-import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.entities.CommercialSpace;
 import com.unhappyrobot.entities.GridObject;
 import com.unhappyrobot.grid.GameGrid;
@@ -214,7 +214,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   }
 
   private void updateGridPointTooltip(float x, float y) {
-    if (TowerConsts.DEBUG) {
+    if (HappyDroidConsts.DEBUG) {
       Vector3 worldPoint = camera.getPickRay(Gdx.input.getX(), Gdx.input.getY()).getEndPoint(1);
 
       GridPoint gridPointAtMouse = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);

@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="IntelliGuard" name="Obfuscation">
+      <configuration>
+        <option name="yGuardJar" value="$USER_HOME$/Downloads/yguard-2.4/lib/yguard.jar" />
+        <option name="inFile" value="$MODULE_DIR$/out/sparky.jar" />
+        <option name="outFile" value="$MODULE_DIR$/out/sparky-obfuscated.jar" />
+        <option name="mainclass" value="com.happydroids.sparky.SparkyMain" />
+        <option name="jarConfig">
+          <JarConfig>
+            <option name="jarEntries">
+              <list>
+                <option value="$MODULE_DIR$/../out/production/sparky" />
+                <option value="$MODULE_DIR$/assets" />
+              </list>
+            </option>
+          </JarConfig>
+        </option>
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
@@ -8,18 +28,8 @@
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
+    <orderEntry type="module" module-name="happydroids-common" exported="" scope="PROVIDED" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../main/libs/main/guava-11.0.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/../main/libs/sources/guava-11.0.2-sources.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -31,6 +41,17 @@
     </orderEntry>
     <orderEntry type="library" scope="TEST" name="junit-mockito-great-expectations" level="project" />
     <orderEntry type="library" name="commons-io" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../out/artifacts/happydroids_common_jar/happydroids-common.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/../out/artifacts/happydroids_common_jar/happydroids-common.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
 

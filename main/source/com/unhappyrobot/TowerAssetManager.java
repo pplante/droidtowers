@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Logger;
+import com.happydroids.HappyDroidConsts;
 
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class TowerAssetManager {
   public static AssetManager assetManager() {
     if (assetManager == null) {
       assetManager = new AssetManager();
-      if (TowerConsts.DEBUG) {
+      if (HappyDroidConsts.DEBUG) {
         assetManager.getLogger().setLevel(Logger.ERROR);
       }
 

@@ -5,8 +5,8 @@
 package com.unhappyrobot.gamestate.server;
 
 import com.happydroids.HappyDroidConsts;
+import com.happydroids.server.HappyDroidService;
 import com.happydroids.server.HappyDroidServiceObject;
-import com.unhappyrobot.TowerConsts;
 
 public class Device extends HappyDroidServiceObject {
   public String uuid;
@@ -17,9 +17,9 @@ public class Device extends HappyDroidServiceObject {
 
   public Device() {
     uuid = TowerGameService.instance().getDeviceId();
-    type = TowerGameService.getDeviceType();
-    osVersion = TowerGameService.getDeviceOSVersion();
-    appVersion = TowerConsts.VERSION;
+    type = HappyDroidService.getDeviceType();
+    osVersion = HappyDroidService.getDeviceOSVersion();
+    appVersion = HappyDroidConsts.VERSION;
   }
 
   @Override

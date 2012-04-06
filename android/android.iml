@@ -46,6 +46,7 @@
       </library>
     </orderEntry>
     <orderEntry type="jdk" jdkName="Android 2.3.3 Google APIs" jdkType="Android SDK" />
+    <orderEntry type="module" module-name="happydroids-common" />
   </component>
 </module>
 

@@ -31,6 +31,9 @@ import java.util.logging.Logger;
 public class HappyDroidService {
   private static final String TAG = HappyDroidService.class.getSimpleName();
   protected static HappyDroidService _instance;
+  private static String deviceType;
+  private static String deviceOSVersion;
+
   private boolean hasNetworkConnection;
   private final Set<Runnable> withNetworkConnectionRunnables;
 
@@ -49,6 +52,22 @@ public class HappyDroidService {
   protected HappyDroidService() {
     withNetworkConnectionRunnables = Sets.newHashSet();
     checkForNetwork();
+  }
+
+  public static void setDeviceOSName(String deviceType) {
+    HappyDroidService.deviceType = deviceType;
+  }
+
+  public static void setDeviceOSVersion(String deviceOSVersion) {
+    HappyDroidService.deviceOSVersion = deviceOSVersion;
+  }
+
+  public static String getDeviceOSVersion() {
+    return deviceOSVersion;
+  }
+
+  public static String getDeviceType() {
+    return deviceType;
   }
 
   public ObjectMapper getObjectMapper() {
@@ -147,9 +166,9 @@ public class HappyDroidService {
     try {
       HttpGet request = new HttpGet(uri);
       addDefaultHeaders(request);
-
+      System.out.println("REQ: GET " + uri);
       HttpResponse response = client.execute(request);
-      System.out.println("GET " + uri + ", " + response.getStatusLine());
+      System.out.println("RES: GET " + uri + ", " + response.getStatusLine());
       return response;
     } catch (HttpHostConnectException ignored) {
       System.out.println("Connection failed for: " + uri);

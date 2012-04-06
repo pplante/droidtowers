@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.happydroids.HappyDroidConsts;
 import com.happydroids.server.ApiCollectionRunnable;
 import com.happydroids.server.GameUpdate;
 import com.happydroids.server.GameUpdateCollection;
@@ -62,7 +63,7 @@ public class TowerGame implements ApplicationListener {
   }
 
   public void create() {
-    if (TowerConsts.DEBUG) {
+    if (HappyDroidConsts.DEBUG) {
       Gdx.app.error("DEBUG", "Debug mode is enabled!");
       Gdx.app.setLogLevel(Application.LOG_DEBUG);
     } else {
@@ -99,7 +100,7 @@ public class TowerGame implements ApplicationListener {
     Gdx.input.setInputProcessor(InputSystem.instance());
     InputSystem.instance().addInputProcessor(rootUiStage, 0);
 
-    if (TowerConsts.DEBUG) {
+    if (HappyDroidConsts.DEBUG) {
       InputSystem.instance().addInputProcessor(new DebugInputAdapter(), 1000);
     }
 
@@ -179,7 +180,7 @@ public class TowerGame implements ApplicationListener {
     rootUiStage.act(deltaTime);
     rootUiStage.draw();
 
-    if (TowerConsts.DEBUG) {
+    if (HappyDroidConsts.DEBUG) {
       Table.drawDebug(activeScene.getStage());
       Table.drawDebug(rootUiStage);
 

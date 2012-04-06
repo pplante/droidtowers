@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Sequence;
 import com.badlogic.gdx.scenes.scene2d.interpolators.OvershootInterpolator;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.happydroids.HappyDroidConsts;
 import com.unhappyrobot.TowerAssetManager;
 import com.unhappyrobot.TowerConsts;
 import com.unhappyrobot.TowerGame;
@@ -40,7 +41,7 @@ public class MainMenuScene extends Scene {
     container.add(label).align(Align.CENTER);
     container.row();
 
-    Label versionlabel = LabelStyle.Default.makeLabel(String.format("%s (%s)", TowerConsts.VERSION, TowerConsts.GIT_SHA));
+    Label versionlabel = LabelStyle.Default.makeLabel(String.format("%s (%s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA));
     container.add(versionlabel).right().padTop(-16);
     container.row();
 
