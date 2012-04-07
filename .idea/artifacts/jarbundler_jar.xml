@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="jarbundler:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/jarbundler_jar</output-path>
+    <root id="archive" name="jarbundler.jar">
+      <element id="module-output" name="jarbundler" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/sparky/libs/commons-io-2.2/commons-io-2.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -2,6 +2,7 @@
   <dictionary name="pplante">
     <words>
       <w>acccess</w>
+      <w>accessdenied</w>
       <w>accessor</w>
       <w>async</w>
       <w>bundler</w>
@@ -24,6 +25,7 @@
       <w>mergewithoutmain</w>
       <w>millis</w>
       <w>minimap</w>
+      <w>notfound</w>
       <w>pixmap</w>
       <w>placeable</w>
       <w>runnables</w>

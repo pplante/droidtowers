@@ -1,0 +1,15 @@
+C:\Users\Phil Plante\AppData\Local\Temporary Projects\HappyDroidsWinHandlerRegister\bin\Debug\HappyDroidsWinHandlerRegister.exe
+C:\Users\Phil Plante\AppData\Local\Temporary Projects\HappyDroidsWinHandlerRegister\bin\Debug\HappyDroidsWinHandlerRegister.pdb
+C:\Users\Phil Plante\AppData\Local\Temporary Projects\HappyDroidsWinHandlerRegister\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Phil Plante\AppData\Local\Temporary Projects\HappyDroidsWinHandlerRegister\obj\Debug\HappyDroidsWinHandlerRegister.Properties.Resources.resources
+C:\Users\Phil Plante\AppData\Local\Temporary Projects\HappyDroidsWinHandlerRegister\obj\Debug\HappyDroidsWinHandlerRegister.csproj.GenerateResource.Cache
+C:\Users\Phil Plante\AppData\Local\Temporary Projects\HappyDroidsWinHandlerRegister\obj\Debug\HappyDroidsWinHandlerRegister.exe
+C:\Users\Phil Plante\AppData\Local\Temporary Projects\HappyDroidsWinHandlerRegister\obj\Debug\HappyDroidsWinHandlerRegister.pdb
+C:\Users\Phil Plante\Documents\Visual Studio 2008\Projects\HappyDroidsWinHandlerRegister\HappyDroidsWinHandlerRegister\obj\Debug\HappyDroidsWinHandlerRegister.exe
+C:\Users\Phil Plante\Documents\Visual Studio 2008\Projects\HappyDroidsWinHandlerRegister\HappyDroidsWinHandlerRegister\obj\Debug\HappyDroidsWinHandlerRegister.pdb
+C:\Users\Phil Plante\Documents\Visual Studio 2008\Projects\HappyDroidsWinHandlerRegister\HappyDroidsWinHandlerRegister\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Phil Plante\Documents\Visual Studio 2008\Projects\HappyDroidsWinHandlerRegister\HappyDroidsWinHandlerRegister\obj\Debug\HappyDroidsWinHandlerRegister.Properties.Resources.resources
+C:\Users\Phil Plante\Documents\Visual Studio 2008\Projects\HappyDroidsWinHandlerRegister\HappyDroidsWinHandlerRegister\obj\Debug\HappyDroidsWinHandlerRegister.csproj.GenerateResource.Cache
+C:\Users\Phil Plante\Documents\Visual Studio 2008\Projects\HappyDroidsWinHandlerRegister\HappyDroidsWinHandlerRegister\bin\Debug\HappyDroidsWinHandlerRegister.exe
+C:\Users\Phil Plante\Documents\Visual Studio 2008\Projects\HappyDroidsWinHandlerRegister\HappyDroidsWinHandlerRegister\bin\Debug\HappyDroidsWinHandlerRegister.pdb
+C:\Users\Phil Plante\Documents\Visual Studio 2008\Projects\HappyDroidsWinHandlerRegister\HappyDroidsWinHandlerRegister\bin\Debug\HappyDroidsWinHandlerRegister.exe.config

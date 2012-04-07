@@ -7,6 +7,9 @@ package com.happydroids.platform;
 
 import com.happydroids.HappyDroidConsts;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 public abstract class HappyDroidUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
   protected StringBuilder generateExceptionErrorString(Throwable throwable) {
     StringBuilder message = new StringBuilder();
@@ -16,7 +19,10 @@ public abstract class HappyDroidUncaughtExceptionHandler implements Thread.Uncau
 
     if (HappyDroidConsts.DEBUG) {
       message.append("\n\nERROR:\n\n");
-      message.append(throwable.toString());
+
+      StringWriter writer = new StringWriter();
+      throwable.printStackTrace(new PrintWriter(writer));
+      message.append(writer.toString());
     }
     return message;
   }

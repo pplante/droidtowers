@@ -4,11 +4,13 @@
 
 package com.happydroids.sparky;
 
-import com.happydroids.platform.HappyDroidUncaughtExceptionHandler;
+import com.happydroids.HappyDroidConsts;
+import com.happydroids.platform.HappyDroidsDesktopUncaughtExceptionHandler;
 import com.happydroids.server.ApiCollectionRunnable;
 import com.happydroids.server.GameUpdate;
 import com.happydroids.server.GameUpdateCollection;
 import com.happydroids.server.HappyDroidServiceCollection;
+import com.happydroids.sparky.platform.PlatformProtocolHandlerFactory;
 import com.happydroids.utils.BackgroundTask;
 import jodd.util.ClassLoaderUtil;
 import org.apache.http.HttpResponse;
@@ -67,12 +69,6 @@ public class SparkyMain extends JFrame {
   }
 
   private void makeRequestForGameUpdates() {
-    BackgroundTask.setUncaughtExceptionHandler(new HappyDroidUncaughtExceptionHandler() {
-      public void uncaughtException(Thread thread, Throwable throwable) {
-      }
-    });
-
-
     new BackgroundTask() {
       @Override
       public void execute() {
@@ -102,7 +98,7 @@ public class SparkyMain extends JFrame {
       public void run() {
         gameUpdates.setEditable(false);
         try {
-          gameUpdates.setPage("http://local.happydroids.com/game-updates");
+          gameUpdates.setPage(HappyDroidConsts.HAPPYDROIDS_URI + "/game-updates");
         } catch (IOException e) {
           e.printStackTrace();
         }
@@ -195,7 +191,12 @@ public class SparkyMain extends JFrame {
     dispose();
   }
 
-  public static void main(String[] args) {
+  public static void main(final String[] args) {
+    BackgroundTask.setUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
+    Thread.setDefaultUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
+
+    PlatformProtocolHandlerFactory.newInstance().initialize(args);
+
     SwingUtilities.invokeLater(new Runnable() {
       public void run() {
         setDefaultLookAndFeelDecorated(true);
@@ -212,5 +213,4 @@ public class SparkyMain extends JFrame {
       }
     });
   }
-
 }

@@ -8,7 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="module" module-name="happydroids-common" exported="" scope="PROVIDED" />
+    <orderEntry type="module" module-name="happydroids-common" exported="" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
       <library>
@@ -21,6 +21,8 @@
     </orderEntry>
     <orderEntry type="library" scope="TEST" name="junit-mockito-great-expectations" level="project" />
     <orderEntry type="library" name="commons-io" level="project" />
+    <orderEntry type="library" name="platform" level="project" />
+    <orderEntry type="library" name="jna" level="project" />
   </component>
 </module>
 

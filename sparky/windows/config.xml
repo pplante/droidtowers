@@ -1,0 +1,16 @@
+<!--
+  ~ Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+  -->
+
+<launch4jConfig>
+  <headerType>gui</headerType>
+  <jar>../out/desktop-jar/HappyDroids-Sparky-release.jar</jar>
+  <outfile>../out/Sparky.exe</outfile>
+  <errTitle>Sparky</errTitle>
+  <chdir>.</chdir>
+  <customProcName>true</customProcName>
+  <icon>DroidTowers.ico</icon>
+  <jre>
+    <minVersion>1.5.0</minVersion>
+  </jre>
+</launch4jConfig>

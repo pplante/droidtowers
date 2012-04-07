@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="platform">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/winregedit/libs/platform.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

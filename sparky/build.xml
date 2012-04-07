@@ -3,7 +3,7 @@
 <!--
   ~ Copyright (c) 2012. HappyDroids LLC, All rights reserved.
   -->
-<project name="HappyDroids-Sparky" default="jar">
+<project name="HappyDroids-Sparky" default="build-all-platforms">
   <property name="compiler.debug" value="off"/>
   <property file="build.properties"/>
 
@@ -78,7 +78,7 @@
     <!--<classpath refid="classpath"/>-->
     <!--</javac>-->
     <copy todir="${classes.dir}/com/intellij">
-      <fileset dir="intellij/intellij">
+      <fileset dir="../tools/intellij/intellij">
         <include name="**/*"/>
       </fileset>
     </copy>
@@ -94,7 +94,7 @@
       <fileset dir="${build.dir}/classes"/>
       <zipfileset dir="${root.dir}/assets/"/>
       <!--<zipgroupfileset dir="${root.dir}/../happydroids-common/libs/main" includes="**/*.jar"/>-->
-      <!--<zipgroupfileset dir="${root.dir}/libs" includes="**/*.jar"/>-->
+      <zipgroupfileset dir="${root.dir}/libs" includes="**/*.jar"/>
     </jar>
   </target>
 
@@ -141,41 +141,40 @@
 
   <target name="build" depends="jar"/>
 
-  <!--<target name="osx" depends="build" description="Build an OSX target">-->
-  <!--<property file="release.properties"/>-->
+  <target name="osx" depends="build" description="Build an OSX target">
+    <taskdef name="jarbundler"
+             classpath="../tools/jarbundler.jar"
+             classname="net.sourceforge.jarbundler.JarBundler"/>
 
-  <!--<taskdef name="jarbundler"-->
-  <!--classpath="../tools/jarbundler-2.2.0.jar"-->
-  <!--classname="net.sourceforge.jarbundler.JarBundler"/>-->
+    <jarbundler dir="${basedir}/out/" verbose="false" showPlist="false"
+                name="${ant.project.name}"
+                mainclass="com.happydroids.sparky.SparkyMain"
+                jar="${build.dir}/${ant.project.name}-release.jar"
+                icon="icons/${ant.project.name}.icns"
+                version="${project.version}"
+                signature="LOCL"
+                customplistfile="test.plist"/>
 
-  <!--<jarbundler dir="${basedir}/out/" verbose="false" showPlist="false"-->
-  <!--name="${ant.project.name}"-->
-  <!--mainclass="com.happydroids.droidtowers.unhappyrobot.DesktopGame"-->
-  <!--jar="${build.dir}/${ant.project.name}-release.jar"-->
-  <!--icon="icons/${ant.project.name}.icns"-->
-  <!--version="${project.version}"/>-->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
 
-  <!--<delete dir="${artifacts.temp.dir}"/>-->
-  <!--</target>-->
+  <property name="launch4j.dir" location="../tools/launch4j"/>
 
-  <!--<property name="launch4j.dir" location="./tools/launch4j"/>-->
+  <target name="exe" depends="build" description="Build a Windows target">
 
-  <!--<target name="exe" depends="build" description="Build a Windows target">-->
-  <!--<property file="release.properties"/>-->
+    <taskdef name="launch4j"
+             classname="net.sf.launch4j.ant.Launch4jTask"
+             classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar"/>
 
-  <!--<taskdef name="launch4j"-->
-  <!--classname="net.sf.launch4j.ant.Launch4jTask"-->
-  <!--classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar"/>-->
+    <launch4j configfile="windows/config.xml"/>
+  </target>
 
-  <!--<launch4j configfile="./desktop/targets/windows/config.xml"/>-->
-  <!--</target>-->
-
-  <!--<target name="build-all-platforms" depends="clean,exe,osx">-->
-  <!--<delete file="${basedir}/out/${ant.project.name}.zip" failonerror="false"/>-->
-  <!--<exec executable="zip" dir="${basedir}/out" output="/dev/null">-->
-  <!--<arg value="-rX"/>-->
-  <!--<arg value="DroidTowers.zip"/>-->
-  <!--<arg value="DroidTowers.app"/>-->
-  <!--</exec>-->
-  <!--</target>-->
+  <target name="build-all-platforms" depends="clean,exe,osx">
+    <delete file="${basedir}/out/${ant.project.name}.zip" failonerror="false"/>
+    <exec executable="zip" dir="${basedir}/out" output="/dev/null">
+      <arg value="-rX"/>
+      <arg value="DroidTowers.zip"/>
+      <arg value="DroidTowers.app"/>
+    </exec>
+  </target>
 </project>

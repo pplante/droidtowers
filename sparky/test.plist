@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLName</key>
+      <string>Droid Towers Web Launcher</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>droidtowers</string>
+      </array>
+    </dict>
+  </array>
+</plist>
