@@ -4,6 +4,7 @@
 
 package com.happydroids.server;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.happydroids.HappyDroidConsts;
 
 import java.util.Date;
@@ -13,8 +14,8 @@ public class GameUpdate extends HappyDroidServiceObject {
   public String gitSha;
   public String version;
   public String notes;
-  public String fullRelease;
-  public String patchFile;
+  public GameUpdateAttachment fullRelease;
+  public GameUpdateAttachment patchFile;
 
   @Override
   public String getBaseResourceUri() {
@@ -37,5 +38,12 @@ public class GameUpdate extends HappyDroidServiceObject {
 
   public String getGitSHA() {
     return gitSha;
+  }
+
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  public class GameUpdateAttachment {
+    public int filesize;
+    public String checksum;
+    public String content;
   }
 }

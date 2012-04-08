@@ -14,6 +14,23 @@
       "id":"4",
       "resourceUri":"/api/v1/gameupdateattachment/4/"
     },
+    "gitSha":"1243dsadsf",
+    "id":"9",
+    "notes":"This is fake!",
+    "patchFile":null,
+    "releasedOn":"2012-04-04T23:32:16",
+    "resourceUri":"/api/v1/gameupdate/9/",
+    "version":"0.10.50"
+  },
+  {
+    "fullRelease":{
+      "checksum":"1947916738228dec04d30155ab1f893e",
+      "content":"/public/uploads/attachments/DroidTowers-release_1_3.jar",
+      "created":"2012-04-07T23:44:36",
+      "filesize":10344053,
+      "id":"4",
+      "resourceUri":"/api/v1/gameupdateattachment/4/"
+    },
     "gitSha":"19093ea",
     "id":"9",
     "notes":"* Began working on a new auto-update mechanism, should allow incremental updates (smaller downloads!)",
@@ -38,17 +55,10 @@
       "id":"6",
       "resourceUri":"/api/v1/gameupdateattachment/6/"
     },
-    "patchFile":{
-      "checksum":"0a0166a0b2a5de429b00f0ec720b1b35",
-      "content":"/public/uploads/attachments/patch.jar",
-      "created":"2012-04-07T23:44:48",
-      "filesize":1318701,
-      "id":"5",
-      "resourceUri":"/api/v1/gameupdateattachment/5/"
-    },
     "gitSha":"c82b6e1",
     "id":"8",
     "notes":"* New art for the Lobby\r\n* Fixed server connectivity problems where network was unavailable\r\n* Fixed the crash reporter, it was not always sending reports\r\n\r\n",
+    "patchFile":null,
     "releasedOn":"2012-04-04T23:30:05",
     "resourceUri":"/api/v1/gameupdate/8/",
     "version":"0.10.46"

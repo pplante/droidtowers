@@ -18,7 +18,7 @@ import java.util.List;
 
 import static com.happydroids.sparky.Expect.expect;
 
-@RunWith(SparkyTestRunner.class)
+@RunWith(HappyDroidTestRunner.class)
 public class GameUpdateCheckerTest {
   public TemporaryFolder temp = new TemporaryFolder();
   private GameUpdateChecker updateChecker;
@@ -84,6 +84,21 @@ public class GameUpdateCheckerTest {
     List<GameUpdate> selectedUpdates = updateChecker.selectUpdates();
     expect(selectedUpdates).toContainInOrder(gameUpdates.get(1), gameUpdates.get(0));
     expect(updateChecker.shouldUsePatches()).toBeTrue();
+    expect(updateChecker.hasCurrentVersion()).toBeFalse();
+  }
+
+  @Test
+  public void selectUpdates_shouldReturnFullReleaseJar_whenPatchForLatestReleaseDoesNotExist() throws IOException {
+    TestHelper.queueApiResponse("fixture_game_update_checker_latest_release_has_no_patch.json");
+    TestHelper.makeFakeGameJar(temp.newFile("DroidTowers.jar"), "0.10.1", "32kne34");
+
+    updateChecker.parseLocalGameJar();
+    updateChecker.fetchUpdates();
+
+    List<GameUpdate> gameUpdates = updateChecker.getUpdates().getObjects();
+    List<GameUpdate> selectedUpdates = updateChecker.selectUpdates();
+    expect(selectedUpdates).toContainInOrder(gameUpdates.get(0));
+    expect(updateChecker.shouldUsePatches()).toBeFalse();
     expect(updateChecker.hasCurrentVersion()).toBeFalse();
   }
 

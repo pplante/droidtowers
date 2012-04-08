@@ -11,8 +11,8 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
-public class SparkyTestRunner extends BlockJUnit4ClassRunner {
-  public SparkyTestRunner(Class<?> klass) throws InitializationError {
+public class HappyDroidTestRunner extends BlockJUnit4ClassRunner {
+  public HappyDroidTestRunner(Class<?> klass) throws InitializationError {
     super(klass);
   }
 

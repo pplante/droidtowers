@@ -72,7 +72,8 @@ public class GameUpdateChecker {
   public List<GameUpdate> selectUpdates() throws IOException {
     if (localGameJarVersionSHA != null) {
       if (!updates.isEmpty()) {
-        if (updates.getObjects().get(0).gitSha.equals(localGameJarVersionSHA)) {
+        GameUpdate latestUpdate = updates.getObjects().get(0);
+        if (latestUpdate.gitSha.equals(localGameJarVersionSHA)) {
           alreadyAtCurrentVersion = true;
           return null;
         } else {
@@ -80,7 +81,7 @@ public class GameUpdateChecker {
         }
 
         if (!usePatches) {
-          pendingUpdates.add(updates.getObjects().get(0));
+          pendingUpdates.add(latestUpdate);
         }
       }
     } else if (!updates.isEmpty()) {
@@ -99,9 +100,16 @@ public class GameUpdateChecker {
       if (update.getGitSHA().equals(localGameJarVersionSHA)) {
         usePatches = true;
         break;
-      }
+      } else {
 
-      pendingUpdates.add(update);
+        if (update.patchFile != null) {
+          pendingUpdates.add(update);
+        } else {
+          usePatches = false;
+          pendingUpdates.clear();
+          break;
+        }
+      }
     }
   }
 
