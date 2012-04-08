@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="DroidTowers" default="build-all-platforms">
-  <property name="compiler.debug" value="off"/>
+<project name="DroidTowers" default="debug">
   <property file="build.properties"/>
+
+  <target name="release">
+    <property name="compiler.debug" value="off"/>
+    <property file="release.properties"/>
+
+    <antcall target="build-all-platforms"/>
+  </target>
+
+  <target name="debug">
+    <property name="compiler.debug" value="on"/>
+    <property file="debug.properties"/>
+
+    <antcall target="build-all-platforms"/>
+  </target>
+
 
   <property name="root.dir" value="."/>
   <property name="tools.dir" value="${root.dir}/tools"/>
@@ -34,6 +48,14 @@
   </path>
   <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.class.path"/>
 
+  <taskdef name="jarpatch" classname="org.jarpatch.JarPatchTask" classpath="${tools.dir}/jarpatch-0.6.jar"/>
+
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+    <classpath>
+      <pathelement location="${tools.dir}/ant-contrib/ant-contrib-1.0b3.jar"/>
+    </classpath>
+  </taskdef>
+
   <path id="classpath">
     <fileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
     <fileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
@@ -50,7 +72,8 @@
 
     <javac srcdir="${root.dir}/pipeline/src" destdir="${build.dir}/tool-classes/" classpathref="classpath"
            failonerror="true"/>
-    <java classname="com.happydroids.droidtowers.pipeline.GenerateAssetManagerFileList" classpath="${build.dir}/tool-classes/"
+    <java classname="com.happydroids.droidtowers.pipeline.GenerateAssetManagerFileList"
+          classpath="${build.dir}/tool-classes/"
           failonerror="true" classpathref="classpath" fork="true" dir="${root.dir}/android"/>
 
     <javac2 destdir="${classes.dir}">
@@ -86,7 +109,7 @@
     <property file="release.properties"/>
 
     <taskdef name="jarbundler"
-             classpath="./tools/jarbundler-2.2.0.jar"
+             classpath="./tools/jarbundler.jar"
              classname="net.sourceforge.jarbundler.JarBundler"/>
 
     <jarbundler dir="${basedir}/out/" verbose="false" showPlist="false"

@@ -4,7 +4,8 @@
 
 package com.happydroids.server;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.happydroids.HappyDroidConsts;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.ProtocolVersion;
@@ -13,21 +14,22 @@ import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class TestHappyDroidService extends HappyDroidService {
-  private LinkedList<String> responses;
+  private HashMap<String, LinkedList<byte[]>> knownUris;
 
   public TestHappyDroidService() {
-    super();
-    responses = Lists.newLinkedList();
+    super(13);
+    knownUris = Maps.newHashMap();
     hasNetworkConnection = true;
   }
 
   @Override
   public HttpResponse makeGetRequest(String uri) {
     try {
-      byte[] bytes = getNextQueuedResponse();
+      byte[] bytes = getNextQueuedResponse(uri);
 
       HttpEntity entity = Mockito.mock(HttpEntity.class);
       Mockito.when(entity.getContent()).thenReturn(new ByteArrayInputStream(bytes));
@@ -42,19 +44,18 @@ public class TestHappyDroidService extends HappyDroidService {
     return null;
   }
 
-  private byte[] getNextQueuedResponse() {
-    byte[] bytes = null;
-    String responseString = responses.poll();
-    if (responseString != null) {
-      bytes = responseString.getBytes();
+  private byte[] getNextQueuedResponse(String uri) {
+    if (!knownUris.containsKey(uri) || knownUris.get(uri).isEmpty()) {
+      throw new RuntimeException("There is no request queued up for: " + uri);
     }
-    return bytes;
+
+    return knownUris.get(uri).pop();
   }
 
   @Override
   public HttpResponse makePostRequest(String uri, Object forServerDoNotCare) {
     try {
-      byte[] bytes = getNextQueuedResponse();
+      byte[] bytes = getNextQueuedResponse(uri);
 
       HttpEntity entity = Mockito.mock(HttpEntity.class);
       Mockito.when(entity.getContent()).thenReturn(new ByteArrayInputStream(bytes));
@@ -69,11 +70,34 @@ public class TestHappyDroidService extends HappyDroidService {
     return null;
   }
 
-  public void queueResponse(String content) {
-    responses.add(content);
+  public void queueResponse(String uri, String content) {
+    queueResponse(uri, content.getBytes());
+  }
+
+  public void queueResponse(String uri, byte[] stream) {
+    if (!uri.contains("http://") && !uri.contains("https://")) {
+      uri = HappyDroidConsts.HAPPYDROIDS_URI + uri;
+    }
+
+    if (!knownUris.containsKey(uri)) {
+      knownUris.put(uri, new LinkedList<byte[]>());
+    }
+
+    knownUris.get(uri).push(stream);
   }
 
   public static void disableNetworkConnection() {
     instance().hasNetworkConnection = false;
+  }
+
+  public HashMap<String, LinkedList<byte[]>> getResponseQueue() {
+    return knownUris;
+  }
+
+  @Override
+  public void withNetworkConnection(Runnable runnable) {
+    if (hasNetworkConnection) {
+      runnable.run();
+    }
   }
 }

@@ -72,7 +72,7 @@
       "id":"6",
       "resourceUri":"/api/v1/gameupdateattachment/6/"
     },
-    "gitSha":"32kne34",
+    "gitSha":"OLDEST_SHA",
     "id":"8",
     "notes":"This is fake!",
     "patchFile":null,

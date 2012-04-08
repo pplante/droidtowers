@@ -13,12 +13,17 @@ import java.util.logging.Logger;
 public class HappyDroidsDesktopUncaughtExceptionHandler extends HappyDroidUncaughtExceptionHandler {
   private static final String TAG = HappyDroidsDesktopUncaughtExceptionHandler.class.getSimpleName();
 
-  public void uncaughtException(Thread thread, Throwable throwable) {
+  public void uncaughtException(Thread thread, final Throwable throwable) {
     Logger.getLogger(TAG).log(Level.SEVERE, "Uncaught exception!", throwable);
-    new CrashReport(throwable).save();
 
     JOptionPane.showMessageDialog(null, generateExceptionErrorString(throwable), "Ooops!", JOptionPane.ERROR_MESSAGE);
 
-    System.exit(100);
+    new Thread() {
+      @Override
+      public void run() {
+        new CrashReport(throwable).saveBlocking();
+        System.exit(100);
+      }
+    }.run();
   }
 }

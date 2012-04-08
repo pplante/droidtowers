@@ -19,7 +19,7 @@
     "notes":"* Began working on a new auto-update mechanism, should allow incremental updates (smaller downloads!)",
     "patchFile":{
       "checksum":"0a0166a0b2a5de429b00f0ec720b1b35",
-      "content":"/public/uploads/attachments/patch.jar",
+      "content":"/public/uploads/attachments/patch10.50.jar",
       "created":"2012-04-07T23:44:48",
       "filesize":1318701,
       "id":"5",
@@ -62,12 +62,12 @@
       "id":"6",
       "resourceUri":"/api/v1/gameupdateattachment/6/"
     },
-    "gitSha":"32kne34",
+    "gitSha":"OLDEST_SHA",
     "id":"8",
     "notes":"This is fake!",
     "patchFile":null,
     "releasedOn":"2012-04-04T23:30:05",
     "resourceUri":"/api/v1/gameupdate/8/",
-    "version":"0.10.46"
+    "version":"0.10.43"
   }
 ]}

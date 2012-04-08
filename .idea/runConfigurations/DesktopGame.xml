@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="DesktopGame" type="Application" factoryName="Application">
     <extension name="coverage" enabled="false" merge="false" runner="idea" />
-    <option name="MAIN_CLASS_NAME" value="com.happydroids.droidtowers.unhappyrobot.DesktopGame" />
+    <option name="MAIN_CLASS_NAME" value="com.happydroids.droidtowers.DesktopGame" />
     <option name="VM_PARAMETERS" value="" />
     <option name="PROGRAM_PARAMETERS" value="" />
     <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/android/assets" />

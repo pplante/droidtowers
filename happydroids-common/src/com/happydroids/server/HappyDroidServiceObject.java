@@ -62,26 +62,35 @@ public abstract class HappyDroidServiceObject {
   public void save(final ApiRunnable afterSave) {
     HappyDroidService.instance().withNetworkConnection(new Runnable() {
       public void run() {
-        if (!beforeSaveValidation(afterSave)) return;
-
-        HttpResponse response;
-        if (resourceUri == null) {
-          response = HappyDroidService.instance().makePostRequest(getBaseResourceUri(), HappyDroidServiceObject.this);
-          if (response != null && response.getStatusLine().getStatusCode() == 201) {
-            Header location = Iterables.getFirst(Lists.newArrayList(response.getHeaders("Location")), null);
-            if (location != null) {
-              resourceUri = location.getValue();
-            }
-
-            copyValuesFromResponse(response);
-          }
-        } else {
-          response = HappyDroidService.instance().makePutRequest(resourceUri, HappyDroidServiceObject.this);
-        }
-
-        afterSave.handleResponse(response, HappyDroidServiceObject.this);
+        saveBlocking(afterSave);
       }
     });
+  }
+
+  public void saveBlocking() {
+    saveBlocking(DUMMY_AFTER_SAVE);
+  }
+
+  public void saveBlocking(ApiRunnable afterSave) {
+    if (!beforeSaveValidation(afterSave)) return;
+
+    HttpResponse response;
+    if (resourceUri == null) {
+      response = HappyDroidService.instance().makePostRequest(getBaseResourceUri(), this);
+      if (response != null && response.getStatusLine().getStatusCode() == 201) {
+        Header location = Iterables.getFirst(Lists.newArrayList(response.getHeaders("Location")), null);
+        if (location != null) {
+          resourceUri = location.getValue();
+        }
+
+        copyValuesFromResponse(response);
+      }
+    } else {
+      response = HappyDroidService.instance().makePutRequest(resourceUri, this);
+    }
+
+
+    afterSave.handleResponse(response, this);
   }
 
   @SuppressWarnings("unchecked")

@@ -12,13 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.happydroids.server.ApiRunnable;
-import com.happydroids.server.HappyDroidServiceObject;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.server.TemporaryToken;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.utils.PeriodicBackgroundTask;
+import com.happydroids.server.ApiRunnable;
+import com.happydroids.server.HappyDroidServiceObject;
 import org.apache.http.HttpResponse;
 
 public class ConnectToHappyDroidsWindow extends TowerWindow {
@@ -104,7 +104,7 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
           public synchronized void afterExecute() {
             if (token != null && token.hasSessionToken()) {
               sessionStatus.setText("Login successful!");
-              TowerGameService.instance().setSessionToken(token.getSessionToken());
+              ((TowerGameService) TowerGameService.instance()).setSessionToken(token.getSessionToken());
             } else {
               sessionStatus.setText("Login failed!");
             }

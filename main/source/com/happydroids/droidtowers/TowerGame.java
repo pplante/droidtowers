@@ -17,11 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.server.ApiCollectionRunnable;
-import com.happydroids.server.GameUpdate;
-import com.happydroids.server.GameUpdateCollection;
-import com.happydroids.server.HappyDroidServiceCollection;
-import com.happydroids.utils.BackgroundTask;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.actions.ActionManager;
 import com.happydroids.droidtowers.controllers.PathSearchManager;
@@ -38,7 +33,7 @@ import com.happydroids.droidtowers.scenes.Scene;
 import com.happydroids.droidtowers.scenes.SplashScene;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
-import org.apache.http.HttpResponse;
+import com.happydroids.utils.BackgroundTask;
 
 public class TowerGame implements ApplicationListener {
   private static OrthographicCamera camera;
@@ -63,12 +58,20 @@ public class TowerGame implements ApplicationListener {
   }
 
   public void create() {
+    TowerGameService.setInstance(new TowerGameService());
+
     if (HappyDroidConsts.DEBUG) {
       Gdx.app.error("DEBUG", "Debug mode is enabled!");
       Gdx.app.setLogLevel(Application.LOG_DEBUG);
     } else {
       Gdx.app.setLogLevel(Application.LOG_ERROR);
     }
+
+    Gdx.app.postRunnable(new Runnable() {
+      public void run() {
+        Thread.currentThread().setUncaughtExceptionHandler(uncaughtExceptionHandler);
+      }
+    });
 
     Thread.currentThread().setUncaughtExceptionHandler(uncaughtExceptionHandler);
     Thread.currentThread().setPriority(Thread.NORM_PRIORITY);
@@ -80,7 +83,7 @@ public class TowerGame implements ApplicationListener {
     new BackgroundTask() {
       @Override
       public void execute() {
-        TowerGameService.instance().registerDevice();
+        ((TowerGameService) TowerGameService.instance()).registerDevice();
       }
     }.run();
 
@@ -131,28 +134,6 @@ public class TowerGame implements ApplicationListener {
     Scene.setGuiSkin(skin);
     Scene.setCamera(camera);
     Scene.setSpriteBatch(spriteBatch);
-
-    new BackgroundTask() {
-      @Override
-      public void execute() {
-        HappyDroidServiceCollection<GameUpdate> updates = new GameUpdateCollection();
-        updates.fetch(new ApiCollectionRunnable<HappyDroidServiceCollection<GameUpdate>>() {
-          @Override
-          public void onError(HttpResponse response, int statusCode, HappyDroidServiceCollection<GameUpdate> collection) {
-            System.out.println("statusCode = " + statusCode);
-          }
-
-          @Override
-          public void onSuccess(HttpResponse response, HappyDroidServiceCollection<GameUpdate> collection) {
-            GameUpdateWindow gameUpdateWindow = new GameUpdateWindow(rootUiStage, skin);
-            gameUpdateWindow.setUpdateCollection(collection);
-            gameUpdateWindow.show().centerOnStage();
-
-            System.out.println("Game update window showing?");
-          }
-        });
-      }
-    }.run();
 
     changeScene(SplashScene.class);
   }

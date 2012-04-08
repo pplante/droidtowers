@@ -3,6 +3,7 @@
 <!--
   ~ Copyright (c) 2012. HappyDroids LLC, All rights reserved.
   -->
+
 <project name="HappyDroids-Sparky" default="build-all-platforms">
   <property name="compiler.debug" value="off"/>
   <property file="build.properties"/>
@@ -153,7 +154,7 @@
                 icon="icons/${ant.project.name}.icns"
                 version="${project.version}"
                 signature="LOCL"
-                customplistfile="test.plist"/>
+                customplistfile="customPListForUrlProtocol.plist"/>
 
     <delete dir="${artifacts.temp.dir}"/>
   </target>

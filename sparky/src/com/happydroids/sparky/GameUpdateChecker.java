@@ -6,7 +6,6 @@ package com.happydroids.sparky;
 
 import com.google.common.collect.Lists;
 import com.happydroids.server.*;
-import org.apache.http.HttpResponse;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,13 +16,15 @@ import java.util.jar.JarFile;
 public class GameUpdateChecker {
   private HappyDroidServiceCollection<GameUpdate> updates;
   private final File gameStorage;
+  private final File gameJar;
   private boolean usePatches;
   private boolean alreadyAtCurrentVersion;
   private String localGameJarVersionSHA;
   private List<GameUpdate> pendingUpdates;
 
-  public GameUpdateChecker(File gameStorage) {
+  public GameUpdateChecker(File gameStorage, File gameJar) {
     this.gameStorage = gameStorage;
+    this.gameJar = gameJar;
     pendingUpdates = Lists.newArrayList();
     alreadyAtCurrentVersion = false;
     usePatches = false;
@@ -31,7 +32,6 @@ public class GameUpdateChecker {
   }
 
   public void parseLocalGameJar() {
-    File gameJar = new File(gameStorage, "DroidTowers.jar");
     if (gameJar.exists()) {
       try {
         JarFile jarFile = new JarFile(gameJar);
@@ -50,32 +50,20 @@ public class GameUpdateChecker {
 
   public void fetchUpdates() {
     updates = new GameUpdateCollection();
-    updates.fetch(new ApiCollectionRunnable<HappyDroidServiceCollection<GameUpdate>>() {
-      @Override
-      public void onError(HttpResponse response, int statusCode, HappyDroidServiceCollection<GameUpdate> collection) {
-//        System.out.println("statusCode = " + statusCode);
-      }
-
-      @Override
-      public void onSuccess(HttpResponse response, HappyDroidServiceCollection<GameUpdate> collection) {
-        for (GameUpdate gameUpdate : collection.getObjects()) {
-//          System.out.println("gameUpdate = " + gameUpdate);
-        }
-      }
-    });
+    updates.fetchBlocking(new ApiCollectionRunnable<HappyDroidServiceCollection<GameUpdate>>());
   }
 
   public HappyDroidServiceCollection<GameUpdate> getUpdates() {
     return updates;
   }
 
-  public List<GameUpdate> selectUpdates() throws IOException {
+  public void selectUpdates() throws IOException {
     if (localGameJarVersionSHA != null) {
       if (!updates.isEmpty()) {
         GameUpdate latestUpdate = updates.getObjects().get(0);
         if (latestUpdate.gitSha.equals(localGameJarVersionSHA)) {
           alreadyAtCurrentVersion = true;
-          return null;
+          return;
         } else {
           findUpdatesSinceLastValidSha();
         }
@@ -87,8 +75,6 @@ public class GameUpdateChecker {
     } else if (!updates.isEmpty()) {
       pendingUpdates.add(updates.getObjects().get(0));
     }
-
-    return !pendingUpdates.isEmpty() ? Lists.reverse(pendingUpdates) : null;
   }
 
   private void findUpdatesSinceLastValidSha() {
@@ -100,15 +86,12 @@ public class GameUpdateChecker {
       if (update.getGitSHA().equals(localGameJarVersionSHA)) {
         usePatches = true;
         break;
+      } else if (update.patchFile != null) {
+        pendingUpdates.add(update);
       } else {
-
-        if (update.patchFile != null) {
-          pendingUpdates.add(update);
-        } else {
-          usePatches = false;
-          pendingUpdates.clear();
-          break;
-        }
+        usePatches = false;
+        pendingUpdates.clear();
+        break;
       }
     }
   }
@@ -118,7 +101,7 @@ public class GameUpdateChecker {
   }
 
   public List<GameUpdate> getPendingUpdates() {
-    return pendingUpdates;
+    return Lists.reverse(pendingUpdates);
   }
 
   public boolean hasCurrentVersion() {

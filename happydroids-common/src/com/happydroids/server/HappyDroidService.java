@@ -35,7 +35,7 @@ public class HappyDroidService {
   private static String deviceOSVersion;
 
   protected boolean hasNetworkConnection;
-  private final Set<Runnable> withNetworkConnectionRunnables;
+  private final Set<Runnable> withNetworkConnectionRunnables = Sets.newHashSet();
 
   public static HappyDroidService instance() {
     if (_instance == null) {
@@ -50,8 +50,11 @@ public class HappyDroidService {
   }
 
   protected HappyDroidService() {
-    withNetworkConnectionRunnables = Sets.newHashSet();
     checkForNetwork();
+  }
+
+  protected HappyDroidService(int fuckYouJava) {
+    // leave this for tests.
   }
 
   public static void setDeviceOSName(String deviceType) {
@@ -89,7 +92,7 @@ public class HappyDroidService {
         BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
         if (entity != null && entity.getContentLength() > 0) {
           String content = EntityUtils.toString(entity, HTTP.UTF_8);
-          System.out.println("\tResponse: " + content);
+//          System.out.println("\tResponse: " + content);
           return mapper.readValue(content, aClazz);
         }
       } catch (IOException e) {

@@ -9,11 +9,11 @@ import org.apache.http.StatusLine;
 
 public class ApiCollectionRunnable<CollectionType extends HappyDroidServiceCollection<? extends HappyDroidServiceObject>> {
   public void onSuccess(HttpResponse response, CollectionType collection) {
-    System.out.println("collection = " + collection);
+    System.out.println("Collection: " + collection);
   }
 
   public void onError(HttpResponse response, int statusCode, CollectionType collection) {
-    System.out.println("collection = " + collection);
+    System.out.println("HTTP ERR: " + statusCode);
   }
 
   void handleResponse(HttpResponse response, CollectionType collection) {

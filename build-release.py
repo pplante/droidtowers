@@ -80,7 +80,7 @@ if __name__ == '__main__':
         git.commit(a=True, m='Artifacts from release-%s' % (new_build_number,))
         git.tag('release-%s' % (new_build_number,))
 
-        ant('build-all-platforms', _fg=True)
+        ant('release', _fg=True)
 
         upload = scp.bake(i='/Users/pplante/.ssh/id_rsa', _fg=True)
 
@@ -96,8 +96,8 @@ if __name__ == '__main__':
             tower_consts)
         with open(TOWER_CONSTS_JAVA, 'w') as fp:
             fp.write(tower_consts)
-        
-        
+
+
         notes = unicode(git.log('--no-decorate', '--pretty=format:[%h]  %s', '--no-merges', 'release-v%s..' % (previous_build_number,)))
 
         blob = json.dumps(dict(
@@ -118,8 +118,8 @@ if __name__ == '__main__':
             print 'Failure posting game update:'
             print r.status_code
             print r.text
-        
-        
+
+
     except Exception, e:
         print e
         sys.exit(1)

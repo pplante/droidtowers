@@ -7,10 +7,10 @@ package com.happydroids.droidtowers.gamestate.server;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.happydroids.server.ApiRunnable;
-import com.happydroids.server.HappyDroidService;
 import com.happydroids.droidtowers.jackson.Vector2Serializer;
 import com.happydroids.droidtowers.jackson.Vector3Serializer;
+import com.happydroids.server.ApiRunnable;
+import com.happydroids.server.HappyDroidService;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
 
@@ -23,23 +23,13 @@ public class TowerGameService extends HappyDroidService {
   private String deviceId;
   private boolean isAuthenticated;
 
-  protected TowerGameService() {
-    super();
-
+  public TowerGameService() {
     preferences = Gdx.app.getPreferences("CONNECT");
     if (!preferences.contains("DEVICE_ID")) {
       preferences.putString("DEVICE_ID", UUID.randomUUID().toString().replaceAll("-", ""));
       preferences.flush();
     }
     deviceId = preferences.getString("DEVICE_ID");
-  }
-
-  public static TowerGameService instance() {
-    if (_instance == null) {
-      _instance = new TowerGameService();
-    }
-
-    return (TowerGameService) _instance;
   }
 
   public void registerDevice() {

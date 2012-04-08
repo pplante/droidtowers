@@ -26,19 +26,7 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
   public void fetch(final ApiCollectionRunnable<HappyDroidServiceCollection<ApiType>> apiRunnable) {
     HappyDroidService.instance().withNetworkConnection(new Runnable() {
       public void run() {
-        HttpResponse response = HappyDroidService.instance().makeGetRequest(getBaseResourceUri());
-        System.out.println("response = " + response);
-        if (response != null && response.getStatusLine() != null && response.getStatusLine().getStatusCode() == 200) {
-          ObjectMapper objectMapper = HappyDroidService.instance().getObjectMapper();
-          try {
-            copyValuesFromResponse(response);
-          } catch (IOException e) {
-            System.out.println("e = " + e);
-            throw new RuntimeException(e);
-          }
-        }
-
-        apiRunnable.handleResponse(response, HappyDroidServiceCollection.this);
+        fetchBlocking(apiRunnable);
       }
     });
   }
@@ -79,6 +67,20 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
 
   public boolean isEmpty() {
     return objects == null || objects.isEmpty();
+  }
+
+  public void fetchBlocking(ApiCollectionRunnable<HappyDroidServiceCollection<ApiType>> apiRunnable) {
+    HttpResponse response = HappyDroidService.instance().makeGetRequest(getBaseResourceUri());
+    if (response != null && response.getStatusLine() != null && response.getStatusLine().getStatusCode() == 200) {
+      ObjectMapper objectMapper = HappyDroidService.instance().getObjectMapper();
+      try {
+        copyValuesFromResponse(response);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
+
+    apiRunnable.handleResponse(response, this);
   }
 
   @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)

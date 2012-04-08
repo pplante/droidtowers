@@ -27,6 +27,8 @@ public class JarJoinerTest {
 
   @Before
   public void setUp() throws IOException {
+    temp.create();
+
     patchFile = temp.newFile("patch.jar");
     existingFile = temp.newFile("existing.jar");
 
@@ -41,11 +43,13 @@ public class JarJoinerTest {
     JarJoiner joiner = new JarJoiner(resultFile);
     joiner.addFile(patchFile);
     joiner.addFile(existingFile);
-    joiner.join("version:v0.10.50");
+    joiner.join("version:v0.10.50", null);
 
     JarFile resultZip = new JarFile(resultFile);
     JarFile existingZip = new JarFile(existingFile);
     JarFile patchZip = new JarFile(patchFile);
+
+    expect(resultZip.getManifest().getMainAttributes().getValue("Game-Version")).toEqual("version:v0.10.50");
 
     Enumeration<JarEntry> existingEntries = existingZip.entries();
     Enumeration<JarEntry> patchEntries = patchZip.entries();

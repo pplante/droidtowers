@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+  -->
+
+<plist>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLName</key>
+      <string>Droid Towers Web Launcher</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>droidtowers</string>
+      </array>
+    </dict>
+  </array>
+</plist>

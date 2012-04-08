@@ -18,13 +18,12 @@ public class HappyDroidTestRunner extends BlockJUnit4ClassRunner {
 
   @Override
   protected Statement methodBlock(FrameworkMethod method) {
-    beforeTestRun();
-
     final Statement statement = super.methodBlock(method);
     return new Statement() {
       @Override
       public void evaluate() throws Throwable {
         try {
+          beforeTestRun();
           statement.evaluate();
         } finally {
           afterTestRun();

@@ -139,12 +139,16 @@ public class GameSave {
   }
 
   public static GameSave readFile(FileHandle fileHandle) throws IOException {
+//    try {
     GameSave gameSave = TowerGameService.instance().getObjectMapper().readValue(fileHandle.read(), GameSave.class);
     if (gameSave != null) {
       gameSave.baseFilename = fileHandle.name();
     }
 
     return gameSave;
+//    } catch (Exception e) {
+//      throw new RuntimeException(e);
+//    }
   }
 
   public boolean isNewGame() {
