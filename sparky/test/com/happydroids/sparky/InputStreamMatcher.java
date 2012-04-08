@@ -2,7 +2,7 @@
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
 
-package com.happydroids.droidtowers.unhappyrobot;
+package com.happydroids.sparky;
 
 import com.pivotallabs.greatexpectations.MatcherOf;
 import com.pivotallabs.greatexpectations.matchers.ObjectMatcher;

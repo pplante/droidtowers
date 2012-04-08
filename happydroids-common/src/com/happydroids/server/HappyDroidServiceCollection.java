@@ -18,10 +18,8 @@ import java.util.List;
 public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServiceObject> {
   private Metadata meta;
   private List<ApiType> objects;
-  private final Class<ApiType> objectClazz;
 
   public HappyDroidServiceCollection(Class<ApiType> objectClazz) {
-    this.objectClazz = objectClazz;
     objects = null;
   }
 
@@ -77,6 +75,10 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
 
   public List<ApiType> getObjects() {
     return objects;
+  }
+
+  public boolean isEmpty() {
+    return objects == null || objects.isEmpty();
   }
 
   @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)

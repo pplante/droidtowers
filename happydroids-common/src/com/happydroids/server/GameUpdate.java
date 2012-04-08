@@ -29,12 +29,13 @@ public class GameUpdate extends HappyDroidServiceObject {
   @Override
   public String toString() {
     return "GameUpdate{" +
-                   "fullRelease='" + fullRelease + '\'' +
+                   "gitSha='" + gitSha + '\'' +
                    ", releasedOn=" + releasedOn +
-                   ", gitSha='" + gitSha + '\'' +
                    ", version='" + version + '\'' +
-                   ", notes='" + notes + '\'' +
-                   ", patchFile='" + patchFile + '\'' +
                    '}';
+  }
+
+  public String getGitSHA() {
+    return gitSha;
   }
 }

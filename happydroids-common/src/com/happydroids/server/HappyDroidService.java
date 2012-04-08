@@ -34,7 +34,7 @@ public class HappyDroidService {
   private static String deviceType;
   private static String deviceOSVersion;
 
-  private boolean hasNetworkConnection;
+  protected boolean hasNetworkConnection;
   private final Set<Runnable> withNetworkConnectionRunnables;
 
   public static HappyDroidService instance() {

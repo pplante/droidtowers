@@ -1,0 +1,38 @@
+{"meta":{
+  "limit":20,
+  "next":null,
+  "offset":0,
+  "previous":null,
+  "totalCount":2
+}, "objects":[
+  {
+    "fullRelease":"/public/uploads/releases/DroidTowers-release_1.jar",
+    "gitSha":"19093ea",
+    "id":"9",
+    "notes":"* Began working on a new auto-update mechanism, should allow incremental updates (smaller downloads!)",
+    "patchFile":"/public/uploads/releases/patch.jar",
+    "releasedOn":"2012-04-04T23:32:16",
+    "resourceUri":"/api/v1/gameupdate/9/",
+    "version":"0.10.50"
+  },
+  {
+    "fullRelease":"/public/uploads/releases/DroidTowers-release.jar",
+    "gitSha":"c82b6e1",
+    "id":"8",
+    "notes":"* New art for the Lobby\r\n* Fixed server connectivity problems where network was unavailable\r\n* Fixed the crash reporter, it was not always sending reports\r\n\r\n",
+    "patchFile":"/public/uploads/releases/patch.jar",
+    "releasedOn":"2012-04-04T23:30:05",
+    "resourceUri":"/api/v1/gameupdate/8/",
+    "version":"0.10.46"
+  },
+  {
+    "fullRelease":"/public/uploads/releases/DroidTowers-release.jar",
+    "gitSha":"32kne34",
+    "id":"8",
+    "notes":"This is a copy of [c82b6e1]",
+    "patchFile":null,
+    "releasedOn":"2012-04-04T23:30:05",
+    "resourceUri":"/api/v1/gameupdate/8/",
+    "version":"0.10.1"
+  }
+]}

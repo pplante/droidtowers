@@ -5,7 +5,7 @@
 package com.happydroids.droidtowers.utils;
 
 import com.happydroids.server.HappyDroidService;
-import com.happydroids.droidtowers.gamestate.server.TestHappyDroidService;
+import com.happydroids.server.TestHappyDroidService;
 
 public class TestHelper {
   public static void queueFakeRequest(final String content) {

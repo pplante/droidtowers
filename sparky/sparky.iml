@@ -21,8 +21,6 @@
     </orderEntry>
     <orderEntry type="library" scope="TEST" name="junit-mockito-great-expectations" level="project" />
     <orderEntry type="library" name="commons-io" level="project" />
-    <orderEntry type="library" name="platform" level="project" />
-    <orderEntry type="library" name="jna" level="project" />
   </component>
 </module>
 

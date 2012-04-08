@@ -4,22 +4,19 @@
 
 package com.happydroids.sparky;
 
+import com.happydroids.TestHelper;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Enumeration;
-import java.util.Random;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
-import static com.happydroids.droidtowers.unhappyrobot.Expect.expect;
+import static com.happydroids.sparky.Expect.expect;
 
 
 public class JarJoinerTest {
@@ -33,8 +30,8 @@ public class JarJoinerTest {
     patchFile = temp.newFile("patch.jar");
     existingFile = temp.newFile("existing.jar");
 
-    makeFakeZip(patchFile);
-    makeFakeZip(existingFile);
+    TestHelper.makeFakeZip(patchFile);
+    TestHelper.makeFakeZip(existingFile);
   }
 
   @Test
@@ -65,14 +62,5 @@ public class JarJoinerTest {
 
       expect(resultZip.getInputStream(entry)).toEqual(patchZip.getInputStream(entry));
     }
-  }
-
-  private void makeFakeZip(File zipFile) throws IOException {
-    ZipOutputStream zipStream = new ZipOutputStream(new FileOutputStream(zipFile));
-    zipStream.putNextEntry(new ZipEntry("image.png"));
-    byte[] bytes = ("Random bytes: " + new Random().nextInt()).getBytes();
-    zipStream.write(bytes, 0, bytes.length);
-    zipStream.closeEntry();
-    zipStream.close();
   }
 }

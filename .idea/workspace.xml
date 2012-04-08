@@ -16,27 +16,30 @@
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/android" />
     <bookmark url="file://$PROJECT_DIR$/.idea/workspace.xml" />
+    <bookmark url="file://$PROJECT_DIR$/sparky/test/com/happydroids/sparky/GameUpdateCheckerTest.java" line="114" mnemonic="0" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="`">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/jarbundler_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jna.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/platform.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/MacProtocolHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/PlatformProtocolHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/PlatformProtocolHandlerFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/WindowsProtocolHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sparky/test.plist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tools/jarbundler/jarbundler.iml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/happydroids_common_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/sparky_jar.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/pplante.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/pplante.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sparky/fixtures/fixture_game_updater_multiple_updates.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/GameUpdateChecker.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sparky/test/com/happydroids/TestHelper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sparky/test/com/happydroids/sparky/GameUpdateCheckerTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sparky/test/com/happydroids/sparky/SparkyTestRunner.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jna.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/platform.xml" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/gamestate/server/TestHappyDroidService.java" afterPath="$PROJECT_DIR$/happydroids-common/test/com/happydroids/server/TestHappyDroidService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/sparky/test/com/happydroids/droidtowers/unhappyrobot/Expect.java" afterPath="$PROJECT_DIR$/sparky/test/com/happydroids/sparky/Expect.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/sparky/test/com/happydroids/droidtowers/unhappyrobot/InputStreamMatcher.java" afterPath="$PROJECT_DIR$/sparky/test/com/happydroids/sparky/InputStreamMatcher.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/HappyDroidUncaughtExceptionHandler.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/HappyDroidUncaughtExceptionHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sparky/build.xml" afterPath="$PROJECT_DIR$/sparky/build.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/happydroids-common.iml" afterPath="$PROJECT_DIR$/happydroids-common/happydroids-common.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/GameUpdate.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/GameUpdate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidServiceCollection.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidServiceCollection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/TowerGameTestRunner.java" afterPath="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/TowerGameTestRunner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/utils/TestHelper.java" afterPath="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/utils/TestHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sparky/sparky.iml" afterPath="$PROJECT_DIR$/sparky/sparky.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/SparkyMain.java" afterPath="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/SparkyMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/JarJoiner.java" afterPath="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/JarJoiner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sparky/test/com/happydroids/sparky/JarJoinerTest.java" afterPath="$PROJECT_DIR$/sparky/test/com/happydroids/sparky/JarJoinerTest.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -99,7 +102,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/ApiCollectionRunnable.java" line="19" class="com.happydroids.server.ApiCollectionRunnable" package="com.happydroids.server">
+      <breakpoint url="file://$PROJECT_DIR$/sparky/test/com/happydroids/TestHelper.java" line="24" class="com.happydroids.TestHelper" package="com.happydroids">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -153,13 +156,62 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SparkyMain.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sparky/src/com/happydroids/sparky/SparkyMain.java">
+      <file leaf-file-name="GameUpdateChecker.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sparky/src/com/happydroids/sparky/GameUpdateChecker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="198" column="0" selection-start="6372" selection-end="6372" vertical-scroll-proportion="1.068217">
+            <state line="16" column="30" selection-start="379" selection-end="379" vertical-scroll-proportion="0.37378642">
               <folding>
-                <element signature="e#0#6884#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameUpdateCheckerTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sparky/test/com/happydroids/sparky/GameUpdateCheckerTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="108" column="34" selection-start="3951" selection-end="3951" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestHelper.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sparky/test/com/happydroids/TestHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="0" selection-start="721" selection-end="721" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HappyDroidService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="11" selection-start="1288" selection-end="1288" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestHappyDroidService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/happydroids-common/test/com/happydroids/server/TestHappyDroidService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="32" selection-start="649" selection-end="649" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#2479#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fixture_game_updater_multiple_updates.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sparky/fixtures/fixture_game_updater_multiple_updates.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="21" selection-start="194" selection-end="201" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -177,22 +229,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/HappyDroidUncaughtExceptionHandler.java" />
-        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/WinRegistry.java" />
-        <option value="/RegExp Fragment (WindowsURLHandler.java:3789).regexp" />
-        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/windows/WindowsURLHandler.java" />
-        <option value="$PROJECT_DIR$/winregedit/build.properties" />
-        <option value="$PROJECT_DIR$/winregedit/build.xml" />
-        <option value="$PROJECT_DIR$/winregedit/src/WinRegistry.java" />
-        <option value="$PROJECT_DIR$/winregedit/src/WinRegEdit.java" />
-        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/HappyDroidsDesktopUncaughtExceptionHandler.java" />
-        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/utils/OSValidator.java" />
-        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/PlatformProtocolHandlerFactory.java" />
-        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/PlatformProtocolHandler.java" />
-        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/MacProtocolHandler.java" />
-        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/WindowsProtocolHandler.java" />
-        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/SparkyMain.java" />
-        <option value="$PROJECT_DIR$/sparky/build.xml" />
+        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/SparkyTestRunner.java" />
+        <option value="$PROJECT_DIR$/main/test/com/happydroids/server/TestHappyDroidService.java" />
+        <option value="$PROJECT_DIR$/sparky/test/com/happydroids/sparky/SparkyTestRunner.java" />
+        <option value="$PROJECT_DIR$/sparky/test/com/happydroids/sparky/Expect.java" />
+        <option value="$PROJECT_DIR$/sparky/test/com/happydroids/sparky/InputStreamMatcher.java" />
+        <option value="$PROJECT_DIR$/sparky/test/com/happydroids/sparky/JarJoinerTest.java" />
+        <option value="$PROJECT_DIR$/sparky/fixtures/fixture_game_updater_multiple_updates.json" />
+        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/JarJoiner.java" />
+        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/GameUpdate.java" />
+        <option value="$PROJECT_DIR$/sparky/test/com/happydroids/TestHelper.java" />
+        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java" />
+        <option value="$PROJECT_DIR$/happydroids-common/test/com/happydroids/server/TestHappyDroidService.java" />
+        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidServiceCollection.java" />
+        <option value="$PROJECT_DIR$/sparky/test/com/happydroids/sparky/GameUpdaterTest.java" />
+        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/GameUpdater.java" />
+        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/GameUpdateChecker.java" />
       </list>
     </option>
   </component>
@@ -477,6 +529,46 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="happydroids" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sparky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="happydroids" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sparky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sparky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -541,7 +633,39 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="sparky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fixtures" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="happydroids-common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="happydroids-common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -563,48 +687,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desktop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desktop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desktop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="unhappyrobot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Favorites" />
@@ -616,7 +698,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="423" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="recentsLimit" value="5" />
+    <property name="recentsLimit" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="420" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="428" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1214" />
@@ -627,18 +709,18 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="Downloaded.Files.Path" value="$PROJECT_DIR$/main/libs" />
+    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="options.lastSelected" value="editing.templates" />
     <property name="download.sources.last.used.dir" value="$PROJECT_DIR$/main/libs/sources" />
-    <property name="options.lastSelected" value="project.propGUI" />
-    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$/main/libs/test" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLanguage" value="Java" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="OverrideImplement.combined" value="true" />
@@ -657,15 +739,15 @@
     <property name="AndroidTargetDevices" value="30324F52864200EC" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="Repository.Attach.Sources" value="true" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/gui" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/sparky/test/com/happydroids" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="0146BF4F17012018" />
     <property name="GenerateAntBuildDialog.backupFiles" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -677,11 +759,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.happydroids.sparky" />
       <recent name="com.unhappyrobot.sparky" />
       <recent name="com.unhappyrobot.gamestate.server" />
       <recent name="com.unhappyrobot.achievements" />
       <recent name="com.unhappyrobot.gui" />
-      <recent name="com.unhappyrobot" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.unhappyrobot" />
@@ -698,13 +780,6 @@
       <recent name="com.unhappyrobot.entities" />
       <recent name="com.unhappyrobot.types" />
     </key>
-    <key name="MoveMembersDialog.RECENTS_KEY">
-      <recent name="com.happydroids.HappyDroidConsts" />
-      <recent name="com.happydroids.server.HappyDroidService" />
-      <recent name="com.unhappyrobot.TowerConsts" />
-      <recent name="com.unhappyrobot.utils.Platform" />
-      <recent name="com.unhappyrobot.utils.Browser" />
-    </key>
     <key name="IntroduceConstantDialog.RECENTS_KEY">
       <recent name="com.unhappyrobot.entities.Lobby" />
       <recent name="com.unhappyrobot.gamestate.server.HappyDroidServiceObject" />
@@ -712,12 +787,26 @@
       <recent name="com.unhappyrobot.scenes.MainMenuScene" />
       <recent name="com.unhappyrobot.TowerConsts" />
     </key>
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="com.happydroids.TestHelper" />
+      <recent name="com.happydroids.HappyDroidConsts" />
+      <recent name="com.happydroids.server.HappyDroidService" />
+      <recent name="com.unhappyrobot.TowerConsts" />
+      <recent name="com.unhappyrobot.utils.Platform" />
+    </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.happydroids.sparky" />
       <recent name="com.happydroids.sparky.platform" />
       <recent name="com.happydroids.sparky.platform.windows" />
       <recent name="com.unhappyrobot.gamestate.server" />
       <recent name="com.unhappyrobot.sparky" />
-      <recent name="com.unhappyrobot" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.happydroids.sparky" />
+      <recent name="com.happydroids.server" />
+      <recent name="com.happydroids.utils" />
+      <recent name="com.happydroids.sparky.platform" />
+      <recent name="com.happydroids.droidtowers.gui" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/winregedit/libs" />
@@ -725,150 +814,9 @@
       <recent name="$PROJECT_DIR$/sparky/src/jodd/util" />
       <recent name="$PROJECT_DIR$/sparky/src/com/unhappyrobot/sparky" />
     </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.happydroids.utils" />
-      <recent name="com.happydroids.sparky.platform" />
-      <recent name="com.happydroids.droidtowers.gui" />
-      <recent name="com.happydroids.droidtowers.utils" />
-      <recent name="com.happydroids.droidtowers.gamestate.server" />
-    </key>
   </component>
-  <component name="RunManager" selected="Application.SparkyMain">
-    <configuration default="false" name="TemporaryTokenTest.create_shouldReturnATempToken" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.happydroids.droidtowers.gamestate.server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="main" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="com.happydroids.droidtowers.gamestate.server" />
-      <option name="MAIN_CLASS_NAME" value="com.happydroids.droidtowers.gamestate.server.TemporaryTokenTest" />
-      <option name="METHOD_NAME" value="create_shouldReturnATempToken" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/android/assets" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="false" name="HappyDroidServiceTest.uploadGameSave" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.happydroids.droidtowers.gamestate.server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="main" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="com.unhappyrobot.gamestate.server" />
-      <option name="MAIN_CLASS_NAME" value="com.unhappyrobot.gamestate.server.HappyDroidServiceTest" />
-      <option name="METHOD_NAME" value="uploadGameSave" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/android/assets" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="false" name="HappyDroidServiceCollectionTest.shouldWOrk" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.happydroids.droidtowers.gamestate.server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="main" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="com.happydroids.droidtowers.gamestate.server" />
-      <option name="MAIN_CLASS_NAME" value="com.happydroids.droidtowers.gamestate.server.HappyDroidServiceCollectionTest" />
-      <option name="METHOD_NAME" value="shouldWOrk" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/android/assets" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Profile ">
-        <option name="myExternalizedOptions" value="&#10;additional-options2=onexit\=snapshot&#10;" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="HappyDroidServiceCollectionTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.happydroids.droidtowers.gamestate.server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="main" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="com.happydroids.droidtowers.gamestate.server" />
-      <option name="MAIN_CLASS_NAME" value="com.happydroids.droidtowers.gamestate.server.HappyDroidServiceCollectionTest" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/android/assets" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Profile ">
-        <option name="myExternalizedOptions" value="&#10;additional-options2=onexit\=snapshot&#10;" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="JarJoinerTest" type="JUnit" factoryName="JUnit" temporary="true">
+  <component name="RunManager" selected="JUnit.GameUpdateCheckerTest">
+    <configuration default="false" name="GameUpdateCheckerTest" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.happydroids.sparky.*" />
@@ -879,12 +827,12 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="PACKAGE_NAME" value="com.happydroids.sparky" />
-      <option name="MAIN_CLASS_NAME" value="com.happydroids.sparky.JarJoinerTest" />
+      <option name="MAIN_CLASS_NAME" value="com.happydroids.sparky.GameUpdateCheckerTest" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/android/assets" />
+      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
@@ -898,6 +846,28 @@
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
     </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
@@ -949,40 +919,6 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -1004,6 +940,18 @@
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
@@ -1103,7 +1051,7 @@
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/android/assets" />
+      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
@@ -1196,17 +1144,13 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="10">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Android Application.Android" />
       <item index="1" class="java.lang.String" itemvalue="Application.DesktopGame" />
       <item index="2" class="java.lang.String" itemvalue="Application.GenerateAssetManagerFileList" />
       <item index="3" class="java.lang.String" itemvalue="Application.SparkyMain" />
       <item index="4" class="java.lang.String" itemvalue="JUnit.All in main lib" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.TemporaryTokenTest.create_shouldReturnATempToken" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.HappyDroidServiceTest.uploadGameSave" />
-      <item index="7" class="java.lang.String" itemvalue="JUnit.HappyDroidServiceCollectionTest.shouldWOrk" />
-      <item index="8" class="java.lang.String" itemvalue="JUnit.HappyDroidServiceCollectionTest" />
-      <item index="9" class="java.lang.String" itemvalue="JUnit.JarJoinerTest" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.GameUpdateCheckerTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -1552,10 +1496,10 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.08979885" sideWeight="0.74388677" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283046" sideWeight="0.7441154" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39853895" sideWeight="0.7441154" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12778662" sideWeight="0.67425966" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2133637" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18351911" sideWeight="0.71829915" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12778662" sideWeight="0.64616555" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35383448" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="IntelliGuard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953683" sideWeight="0.48726115" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18351911" sideWeight="0.71829915" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32975337" sideWeight="0.649962" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1670,127 +1614,122 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/winregedit/libs/platform.jar!/com/sun/jna/platform/win32/WinNT.class">
+    <entry file="file://$PROJECT_DIR$/sparky/test/com/happydroids/sparky/Expect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="154" column="29" selection-start="5339" selection-end="5362" vertical-scroll-proportion="0.34279227">
+        <state line="4" column="28" selection-start="97" selection-end="97" vertical-scroll-proportion="0.053398058">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/winregedit/libs/platform.jar!/com/sun/jna/platform/win32/WinReg.class">
+    <entry file="file://$PROJECT_DIR$/sparky/test/com/happydroids/sparky/JarJoinerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="17" selection-start="168" selection-end="168" vertical-scroll-proportion="0.098434">
+        <state line="43" column="36" selection-start="1112" selection-end="1112" vertical-scroll-proportion="0.22572815">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/winregedit/build.properties">
+    <entry file="file://$PROJECT_DIR$/sparky/src/com/happydroids/sparky/JarJoiner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="24" selection-start="228" selection-end="228" vertical-scroll-proportion="0.14363438">
+        <state line="44" column="9" selection-start="1257" selection-end="1257" vertical-scroll-proportion="-0.2815534">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/HappyDroidUncaughtExceptionHandler.java">
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/GameUpdate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="40" selection-start="768" selection-end="908" vertical-scroll-proportion="0.5266594">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/winregedit/src/WinRegistry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1793" selection-end="1793" vertical-scroll-proportion="0.021803766">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#221#310#0" expanded="true" />
-            <element signature="e#10691#10707#0" expanded="true" />
-            <element signature="e#11686#11694#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/winregedit/src/WinRegEdit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="25" selection-start="116" selection-end="116" vertical-scroll-proportion="0.05116279">
+        <state line="38" column="18" selection-start="882" selection-end="882" vertical-scroll-proportion="0.8131068">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/HappyDroidsDesktopUncaughtExceptionHandler.java">
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/sun/reflect/DelegatingMethodAccessorImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="3" selection-start="774" selection-end="774" vertical-scroll-proportion="0.27286822">
+        <state line="13" column="1" selection-start="657" selection-end="657" vertical-scroll-proportion="0.20465116">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/unhappyrobot/DesktopGame.java">
+    <entry file="jar://$PROJECT_DIR$/happydroids-common/libs/test/junit-4.7.jar!/org/junit/internal/runners/statements/RunAfters.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="45" selection-start="640" selection-end="640" vertical-scroll-proportion="0.13643411">
+        <state line="5" column="51" selection-start="213" selection-end="213" vertical-scroll-proportion="0.069565214">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/PlatformProtocolHandlerFactory.java">
+    <entry file="jar://$PROJECT_DIR$/happydroids-common/libs/test/junit-4.7.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="39" selection-start="239" selection-end="239" vertical-scroll-proportion="0.11937985">
+        <state line="11" column="38" selection-start="385" selection-end="385" vertical-scroll-proportion="0.17391305">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/utils/OSValidator.java">
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/ApiCollectionRunnable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="20" selection-start="279" selection-end="279" vertical-scroll-proportion="0.20465116">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/winregedit/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="30" selection-start="4103" selection-end="4103" vertical-scroll-proportion="1.4968992">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/MacProtocolHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="87" selection-start="587" selection-end="587" vertical-scroll-proportion="0.2387597">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#413#623#0" expanded="true" />
-            <element signature="e#616#617#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sparky/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="31" selection-start="1037" selection-end="1037" vertical-scroll-proportion="0.4775194">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/PlatformProtocolHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="17" selection-start="128" selection-end="128" vertical-scroll-proportion="0.068217054">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/WindowsProtocolHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="55" selection-start="315" selection-end="315" vertical-scroll-proportion="0.13643411">
+        <state line="19" column="0" selection-start="657" selection-end="657" vertical-scroll-proportion="0.36771846">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sparky/src/com/happydroids/sparky/SparkyMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="198" column="0" selection-start="6372" selection-end="6372" vertical-scroll-proportion="1.068217">
+        <state line="40" column="7" selection-start="1273" selection-end="1273" vertical-scroll-proportion="0.5339806">
           <folding>
             <element signature="e#0#6884#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="11" selection-start="1288" selection-end="1288" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/happydroids-common/test/com/happydroids/server/TestHappyDroidService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="32" selection-start="649" selection-end="649" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#2479#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sparky/fixtures/fixture_game_updater_multiple_updates.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="21" selection-start="194" selection-end="201" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sparky/test/com/happydroids/TestHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="721" selection-end="721" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidServiceCollection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="30" selection-start="2726" selection-end="2726" vertical-scroll-proportion="1.0048543">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sparky/test/com/happydroids/sparky/GameUpdateCheckerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="34" selection-start="3951" selection-end="3951" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sparky/src/com/happydroids/sparky/GameUpdateChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="30" selection-start="379" selection-end="379" vertical-scroll-proportion="0.37378642">
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1867,7 +1806,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>jarbundler</last-edited>
+          <last-edited>sparky</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1890,7 +1829,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>apache-commons</last-edited>
+          <last-edited>main</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

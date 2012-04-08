@@ -41,9 +41,8 @@ public class JarJoiner {
 
   public void join(String gameVersion) throws IOException {
     // Construct a string version of a manifest
-    StringBuffer sbuf = new StringBuffer();
-    sbuf.append("Manifest-Version: 1.0\n");
-    sbuf.append("Game-Version: " + gameVersion + "\n");
+    StringBuilder sbuf = new StringBuilder();
+    sbuf.append("Game-Version: ").append(gameVersion).append("\n");
 
     JarOutputStream outputZip = new JarOutputStream(new BufferedOutputStream(new FileOutputStream(outputFile)), new Manifest(new ByteArrayInputStream(sbuf.toString().getBytes("UTF-8"))));
 
