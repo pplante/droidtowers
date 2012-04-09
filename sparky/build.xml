@@ -95,17 +95,18 @@
       <fileset dir="${build.dir}/classes"/>
       <zipfileset dir="${root.dir}/assets/"/>
       <!--<zipgroupfileset dir="${root.dir}/../happydroids-common/libs/main" includes="**/*.jar"/>-->
-      <zipgroupfileset dir="${root.dir}/libs" includes="**/*.jar"/>
+      <zipgroupfileset dir="${root.dir}/libs" includes="**/jackson*.jar"/>
     </jar>
   </target>
 
   <target name="proguard" depends="jar">
     <taskdef resource="proguard/ant/task.properties"
              classpath="../tools/proguard/lib/proguard.jar"/>
-    <proguard allowaccessmodification="true"
+    <proguard allowaccessmodification="false"
               usemixedcaseclassnames="false"
-              skipnonpubliclibraryclasses="false"
+              skipnonpubliclibraryclasses="true"
               preverify="true"
+              shrink="false"
               optimize="false"
               obfuscate="false"
               verbose="true"
@@ -118,18 +119,47 @@
       <libraryjar path="${jdk.classpath.1.6.unix}"/>
       <libraryjar path="../tools/jsr305-2.0.0.jar"/>
 
-      <optimizations filter="!code/simplification/arithmetic"/>
-      <keepattributes name="*Annotation*"/>
-      <keep name="com.happydroids.sparky.SparkyMain" allowobfuscation="false">
+      <keepattributes name="*Annotation*,EnclosingMethod,com.fasterxml.jackson.annotation.**,com.fasterxml.jackson.databind.annotation.**"/>
+      <keepattributes name="EnclosingMethod"/>
+      <keepattributes name="com.fasterxml.jackson.annotation.**"/>
+      <keepattributes name="com.fasterxml.jackson.databind.annotation.**"/>
+      <keep name="com.happydroids.sparky.SparkyMain">
         <method name="main"/>
         <constructor/>
         <method name="*"/>
-        <field/>
+        <field name="*"/>
+      </keep>
+      <keep name="com.happydroids.**" allowobfuscation="false">
+        <method name="main"/>
+        <constructor/>
+        <method name="*"/>
+        <field name="*"/>
+      </keep>
+      <keep name="com.google.**" allowobfuscation="false" allowoptimization="false">
+        <constructor/>
+        <method name="*"/>
+        <field name="*"/>
+      </keep>
+      <keep extends="com.happydroids.server.HappyDroidServiceObject">
+        <constructor/>
+        <method name="*"/>
+        <field name="*"/>
+      </keep>
+      <keep extends="com.happydroids.server.HappyDroidServiceCollection">
+        <constructor/>
+        <method name="*"/>
+        <field name="*"/>
+      </keep>
+
+      <keep name="org.apache.**,com.fasterxml.**,com.intellij.**" allowshrinking="false" allowobfuscation="false" allowoptimization="false">
+        <constructor/>
+        <method name="*"/>
+        <field name="*"/>
       </keep>
       <dontwarn/>
+      <dontnote/>
       <dontnote name="com.google.common.base.FinalizableReferenceQueue"/>
       <dontnote name="com.google.common.base.internal.Finalizer"/>
-      <dontnote name="jodd.**"/>
       <dontnote name="org.apache.**"/>
       <dontnote name="javax.**"/>
       <dontnote name="com.fasterxml.jackson.databind.deser.BasicDeserializerFactory"/>

@@ -9,27 +9,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="module" module-name="happydroids-common" exported="" />
+    <orderEntry type="library" exported="" name="commons-io" level="project" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="junit-mockito-great-expectations" level="project" />
-    <orderEntry type="library" name="commons-io" level="project" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/cobra.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/js.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
   </component>
 </module>
 

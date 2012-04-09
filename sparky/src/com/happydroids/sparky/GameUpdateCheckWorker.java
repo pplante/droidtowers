@@ -51,7 +51,4 @@ public class GameUpdateCheckWorker extends SimpleSwingWorker {
     return null;
   }
 
-  @Override
-  protected void done() {
-  }
 }

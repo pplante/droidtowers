@@ -26,7 +26,6 @@ public abstract class SimpleSwingWorker {
       } catch (final Exception ex) {
         throw new RuntimeException(ex);
       }
-      SimpleSwingWorker.this.done();
     }
   };
 
@@ -34,8 +33,6 @@ public abstract class SimpleSwingWorker {
   }
 
   protected abstract Void doInBackground() throws Exception;
-
-  protected abstract void done();
 
   public void execute() {
     worker.execute();

@@ -7,7 +7,6 @@ package com.happydroids.sparky;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.platform.HappyDroidsDesktopUncaughtExceptionHandler;
 import com.happydroids.server.HappyDroidService;
-import com.happydroids.sparky.platform.PlatformProtocolHandlerFactory;
 import com.happydroids.utils.BackgroundTask;
 
 import javax.swing.*;
@@ -20,6 +19,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,12 +27,13 @@ public class SparkyMain extends JFrame {
   private JPanel contentPane;
   private JLabel happyDroidsLogo;
   private JProgressBar updateProgress;
-  private JEditorPane webPane;
   private JLabel updateStatus;
   private JPanel innerPane;
   private JButton startBuildingButton;
-  private JButton retryButton;
   private JScrollPane scrollPane;
+  private JEditorPane webPane;
+  private JPanel bottomPanel;
+  private BackgroundPanel backgroundPanel;
   private boolean updateInProgress;
   private File gameStorage;
   private File gameJar;
@@ -69,28 +70,44 @@ public class SparkyMain extends JFrame {
 
     gameJar = new File(gameStorage, "DroidTowers.jar");
 
-    retryButton.setVisible(false);
-    scrollPane.setVisible(true);
-
-//    makeRequestForGameUpdates();
+    makeRequestForGameUpdates();
 
     try {
-      webPane.setPage(new File("test.html").toURL());
+      backgroundPanel.add(bottomPanel);
+      backgroundPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+      backgroundPanel.setTransparentAdd(true);
+      bottomPanel.setBackground(new Color(0, 0, 0, 0));
+      scrollPane.setBackground(new Color(0, 0, 0, 0));
+      scrollPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+      webPane.setBackground(new Color(0, 0, 0, 0));
+      webPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+      webPane.setPage(HappyDroidConsts.HAPPYDROIDS_URI + "/game-updates");
+
+      addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent mouseEvent) {
+          try {
+            webPane.setPage(HappyDroidConsts.HAPPYDROIDS_URI + "/game-updates?r=" + new Random().nextFloat());
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        }
+      });
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
 
-
-    retryButton.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent actionEvent) {
-        makeRequestForGameUpdates();
-      }
-    });
+  private void createUIComponents() {
+    backgroundPanel = new BackgroundPanel(new ImageIcon("assets/bottom-bar.png").getImage(), BackgroundPanel.TILED, 1f, 0f);
+    backgroundPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+    backgroundPanel.setTransparentAdd(true);
   }
 
   private void makeRequestForGameUpdates() {
-    retryButton.setEnabled(false);
+    updateInProgress = true;
     updateProgress.setMaximum(100);
+
     updateProgressStatus("Checking for updates...");
     HappyDroidService.instance().withNetworkConnection(new Runnable() {
       public void run() {
@@ -98,16 +115,6 @@ public class SparkyMain extends JFrame {
         updateCheckerWorker.addPropertyChangeListener(new GameUpdateCheckListener());
         updateCheckerWorker.execute();
 
-        new Thread() {
-          @Override
-          public void run() {
-            webPane.setEditable(false);
-            try {
-              webPane.setPage(HappyDroidConsts.HAPPYDROIDS_URI + "/game-updates");
-            } catch (IOException ignored) {
-            }
-          }
-        }.start();
       }
     });
   }
@@ -159,23 +166,23 @@ public class SparkyMain extends JFrame {
     BackgroundTask.setUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
     Thread.currentThread().setUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
 
-    PlatformProtocolHandlerFactory.newInstance().initialize(args);
+//    PlatformProtocolHandlerFactory.newInstance().initialize(args);
 
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        setDefaultLookAndFeelDecorated(true);
+//    SwingUtilities.invokeLater(new Runnable() {
+//      public void run() {
+    setDefaultLookAndFeelDecorated(true);
 
-        SparkyMain window = new SparkyMain();
-        window.addWindowStateListener(new WindowStateListener() {
-          public void windowStateChanged(WindowEvent windowEvent) {
-            System.out.println("windowEvent = " + windowEvent);
-          }
-        });
-        window.pack();
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
-      }
-    });
+    SparkyMain window = new SparkyMain();
+//        window.addWindowStateListener(new WindowStateListener() {
+//          public void windowStateChanged(WindowEvent windowEvent) {
+//            System.out.println("windowEvent = " + windowEvent);
+//          }
+//        });
+    window.pack();
+    window.setLocationRelativeTo(null);
+    window.setVisible(true);
+//      }
+//    });
   }
 
   private class StartBuildingButtonClick implements ActionListener {
@@ -213,6 +220,8 @@ public class SparkyMain extends JFrame {
     }
 
     private void updateProcessComplete(PropertyChangeEvent event) {
+      updateInProgress = false;
+
       if (gameJar.exists()) {
         updateProgress.setValue(100);
         updateProgressStatus("Update complete!");
@@ -222,9 +231,6 @@ public class SparkyMain extends JFrame {
         updateProgressStatus("Update failed!");
         updateProgress.setValue(0);
         updateProgress.setEnabled(false);
-        retryButton.setVisible(true);
-        retryButton.setEnabled(true);
-        scrollPane.setVisible(false);
       }
     }
 
