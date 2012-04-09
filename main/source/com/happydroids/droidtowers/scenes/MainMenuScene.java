@@ -75,6 +75,22 @@ public class MainMenuScene extends Scene {
 
 
     TextureAtlas atlas = TowerAssetManager.textureAtlas("hud/menus.txt");
+    Image libGdxLogo = new Image(atlas.findRegion("powered-by-libgdx"));
+    libGdxLogo.setAlign(Align.CENTER);
+    libGdxLogo.x = 5;
+    libGdxLogo.y = 5;
+    libGdxLogo.scaleX = libGdxLogo.scaleY = 0f;
+    libGdxLogo.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        TowerGame.getPlatformBrowserUtil().launchWebBrowser("http://libgdx.badlogicgames.com");
+      }
+    });
+    addActor(libGdxLogo);
+
+
+    libGdxLogo.action(ScaleTo.$(1f, 1f, 0.55f)
+                              .setInterpolator(OvershootInterpolator.$(1.75f)));
+
     Image happyDroidsLogo = new Image(atlas.findRegion("happy-droids-logo"));
     happyDroidsLogo.setAlign(Align.CENTER);
     happyDroidsLogo.x = getStage().width() - happyDroidsLogo.width - 5;
@@ -86,6 +102,7 @@ public class MainMenuScene extends Scene {
       }
     });
     addActor(happyDroidsLogo);
+
 
     happyDroidsLogo.action(ScaleTo.$(1f, 1f, 0.55f)
                                    .setInterpolator(OvershootInterpolator.$(1.75f)));

@@ -16,3 +16,10 @@ droid-towers-logo
   orig: 506, 86
   offset: 4, 4
   index: -1
+powered-by-libgdx
+  rotate: false
+  xy: 0, 146
+  size: 117, 35
+  orig: 117, 35
+  offset: 0, 0
+  index: -1
