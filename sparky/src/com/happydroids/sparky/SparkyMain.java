@@ -6,9 +6,9 @@ package com.happydroids.sparky;
 
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.platform.HappyDroidsDesktopUncaughtExceptionHandler;
+import com.happydroids.server.HappyDroidService;
 import com.happydroids.sparky.platform.PlatformProtocolHandlerFactory;
 import com.happydroids.utils.BackgroundTask;
-import jodd.util.ClassLoaderUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +18,8 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,10 +27,12 @@ public class SparkyMain extends JFrame {
   private JPanel contentPane;
   private JLabel happyDroidsLogo;
   private JProgressBar updateProgress;
-  private JEditorPane gameUpdates;
+  private JEditorPane webPane;
   private JLabel updateStatus;
   private JPanel innerPane;
   private JButton startBuildingButton;
+  private JButton retryButton;
+  private JScrollPane scrollPane;
   private boolean updateInProgress;
   private File gameStorage;
   private File gameJar;
@@ -65,57 +69,64 @@ public class SparkyMain extends JFrame {
 
     gameJar = new File(gameStorage, "DroidTowers.jar");
 
-    makeRequestForGameUpdates();
+    retryButton.setVisible(false);
+    scrollPane.setVisible(true);
+
+//    makeRequestForGameUpdates();
+
+    try {
+      webPane.setPage(new File("test.html").toURL());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+
+    retryButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent actionEvent) {
+        makeRequestForGameUpdates();
+      }
+    });
   }
 
   private void makeRequestForGameUpdates() {
+    retryButton.setEnabled(false);
+    updateProgress.setMaximum(100);
     updateProgressStatus("Checking for updates...");
+    HappyDroidService.instance().withNetworkConnection(new Runnable() {
+      public void run() {
+        GameUpdateCheckWorker updateCheckerWorker = new GameUpdateCheckWorker(gameStorage, gameJar);
+        updateCheckerWorker.addPropertyChangeListener(new GameUpdateCheckListener());
+        updateCheckerWorker.execute();
 
-    GameUpdateCheckWorker updateCheckerWorker = new GameUpdateCheckWorker(gameStorage, gameJar);
-    updateCheckerWorker.addPropertyChangeListener(new PropertyChangeListener() {
-      public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
-        String propertyName = propertyChangeEvent.getPropertyName();
-        System.out.println("propertyName = " + propertyName);
-        if (propertyName.equals("updateCheckComplete")) {
-          if (((Boolean) propertyChangeEvent.getNewValue())) {
-            updateProgressStatus("There is an update available, it will be automatically downloaded for you.");
-          } else {
-            updateProgressStatus("No updates found.");
+        new Thread() {
+          @Override
+          public void run() {
+            webPane.setEditable(false);
+            try {
+              webPane.setPage(HappyDroidConsts.HAPPYDROIDS_URI + "/game-updates");
+            } catch (IOException ignored) {
+            }
           }
-        } else if (propertyName.equals("updateProcessComplete")) {
-          updateProgressStatus("Update complete!");
-          startBuildingButton.setEnabled(true);
-        }
+        }.start();
       }
     });
-
-    updateCheckerWorker.execute();
-
-    new Thread() {
-      @Override
-      public void run() {
-        gameUpdates.setEditable(false);
-        try {
-          gameUpdates.setPage(HappyDroidConsts.HAPPYDROIDS_URI + "/game-updates");
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
-    }.start();
   }
 
   private void launchGameFromJar(File mergedJarFile) {
     try {
-      ClassLoaderUtil.addUrlToClassPath(mergedJarFile.toURI().toURL());
+      URLClassLoader classLoader = (URLClassLoader) getClass().getClassLoader();
+      Method addURL = URLClassLoader.class.getDeclaredMethod("addURL", new Class[]{URL.class});
+      addURL.setAccessible(true);
+      addURL.invoke(classLoader, mergedJarFile.toURI().toURL());
 
-      Class aClass = ClassLoaderUtil.loadClass("com.happydroids.droidtowers.unhappyrobot.DesktopGame");
+      Class aClass = classLoader.loadClass("com.happydroids.droidtowers.DesktopGame");
       Method main = aClass.getDeclaredMethod("main", String[].class);
       Object instance = aClass.newInstance();
       main.invoke(instance, new Object[]{null});
 
       dispose();
     } catch (Exception e) {
-      e.printStackTrace();
+      throw new RuntimeException("Unable to start game.");
     }
   }
 
@@ -170,6 +181,67 @@ public class SparkyMain extends JFrame {
   private class StartBuildingButtonClick implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       launchGameFromJar(gameJar);
+    }
+  }
+
+  private class GameUpdateCheckListener implements PropertyChangeListener {
+    public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+      String propertyName = propertyChangeEvent.getPropertyName();
+      if (propertyName.equals("state")) {
+        return;
+      }
+
+      try {
+        Method declaredMethod = GameUpdateCheckListener.class.getDeclaredMethod(propertyName, new Class[]{PropertyChangeEvent.class});
+        if (declaredMethod != null) {
+          declaredMethod.invoke(this, propertyChangeEvent);
+        }
+
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+
+    private void updateDownloadProgress(PropertyChangeEvent event) {
+      updateProgressStatus("Downloading update...");
+      updateProgressBarFromEvent(event);
+    }
+
+    private void updateProcessingProgress(PropertyChangeEvent event) {
+      updateProgressStatus("Extracting update...");
+      updateProgressBarFromEvent(event);
+    }
+
+    private void updateProcessComplete(PropertyChangeEvent event) {
+      if (gameJar.exists()) {
+        updateProgress.setValue(100);
+        updateProgressStatus("Update complete!");
+        startBuildingButton.setEnabled(true);
+      } else {
+//            JOptionPane.showMessageDialog(null, "Sorry, there was a problem contacting the update server\nto download a copy of Droid Towers.\n\nPlease check your internet connection then try again.", "Connection Problem: ETF0NH0M3", JOptionPane.INFORMATION_MESSAGE);
+        updateProgressStatus("Update failed!");
+        updateProgress.setValue(0);
+        updateProgress.setEnabled(false);
+        retryButton.setVisible(true);
+        retryButton.setEnabled(true);
+        scrollPane.setVisible(false);
+      }
+    }
+
+    private void updateCheckComplete(PropertyChangeEvent event) {
+      if (((Boolean) event.getNewValue())) {
+        updateProgressStatus("There is an update available, it will be automatically downloaded for you.");
+      } else {
+        updateProgressStatus("No updates found.");
+      }
+    }
+
+    private void updateProgressBarFromEvent(PropertyChangeEvent event) {
+      Integer totalBytesToDownload = (Integer) event.getOldValue();
+      Integer totalBytesDownloaded = (Integer) event.getNewValue();
+      double progress = ((float) totalBytesDownloaded / (float) totalBytesToDownload) * 100.0;
+
+      updateProgress.setValue((int) progress);
     }
   }
 }

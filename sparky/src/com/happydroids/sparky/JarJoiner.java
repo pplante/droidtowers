@@ -29,7 +29,7 @@ public class JarJoiner {
   private List<JarFile> jarsToProcess;
   private int numTotalEntries;
   private int numEntriesProcessed;
-  private Runnable progressCallback;
+  private JarJoinerProgressListener progressCallback;
 
   public JarJoiner(File outputFile) {
     this.outputFile = outputFile;
@@ -60,6 +60,10 @@ public class JarJoiner {
     }
     outputZip.close();
     fileOutputStream.close();
+
+    if (progressCallback != null) {
+      progressCallback.run(numEntriesProcessed, numTotalEntries);
+    }
   }
 
   private void copyEntriesToFromZipFile(JarOutputStream outputZip, JarFile existingZip) throws IOException {
@@ -76,7 +80,7 @@ public class JarJoiner {
         numEntriesProcessed++;
 
         if (numEntriesProcessed % 25 == 0 && progressCallback != null) {
-          progressCallback.run();
+          progressCallback.run(numEntriesProcessed, numTotalEntries);
         }
       }
     }
@@ -90,7 +94,7 @@ public class JarJoiner {
     return numTotalEntries;
   }
 
-  public void setProgressCallback(Runnable progressCallback) {
+  public void setProgressCallback(JarJoinerProgressListener progressCallback) {
     this.progressCallback = progressCallback;
   }
 

@@ -21,6 +21,10 @@ public class GameUpdateDownloader {
   private Runnable postDownloadRunnable;
   private final File gameStorage;
   private final File gameJar;
+  private int totalBytesToDownload;
+  private int totalBytesDownloaded;
+  private Runnable downloadProgressRunnable;
+  private JarJoinerProgressListener processingProgressRunnable;
 
   public GameUpdateDownloader(File gameStorage, File gameJar) {
     this.gameStorage = gameStorage;
@@ -38,7 +42,14 @@ public class GameUpdateDownloader {
 
     Logger.getAnonymousLogger().info(String.format("Downloading %d updates!", updateChecker.getPendingUpdates().size()));
 
+    totalBytesToDownload = 0;
+    for (GameUpdate gameUpdate : updateChecker.getPendingUpdates()) {
+      totalBytesToDownload += updateChecker.shouldUsePatches() ? gameUpdate.patchFile.filesize : gameUpdate.fullRelease.filesize;
+    }
+
     final JarJoiner joiner = new JarJoiner(gameJar);
+    joiner.setProgressCallback(processingProgressRunnable);
+
     for (GameUpdate gameUpdate : updateChecker.getPendingUpdates()) {
       Logger.getAnonymousLogger().info("Downloading: " + gameUpdate.gitSha);
       File updateFile = fetchGameUpdate(gameUpdate, updateChecker.shouldUsePatches());
@@ -70,9 +81,23 @@ public class GameUpdateDownloader {
 
     File updateFile = File.createTempFile("gameUpdate", ".jar");
     FileOutputStream fileOutputStream = new FileOutputStream(updateFile);
-    new BufferedHttpEntity(httpResponse.getEntity()).writeTo(fileOutputStream);
-    fileOutputStream.flush();
-    fileOutputStream.close();
+    BufferedHttpEntity httpEntity = new BufferedHttpEntity(httpResponse.getEntity());
+
+    final ProgressTrackerOutputStream outputStream = new ProgressTrackerOutputStream(fileOutputStream);
+
+    if (downloadProgressRunnable != null) {
+      outputStream.setProgressListener(new Runnable() {
+        public void run() {
+          synchronized (GameUpdateDownloader.this) {
+            totalBytesDownloaded = outputStream.getProgress();
+            downloadProgressRunnable.run();
+          }
+        }
+      });
+    }
+
+    httpEntity.writeTo(outputStream);
+    outputStream.close();
 
     return updateFile;
   }
@@ -91,9 +116,26 @@ public class GameUpdateDownloader {
     return !updateChecker.hasCurrentVersion() || (updateChecker.getPendingUpdates() != null && !updateChecker.getPendingUpdates().isEmpty());
   }
 
+  public void setDownloadProgressRunnable(Runnable downloadProgressRunnable) {
+    this.downloadProgressRunnable = downloadProgressRunnable;
+  }
+
+  public void setProcessingProgressRunnable(JarJoinerProgressListener processingProgressRunnable) {
+    this.processingProgressRunnable = processingProgressRunnable;
+  }
+
+
   private class GameFileDownloadException extends IOException {
     public GameFileDownloadException(String message) {
       super(message);
     }
+  }
+
+  public synchronized int getTotalBytesDownloaded() {
+    return totalBytesDownloaded;
+  }
+
+  public synchronized int getTotalBytesToDownload() {
+    return totalBytesToDownload;
   }
 }

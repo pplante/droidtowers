@@ -22,6 +22,19 @@ public class GameUpdateCheckWorker extends SimpleSwingWorker {
   @Override
   protected Void doInBackground() {
     try {
+      updateDownloader.setDownloadProgressRunnable(new Runnable() {
+        public void run() {
+          firePropertyChange("updateDownloadProgress", updateDownloader.getTotalBytesToDownload(), updateDownloader.getTotalBytesDownloaded());
+        }
+      });
+
+      updateDownloader.setProcessingProgressRunnable(new JarJoinerProgressListener() {
+        @Override
+        public void run(int numEntriesProcessed, int numTotalEntries) {
+          firePropertyChange("updateProcessingProgress", numTotalEntries, numEntriesProcessed);
+        }
+      });
+
       updateDownloader.checkForUpdates();
       firePropertyChange("updateCheckComplete", false, updateDownloader.updateAvailable());
 

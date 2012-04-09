@@ -42,6 +42,11 @@ public abstract class SimpleSwingWorker {
   }
 
   protected void firePropertyChange(String eventName, Object oldValue, Object newValue) {
+    try {
+      Thread.sleep(10);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     worker.firePropertyChange(eventName, oldValue, newValue);
   }
 
