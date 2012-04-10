@@ -5,9 +5,9 @@
 package com.happydroids.server;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.google.common.collect.Sets;
 import com.happydroids.HappyDroidConsts;
+import com.happydroids.jackson.HappyDroidObjectMapper;
 import com.happydroids.utils.BackgroundTask;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -36,6 +36,7 @@ public class HappyDroidService {
 
   protected boolean hasNetworkConnection;
   private final Set<Runnable> withNetworkConnectionRunnables = Sets.newHashSet();
+  protected final HappyDroidObjectMapper objectMapper;
 
   public static HappyDroidService instance() {
     if (_instance == null) {
@@ -51,10 +52,12 @@ public class HappyDroidService {
 
   protected HappyDroidService() {
     checkForNetwork();
+    objectMapper = new HappyDroidObjectMapper();
   }
 
   protected HappyDroidService(int fuckYouJava) {
     // leave this for tests.
+    objectMapper = new HappyDroidObjectMapper();
   }
 
   public static void setDeviceOSName(String deviceType) {
@@ -73,16 +76,8 @@ public class HappyDroidService {
     return deviceType;
   }
 
-  public ObjectMapper getObjectMapper() {
-    ObjectMapper objectMapper = new ObjectMapper();
-    SimpleModule simpleModule = new SimpleModule("Specials");
-    addCustomSerializers(simpleModule);
-    objectMapper.registerModule(simpleModule);
+  public HappyDroidObjectMapper getObjectMapper() {
     return objectMapper;
-  }
-
-  protected void addCustomSerializers(SimpleModule simpleModule) {
-    simpleModule.addSerializer(new StackTraceSerializer());
   }
 
   public static <T> T materializeObject(HttpResponse response, Class<T> aClazz) {

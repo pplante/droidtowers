@@ -53,7 +53,7 @@ public class GridObjectState {
         }
       }
     } else {
-      throw new RuntimeException("Looks like you forget to call instance() of the factory for type: " + typeClass.getName());
+      throw new RuntimeException("Looks like you forget to call instance() of the factory for type: " + typeClass);
     }
 
     return null;

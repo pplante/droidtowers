@@ -18,6 +18,8 @@ import javax.annotation.Nullable;
 class AchievementRequirement {
   private RequirementType type;
   private AchievementThing thing;
+  private ProviderType thingProviderTypes[];
+  private Class<? extends GridObject> thingObjectTypes[];
   private double amount;
 
   public boolean isCompleted() {
@@ -49,7 +51,19 @@ class AchievementRequirement {
     GuavaSet<GridObject> gridObjects = null;
     Predicate<GridObject> gridObjectPredicate = null;
 
+    Class<? extends GridObject>[] classes = null;
+    ProviderType provides[] = null;
+
     switch (thing) {
+      case HOUSING:
+        gridObjects = gameGrid.getInstancesOf(Room.class, CommercialSpace.class);
+        gridObjectPredicate = new Predicate<GridObject>() {
+          public boolean apply(@Nullable GridObject gridObject) {
+            return gridObject instanceof Room && ((RoomType) gridObject.getGridObjectType()).provides() == ProviderType.HOUSING;
+          }
+        };
+        break;
+
       case HOTEL_ROOM:
         gridObjects = gameGrid.getInstancesOf(Room.class, CommercialSpace.class);
         gridObjectPredicate = new Predicate<GridObject>() {

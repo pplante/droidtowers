@@ -6,6 +6,9 @@
       <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/jackson-databind-2.0.0.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/happydroids-common/libs/sources/jackson-databind-2.0.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happydroids-common/libs/sources/jackson-core-2.0.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

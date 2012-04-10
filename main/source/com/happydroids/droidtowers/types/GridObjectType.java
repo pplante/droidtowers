@@ -20,6 +20,7 @@ import java.util.WeakHashMap;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public abstract class GridObjectType {
+  private String id;
   private String name;
   private int height;
   private int width;
@@ -149,5 +150,9 @@ public abstract class GridObjectType {
 
   public void setLocked(boolean locked) {
     this.locked = locked;
+  }
+
+  public String getId() {
+    return id;
   }
 }

@@ -12,5 +12,6 @@ public enum ProviderType {
   HOTEL_ROOMS,
   OFFICE_SERVICES,
   JANITORS,
-  MAIDS
+  MAIDS,
+  SECURITY
 }

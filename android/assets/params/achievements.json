@@ -22,14 +22,16 @@
     "requirements":[
       {
         "type":"BUILD",
-        "thing":"HOTEL_ROOM",
-        "amount":3
+        "amount":3,
+        "thing":"PROVIDER_TYPE",
+        "thingProviderTypes":["HOTEL_ROOMS"]
       }
     ],
     "rewards":[
       {
         "type":"UNLOCK",
-        "thing":"MAIDS_OFFICE"
+        "thing":"OBJECT_TYPE",
+        "thingTypeId":"MAIDS_CLOSET"
       }
     ]
   },
@@ -39,14 +41,45 @@
     "requirements":[
       {
         "type":"BUILD",
-        "thing":"COMMERCIAL_SPACE",
-        "amount":3
+        "amount":3,
+        "thing":"PROVIDER_TYPE",
+        "thingProviderTypes":["OFFICE_SERVICES", "FOOD"]
       }
     ],
     "rewards":[
       {
         "type":"UNLOCK",
-        "thing":"JANITORS_CLOSET"
+        "thing":"OBJECT_TYPE",
+        "thingTypeId":"JANITORS_CLOSET"
+      }
+    ]
+  },
+  {
+    "id":"security center",
+    "name":"Big Brother is Everywhere",
+    "requirements":[
+      {
+        "type":"BUILD",
+        "amount":10,
+        "thing":"OBJECT_TYPE",
+        "thingObjectTypes":["CommercialSpace"]
+      },
+      {
+        "type":"BUILD",
+        "amount":15,
+        "thing":"PROVIDER_TYPE",
+        "thingProviderTypes":["HOUSING"]
+      },
+      {
+        "type":"POPULATION",
+        "amount":120
+      }
+    ],
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingTypeId":"SECURITY_CENTER"
       }
     ]
   }

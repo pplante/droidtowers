@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers;
 
+import com.badlogic.gdx.Gdx;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
@@ -34,6 +35,8 @@ public class NonGLTestRunner extends BlockJUnit4ClassRunner {
 
   protected void beforeTestRun() {
     TweenSystem.getTweenManager();
+    Gdx.files = new TestGdxFiles();
+    Gdx.app = new TestGdxApplication();
   }
 
   protected void afterTestRun() {

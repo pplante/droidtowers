@@ -30,10 +30,6 @@ import com.happydroids.droidtowers.input.DefaultKeybindings;
 import com.happydroids.droidtowers.input.GestureDelegater;
 import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputSystem;
-import com.happydroids.droidtowers.types.CommercialTypeFactory;
-import com.happydroids.droidtowers.types.ElevatorTypeFactory;
-import com.happydroids.droidtowers.types.RoomTypeFactory;
-import com.happydroids.droidtowers.types.StairTypeFactory;
 
 import java.util.List;
 
@@ -76,11 +72,6 @@ public class TowerScene extends Scene {
     if (gameSave == null) {
       throw new RuntimeException("Cannot load game with no GameSave passed.");
     }
-
-    RoomTypeFactory.instance();
-    CommercialTypeFactory.instance();
-    ElevatorTypeFactory.instance();
-    StairTypeFactory.instance();
 
     gameGrid = new GameGrid(camera);
     gameGridRenderer = gameGrid.getRenderer();

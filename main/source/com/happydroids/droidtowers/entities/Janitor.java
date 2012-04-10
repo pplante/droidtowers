@@ -5,11 +5,9 @@
 package com.happydroids.droidtowers.entities;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.types.ProviderType;
 import com.happydroids.droidtowers.types.RoomType;
@@ -24,8 +22,8 @@ public class Janitor extends Avatar {
   }
 
   @Override
-  protected TextureAtlas getTextureAtlas() {
-    return TowerAssetManager.textureAtlas("characters/janitor.txt");
+  protected String addFramePrefix(String frameName) {
+    return "janitor/" + frameName;
   }
 
   @Override

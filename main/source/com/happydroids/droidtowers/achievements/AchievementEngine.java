@@ -10,10 +10,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
+import com.happydroids.droidtowers.entities.GridObjectPlacementState;
 import com.happydroids.droidtowers.events.GridObjectChangedEvent;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.AchievementNotification;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -33,16 +36,22 @@ public class AchievementEngine {
     return instance;
   }
 
-  private AchievementEngine() {
+  protected AchievementEngine() {
+    completedAchievements = Sets.newHashSet();
+
     try {
       FileHandle fileHandle = Gdx.files.internal("params/achievements.json");
-      ObjectMapper mapper = new ObjectMapper();
+      ObjectMapper mapper = TowerGameService.instance().getObjectMapper();
       achievements = mapper.readValue(fileHandle.reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, Achievement.class));
-    } catch (Throwable throwable) {
-      throwable.printStackTrace();
-    }
 
-    completedAchievements = Sets.newHashSet();
+      for (Achievement achievement : achievements) {
+        for (AchievementReward reward : achievement.getRewards()) {
+          reward.validate();
+        }
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   public List<Achievement> getAchievements() {
@@ -51,15 +60,16 @@ public class AchievementEngine {
 
   @Subscribe
   public void GameEvent_handleGridObjectEvent(GridObjectChangedEvent event) {
-    if (!event.nameOfParamChanged.equals("placementState")) {
+    if (!event.gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
       return;
     }
-
+    System.out.println("event = " + event);
     List<String> summary = Lists.newArrayList();
 
     Iterator<Achievement> achievementIterator = achievements.iterator();
     while (achievementIterator.hasNext()) {
       Achievement achievement = achievementIterator.next();
+      System.out.println(achievement);
       if (achievement.isCompleted() && !completedAchievements.contains(achievement)) {
         String rewardSummary = achievement.giveReward();
 

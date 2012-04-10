@@ -33,6 +33,7 @@ import com.happydroids.droidtowers.scenes.Scene;
 import com.happydroids.droidtowers.scenes.SplashScene;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
+import com.happydroids.droidtowers.types.*;
 import com.happydroids.utils.BackgroundTask;
 
 public class TowerGame implements ApplicationListener {
@@ -87,6 +88,12 @@ public class TowerGame implements ApplicationListener {
       }
     }.run();
 
+
+    RoomTypeFactory.instance();
+    CommercialTypeFactory.instance();
+    ServiceRoomTypeFactory.instance();
+    ElevatorTypeFactory.instance();
+    StairTypeFactory.instance();
 
     AchievementEngine.instance();
     Tween.setCombinedAttributesLimit(4);

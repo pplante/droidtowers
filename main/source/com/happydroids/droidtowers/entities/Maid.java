@@ -4,8 +4,6 @@
 
 package com.happydroids.droidtowers.entities;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.types.ProviderType;
 
@@ -14,9 +12,8 @@ public class Maid extends Janitor {
     super(avatarLayer);
   }
 
-  @Override
-  protected TextureAtlas getTextureAtlas() {
-    return TowerAssetManager.textureAtlas("characters/maid.txt");
+  protected String addFramePrefix(String frameName) {
+    return "maid/" + frameName;
   }
 
   public static boolean checkProviderType(ProviderType providerType) {

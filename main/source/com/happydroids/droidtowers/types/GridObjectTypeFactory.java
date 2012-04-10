@@ -64,6 +64,19 @@ public abstract class GridObjectTypeFactory<T extends GridObjectType> {
     return null;
   }
 
+  public static GridObjectType findTypeById(String typeId) {
+    for (GridObjectTypeFactory typeFactory : typeFactories) {
+      for (Object objectType : typeFactory.all()) {
+        GridObjectType gridObjectType = (GridObjectType) objectType;
+        if (gridObjectType.getId() != null && gridObjectType.getId().equalsIgnoreCase(typeId)) {
+          return gridObjectType;
+        }
+      }
+    }
+
+    return null;
+  }
+
   public Class<T> getObjectType() {
     return gridObjectTypeClass;
   }

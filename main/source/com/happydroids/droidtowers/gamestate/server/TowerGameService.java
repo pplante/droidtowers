@@ -6,7 +6,9 @@ package com.happydroids.droidtowers.gamestate.server;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.jsontype.NamedType;
+import com.happydroids.droidtowers.gamestate.GameSave;
+import com.happydroids.droidtowers.jackson.TowerGameClassDeserializer;
 import com.happydroids.droidtowers.jackson.Vector2Serializer;
 import com.happydroids.droidtowers.jackson.Vector3Serializer;
 import com.happydroids.server.ApiRunnable;
@@ -24,12 +26,27 @@ public class TowerGameService extends HappyDroidService {
   private boolean isAuthenticated;
 
   public TowerGameService() {
+    super();
+
     preferences = Gdx.app.getPreferences("CONNECT");
     if (!preferences.contains("DEVICE_ID")) {
       preferences.putString("DEVICE_ID", UUID.randomUUID().toString().replaceAll("-", ""));
       preferences.flush();
     }
     deviceId = preferences.getString("DEVICE_ID");
+
+    objectMapper.registerSubtypes(new NamedType(GameSave.class, "com.unhappyrobot.gamestate.GameSave"));
+    objectMapper.addDeserializer(Class.class, new TowerGameClassDeserializer());
+    objectMapper.addSerializer(new Vector3Serializer());
+    objectMapper.addSerializer(new Vector2Serializer());
+  }
+
+  public static TowerGameService instance() {
+    if (_instance == null) {
+      _instance = new TowerGameService();
+    }
+
+    return (TowerGameService) _instance;
   }
 
   public void registerDevice() {
@@ -71,12 +88,6 @@ public class TowerGameService extends HappyDroidService {
 
   public boolean hasAuthenticated() {
     return isAuthenticated;
-  }
-
-  @Override
-  protected void addCustomSerializers(SimpleModule simpleModule) {
-    simpleModule.addSerializer(new Vector3Serializer());
-    simpleModule.addSerializer(new Vector2Serializer());
   }
 
   @Override

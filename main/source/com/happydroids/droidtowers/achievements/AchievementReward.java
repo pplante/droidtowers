@@ -5,20 +5,25 @@
 package com.happydroids.droidtowers.achievements;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.entities.Player;
-import com.happydroids.droidtowers.types.ProviderType;
-import com.happydroids.droidtowers.types.ServiceRoomType;
-import com.happydroids.droidtowers.types.ServiceRoomTypeFactory;
+import com.happydroids.droidtowers.types.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
+
+import static com.happydroids.droidtowers.achievements.AchievementThing.OBJECT_TYPE;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class AchievementReward {
   private RewardType type;
   private AchievementThing thing;
+  private String thingTypeId;
   private double amount;
+
+  @JsonIgnore
+  private GridObjectType thingObjectType;
 
   public AchievementReward() {
 
@@ -50,13 +55,10 @@ public class AchievementReward {
       throw new RuntimeException(String.format("AchievementReward %s does not contain 'thing' parameter.", type));
     }
 
+
     switch (thing) {
       case MAIDS_OFFICE:
-        for (ServiceRoomType serviceRoomType : ServiceRoomTypeFactory.instance().all()) {
-          if (serviceRoomType.provides() == ProviderType.MAIDS) {
-            serviceRoomType.setLocked(false);
-          }
-        }
+        handleThingUnlockReward();
         break;
       case JANITORS_CLOSET:
         for (ServiceRoomType serviceRoomType : ServiceRoomTypeFactory.instance().all()) {
@@ -65,6 +67,21 @@ public class AchievementReward {
           }
         }
         break;
+
+      case OBJECT_TYPE:
+        if (thingObjectType == null) {
+          throw new RuntimeException(String.format("Cannot find a type for: %s", thingTypeId));
+        }
+
+        thingObjectType.setLocked(false);
+    }
+  }
+
+  private void handleThingUnlockReward() {
+    for (ServiceRoomType serviceRoomType : ServiceRoomTypeFactory.instance().all()) {
+      if (serviceRoomType.provides() == ProviderType.MAIDS) {
+        serviceRoomType.setLocked(false);
+      }
     }
   }
 
@@ -117,5 +134,16 @@ public class AchievementReward {
     }
 
     return StringUtils.join(parts, " ") + "\n";
+  }
+
+  public void validate() {
+    if (thing != null && thing.equals(OBJECT_TYPE) && thingTypeId != null) {
+      GridObjectType objectType = GridObjectTypeFactory.findTypeById(thingTypeId);
+      if (objectType == null) {
+        throw new RuntimeException(String.format("Cannot find a type for: %s", thingTypeId));
+      }
+
+      thingObjectType = objectType;
+    }
   }
 }

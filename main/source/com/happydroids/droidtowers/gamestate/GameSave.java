@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.happydroids.droidtowers.DifficultyLevel;
@@ -24,15 +25,18 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridObjectState;
 import com.happydroids.droidtowers.grid.GridPositionCache;
 import com.happydroids.droidtowers.input.CameraController;
+import com.happydroids.droidtowers.jackson.TowerTypeIdResolver;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
-@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.WRAPPER_OBJECT, property = "class")
+@JsonTypeInfo(use = JsonTypeInfo.Id.CUSTOM, include = JsonTypeInfo.As.WRAPPER_OBJECT, property = "class")
+@JsonTypeIdResolver(TowerTypeIdResolver.class)
 public class GameSave {
   protected int fileGeneration;
   protected String cloudSaveUri;
@@ -72,7 +76,6 @@ public class GameSave {
     gameGrid.clearObjects();
     gameGrid.setGridSize(gridSize.x, gridSize.y);
     gameGrid.updateWorldSize();
-    System.out.println("gridSize = " + gridSize);
 
     Player.setInstance(player);
 
@@ -123,7 +126,10 @@ public class GameSave {
   }
 
   public void save(FileHandle gameFile) throws IOException {
-    TowerGameService.instance().getObjectMapper().writeValue(gameFile.file(), this);
+    OutputStream stream = gameFile.write(false);
+    TowerGameService.instance().getObjectMapper().writeValue(stream, this);
+    stream.flush();
+    stream.close();
   }
 
   public String getCloudSaveUri() {

@@ -24,13 +24,13 @@ public class GenerateAssetManagerFileList {
 
     addDirectoryToAssetManager("backgrounds/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("backgrounds/", ".png", Texture.class);
-    addDirectoryToAssetManager("characters/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("fonts/", ".fnt", BitmapFont.class);
     addDirectoryToAssetManager("hud/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("rooms/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("sound/effects/", ".wav", Sound.class);
 
     addFileEntry(assetsDir.child("default-skin.ui"), Skin.class);
+    addFileEntry(assetsDir.child("characters.txt"), TextureAtlas.class);
     addFileEntry(assetsDir.child("transport.txt"), TextureAtlas.class);
     addFileEntry(assetsDir.child("rain-drop.png"), Texture.class);
     addFileEntry(assetsDir.child("decals.png"), Texture.class);

@@ -65,9 +65,9 @@ public class MainMenuScene extends Scene {
     container.add(loadGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row().padTop(15);
 
-    TextButton optionsButton = new TextButton("options", getGuiSkin());
-    container.add(optionsButton).fill().maxWidth(BUTTON_WIDTH);
-    container.row().padTop(40);
+//    TextButton optionsButton = new TextButton("options", getGuiSkin());
+//    container.add(optionsButton).fill().maxWidth(BUTTON_WIDTH);
+//    container.row().padTop(40);
 
     TextButton exitGameButton = new TextButton("exit game", getGuiSkin());
     container.add(exitGameButton).fill().maxWidth(BUTTON_WIDTH);

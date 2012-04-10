@@ -31,6 +31,7 @@ public class Achievement {
   public boolean isCompleted() {
     for (AchievementRequirement requirement : requirements) {
       if (!requirement.isCompleted()) {
+        System.out.println("Requirement unsatisfied: " + requirement);
         return false;
       }
     }
@@ -86,5 +87,9 @@ public class Achievement {
 
   public String getName() {
     return name;
+  }
+
+  public Set<AchievementReward> getRewards() {
+    return rewards;
   }
 }

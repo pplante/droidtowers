@@ -10,8 +10,11 @@ public enum AchievementThing {
   MONEY(TowerConsts.CURRENCY_SYMBOL),
   HOTEL_ROOM("Hotel Room"),
   COMMERCIAL_SPACE("Commercial Space"),
+  HOUSING("Housing"),
   MAIDS_OFFICE("Maid's Office"),
-  JANITORS_CLOSET("Janitor's Closet");
+  JANITORS_CLOSET("Janitor's Closet"),
+  PROVIDER_TYPE(null),
+  OBJECT_TYPE(null);
 
   public final String displayString;
 

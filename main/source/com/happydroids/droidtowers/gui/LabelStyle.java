@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 public enum LabelStyle {
   BankGothic64("fonts/bank_gothic_64.fnt", Color.WHITE),
+  BankGothic32("fonts/bank_gothic_32.fnt", Color.WHITE),
   Default("fonts/hiragino_maru_14_white.fnt", Color.WHITE);
 
   private static HashMap<String, BitmapFont> bitmapFonts = Maps.newHashMap();

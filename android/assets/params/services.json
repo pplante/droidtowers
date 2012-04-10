@@ -1,5 +1,6 @@
 [
   {
+    "id":"JANITORS_CLOSET",
     "name":"Janitors Closet",
     "coins":20000,
     "height":1,
@@ -13,10 +14,11 @@
     "provides":"JANITORS"
   },
   {
+    "id":"MAIDS_CLOSET",
     "name":"Maids Closet",
     "coins":20000,
     "height":1,
-    "width":3,
+    "width":2,
     "locked":true,
     "experienceAward":2200,
     "populationAttraction":0,
@@ -26,5 +28,21 @@
     "provides":"MAIDS",
     "atlasFilename":"rooms/housing.txt",
     "imageFilename":"2x1-maids-closet"
+  },
+  {
+    "id":"SECURITY_CENTER",
+    "name":"Security Center",
+    "coins":60000,
+    "height":1,
+    "width":4,
+    "locked":true,
+    "experienceAward":2200,
+    "populationAttraction":0,
+    "populationRequired":100,
+    "jobsProvided":6,
+    "noiseLevel":0.5,
+    "provides":"SECURITY",
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"4x1-security-center"
   }
 ]

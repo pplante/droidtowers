@@ -64,11 +64,11 @@ public class Avatar extends GameObject {
     pickColor();
 
     TextureAtlas droidAtlas = getTextureAtlas();
-    TextureAtlas.AtlasRegion stationary = droidAtlas.findRegion("stationary");
+    TextureAtlas.AtlasRegion stationary = droidAtlas.findRegion(addFramePrefix("stationary"));
     setSize(stationary.originalWidth, stationary.originalHeight);
     setRegion(stationary);
 
-    walkAnimation = new Animation(FRAME_DURATION, droidAtlas.findRegions("walk"));
+    walkAnimation = new Animation(FRAME_DURATION, droidAtlas.findRegions(addFramePrefix("walk")));
     walkAnimationTime = 0f;
 
 //    speechBubble = new SpeechBubble();
@@ -76,8 +76,12 @@ public class Avatar extends GameObject {
 //    HeadsUpDisplay.instance().addActor(speechBubble);
   }
 
+  protected String addFramePrefix(String frameName) {
+    return "droid/" + frameName;
+  }
+
   protected TextureAtlas getTextureAtlas() {
-    return TowerAssetManager.textureAtlas("characters/droid.txt");
+    return TowerAssetManager.textureAtlas("characters.txt");
   }
 
   private void displaySpeechBubble(String newText) {
