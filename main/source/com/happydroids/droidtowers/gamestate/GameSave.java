@@ -92,6 +92,8 @@ public class GameSave {
         gridObjectState.materialize(gameGrid);
       }
     }
+
+    newGame = false;
   }
 
   public void update() {
