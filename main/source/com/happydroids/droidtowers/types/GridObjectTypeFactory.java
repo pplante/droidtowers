@@ -84,4 +84,18 @@ public abstract class GridObjectTypeFactory<T extends GridObjectType> {
   public T castToObjectType(Object o) {
     return gridObjectTypeClass.cast(o);
   }
+
+  public T findByProviderType(ProviderType providerType) {
+    for (T roomType : all()) {
+      if (roomType.provides(providerType)) {
+        return roomType;
+      }
+    }
+
+    return null;
+  }
+
+  public static List<GridObjectTypeFactory> allFactories() {
+    return typeFactories;
+  }
 }

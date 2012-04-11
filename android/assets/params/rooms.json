@@ -1,6 +1,7 @@
 [
   {
-    "name":"Lobby 4x1",
+    "id":"GROUND-FLOOR-LOBBY",
+    "name":"Main Lobby",
     "continuousPlacement":true,
     "isLobby":true,
     "coins":5000,
@@ -8,59 +9,65 @@
     "height":1,
     "width":4,
     "atlasFilename":"rooms/housing.txt",
-    "imageFilename":"4x1-lobby"
+    "imageFilename":"4x1-lobby",
+    "provides":"LOBBY"
   },
   {
+    "id":"SMALL-APARTMENT",
     "name":"Small Apartment",
     "coins":8000,
     "experienceAward":1000,
     "populationMax":4,
     "height":1,
     "width":3,
-    "provides":"HOUSING",
+    "provides":"APARTMENT",
     "atlasFilename":"rooms/housing.txt",
     "imageFilename":"3x1-small-apartment"
   },
   {
+    "id":"LARGE-APARTMENT",
     "name":"Large Apartment",
     "coins":14000,
     "height":1,
     "experienceAward":2200,
     "populationMax":6,
     "width":4,
-    "provides":"HOUSING",
+    "provides":"APARTMENT",
     "atlasFilename":"rooms/generic.txt",
     "imageFilename":"generic/generic_room_4x"
   },
   {
+    "id":"SMALL-CONDO",
     "name":"Small Condo",
     "coins":16000,
     "height":1,
     "experienceAward":2200,
     "populationMax":4,
     "width":3,
-    "provides":"HOUSING",
+    "provides":"CONDO",
     "atlasFilename":"rooms/housing.txt",
     "imageFilename":"3x1-small-condo"
   },
   {
+    "id":"LARGE-CONDO",
     "name":"Large Condo",
     "coins":28000,
     "height":1,
     "experienceAward":5000,
     "populationMax":6,
     "width":4,
-    "provides":"HOUSING",
+    "provides":"CONDO",
     "atlasFilename":"rooms/housing.txt",
     "imageFilename":"4x1-large-condo"
   },
   {
+    "id":"PENTHOUSE",
     "name":"Penthouse",
     "coins":60000,
     "height":1,
     "experienceAward":5000,
     "populationMax":6,
     "width":5,
-    "provides":"HOUSING"
+    "provides":"PENTHOUSE"
   }
 ]

@@ -4,6 +4,7 @@
 
 package com.happydroids.sparky;
 
+import com.happydroids.SparkyTestHelper;
 import com.happydroids.TestHelper;
 import com.happydroids.server.ApiCollectionRunnable;
 import com.happydroids.server.GameUpdate;
@@ -49,7 +50,7 @@ public class GameUpdateCheckerTest {
 
   @Test
   public void parseLocalGameJar_shouldReturnGitSHA_whenLocalJarExists() throws IOException {
-    TestHelper.makeFakeGameJar(jarFile, "0.10.1", "OLDEST_SHA");
+    SparkyTestHelper.makeFakeGameJar(jarFile, "0.10.1", "OLDEST_SHA");
     updateChecker.parseLocalGameJar();
 
     expect(updateChecker.getLocalGameJarVersionSHA()).toEqual("OLDEST_SHA");
@@ -57,7 +58,7 @@ public class GameUpdateCheckerTest {
 
   @Test
   public void selectUpdates_shouldReturnNewestFullJar_whenNoLocalJarExists() throws IOException {
-    TestHelper.queueApiResponse("/api/v1/gameupdate/", "fixture_game_updater_multiple_updates.json");
+    TestHelper.queueApiResponseFromFixture("/api/v1/gameupdate/", "fixture_game_updater_multiple_updates.json");
 
     updateChecker.parseLocalGameJar();
     runnable = new ApiCollectionRunnable<HappyDroidServiceCollection<GameUpdate>>();
@@ -72,8 +73,8 @@ public class GameUpdateCheckerTest {
 
   @Test
   public void selectUpdates_shouldReturnNewestFullJar_whenNoLocalJarWithValidGitSHAExists() throws IOException {
-    TestHelper.queueApiResponse("/api/v1/gameupdate/", "fixture_game_updater_multiple_updates.json");
-    TestHelper.makeFakeGameJar(jarFile, "0.10.1", "BULLSHIT SHA");
+    TestHelper.queueApiResponseFromFixture("/api/v1/gameupdate/", "fixture_game_updater_multiple_updates.json");
+    SparkyTestHelper.makeFakeGameJar(jarFile, "0.10.1", "BULLSHIT SHA");
 
     updateChecker.parseLocalGameJar();
     updateChecker.fetchUpdates();
@@ -86,8 +87,8 @@ public class GameUpdateCheckerTest {
 
   @Test
   public void selectUpdates_shouldReturnListOfPatches_whenLocalJarWithValidGitSHAExists() throws IOException {
-    TestHelper.queueApiResponse("/api/v1/gameupdate/", "fixture_game_updater_multiple_updates.json");
-    TestHelper.makeFakeGameJar(jarFile, "0.10.1", "OLDEST_SHA");
+    TestHelper.queueApiResponseFromFixture("/api/v1/gameupdate/", "fixture_game_updater_multiple_updates.json");
+    SparkyTestHelper.makeFakeGameJar(jarFile, "0.10.1", "OLDEST_SHA");
 
     updateChecker.parseLocalGameJar();
     updateChecker.fetchUpdates();
@@ -102,8 +103,8 @@ public class GameUpdateCheckerTest {
 
   @Test
   public void selectUpdates_shouldReturnFullReleaseJar_whenPatchForLatestReleaseDoesNotExist() throws IOException {
-    TestHelper.queueApiResponse("/api/v1/gameupdate/", "fixture_game_update_checker_latest_release_has_no_patch.json");
-    TestHelper.makeFakeGameJar(jarFile, "0.10.1", "OLDEST_SHA");
+    TestHelper.queueApiResponseFromFixture("/api/v1/gameupdate/", "fixture_game_update_checker_latest_release_has_no_patch.json");
+    SparkyTestHelper.makeFakeGameJar(jarFile, "0.10.1", "OLDEST_SHA");
 
     updateChecker.parseLocalGameJar();
     updateChecker.fetchUpdates();
@@ -118,8 +119,8 @@ public class GameUpdateCheckerTest {
 
   @Test
   public void hasCurrentVersion_shouldReturnTrue_whenGameJarGitSHAIsLatest() throws IOException {
-    TestHelper.queueApiResponse("/api/v1/gameupdate/", "fixture_game_updater_multiple_updates.json");
-    TestHelper.makeFakeGameJar(jarFile, "0.10.50", "19093ea");
+    TestHelper.queueApiResponseFromFixture("/api/v1/gameupdate/", "fixture_game_updater_multiple_updates.json");
+    SparkyTestHelper.makeFakeGameJar(jarFile, "0.10.50", "19093ea");
 
     updateChecker.parseLocalGameJar();
     updateChecker.fetchUpdates();
@@ -131,7 +132,7 @@ public class GameUpdateCheckerTest {
   @Test
   public void hasCurrentVersion_shouldReturnTrue_whenGameJarExistsButUpdateServerIsUnreachable() throws IOException {
     TestHappyDroidService.disableNetworkConnection();
-    TestHelper.makeFakeGameJar(jarFile, "0.10.50", "19093ea");
+    SparkyTestHelper.makeFakeGameJar(jarFile, "0.10.50", "19093ea");
 
     updateChecker.parseLocalGameJar();
     updateChecker.fetchUpdates();

@@ -1,5 +1,6 @@
 [
   {
+    "id":"SMALL-OFFICE",
     "name":"Small Office",
     "coins":25000,
     "height":1,
@@ -12,6 +13,21 @@
     "provides":"OFFICE_SERVICES"
   },
   {
+    "id":"HOTEL-ROOM",
+    "name":"Hotel Room",
+    "continuousPlacement":true,
+    "coins":8000,
+    "experienceAward":1500,
+    "populationMax":2,
+    "height":1,
+    "width":2,
+    "noiseLevel":0.2,
+    "provides":"HOTEL_ROOMS",
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"2x1-hotel-room"
+  },
+  {
+    "id":"BURGER-JOINT",
     "name":"Burger Joint",
     "coins":10000,
     "height":1,
@@ -26,6 +42,7 @@
     "imageFilename":"3x1-burger-joint"
   },
   {
+    "id":"PIZZA-PLACE",
     "name":"Pizza Place",
     "coins":12500,
     "height":1,
@@ -40,19 +57,7 @@
     "imageFilename":"3x1-pizza-place"
   },
   {
-    "name":"Hotel Room",
-    "continuousPlacement":true,
-    "coins":8000,
-    "experienceAward":1500,
-    "populationMax":2,
-    "height":1,
-    "width":2,
-    "noiseLevel":0.2,
-    "provides":"HOTEL_ROOMS",
-    "atlasFilename":"rooms/housing.txt",
-    "imageFilename":"2x1-hotel-room"
-  },
-  {
+    "id":"SUSHI-PLACE",
     "name":"Sushi",
     "continuousPlacement":true,
     "coins":19599,
@@ -66,6 +71,7 @@
     "imageFilename":"2x1-sushi"
   },
   {
+    "id":"COCKTAIL-BAR",
     "name":"Cocktail Bar",
     "continuousPlacement":true,
     "coins":22399,

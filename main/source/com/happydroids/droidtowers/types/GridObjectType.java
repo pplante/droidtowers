@@ -18,23 +18,25 @@ import com.happydroids.droidtowers.math.GridPoint;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
 public abstract class GridObjectType {
-  private String id;
-  private String name;
-  private int height;
-  private int width;
-  private int coins;
-  private int experienceAward;
-  private String atlasFilename;
-  private String imageFilename;
-  private boolean continuousPlacement;
-  private boolean canShareSpace;
-  private boolean locked;
-  private float noiseLevel;
+  protected String id;
+  protected String name;
+  protected int height;
+  protected int width;
+  protected int coins;
+  protected int experienceAward;
+  protected String atlasFilename;
+  protected String imageFilename;
+  protected boolean continuousPlacement;
+  protected boolean canShareSpace;
+  protected boolean locked;
+  protected float noiseLevel;
+  protected ProviderType provides;
 
   @JsonIgnore
   private static WeakHashMap<String, TextureAtlas> atlases;
+  @JsonIgnore
   private TextureAtlas textureAtlas;
 
   public abstract GridObject makeGridObject(GameGrid gameGrid);
@@ -154,5 +156,17 @@ public abstract class GridObjectType {
 
   public String getId() {
     return id;
+  }
+
+  public boolean provides(ProviderType... thingProviderTypes) {
+    if (provides != null) {
+      for (ProviderType thingProviderType : thingProviderTypes) {
+        if (thingProviderType == provides) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 }

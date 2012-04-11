@@ -17,11 +17,10 @@ public class RoomType extends GridObjectType {
   private boolean isLobby;
   private int populationMax;
   private int populationRequired;
-  private ProviderType provides;
 
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {
-    if (isLobby) {
+    if (provides == ProviderType.LOBBY) {
       return new Lobby(this, gameGrid);
     }
 
@@ -35,7 +34,7 @@ public class RoomType extends GridObjectType {
 
   @Override
   public boolean canBeAt(GridObject gridObject) {
-    if (isLobby) {
+    if (provides == ProviderType.LOBBY) {
       return gridObject.getPosition().y == TowerConsts.LOBBY_FLOOR && checkForOverlap(gridObject);
     }
 
@@ -54,19 +53,11 @@ public class RoomType extends GridObjectType {
     return true;
   }
 
-  public boolean isLobby() {
-    return isLobby;
-  }
-
   public int getPopulationMax() {
     return populationMax;
   }
 
   public int getPopulationRequired() {
     return populationRequired;
-  }
-
-  public ProviderType provides() {
-    return provides;
   }
 }

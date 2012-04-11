@@ -4,7 +4,6 @@
 
 package com.happydroids.droidtowers;
 
-import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.server.HappyDroidService;
 import com.happydroids.server.TestHappyDroidService;
 import org.junit.runners.model.InitializationError;
@@ -16,12 +15,7 @@ public class TowerGameTestRunner extends GdxTestRunner {
 
   @Override
   protected void beforeTestRun() {
+    super.beforeTestRun();
     HappyDroidService.setInstance(new TestHappyDroidService());
-    TweenSystem.getTweenManager();
-  }
-
-  @Override
-  protected void afterTestRun() {
-    TweenSystem.setTweenManager(null);
   }
 }

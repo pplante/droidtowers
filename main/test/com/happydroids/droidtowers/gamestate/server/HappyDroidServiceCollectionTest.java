@@ -4,7 +4,7 @@
 
 package com.happydroids.droidtowers.gamestate.server;
 
-import com.happydroids.droidtowers.TowerGameTestRunner;
+import com.happydroids.droidtowers.NonGLTestRunner;
 import com.happydroids.server.GameUpdateCollection;
 import com.happydroids.server.HappyDroidServiceCollection;
 import org.junit.Before;
@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
 import static com.happydroids.droidtowers.Expect.expect;
 
 
-@RunWith(TowerGameTestRunner.class)
+@RunWith(NonGLTestRunner.class)
 public class HappyDroidServiceCollectionTest {
 
   private HappyDroidServiceCollection collection;
@@ -26,7 +26,7 @@ public class HappyDroidServiceCollectionTest {
 
   @Test
   public void getBaseResourceUri_shouldReflectivelyLookUpTheResourceUriFromClass() {
-    expect(collection.getBaseResourceUri()).toContain("/api/v1/gamestate/");
+    expect(collection.getBaseResourceUri()).toContain("/api/v1/gameupdate/");
   }
 
   @Test

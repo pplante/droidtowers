@@ -4,11 +4,12 @@
 
 package com.happydroids.sparky;
 
-import com.happydroids.TestHelper;
+import com.happydroids.SparkyTestHelper;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +19,7 @@ import java.util.jar.JarFile;
 
 import static com.happydroids.sparky.Expect.expect;
 
-
+@RunWith(HappyDroidTestRunner.class)
 public class JarJoinerTest {
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
@@ -32,8 +33,8 @@ public class JarJoinerTest {
     patchFile = temp.newFile("patch.jar");
     existingFile = temp.newFile("existing.jar");
 
-    TestHelper.makeFakeZip(patchFile);
-    TestHelper.makeFakeZip(existingFile);
+    SparkyTestHelper.makeFakeZip(patchFile);
+    SparkyTestHelper.makeFakeZip(existingFile);
   }
 
   @Test

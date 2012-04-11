@@ -7,6 +7,8 @@ package com.happydroids.droidtowers;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.files.FileHandle;
 
+import java.io.File;
+
 /**
  * @author mzechner
  * @author Nathan Sweet
@@ -24,7 +26,11 @@ public class TestGdxFiles implements Files {
 
   public FileHandle internal(String path) {
     if (!path.contains("android/assets")) {
-      path = "../android/assets/" + path;
+      if (new File("../android/assets").exists()) {
+        path = "../android/assets/" + path;
+      } else if (new File(".android/assets").exists()) {
+        path = "./android/assets/" + path;
+      }
     }
 
     return new TestGdxFileHandle(path, FileType.Internal);

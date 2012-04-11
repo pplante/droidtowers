@@ -6,12 +6,10 @@ package com.happydroids.droidtowers.achievements;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.collect.Lists;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.Player;
-import com.happydroids.droidtowers.types.*;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
+import com.happydroids.droidtowers.types.GridObjectType;
+import com.happydroids.droidtowers.types.GridObjectTypeFactory;
 
 import static com.happydroids.droidtowers.achievements.AchievementThing.OBJECT_TYPE;
 
@@ -39,62 +37,66 @@ public class AchievementReward {
     this.amount = amount;
   }
 
+  public AchievementReward(RewardType type, AchievementThing objectType, String objectTypeId) {
+    this.type = type;
+    thing = objectType;
+    thingTypeId = objectTypeId;
+  }
+
   public void give() {
-    switch (type) {
-      case GIVE:
-        handleGiveReward();
-        break;
-      case UNLOCK:
-        handleUnlockReward();
-        break;
-    }
-  }
-
-  private void handleUnlockReward() {
-    if (thing == null) {
+    if (type == null) {
+      throw new RuntimeException("AchievementReward does not contain 'type' parameter.");
+    } else if (thing == null) {
       throw new RuntimeException(String.format("AchievementReward %s does not contain 'thing' parameter.", type));
     }
 
-
     switch (thing) {
-      case MAIDS_OFFICE:
-        handleThingUnlockReward();
-        break;
-      case JANITORS_CLOSET:
-        for (ServiceRoomType serviceRoomType : ServiceRoomTypeFactory.instance().all()) {
-          if (serviceRoomType.provides() == ProviderType.JANITORS) {
-            serviceRoomType.setLocked(false);
-          }
-        }
-        break;
-
       case OBJECT_TYPE:
-        if (thingObjectType == null) {
-          throw new RuntimeException(String.format("Cannot find a type for: %s", thingTypeId));
-        }
-
-        thingObjectType.setLocked(false);
-    }
-  }
-
-  private void handleThingUnlockReward() {
-    for (ServiceRoomType serviceRoomType : ServiceRoomTypeFactory.instance().all()) {
-      if (serviceRoomType.provides() == ProviderType.MAIDS) {
-        serviceRoomType.setLocked(false);
-      }
-    }
-  }
-
-  private void handleGiveReward() {
-    if (thing == null) {
-      throw new RuntimeException(String.format("AchievementReward %s does not contain 'thing' parameter.", type));
-    }
-
-    switch (thing) {
+        getThingObjectType().setLocked(false);
+        break;
       case MONEY:
         Player.instance().addCurrency((int) amount);
         break;
     }
+  }
+
+  protected GridObjectType getThingObjectType() {
+    if (thing == OBJECT_TYPE && thingTypeId != null) {
+      GridObjectType objectType = GridObjectTypeFactory.findTypeById(thingTypeId);
+      if (objectType == null) {
+        throw new RuntimeException(String.format("Cannot find a type for: %s", thingTypeId));
+      }
+
+      return objectType;
+    }
+
+    throw new RuntimeException("Cannot find a type for null!");
+  }
+
+  public String getRewardString() {
+    return displayStringForType() + " " + displayStringForThing();
+  }
+
+  private String displayStringForType() {
+    switch (type) {
+      case GIVE:
+        return "Awarded";
+      case UNLOCK:
+        return "Unlocked";
+    }
+
+    return "";
+  }
+
+  private String displayStringForThing() {
+    switch (thing) {
+      case MONEY:
+        return TowerConsts.CURRENCY_SYMBOL + (int) amount;
+      case OBJECT_TYPE:
+        return getThingObjectType().getName();
+    }
+
+    return "";
   }
 
   @Override
@@ -106,44 +108,11 @@ public class AchievementReward {
                    '}';
   }
 
-
   public RewardType getType() {
     return type;
   }
 
   public AchievementThing getThing() {
     return thing;
-  }
-
-  public double getAmount() {
-    return amount;
-  }
-
-  public String getFormattedString() {
-    List<String> parts = Lists.newArrayList();
-    if (type != null) {
-      parts.add(type.displayString);
-    }
-
-    if (thing != null) {
-      parts.add(thing.displayString);
-    }
-
-    if (amount > 0) {
-      parts.add("" + (int) amount);
-    }
-
-    return StringUtils.join(parts, " ") + "\n";
-  }
-
-  public void validate() {
-    if (thing != null && thing.equals(OBJECT_TYPE) && thingTypeId != null) {
-      GridObjectType objectType = GridObjectTypeFactory.findTypeById(thingTypeId);
-      if (objectType == null) {
-        throw new RuntimeException(String.format("Cannot find a type for: %s", thingTypeId));
-      }
-
-      thingObjectType = objectType;
-    }
   }
 }

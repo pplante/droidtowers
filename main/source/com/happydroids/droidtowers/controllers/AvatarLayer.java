@@ -16,6 +16,7 @@ import com.happydroids.droidtowers.entities.*;
 import com.happydroids.droidtowers.events.GridObjectAddedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.types.ProviderType;
 import com.happydroids.droidtowers.types.RoomType;
 import com.happydroids.droidtowers.utils.Random;
 
@@ -144,20 +145,14 @@ public class AvatarLayer extends GameLayer {
   public void GameEvent_GridObjectAdded(GridObjectAddedEvent event) {
     if (event.gridObject instanceof Room) {
       RoomType roomType = (RoomType) event.gridObject.getGridObjectType();
-      if (roomType.provides() != null) {
-        switch (roomType.provides()) {
-          case JANITORS:
-            setupAvatar(new Janitor(this));
-            setupAvatar(new Janitor(this));
-            setupAvatar(new Janitor(this));
-            break;
-
-          case MAIDS:
-            setupAvatar(new Maid(this));
-            setupAvatar(new Maid(this));
-            setupAvatar(new Maid(this));
-            break;
-        }
+      if (roomType.provides(ProviderType.JANITORS)) {
+        setupAvatar(new Janitor(this));
+        setupAvatar(new Janitor(this));
+        setupAvatar(new Janitor(this));
+      } else if (roomType.provides(ProviderType.MAIDS)) {
+        setupAvatar(new Maid(this));
+        setupAvatar(new Maid(this));
+        setupAvatar(new Maid(this));
       }
     }
   }
@@ -166,20 +161,14 @@ public class AvatarLayer extends GameLayer {
   public void GameEvent_GridObjectRemoved(GridObjectRemovedEvent event) {
     if (event.gridObject instanceof Room) {
       RoomType roomType = (RoomType) event.gridObject.getGridObjectType();
-      if (roomType.provides() != null) {
-        switch (roomType.provides()) {
-          case JANITORS:
-            removeChild(Iterables.getFirst(janitors, null));
-            removeChild(Iterables.getFirst(janitors, null));
-            removeChild(Iterables.getFirst(janitors, null));
-            break;
-
-          case MAIDS:
-            removeChild(Iterables.getFirst(maids, null));
-            removeChild(Iterables.getFirst(maids, null));
-            removeChild(Iterables.getFirst(maids, null));
-            break;
-        }
+      if (roomType.provides(ProviderType.JANITORS)) {
+        removeChild(Iterables.getFirst(janitors, null));
+        removeChild(Iterables.getFirst(janitors, null));
+        removeChild(Iterables.getFirst(janitors, null));
+      } else if (roomType.provides(ProviderType.MAIDS)) {
+        removeChild(Iterables.getFirst(maids, null));
+        removeChild(Iterables.getFirst(maids, null));
+        removeChild(Iterables.getFirst(maids, null));
       }
     }
   }

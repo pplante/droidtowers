@@ -5,9 +5,18 @@
 package com.happydroids.droidtowers;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl.LwjglGraphics;
 
 public class TestGdxApplication implements Application {
-  public Graphics getGraphics() {
+
+  private GdxTestPreferences preferences;
+
+  public TestGdxApplication(ApplicationListener listener, LwjglApplicationConfiguration config) {
+    preferences = new GdxTestPreferences();
+  }
+
+  public LwjglGraphics getGraphics() {
     return null;
   }
 
@@ -61,7 +70,7 @@ public class TestGdxApplication implements Application {
   }
 
   public Preferences getPreferences(String name) {
-    return new GdxTestPreferences();
+    return preferences;
   }
 
   public void postRunnable(Runnable runnable) {

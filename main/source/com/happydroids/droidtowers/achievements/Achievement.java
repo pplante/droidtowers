@@ -5,16 +5,18 @@
 package com.happydroids.droidtowers.achievements;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.google.common.collect.Sets;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
+import com.happydroids.droidtowers.grid.GameGrid;
 
-import java.util.Set;
+import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Achievement {
   private String id;
   private String name;
-  private Set<AchievementRequirement> requirements;
-  private Set<AchievementReward> rewards;
+  private List<AchievementRequirement> requirements;
+  private List<AchievementReward> rewards;
   private boolean completed;
   private boolean gaveRewards;
 
@@ -24,13 +26,13 @@ public class Achievement {
 
   public Achievement(String name) {
     this.name = name;
-    rewards = Sets.newHashSet();
-    requirements = Sets.newHashSet();
+    rewards = Lists.newArrayList();
+    requirements = Lists.newArrayList();
   }
 
-  public boolean isCompleted() {
+  public boolean isCompleted(GameGrid gameGrid) {
     for (AchievementRequirement requirement : requirements) {
-      if (!requirement.isCompleted()) {
+      if (!requirement.isCompleted(gameGrid)) {
         System.out.println("Requirement unsatisfied: " + requirement);
         return false;
       }
@@ -51,8 +53,12 @@ public class Achievement {
   }
 
   public String giveReward() {
-    if (!gaveRewards) {
+    if (!gaveRewards && completed) {
       gaveRewards = true;
+      for (AchievementReward reward : rewards) {
+        reward.give();
+      }
+
       return toRewardString();
     }
 
@@ -60,13 +66,12 @@ public class Achievement {
   }
 
   public String toRewardString() {
-    StringBuilder summary = new StringBuilder();
+    List<String> summary = Lists.newArrayList(String.format("Complete: %s!", name));
     for (AchievementReward reward : rewards) {
-      reward.give();
-      summary.append(reward.getFormattedString());
+      summary.add(reward.getRewardString());
     }
 
-    return String.format("Complete: %s!\n%s", name, summary);
+    return Joiner.on("\n").join(summary);
   }
 
   public String getId() {
@@ -89,7 +94,7 @@ public class Achievement {
     return name;
   }
 
-  public Set<AchievementReward> getRewards() {
+  public List<AchievementReward> getRewards() {
     return rewards;
   }
 }

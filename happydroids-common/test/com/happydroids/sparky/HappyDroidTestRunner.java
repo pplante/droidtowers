@@ -4,6 +4,7 @@
 
 package com.happydroids.sparky;
 
+import com.happydroids.HttpTestHelper;
 import com.happydroids.server.HappyDroidService;
 import com.happydroids.server.TestHappyDroidService;
 import org.junit.runners.BlockJUnit4ClassRunner;
@@ -33,6 +34,7 @@ public class HappyDroidTestRunner extends BlockJUnit4ClassRunner {
   }
 
   protected void beforeTestRun() {
+    HttpTestHelper.resetInstance();
     HappyDroidService.setInstance(new TestHappyDroidService());
   }
 

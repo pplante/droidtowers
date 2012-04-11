@@ -43,12 +43,6 @@ public class AchievementEngine {
       FileHandle fileHandle = Gdx.files.internal("params/achievements.json");
       ObjectMapper mapper = TowerGameService.instance().getObjectMapper();
       achievements = mapper.readValue(fileHandle.reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, Achievement.class));
-
-      for (Achievement achievement : achievements) {
-        for (AchievementReward reward : achievement.getRewards()) {
-          reward.validate();
-        }
-      }
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -60,7 +54,7 @@ public class AchievementEngine {
 
   @Subscribe
   public void GameEvent_handleGridObjectEvent(GridObjectChangedEvent event) {
-    if (!event.gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
+    if (!event.nameOfParamChanged.equals("placementState") || !event.gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
       return;
     }
     System.out.println("event = " + event);
@@ -70,7 +64,7 @@ public class AchievementEngine {
     while (achievementIterator.hasNext()) {
       Achievement achievement = achievementIterator.next();
       System.out.println(achievement);
-      if (achievement.isCompleted() && !completedAchievements.contains(achievement)) {
+      if (achievement.isCompleted(gameGrid) && !completedAchievements.contains(achievement)) {
         String rewardSummary = achievement.giveReward();
 
         if (rewardSummary != null) {
@@ -92,13 +86,22 @@ public class AchievementEngine {
   }
 
   public void loadCompletedAchievements(List<String> achievementIds) {
+    for (Achievement achievement : achievements) {
+      achievement.setCompleted(false);
+
+      for (AchievementReward reward : achievement.getRewards()) {
+        if (reward.getType().equals(RewardType.UNLOCK) && reward.getThing().equals(AchievementThing.OBJECT_TYPE)) {
+          System.out.println("Reset: " + reward.getRewardString());
+          reward.getThingObjectType().setLocked(true);
+        }
+      }
+    }
+
     if (achievementIds == null) {
       return;
     }
 
-    Iterator<Achievement> achievementIterator = achievements.iterator();
-    while (achievementIterator.hasNext()) {
-      Achievement achievement = achievementIterator.next();
+    for (Achievement achievement : achievements) {
       if (achievementIds.contains(achievement.getId())) {
         achievement.setCompleted(true);
         achievement.giveReward();

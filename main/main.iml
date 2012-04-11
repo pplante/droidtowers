@@ -19,19 +19,9 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="module" module-name="happydroids-common" />
     <orderEntry type="library" scope="TEST" name="desktop" level="project" />
     <orderEntry type="library" name="main" level="project" />
-    <orderEntry type="module-library" exported="">
-      <library name="jackson">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/main/jackson-annotations-2.0.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/libs/main/jackson-core-2.0.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/libs/main/jackson-databind-2.0.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
@@ -41,8 +31,8 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="happydroids-common" />
     <orderEntry type="library" scope="TEST" name="junit-mockito-great-expectations" level="project" />
+    <orderEntry type="library" name="guice-3.0-no_aop" level="project" />
   </component>
 </module>
 

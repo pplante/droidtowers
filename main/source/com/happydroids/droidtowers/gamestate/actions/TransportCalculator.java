@@ -12,6 +12,7 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
 import com.happydroids.droidtowers.grid.GridPositionCache;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.types.ProviderType;
 import com.happydroids.droidtowers.types.RoomType;
 
 public class TransportCalculator extends GameGridAction {
@@ -45,7 +46,7 @@ public class TransportCalculator extends GameGridAction {
     for (GridObject gridObject : gameGrid.getInstancesOf(roomClasses)) {
       Room room = (Room) gridObject;
       RoomType roomType = (RoomType) room.getGridObjectType();
-      if (roomType.isLobby()) {
+      if (roomType.provides(ProviderType.LOBBY)) {
         room.setConnectedToTransport(true, false);
       } else {
         room.setConnectedToTransport(false, false);

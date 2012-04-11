@@ -61,8 +61,8 @@
       {
         "type":"BUILD",
         "amount":10,
-        "thing":"OBJECT_TYPE",
-        "thingObjectTypes":["CommercialSpace"]
+        "thing":"PROVIDER_TYPE",
+        "thingProviderTypes":["COMMERCIAL"]
       },
       {
         "type":"BUILD",

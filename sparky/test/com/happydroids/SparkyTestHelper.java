@@ -4,34 +4,14 @@
 
 package com.happydroids;
 
-import com.google.common.collect.Lists;
-import com.happydroids.server.TestHappyDroidService;
-import org.apache.commons.io.FileUtils;
-
 import java.io.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Random;
 import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class TestHelper {
-  public static void queueApiResponse(String uri, String fixtureFilename) throws IOException {
-    String content = null;
-
-    if (fixtureFilename != null) {
-      content = FileUtils.readFileToString(new File("fixtures/", fixtureFilename));
-    }
-
-    ((TestHappyDroidService) TestHappyDroidService.instance()).queueResponse(uri, content);
-  }
-
-  public static void queueApiResponse(String uri, byte[] bytes) throws IOException {
-    ((TestHappyDroidService) TestHappyDroidService.instance()).queueResponse(uri, bytes);
-  }
-
+public class SparkyTestHelper extends TestHelper {
   public static void makeFakeZip(File zipFile) throws IOException {
     ZipOutputStream zipStream = new ZipOutputStream(new FileOutputStream(zipFile));
     zipStream.putNextEntry(new ZipEntry("image.png"));
@@ -47,9 +27,6 @@ public class TestHelper {
     if (!jarFile.exists()) {
       throw new RuntimeException("Could not create fake game jar!");
     }
-  }
-
-  public static void disableNetworkConnection() {
   }
 
   public static void makeFakeGameJar(OutputStream outputStream, String gameVersion, String versionSha) throws IOException {
@@ -76,17 +53,4 @@ public class TestHelper {
     outputZip.close();
   }
 
-  public static ArrayList<byte[]> getQueuedRequests() {
-    ArrayList<byte[]> list = Lists.newArrayList();
-
-    for (LinkedList<byte[]> linkedList : ((TestHappyDroidService) TestHappyDroidService.instance()).getResponseQueue().values()) {
-      list.addAll(linkedList);
-    }
-
-    return list;
-  }
-
-  public static void clearQueuedRequests() {
-    ((TestHappyDroidService) TestHappyDroidService.instance()).getResponseQueue().clear();
-  }
 }

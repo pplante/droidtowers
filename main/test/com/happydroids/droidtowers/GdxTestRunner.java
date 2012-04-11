@@ -7,6 +7,8 @@ package com.happydroids.droidtowers;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.droidtowers.tween.TweenSystem;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
@@ -15,17 +17,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GdxTestRunner extends NonGLTestRunner implements ApplicationListener {
-
   private final Map<FrameworkMethod, RunNotifier> invokeInRender = new HashMap<FrameworkMethod, RunNotifier>();
 
   public GdxTestRunner(Class<?> klass) throws InitializationError {
     super(klass);
+
     LwjglApplicationConfiguration conf = new LwjglApplicationConfiguration();
     conf.width = 800;
     conf.height = 600;
     conf.title = "Gdx Test Runner";
     conf.useGL20 = true;
     new LwjglApplication(this, conf);
+  }
+
+  @Override
+  protected void beforeTestRun() {
+    TweenSystem.getTweenManager();
+    TowerGameService.setInstance(new TowerGameService());
   }
 
   public void create() {

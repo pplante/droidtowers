@@ -70,6 +70,11 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
   }
 
   public void fetchBlocking(ApiCollectionRunnable<HappyDroidServiceCollection<ApiType>> apiRunnable) {
+    if (!HappyDroidService.instance().haveNetworkConnection()) {
+      apiRunnable.onError(null, HttpStatusCode.ClientClosedRequest, this);
+      return;
+    }
+
     HttpResponse response = HappyDroidService.instance().makeGetRequest(getBaseResourceUri());
     if (response != null && response.getStatusLine() != null && response.getStatusLine().getStatusCode() == 200) {
       ObjectMapper objectMapper = HappyDroidService.instance().getObjectMapper();

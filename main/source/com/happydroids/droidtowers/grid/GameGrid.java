@@ -29,7 +29,7 @@ public class GameGrid extends GameLayer {
   private Vector2 gridSize;
   private GuavaSet<GridObject> objects;
   private Vector2 worldSize;
-  private final GameGridRenderer gameGridRenderer;
+  private GameGridRenderer gameGridRenderer;
   private Map<Class, GuavaSet<GridObject>> gridObjectsByType;
   private GridObject selectedGridObject;
   private GridObject transitGridObjectA;
@@ -37,12 +37,16 @@ public class GameGrid extends GameLayer {
   private float highestPoint;
 
   public GameGrid(OrthographicCamera camera) {
+    this();
+    gameGridRenderer = new GameGridRenderer(this, camera);
+  }
+
+  protected GameGrid() {
     setTouchEnabled(true);
 
     gridObjectsByType = new HashMap<Class, GuavaSet<GridObject>>();
     objects = new GuavaSet<GridObject>(25);
 
-    gameGridRenderer = new GameGridRenderer(this, camera);
     gridSize = new Vector2(8, 8);
 
     updateWorldSize();
@@ -142,7 +146,21 @@ public class GameGrid extends GameLayer {
     if (classes != null) {
       for (Class otherClass : classes) {
         if (gridObjectsByType.containsKey(otherClass)) {
-          found.addAll(gridObjectsByType.get(otherClass));
+          found.addAll(getInstancesOf(otherClass));
+        }
+      }
+    }
+
+    return found;
+  }
+
+  // TODO: GROT!
+  public GuavaSet<GridObject> getInstancesOf(Set<Class<? extends GridObject>> classes) {
+    GuavaSet<GridObject> found = new GuavaSet<GridObject>();
+    if (classes != null) {
+      for (Class otherClass : classes) {
+        if (gridObjectsByType.containsKey(otherClass)) {
+          found.addAll(getInstancesOf(otherClass));
         }
       }
     }
@@ -185,6 +203,7 @@ public class GameGrid extends GameLayer {
     return false;
   }
 
+
   @Override
   public boolean pan(Vector2 worldPoint, Vector2 deltaPoint) {
     if (selectedGridObject != null) {
@@ -199,7 +218,6 @@ public class GameGrid extends GameLayer {
 
     return false;
   }
-
 
   public GridPoint closestGridPoint(float x, float y) {
     float gridX = (float) Math.floor((int) x / TowerConsts.GRID_UNIT_SIZE);

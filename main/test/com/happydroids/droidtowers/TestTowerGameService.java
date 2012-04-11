@@ -2,14 +2,15 @@
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
 
-package com.happydroids.server;
+package com.happydroids.droidtowers;
 
 import com.happydroids.HttpTestHelper;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import org.apache.http.HttpResponse;
 
-public class TestHappyDroidService extends HappyDroidService {
-  public TestHappyDroidService() {
-    super(13);
+class TestTowerGameService extends TowerGameService {
+  public TestTowerGameService() {
+    super();
     hasNetworkConnection = true;
   }
 

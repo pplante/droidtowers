@@ -24,7 +24,7 @@ public class AchievementNotification extends Table {
   public AchievementNotification(Achievement achievement) {
     this.achievement = achievement;
 
-    setBackground(HeadsUpDisplay.instance().getGuiSkin().getPatch("default-round"));
+//    setBackground(HeadsUpDisplay.instance().getGuiSkin().getPatch("default-round"));
 
     defaults().top().left().pad(4);
 

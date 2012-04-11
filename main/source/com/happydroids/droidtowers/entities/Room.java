@@ -17,6 +17,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.types.ProviderType;
 import com.happydroids.droidtowers.types.RoomType;
 import com.happydroids.droidtowers.utils.Random;
 
@@ -37,7 +38,7 @@ public class Room extends GridObject {
   public Room(RoomType roomType, GameGrid gameGrid) {
     super(roomType, gameGrid);
 
-    connectedToTransport = roomType.isLobby();
+    connectedToTransport = roomType.provides(ProviderType.LOBBY);
 
     if (labelFont == null) {
       labelFont = TowerAssetManager.bitmapFont("fonts/helvetica_neue_18.fnt");

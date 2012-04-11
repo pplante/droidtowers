@@ -5,30 +5,25 @@
 package com.happydroids.droidtowers.achievements;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.google.common.base.Predicate;
-import com.happydroids.droidtowers.entities.*;
+import com.happydroids.droidtowers.entities.GridObject;
+import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.grid.GameGrid;
-import com.happydroids.droidtowers.types.CommercialType;
 import com.happydroids.droidtowers.types.ProviderType;
-import com.happydroids.droidtowers.types.RoomType;
-
-import javax.annotation.Nullable;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 class AchievementRequirement {
   private RequirementType type;
   private AchievementThing thing;
-  private ProviderType thingProviderTypes[];
-  private Class<? extends GridObject> thingObjectTypes[];
+  private ProviderType[] thingProviderTypes;
   private double amount;
 
-  public boolean isCompleted() {
+  public boolean isCompleted(GameGrid gameGrid) {
     switch (type) {
       case POPULATION:
         return Player.instance().getTotalPopulation() >= amount;
 
       case BUILD:
-        return handleBuildRequirement();
+        return handleBuildRequirement(gameGrid);
 
       default:
         assert false;
@@ -38,53 +33,30 @@ class AchievementRequirement {
     return false;
   }
 
-  private boolean handleBuildRequirement() {
+  private boolean handleBuildRequirement(GameGrid gameGrid) {
     if (thing == null) {
       throw new RuntimeException(String.format("AchievementRequirement %s does not contain 'thing' parameter.", type));
+    } else if (thingProviderTypes == null) {
+      throw new RuntimeException(String.format("AchievementRequirement %s does not contain 'thingProviderTypes' parameter.", type));
     }
 
-    if (!AchievementEngine.instance().hasGameGrid()) {
+
+    if (gameGrid == null) {
       return false;
     }
-    GameGrid gameGrid = AchievementEngine.instance().getGameGrid();
 
-    GuavaSet<GridObject> gridObjects = null;
-    Predicate<GridObject> gridObjectPredicate = null;
+    int numMatches = 0;
+    for (GridObject gridObject : gameGrid.getObjects()) {
+      if (numMatches >= amount) {
+        return true;
+      }
 
-    Class<? extends GridObject>[] classes = null;
-    ProviderType provides[] = null;
-
-    switch (thing) {
-      case HOUSING:
-        gridObjects = gameGrid.getInstancesOf(Room.class, CommercialSpace.class);
-        gridObjectPredicate = new Predicate<GridObject>() {
-          public boolean apply(@Nullable GridObject gridObject) {
-            return gridObject instanceof Room && ((RoomType) gridObject.getGridObjectType()).provides() == ProviderType.HOUSING;
-          }
-        };
-        break;
-
-      case HOTEL_ROOM:
-        gridObjects = gameGrid.getInstancesOf(Room.class, CommercialSpace.class);
-        gridObjectPredicate = new Predicate<GridObject>() {
-          public boolean apply(@Nullable GridObject gridObject) {
-            return gridObject instanceof Room && ((RoomType) gridObject.getGridObjectType()).provides() == ProviderType.HOTEL_ROOMS;
-          }
-        };
-        break;
-
-      case COMMERCIAL_SPACE:
-        gridObjects = gameGrid.getInstancesOf(CommercialSpace.class);
-        gridObjectPredicate = new Predicate<GridObject>() {
-          public boolean apply(@Nullable GridObject gridObject) {
-            ProviderType providerType = ((CommercialType) gridObject.getGridObjectType()).provides();
-            return gridObject instanceof CommercialSpace && (providerType == ProviderType.OFFICE_SERVICES || providerType == ProviderType.FOOD);
-          }
-        };
-        break;
+      if (gridObject.getGridObjectType().provides(thingProviderTypes)) {
+        numMatches++;
+      }
     }
 
-    return gridObjects != null && gridObjectPredicate != null && gridObjects.filterBy(gridObjectPredicate).size() >= amount;
+    return false;
   }
 
   @Override
@@ -94,5 +66,21 @@ class AchievementRequirement {
                    ", type=" + type +
                    ", thing=" + thing +
                    '}';
+  }
+
+  public void setAmount(double amount) {
+    this.amount = amount;
+  }
+
+  public void setThing(AchievementThing thing) {
+    this.thing = thing;
+  }
+
+  public void setThingProviderTypes(ProviderType... thingProviderTypes) {
+    this.thingProviderTypes = thingProviderTypes;
+  }
+
+  public void setType(RequirementType type) {
+    this.type = type;
   }
 }

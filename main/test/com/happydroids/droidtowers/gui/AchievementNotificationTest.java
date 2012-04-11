@@ -11,12 +11,14 @@ import com.happydroids.droidtowers.achievements.AchievementThing;
 import com.happydroids.droidtowers.achievements.RewardType;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static com.happydroids.droidtowers.Expect.expect;
 
 @RunWith(TowerGameTestRunner.class)
+@Ignore
 public class AchievementNotificationTest {
 
   private AchievementNotification notification;

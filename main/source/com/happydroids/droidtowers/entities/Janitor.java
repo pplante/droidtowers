@@ -10,7 +10,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.types.ProviderType;
-import com.happydroids.droidtowers.types.RoomType;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -32,9 +31,7 @@ public class Janitor extends Avatar {
     if (commercialSpaces != null) {
       List<GridObject> sortedObjects = commercialSpaces.filterBy(new Predicate<GridObject>() {
         public boolean apply(@Nullable GridObject input) {
-          ProviderType providerType = RoomType.class.cast(input.getGridObjectType()).provides();
-          int numVisitors = CommercialSpace.class.cast(input).getNumVisitors();
-          return numVisitors > 0 && checkProviderType(providerType);
+          return ((CommercialSpace) input).getNumVisitors() > 0 && input.getGridObjectType().provides(ProviderType.FOOD, ProviderType.OFFICE_SERVICES);
         }
       }).sortedBy(new Function<GridObject, Long>() {
         public Long apply(@Nullable GridObject gridObject) {
@@ -46,9 +43,5 @@ public class Janitor extends Avatar {
     } else {
       wanderAround();
     }
-  }
-
-  public static boolean checkProviderType(ProviderType providerType) {
-    return providerType.equals(ProviderType.FOOD) || providerType.equals(ProviderType.OFFICE_SERVICES);
   }
 }
