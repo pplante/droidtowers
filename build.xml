@@ -88,7 +88,7 @@
     <jar destfile="${release-jar}" basedir="${build.dir}/classes"
          filesetmanifest="mergewithoutmain">
       <manifest>
-        <attribute name="Main-Class" value="com.unhappyrobot.DesktopGame"/>
+        <attribute name="Main-Class" value="com.happydroids.droidtowers.DesktopGame"/>
         <attribute name="Class-Path" value="."/>
       </manifest>
       <fileset dir="${build.dir}/classes"/>

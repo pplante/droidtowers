@@ -151,20 +151,19 @@ public class MainMenuScene extends Scene {
   }
 
   private class LaunchWindowClickListener implements ClickListener {
-    private final Class<? extends TowerWindow> aClass;
+    private final Class<? extends TowerWindow> windowClass;
 
-    public LaunchWindowClickListener(Class<? extends TowerWindow> aClass) {
-      this.aClass = aClass;
+    public LaunchWindowClickListener(Class<? extends TowerWindow> windowClass) {
+      this.windowClass = windowClass;
     }
 
     public void click(Actor actor, float x, float y) {
       try {
-        System.out.println("aClass = " + aClass);
-        Constructor<? extends TowerWindow> constructor = aClass.getConstructor(Stage.class, Skin.class);
+        Constructor<? extends TowerWindow> constructor = windowClass.getConstructor(Stage.class, Skin.class);
         TowerWindow window = constructor.newInstance(getStage(), getGuiSkin());
         window.modal(true).show().centerOnStage();
       } catch (Exception e) {
-        Gdx.app.error(TAG, "Error loading dialog: " + aClass.getSimpleName(), e);
+        throw new RuntimeException(e);
       }
     }
   }

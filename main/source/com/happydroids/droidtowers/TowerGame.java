@@ -79,12 +79,12 @@ public class TowerGame implements ApplicationListener {
 
     TowerAssetManager.assetManager();
 
-    BackgroundTask.setUncaughtExceptionHandler(uncaughtExceptionHandler);
+//    BackgroundTask.setUncaughtExceptionHandler(uncaughtExceptionHandler);
 
     new BackgroundTask() {
       @Override
       public void execute() {
-        ((TowerGameService) TowerGameService.instance()).registerDevice();
+        TowerGameService.instance().registerDevice();
       }
     }.run();
 

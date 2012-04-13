@@ -1,0 +1,112 @@
+{
+    "com.unhappyrobot.gamestate.GameSave": {
+        "baseFilename": "6232fa7236f44e34bef1ea3ade110f95.json",
+        "cameraPosition": {
+            "x": 780.49384,
+            "y": 889.1384,
+            "z": 0.0
+        },
+        "cameraZoom": 1.0,
+        "cloudSaveUri": "http://local.happydroids.com/api/v1/gamesave/73/",
+        "completedAchievements": [],
+        "difficultyLevel": "EASY",
+        "fileGeneration": 43,
+        "gridObjects": [
+            {
+                "position": {
+                    "x": 9.0,
+                    "y": 11.0
+                },
+                "size": {
+                    "x": 3.0,
+                    "y": 1.0
+                },
+                "typeClass": "com.unhappyrobot.types.RoomType",
+                "typeName": "Small Apartment"
+            },
+            {
+                "position": {
+                    "x": 9.0,
+                    "y": 13.0
+                },
+                "size": {
+                    "x": 5.0,
+                    "y": 1.0
+                },
+                "typeClass": "com.unhappyrobot.types.RoomType",
+                "typeName": "Penthouse"
+            },
+            {
+                "position": {
+                    "x": 9.0,
+                    "y": 12.0
+                },
+                "size": {
+                    "x": 3.0,
+                    "y": 1.0
+                },
+                "typeClass": "com.unhappyrobot.types.RoomType",
+                "typeName": "Small Apartment"
+            },
+            {
+                "position": {
+                    "x": 10.0,
+                    "y": 9.0
+                },
+                "size": {
+                    "x": 1.0,
+                    "y": 7.0
+                },
+                "typeClass": "com.unhappyrobot.types.ElevatorType",
+                "typeName": "Elevator Shaft"
+            },
+            {
+                "position": {
+                    "x": 9.0,
+                    "y": 14.0
+                },
+                "size": {
+                    "x": 4.0,
+                    "y": 1.0
+                },
+                "typeClass": "com.unhappyrobot.types.RoomType",
+                "typeName": "Large Condo"
+            },
+            {
+                "position": {
+                    "x": 9.0,
+                    "y": 10.0
+                },
+                "size": {
+                    "x": 4.0,
+                    "y": 1.0
+                },
+                "typeClass": "com.unhappyrobot.types.RoomType",
+                "typeName": "Lobby 4x1"
+            }
+        ],
+        "gridSize": {
+            "x": 40.0,
+            "y": 40.0
+        },
+        "newGame": true,
+        "objectCounts": {
+            "Elevator Shaft": 1,
+            "Large Condo": 1,
+            "Lobby 4x1": 1,
+            "Penthouse": 1,
+            "Small Apartment": 2
+        },
+        "player": {
+            "coins": 461707,
+            "experience": 15000,
+            "jobsFilled": 0,
+            "jobsMax": 0,
+            "maxPopulation": 20,
+            "populationAttracted": 10,
+            "populationMax": 20,
+            "populationResidency": 10
+        },
+        "towerName": "test"
+    }
+}

@@ -166,99 +166,75 @@ public class InputSystem extends InputAdapter {
 
   @Override
   public boolean keyUp(int keycode) {
-    try {
-      if (inputProcessorsSorted != null) {
-        for (InputProcessorEntry entry : inputProcessorsSorted) {
-          if (entry.getInputProcessor().keyUp(keycode)) {
-            return true;
-          }
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().keyUp(keycode)) {
+          return true;
         }
       }
-
-      return false;
-    } catch (Exception e) {
-      throw new RuntimeException(e);
     }
+
+    return false;
   }
 
   public boolean touchDown(int x, int y, int pointer, int button) {
-    try {
-      if (inputProcessorsSorted != null) {
-        for (InputProcessorEntry entry : inputProcessorsSorted) {
-          if (entry.getInputProcessor().touchDown(x, y, pointer, button)) {
-            return true;
-          }
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().touchDown(x, y, pointer, button)) {
+          return true;
         }
       }
-
-      return false;
-    } catch (Exception e) {
-      throw new RuntimeException(e);
     }
+
+    return false;
   }
 
   public boolean touchUp(int x, int y, int pointer, int button) {
-    try {
-      if (inputProcessorsSorted != null) {
-        for (InputProcessorEntry entry : inputProcessorsSorted) {
-          if (entry.getInputProcessor().touchUp(x, y, pointer, button)) {
-            return true;
-          }
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().touchUp(x, y, pointer, button)) {
+          return true;
         }
       }
-
-      return false;
-    } catch (Exception e) {
-      throw new RuntimeException(e);
     }
+
+    return false;
   }
 
   public boolean touchDragged(int x, int y, int pointer) {
-    try {
-      if (inputProcessorsSorted != null) {
-        for (InputProcessorEntry entry : inputProcessorsSorted) {
-          if (entry.getInputProcessor().touchDragged(x, y, pointer)) {
-            return true;
-          }
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().touchDragged(x, y, pointer)) {
+          return true;
         }
       }
-
-      return false;
-    } catch (Exception e) {
-      throw new RuntimeException(e);
     }
+
+    return false;
   }
 
   public boolean touchMoved(int x, int y) {
-    try {
-      if (inputProcessorsSorted != null) {
-        for (InputProcessorEntry entry : inputProcessorsSorted) {
-          if (entry.getInputProcessor().touchMoved(x, y)) {
-            return true;
-          }
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().touchMoved(x, y)) {
+          return true;
         }
       }
-
-      return false;
-    } catch (Exception e) {
-      throw new RuntimeException(e);
     }
+
+    return false;
   }
 
   public boolean scrolled(int amount) {
-    try {
-      if (inputProcessorsSorted != null) {
-        for (InputProcessorEntry entry : inputProcessorsSorted) {
-          if (entry.getInputProcessor().scrolled(amount)) {
-            return true;
-          }
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().scrolled(amount)) {
+          return true;
         }
       }
-
-      return gestureDelegater != null && gestureDelegater.scrolled(amount);
-    } catch (Exception e) {
-      throw new RuntimeException(e);
     }
+
+    return gestureDelegater != null && gestureDelegater.scrolled(amount);
   }
 
   public void update(float deltaTime) {

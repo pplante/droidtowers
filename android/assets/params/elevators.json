@@ -1,5 +1,6 @@
 [
   {
+    "id": "ELEVATOR",
     "name":"Elevator Shaft",
     "continuousPlacement":true,
     "canShareSpace":true,

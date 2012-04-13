@@ -2,16 +2,65 @@ housing.png
 format: RGBA8888
 filter: MipMapNearestNearest,Linear
 repeat: none
+3x1-small-office
+  rotate: false
+  xy: 260, 134
+  size: 192, 64
+  orig: 192, 64
+  offset: 0, 0
+  index: -1
+generic_room_3x
+  rotate: false
+  xy: 260, 68
+  size: 192, 64
+  orig: 192, 64
+  offset: 0, 0
+  index: 1
 2x1-sushi
   rotate: false
-  xy: 132, 332
+  xy: 196, 398
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+generic_room_4x
+  rotate: false
+  xy: 2, 134
+  size: 256, 64
+  orig: 256, 64
+  offset: 0, 0
+  index: 1
+4x1-security-center
+  rotate: false
+  xy: 2, 68
+  size: 256, 64
+  orig: 256, 64
+  offset: 0, 0
+  index: -1
+4x1-large-condo
+  rotate: false
+  xy: 2, 266
+  size: 256, 64
+  orig: 256, 64
+  offset: 0, 0
+  index: -1
+2x1-hotel-room
+  rotate: false
+  xy: 326, 398
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 3x1-small-condo
   rotate: false
-  xy: 260, 200
+  xy: 2, 332
+  size: 192, 64
+  orig: 192, 64
+  offset: 0, 0
+  index: -1
+3x1-small-apartment
+  rotate: false
+  xy: 2, 398
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
@@ -23,6 +72,27 @@ lobby-left
   orig: 36, 64
   offset: 0, 0
   index: -1
+4x1-lobby
+  rotate: false
+  xy: 2, 200
+  size: 256, 64
+  orig: 256, 64
+  offset: 0, 0
+  index: -1
+generic_room_2x
+  rotate: false
+  xy: 196, 332
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: 1
+5x1-large-office
+  rotate: false
+  xy: 2, 2
+  size: 320, 64
+  orig: 320, 64
+  offset: 0, 0
+  index: -1
 lobby-right
   rotate: false
   xy: 454, 2
@@ -30,87 +100,31 @@ lobby-right
   orig: 36, 64
   offset: 0, 0
   index: -1
-3x1-burger-joint
-  rotate: false
-  xy: 260, 134
-  size: 192, 64
-  orig: 192, 64
-  offset: 0, 0
-  index: -1
-3x1-small-apartment
-  rotate: false
-  xy: 2, 266
-  size: 192, 64
-  orig: 192, 64
-  offset: 0, 0
-  index: -1
-generic_room_2x
-  rotate: false
-  xy: 2, 398
-  size: 128, 64
-  orig: 128, 64
-  offset: 0, 0
-  index: 1
-generic_room_3x
-  rotate: false
-  xy: 260, 2
-  size: 192, 64
-  orig: 192, 64
-  offset: 0, 0
-  index: 1
-generic_room_4x
-  rotate: false
-  xy: 2, 68
-  size: 256, 64
-  orig: 256, 64
-  offset: 0, 0
-  index: 1
-2x1-maids-closet
-  rotate: false
-  xy: 2, 332
-  size: 128, 64
-  orig: 128, 64
-  offset: 0, 0
-  index: -1
-4x1-large-condo
-  rotate: false
-  xy: 2, 200
-  size: 256, 64
-  orig: 256, 64
-  offset: 0, 0
-  index: -1
-4x1-security-center
-  rotate: false
-  xy: 2, 2
-  size: 256, 64
-  orig: 256, 64
-  offset: 0, 0
-  index: -1
-2x1-hotel-room
-  rotate: false
-  xy: 132, 398
-  size: 128, 64
-  orig: 128, 64
-  offset: 0, 0
-  index: -1
 3x1-pizza-place
   rotate: false
-  xy: 260, 68
+  xy: 260, 200
   size: 192, 64
   orig: 192, 64
+  offset: 0, 0
+  index: -1
+2x1-maids-closet
+  rotate: false
+  xy: 324, 2
+  size: 128, 64
+  orig: 128, 64
   offset: 0, 0
   index: -1
 2x1-bar
   rotate: false
-  xy: 196, 266
+  xy: 326, 332
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
-4x1-lobby
+3x1-burger-joint
   rotate: false
-  xy: 2, 134
-  size: 256, 64
-  orig: 256, 64
+  xy: 260, 266
+  size: 192, 64
+  orig: 192, 64
   offset: 0, 0
   index: -1

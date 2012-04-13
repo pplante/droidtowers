@@ -94,7 +94,7 @@
       </manifest>
       <fileset dir="${build.dir}/classes"/>
       <zipfileset dir="${root.dir}/assets/"/>
-      <!--<zipgroupfileset dir="${root.dir}/../happydroids-common/libs/main" includes="**/*.jar"/>-->
+      <zipgroupfileset dir="${root.dir}/../happydroids-common/libs/main" includes="**/*.jar"/>
       <zipgroupfileset dir="${root.dir}/libs" includes="**/jackson*.jar"/>
     </jar>
   </target>
@@ -102,57 +102,60 @@
   <target name="proguard" depends="jar">
     <taskdef resource="proguard/ant/task.properties"
              classpath="../tools/proguard/lib/proguard.jar"/>
-    <proguard allowaccessmodification="false"
+    <proguard allowaccessmodification="true"
               usemixedcaseclassnames="false"
-              skipnonpubliclibraryclasses="true"
-              preverify="true"
-              shrink="false"
+              skipnonpubliclibraryclasses="false"
+              shrink="true"
               optimize="false"
               obfuscate="false"
               verbose="true"
               printmapping="sparky.map"
               defaultpackage=""
+              target="1.5"
               mergeinterfacesaggressively="false">
       <injar path="${release-jar}"/>
-      <injar refid="classpath" filter="!META-INF/**,!extras.manifest,!**/*.jj"/>
+      <!--<injar refid="classpath" filter="!META-INF/**,!extras.manifest,!**/*.jj"/>-->
       <outjar path="${obfuscated-jar}"/>
       <libraryjar path="${jdk.classpath.1.6.unix}"/>
       <libraryjar path="../tools/jsr305-2.0.0.jar"/>
 
-      <keepattributes name="*Annotation*,EnclosingMethod,com.fasterxml.jackson.annotation.**,com.fasterxml.jackson.databind.annotation.**"/>
-      <keepattributes name="EnclosingMethod"/>
-      <keepattributes name="com.fasterxml.jackson.annotation.**"/>
-      <keepattributes name="com.fasterxml.jackson.databind.annotation.**"/>
+      <keepattribute name="**Annotation**"/>
+      <!--<keepattribute name="EnclosingMethod"/>-->
+      <!--<keepattribute name="com.fasterxml.jackson.annotation.**"/>-->
+      <!--<keepattribute name="com.fasterxml.jackson.databind.annotation.**"/>-->
       <keep name="com.happydroids.sparky.SparkyMain">
         <method name="main"/>
         <constructor/>
         <method name="*"/>
         <field name="*"/>
       </keep>
-      <keep name="com.happydroids.**" allowobfuscation="false">
+      <keep name="com.happydroids.**" allowobfuscation="false" allowoptimization="false" allowshrinking="false">
         <method name="main"/>
         <constructor/>
         <method name="*"/>
         <field name="*"/>
       </keep>
-      <keep name="com.google.**" allowobfuscation="false" allowoptimization="false">
+      <keep name="com.google.**" allowobfuscation="false" allowoptimization="false" allowshrinking="true">
         <constructor/>
         <method name="*"/>
         <field name="*"/>
       </keep>
-      <keep extends="com.happydroids.server.HappyDroidServiceObject">
+      <keep extends="com.happydroids.server.HappyDroidServiceObject" allowshrinking="false" allowobfuscation="false"
+            allowoptimization="false">
         <constructor/>
         <method name="*"/>
         <field name="*"/>
       </keep>
-      <keep extends="com.happydroids.server.HappyDroidServiceCollection">
+      <keep extends="com.happydroids.server.HappyDroidServiceCollection" allowshrinking="false" allowobfuscation="false"
+            allowoptimization="false">
         <constructor/>
         <method name="*"/>
         <field name="*"/>
       </keep>
 
-      <keep name="org.apache.**,com.fasterxml.**,com.intellij.**" allowshrinking="false" allowobfuscation="false" allowoptimization="false">
-        <constructor/>
+      <keep name="org.apache.**,com.fasterxml.**,com.intellij.**" allowshrinking="false" allowobfuscation="false"
+            allowoptimization="false">
+        <constructor name="*" />
         <method name="*"/>
         <field name="*"/>
       </keep>
@@ -170,7 +173,11 @@
     <java jar="${release-jar}" fork="true"/>
   </target>
 
-  <target name="build" depends="jar"/>
+  <target name="run.proguard" depends="proguard">
+    <java jar="${obfuscated-jar}" fork="true"/>
+  </target>
+
+  <target name="build" depends="proguard"/>
 
   <target name="osx" depends="build" description="Build an OSX target">
     <taskdef name="jarbundler"
@@ -180,7 +187,7 @@
     <jarbundler dir="${basedir}/out/" verbose="false" showPlist="false"
                 name="${ant.project.name}"
                 mainclass="com.happydroids.sparky.SparkyMain"
-                jar="${build.dir}/${ant.project.name}-release.jar"
+                jar="${obfuscated-jar}"
                 icon="icons/${ant.project.name}.icns"
                 version="${project.version}"
                 signature="LOCL"

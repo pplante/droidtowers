@@ -6,6 +6,7 @@ package com.happydroids.sparky;
 
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.platform.HappyDroidsDesktopUncaughtExceptionHandler;
+import com.happydroids.platform.Platform;
 import com.happydroids.server.HappyDroidService;
 import com.happydroids.utils.BackgroundTask;
 
@@ -40,7 +41,7 @@ public class SparkyMain extends JFrame {
 
   public SparkyMain() {
     setContentPane(contentPane);
-    setSize(800, 480);
+    setSize(contentPane.getWidth(), contentPane.getHeight());
     setResizable(false);
     setTitle("Droid Towers");
     getRootPane().setDefaultButton(startBuildingButton);
@@ -63,24 +64,20 @@ public class SparkyMain extends JFrame {
     }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     updateProgressStatus(null);
-    gameStorage = new File("gameStorage/");
-    if (!gameStorage.exists()) {
-      gameJar.mkdirs();
-    }
+    gameStorage = Platform.getAppRoot();
 
     gameJar = new File(gameStorage, "DroidTowers.jar");
 
     makeRequestForGameUpdates();
 
     try {
-      backgroundPanel.add(bottomPanel);
-      backgroundPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-      backgroundPanel.setTransparentAdd(true);
-      bottomPanel.setBackground(new Color(0, 0, 0, 0));
+      scrollPane.setBorder(null);
+      contentPane.setBorder(null);
+      bottomPanel.setBorder(null);
+      bottomPanel.setOpaque(false);
       scrollPane.setBackground(new Color(0, 0, 0, 0));
-      scrollPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-      webPane.setBackground(new Color(0, 0, 0, 0));
-      webPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+      scrollPane.setOpaque(false);
+
       webPane.setPage(HappyDroidConsts.HAPPYDROIDS_URI + "/game-updates");
 
       addMouseListener(new MouseAdapter() {
@@ -99,7 +96,7 @@ public class SparkyMain extends JFrame {
   }
 
   private void createUIComponents() {
-    backgroundPanel = new BackgroundPanel(new ImageIcon("assets/bottom-bar.png").getImage(), BackgroundPanel.TILED, 1f, 0f);
+    backgroundPanel = new BackgroundPanel(new ImageIcon("assets/background.png").getImage(), BackgroundPanel.TILED, 1f, 0f);
     backgroundPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
     backgroundPanel.setTransparentAdd(true);
   }
@@ -168,21 +165,16 @@ public class SparkyMain extends JFrame {
 
 //    PlatformProtocolHandlerFactory.newInstance().initialize(args);
 
-//    SwingUtilities.invokeLater(new Runnable() {
-//      public void run() {
-    setDefaultLookAndFeelDecorated(true);
+    SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        setDefaultLookAndFeelDecorated(true);
 
-    SparkyMain window = new SparkyMain();
-//        window.addWindowStateListener(new WindowStateListener() {
-//          public void windowStateChanged(WindowEvent windowEvent) {
-//            System.out.println("windowEvent = " + windowEvent);
-//          }
-//        });
-    window.pack();
-    window.setLocationRelativeTo(null);
-    window.setVisible(true);
-//      }
-//    });
+        SparkyMain window = new SparkyMain();
+        window.pack();
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
+      }
+    });
   }
 
   private class StartBuildingButtonClick implements ActionListener {

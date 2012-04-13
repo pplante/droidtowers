@@ -4,6 +4,7 @@
 
 package com.happydroids;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import org.apache.commons.io.FileUtils;
 import org.apache.http.Header;
@@ -16,21 +17,23 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 public class TestHelper {
-  private static final String[] fixturePaths = new String[]{"sparky/fixtures/"};
+  private static final String[] fixturePaths = new String[]{"fixtures/", "sparky/fixtures/", "main/fixtures/"};
 
-  public static void queueApiResponseFromFixture(String uri, String fixtureFilename) throws IOException {
+  public static File fixture(String fixtureFilename) throws IOException {
     File file = null;
 
     for (String fixturePath : fixturePaths) {
       file = new File(fixturePath, fixtureFilename);
-      System.out.println(file.getAbsolutePath());
       if (file.exists()) {
-        queueApiResponse(uri, FileUtils.readFileToString(file));
-        return;
+        return file;
       }
     }
 
     throw new IOException("Could not find: " + fixtureFilename + " in search paths: " + Arrays.toString(fixturePaths));
+  }
+
+  public static void queueApiResponseFromFixture(String uri, String fixtureFilename) throws IOException {
+    queueApiResponse(uri, FileUtils.readFileToString(fixture(fixtureFilename)));
   }
 
   public static void queueApiResponse(String uri, String content) throws IOException {
@@ -58,5 +61,13 @@ public class TestHelper {
 
   public static void clearQueuedRequests() {
     HttpTestHelper.instance().getResponseQueue().clear();
+  }
+
+  public static Object readJson(File file) throws IOException {
+    return new ObjectMapper().readValue(file, Object.class);
+  }
+
+  public static Object readJson(String content) throws IOException {
+    return new ObjectMapper().readValue(content, Object.class);
   }
 }

@@ -9,15 +9,17 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.platform.DesktopBrowserUtil;
 import com.happydroids.platform.HappyDroidsDesktopUncaughtExceptionHandler;
-import com.happydroids.utils.OSValidator;
+import com.happydroids.platform.Platform;
 
 public class DesktopGame {
   public static void main(String[] args) {
-    TowerGameService.setDeviceOSName(OSValidator.getOSType());
+    TowerGameService.setDeviceOSName(Platform.getOSType().name());
     TowerGameService.setDeviceOSVersion(System.getProperty("os.version"));
 
+    Thread.setDefaultUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
+
     LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-    config.title = "TowerSim";
+    config.title = String.format("Droid Towers (%s)", TowerConsts.VERSION);
     config.resizable = false;
     config.width = 800;
     config.height = 480;

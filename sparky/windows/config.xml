@@ -4,7 +4,7 @@
 
 <launch4jConfig>
   <headerType>gui</headerType>
-  <jar>../out/desktop-jar/HappyDroids-Sparky-release.jar</jar>
+  <jar>../out/desktop-jar/HappyDroids-Sparky-obfuscated.jar</jar>
   <outfile>../out/Sparky.exe</outfile>
   <errTitle>Sparky</errTitle>
   <chdir>.</chdir>

@@ -4,13 +4,14 @@
 
 package com.happydroids.sparky.platform;
 
-import com.happydroids.utils.OSValidator;
+import com.happydroids.platform.Platform;
+import com.happydroids.platform.Platforms;
 
 public class PlatformProtocolHandlerFactory {
   public static PlatformProtocolHandler newInstance() {
-    if(OSValidator.getOSType().equals("macosx")) {
+    if (Platform.getOSType().equals(Platforms.Mac)) {
       return new MacProtocolHandler();
-    } else if(OSValidator.getOSType().equals("windows")) {
+    } else if (Platform.getOSType().equals(Platforms.Windows)) {
       return new WindowsProtocolHandler();
     }
     return null;

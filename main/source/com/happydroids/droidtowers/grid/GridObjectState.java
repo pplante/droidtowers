@@ -13,49 +13,60 @@ import com.happydroids.droidtowers.types.GridObjectTypeFactory;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class GridObjectState {
+  private String typeId;
   private GridPoint position;
   private GridPoint size;
-  private Class<? extends GridObjectType> typeClass;
-  private String typeName;
 
   public GridObjectState() {
 
   }
 
   public GridObjectState(GridObject gridObject) {
-    typeClass = gridObject.getGridObjectType().getClass();
-    typeName = gridObject.getGridObjectType().getName();
+    typeId = gridObject.getGridObjectType().getId();
     position = gridObject.getPosition();
     size = gridObject.getSize();
   }
 
-  public Class<? extends GridObjectType> getTypeClass() {
-    return typeClass;
-  }
-
   public GridObject materialize(GameGrid gameGrid) {
-    GridObjectTypeFactory factoryForType = GridObjectTypeFactory.factoryForType(typeClass);
+    GridObjectType objectType = GridObjectTypeFactory.findTypeById(typeId);
+    if (objectType != null) {
+      GridObject object = objectType.makeGridObject(gameGrid);
 
-    if (factoryForType != null) {
-      GridObjectType objectType = factoryForType.findByName(typeName);
+      if (object != null) {
+        object.setPosition(position.x, position.y);
+        object.setSize(size.x, size.y);
+        object.setPlacementState(GridObjectPlacementState.PLACED);
 
-      if (objectType != null) {
-        GridObject object = objectType.makeGridObject(gameGrid);
+        gameGrid.addObject(object);
 
-        if (object != null) {
-          object.setPosition(position.x, position.y);
-          object.setSize(size.x, size.y);
-          object.setPlacementState(GridObjectPlacementState.PLACED);
-
-          gameGrid.addObject(object);
-
-          return object;
-        }
+        return object;
       }
-    } else {
-      throw new RuntimeException("Looks like you forget to call instance() of the factory for type: " + typeClass);
     }
 
-    return null;
+    throw new RuntimeException("Cannot find type: "+ typeId);
+  }
+
+  public GridPoint getPosition() {
+    return position;
+  }
+
+  public void setPosition(GridPoint position) {
+    this.position = position;
+  }
+
+  public GridPoint getSize() {
+    return size;
+  }
+
+  public void setSize(GridPoint size) {
+    this.size = size;
+  }
+
+  public String getTypeId() {
+    return typeId;
+  }
+
+  public void setTypeId(String typeId) {
+    this.typeId = typeId;
   }
 }

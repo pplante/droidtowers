@@ -17,9 +17,9 @@ import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.scenes.TowerScene;
 
-import java.io.IOException;
-
 public class LoadGameWindow extends TowerWindow {
+  private boolean foundSaveFile;
+
   public LoadGameWindow(Stage stage, Skin skin) {
     super("Load a saved game", stage, skin);
 
@@ -35,11 +35,17 @@ public class LoadGameWindow extends TowerWindow {
     if (files != null && files.length > 0) {
       for (FileHandle file : files) {
         if (file.name().endsWith(".json")) {
-          gameFiles.row();
-          gameFiles.add(makeGameFileRow(file));
+          Table fileRow = makeGameFileRow(file);
+          if (fileRow != null) {
+            gameFiles.row();
+            gameFiles.add(fileRow);
+            foundSaveFile = true;
+          }
         }
       }
-    } else {
+    }
+
+    if(!foundSaveFile) {
       gameFiles.add(LabelStyle.Default.makeLabel("No saved games were found on this device."));
     }
 
@@ -49,6 +55,13 @@ public class LoadGameWindow extends TowerWindow {
   }
 
   private Table makeGameFileRow(final FileHandle gameSave) {
+    String towerName = "Unnamed Tower";
+    try {
+      towerName = GameSave.readFile(gameSave).getTowerName();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+
     FileHandle imageFile = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY + gameSave.name() + ".png");
 
 
@@ -64,19 +77,19 @@ public class LoadGameWindow extends TowerWindow {
     fileRow.defaults().pad(5).width(360);
     fileRow.row().top().left();
     fileRow.add(imageActor).top().left().width(100);
-    fileRow.add(makeGameFileInfoBox(gameSave)).top().left().fill();
+    fileRow.add(makeGameFileInfoBox(gameSave, towerName)).top().left().fill();
 
     return fileRow;
   }
 
-  private Table makeGameFileInfoBox(final FileHandle savedGameFile) {
+  private Table makeGameFileInfoBox(final FileHandle savedGameFile, String towerName) {
     TextButton launchButton = new TextButton("Play", skin);
     launchButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         dismiss();
         try {
           TowerGame.changeScene(TowerScene.class, GameSave.readFile(savedGameFile));
-        } catch (IOException e) {
+        } catch (Exception e) {
           throw new RuntimeException(e);
         }
       }
@@ -85,7 +98,7 @@ public class LoadGameWindow extends TowerWindow {
     Table box = new Table();
     box.defaults().top().left().expand();
     box.row();
-    box.add(LabelStyle.Default.makeLabel(savedGameFile.nameWithoutExtension())).top().left();
+    box.add(LabelStyle.Default.makeLabel(towerName)).top().left();
     box.add(launchButton).top().right();
 
     return box;
