@@ -20,7 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-release.py" afterPath="$PROJECT_DIR$/build-release.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -154,7 +156,7 @@
       <file leaf-file-name="HappyDroidConsts.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="78" selection-start="204" selection-end="280" vertical-scroll-proportion="0.0">
+            <state line="13" column="0" selection-start="0" selection-end="416" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -163,7 +165,7 @@
       <file leaf-file-name="build-release.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/build-release.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="61" selection-start="325" selection-end="325" vertical-scroll-proportion="0.13977128">
+            <state line="74" column="0" selection-start="3049" selection-end="3049" vertical-scroll-proportion="0.7268107">
               <folding />
             </state>
           </provider>
@@ -1614,14 +1616,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="78" selection-start="204" selection-end="280" vertical-scroll-proportion="0.0">
+        <state line="13" column="0" selection-start="0" selection-end="416" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build-release.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="61" selection-start="325" selection-end="325" vertical-scroll-proportion="0.13977128">
+        <state line="74" column="0" selection-start="3049" selection-end="3049" vertical-scroll-proportion="0.7268107">
           <folding />
         </state>
       </provider>

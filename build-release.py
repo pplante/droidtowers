@@ -14,7 +14,7 @@ TOWER_CONSTS_JAVA = './happydroids-common/src/com/happydroids/HappyDroidConsts.j
 
 debug_flag_re = re.compile(r'(public static boolean DEBUG = (?:true|false);)')
 server_url_re = re.compile(r'(public static final String HAPPYDROIDS_SERVER = "(?:.+?)";)')
-server_https_re = re.compile(r'(public static final String HAPPYDROIDS_URI = "(?:.+?)" + HAPPYDROIDS_SERVER;)')
+server_https_re = re.compile(r'(public static final String HAPPYDROIDS_URI = "(?:.+?)" \+ HAPPYDROIDS_SERVER;)')
 version_re = re.compile(r'(public static String VERSION = "(?:.+?)";)')
 git_sha_re = re.compile(r'(public static String GIT_SHA = "(?:.+?)";)')
 
@@ -71,7 +71,9 @@ if __name__ == '__main__':
             tower_consts)
         tower_consts = version_re.sub('public static String VERSION = "%s";' % (new_build_number,), tower_consts)
         tower_consts = git_sha_re.sub('public static String GIT_SHA = "%s";' % (revision,), tower_consts)
+
         print tower_consts
+
         with open(TOWER_CONSTS_JAVA, 'w+') as fp:
             fp.write(tower_consts)
 
