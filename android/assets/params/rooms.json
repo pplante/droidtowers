@@ -68,6 +68,8 @@
     "experienceAward":5000,
     "populationMax":6,
     "width":5,
-    "provides":"PENTHOUSE"
+    "provides":"PENTHOUSE",
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"5x1-penthouse"
   }
 ]

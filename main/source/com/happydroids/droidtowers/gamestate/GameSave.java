@@ -20,6 +20,7 @@ import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.GridObjectPlacementState;
 import com.happydroids.droidtowers.entities.Player;
+import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_SwitchToGenericTypeInfo;
 import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_UnhappyrobotToDroidTowers;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -29,8 +30,6 @@ import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.jackson.TowerTypeIdResolver;
 import sk.seges.acris.json.server.migrate.JacksonTransformer;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -39,10 +38,11 @@ import java.util.List;
 import java.util.UUID;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
-@JsonTypeInfo(use= JsonTypeInfo.Id.MINIMAL_CLASS, include = JsonTypeInfo.As.WRAPPER_OBJECT, property = "class")
+@JsonTypeInfo(use = JsonTypeInfo.Id.MINIMAL_CLASS, include = JsonTypeInfo.As.WRAPPER_OBJECT, property = "class")
 @JsonTypeIdResolver(TowerTypeIdResolver.class)
 public class GameSave {
   protected int fileGeneration;
+  protected int fileFormat;
   protected String cloudSaveUri;
   protected String towerName;
   protected DifficultyLevel difficultyLevel;
@@ -152,13 +152,15 @@ public class GameSave {
 
   public static GameSave readFile(FileHandle fileHandle) throws Exception {
     try {
-      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-      JacksonTransformer transformer = new JacksonTransformer(fileHandle.read(), outputStream);
-      transformer.transform(Migration_GameSave_UnhappyrobotToDroidTowers.class);
+      JacksonTransformer transformer = new JacksonTransformer(fileHandle.read());
+      transformer.addTransform(Migration_GameSave_UnhappyrobotToDroidTowers.class);
+      transformer.addTransform(Migration_GameSave_SwitchToGenericTypeInfo.class);
 
-      return TowerGameService.instance().getObjectMapper().readValue(new ByteArrayInputStream(outputStream.toByteArray()), GameSave.class);
+      byte[] bytes = transformer.process();
+
+      return TowerGameService.instance().getObjectMapper().readValue(bytes, GameSave.class);
     } catch (Exception e) {
-      throw new Exception("There was a problem parsing: "+ fileHandle.name());
+      throw new RuntimeException("There was a problem parsing: " + fileHandle.name(), e);
     }
   }
 

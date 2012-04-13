@@ -25,6 +25,7 @@
     <orderEntry type="library" exported="" name="guava" level="project" />
     <orderEntry type="library" name="junit-mockito-great-expectations" level="project" />
     <orderEntry type="library" scope="TEST" name="commons-io" level="project" />
+    <orderEntry type="library" name="commons-io" level="project" />
   </component>
 </module>
 

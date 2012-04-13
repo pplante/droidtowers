@@ -14,6 +14,7 @@ public class GameUpdate extends HappyDroidServiceObject {
   public String gitSha;
   public String version;
   public String notes;
+  public boolean active;
   public GameUpdateAttachment fullRelease;
   public GameUpdateAttachment patchFile;
 

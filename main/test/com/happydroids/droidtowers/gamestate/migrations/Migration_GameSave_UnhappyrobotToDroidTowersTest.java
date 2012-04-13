@@ -33,8 +33,8 @@ public class Migration_GameSave_UnhappyrobotToDroidTowersTest {
   @Test
   public void process_shouldTranslatePackageNames() throws IOException, ScriptException {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    JacksonTransformer transformer = new JacksonTransformer(new FileInputStream(input), outputStream);
-    transformer.transform(Migration_GameSave_UnhappyrobotToDroidTowers.class);
+    JacksonTransformer transformer = new JacksonTransformer(new FileInputStream(input));
+//    transformer.transform(Migration_GameSave_UnhappyrobotToDroidTowers.class, input);
 
     expect(TestHelper.readJson(outputStream.toString())).toEqual(TestHelper.readJson(expectedOutput));
   }

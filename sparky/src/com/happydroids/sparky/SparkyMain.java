@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,6 +46,13 @@ public class SparkyMain extends JFrame {
     getRootPane().setDefaultButton(startBuildingButton);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
+    scrollPane.setBorder(null);
+    contentPane.setBorder(null);
+    bottomPanel.setBorder(null);
+    bottomPanel.setOpaque(false);
+    scrollPane.setBackground(new Color(0, 0, 0, 0));
+    scrollPane.setOpaque(false);
+
     startBuildingButton.addActionListener(new StartBuildingButtonClick());
 
 // call onCancel() when cross is clicked
@@ -69,30 +75,6 @@ public class SparkyMain extends JFrame {
     gameJar = new File(gameStorage, "DroidTowers.jar");
 
     makeRequestForGameUpdates();
-
-    try {
-      scrollPane.setBorder(null);
-      contentPane.setBorder(null);
-      bottomPanel.setBorder(null);
-      bottomPanel.setOpaque(false);
-      scrollPane.setBackground(new Color(0, 0, 0, 0));
-      scrollPane.setOpaque(false);
-
-      webPane.setPage(HappyDroidConsts.HAPPYDROIDS_URI + "/game-updates");
-
-      addMouseListener(new MouseAdapter() {
-        @Override
-        public void mouseClicked(MouseEvent mouseEvent) {
-          try {
-            webPane.setPage(HappyDroidConsts.HAPPYDROIDS_URI + "/game-updates?r=" + new Random().nextFloat());
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
-        }
-      });
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
 
   private void createUIComponents() {
@@ -112,6 +94,17 @@ public class SparkyMain extends JFrame {
         updateCheckerWorker.addPropertyChangeListener(new GameUpdateCheckListener());
         updateCheckerWorker.execute();
 
+
+        new BackgroundTask() {
+          @Override
+          public void execute() {
+            try {
+              webPane.setPage(HappyDroidConsts.HAPPYDROIDS_URI + "/game-updates");
+            } catch (IOException ignored) {
+
+            }
+          }
+        }.execute();
       }
     });
   }

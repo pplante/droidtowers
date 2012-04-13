@@ -4,63 +4,63 @@ filter: MipMapNearestNearest,Linear
 repeat: none
 3x1-small-office
   rotate: false
-  xy: 260, 134
+  xy: 260, 200
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
 generic_room_3x
   rotate: false
-  xy: 260, 68
+  xy: 260, 134
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: 1
 2x1-sushi
   rotate: false
-  xy: 196, 398
+  xy: 2, 464
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 generic_room_4x
   rotate: false
-  xy: 2, 134
+  xy: 2, 200
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: 1
 4x1-security-center
   rotate: false
-  xy: 2, 68
+  xy: 2, 134
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
 4x1-large-condo
   rotate: false
-  xy: 2, 266
+  xy: 2, 332
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
 2x1-hotel-room
   rotate: false
-  xy: 326, 398
+  xy: 262, 464
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 3x1-small-condo
   rotate: false
-  xy: 2, 332
+  xy: 2, 398
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
 3x1-small-apartment
   rotate: false
-  xy: 2, 398
+  xy: 196, 398
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
@@ -74,14 +74,14 @@ lobby-left
   index: -1
 4x1-lobby
   rotate: false
-  xy: 2, 200
+  xy: 2, 266
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
 generic_room_2x
   rotate: false
-  xy: 196, 332
+  xy: 324, 68
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
@@ -100,9 +100,16 @@ lobby-right
   orig: 36, 64
   offset: 0, 0
   index: -1
+5x1-penthouse
+  rotate: false
+  xy: 2, 68
+  size: 320, 64
+  orig: 320, 64
+  offset: 0, 0
+  index: -1
 3x1-pizza-place
   rotate: false
-  xy: 260, 200
+  xy: 260, 266
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
@@ -116,14 +123,14 @@ lobby-right
   index: -1
 2x1-bar
   rotate: false
-  xy: 326, 332
+  xy: 132, 464
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 3x1-burger-joint
   rotate: false
-  xy: 260, 266
+  xy: 260, 332
   size: 192, 64
   orig: 192, 64
   offset: 0, 0

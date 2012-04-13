@@ -8,25 +8,34 @@
 package sk.seges.acris.json.server.migrate;
 
 import javax.script.ScriptException;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class containing logic for every transformer written.
  *
- * @author ladislav.gazo
- *
- * @param <T>
- *            Represents type of transformation used (e.g. File with
+ * @param <T> Represents type of transformation used (e.g. File with
  *            transformation script or String with transformation script class)
+ * @author ladislav.gazo
  */
 public abstract class Transformer<T> {
-	protected final InputStream inputStream;
-	protected final OutputStream outputStream;
+  protected final InputStream inputStream;
+  protected List<Class<? extends JacksonTransformationScript>> transforms;
 
-	public Transformer(InputStream inputStream, OutputStream outputStream) throws ScriptException, FileNotFoundException {
-		this.inputStream = inputStream;
-		this.outputStream = outputStream;
-	}
+  public Transformer(InputStream inputStream) throws ScriptException, FileNotFoundException {
+    this.inputStream = inputStream;
+    transforms = new ArrayList<Class<? extends JacksonTransformationScript>>();
+  }
 
-	public abstract void transform(Class<? extends JacksonTransformationScript> transformationClass);
+  public abstract byte[] transform(Class<? extends JacksonTransformationScript> transformationClass, ByteArrayInputStream input);
+
+  public void addTransform(Class<? extends JacksonTransformationScript> clazz) {
+    transforms.add(clazz);
+  }
+
+  public abstract byte[] process() throws IOException;
 }

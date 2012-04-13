@@ -95,7 +95,7 @@
       <fileset dir="${build.dir}/classes"/>
       <zipfileset dir="${root.dir}/assets/"/>
       <zipgroupfileset dir="${root.dir}/../happydroids-common/libs/main" includes="**/*.jar"/>
-      <zipgroupfileset dir="${root.dir}/libs" includes="**/jackson*.jar"/>
+      <zipgroupfileset dir="${root.dir}/libs" includes="**/*.jar"/>
     </jar>
   </target>
 
@@ -155,7 +155,7 @@
 
       <keep name="org.apache.**,com.fasterxml.**,com.intellij.**" allowshrinking="false" allowobfuscation="false"
             allowoptimization="false">
-        <constructor name="*" />
+        <constructor name="*"/>
         <method name="*"/>
         <field name="*"/>
       </keep>
@@ -177,7 +177,7 @@
     <java jar="${obfuscated-jar}" fork="true"/>
   </target>
 
-  <target name="build" depends="proguard"/>
+  <target name="build" depends="jar"/>
 
   <target name="osx" depends="build" description="Build an OSX target">
     <taskdef name="jarbundler"
@@ -185,9 +185,9 @@
              classname="net.sourceforge.jarbundler.JarBundler"/>
 
     <jarbundler dir="${basedir}/out/" verbose="false" showPlist="false"
-                name="${ant.project.name}"
+                name="DroidTowers"
                 mainclass="com.happydroids.sparky.SparkyMain"
-                jar="${obfuscated-jar}"
+                jar="${release-jar}"
                 icon="icons/${ant.project.name}.icns"
                 version="${project.version}"
                 signature="LOCL"

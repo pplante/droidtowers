@@ -1,6 +1,6 @@
 [
   {
-    "id":"JANITORS_CLOSET",
+    "id":"JANITORS-CLOSET",
     "name":"Janitors Closet",
     "coins":20000,
     "height":1,
@@ -13,7 +13,7 @@
     "provides":"JANITORS"
   },
   {
-    "id":"MAIDS_CLOSET",
+    "id":"MAIDS-CLOSET",
     "name":"Maids Closet",
     "coins":20000,
     "height":1,
@@ -28,7 +28,7 @@
     "imageFilename":"2x1-maids-closet"
   },
   {
-    "id":"SECURITY_CENTER",
+    "id":"SECURITY-CENTER",
     "name":"Security Center",
     "coins":60000,
     "height":1,

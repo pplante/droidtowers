@@ -31,7 +31,7 @@
       {
         "type":"UNLOCK",
         "thing":"OBJECT_TYPE",
-        "thingTypeId":"MAIDS_CLOSET"
+        "thingTypeId":"MAIDS-CLOSET"
       }
     ]
   },
@@ -50,7 +50,7 @@
       {
         "type":"UNLOCK",
         "thing":"OBJECT_TYPE",
-        "thingTypeId":"JANITORS_CLOSET"
+        "thingTypeId":"JANITORS-CLOSET"
       }
     ]
   },
@@ -79,7 +79,7 @@
       {
         "type":"UNLOCK",
         "thing":"OBJECT_TYPE",
-        "thingTypeId":"SECURITY_CENTER"
+        "thingTypeId":"SECURITY-CENTER"
       }
     ]
   }

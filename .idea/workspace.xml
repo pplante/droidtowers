@@ -20,9 +20,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/migrations/Migration_GameSave_SwitchToGenericTypeInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/rooms/housing.png" afterPath="$PROJECT_DIR$/android/assets/rooms/housing.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-release.py" afterPath="$PROJECT_DIR$/build-release.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/params/achievements.json" afterPath="$PROJECT_DIR$/android/assets/params/achievements.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/params/rooms.json" afterPath="$PROJECT_DIR$/android/assets/params/rooms.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/params/services.json" afterPath="$PROJECT_DIR$/android/assets/params/services.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/rooms/housing.txt" afterPath="$PROJECT_DIR$/android/assets/rooms/housing.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/happydroids-common.iml" afterPath="$PROJECT_DIR$/happydroids-common/happydroids-common.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/GameUpdate.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/GameUpdate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/sk/seges/acris/json/server/migrate/JacksonTransformer.java" afterPath="$PROJECT_DIR$/happydroids-common/src/sk/seges/acris/json/server/migrate/JacksonTransformer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/sk/seges/acris/json/server/migrate/Transformer.java" afterPath="$PROJECT_DIR$/happydroids-common/src/sk/seges/acris/json/server/migrate/Transformer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/gamestate/migrations/Migration_GameSave_UnhappyrobotToDroidTowersTest.java" afterPath="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/gamestate/migrations/Migration_GameSave_UnhappyrobotToDroidTowersTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sparky/build.xml" afterPath="$PROJECT_DIR$/sparky/build.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/SparkyMain.java" afterPath="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/SparkyMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sparky/windows/config.xml" afterPath="$PROJECT_DIR$/sparky/windows/config.xml" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -153,19 +167,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HappyDroidConsts.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
+      <file leaf-file-name="Migration_GameSave_SwitchToGenericTypeInfo.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/migrations/Migration_GameSave_SwitchToGenericTypeInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="0" selection-start="0" selection-end="416" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build-release.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/build-release.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="0" selection-start="3049" selection-end="3049" vertical-scroll-proportion="0.7268107">
+            <state line="5" column="0" selection-start="127" selection-end="127" vertical-scroll-proportion="0.09030837">
               <folding />
             </state>
           </provider>
@@ -184,22 +189,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/utils/Platform.java" />
-        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/Platforms.java" />
-        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/platform/PlatformProtocolHandlerFactory.java" />
-        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/Platform.java" />
-        <option value="$PROJECT_DIR$/sparky/windows/config.xml" />
-        <option value="$PROJECT_DIR$/android/assets/params/commercial-spaces.json" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/LoadGameWindow.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/InputSystem.java" />
-        <option value="$PROJECT_DIR$/sparky/build.xml" />
-        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/sdfsdf.java" />
-        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/SparkyMain.form" />
-        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/AlphaContainer.java" />
-        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/SparkyMain.java" />
         <option value="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" />
         <option value="$PROJECT_DIR$/build-release.py" />
+        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/GameUpdate.java" />
+        <option value="$PROJECT_DIR$/sparky/windows/config.xml" />
+        <option value="$PROJECT_DIR$/sparky/build.xml" />
+        <option value="$PROJECT_DIR$/sparky/src/com/happydroids/sparky/SparkyMain.java" />
+        <option value="$PROJECT_DIR$/android/assets/params/rooms.json" />
+        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridObjectState.java" />
+        <option value="$PROJECT_DIR$/happydroids-common/src/sk/seges/acris/json/server/migrate/Transformer.java" />
+        <option value="$PROJECT_DIR$/happydroids-common/src/sk/seges/acris/json/server/migrate/JacksonTransformer.java" />
+        <option value="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/gamestate/migrations/Migration_GameSave_UnhappyrobotToDroidTowersTest.java" />
+        <option value="$PROJECT_DIR$/android/assets/params/services.json" />
+        <option value="$PROJECT_DIR$/android/assets/params/achievements.json" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/migrations/Migration_GameSave_SwitchToGenericTypeInfo.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" />
       </list>
     </option>
   </component>
@@ -227,8 +232,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="22" />
-    <option name="width" value="2560" />
-    <option name="height" value="1414" />
+    <option name="width" value="1440" />
+    <option name="height" value="874" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -435,6 +440,16 @@
       <sortByType ProjectPane="false" />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Ignored" />
         <subPane subId="Project Files">
@@ -442,16 +457,6 @@
             <PATH_ELEMENT USER_OBJECT="Root">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -513,26 +518,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="happydroids-common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desktop" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -616,11 +601,11 @@
       <recent name="com.unhappyrobot.sparky" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.happydroids.droidtowers.gamestate.migrations" />
       <recent name="com.happydroids.platform" />
       <recent name="sk.seges.acris.json.server.migrate" />
       <recent name="com.happydroids.sparky" />
       <recent name="com.unhappyrobot" />
-      <recent name="com.unhappyrobot.gui" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/main/fixtures/migrations" />
@@ -669,7 +654,7 @@
       <recent name="com.happydroids.droidtowers.jackson" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SparkyMain">
+  <component name="RunManager" selected="Application.DesktopGame">
     <configuration default="false" name="Migration_GameSave_UnhappyrobotToDroidTowersTest" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
@@ -1364,31 +1349,31 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="2560" height="1414" extended-state="0" />
+    <frame x="0" y="22" width="1440" height="874" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18351911" sideWeight="0.6180714" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3257403" sideWeight="0.95461786" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2093949" sideWeight="0.6180714" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27866364" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27799228" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24918832" sideWeight="0.7441154" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4722855" sideWeight="0.5113636" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947233" sideWeight="0.50995225" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18175288" sideWeight="0.74903476" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14439656" sideWeight="0.37966537" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.7441154" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32877752" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27790433" sideWeight="0.79100317" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27541828" sideWeight="0.79100317" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32801822" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19362187" sideWeight="0.49748382" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.08979885" sideWeight="0.74388677" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283046" sideWeight="0.7441154" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39853895" sideWeight="0.7441154" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14490446" sideWeight="0.6180714" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38192862" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14439656" sideWeight="0.61904764" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3809524" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18351911" sideWeight="0.6180714" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IntelliGuard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953683" sideWeight="0.48726115" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32961783" sideWeight="0.6173121" order="10" side_tool="true" content_ui="tabs" />
@@ -1504,126 +1489,114 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/happydroids-common/libs/sources/jackson-databind-2.0.0-sources.jar!/com/fasterxml/jackson/databind/introspect/VisibilityChecker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="130" column="54" selection-start="4507" selection-end="4507" vertical-scroll-proportion="-0.055908512">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/LoadGameWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="3" selection-start="1964" selection-end="1964" vertical-scroll-proportion="0.027954256">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/awt/Component.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="270" column="14" selection-start="9924" selection-end="9924" vertical-scroll-proportion="0.3329098">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/javax/swing/JScrollPane.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#5556#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sparky/src/com/happydroids/sparky/BackgroundPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="13" selection-start="421" selection-end="421" vertical-scroll-proportion="-5.7369757">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/awt/BorderLayout.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="9" selection-start="1376" selection-end="1376" vertical-scroll-proportion="0.3329098">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sparky/src/com/happydroids/sparky/AlphaContainer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="30" selection-start="970" selection-end="970" vertical-scroll-proportion="0.41677254">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/Stage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="0" selection-start="2677" selection-end="2677" vertical-scroll-proportion="0.22363405">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidServiceObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="46" selection-start="2569" selection-end="2569" vertical-scroll-proportion="0.36086404">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="32" selection-start="3079" selection-end="3079" vertical-scroll-proportion="-0.2515883">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sparky/src/com/happydroids/sparky/SparkyMain.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sparky/src/com/happydroids/sparky/SparkyMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="32" selection-start="2803" selection-end="2803" vertical-scroll-proportion="0.88113695">
-          <folding>
-            <element signature="e#0#8203#0" expanded="true" />
-            <element signature="e#5473#5722#0" expanded="true" />
-            <element signature="e#5715#5716#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="0" selection-start="1372" selection-end="1372" vertical-scroll-proportion="0.8106734">
-          <folding>
-            <element signature="e#0#1375#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerConsts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="40" selection-start="255" selection-end="255" vertical-scroll-proportion="0.22363405">
-          <folding>
-            <element signature="e#0#1613#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="92" column="40" selection-start="2960" selection-end="2960" vertical-scroll-proportion="0.20895523" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="0" selection-end="416" vertical-scroll-proportion="0.0">
+        <state line="9" column="42" selection-start="322" selection-end="322" vertical-scroll-proportion="0.33920705" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/migrations/Migration_GameSave_UnhappyrobotToDroidTowers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="13" selection-start="534" selection-end="534" vertical-scroll-proportion="0.43612334">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build-release.py">
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/sk/seges/acris/json/server/migrate/Transformer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="0" selection-start="3049" selection-end="3049" vertical-scroll-proportion="0.7268107">
+        <state line="27" column="9" selection-start="667" selection-end="667" vertical-scroll-proportion="0.5510204">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/happydroids-common/libs/sources/jackson-databind-2.0.0-sources.jar!/com/fasterxml/jackson/databind/ObjectMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1988" column="18" selection-start="75324" selection-end="75324" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/test/com/happydroids/droidtowers/gamestate/migrations/Migration_GameSave_UnhappyrobotToDroidTowersTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="72" selection-start="1339" selection-end="1339" vertical-scroll-proportion="1.0476191">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/sk/seges/acris/json/server/migrate/JacksonTransformer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="16" selection-start="1812" selection-end="1812" vertical-scroll-proportion="0.5510204">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridObjectState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="0" selection-start="1348" selection-end="1348" vertical-scroll-proportion="0.81718063">
+          <folding>
+            <element signature="e#0#1806#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/assets/params/rooms.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="10" selection-start="16" selection-end="34" vertical-scroll-proportion="0.058666665">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/assets/params/commercial-spaces.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/assets/params/achievements.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="6" selection-start="1462" selection-end="1462" vertical-scroll-proportion="0.876652">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/assets/params/services.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="19" selection-start="25" selection-end="25" vertical-scroll-proportion="0.059471365">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/happydroids-common/libs/sources/jackson-databind-2.0.0-sources.jar!/com/fasterxml/jackson/databind/node/ObjectNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="162" column="20" selection-start="4720" selection-end="4720" vertical-scroll-proportion="0.33259913">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/happydroids-common/libs/sources/jackson-annotations-2.0.0-sources.jar!/com/fasterxml/jackson/annotation/JsonTypeInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="8" selection-start="5125" selection-end="5125" vertical-scroll-proportion="1.1079295">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="27" selection-start="2058" selection-end="2058" vertical-scroll-proportion="0.5011338">
+          <folding>
+            <element signature="e#0#6058#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/migrations/Migration_GameSave_SwitchToGenericTypeInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="127" selection-end="127" vertical-scroll-proportion="0.09030837">
           <folding />
         </state>
       </provider>
