@@ -4,10 +4,12 @@
 
 package com.happydroids.droidtowers.gamestate.server;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.server.HappyDroidService;
 import com.happydroids.server.HappyDroidServiceObject;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Device extends HappyDroidServiceObject {
   public String uuid;
   public String type;

@@ -4,7 +4,7 @@
 
 package com.happydroids.sparky;
 
-import com.happydroids.platform.HappyDroidsDesktopUncaughtExceptionHandler;
+import com.happydroids.platform.DesktopUncaughtExceptionHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class GameUpdateCheckWorker extends SimpleSwingWorker {
   public GameUpdateCheckWorker(File gameStorage, File gameJar) {
     this.updateDownloader = new GameUpdateDownloader(gameStorage, gameJar);
 
-    Thread.currentThread().setUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
+    Thread.currentThread().setUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
   }
 
 

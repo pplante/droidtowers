@@ -4,9 +4,11 @@
 
 package com.happydroids.droidtowers.types;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.happydroids.droidtowers.entities.GridObject;
 
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public abstract class TransitType extends GridObjectType {
   @Override
   public int getZIndex() {

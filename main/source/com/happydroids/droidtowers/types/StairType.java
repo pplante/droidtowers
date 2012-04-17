@@ -4,10 +4,12 @@
 
 package com.happydroids.droidtowers.types;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Stair;
 import com.happydroids.droidtowers.grid.GameGrid;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class StairType extends TransitType {
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {

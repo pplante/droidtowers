@@ -4,11 +4,13 @@
 
 package com.happydroids.server;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.happydroids.HappyDroidConsts;
 
 import java.util.Date;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class GameUpdate extends HappyDroidServiceObject {
   public Date releasedOn;
   public String gitSha;

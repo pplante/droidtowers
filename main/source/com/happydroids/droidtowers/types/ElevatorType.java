@@ -4,11 +4,13 @@
 
 package com.happydroids.droidtowers.types;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.happydroids.droidtowers.entities.Elevator;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Room;
 import com.happydroids.droidtowers.grid.GameGrid;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class ElevatorType extends TransitType {
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {

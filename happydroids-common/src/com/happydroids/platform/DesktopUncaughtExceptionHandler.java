@@ -10,8 +10,8 @@ import javax.swing.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class HappyDroidsDesktopUncaughtExceptionHandler extends HappyDroidUncaughtExceptionHandler {
-  private static final String TAG = HappyDroidsDesktopUncaughtExceptionHandler.class.getSimpleName();
+public class DesktopUncaughtExceptionHandler extends HappyDroidUncaughtExceptionHandler {
+  private static final String TAG = DesktopUncaughtExceptionHandler.class.getSimpleName();
 
   public void uncaughtException(Thread thread, final Throwable throwable) {
     Logger.getLogger(TAG).log(Level.SEVERE, "Uncaught exception!", throwable);

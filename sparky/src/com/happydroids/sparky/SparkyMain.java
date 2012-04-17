@@ -152,8 +152,8 @@ public class SparkyMain extends JFrame {
       Logger.getAnonymousLogger().setLevel(Level.FINEST);
     }
 
-//    BackgroundTask.setUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
-//    Thread.setDefaultUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
+//    BackgroundTask.setUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
+//    Thread.setDefaultUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
 
 //    PlatformProtocolHandlerFactory.newInstance().initialize(args);
 

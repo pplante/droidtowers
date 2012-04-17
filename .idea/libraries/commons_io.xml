@@ -1,15 +1,10 @@
 <component name="libraryTable">
   <library name="commons-io">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/sparky/libs/commons-io-2.2" />
-      <root url="file://$PROJECT_DIR$/sparky/libs/commons-io-2.2" />
+      <root url="file://$PROJECT_DIR$/happydroids-common/libs/main/commons-io-2.2" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="file://$PROJECT_DIR$/sparky/libs/commons-io-2.2" />
-      <root url="file://$PROJECT_DIR$/sparky/libs/commons-io-2.2" />
-    </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/sparky/libs/commons-io-2.2" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/sparky/libs/commons-io-2.2" recursive="false" type="SOURCES" />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/happydroids-common/libs/main/commons-io-2.2" recursive="false" />
   </library>
 </component>

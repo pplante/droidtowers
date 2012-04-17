@@ -4,7 +4,6 @@
 
 package com.happydroids.droidtowers.gamestate.actions;
 
-import com.badlogic.gdx.Gdx;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.entities.*;
 import com.happydroids.droidtowers.events.GridObjectEvent;
@@ -36,7 +35,6 @@ public class TransportCalculator extends GameGridAction {
 
   @Override
   public void run() {
-    Gdx.app.debug(TAG, "running.");
     for (GridPosition[] gridPositions : GridPositionCache.instance().getPositions()) {
       for (GridPosition gridPosition : gridPositions) {
         gridPosition.connectedToTransit = false;

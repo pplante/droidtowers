@@ -18,7 +18,7 @@ import com.happydroids.droidtowers.math.GridPoint;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public abstract class GridObjectType {
   protected String id;
   protected String name;

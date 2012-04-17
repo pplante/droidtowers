@@ -24,6 +24,7 @@
   <property name="classes.dir" value="${build.dir}/classes"/>
 
   <property name="release-jar" value="${build.dir}/${ant.project.name}-release.jar"/>
+  <property name="obfuscated-jar" value="${build.dir}/${ant.project.name}-obfuscated.jar"/>
 
   <property name="happydroids.common" value="${root.dir}/happydroids-common"/>
   <property name="happydroids.common.source" value="${happydroids.common}/src"/>
@@ -36,6 +37,42 @@
   <property name="droidtowers.desktop" value="${root.dir}/desktop"/>
   <property name="droidtowers.desktop.source" value="${droidtowers.desktop}/source"/>
   <property name="droidtowers.desktop.libs" value="${droidtowers.desktop}/libs/main"/>
+
+  <path id="jdk.classpath.1.6">
+    <fileset dir="${jdk.home.1.6.classes}">
+      <include name="classes.jar"/>
+      <include name="alt-rt.jar"/>
+      <include name="alt-string.jar"/>
+      <include name="charsets.jar"/>
+      <include name="jsse.jar"/>
+      <include name="ui.jar"/>
+    </fileset>
+    <fileset dir="${jdk.home.1.6}">
+      <include name="lib/deploy.jar"/>
+      <include name="lib/dt.jar"/>
+      <include name="lib/javaws.jar"/>
+      <include name="lib/jce.jar"/>
+      <include name="lib/jconsole.jar"/>
+      <include name="lib/management-agent.jar"/>
+      <include name="lib/plugin.jar"/>
+      <include name="lib/sa-jdi.jar"/>
+      <include name="lib/ext/apple_provider.jar"/>
+      <include name="lib/ext/dnsns.jar"/>
+      <include name="lib/ext/localedata.jar"/>
+      <include name="lib/ext/sunjce_provider.jar"/>
+      <include name="lib/ext/sunpkcs11.jar"/>
+    </fileset>
+  </path>
+
+  <path id="classpath">
+    <fileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
+    <fileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
+    <fileset dir="${droidtowers.desktop.libs}" includes="**/*.jar"/>
+    <file file="${tools.dir}/jsr305-2.0.0.jar"/>
+  </path>
+
+  <pathconvert targetos="unix" property="jdk.classpath.1.6.unix" refid="jdk.classpath.1.6"/>
+  <pathconvert targetos="unix" property="classpath.unix" refid="classpath"/>
 
   <path id="javac2.class.path">
     <pathelement location="${tools.dir}/intellij/asm.jar"/>
@@ -56,11 +93,6 @@
     </classpath>
   </taskdef>
 
-  <path id="classpath">
-    <fileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
-    <fileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
-    <fileset dir="${droidtowers.desktop.libs}" includes="**/*.jar"/>
-  </path>
 
   <target name="clean">
     <delete dir="${build.dir}"/>
@@ -76,7 +108,7 @@
           classpath="${build.dir}/tool-classes/"
           failonerror="true" classpathref="classpath" fork="true" dir="${root.dir}/android"/>
 
-    <javac2 destdir="${classes.dir}">
+    <javac2 destdir="${classes.dir}" debug="${compiler.debug}">
       <classpath refid="classpath"/>
       <src path="${happydroids.common.source}"/>
       <src path="${droidtowers.main.source}"/>
@@ -86,23 +118,167 @@
 
   <target name="jar" depends="compile">
     <jar destfile="${release-jar}" basedir="${build.dir}/classes"
-         filesetmanifest="mergewithoutmain">
+         filesetmanifest="mergewithoutmain" duplicate="preserve">
       <manifest>
         <attribute name="Main-Class" value="com.happydroids.droidtowers.DesktopGame"/>
         <attribute name="Class-Path" value="."/>
       </manifest>
       <fileset dir="${build.dir}/classes"/>
-      <zipgroupfileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
-      <zipgroupfileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
-      <zipgroupfileset dir="${droidtowers.desktop.libs}" includes="**/*.jar"/>
+      <!--<zipgroupfileset dir="${happydroids.common.libs}" includes="**/*.jar"/>-->
+      <!--<zipgroupfileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>-->
+      <!--<zipgroupfileset dir="${droidtowers.desktop.libs}" includes="**/*.jar"/>-->
       <zipfileset dir="${root.dir}/android/assets/"/>
     </jar>
+  </target>
+
+  <target name="proguard" depends="jar">
+    <taskdef resource="proguard/ant/task.properties"
+             classpath="${tools.dir}/proguard/lib/proguard.jar"/>
+    <proguard allowaccessmodification="false"
+              usemixedcaseclassnames="false"
+              skipnonpubliclibraryclasses="false"
+              preverify="false"
+              shrink="true"
+              optimize="false"
+              optimizationpasses="5"
+              obfuscate="false"
+              verbose="true"
+              printmapping="droidtowers.map"
+              defaultpackage=""
+              target="1.6"
+              keepparameternames="true"
+              mergeinterfacesaggressively="false">
+      <injar path="${release-jar}"/>
+      <injar refid="classpath" filter="!META-INF/**,!extras.manifest,!**/*.jj"/>
+      <outjar path="${obfuscated-jar}"/>
+      <libraryjar path="${jdk.classpath.1.6.unix}"/>
+      <libraryjar path="${tools.dir}/jsr305-2.0.0.jar"/>
+
+      <keep name="com.happydroids.droidtowers.DesktopGame">
+        <method name="main"/>
+      </keep>
+      <keep name="com.happydroids.server.**" allowobfuscation="false" allowoptimization="false" allowshrinking="false">
+        <method name="main"/>
+        <constructor/>
+        <method/>
+        <field/>
+      </keep>
+
+      <keepclasseswithmembers allowshrinking="false" allowoptimization="false" allowobfuscation="false">
+        <method annotation="com.google.common.eventbus.Subscribe" />
+      </keepclasseswithmembers>
+
+      <keep annotation="com.fasterxml.jackson.annotation.**" allowobfuscation="false" allowoptimization="false"
+            allowshrinking="false">
+        <constructor/>
+        <method/>
+        <field/>
+      </keep>
+      <keep annotation="com.google.common.annotations.**" allowobfuscation="false" allowoptimization="false"
+            allowshrinking="false">
+        <constructor/>
+        <method/>
+        <field/>
+      </keep>
+      <keep name="com.google.**" allowobfuscation="false" allowoptimization="false" allowshrinking="true">
+        <constructor/>
+        <method/>
+        <field/>
+      </keep>
+      <keep name="com.google.common.eventbus.**" allowobfuscation="false" allowoptimization="false" allowshrinking="false">
+        <constructor/>
+        <method/>
+        <field/>
+      </keep>
+
+      <keep name="com.badlogic.**,org.lwjgl.**" allowobfuscation="false" allowoptimization="false"
+            allowshrinking="false">
+        <constructor/>
+        <method/>
+        <field/>
+      </keep>
+
+      <keep extends="com.badlogic.**" allowobfuscation="false" allowoptimization="false" allowshrinking="false">
+        <constructor/>
+        <method/>
+        <field/>
+      </keep>
+
+      <keep>
+        <method name="click"/>
+        <method name="onClick"/>
+      </keep>
+
+      <keep name="org.apache.**" allowshrinking="false" allowobfuscation="false"
+            allowoptimization="true">
+        <constructor/>
+        <method/>
+        <field/>
+      </keep>
+
+      <keep name="com.intellij.**" allowshrinking="false" allowobfuscation="false"
+            allowoptimization="false">
+        <constructor/>
+        <method/>
+        <field/>
+      </keep>
+
+      <keep name="com.fasterxml.**">
+        <constructor/>
+        <method/>
+        <field/>
+      </keep>
+
+      <keepclasseswithmembernames>
+        <method access="native"/>
+      </keepclasseswithmembernames>
+
+      <keepclassmembers extends="java.lang.Enum">
+        <method access="public static" type="**[]" name="values" parameters=""/>
+        <method access="public static" type="**" name="valueOf" parameters="java.lang.String"/>
+      </keepclassmembers>
+
+      <!-- Keep some useful attributes. -->
+
+      <keepattributes/>
+      <keepattribute name="InnerClasses"/>
+      <keepattribute name="SourceFile"/>
+      <keepattribute name="LineNumberTable"/>
+      <keepattribute name="Deprecated"/>
+      <keepattribute name="*Annotation*"/>
+      <keepattribute name="Signature"/>
+
+      <!-- Preserve all public classes,
+and their public and protected fields and methods. -->
+
+      <!--<keep access="public">-->
+      <!--<constructor/>-->
+      <!--<field access="public protected"/>-->
+      <!--<method access="public protected"/>-->
+      <!--</keep>-->
+
+
+      <!-- Preserve all .class method names. -->
+
+      <keepclassmembernames access="public">
+        <method type="java.lang.Class" name="class$" parameters="java.lang.String"/>
+        <method type="java.lang.Class" name="class$" parameters="java.lang.String,boolean"/>
+      </keepclassmembernames>
+
+
+      <dontwarn/>
+      <dontnote/>
+    </proguard>
   </target>
 
   <target name="build" depends="clean,jar"/>
 
   <target name="run" depends="build">
     <java jar="${release-jar}" fork="true"/>
+  </target>
+
+  <target name="run.proguard" depends="proguard">
+    <java jar="${obfuscated-jar}" fork="true"/>
   </target>
 
   <target name="osx" depends="build" description="Build an OSX target">

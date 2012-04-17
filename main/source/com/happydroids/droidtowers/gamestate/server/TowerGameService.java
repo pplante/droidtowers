@@ -6,8 +6,6 @@ package com.happydroids.droidtowers.gamestate.server;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.fasterxml.jackson.databind.jsontype.NamedType;
-import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.jackson.TowerGameClassDeserializer;
 import com.happydroids.droidtowers.jackson.Vector2Serializer;
 import com.happydroids.droidtowers.jackson.Vector3Serializer;
@@ -35,7 +33,6 @@ public class TowerGameService extends HappyDroidService {
     }
     deviceId = preferences.getString("DEVICE_ID");
 
-    getObjectMapper().registerSubtypes(new NamedType(GameSave.class, "com.unhappyrobot.gamestate.GameSave"));
     getObjectMapper().addDeserializer(Class.class, new TowerGameClassDeserializer());
     getObjectMapper().addSerializer(new Vector3Serializer());
     getObjectMapper().addSerializer(new Vector2Serializer());

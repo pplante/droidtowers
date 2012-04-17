@@ -8,7 +8,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.platform.DesktopBrowserUtil;
-import com.happydroids.platform.HappyDroidsDesktopUncaughtExceptionHandler;
+import com.happydroids.platform.DesktopUncaughtExceptionHandler;
 import com.happydroids.platform.Platform;
 
 public class DesktopGame {
@@ -16,7 +16,7 @@ public class DesktopGame {
     TowerGameService.setDeviceOSName(Platform.getOSType().name());
     TowerGameService.setDeviceOSVersion(System.getProperty("os.version"));
 
-    Thread.setDefaultUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
+    Thread.setDefaultUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
 
     LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
     config.title = String.format("Droid Towers (%s)", TowerConsts.VERSION);
@@ -27,7 +27,7 @@ public class DesktopGame {
 //    config.vSyncEnabled = false;
 
     TowerGame towerGame = new TowerGame();
-    towerGame.setUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
+    towerGame.setUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
     towerGame.setPlatformBrowserUtil(new DesktopBrowserUtil());
 
     new LwjglApplication(new LwjglApplicationShim(towerGame), config);
