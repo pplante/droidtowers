@@ -4,6 +4,8 @@
 
 package com.happydroids.droidtowers.utils;
 
+import com.happydroids.HappyDroidConsts;
+
 import java.io.IOException;
 
 public class ClassNameResolver {
@@ -20,7 +22,7 @@ public class ClassNameResolver {
   };
 
   public static Class tryToLoadClass(String className) throws IOException {
-    System.out.println("Looking for: " + className);
+    if (HappyDroidConsts.DEBUG) System.out.println("Looking for: " + className);
     try {
       return Class.forName(className, true, Thread.currentThread().getContextClassLoader());
     } catch (ClassNotFoundException e) {

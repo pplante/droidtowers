@@ -152,4 +152,6 @@ public class Room extends GridObject {
   public float getSurroundingNoiseLevel() {
     return surroundingNoiseLevel;
   }
+
+
 }

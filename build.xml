@@ -134,25 +134,26 @@
   <target name="proguard" depends="jar">
     <taskdef resource="proguard/ant/task.properties"
              classpath="${tools.dir}/proguard/lib/proguard.jar"/>
-    <proguard allowaccessmodification="false"
+    <proguard allowaccessmodification="true"
               usemixedcaseclassnames="false"
               skipnonpubliclibraryclasses="false"
               preverify="false"
               shrink="true"
               optimize="false"
-              optimizationpasses="5"
-              obfuscate="false"
+              obfuscate="true"
               verbose="true"
               printmapping="droidtowers.map"
               defaultpackage=""
               target="1.6"
-              keepparameternames="true"
-              mergeinterfacesaggressively="false">
+              keepparameternames="false"
+              mergeinterfacesaggressively="true">
       <injar path="${release-jar}"/>
       <injar refid="classpath" filter="!META-INF/**,!extras.manifest,!**/*.jj"/>
       <outjar path="${obfuscated-jar}"/>
       <libraryjar path="${jdk.classpath.1.6.unix}"/>
       <libraryjar path="${tools.dir}/jsr305-2.0.0.jar"/>
+
+      <optimizations name="!code/simplification/arithmetic"/>
 
       <keep name="com.happydroids.droidtowers.DesktopGame">
         <method name="main"/>
@@ -165,7 +166,7 @@
       </keep>
 
       <keepclasseswithmembers allowshrinking="false" allowoptimization="false" allowobfuscation="false">
-        <method annotation="com.google.common.eventbus.Subscribe" />
+        <method annotation="com.google.common.eventbus.Subscribe"/>
       </keepclasseswithmembers>
 
       <keep annotation="com.fasterxml.jackson.annotation.**" allowobfuscation="false" allowoptimization="false"
@@ -174,18 +175,8 @@
         <method/>
         <field/>
       </keep>
-      <keep annotation="com.google.common.annotations.**" allowobfuscation="false" allowoptimization="false"
-            allowshrinking="false">
-        <constructor/>
-        <method/>
-        <field/>
-      </keep>
+
       <keep name="com.google.**" allowobfuscation="false" allowoptimization="false" allowshrinking="true">
-        <constructor/>
-        <method/>
-        <field/>
-      </keep>
-      <keep name="com.google.common.eventbus.**" allowobfuscation="false" allowoptimization="false" allowshrinking="false">
         <constructor/>
         <method/>
         <field/>
@@ -198,16 +189,24 @@
         <field/>
       </keep>
 
-      <keep extends="com.badlogic.**" allowobfuscation="false" allowoptimization="false" allowshrinking="false">
+      <keep extends="com.badlogic.**" allowobfuscation="true" allowoptimization="false" allowshrinking="false">
         <constructor/>
-        <method/>
-        <field/>
       </keep>
 
       <keep>
         <method name="click"/>
         <method name="onClick"/>
       </keep>
+
+      <assumenosideeffects name="com.badlogic.gdx.Application">
+        <method name="log"/>
+        <method name="debug"/>
+        <method name="error"/>
+      </assumenosideeffects>
+
+      <assumenosideeffects name="java.lang.System">
+        <field name="out"/>
+      </assumenosideeffects>
 
       <keep name="org.apache.**" allowshrinking="false" allowobfuscation="false"
             allowoptimization="true">
@@ -240,23 +239,12 @@
 
       <!-- Keep some useful attributes. -->
 
-      <keepattributes/>
       <keepattribute name="InnerClasses"/>
       <keepattribute name="SourceFile"/>
       <keepattribute name="LineNumberTable"/>
       <keepattribute name="Deprecated"/>
       <keepattribute name="*Annotation*"/>
       <keepattribute name="Signature"/>
-
-      <!-- Preserve all public classes,
-and their public and protected fields and methods. -->
-
-      <!--<keep access="public">-->
-      <!--<constructor/>-->
-      <!--<field access="public protected"/>-->
-      <!--<method access="public protected"/>-->
-      <!--</keep>-->
-
 
       <!-- Preserve all .class method names. -->
 

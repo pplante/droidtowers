@@ -68,18 +68,11 @@ public class TowerGame implements ApplicationListener {
       Gdx.app.setLogLevel(Application.LOG_ERROR);
     }
 
-    Gdx.app.postRunnable(new Runnable() {
-      public void run() {
-        Thread.currentThread().setUncaughtExceptionHandler(uncaughtExceptionHandler);
-      }
-    });
+    Thread.setDefaultUncaughtExceptionHandler(uncaughtExceptionHandler);
 
-    Thread.currentThread().setUncaughtExceptionHandler(uncaughtExceptionHandler);
     Thread.currentThread().setPriority(Thread.NORM_PRIORITY);
 
     TowerAssetManager.assetManager();
-
-//    BackgroundTask.setUncaughtExceptionHandler(uncaughtExceptionHandler);
 
     new BackgroundTask() {
       @Override
@@ -219,7 +212,7 @@ public class TowerGame implements ApplicationListener {
         activeScene.dispose();
       }
 
-      System.out.println("Switching scene to: " + sceneClass.getSimpleName());
+      if (HappyDroidConsts.DEBUG) System.out.println("Switching scene to: " + sceneClass.getSimpleName());
       activeScene = sceneClass.newInstance();
       activeScene.create(args);
       activeScene.resume();

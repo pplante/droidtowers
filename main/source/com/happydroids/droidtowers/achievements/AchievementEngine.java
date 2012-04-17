@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
+import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.entities.GridObjectPlacementState;
 import com.happydroids.droidtowers.events.GridObjectChangedEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
@@ -57,13 +58,13 @@ public class AchievementEngine {
     if (!event.nameOfParamChanged.equals("placementState") || !event.gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
       return;
     }
-    System.out.println("event = " + event);
+    if (HappyDroidConsts.DEBUG) System.out.println("event = " + event);
     List<String> summary = Lists.newArrayList();
 
     Iterator<Achievement> achievementIterator = achievements.iterator();
     while (achievementIterator.hasNext()) {
       Achievement achievement = achievementIterator.next();
-      System.out.println(achievement);
+      if (HappyDroidConsts.DEBUG) System.out.println(achievement);
       if (achievement.isCompleted(gameGrid) && !completedAchievements.contains(achievement)) {
         String rewardSummary = achievement.giveReward();
 
@@ -91,7 +92,7 @@ public class AchievementEngine {
 
       for (AchievementReward reward : achievement.getRewards()) {
         if (reward.getType().equals(RewardType.UNLOCK) && reward.getThing().equals(AchievementThing.OBJECT_TYPE)) {
-          System.out.println("Reset: " + reward.getRewardString());
+          if (HappyDroidConsts.DEBUG) System.out.println("Reset: " + reward.getRewardString());
           reward.getThingObjectType().setLocked(true);
         }
       }

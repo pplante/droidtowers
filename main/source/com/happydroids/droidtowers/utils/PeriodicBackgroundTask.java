@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.utils;
 
+import com.happydroids.HappyDroidConsts;
 import com.happydroids.utils.BackgroundTask;
 
 import static java.lang.Thread.sleep;
@@ -23,7 +24,7 @@ public abstract class PeriodicBackgroundTask extends BackgroundTask {
   public final void execute() {
     while (update() && !canceled) {
       try {
-        System.out.println("updateFrequency = " + updateFrequency);
+        if (HappyDroidConsts.DEBUG) System.out.println("updateFrequency = " + updateFrequency);
         sleep(updateFrequency);
         yield();
       } catch (InterruptedException ignored) {

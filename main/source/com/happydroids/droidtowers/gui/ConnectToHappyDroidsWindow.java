@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.server.TemporaryToken;
@@ -91,7 +92,7 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
             if (token == null) return false;
             try {
               token.validate();
-              System.out.println("token = " + token);
+              if (HappyDroidConsts.DEBUG) System.out.println("token = " + token);
               return !token.hasSessionToken();
             } catch (RuntimeException e) {
               Gdx.app.error(TAG, "Error validating the temporary token.", e);

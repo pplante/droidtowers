@@ -63,6 +63,15 @@ public class CommercialSpace extends Room {
     return 0;
   }
 
+  @Override
+  public int getCoinsEarned() {
+    if (jobsFilled > 0) {
+      return (gridObjectType.getCoinsEarned() / ((CommercialType) gridObjectType).getJobsProvided()) * -jobsFilled;
+    }
+
+    return 0;
+  }
+
   public void recordVisitor(Avatar avatar) {
     if (avatar instanceof Janitor || avatar instanceof Maid) {
       numVisitors = 0;

@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.achievements;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
+import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.grid.GameGrid;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class Achievement {
   public boolean isCompleted(GameGrid gameGrid) {
     for (AchievementRequirement requirement : requirements) {
       if (!requirement.isCompleted(gameGrid)) {
-        System.out.println("Requirement unsatisfied: " + requirement);
+        if (HappyDroidConsts.DEBUG) System.out.println("Requirement unsatisfied: " + requirement);
         return false;
       }
     }

@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
+import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
@@ -108,7 +109,7 @@ public class Avatar extends GameObject {
 
   protected void wanderAround() {
     GridPosition start = GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY()));
-    System.out.println(String.format("%s is bored.", this.getClass().getSimpleName()));
+    if (HappyDroidConsts.DEBUG) System.out.println(String.format("%s is bored.", this.getClass().getSimpleName()));
 
     setupPathFinder(new WanderPathFinder(start));
   }

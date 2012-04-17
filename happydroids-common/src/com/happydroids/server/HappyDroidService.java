@@ -90,7 +90,8 @@ public class HappyDroidService {
         BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
         if (entity != null && entity.getContentLength() > 0) {
           String content = EntityUtils.toString(entity, HTTP.UTF_8);
-//          System.out.println("\tResponse: " + content);
+          if (HappyDroidConsts.DEBUG)
+            System.out.println("\tResponse: " + content);
           return mapper.readValue(content, aClazz);
         }
       } catch (IOException e) {
@@ -104,7 +105,8 @@ public class HappyDroidService {
   public HttpResponse makePutRequest(String uri, Object objectForServer) {
     HttpClient client = new DefaultHttpClient();
     try {
-      System.out.println("PUT " + uri);
+      if (HappyDroidConsts.DEBUG)
+        System.out.println("PUT " + uri);
       HttpPut request = new HttpPut(uri);
       addDefaultHeaders(request);
 
@@ -117,7 +119,8 @@ public class HappyDroidService {
 
       return client.execute(request);
     } catch (HttpHostConnectException ignored) {
-      System.out.println("Connection failed for: " + uri);
+      if (HappyDroidConsts.DEBUG)
+        System.out.println("Connection failed for: " + uri);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -128,29 +131,29 @@ public class HappyDroidService {
   public HttpResponse makePostRequest(String uri, Object objectForServer) {
     HttpClient client = new DefaultHttpClient();
     try {
-      System.out.println("POST " + uri);
+      if (HappyDroidConsts.DEBUG) System.out.println("POST " + uri);
       HttpPost request = new HttpPost(uri);
       addDefaultHeaders(request);
 
       if (objectForServer != null) {
         ObjectMapper mapper = getObjectMapper();
-        System.out.println(mapper.writeValueAsString(objectForServer));
+        if (HappyDroidConsts.DEBUG) System.out.println(mapper.writeValueAsString(objectForServer));
         StringEntity entity = new StringEntity(mapper.writeValueAsString(objectForServer));
         entity.setContentType("multipart/form-data");
         request.setEntity(entity);
       }
 
       HttpResponse response = client.execute(request);
-      System.out.println("\t" + response.getStatusLine());
+      if (HappyDroidConsts.DEBUG) System.out.println("\t" + response.getStatusLine());
 
       if (response.getStatusLine().getStatusCode() == 500) {
         String content = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
-        System.out.println("\tResponse: " + content);
+        if (HappyDroidConsts.DEBUG) System.out.println("\tResponse: " + content);
       }
 
       return response;
     } catch (HttpHostConnectException ignored) {
-      System.out.println("Connection failed for: " + uri);
+      if (HappyDroidConsts.DEBUG) System.out.println("Connection failed for: " + uri);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -167,12 +170,12 @@ public class HappyDroidService {
     try {
       HttpGet request = new HttpGet(uri);
       addDefaultHeaders(request);
-      System.out.println("REQ: GET " + uri);
+      if (HappyDroidConsts.DEBUG) System.out.println("REQ: GET " + uri);
       HttpResponse response = client.execute(request);
-      System.out.println("RES: GET " + uri + ", " + response.getStatusLine());
+      if (HappyDroidConsts.DEBUG) System.out.println("RES: GET " + uri + ", " + response.getStatusLine());
       return response;
     } catch (HttpHostConnectException ignored) {
-      System.out.println("Connection failed for: " + uri);
+      if (HappyDroidConsts.DEBUG) System.out.println("Connection failed for: " + uri);
     } catch (Exception e) {
       e.printStackTrace();
     }
