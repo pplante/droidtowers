@@ -1,10 +1,10 @@
 [
   {
-    "id": "ELEVATOR",
+    "id":"ELEVATOR",
     "name":"Elevator Shaft",
     "continuousPlacement":true,
     "canShareSpace":true,
-    "coins":100,
+    "coins":15000,
     "experienceAward":2000,
     "height":1,
     "width":1,

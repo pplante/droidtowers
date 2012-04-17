@@ -3,7 +3,7 @@
     "name":"Glass Stairs",
     "continuousPlacement":true,
     "canShareSpace":true,
-    "coins":100,
+    "coins":5000,
     "experienceAward":500,
     "height":1,
     "width":2,

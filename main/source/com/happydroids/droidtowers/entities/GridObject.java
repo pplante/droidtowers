@@ -168,6 +168,14 @@ public abstract class GridObject {
     return gridObjectType.getCoinsEarned();
   }
 
+  public int getUpkeepCost() {
+    if (placementState == GridObjectPlacementState.INVALID) {
+      return 0;
+    }
+
+    return gridObjectType.getUpkeepCost();
+  }
+
   public void setPlacementState(GridObjectPlacementState placementState) {
     this.placementState = placementState;
     updatePlacementStatus();
@@ -177,10 +185,10 @@ public abstract class GridObject {
     return placementState;
   }
 
+
   protected void addAction(TimeDelayedAction action) {
     actions.add(action);
   }
-
 
   public float getNoiseLevel() {
     return gridObjectType.getNoiseLevel();
@@ -206,10 +214,10 @@ public abstract class GridObject {
     return points;
   }
 
+
   public List<GridPoint> getGridPointsTouched() {
     return getGridPointsOccupied();
   }
-
 
   public float distanceToLobby() {
     return position.y - TowerConsts.LOBBY_FLOOR;

@@ -16,12 +16,18 @@ public class EarnoutCalculator extends GameGridAction {
 
   @Override
   public void run() {
-    int coinsEarned = 0;
+    int coinsEarnedFromRent = 0;
+    int coinsSpentOnUpkeep = 0;
     for (GridObject object : gameGrid.getObjects()) {
-      coinsEarned += object.getCoinsEarned();
+      coinsEarnedFromRent += object.getCoinsEarned();
+      coinsSpentOnUpkeep += object.getUpkeepCost();
     }
 
-    if (HappyDroidConsts.DEBUG) System.out.println(String.format("Player earned: %d coins", coinsEarned));
-    Player.instance().addCurrency(coinsEarned);
+    if (HappyDroidConsts.DEBUG)
+      System.out.println(String.format("Income report: %d earned, %d spent on upkeep", coinsEarnedFromRent, coinsSpentOnUpkeep));
+
+    Player.instance().addCurrency(coinsEarnedFromRent - coinsSpentOnUpkeep);
+    Player.instance().setCurrentIncome(coinsEarnedFromRent);
+    Player.instance().setCurrentExpenses(coinsSpentOnUpkeep);
   }
 }

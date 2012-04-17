@@ -6,8 +6,10 @@ package com.happydroids.droidtowers.entities;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Player {
   @JsonIgnore
   private static Player instance;
@@ -20,6 +22,8 @@ public class Player {
   private int maxPopulation;
   private int populationMax;
   private int populationResidency;
+  private int currentIncome;
+  private int currentExpenses;
 
   public static Player instance() {
     if (instance == null) {
@@ -104,5 +108,21 @@ public class Player {
 
   public void setJobsFilled(int jobsFilled) {
     this.jobsFilled = jobsFilled;
+  }
+
+  public void setCurrentIncome(int currentIncome) {
+    this.currentIncome = currentIncome;
+  }
+
+  public void setCurrentExpenses(int currentUpkeep) {
+    this.currentExpenses = currentUpkeep;
+  }
+
+  public int getCurrentIncome() {
+    return currentIncome;
+  }
+
+  public int getCurrentExpenses() {
+    return currentExpenses;
   }
 }

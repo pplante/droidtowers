@@ -114,7 +114,7 @@ public class Room extends GridObject {
 
   @Override
   public int getCoinsEarned() {
-    if (currentResidency > 0) {
+    if (currentResidency > 0 && isConnectedToTransport()) {
       RoomType roomType = (RoomType) gridObjectType;
       return (roomType.getCoinsEarned() / roomType.getPopulationMax()) * currentResidency;
     }

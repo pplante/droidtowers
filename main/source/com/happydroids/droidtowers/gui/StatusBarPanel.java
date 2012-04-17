@@ -22,6 +22,8 @@ public class StatusBarPanel extends Table {
   private final Label gameSpeedLabel;
   private final Label populationLabel;
   private float lastUpdated = TowerConsts.HUD_UPDATE_FREQUENCY;
+  private final Label moneyIncomeLabel;
+  private final Label moneyExpensesLabel;
 
   public StatusBarPanel(Skin guiSkin, TowerScene towerScene) {
     this.guiSkin = guiSkin;
@@ -29,6 +31,8 @@ public class StatusBarPanel extends Table {
     Label.LabelStyle helvetica_neue_10_bold_white = this.guiSkin.getStyle("helvetica_neue_10_bold_white", Label.LabelStyle.class);
 
     moneyLabel = makeLabel("0", null);
+    moneyIncomeLabel = makeLabel("0", null);
+    moneyExpensesLabel = makeLabel("0", null);
     experienceLabel = makeLabel("0", null);
     populationLabel = makeLabel("0", null);
     gameSpeedLabel = makeLabel("0x", null);
@@ -41,12 +45,16 @@ public class StatusBarPanel extends Table {
     row().center();
     add(makeLabel("EXPERIENCE", helvetica_neue_10_bold_white)).minWidth(100);
     add(makeLabel("COINS", helvetica_neue_10_bold_white)).minWidth(100);
+    add(makeLabel("INCOME", helvetica_neue_10_bold_white)).minWidth(100);
+    add(makeLabel("EXPENSES", helvetica_neue_10_bold_white)).minWidth(100);
     add(makeLabel("POPULATION", helvetica_neue_10_bold_white)).minWidth(100);
     add(makeLabel("GAME SPEED", helvetica_neue_10_bold_white)).minWidth(100);
 
     row().center();
     add(experienceLabel);
     add(moneyLabel);
+    add(moneyIncomeLabel);
+    add(moneyExpensesLabel);
     add(populationLabel);
     add(gameSpeedLabel);
 
@@ -64,6 +72,8 @@ public class StatusBarPanel extends Table {
       Player player = Player.instance();
       experienceLabel.setText(NumberFormat.getInstance().format(player.getExperience()));
       moneyLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + NumberFormat.getInstance().format(player.getCoins()));
+      moneyIncomeLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + NumberFormat.getInstance().format(player.getCurrentIncome()));
+      moneyExpensesLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + NumberFormat.getInstance().format(player.getCurrentExpenses()));
       populationLabel.setText(NumberFormat.getInstance().format(player.getTotalPopulation()));
 
       gameSpeedLabel.setText(towerScene.getTimeMultiplier() + "x");

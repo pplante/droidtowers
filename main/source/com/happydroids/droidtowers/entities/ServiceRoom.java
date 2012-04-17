@@ -11,4 +11,9 @@ public class ServiceRoom extends CommercialSpace {
   public ServiceRoom(ServiceRoomType serviceRoomType, GameGrid gameGrid) {
     super(serviceRoomType, gameGrid);
   }
+
+  @Override
+  public int getCoinsEarned() {
+    return 0;
+  }
 }

@@ -85,7 +85,11 @@ public abstract class GridObjectType {
   }
 
   public int getCoinsEarned() {
-    return (int) Math.round(coins * 0.0125);
+    return Math.round(coins / 1000);
+  }
+
+  public int getUpkeepCost() {
+    return Math.round(coins / 1000);
   }
 
   public boolean canShareSpace(GridObject gridObject) {
