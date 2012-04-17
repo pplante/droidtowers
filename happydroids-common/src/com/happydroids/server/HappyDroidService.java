@@ -37,7 +37,7 @@ public class HappyDroidService {
   protected static boolean hasNetworkConnection;
   private final Set<Runnable> withNetworkConnectionRunnables = Sets.newHashSet();
 
-  protected final HappyDroidObjectMapper objectMapper;
+  protected HappyDroidObjectMapper objectMapper;
 
   public static HappyDroidService instance() {
     if (_instance == null) {
@@ -53,12 +53,10 @@ public class HappyDroidService {
 
   protected HappyDroidService() {
     checkForNetwork();
-    objectMapper = new HappyDroidObjectMapper();
   }
 
   protected HappyDroidService(int fuckYouJava) {
     // leave this for tests.
-    objectMapper = new HappyDroidObjectMapper();
   }
 
   public static void setDeviceOSName(String deviceType) {
@@ -78,6 +76,10 @@ public class HappyDroidService {
   }
 
   public HappyDroidObjectMapper getObjectMapper() {
+    if (objectMapper == null) {
+      objectMapper = new HappyDroidObjectMapper();
+    }
+
     return objectMapper;
   }
 

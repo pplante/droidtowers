@@ -10,7 +10,6 @@ import org.apache.commons.io.IOUtils;
 
 import javax.script.ScriptException;
 import java.io.*;
-import java.lang.reflect.Method;
 
 /**
  * Transforms JSON data using Jackson's tree model based scripts.
@@ -30,8 +29,7 @@ public class JacksonTransformer extends Transformer<String> {
       JsonNode jsonNode = mapper.readValue(input, JsonNode.class);
 
       Object transformation = transformationClass.newInstance();
-      Method method = transformation.getClass().getMethod("execute", JsonNode.class);
-      method.invoke(transformation, jsonNode);
+      ((JacksonTransformationScript) transformation).execute(jsonNode);
 
       return mapper.writeValueAsBytes(jsonNode);
     } catch (Exception e) {

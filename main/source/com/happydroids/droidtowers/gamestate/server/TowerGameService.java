@@ -35,10 +35,10 @@ public class TowerGameService extends HappyDroidService {
     }
     deviceId = preferences.getString("DEVICE_ID");
 
-    objectMapper.registerSubtypes(new NamedType(GameSave.class, "com.unhappyrobot.gamestate.GameSave"));
-    objectMapper.addDeserializer(Class.class, new TowerGameClassDeserializer());
-    objectMapper.addSerializer(new Vector3Serializer());
-    objectMapper.addSerializer(new Vector2Serializer());
+    getObjectMapper().registerSubtypes(new NamedType(GameSave.class, "com.unhappyrobot.gamestate.GameSave"));
+    getObjectMapper().addDeserializer(Class.class, new TowerGameClassDeserializer());
+    getObjectMapper().addSerializer(new Vector3Serializer());
+    getObjectMapper().addSerializer(new Vector2Serializer());
   }
 
   public static TowerGameService instance() {

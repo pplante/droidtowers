@@ -5,7 +5,6 @@
 package com.happydroids.sparky;
 
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.platform.HappyDroidsDesktopUncaughtExceptionHandler;
 import com.happydroids.platform.Platform;
 import com.happydroids.server.HappyDroidService;
 import com.happydroids.utils.BackgroundTask;
@@ -153,8 +152,8 @@ public class SparkyMain extends JFrame {
       Logger.getAnonymousLogger().setLevel(Level.FINEST);
     }
 
-    BackgroundTask.setUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
-    Thread.currentThread().setUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
+//    BackgroundTask.setUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
+//    Thread.setDefaultUncaughtExceptionHandler(new HappyDroidsDesktopUncaughtExceptionHandler());
 
 //    PlatformProtocolHandlerFactory.newInstance().initialize(args);
 

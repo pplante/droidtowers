@@ -25,8 +25,15 @@
   </target>
 
   <path id="jdk.classpath.1.6">
+    <fileset dir="${jdk.home.1.6.classes}">
+      <include name="classes.jar"/>
+      <include name="alt-rt.jar"/>
+      <include name="alt-string.jar"/>
+      <include name="charsets.jar"/>
+      <include name="jsse.jar"/>
+      <include name="ui.jar"/>
+    </fileset>
     <fileset dir="${jdk.home.1.6}">
-      <include name="../Classes/classes.jar"/>
       <include name="lib/deploy.jar"/>
       <include name="lib/dt.jar"/>
       <include name="lib/javaws.jar"/>
@@ -35,11 +42,6 @@
       <include name="lib/management-agent.jar"/>
       <include name="lib/plugin.jar"/>
       <include name="lib/sa-jdi.jar"/>
-      <include name="../Classes/alt-rt.jar"/>
-      <include name="../Classes/alt-string.jar"/>
-      <include name="../Classes/charsets.jar"/>
-      <include name="../Classes/jsse.jar"/>
-      <include name="../Classes/ui.jar"/>
       <include name="lib/ext/apple_provider.jar"/>
       <include name="lib/ext/dnsns.jar"/>
       <include name="lib/ext/localedata.jar"/>
@@ -94,78 +96,122 @@
       </manifest>
       <fileset dir="${build.dir}/classes"/>
       <zipfileset dir="${root.dir}/assets/"/>
-      <zipgroupfileset dir="${root.dir}/../happydroids-common/libs/main" includes="**/*.jar"/>
-      <zipgroupfileset dir="${root.dir}/libs" includes="**/*.jar"/>
+      <!--<zipgroupfileset dir="${root.dir}/../happydroids-common/libs/main" includes="**/*.jar"/>-->
+      <!--<zipgroupfileset dir="${root.dir}/libs" includes="**/*.jar"/>-->
     </jar>
   </target>
 
   <target name="proguard" depends="jar">
     <taskdef resource="proguard/ant/task.properties"
              classpath="../tools/proguard/lib/proguard.jar"/>
-    <proguard allowaccessmodification="true"
+    <proguard allowaccessmodification="false"
               usemixedcaseclassnames="false"
               skipnonpubliclibraryclasses="false"
+              preverify="false"
               shrink="true"
               optimize="false"
               obfuscate="false"
               verbose="true"
               printmapping="sparky.map"
               defaultpackage=""
-              target="1.5"
-              mergeinterfacesaggressively="false">
+              target="1.6"
+              keepparameternames="true"
+              mergeinterfacesaggressively="true">
       <injar path="${release-jar}"/>
-      <!--<injar refid="classpath" filter="!META-INF/**,!extras.manifest,!**/*.jj"/>-->
+      <injar refid="classpath" filter="!META-INF/**,!extras.manifest,!**/*.jj"/>
       <outjar path="${obfuscated-jar}"/>
       <libraryjar path="${jdk.classpath.1.6.unix}"/>
       <libraryjar path="../tools/jsr305-2.0.0.jar"/>
 
-      <keepattribute name="**Annotation**"/>
-      <!--<keepattribute name="EnclosingMethod"/>-->
-      <!--<keepattribute name="com.fasterxml.jackson.annotation.**"/>-->
-      <!--<keepattribute name="com.fasterxml.jackson.databind.annotation.**"/>-->
       <keep name="com.happydroids.sparky.SparkyMain">
         <method name="main"/>
         <constructor/>
-        <method name="*"/>
-        <field name="*"/>
+        <method/>
+        <field/>
       </keep>
-      <keep name="com.happydroids.**" allowobfuscation="false" allowoptimization="false" allowshrinking="false">
+      <keep name="com.happydroids.server.**" allowobfuscation="false" allowoptimization="false" allowshrinking="false">
         <method name="main"/>
         <constructor/>
-        <method name="*"/>
-        <field name="*"/>
+        <method/>
+        <field/>
       </keep>
       <keep name="com.google.**" allowobfuscation="false" allowoptimization="false" allowshrinking="true">
         <constructor/>
-        <method name="*"/>
-        <field name="*"/>
+        <method/>
+        <field/>
       </keep>
       <keep extends="com.happydroids.server.HappyDroidServiceObject" allowshrinking="false" allowobfuscation="false"
             allowoptimization="false">
         <constructor/>
-        <method name="*"/>
-        <field name="*"/>
+        <method/>
+        <field/>
       </keep>
       <keep extends="com.happydroids.server.HappyDroidServiceCollection" allowshrinking="false" allowobfuscation="false"
-            allowoptimization="false">
+            allowoptimization="true">
         <constructor/>
-        <method name="*"/>
-        <field name="*"/>
+        <method/>
+        <field/>
       </keep>
 
-      <keep name="org.apache.**,com.fasterxml.**,com.intellij.**" allowshrinking="false" allowobfuscation="false"
-            allowoptimization="false">
-        <constructor name="*"/>
-        <method name="*"/>
-        <field name="*"/>
+      <keepclassmembers implements="java.beans.PropertyChangeListener" />
+
+      <keep name="org.apache.**" allowshrinking="false" allowobfuscation="false"
+            allowoptimization="true">
+        <constructor/>
+        <method/>
+        <field/>
       </keep>
+
+      <keep name="com.intellij.**" allowshrinking="false" allowobfuscation="false"
+            allowoptimization="false">
+        <constructor/>
+        <method/>
+        <field/>
+      </keep>
+
+      <keep name="com.fasterxml.**">
+        <constructor/>
+        <method/>
+        <field/>
+      </keep>
+
+      <keepclasseswithmembernames>
+        <method access="native"/>
+      </keepclasseswithmembernames>
+
+      <keepclassmembers extends="java.lang.Enum">
+        <method access="public static" type="**[]" name="values" parameters=""/>
+        <method access="public static" type="**" name="valueOf" parameters="java.lang.String"/>
+      </keepclassmembers>
+
+      <!-- Keep some useful attributes. -->
+
+      <keepattribute name="InnerClasses"/>
+      <keepattribute name="SourceFile"/>
+      <keepattribute name="LineNumberTable"/>
+      <keepattribute name="Deprecated"/>
+      <keepattribute name="*Annotation*"/>
+      <keepattribute name="Signature"/>
+
+      <!-- Preserve all public classes,
+and their public and protected fields and methods. -->
+
+      <!--<keep access="public">-->
+        <!--<field access="public protected"/>-->
+        <!--<method access="public protected"/>-->
+      <!--</keep>-->
+
+
+      <!-- Preserve all .class method names. -->
+
+      <keepclassmembernames access="public">
+        <method type="java.lang.Class" name="class$" parameters="java.lang.String"/>
+        <method type="java.lang.Class" name="class$" parameters="java.lang.String,boolean"/>
+      </keepclassmembernames>
+
+
       <dontwarn/>
       <dontnote/>
-      <dontnote name="com.google.common.base.FinalizableReferenceQueue"/>
-      <dontnote name="com.google.common.base.internal.Finalizer"/>
-      <dontnote name="org.apache.**"/>
-      <dontnote name="javax.**"/>
-      <dontnote name="com.fasterxml.jackson.databind.deser.BasicDeserializerFactory"/>
     </proguard>
   </target>
 
