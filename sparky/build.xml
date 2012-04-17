@@ -110,13 +110,13 @@
               preverify="false"
               shrink="true"
               optimize="false"
-              obfuscate="false"
+              obfuscate="true"
               verbose="true"
               printmapping="sparky.map"
               defaultpackage=""
               target="1.6"
               keepparameternames="true"
-              mergeinterfacesaggressively="true">
+              mergeinterfacesaggressively="false">
       <injar path="${release-jar}"/>
       <injar refid="classpath" filter="!META-INF/**,!extras.manifest,!**/*.jj"/>
       <outjar path="${obfuscated-jar}"/>
@@ -153,7 +153,11 @@
         <field/>
       </keep>
 
-      <keepclassmembers implements="java.beans.PropertyChangeListener" />
+      <keep implements="java.beans.PropertyChangeListener">
+        <constructor/>
+        <method/>
+        <field/>
+      </keep>
 
       <keep name="org.apache.**" allowshrinking="false" allowobfuscation="false"
             allowoptimization="true">
@@ -197,8 +201,8 @@
 and their public and protected fields and methods. -->
 
       <!--<keep access="public">-->
-        <!--<field access="public protected"/>-->
-        <!--<method access="public protected"/>-->
+      <!--<field access="public protected"/>-->
+      <!--<method access="public protected"/>-->
       <!--</keep>-->
 
 
