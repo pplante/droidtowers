@@ -39,10 +39,6 @@ public class TestGridObjectType extends GridObjectType {
     this.coins = coins;
   }
 
-  public void setContinuousPlacement(boolean continuousPlacement) {
-    this.continuousPlacement = continuousPlacement;
-  }
-
   public void setExperienceAward(int experienceAward) {
     this.experienceAward = experienceAward;
   }

@@ -1,7 +1,6 @@
 [
   {
     "name":"Glass Stairs",
-    "continuousPlacement":true,
     "canShareSpace":true,
     "coins":5000,
     "experienceAward":500,

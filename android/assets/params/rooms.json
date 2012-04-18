@@ -2,7 +2,6 @@
   {
     "id":"GROUND-FLOOR-LOBBY",
     "name":"Main Lobby",
-    "continuousPlacement":true,
     "isLobby":true,
     "coins":5000,
     "experienceAward":1000,

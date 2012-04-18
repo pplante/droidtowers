@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.achievements;
 
 import com.happydroids.droidtowers.NonGLTestRunner;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.grid.TestGameGrid;
 import com.happydroids.droidtowers.types.ProviderType;
 import org.junit.Before;
 import org.junit.Test;
@@ -56,6 +57,4 @@ public class AchievementRequirementTest {
     expect(requirement.isCompleted(gameGrid)).toBeTrue();
   }
 
-  private class TestGameGrid extends GameGrid {
-  }
 }

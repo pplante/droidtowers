@@ -32,7 +32,6 @@
   {
     "id":"HOTEL-ROOM",
     "name":"Hotel Room",
-    "continuousPlacement":true,
     "coins":8000,
     "experienceAward":1500,
     "populationMax":2,
@@ -76,7 +75,6 @@
   {
     "id":"SUSHI-PLACE",
     "name":"Sushi",
-    "continuousPlacement":true,
     "coins":19599,
     "experienceAward":1500,
     "populationMax":2,
@@ -90,7 +88,6 @@
   {
     "id":"COCKTAIL-BAR",
     "name":"Cocktail Bar",
-    "continuousPlacement":true,
     "coins":22399,
     "experienceAward":1500,
     "populationMax":2,
