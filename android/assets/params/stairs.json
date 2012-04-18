@@ -1,5 +1,6 @@
 [
   {
+    "id":"GLASS-STAIRS",
     "name":"Glass Stairs",
     "canShareSpace":true,
     "coins":5000,

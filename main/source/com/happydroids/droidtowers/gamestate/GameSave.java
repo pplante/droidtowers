@@ -20,7 +20,6 @@ import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.GridObjectPlacementState;
 import com.happydroids.droidtowers.entities.Player;
-import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_SwitchToGenericTypeInfo;
 import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_UnhappyrobotToDroidTowers;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -142,7 +141,7 @@ public class GameSave {
     return cloudSaveUri;
   }
 
-  private static String generateFilename() {
+  public static String generateFilename() {
     return UUID.randomUUID().toString().replaceAll("-", "") + ".json";
   }
 
@@ -152,9 +151,8 @@ public class GameSave {
 
   public static GameSave readFile(FileHandle fileHandle) throws Exception {
     try {
-      JacksonTransformer transformer = new JacksonTransformer(fileHandle.read());
+      JacksonTransformer transformer = new JacksonTransformer(fileHandle.read(), fileHandle.name());
       transformer.addTransform(Migration_GameSave_UnhappyrobotToDroidTowers.class);
-      transformer.addTransform(Migration_GameSave_SwitchToGenericTypeInfo.class);
 
       byte[] bytes = transformer.process();
 

@@ -16,14 +16,15 @@ public class DesktopUncaughtExceptionHandler extends HappyDroidUncaughtException
   public void uncaughtException(Thread thread, final Throwable throwable) {
     Logger.getLogger(TAG).log(Level.SEVERE, "Uncaught exception!", throwable);
 
-    JOptionPane.showMessageDialog(null, generateExceptionErrorString(throwable), "Ooops!", JOptionPane.ERROR_MESSAGE);
-
     new Thread() {
       @Override
       public void run() {
         new CrashReport(throwable).saveBlocking();
-        System.exit(100);
       }
     }.run();
+
+    JOptionPane.showMessageDialog(null, generateExceptionErrorString(throwable), "Ooops!", JOptionPane.ERROR_MESSAGE);
+
+    System.exit(100);
   }
 }

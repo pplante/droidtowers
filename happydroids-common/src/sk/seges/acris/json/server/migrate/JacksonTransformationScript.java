@@ -20,11 +20,7 @@ import java.util.Arrays;
  * @author ladislav.gazo
  */
 public abstract class JacksonTransformationScript<T extends JsonNode> {
-  public void execute(T node) {
-    process(node);
-  }
-
-  protected abstract void process(T node);
+  protected abstract void process(T node, String fileName);
 
   /**
    * Renames field in an object node.
@@ -95,15 +91,6 @@ public abstract class JacksonTransformationScript<T extends JsonNode> {
     return addNonExistent(parent, field, arrayNode);
   }
 
-  /**
-   * Removes a field from object node if it exists.
-   *
-   * @param <N>    Expected value type.
-   * @param parent
-   * @param field
-   * @return Value of the removed field or null if the field does not exist.
-   */
-  @SuppressWarnings("unchecked")
   protected <N extends JsonNode> N removeIfExists(ObjectNode parent, String field) {
     JsonNode formerLayoutParamsField = parent.get(field);
 

@@ -269,7 +269,7 @@
     <java jar="${obfuscated-jar}" fork="true"/>
   </target>
 
-  <target name="osx" depends="build" description="Build an OSX target">
+  <target name="osx" depends="proguard" description="Build an OSX target">
     <property file="release.properties"/>
 
     <taskdef name="jarbundler"
@@ -278,8 +278,8 @@
 
     <jarbundler dir="${basedir}/out/" verbose="false" showPlist="false"
                 name="${ant.project.name}"
-                mainclass="com.unhappyrobot.DesktopGame"
-                jar="${build.dir}/${ant.project.name}-release.jar"
+                mainclass="com.happydroids.droidtowers.DesktopGame"
+                jar="${obfuscated-jar}"
                 icon="icons/${ant.project.name}.icns"
                 version="${project.version}"/>
 
@@ -288,7 +288,7 @@
 
   <property name="launch4j.dir" location="./tools/launch4j"/>
 
-  <target name="exe" depends="build" description="Build a Windows target">
+  <target name="exe" depends="proguard" description="Build a Windows target">
     <property file="release.properties"/>
 
     <taskdef name="launch4j"

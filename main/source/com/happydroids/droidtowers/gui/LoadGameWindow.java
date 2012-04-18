@@ -72,11 +72,11 @@ public class LoadGameWindow extends TowerWindow {
 
     WheelScrollFlickScrollPane scrollPane = new WheelScrollFlickScrollPane();
     scrollPane.setWidget(gameFiles);
-    add(scrollPane).height(380).width(700);
+    add(scrollPane).maxHeight(380).width(700);
   }
 
   private Table makeGameFileRow(final FileHandle gameSave) {
-    GameSave towerData = null;
+    GameSave towerData;
     try {
       towerData = GameSave.readFile(gameSave);
     } catch (Exception e) {

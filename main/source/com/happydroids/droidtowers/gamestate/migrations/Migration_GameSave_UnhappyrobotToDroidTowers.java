@@ -7,21 +7,50 @@ package com.happydroids.droidtowers.gamestate.migrations;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.happydroids.droidtowers.types.GridObjectType;
+import com.happydroids.droidtowers.types.GridObjectTypeFactory;
 import sk.seges.acris.json.server.migrate.JacksonTransformationScript;
 
-public class Migration_GameSave_UnhappyrobotToDroidTowers extends JacksonTransformationScript<ObjectNode> {
-  @Override
-  protected void process(ObjectNode node) {
-    ObjectNode gameSaveNode = (ObjectNode) node.findValue("com.unhappyrobot.gamestate.GameSave");
+import java.util.HashMap;
+import java.util.Map;
 
-    if (gameSaveNode == null || gameSaveNode.has("fileFormat")) return;
+public class Migration_GameSave_UnhappyrobotToDroidTowers extends JacksonTransformationScript<ObjectNode> {
+  private static final HashMap<String, String> typeNameMap = new HashMap<String, String>();
+
+  static {
+    typeNameMap.put("MAIDS-OFFICE", "MAIDS-CLOSET");
+    typeNameMap.put("JANITORS-OFFICE", "JANITORS-CLOSET");
+    typeNameMap.put("SUSHI", "SUSHI-PLACE");
+    typeNameMap.put("MAIN-LOBBY", "GROUND-FLOOR-LOBBY");
+    typeNameMap.put("LOBBY-4X1", "GROUND-FLOOR-LOBBY");
+    typeNameMap.put("ELEVATOR-SHAFT", "ELEVATOR");
+  }
+
+  @Override
+  protected void process(ObjectNode node, String fileName) {
+    ObjectNode gameSaveNode = (ObjectNode) node.findValue("com.unhappyrobot.gamestate.GameSave");
+    if (gameSaveNode == null) {
+      return;
+    }
+
+    JsonNode fileFormat = gameSaveNode.findValue("fileFormat");
+    if (fileFormat != null && fileFormat.asInt() >= 2) {
+      return;
+    }
 
     ArrayNode gridObjects = gameSaveNode.withArray("gridObjects");
     for (JsonNode gridObjectNode : gridObjects) {
       ObjectNode gridObject = (ObjectNode) gridObjectNode;
-      gridObject.put("typeId", transformTypeNameToTypeId(gridObject));
-      gridObject.remove("typeClass");
-      gridObject.remove("typeName");
+      if (gridObject == null) {
+        throw new RuntimeException("Error converting: " + gridObject);
+      } else if (!gridObject.has("typeId")) {
+        String typeName = gridObject.get("typeName").asText();
+        String typeId = transformTypeNameToTypeId(typeName);
+
+        gridObject.put("typeId", typeId);
+        gridObject.remove("typeClass");
+        gridObject.remove("typeName");
+      }
     }
 
     gameSaveNode.remove("objectCounts");
@@ -30,20 +59,31 @@ public class Migration_GameSave_UnhappyrobotToDroidTowers extends JacksonTransfo
 
     node.removeAll();
 
-    gameSaveNode.put("fileFormat", 1);
+    if (!gameSaveNode.has("baseFilename"))
+      gameSaveNode.put("baseFilename", fileName);
+
+    if (!gameSaveNode.has("towerName"))
+      gameSaveNode.put("towerName", "Untitled Tower");
+
+    gameSaveNode.put("fileFormat", 2);
 
     node.put("GameSave", gameSaveNode);
   }
 
-  private String transformTypeNameToTypeId(ObjectNode gridObject) {
-    String typeName = gridObject.get("typeName").asText().replaceAll(" ", "-");
+  private String transformTypeNameToTypeId(String typeName) {
+    typeName = typeName.replaceAll(" ", "-").toUpperCase();
 
-    if (typeName.equalsIgnoreCase("LOBBY-4X1")) {
-      typeName = "LOBBY";
-    } else if (typeName.equalsIgnoreCase("ELEVATOR-SHAFT")) {
-      typeName = "ELEVATOR";
+    for (Map.Entry<String, String> entry : typeNameMap.entrySet()) {
+      if (entry.getKey().equalsIgnoreCase(typeName)) {
+        typeName = entry.getValue();
+      }
     }
 
-    return typeName.toUpperCase();
+    GridObjectType objectType = GridObjectTypeFactory.findTypeById(typeName);
+    if (objectType == null) {
+      throw new RuntimeException("Could not convert: " + typeName);
+    }
+
+    return typeName;
   }
 }

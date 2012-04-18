@@ -20,7 +20,7 @@ public class TestHelper {
   private static final String[] fixturePaths = new String[]{"fixtures/", "sparky/fixtures/", "main/fixtures/"};
 
   public static File fixture(String fixtureFilename) throws IOException {
-    File file = null;
+    File file;
 
     for (String fixturePath : fixturePaths) {
       file = new File(fixturePath, fixtureFilename);
@@ -69,5 +69,9 @@ public class TestHelper {
 
   public static Object readJson(String content) throws IOException {
     return new ObjectMapper().readValue(content, Object.class);
+  }
+
+  public static Object readJson(byte[] bytes) throws IOException {
+    return new ObjectMapper().readValue(bytes, Object.class);
   }
 }

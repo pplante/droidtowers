@@ -7557,15 +7557,15 @@ com.happydroids.HappyDroidConsts -> a:
     java.lang.String GIT_SHA -> b
 com.happydroids.jackson.HappyDroidObjectMapper -> b:
     com.fasterxml.jackson.databind.module.SimpleModule happyModules -> a
-com.happydroids.platform.HappyDroidUncaughtExceptionHandler -> c:
-    java.lang.StringBuilder generateExceptionErrorString(java.lang.Throwable) -> a
-com.happydroids.platform.HappyDroidsDesktopUncaughtExceptionHandler -> d:
+com.happydroids.platform.DesktopUncaughtExceptionHandler -> c:
     java.lang.String TAG -> a
     void uncaughtException(java.lang.Thread,java.lang.Throwable) -> uncaughtException
-com.happydroids.platform.HappyDroidsDesktopUncaughtExceptionHandler$1 -> e:
+com.happydroids.platform.DesktopUncaughtExceptionHandler$1 -> d:
     java.lang.Throwable val$throwable -> a
-    com.happydroids.platform.HappyDroidsDesktopUncaughtExceptionHandler this$0 -> b
+    com.happydroids.platform.DesktopUncaughtExceptionHandler this$0 -> b
     void run() -> run
+com.happydroids.platform.HappyDroidUncaughtExceptionHandler -> e:
+    java.lang.StringBuilder generateExceptionErrorString(java.lang.Throwable) -> a
 com.happydroids.platform.Platform -> f:
     com.happydroids.platform.Platforms getOSType() -> a
     java.io.File getAppRoot() -> b

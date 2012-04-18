@@ -17,7 +17,7 @@
 
   <path id="classpath">
     <fileset dir="${root.dir}/../happydroids-common/libs/main" includes="**/*.jar"/>
-    <fileset dir="${root.dir}/libs" includes="**/*.jar"/>
+    <!--<fileset dir="${root.dir}/libs" includes="**/*.jar"/>-->
   </path>
 
   <target name="clean">
@@ -229,7 +229,7 @@ and their public and protected fields and methods. -->
 
   <target name="build" depends="jar"/>
 
-  <target name="osx" depends="build" description="Build an OSX target">
+  <target name="osx" depends="proguard" description="Build an OSX target">
     <taskdef name="jarbundler"
              classpath="../tools/jarbundler.jar"
              classname="net.sourceforge.jarbundler.JarBundler"/>
@@ -237,7 +237,7 @@ and their public and protected fields and methods. -->
     <jarbundler dir="${basedir}/out/" verbose="false" showPlist="false"
                 name="DroidTowers"
                 mainclass="com.happydroids.sparky.SparkyMain"
-                jar="${release-jar}"
+                jar="${obfuscated-jar}"
                 icon="icons/${ant.project.name}.icns"
                 version="${project.version}"
                 signature="LOCL"
@@ -248,7 +248,7 @@ and their public and protected fields and methods. -->
 
   <property name="launch4j.dir" location="../tools/launch4j"/>
 
-  <target name="exe" depends="build" description="Build a Windows target">
+  <target name="exe" depends="proguard" description="Build a Windows target">
 
     <taskdef name="launch4j"
              classname="net.sf.launch4j.ant.Launch4jTask"

@@ -18,18 +18,23 @@ import java.io.*;
  * @see sk.seges.acris.json.server.migrate.JacksonTransformationScript
  */
 public class JacksonTransformer extends Transformer<String> {
-  public JacksonTransformer(InputStream inputStream) throws ScriptException, FileNotFoundException {
+  private final String fileName;
+
+  public JacksonTransformer(InputStream inputStream, String fileName) throws ScriptException, FileNotFoundException {
     super(inputStream);
+    this.fileName = fileName;
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public byte[] transform(Class<? extends JacksonTransformationScript> transformationClass, ByteArrayInputStream input) {
     ObjectMapper mapper = new ObjectMapper();
     try {
       JsonNode jsonNode = mapper.readValue(input, JsonNode.class);
+      System.out.println("Executing migration: " + transformationClass.getSimpleName());
+      JacksonTransformationScript transformation = transformationClass.newInstance();
 
-      Object transformation = transformationClass.newInstance();
-      ((JacksonTransformationScript) transformation).execute(jsonNode);
+      transformation.process(jsonNode, fileName);
 
       return mapper.writeValueAsBytes(jsonNode);
     } catch (Exception e) {
