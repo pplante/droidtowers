@@ -179,4 +179,8 @@ public class GameSave {
   public String getTowerName() {
     return towerName;
   }
+
+  public Player getPlayer() {
+    return player;
+  }
 }

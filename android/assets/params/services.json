@@ -36,11 +36,6 @@
     "experienceAward":2200,
     "populationAttraction":0,
     "populationRequired":100,
-    "requirements":{
-      "POPULATION":50,
-      "EMPLOYMENT":35,
-      "COMMERCIAL":10
-    },
     "jobsProvided":6,
     "noiseLevel":0.5,
     "provides":"SECURITY",

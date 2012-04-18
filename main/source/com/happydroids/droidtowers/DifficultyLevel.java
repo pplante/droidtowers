@@ -5,9 +5,9 @@
 package com.happydroids.droidtowers;
 
 public enum DifficultyLevel {
-  EASY(50000),
-  MEDIUM(35000),
-  HARD(10000);
+  EASY(500000),
+  MEDIUM(350000),
+  HARD(100000);
   private final int startingMoney;
 
 
