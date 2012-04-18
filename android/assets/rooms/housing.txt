@@ -18,9 +18,16 @@ generic_room_3x
   index: 1
 2x1-sushi
   rotate: false
-  xy: 2, 464
+  xy: 196, 464
   size: 128, 64
   orig: 128, 64
+  offset: 0, 0
+  index: -1
+4x1-security-center
+  rotate: false
+  xy: 2, 134
+  size: 256, 64
+  orig: 256, 64
   offset: 0, 0
   index: -1
 generic_room_4x
@@ -30,37 +37,30 @@ generic_room_4x
   orig: 256, 64
   offset: 0, 0
   index: 1
-4x1-security-center
-  rotate: false
-  xy: 2, 134
-  size: 256, 64
-  orig: 256, 64
-  offset: 0, 0
-  index: -1
 4x1-large-condo
   rotate: false
-  xy: 2, 332
+  xy: 2, 398
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
 2x1-hotel-room
   rotate: false
-  xy: 262, 464
+  xy: 2, 530
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 3x1-small-condo
   rotate: false
-  xy: 2, 398
+  xy: 260, 398
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
 3x1-small-apartment
   rotate: false
-  xy: 196, 398
+  xy: 2, 464
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
@@ -70,6 +70,13 @@ lobby-left
   xy: 454, 68
   size: 36, 64
   orig: 36, 64
+  offset: 0, 0
+  index: -1
+4x1-movie-theater
+  rotate: false
+  xy: 2, 332
+  size: 256, 64
+  orig: 256, 64
   offset: 0, 0
   index: -1
 4x1-lobby
@@ -123,7 +130,7 @@ lobby-right
   index: -1
 2x1-bar
   rotate: false
-  xy: 132, 464
+  xy: 326, 464
   size: 128, 64
   orig: 128, 64
   offset: 0, 0

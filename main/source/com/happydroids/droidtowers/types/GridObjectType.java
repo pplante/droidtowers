@@ -12,7 +12,6 @@ import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPositionCache;
-import com.happydroids.droidtowers.math.Bounds2d;
 import com.happydroids.droidtowers.math.GridPoint;
 
 import java.util.Set;
@@ -89,13 +88,16 @@ public abstract class GridObjectType {
   }
 
   protected boolean checkIfTouchingAnotherObject(GridObject gridObject) {
-    Bounds2d belowObject = new Bounds2d(gridObject.getPosition().cpy().sub(0, 1), gridObject.getSize());
+    GridPoint gridPointBelow = gridObject.getPosition().cpy();
+    gridPointBelow.sub(0, 1);
 
-    GridPoint gridPoint = gridObject.getPosition().cpy();
-    gridPoint.sub(0, 1);
+    GridPoint gridPointAbove = gridObject.getPosition().cpy();
+    gridPointAbove.add(0, 1);
 
-    Set<GridObject> objectsBelow = GridPositionCache.instance().getObjectsAt(gridPoint, gridObject.getSize(), gridObject);
-    return objectsBelow.size() != 0;
+    Set<GridObject> objectsBelow = GridPositionCache.instance().getObjectsAt(gridPointBelow, gridObject.getSize(), gridObject);
+    Set<GridObject> objectsAbove = GridPositionCache.instance().getObjectsAt(gridPointAbove, gridObject.getSize(), gridObject);
+
+    return objectsBelow.size() != 0 || objectsAbove.size() != 0;
   }
 
   protected boolean checkForOverlap(GridObject gridObject) {

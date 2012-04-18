@@ -78,6 +78,8 @@
     "coins":19599,
     "experienceAward":1500,
     "populationMax":2,
+    "populationAttraction":12,
+    "jobsProvided":3,
     "height":1,
     "width":2,
     "noiseLevel":0.2,
@@ -91,11 +93,27 @@
     "coins":22399,
     "experienceAward":1500,
     "populationMax":2,
+    "populationAttraction":15,
+    "jobsProvided":2,
     "height":1,
     "width":2,
     "noiseLevel":0.2,
     "provides":"ENTERTAINMENT",
     "atlasFilename":"rooms/housing.txt",
     "imageFilename":"2x1-bar"
+  },
+  {
+    "id":"MOVIE-THEATER",
+    "name":"Movie Theater",
+    "coins":32399,
+    "experienceAward":2500,
+    "populationAttraction":35,
+    "jobsProvided":10,
+    "height":1,
+    "width":4,
+    "noiseLevel":1.0,
+    "provides":"ENTERTAINMENT",
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"4x1-movie-theater"
   }
 ]
