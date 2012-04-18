@@ -32,15 +32,15 @@
     "populationMax":6,
     "width":4,
     "provides":"APARTMENT",
-    "atlasFilename":"rooms/generic.txt",
-    "imageFilename":"generic/generic_room_4x"
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"4x1-large-apartment"
   },
   {
     "id":"SMALL-CONDO",
     "name":"Small Condo",
     "coins":16000,
     "height":1,
-    "experienceAward":2200,
+    "experienceAward":1400,
     "populationMax":4,
     "width":3,
     "provides":"CONDO",

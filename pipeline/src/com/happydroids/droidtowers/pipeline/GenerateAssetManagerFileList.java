@@ -23,6 +23,7 @@ public class GenerateAssetManagerFileList {
     FileHandle template = new FileHandle("assets-raw/templates/TowerAssetManagerFilesList-template.java");
 
     addDirectoryToAssetManager("backgrounds/", ".txt", TextureAtlas.class);
+    addDirectoryToAssetManager("movies/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("backgrounds/", ".png", Texture.class);
     addDirectoryToAssetManager("fonts/", ".fnt", BitmapFont.class);
     addDirectoryToAssetManager("hud/", ".txt", TextureAtlas.class);
