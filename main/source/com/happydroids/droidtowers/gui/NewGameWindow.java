@@ -17,7 +17,11 @@ import com.happydroids.droidtowers.scenes.TowerScene;
 
 import java.text.NumberFormat;
 
+import static com.happydroids.droidtowers.platform.Display.scale;
+
 public class NewGameWindow extends TowerWindowTwo {
+
+  public static final int ROW_SPACE = scale(16);
 
   private DifficultyLevel difficultyLevel;
   private final TextButton beginButton;
@@ -27,7 +31,7 @@ public class NewGameWindow extends TowerWindowTwo {
 
     clear();
 
-    row().space(16).padTop(32);
+    row().space(ROW_SPACE).padTop(scale(32));
     add(FontManager.RobotoBold18.makeLabel("Please provide a name for your Tower:")).right();
 
     final TextField nameField = FontManager.Roboto32.makeTextField("", "Tower Name", skin);
@@ -43,7 +47,7 @@ public class NewGameWindow extends TowerWindowTwo {
       }
     });
     add(nameField).fillX().expandX().left();
-    row().space(16);
+    row().space(ROW_SPACE);
 
     add(FontManager.RobotoBold18.makeLabel("Select level of difficulty:")).right();
 
@@ -58,7 +62,7 @@ public class NewGameWindow extends TowerWindowTwo {
     buttonContainer.add(hard).expand();
 
     add(buttonContainer).fill();
-    row().space(16).colspan(2);
+    row().space(ROW_SPACE).colspan(2);
 
     final String moneyLabelPrefix = "Starting money: ";
     final Label moneyLabel = FontManager.Roboto32.makeLabel(moneyLabelPrefix);
@@ -97,12 +101,12 @@ public class NewGameWindow extends TowerWindowTwo {
     });
 
     Table bottomBar = new Table();
-    bottomBar.row().space(16);
+    bottomBar.row().space(ROW_SPACE);
     bottomBar.add(cancelButton);
     bottomBar.add(beginButton);
 
 
-    row().colspan(2).expandY().bottom().right().padBottom(16);
+    row().colspan(2).expandY().bottom().right().padBottom(ROW_SPACE);
     add(bottomBar);
   }
 }

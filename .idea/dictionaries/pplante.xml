@@ -16,6 +16,7 @@
       <w>gamestate</w>
       <w>ggmoney</w>
       <w>happydroids</w>
+      <w>hdpi</w>
       <w>hiragino</w>
       <w>iterable</w>
       <w>jarbundler</w>
@@ -23,6 +24,7 @@
       <w>keycode</w>
       <w>lwjgl</w>
       <w>maru</w>
+      <w>mdpi</w>
       <w>mergewithoutmain</w>
       <w>millis</w>
       <w>minimap</w>

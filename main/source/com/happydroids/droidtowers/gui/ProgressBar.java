@@ -19,7 +19,7 @@ public class ProgressBar extends WidgetGroup {
     pixmap.fill();
 
     visible = false;
-    statusLabel = FontManager.BankGothic64.makeLabel("asdf");
+    statusLabel = FontManager.Roboto64.makeLabel("");
 
 //    defaults();
 //    setBackground(new NinePatch(new Texture(pixmap)));

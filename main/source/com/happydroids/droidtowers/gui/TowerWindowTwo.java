@@ -17,6 +17,8 @@ import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
 
+import static com.happydroids.droidtowers.platform.Display.scale;
+
 public class TowerWindowTwo {
   private static final int[] DIALOG_CLOSE_KEYCODES = new int[]{InputSystem.Keys.ESCAPE, InputSystem.Keys.BACK};
   private InputCallback closeDialogCallback;
@@ -71,10 +73,10 @@ public class TowerWindowTwo {
     window.setBackground(background);
     window.size((int) stage.width(), (int) stage.height());
 
-    window.add(FontManager.Roboto32.makeLabel(title)).center().left().expand().padLeft(18);
+    window.add(FontManager.Roboto32.makeLabel(title)).center().left().expand().padLeft(scale(18));
     window.row();
-    window.add(new HorizontalRule(2)).expandX();
-    window.row().fill().height((int) (stage.height() - 46)).padLeft(24).padRight(24);
+    window.add(new HorizontalRule(scale(2))).expandX();
+    window.row().fill().height((int) (stage.height() - scale(46))).padLeft(scale(24)).padRight(scale(24));
 
     content = new Table();
     content.row().expandX();

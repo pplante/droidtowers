@@ -45,18 +45,18 @@ public class SplashScene extends Scene {
   public void create(Object... args) {
 //    addModalBackground();
 
-    Label titleLabel = FontManager.BankGothic64.makeLabel("Droid Towers");
+    Label titleLabel = FontManager.Roboto64.makeLabel("Droid Towers");
     titleLabel.setAlignment(Align.CENTER);
     titleLabel.y = getStage().centerY() * 1.66f;
     centerHorizontally(titleLabel);
     addActor(titleLabel);
 
-    loadingMessage = FontManager.BankGothic32.makeLabel(selectRandomMessage());
+    loadingMessage = FontManager.Roboto32.makeLabel(selectRandomMessage());
     loadingMessage.setAlignment(Align.CENTER);
     center(loadingMessage);
     addActor(loadingMessage);
 
-    progressBar = FontManager.BankGothic64.makeLabel(null);
+    progressBar = FontManager.Roboto64.makeLabel(null);
     progressBar.setAlignment(Align.CENTER);
     centerHorizontally(progressBar);
     progressBar.y = 100;

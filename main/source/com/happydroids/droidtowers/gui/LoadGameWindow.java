@@ -7,9 +7,7 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -22,32 +20,17 @@ import com.happydroids.droidtowers.scenes.TowerScene;
 
 import java.text.NumberFormat;
 
+import static com.happydroids.droidtowers.platform.Display.scale;
+
 public class LoadGameWindow extends TowerWindowTwo {
   private boolean foundSaveFile;
-  private Pixmap pixmap;
-  private NinePatch background;
   private final Table gameFiles;
 
   public LoadGameWindow(Stage stage, Skin skin) {
     super("Load a Tower", stage, skin);
 
-    if (pixmap == null) {
-      pixmap = new Pixmap(2, 2, Pixmap.Format.RGB888);
-      pixmap.setColor(Color.BLACK);
-      pixmap.fill();
-      pixmap.setColor(new Color(0.075f, 0.075f, 0.075f, 1f));
-      pixmap.drawPixel(0, 0);
-      pixmap.drawPixel(1, 0);
-
-      Texture texture = new Texture(pixmap);
-      texture.setWrap(Texture.TextureWrap.ClampToEdge, Texture.TextureWrap.ClampToEdge);
-      texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-      background = new NinePatch(texture);
-    }
-
     FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
     FileHandle[] files = storage.list();
-
 
     gameFiles = new Table();
     gameFiles.clear();
@@ -97,16 +80,16 @@ public class LoadGameWindow extends TowerWindowTwo {
 
 
     Table fileRow = new Table();
-    fileRow.defaults().fill().pad(10).space(10);
+    fileRow.defaults().fill().pad(scale(10)).space(scale(10));
     fileRow.row();
-    fileRow.add(imageActor).width(100).right();
+    fileRow.add(imageActor).width(scale(100)).right();
     fileRow.add(makeGameFileInfoBox(fileRow, gameSave, towerData)).expandX().top();
 
     return fileRow;
   }
 
   private Table makeGameFileInfoBox(final Table fileRow, final FileHandle savedGameFile, GameSave towerData) {
-    TextButton launchButton = new TextButton("Play", skin);
+    TextButton launchButton = FontManager.RobotoBold18.makeTextButton("Play", skin);
     launchButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
 //        dismiss();
@@ -118,7 +101,7 @@ public class LoadGameWindow extends TowerWindowTwo {
       }
     });
 
-    TextButton deleteButton = new TextButton("Delete", skin);
+    TextButton deleteButton = FontManager.RobotoBold18.makeTextButton("Delete", skin);
     deleteButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         new Dialog().setTitle("Are you sure you want to delete this Tower?")
@@ -151,11 +134,11 @@ public class LoadGameWindow extends TowerWindowTwo {
     group.addActor(FontManager.RobotoBold18.makeLabel(towerData.getTowerName()));
 
     Table box = new Table();
-    box.defaults().fillX().space(5);
+    box.defaults().fillX().space(scale(5));
     box.row().top().left().fillX();
     box.add(group).top().left().expandX();
-    box.add(deleteButton).width(80);
-    box.add(launchButton).width(80);
+    box.add(deleteButton).width(scale(80));
+    box.add(launchButton).width(scale(80));
 
 //    box.debug();
 

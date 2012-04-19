@@ -37,7 +37,7 @@ public class MainMenuScene extends Scene {
     Table container = new Table(getGuiSkin());
     container.defaults().center().left();
 
-    Label label = FontManager.BankGothic64.makeLabel("Droid Towers");
+    Label label = FontManager.Roboto64.makeLabel("Droid Towers");
     container.add(label).align(Align.CENTER);
     container.row();
 

@@ -13,11 +13,10 @@ import com.google.common.collect.Maps;
 import java.util.HashMap;
 
 public enum FontManager {
-  BankGothic64("fonts/bank_gothic_64.fnt", Color.WHITE),
-  BankGothic32("fonts/bank_gothic_32.fnt", Color.WHITE),
-  Roboto32("fonts/roboto_white_32.fnt", Color.WHITE),
-  Default("fonts/roboto_white_14.fnt", Color.WHITE),
-  RobotoBold18("fonts/roboto_bold_white_18.fnt", Color.WHITE, 8, 16);
+  Default("fonts/roboto_white_14.fnt", "fonts/roboto_white_28.fnt", Color.WHITE),
+  RobotoBold18("fonts/roboto_bold_white_18.fnt", "fonts/roboto_white_32.fnt", Color.WHITE, 8, 16),
+  Roboto32("fonts/roboto_white_32.fnt", "fonts/roboto_white_64.fnt", Color.WHITE),
+  Roboto64("fonts/roboto_white_64.fnt", "fonts/roboto_white_128.fnt", Color.WHITE);
 
   private static HashMap<String, BitmapFont> bitmapFonts = Maps.newHashMap();
   private Label.LabelStyle labelStyle;
@@ -28,14 +27,18 @@ public enum FontManager {
   private TextField.TextFieldStyle textFieldStyle;
 
   FontManager(String fontPath, Color color) {
-    this(fontPath, color, 0, 0);
+    this(fontPath, fontPath, color, 0, 0);
   }
 
-  FontManager(String fontPath, Color color, int buttonPadTop, int buttonPadLeft) {
-    this.fontPath = fontPath;
+  FontManager(String mdpiFontPath, String hdpiFontPath, Color color, int buttonPadTop, int buttonPadLeft) {
+    this.fontPath = Gdx.graphics.getDensity() > 1f ? hdpiFontPath : mdpiFontPath;
     this.color = color;
     this.buttonPadTop = buttonPadTop;
     this.buttonPadLeft = buttonPadLeft;
+  }
+
+  FontManager(String mdpiFontPath, String hdpiFontPath, Color color) {
+    this(mdpiFontPath, hdpiFontPath, color, 0, 0);
   }
 
   private Label.LabelStyle labelStyle() {
