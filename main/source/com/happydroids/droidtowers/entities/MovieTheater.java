@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
@@ -48,7 +49,7 @@ public class MovieTheater extends CommercialSpace {
 
   @Override
   public boolean touchDown(Vector2 gameGridPoint) {
-    TowerGame.getPlatformBrowserUtil().launchWebBrowser("http://www.fandango.com/marvelstheavengers_30154/movieoverview");
+    TowerGame.getPlatformBrowserUtil().launchWebBrowser("http://www.fandango.com/marvelstheavengers_30154/movieoverview?CJAFFILIATE&PID=" + TowerConsts.FANDANGO_COMMISSION_JUNCTION_ID);
     return true;
   }
 }

@@ -19,7 +19,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.*;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
@@ -53,12 +55,12 @@ public class MainMenuScene extends Scene {
             .repeatYoyo(Tween.INFINITY, 250)
             .start(TweenSystem.getTweenManager());
 
-//    if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT && TowerGameService.instance().haveNetworkConnection() && !TowerGameService.instance().hasAuthenticated()) {
-    TextButton connectFacebookButton = FontManager.RobotoBold18.makeTextButton("login to happydroids.com", getGuiSkin());
-//      connectFacebookButton.setClickListener(new LaunchWindowClickListener(ConnectToHappyDroidsWindow.class));
-    container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
-    container.row().padTop(BUTTON_SPACING);
-//    }
+    if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT && TowerGameService.instance().haveNetworkConnection() && !TowerGameService.instance().hasAuthenticated()) {
+      TextButton connectFacebookButton = FontManager.RobotoBold18.makeTextButton("login to happydroids.com", getGuiSkin());
+      connectFacebookButton.setClickListener(new LaunchWindowClickListener(ConnectToHappyDroidsWindow.class));
+      container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
+      container.row().padTop(BUTTON_SPACING);
+    }
 
     TextButton newGameButton = FontManager.RobotoBold18.makeTextButton("new game", getGuiSkin());
     container.add(newGameButton).fill().maxWidth(BUTTON_WIDTH);

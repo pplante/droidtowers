@@ -22,40 +22,34 @@ import com.happydroids.server.ApiRunnable;
 import com.happydroids.server.HappyDroidServiceObject;
 import org.apache.http.HttpResponse;
 
-public class ConnectToHappyDroidsWindow extends TowerWindow {
+public class ConnectToHappyDroidsWindow extends TowerWindowTwo {
   private static final String TAG = ConnectToHappyDroidsWindow.class.getSimpleName();
   private TemporaryToken token;
   private PeriodicBackgroundTask periodicBackgroundTask;
   private final TextButton accessTokenButton;
 
   public ConnectToHappyDroidsWindow(Stage stage, Skin skin) {
-    super("Connect to Facebook", stage, skin);
-    defaults().top().left().pad(5);
+    super("Connect to Happy Droids", stage, skin);
 
+    clear();
     row().pad(10);
-    add(FontManager.Default.makeLabel("Connecting to Facebook will enable:\n\n* Towers to be stored in the cloud\n* Sharing towers with friends\n* Other stuff!"));
+    add(FontManager.Roboto24.makeLabel("Connecting your Facebook account to Happy Droids will enable:\n\n* Towers to be stored in the cloud\n* Sharing towers with friends\n* Other stuff!")).expandX();
     row().pad(10);
-    add(FontManager.Default.makeLabel("To get started, goto happydroids.com\n then click the \"Connect to Facebook\" button."));
+    add(FontManager.Roboto24.makeLabel("To get started, goto happydroids.com\n then click the \"Connect to Facebook\" button."));
     row().pad(10);
-    add(FontManager.Default.makeLabel("After logging in, type the code below to connect your game."));
-    row().pad(10);
+    add(FontManager.Roboto24.makeLabel("After logging in, type the code below to connect your game."));
+    row().expand();
 
-    accessTokenButton = new TextButton("CODE: Reticulating splines...", skin);
-    TextButton close = new TextButton("close", skin);
-    close.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        dismiss();
-      }
-    });
+    accessTokenButton = FontManager.RobotoBold18.makeTextButton("CODE: Reticulating splines...", skin);
 
-    final Label sessionStatus = FontManager.Default.makeLabel("Waiting for You to login...");
+    final Label sessionStatus = FontManager.Roboto24.makeLabel("Waiting for You to login...");
 
     final Table bottom = new Table();
-    bottom.defaults().top().left().expand();
+    bottom.defaults();
+    bottom.row().space(20);
     bottom.add(accessTokenButton);
-    bottom.add(sessionStatus).fill().center();
-    bottom.add(close).right();
-    add(bottom).width(500);
+    bottom.add(sessionStatus).expand();
+    add(bottom).fill();
 
     token = new TemporaryToken();
     token.save(new ApiRunnable() {

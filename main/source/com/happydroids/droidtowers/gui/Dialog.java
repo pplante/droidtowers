@@ -31,7 +31,7 @@ public class Dialog {
   private TextButton negativeButton;
   private String title;
   private String messageText;
-  private TowerWindow window;
+  private TowerWindowTwo window;
   private boolean shouldDisplayCentered;
   private final InputCallback positiveButtonInputCallback;
   private final InputCallback negativeButtonInputCallback;
@@ -112,7 +112,7 @@ public class Dialog {
   public Dialog show() {
     ModalOverlay.instance().show(stage);
 
-    window = new TowerWindow(title, stage, skin);
+    window = new TowerWindowTwo(title, stage, skin);
 
     Table container = new Table(skin);
     container.defaults().pad(scale(12)).top().left();
@@ -120,7 +120,7 @@ public class Dialog {
     messageLabel.setWrap(true);
 
     container.row();
-    container.add(messageLabel).colspan(buttons.size()).width(Display.percentOfScreen(0.8f));
+    container.add(messageLabel).colspan(buttons.size()).width(Display.percentOfScreen(0.8f)).minHeight(scale(120));
 
     container.row();
     for (TextButton button : buttons) {
@@ -129,7 +129,7 @@ public class Dialog {
     container.pack();
 
     window.add(container);
-    window.modal(true).show().centerOnStage();
+    window.show();
 
     if (positiveButton != null) {
       InputSystem.instance().bind(InputSystem.Keys.ENTER, positiveButtonInputCallback);
@@ -150,5 +150,4 @@ public class Dialog {
       ModalOverlay.instance().hide();
     }
   }
-
 }

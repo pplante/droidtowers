@@ -34,6 +34,7 @@ public class TowerConsts extends HappyDroidConsts {
   public static final long FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK = 3500;
   public static final float MINI_MAP_REDRAW_FREQUENCY = 1f;
   public static final String GAME_SAVE_DIRECTORY = Gdx.app.getType() == Application.ApplicationType.Android ? "towergame/" : ".towergame/";
+  public static final String FANDANGO_COMMISSION_JUNCTION_ID = "5737037";
 
   private TowerConsts() {
 
