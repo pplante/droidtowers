@@ -31,13 +31,19 @@ public class TowerAssetManagerFilesList {
     preloadFiles.put("backgrounds/clouds.txt", TextureAtlas.class);
     files.put("sound/effects/construction-placement-1.wav", Sound.class);
     files.put("hud/misc.txt", TextureAtlas.class);
+    files.put("fonts/roboto_white_28.fnt", BitmapFont.class);
     files.put("transport.txt", TextureAtlas.class);
+    files.put("fonts/roboto_white_64.fnt", BitmapFont.class);
     files.put("rooms/housing.txt", TextureAtlas.class);
     files.put("rooms/generic.txt", TextureAtlas.class);
     files.put("characters.txt", TextureAtlas.class);
     files.put("hud/test.txt", TextureAtlas.class);
     files.put("fonts/roboto_white_32.fnt", BitmapFont.class);
+    files.put("hud/buttons-hd.txt", TextureAtlas.class);
+    files.put("fonts/roboto_white_48.fnt", BitmapFont.class);
     files.put("fonts/bank_gothic_64.fnt", BitmapFont.class);
+    files.put("fonts/roboto_white_12.fnt", BitmapFont.class);
+    files.put("fonts/roboto_white_128.fnt", BitmapFont.class);
     preloadFiles.put("default-skin.ui", Skin.class);
     files.put("fonts/menlo_16.fnt", BitmapFont.class);
     files.put("backgrounds/cityscape.txt", TextureAtlas.class);
@@ -51,6 +57,7 @@ public class TowerAssetManagerFilesList {
     files.put("backgrounds/ground-tile.png", Texture.class);
     files.put("backgrounds/clouds.png", Texture.class);
     files.put("fonts/helvetica_neue_14_black.fnt", BitmapFont.class);
+    files.put("fonts/roboto_white_24.fnt", BitmapFont.class);
     files.put("fonts/hiragino_maru_14_white.fnt", BitmapFont.class);
     files.put("fonts/helvetica_neue_10_bold_white.fnt", BitmapFont.class);
     files.put("backgrounds/sky-gradient.png", Texture.class);

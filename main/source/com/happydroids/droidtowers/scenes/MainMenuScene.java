@@ -178,16 +178,16 @@ public class MainMenuScene extends Scene {
   }
 
   private class LaunchWindowClickListener implements ClickListener {
-    private final Class<? extends TowerWindowTwo> windowClass;
+    private final Class<? extends TowerWindow> windowClass;
 
-    public LaunchWindowClickListener(Class<? extends TowerWindowTwo> windowClass) {
+    public LaunchWindowClickListener(Class<? extends TowerWindow> windowClass) {
       this.windowClass = windowClass;
     }
 
     public void click(Actor actor, float x, float y) {
       try {
-        Constructor<? extends TowerWindowTwo> constructor = windowClass.getConstructor(Stage.class, Skin.class);
-        TowerWindowTwo window = constructor.newInstance(getStage(), getGuiSkin());
+        Constructor<? extends TowerWindow> constructor = windowClass.getConstructor(Stage.class, Skin.class);
+        TowerWindow window = constructor.newInstance(getStage(), getGuiSkin());
         window.show();
       } catch (Exception e) {
         throw new RuntimeException(e);

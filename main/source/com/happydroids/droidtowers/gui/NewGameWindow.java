@@ -19,7 +19,7 @@ import java.text.NumberFormat;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class NewGameWindow extends TowerWindowTwo {
+public class NewGameWindow extends TowerWindow {
 
   public static final int ROW_SPACE = scale(16);
 

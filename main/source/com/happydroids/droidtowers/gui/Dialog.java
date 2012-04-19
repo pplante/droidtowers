@@ -31,7 +31,7 @@ public class Dialog {
   private TextButton negativeButton;
   private String title;
   private String messageText;
-  private TowerWindowTwo window;
+  private TowerWindow window;
   private boolean shouldDisplayCentered;
   private final InputCallback positiveButtonInputCallback;
   private final InputCallback negativeButtonInputCallback;
@@ -112,7 +112,7 @@ public class Dialog {
   public Dialog show() {
     ModalOverlay.instance().show(stage);
 
-    window = new TowerWindowTwo(title, stage, skin);
+    window = new TowerWindow(title, stage, skin);
 
     Table container = new Table(skin);
     container.defaults().pad(scale(12)).top().left();

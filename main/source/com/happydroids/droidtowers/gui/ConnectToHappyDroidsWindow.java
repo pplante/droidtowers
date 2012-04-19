@@ -22,7 +22,7 @@ import com.happydroids.server.ApiRunnable;
 import com.happydroids.server.HappyDroidServiceObject;
 import org.apache.http.HttpResponse;
 
-public class ConnectToHappyDroidsWindow extends TowerWindowTwo {
+public class ConnectToHappyDroidsWindow extends TowerWindow {
   private static final String TAG = ConnectToHappyDroidsWindow.class.getSimpleName();
   private TemporaryToken token;
   private PeriodicBackgroundTask periodicBackgroundTask;

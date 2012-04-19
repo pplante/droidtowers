@@ -18,7 +18,7 @@ import com.happydroids.droidtowers.types.GridObjectTypeFactory;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class GridObjectPurchaseMenu extends TowerWindowTwo {
+public class GridObjectPurchaseMenu extends TowerWindow {
   private Class gridObjectTypeClass;
   private final Runnable toolCleanupRunnable;
 

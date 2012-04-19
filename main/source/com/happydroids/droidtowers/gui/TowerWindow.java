@@ -19,7 +19,7 @@ import com.happydroids.droidtowers.input.InputSystem;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class TowerWindowTwo {
+public class TowerWindow {
   private static final int[] DIALOG_CLOSE_KEYCODES = new int[]{InputSystem.Keys.ESCAPE, InputSystem.Keys.BACK};
   private InputCallback closeDialogCallback;
   private Runnable dismissCallback;
@@ -32,7 +32,7 @@ public class TowerWindowTwo {
   private final Table content;
   private Table window;
 
-  public TowerWindowTwo(String title, Stage stage, Skin skin) {
+  public TowerWindow(String title, Stage stage, Skin skin) {
     if (pixmap == null) {
       pixmap = new Pixmap(2, 10, Pixmap.Format.RGB888);
 
@@ -95,10 +95,10 @@ public class TowerWindowTwo {
     return content.row();
   }
 
-  public TowerWindowTwo show() {
+  public TowerWindow show() {
     closeDialogCallback = new InputCallback() {
       public boolean run(float timeDelta) {
-        TowerWindowTwo.this.dismiss();
+        TowerWindow.this.dismiss();
         return true;
       }
     };

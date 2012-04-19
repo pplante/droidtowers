@@ -22,7 +22,7 @@ import java.text.NumberFormat;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class LoadGameWindow extends TowerWindowTwo {
+public class LoadGameWindow extends TowerWindow {
   private boolean foundSaveFile;
   private final Table gameFiles;
 
