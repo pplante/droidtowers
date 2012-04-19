@@ -538,6 +538,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="435" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="ExportedUnsignedApkPath" value="$USER_HOME$/Desktop/droidtowers.apk" />
+    <property name="ExportedApkPath" value="$PROJECT_DIR$/android/android.apk" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="432" />
@@ -589,6 +590,8 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="0146BF4F17012018" />
+    <property name="KeystoreLocation" value="$PROJECT_DIR$/happydroids-droidtowers" />
+    <property name="KeyAlias" value="key0" />
     <property name="GenerateAntBuildDialog.backupFiles" value="false" />
     <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
@@ -1401,7 +1404,11 @@
       <created>1334829186132</created>
       <updated>1334829186133</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="fixed the connect to happydroids button!">
+      <created>1334829437704</created>
+      <updated>1334829437704</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">

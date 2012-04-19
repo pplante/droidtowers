@@ -1,0 +1,67 @@
+buttons-hd.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+tool-housing
+  rotate: false
+  xy: 118, 1
+  size: 116, 116
+  orig: 116, 116
+  offset: 6, 6
+  index: -1
+tool-transit
+  rotate: false
+  xy: 1, 1
+  size: 116, 116
+  orig: 116, 116
+  offset: 6, 6
+  index: -1
+audio-off
+  rotate: false
+  xy: 118, 235
+  size: 116, 116
+  orig: 116, 116
+  offset: 6, 6
+  index: -1
+overlay-button
+  rotate: false
+  xy: 352, 1
+  size: 116, 116
+  orig: 116, 116
+  offset: 6, 6
+  index: -1
+tool-sprite
+  rotate: false
+  xy: 1, 118
+  size: 116, 116
+  orig: 116, 116
+  offset: 6, 6
+  index: -1
+tool-sell
+  rotate: false
+  xy: 1, 352
+  size: 116, 116
+  orig: 116, 116
+  offset: 6, 6
+  index: -1
+audio-on
+  rotate: false
+  xy: 118, 118
+  size: 116, 116
+  orig: 116, 116
+  offset: 6, 6
+  index: -1
+tool-commerce
+  rotate: false
+  xy: 235, 1
+  size: 116, 116
+  orig: 116, 116
+  offset: 6, 6
+  index: -1
+tool-services
+  rotate: false
+  xy: 1, 235
+  size: 116, 116
+  orig: 116, 116
+  offset: 6, 6
+  index: -1
