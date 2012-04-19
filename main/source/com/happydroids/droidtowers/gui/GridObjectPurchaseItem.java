@@ -47,7 +47,7 @@ class GridObjectPurchaseItem extends Table {
 
     row().fill();
     add(new Label(gridObjectType.getName(), skin)).minWidth(350);
-    Label priceLabel = LabelStyle.Default.makeLabel(TowerConsts.CURRENCY_SYMBOL + NumberFormat.getInstance().format(gridObjectType.getCoins()));
+    Label priceLabel = FontManager.Default.makeLabel(TowerConsts.CURRENCY_SYMBOL + NumberFormat.getInstance().format(gridObjectType.getCoins()));
     priceLabel.setAlignment(Align.RIGHT);
     add(priceLabel).right().fill();
 
@@ -57,7 +57,7 @@ class GridObjectPurchaseItem extends Table {
     if (textureRegion != null) {
       actor = new Image(textureRegion, Scaling.fit, Align.LEFT | Align.TOP);
     } else {
-      actor = LabelStyle.Default.makeLabel("No image found.");
+      actor = FontManager.Default.makeLabel("No image found.");
     }
     add(actor).maxHeight(40).maxWidth(200);
     add(buyButton).align(Align.RIGHT).width(80);

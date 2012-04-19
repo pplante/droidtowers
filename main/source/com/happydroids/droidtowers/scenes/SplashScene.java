@@ -10,12 +10,15 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.TowerAssetManagerFilesList;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.GameObject;
-import com.happydroids.droidtowers.gui.LabelStyle;
+import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.utils.Random;
+
+import java.util.Set;
 
 public class SplashScene extends Scene {
   private static final String[] STRINGS = new String[]{
@@ -42,18 +45,18 @@ public class SplashScene extends Scene {
   public void create(Object... args) {
 //    addModalBackground();
 
-    Label titleLabel = LabelStyle.BankGothic64.makeLabel("Droid Towers");
+    Label titleLabel = FontManager.BankGothic64.makeLabel("Droid Towers");
     titleLabel.setAlignment(Align.CENTER);
     titleLabel.y = getStage().centerY() * 1.66f;
     centerHorizontally(titleLabel);
     addActor(titleLabel);
 
-    loadingMessage = LabelStyle.BankGothic32.makeLabel(selectRandomMessage());
+    loadingMessage = FontManager.BankGothic32.makeLabel(selectRandomMessage());
     loadingMessage.setAlignment(Align.CENTER);
     center(loadingMessage);
     addActor(loadingMessage);
 
-    progressBar = LabelStyle.BankGothic64.makeLabel(null);
+    progressBar = FontManager.BankGothic64.makeLabel(null);
     progressBar.setAlignment(Align.CENTER);
     centerHorizontally(progressBar);
     progressBar.y = 100;
@@ -79,6 +82,16 @@ public class SplashScene extends Scene {
 
   @Override
   public void render(float deltaTime) {
+    Set<String> preloadFiles = TowerAssetManagerFilesList.preloadFiles.keySet();
+
+    boolean hasFilesToPreload = false;
+    for (String preloadFile : preloadFiles) {
+      if (!TowerAssetManager.assetManager().isLoaded(preloadFile)) {
+        hasFilesToPreload = true;
+      }
+    }
+
+
     boolean assetManagerFinished = TowerAssetManager.assetManager().update();
 
     int progress = (int) (TowerAssetManager.assetManager().getProgress() * 100f);
@@ -90,7 +103,7 @@ public class SplashScene extends Scene {
       selectedNewMessage = true;
     }
 
-    if (assetManagerFinished) {
+    if (!hasFilesToPreload) {
       TowerGame.changeScene(MainMenuScene.class);
     }
 

@@ -30,6 +30,10 @@ public class TowerAssetManager {
 
       Texture.setAssetManager(assetManager);
 
+      for (Map.Entry<String, Class> entry : TowerAssetManagerFilesList.preloadFiles.entrySet()) {
+        assetManager.load(entry.getKey(), entry.getValue());
+      }
+
       for (Map.Entry<String, Class> entry : TowerAssetManagerFilesList.files.entrySet()) {
         assetManager.load(entry.getKey(), entry.getValue());
       }
@@ -42,6 +46,12 @@ public class TowerAssetManager {
     }
 
     return assetManager;
+  }
+
+  private static void addPostPreloadFiles() {
+    for (Map.Entry<String, Class> entry : TowerAssetManagerFilesList.files.entrySet()) {
+      assetManager.load(entry.getKey(), entry.getValue());
+    }
   }
 
   private static void addDirectoryToAssetManager(AssetManager assetManager, String path, String pathSuffix, Class<?> clazz) {

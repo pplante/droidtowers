@@ -97,7 +97,7 @@ public class TowerGame implements ApplicationListener {
     menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_14_bold_white.fnt"), false);
     camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     spriteBatch = new SpriteBatch(100);
-    rootUiStage = new Stage(800, 480, true, spriteBatch);
+    rootUiStage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false, spriteBatch);
 
     InputSystem.instance().setup(camera);
     Gdx.input.setInputProcessor(InputSystem.instance());
@@ -139,6 +139,8 @@ public class TowerGame implements ApplicationListener {
   }
 
   public void render() {
+    TowerAssetManager.assetManager().update();
+
     Gdx.gl.glClearColor(0.48f, 0.729f, 0.870f, 1.0f);
     Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
     Gdx.gl.glEnable(GL10.GL_BLEND);
@@ -197,7 +199,7 @@ public class TowerGame implements ApplicationListener {
   public void dispose() {
     activeScene.dispose();
     spriteBatch.dispose();
-    for (LabelStyle labelStyle : LabelStyle.values()) {
+    for (FontManager labelStyle : FontManager.values()) {
       labelStyle.reset();
     }
     BackgroundTask.dispose();

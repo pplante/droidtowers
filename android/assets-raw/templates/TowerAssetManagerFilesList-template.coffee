@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
- */
+* Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+*/
 
 package com.happydroids.droidtowers;
 
@@ -14,9 +14,10 @@ import com.google.common.collect.Maps;
 import java.util.Map;
 
 public class TowerAssetManagerFilesList {
-  public static Map<String, Class> files = Maps.newHashMap();
+public static Map<String, Class> preloadFiles = Maps.newHashMap();
+public static Map<String, Class> files = Maps.newHashMap();
 
-  static {
-    // REPLACEME
-  }
+static {
+// REPLACEME
+}
 }

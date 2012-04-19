@@ -15,15 +15,15 @@ public class DroidTowerGame extends AndroidApplication {
   public void onCreate(android.os.Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    TowerGameService.setInstance(new TowerGameService());
-
     TowerGameService.setDeviceOSName("android");
     TowerGameService.setDeviceOSVersion("sdk" + getVersion());
 
     TowerGame towerGame = new TowerGame();
     towerGame.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(this));
     towerGame.setPlatformBrowserUtil(new AndroidBrowserUtil(this));
+
     initialize(towerGame, true);
+
     Gdx.input.setCatchBackKey(true);
     Gdx.input.setCatchMenuKey(true);
   }

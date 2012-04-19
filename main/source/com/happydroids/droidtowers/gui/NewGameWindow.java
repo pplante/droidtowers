@@ -17,7 +17,7 @@ import com.happydroids.droidtowers.scenes.TowerScene;
 
 import java.text.NumberFormat;
 
-public class NewGameWindow extends TowerWindow {
+public class NewGameWindow extends TowerWindowTwo {
 
   private DifficultyLevel difficultyLevel;
   private final TextButton beginButton;
@@ -25,11 +25,12 @@ public class NewGameWindow extends TowerWindow {
   public NewGameWindow(Stage stage, Skin skin) {
     super("Start a new Tower", stage, skin);
 
-    defaults().top().left().pad(5);
-    add(LabelStyle.Default.makeLabel("Please provide a name for your Tower:"));
-    row().colspan(2);
+    clear();
 
-    final TextField nameField = new TextField("", "Tower Name", skin);
+    row().space(16).padTop(32);
+    add(FontManager.RobotoBold18.makeLabel("Please provide a name for your Tower:")).right();
+
+    final TextField nameField = FontManager.Roboto32.makeTextField("", "Tower Name", skin);
     nameField.setTextFieldListener(new TextField.TextFieldListener() {
       public void keyTyped(TextField textField, char key) {
         beginButton.touchable = !textField.getText().isEmpty();
@@ -41,15 +42,14 @@ public class NewGameWindow extends TowerWindow {
         }
       }
     });
-    add(nameField);
-    row().padTop(15).colspan(2);
+    add(nameField).fillX().expandX().left();
+    row().space(16);
 
-    add(LabelStyle.Default.makeLabel("Select level of difficulty:"));
-    row().colspan(2);
+    add(FontManager.RobotoBold18.makeLabel("Select level of difficulty:")).right();
 
-    TextButton easy = new CheckBox(" Easy", skin);
-    TextButton medium = new CheckBox(" Medium", skin);
-    TextButton hard = new CheckBox(" Hard", skin);
+    TextButton easy = FontManager.RobotoBold18.makeCheckBox("Easy", skin);
+    TextButton medium = FontManager.RobotoBold18.makeCheckBox("Medium", skin);
+    TextButton hard = FontManager.RobotoBold18.makeCheckBox("Hard", skin);
 
     Table buttonContainer = new Table(skin);
     buttonContainer.row().pad(4);
@@ -57,11 +57,11 @@ public class NewGameWindow extends TowerWindow {
     buttonContainer.add(medium).expand();
     buttonContainer.add(hard).expand();
 
-    add(buttonContainer).center().fill();
-    row().padTop(15).colspan(2);
+    add(buttonContainer).fill();
+    row().space(16).colspan(2);
 
     final String moneyLabelPrefix = "Starting money: ";
-    final Label moneyLabel = LabelStyle.Default.makeLabel(moneyLabelPrefix);
+    final Label moneyLabel = FontManager.Roboto32.makeLabel(moneyLabelPrefix);
     add(moneyLabel);
 
     final ButtonGroup difficultyGroup = new ButtonGroup(easy, medium, hard);
@@ -70,27 +70,24 @@ public class NewGameWindow extends TowerWindow {
         Button checked = difficultyGroup.getChecked();
         if (checked != null) {
           String buttonText = ((TextButton) checked).getText().toString();
-          difficultyLevel = DifficultyLevel.valueOf(buttonText.substring(1).toUpperCase());
+          difficultyLevel = DifficultyLevel.valueOf(buttonText.toUpperCase());
           moneyLabel.setText(moneyLabelPrefix + NumberFormat.getCurrencyInstance().format(difficultyLevel.getStartingMoney()));
         }
       }
     });
 
-    difficultyGroup.setChecked(" Easy");
+    difficultyGroup.setChecked("Easy");
 
-    row().padTop(25);
-    TextButton cancel = new TextButton("Cancel", skin);
-    cancel.setClickListener(new ClickListener() {
+    TextButton cancelButton = FontManager.RobotoBold18.makeTextButton("cancel", skin);
+    cancelButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         dismiss();
       }
     });
 
-    add(cancel).right();
-    beginButton = new TextButton("Begin building!", skin);
+    beginButton = FontManager.RobotoBold18.makeTextButton("Begin Building!", skin);
     beginButton.touchable = false;
     beginButton.action(FadeTo.$(0.6f, 0f));
-    add(beginButton).right();
 
     beginButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
@@ -98,5 +95,14 @@ public class NewGameWindow extends TowerWindow {
         TowerGame.changeScene(TowerScene.class, new GameSave(nameField.getText(), difficultyLevel));
       }
     });
+
+    Table bottomBar = new Table();
+    bottomBar.row().space(16);
+    bottomBar.add(cancelButton);
+    bottomBar.add(beginButton);
+
+
+    row().colspan(2).expandY().bottom().right().padBottom(16);
+    add(bottomBar);
   }
 }

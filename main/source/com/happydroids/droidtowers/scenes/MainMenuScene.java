@@ -28,7 +28,7 @@ import java.lang.reflect.Constructor;
 
 public class MainMenuScene extends Scene {
   private static final String TAG = MainMenuScene.class.getSimpleName();
-  public static final int BUTTON_WIDTH = 220;
+  public static final int BUTTON_WIDTH = 280;
 
   private SplashCloudLayer cloudLayer;
 
@@ -37,11 +37,11 @@ public class MainMenuScene extends Scene {
     Table container = new Table(getGuiSkin());
     container.defaults().center().left();
 
-    Label label = LabelStyle.BankGothic64.makeLabel("Droid Towers");
+    Label label = FontManager.BankGothic64.makeLabel("Droid Towers");
     container.add(label).align(Align.CENTER);
     container.row();
 
-    Label versionlabel = LabelStyle.Default.makeLabel(String.format("%s (%s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA));
+    Label versionlabel = FontManager.Default.makeLabel(String.format("%s (%s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA));
     container.add(versionlabel).right().padTop(-16);
     container.row();
 
@@ -51,25 +51,25 @@ public class MainMenuScene extends Scene {
             .start(TweenSystem.getTweenManager());
 
     if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT && TowerGameService.instance().haveNetworkConnection() && !TowerGameService.instance().hasAuthenticated()) {
-      TextButton connectFacebookButton = new TextButton("login to happydroids.com", getGuiSkin());
-      connectFacebookButton.setClickListener(new LaunchWindowClickListener(ConnectToHappyDroidsWindow.class));
+      TextButton connectFacebookButton = FontManager.RobotoBold18.makeTextButton("login to happydroids.com", getGuiSkin());
+//      connectFacebookButton.setClickListener(new LaunchWindowClickListener(ConnectToHappyDroidsWindow.class));
       container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
       container.row().padTop(30);
     }
 
-    TextButton newGameButton = new TextButton("new game", getGuiSkin());
+    TextButton newGameButton = FontManager.RobotoBold18.makeTextButton("new game", getGuiSkin());
     container.add(newGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row().padTop(15);
 
-    TextButton loadGameButton = new TextButton("load game", getGuiSkin());
+    TextButton loadGameButton = FontManager.RobotoBold18.makeTextButton("load game", getGuiSkin());
     container.add(loadGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row().padTop(15);
 
-//    TextButton optionsButton = new TextButton("options", getGuiSkin());
+//    TextButton optionsButton = FontManager.RobotoBold18.makeTextButton("options", getGuiSkin());
 //    container.add(optionsButton).fill().maxWidth(BUTTON_WIDTH);
 //    container.row().padTop(40);
 
-    TextButton exitGameButton = new TextButton("exit game", getGuiSkin());
+    TextButton exitGameButton = FontManager.RobotoBold18.makeTextButton("exit game", getGuiSkin());
     container.add(exitGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row();
 
@@ -130,6 +130,8 @@ public class MainMenuScene extends Scene {
         Gdx.app.exit();
       }
     });
+
+    newGameButton.click(1, 1);
   }
 
   @Override
@@ -151,17 +153,17 @@ public class MainMenuScene extends Scene {
   }
 
   private class LaunchWindowClickListener implements ClickListener {
-    private final Class<? extends TowerWindow> windowClass;
+    private final Class<? extends TowerWindowTwo> windowClass;
 
-    public LaunchWindowClickListener(Class<? extends TowerWindow> windowClass) {
+    public LaunchWindowClickListener(Class<? extends TowerWindowTwo> windowClass) {
       this.windowClass = windowClass;
     }
 
     public void click(Actor actor, float x, float y) {
       try {
-        Constructor<? extends TowerWindow> constructor = windowClass.getConstructor(Stage.class, Skin.class);
-        TowerWindow window = constructor.newInstance(getStage(), getGuiSkin());
-        window.modal(true).show().centerOnStage();
+        Constructor<? extends TowerWindowTwo> constructor = windowClass.getConstructor(Stage.class, Skin.class);
+        TowerWindowTwo window = constructor.newInstance(getStage(), getGuiSkin());
+        window.show();
       } catch (Exception e) {
         throw new RuntimeException(e);
       }

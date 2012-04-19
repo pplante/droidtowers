@@ -20,7 +20,11 @@ public class GenerateAssetManagerFileList {
   private static Set<String> managedFiles = Sets.newHashSet();
 
   public static void main(String[] args) {
-    FileHandle template = new FileHandle("assets-raw/templates/TowerAssetManagerFilesList-template.java");
+    FileHandle template = new FileHandle("assets-raw/templates/TowerAssetManagerFilesList-template.coffee");
+
+    addEntryToPreloader(assetsDir.child("default-skin.ui"), Skin.class);
+    addEntryToPreloader(assetsDir.child("backgrounds/clouds.txt"), TextureAtlas.class);
+    addEntryToPreloader(assetsDir.child("hud/menus.txt"), TextureAtlas.class);
 
     addDirectoryToAssetManager("backgrounds/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("movies/", ".txt", TextureAtlas.class);
@@ -30,7 +34,6 @@ public class GenerateAssetManagerFileList {
     addDirectoryToAssetManager("rooms/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("sound/effects/", ".wav", Sound.class);
 
-    addFileEntry(assetsDir.child("default-skin.ui"), Skin.class);
     addFileEntry(assetsDir.child("characters.txt"), TextureAtlas.class);
     addFileEntry(assetsDir.child("transport.txt"), TextureAtlas.class);
     addFileEntry(assetsDir.child("rain-drop.png"), Texture.class);
@@ -43,6 +46,14 @@ public class GenerateAssetManagerFileList {
     outputFile.writeString(javaFileContent, false);
 
     System.out.println("Generated: " + outputFile.path());
+  }
+
+  private static void addEntryToPreloader(FileHandle child, Class clazz) {
+    if (!child.exists()) {
+      throw new RuntimeException("File not found: " + child.path());
+    }
+
+    managedFiles.add(String.format("preloadFiles.put(\"%s\", %s.class);", child.path().replace("assets/", ""), clazz.getSimpleName()));
   }
 
   private static void addDirectoryToAssetManager(String folder, String suffix, Class clazz) {
