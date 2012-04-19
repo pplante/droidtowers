@@ -15,6 +15,7 @@ import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.Scene;
 
 import java.util.List;
@@ -119,7 +120,7 @@ public class Dialog {
     messageLabel.setWrap(true);
 
     container.row();
-    container.add(messageLabel).colspan(buttons.size()).width(scale(600));
+    container.add(messageLabel).colspan(buttons.size()).width(Display.percentOfScreen(0.8f));
 
     container.row();
     for (TextButton button : buttons) {

@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.scenes;
 
 import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -19,7 +20,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
+import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gui.*;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
@@ -135,6 +138,26 @@ public class MainMenuScene extends Scene {
     });
 
 //    newGameButton.click(1, 1);
+
+
+    try {
+      FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
+      FileHandle[] files = storage.list(".json");
+      if (files.length > 0) {
+        while (!TowerAssetManager.assetManager().update()) {
+          Thread.yield();
+        }
+
+        for (FileHandle file : files) {
+          if (!file.path().endsWith("png")) {
+            TowerGame.changeScene(TowerScene.class, GameSave.readFile(file));
+            break;
+          }
+        }
+      }
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override

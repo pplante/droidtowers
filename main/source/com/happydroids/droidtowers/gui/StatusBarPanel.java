@@ -16,6 +16,8 @@ import com.happydroids.droidtowers.scenes.TowerScene;
 
 import java.text.NumberFormat;
 
+import static com.happydroids.droidtowers.platform.Display.scale;
+
 public class StatusBarPanel extends Table {
   private final Skin guiSkin;
   private final TowerScene towerScene;
@@ -41,7 +43,7 @@ public class StatusBarPanel extends Table {
     setBackground(guiSkin.getPatch("default-round"));
 
     defaults();
-    top().left().padTop(8).padLeft(8);
+    top().left().padTop(scale(8)).padLeft(scale(8));
 
     row().center();
     makeHeader("EXPERIENCE");
@@ -51,7 +53,7 @@ public class StatusBarPanel extends Table {
     makeHeader("POPULATION");
     makeHeader("GAME SPEED");
 
-    row().center();
+    row().center().padRight(12);
     add(experienceLabel);
     add(moneyLabel);
     add(moneyIncomeLabel);
@@ -73,7 +75,7 @@ public class StatusBarPanel extends Table {
     label.setAlignment(Align.CENTER);
     label.setColor(Color.LIGHT_GRAY);
 
-    return add(label).center().minWidth(100);
+    return add(label).center().padRight(12);
   }
 
   @Override

@@ -30,7 +30,7 @@ public class LoadGameWindow extends TowerWindowTwo {
     super("Load a Tower", stage, skin);
 
     FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
-    FileHandle[] files = storage.list();
+    FileHandle[] files = storage.list(".json");
 
     gameFiles = new Table();
     gameFiles.clear();
@@ -92,7 +92,7 @@ public class LoadGameWindow extends TowerWindowTwo {
     TextButton launchButton = FontManager.RobotoBold18.makeTextButton("Play", skin);
     launchButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-//        dismiss();
+        dismiss();
         try {
           TowerGame.changeScene(TowerScene.class, GameSave.readFile(savedGameFile));
         } catch (Exception e) {
