@@ -4,7 +4,7 @@
 
 <launch4jConfig>
   <headerType>gui</headerType>
-  <jar>../../../out/desktop-jar/DroidTowers-obfuscated.jar</jar>
+  <jar>../../../out/desktop-jar/DroidTowers-release.jar</jar>
   <outfile>../../../out/DroidTowers.exe</outfile>
   <errTitle>DroidTowers</errTitle>
   <chdir>.</chdir>

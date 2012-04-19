@@ -9418,17 +9418,19 @@ com.esotericsoftware.tablelayout.Cell -> com.esotericsoftware.tablelayout.Cell:
     511:512:com.esotericsoftware.tablelayout.Cell center() -> d
     516:522:com.esotericsoftware.tablelayout.Cell top() -> e
     526:532:com.esotericsoftware.tablelayout.Cell left() -> f
-    546:552:com.esotericsoftware.tablelayout.Cell right() -> g
-    556:558:com.esotericsoftware.tablelayout.Cell expand() -> h
-    562:563:com.esotericsoftware.tablelayout.Cell expandX() -> i
+    536:542:com.esotericsoftware.tablelayout.Cell bottom() -> g
+    546:552:com.esotericsoftware.tablelayout.Cell right() -> h
+    556:558:com.esotericsoftware.tablelayout.Cell expand() -> i
+    562:563:com.esotericsoftware.tablelayout.Cell expandX() -> j
+    567:568:com.esotericsoftware.tablelayout.Cell expandY() -> k
     584:585:com.esotericsoftware.tablelayout.Cell ignore(java.lang.Boolean) -> a
-    594:594:boolean getIgnore() -> j
+    594:594:boolean getIgnore() -> l
     598:599:com.esotericsoftware.tablelayout.Cell colspan(java.lang.Integer) -> b
-    638:638:int getWidgetX() -> k
-    642:642:int getWidgetY() -> l
-    646:646:int getWidgetWidth() -> m
-    650:650:int getWidgetHeight() -> n
-    754:754:boolean isEndRow() -> o
+    638:638:int getWidgetX() -> m
+    642:642:int getWidgetY() -> n
+    646:646:int getWidgetWidth() -> o
+    650:650:int getWidgetHeight() -> p
+    754:754:boolean isEndRow() -> q
     774:797:com.esotericsoftware.tablelayout.Cell defaults(com.esotericsoftware.tablelayout.BaseTableLayout) -> a
 com.esotericsoftware.tablelayout.ParseException -> com.esotericsoftware.tablelayout.ParseException:
     int line -> a
@@ -26948,7 +26950,8 @@ com.happydroids.droidtowers.gui.FontManager -> com.happydroids.droidtowers.gui.F
     com.badlogic.gdx.graphics.Color color -> j
     int buttonPadTop -> k
     int buttonPadLeft -> l
-    com.happydroids.droidtowers.gui.FontManager[] $VALUES -> m
+    com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle textFieldStyle -> m
+    com.happydroids.droidtowers.gui.FontManager[] $VALUES -> n
     com.happydroids.droidtowers.gui.FontManager[] values() -> values
     com.happydroids.droidtowers.gui.FontManager valueOf(java.lang.String) -> valueOf
     com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle labelStyle() -> c
@@ -26956,7 +26959,9 @@ com.happydroids.droidtowers.gui.FontManager -> com.happydroids.droidtowers.gui.F
     com.badlogic.gdx.scenes.scene2d.ui.Label makeLabel(java.lang.String) -> a
     com.badlogic.gdx.scenes.scene2d.ui.TextButton makeTextButton(java.lang.String,com.badlogic.gdx.scenes.scene2d.ui.Skin) -> a
     void reset() -> b
+    com.badlogic.gdx.scenes.scene2d.ui.CheckBox makeCheckBox(java.lang.String,com.badlogic.gdx.scenes.scene2d.ui.Skin) -> b
     com.badlogic.gdx.scenes.scene2d.ui.TextButton applyTextButtonLabelStyle(com.badlogic.gdx.scenes.scene2d.ui.TextButton) -> a
+    com.badlogic.gdx.scenes.scene2d.ui.TextField makeTextField(java.lang.String,java.lang.String,com.badlogic.gdx.scenes.scene2d.ui.Skin) -> a
 com.happydroids.droidtowers.gui.GridObjectPurchaseItem -> com.happydroids.droidtowers.gui.GridObjectPurchaseItem:
     com.badlogic.gdx.graphics.g2d.NinePatch background -> a
     com.badlogic.gdx.graphics.Pixmap pixmap -> b
@@ -27034,7 +27039,10 @@ com.happydroids.droidtowers.gui.HorizontalRule -> com.happydroids.droidtowers.gu
     float getMinHeight() -> getMinHeight
     float getPrefWidth() -> getPrefWidth
 com.happydroids.droidtowers.gui.LoadGameWindow -> com.happydroids.droidtowers.gui.LoadGameWindow:
-    com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table gameFiles -> a
+    boolean foundSaveFile -> a
+    com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table gameFiles -> d
+    com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table makeGameFileRow(com.badlogic.gdx.files.FileHandle) -> a
+    com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table makeGameFileInfoBox(com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table,com.badlogic.gdx.files.FileHandle,com.happydroids.droidtowers.gamestate.GameSave) -> a
     com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table access$000(com.happydroids.droidtowers.gui.LoadGameWindow) -> a
 com.happydroids.droidtowers.gui.LoadGameWindow$1 -> com.happydroids.droidtowers.gui.LoadGameWindow$1:
     com.badlogic.gdx.files.FileHandle val$savedGameFile -> a
@@ -27226,27 +27234,16 @@ com.happydroids.droidtowers.gui.TowerWindow -> com.happydroids.droidtowers.gui.T
     com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table window -> k
     com.badlogic.gdx.graphics.Color makeRGB(int,int,int) -> a
     com.esotericsoftware.tablelayout.Cell add(com.badlogic.gdx.scenes.scene2d.Actor) -> a
-    com.happydroids.droidtowers.gui.TowerWindow show() -> b
-    void dismiss() -> c
+    com.esotericsoftware.tablelayout.Cell row() -> b
+    com.happydroids.droidtowers.gui.TowerWindow show() -> c
+    void dismiss() -> d
     void setDismissCallback(java.lang.Runnable) -> a
+    void clear() -> e
 com.happydroids.droidtowers.gui.TowerWindow$1 -> com.happydroids.droidtowers.gui.TowerWindow$1:
     com.happydroids.droidtowers.gui.TowerWindow this$0 -> a
     void click(com.badlogic.gdx.scenes.scene2d.Actor,float,float) -> click
 com.happydroids.droidtowers.gui.TowerWindow$2 -> com.happydroids.droidtowers.gui.TowerWindow$2:
     com.happydroids.droidtowers.gui.TowerWindow this$0 -> a
-    boolean run(float) -> a
-com.happydroids.droidtowers.gui.TowerWindowTwo -> com.happydroids.droidtowers.gui.TowerWindowTwo:
-    int[] DIALOG_CLOSE_KEYCODES -> b
-    com.happydroids.droidtowers.input.InputCallback closeDialogCallback -> c
-    java.lang.Runnable dismissCallback -> d
-    com.badlogic.gdx.scenes.scene2d.Stage stage -> a
-    com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table window -> e
-    void dismiss() -> a
-com.happydroids.droidtowers.gui.TowerWindowTwo$1 -> com.happydroids.droidtowers.gui.TowerWindowTwo$1:
-    com.happydroids.droidtowers.gui.TowerWindowTwo this$0 -> a
-    void click(com.badlogic.gdx.scenes.scene2d.Actor,float,float) -> click
-com.happydroids.droidtowers.gui.TowerWindowTwo$2 -> com.happydroids.droidtowers.gui.TowerWindowTwo$2:
-    com.happydroids.droidtowers.gui.TowerWindowTwo this$0 -> a
     boolean run(float) -> a
 com.happydroids.droidtowers.gui.WheelScrollFlickScrollPane -> com.happydroids.droidtowers.gui.WheelScrollFlickScrollPane:
     boolean touchMoved(float,float) -> touchMoved
