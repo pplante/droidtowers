@@ -4,10 +4,12 @@
 
 package com.happydroids.droidtowers.gui;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.scenes.TowerScene;
@@ -28,14 +30,13 @@ public class StatusBarPanel extends Table {
   public StatusBarPanel(Skin guiSkin, TowerScene towerScene) {
     this.guiSkin = guiSkin;
     this.towerScene = towerScene;
-    Label.LabelStyle helvetica_neue_10_bold_white = this.guiSkin.getStyle("helvetica_neue_10_bold_white", Label.LabelStyle.class);
 
-    moneyLabel = makeLabel("0", null);
-    moneyIncomeLabel = makeLabel("0", null);
-    moneyExpensesLabel = makeLabel("0", null);
-    experienceLabel = makeLabel("0", null);
-    populationLabel = makeLabel("0", null);
-    gameSpeedLabel = makeLabel("0x", null);
+    moneyLabel = makeValueLabel("0");
+    moneyIncomeLabel = makeValueLabel("0");
+    moneyExpensesLabel = makeValueLabel("0");
+    experienceLabel = makeValueLabel("0");
+    populationLabel = makeValueLabel("0");
+    gameSpeedLabel = makeValueLabel("0x");
 
     setBackground(guiSkin.getPatch("default-round"));
 
@@ -43,12 +44,12 @@ public class StatusBarPanel extends Table {
     top().left().padTop(8).padLeft(8);
 
     row().center();
-    add(makeLabel("EXPERIENCE", helvetica_neue_10_bold_white)).minWidth(100);
-    add(makeLabel("COINS", helvetica_neue_10_bold_white)).minWidth(100);
-    add(makeLabel("INCOME", helvetica_neue_10_bold_white)).minWidth(100);
-    add(makeLabel("EXPENSES", helvetica_neue_10_bold_white)).minWidth(100);
-    add(makeLabel("POPULATION", helvetica_neue_10_bold_white)).minWidth(100);
-    add(makeLabel("GAME SPEED", helvetica_neue_10_bold_white)).minWidth(100);
+    makeHeader("EXPERIENCE");
+    makeHeader("COINS");
+    makeHeader("INCOME");
+    makeHeader("EXPENSES");
+    makeHeader("POPULATION");
+    makeHeader("GAME SPEED");
 
     row().center();
     add(experienceLabel);
@@ -59,6 +60,20 @@ public class StatusBarPanel extends Table {
     add(gameSpeedLabel);
 
     pack();
+  }
+
+  private Label makeValueLabel(String labelText) {
+    Label label = FontManager.Default.makeLabel(labelText);
+    label.setAlignment(Align.CENTER);
+    return label;
+  }
+
+  private Cell makeHeader(String headerText) {
+    Label label = FontManager.Roboto12.makeLabel(headerText);
+    label.setAlignment(Align.CENTER);
+    label.setColor(Color.LIGHT_GRAY);
+
+    return add(label).center().minWidth(100);
   }
 
   @Override
@@ -80,16 +95,5 @@ public class StatusBarPanel extends Table {
 
       pack();
     }
-  }
-
-  private Label makeLabel(String text, Label.LabelStyle labelStyle) {
-    Label label = new Label(text, guiSkin);
-    label.setAlignment(Align.CENTER);
-
-    if (labelStyle != null) {
-      label.setStyle(labelStyle);
-    }
-
-    return label;
   }
 }

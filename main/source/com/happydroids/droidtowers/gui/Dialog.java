@@ -19,6 +19,8 @@ import com.happydroids.droidtowers.scenes.Scene;
 
 import java.util.List;
 
+import static com.happydroids.droidtowers.platform.Display.scale;
+
 public class Dialog {
   static final int[] NEGATIVE_BUTTON_KEYS = new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE};
   private Stage stage;
@@ -72,7 +74,7 @@ public class Dialog {
   }
 
   public Dialog addButton(ResponseType type, String labelText, final OnClickCallback onClickCallback) {
-    TextButton button = new TextButton(labelText, skin);
+    TextButton button = FontManager.RobotoBold18.makeTextButton(labelText, skin);
 
     if (type == ResponseType.NEGATIVE) {
       negativeButton = button;
@@ -112,12 +114,12 @@ public class Dialog {
     window = new TowerWindow(title, stage, skin);
 
     Table container = new Table(skin);
-    container.defaults().pad(5).top().left();
-    Label messageLabel = FontManager.Default.makeLabel(messageText);
+    container.defaults().pad(scale(12)).top().left();
+    Label messageLabel = FontManager.Roboto24.makeLabel(messageText);
     messageLabel.setWrap(true);
 
     container.row();
-    container.add(messageLabel).colspan(buttons.size()).width(600);
+    container.add(messageLabel).colspan(buttons.size()).width(scale(600));
 
     container.row();
     for (TextButton button : buttons) {

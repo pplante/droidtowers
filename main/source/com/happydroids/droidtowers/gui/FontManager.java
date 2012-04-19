@@ -17,7 +17,9 @@ public enum FontManager {
   Default("fonts/roboto_white_14.fnt", "fonts/roboto_white_28.fnt", Color.WHITE),
   RobotoBold18("fonts/roboto_bold_white_18.fnt", "fonts/roboto_white_32.fnt", Color.WHITE, 8, 16),
   Roboto32("fonts/roboto_white_32.fnt", "fonts/roboto_white_64.fnt", Color.WHITE),
-  Roboto64("fonts/roboto_white_64.fnt", "fonts/roboto_white_128.fnt", Color.WHITE);
+  Roboto64("fonts/roboto_white_64.fnt", "fonts/roboto_white_128.fnt", Color.WHITE),
+  Roboto24("fonts/roboto_white_24.fnt", "fonts/roboto_white_48.fnt", Color.WHITE),
+  Roboto12("fonts/roboto_white_12.fnt", "fonts/roboto_white_24.fnt", Color.WHITE);
 
   private static HashMap<String, BitmapFont> bitmapFonts = Maps.newHashMap();
   private Label.LabelStyle labelStyle;
