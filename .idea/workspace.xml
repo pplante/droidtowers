@@ -23,13 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TowerWindow.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerConsts.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerConsts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/MovieTheater.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/MovieTheater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ConnectToHappyDroidsWindow.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ConnectToHappyDroidsWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Dialog.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Dialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -187,7 +181,7 @@
       <file leaf-file-name="MainMenuScene.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="66" selection-start="2288" selection-end="2288" vertical-scroll-proportion="0.41263574">
+            <state line="70" column="43" selection-start="3155" selection-end="3155" vertical-scroll-proportion="0.6949654">
               <folding>
                 <element signature="e#0#7242#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -669,7 +663,7 @@
       <recent name="$PROJECT_DIR$/sparky/src/jodd/util" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DesktopGame">
+  <component name="RunManager" selected="Android Application.Android">
     <configuration default="false" name="Migration_GameSave_UnhappyrobotToDroidTowersTest" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
@@ -1403,7 +1397,11 @@
       <created>1334827347531</created>
       <updated>1334827347531</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="fixed the connect to happydroids button!">
+      <created>1334829186132</created>
+      <updated>1334829186133</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1507,7 +1505,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed ALL THE THINGS" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed the connect to happydroids button!" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1520,7 +1518,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="moved a bunch of code out to happydroids-common so it can be shared amongst the other projects easily" />
     <MESSAGE value="renamed all the packages, should write a migration for old game files." />
     <MESSAGE value="added the game update checker to sparky" />
     <MESSAGE value="game update checker can now handle releases without a patch, the full download will then be used." />
@@ -1545,6 +1542,7 @@
     <MESSAGE value="restyled the status bar panel" />
     <MESSAGE value="restyled the status bar panel and fixed the dialog scaling" />
     <MESSAGE value="fixed ALL THE THINGS" />
+    <MESSAGE value="fixed the connect to happydroids button!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1685,7 +1683,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="66" selection-start="2288" selection-end="2288" vertical-scroll-proportion="0.41263574">
+        <state line="70" column="43" selection-start="3155" selection-end="3155" vertical-scroll-proportion="0.6949654">
           <folding>
             <element signature="e#0#7242#0" expanded="true" />
             <element signature="imports" expanded="true" />
