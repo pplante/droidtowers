@@ -33,7 +33,6 @@ public class LoadGameWindow extends TowerWindowTwo {
     FileHandle[] files = storage.list(".json");
 
     gameFiles = new Table();
-    gameFiles.clear();
     gameFiles.defaults();
 
     if (files != null && files.length > 0) {
@@ -56,6 +55,7 @@ public class LoadGameWindow extends TowerWindowTwo {
     }
 
     WheelScrollFlickScrollPane scrollPane = new WheelScrollFlickScrollPane();
+    scrollPane.setFillParent(true);
     scrollPane.setWidget(gameFiles);
     add(scrollPane).fill();
   }

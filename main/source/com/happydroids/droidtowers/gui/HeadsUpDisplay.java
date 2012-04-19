@@ -70,7 +70,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     toolMenu = new RadialMenu();
     toolMenu.arc = 35f;
-    toolMenu.radius = 140f;
+    toolMenu.radius = 180;
     toolMenu.rotation = 3f;
 
     addActor(new ExpandLandOverlay(gameGrid, guiSkin));
@@ -187,9 +187,7 @@ public class HeadsUpDisplay extends WidgetGroup {
       }
     });
 
-    stage.addActor(purchaseDialog);
-
-    purchaseDialog.centerOnStage().modal(true).show();
+    purchaseDialog.show();
   }
 
   public Skin getGuiSkin() {

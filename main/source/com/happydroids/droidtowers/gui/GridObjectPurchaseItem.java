@@ -18,6 +18,8 @@ import com.happydroids.droidtowers.types.GridObjectType;
 
 import java.text.NumberFormat;
 
+import static com.happydroids.droidtowers.platform.Display.scale;
+
 class GridObjectPurchaseItem extends Table {
   private static NinePatch background;
   private static Pixmap pixmap;
@@ -41,15 +43,15 @@ class GridObjectPurchaseItem extends Table {
       background = new NinePatch(texture);
     }
 
-    buyButton = new TextButton(gridObjectType.isLocked() ? "LOCKED" : "Buy", skin);
+    buyButton = FontManager.RobotoBold18.makeTextButton(gridObjectType.isLocked() ? "LOCKED" : "Buy", skin);
 
-    defaults().align(Align.LEFT | Align.TOP).pad(2).expand();
+    defaults().align(Align.LEFT | Align.TOP).pad(scale(2)).expand();
 
-    row().fill();
-    add(new Label(gridObjectType.getName(), skin)).minWidth(350);
-    Label priceLabel = FontManager.Default.makeLabel(TowerConsts.CURRENCY_SYMBOL + NumberFormat.getInstance().format(gridObjectType.getCoins()));
+    row().expandX();
+    add(FontManager.RobotoBold18.makeLabel(gridObjectType.getName())).minWidth(350).fillX();
+    Label priceLabel = FontManager.RobotoBold18.makeLabel(TowerConsts.CURRENCY_SYMBOL + NumberFormat.getInstance().format(gridObjectType.getCoins()));
     priceLabel.setAlignment(Align.RIGHT);
-    add(priceLabel).right().fill();
+    add(priceLabel).right().fill().padBottom(scale(8));
 
     row().align(Align.LEFT);
     TextureRegion textureRegion = gridObjectType.getTextureRegion();

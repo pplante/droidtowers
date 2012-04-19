@@ -4,9 +4,11 @@
 
 package com.happydroids.droidtowers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -31,11 +33,11 @@ public class TowerAssetManager {
       Texture.setAssetManager(assetManager);
 
       for (Map.Entry<String, Class> entry : TowerAssetManagerFilesList.preloadFiles.entrySet()) {
-        assetManager.load(entry.getKey(), entry.getValue());
+        assetManager.load(checkForHDPI(entry.getKey()), entry.getValue());
       }
 
       for (Map.Entry<String, Class> entry : TowerAssetManagerFilesList.files.entrySet()) {
-        assetManager.load(entry.getKey(), entry.getValue());
+        assetManager.load(checkForHDPI(entry.getKey()), entry.getValue());
       }
 
       assetManager.setErrorListener(new AssetErrorListener() {
@@ -48,10 +50,14 @@ public class TowerAssetManager {
     return assetManager;
   }
 
-  private static void addPostPreloadFiles() {
-    for (Map.Entry<String, Class> entry : TowerAssetManagerFilesList.files.entrySet()) {
-      assetManager.load(entry.getKey(), entry.getValue());
+  private static String checkForHDPI(String fileName) {
+    FileHandle file = Gdx.files.internal(fileName);
+    String hdpiFileName = file.nameWithoutExtension() + "-hd" + file.extension();
+    if (Gdx.files.internal(hdpiFileName).exists()) {
+      return hdpiFileName;
     }
+
+    return fileName;
   }
 
   private static void addDirectoryToAssetManager(AssetManager assetManager, String path, String pathSuffix, Class<?> clazz) {
