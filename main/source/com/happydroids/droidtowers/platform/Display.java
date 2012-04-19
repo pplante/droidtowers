@@ -4,20 +4,18 @@
 
 package com.happydroids.droidtowers.platform;
 
-import com.badlogic.gdx.Gdx;
-
 public class Display {
-  private static float displayDensity = Float.MAX_VALUE;
+  private static float scaledDensity = 1f;
 
   public static int scale(int pixels) {
-    if (displayDensity == Float.MAX_VALUE) {
-      displayDensity = Gdx.graphics.getDensity();
-    }
+    return (int) ((float) pixels * scaledDensity);
+  }
 
-    if (displayDensity < 1f) {
-      return pixels;
-    }
+  public static void setScaledDensity(float scaledDensity) {
+    Display.scaledDensity = scaledDensity;
+  }
 
-    return (int) ((float) pixels * displayDensity);
+  public static float getScaledDensity() {
+    return scaledDensity;
   }
 }

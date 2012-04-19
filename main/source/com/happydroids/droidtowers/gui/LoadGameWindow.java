@@ -52,7 +52,7 @@ public class LoadGameWindow extends TowerWindowTwo {
     }
 
     if (!foundSaveFile) {
-      gameFiles.add(FontManager.Default.makeLabel("No saved games were found on this device."));
+      gameFiles.add(FontManager.RobotoBold18.makeLabel("No saved games were found on this device."));
     }
 
     WheelScrollFlickScrollPane scrollPane = new WheelScrollFlickScrollPane();

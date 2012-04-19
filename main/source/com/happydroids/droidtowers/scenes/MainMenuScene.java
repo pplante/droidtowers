@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.scenes;
 
 import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -18,17 +19,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
-import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.*;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
 import java.lang.reflect.Constructor;
 
+import static com.happydroids.droidtowers.platform.Display.scale;
+
 public class MainMenuScene extends Scene {
   private static final String TAG = MainMenuScene.class.getSimpleName();
-  public static final int BUTTON_WIDTH = 280;
+  public static final int BUTTON_WIDTH = scale(280);
+  public static final int BUTTON_SPACING = scale(16);
 
   private SplashCloudLayer cloudLayer;
 
@@ -41,33 +43,34 @@ public class MainMenuScene extends Scene {
     container.add(label).align(Align.CENTER);
     container.row();
 
-    Label versionlabel = FontManager.Default.makeLabel(String.format("%s (%s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA));
-    container.add(versionlabel).right().padTop(-16);
-    container.row();
+    Label versionLabel = FontManager.Default.makeLabel(String.format("%s (%s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA));
+    versionLabel.setColor(Color.DARK_GRAY);
+    container.add(versionLabel).right().padTop(scale(-8));
+    container.row().padTop(30);
 
     Tween.to(label, WidgetAccessor.COLOR, 500)
             .target(1, 1, 1, 0.65f)
             .repeatYoyo(Tween.INFINITY, 250)
             .start(TweenSystem.getTweenManager());
 
-    if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT && TowerGameService.instance().haveNetworkConnection() && !TowerGameService.instance().hasAuthenticated()) {
-      TextButton connectFacebookButton = FontManager.RobotoBold18.makeTextButton("login to happydroids.com", getGuiSkin());
+//    if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT && TowerGameService.instance().haveNetworkConnection() && !TowerGameService.instance().hasAuthenticated()) {
+    TextButton connectFacebookButton = FontManager.RobotoBold18.makeTextButton("login to happydroids.com", getGuiSkin());
 //      connectFacebookButton.setClickListener(new LaunchWindowClickListener(ConnectToHappyDroidsWindow.class));
-      container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
-      container.row().padTop(30);
-    }
+    container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
+    container.row().padTop(BUTTON_SPACING);
+//    }
 
     TextButton newGameButton = FontManager.RobotoBold18.makeTextButton("new game", getGuiSkin());
     container.add(newGameButton).fill().maxWidth(BUTTON_WIDTH);
-    container.row().padTop(15);
+    container.row().padTop(BUTTON_SPACING);
 
     TextButton loadGameButton = FontManager.RobotoBold18.makeTextButton("load game", getGuiSkin());
     container.add(loadGameButton).fill().maxWidth(BUTTON_WIDTH);
-    container.row().padTop(15);
+    container.row().padTop(BUTTON_SPACING);
 
 //    TextButton optionsButton = FontManager.RobotoBold18.makeTextButton("options", getGuiSkin());
 //    container.add(optionsButton).fill().maxWidth(BUTTON_WIDTH);
-//    container.row().padTop(40);
+//    container.row().padTop(BUTTON_SPACING);
 
     TextButton exitGameButton = FontManager.RobotoBold18.makeTextButton("exit game", getGuiSkin());
     container.add(exitGameButton).fill().maxWidth(BUTTON_WIDTH);
@@ -131,7 +134,7 @@ public class MainMenuScene extends Scene {
       }
     });
 
-    newGameButton.click(1, 1);
+//    newGameButton.click(1, 1);
   }
 
   @Override

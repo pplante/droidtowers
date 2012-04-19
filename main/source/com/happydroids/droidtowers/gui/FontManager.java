@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.google.common.collect.Maps;
+import com.happydroids.droidtowers.platform.Display;
 
 import java.util.HashMap;
 
@@ -31,7 +32,7 @@ public enum FontManager {
   }
 
   FontManager(String mdpiFontPath, String hdpiFontPath, Color color, int buttonPadTop, int buttonPadLeft) {
-    this.fontPath = Gdx.graphics.getDensity() > 1f ? hdpiFontPath : mdpiFontPath;
+    this.fontPath = Display.getScaledDensity() > 1f ? hdpiFontPath : mdpiFontPath;
     this.color = color;
     this.buttonPadTop = buttonPadTop;
     this.buttonPadLeft = buttonPadLeft;
