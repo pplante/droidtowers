@@ -260,7 +260,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     bubble.setText(message);
     bubble.followObject(gridObject);
     bubble.show();
-
+    System.out.println("Bubble: " + message);
     addActor(bubble);
   }
 
