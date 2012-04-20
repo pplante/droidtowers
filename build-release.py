@@ -89,15 +89,15 @@ if __name__ == '__main__':
         ant('release', _fg=True)
 
         upload = scp.bake(i='/Users/pplante/.ssh/id_rsa', _fg=True)
-        
+
         upload('./out/DroidTowers.exe', '%s/DroidTowers.exe' % (SCP_TARGET_PATH,))
         upload('./out/DroidTowers.zip', '%s/DroidTowers.zip' % (SCP_TARGET_PATH,))
-        
+
         print "http://www.happydroids.com/alphas/DroidTowers.exe"
         print "http://www.happydroids.com/alphas/DroidTowers.zip"
 
         tower_consts = open(TOWER_CONSTS_JAVA).read()
-        tower_consts = debug_flag_re.sub('public static boolean DEBUG = true;', tower_consts)
+        tower_consts = debug_flag_re.sub('public static final boolean DEBUG = true;', tower_consts)
         tower_consts = server_url_re.sub('public static final String HAPPYDROIDS_SERVER = "local.happydroids.com";',
             tower_consts)
         tower_consts = server_https_re.sub(
