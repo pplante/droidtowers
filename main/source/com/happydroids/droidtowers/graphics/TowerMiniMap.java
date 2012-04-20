@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -49,8 +50,8 @@ public class TowerMiniMap extends Table {
       maxSize = min(gridSize.x, gridSize.y) / max(gridSize.x, gridSize.y);
     }
 
-    float pixmapWidth = gridSize.x * maxSize;
-    float pixmapHeight = gridSize.y * maxSize;
+    float pixmapWidth = MathUtils.nextPowerOfTwo((int) (gridSize.x * maxSize));
+    float pixmapHeight = MathUtils.nextPowerOfTwo((int) (gridSize.y * maxSize));
     double objWidth, objHeight, xPos, yPos;
 
     Pixmap pixmap = new Pixmap((int) pixmapWidth, (int) pixmapHeight, Pixmap.Format.RGB565);

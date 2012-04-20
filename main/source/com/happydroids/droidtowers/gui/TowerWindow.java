@@ -36,23 +36,19 @@ public class TowerWindow {
     if (pixmap == null) {
       pixmap = new Pixmap(16, 16, Pixmap.Format.RGB888);
 
-
       pixmap.setColor(makeRGB(23, 22, 23));
       pixmap.fill();
 
       pixmap.setColor(makeRGB(36, 33, 38));
-      pixmap.drawPixel(0, 0);
-      pixmap.drawPixel(1, 0);
+      pixmap.fillRectangle(0, 0, 16, 1);
 
       pixmap.setColor(makeRGB(49, 45, 52));
-      pixmap.drawPixel(0, 12);
-      pixmap.drawPixel(1, 12);
+      pixmap.fillRectangle(0, 11, 16, 3);
 
       pixmap.setColor(makeRGB(57, 67, 70));
-      pixmap.drawPixel(0, 14);
-      pixmap.drawPixel(1, 14);
+      pixmap.fillRectangle(0, 14, 16, 2);
 
-      texture = new Texture(pixmap, false);
+      texture = new Texture(pixmap);
       texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
       background = new NinePatch(texture);
     }

@@ -82,7 +82,7 @@ public class LoadGameWindow extends TowerWindow {
     Table fileRow = new Table();
     fileRow.defaults().fill().pad(scale(10)).space(scale(10));
     fileRow.row();
-    fileRow.add(imageActor).width(scale(100)).right();
+    fileRow.add(imageActor).width(scale(100)).center().right();
     fileRow.add(makeGameFileInfoBox(fileRow, gameSave, towerData)).expandX().top();
 
     return fileRow;
