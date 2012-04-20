@@ -56,7 +56,7 @@ public class Room extends GridObject {
       pixmap.setColor(Color.GRAY);
       pixmap.fillRectangle(1, 1, width - 2, height - 2);
 
-      Texture texture = new Texture(pixmap, true);
+      Texture texture = new Texture(pixmap, false);
       texture.setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Nearest);
       texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 

@@ -34,7 +34,7 @@ public class TowerWindow {
 
   public TowerWindow(String title, Stage stage, Skin skin) {
     if (pixmap == null) {
-      pixmap = new Pixmap(2, 10, Pixmap.Format.RGB888);
+      pixmap = new Pixmap(16, 16, Pixmap.Format.RGB888);
 
 
       pixmap.setColor(makeRGB(23, 22, 23));
@@ -45,14 +45,14 @@ public class TowerWindow {
       pixmap.drawPixel(1, 0);
 
       pixmap.setColor(makeRGB(49, 45, 52));
-      pixmap.drawPixel(0, 8);
-      pixmap.drawPixel(1, 8);
+      pixmap.drawPixel(0, 12);
+      pixmap.drawPixel(1, 12);
 
       pixmap.setColor(makeRGB(57, 67, 70));
-      pixmap.drawPixel(0, 9);
-      pixmap.drawPixel(1, 9);
+      pixmap.drawPixel(0, 14);
+      pixmap.drawPixel(1, 14);
 
-      texture = new Texture(pixmap);
+      texture = new Texture(pixmap, false);
       texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
       background = new NinePatch(texture);
     }
