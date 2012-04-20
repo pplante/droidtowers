@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.google.common.collect.Maps;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.platform.Display;
 
 import java.util.HashMap;
@@ -56,7 +57,13 @@ public enum FontManager {
 
   public BitmapFont getFont() {
     if (!bitmapFonts.containsKey(fontPath)) {
-      BitmapFont font = new BitmapFont(Gdx.files.internal(fontPath), false);
+      BitmapFont font;
+      if (TowerAssetManager.assetManager().isLoaded(fontPath)) {
+        font = TowerAssetManager.bitmapFont(fontPath);
+      } else {
+        font = new BitmapFont(Gdx.files.internal(fontPath), false);
+      }
+
       font.setUseIntegerPositions(true);
       bitmapFonts.put(fontPath, font);
     }
@@ -73,7 +80,11 @@ public enum FontManager {
   }
 
   private void reset() {
-    bitmapFonts.remove(fontPath);
+    BitmapFont font = bitmapFonts.remove(fontPath);
+    if (font != null) {
+      font.dispose();
+    }
+
     labelStyle = null;
   }
 

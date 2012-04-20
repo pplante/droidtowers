@@ -10,8 +10,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 
+import static com.happydroids.droidtowers.ColorUtil.rgba;
+
 public class HorizontalRule extends Widget {
-  private static final Color DEFAULT_COLOR = new Color(0f, 0.6f, 0.8f, 1f);
+  private static final Color DEFAULT_COLOR = rgba("#0099CC"); // android ICS blue!
   private final Texture texture;
   private float desiredWidth;
   private final int desiredHeight;

@@ -194,9 +194,6 @@ public class TowerGame implements ApplicationListener {
   public void pause() {
     Gdx.app.log("lifecycle", "pausing!");
     activeScene.pause();
-
-    FontManager.resetAll();
-    TowerAssetManager.reset();
   }
 
   public void resume() {
@@ -209,6 +206,8 @@ public class TowerGame implements ApplicationListener {
     activeScene.dispose();
     spriteBatch.dispose();
     BackgroundTask.dispose();
+    TowerAssetManager.dispose();
+    FontManager.resetAll();
   }
 
   public static void changeScene(Class<? extends Scene> sceneClass, Object... args) {

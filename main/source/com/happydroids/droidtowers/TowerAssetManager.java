@@ -84,7 +84,7 @@ public class TowerAssetManager {
     return assetManager().get(s, Texture.class);
   }
 
-  public static void reset() {
-    assetManager = null;
+  public static void dispose() {
+    assetManager.dispose();
   }
 }

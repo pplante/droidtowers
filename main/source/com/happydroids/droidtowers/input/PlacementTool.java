@@ -20,6 +20,8 @@ import com.happydroids.droidtowers.types.GridObjectType;
 
 import java.util.List;
 
+import static com.badlogic.gdx.Application.ApplicationType.Android;
+import static com.badlogic.gdx.Application.ApplicationType.Desktop;
 import static com.happydroids.droidtowers.input.InputSystem.Keys;
 
 public class PlacementTool extends ToolBase {
@@ -105,24 +107,31 @@ public class PlacementTool extends ToolBase {
   }
 
   public boolean tap(int x, int y, int count) {
-    if (count >= 2) {
-      if (!gameGrid.canObjectBeAt(gridObject)) {
-        HeadsUpDisplay.instance().showToast("This object cannot be placed here.");
-        return false;
-      } else {
-        gridObject.setPlacementState(GridObjectPlacementState.PLACED);
-      }
-
-      if (purchaseManager != null) {
-        purchaseManager.makePurchase();
-      }
-
-      gridObject = null;
-      touchDownPointDelta = null;
-
-      verifyAbilityToPurchase();
+    if (Gdx.app.getType().equals(Android) && count >= 2) {
+      return finishPurchase();
+    } else if(Gdx.app.getType().equals(Desktop) && count >= 1) {
+      return finishPurchase();
     }
 
+    return false;
+  }
+
+  private boolean finishPurchase() {
+    if (!gameGrid.canObjectBeAt(gridObject)) {
+      HeadsUpDisplay.instance().showToast("This object cannot be placed here.");
+      return true;
+    } else {
+      gridObject.setPlacementState(GridObjectPlacementState.PLACED);
+    }
+
+    if (purchaseManager != null) {
+      purchaseManager.makePurchase();
+    }
+
+    gridObject = null;
+    touchDownPointDelta = null;
+
+    verifyAbilityToPurchase();
     return false;
   }
 
