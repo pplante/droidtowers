@@ -1,6 +1,6 @@
 misc.png
 format: RGBA8888
-filter: Linear,Linear
+filter: MipMapNearestNearest,Linear
 repeat: none
 speech-bubble-tip
   rotate: false

@@ -4,22 +4,22 @@ filter: Linear,Linear
 repeat: none
 small
   rotate: false
-  xy: 2, 179
-  size: 248, 134
-  orig: 248, 134
-  offset: 0, 2
+  xy: 2, 280
+  size: 233, 128
+  orig: 233, 128
+  offset: 0, 0
   index: -1
 medium
   rotate: false
-  xy: 544, 2
-  size: 320, 118
-  orig: 320, 118
+  xy: 2, 168
+  size: 301, 111
+  orig: 301, 111
   offset: 0, 0
   index: -1
 large
   rotate: false
   xy: 2, 2
-  size: 540, 175
-  orig: 540, 175
+  size: 508, 165
+  orig: 508, 165
   offset: 0, 0
   index: -1

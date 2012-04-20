@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.happydroids.droidtowers.SplashSceneStates;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerAssetManagerFilesList;
 import com.happydroids.droidtowers.TowerGame;
@@ -19,6 +20,9 @@ import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.utils.Random;
 
 import java.util.Set;
+
+import static com.happydroids.droidtowers.SplashSceneStates.PRELOAD_CYCLE;
+import static com.happydroids.droidtowers.SplashSceneStates.RESUME_CYCLE;
 
 public class SplashScene extends Scene {
   private static final String[] STRINGS = new String[]{
@@ -40,10 +44,13 @@ public class SplashScene extends Scene {
   private Label loadingMessage;
   private boolean selectedNewMessage;
   private Sprite happyDroid;
+  private SplashSceneStates splashState = PRELOAD_CYCLE;
 
   @Override
   public void create(Object... args) {
-//    addModalBackground();
+    if (args != null) {
+      splashState = ((SplashSceneStates) args[0]);
+    }
 
     Label titleLabel = FontManager.Roboto64.makeLabel("Droid Towers");
     titleLabel.setAlignment(Align.CENTER);
@@ -103,8 +110,14 @@ public class SplashScene extends Scene {
       selectedNewMessage = true;
     }
 
-    if (!hasFilesToPreload) {
-      TowerGame.changeScene(MainMenuScene.class);
+    if (splashState == PRELOAD_CYCLE) {
+      if (!hasFilesToPreload) {
+        TowerGame.changeScene(MainMenuScene.class);
+      }
+    } else if(splashState == RESUME_CYCLE) {
+      if(assetManagerFinished) {
+        TowerGame.popScene();
+      }
     }
 
     getSpriteBatch().begin();

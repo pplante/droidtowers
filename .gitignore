@@ -1,3 +1,4 @@
+*.apk
 sparky/bin/
 out/
 android/gen

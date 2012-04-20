@@ -4,126 +4,126 @@ filter: MipMapNearestNearest,Linear
 repeat: none
 3x1-small-office
   rotate: false
-  xy: 260, 134
+  xy: 320, 0
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
 2x1-sushi
   rotate: false
-  xy: 324, 68
+  xy: 128, 448
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 4x1-security-center
   rotate: false
-  xy: 2, 134
+  xy: 0, 128
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
 4x1-large-condo
   rotate: false
-  xy: 2, 332
+  xy: 256, 192
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
 2x1-hotel-room
   rotate: false
-  xy: 132, 464
+  xy: 192, 384
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 3x1-small-condo
   rotate: false
-  xy: 260, 332
+  xy: 0, 320
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
 3x1-small-apartment
   rotate: false
-  xy: 260, 398
+  xy: 0, 384
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
 lobby-left
   rotate: false
-  xy: 454, 68
+  xy: 256, 448
   size: 36, 64
   orig: 36, 64
   offset: 0, 0
   index: -1
 4x1-large-apartment
   rotate: false
-  xy: 2, 398
+  xy: 0, 256
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
 4x1-movie-theater
   rotate: false
-  xy: 2, 266
+  xy: 0, 192
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
 4x1-lobby
   rotate: false
-  xy: 2, 200
+  xy: 256, 128
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
 5x1-large-office
   rotate: false
-  xy: 2, 2
+  xy: 0, 0
   size: 320, 64
   orig: 320, 64
   offset: 0, 0
   index: -1
 lobby-right
   rotate: false
-  xy: 454, 2
+  xy: 448, 256
   size: 36, 64
   orig: 36, 64
   offset: 0, 0
   index: -1
 5x1-penthouse
   rotate: false
-  xy: 2, 68
+  xy: 0, 64
   size: 320, 64
   orig: 320, 64
   offset: 0, 0
   index: -1
 3x1-pizza-place
   rotate: false
-  xy: 260, 200
+  xy: 320, 64
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
 2x1-maids-closet
   rotate: false
-  xy: 324, 2
+  xy: 0, 448
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 2x1-bar
   rotate: false
-  xy: 2, 464
+  xy: 192, 320
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 3x1-burger-joint
   rotate: false
-  xy: 260, 266
+  xy: 256, 256
   size: 192, 64
   orig: 192, 64
   offset: 0, 0

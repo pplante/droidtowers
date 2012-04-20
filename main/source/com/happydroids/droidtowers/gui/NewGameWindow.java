@@ -37,7 +37,7 @@ public class NewGameWindow extends TowerWindow {
     final TextField nameField = FontManager.Roboto32.makeTextField("", "Tower Name", skin);
     nameField.setTextFieldListener(new TextField.TextFieldListener() {
       public void keyTyped(TextField textField, char key) {
-        beginButton.touchable = !textField.getText().isEmpty();
+        beginButton.touchable = textField.getText().length() > 1;
 
         if (beginButton.touchable) {
           beginButton.action(FadeIn.$(0.125f));

@@ -4,21 +4,14 @@ filter: Linear,Linear
 repeat: none
 happy-droids-logo
   rotate: false
-  xy: 0, 86
+  xy: 0, 35
   size: 94, 60
   orig: 94, 60
   offset: 3, 5
   index: -1
-droid-towers-logo
-  rotate: false
-  xy: 0, 0
-  size: 506, 86
-  orig: 506, 86
-  offset: 4, 4
-  index: -1
 powered-by-libgdx
   rotate: false
-  xy: 0, 146
+  xy: 0, 0
   size: 117, 35
   orig: 117, 35
   offset: 0, 0

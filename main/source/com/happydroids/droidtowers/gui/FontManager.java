@@ -72,7 +72,7 @@ public enum FontManager {
     return applyTextButtonLabelStyle(new TextButton(labelText, skin));
   }
 
-  public void reset() {
+  private void reset() {
     bitmapFonts.remove(fontPath);
     labelStyle = null;
   }
@@ -96,5 +96,11 @@ public enum FontManager {
     }
 
     return new TextField(labelText, hintText, textFieldStyle);
+  }
+
+  public static void resetAll() {
+    for (FontManager fontManager : values()) {
+      fontManager.reset();
+    }
   }
 }

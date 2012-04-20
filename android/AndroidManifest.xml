@@ -5,7 +5,9 @@
 
 <!--suppress AndroidDomInspection -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.happydroids.droidtowers">
+          package="com.happydroids.droidtowers"
+          android:versionCode="100"
+          android:versionName="v0.30.3">
 
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.INTERNET"/>
@@ -22,4 +24,5 @@
       </intent-filter>
     </activity>
   </application>
+  <uses-sdk android:minSdkVersion="8"/>
 </manifest>

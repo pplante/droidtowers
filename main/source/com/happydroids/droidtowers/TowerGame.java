@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.google.common.collect.Lists;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.actions.ActionManager;
@@ -36,6 +37,8 @@ import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.types.*;
 import com.happydroids.utils.BackgroundTask;
 
+import java.util.LinkedList;
+
 public class TowerGame implements ApplicationListener {
   private static OrthographicCamera camera;
   private SpriteBatch spriteBatch;
@@ -45,9 +48,11 @@ public class TowerGame implements ApplicationListener {
   private static boolean audioEnabled;
   private static Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
   private static PlatformBrowserUtil platformBrowserUtil;
+  private static LinkedList<Scene> pausedScenes;
 
   public TowerGame() {
     audioEnabled = true;
+    pausedScenes = Lists.newLinkedList();
   }
 
   public static boolean isAudioEnabled() {
@@ -135,7 +140,7 @@ public class TowerGame implements ApplicationListener {
     Scene.setCamera(camera);
     Scene.setSpriteBatch(spriteBatch);
 
-    changeScene(SplashScene.class);
+    changeScene(SplashScene.class, SplashSceneStates.PRELOAD_CYCLE);
   }
 
   public void render() {
@@ -189,32 +194,38 @@ public class TowerGame implements ApplicationListener {
   public void pause() {
     Gdx.app.log("lifecycle", "pausing!");
     activeScene.pause();
+
+    FontManager.resetAll();
+    TowerAssetManager.reset();
   }
 
   public void resume() {
     Gdx.app.log("lifecycle", "resuming!");
-    activeScene.resume();
+
+    pushScene(SplashScene.class, SplashSceneStates.RESUME_CYCLE);
   }
 
   public void dispose() {
     activeScene.dispose();
     spriteBatch.dispose();
-    for (FontManager labelStyle : FontManager.values()) {
-      labelStyle.reset();
-    }
     BackgroundTask.dispose();
-    TowerAssetManager.reset();
   }
 
   public static void changeScene(Class<? extends Scene> sceneClass, Object... args) {
+    if (HappyDroidConsts.DEBUG) System.out.println("Switching scene to: " + sceneClass.getSimpleName());
+
+    popScene();
+    pushScene(sceneClass, args);
+  }
+
+  public static void pushScene(Class<? extends Scene> sceneClass, Object... args) {
     try {
       if (activeScene != null) {
-        InputSystem.instance().removeInputProcessor(activeScene.getStage());
         activeScene.pause();
-        activeScene.dispose();
+        InputSystem.instance().removeInputProcessor(activeScene.getStage());
+        pausedScenes.push(activeScene);
       }
 
-      if (HappyDroidConsts.DEBUG) System.out.println("Switching scene to: " + sceneClass.getSimpleName());
       activeScene = sceneClass.newInstance();
       activeScene.create(args);
       activeScene.resume();
@@ -223,6 +234,22 @@ public class TowerGame implements ApplicationListener {
       throw new RuntimeException(e);
     } catch (IllegalAccessException e) {
       throw new RuntimeException(e);
+    }
+  }
+
+  public static void popScene() {
+    if (activeScene != null) {
+      InputSystem.instance().removeInputProcessor(activeScene.getStage());
+      activeScene.pause();
+      activeScene.dispose();
+
+      activeScene = null;
+    }
+
+    if (!pausedScenes.isEmpty()) {
+      activeScene = pausedScenes.pop();
+      activeScene.resume();
+      InputSystem.instance().addInputProcessor(activeScene.getStage(), 10);
     }
   }
 

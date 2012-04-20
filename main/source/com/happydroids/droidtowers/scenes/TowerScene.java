@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.input.GestureDetector;
 import com.google.common.collect.Lists;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.WeatherService;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
@@ -72,6 +73,8 @@ public class TowerScene extends Scene {
     if (gameSave == null) {
       throw new RuntimeException("Cannot load game with no GameSave passed.");
     }
+
+    TowerAssetManager.assetManager().finishLoading();
 
     gameGrid = new GameGrid(camera);
     gameGridRenderer = gameGrid.getRenderer();

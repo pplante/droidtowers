@@ -37,7 +37,6 @@ files.put("fonts/roboto_white_64.fnt", BitmapFont.class);
 files.put("rooms/housing.txt", TextureAtlas.class);
 files.put("rooms/generic.txt", TextureAtlas.class);
 files.put("characters.txt", TextureAtlas.class);
-files.put("hud/test.txt", TextureAtlas.class);
 files.put("fonts/roboto_white_32.fnt", BitmapFont.class);
 files.put("hud/buttons-hd.txt", TextureAtlas.class);
 files.put("fonts/roboto_white_48.fnt", BitmapFont.class);
