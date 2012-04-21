@@ -114,22 +114,29 @@ public class TowerGame implements ApplicationListener {
 
     InputSystem.instance().bind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, new InputCallback() {
       public boolean run(float timeDelta) {
-        new Dialog(rootUiStage).setTitle("Awe, don't leave me.").setMessage("Are you sure you want to exit to the Main Menu?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
-          @Override
-          public void onClick(Dialog dialog) {
-            dialog.dismiss();
-            if (activeScene instanceof MainMenuScene) {
-              Gdx.app.exit();
-            } else {
-              changeScene(MainMenuScene.class);
-            }
-          }
-        }).addButton(ResponseType.NEGATIVE, "No way!", new OnClickCallback() {
-          @Override
-          public void onClick(Dialog dialog) {
-            dialog.dismiss();
-          }
-        }).show();
+        final boolean mainMenuIsActive = activeScene instanceof MainMenuScene;
+
+        new Dialog(rootUiStage)
+                .setTitle("Awe, don't leave me.")
+                .setMessage("Are you sure you want to exit " + (mainMenuIsActive ? "the game?" : "to the Main Menu?"))
+                .addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
+                  @Override
+                  public void onClick(Dialog dialog) {
+                    dialog.dismiss();
+                    if (mainMenuIsActive) {
+                      Gdx.app.exit();
+                    } else {
+                      changeScene(MainMenuScene.class);
+                    }
+                  }
+                })
+                .addButton(ResponseType.NEGATIVE, "No way!", new OnClickCallback() {
+                  @Override
+                  public void onClick(Dialog dialog) {
+                    dialog.dismiss();
+                  }
+                })
+                .show();
 
         return true;
       }

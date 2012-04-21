@@ -24,13 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/utils/BackgroundTask.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/utils/BackgroundTask.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementEngine.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/TutorialEngine.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/TutorialEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameState.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -212,10 +206,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameSave.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="GameSave.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="107" column="82" selection-start="3958" selection-end="3958" vertical-scroll-proportion="0.75567013">
+            <state line="107" column="82" selection-start="3958" selection-end="3958" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#0#6463#0" expanded="true" />
                 <element signature="e#4933#4980#0" expanded="true" />
@@ -247,13 +241,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TowerGame.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="TowerGame.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="122" column="20" selection-start="4785" selection-end="4785" vertical-scroll-proportion="0.0">
+            <state line="120" column="84" selection-start="4637" selection-end="4637" vertical-scroll-proportion="0.3655914">
               <folding>
-                <element signature="e#4558#4869#0" expanded="true" />
-                <element signature="e#4858#4859#0" expanded="true" />
+                <element signature="e#4729#5100#0" expanded="true" />
+                <element signature="e#5081#5082#0" expanded="true" />
+                <element signature="e#5163#5345#0" expanded="true" />
+                <element signature="e#5326#5327#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -286,8 +282,8 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/TutorialEngine.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementEngine.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
       </list>
     </option>
   </component>
@@ -1511,7 +1507,11 @@
       <created>1334994882416</created>
       <updated>1334994882416</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="fixed a bunch of static instance bugs with the achievements and tutorials">
+      <created>1334999785252</created>
+      <updated>1334999785253</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1557,8 +1557,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.08979885" sideWeight="0.74388677" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283046" sideWeight="0.7441154" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39853895" sideWeight="0.7441154" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13398437" sideWeight="0.742921" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25707898" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13398437" sideWeight="0.72876304" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25707898" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="IntelliGuard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953683" sideWeight="0.48726115" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18351911" sideWeight="0.6180714" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1615,7 +1615,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="added restrooms to the services provider type" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed a bunch of static instance bugs with the achievements and tutorials" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1628,7 +1628,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="sparky mostly works now!" />
     <MESSAGE value="added clickable libgdx logo to the main menu" />
     <MESSAGE value="upgraded the achievements engine quite a bit, much more robust now!&#10;merged all the avatars into a single image&#10;wrote some migration code that could work lol" />
     <MESSAGE value="achievements is much much more robust now&#10;everything has a provider type, got rid of the notion of isLobby too!" />
@@ -1653,6 +1652,7 @@
     <MESSAGE value="ooops renamed the window class to fix proguard" />
     <MESSAGE value="TUTORIAL WORKS!" />
     <MESSAGE value="added restrooms to the services provider type" />
+    <MESSAGE value="fixed a bunch of static instance bugs with the achievements and tutorials" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1740,15 +1740,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="127" selection-end="127" vertical-scroll-proportion="0.176">
-          <folding>
-            <element signature="e#0#448#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/android/libs/gdx-backend-android-sources.jar!/com/badlogic/gdx/backends/android/AndroidApplicationConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -1794,12 +1785,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="20" selection-start="4785" selection-end="4785" vertical-scroll-proportion="0.0">
+        <state line="107" column="82" selection-start="3958" selection-end="3958" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#4558#4869#0" expanded="true" />
-            <element signature="e#4858#4859#0" expanded="true" />
+            <element signature="e#0#6463#0" expanded="true" />
+            <element signature="e#4933#4980#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1814,12 +1805,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java">
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="82" selection-start="3958" selection-end="3958" vertical-scroll-proportion="0.75567013">
+        <state line="7" column="0" selection-start="127" selection-end="127" vertical-scroll-proportion="0.16193481">
           <folding>
-            <element signature="e#0#6463#0" expanded="true" />
-            <element signature="e#4933#4980#0" expanded="true" />
+            <element signature="e#0#448#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="120" column="84" selection-start="4637" selection-end="4637" vertical-scroll-proportion="0.3655914">
+          <folding>
+            <element signature="e#4729#5100#0" expanded="true" />
+            <element signature="e#5081#5082#0" expanded="true" />
+            <element signature="e#5163#5345#0" expanded="true" />
+            <element signature="e#5326#5327#0" expanded="true" />
           </folding>
         </state>
       </provider>
