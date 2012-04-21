@@ -35,7 +35,7 @@ public class SkyLayer extends GameLayer {
     Texture texture = new Texture(Gdx.files.internal("backgrounds/sky-gradient.png"));
     sky = new GameObject(texture);
     GameGrid_onResize(null);
-    sky.setColor(weatherService.currentState().color);
+    sky.setColor(weatherService.currentState().skyColor);
 
     addChild(sky);
   }
@@ -49,7 +49,7 @@ public class SkyLayer extends GameLayer {
 
   @Subscribe
   public void WeatherService_onWeatherChange(WeatherStateChangeEvent event) {
-    Color tweenColor = weatherService.currentState().color;
+    Color tweenColor = weatherService.currentState().skyColor;
 
     Tween.to(sky, GameObjectAccessor.COLOR, TowerConsts.WEATHER_SERVICE_STATE_CHANGE_DURATION)
             .target(tweenColor.r, tweenColor.g, tweenColor.b, tweenColor.a)

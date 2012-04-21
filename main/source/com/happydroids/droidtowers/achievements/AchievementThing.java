@@ -7,5 +7,6 @@ package com.happydroids.droidtowers.achievements;
 public enum AchievementThing {
   MONEY,
   PROVIDER_TYPE,
-  OBJECT_TYPE
+  OBJECT_TYPE,
+  ACHIEVEMENT
 }

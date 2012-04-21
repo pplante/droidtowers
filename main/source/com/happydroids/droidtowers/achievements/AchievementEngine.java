@@ -64,6 +64,8 @@ public class AchievementEngine {
   public void complete(Achievement achievement) {
     if (completedAchievements.contains(achievement)) {
       return;
+    } else if (achievement.isLocked()) {
+      return;
     }
 
     achievement.setCompleted(true);
@@ -164,5 +166,25 @@ public class AchievementEngine {
     for (Achievement achievement : achievements) {
       achievement.resetState();
     }
+  }
+
+  public void completeAll() {
+    Iterator<Achievement> achievementIterator = achievements.iterator();
+    while (achievementIterator.hasNext()) {
+      Achievement achievement = achievementIterator.next();
+      complete(achievement);
+
+      achievementIterator.remove();
+    }
+  }
+
+  public Achievement findById(String achievementId) {
+    for (Achievement achievement : achievements) {
+      if (achievement.getId().equalsIgnoreCase(achievementId)) {
+        return achievement;
+      }
+    }
+
+    return null;
   }
 }

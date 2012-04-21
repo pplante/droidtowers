@@ -14,8 +14,7 @@ import com.happydroids.droidtowers.types.ProviderType;
 
 import java.util.Set;
 
-import static com.happydroids.droidtowers.achievements.AchievementThing.OBJECT_TYPE;
-import static com.happydroids.droidtowers.achievements.AchievementThing.PROVIDER_TYPE;
+import static com.happydroids.droidtowers.achievements.AchievementThing.*;
 import static com.happydroids.droidtowers.entities.GridObjectPlacementState.PLACED;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
@@ -23,7 +22,7 @@ class AchievementRequirement {
   private RequirementType type;
   private AchievementThing thing;
   private ProviderType[] thingProviderTypes;
-  private String thingTypeId;
+  private String thingId;
   private double amount;
 
   public boolean isCompleted(GameGrid gameGrid) {
@@ -33,7 +32,7 @@ class AchievementRequirement {
       case BUILD:
         return handleBuildRequirement(gameGrid);
       case UNLOCK:
-        return handleUnlockRequirement();
+        return handleUnlockRequirement(gameGrid);
       default:
         assert false;
         break;
@@ -42,21 +41,34 @@ class AchievementRequirement {
     return false;
   }
 
-  private boolean handleUnlockRequirement() {
+  private boolean handleUnlockRequirement(GameGrid gameGrid) {
     Set<Achievement> completedAchievements = AchievementEngine.instance().getCompletedAchievements();
     if (completedAchievements.isEmpty()) {
       return false;
     }
 
-    GridObjectType objectType = GridObjectTypeFactory.findTypeById(thingTypeId);
-    return objectType != null && !objectType.isLocked();
+    if (thing.equals(OBJECT_TYPE)) {
+      GridObjectType objectType = GridObjectTypeFactory.findTypeById(thingId);
+      return objectType != null && !objectType.isLocked();
+    } else if (thing.equals(ACHIEVEMENT)) {
+      Achievement achievement = AchievementEngine.instance().findById(thingId);
+      if (achievement == null) {
+        achievement = TutorialEngine.instance().findById(thingId);
+      }
+
+      if (achievement != null) {
+        return achievement.isCompleted(gameGrid);
+      }
+    }
+
+    return false;
   }
 
   private boolean handleBuildRequirement(GameGrid gameGrid) {
     if (thing == null) {
       throw new RuntimeException(String.format("AchievementRequirement %s does not contain 'thing' parameter.", type));
-    } else if (thingProviderTypes == null && thingTypeId == null) {
-      throw new RuntimeException(String.format("AchievementRequirement %s does not contain 'thingProviderTypes' or 'thingTypeId' parameter.", type));
+    } else if (thingProviderTypes == null && thingId == null) {
+      throw new RuntimeException(String.format("AchievementRequirement %s does not contain 'thingProviderTypes' or 'thingId' parameter.", type));
     }
 
     if (gameGrid == null) {
@@ -73,7 +85,7 @@ class AchievementRequirement {
       GridObjectType gridObjectType = gridObject.getGridObjectType();
       if (thing.equals(PROVIDER_TYPE) && gridObjectType.provides(thingProviderTypes)) {
         numMatches++;
-      } else if (thing.equals(OBJECT_TYPE) && gridObjectType.getId().equalsIgnoreCase(thingTypeId)) {
+      } else if (thing.equals(OBJECT_TYPE) && gridObjectType.getId().equalsIgnoreCase(thingId)) {
         numMatches++;
       }
 

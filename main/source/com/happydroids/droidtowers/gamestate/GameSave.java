@@ -90,8 +90,6 @@ public class GameSave {
       CameraController.instance().checkBounds();
     }
 
-    TutorialEngine.instance().resetState();
-
     if (gridObjects != null) {
       for (GridObjectState gridObjectState : gridObjects) {
         gridObjectState.materialize(gameGrid);
@@ -99,8 +97,8 @@ public class GameSave {
     }
 
     if (newGame) {
-      TutorialEngine.instance().enable();
-      TutorialEngine.instance().complete("tutorial-welcome");
+      TutorialEngine.instance().setEnabled(true);
+      TutorialEngine.instance().moveToStepWhenReady("tutorial-welcome");
     } else {
       TutorialEngine.instance().completeAll();
     }

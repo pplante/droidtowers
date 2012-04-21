@@ -4,13 +4,13 @@
 
 package com.happydroids.droidtowers.types;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.AchievementReward;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -23,6 +23,8 @@ import java.util.WeakHashMap;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
 public abstract class GridObjectType {
+  private static final String TAG = GridObjectType.class.getSimpleName();
+
   protected String id;
   protected String name;
   protected int height;
@@ -33,8 +35,8 @@ public abstract class GridObjectType {
   protected String imageFilename;
   protected boolean canShareSpace;
   protected float noiseLevel;
-  protected ProviderType provides;
 
+  protected ProviderType provides;
   private static WeakHashMap<String, TextureAtlas> atlases;
   private TextureAtlas textureAtlas;
   private AchievementReward achievementLock;
@@ -173,16 +175,16 @@ public abstract class GridObjectType {
   public void addLock(AchievementReward reward) {
     if (!isLocked()) {
       achievementLock = reward;
-      if (TowerConsts.DEBUG) System.out.println(name + " locked by " + reward);
+      Gdx.app.debug(TAG, name + " locked by " + reward);
     } else {
-      if (TowerConsts.DEBUG) System.out.println(name + " is already locked by " + reward);
+      Gdx.app.debug(TAG, name + " is already locked by " + reward);
     }
   }
 
   public void removeLock() {
     if (achievementLock != null) {
       achievementLock = null;
-      if (TowerConsts.DEBUG) System.out.println(name + " unlocked.");
+      Gdx.app.debug(TAG, name + " unlocked.");
     }
   }
 }

@@ -49,7 +49,7 @@ public class GridObjectPurchaseMenu extends TowerWindow {
           placementTool.enterPurchaseMode();
 
           if (gridObjectType.getId().equalsIgnoreCase("GROUND-FLOOR-LOBBY")) {
-            TutorialEngine.instance().complete("tutorial-purchased-lobby");
+            TutorialEngine.instance().moveToStepWhenReady("tutorial-purchased-lobby");
           }
 
           dismiss();

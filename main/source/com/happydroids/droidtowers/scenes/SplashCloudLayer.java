@@ -20,7 +20,7 @@ public class SplashCloudLayer extends CloudLayer {
     worldSize = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() / 2);
 
     for (int i = 0; i < MAX_ACTIVE_CLOUDS; i++) {
-      spawnCloudNow();
+      spawnCloudNow(false);
     }
 
     for (GameObject gameObject : gameObjects) {

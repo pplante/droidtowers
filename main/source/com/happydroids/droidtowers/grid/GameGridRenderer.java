@@ -16,6 +16,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.GridObjectPlacementState;
@@ -33,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import static com.happydroids.droidtowers.graphics.Overlays.POPULATION_LEVEL;
 
 public class GameGridRenderer extends GameLayer {
   private GameGrid gameGrid;
@@ -193,13 +195,24 @@ public class GameGridRenderer extends GameLayer {
 
   public void addActiveOverlay(Overlays overlay) {
     activeOverlays.add(overlay);
+
+    if (overlay.equals(POPULATION_LEVEL)) {
+      TutorialEngine.instance().moveToStepWhenReady("tutorial-turn-off-population-overlay");
+    }
   }
 
   public void removeActiveOverlay(Overlays overlay) {
     activeOverlays.remove(overlay);
+
+    if (overlay.equals(POPULATION_LEVEL)) {
+      TutorialEngine.instance().moveToStepWhenReady("tutorial-finished");
+    }
   }
 
   public void clearOverlays() {
+    if (activeOverlays.contains(POPULATION_LEVEL)) {
+      TutorialEngine.instance().moveToStepWhenReady("tutorial-finished");
+    }
     activeOverlays.clear();
   }
 

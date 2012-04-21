@@ -55,7 +55,7 @@ public class TowerMiniMap extends Table {
     double objWidth, objHeight, xPos, yPos;
 
     Pixmap pixmap = new Pixmap((int) pixmapWidth, (int) pixmapHeight, Pixmap.Format.RGB565);
-    pixmap.setColor(WeatherState.SUNNY.color);
+    pixmap.setColor(WeatherState.SUNNY.skyColor);
     pixmap.fill();
 
     double landHeight = floor((TowerConsts.LOBBY_FLOOR - 1) * maxSize);

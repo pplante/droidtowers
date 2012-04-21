@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.achievements;
 
+import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -14,12 +15,15 @@ import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Achievement {
+  private static final String TAG = Achievement.class.getSimpleName();
+
   private String id;
   protected String name;
   protected String description;
   private List<AchievementRequirement> requirements;
   protected List<AchievementReward> rewards;
   private boolean completed;
+  private AchievementReward lockedBy;
 
   public Achievement() {
 
@@ -32,10 +36,14 @@ public class Achievement {
   }
 
   public boolean isCompleted(GameGrid gameGrid) {
+    if (isLocked()) {
+      return false;
+    }
+
     if (requirements != null) {
       for (AchievementRequirement requirement : requirements) {
         if (!requirement.isCompleted(gameGrid)) {
-//          if (HappyDroidConsts.DEBUG) System.out.println("Requirement unsatisfied: " + requirement);
+//          Gdx.app.debug(TAG,"Requirement unsatisfied: " + requirement);
           return false;
         }
       }
@@ -61,7 +69,7 @@ public class Achievement {
   }
 
   public void resetState() {
-    if (TowerConsts.DEBUG) System.out.println("Reset: " + id);
+    Gdx.app.debug(TAG, "Reset: " + id);
     completed = false;
 
     if (rewards != null) {
@@ -117,5 +125,25 @@ public class Achievement {
                    ", requirements=" + requirements +
                    ", rewards=" + rewards +
                    '}';
+  }
+
+  public boolean isLocked() {
+    return lockedBy != null;
+  }
+
+  public void addLock(AchievementReward reward) {
+    if (!isLocked()) {
+      lockedBy = reward;
+      Gdx.app.debug(TAG, id + " locked by " + lockedBy);
+    } else {
+      Gdx.app.debug(TAG, id + " is already locked by " + lockedBy);
+    }
+  }
+
+  public void removeLock() {
+    if (lockedBy != null) {
+      lockedBy = null;
+      Gdx.app.debug(TAG, name + " unlocked.");
+    }
   }
 }

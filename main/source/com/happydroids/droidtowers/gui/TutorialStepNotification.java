@@ -78,10 +78,8 @@ public class TutorialStepNotification extends Table {
   public boolean touchDown(float x, float y, int pointer) {
     if (allowDismiss) {
       hide();
-
-      return true;
     }
 
-    return false;
+    return true;
   }
 }

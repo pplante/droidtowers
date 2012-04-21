@@ -98,4 +98,9 @@ public class StatusBarPanel extends Table {
       pack();
     }
   }
+
+  @Override
+  public boolean touchDown(float x, float y, int pointer) {
+    return true;
+  }
 }

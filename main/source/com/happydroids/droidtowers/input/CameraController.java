@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.events.CameraControllerEvent;
@@ -90,6 +91,9 @@ public class CameraController implements GestureDetector.GestureListener {
 
     camera.position.add(deltaX, deltaY, 0);
     checkBounds();
+
+    TutorialEngine.instance().moveToStepWhenReady("tutorial-zoom");
+
     return false;
   }
 
@@ -99,6 +103,8 @@ public class CameraController implements GestureDetector.GestureListener {
 
     checkZoom();
     checkBounds();
+
+    TutorialEngine.instance().moveToStepWhenReady("tutorial-turn-on-population-overlay");
 
     return true;
   }
@@ -112,6 +118,8 @@ public class CameraController implements GestureDetector.GestureListener {
 
     checkZoom();
     checkBounds();
+
+    TutorialEngine.instance().moveToStepWhenReady("tutorial-turn-on-population-overlay");
 
     return true;
   }

@@ -7,14 +7,18 @@ package com.happydroids.droidtowers.events;
 import com.badlogic.gdx.graphics.Color;
 import com.happydroids.droidtowers.utils.Random;
 
+import static com.happydroids.droidtowers.ColorUtil.rgba;
+
 public enum WeatherState {
-  SUNNY(0.48f, 0.72f, 0.87f),
-  RAINING(0.31f, 0.43f, 0.49f);
+  SUNNY(rgba("#7ab7dd"), Color.WHITE),
+  RAINING(rgba("#374153"), rgba("#111111"));
 
-  public final Color color;
+  public final Color skyColor;
+  public final Color cloudColor;
 
-  WeatherState(float r, float g, float b) {
-    color = new Color(r, g, b, 1f);
+  WeatherState(Color skyColor, Color cloudColor) {
+    this.skyColor = skyColor;
+    this.cloudColor = cloudColor;
   }
 
   public static WeatherState random() {

@@ -121,7 +121,7 @@ public class HeadsUpDisplay extends WidgetGroup {
           toolMenu.x = toolButton.x + 20f;
           toolMenu.y = toolButton.y;
           toolMenu.show();
-          TutorialEngine.instance().complete("tutorial-unlock-lobby");
+          TutorialEngine.instance().moveToStepWhenReady("tutorial-unlock-lobby");
         } else {
           toolMenu.hide();
           toolMenu.markToRemove(true);
@@ -166,7 +166,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
         if (purchaseDialog == null) {
           if (typeFactory instanceof RoomTypeFactory) {
-            TutorialEngine.instance().complete("tutorial-unlock-lobby");
+            TutorialEngine.instance().moveToStepWhenReady("tutorial-unlock-lobby");
           }
 
           makePurchaseDialog(dialogTitle, typeFactory, ((ImageButton) actor).getStyle());

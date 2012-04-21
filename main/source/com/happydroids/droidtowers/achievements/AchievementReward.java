@@ -11,15 +11,16 @@ import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
 import com.happydroids.droidtowers.types.ProviderType;
 
+import static com.happydroids.droidtowers.achievements.AchievementThing.ACHIEVEMENT;
 import static com.happydroids.droidtowers.achievements.AchievementThing.OBJECT_TYPE;
-import static com.happydroids.droidtowers.achievements.AchievementThing.PROVIDER_TYPE;
+import static com.happydroids.droidtowers.achievements.RewardType.UNLOCK;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class AchievementReward {
   private RewardType type;
   private AchievementThing thing;
   private ProviderType[] thingProviderTypes;
-  private String thingTypeId;
+  private String thingId;
   private double amount;
 
   public AchievementReward() {
@@ -39,7 +40,7 @@ public class AchievementReward {
   public AchievementReward(RewardType type, AchievementThing objectType, String objectTypeId) {
     this.type = type;
     thing = objectType;
-    thingTypeId = objectTypeId;
+    thingId = objectTypeId;
   }
 
   public void give() {
@@ -49,6 +50,22 @@ public class AchievementReward {
       throw new RuntimeException(String.format("AchievementReward %s does not contain 'thing' parameter.", type));
     }
 
+    switch (type) {
+      case UNLOCK:
+        handleUnlockReward();
+        break;
+
+      case COMPLETE:
+        if (thing.equals(ACHIEVEMENT)) {
+          Achievement achievement = findAchievementById();
+          achievement.setCompleted(true);
+          achievement.giveReward();
+        }
+        break;
+    }
+  }
+
+  private void handleUnlockReward() {
     switch (thing) {
       case MONEY:
         Player.instance().addCurrency((int) amount);
@@ -59,7 +76,23 @@ public class AchievementReward {
       case PROVIDER_TYPE:
         handleProviderTypeReward();
         break;
+      case ACHIEVEMENT:
+        findAchievementById().removeLock();
+        break;
     }
+  }
+
+  private Achievement findAchievementById() {
+    Achievement achievement = AchievementEngine.instance().findById(thingId);
+    if (achievement == null) {
+      achievement = TutorialEngine.instance().findById(thingId);
+    }
+
+    if (achievement != null) {
+      return achievement;
+    }
+
+    throw new RuntimeException("Could not find Achievement with id: " + thingId);
   }
 
   private void handleProviderTypeReward() {
@@ -92,16 +125,34 @@ public class AchievementReward {
   }
 
   protected GridObjectType getThingObjectType() {
-    if (thing == OBJECT_TYPE && thingTypeId != null) {
-      GridObjectType objectType = GridObjectTypeFactory.findTypeById(thingTypeId);
+    if (thing == OBJECT_TYPE && thingId != null) {
+      GridObjectType objectType = GridObjectTypeFactory.findTypeById(thingId);
       if (objectType == null) {
-        throw new RuntimeException(String.format("Cannot find a type for: %s", thingTypeId));
+        throw new RuntimeException(String.format("Cannot find a type for: %s", thingId));
       }
 
       return objectType;
     }
 
     throw new RuntimeException("Cannot find a type for null!");
+  }
+
+  public void resetState() {
+    if (type.equals(UNLOCK)) {
+      switch (thing) {
+        case OBJECT_TYPE:
+          getThingObjectType().addLock(this);
+          break;
+
+        case PROVIDER_TYPE:
+          setProviderTypeLockState(true);
+          break;
+
+        case ACHIEVEMENT:
+          findAchievementById().addLock(this);
+          break;
+      }
+    }
   }
 
   public String getRewardString() {
@@ -130,15 +181,6 @@ public class AchievementReward {
     return "";
   }
 
-  @Override
-  public String toString() {
-    return "AchievementReward{" +
-                   "amount=" + amount +
-                   ", type=" + type +
-                   ", thing=" + thing +
-                   '}';
-  }
-
   public RewardType getType() {
     return type;
   }
@@ -147,13 +189,5 @@ public class AchievementReward {
     return thing;
   }
 
-  public void resetState() {
-    if (type.equals(RewardType.UNLOCK)) {
-      if (thing.equals(OBJECT_TYPE)) {
-        getThingObjectType().addLock(this);
-      } else if (thing.equals(PROVIDER_TYPE)) {
-        setProviderTypeLockState(true);
-      }
-    }
-  }
+
 }

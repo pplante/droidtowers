@@ -14,7 +14,6 @@ import com.happydroids.droidtowers.gui.TutorialStepNotification;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class TutorialEngine extends AchievementEngine {
   private static TutorialEngine instance;
@@ -46,6 +45,10 @@ public class TutorialEngine extends AchievementEngine {
     }
   }
 
+  public void moveToStepWhenReady(String stepId) {
+    complete(stepId);
+  }
+
   @Override
   protected void displayNotification(Achievement achievement) {
     if (enabled) {
@@ -53,31 +56,14 @@ public class TutorialEngine extends AchievementEngine {
     }
   }
 
-  @Override
-  public void resetState() {
-    enabled = false;
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
 
-    super.resetState();
+    resetState();
   }
 
   @Subscribe
   public void Elevator_onHeightChange(ElevatorHeightChangeEvent event) {
-    complete("tutorial-finished");
-  }
-
-  public void enable() {
-    enabled = true;
-
-    super.resetState();
-  }
-
-  public void completeAll() {
-    Iterator<Achievement> achievementIterator = achievements.iterator();
-    while (achievementIterator.hasNext()) {
-      Achievement achievement = achievementIterator.next();
-      complete(achievement);
-
-      achievementIterator.remove();
-    }
+    moveToStepWhenReady("tutorial-pan");
   }
 }

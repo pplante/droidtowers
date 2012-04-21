@@ -6,5 +6,6 @@ package com.happydroids.droidtowers.achievements;
 
 public enum RewardType {
   GIVE,
-  UNLOCK
+  UNLOCK,
+  COMPLETE
 }

@@ -12,7 +12,7 @@
       {
         "type":"UNLOCK",
         "thing":"OBJECT_TYPE",
-        "thingTypeId":"GROUND-FLOOR-LOBBY"
+        "thingId":"GROUND-FLOOR-LOBBY"
       }
     ]
   },
@@ -29,7 +29,7 @@
       {
         "type":"BUILD",
         "thing":"OBJECT_TYPE",
-        "thingTypeId":"GROUND-FLOOR-LOBBY",
+        "thingId":"GROUND-FLOOR-LOBBY",
         "amount":1
       }
     ],
@@ -37,7 +37,7 @@
       {
         "type":"UNLOCK",
         "thing":"OBJECT_TYPE",
-        "thingTypeId":"SMALL-APARTMENT"
+        "thingId":"SMALL-APARTMENT"
       }
     ]
   },
@@ -49,7 +49,7 @@
       {
         "type":"BUILD",
         "thing":"OBJECT_TYPE",
-        "thingTypeId":"SMALL-APARTMENT",
+        "thingId":"SMALL-APARTMENT",
         "amount":1
       }
     ],
@@ -57,7 +57,7 @@
       {
         "type":"UNLOCK",
         "thing":"OBJECT_TYPE",
-        "thingTypeId":"ELEVATOR"
+        "thingId":"ELEVATOR"
       }
     ]
   },
@@ -69,8 +69,63 @@
       {
         "type":"BUILD",
         "thing":"OBJECT_TYPE",
-        "thingTypeId":"ELEVATOR",
+        "thingId":"ELEVATOR",
         "amount":1
+      }
+    ],
+    "rewards":[
+      {
+        "type":"COMPLETE",
+        "thing":"ACHIEVEMENT",
+        "thingId":"tutorial-pan"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-pan",
+    "name":"Navigation",
+    "description":"Now that your Tower is up and running,\nlets learn how to control your camera.\n\nTo move the screen around, tap anywhere and drag.",
+    "rewards":[
+      {
+        "type":"COMPLETE",
+        "thing":"ACHIEVEMENT",
+        "thingId":"tutorial-zoom"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-zoom",
+    "name":"Magnification",
+    "description":"Great!\n\nYou can also zoom in via your mouse's scroll wheel.\n\nIt works just like scrolling a document.\n\nTry it now.",
+    "rewards":[
+      {
+        "type":"COMPLETE",
+        "thing":"ACHIEVEMENT",
+        "thingId":"tutorial-turn-on-population-overlay"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-turn-on-population-overlay",
+    "name":"Population Overlays",
+    "description":"Now that you've mastered the camera controls,\nit is time to introduce the data overlays.\n\nIn the top right corner click the Overlay button, it has two squares in a circle.",
+    "rewards":[
+      {
+        "type":"COMPLETE",
+        "thing":"ACHIEVEMENT",
+        "thingId":"tutorial-turn-off-population-overlay"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-turn-off-population-overlay",
+    "name":"Population Overlays",
+    "description":"Look at the Apartment you built, notice the blue coloring?\n\nThis signifies that there are Droids living there.\n\nOther overlays can provide you insight into the management\nof your Tower's overall success.\n\nNow turn off the Population overlay by clicking 'Clear All'",
+    "rewards":[
+      {
+        "type":"COMPLETE",
+        "thing":"ACHIEVEMENT",
+        "thingId":"tutorial-finished"
       }
     ]
   },
