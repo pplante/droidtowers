@@ -12,6 +12,7 @@ import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.WeatherService;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
+import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.actions.ActionManager;
 import com.happydroids.droidtowers.actions.GameSaveAction;
 import com.happydroids.droidtowers.audio.GameGridSoundDispatcher;
@@ -30,6 +31,8 @@ import com.happydroids.droidtowers.input.DefaultKeybindings;
 import com.happydroids.droidtowers.input.GestureDelegater;
 import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.types.GridObjectType;
+import com.happydroids.droidtowers.types.GridObjectTypeFactory;
 
 import java.util.List;
 
@@ -111,6 +114,7 @@ public class TowerScene extends Scene {
 
     gameState.loadSavedGame();
     AchievementEngine.instance().registerGameGrid(gameGrid);
+    TutorialEngine.instance().registerGameGrid(gameGrid);
 
     populationCalculator = new PopulationCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
     earnoutCalculator = new EarnoutCalculator(gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
@@ -136,6 +140,18 @@ public class TowerScene extends Scene {
     ActionManager.instance().addAction(saveAction);
   }
 
+  private void detachActions() {
+    ActionManager.instance().removeAction(achievementEngineCheck);
+    ActionManager.instance().removeAction(transportCalculator);
+    ActionManager.instance().removeAction(populationCalculator);
+    ActionManager.instance().removeAction(earnoutCalculator);
+    ActionManager.instance().removeAction(employmentCalculator);
+    ActionManager.instance().removeAction(desirabilityCalculator);
+
+    // SHOULD ALWAYS BE LAST.
+    ActionManager.instance().removeAction(saveAction);
+  }
+
   @Override
   public void pause() {
     gameState.saveGame(true);
@@ -158,20 +174,22 @@ public class TowerScene extends Scene {
 
   @Override
   public void dispose() {
+    detachActions();
+
     InputSystem.instance().removeInputProcessor(gestureDetector);
     InputSystem.instance().setGestureDelegator(null);
     keybindings.unbindKeys();
 
+    TutorialEngine.instance().unregisterGameGrid();
+    TutorialEngine.instance().resetState();
+
     AchievementEngine.instance().unregisterGameGrid();
-
-    ActionManager.instance().removeAction(transportCalculator);
-    ActionManager.instance().removeAction(populationCalculator);
-    ActionManager.instance().removeAction(earnoutCalculator);
-    ActionManager.instance().removeAction(employmentCalculator);
-    ActionManager.instance().removeAction(desirabilityCalculator);
-
-    // SHOULD ALWAYS BE LAST.
-    ActionManager.instance().removeAction(saveAction);
+    AchievementEngine.instance().resetState();
+    for (GridObjectTypeFactory typeFactory : GridObjectTypeFactory.allFactories()) {
+      for (Object o : typeFactory.all()) {
+        ((GridObjectType)o).removeLock();
+      }
+    }
   }
 
 

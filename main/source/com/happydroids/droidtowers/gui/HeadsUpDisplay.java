@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.achievements.AchievementEngine;
+import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -121,7 +121,7 @@ public class HeadsUpDisplay extends WidgetGroup {
           toolMenu.x = toolButton.x + 20f;
           toolMenu.y = toolButton.y;
           toolMenu.show();
-          AchievementEngine.instance().completeAchievement("tutorial-unlock-lobby");
+          TutorialEngine.instance().complete("tutorial-unlock-lobby");
         } else {
           toolMenu.hide();
           toolMenu.markToRemove(true);
@@ -166,7 +166,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
         if (purchaseDialog == null) {
           if (typeFactory instanceof RoomTypeFactory) {
-            AchievementEngine.instance().completeAchievement("tutorial-unlock-lobby");
+            TutorialEngine.instance().complete("tutorial-unlock-lobby");
           }
 
           makePurchaseDialog(dialogTitle, typeFactory, ((ImageButton) actor).getStyle());

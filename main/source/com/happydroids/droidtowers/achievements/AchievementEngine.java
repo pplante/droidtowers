@@ -9,12 +9,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.entities.GridObjectPlacementState;
-import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
 import com.happydroids.droidtowers.events.GridObjectChangedEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.AchievementNotification;
-import com.happydroids.droidtowers.gui.TutorialStepNotification;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,9 +21,9 @@ import java.util.List;
 import java.util.Set;
 
 public class AchievementEngine {
-  private static AchievementEngine instance;
-  private List<Achievement> achievements;
-  private Set<Achievement> completedAchievements;
+  protected static AchievementEngine instance;
+  protected List<Achievement> achievements;
+  protected Set<Achievement> completedAchievements;
   private GameGrid gameGrid;
 
   public static AchievementEngine instance() {
@@ -42,10 +40,6 @@ public class AchievementEngine {
     try {
       ObjectMapper mapper = TowerGameService.instance().getObjectMapper();
       achievements = mapper.readValue(Gdx.files.internal("params/achievements.json").reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, Achievement.class));
-
-      List<Achievement> tutorialSteps = mapper.readValue(Gdx.files.internal("params/tutorial-steps.json").reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, TutorialStep.class));
-      achievements.addAll(tutorialSteps);
-
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -60,14 +54,14 @@ public class AchievementEngine {
     while (achievementIterator.hasNext()) {
       Achievement achievement = achievementIterator.next();
       if (achievement.isCompleted(gameGrid) && !completedAchievements.contains(achievement)) {
-        completeAchievement(achievement);
+        complete(achievement);
 
         achievementIterator.remove();
       }
     }
   }
 
-  public void completeAchievement(Achievement achievement) {
+  public void complete(Achievement achievement) {
     if (completedAchievements.contains(achievement)) {
       return;
     }
@@ -75,19 +69,19 @@ public class AchievementEngine {
     achievement.setCompleted(true);
     achievement.giveReward();
 
-    if (achievement instanceof TutorialStep) {
-      new TutorialStepNotification((TutorialStep) achievement).show();
-    } else {
-      new AchievementNotification(achievement).show();
-    }
+    displayNotification(achievement);
 
     completedAchievements.add(achievement);
   }
 
-  public void completeAchievement(String achievementId) {
+  protected void displayNotification(Achievement achievement) {
+    new AchievementNotification(achievement).show();
+  }
+
+  public void complete(String achievementId) {
     for (Achievement achievement : achievements) {
       if (achievementId.equalsIgnoreCase(achievement.getId())) {
-        completeAchievement(achievement);
+        complete(achievement);
         return;
       }
     }
@@ -100,9 +94,7 @@ public class AchievementEngine {
   }
 
   public void loadCompletedAchievements(List<String> achievementIds) {
-    for (Achievement achievement : achievements) {
-      achievement.resetState();
-    }
+    resetState();
 
     if (achievementIds == null) {
       return;
@@ -127,7 +119,7 @@ public class AchievementEngine {
 
   public void unregisterGameGrid() {
     if (gameGrid != null) {
-      gameGrid.events().unregister(AchievementEngine.instance());
+      gameGrid.events().unregister(this);
     }
 
     gameGrid = null;
@@ -136,7 +128,7 @@ public class AchievementEngine {
   public void registerGameGrid(GameGrid gameGrid) {
     this.gameGrid = gameGrid;
     if (gameGrid != null) {
-      gameGrid.events().register(AchievementEngine.instance());
+      gameGrid.events().register(this);
     }
   }
 
@@ -153,8 +145,18 @@ public class AchievementEngine {
     checkAchievements();
   }
 
-  @Subscribe
-  public void Elevator_onHeightChange(ElevatorHeightChangeEvent event) {
-    completeAchievement("tutorial-finished");
+  public void resetState() {
+    if (!completedAchievements.isEmpty()) {
+      for (Achievement completedAchievement : completedAchievements) {
+        completedAchievement.setCompleted(false);
+      }
+
+      achievements.addAll(completedAchievements);
+      completedAchievements.clear();
+    }
+
+    for (Achievement achievement : achievements) {
+      achievement.resetState();
+    }
   }
 }

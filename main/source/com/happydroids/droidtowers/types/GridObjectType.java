@@ -178,10 +178,10 @@ public abstract class GridObjectType {
     }
   }
 
-  public void removeLock(AchievementReward reward) {
+  public void removeLock() {
     if (achievementLock != null) {
       achievementLock = null;
-      System.out.println(name + " unlocked by " + reward);
+      System.out.println(name + " unlocked.");
     }
   }
 }

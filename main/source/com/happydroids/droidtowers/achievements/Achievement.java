@@ -20,7 +20,6 @@ public class Achievement {
   private List<AchievementRequirement> requirements;
   protected List<AchievementReward> rewards;
   private boolean completed;
-  private boolean gaveRewards;
 
   public Achievement() {
 
@@ -50,18 +49,15 @@ public class Achievement {
   }
 
   public String giveReward() {
-    if (!gaveRewards && completed) {
-      gaveRewards = true;
+    if (completed) {
       if (rewards != null) {
         for (AchievementReward reward : rewards) {
           reward.give();
         }
       }
-
-      return toRewardString();
     }
 
-    return null;
+    return toRewardString();
   }
 
   public void resetState() {
@@ -96,10 +92,6 @@ public class Achievement {
     this.completed = completed;
   }
 
-  public boolean alreadyGaveReward() {
-    return gaveRewards;
-  }
-
   public void addReward(AchievementReward reward) {
     rewards.add(reward);
   }
@@ -120,7 +112,6 @@ public class Achievement {
   public String toString() {
     return "Achievement{" +
                    "completed=" + completed +
-                   ", gaveRewards=" + gaveRewards +
                    ", id='" + id + '\'' +
                    ", name='" + name + '\'' +
                    ", requirements=" + requirements +

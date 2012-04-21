@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.gamestate.actions;
 
 import com.happydroids.droidtowers.achievements.AchievementEngine;
+import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.grid.GameGrid;
 
 public class AchievementEngineCheck extends DesirabilityCalculator {
@@ -15,5 +16,6 @@ public class AchievementEngineCheck extends DesirabilityCalculator {
   @Override
   public void run() {
     AchievementEngine.instance().checkAchievements();
+    TutorialEngine.instance().checkAchievements();
   }
 }

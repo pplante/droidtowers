@@ -54,7 +54,7 @@ public class AchievementReward {
         Player.instance().addCurrency((int) amount);
         break;
       case OBJECT_TYPE:
-        getThingObjectType().removeLock(this);
+        getThingObjectType().removeLock();
         break;
       case PROVIDER_TYPE:
         handleProviderTypeReward();
@@ -83,7 +83,7 @@ public class AchievementReward {
             if (locked) {
               gridObjectType.addLock(this);
             } else {
-              gridObjectType.removeLock(this);
+              gridObjectType.removeLock();
             }
           }
         }

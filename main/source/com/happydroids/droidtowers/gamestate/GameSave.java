@@ -17,6 +17,7 @@ import com.happydroids.droidtowers.DifficultyLevel;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
+import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.GridObjectPlacementState;
 import com.happydroids.droidtowers.entities.Player;
@@ -25,7 +26,6 @@ import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridObjectState;
 import com.happydroids.droidtowers.grid.GridPositionCache;
-import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.jackson.TowerTypeIdResolver;
 import sk.seges.acris.json.server.migrate.JacksonTransformer;
@@ -91,6 +91,7 @@ public class GameSave {
     }
 
     AchievementEngine.instance().loadCompletedAchievements(completedAchievements);
+    TutorialEngine.instance().resetState();
 
     if (gridObjects != null) {
       for (GridObjectState gridObjectState : gridObjects) {
@@ -99,15 +100,8 @@ public class GameSave {
     }
 
     if (newGame) {
-      AchievementEngine.instance().completeAchievement("tutorial-welcome");
-    } else {
-      for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
-        if (achievement.getId().startsWith("tutorial")) {
-          AchievementEngine.instance().completeAchievement(achievement);
-        }
-      }
-
-      HeadsUpDisplay.instance().setTutorialStep(null);
+      TutorialEngine.instance().enable();
+      TutorialEngine.instance().complete("tutorial-welcome");
     }
 
     newGame = false;
