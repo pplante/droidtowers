@@ -17,19 +17,6 @@ public abstract class BackgroundTask {
   protected Thread thread;
   private static Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
 
-  static {
-    threadPool = Executors.newCachedThreadPool(new ThreadFactory() {
-      public Thread newThread(Runnable r) {
-        Thread thread = new Thread(r, "BackgroundTaskThread");
-        if (uncaughtExceptionHandler != null) {
-          thread.setUncaughtExceptionHandler(uncaughtExceptionHandler);
-        }
-        thread.setPriority(Thread.MIN_PRIORITY);
-        thread.setDaemon(true);
-        return thread;
-      }
-    });
-  }
 
   public BackgroundTask() {
 
@@ -44,6 +31,20 @@ public abstract class BackgroundTask {
   }
 
   public final void run() {
+    if (threadPool == null) {
+      threadPool = Executors.newCachedThreadPool(new ThreadFactory() {
+        public Thread newThread(Runnable r) {
+          Thread thread = new Thread(r, "BackgroundTaskThread");
+          if (uncaughtExceptionHandler != null) {
+            thread.setUncaughtExceptionHandler(uncaughtExceptionHandler);
+          }
+          thread.setPriority(Thread.MIN_PRIORITY);
+          thread.setDaemon(true);
+          return thread;
+        }
+      });
+    }
+
     threadPool.submit(new Runnable() {
       public void run() {
         beforeExecute();
@@ -60,6 +61,8 @@ public abstract class BackgroundTask {
       try {
         threadPool.awaitTermination(5, TimeUnit.SECONDS);
       } catch (InterruptedException ignored) {
+      } finally {
+        threadPool = null;
       }
     }
   }

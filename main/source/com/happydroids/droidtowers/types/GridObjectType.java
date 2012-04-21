@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.AchievementReward;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -172,16 +173,16 @@ public abstract class GridObjectType {
   public void addLock(AchievementReward reward) {
     if (!isLocked()) {
       achievementLock = reward;
-      System.out.println(name + " locked by " + reward);
+      if (TowerConsts.DEBUG) System.out.println(name + " locked by " + reward);
     } else {
-      System.out.println(name + " is already locked by " + reward);
+      if (TowerConsts.DEBUG) System.out.println(name + " is already locked by " + reward);
     }
   }
 
   public void removeLock() {
     if (achievementLock != null) {
       achievementLock = null;
-      System.out.println(name + " unlocked.");
+      if (TowerConsts.DEBUG) System.out.println(name + " unlocked.");
     }
   }
 }

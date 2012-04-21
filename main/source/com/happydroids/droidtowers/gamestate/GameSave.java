@@ -90,7 +90,6 @@ public class GameSave {
       CameraController.instance().checkBounds();
     }
 
-    AchievementEngine.instance().loadCompletedAchievements(completedAchievements);
     TutorialEngine.instance().resetState();
 
     if (gridObjects != null) {
@@ -102,7 +101,11 @@ public class GameSave {
     if (newGame) {
       TutorialEngine.instance().enable();
       TutorialEngine.instance().complete("tutorial-welcome");
+    } else {
+      TutorialEngine.instance().completeAll();
     }
+
+    AchievementEngine.instance().loadCompletedAchievements(completedAchievements);
 
     newGame = false;
   }

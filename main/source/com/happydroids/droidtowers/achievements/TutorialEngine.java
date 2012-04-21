@@ -14,6 +14,7 @@ import com.happydroids.droidtowers.gui.TutorialStepNotification;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class TutorialEngine extends AchievementEngine {
   private static TutorialEngine instance;
@@ -40,7 +41,7 @@ public class TutorialEngine extends AchievementEngine {
 
   @Override
   public void checkAchievements() {
-    if(enabled) {
+    if (enabled) {
       super.checkAchievements();
     }
   }
@@ -68,5 +69,15 @@ public class TutorialEngine extends AchievementEngine {
     enabled = true;
 
     super.resetState();
+  }
+
+  public void completeAll() {
+    Iterator<Achievement> achievementIterator = achievements.iterator();
+    while (achievementIterator.hasNext()) {
+      Achievement achievement = achievementIterator.next();
+      complete(achievement);
+
+      achievementIterator.remove();
+    }
   }
 }

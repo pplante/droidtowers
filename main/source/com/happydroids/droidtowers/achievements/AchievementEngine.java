@@ -86,6 +86,12 @@ public class AchievementEngine {
       }
     }
 
+    for (Achievement achievement : completedAchievements) {
+      if (achievementId.equalsIgnoreCase(achievement.getId())) {
+        return;
+      }
+    }
+
     throw new RuntimeException("Could not find achievement called: " + achievementId);
   }
 

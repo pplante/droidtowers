@@ -7,14 +7,16 @@ package com.happydroids.droidtowers.gamestate;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.happydroids.utils.BackgroundTask;
+import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
 import com.happydroids.droidtowers.graphics.TowerMiniMap;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.OnClickCallback;
 import com.happydroids.droidtowers.gui.ResponseType;
+import com.happydroids.droidtowers.scenes.MainMenuScene;
 import com.happydroids.droidtowers.utils.PNG;
+import com.happydroids.utils.BackgroundTask;
 
 import java.io.OutputStream;
 
@@ -69,7 +71,7 @@ public class GameState {
         @Override
         public void onClick(Dialog dialog) {
           dialog.dismiss();
-          Gdx.app.exit();
+          TowerGame.changeScene(MainMenuScene.class);
         }
       }).show();
     } finally {

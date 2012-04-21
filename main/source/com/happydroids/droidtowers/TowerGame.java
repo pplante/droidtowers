@@ -114,7 +114,7 @@ public class TowerGame implements ApplicationListener {
 
     InputSystem.instance().bind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, new InputCallback() {
       public boolean run(float timeDelta) {
-        new Dialog(rootUiStage).setTitle("Awe, don't leave me.").setMessage("Are you sure you want to exit the game?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
+        new Dialog(rootUiStage).setTitle("Awe, don't leave me.").setMessage("Are you sure you want to exit to the Main Menu?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
           @Override
           public void onClick(Dialog dialog) {
             dialog.dismiss();
@@ -204,10 +204,20 @@ public class TowerGame implements ApplicationListener {
 
   public void dispose() {
     activeScene.dispose();
+
+    activeScene = null;
+    pausedScenes = null;
+    rootUiStage = null;
+    camera = null;
+    uncaughtExceptionHandler = null;
+    platformBrowserUtil = null;
+
     spriteBatch.dispose();
     BackgroundTask.dispose();
     TowerAssetManager.dispose();
     FontManager.resetAll();
+
+    System.exit(0);
   }
 
   public static void changeScene(Class<? extends Scene> sceneClass, Object... args) {
