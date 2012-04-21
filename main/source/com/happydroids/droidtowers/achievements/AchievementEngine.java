@@ -5,17 +5,16 @@
 package com.happydroids.droidtowers.achievements;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
-import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.entities.GridObjectPlacementState;
+import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
 import com.happydroids.droidtowers.events.GridObjectChangedEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.AchievementNotification;
+import com.happydroids.droidtowers.gui.TutorialStepNotification;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,9 +40,12 @@ public class AchievementEngine {
     completedAchievements = Sets.newHashSet();
 
     try {
-      FileHandle fileHandle = Gdx.files.internal("params/achievements.json");
       ObjectMapper mapper = TowerGameService.instance().getObjectMapper();
-      achievements = mapper.readValue(fileHandle.reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, Achievement.class));
+      achievements = mapper.readValue(Gdx.files.internal("params/achievements.json").reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, Achievement.class));
+
+      List<Achievement> tutorialSteps = mapper.readValue(Gdx.files.internal("params/tutorial-steps.json").reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, TutorialStep.class));
+      achievements.addAll(tutorialSteps);
+
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -53,33 +55,44 @@ public class AchievementEngine {
     return achievements;
   }
 
-  @Subscribe
-  public void GameEvent_handleGridObjectEvent(GridObjectChangedEvent event) {
-    if (!event.nameOfParamChanged.equals("placementState") || !event.gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
-      return;
-    }
-    if (HappyDroidConsts.DEBUG) System.out.println("event = " + event);
-    List<String> summary = Lists.newArrayList();
-
+  public void checkAchievements() {
     Iterator<Achievement> achievementIterator = achievements.iterator();
     while (achievementIterator.hasNext()) {
       Achievement achievement = achievementIterator.next();
-      if (HappyDroidConsts.DEBUG) System.out.println(achievement);
       if (achievement.isCompleted(gameGrid) && !completedAchievements.contains(achievement)) {
-        String rewardSummary = achievement.giveReward();
-
-        if (rewardSummary != null) {
-          summary.add(rewardSummary);
-        }
-
-        AchievementNotification notification = new AchievementNotification(achievement);
-        notification.show();
-
-        completedAchievements.add(achievement);
+        completeAchievement(achievement);
 
         achievementIterator.remove();
       }
     }
+  }
+
+  public void completeAchievement(Achievement achievement) {
+    if (completedAchievements.contains(achievement)) {
+      return;
+    }
+
+    achievement.setCompleted(true);
+    achievement.giveReward();
+
+    if (achievement instanceof TutorialStep) {
+      new TutorialStepNotification((TutorialStep) achievement).show();
+    } else {
+      new AchievementNotification(achievement).show();
+    }
+
+    completedAchievements.add(achievement);
+  }
+
+  public void completeAchievement(String achievementId) {
+    for (Achievement achievement : achievements) {
+      if (achievementId.equalsIgnoreCase(achievement.getId())) {
+        completeAchievement(achievement);
+        return;
+      }
+    }
+
+    throw new RuntimeException("Could not find achievement called: " + achievementId);
   }
 
   public Set<Achievement> getCompletedAchievements() {
@@ -88,14 +101,7 @@ public class AchievementEngine {
 
   public void loadCompletedAchievements(List<String> achievementIds) {
     for (Achievement achievement : achievements) {
-      achievement.setCompleted(false);
-
-      for (AchievementReward reward : achievement.getRewards()) {
-        if (reward.getType().equals(RewardType.UNLOCK) && reward.getThing().equals(AchievementThing.OBJECT_TYPE)) {
-          if (HappyDroidConsts.DEBUG) System.out.println("Reset: " + reward.getRewardString());
-          reward.getThingObjectType().setLocked(true);
-        }
-      }
+      achievement.resetState();
     }
 
     if (achievementIds == null) {
@@ -136,5 +142,19 @@ public class AchievementEngine {
 
   public GameGrid getGameGrid() {
     return gameGrid;
+  }
+
+  @Subscribe
+  public void GameEvent_handleGridObjectEvent(GridObjectChangedEvent event) {
+    if (event.nameOfParamChanged.equals("placementState") && event.gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
+      return;
+    }
+
+    checkAchievements();
+  }
+
+  @Subscribe
+  public void Elevator_onHeightChange(ElevatorHeightChangeEvent event) {
+    completeAchievement("tutorial-finished");
   }
 }

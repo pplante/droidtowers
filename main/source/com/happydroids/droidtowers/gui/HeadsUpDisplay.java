@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -47,6 +48,8 @@ public class HeadsUpDisplay extends WidgetGroup {
   private TextButton expandLandButton;
   private final ImageButton toolButton;
   private final ImageButton.ImageButtonStyle toolButtonStyle;
+  private TutorialStepNotification tutorialStep;
+  private final StatusBarPanel statusBarPanel;
 
   public HeadsUpDisplay(TowerScene towerScene) {
     instance = this;
@@ -60,7 +63,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     hudAtlas = TowerAssetManager.textureAtlas("hud/buttons.txt");
 
-    StatusBarPanel statusBarPanel = new StatusBarPanel(guiSkin, towerScene);
+    statusBarPanel = new StatusBarPanel(guiSkin, towerScene);
     statusBarPanel.x = -4;
     statusBarPanel.y = stage.height() - statusBarPanel.height + 4;
     addActor(statusBarPanel);
@@ -118,6 +121,7 @@ public class HeadsUpDisplay extends WidgetGroup {
           toolMenu.x = toolButton.x + 20f;
           toolMenu.y = toolButton.y;
           toolMenu.show();
+          AchievementEngine.instance().completeAchievement("tutorial-unlock-lobby");
         } else {
           toolMenu.hide();
           toolMenu.markToRemove(true);
@@ -161,6 +165,10 @@ public class HeadsUpDisplay extends WidgetGroup {
         toolMenu.hide();
 
         if (purchaseDialog == null) {
+          if (typeFactory instanceof RoomTypeFactory) {
+            AchievementEngine.instance().completeAchievement("tutorial-unlock-lobby");
+          }
+
           makePurchaseDialog(dialogTitle, typeFactory, ((ImageButton) actor).getStyle());
           toolButton.setStyle(((ImageButton) actor).getStyle());
         } else {
@@ -268,5 +276,20 @@ public class HeadsUpDisplay extends WidgetGroup {
 
   public static HeadsUpDisplay instance() {
     return instance;
+  }
+
+  public void setTutorialStep(TutorialStepNotification nextStep) {
+    if (tutorialStep != null) {
+      tutorialStep.markToRemove(true);
+    }
+
+    tutorialStep = nextStep;
+
+    if (tutorialStep != null) {
+      addActor(tutorialStep);
+
+      tutorialStep.x = 10;
+      tutorialStep.y = ((int) (getStage().height() - (statusBarPanel.height + tutorialStep.height + 6)));
+    }
   }
 }

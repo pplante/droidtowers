@@ -55,10 +55,6 @@ public class TestGridObjectType extends GridObjectType {
     this.imageFilename = imageFilename;
   }
 
-  public void setLocked(boolean locked) {
-    this.locked = locked;
-  }
-
   public void setName(String name) {
     this.name = name;
   }

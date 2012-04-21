@@ -45,7 +45,7 @@ public class MainMenuScene extends Scene {
     container.add(label).align(Align.CENTER);
     container.row();
 
-    Label versionLabel = FontManager.Default.makeLabel(String.format("%s (%s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA));
+    Label versionLabel = FontManager.Default.makeLabel(String.format("%s (%s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA.substring(0, 8)));
     versionLabel.setColor(Color.DARK_GRAY);
     container.add(versionLabel).right().padTop(scale(-8));
     container.row().padTop(30);
@@ -137,6 +137,11 @@ public class MainMenuScene extends Scene {
     });
 
 //    newGameButton.click(1, 1);
+/*
+    GameSave gameSave = new GameSave("DO NOT SAVE!", DifficultyLevel.EASY);
+    gameSave.disableSaving();
+    TowerGame.changeScene(TowerScene.class, gameSave);
+*/
 /*
     try {
       FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);

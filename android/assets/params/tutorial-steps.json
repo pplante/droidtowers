@@ -1,0 +1,89 @@
+[
+  {
+    "id":"tutorial-welcome",
+    "name":"Welcome to Droid Towers!",
+    "description":"To start building your Tower,\ntap the Build menu in the bottom right."
+  },
+  {
+    "id":"tutorial-unlock-lobby",
+    "name":"Breaking ground",
+    "description":"Click on the house icon to open the buy menu.\n\nThen click \"BUY\" next to the Lobby.",
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingTypeId":"GROUND-FLOOR-LOBBY"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-purchased-lobby",
+    "name":"Pillars of Success",
+    "description":"Your cursor now is in \"Placement\" mode.\n\nTap to place the Lobby."
+  },
+  {
+    "id":"tutorial-build-lobby",
+    "name":"There is no place like Home",
+    "description":"The Lobby serves as the base for a Tower.\n\nDroids need a place to call home.\n\nYou should buy an Apartment for them.",
+    "requirements":[
+      {
+        "type":"BUILD",
+        "thing":"OBJECT_TYPE",
+        "thingTypeId":"GROUND-FLOOR-LOBBY",
+        "amount":1
+      }
+    ],
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingTypeId":"SMALL-APARTMENT"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-build-apartment",
+    "name":"Beam me up, Scotty",
+    "description":"Notice the little red box on your Apartment?\n\nThat means it is not connected to the Main Lobby.\n\nLets build an Elevator so the Droids can move in.",
+    "requirements":[
+      {
+        "type":"BUILD",
+        "thing":"OBJECT_TYPE",
+        "thingTypeId":"SMALL-APARTMENT",
+        "amount":1
+      }
+    ],
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingTypeId":"ELEVATOR"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-stretch-elevator",
+    "name":"Sky's the limit!",
+    "description":"Elevators need to service each floor of your Tower.\n\nConnect your elevator by dragging the top or bottom\nof the elevator shaft.",
+    "requirements":[
+      {
+        "type":"BUILD",
+        "thing":"OBJECT_TYPE",
+        "thingTypeId":"ELEVATOR",
+        "amount":1
+      }
+    ]
+  },
+  {
+    "id":"tutorial-finished",
+    "name":"Congratulations!",
+    "description":"Congratulations!\n\nYou are now ready to conquer the sky's!",
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"PROVIDER_TYPE",
+        "thingProviderTypes":["HOUSING", "COMMERCIAL", "TRANSPORT", "SERVICE"]
+      }
+    ]
+  }
+]

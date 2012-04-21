@@ -7,7 +7,7 @@ package com.happydroids.droidtowers.achievements;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import com.happydroids.HappyDroidConsts;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.grid.GameGrid;
 
 import java.util.List;
@@ -15,9 +15,10 @@ import java.util.List;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Achievement {
   private String id;
-  private String name;
+  protected String name;
+  protected String description;
   private List<AchievementRequirement> requirements;
-  private List<AchievementReward> rewards;
+  protected List<AchievementReward> rewards;
   private boolean completed;
   private boolean gaveRewards;
 
@@ -32,32 +33,29 @@ public class Achievement {
   }
 
   public boolean isCompleted(GameGrid gameGrid) {
-    for (AchievementRequirement requirement : requirements) {
-      if (!requirement.isCompleted(gameGrid)) {
-        if (HappyDroidConsts.DEBUG) System.out.println("Requirement unsatisfied: " + requirement);
-        return false;
+    if (requirements != null) {
+      for (AchievementRequirement requirement : requirements) {
+        if (!requirement.isCompleted(gameGrid)) {
+//          if (HappyDroidConsts.DEBUG) System.out.println("Requirement unsatisfied: " + requirement);
+          return false;
+        }
       }
+
+      completed = true;
+
+      return true;
     }
 
-    completed = true;
-
-    return true;
-  }
-
-  @Override
-  public String toString() {
-    return "Achievement{" +
-                   "name='" + name + '\'' +
-                   ", requirements=" + requirements +
-                   ", rewards=" + rewards +
-                   '}';
+    return false;
   }
 
   public String giveReward() {
     if (!gaveRewards && completed) {
       gaveRewards = true;
-      for (AchievementReward reward : rewards) {
-        reward.give();
+      if (rewards != null) {
+        for (AchievementReward reward : rewards) {
+          reward.give();
+        }
       }
 
       return toRewardString();
@@ -66,10 +64,25 @@ public class Achievement {
     return null;
   }
 
+  public void resetState() {
+    if (TowerConsts.DEBUG) System.out.println("Reset: " + id);
+    completed = false;
+
+    if (rewards != null) {
+      for (AchievementReward reward : rewards) {
+        reward.resetState();
+      }
+    } else {
+      if (TowerConsts.DEBUG) System.out.println("Achievement has no rewards: " + getId());
+    }
+  }
+
   public String toRewardString() {
     List<String> summary = Lists.newArrayList(String.format("Complete: %s!", name));
-    for (AchievementReward reward : rewards) {
-      summary.add(reward.getRewardString());
+    if (rewards != null) {
+      for (AchievementReward reward : rewards) {
+        summary.add(reward.getRewardString());
+      }
     }
 
     return Joiner.on("\n").join(summary);
@@ -97,5 +110,21 @@ public class Achievement {
 
   public List<AchievementReward> getRewards() {
     return rewards;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  @Override
+  public String toString() {
+    return "Achievement{" +
+                   "completed=" + completed +
+                   ", gaveRewards=" + gaveRewards +
+                   ", id='" + id + '\'' +
+                   ", name='" + name + '\'' +
+                   ", requirements=" + requirements +
+                   ", rewards=" + rewards +
+                   '}';
   }
 }

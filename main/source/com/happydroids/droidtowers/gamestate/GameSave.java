@@ -25,6 +25,7 @@ import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridObjectState;
 import com.happydroids.droidtowers.grid.GridPositionCache;
+import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.jackson.TowerTypeIdResolver;
 import sk.seges.acris.json.server.migrate.JacksonTransformer;
@@ -56,6 +57,7 @@ public class GameSave {
   private boolean newGame;
   private GameGrid gameGrid;
   private OrthographicCamera camera;
+  private boolean saveToDiskDisabled;
 
   public GameSave() {
     newGame = false;
@@ -96,6 +98,18 @@ public class GameSave {
       }
     }
 
+    if (newGame) {
+      AchievementEngine.instance().completeAchievement("tutorial-welcome");
+    } else {
+      for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
+        if (achievement.getId().startsWith("tutorial")) {
+          AchievementEngine.instance().completeAchievement(achievement);
+        }
+      }
+
+      HeadsUpDisplay.instance().setTutorialStep(null);
+    }
+
     newGame = false;
   }
 
@@ -130,7 +144,10 @@ public class GameSave {
     fileGeneration += 1;
   }
 
+  @SuppressWarnings("PointlessBooleanExpression")
   public void save(FileHandle gameFile) throws IOException {
+    if (TowerConsts.DEBUG && saveToDiskDisabled) return;
+
     OutputStream stream = gameFile.write(false);
     TowerGameService.instance().getObjectMapper().writeValue(stream, this);
     stream.flush();
@@ -180,5 +197,9 @@ public class GameSave {
 
   public Player getPlayer() {
     return player;
+  }
+
+  public void disableSaving() {
+    saveToDiskDisabled = true;
   }
 }

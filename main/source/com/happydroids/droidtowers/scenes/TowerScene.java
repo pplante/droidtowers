@@ -16,7 +16,6 @@ import com.happydroids.droidtowers.actions.ActionManager;
 import com.happydroids.droidtowers.actions.GameSaveAction;
 import com.happydroids.droidtowers.audio.GameGridSoundDispatcher;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
-import com.happydroids.droidtowers.controllers.GameTips;
 import com.happydroids.droidtowers.entities.CloudLayer;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.gamestate.GameSave;
@@ -44,7 +43,6 @@ public class TowerScene extends Scene {
   private GameSave gameSave;
   private WeatherService weatherService;
   private HeadsUpDisplay headsUpDisplay;
-  private GameTips gameTips;
   private GestureDetector gestureDetector;
   private GestureDelegater gestureDelegater;
   private GameGridSoundDispatcher gridSoundDispatcher;
@@ -56,6 +54,7 @@ public class TowerScene extends Scene {
   private DesirabilityCalculator desirabilityCalculator;
   private GameSaveAction saveAction;
   private DefaultKeybindings keybindings;
+  private AchievementEngineCheck achievementEngineCheck;
 
   public TowerScene() {
     gameSaveLocation = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
@@ -99,8 +98,6 @@ public class TowerScene extends Scene {
     gameLayers.add(gameGrid);
     gameLayers.add(AvatarLayer.initialize(gameGrid));
 
-    gameTips = new GameTips(gameGrid);
-
     gestureDelegater = new GestureDelegater(camera, gameLayers);
     gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, gestureDelegater);
 
@@ -119,6 +116,7 @@ public class TowerScene extends Scene {
     earnoutCalculator = new EarnoutCalculator(gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
     employmentCalculator = new EmploymentCalculator(gameGrid, TowerConsts.JOB_UPDATE_FREQUENCY);
     desirabilityCalculator = new DesirabilityCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
+    achievementEngineCheck = new AchievementEngineCheck(gameGrid, TowerConsts.ACHIEVEMENT_ENGINE_FREQUENCY);
     saveAction = new GameSaveAction(gameState);
     transportCalculator = new TransportCalculator(gameGrid, TowerConsts.TRANSPORT_CALCULATOR_FREQUENCY);
     transportCalculator.run();
@@ -132,6 +130,7 @@ public class TowerScene extends Scene {
     ActionManager.instance().addAction(earnoutCalculator);
     ActionManager.instance().addAction(employmentCalculator);
     ActionManager.instance().addAction(desirabilityCalculator);
+    ActionManager.instance().addAction(achievementEngineCheck);
 
     // SHOULD ALWAYS BE LAST.
     ActionManager.instance().addAction(saveAction);

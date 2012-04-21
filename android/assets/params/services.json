@@ -1,5 +1,19 @@
 [
   {
+    "id":"PUBLIC-RESTROOM",
+    "name":"Public Restroom",
+    "coins":1000,
+    "height":1,
+    "width":1,
+    "experienceAward":300,
+    "populationAttraction":0,
+    "populationRequired":5,
+    "jobsProvided":0,
+    "noiseLevel":0.3,
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"1x1-bathroom"
+  },
+  {
     "id":"JANITORS-CLOSET",
     "name":"Janitors Closet",
     "coins":20000,

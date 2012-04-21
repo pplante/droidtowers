@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.actions.Action;
-import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
+import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.ElevatorType;
@@ -150,7 +150,7 @@ public class Elevator extends Transit {
       position.y = Math.max(newPosY, 0);
     }
 
-    broadcastEvent(new GridObjectBoundsChangeEvent(this, prevSize, prevPosition));
+    broadcastEvent(new ElevatorHeightChangeEvent(this, prevSize, prevPosition));
 
     return true;
   }

@@ -15,8 +15,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.TowerGame;
-import com.happydroids.droidtowers.scenes.Scene;
 import com.happydroids.droidtowers.tween.TweenSystem;
+
+import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class Toast extends Table {
   private static Pixmap pixmap;
@@ -33,11 +34,11 @@ public class Toast extends Table {
     }
 
     visible = false;
-    label = new Label(Scene.getGuiSkin());
+    label = FontManager.RobotoBold18.makeLabel("");
 
     defaults();
     setBackground(background);
-    pad(4);
+    pad(scale(12));
     add(label);
     pack();
   }
@@ -51,7 +52,7 @@ public class Toast extends Table {
     pack();
 
     x = (TowerGame.getActiveScene().getStage().width() - width) / 2;
-    y = TowerGame.getActiveScene().getStage().height() - height - 10;
+    y = height + scale(10);
 
     color.a = 0f;
     visible = true;

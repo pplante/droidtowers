@@ -35,6 +35,7 @@ public class TowerConsts extends HappyDroidConsts {
   public static final float MINI_MAP_REDRAW_FREQUENCY = 1f;
   public static final String GAME_SAVE_DIRECTORY = Gdx.app.getType() == Application.ApplicationType.Android ? "towergame/" : ".towergame/";
   public static final String FANDANGO_COMMISSION_JUNCTION_ID = "5737037";
+  public static final float ACHIEVEMENT_ENGINE_FREQUENCY = 5f;
 
   private TowerConsts() {
 

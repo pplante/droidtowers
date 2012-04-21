@@ -8,62 +8,55 @@ import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.badlogic.gdx.utils.Scaling;
-import com.happydroids.droidtowers.achievements.Achievement;
+import com.happydroids.droidtowers.achievements.TutorialStep;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
-public class AchievementNotification extends Table {
-  private final Achievement achievement;
+import static com.happydroids.droidtowers.platform.Display.scale;
 
-  public AchievementNotification(Achievement achievement) {
-    this.achievement = achievement;
+public class TutorialStepNotification extends Table {
+  private boolean allowDismiss;
 
+  public TutorialStepNotification(TutorialStep step) {
     setBackground(HeadsUpDisplay.instance().getGuiSkin().getPatch("default-round"));
 
-    defaults().top().left().pad(4);
+    defaults();
 
-    add(new Image(new Texture(Gdx.files.internal("hud/trophy.png")), Scaling.none)).minWidth(64).padRight(8);
+    row();
+    add(FontManager.RobotoBold18.makeLabel(step.getName())).top();
+    row().pad(scale(6));
+    add(new HorizontalRule());
+    row().pad(scale(6));
+    add(FontManager.Default.makeLabel(step.getDescription())).top();
 
-    Table textTable = new Table();
-    textTable.defaults().left().top();
-    add(textTable);
+    if (step.getId().equalsIgnoreCase("tutorial-finished")) {
+      row().pad(scale(6));
+      add(FontManager.Default.makeLabel("[ tap to dismiss ]"));
 
-    textTable.add(new Label(achievement.getName(), HeadsUpDisplay.instance().getGuiSkin())).top();
-    textTable.row();
-    textTable.add(new Label(achievement.toRewardString(), HeadsUpDisplay.instance().getGuiSkin())).top();
-    textTable.pack();
-    setClip(true);
+      allowDismiss = true;
+    }
+
     pack();
   }
 
   public void show() {
-    HeadsUpDisplay.instance().getNotificationStack().addActor(this);
+    HeadsUpDisplay.instance().setTutorialStep(this);
 
     Timeline.createSequence()
             .push(Tween.set(this, WidgetAccessor.OPACITY).target(0.0f))
             .push(Tween.to(this, WidgetAccessor.OPACITY, 200).target(1.0f))
-            .setCallback(new TweenCallback() {
-              public void onEvent(int eventType, BaseTween source) {
-                hide(true);
-              }
-            })
             .setCallbackTriggers(TweenCallback.END)
             .start(TweenSystem.getTweenManager());
   }
 
-  public void hide(final boolean useDelay) {
+  public void hide() {
     TweenSystem.getTweenManager().killTarget(this);
 
-    final WidgetGroup targetParent = (WidgetGroup) AchievementNotification.this.parent;
+    final WidgetGroup targetParent = (WidgetGroup) this.parent;
 
     Timeline.createSequence()
-            .push(Tween.set(this, WidgetAccessor.SIZE).target(this.width, this.height).delay(useDelay ? 4000 : 0))
+            .push(Tween.set(this, WidgetAccessor.SIZE).target(this.width, this.height))
             .beginParallel()
             .push(Tween.to(this, WidgetAccessor.SIZE, 300).target(this.width, 0))
             .push(Tween.to(this, WidgetAccessor.OPACITY, 300).target(0))
@@ -71,7 +64,7 @@ public class AchievementNotification extends Table {
             .setCallback(new TweenCallback() {
               public void onEvent(int eventType, BaseTween source) {
                 if (targetParent != null) {
-                  targetParent.removeActor(AchievementNotification.this);
+                  targetParent.removeActor(TutorialStepNotification.this);
                   targetParent.invalidate();
                   targetParent.layout();
                 }
@@ -83,7 +76,12 @@ public class AchievementNotification extends Table {
 
   @Override
   public boolean touchDown(float x, float y, int pointer) {
-    hide(false);
-    return true;
+    if (allowDismiss) {
+      hide();
+
+      return true;
+    }
+
+    return false;
   }
 }

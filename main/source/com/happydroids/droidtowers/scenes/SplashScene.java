@@ -85,6 +85,7 @@ public class SplashScene extends Scene {
 
   @Override
   public void resume() {
+
   }
 
   @Override
@@ -114,8 +115,8 @@ public class SplashScene extends Scene {
       if (!hasFilesToPreload) {
         TowerGame.changeScene(MainMenuScene.class);
       }
-    } else if(splashState == RESUME_CYCLE) {
-      if(assetManagerFinished) {
+    } else if (splashState == RESUME_CYCLE) {
+      if (assetManagerFinished) {
         TowerGame.popScene();
       }
     }

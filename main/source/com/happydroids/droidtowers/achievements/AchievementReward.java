@@ -5,23 +5,22 @@
 package com.happydroids.droidtowers.achievements;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
+import com.happydroids.droidtowers.types.ProviderType;
 
 import static com.happydroids.droidtowers.achievements.AchievementThing.OBJECT_TYPE;
+import static com.happydroids.droidtowers.achievements.AchievementThing.PROVIDER_TYPE;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class AchievementReward {
   private RewardType type;
   private AchievementThing thing;
+  private ProviderType[] thingProviderTypes;
   private String thingTypeId;
   private double amount;
-
-  @JsonIgnore
-  private GridObjectType thingObjectType;
 
   public AchievementReward() {
 
@@ -51,12 +50,44 @@ public class AchievementReward {
     }
 
     switch (thing) {
-      case OBJECT_TYPE:
-        getThingObjectType().setLocked(false);
-        break;
       case MONEY:
         Player.instance().addCurrency((int) amount);
         break;
+      case OBJECT_TYPE:
+        getThingObjectType().removeLock(this);
+        break;
+      case PROVIDER_TYPE:
+        handleProviderTypeReward();
+        break;
+    }
+  }
+
+  private void handleProviderTypeReward() {
+    if (thingProviderTypes == null || thingProviderTypes.length == 0) {
+      throw new RuntimeException("Reward with 'thing' value of 'PROVIDER_TYPE' needs the parameter 'thingProviderTypes' to be set.");
+    }
+
+    setProviderTypeLockState(false);
+  }
+
+  private void setProviderTypeLockState(boolean locked) {
+    if (thingProviderTypes == null || thingProviderTypes.length == 0) {
+      throw new RuntimeException("Reward with 'thing' value of 'PROVIDER_TYPE' needs the parameter 'thingProviderTypes' to be set.");
+    }
+
+    for (ProviderType providerType : thingProviderTypes) {
+      for (GridObjectTypeFactory typeFactory : GridObjectTypeFactory.allFactories()) {
+        for (Object objectType : typeFactory.findByProviderType(providerType)) {
+          GridObjectType gridObjectType = (GridObjectType) objectType;
+          if (gridObjectType.provides(providerType)) {
+            if (locked) {
+              gridObjectType.addLock(this);
+            } else {
+              gridObjectType.removeLock(this);
+            }
+          }
+        }
+      }
     }
   }
 
@@ -114,5 +145,15 @@ public class AchievementReward {
 
   public AchievementThing getThing() {
     return thing;
+  }
+
+  public void resetState() {
+    if (type.equals(RewardType.UNLOCK)) {
+      if (thing.equals(OBJECT_TYPE)) {
+        getThingObjectType().addLock(this);
+      } else if (thing.equals(PROVIDER_TYPE)) {
+        setProviderTypeLockState(true);
+      }
+    }
   }
 }

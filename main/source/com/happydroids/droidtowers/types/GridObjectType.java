@@ -8,12 +8,15 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.achievements.AchievementReward;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPositionCache;
 import com.happydroids.droidtowers.math.GridPoint;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.WeakHashMap;
 
@@ -28,12 +31,12 @@ public abstract class GridObjectType {
   protected String atlasFilename;
   protected String imageFilename;
   protected boolean canShareSpace;
-  protected boolean locked;
   protected float noiseLevel;
   protected ProviderType provides;
 
   private static WeakHashMap<String, TextureAtlas> atlases;
   private TextureAtlas textureAtlas;
+  private AchievementReward achievementLock;
 
   public abstract GridObject makeGridObject(GameGrid gameGrid);
 
@@ -145,11 +148,7 @@ public abstract class GridObjectType {
   }
 
   public boolean isLocked() {
-    return locked;
-  }
-
-  public void setLocked(boolean locked) {
-    this.locked = locked;
+    return achievementLock != null;
   }
 
   public String getId() {
@@ -158,13 +157,31 @@ public abstract class GridObjectType {
 
   public boolean provides(ProviderType... thingProviderTypes) {
     if (provides != null) {
-      for (ProviderType thingProviderType : thingProviderTypes) {
-        if (thingProviderType == provides) {
+      HashSet<ProviderType> typeHashSet = Sets.newHashSet(provides);
+
+      for (ProviderType otherType : thingProviderTypes) {
+        if (otherType.matches(typeHashSet)) {
           return true;
         }
       }
     }
 
     return false;
+  }
+
+  public void addLock(AchievementReward reward) {
+    if (!isLocked()) {
+      achievementLock = reward;
+      System.out.println(name + " locked by " + reward);
+    } else {
+      System.out.println(name + " is already locked by " + reward);
+    }
+  }
+
+  public void removeLock(AchievementReward reward) {
+    if (achievementLock != null) {
+      achievementLock = null;
+      System.out.println(name + " unlocked by " + reward);
+    }
   }
 }

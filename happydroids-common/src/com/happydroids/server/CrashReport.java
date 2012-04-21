@@ -9,7 +9,7 @@ import com.happydroids.HappyDroidConsts;
 
 import java.io.IOException;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("FieldCanBeLocal")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class CrashReport extends HappyDroidServiceObject {
   private final String name;

@@ -5,12 +5,7 @@
 package com.happydroids.droidtowers.achievements;
 
 public enum RequirementType {
-  POPULATION("Population"),
-  BUILD("Build");
-
-  private final String label;
-
-  RequirementType(String label) {
-    this.label = label;
-  }
+  POPULATION,
+  BUILD,
+  UNLOCK
 }

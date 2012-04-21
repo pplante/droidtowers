@@ -44,6 +44,13 @@ repeat: none
   orig: 192, 64
   offset: 0, 0
   index: -1
+1x1-bathroom
+  rotate: false
+  xy: 256, 448
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
 3x1-small-apartment
   rotate: false
   xy: 0, 384
@@ -51,18 +58,18 @@ repeat: none
   orig: 192, 64
   offset: 0, 0
   index: -1
-lobby-left
-  rotate: false
-  xy: 256, 448
-  size: 36, 64
-  orig: 36, 64
-  offset: 0, 0
-  index: -1
 4x1-large-apartment
   rotate: false
   xy: 0, 256
   size: 256, 64
   orig: 256, 64
+  offset: 0, 0
+  index: -1
+lobby-left
+  rotate: false
+  xy: 320, 384
+  size: 36, 64
+  orig: 36, 64
   offset: 0, 0
   index: -1
 4x1-movie-theater
@@ -86,9 +93,16 @@ lobby-left
   orig: 320, 64
   offset: 0, 0
   index: -1
-lobby-right
+bathroom
   rotate: false
   xy: 448, 256
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+lobby-right
+  rotate: false
+  xy: 320, 320
   size: 36, 64
   orig: 36, 64
   offset: 0, 0

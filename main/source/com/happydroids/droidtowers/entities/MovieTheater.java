@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.types.CommercialType;
@@ -45,10 +44,11 @@ public class MovieTheater extends CommercialSpace {
 
     super.render(spriteBatch);
   }
-
+/*
   @Override
   public boolean touchDown(Vector2 gameGridPoint) {
     TowerGame.getPlatformBrowserUtil().launchWebBrowser("http://www.tkqlhce.com/da74cy63y5LRTPTMPTLNMRVVTUR");
     return true;
   }
+ */
 }

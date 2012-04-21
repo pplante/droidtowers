@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.input.PlacementTool;
@@ -46,6 +47,10 @@ public class GridObjectPurchaseMenu extends TowerWindow {
           PlacementTool placementTool = (PlacementTool) InputSystem.instance().getCurrentTool();
           placementTool.setup(gridObjectType);
           placementTool.enterPurchaseMode();
+
+          if (gridObjectType.getId().equalsIgnoreCase("GROUND-FLOOR-LOBBY")) {
+            AchievementEngine.instance().completeAchievement("tutorial-purchased-lobby");
+          }
 
           dismiss();
         }
