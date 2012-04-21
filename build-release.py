@@ -23,7 +23,7 @@ def retrieve_git_revision():
     if len(git_status) > 0:
         raise Exception("Git status reports there are changes to be committed.")
 
-    return git('rev-parse', '--short', 'HEAD').strip()
+    return git('rev-parse', 'HEAD').strip()
 
 
 def retreive_build_number():
@@ -106,29 +106,29 @@ if __name__ == '__main__':
         with open(TOWER_CONSTS_JAVA, 'w') as fp:
             fp.write(tower_consts)
 
-#        notes = unicode(git.log('--no-decorate', '--pretty=format:[%h]  %s', '--no-merges',
-#            'release-v%s..' % (previous_build_number,)))
-#
-#        blob = json.dumps(dict(
-#            version=new_build_number,
-#            git_sha=revision,
-#            released_on=datetime.now().isoformat(),
-#            notes=notes
-#        ))
-#
-#        headers = {'content-type': 'application/json'}
-#
-#        r = requests.post('https://www.happydroids.com/api/v1/gameupdate/?format=json',
-#            auth=('pplante', getpass('Please enter password for game update: ')), data=blob, headers=headers)
-#
-#        if r.status_code == 201:
-#            print 'Game update successfully posted!'
-#            print r.headers['location']
-#        else:
-#            print 'Failure posting game update:'
-#            print r.status_code
-#            print r.text
-#
+        #        notes = unicode(git.log('--no-decorate', '--pretty=format:[%h]  %s', '--no-merges',
+        #            'release-v%s..' % (previous_build_number,)))
+        #
+        #        blob = json.dumps(dict(
+        #            version=new_build_number,
+        #            git_sha=revision,
+        #            released_on=datetime.now().isoformat(),
+        #            notes=notes
+        #        ))
+        #
+        #        headers = {'content-type': 'application/json'}
+        #
+        #        r = requests.post('https://www.happydroids.com/api/v1/gameupdate/?format=json',
+        #            auth=('pplante', getpass('Please enter password for game update: ')), data=blob, headers=headers)
+        #
+        #        if r.status_code == 201:
+        #            print 'Game update successfully posted!'
+        #            print r.headers['location']
+        #        else:
+        #            print 'Failure posting game update:'
+        #            print r.status_code
+        #            print r.text
+        #
 
     except Exception, e:
         print e

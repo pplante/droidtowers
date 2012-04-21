@@ -9,6 +9,7 @@ import com.happydroids.server.CrashReport;
 import com.happydroids.server.HappyDroidServiceObject;
 import org.apache.http.HttpResponse;
 
+import javax.swing.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +19,7 @@ public class DesktopUncaughtExceptionHandler extends HappyDroidUncaughtException
   public void uncaughtException(Thread thread, final Throwable throwable) {
     Logger.getLogger(TAG).log(Level.SEVERE, "Uncaught exception!", throwable);
 
-//    JOptionPane.showMessageDialog(null, generateExceptionErrorString(throwable), "Ooops!", JOptionPane.ERROR_MESSAGE);
+    JOptionPane.showMessageDialog(null, generateExceptionErrorString(throwable), "Ooops!", JOptionPane.ERROR_MESSAGE);
 
     new CrashReport(throwable).save(new ApiRunnable() {
       @Override

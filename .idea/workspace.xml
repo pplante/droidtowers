@@ -24,6 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-release.py" afterPath="$PROJECT_DIR$/build-release.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/DesktopUncaughtExceptionHandler.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/DesktopUncaughtExceptionHandler.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -193,14 +195,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GameSave.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="GameSave.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="0" selection-start="4060" selection-end="4060" vertical-scroll-proportion="0.4082474">
+            <state line="117" column="16" selection-start="4229" selection-end="4229" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#0#6626#0" expanded="true" />
                 <element signature="e#5096#5143#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build-release.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build-release.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="27" selection-start="1002" selection-end="1002" vertical-scroll-proportion="0.4164038">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -218,10 +229,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/Achievement.java" />
-        <option value="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/achievements/TestGridObjectType.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/ProviderType.java" />
-        <option value="$PROJECT_DIR$/android/assets/params/stairs.json" />
         <option value="$PROJECT_DIR$/android/assets/params/elevators.json" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TutorialStepNotification.java" />
@@ -234,6 +241,10 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/TowerScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementEngine.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" />
+        <option value="$PROJECT_DIR$/android/assets/params/services.json" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/ProviderType.java" />
+        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/DesktopUncaughtExceptionHandler.java" />
+        <option value="$PROJECT_DIR$/build-release.py" />
       </list>
     </option>
   </component>
@@ -1453,7 +1464,11 @@
       <created>1334994809341</created>
       <updated>1334994809341</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="added restrooms to the services provider type">
+      <created>1334994882416</created>
+      <updated>1334994882416</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1492,15 +1507,15 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14414063" sideWeight="0.7734724" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.7441154" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328614" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27123696" sideWeight="0.79100317" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27123696" sideWeight="0.79100317" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19362187" sideWeight="0.49748382" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.08979885" sideWeight="0.74388677" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283046" sideWeight="0.7441154" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39853895" sideWeight="0.7441154" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13398437" sideWeight="0.742921" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25707898" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13398437" sideWeight="0.72876304" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25707898" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="IntelliGuard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953683" sideWeight="0.48726115" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18351911" sideWeight="0.6180714" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1557,7 +1572,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="TUTORIAL WORKS!" />
+    <option name="LAST_COMMIT_MESSAGE" value="added restrooms to the services provider type" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1570,7 +1585,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="game update checker can now handle releases without a patch, the full download will then be used." />
     <MESSAGE value="sparky mostly works now!" />
     <MESSAGE value="added clickable libgdx logo to the main menu" />
     <MESSAGE value="upgraded the achievements engine quite a bit, much more robust now!&#10;merged all the avatars into a single image&#10;wrote some migration code that could work lol" />
@@ -1595,6 +1609,7 @@
     <MESSAGE value="fixed the connect to happydroids button!" />
     <MESSAGE value="ooops renamed the window class to fix proguard" />
     <MESSAGE value="TUTORIAL WORKS!" />
+    <MESSAGE value="added restrooms to the services provider type" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1617,37 +1632,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorCar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="42" selection-start="611" selection-end="611" vertical-scroll-proportion="0.2174905">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/events/ElevatorHeightChangeEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="2" selection-start="301" selection-end="301" vertical-scroll-proportion="0.11711027">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/events/GridObjectBoundsChangeEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="38" selection-start="260" selection-end="260" vertical-scroll-proportion="0.10038023">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Elevator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="152" column="49" selection-start="4926" selection-end="4926" vertical-scroll-proportion="0.33333334">
-          <folding>
-            <element signature="e#0#5295#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="284" column="0" selection-start="9827" selection-end="9827" vertical-scroll-proportion="0.6781609">
@@ -1739,13 +1723,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/ProviderType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="45" selection-start="523" selection-end="523" vertical-scroll-proportion="0.63505155">
+          <folding>
+            <element signature="e#0#1122#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/assets/params/services.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="26" selection-start="268" selection-end="268" vertical-scroll-proportion="0.27216494">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="0" selection-start="4060" selection-end="4060" vertical-scroll-proportion="0.4082474">
+        <state line="117" column="16" selection-start="4229" selection-end="4229" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#0#6626#0" expanded="true" />
             <element signature="e#5096#5143#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/DesktopUncaughtExceptionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="4" selection-start="713" selection-end="713" vertical-scroll-proportion="0.32386962">
+          <folding>
+            <element signature="e#0#1260#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build-release.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="27" selection-start="1002" selection-end="1002" vertical-scroll-proportion="0.4164038">
+          <folding />
         </state>
       </provider>
     </entry>
