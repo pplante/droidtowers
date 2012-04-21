@@ -10,6 +10,7 @@
     "populationRequired":5,
     "jobsProvided":0,
     "noiseLevel":0.3,
+    "provides":"RESTROOM",
     "atlasFilename":"rooms/housing.txt",
     "imageFilename":"1x1-bathroom"
   },
