@@ -8,6 +8,6 @@ public class HappyDroidConsts {
   public static final String HAPPYDROIDS_SERVER = "www.happydroids.com";
   public static final String HAPPYDROIDS_URI = "https://" + HAPPYDROIDS_SERVER;
   public static final boolean DEBUG = false;
-  public static String VERSION = "v0.40.3";
-  public static String GIT_SHA = "f712eba55a2c1b5d682b429f140a2ade3d00954e";
+  public static String VERSION = "v0.40.4";
+  public static String GIT_SHA = "c3f7ca3cb4f0ca071392db787653cc6db9d67986";
 }
