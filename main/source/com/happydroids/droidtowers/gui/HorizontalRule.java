@@ -6,30 +6,33 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Widget;
+import com.happydroids.droidtowers.graphics.PixmapGenerator;
 
 import static com.happydroids.droidtowers.ColorUtil.rgba;
 
 public class HorizontalRule extends Widget {
   private static final Color DEFAULT_COLOR = rgba("#0099CC"); // android ICS blue!
-  private final Texture texture;
-  private float desiredWidth;
   private final int desiredHeight;
+  private PixmapGenerator pixmapGenerator;
 
   public HorizontalRule() {
     this(DEFAULT_COLOR, 2);
   }
 
-  public HorizontalRule(Color desiredColor, int desiredHeight) {
+  public HorizontalRule(final Color desiredColor, int desiredHeight) {
     this.desiredHeight = desiredHeight;
-    Pixmap pixmap = new Pixmap(2, 2, Pixmap.Format.RGB565);
-    pixmap.setColor(desiredColor);
-    pixmap.fill();
 
-    texture = new Texture(pixmap);
-    texture.setWrap(Texture.TextureWrap.ClampToEdge, Texture.TextureWrap.ClampToEdge);
+    pixmapGenerator = new PixmapGenerator() {
+      @Override
+      protected Pixmap generate() {
+        Pixmap pixmap = new Pixmap(2, 2, Pixmap.Format.RGB565);
+        pixmap.setColor(desiredColor);
+        pixmap.fill();
+        return pixmap;
+      }
+    };
   }
 
   public HorizontalRule(int height) {
@@ -38,7 +41,7 @@ public class HorizontalRule extends Widget {
 
   @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
-    batch.draw(texture, x, y, width, height);
+    batch.draw(pixmapGenerator.getTexture(), x, y, width, height);
   }
 
   @Override
@@ -59,5 +62,12 @@ public class HorizontalRule extends Widget {
   @Override
   public float getPrefWidth() {
     return parent.width;
+  }
+
+  @Override
+  public void remove() {
+    pixmapGenerator.dispose();
+
+    super.remove();
   }
 }

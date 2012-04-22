@@ -14,8 +14,11 @@ import com.happydroids.droidtowers.platform.Display;
 
 import java.util.HashMap;
 
+import static com.happydroids.droidtowers.platform.Display.scale;
+
 public enum FontManager {
   Default("fonts/roboto_white_14.fnt", "fonts/roboto_white_28.fnt", Color.WHITE),
+  Roboto18("fonts/roboto_white_18.fnt", "fonts/roboto_white_32.fnt", Color.WHITE, 8, 16),
   RobotoBold18("fonts/roboto_bold_white_18.fnt", "fonts/roboto_white_32.fnt", Color.WHITE, 8, 16),
   Roboto32("fonts/roboto_white_32.fnt", "fonts/roboto_white_64.fnt", Color.WHITE),
   Roboto64("fonts/roboto_white_64.fnt", "fonts/roboto_white_128.fnt", Color.WHITE),
@@ -37,8 +40,8 @@ public enum FontManager {
   FontManager(String mdpiFontPath, String hdpiFontPath, Color color, int buttonPadTop, int buttonPadLeft) {
     this.fontPath = Display.getScaledDensity() > 1f ? hdpiFontPath : mdpiFontPath;
     this.color = color;
-    this.buttonPadTop = buttonPadTop;
-    this.buttonPadLeft = buttonPadLeft;
+    this.buttonPadTop = scale(buttonPadTop);
+    this.buttonPadLeft = scale(buttonPadLeft);
   }
 
   FontManager(String mdpiFontPath, String hdpiFontPath, Color color) {

@@ -4,14 +4,13 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.happydroids.droidtowers.graphics.Overlays;
 import com.happydroids.droidtowers.grid.GameGridRenderer;
+
+import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class OverlayControl extends ImageButton {
   private Menu overlayMenu;
@@ -29,14 +28,11 @@ public class OverlayControl extends ImageButton {
     });
 
     overlayMenu = new Menu(skin);
-    overlayMenu.defaults();
-    overlayMenu.top().left();
+    overlayMenu.defaults().pad(4);
 
     for (final Overlays overlay : Overlays.values()) {
-      final CheckBox checkBox = new CheckBox(overlay.toString(), skin);
-      checkBox.align(Align.LEFT);
-      checkBox.getLabelCell().pad(4);
-      checkBox.invalidate();
+      final CheckBox checkBox = FontManager.Roboto18.makeCheckBox(overlay.toString(), skin);
+      checkBox.getLabelCell().pad(null).padLeft(scale(6));
       checkBox.setClickListener(new ClickListener() {
         public void click(Actor actor, float x, float y) {
           if (checkBox.isChecked()) {
@@ -46,20 +42,15 @@ public class OverlayControl extends ImageButton {
           }
         }
       });
-      overlayMenu.row().left().pad(2, 6, 2, 6);
-      overlayMenu.add(checkBox);
-      Pixmap pixmap = new Pixmap(16, 16, Pixmap.Format.RGB565);
-      pixmap.setColor(Color.GRAY);
-      pixmap.fill();
-      pixmap.setColor(overlay.getColor(1f));
-      pixmap.fillRectangle(1, 1, 14, 14);
 
-      Image image = new Image(new Texture(pixmap));
-      overlayMenu.add(image);
+      overlayMenu.row().left();
+      overlayMenu.add(checkBox);
+
+      overlayMenu.add(new Image(overlay.getPixmapGenerator().getTexture()));
     }
 
     overlayMenu.row().colspan(2).left().pad(6, 2, 2, 2);
-    TextButton clearAllButton = new TextButton("Clear All", skin);
+    TextButton clearAllButton = FontManager.Roboto18.makeTextButton("Clear All", skin);
     clearAllButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         gameGridRenderer.clearOverlays();

@@ -5,14 +5,13 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.esotericsoftware.tablelayout.Cell;
+import com.happydroids.droidtowers.graphics.PixmapGenerator;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
 
@@ -21,38 +20,42 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class TowerWindow {
   private static final int[] DIALOG_CLOSE_KEYCODES = new int[]{InputSystem.Keys.ESCAPE, InputSystem.Keys.BACK};
+
+  private final PixmapGenerator pixmapGenerator;
+
+
   private InputCallback closeDialogCallback;
   private Runnable dismissCallback;
   protected final Stage stage;
   protected final Skin skin;
-  private static NinePatch background;
-  private static Pixmap pixmap;
   private final Table content;
   private Table window;
 
   public TowerWindow(String title, Stage stage, Skin skin) {
-    if (pixmap == null) {
-      pixmap = new Pixmap(16, 16, Pixmap.Format.RGB888);
-
-      pixmap.setColor(rgba("#171617"));
-      pixmap.fill();
-
-      pixmap.setColor(rgba("#242126"));
-      pixmap.fillRectangle(0, 0, 16, 1);
-
-      pixmap.setColor(rgba("#312d34"));
-      pixmap.fillRectangle(0, 11, 16, 3);
-
-      pixmap.setColor(rgba("#394346"));
-      pixmap.fillRectangle(0, 14, 16, 2);
-
-      Texture texture = new Texture(pixmap);
-      texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-      background = new NinePatch(texture);
-    }
-
     this.stage = stage;
     this.skin = skin;
+
+    pixmapGenerator = new PixmapGenerator() {
+      @Override
+      protected Pixmap generate() {
+        Pixmap pixmap = new Pixmap(16, 16, Pixmap.Format.RGB888);
+
+        pixmap.setColor(rgba("#171617"));
+        pixmap.fill();
+
+        pixmap.setColor(rgba("#242126"));
+        pixmap.fillRectangle(0, 0, 16, 1);
+
+        pixmap.setColor(rgba("#312d34"));
+        pixmap.fillRectangle(0, 11, 16, 3);
+
+        pixmap.setColor(rgba("#394346"));
+        pixmap.fillRectangle(0, 14, 16, 2);
+
+        return pixmap;
+      }
+    };
+
 
     window = new Table();
     window.touchable = true;
@@ -62,7 +65,7 @@ public class TowerWindow {
       }
     });
 
-    window.setBackground(background);
+    window.setBackground(pixmapGenerator.getNinePatch());
     window.size((int) stage.width(), (int) stage.height());
 
     window.add(FontManager.Roboto32.makeLabel(title)).center().left().expand().padLeft(scale(18));
@@ -113,6 +116,8 @@ public class TowerWindow {
     stage.setKeyboardFocus(null);
 
     window.markToRemove(true);
+
+    pixmapGenerator.dispose();
   }
 
   public void setDismissCallback(Runnable dismissCallback) {

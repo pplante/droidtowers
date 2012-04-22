@@ -9,35 +9,36 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.TowerGame;
+import com.happydroids.droidtowers.graphics.PixmapGenerator;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class Toast extends Table {
-  private static Pixmap pixmap;
-  private static NinePatch background;
   private final Label label;
+  private final PixmapGenerator pixmapGenerator;
 
   public Toast() {
-    if (pixmap == null) {
-      pixmap = new Pixmap(2, 2, Pixmap.Format.RGBA4444);
-      pixmap.setColor(new Color(0, 0, 0, 0.65f));
-      pixmap.fill();
+    pixmapGenerator = new PixmapGenerator() {
+      @Override
+      protected Pixmap generate() {
+        Pixmap pixmap = new Pixmap(2, 2, Pixmap.Format.RGBA4444);
+        pixmap.setColor(new Color(0, 0, 0, 0.65f));
+        pixmap.fill();
 
-      background = new NinePatch(new Texture(pixmap));
-    }
+        return pixmap;
+      }
+    };
 
     visible = false;
     label = FontManager.RobotoBold18.makeLabel("");
 
     defaults();
-    setBackground(background);
+    setBackground(pixmapGenerator.getNinePatch());
     pad(scale(12));
     add(label);
     pack();
@@ -97,5 +98,12 @@ public class Toast extends Table {
     visible = false;
 
     return true;
+  }
+
+  @Override
+  public void remove() {
+    pixmapGenerator.dispose();
+
+    super.remove();
   }
 }
