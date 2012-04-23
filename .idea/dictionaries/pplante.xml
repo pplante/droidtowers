@@ -32,6 +32,7 @@
       <w>notfound</w>
       <w>pixmap</w>
       <w>placeable</w>
+      <w>preload</w>
       <w>rgba</w>
       <w>roboto</w>
       <w>runnables</w>

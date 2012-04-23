@@ -8,8 +8,8 @@ import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.equations.Linear;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
@@ -23,7 +23,7 @@ public class Rain extends GameObject {
   public Rain(GameGrid gameGrid) {
     super();
 
-    Texture rainDropTexture = new Texture(Gdx.files.internal("rain-drop.png"));
+    Texture rainDropTexture = TowerAssetManager.texture("rain-drop.png");
     rainDropTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
     setTexture(rainDropTexture);

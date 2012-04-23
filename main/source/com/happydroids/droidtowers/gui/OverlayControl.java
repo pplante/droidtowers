@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.graphics.Overlays;
 import com.happydroids.droidtowers.grid.GameGridRenderer;
 
@@ -46,7 +47,7 @@ public class OverlayControl extends ImageButton {
       overlayMenu.row().left();
       overlayMenu.add(checkBox);
 
-      overlayMenu.add(new Image(overlay.getPixmapGenerator().getTexture()));
+      overlayMenu.add(new Image(TowerAssetManager.texture("swatches/" + overlay.getSwatchFilename()))).width(16).height(16);
     }
 
     overlayMenu.row().colspan(2).left().pad(6, 2, 2, 2);
@@ -66,5 +67,10 @@ public class OverlayControl extends ImageButton {
     overlayMenu.add(clearAllButton).fill();
 
     overlayMenu.pack();
+  }
+
+  @Override
+  public boolean touchDown(float x, float y, int pointer) {
+    return true;
   }
 }

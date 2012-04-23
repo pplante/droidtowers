@@ -5,10 +5,10 @@
 package com.happydroids.droidtowers.graphics;
 
 import aurelienribon.tweenengine.Tween;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.eventbus.Subscribe;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.WeatherService;
 import com.happydroids.droidtowers.entities.GameLayer;
@@ -32,7 +32,7 @@ public class SkyLayer extends GameLayer {
     gameGrid.events().register(this);
     weatherService.events().register(this);
 
-    Texture texture = new Texture(Gdx.files.internal("backgrounds/sky-gradient.png"));
+    Texture texture = TowerAssetManager.texture("backgrounds/sky-gradient.png");
     sky = new GameObject(texture);
     GameGrid_onResize(null);
     sky.setColor(weatherService.currentState().skyColor);

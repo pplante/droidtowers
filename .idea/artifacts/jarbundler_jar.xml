@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/jarbundler_jar</output-path>
     <root id="archive" name="jarbundler.jar">
       <element id="module-output" name="jarbundler" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/sparky/libs/commons-io-2.2/commons-io-2.2.jar" path-in-jar="/" />
+      <element id="library" level="project" name="commons-io" />
     </root>
   </artifact>
 </component>

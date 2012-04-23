@@ -49,6 +49,7 @@ public class TowerGame implements ApplicationListener {
   private static Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
   private static PlatformBrowserUtil platformBrowserUtil;
   private static LinkedList<Scene> pausedScenes;
+  private boolean firstRun;
 
   public TowerGame() {
     audioEnabled = true;
@@ -64,6 +65,8 @@ public class TowerGame implements ApplicationListener {
   }
 
   public void create() {
+    Gdx.app.error("lifecycle", "create");
+
     TowerGameService.setInstance(new TowerGameService());
 
     if (HappyDroidConsts.DEBUG) {
@@ -151,8 +154,6 @@ public class TowerGame implements ApplicationListener {
   }
 
   public void render() {
-    TowerAssetManager.assetManager().update();
-
     Gdx.gl.glClearColor(0.48f, 0.729f, 0.870f, 1.0f);
     Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
     Gdx.gl.glEnable(GL10.GL_BLEND);
@@ -194,22 +195,27 @@ public class TowerGame implements ApplicationListener {
     camera.viewportWidth = width;
     camera.viewportHeight = height;
     spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
+    activeScene.getSpriteBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
     Gdx.gl.glViewport(0, 0, width, height);
   }
 
 
   public void pause() {
-    Gdx.app.log("lifecycle", "pausing!");
+    Gdx.app.error("lifecycle", "pausing!");
     activeScene.pause();
   }
 
   public void resume() {
-    Gdx.app.log("lifecycle", "resuming!");
+    Gdx.app.error("lifecycle", "resuming!");
 
-    pushScene(SplashScene.class, SplashSceneStates.RESUME_CYCLE);
+    if (!firstRun) {
+      firstRun = true;
+      pushScene(SplashScene.class, SplashSceneStates.RESUME_CYCLE);
+    }
   }
 
   public void dispose() {
+    Gdx.app.error("lifecycle", "dispose");
     activeScene.dispose();
 
     activeScene = null;

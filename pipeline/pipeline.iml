@@ -13,6 +13,8 @@
     <orderEntry type="library" exported="" name="commons-io" level="project" />
     <orderEntry type="library" exported="" name="apache-httpclient" level="project" />
     <orderEntry type="library" exported="" name="apache-commons" level="project" />
+    <orderEntry type="module" module-name="main" />
+    <orderEntry type="library" name="desktop" level="project" />
   </component>
 </module>
 

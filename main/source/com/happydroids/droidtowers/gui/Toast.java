@@ -7,38 +7,25 @@ package com.happydroids.droidtowers.gui;
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerGame;
-import com.happydroids.droidtowers.graphics.PixmapGenerator;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class Toast extends Table {
   private final Label label;
-  private final PixmapGenerator pixmapGenerator;
 
   public Toast() {
-    pixmapGenerator = new PixmapGenerator() {
-      @Override
-      protected Pixmap generate() {
-        Pixmap pixmap = new Pixmap(2, 2, Pixmap.Format.RGBA4444);
-        pixmap.setColor(new Color(0, 0, 0, 0.65f));
-        pixmap.fill();
-
-        return pixmap;
-      }
-    };
-
     visible = false;
     label = FontManager.RobotoBold18.makeLabel("");
 
     defaults();
-    setBackground(pixmapGenerator.getNinePatch());
+    setBackground(new NinePatch(TowerAssetManager.texture("hud/toast-bg.png")));
     pad(scale(12));
     add(label);
     pack();
@@ -98,12 +85,5 @@ public class Toast extends Table {
     visible = false;
 
     return true;
-  }
-
-  @Override
-  public void remove() {
-    pixmapGenerator.dispose();
-
-    super.remove();
   }
 }

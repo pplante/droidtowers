@@ -5,7 +5,6 @@
 package com.happydroids.droidtowers.graphics;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.google.common.base.Function;
 import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.entities.GridObject;
@@ -110,7 +109,6 @@ public enum Overlays {
       };
     }
   };
-  private PixmapGenerator pixmapGenerator;
 
   public abstract String toString();
 
@@ -118,22 +116,7 @@ public enum Overlays {
 
   public abstract Function<GridObject, Float> getMethod();
 
-  public PixmapGenerator getPixmapGenerator() {
-    if (pixmapGenerator == null) {
-      pixmapGenerator = new PixmapGenerator() {
-        @Override
-        protected Pixmap generate() {
-          Pixmap pixmap = new Pixmap(16, 16, Pixmap.Format.RGB565);
-          pixmap.setColor(Color.GRAY);
-          pixmap.fill();
-          pixmap.setColor(getColor(1f));
-          pixmap.fillRectangle(1, 1, 14, 14);
-
-          return pixmap;
-        }
-      };
-    }
-
-    return pixmapGenerator;
+  public String getSwatchFilename() {
+    return String.format("swatch-%s.png", getColor(1f));
   }
 }
