@@ -97,6 +97,7 @@
     "id":"tutorial-zoom",
     "name":"Magnification",
     "description":"Great!\n\nYou can also zoom in via your mouse's scroll wheel.\n\nIt works just like scrolling a document.\n\nTry it now.",
+    "descriptionMobile":"Great!\n\nYou can also zoom in & out by pinching the screen.\n\nTry it now.",
     "rewards":[
       {
         "type":"UNLOCK",
@@ -132,7 +133,7 @@
   {
     "id":"tutorial-finished",
     "name":"Congratulations!",
-    "description":"Congratulations!\n\nYou are now ready to conquer the sky's!",
+    "description":"Congratulations!\n\nYou are now ready to conquer the sky's!\n\n",
     "rewards":[
       {
         "type":"UNLOCK",

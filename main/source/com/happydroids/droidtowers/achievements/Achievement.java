@@ -13,6 +13,8 @@ import com.happydroids.droidtowers.grid.GameGrid;
 
 import java.util.List;
 
+import static com.badlogic.gdx.Application.ApplicationType.Android;
+
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Achievement {
   private static final String TAG = Achievement.class.getSimpleName();
@@ -20,6 +22,7 @@ public class Achievement {
   private String id;
   protected String name;
   protected String description;
+  protected String descriptionMobile;
   private List<AchievementRequirement> requirements;
   protected List<AchievementReward> rewards;
   private boolean completed;
@@ -109,6 +112,10 @@ public class Achievement {
   }
 
   public String getDescription() {
+    if (descriptionMobile != null && Gdx.app.getType().equals(Android)) {
+      return descriptionMobile;
+    }
+
     return description;
   }
 
