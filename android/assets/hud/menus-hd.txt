@@ -1,18 +1,18 @@
-menus.png
+menus-hd.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 happy-droids-logo
   rotate: false
-  xy: 0, 35
-  size: 98, 62
-  orig: 98, 62
-  offset: 3, 2
+  xy: 0, 70
+  size: 194, 120
+  orig: 194, 120
+  offset: 7, 7
   index: -1
 powered-by-libgdx
   rotate: false
   xy: 0, 0
-  size: 117, 35
-  orig: 117, 35
+  size: 234, 70
+  orig: 234, 70
   offset: 0, 0
   index: -1

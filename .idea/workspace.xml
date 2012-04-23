@@ -25,8 +25,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets-raw/hud/menus/happy-droids-logo.png" afterPath="$PROJECT_DIR$/android/assets-raw/hud/menus/happy-droids-logo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets-raw/hud/menus/powered-by-libgdx.png" afterPath="$PROJECT_DIR$/android/assets-raw/hud/menus/powered-by-libgdx.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets-raw/texturepacker/menus.tps" afterPath="$PROJECT_DIR$/android/assets-raw/texturepacker/menus.tps" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/hud/menus.png" afterPath="$PROJECT_DIR$/android/assets/hud/menus.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/params/tutorial-steps.json" afterPath="$PROJECT_DIR$/android/assets/params/tutorial-steps.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/hud/menus.txt" afterPath="$PROJECT_DIR$/android/assets/hud/menus.txt" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -208,7 +212,7 @@
       <file leaf-file-name="tutorial-steps.json" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/android/assets/params/tutorial-steps.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="98" column="59" selection-start="2652" selection-end="2652" vertical-scroll-proportion="0.3646409">
+            <state line="98" column="59" selection-start="2652" selection-end="2652" vertical-scroll-proportion="0.36263737">
               <folding />
             </state>
           </provider>
@@ -1405,7 +1409,11 @@
       <created>1335211283629</created>
       <updated>1335211283629</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="added the ability to customize messages for mobile">
+      <created>1335211321518</created>
+      <updated>1335211321518</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1443,7 +1451,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14414063" sideWeight="0.57228017" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.7441154" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328614" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2693267" sideWeight="0.79100317" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2693267" sideWeight="0.79100317" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19362187" sideWeight="0.49748382" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
@@ -1451,7 +1459,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283046" sideWeight="0.7441154" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39853895" sideWeight="0.7441154" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40859374" sideWeight="0.742921" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27306733" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27306733" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18351911" sideWeight="0.6180714" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IntelliGuard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953683" sideWeight="0.48726115" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1680,7 +1688,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/android/assets/params/tutorial-steps.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="59" selection-start="2652" selection-end="2652" vertical-scroll-proportion="0.3646409">
+        <state line="98" column="59" selection-start="2652" selection-end="2652" vertical-scroll-proportion="0.36263737">
           <folding />
         </state>
       </provider>
