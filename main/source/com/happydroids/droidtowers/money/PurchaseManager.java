@@ -39,18 +39,23 @@ public class PurchaseManager {
 
     final int moneyFromVinnie = Random.randomInt(1000, 50000);
     String message = String.format("So it looks like you ran out of money.\n\nLuckily, Cousin Vinnie has offered to loan you %s%s.\n\nSo, how about it?", TowerConsts.CURRENCY_SYMBOL, NumberFormat.getInstance().format(moneyFromVinnie));
-    new Dialog().setTitle("Not enough money :(").setMessage(message).addButton("Yes", new OnClickCallback() {
-      @Override
-      public void onClick(Dialog dialog) {
-        Player.instance().addCurrency(moneyFromVinnie);
-        dialog.dismiss();
-      }
-    }).addButton(ResponseType.NEGATIVE, "No thanks!", new OnClickCallback() {
-      @Override
-      public void onClick(Dialog dialog) {
-        dialog.dismiss();
-      }
-    }).show();
+    new Dialog()
+            .setTitle("Not enough money :(")
+            .setMessage(message)
+            .addButton("Yes", new OnClickCallback() {
+              @Override
+              public void onClick(Dialog dialog) {
+                Player.instance().addCurrency(moneyFromVinnie);
+                dialog.dismiss();
+              }
+            })
+            .addButton(ResponseType.NEGATIVE, "No thanks!", new OnClickCallback() {
+              @Override
+              public void onClick(Dialog dialog) {
+                dialog.dismiss();
+              }
+            })
+            .show();
   }
 
   public void makePurchase() {

@@ -28,6 +28,8 @@ import com.happydroids.droidtowers.scenes.Scene;
 import com.happydroids.droidtowers.scenes.TowerScene;
 import com.happydroids.droidtowers.types.*;
 
+import static com.happydroids.droidtowers.platform.Display.scale;
+
 public class HeadsUpDisplay extends WidgetGroup {
   private TextureAtlas hudAtlas;
   private Skin guiSkin;
@@ -73,7 +75,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     toolMenu = new RadialMenu();
     toolMenu.arc = 35f;
-    toolMenu.radius = 180;
+    toolMenu.radius = scale(180);
     toolMenu.rotation = 3f;
 
     addActor(new ExpandLandOverlay(gameGrid, guiSkin));

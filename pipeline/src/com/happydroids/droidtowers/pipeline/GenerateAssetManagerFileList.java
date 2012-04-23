@@ -91,6 +91,9 @@ public class GenerateAssetManagerFileList {
   private static void addEntryToPreloader(FileHandle child, Class clazz) {
     if (!child.exists()) {
       throw new RuntimeException("File not found: " + child.path());
+    } else if (child.name().contains("-hd")) {
+      System.out.println("Skipping HD asset: " + child.path());
+      return;
     }
 
     managedFiles.add(String.format("preloadFiles.put(\"%s\", %s.class);", child.path().replace("assets/", ""), clazz.getSimpleName()));
@@ -105,7 +108,11 @@ public class GenerateAssetManagerFileList {
   private static void addFileEntry(FileHandle child, Class clazz) {
     if (!child.exists()) {
       throw new RuntimeException("File not found: " + child.path());
+    } else if (child.name().contains("-hd")) {
+      System.out.println("Skipping HD asset: " + child.path());
+      return;
     }
+
     managedFiles.add(String.format("files.put(\"%s\", %s.class);", child.path().replace("assets/", ""), clazz.getSimpleName()));
   }
 

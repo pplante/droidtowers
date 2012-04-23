@@ -20,9 +20,9 @@ public enum FontManager {
   Default("fonts/roboto_white_14.fnt", "fonts/roboto_white_28.fnt", Color.WHITE),
   Roboto18("fonts/roboto_white_18.fnt", "fonts/roboto_white_32.fnt", Color.WHITE, 8, 16),
   RobotoBold18("fonts/roboto_bold_white_18.fnt", "fonts/roboto_white_32.fnt", Color.WHITE, 8, 16),
-  Roboto32("fonts/roboto_white_32.fnt", "fonts/roboto_white_64.fnt", Color.WHITE),
-  Roboto64("fonts/roboto_white_64.fnt", "fonts/roboto_white_128.fnt", Color.WHITE),
-  Roboto24("fonts/roboto_white_24.fnt", "fonts/roboto_white_48.fnt", Color.WHITE),
+  Roboto32("fonts/roboto_white_32.fnt", "fonts/roboto_white_48.fnt", Color.WHITE),
+  Roboto64("fonts/roboto_white_64.fnt", "fonts/roboto_white_96.fnt", Color.WHITE),
+  Roboto24("fonts/roboto_white_24.fnt", "fonts/roboto_white_36.fnt", Color.WHITE),
   Roboto12("fonts/roboto_white_12.fnt", "fonts/roboto_white_24.fnt", Color.WHITE);
 
   private static HashMap<String, BitmapFont> bitmapFonts = Maps.newHashMap();
@@ -74,14 +74,6 @@ public enum FontManager {
     return bitmapFonts.get(fontPath);
   }
 
-  public Label makeLabel(String text) {
-    return new Label(text, labelStyle());
-  }
-
-  public TextButton makeTextButton(String labelText, Skin skin) {
-    return applyTextButtonLabelStyle(new TextButton(labelText, skin));
-  }
-
   private void reset() {
     BitmapFont font = bitmapFonts.remove(fontPath);
     if (font != null) {
@@ -89,6 +81,18 @@ public enum FontManager {
     }
 
     labelStyle = null;
+  }
+
+  public Label makeLabel(String text) {
+    return new Label(text, labelStyle());
+  }
+
+  public TransparentTextButton makeTransparentButton(String labelText, final Skin skin) {
+    return applyTextButtonLabelStyle(new TransparentTextButton(labelText, skin));
+  }
+
+  public TextButton makeTextButton(String labelText, Skin skin) {
+    return applyTextButtonLabelStyle(new TextButton(labelText, skin));
   }
 
   public CheckBox makeCheckBox(String labelText, Skin skin) {

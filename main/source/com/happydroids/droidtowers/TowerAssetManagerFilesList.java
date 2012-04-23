@@ -31,7 +31,6 @@ public class TowerAssetManagerFilesList {
     files.put("fonts/roboto_white_12.fnt", BitmapFont.class);
     files.put("fonts/roboto_white_128.fnt", BitmapFont.class);
     files.put("fonts/roboto_white_48.fnt", BitmapFont.class);
-    files.put("hud/buttons-hd.txt", TextureAtlas.class);
     files.put("fonts/menlo_16.fnt", BitmapFont.class);
     preloadFiles.put("hud/menus.txt", TextureAtlas.class);
     files.put("swatches/swatch-ff0000ff.png", Texture.class);
@@ -53,6 +52,7 @@ public class TowerAssetManagerFilesList {
     files.put("movies/avengers.txt", TextureAtlas.class);
     preloadFiles.put("backgrounds/clouds.txt", TextureAtlas.class);
     files.put("fonts/roboto_white_28.fnt", BitmapFont.class);
+    files.put("fonts/roboto_white_36.fnt", BitmapFont.class);
     files.put("fonts/roboto_white_64.fnt", BitmapFont.class);
     files.put("transport.txt", TextureAtlas.class);
     files.put("rooms/housing.txt", TextureAtlas.class);
@@ -64,6 +64,7 @@ public class TowerAssetManagerFilesList {
     preloadFiles.put("default-skin.ui", Skin.class);
     files.put("backgrounds/cityscape.txt", TextureAtlas.class);
     files.put("fonts/roboto_bold_white_18.fnt", BitmapFont.class);
+    files.put("fonts/roboto_white_96.fnt", BitmapFont.class);
     files.put("backgrounds/cityscape.png", Texture.class);
     files.put("fonts/helvetica_neue_18.fnt", BitmapFont.class);
     files.put("fonts/roboto_white_24.fnt", BitmapFont.class);

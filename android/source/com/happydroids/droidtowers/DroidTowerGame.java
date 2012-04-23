@@ -20,6 +20,7 @@ public class DroidTowerGame extends AndroidApplication {
     DisplayMetrics metrics = new DisplayMetrics();
     getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
+    Display.setHDPI(metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH);
     Display.setScaledDensity(metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH ? 1.5f : 1f);
 
     TowerGameService.setDeviceOSName("android");

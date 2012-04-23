@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Logger;
 import com.happydroids.HappyDroidConsts;
+import com.happydroids.droidtowers.platform.Display;
 
 import java.util.Map;
 
@@ -51,10 +52,13 @@ public class TowerAssetManager {
   }
 
   private static String checkForHDPI(String fileName) {
-    FileHandle file = Gdx.files.internal(fileName);
-    String hdpiFileName = file.nameWithoutExtension() + "-hd" + file.extension();
-    if (Gdx.files.internal(hdpiFileName).exists()) {
-      return hdpiFileName;
+    if (Display.isHDPIMode()) {
+      FileHandle file = Gdx.files.internal(fileName);
+      String hdpiFileName = file.parent() + "/" + file.nameWithoutExtension() + "-hd." + file.extension();
+      Gdx.app.error(TAG, "Looking for: " + hdpiFileName + ", found: " + Gdx.files.internal(hdpiFileName).exists());
+      if (Gdx.files.internal(hdpiFileName).exists()) {
+        return hdpiFileName;
+      }
     }
 
     return fileName;
@@ -77,11 +81,11 @@ public class TowerAssetManager {
   }
 
   public static TextureAtlas textureAtlas(String s) {
-    return assetManager().get(s, TextureAtlas.class);
+    return assetManager().get(checkForHDPI(s), TextureAtlas.class);
   }
 
   public static Texture texture(String s) {
-    return assetManager().get(s, Texture.class);
+    return assetManager().get(checkForHDPI(s), Texture.class);
   }
 
   public static void dispose() {

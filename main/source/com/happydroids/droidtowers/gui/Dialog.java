@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
@@ -22,17 +21,12 @@ import java.util.List;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class Dialog {
+public class Dialog extends TowerWindow {
   static final int[] NEGATIVE_BUTTON_KEYS = new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE};
-  private Stage stage;
-  private Skin skin;
   private List<TextButton> buttons;
   private TextButton positiveButton;
   private TextButton negativeButton;
-  private String title;
   private String messageText;
-  private TowerWindow window;
-  private boolean shouldDisplayCentered;
   private final InputCallback positiveButtonInputCallback;
   private final InputCallback negativeButtonInputCallback;
 
@@ -41,9 +35,8 @@ public class Dialog {
   }
 
   public Dialog(Stage stage) {
-    this.stage = stage;
-    skin = Scene.getGuiSkin();
-    title = "Dialog";
+    super("Dialog", stage, Scene.getGuiSkin());
+
     buttons = Lists.newArrayList();
 
     positiveButtonInputCallback = new InputCallback() {
@@ -62,8 +55,9 @@ public class Dialog {
     };
   }
 
+  @Override
   public Dialog setTitle(String title) {
-    this.title = title;
+    super.setTitle(title);
 
     return this;
   }
@@ -110,11 +104,7 @@ public class Dialog {
   }
 
   public Dialog show() {
-    ModalOverlay.instance().show(stage);
-
-    window = new TowerWindow(title, stage, skin);
-
-    Table container = new Table(skin);
+    Table container = new Table();
     container.defaults().pad(scale(12)).top().left();
     Label messageLabel = FontManager.Roboto24.makeLabel(messageText);
     messageLabel.setWrap(true);
@@ -128,9 +118,15 @@ public class Dialog {
     }
     container.pack();
 
-    window.add(container);
-    window.show();
+    add(container);
 
+    super.show();
+
+    return this;
+  }
+
+  @Override
+  protected void bindKeys() {
     if (positiveButton != null) {
       InputSystem.instance().bind(InputSystem.Keys.ENTER, positiveButtonInputCallback);
     }
@@ -138,16 +134,10 @@ public class Dialog {
     if (negativeButton != null) {
       InputSystem.instance().bind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
     }
-
-    return this;
   }
 
-  public void dismiss() {
-    if (window != null) {
-      window.dismiss();
-      window = null;
-      InputSystem.instance().unbind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
-      ModalOverlay.instance().hide();
-    }
+  @Override
+  protected void unbindKeys() {
+    InputSystem.instance().unbind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
   }
 }
