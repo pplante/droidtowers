@@ -9,11 +9,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.SplashSceneStates;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerAssetManagerFilesList;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.GameObject;
+import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
@@ -34,23 +36,38 @@ public class SplashScene extends Scene {
                                                               "are we there yet?",
                                                               "solving world hunger",
                                                               "booting skynet...SUCCESS!",
+                                                              "GLaDOS loves you.",
+                                                              "priming buttons for clicking",
+                                                              "calculating shipping and handling",
+                                                              "contacting the authorities",
+                                                              "I'm still alive...",
                                                               "downloading pictures of cats",
+                                                              "spinning up ftl drives",
                                                               "so, uhh...how are you?",
                                                               "its going to be\na beautiful day!",
                                                               "de-fuzzing logic pathways",
                                                               "cleaning the tubes",
   };
-  private Label progressBar;
+  private Label progressLabel;
   private Label loadingMessage;
   private boolean selectedNewMessage;
   private Sprite happyDroid;
   private SplashSceneStates splashState = PRELOAD_CYCLE;
+  private GameSave gameSave;
+  private int progressLastChanged;
+  private Set<String> messagesUsed;
 
   @Override
   public void create(Object... args) {
     if (args != null) {
       splashState = ((SplashSceneStates) args[0]);
+
+      if (args.length > 1 && args[1] instanceof GameSave) {
+        gameSave = ((GameSave) args[1]);
+      }
     }
+
+    messagesUsed = Sets.newHashSet();
 
     Label titleLabel = FontManager.Roboto64.makeLabel("Droid Towers");
     titleLabel.setAlignment(Align.CENTER);
@@ -63,11 +80,11 @@ public class SplashScene extends Scene {
     center(loadingMessage);
     addActor(loadingMessage);
 
-    progressBar = FontManager.Roboto64.makeLabel(null);
-    progressBar.setAlignment(Align.CENTER);
-    centerHorizontally(progressBar);
-    progressBar.y = 100;
-    addActor(progressBar);
+    progressLabel = FontManager.Roboto64.makeLabel(null);
+    progressLabel.setAlignment(Align.CENTER);
+    centerHorizontally(progressLabel);
+    progressLabel.y = 100;
+    addActor(progressLabel);
 
     happyDroid = new GameObject(new Texture("happy-droid.png"));
     happyDroid.setPosition(-happyDroid.getWidth() / 2, -happyDroid.getHeight() / 2);
@@ -76,7 +93,14 @@ public class SplashScene extends Scene {
   }
 
   private String selectRandomMessage() {
-    return STRINGS[Random.randomInt(STRINGS.length - 1)];
+    String msg;
+    do {
+      msg = STRINGS[Random.randomInt(STRINGS.length - 1)];
+    } while (messagesUsed.contains(msg));
+
+    messagesUsed.add(msg);
+
+    return msg;
   }
 
   @Override
@@ -90,6 +114,36 @@ public class SplashScene extends Scene {
 
   @Override
   public void render(float deltaTime) {
+    verifyFilesPreloaded();
+
+    boolean assetManagerFinished = TowerAssetManager.assetManager().update();
+
+    if (splashState == RESUME_CYCLE) {
+      if (assetManagerFinished) {
+        if (gameSave != null) {
+          TowerGame.changeScene(TowerScene.class, gameSave);
+        } else {
+          TowerGame.popScene();
+        }
+      }
+    }
+
+    if (!assetManagerFinished) {
+      int progress = (int) (TowerAssetManager.assetManager().getProgress() * 100f);
+      progressLabel.setText(progress + "%");
+
+      if (progress - progressLastChanged >= 33) {
+        progressLastChanged = progress;
+        loadingMessage.setText(selectRandomMessage());
+      }
+
+      getSpriteBatch().begin();
+      happyDroid.draw(getSpriteBatch());
+      getSpriteBatch().end();
+    }
+  }
+
+  private void verifyFilesPreloaded() {
     Set<String> preloadFiles = TowerAssetManagerFilesList.preloadFiles.keySet();
 
     boolean hasFilesToPreload = false;
@@ -99,31 +153,11 @@ public class SplashScene extends Scene {
       }
     }
 
-
-    boolean assetManagerFinished = TowerAssetManager.assetManager().update();
-
-    int progress = (int) (TowerAssetManager.assetManager().getProgress() * 100f);
-    String progressText = String.format("%d%%", progress);
-    progressBar.setText(progressText);
-
-    if (progress >= 50 && !selectedNewMessage) {
-      loadingMessage.setText(selectRandomMessage());
-      selectedNewMessage = true;
-    }
-
     if (splashState == PRELOAD_CYCLE) {
       if (!hasFilesToPreload) {
         TowerGame.changeScene(MainMenuScene.class);
       }
-    } else if (splashState == RESUME_CYCLE) {
-      if (assetManagerFinished) {
-        TowerGame.popScene();
-      }
     }
-
-    getSpriteBatch().begin();
-    happyDroid.draw(getSpriteBatch());
-    getSpriteBatch().end();
   }
 
   @Override

@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.achievements;
 
 import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
@@ -28,8 +27,6 @@ public class TutorialEngine extends AchievementEngine {
   }
 
   protected TutorialEngine() {
-    completedAchievements = Sets.newHashSet();
-
     try {
       ObjectMapper mapper = TowerGameService.instance().getObjectMapper();
       achievements = mapper.readValue(Gdx.files.internal("params/tutorial-steps.json").reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, TutorialStep.class));

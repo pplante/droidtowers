@@ -68,9 +68,4 @@ public class OverlayControl extends ImageButton {
 
     overlayMenu.pack();
   }
-
-  @Override
-  public boolean touchDown(float x, float y, int pointer) {
-    return true;
-  }
 }

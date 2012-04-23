@@ -173,6 +173,8 @@ public class MainMenuScene extends Scene {
 
   @Override
   public void render(float deltaTime) {
+    TowerAssetManager.assetManager().update();
+
     cloudLayer.update(deltaTime);
     cloudLayer.render(getSpriteBatch(), getCamera());
   }

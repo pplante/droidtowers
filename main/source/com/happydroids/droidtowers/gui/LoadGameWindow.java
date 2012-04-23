@@ -13,10 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
+import com.happydroids.droidtowers.SplashSceneStates;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.GameSave;
-import com.happydroids.droidtowers.scenes.TowerScene;
+import com.happydroids.droidtowers.scenes.SplashScene;
 
 import java.text.NumberFormat;
 
@@ -94,7 +95,7 @@ public class LoadGameWindow extends TowerWindow {
       public void click(Actor actor, float x, float y) {
         dismiss();
         try {
-          TowerGame.changeScene(TowerScene.class, GameSave.readFile(savedGameFile));
+          TowerGame.changeScene(SplashScene.class, SplashSceneStates.RESUME_CYCLE, GameSave.readFile(savedGameFile));
         } catch (Exception e) {
           throw new RuntimeException(e);
         }

@@ -127,8 +127,10 @@ public class GameSave {
     }
     completedAchievements = Lists.newArrayList();
 
-    for (Achievement achievement : AchievementEngine.instance().getCompletedAchievements()) {
-      completedAchievements.add(achievement.getId());
+    for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
+      if (achievement.isCompleted()) {
+        completedAchievements.add(achievement.getId());
+      }
     }
 
     cameraPosition = camera.position;

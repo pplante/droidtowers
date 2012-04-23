@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.achievements;
 
 import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.entities.GridObjectPlacementState;
 import com.happydroids.droidtowers.events.GridObjectChangedEvent;
@@ -16,14 +15,11 @@ import com.happydroids.droidtowers.gui.AchievementNotification;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 public class AchievementEngine {
   protected static AchievementEngine instance;
   protected List<Achievement> achievements;
-  protected Set<Achievement> completedAchievements;
   private GameGrid gameGrid;
 
   public static AchievementEngine instance() {
@@ -35,8 +31,6 @@ public class AchievementEngine {
   }
 
   protected AchievementEngine() {
-    completedAchievements = Sets.newHashSet();
-
     try {
       ObjectMapper mapper = TowerGameService.instance().getObjectMapper();
       achievements = mapper.readValue(Gdx.files.internal("params/achievements.json").reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, Achievement.class));
@@ -50,21 +44,15 @@ public class AchievementEngine {
   }
 
   public void checkAchievements() {
-    Iterator<Achievement> achievementIterator = achievements.iterator();
-    while (achievementIterator.hasNext()) {
-      Achievement achievement = achievementIterator.next();
-      if (achievement.isCompleted(gameGrid) && !completedAchievements.contains(achievement)) {
+    for (Achievement achievement : achievements) {
+      if (!achievement.isCompleted() && achievement.requirementsMet(gameGrid)) {
         complete(achievement);
-
-        achievementIterator.remove();
       }
     }
   }
 
   public void complete(Achievement achievement) {
-    if (completedAchievements.contains(achievement)) {
-      return;
-    } else if (achievement.isLocked()) {
+    if (achievement.isLocked() || achievement.isCompleted()) {
       return;
     }
 
@@ -72,8 +60,6 @@ public class AchievementEngine {
     achievement.giveReward();
 
     displayNotification(achievement);
-
-    completedAchievements.add(achievement);
   }
 
   protected void displayNotification(Achievement achievement) {
@@ -88,17 +74,7 @@ public class AchievementEngine {
       }
     }
 
-    for (Achievement achievement : completedAchievements) {
-      if (achievementId.equalsIgnoreCase(achievement.getId())) {
-        return;
-      }
-    }
-
     throw new RuntimeException("Could not find achievement called: " + achievementId);
-  }
-
-  public Set<Achievement> getCompletedAchievements() {
-    return completedAchievements;
   }
 
   public void loadCompletedAchievements(List<String> achievementIds) {
@@ -112,7 +88,6 @@ public class AchievementEngine {
       if (achievementIds.contains(achievement.getId())) {
         achievement.setCompleted(true);
         achievement.giveReward();
-        completedAchievements.add(achievement);
       }
     }
   }
@@ -154,13 +129,8 @@ public class AchievementEngine {
   }
 
   public void resetState() {
-    if (!completedAchievements.isEmpty()) {
-      for (Achievement completedAchievement : completedAchievements) {
-        completedAchievement.setCompleted(false);
-      }
-
-      achievements.addAll(completedAchievements);
-      completedAchievements.clear();
+    for (Achievement completedAchievement : achievements) {
+      completedAchievement.setCompleted(false);
     }
 
     for (Achievement achievement : achievements) {
@@ -169,12 +139,8 @@ public class AchievementEngine {
   }
 
   public void completeAll() {
-    Iterator<Achievement> achievementIterator = achievements.iterator();
-    while (achievementIterator.hasNext()) {
-      Achievement achievement = achievementIterator.next();
+    for (Achievement achievement : achievements) {
       complete(achievement);
-
-      achievementIterator.remove();
     }
   }
 

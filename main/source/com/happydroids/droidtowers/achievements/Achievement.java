@@ -35,7 +35,7 @@ public class Achievement {
     requirements = Lists.newArrayList();
   }
 
-  public boolean isCompleted(GameGrid gameGrid) {
+  public boolean requirementsMet(GameGrid gameGrid) {
     if (isLocked()) {
       return false;
     }
@@ -145,5 +145,9 @@ public class Achievement {
       lockedBy = null;
       Gdx.app.debug(TAG, name + " unlocked.");
     }
+  }
+
+  public boolean isCompleted() {
+    return completed;
   }
 }

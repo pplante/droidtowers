@@ -49,7 +49,6 @@ public class TowerGame implements ApplicationListener {
   private static Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
   private static PlatformBrowserUtil platformBrowserUtil;
   private static LinkedList<Scene> pausedScenes;
-  private boolean firstRun;
 
   public TowerGame() {
     audioEnabled = true;
@@ -208,10 +207,7 @@ public class TowerGame implements ApplicationListener {
   public void resume() {
     Gdx.app.error("lifecycle", "resuming!");
 
-    if (!firstRun) {
-      firstRun = true;
-      pushScene(SplashScene.class, SplashSceneStates.RESUME_CYCLE);
-    }
+    pushScene(SplashScene.class, SplashSceneStates.RESUME_CYCLE);
   }
 
   public void dispose() {

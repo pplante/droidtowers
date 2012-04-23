@@ -12,8 +12,6 @@ import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
 import com.happydroids.droidtowers.types.ProviderType;
 
-import java.util.Set;
-
 import static com.happydroids.droidtowers.achievements.AchievementThing.*;
 import static com.happydroids.droidtowers.entities.GridObjectPlacementState.PLACED;
 
@@ -42,11 +40,6 @@ class AchievementRequirement {
   }
 
   private boolean handleUnlockRequirement(GameGrid gameGrid) {
-    Set<Achievement> completedAchievements = AchievementEngine.instance().getCompletedAchievements();
-    if (completedAchievements.isEmpty()) {
-      return false;
-    }
-
     if (thing.equals(OBJECT_TYPE)) {
       GridObjectType objectType = GridObjectTypeFactory.findTypeById(thingId);
       return objectType != null && !objectType.isLocked();
@@ -57,7 +50,7 @@ class AchievementRequirement {
       }
 
       if (achievement != null) {
-        return achievement.isCompleted(gameGrid);
+        return achievement.requirementsMet(gameGrid);
       }
     }
 

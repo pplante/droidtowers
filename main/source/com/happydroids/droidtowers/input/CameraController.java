@@ -79,9 +79,17 @@ public class CameraController implements GestureDetector.GestureListener {
   }
 
   public boolean fling(float velocityX, float velocityY) {
+    Gdx.app.error("camera", String.format("fling: %.2f, %.2f", velocityX, velocityY));
     flinging = true;
-    velX = camera.zoom * velocityX * 0.5f;
-    velY = camera.zoom * velocityY * 0.5f;
+
+    if (Math.abs(velocityX) >= 300) {
+      velX = camera.zoom * velocityX * 0.5f;
+    }
+
+    if (Math.abs(velocityY) >= 300) {
+      velY = camera.zoom * velocityY * 0.5f;
+    }
+
     return false;
   }
 
@@ -177,12 +185,6 @@ public class CameraController implements GestureDetector.GestureListener {
     return events;
   }
 
-  @Subscribe
-  public void GameGrid_onGridResize(GameGridResizeEvent event) {
-    worldSize = event.gameGrid.getWorldSize();
-    updateCameraConstraints();
-  }
-
   public void panTo(float x, float y, boolean animate) {
     if (animate) {
       TweenSystem.getTweenManager().killTarget(this);
@@ -196,5 +198,11 @@ public class CameraController implements GestureDetector.GestureListener {
 
   public void panTo(Vector3 position, boolean animate) {
     panTo(position.x, position.y, animate);
+  }
+
+  @Subscribe
+  public void GameGrid_onGridResize(GameGridResizeEvent event) {
+    worldSize = event.gameGrid.getWorldSize();
+    updateCameraConstraints();
   }
 }
