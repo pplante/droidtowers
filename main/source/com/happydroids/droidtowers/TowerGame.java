@@ -149,7 +149,7 @@ public class TowerGame implements ApplicationListener {
     Scene.setCamera(camera);
     Scene.setSpriteBatch(spriteBatch);
 
-    changeScene(SplashScene.class, SplashSceneStates.PRELOAD_CYCLE);
+    changeScene(SplashScene.class, SplashSceneStates.PRELOAD_ONLY);
   }
 
   public void render() {
@@ -207,7 +207,7 @@ public class TowerGame implements ApplicationListener {
   public void resume() {
     Gdx.app.error("lifecycle", "resuming!");
 
-    pushScene(SplashScene.class, SplashSceneStates.RESUME_CYCLE);
+    pushScene(SplashScene.class, SplashSceneStates.FULL_LOAD);
   }
 
   public void dispose() {

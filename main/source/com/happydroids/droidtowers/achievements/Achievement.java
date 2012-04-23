@@ -43,13 +43,9 @@ public class Achievement {
     if (requirements != null) {
       for (AchievementRequirement requirement : requirements) {
         if (!requirement.isCompleted(gameGrid)) {
-//          Gdx.app.debug(TAG,"Requirement unsatisfied: " + requirement);
           return false;
         }
       }
-
-      completed = true;
-
       return true;
     }
 

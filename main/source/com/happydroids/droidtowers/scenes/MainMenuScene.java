@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.interpolators.OvershootInterpolator;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
+import com.happydroids.droidtowers.DebugUtils;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
@@ -136,30 +137,9 @@ public class MainMenuScene extends Scene {
       }
     });
 
-//    newGameButton.click(1, 1);
 
-//    GameSave gameSave = new GameSave("DO NOT SAVE!", DifficultyLevel.EASY);
-//    gameSave.disableSaving();
-//    TowerGame.changeScene(TowerScene.class, gameSave);
-
-//    try {
-//      FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
-//      FileHandle[] files = storage.list(".json");
-//      if (files.length > 0) {
-//        while (!TowerAssetManager.assetManager().update()) {
-//          Thread.yield();
-//        }
-//
-//        for (FileHandle file : files) {
-//          if (!file.path().endsWith("png")) {
-//            TowerGame.changeScene(TowerScene.class, GameSave.readFile(file));
-//            break;
-//          }
-//        }
-//      }
-//    } catch (Exception e) {
-//      throw new RuntimeException(e);
-//    }
+    DebugUtils.createNonSavableGame();
+//    DebugUtils.loadFirstGameFound();
   }
 
   @Override

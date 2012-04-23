@@ -5,6 +5,6 @@
 package com.happydroids.droidtowers;
 
 public enum SplashSceneStates {
-  PRELOAD_CYCLE, RESUME_CYCLE
-
+  PRELOAD_ONLY,
+  FULL_LOAD
 }

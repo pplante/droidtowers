@@ -68,7 +68,6 @@ class AchievementRequirement {
       return false;
     }
 
-
     int numMatches = 0;
     for (GridObject gridObject : gameGrid.getObjects()) {
       if (!gridObject.getPlacementState().equals(PLACED)) {
@@ -81,13 +80,9 @@ class AchievementRequirement {
       } else if (thing.equals(OBJECT_TYPE) && gridObjectType.getId().equalsIgnoreCase(thingId)) {
         numMatches++;
       }
-
-      if (numMatches >= amount) {
-        return true;
-      }
     }
 
-    return false;
+    return numMatches >= amount;
   }
 
   @Override

@@ -95,7 +95,7 @@ public class LoadGameWindow extends TowerWindow {
       public void click(Actor actor, float x, float y) {
         dismiss();
         try {
-          TowerGame.changeScene(SplashScene.class, SplashSceneStates.RESUME_CYCLE, GameSave.readFile(savedGameFile));
+          TowerGame.changeScene(SplashScene.class, SplashSceneStates.FULL_LOAD, GameSave.readFile(savedGameFile));
         } catch (Exception e) {
           throw new RuntimeException(e);
         }

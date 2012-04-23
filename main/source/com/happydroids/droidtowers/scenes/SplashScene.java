@@ -23,8 +23,8 @@ import com.happydroids.droidtowers.utils.Random;
 
 import java.util.Set;
 
-import static com.happydroids.droidtowers.SplashSceneStates.PRELOAD_CYCLE;
-import static com.happydroids.droidtowers.SplashSceneStates.RESUME_CYCLE;
+import static com.happydroids.droidtowers.SplashSceneStates.FULL_LOAD;
+import static com.happydroids.droidtowers.SplashSceneStates.PRELOAD_ONLY;
 
 public class SplashScene extends Scene {
   private static final String[] STRINGS = new String[]{
@@ -52,7 +52,7 @@ public class SplashScene extends Scene {
   private Label loadingMessage;
   private boolean selectedNewMessage;
   private Sprite happyDroid;
-  private SplashSceneStates splashState = PRELOAD_CYCLE;
+  private SplashSceneStates splashState = PRELOAD_ONLY;
   private GameSave gameSave;
   private int progressLastChanged;
   private Set<String> messagesUsed;
@@ -118,7 +118,7 @@ public class SplashScene extends Scene {
 
     boolean assetManagerFinished = TowerAssetManager.assetManager().update();
 
-    if (splashState == RESUME_CYCLE) {
+    if (splashState == FULL_LOAD) {
       if (assetManagerFinished) {
         if (gameSave != null) {
           TowerGame.changeScene(TowerScene.class, gameSave);
@@ -153,7 +153,7 @@ public class SplashScene extends Scene {
       }
     }
 
-    if (splashState == PRELOAD_CYCLE) {
+    if (splashState == PRELOAD_ONLY) {
       if (!hasFilesToPreload) {
         TowerGame.changeScene(MainMenuScene.class);
       }
