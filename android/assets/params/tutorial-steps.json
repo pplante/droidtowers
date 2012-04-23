@@ -108,7 +108,7 @@
   {
     "id":"tutorial-turn-on-population-overlay",
     "name":"Population Overlays",
-    "description":"Now that you've mastered the camera controls,\nit is time to introduce the data overlays.\n\nIn the top right corner click the Overlay button, it has two squares in a circle.",
+    "description":"Now that you've mastered the camera controls,\nit is time to introduce the data overlays.\n\nIn the top right corner click the Overlays button.",
     "rewards":[
       {
         "type":"UNLOCK",
@@ -120,7 +120,7 @@
   {
     "id":"tutorial-turn-off-population-overlay",
     "name":"Population Overlays",
-    "description":"Look at the Apartment you built, notice the blue coloring?\n\nThis signifies that there are Droids living there.\n\nOther overlays can provide you insight into the management\nof your Tower's overall success.\n\nNow turn off the Population overlay by clicking 'Clear All'",
+    "description":"Look at the Apartment you built, notice the blue coloring?\n\nThis signifies that there are Droids living there.\n\nOverlays insight into the management\nof your Tower's overall success.\n\nNow turn off the Population overlay by clicking 'Clear All'",
     "rewards":[
       {
         "type":"UNLOCK",
