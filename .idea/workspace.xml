@@ -22,7 +22,10 @@
     <bookmark url="file://$PROJECT_DIR$/sparky/test/com/happydroids/sparky/GameUpdateCheckerTest.java" line="144" mnemonic="0" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="" />
+    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
+    </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -273,13 +276,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HeadsUpDisplay.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="HeadsUpDisplay.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="27" selection-start="2867" selection-end="2867" vertical-scroll-proportion="0.5807814">
+            <state line="77" column="27" selection-start="2867" selection-end="2867" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#0#10131#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="108" column="49" selection-start="4327" selection-end="4327" vertical-scroll-proportion="0.23231256">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -297,7 +309,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/LoadGameWindow.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
@@ -313,6 +324,7 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" />
         <option value="$PROJECT_DIR$/android/source/com/happydroids/droidtowers/DroidTowerGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/TowerScene.java" />
+        <option value="$PROJECT_DIR$/build.xml" />
       </list>
     </option>
   </component>
@@ -1627,13 +1639,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/GridObjectPurchaseItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="6" selection-start="565" selection-end="565" vertical-scroll-proportion="0.04751848">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/VerticalRule.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="0" selection-start="603" selection-end="603" vertical-scroll-proportion="0.23231256">
@@ -1757,10 +1762,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="27" selection-start="2867" selection-end="2867" vertical-scroll-proportion="0.5807814">
+        <state line="77" column="27" selection-start="2867" selection-end="2867" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#0#10131#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="49" selection-start="4327" selection-end="4327" vertical-scroll-proportion="0.23231256">
+          <folding />
         </state>
       </provider>
     </entry>

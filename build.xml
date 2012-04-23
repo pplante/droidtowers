@@ -102,8 +102,13 @@
     <mkdir dir="${classes.dir}"/>
     <mkdir dir="${build.dir}/tool-classes"/>
 
-    <javac srcdir="${root.dir}/pipeline/src" destdir="${build.dir}/tool-classes/" classpathref="classpath"
-           failonerror="true"/>
+    <javac2 destdir="${build.dir}/tool-classes/" debug="${compiler.debug}">
+      <classpath refid="classpath"/>
+      <src path="${happydroids.common.source}"/>
+      <src path="${droidtowers.main.source}"/>
+      <src path="${droidtowers.desktop.source}"/>
+      <src path="${root.dir}/pipeline/src"/>
+    </javac2>
     <java classname="com.happydroids.droidtowers.pipeline.GenerateAssetManagerFileList"
           classpath="${build.dir}/tool-classes/"
           failonerror="true" classpathref="classpath" fork="true" dir="${root.dir}/android"/>
@@ -193,7 +198,8 @@
         <constructor/>
       </keep>
 
-      <keep extends="com.happydroids.droidtowers.gui.TowerWindow" allowobfuscation="true" allowoptimization="false" allowshrinking="false">
+      <keep extends="com.happydroids.droidtowers.gui.TowerWindow" allowobfuscation="true" allowoptimization="false"
+            allowshrinking="false">
         <constructor/>
       </keep>
 
