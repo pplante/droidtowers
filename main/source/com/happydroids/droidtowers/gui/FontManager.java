@@ -103,6 +103,7 @@ public enum FontManager {
     textButton.getLabel().setStyle(labelStyle());
     textButton.getLabelCell().pad(buttonPadTop, buttonPadLeft, buttonPadTop, buttonPadLeft);
     textButton.invalidate();
+    textButton.pack();
 
     return textButton;
   }

@@ -6,7 +6,6 @@ package com.happydroids.droidtowers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetErrorListener;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,12 +20,12 @@ import java.util.Map;
 
 public class TowerAssetManager {
   private static final String TAG = TowerAssetManager.class.getSimpleName();
-  private static AssetManager assetManager;
+  private static MemoryTrackingAssetManager assetManager;
 
   @SuppressWarnings("unchecked")
-  public static AssetManager assetManager() {
+  public static MemoryTrackingAssetManager assetManager() {
     if (assetManager == null) {
-      assetManager = new AssetManager();
+      assetManager = new MemoryTrackingAssetManager();
       if (HappyDroidConsts.DEBUG) {
         assetManager.getLogger().setLevel(Logger.ERROR);
       }
@@ -64,10 +63,6 @@ public class TowerAssetManager {
     return fileName;
   }
 
-  private static void addDirectoryToAssetManager(AssetManager assetManager, String path, String pathSuffix, Class<?> clazz) {
-
-  }
-
   public static Skin skin(String s) {
     return assetManager().get(s, Skin.class);
   }
@@ -85,7 +80,9 @@ public class TowerAssetManager {
   }
 
   public static Texture texture(String s) {
-    return assetManager().get(checkForHDPI(s), Texture.class);
+    Texture texture = assetManager().get(checkForHDPI(s), Texture.class);
+    System.out.println("texture.getTextureData().getFormat() = " + texture.getTextureData().getFormat());
+    return texture;
   }
 
   public static void dispose() {

@@ -5,7 +5,6 @@
 package com.happydroids.droidtowers.grid;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -82,7 +81,7 @@ public class GameGridRenderer extends GameLayer {
   }
 
   @Override
-  public void render(SpriteBatch spriteBatch, Camera camera) {
+  public void render(SpriteBatch spriteBatch, OrthographicCamera camera) {
     shapeRenderer.setProjectionMatrix(camera.combined);
 
     if (shouldRenderGridLines) {

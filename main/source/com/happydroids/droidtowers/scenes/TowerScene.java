@@ -91,8 +91,8 @@ public class TowerScene extends Scene {
     gameLayers = Lists.newArrayList();
     gameLayers.add(new SkyLayer(gameGrid, weatherService));
     gameLayers.add(new CityScapeLayer(gameGrid));
-    gameLayers.add(new RainLayer(gameGrid, weatherService));
     gameLayers.add(new CloudLayer(gameGrid, weatherService));
+    gameLayers.add(new RainLayer(gameGrid, weatherService));
     gameLayers.add(new GroundLayer(gameGrid));
     gameLayers.add(gameGridRenderer);
     gameLayers.add(gameGrid);

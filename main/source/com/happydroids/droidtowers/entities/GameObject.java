@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 
 public class GameObject extends Sprite {
-  private boolean visible = true;
+  protected boolean visible = true;
   private float velocityX;
   private float velocityY;
   private boolean markedForRemoval;
@@ -31,6 +31,13 @@ public class GameObject extends Sprite {
 
   public GameObject(Texture texture, int u, int v, int u2, int v2) {
     super(texture, u, v, u2, v2);
+  }
+
+  @Override
+  public void draw(SpriteBatch spriteBatch) {
+    if (visible) {
+      super.draw(spriteBatch);
+    }
   }
 
   @Override
@@ -95,6 +102,4 @@ public class GameObject extends Sprite {
   public boolean isMarkedForRemoval() {
     return markedForRemoval;
   }
-
-
 }

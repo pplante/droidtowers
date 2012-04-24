@@ -15,6 +15,16 @@ public class TransparentTextButton extends TextButton {
   public TransparentTextButton(String text, Skin skin) {
     super(text, skin);
 
-    setStyle(new TextButtonStyle(new NinePatch(TowerAssetManager.texture("hud/toast-bg.png")), new NinePatch(TowerAssetManager.texture("hud/horizontal-rule.png"), rgba("#007399")), null, 0, 0, 0, 0, getStyle().font, getStyle().fontColor, getStyle().downFontColor, getStyle().checkedFontColor));
+    setStyle(new TextButtonStyle(new NinePatch(TowerAssetManager.texture("hud/toast-bg.png")),
+                                        new NinePatch(TowerAssetManager.texture("hud/horizontal-rule.png"), rgba("#007399")),
+                                        new NinePatch(TowerAssetManager.texture("hud/horizontal-rule.png"), rgba("#007399")),
+                                        getStyle().pressedOffsetX,
+                                        getStyle().pressedOffsetY,
+                                        getStyle().unpressedOffsetX,
+                                        getStyle().unpressedOffsetY,
+                                        getStyle().font,
+                                        getStyle().fontColor,
+                                        getStyle().downFontColor,
+                                        getStyle().checkedFontColor));
   }
 }

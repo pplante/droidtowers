@@ -4,8 +4,8 @@
 
 package com.happydroids.droidtowers.entities;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
@@ -27,7 +27,7 @@ public class GameLayer {
     gameObjects.add(gameObject);
   }
 
-  public void render(SpriteBatch spriteBatch, Camera camera) {
+  public void render(SpriteBatch spriteBatch, OrthographicCamera camera) {
     if (!visible) return;
 
     spriteBatch.begin();

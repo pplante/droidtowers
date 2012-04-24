@@ -182,7 +182,14 @@ public class TowerGame implements ApplicationListener {
       float javaHeapInBytes = Gdx.app.getJavaHeap() / TowerConsts.ONE_MEGABYTE;
       float nativeHeapInBytes = Gdx.app.getNativeHeap() / TowerConsts.ONE_MEGABYTE;
 
-      String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f)\nmem: (java %.1f Mb, native %.1f Mb)", Gdx.graphics.getFramesPerSecond(), camera.position.x, camera.position.y, camera.zoom, javaHeapInBytes, nativeHeapInBytes);
+      String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f)\nmem: (java %.1f Mb, native %.1f Mb, gpu %.1f Mb)",
+                                             Gdx.graphics.getFramesPerSecond(),
+                                             camera.position.x,
+                                             camera.position.y,
+                                             camera.zoom,
+                                             javaHeapInBytes,
+                                             nativeHeapInBytes,
+                                             TowerAssetManager.assetManager().getMemoryInMegabytes());
       spriteBatch.begin();
       menloBitmapFont.drawMultiLine(spriteBatch, infoText, 5, 35);
       spriteBatch.end();
