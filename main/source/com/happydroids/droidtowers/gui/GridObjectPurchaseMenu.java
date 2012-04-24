@@ -7,7 +7,6 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
@@ -40,8 +39,9 @@ public class GridObjectPurchaseMenu extends TowerWindow {
       final GridObjectType gridObjectType = typeFactory.castToObjectType(o);
 
       GridObjectPurchaseItem purchaseItem = new GridObjectPurchaseItem(gridObjectType, skin);
-      purchaseItem.setBuyClickListener(new ClickListener() {
-        public void click(Actor actor, float x, float y) {
+      purchaseItem.setBuyClickListener(new VibrateClickListener() {
+        @Override
+        public void onClick(Actor actor, float x, float y) {
           InputSystem.instance().switchTool(GestureTool.PLACEMENT, toolCleanupRunnable);
 
           PlacementTool placementTool = (PlacementTool) InputSystem.instance().getCurrentTool();

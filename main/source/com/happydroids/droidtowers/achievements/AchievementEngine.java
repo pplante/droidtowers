@@ -8,7 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.entities.GridObjectPlacementState;
-import com.happydroids.droidtowers.events.GridObjectChangedEvent;
+import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.AchievementNotification;
@@ -120,12 +120,10 @@ public class AchievementEngine {
   }
 
   @Subscribe
-  public void GameEvent_handleGridObjectEvent(GridObjectChangedEvent event) {
-    if (event.nameOfParamChanged.equals("placementState") && event.gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
-      return;
+  public void GameEvent_handleGridObjectEvent(GridObjectEvent event) {
+    if (event.gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
+      checkAchievements();
     }
-
-    checkAchievements();
   }
 
   public void resetState() {

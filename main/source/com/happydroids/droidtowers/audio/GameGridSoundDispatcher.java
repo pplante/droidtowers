@@ -9,7 +9,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.GridObjectPlacementState;
-import com.happydroids.droidtowers.events.GridObjectChangedEvent;
+import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 
@@ -24,12 +24,10 @@ public class GameGridSoundDispatcher {
   }
 
   @Subscribe
-  public void GameGrid_onGridObjectChanged(GridObjectChangedEvent event) {
+  public void GameGrid_onGridObjectPlaced(GridObjectPlacedEvent event) {
     if (!TowerGame.isAudioEnabled()) return;
 
-    if (event.nameOfParamChanged.equals("placementState") && event.gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
-      constructionSound.play();
-    }
+    constructionSound.play();
   }
 
   @Subscribe

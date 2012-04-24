@@ -16,6 +16,7 @@ import com.happydroids.droidtowers.actions.TimeDelayedAction;
 import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
 import com.happydroids.droidtowers.events.GridObjectChangedEvent;
 import com.happydroids.droidtowers.events.GridObjectEvent;
+import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.math.Bounds2d;
 import com.happydroids.droidtowers.math.GridPoint;
@@ -143,6 +144,7 @@ public abstract class GridObject {
         renderColor = gameGrid.canObjectBeAt(this) ? Color.CYAN : Color.RED;
       } else if (placementState.equals(GridObjectPlacementState.PLACED)) {
         renderColor = Color.WHITE;
+        broadcastEvent(new GridObjectPlacedEvent(this));
       }
     }
 

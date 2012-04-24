@@ -97,8 +97,8 @@ public class HeadsUpDisplay extends WidgetGroup {
     toolMenu.addActor(servicesButton);
 
     final ImageButton sellButton = new ImageButton(hudAtlas.findRegion("tool-sell"));
-    sellButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
+    sellButton.setClickListener(new VibrateClickListener() {
+      public void onClick(Actor actor, float x, float y) {
         toolMenu.hide();
         toolButton.setStyle(sellButton.getStyle());
         InputSystem.instance().switchTool(GestureTool.SELL, new Runnable() {
@@ -116,8 +116,8 @@ public class HeadsUpDisplay extends WidgetGroup {
     toolButton.y = 5;
     addActor(toolButton);
     toolButtonStyle = toolButton.getStyle();
-    toolButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
+    toolButton.setClickListener(new VibrateClickListener() {
+      public void onClick(Actor actor, float x, float y) {
         if (!toolMenu.visible) {
           stage.addActor(toolMenu);
           toolMenu.x = toolButton.x + 20f;
@@ -162,8 +162,8 @@ public class HeadsUpDisplay extends WidgetGroup {
   }
 
   private ClickListener makePurchaseButtonClickListener(final String dialogTitle, final GridObjectTypeFactory typeFactory) {
-    return new ClickListener() {
-      public void click(Actor actor, float x, float y) {
+    return new VibrateClickListener() {
+      public void onClick(Actor actor, float x, float y) {
         toolMenu.hide();
 
         if (purchaseDialog == null) {

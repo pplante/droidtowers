@@ -19,10 +19,8 @@ public class OverlayControl extends ImageButton {
   public OverlayControl(TextureAtlas hudAtlas, Skin skin, final GameGridRenderer gameGridRenderer) {
     super(hudAtlas.findRegion("overlay-button"));
 
-    setClickListener(new ClickListener() {
-      boolean isShowing;
-
-      public void click(Actor actor, float x, float y) {
+    setClickListener(new VibrateClickListener() {
+      public void onClick(Actor actor, float x, float y) {
         overlayMenu.show(OverlayControl.this);
         overlayMenu.x -= overlayMenu.width - OverlayControl.this.width;
       }

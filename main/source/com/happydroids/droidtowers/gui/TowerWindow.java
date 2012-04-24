@@ -67,8 +67,9 @@ public class TowerWindow {
     content.row().expandX();
     window.add(content).fill();
 
-    closeButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
+    closeButton.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
         dismiss();
       }
     });
