@@ -19,6 +19,7 @@
   {
     "id":"build1hotelroom",
     "name":"Build 3 Hotel Rooms.",
+    "description":"Hotel Rooms provide a place for temporary residents to stay, but they will get dirty over time.  The Maids Closet provides an employment source who will clean these rooms on a regular basis.",
     "requirements":[
       {
         "type":"BUILD",

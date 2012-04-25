@@ -44,6 +44,13 @@ tool-sell
   orig: 88, 88
   offset: 4, 4
   index: -1
+achievements
+  rotate: false
+  xy: 90, 357
+  size: 88, 88
+  orig: 88, 88
+  offset: 4, 4
+  index: -1
 audio-on
   rotate: false
   xy: 1, 357

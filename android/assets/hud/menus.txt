@@ -9,6 +9,13 @@ happy-droids-logo
   orig: 98, 62
   offset: 3, 2
   index: -1
+right-arrow
+  rotate: false
+  xy: 0, 97
+  size: 14, 16
+  orig: 14, 16
+  offset: 1, 0
+  index: -1
 powered-by-libgdx
   rotate: false
   xy: 0, 0

@@ -112,6 +112,7 @@ public class AchievementEngine {
     this.gameGrid = gameGrid;
     if (gameGrid != null) {
       gameGrid.events().register(this);
+      checkAchievements();
     }
   }
 

@@ -134,9 +134,17 @@ public class HeadsUpDisplay extends WidgetGroup {
     final AudioControl audioControl = new AudioControl(hudAtlas);
     final OverlayControl overlayControl = new OverlayControl(hudAtlas, guiSkin, gameGrid.getRenderer());
 
+    ImageButton achievementsButton = new ImageButton(TowerAssetManager.textureFromAtlas("achievements", "hud/buttons.txt"));
+    achievementsButton.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        new AchievementViewer(getStage(), getGuiSkin()).show();
+      }
+    });
+
     final Table topLeftButtons = new Table(getGuiSkin());
     topLeftButtons.defaults().center().right().space(5);
     topLeftButtons.clear();
+    topLeftButtons.add(achievementsButton);
     topLeftButtons.add(audioControl);
     topLeftButtons.add(overlayControl);
     topLeftButtons.pack();

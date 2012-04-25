@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
@@ -48,6 +47,7 @@ public class Dialog extends TowerWindow {
 
     negativeButtonInputCallback = new InputCallback() {
       public boolean run(float timeDelta) {
+        negativeButton.click(1, 1);
         dismiss();
 
         return true;
@@ -78,8 +78,8 @@ public class Dialog extends TowerWindow {
     }
 
     if (onClickCallback != null) {
-      button.setClickListener(new ClickListener() {
-        public void click(Actor actor, float x, float y) {
+      button.setClickListener(new VibrateClickListener() {
+        public void onClick(Actor actor, float x, float y) {
           onClickCallback.onClick(Dialog.this);
         }
       });

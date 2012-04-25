@@ -26,8 +26,8 @@ public class TowerWindow {
   private Runnable dismissCallback;
   protected final Stage stage;
   protected final Skin skin;
-  private final Table content;
-  private Table window;
+  protected final Table content;
+  protected Table container;
   private final Label titleLabel;
   private final TransparentTextButton closeButton;
 
@@ -35,9 +35,9 @@ public class TowerWindow {
     this.stage = stage;
     this.skin = skin;
 
-    window = new Table();
-    window.touchable = true;
-    window.setClickListener(new ClickListener() {
+    container = new Table();
+    container.touchable = true;
+    container.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
 
       }
@@ -45,8 +45,8 @@ public class TowerWindow {
 
     Texture texture = TowerAssetManager.texture("hud/window-bg.png");
     texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-    window.setBackground(new NinePatch(texture));
-    window.size((int) stage.width(), (int) stage.height());
+    container.setBackground(new NinePatch(texture));
+    container.size((int) stage.width(), (int) stage.height());
 
     titleLabel = FontManager.Roboto32.makeLabel(title);
     closeButton = FontManager.Roboto18.makeTransparentButton("< back", skin);
@@ -57,15 +57,15 @@ public class TowerWindow {
     topBar.add(new VerticalRule(scale(2))).fillY();
     topBar.add(titleLabel).center().left().expand().pad(scale(4)).padLeft(scale(12));
 
-    window.add(topBar).fill();
+    container.add(topBar).fill();
 
-    window.row();
-    window.add(new HorizontalRule(scale(2))).expandX();
-    window.row().fill().height((int) (stage.height() - scale(46))).padLeft(scale(24)).padRight(scale(24));
+    container.row();
+    container.add(new HorizontalRule(scale(2))).expandX();
+    container.row().fill().height((int) (stage.height() - scale(46))).padLeft(scale(24)).padRight(scale(24));
 
     content = new Table();
     content.row().expandX();
-    window.add(content).fill();
+    container.add(content).fill();
 
     closeButton.setClickListener(new VibrateClickListener() {
       @Override
@@ -86,9 +86,9 @@ public class TowerWindow {
   public TowerWindow show() {
     bindKeys();
 
-    window.invalidate();
-    window.pack();
-    stage.addActor(window);
+    container.invalidate();
+    container.pack();
+    stage.addActor(container);
 
     return this;
   }
@@ -103,7 +103,7 @@ public class TowerWindow {
     stage.setScrollFocus(null);
     stage.setKeyboardFocus(null);
 
-    window.markToRemove(true);
+    container.markToRemove(true);
   }
 
   public void setDismissCallback(Runnable dismissCallback) {
@@ -140,5 +140,9 @@ public class TowerWindow {
     titleLabel.setText(title);
 
     return this;
+  }
+
+  protected Cell defaults() {
+    return content.defaults();
   }
 }

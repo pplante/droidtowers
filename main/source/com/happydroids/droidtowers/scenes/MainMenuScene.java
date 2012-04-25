@@ -138,8 +138,8 @@ public class MainMenuScene extends Scene {
     });
 
 
-//    DebugUtils.createNonSavableGame();
-    DebugUtils.loadFirstGameFound();
+    DebugUtils.createNonSavableGame();
+//    DebugUtils.loadFirstGameFound();
   }
 
   @Override

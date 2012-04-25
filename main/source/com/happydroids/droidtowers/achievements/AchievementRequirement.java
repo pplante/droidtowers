@@ -22,6 +22,8 @@ class AchievementRequirement {
   private ProviderType[] thingProviderTypes;
   private String thingId;
   private double amount;
+  private int currentWeight;
+  private int totalWeight;
 
   public boolean isCompleted(GameGrid gameGrid) {
     switch (type) {
@@ -108,5 +110,13 @@ class AchievementRequirement {
 
   public void setType(RequirementType type) {
     this.type = type;
+  }
+
+  public int getCurrentWeight() {
+    return currentWeight;
+  }
+
+  public int getTotalWeight() {
+    return totalWeight;
   }
 }

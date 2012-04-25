@@ -27,6 +27,9 @@ public class Achievement {
   protected List<AchievementReward> rewards;
   private boolean completed;
   private AchievementReward lockedBy;
+  private int percentComplete;
+  private int totalWeight;
+  private int finishedWeight;
 
   public Achievement() {
 
@@ -48,6 +51,7 @@ public class Achievement {
         if (!requirement.isCompleted(gameGrid)) {
           return false;
         }
+        finishedWeight = requirement.getCurrentWeight();
       }
       return true;
     }
@@ -77,6 +81,13 @@ public class Achievement {
       }
     } else {
       if (TowerConsts.DEBUG) System.out.println("Achievement has no rewards: " + getId());
+    }
+
+    totalWeight = 0;
+    if (requirements != null) {
+      for (AchievementRequirement requirement : requirements) {
+        totalWeight += requirement.getTotalWeight();
+      }
     }
   }
 
@@ -152,5 +163,17 @@ public class Achievement {
 
   public boolean isCompleted() {
     return completed;
+  }
+
+  public int getPercentComplete() {
+    if (completed) {
+      return 100;
+    }
+
+    if (finishedWeight > 0 && totalWeight > 0) {
+      return finishedWeight / totalWeight;
+    }
+
+    return 0;
   }
 }

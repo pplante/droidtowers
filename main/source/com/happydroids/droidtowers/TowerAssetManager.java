@@ -80,12 +80,14 @@ public class TowerAssetManager {
   }
 
   public static Texture texture(String s) {
-    Texture texture = assetManager().get(checkForHDPI(s), Texture.class);
-    System.out.println("texture.getTextureData().getFormat() = " + texture.getTextureData().getFormat());
-    return texture;
+    return assetManager().get(checkForHDPI(s), Texture.class);
   }
 
   public static void dispose() {
     assetManager.dispose();
+  }
+
+  public static TextureAtlas.AtlasRegion textureFromAtlas(String textureName, String atlasName) {
+    return assetManager().get(checkForHDPI(atlasName), TextureAtlas.class).findRegion(textureName);
   }
 }

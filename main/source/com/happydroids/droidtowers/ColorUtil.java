@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+ */
+
 package com.happydroids.droidtowers;
 
 import com.badlogic.gdx.graphics.Color;
@@ -8,6 +12,16 @@ public class ColorUtil {
   public static Color rgba(String colorStr) {
     if (colorStr.charAt(0) == '#') {
       colorStr = colorStr.substring(1);
+    }
+
+    if (colorStr.length() < 6) {
+      String finalColor = "";
+
+      for (char c : colorStr.toCharArray()) {
+        finalColor += c + c;
+      }
+
+      colorStr = finalColor;
     }
 
     if (colorStr.length() < 8) {

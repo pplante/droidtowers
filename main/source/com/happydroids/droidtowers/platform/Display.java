@@ -10,6 +10,10 @@ public class Display {
   private static float scaledDensity = 1f;
   private static boolean hdpiMode;
 
+  public static int scale(float pixels) {
+    return scale((int) pixels);
+  }
+
   public static int scale(int pixels) {
     return (int) ((float) pixels * scaledDensity);
   }
