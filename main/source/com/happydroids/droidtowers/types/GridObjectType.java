@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.achievements.AchievementReward;
+import com.happydroids.droidtowers.achievements.Reward;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPositionCache;
@@ -39,7 +39,7 @@ public abstract class GridObjectType {
   protected ProviderType provides;
   private static WeakHashMap<String, TextureAtlas> atlases;
   private TextureAtlas textureAtlas;
-  private AchievementReward achievementLock;
+  private Reward lock;
 
   public abstract GridObject makeGridObject(GameGrid gameGrid);
 
@@ -151,7 +151,7 @@ public abstract class GridObjectType {
   }
 
   public boolean isLocked() {
-    return achievementLock != null;
+    return lock != null;
   }
 
   public String getId() {
@@ -172,9 +172,9 @@ public abstract class GridObjectType {
     return false;
   }
 
-  public void addLock(AchievementReward reward) {
+  public void addLock(Reward reward) {
     if (!isLocked()) {
-      achievementLock = reward;
+      lock = reward;
       Gdx.app.debug(TAG, name + " locked by " + reward);
     } else {
       Gdx.app.debug(TAG, name + " is already locked by " + reward);
@@ -182,8 +182,8 @@ public abstract class GridObjectType {
   }
 
   public void removeLock() {
-    if (achievementLock != null) {
-      achievementLock = null;
+    if (lock != null) {
+      lock = null;
       Gdx.app.debug(TAG, name + " unlocked.");
     }
   }

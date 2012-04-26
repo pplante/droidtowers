@@ -5,7 +5,6 @@
 package com.happydroids.droidtowers.achievements;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
@@ -16,28 +15,28 @@ import static com.happydroids.droidtowers.achievements.AchievementThing.OBJECT_T
 import static com.happydroids.droidtowers.achievements.RewardType.UNLOCK;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class AchievementReward {
+public class Reward {
   private RewardType type;
   private AchievementThing thing;
   private ProviderType[] thingProviderTypes;
   private String thingId;
   private double amount;
 
-  public AchievementReward() {
+  public Reward() {
 
   }
 
-  public AchievementReward(RewardType type, AchievementThing thing) {
+  public Reward(RewardType type, AchievementThing thing) {
     this(type, thing, 0);
   }
 
-  public AchievementReward(RewardType type, AchievementThing thing, int amount) {
+  public Reward(RewardType type, AchievementThing thing, int amount) {
     this.type = type;
     this.thing = thing;
     this.amount = amount;
   }
 
-  public AchievementReward(RewardType type, AchievementThing objectType, String objectTypeId) {
+  public Reward(RewardType type, AchievementThing objectType, String objectTypeId) {
     this.type = type;
     thing = objectType;
     thingId = objectTypeId;
@@ -45,9 +44,9 @@ public class AchievementReward {
 
   public void give() {
     if (type == null) {
-      throw new RuntimeException("AchievementReward does not contain 'type' parameter.");
+      throw new RuntimeException("Reward does not contain 'type' parameter.");
     } else if (thing == null) {
-      throw new RuntimeException(String.format("AchievementReward %s does not contain 'thing' parameter.", type));
+      throw new RuntimeException(String.format("Reward %s does not contain 'thing' parameter.", type));
     }
 
     switch (type) {
@@ -57,7 +56,7 @@ public class AchievementReward {
 
       case COMPLETE:
         if (thing.equals(ACHIEVEMENT)) {
-          Achievement achievement = findAchievementById();
+          Achievement achievement = Achievement.findById(thingId);
           achievement.setCompleted(true);
           achievement.giveReward();
         }
@@ -77,22 +76,9 @@ public class AchievementReward {
         handleProviderTypeReward();
         break;
       case ACHIEVEMENT:
-        findAchievementById().removeLock();
+        Achievement.findById(thingId).removeLock();
         break;
     }
-  }
-
-  private Achievement findAchievementById() {
-    Achievement achievement = AchievementEngine.instance().findById(thingId);
-    if (achievement == null) {
-      achievement = TutorialEngine.instance().findById(thingId);
-    }
-
-    if (achievement != null) {
-      return achievement;
-    }
-
-    throw new RuntimeException("Could not find Achievement with id: " + thingId);
   }
 
   private void handleProviderTypeReward() {
@@ -149,14 +135,14 @@ public class AchievementReward {
           break;
 
         case ACHIEVEMENT:
-          findAchievementById().addLock(this);
+          Achievement.findById(thingId).addLock(this);
           break;
       }
     }
   }
 
   public String getRewardString() {
-    return displayStringForType() + " " + displayStringForThing();
+    return displayStringForType() + " " + AchievementThing.displayStringForThing(thing, amount, thingId, thingProviderTypes);
   }
 
   private String displayStringForType() {
@@ -165,17 +151,6 @@ public class AchievementReward {
         return "Awarded";
       case UNLOCK:
         return "Unlocked";
-    }
-
-    return "";
-  }
-
-  private String displayStringForThing() {
-    switch (thing) {
-      case MONEY:
-        return TowerConsts.CURRENCY_SYMBOL + (int) amount;
-      case OBJECT_TYPE:
-        return getThingObjectType().getName();
     }
 
     return "";

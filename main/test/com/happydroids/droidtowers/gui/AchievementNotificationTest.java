@@ -6,8 +6,8 @@ package com.happydroids.droidtowers.gui;
 
 import com.happydroids.droidtowers.TowerGameTestRunner;
 import com.happydroids.droidtowers.achievements.Achievement;
-import com.happydroids.droidtowers.achievements.AchievementReward;
 import com.happydroids.droidtowers.achievements.AchievementThing;
+import com.happydroids.droidtowers.achievements.Reward;
 import com.happydroids.droidtowers.achievements.RewardType;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import org.junit.Before;
@@ -26,7 +26,7 @@ public class AchievementNotificationTest {
   @Before
   public void setUp() throws Exception {
     Achievement achievement = new Achievement("Sample");
-    achievement.addReward(new AchievementReward(RewardType.GIVE, AchievementThing.MONEY, 100));
+    achievement.addReward(new Reward(RewardType.GIVE, AchievementThing.MONEY, 100));
 
     notification = new AchievementNotification(achievement);
   }

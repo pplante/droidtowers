@@ -23,12 +23,26 @@ audio-off
   orig: 58, 58
   offset: 3, 3
   index: -1
+expand-land-right
+  rotate: false
+  xy: 119, 60
+  size: 52, 58
+  orig: 52, 58
+  offset: 6, 3
+  index: -1
 overlay-button
   rotate: false
   xy: 178, 1
   size: 58, 58
   orig: 58, 58
   offset: 3, 3
+  index: -1
+expand-land-left
+  rotate: false
+  xy: 172, 60
+  size: 52, 58
+  orig: 52, 58
+  offset: 6, 3
   index: -1
 tool-sprite
   rotate: false

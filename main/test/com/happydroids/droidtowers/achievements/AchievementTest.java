@@ -23,7 +23,7 @@ public class AchievementTest {
   @Test
   public void toRewardString_shouldOutputProperMessageForGives() {
     Achievement achievement = new Achievement("Sample");
-    achievement.addReward(new AchievementReward(RewardType.GIVE, AchievementThing.MONEY, 100));
+    achievement.addReward(new Reward(RewardType.GIVE, AchievementThing.MONEY, 100));
 
     expect(achievement.toRewardString()).toEqual("Complete: Sample!\nAwarded $100");
   }
@@ -31,7 +31,7 @@ public class AchievementTest {
   @Test
   public void toRewardString_shouldOutputProperMessageForUnlocks() {
     Achievement achievement = new Achievement("Sample");
-    achievement.addReward(new AchievementReward(RewardType.UNLOCK, AchievementThing.OBJECT_TYPE, "MAIDS_CLOSET"));
+    achievement.addReward(new Reward(RewardType.UNLOCK, AchievementThing.OBJECT_TYPE, "MAIDS_CLOSET"));
 
     expect(achievement.toRewardString()).toEqual("Complete: Sample!\nUnlocked Maids Closet");
   }
@@ -39,8 +39,8 @@ public class AchievementTest {
   @Test
   public void toRewardString_shouldHandleMultipleRewards() {
     Achievement achievement = new Achievement("Sample");
-    achievement.addReward(new AchievementReward(RewardType.GIVE, AchievementThing.MONEY, 100));
-    achievement.addReward(new AchievementReward(RewardType.UNLOCK, AchievementThing.OBJECT_TYPE, "MAIDS_CLOSET"));
+    achievement.addReward(new Reward(RewardType.GIVE, AchievementThing.MONEY, 100));
+    achievement.addReward(new Reward(RewardType.UNLOCK, AchievementThing.OBJECT_TYPE, "MAIDS_CLOSET"));
 
     expect(achievement.toRewardString()).toEqual("Complete: Sample!\nAwarded $100\nUnlocked Maids Closet");
   }

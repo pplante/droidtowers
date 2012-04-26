@@ -6,10 +6,12 @@ package com.happydroids.droidtowers.types;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Sets;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public abstract class GridObjectTypeFactory<T extends GridObjectType> {
   protected List<T> objectTypes;
@@ -75,6 +77,21 @@ public abstract class GridObjectTypeFactory<T extends GridObjectType> {
     }
 
     return null;
+  }
+
+  public static Set<GridObjectType> findByProviderTypeFromAnyFactory(ProviderType providerType) {
+    Set<GridObjectType> objectTypes = Sets.newHashSet();
+
+    for (GridObjectTypeFactory typeFactory : typeFactories) {
+      for (Object o : typeFactory.all()) {
+        GridObjectType gridObjectType = (GridObjectType) o;
+        if (gridObjectType.provides(providerType)) {
+          objectTypes.add(gridObjectType);
+        }
+      }
+    }
+
+    return objectTypes;
   }
 
   public Class<T> getObjectType() {

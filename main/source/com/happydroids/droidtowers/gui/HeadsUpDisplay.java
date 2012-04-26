@@ -47,7 +47,6 @@ public class HeadsUpDisplay extends WidgetGroup {
   private InputCallback closeDialogCallback = null;
   private RadialMenu toolMenu;
   private final StackGroup notificationStack;
-  private TextButton expandLandButton;
   private final ImageButton toolButton;
   private final ImageButton.ImageButtonStyle toolButtonStyle;
   private TutorialStepNotification tutorialStep;
@@ -65,9 +64,9 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     hudAtlas = TowerAssetManager.textureAtlas("hud/buttons.txt");
 
-    statusBarPanel = new StatusBarPanel(guiSkin, towerScene);
-    statusBarPanel.x = -4;
-    statusBarPanel.y = stage.height() - statusBarPanel.height + 4;
+    statusBarPanel = new StatusBarPanel(towerScene);
+    statusBarPanel.x = 0;
+    statusBarPanel.y = stage.height() - statusBarPanel.height;
     addActor(statusBarPanel);
 
     mouseToolTip = new ToolTip(guiSkin);
@@ -137,7 +136,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     ImageButton achievementsButton = new ImageButton(TowerAssetManager.textureFromAtlas("achievements", "hud/buttons.txt"));
     achievementsButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        new AchievementViewer(getStage(), getGuiSkin()).show();
+        new AchievementListView(getStage(), getGuiSkin()).show();
       }
     });
 
@@ -264,11 +263,11 @@ public class HeadsUpDisplay extends WidgetGroup {
   }
 
   public float getPrefWidth() {
-    return 0;
+    return stage.width();
   }
 
   public float getPrefHeight() {
-    return 0;
+    return stage.height();
   }
 
   public void showTipBubble(GridObject gridObject, String message) {
@@ -296,7 +295,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     tutorialStep = nextStep;
 
     if (tutorialStep != null) {
-      addActor(tutorialStep);
+      getStage().addActor(tutorialStep);
 
       tutorialStep.x = 10;
       tutorialStep.y = ((int) (getStage().height() - (statusBarPanel.height + tutorialStep.height + 6)));

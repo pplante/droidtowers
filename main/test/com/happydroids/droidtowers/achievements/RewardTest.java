@@ -12,10 +12,10 @@ import org.junit.runner.RunWith;
 import static com.happydroids.droidtowers.Expect.expect;
 
 @RunWith(NonGLTestRunner.class)
-public class AchievementRewardTest {
+public class RewardTest {
   @Test
   public void getRewardString_shouldWork_whenRewardIsMoney() {
-    AchievementReward reward = new AchievementReward(RewardType.GIVE, AchievementThing.MONEY, 100);
+    Reward reward = new Reward(RewardType.GIVE, AchievementThing.MONEY, 100);
     expect(reward.getRewardString()).toEqual("Awarded $100");
   }
 
@@ -23,7 +23,7 @@ public class AchievementRewardTest {
   public void getRewardString_shouldWork_whenRewardIsObjectType() {
     ServiceRoomTypeFactory.instance();
 
-    AchievementReward reward = new AchievementReward(RewardType.UNLOCK, AchievementThing.OBJECT_TYPE, "MAIDS_CLOSET");
+    Reward reward = new Reward(RewardType.UNLOCK, AchievementThing.OBJECT_TYPE, "MAIDS_CLOSET");
     expect(reward.getRewardString()).toEqual("Unlocked Maids Closet");
   }
 }

@@ -8,8 +8,11 @@ import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
-import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.happydroids.droidtowers.Colors;
+import com.happydroids.droidtowers.Strings;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.TutorialStep;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
@@ -19,16 +22,23 @@ public class TutorialStepNotification extends Table {
   private boolean allowDismiss;
 
   public TutorialStepNotification(TutorialStep step) {
-    setBackground(HeadsUpDisplay.instance().getGuiSkin().getPatch("default-round"));
+    super();
 
-    defaults();
+    setBackground(TowerAssetManager.ninePatch("hud/horizontal-rule.png", Colors.TRANSPARENT_BLACK));
+
+    defaults().top().left();
+
+    row().pad(scale(6));
+    add(FontManager.RobotoBold18.makeLabel(step.getName()));
 
     row();
-    add(FontManager.RobotoBold18.makeLabel(step.getName())).top();
-    row().pad(scale(6));
     add(new HorizontalRule());
+
+
+    Label descLabel = FontManager.Default.makeLabel(Strings.wrap(step.getDescription(), 40));
+
     row().pad(scale(6));
-    add(FontManager.Default.makeLabel(step.getDescription())).top();
+    add(descLabel).fillX();
 
     if (step.getId().equalsIgnoreCase("tutorial-finished")) {
       row().pad(scale(6));
@@ -53,8 +63,6 @@ public class TutorialStepNotification extends Table {
   public void hide() {
     TweenSystem.getTweenManager().killTarget(this);
 
-    final WidgetGroup targetParent = (WidgetGroup) this.parent;
-
     Timeline.createSequence()
             .push(Tween.set(this, WidgetAccessor.SIZE).target(this.width, this.height))
             .beginParallel()
@@ -63,11 +71,7 @@ public class TutorialStepNotification extends Table {
             .end()
             .setCallback(new TweenCallback() {
               public void onEvent(int eventType, BaseTween source) {
-                if (targetParent != null) {
-                  targetParent.removeActor(TutorialStepNotification.this);
-                  targetParent.invalidate();
-                  targetParent.layout();
-                }
+                TutorialStepNotification.this.markToRemove(true);
               }
             })
             .setCallbackTriggers(TweenCallback.END)

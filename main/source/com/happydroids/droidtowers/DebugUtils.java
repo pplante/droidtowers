@@ -36,10 +36,11 @@ public class DebugUtils {
     }
   }
 
-  public static void createNonSavableGame() {
+  public static void createNonSavableGame(boolean newGame) {
     verifyEnvironment();
 
     GameSave gameSave = new GameSave("DO NOT SAVE!", DifficultyLevel.EASY);
+    gameSave.setNewGame(newGame);
     gameSave.disableSaving();
     TowerGame.changeScene(SplashScene.class, SplashSceneStates.FULL_LOAD, gameSave);
   }

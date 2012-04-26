@@ -17,45 +17,45 @@ import java.util.HashMap;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public enum FontManager {
-  Default("fonts/roboto_white_14.fnt", "fonts/roboto_white_28.fnt", Color.WHITE),
-  Roboto18("fonts/roboto_white_18.fnt", "fonts/roboto_white_32.fnt", Color.WHITE, 8, 16),
-  RobotoBold18("fonts/roboto_bold_white_18.fnt", "fonts/roboto_white_32.fnt", Color.WHITE, 8, 16),
-  Roboto32("fonts/roboto_white_32.fnt", "fonts/roboto_white_48.fnt", Color.WHITE),
-  Roboto64("fonts/roboto_white_64.fnt", "fonts/roboto_white_96.fnt", Color.WHITE),
-  Roboto24("fonts/roboto_white_24.fnt", "fonts/roboto_white_36.fnt", Color.WHITE),
-  Roboto12("fonts/roboto_white_12.fnt", "fonts/roboto_white_24.fnt", Color.WHITE);
+  Default("fonts/roboto_white_14.fnt", "fonts/roboto_white_24.fnt"),
+  Roboto18("fonts/roboto_white_18.fnt", "fonts/roboto_white_32.fnt", 8, 16),
+  RobotoBold18("fonts/roboto_bold_white_18.fnt", "fonts/roboto_white_32.fnt", 8, 16),
+  Roboto32("fonts/roboto_white_32.fnt", "fonts/roboto_white_48.fnt"),
+  Roboto64("fonts/roboto_white_64.fnt", "fonts/roboto_white_96.fnt"),
+  Roboto24("fonts/roboto_white_24.fnt", "fonts/roboto_white_36.fnt"),
+  Roboto12("fonts/roboto_white_12.fnt", "fonts/roboto_white_18.fnt");
 
   private static HashMap<String, BitmapFont> bitmapFonts = Maps.newHashMap();
   private Label.LabelStyle labelStyle;
   private final String fontPath;
-  private final Color color;
   private final int buttonPadTop;
   private final int buttonPadLeft;
   private TextField.TextFieldStyle textFieldStyle;
 
   FontManager(String fontPath, Color color) {
-    this(fontPath, fontPath, color, 0, 0);
+    this(fontPath, fontPath, 0, 0);
   }
 
-  FontManager(String mdpiFontPath, String hdpiFontPath, Color color, int buttonPadTop, int buttonPadLeft) {
+  FontManager(String mdpiFontPath, String hdpiFontPath, int buttonPadTop, int buttonPadLeft) {
     this.fontPath = Display.getScaledDensity() > 1f ? hdpiFontPath : mdpiFontPath;
-    this.color = color;
     this.buttonPadTop = scale(buttonPadTop);
     this.buttonPadLeft = scale(buttonPadLeft);
   }
 
-  FontManager(String mdpiFontPath, String hdpiFontPath, Color color) {
-    this(mdpiFontPath, hdpiFontPath, color, 0, 0);
+  FontManager(String mdpiFontPath, String hdpiFontPath) {
+    this(mdpiFontPath, hdpiFontPath, 0, 0);
   }
 
   private Label.LabelStyle labelStyle() {
     if (labelStyle == null) {
-      getFont();
-
-      labelStyle = new Label.LabelStyle(getFont(), color);
+      labelStyle = labelStyle(Color.WHITE);
     }
 
     return labelStyle;
+  }
+
+  private Label.LabelStyle labelStyle(Color color) {
+    return new Label.LabelStyle(getFont(), color);
   }
 
   public BitmapFont getFont() {
@@ -84,7 +84,7 @@ public enum FontManager {
   }
 
   public Label makeLabel(String text) {
-    return new Label(text, labelStyle());
+    return makeLabel(text, Color.WHITE);
   }
 
   public TransparentTextButton makeTransparentButton(String labelText, final Skin skin) {
@@ -111,7 +111,7 @@ public enum FontManager {
   public TextField makeTextField(String labelText, String hintText, Skin skin) {
     if (textFieldStyle == null) {
       TextField.TextFieldStyle defaultStyle = skin.getStyle(TextField.TextFieldStyle.class);
-      textFieldStyle = new TextField.TextFieldStyle(getFont(), color, getFont(), defaultStyle.messageFontColor, defaultStyle.cursor, defaultStyle.selection, defaultStyle.background);
+      textFieldStyle = new TextField.TextFieldStyle(getFont(), Color.WHITE, getFont(), defaultStyle.messageFontColor, defaultStyle.cursor, defaultStyle.selection, defaultStyle.background);
     }
 
     return new TextField(labelText, hintText, textFieldStyle);
@@ -121,5 +121,15 @@ public enum FontManager {
     for (FontManager fontManager : values()) {
       fontManager.reset();
     }
+  }
+
+  public Label makeLabel(String text, Color fontColor) {
+    return new Label(text, labelStyle(fontColor));
+  }
+
+  public Label makeLabel(String text, Color fontColor, int textAlignment) {
+    Label label = new Label(text, labelStyle(fontColor));
+    label.setAlignment(textAlignment);
+    return label;
   }
 }

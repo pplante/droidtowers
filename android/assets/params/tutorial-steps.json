@@ -2,12 +2,12 @@
   {
     "id":"tutorial-welcome",
     "name":"Welcome to Droid Towers!",
-    "description":"To start building your Tower,\ntap the Build menu in the bottom right."
+    "description":"To start building your Tower, tap the Build menu in the bottom right."
   },
   {
     "id":"tutorial-unlock-lobby",
     "name":"Breaking ground",
-    "description":"Tap on the house icon to open the buy menu.\n\nThen tap \"BUY\" next to the Lobby.",
+    "description":"Tap on the house icon to open the buy menu. Then tap \"BUY\" next to the Lobby.",
     "rewards":[
       {
         "type":"UNLOCK",
@@ -19,12 +19,12 @@
   {
     "id":"tutorial-purchased-lobby",
     "name":"Pillars of Success",
-    "description":"Your cursor now is in \"Placement\" mode.\n\nTap to place the Lobby."
+    "description":"Your cursor now is in \"Placement\" mode. Tap to place the Lobby."
   },
   {
     "id":"tutorial-build-lobby",
     "name":"There is no place like Home",
-    "description":"The Lobby serves as the base for a Tower.\n\nDroids need a place to call home.\n\nYou should buy an Apartment for them.",
+    "description":"The Lobby serves as the base for a Tower. Droids need a place to call home. You should buy an Apartment for them.",
     "requirements":[
       {
         "type":"BUILD",
@@ -44,7 +44,7 @@
   {
     "id":"tutorial-build-apartment",
     "name":"Beam me up, Scotty",
-    "description":"Notice the little red box on your Apartment?\n\nThat means it is not connected to the Main Lobby.\n\nLets build an Elevator so the Droids can move in.",
+    "description":"Notice the little red box on your Apartment? That means it is not connected to the Main Lobby. Lets build an Elevator so the Droids can move in.",
     "requirements":[
       {
         "type":"BUILD",
@@ -64,7 +64,7 @@
   {
     "id":"tutorial-stretch-elevator",
     "name":"Sky's the limit!",
-    "description":"Elevators need to service each floor of your Tower.\n\nConnect your elevator by dragging the top or bottom\nof the elevator shaft.",
+    "description":"Elevators need to service each floor of your Tower. Connect your elevator by dragging the top or bottom of the elevator shaft.",
     "requirements":[
       {
         "type":"BUILD",
@@ -84,7 +84,7 @@
   {
     "id":"tutorial-pan",
     "name":"Navigation",
-    "description":"Now that your Tower is up and running,\nlets learn how to control your camera.\n\nTo move the screen around, tap anywhere and drag.",
+    "description":"Now that your Tower is up and running, lets learn how to control your camera. To move the screen around, tap anywhere and drag.",
     "rewards":[
       {
         "type":"UNLOCK",
@@ -96,8 +96,8 @@
   {
     "id":"tutorial-zoom",
     "name":"Magnification",
-    "description":"Great!\n\nYou can also zoom in via your mouse's scroll wheel.\n\nIt works just like scrolling a document.\n\nTry it now.",
-    "descriptionMobile":"Great!\n\nYou can also zoom in & out by pinching the screen.\n\nTry it now.",
+    "description":"Great! You can also zoom in via your mouse's scroll wheel. It works just like scrolling a document. Try it now.",
+    "descriptionMobile":"Great! You can also zoom in & out by pinching the screen. Try it now.",
     "rewards":[
       {
         "type":"UNLOCK",
@@ -109,7 +109,7 @@
   {
     "id":"tutorial-turn-on-population-overlay",
     "name":"Population Overlays",
-    "description":"Now that you've mastered the camera controls,\nit is time to introduce the data overlays.\n\nIn the top right corner tap the Overlays button.",
+    "description":"Now that you've mastered the camera controls, it is time to introduce the data overlays. In the top right corner tap the Overlays button.",
     "rewards":[
       {
         "type":"UNLOCK",
@@ -121,7 +121,7 @@
   {
     "id":"tutorial-turn-off-population-overlay",
     "name":"Population Overlays",
-    "description":"Look at the Apartment you built, notice the blue coloring?\n\nThis shows there are Droids living there.\n\nOverlays provide insight into the management\nof your Tower's overall success.\n\nNow turn off the Population overlay by tapping 'Clear All'",
+    "description":"Look at the Apartment you built, notice the blue coloring? This shows there are Droids living there. Overlays provide insight into the management of your Tower's overall success. Now turn off the Population overlay by tapping 'Clear All'",
     "rewards":[
       {
         "type":"UNLOCK",
@@ -133,7 +133,7 @@
   {
     "id":"tutorial-finished",
     "name":"Congratulations!",
-    "description":"Congratulations!\n\nYou are now ready to conquer the sky's!\n\n",
+    "description":"Congratulations! You are now ready to conquer the sky's! ",
     "rewards":[
       {
         "type":"UNLOCK",

@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.SplashSceneStates;
-import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerAssetManagerFilesList;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.GameObject;
@@ -25,6 +24,8 @@ import java.util.Set;
 
 import static com.happydroids.droidtowers.SplashSceneStates.FULL_LOAD;
 import static com.happydroids.droidtowers.SplashSceneStates.PRELOAD_ONLY;
+import static com.happydroids.droidtowers.TowerAssetManager.assetManager;
+import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class SplashScene extends Scene {
   private static final String[] STRINGS = new String[]{
@@ -83,7 +84,7 @@ public class SplashScene extends Scene {
     progressLabel = FontManager.Roboto64.makeLabel(null);
     progressLabel.setAlignment(Align.CENTER);
     centerHorizontally(progressLabel);
-    progressLabel.y = 100;
+    progressLabel.y = scale(100);
     addActor(progressLabel);
 
     happyDroid = new GameObject(new Texture("happy-droid.png"));
@@ -116,7 +117,7 @@ public class SplashScene extends Scene {
   public void render(float deltaTime) {
     verifyFilesPreloaded();
 
-    boolean assetManagerFinished = TowerAssetManager.assetManager().update();
+    boolean assetManagerFinished = assetManager().update();
 
     if (splashState == FULL_LOAD) {
       if (assetManagerFinished) {
@@ -129,7 +130,7 @@ public class SplashScene extends Scene {
     }
 
     if (!assetManagerFinished) {
-      int progress = (int) (TowerAssetManager.assetManager().getProgress() * 100f);
+      int progress = (int) (assetManager().getProgress() * 100f);
       progressLabel.setText(progress + "%");
 
       if (progress - progressLastChanged >= 33) {
@@ -141,6 +142,8 @@ public class SplashScene extends Scene {
       happyDroid.draw(getSpriteBatch());
       getSpriteBatch().end();
     }
+
+    Thread.yield();
   }
 
   private void verifyFilesPreloaded() {
@@ -148,7 +151,7 @@ public class SplashScene extends Scene {
 
     boolean hasFilesToPreload = false;
     for (String preloadFile : preloadFiles) {
-      if (!TowerAssetManager.assetManager().isLoaded(preloadFile)) {
+      if (!assetManager().isLoaded(preloadFile)) {
         hasFilesToPreload = true;
       }
     }

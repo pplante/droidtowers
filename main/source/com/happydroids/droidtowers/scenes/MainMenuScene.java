@@ -72,8 +72,8 @@ public class MainMenuScene extends Scene {
     container.row().padTop(BUTTON_SPACING);
 
 //    TextButton optionsButton = FontManager.RobotoBold18.makeTextButton("options", getGuiSkin());
-//    container.add(optionsButton).fill().maxWidth(BUTTON_WIDTH);
-//    container.row().padTop(BUTTON_SPACING);
+//    wrapper.add(optionsButton).fill().maxWidth(BUTTON_WIDTH);
+//    wrapper.row().padTop(BUTTON_SPACING);
 
     TextButton exitGameButton = FontManager.RobotoBold18.makeTextButton("exit game", getGuiSkin());
     container.add(exitGameButton).fill().maxWidth(BUTTON_WIDTH);
@@ -138,7 +138,7 @@ public class MainMenuScene extends Scene {
     });
 
 
-    DebugUtils.createNonSavableGame();
+    DebugUtils.createNonSavableGame(true);
 //    DebugUtils.loadFirstGameFound();
   }
 

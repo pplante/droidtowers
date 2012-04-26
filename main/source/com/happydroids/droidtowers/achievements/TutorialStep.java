@@ -19,7 +19,7 @@ public class TutorialStep extends Achievement {
     List<String> summary = Lists.newArrayList();
 
     if (rewards != null) {
-      for (AchievementReward reward : rewards) {
+      for (Reward reward : rewards) {
         summary.add(reward.getRewardString());
       }
     }

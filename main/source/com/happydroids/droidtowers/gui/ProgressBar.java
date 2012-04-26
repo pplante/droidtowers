@@ -9,34 +9,31 @@ import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Widget;
+import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 
-import static com.happydroids.droidtowers.ColorUtil.rgba;
-
-class ProgressBar extends Table {
-  public static final Color ICS_BLUE = rgba("#0099CC");
+class ProgressBar extends Widget {
   private final Label valueLabel;
-  private final NoOpWidget barPlaceholder;
   private NinePatch patch;
   private int padding;
   private int value;
 
   ProgressBar() {
+    this(0);
+  }
+
+  public ProgressBar(int progress) {
     super();
 
     padding = 3;
 
-    defaults().top().left().fill();
-
     patch = new NinePatch(TowerAssetManager.texture("hud/horizontal-rule.png"));
 
-    barPlaceholder = new NoOpWidget();
-    add(barPlaceholder).expand().left().width("100%");
-
     valueLabel = FontManager.Default.makeLabel("100%");
-    valueLabel.setAlignment(Align.RIGHT);
-    add(valueLabel).width(45);
+    valueLabel.setAlignment(Align.CENTER);
+
+    setValue(progress);
   }
 
   @Override
@@ -56,20 +53,31 @@ class ProgressBar extends Table {
 
   @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
+    validate();
+
     batch.disableBlending();
 
     patch.setColor(Color.DARK_GRAY);
-    patch.draw(batch, x + barPlaceholder.x, y + barPlaceholder.y, barPlaceholder.width, barPlaceholder.height);
+    patch.draw(batch, x, y, width, height);
 
     if (value > 0) {
-      patch.setColor(ICS_BLUE);
-      patch.draw(batch, x + barPlaceholder.x + padding,
-                        y + barPlaceholder.y + padding,
-                        ((barPlaceholder.width / 100) * value) - (padding * 2),
-                        barPlaceholder.height - (padding * 2));
+      patch.setColor(Colors.ICS_BLUE);
+      patch.draw(batch, x + padding,
+                        y + padding,
+                        ((width / 100) * value) - (padding * 2),
+                        height - (padding * 2));
     }
 
     batch.enableBlending();
-    super.draw(batch, parentAlpha);
+
+    valueLabel.x = x;
+    valueLabel.y = y;
+    valueLabel.draw(batch, parentAlpha);
+  }
+
+  @Override
+  public void layout() {
+    valueLabel.width = width;
+    valueLabel.height = height;
   }
 }

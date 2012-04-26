@@ -12,20 +12,22 @@ import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
 import com.happydroids.droidtowers.types.ProviderType;
 
+import java.text.NumberFormat;
+
 import static com.happydroids.droidtowers.achievements.AchievementThing.*;
 import static com.happydroids.droidtowers.entities.GridObjectPlacementState.PLACED;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-class AchievementRequirement {
+public class Requirement {
   private RequirementType type;
   private AchievementThing thing;
   private ProviderType[] thingProviderTypes;
   private String thingId;
-  private double amount;
+  private int amount;
   private int currentWeight;
   private int totalWeight;
 
-  public boolean isCompleted(GameGrid gameGrid) {
+  public boolean validate(GameGrid gameGrid) {
     switch (type) {
       case POPULATION:
         return Player.instance().getTotalPopulation() >= amount;
@@ -52,7 +54,8 @@ class AchievementRequirement {
       }
 
       if (achievement != null) {
-        return achievement.requirementsMet(gameGrid);
+        achievement.checkRequirements(gameGrid);
+        return achievement.isCompleted();
       }
     }
 
@@ -61,16 +64,16 @@ class AchievementRequirement {
 
   private boolean handleBuildRequirement(GameGrid gameGrid) {
     if (thing == null) {
-      throw new RuntimeException(String.format("AchievementRequirement %s does not contain 'thing' parameter.", type));
+      throw new RuntimeException(String.format("Requirement %s does not contain 'thing' parameter.", type));
     } else if (thingProviderTypes == null && thingId == null) {
-      throw new RuntimeException(String.format("AchievementRequirement %s does not contain 'thingProviderTypes' or 'thingId' parameter.", type));
+      throw new RuntimeException(String.format("Requirement %s does not contain 'thingProviderTypes' or 'thingId' parameter.", type));
     }
 
     if (gameGrid == null) {
       return false;
     }
 
-    int numMatches = 0;
+    currentWeight = 0;
     for (GridObject gridObject : gameGrid.getObjects()) {
       if (!gridObject.getPlacementState().equals(PLACED)) {
         continue;
@@ -78,25 +81,25 @@ class AchievementRequirement {
 
       GridObjectType gridObjectType = gridObject.getGridObjectType();
       if (thing.equals(PROVIDER_TYPE) && gridObjectType.provides(thingProviderTypes)) {
-        numMatches++;
+        currentWeight++;
       } else if (thing.equals(OBJECT_TYPE) && gridObjectType.getId().equalsIgnoreCase(thingId)) {
-        numMatches++;
+        currentWeight++;
       }
     }
 
-    return numMatches >= amount;
+    return currentWeight >= amount;
   }
 
   @Override
   public String toString() {
-    return "AchievementRequirement{" +
+    return "Requirement{" +
                    "amount=" + amount +
                    ", type=" + type +
                    ", thing=" + thing +
                    '}';
   }
 
-  public void setAmount(double amount) {
+  public void setAmount(int amount) {
     this.amount = amount;
   }
 
@@ -116,7 +119,30 @@ class AchievementRequirement {
     return currentWeight;
   }
 
-  public int getTotalWeight() {
-    return totalWeight;
+  public int getAmount() {
+    return amount;
+  }
+
+  public String displayString() {
+    String display = null;
+    switch (type) {
+      case BUILD:
+        display = "Build " + displayStringForThing(thing, amount, thingId, thingProviderTypes);
+        break;
+
+      case UNLOCK:
+        if (thing.equals(ACHIEVEMENT)) {
+          return "Complete Achievement: " + displayStringForThing(thing, amount, thingId, thingProviderTypes);
+        }
+
+      case POPULATION:
+        return "Attract " + NumberFormat.getInstance().format(amount) + " Residents";
+    }
+
+    return display;
+  }
+
+  public int getProgress() {
+    return (int) (((float) currentWeight / (float) getAmount()) * 100);
   }
 }

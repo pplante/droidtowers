@@ -8,8 +8,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Logger;
@@ -89,5 +91,13 @@ public class TowerAssetManager {
 
   public static TextureAtlas.AtlasRegion textureFromAtlas(String textureName, String atlasName) {
     return assetManager().get(checkForHDPI(atlasName), TextureAtlas.class).findRegion(textureName);
+  }
+
+  public static NinePatch ninePatch(String fileName) {
+    return ninePatch(fileName, Color.WHITE);
+  }
+
+  public static NinePatch ninePatch(String fileName, Color color) {
+    return new NinePatch(texture(fileName), color);
   }
 }

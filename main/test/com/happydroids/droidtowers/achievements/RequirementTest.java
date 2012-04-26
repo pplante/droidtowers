@@ -15,13 +15,13 @@ import org.junit.runner.RunWith;
 import static com.happydroids.droidtowers.Expect.expect;
 
 @RunWith(NonGLTestRunner.class)
-public class AchievementRequirementTest {
+public class RequirementTest {
 
-  private AchievementRequirement requirement;
+  private Requirement requirement;
 
   @Before
   public void setup() {
-    requirement = new AchievementRequirement();
+    requirement = new Requirement();
     requirement.setAmount(3);
     requirement.setType(RequirementType.BUILD);
     requirement.setThing(AchievementThing.PROVIDER_TYPE);
@@ -30,7 +30,7 @@ public class AchievementRequirementTest {
 
   @Test
   public void isCompleted_shouldReturnFalse_whenProviderTypeRequirementIsNotMet() {
-    expect(requirement.isCompleted(new TestGameGrid())).toBeFalse();
+    expect(requirement.validate(new TestGameGrid())).toBeFalse();
   }
 
   @Test
@@ -42,7 +42,7 @@ public class AchievementRequirementTest {
     gameGrid.addObject(testType.makeGridObject(gameGrid));
     gameGrid.addObject(testType.makeGridObject(gameGrid));
     gameGrid.addObject(testType.makeGridObject(gameGrid));
-    expect(requirement.isCompleted(gameGrid)).toBeTrue();
+    expect(requirement.validate(gameGrid)).toBeTrue();
   }
 
   @Test
@@ -54,7 +54,7 @@ public class AchievementRequirementTest {
     gameGrid.addObject(testType.makeGridObject(gameGrid));
     gameGrid.addObject(testType.makeGridObject(gameGrid));
     gameGrid.addObject(testType.makeGridObject(gameGrid));
-    expect(requirement.isCompleted(gameGrid)).toBeTrue();
+    expect(requirement.validate(gameGrid)).toBeTrue();
   }
 
 }

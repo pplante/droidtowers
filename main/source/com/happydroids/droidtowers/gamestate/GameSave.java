@@ -199,4 +199,8 @@ public class GameSave {
   public void disableSaving() {
     saveToDiskDisabled = true;
   }
+
+  public void setNewGame(boolean newGame) {
+    this.newGame = newGame;
+  }
 }

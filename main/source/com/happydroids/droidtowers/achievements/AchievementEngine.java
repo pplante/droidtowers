@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AchievementEngine {
+  private static final String TAG = AchievementEngine.class.getSimpleName();
+
   protected static AchievementEngine instance;
   protected List<Achievement> achievements;
   private GameGrid gameGrid;
@@ -44,15 +46,18 @@ public class AchievementEngine {
   }
 
   public void checkAchievements() {
+    Gdx.app.debug(TAG, "Checking achievements...");
     for (Achievement achievement : achievements) {
-      if (!achievement.isCompleted() && achievement.requirementsMet(gameGrid)) {
+      achievement.checkRequirements(gameGrid);
+
+      if (achievement.isCompleted()) {
         complete(achievement);
       }
     }
   }
 
-  public void complete(Achievement achievement) {
-    if (achievement.isLocked() || achievement.isCompleted()) {
+  private void complete(Achievement achievement) {
+    if (achievement.isLocked() || achievement.hasGivenReward()) {
       return;
     }
 
@@ -96,6 +101,32 @@ public class AchievementEngine {
     achievements.add(achievement);
   }
 
+  public void resetState() {
+    for (Achievement completedAchievement : achievements) {
+      completedAchievement.setCompleted(false);
+    }
+
+    for (Achievement achievement : achievements) {
+      achievement.resetState();
+    }
+  }
+
+  public void completeAll() {
+    for (Achievement achievement : achievements) {
+      complete(achievement);
+    }
+  }
+
+  public Achievement findById(String achievementId) {
+    for (Achievement achievement : achievements) {
+      if (achievement.getId().equalsIgnoreCase(achievementId)) {
+        return achievement;
+      }
+    }
+
+    return null;
+  }
+
   public boolean hasGameGrid() {
     return gameGrid != null;
   }
@@ -123,33 +154,8 @@ public class AchievementEngine {
   @Subscribe
   public void GameEvent_handleGridObjectEvent(GridObjectEvent event) {
     if (event.gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
+      Gdx.app.debug(TAG, "GameEvent_handleGridObjectEvent triggered by: " + event);
       checkAchievements();
     }
-  }
-
-  public void resetState() {
-    for (Achievement completedAchievement : achievements) {
-      completedAchievement.setCompleted(false);
-    }
-
-    for (Achievement achievement : achievements) {
-      achievement.resetState();
-    }
-  }
-
-  public void completeAll() {
-    for (Achievement achievement : achievements) {
-      complete(achievement);
-    }
-  }
-
-  public Achievement findById(String achievementId) {
-    for (Achievement achievement : achievements) {
-      if (achievement.getId().equalsIgnoreCase(achievementId)) {
-        return achievement;
-      }
-    }
-
-    return null;
   }
 }

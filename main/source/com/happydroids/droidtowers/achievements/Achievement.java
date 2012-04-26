@@ -23,13 +23,14 @@ public class Achievement {
   protected String name;
   protected String description;
   protected String descriptionMobile;
-  private List<AchievementRequirement> requirements;
-  protected List<AchievementReward> rewards;
+  private List<Requirement> requirements;
+  protected List<Reward> rewards;
   private boolean completed;
-  private AchievementReward lockedBy;
+  private Reward lockedBy;
   private int percentComplete;
   private int totalWeight;
   private int finishedWeight;
+  private boolean givenReward;
 
   public Achievement() {
 
@@ -41,28 +42,41 @@ public class Achievement {
     requirements = Lists.newArrayList();
   }
 
-  public boolean requirementsMet(GameGrid gameGrid) {
-    if (isLocked()) {
-      return false;
+  public static Achievement findById(String achievementId) {
+    Achievement achievement = AchievementEngine.instance().findById(achievementId);
+    if (achievement == null) {
+      achievement = TutorialEngine.instance().findById(achievementId);
+    }
+
+    if (achievement != null) {
+      return achievement;
+    }
+
+    throw new RuntimeException("Could not find Achievement with id: " + achievementId);
+  }
+
+  public void checkRequirements(GameGrid gameGrid) {
+    if ((lockedBy != null) || completed) {
+      return;
     }
 
     if (requirements != null) {
-      for (AchievementRequirement requirement : requirements) {
-        if (!requirement.isCompleted(gameGrid)) {
-          return false;
-        }
-        finishedWeight = requirement.getCurrentWeight();
+      finishedWeight = 0;
+      for (Requirement requirement : requirements) {
+        boolean completed = requirement.validate(gameGrid);
+        finishedWeight += requirement.getCurrentWeight();
       }
-      return true;
-    }
 
-    return false;
+      System.out.println(String.format("%s %d/%d %d", name, finishedWeight, totalWeight, getPercentComplete()));
+      completed = finishedWeight == totalWeight;
+    }
   }
 
   public String giveReward() {
     if (completed) {
+      givenReward = true;
       if (rewards != null) {
-        for (AchievementReward reward : rewards) {
+        for (Reward reward : rewards) {
           reward.give();
         }
       }
@@ -76,7 +90,7 @@ public class Achievement {
     completed = false;
 
     if (rewards != null) {
-      for (AchievementReward reward : rewards) {
+      for (Reward reward : rewards) {
         reward.resetState();
       }
     } else {
@@ -85,8 +99,8 @@ public class Achievement {
 
     totalWeight = 0;
     if (requirements != null) {
-      for (AchievementRequirement requirement : requirements) {
-        totalWeight += requirement.getTotalWeight();
+      for (Requirement requirement : requirements) {
+        totalWeight += requirement.getAmount();
       }
     }
   }
@@ -94,7 +108,7 @@ public class Achievement {
   public String toRewardString() {
     List<String> summary = Lists.newArrayList(String.format("Complete: %s!", name));
     if (rewards != null) {
-      for (AchievementReward reward : rewards) {
+      for (Reward reward : rewards) {
         summary.add(reward.getRewardString());
       }
     }
@@ -110,7 +124,7 @@ public class Achievement {
     this.completed = completed;
   }
 
-  public void addReward(AchievementReward reward) {
+  public void addReward(Reward reward) {
     rewards.add(reward);
   }
 
@@ -118,7 +132,7 @@ public class Achievement {
     return name;
   }
 
-  public List<AchievementReward> getRewards() {
+  public List<Reward> getRewards() {
     return rewards;
   }
 
@@ -145,7 +159,7 @@ public class Achievement {
     return lockedBy != null;
   }
 
-  public void addLock(AchievementReward reward) {
+  public void addLock(Reward reward) {
     if (!isLocked()) {
       lockedBy = reward;
       Gdx.app.debug(TAG, id + " locked by " + lockedBy);
@@ -170,10 +184,18 @@ public class Achievement {
       return 100;
     }
 
-    if (finishedWeight > 0 && totalWeight > 0) {
-      return finishedWeight / totalWeight;
+    if (totalWeight > 0) {
+      return (int) (((float) finishedWeight / (float) totalWeight) * 100);
     }
 
     return 0;
+  }
+
+  public List<Requirement> getRequirements() {
+    return requirements;
+  }
+
+  public boolean hasGivenReward() {
+    return givenReward;
   }
 }

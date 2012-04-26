@@ -5,13 +5,17 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.google.common.eventbus.Subscribe;
+import com.happydroids.droidtowers.Colors;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -21,21 +25,20 @@ import com.happydroids.droidtowers.input.CameraController;
 public class ExpandLandOverlay extends WidgetGroup {
   private static final int PADDING = 300;
   private final GameGrid gameGrid;
-  private TextButton leftButton;
-  private TextButton rightButton;
-  private TextButton topButton;
+  private Button leftButton;
+  private Button rightButton;
 
   public ExpandLandOverlay(GameGrid _gameGrid, Skin guiSkin) {
     this.gameGrid = _gameGrid;
     CameraController.events().register(this);
 
-    leftButton = new TextButton("Expand Land", guiSkin);
+    leftButton = new ExpandLandButton("left");
     leftButton.visible = false;
     leftButton.x = 5;
     leftButton.y = Gdx.graphics.getHeight() / 2;
     addActor(leftButton);
 
-    rightButton = new TextButton("Expand Land", guiSkin);
+    rightButton = new ExpandLandButton("right");
     rightButton.visible = false;
     rightButton.x = Gdx.graphics.getWidth() - rightButton.width - 5;
     rightButton.y = Gdx.graphics.getHeight() / 2;
@@ -77,5 +80,20 @@ public class ExpandLandOverlay extends WidgetGroup {
   public void CameraController_onPan(CameraControllerEvent event) {
     leftButton.visible = event.position.x <= PADDING * event.zoom;
     rightButton.visible = event.position.x + (PADDING * event.zoom) >= gameGrid.getWorldSize().x;
+  }
+
+  private static class ExpandLandButton extends Button {
+    public ExpandLandButton(String textureSuffix) {
+      super(new ButtonStyle(
+                                   makeNinePatch(textureSuffix, new Color(1f, 1f, 1f, 0.5f)),
+                                   makeNinePatch(textureSuffix, Colors.ICS_BLUE),
+                                   makeNinePatch(textureSuffix, new Color(1f, 1f, 1f, 0.75f)),
+                                   0, 0, 0, 0
+      ));
+    }
+
+    private static NinePatch makeNinePatch(String textureSuffix, Color color) {
+      return new NinePatch(TowerAssetManager.textureFromAtlas("expand-land-" + textureSuffix, "hud/buttons.txt"), color);
+    }
   }
 }

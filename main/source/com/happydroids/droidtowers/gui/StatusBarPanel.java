@@ -7,9 +7,10 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.esotericsoftware.tablelayout.Cell;
+import com.happydroids.droidtowers.Colors;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.scenes.TowerScene;
@@ -19,7 +20,6 @@ import java.text.NumberFormat;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class StatusBarPanel extends Table {
-  private final Skin guiSkin;
   private final TowerScene towerScene;
   private final Label moneyLabel;
   private final Label experienceLabel;
@@ -29,8 +29,7 @@ public class StatusBarPanel extends Table {
   private final Label moneyIncomeLabel;
   private final Label moneyExpensesLabel;
 
-  public StatusBarPanel(Skin guiSkin, TowerScene towerScene) {
-    this.guiSkin = guiSkin;
+  public StatusBarPanel(TowerScene towerScene) {
     this.towerScene = towerScene;
 
     moneyLabel = makeValueLabel("0");
@@ -40,21 +39,20 @@ public class StatusBarPanel extends Table {
     populationLabel = makeValueLabel("0");
     gameSpeedLabel = makeValueLabel("0x");
 
-    setBackground(guiSkin.getPatch("default-round"));
+    setBackground(TowerAssetManager.ninePatch("hud/horizontal-rule.png", Colors.TRANSPARENT_BLACK));
 
     defaults();
-    top().left().padTop(scale(8)).padLeft(scale(8));
+    center();
+    pad(scale(4), scale(8), scale(4), scale(8));
 
-    row().center();
-    makeHeader("EXPERIENCE");
+    row().spaceRight(scale(8));
     makeHeader("COINS");
     makeHeader("INCOME");
     makeHeader("EXPENSES");
     makeHeader("POPULATION");
     makeHeader("GAME SPEED");
 
-    row().center().padRight(12);
-    add(experienceLabel);
+    row().spaceRight(scale(8));
     add(moneyLabel);
     add(moneyIncomeLabel);
     add(moneyExpensesLabel);
@@ -63,6 +61,7 @@ public class StatusBarPanel extends Table {
 
     pack();
   }
+
 
   private Label makeValueLabel(String labelText) {
     Label label = FontManager.Default.makeLabel(labelText);
@@ -75,7 +74,7 @@ public class StatusBarPanel extends Table {
     label.setAlignment(Align.CENTER);
     label.setColor(Color.LIGHT_GRAY);
 
-    return add(label).center().padRight(12);
+    return add(label).center();
   }
 
   @Override
