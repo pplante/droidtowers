@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.grid;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Maps;
@@ -132,6 +133,12 @@ public class GameGrid extends GameLayer {
   }
 
   public void update(float deltaTime) {
+//    HACK: have to figure out a better way to clear out previously selected grid objects, until then...
+    if (selectedGridObject != null && !Gdx.input.isTouched()) {
+      selectedGridObject.touchUp();
+      selectedGridObject = null;
+    }
+
     for (GridObject gridObject : objects) {
       gridObject.update(deltaTime);
     }

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.actions.Action;
@@ -66,7 +67,11 @@ public class Elevator extends Transit {
 
     GridPoint gridPoint = new GridPoint(position.x, position.y);
 
-    bottomSprite.setColor(renderColor);
+    if (selectedResizeHandle == ResizeHandle.BOTTOM) {
+      bottomSprite.setColor(Colors.ICS_BLUE);
+    } else {
+      bottomSprite.setColor(renderColor);
+    }
     bottomSprite.setPosition(gridPoint.getWorldX(gameGrid), gridPoint.getWorldY(gameGrid));
     bottomSprite.draw(spriteBatch);
 
@@ -94,7 +99,11 @@ public class Elevator extends Transit {
     elevatorCar.draw(spriteBatch);
 
     gridPoint.add(0, 1);
-    topSprite.setColor(renderColor);
+    if (selectedResizeHandle == ResizeHandle.TOP) {
+      topSprite.setColor(Colors.ICS_BLUE);
+    } else {
+      topSprite.setColor(renderColor);
+    }
     topSprite.setPosition(gridPoint.getWorldX(gameGrid), gridPoint.getWorldY(gameGrid));
     topSprite.draw(spriteBatch);
   }
@@ -119,6 +128,13 @@ public class Elevator extends Transit {
     }
 
     return selectedResizeHandle != null;
+  }
+
+  @Override
+  public boolean touchUp() {
+    selectedResizeHandle = null;
+
+    return false;
   }
 
   @Override

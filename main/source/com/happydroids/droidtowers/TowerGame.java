@@ -77,7 +77,7 @@ public class TowerGame implements ApplicationListener {
 
     Thread.setDefaultUncaughtExceptionHandler(uncaughtExceptionHandler);
 
-    Thread.currentThread().setPriority(Thread.NORM_PRIORITY);
+    Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 
     TowerAssetManager.assetManager();
 

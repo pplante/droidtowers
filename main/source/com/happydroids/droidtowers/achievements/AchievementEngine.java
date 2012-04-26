@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.entities.GridObjectPlacementState;
+import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
 import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -153,6 +154,8 @@ public class AchievementEngine {
 
   @Subscribe
   public void GameEvent_handleGridObjectEvent(GridObjectEvent event) {
+    if (event instanceof ElevatorHeightChangeEvent) return;
+
     if (event.gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
       Gdx.app.debug(TAG, "GameEvent_handleGridObjectEvent triggered by: " + event);
       checkAchievements();

@@ -93,6 +93,10 @@ public abstract class GridObject {
     return false;
   }
 
+  public boolean touchUp() {
+    return false;
+  }
+
   public GridPoint getSize() {
     return size;
   }
