@@ -40,6 +40,8 @@ import com.happydroids.utils.BackgroundTask;
 import java.util.LinkedList;
 
 public class TowerGame implements ApplicationListener {
+  private static final String TAG = TowerGame.class.getSimpleName();
+
   private static OrthographicCamera camera;
   private SpriteBatch spriteBatch;
   private BitmapFont menloBitmapFont;
@@ -275,6 +277,8 @@ public class TowerGame implements ApplicationListener {
       activeScene = pausedScenes.pop();
       activeScene.resume();
       InputSystem.instance().addInputProcessor(activeScene.getStage(), 10);
+    } else {
+      Gdx.app.error(TAG, "popScene says there are no more scenes.");
     }
   }
 

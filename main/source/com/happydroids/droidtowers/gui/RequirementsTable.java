@@ -34,12 +34,12 @@ class RequirementsTable extends Table {
 
   @SuppressWarnings("unchecked")
   private void addRequirement(Requirement requirement) {
-    row().fillX();
+    row().fillX().pad(12, 0, 12, 0);
     Label label = Roboto18.makeLabel(requirement.displayString());
     label.setWrap(true);
-    add(label).expandX().pad(12, 0, 12, 0);
+    add(label).expandX();
 
-    Cell amountCell = add();
+    Cell amountCell = add().center();
     if (requirement.getAmount() > 0) {
       Label amountValue = RobotoBold18.makeLabel(String.format("%d/%d", requirement.getCurrentWeight(), requirement.getAmount()));
       amountValue.setAlignment(Align.CENTER);
@@ -49,8 +49,7 @@ class RequirementsTable extends Table {
     ProgressBar progressBar = new ProgressBar(requirement.getProgress());
     add(progressBar)
             .width(200)
-            .right()
-            .top();
+            .right().center();
 
     row();
     add(new HorizontalRule(Color.DARK_GRAY, 1)).colspan(3);

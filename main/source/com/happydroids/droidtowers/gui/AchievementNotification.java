@@ -11,32 +11,30 @@ import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
+import static com.happydroids.droidtowers.platform.Display.scale;
+
 public class AchievementNotification extends Table {
-  private final Achievement achievement;
 
   public AchievementNotification(Achievement achievement) {
-    this.achievement = achievement;
-
     setBackground(HeadsUpDisplay.instance().getGuiSkin().getPatch("default-round"));
 
-    defaults().top().left().pad(4);
+    defaults().top().left().pad(scale(4));
 
-    add(new Image(new Texture(Gdx.files.internal("hud/trophy.png")), Scaling.none)).minWidth(64).padRight(8);
+    add(new Image(new Texture(Gdx.files.internal("hud/trophy.png")), Scaling.none)).minWidth(scale(64)).padRight(scale(8));
 
     Table textTable = new Table();
     textTable.defaults().left().top();
     add(textTable);
 
-    textTable.add(new Label(achievement.getName(), HeadsUpDisplay.instance().getGuiSkin())).top();
+    textTable.add(FontManager.Roboto18.makeLabel(achievement.getName())).top();
     textTable.row();
-    textTable.add(new Label(achievement.toRewardString(), HeadsUpDisplay.instance().getGuiSkin())).top();
+    textTable.add(FontManager.Default.makeLabel(achievement.toRewardString())).top();
     textTable.pack();
     setClip(true);
     pack();

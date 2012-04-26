@@ -20,4 +20,9 @@ public class ScrollableTowerWindow extends TowerWindow {
 
     return scrollPane;
   }
+
+  protected void shoveContentUp() {
+    row().fill().space(0);
+    add().expand();
+  }
 }

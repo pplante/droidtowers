@@ -14,13 +14,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
+import static com.happydroids.droidtowers.platform.Display.scale;
+
 public class AchievementDetailView extends ScrollableTowerWindow {
   public AchievementDetailView(Achievement achievement, Stage stage, Skin skin) {
     super("Achievements > " + achievement.getName(), stage, skin);
 
-    defaults().top().left().space(6);
+    defaults().top().left().space(scale(6));
 
-    row().height(18);
+    row().height(scale(18));
     add(new NoOpWidget());
 
     String description = achievement.getDescription();
@@ -32,7 +34,7 @@ public class AchievementDetailView extends ScrollableTowerWindow {
       descLabel.setWrap(true);
       add(descLabel).fill();
 
-      row().height(18);
+      row().height(scale(18));
       add(new NoOpWidget());
     }
 
@@ -43,8 +45,7 @@ public class AchievementDetailView extends ScrollableTowerWindow {
       add(new RequirementsTable(requirements)).fill();
     }
 
-    row().fill().space(0);
-    add().expand();
+    shoveContentUp();
   }
 
   private void addHeaderRow(String headerText) {

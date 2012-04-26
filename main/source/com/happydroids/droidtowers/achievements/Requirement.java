@@ -30,7 +30,8 @@ public class Requirement {
   public boolean validate(GameGrid gameGrid) {
     switch (type) {
       case POPULATION:
-        return Player.instance().getTotalPopulation() >= amount;
+        currentWeight = Player.instance().getTotalPopulation();
+        return currentWeight >= amount;
       case BUILD:
         return handleBuildRequirement(gameGrid);
       case UNLOCK:

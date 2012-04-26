@@ -23,9 +23,8 @@ import java.text.NumberFormat;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class LoadGameWindow extends TowerWindow {
+public class LoadGameWindow extends ScrollableTowerWindow {
   private boolean foundSaveFile;
-  private final Table gameFiles;
 
   public LoadGameWindow(Stage stage, Skin skin) {
     super("Load a Tower", stage, skin);
@@ -33,32 +32,24 @@ public class LoadGameWindow extends TowerWindow {
     FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
     FileHandle[] files = storage.list(".json");
 
-    gameFiles = new Table();
-    gameFiles.defaults();
-
     if (files != null && files.length > 0) {
       for (FileHandle file : files) {
         if (file.name().endsWith(".json")) {
           Table fileRow = makeGameFileRow(file);
           if (fileRow != null) {
-            gameFiles.row().fill();
-            gameFiles.add(fileRow).expandX();
-            gameFiles.row().fillX();
-            gameFiles.add(new HorizontalRule(Color.DARK_GRAY, 2));
+            row().fillX();
+            add(fileRow).expandX();
             foundSaveFile = true;
           }
         }
       }
+
+      shoveContentUp();
     }
 
     if (!foundSaveFile) {
-      gameFiles.add(FontManager.RobotoBold18.makeLabel("No saved games were found on this device."));
+      add(FontManager.RobotoBold18.makeLabel("No saved games were found on this device."));
     }
-
-    WheelScrollFlickScrollPane scrollPane = new WheelScrollFlickScrollPane();
-    scrollPane.setFillParent(true);
-    scrollPane.setWidget(gameFiles);
-    add(scrollPane).fill();
   }
 
   private Table makeGameFileRow(final FileHandle gameSave) {
@@ -81,10 +72,12 @@ public class LoadGameWindow extends TowerWindow {
 
 
     Table fileRow = new Table();
-    fileRow.defaults().fill().pad(scale(10)).space(scale(10));
+    fileRow.defaults().fillX().pad(scale(10)).space(scale(10));
     fileRow.row();
-    fileRow.add(imageActor).width(scale(100)).center().right();
+    fileRow.add(imageActor).width(scale(64)).height(scale(64)).center();
     fileRow.add(makeGameFileInfoBox(fileRow, gameSave, towerData)).expandX().top();
+    fileRow.row().fillX();
+    fileRow.add(new HorizontalRule(Color.DARK_GRAY, 2)).colspan(2);
 
     return fileRow;
   }
@@ -104,17 +97,17 @@ public class LoadGameWindow extends TowerWindow {
 
     TextButton deleteButton = FontManager.RobotoBold18.makeTextButton("Delete", skin);
     deleteButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
+      public void click(final Actor actor, float x, float y) {
         new Dialog().setTitle("Are you sure you want to delete this Tower?")
                 .setMessage("If you delete this tower, it will disappear forever.\n\nAre you sure?")
                 .addButton(ResponseType.POSITIVE, "Yes, delete it", new OnClickCallback() {
                   @Override
                   public void onClick(Dialog dialog) {
-                    savedGameFile.delete();
+//                    savedGameFile.delete();
 
-                    gameFiles.getCell(fileRow).ignore(true);
-                    gameFiles.removeActor(fileRow);
-                    gameFiles.invalidate();
+                    content.getCell(fileRow).ignore();
+                    content.removeActor(fileRow);
+                    content.invalidate();
 
                     dialog.dismiss();
                   }

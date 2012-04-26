@@ -91,6 +91,8 @@ public class AchievementEngine {
     }
 
     for (Achievement achievement : achievements) {
+      achievement.checkRequirements(gameGrid);
+
       if (achievementIds.contains(achievement.getId())) {
         achievement.setCompleted(true);
         achievement.giveReward();

@@ -20,7 +20,8 @@ import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
-import com.happydroids.droidtowers.achievements.TutorialEngine;
+
+import static com.happydroids.droidtowers.platform.Display.scale;
 
 
 public class AchievementListView extends ScrollableTowerWindow {
@@ -37,13 +38,11 @@ public class AchievementListView extends ScrollableTowerWindow {
       makeItem(achievement);
     }
 
-    for (Achievement achievement : TutorialEngine.instance().getAchievements()) {
-      makeItem(achievement);
-    }
+    shoveContentUp();
   }
 
   public void makeItem(final Achievement achievement) {
-    row().expand();
+    row().expandX();
     AchievementListViewItem actor = new AchievementListViewItem(achievement);
     actor.setClickListener(new VibrateClickListener() {
       @Override
@@ -57,10 +56,10 @@ public class AchievementListView extends ScrollableTowerWindow {
   private class AchievementListViewItem extends Table {
     public AchievementListViewItem(Achievement achievement) {
 
-      row().pad(16, 8, 16, 8);
+      row().pad(scale(16), scale(8), scale(16), scale(8));
       add(FontManager.Roboto18.makeLabel(achievement.getName())).expandX().left();
 
-      add(new ProgressBar(achievement.getPercentComplete())).width(200);
+      add(new ProgressBar(achievement.getPercentComplete())).width(scale(200));
 
       Image arrowImg = new Image(TowerAssetManager.textureFromAtlas("right-arrow", "hud/menus.txt"), Scaling.fit);
       add(arrowImg).width((int) arrowImg.width);

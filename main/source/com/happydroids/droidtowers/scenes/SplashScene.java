@@ -142,8 +142,6 @@ public class SplashScene extends Scene {
       happyDroid.draw(getSpriteBatch());
       getSpriteBatch().end();
     }
-
-    Thread.yield();
   }
 
   private void verifyFilesPreloaded() {

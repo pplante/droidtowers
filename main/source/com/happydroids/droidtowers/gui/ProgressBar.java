@@ -47,8 +47,8 @@ class ProgressBar extends Widget {
   }
 
   public void setValue(int value) {
-    this.value = value;
-    valueLabel.setText(value + "%");
+    this.value = Math.min(100, value);
+    valueLabel.setText(this.value + "%");
   }
 
   @Override
@@ -64,7 +64,7 @@ class ProgressBar extends Widget {
       patch.setColor(Colors.ICS_BLUE);
       patch.draw(batch, x + padding,
                         y + padding,
-                        ((width / 100) * value) - (padding * 2),
+                        Math.min(((width / 100) * value), width) - (padding * 2),
                         height - (padding * 2));
     }
 

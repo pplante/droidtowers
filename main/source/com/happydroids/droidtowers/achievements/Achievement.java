@@ -106,7 +106,8 @@ public class Achievement {
   }
 
   public String toRewardString() {
-    List<String> summary = Lists.newArrayList(String.format("Complete: %s!", name));
+    List<String> summary = Lists.newArrayList();
+
     if (rewards != null) {
       for (Reward reward : rewards) {
         summary.add(reward.getRewardString());
