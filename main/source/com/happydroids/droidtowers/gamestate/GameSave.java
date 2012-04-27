@@ -54,7 +54,7 @@ public class GameSave {
   protected ArrayList<String> completedAchievements;
   private String baseFilename;
   private boolean newGame;
-  protected GameGrid gameGrid;
+  private GameGrid gameGrid;
   private OrthographicCamera camera;
   private boolean saveToDiskDisabled;
 

@@ -138,7 +138,7 @@ public class MainMenuScene extends Scene {
         Gdx.app.exit();
       }
     });
-
+    TowerAssetManager.assetManager().finishLoading();
     testGrid = new GameGrid(getCamera());
     DebugUtils.loadFirstGameFound(new VarArgRunnable() {
       public void run(Object... args) {
@@ -167,7 +167,13 @@ public class MainMenuScene extends Scene {
   public void render(float deltaTime) {
     TowerAssetManager.assetManager().update();
 
+    getCamera().zoom = 8f;
+    getCamera().update();
+    testGrid.update(deltaTime);
+    testGrid.getRenderer().update(deltaTime);
     testGrid.getRenderer().render(getSpriteBatch(), getCamera());
+    getCamera().zoom = 1f;
+    getCamera().update();
 
     cloudLayer.update(deltaTime);
     cloudLayer.render(getSpriteBatch(), getCamera());

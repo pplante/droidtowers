@@ -25,26 +25,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/VarArgRunnable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/NonInteractiveGameSave.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DebugUtils.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DebugUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Lobby.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Lobby.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/MovieTheater.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/MovieTheater.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/TransportCalculator.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/TransportCalculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/TowerMiniMap.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/TowerMiniMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGrid.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGrid.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPositionCache.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPositionCache.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/SellTool.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/SellTool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pathfinding/TransitPathFinder.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pathfinding/TransitPathFinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pathfinding/WanderPathFinder.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pathfinding/WanderPathFinder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/NonInteractiveGameSave.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/NonInteractiveGameSave.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/TowerScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/TowerScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/RoomType.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/RoomType.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -217,14 +202,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainMenuScene.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="GameGridRenderer.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="86" column="70" selection-start="3301" selection-end="3301" vertical-scroll-proportion="0.14942528">
+              <folding>
+                <element signature="e#0#8555#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainMenuScene.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="169" column="26" selection-start="6566" selection-end="6566" vertical-scroll-proportion="0.49425286">
+            <state line="172" column="27" selection-start="6705" selection-end="6705" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#0#7368#0" expanded="true" />
-                <element signature="e#5957#6264#0" expanded="true" />
-                <element signature="e#6257#6258#0" expanded="true" />
+                <element signature="e#0#7605#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -243,8 +238,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/TransportCalculator.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/TowerMiniMap.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/SellTool.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
@@ -253,12 +246,14 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/RoomType.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPositionCache.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGrid.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/TowerScene.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/MovieTheater.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GridObject.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/NonInteractiveGameSave.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/MovieTheater.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java" />
       </list>
     </option>
   </component>
@@ -1555,7 +1550,11 @@
       <created>1335435808927</created>
       <updated>1335435808927</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="moved the grid position cache away from being a singleton, and instead be owned by the game grid whom its caching for&#10;">
+      <created>1335488048891</created>
+      <updated>1335488048891</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1580,7 +1579,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3257403" sideWeight="0.95461786" order="7" side_tool="false" content_ui="tabs" />
@@ -1719,122 +1718,125 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/TowerScene.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Lobby.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="0" selection-start="3235" selection-end="3235" vertical-scroll-proportion="0.29806453">
+        <state line="14" column="13" selection-start="466" selection-end="466" vertical-scroll-proportion="0.24672897">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/StairType.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Elevator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="11" selection-start="621" selection-end="621" vertical-scroll-proportion="0.33290324">
+        <state line="21" column="13" selection-start="839" selection-end="839" vertical-scroll-proportion="0.25287357">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/RoomType.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/CommercialSpace.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="55" selection-start="1152" selection-end="1152" vertical-scroll-proportion="0.33333334">
+        <state line="10" column="13" selection-start="286" selection-end="286" vertical-scroll-proportion="0.25287357">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPositionCache.java">
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/jackson/HappyDroidObjectMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="0" selection-start="5637" selection-end="5637" vertical-scroll-proportion="0.80129033">
+        <state line="15" column="9" selection-start="491" selection-end="491" vertical-scroll-proportion="0.1271028">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java">
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="47" selection-start="2694" selection-end="2694" vertical-scroll-proportion="-1.5511811">
+        <state line="79" column="33" selection-start="2368" selection-end="2368" vertical-scroll-proportion="0.41495326">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/ElevatorType.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/utils/ClassNameResolver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="27" selection-start="808" selection-end="808" vertical-scroll-proportion="0.45144358">
+        <state line="32" column="22" selection-start="1542" selection-end="1542" vertical-scroll-proportion="0.46542057">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GridObject.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/jackson/TowerGameClassDeserializer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="26" selection-start="2249" selection-end="2249" vertical-scroll-proportion="0.24129032">
+        <state line="16" column="33" selection-start="580" selection-end="580" vertical-scroll-proportion="0.37009346">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pathfinding/WanderPathFinder.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/TowerGameService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="45" selection-start="1513" selection-end="1513" vertical-scroll-proportion="0.37548387">
+        <state line="35" column="66" selection-start="1213" selection-end="1213" vertical-scroll-proportion="0.37009346">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/Sprite.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/math/GridPoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="442" column="14" selection-start="14844" selection-end="14844" vertical-scroll-proportion="0.33333334">
+        <state line="30" column="45" selection-start="662" selection-end="662" vertical-scroll-proportion="0.17757009">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GameObject.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridObjectState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="12" selection-start="933" selection-end="933" vertical-scroll-proportion="0.3896774">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="14" selection-start="2943" selection-end="2943" vertical-scroll-proportion="0.6245161">
+        <state line="16" column="14" selection-start="602" selection-end="602" vertical-scroll-proportion="0.33271027">
           <folding>
-            <element signature="e#0#6458#0" expanded="true" />
+            <element signature="e#0#1806#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/NonInteractiveGameSave.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="33" selection-start="1215" selection-end="1215" vertical-scroll-proportion="0.646729">
+        <state line="19" column="33" selection-start="737" selection-end="737" vertical-scroll-proportion="-0.56635517">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GameLayer.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="816" selection-end="816" vertical-scroll-proportion="0.21935484">
+        <state line="199" column="0" selection-start="6377" selection-end="6377" vertical-scroll-proportion="0.5981308">
+          <folding>
+            <element signature="e#0#6456#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GridObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="22" selection-start="1098" selection-end="1098" vertical-scroll-proportion="-1.0691589">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGrid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="247" column="48" selection-start="7081" selection-end="7081" vertical-scroll-proportion="6.1948385">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/MovieTheater.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="5" selection-start="1362" selection-end="1362" vertical-scroll-proportion="0.5850467">
+        <state line="82" column="17" selection-start="2407" selection-end="2407" vertical-scroll-proportion="0.041121494">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="169" column="26" selection-start="6566" selection-end="6566" vertical-scroll-proportion="0.49425286">
+        <state line="172" column="27" selection-start="6705" selection-end="6705" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#0#7368#0" expanded="true" />
-            <element signature="e#5957#6264#0" expanded="true" />
-            <element signature="e#6257#6258#0" expanded="true" />
+            <element signature="e#0#7605#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="70" selection-start="3301" selection-end="3301" vertical-scroll-proportion="0.14942528">
+          <folding>
+            <element signature="e#0#8555#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
