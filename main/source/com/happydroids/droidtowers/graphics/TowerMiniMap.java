@@ -19,7 +19,6 @@ import com.happydroids.droidtowers.events.WeatherState;
 import com.happydroids.droidtowers.gamestate.actions.GameGridTransportCalculationComplete;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
-import com.happydroids.droidtowers.grid.GridPositionCache;
 
 import static java.lang.Math.*;
 
@@ -64,7 +63,7 @@ public class TowerMiniMap extends Table {
     pixmap.setColor(Color.ORANGE);
     pixmap.fillRectangle(0, (int) landY, (int) pixmapWidth, (int) landHeight);
 
-    GridPosition[][] positions = GridPositionCache.instance().getPositions();
+    GridPosition[][] positions = gameGrid.positionCache().getPositions();
     for (GridPosition[] row : positions) {
       for (GridPosition position : row) {
         if (position.size() == 0) continue;

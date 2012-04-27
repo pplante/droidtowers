@@ -36,17 +36,19 @@ public class GameGrid extends GameLayer {
   private GridObject transitGridObjectA;
   private GridObject transitGridObjectB;
   private float highestPoint;
+  private GridPositionCache positionCache;
 
   public GameGrid(OrthographicCamera camera) {
     this();
     gameGridRenderer = new GameGridRenderer(this, camera);
   }
 
-  protected GameGrid() {
+  public GameGrid() {
     setTouchEnabled(true);
 
     gridObjectsByType = new HashMap<Class, GuavaSet<GridObject>>();
     objects = new GuavaSet<GridObject>(25);
+    positionCache = new GridPositionCache(this);
 
     gridSize = new Vector2(8, 8);
 
@@ -179,7 +181,7 @@ public class GameGrid extends GameLayer {
   public boolean tap(Vector2 worldPoint, int count) {
     GridPoint gridPointAtFinger = closestGridPoint(worldPoint);
 
-    Set<GridObject> gridObjects = GridPositionCache.instance().getObjectsAt(gridPointAtFinger, new Vector2(1, 1));
+    Set<GridObject> gridObjects = positionCache.getObjectsAt(gridPointAtFinger, new Vector2(1, 1));
     for (GridObject gridObject : gridObjects) {
       if (gridObject.tap(gridPointAtFinger, count)) {
         return true;
@@ -197,7 +199,7 @@ public class GameGrid extends GameLayer {
   public boolean touchDown(Vector2 worldPoint, int pointer) {
     GridPoint gameGridPoint = closestGridPoint(worldPoint);
 
-    Set<GridObject> gridObjects = GridPositionCache.instance().getObjectsAt(gameGridPoint, new Vector2(1, 1));
+    Set<GridObject> gridObjects = positionCache.getObjectsAt(gameGridPoint, new Vector2(1, 1));
     for (GridObject gridObject : gridObjects) {
       if (gridObject.touchDown(gameGridPoint)) {
         selectedGridObject = gridObject;
@@ -243,9 +245,14 @@ public class GameGrid extends GameLayer {
   public void clearObjects() {
     gridObjectsByType = Maps.newHashMap();
     objects = new GuavaSet<GridObject>();
+    positionCache = new GridPositionCache(this);
   }
 
   public boolean isEmpty() {
     return objects.isEmpty();
+  }
+
+  public GridPositionCache positionCache() {
+    return positionCache;
   }
 }

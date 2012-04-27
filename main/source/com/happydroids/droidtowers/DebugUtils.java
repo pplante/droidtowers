@@ -8,12 +8,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.scenes.SplashScene;
-import com.happydroids.droidtowers.scenes.TowerScene;
 
 import static com.happydroids.HappyDroidConsts.DEBUG;
 
 public class DebugUtils {
-  public static void loadFirstGameFound() {
+  public static void loadFirstGameFound(VarArgRunnable loadGameRunnable) {
     verifyEnvironment();
 
     try {
@@ -26,7 +25,7 @@ public class DebugUtils {
 
         for (FileHandle file : files) {
           if (!file.path().endsWith("png")) {
-            TowerGame.changeScene(TowerScene.class, GameSave.readFile(file));
+            loadGameRunnable.run(file);
             break;
           }
         }

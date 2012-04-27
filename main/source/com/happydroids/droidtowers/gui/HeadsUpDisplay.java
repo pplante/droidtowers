@@ -19,7 +19,6 @@ import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
-import com.happydroids.droidtowers.grid.GridPositionCache;
 import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
@@ -233,7 +232,7 @@ public class HeadsUpDisplay extends WidgetGroup {
       Vector3 worldPoint = camera.getPickRay(Gdx.input.getX(), Gdx.input.getY()).getEndPoint(1);
 
       GridPoint gridPointAtMouse = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
-      GridPosition gridPosition = GridPositionCache.instance().getPosition(gridPointAtMouse);
+      GridPosition gridPosition = gameGrid.positionCache().getPosition(gridPointAtMouse);
       if (gridPosition != null) {
         int totalVisitors = 0;
         for (GridObject gridObject : gridPosition.getObjects()) {

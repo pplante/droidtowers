@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.grid.GameGrid;
-import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.types.CommercialType;
 
 public class MovieTheater extends CommercialSpace {
@@ -36,7 +35,7 @@ public class MovieTheater extends CommercialSpace {
     if (avengersTime <= currentMillis) {
       avengersTime = currentMillis + 140000;
       animationTime = 0f;
-      HeadsUpDisplay.instance().showTipBubble(this, "Now Playing: THE AVENGERS");
+//      HeadsUpDisplay.instance().showTipBubble(this, "Now Playing: THE AVENGERS");
     }
 
     Vector2 worldCenter = getWorldCenter();

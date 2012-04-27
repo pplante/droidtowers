@@ -14,7 +14,6 @@ import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.grid.GameGrid;
-import com.happydroids.droidtowers.grid.GridPositionCache;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.OnClickCallback;
 import com.happydroids.droidtowers.math.GridPoint;
@@ -40,7 +39,7 @@ public class SellTool extends ToolBase {
     Vector3 worldPoint = camera.getPickRay(x, y).getEndPoint(1);
     GridPoint gridPointAtFinger = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
 
-    Set<GridObject> gridObjects = GridPositionCache.instance().getObjectsAt(gridPointAtFinger, new Vector2(1, 1));
+    Set<GridObject> gridObjects = gameGrid.positionCache().getObjectsAt(gridPointAtFinger, new Vector2(1, 1));
 
     if (gridObjects != null) {
       List<GridObject> zIndexSorted = Ordering.natural().reverse().onResultOf(new Function<GridObject, Integer>() {

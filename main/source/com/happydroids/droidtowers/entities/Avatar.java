@@ -20,7 +20,6 @@ import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
 import com.happydroids.droidtowers.controllers.PathSearchManager;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
-import com.happydroids.droidtowers.grid.GridPositionCache;
 import com.happydroids.droidtowers.gui.SpeechBubble;
 import com.happydroids.droidtowers.pathfinding.TransitPathFinder;
 import com.happydroids.droidtowers.pathfinding.WanderPathFinder;
@@ -108,10 +107,10 @@ public class Avatar extends GameObject {
   }
 
   protected void wanderAround() {
-    GridPosition start = GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY()));
+    GridPosition start = gameGrid.positionCache().getPosition(gameGrid.closestGridPoint(getX(), getY()));
     if (HappyDroidConsts.DEBUG) System.out.println(String.format("%s is bored.", this.getClass().getSimpleName()));
 
-    setupPathFinder(new WanderPathFinder(start));
+    setupPathFinder(new WanderPathFinder(gameGrid, start));
   }
 
   protected void navigateToGridObject(GridObject gridObject) {
@@ -121,10 +120,10 @@ public class Avatar extends GameObject {
     }
     movingTo = gridObject;
 
-    GridPosition start = GridPositionCache.instance().getPosition(gameGrid.closestGridPoint(getX(), getY()));
-    GridPosition goal = GridPositionCache.instance().getPosition(gridObject.getPosition());
+    GridPosition start = gameGrid.positionCache().getPosition(gameGrid.closestGridPoint(getX(), getY()));
+    GridPosition goal = gameGrid.positionCache().getPosition(gridObject.getPosition());
 
-    setupPathFinder(new TransitPathFinder(start, goal));
+    setupPathFinder(new TransitPathFinder(gameGrid, start, goal));
   }
 
   private void setupPathFinder(final TransitPathFinder finder) {

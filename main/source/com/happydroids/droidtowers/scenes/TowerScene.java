@@ -24,7 +24,6 @@ import com.happydroids.droidtowers.gamestate.actions.*;
 import com.happydroids.droidtowers.graphics.*;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GameGridRenderer;
-import com.happydroids.droidtowers.grid.GridPositionCache;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.input.DefaultKeybindings;
 import com.happydroids.droidtowers.input.GestureDelegater;
@@ -78,8 +77,6 @@ public class TowerScene extends Scene {
     gameGrid = new GameGrid(camera);
     gameGridRenderer = gameGrid.getRenderer();
     gameState = new GameState(camera, gameSaveLocation, gameSave, gameGrid);
-
-    GridPositionCache.reset(gameGrid);
 
     headsUpDisplay = new HeadsUpDisplay(this);
     weatherService = new WeatherService();

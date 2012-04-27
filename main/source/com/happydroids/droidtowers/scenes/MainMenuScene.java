@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.scenes;
 
 import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -18,10 +19,11 @@ import com.badlogic.gdx.scenes.scene2d.interpolators.OvershootInterpolator;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.TowerGame;
+import com.happydroids.droidtowers.*;
+import com.happydroids.droidtowers.gamestate.GameSave;
+import com.happydroids.droidtowers.gamestate.NonInteractiveGameSave;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.*;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
@@ -35,6 +37,7 @@ public class MainMenuScene extends Scene {
   public static final int BUTTON_SPACING = scale(16);
 
   private SplashCloudLayer cloudLayer;
+  private GameGrid testGrid;
 
   @Override
   public void create(Object... args) {
@@ -136,6 +139,17 @@ public class MainMenuScene extends Scene {
       }
     });
 
+    testGrid = new GameGrid(getCamera());
+    DebugUtils.loadFirstGameFound(new VarArgRunnable() {
+      public void run(Object... args) {
+        try {
+          final GameSave gameLoaded = NonInteractiveGameSave.readFile((FileHandle) args[0]);
+          gameLoaded.attachToGame(testGrid, null);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    });
 
 //    DebugUtils.createNonSavableGame(true);
 //    DebugUtils.loadFirstGameFound();
@@ -152,6 +166,8 @@ public class MainMenuScene extends Scene {
   @Override
   public void render(float deltaTime) {
     TowerAssetManager.assetManager().update();
+
+    testGrid.getRenderer().render(getSpriteBatch(), getCamera());
 
     cloudLayer.update(deltaTime);
     cloudLayer.render(getSpriteBatch(), getCamera());

@@ -5,15 +5,18 @@
 package com.happydroids.droidtowers.pathfinding;
 
 import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
-import com.happydroids.droidtowers.grid.GridPositionCache;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class TransitPathFinder extends AStar<GridPosition> {
-  public TransitPathFinder(GridPosition start, GridPosition goal) {
+  protected final GameGrid gameGrid;
+
+  public TransitPathFinder(GameGrid gameGrid, GridPosition start, GridPosition goal) {
     super(start, goal);
+    this.gameGrid = gameGrid;
   }
 
   @Override
@@ -71,7 +74,7 @@ public class TransitPathFinder extends AStar<GridPosition> {
   }
 
   private void checkGridPosition(List<GridPosition> successors, int x, int y) {
-    GridPosition position = GridPositionCache.instance().getPosition(x, y);
+    GridPosition position = gameGrid.positionCache().getPosition(x, y);
     if (position != null && (position.connectedToTransit || y == TowerConsts.LOBBY_FLOOR)) {
       successors.add(position);
     }

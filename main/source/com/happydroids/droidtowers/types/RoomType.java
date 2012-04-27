@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.*;
 import com.happydroids.droidtowers.grid.GameGrid;
-import com.happydroids.droidtowers.grid.GridPositionCache;
 
 import java.util.Set;
 
@@ -43,7 +42,7 @@ public class RoomType extends GridObjectType {
 
   @Override
   protected boolean checkForOverlap(GridObject gridObject) {
-    Set<GridObject> objectsOverlapped = GridPositionCache.instance().getObjectsAt(gridObject.getPosition(), gridObject.getSize(), gridObject);
+    Set<GridObject> objectsOverlapped = gridObject.getGameGrid().positionCache().getObjectsAt(gridObject.getPosition(), gridObject.getSize(), gridObject);
     for (GridObject object : objectsOverlapped) {
       if (!object.canShareSpace(gridObject)) {
         return false;

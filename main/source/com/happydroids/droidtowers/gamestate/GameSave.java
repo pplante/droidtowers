@@ -25,7 +25,6 @@ import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_Unhap
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridObjectState;
-import com.happydroids.droidtowers.grid.GridPositionCache;
 import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.jackson.TowerTypeIdResolver;
 import sk.seges.acris.json.server.migrate.JacksonTransformer;
@@ -55,7 +54,7 @@ public class GameSave {
   protected ArrayList<String> completedAchievements;
   private String baseFilename;
   private boolean newGame;
-  private GameGrid gameGrid;
+  protected GameGrid gameGrid;
   private OrthographicCamera camera;
   private boolean saveToDiskDisabled;
 
@@ -77,7 +76,6 @@ public class GameSave {
     this.gameGrid = gameGrid;
     this.camera = camera;
 
-    GridPositionCache.reset(gameGrid);
     gameGrid.clearObjects();
     gameGrid.setGridSize(gridSize.x, gridSize.y);
     gameGrid.updateWorldSize();

@@ -14,7 +14,6 @@ import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.Reward;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
-import com.happydroids.droidtowers.grid.GridPositionCache;
 import com.happydroids.droidtowers.math.GridPoint;
 
 import java.util.HashSet;
@@ -100,14 +99,14 @@ public abstract class GridObjectType {
     GridPoint gridPointAbove = gridObject.getPosition().cpy();
     gridPointAbove.add(0, 1);
 
-    Set<GridObject> objectsBelow = GridPositionCache.instance().getObjectsAt(gridPointBelow, gridObject.getSize(), gridObject);
-    Set<GridObject> objectsAbove = GridPositionCache.instance().getObjectsAt(gridPointAbove, gridObject.getSize(), gridObject);
+    Set<GridObject> objectsBelow = gridObject.getGameGrid().positionCache().getObjectsAt(gridPointBelow, gridObject.getSize(), gridObject);
+    Set<GridObject> objectsAbove = gridObject.getGameGrid().positionCache().getObjectsAt(gridPointAbove, gridObject.getSize(), gridObject);
 
     return objectsBelow.size() != 0 || objectsAbove.size() != 0;
   }
 
   protected boolean checkForOverlap(GridObject gridObject) {
-    Set<GridObject> objectsOverlapped = GridPositionCache.instance().getObjectsAt(gridObject.getPosition(), gridObject.getSize(), gridObject);
+    Set<GridObject> objectsOverlapped = gridObject.getGameGrid().positionCache().getObjectsAt(gridObject.getPosition(), gridObject.getSize(), gridObject);
     for (GridObject object : objectsOverlapped) {
       if (!gridObject.canShareSpace(object)) {
         return false;

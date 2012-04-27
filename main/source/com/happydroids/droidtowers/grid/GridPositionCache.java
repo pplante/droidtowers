@@ -21,18 +21,14 @@ import java.util.Set;
 
 public class GridPositionCache {
   public static final Vector2 SINGLE_POINT = new Vector2(1, 1);
+
   private GridPosition[][] gridPositions;
-  private static GridPositionCache instance;
   private Vector2 gridSize;
   private final GameGrid gameGrid;
 
-  private GridPositionCache(GameGrid gameGrid) {
+  public GridPositionCache(GameGrid gameGrid) {
     this.gameGrid = gameGrid;
     gameGrid.events().register(this);
-  }
-
-  public static GridPositionCache instance() {
-    return instance;
   }
 
   @Subscribe
@@ -196,10 +192,5 @@ public class GridPositionCache {
 
   public void resumeEvents() {
     gameGrid.events().register(this);
-  }
-
-  public static void reset(GameGrid gameGrid) {
-    instance = null;
-    instance = new GridPositionCache(gameGrid);
   }
 }

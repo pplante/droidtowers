@@ -9,7 +9,6 @@ import com.happydroids.droidtowers.entities.*;
 import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
-import com.happydroids.droidtowers.grid.GridPositionCache;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.ProviderType;
 import com.happydroids.droidtowers.types.RoomType;
@@ -35,7 +34,7 @@ public class TransportCalculator extends GameGridAction {
 
   @Override
   public void run() {
-    for (GridPosition[] gridPositions : GridPositionCache.instance().getPositions()) {
+    for (GridPosition[] gridPositions : gameGrid.positionCache().getPositions()) {
       for (GridPosition gridPosition : gridPositions) {
         gridPosition.connectedToTransit = false;
       }
@@ -58,7 +57,7 @@ public class TransportCalculator extends GameGridAction {
         int x = (int) gridPoint.x;
         int y = (int) gridPoint.y;
 
-        GridPosition gridPosition = GridPositionCache.instance().getPosition(x, y);
+        GridPosition gridPosition = gameGrid.positionCache().getPosition(x, y);
         if (gridPosition != null) {
           gridPosition.connectedToTransit = true;
         }
@@ -72,7 +71,7 @@ public class TransportCalculator extends GameGridAction {
   }
 
   private void scanForRooms(int x, int y, int stepX) {
-    GridPosition gridPosition = GridPositionCache.instance().getPosition(x, y);
+    GridPosition gridPosition = gameGrid.positionCache().getPosition(x, y);
     while (gridPosition != null && gridPosition.size() > 0) {
       gridPosition.connectedToTransit = true;
       for (GridObject gridObject : gridPosition.getObjects()) {
@@ -83,7 +82,7 @@ public class TransportCalculator extends GameGridAction {
       }
 
       x += stepX;
-      gridPosition = GridPositionCache.instance().getPosition(x, y);
+      gridPosition = gameGrid.positionCache().getPosition(x, y);
     }
   }
 
