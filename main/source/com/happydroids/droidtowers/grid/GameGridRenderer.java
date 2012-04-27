@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Matrix4;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
@@ -38,9 +37,9 @@ import static com.happydroids.droidtowers.graphics.Overlays.POPULATION_LEVEL;
 
 public class GameGridRenderer extends GameLayer {
   private GameGrid gameGrid;
-  private final OrthographicCamera camera;
+  protected final OrthographicCamera camera;
   private boolean shouldRenderGridLines;
-  private final ShapeRenderer shapeRenderer;
+  protected final ShapeRenderer shapeRenderer;
   private Function<GridObject, Color> employmentLevelOverlayFunc;
   private Function<GridObject, Color> populationLevelOverlayFunc;
   private Function<GridObject, Color> desirabilityLevelOverlayFunc;
@@ -82,11 +81,7 @@ public class GameGridRenderer extends GameLayer {
   }
 
   @Override
-  public void render(SpriteBatch spriteBatch, OrthographicCamera camera) {
-    shapeRenderer.setProjectionMatrix(camera.combined);
-    Matrix4 projectionMatrix = spriteBatch.getProjectionMatrix().cpy();
-    spriteBatch.setProjectionMatrix(camera.combined);
-
+  public void render(SpriteBatch spriteBatch) {
     if (shouldRenderGridLines) {
       renderGridLines();
     }
@@ -111,8 +106,6 @@ public class GameGridRenderer extends GameLayer {
         transitLine.render(shapeRenderer);
       }
     }
-
-    spriteBatch.setProjectionMatrix(projectionMatrix);
   }
 
   private void makeOverlayFunctions() {

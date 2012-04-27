@@ -162,7 +162,7 @@ public class TowerScene extends Scene {
     updateGameObjects(deltaTime);
 
     for (GameLayer layer : gameLayers) {
-      layer.render(getSpriteBatch(), getCamera());
+      layer.render(getSpriteBatch());
     }
   }
 

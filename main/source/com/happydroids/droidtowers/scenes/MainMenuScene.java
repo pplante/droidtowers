@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
@@ -24,6 +25,7 @@ import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.NonInteractiveGameSave;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.grid.NeighborGameGrid;
 import com.happydroids.droidtowers.gui.*;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
@@ -139,7 +141,8 @@ public class MainMenuScene extends Scene {
       }
     });
     TowerAssetManager.assetManager().finishLoading();
-    testGrid = new GameGrid(getCamera());
+    testGrid = new NeighborGameGrid(getCamera(), new Vector2(-800, -400));
+
     DebugUtils.loadFirstGameFound(new VarArgRunnable() {
       public void run(Object... args) {
         try {
@@ -167,16 +170,12 @@ public class MainMenuScene extends Scene {
   public void render(float deltaTime) {
     TowerAssetManager.assetManager().update();
 
-    getCamera().zoom = 8f;
-    getCamera().update();
     testGrid.update(deltaTime);
     testGrid.getRenderer().update(deltaTime);
-    testGrid.getRenderer().render(getSpriteBatch(), getCamera());
-    getCamera().zoom = 1f;
-    getCamera().update();
+    testGrid.getRenderer().render(getSpriteBatch());
 
     cloudLayer.update(deltaTime);
-    cloudLayer.render(getSpriteBatch(), getCamera());
+    cloudLayer.render(getSpriteBatch());
   }
 
   @Override

@@ -30,13 +30,14 @@ public class GameGrid extends GameLayer {
   private Vector2 gridSize;
   private GuavaSet<GridObject> objects;
   private Vector2 worldSize;
-  private GameGridRenderer gameGridRenderer;
+  protected GameGridRenderer gameGridRenderer;
   private Map<Class, GuavaSet<GridObject>> gridObjectsByType;
   private GridObject selectedGridObject;
   private GridObject transitGridObjectA;
   private GridObject transitGridObjectB;
   private float highestPoint;
   private GridPositionCache positionCache;
+  private Vector2 gridOrigin;
 
   public GameGrid(OrthographicCamera camera) {
     this();
@@ -51,6 +52,7 @@ public class GameGrid extends GameLayer {
     positionCache = new GridPositionCache(this);
 
     gridSize = new Vector2(8, 8);
+    gridOrigin = new Vector2();
 
     updateWorldSize();
   }
@@ -255,4 +257,14 @@ public class GameGrid extends GameLayer {
   public GridPositionCache positionCache() {
     return positionCache;
   }
+
+  public void setGridOrigin(Vector2 gridOrigin) {
+    this.gridOrigin.set(gridOrigin);
+  }
+
+  public Vector2 getGridOrigin() {
+    return gridOrigin;
+  }
+
+
 }
