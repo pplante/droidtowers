@@ -24,7 +24,7 @@ public class TutorialStepNotification extends Table {
   public TutorialStepNotification(TutorialStep step) {
     super();
 
-    setBackground(TowerAssetManager.ninePatch("hud/horizontal-rule.png", Colors.TRANSPARENT_BLACK));
+    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.TRANSPARENT_BLACK));
 
     defaults().top().left();
 

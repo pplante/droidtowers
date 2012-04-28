@@ -102,7 +102,7 @@ public abstract class GridObject {
     return false;
   }
 
-  public boolean touchDown(Vector2 gameGridPoint) {
+  public boolean touchDown(Vector2 gameGridPoint, Vector2 worldPoint, int pointer) {
     return false;
   }
 
@@ -120,8 +120,7 @@ public abstract class GridObject {
 
   public void setSize(float x, float y) {
     size.set(x, y);
-    worldSize.set(size.getWorldX(gameGrid) * gameGrid.getGridScale(), size.getWorldY(gameGrid) * gameGrid.getGridScale());
-    updateWorldCenterAndTop();
+    updateWorldCoordinates();
   }
 
   public GridPoint getPosition() {
@@ -137,14 +136,15 @@ public abstract class GridObject {
 
     position.set(x, y);
     clampPosition();
-    worldPosition.set(gameGrid.getGridOrigin().x + (position.getWorldX(gameGrid) * gameGrid.getGridScale()), gameGrid.getGridOrigin().y + (position.getWorldY(gameGrid) * gameGrid.getGridScale()));
-    updateWorldCenterAndTop();
+    updateWorldCoordinates();
     updatePlacementStatus();
 
     broadcastEvent(new GridObjectBoundsChangeEvent(this, size, prevPosition));
   }
 
-  private void updateWorldCenterAndTop() {
+  protected void updateWorldCoordinates() {
+    worldPosition.set(gameGrid.getGridOrigin().x + (position.getWorldX(gameGrid) * gameGrid.getGridScale()), gameGrid.getGridOrigin().y + (position.getWorldY(gameGrid) * gameGrid.getGridScale()));
+    worldSize.set(size.getWorldX(gameGrid) * gameGrid.getGridScale(), size.getWorldY(gameGrid) * gameGrid.getGridScale());
     worldBounds.set(worldPosition.x, worldPosition.y, worldSize.x, worldSize.y);
     worldCenter.set(worldPosition.x + worldSize.x / 2, worldPosition.y + worldSize.y / 2);
     worldTop.set(worldPosition.x + worldSize.x / 2, worldPosition.y + worldSize.y);

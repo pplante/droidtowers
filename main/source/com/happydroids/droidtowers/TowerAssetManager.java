@@ -6,12 +6,14 @@ package com.happydroids.droidtowers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetErrorListener;
+import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Logger;
@@ -20,9 +22,13 @@ import com.happydroids.droidtowers.platform.Display;
 
 import java.util.Map;
 
+import static com.badlogic.gdx.graphics.Texture.TextureFilter.Linear;
+import static com.badlogic.gdx.graphics.Texture.TextureFilter.MipMapNearestNearest;
+
 public class TowerAssetManager {
   private static final String TAG = TowerAssetManager.class.getSimpleName();
   private static MemoryTrackingAssetManager assetManager;
+  public static final String WHITE_SWATCH = "swatches/swatch-white.png";
 
   @SuppressWarnings("unchecked")
   public static MemoryTrackingAssetManager assetManager() {
@@ -41,6 +47,13 @@ public class TowerAssetManager {
       for (Map.Entry<String, Class> entry : TowerAssetManagerFilesList.files.entrySet()) {
         assetManager.load(checkForHDPI(entry.getKey()), entry.getValue());
       }
+
+      TextureLoader.TextureParameter parameter = new TextureLoader.TextureParameter();
+      parameter.genMipMaps = true;
+      parameter.minFilter = MipMapNearestNearest;
+      parameter.magFilter = Linear;
+      assetManager.load(checkForHDPI("elevator/shaft.png"), Texture.class, parameter);
+      assetManager.load(checkForHDPI("elevator/empty.png"), Texture.class, parameter);
 
       assetManager.setErrorListener(new AssetErrorListener() {
         public void error(String fileName, Class type, Throwable throwable) {
@@ -99,5 +112,9 @@ public class TowerAssetManager {
 
   public static NinePatch ninePatch(String fileName, Color color) {
     return new NinePatch(texture(fileName), color);
+  }
+
+  public static Sprite sprite(String fileName) {
+    return new Sprite(texture(fileName));
   }
 }

@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.pipeline;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -33,7 +34,6 @@ public class GenerateAssetManagerFileList {
     addEntryToPreloader(assetsDir.child("backgrounds/clouds.txt"), TextureAtlas.class);
     addEntryToPreloader(assetsDir.child("hud/menus.txt"), TextureAtlas.class);
     addEntryToPreloader(assetsDir.child("hud/window-bg.png"), Texture.class);
-    addEntryToPreloader(assetsDir.child("hud/horizontal-rule.png"), Texture.class);
     addEntryToPreloader(assetsDir.child("hud/toast-bg.png"), Texture.class);
 
     addDirectoryToAssetManager("backgrounds/", ".txt", TextureAtlas.class);
@@ -54,21 +54,10 @@ public class GenerateAssetManagerFileList {
       swatchesDir.mkdirs();
     }
 
+    makeSwatch(swatchesDir, "swatch-white.png", Color.WHITE);
+
     for (Overlays overlay : Overlays.values()) {
-      String swatchFilename = overlay.getSwatchFilename();
-      FileHandle swatchFile = swatchesDir.child(swatchFilename);
-      if (swatchFile.exists()) continue;
-
-      try {
-        Pixmap pixmap = new Pixmap(2, 2, Pixmap.Format.RGB888);
-        pixmap.setColor(overlay.getColor(1f));
-        pixmap.fill();
-
-        byte[] bytes = PNG.toPNG(pixmap);
-        swatchFile.writeBytes(bytes, false);
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
+      makeSwatch(swatchesDir, overlay.getSwatchFilename(), overlay.getColor(1f));
     }
 
     addDirectoryToAssetManager("swatches/", ".png", Texture.class);
@@ -80,6 +69,22 @@ public class GenerateAssetManagerFileList {
     outputFile.writeString(javaFileContent, false);
 
     System.out.println("Generated: " + outputFile.path());
+  }
+
+  private static void makeSwatch(FileHandle swatchesDir, String swatchFilename, Color color) {
+    FileHandle swatchFile = swatchesDir.child(swatchFilename);
+    if (swatchFile.exists()) return;
+
+    try {
+      Pixmap pixmap = new Pixmap(2, 2, Pixmap.Format.RGB888);
+      pixmap.setColor(color);
+      pixmap.fill();
+
+      byte[] bytes = PNG.toPNG(pixmap);
+      swatchFile.writeBytes(bytes, false);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   private static void addDirectoryToPreloader(String folder, String suffix, Class clazz) {

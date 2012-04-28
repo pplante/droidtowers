@@ -82,7 +82,6 @@ public class GameObject extends Sprite {
   public void setWrap(Texture.TextureWrap wrapX, Texture.TextureWrap wrapY) {
     Texture texture = getTexture();
 
-
     if (wrapX == Texture.TextureWrap.Repeat) {
       setU(0f);
       setU2(getWidth() / texture.getWidth());

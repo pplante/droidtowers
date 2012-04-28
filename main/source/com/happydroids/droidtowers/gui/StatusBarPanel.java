@@ -39,7 +39,7 @@ public class StatusBarPanel extends Table {
     populationLabel = makeValueLabel("0");
     gameSpeedLabel = makeValueLabel("0x");
 
-    setBackground(TowerAssetManager.ninePatch("hud/horizontal-rule.png", Colors.TRANSPARENT_BLACK));
+    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.TRANSPARENT_BLACK));
 
     defaults();
     center();

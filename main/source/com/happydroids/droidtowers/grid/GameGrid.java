@@ -207,7 +207,7 @@ public class GameGrid extends GameLayer {
 
     Set<GridObject> gridObjects = positionCache.getObjectsAt(gameGridPoint, new Vector2(1, 1));
     for (GridObject gridObject : gridObjects) {
-      if (gridObject.touchDown(gameGridPoint)) {
+      if (gridObject.touchDown(gameGridPoint, worldPoint, pointer)) {
         selectedGridObject = gridObject;
         return true;
       }

@@ -5,17 +5,18 @@
 package com.happydroids.droidtowers.entities;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
-import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.actions.Action;
 import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.ElevatorType;
 import com.happydroids.droidtowers.types.ResizeHandle;
@@ -31,6 +32,7 @@ public class Elevator extends Transit {
   private Action onResizeAction;
   private ElevatorCar elevatorCar;
   static TextureAtlas elevatorAtlas;
+  private Vector2 anchorPoint;
 
   public Elevator(ElevatorType elevatorType, final GameGrid gameGrid) {
     super(elevatorType, gameGrid);
@@ -44,12 +46,11 @@ public class Elevator extends Transit {
     topSprite.setScale(getGridScale());
     bottomSprite = elevatorAtlas.createSprite("elevator/bottom");
     bottomSprite.setScale(getGridScale());
-    shaftSprite = elevatorAtlas.createSprite("elevator/shaft");
+    shaftSprite = TowerAssetManager.sprite("elevator/shaft.png");
     shaftSprite.setScale(getGridScale());
-    emptyShaftSprite = elevatorAtlas.createSprite("elevator/empty");
+    emptyShaftSprite = TowerAssetManager.sprite("elevator/empty.png");
     emptyShaftSprite.setScale(getGridScale());
-    floorFont = TowerAssetManager.bitmapFont("fonts/bank_gothic_32.fnt");
-    floorFont.setScale(getGridScale());
+    floorFont = FontManager.BankGothic32.getFont();
 
     drawShaft = true;
 
@@ -75,7 +76,7 @@ public class Elevator extends Transit {
     Vector2 localPoint = worldPosition.cpy();
 
     if (selectedResizeHandle == ResizeHandle.BOTTOM) {
-      bottomSprite.setColor(Colors.ICS_BLUE);
+      bottomSprite.setColor(Color.CYAN);
     } else {
       bottomSprite.setColor(renderColor);
     }
@@ -84,35 +85,40 @@ public class Elevator extends Transit {
 
     Sprite shaftToRender = drawShaft ? shaftSprite : emptyShaftSprite;
     BitmapFont.TextBounds textBounds;
+
+
+    localPoint.add(0, scaledGridUnit());
     shaftToRender.setColor(renderColor);
-    for (int y = (int) position.y + 1; y < position.y + size.y - 1; y++) {
-      localPoint.add(0, scaledGridUnit());
+    shaftToRender.setPosition(localPoint.x, localPoint.y);
+    shaftToRender.setSize(worldSize.x, worldSize.y - scaledGridUnit());
+    setWrap(shaftToRender);
+    shaftToRender.draw(spriteBatch);
 
-      shaftToRender.setPosition(localPoint.x, localPoint.y);
-      shaftToRender.draw(spriteBatch);
-
-      String labelText = String.valueOf(y - TowerConsts.LOBBY_FLOOR + 1);
-      if (y == TowerConsts.LOBBY_FLOOR) {
+    for (int localFloorNum = 1; localFloorNum < size.y - 1; localFloorNum++) {
+      int worldFloorNum = (int) (position.y + localFloorNum + 1);
+      String labelText = String.valueOf(worldFloorNum - TowerConsts.LOBBY_FLOOR);
+      if (worldFloorNum == TowerConsts.LOBBY_FLOOR) {
         labelText = "L";
-      } else if (y < TowerConsts.LOBBY_FLOOR) {
-        labelText = "B" + (TowerConsts.LOBBY_FLOOR - y);
+      } else if (worldFloorNum < TowerConsts.LOBBY_FLOOR) {
+        labelText = "B" + (TowerConsts.LOBBY_FLOOR - worldFloorNum);
       }
 
       textBounds = floorFont.getBounds(labelText);
       floorFont.setColor(1, 1, 1, 0.5f);
-      floorFont.draw(spriteBatch, labelText, localPoint.x + ((TowerConsts.GRID_UNIT_SIZE - textBounds.width) / 2), localPoint.y + ((TowerConsts.GRID_UNIT_SIZE - textBounds.height) / 2));
+      floorFont.setScale(getGridScale());
+      floorFont.draw(spriteBatch, labelText, worldPosition.x + ((TowerConsts.GRID_UNIT_SIZE - textBounds.width) / 2), worldPosition.y + (scaledGridUnit() * localFloorNum) + ((TowerConsts.GRID_UNIT_SIZE - textBounds.height) / 2));
     }
 
     elevatorCar.setColor(renderColor);
     elevatorCar.draw(spriteBatch);
 
-    localPoint.add(0, 1);
+    localPoint.add(0, scaledGridUnit() * (size.y - 3));
     if (selectedResizeHandle == ResizeHandle.TOP) {
-      topSprite.setColor(Colors.ICS_BLUE);
+      topSprite.setColor(Color.CYAN);
     } else {
       topSprite.setColor(renderColor);
     }
-    topSprite.setPosition(localPoint.x, localPoint.y);
+    topSprite.setPosition(localPoint.x, localPoint.y + scaledGridUnit());
     topSprite.draw(spriteBatch);
   }
 
@@ -130,11 +136,13 @@ public class Elevator extends Transit {
   }
 
   @Override
-  public boolean touchDown(Vector2 gameGridPoint) {
-    if (gameGridPoint.y == position.y + size.y - 1) {
+  public boolean touchDown(Vector2 gameGridPoint, Vector2 worldPoint, int pointer) {
+    if (topSprite.getBoundingRectangle().contains(worldPoint.x, worldPoint.y)) {
       selectedResizeHandle = ResizeHandle.TOP;
-    } else if (gameGridPoint.y == position.y) {
+      anchorPoint = position.cpy();
+    } else if (bottomSprite.getBoundingRectangle().contains(worldPoint.x, worldPoint.y)) {
       selectedResizeHandle = ResizeHandle.BOTTOM;
+      anchorPoint = position.cpy().add(size);
     } else {
       selectedResizeHandle = null;
     }
@@ -144,6 +152,10 @@ public class Elevator extends Transit {
 
   @Override
   public boolean touchUp() {
+    if (selectedResizeHandle != null) {
+      broadcastEvent(new ElevatorHeightChangeEvent(this));
+    }
+
     selectedResizeHandle = null;
 
     return false;
@@ -154,33 +166,30 @@ public class Elevator extends Transit {
     GridPoint prevSize = size.cpy();
     GridPoint prevPosition = position.cpy();
 
-    float newSize = -1;
-    float newPosY = -1;
-    if (selectedResizeHandle == ResizeHandle.TOP) {
-      newSize = Math.max(gridPointDelta.y - position.y, 3);
-    } else if (selectedResizeHandle == ResizeHandle.BOTTOM) {
-      newPosY = gridPointDelta.y;
-      newSize = position.y + size.y - gridPointDelta.y;
+    switch (selectedResizeHandle) {
+      case BOTTOM:
+        position.y = gridPointAtFinger.y;
+        size.y = anchorPoint.y - position.y + 1;
+        checkSize();
+        position.y = anchorPoint.y - size.y;
+        break;
+
+      case TOP:
+        size.y = gridPointAtFinger.y - anchorPoint.y;
+        checkSize();
+        break;
     }
 
-    if (newSize < 3 || newSize > 17) {
-      return true;
-    }
+    checkSize();
 
-    newSize = Math.max(newSize, 3);
-    newSize = Math.min(newSize, 17);
-
-    if (newSize != -1 && newSize != size.y) {
-      size.y = newSize;
-    }
-
-    if (newPosY != -1) {
-      position.y = Math.max(newPosY, 0);
-    }
-
-    broadcastEvent(new ElevatorHeightChangeEvent(this, prevSize, prevPosition));
+    updateWorldCoordinates();
 
     return true;
+  }
+
+  private void checkSize() {
+    size.y = Math.max(size.y, 3);
+    size.y = Math.min(size.y, 17);
   }
 
   @Override
@@ -199,5 +208,14 @@ public class Elevator extends Transit {
 
   public ElevatorCar getCar() {
     return elevatorCar;
+  }
+
+  public void setWrap(Sprite shaftSprite) {
+    Texture texture = shaftSprite.getTexture();
+
+    shaftSprite.setV(0f);
+    shaftSprite.setV2(shaftSprite.getHeight() / texture.getHeight());
+
+    texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
   }
 }

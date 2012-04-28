@@ -27,8 +27,6 @@ import static com.happydroids.droidtowers.gui.ResponseType.NEGATIVE;
 import static com.happydroids.droidtowers.gui.ResponseType.POSITIVE;
 
 public class SellTool extends ToolBase {
-  private GameGrid gameGrid;
-
   public SellTool(OrthographicCamera camera, List<GameLayer> gameLayers, GameGrid gameGrid) {
     super(camera, gameLayers, gameGrid);
   }

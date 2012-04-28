@@ -5,10 +5,9 @@
 package com.happydroids.droidtowers.events;
 
 import com.happydroids.droidtowers.entities.GridObject;
-import com.happydroids.droidtowers.math.GridPoint;
 
-public class ElevatorHeightChangeEvent extends GridObjectBoundsChangeEvent {
-  public ElevatorHeightChangeEvent(GridObject gridObject, GridPoint prevSize, GridPoint prevPosition) {
-    super(gridObject, prevSize, prevPosition);
+public class ElevatorHeightChangeEvent extends GridObjectEvent {
+  public ElevatorHeightChangeEvent(GridObject gridObject) {
+    super(gridObject);
   }
 }

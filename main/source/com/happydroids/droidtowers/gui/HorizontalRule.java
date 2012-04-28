@@ -26,7 +26,7 @@ public class HorizontalRule extends Widget {
     this.desiredColor = desiredColor;
     this.desiredHeight = desiredHeight;
 
-    texture = TowerAssetManager.texture("hud/horizontal-rule.png");
+    texture = TowerAssetManager.texture(TowerAssetManager.WHITE_SWATCH);
   }
 
   public HorizontalRule(int height) {

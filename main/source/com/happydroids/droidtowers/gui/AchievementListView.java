@@ -30,7 +30,7 @@ public class AchievementListView extends ScrollableTowerWindow {
   public AchievementListView(Stage stage, Skin skin) {
     super("Achievements", stage, skin);
 
-    itemSelectBackground = TowerAssetManager.ninePatch("hud/horizontal-rule.png", Colors.ICS_BLUE);
+    itemSelectBackground = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.ICS_BLUE);
 
     defaults();
 

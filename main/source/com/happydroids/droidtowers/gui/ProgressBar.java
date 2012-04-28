@@ -28,7 +28,7 @@ class ProgressBar extends Widget {
 
     padding = 3;
 
-    patch = new NinePatch(TowerAssetManager.texture("hud/horizontal-rule.png"));
+    patch = new NinePatch(TowerAssetManager.texture(TowerAssetManager.WHITE_SWATCH));
 
     valueLabel = FontManager.Default.makeLabel("100%");
     valueLabel.setAlignment(Align.CENTER);
