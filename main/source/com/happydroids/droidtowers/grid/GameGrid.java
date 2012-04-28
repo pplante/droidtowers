@@ -40,7 +40,7 @@ public class GameGrid extends GameLayer {
   protected GridPositionCache positionCache;
   private Vector2 gridOrigin;
   protected Rectangle worldBounds;
-  protected Vector2 gridScale;
+  protected float gridScale;
 
   public GameGrid(OrthographicCamera camera) {
     this();
@@ -56,13 +56,13 @@ public class GameGrid extends GameLayer {
 
     gridSize = new Vector2(8, 8);
     gridOrigin = new Vector2();
-    gridScale = new Vector2(1, 1);
+    gridScale = 1f;
 
     updateWorldSize();
   }
 
   public void updateWorldSize() {
-    worldSize = new Vector2(gridSize.x * TowerConsts.GRID_UNIT_SIZE * gridScale.x, gridSize.y * TowerConsts.GRID_UNIT_SIZE * gridScale.y);
+    worldSize = new Vector2(gridSize.x * TowerConsts.GRID_UNIT_SIZE * gridScale, gridSize.y * TowerConsts.GRID_UNIT_SIZE * gridScale);
     worldBounds = new Rectangle(gridOrigin.x, gridOrigin.y, worldSize.x, worldSize.y);
     events().post(new GameGridResizeEvent(this));
   }
@@ -275,15 +275,11 @@ public class GameGrid extends GameLayer {
     return worldBounds;
   }
 
-  public Vector2 getGridScale() {
+  public float getGridScale() {
     return gridScale;
   }
 
-  public void setGridScale(Vector2 gridScale) {
+  public void setGridScale(float gridScale) {
     this.gridScale = gridScale;
-  }
-
-  protected void setGridScale(float scaleX, float scaleY) {
-    gridScale.set(scaleX, scaleY);
   }
 }

@@ -26,11 +26,11 @@ public class Lobby extends Room {
 
     leftCap = new Sprite(atlas.findRegion("lobby-left"));
     leftCap.setOrigin(0, 0);
-    leftCap.setScale(getGridScale().x, getGridScale().y);
+    leftCap.setScale(getGridScale(), getGridScale());
 
     rightCap = new Sprite(atlas.findRegion("lobby-right"));
     rightCap.setOrigin(0, 0);
-    rightCap.setScale(getGridScale().x, getGridScale().y);
+    rightCap.setScale(getGridScale(), getGridScale());
   }
 
   @Override
@@ -46,10 +46,10 @@ public class Lobby extends Room {
     GridPoint left = getPosition().cpy();
     left.sub(2, 0);
 
-    Vector2 gridScale = getGridScale();
+    float gridScale = getGridScale();
     if (gameGrid.positionCache().getObjectsAt(left, TWO_WIDE).size() == 0) {
       leftCap.setColor(renderColor);
-      leftCap.setPosition(worldPosition.x - (leftCap.getWidth() * gridScale.x), worldPosition.y);
+      leftCap.setPosition(worldPosition.x - (leftCap.getWidth() * gridScale), worldPosition.y);
       leftCap.draw(spriteBatch);
     }
 
@@ -60,7 +60,7 @@ public class Lobby extends Room {
       rightCap.setColor(renderColor);
       rightCap.setOrigin(0, 0);
       rightCap.setPosition(worldPosition.x + worldSize.x, worldPosition.y);
-      rightCap.setScale(gridScale.x, gridScale.y);
+      rightCap.setScale(gridScale);
       rightCap.draw(spriteBatch);
     }
   }

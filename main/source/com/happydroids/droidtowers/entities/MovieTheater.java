@@ -40,8 +40,7 @@ public class MovieTheater extends CommercialSpace {
     }
 
     Vector2 worldCenter = getWorldCenter();
-    Vector2 gridScale = getGridScale();
-    spriteBatch.draw(avengersMovie.getKeyFrame(animationTime, true), worldCenter.x - 53.5f * gridScale.x, worldCenter.y - 19 * gridScale.y, 107 * gridScale.x, 44 * gridScale.y);
+    spriteBatch.draw(avengersMovie.getKeyFrame(animationTime, true), worldCenter.x - 53.5f * getGridScale(), worldCenter.y - 19 * getGridScale(), 107 * getGridScale(), 44 * getGridScale());
 
     super.render(spriteBatch, renderTintColor);
   }

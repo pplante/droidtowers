@@ -48,7 +48,7 @@ public abstract class GridObject {
     position = new GridPoint(0, 0);
     worldPosition = new Vector2();
     size = new GridPoint(gridObjectType.getWidth(), gridObjectType.getHeight());
-    worldSize = new Vector2(size.getWorldX(gameGrid) * gameGrid.getGridScale().x, size.getWorldY(gameGrid) * gameGrid.getGridScale().y);
+    worldSize = new Vector2(size.getWorldX(gameGrid) * gameGrid.getGridScale(), size.getWorldY(gameGrid) * gameGrid.getGridScale());
     bounds = new Bounds2d(position, size);
     placementState = GridObjectPlacementState.INVALID;
     actions = new HashSet<Action>();
@@ -113,7 +113,7 @@ public abstract class GridObject {
 
   public void setSize(float x, float y) {
     size.set(x, y);
-    worldSize.set(size.getWorldX(gameGrid) * gameGrid.getGridScale().x, size.getWorldY(gameGrid) * gameGrid.getGridScale().y);
+    worldSize.set(size.getWorldX(gameGrid) * gameGrid.getGridScale(), size.getWorldY(gameGrid) * gameGrid.getGridScale());
     updateWorldCenterAndTop();
   }
 
@@ -130,7 +130,7 @@ public abstract class GridObject {
 
     position.set(x, y);
     clampPosition();
-    worldPosition.set(gameGrid.getGridOrigin().x + (position.getWorldX(gameGrid) * gameGrid.getGridScale().x), gameGrid.getGridOrigin().y + (position.getWorldY(gameGrid) * gameGrid.getGridScale().y));
+    worldPosition.set(gameGrid.getGridOrigin().x + (position.getWorldX(gameGrid) * gameGrid.getGridScale()), gameGrid.getGridOrigin().y + (position.getWorldY(gameGrid) * gameGrid.getGridScale()));
     updateWorldCenterAndTop();
     updatePlacementStatus();
 
@@ -289,7 +289,7 @@ public abstract class GridObject {
     return desirability;
   }
 
-  protected Vector2 getGridScale() {
+  protected float getGridScale() {
     return gameGrid.getGridScale();
   }
 }

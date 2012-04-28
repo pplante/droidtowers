@@ -41,6 +41,7 @@ public class Elevator extends Transit {
 
     size.set(1, 3);
     topSprite = elevatorAtlas.createSprite("elevator/top");
+    topSprite.setScale(getGridScale());
     bottomSprite = elevatorAtlas.createSprite("elevator/bottom");
     shaftSprite = elevatorAtlas.createSprite("elevator/shaft");
     emptyShaftSprite = elevatorAtlas.createSprite("elevator/empty");
@@ -77,9 +78,10 @@ public class Elevator extends Transit {
     bottomSprite.draw(spriteBatch);
 
     Sprite shaftToRender = drawShaft ? shaftSprite : emptyShaftSprite;
+    BitmapFont.TextBounds textBounds;
     shaftToRender.setColor(renderColor);
     for (int y = (int) position.y + 1; y < position.y + size.y - 1; y++) {
-      localPoint.add(0, TowerConsts.GRID_UNIT_SIZE * getGridScale().y);
+      localPoint.add(0, scaledGridUnit());
 
       shaftToRender.setPosition(localPoint.x, localPoint.y);
       shaftToRender.draw(spriteBatch);
@@ -91,7 +93,7 @@ public class Elevator extends Transit {
         labelText = "B" + (TowerConsts.LOBBY_FLOOR - y);
       }
 
-      BitmapFont.TextBounds textBounds = floorFont.getBounds(labelText);
+      textBounds = floorFont.getBounds(labelText);
       floorFont.setColor(1, 1, 1, 0.5f);
       floorFont.draw(spriteBatch, labelText, localPoint.x + ((TowerConsts.GRID_UNIT_SIZE - textBounds.width) / 2), localPoint.y + ((TowerConsts.GRID_UNIT_SIZE - textBounds.height) / 2));
     }
@@ -107,6 +109,10 @@ public class Elevator extends Transit {
     }
     topSprite.setPosition(localPoint.x, localPoint.y);
     topSprite.draw(spriteBatch);
+  }
+
+  private float scaledGridUnit() {
+    return TowerConsts.GRID_UNIT_SIZE * getGridScale();
   }
 
   @Override

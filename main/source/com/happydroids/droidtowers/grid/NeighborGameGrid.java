@@ -17,7 +17,7 @@ public class NeighborGameGrid extends GameGrid {
     super();
 
     setGridOrigin(gridOrigin);
-    setGridScale(0.3f, 0.3f);
+    setGridScale(0.3f);
     gameGridRenderer = new GameGridRenderer(this, camera);
   }
 
