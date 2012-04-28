@@ -31,12 +31,9 @@ public class PlacementTool extends ToolBase {
   private boolean isDraggingGridObject;
   private PurchaseManager purchaseManager;
   private final InputCallback cancelPlacementInputCallback;
-  private final GameGrid gameGrid;
 
-  public PlacementTool(OrthographicCamera camera, List<GameLayer> gameLayers) {
-    super(camera, gameLayers);
-
-    gameGrid = getGameGrid();
+  public PlacementTool(OrthographicCamera camera, List<GameLayer> gameLayers, GameGrid gameGrid) {
+    super(camera, gameLayers, gameGrid);
 
     cancelPlacementInputCallback = new InputCallback() {
       public boolean run(float timeDelta) {

@@ -21,17 +21,11 @@ public class GestureDelegater implements GestureListener {
   private GameGrid gameGrid;
   private List<GameLayer> gameLayers;
 
-  public GestureDelegater(OrthographicCamera camera, List<GameLayer> gameLayers) {
+  public GestureDelegater(OrthographicCamera camera, List<GameLayer> gameLayers, GameGrid gameGrid) {
     this.gameLayers = gameLayers;
+    this.gameGrid = gameGrid;
 
-    for (GameLayer gameLayer : gameLayers) {
-      if (gameLayer instanceof GameGrid) {
-        gameGrid = (GameGrid) gameLayer;
-        break;
-      }
-    }
-
-    CameraController.initialize(camera, gameGrid);
+    CameraController.initialize(camera, this.gameGrid);
     this.cameraController = CameraController.instance();
   }
 
@@ -46,7 +40,7 @@ public class GestureDelegater implements GestureListener {
       currentTool.cleanup();
     }
 
-    currentTool = tool.newInstance(camera, gameLayers);
+    currentTool = tool.newInstance(camera, gameLayers, gameGrid);
     beforeSwitchToolRunnable = switchToolRunnable;
   }
 

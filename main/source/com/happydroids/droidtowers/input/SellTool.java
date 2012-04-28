@@ -29,10 +29,8 @@ import static com.happydroids.droidtowers.gui.ResponseType.POSITIVE;
 public class SellTool extends ToolBase {
   private GameGrid gameGrid;
 
-  public SellTool(OrthographicCamera camera, List<GameLayer> gameLayers) {
-    super(camera, gameLayers);
-
-    gameGrid = getGameGrid();
+  public SellTool(OrthographicCamera camera, List<GameLayer> gameLayers, GameGrid gameGrid) {
+    super(camera, gameLayers, gameGrid);
   }
 
   public boolean touchDown(int x, int y, int pointer) {

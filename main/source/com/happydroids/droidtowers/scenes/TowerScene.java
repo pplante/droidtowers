@@ -103,7 +103,7 @@ public class TowerScene extends Scene {
     gameLayers.add(gameGrid);
     gameLayers.add(AvatarLayer.initialize(gameGrid));
 
-    gestureDelegater = new GestureDelegater(camera, gameLayers);
+    gestureDelegater = new GestureDelegater(camera, gameLayers, gameGrid);
     gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, gestureDelegater);
 
     gridSoundDispatcher = new GameGridSoundDispatcher();

@@ -9,12 +9,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.happydroids.droidtowers.entities.GameLayer;
+import com.happydroids.droidtowers.grid.GameGrid;
 
 import java.util.List;
 
 public class PickerTool extends ToolBase {
-  public PickerTool(OrthographicCamera camera, List<GameLayer> gameLayers) {
-    super(camera, gameLayers);
+  public PickerTool(OrthographicCamera camera, List<GameLayer> gameLayers, GameGrid gameGrid) {
+    super(camera, gameLayers, gameGrid);
   }
 
   @Override

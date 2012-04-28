@@ -125,7 +125,7 @@ public class GameGrid extends GameLayer {
     Rectangle boundsOfGridObjectToCheck = gridObject.getBounds();
     for (GridObject child : objects) {
       if (child != gridObject) {
-        if (child.getBounds().overlaps(boundsOfGridObjectToCheck) && !child.canShareSpace(gridObject)) {
+        if (child.getBounds().contains(boundsOfGridObjectToCheck) && !child.canShareSpace(gridObject)) {
           return false;
         }
       }

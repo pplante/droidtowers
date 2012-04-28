@@ -9,27 +9,18 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.grid.GameGrid;
-import com.happydroids.droidtowers.grid.NeighborGameGrid;
 
 import java.util.List;
 
 public class ToolBase implements GestureDetector.GestureListener {
   protected final OrthographicCamera camera;
   protected final List<GameLayer> gameLayers;
+  protected final GameGrid gameGrid;
 
-  public ToolBase(OrthographicCamera camera, List<GameLayer> gameLayers) {
+  public ToolBase(OrthographicCamera camera, List<GameLayer> gameLayers, GameGrid gameGrid) {
     this.camera = camera;
     this.gameLayers = gameLayers;
-  }
-
-  public GameGrid getGameGrid() {
-    for (GameLayer gameLayer : gameLayers) {
-      if ((gameLayer instanceof GameGrid) && !(gameLayer instanceof NeighborGameGrid)) {
-        return (GameGrid) gameLayer;
-      }
-    }
-
-    return null;
+    this.gameGrid = gameGrid;
   }
 
   public boolean touchDown(int x, int y, int pointer) {
