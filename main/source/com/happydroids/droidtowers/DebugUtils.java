@@ -8,9 +8,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.scenes.SplashScene;
-import com.happydroids.droidtowers.scenes.TowerScene;
 
 import static com.happydroids.HappyDroidConsts.DEBUG;
+import static com.happydroids.droidtowers.SplashSceneStates.FULL_LOAD;
 
 public class DebugUtils {
   public static void loadFirstGameFound(VarArgRunnable loadGameRunnable) {
@@ -42,7 +42,7 @@ public class DebugUtils {
     GameSave gameSave = new GameSave("DO NOT SAVE!", DifficultyLevel.EASY);
     gameSave.setNewGame(newGame);
     gameSave.disableSaving();
-    TowerGame.changeScene(SplashScene.class, SplashSceneStates.FULL_LOAD, gameSave);
+    TowerGame.changeScene(SplashScene.class, FULL_LOAD, gameSave);
   }
 
   private static void verifyEnvironment() {
@@ -57,7 +57,7 @@ public class DebugUtils {
     loadFirstGameFound(new VarArgRunnable() {
       public void run(Object... args) {
         try {
-          TowerGame.changeScene(TowerScene.class, GameSave.readFile((FileHandle) args[0]));
+          TowerGame.changeScene(SplashScene.class, FULL_LOAD, GameSave.readFile((FileHandle) args[0]));
         } catch (Exception e) {
           e.printStackTrace();
         }

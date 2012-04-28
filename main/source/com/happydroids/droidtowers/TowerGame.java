@@ -29,6 +29,7 @@ import com.happydroids.droidtowers.input.CameraControllerAccessor;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.platform.PlatformBrowserUtil;
+import com.happydroids.droidtowers.platform.PlatformProtocolHandler;
 import com.happydroids.droidtowers.scenes.MainMenuScene;
 import com.happydroids.droidtowers.scenes.Scene;
 import com.happydroids.droidtowers.scenes.SplashScene;
@@ -51,6 +52,7 @@ public class TowerGame implements ApplicationListener {
   private static Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
   private static PlatformBrowserUtil platformBrowserUtil;
   private static LinkedList<Scene> pausedScenes;
+  private PlatformProtocolHandler protocolHandler;
 
   public TowerGame() {
     audioEnabled = true;
@@ -89,7 +91,6 @@ public class TowerGame implements ApplicationListener {
         TowerGameService.instance().registerDevice();
       }
     }.run();
-
 
     RoomTypeFactory.instance();
     CommercialTypeFactory.instance();
@@ -151,7 +152,12 @@ public class TowerGame implements ApplicationListener {
     Scene.setCamera(camera);
     Scene.setSpriteBatch(spriteBatch);
 
-    changeScene(SplashScene.class, SplashSceneStates.PRELOAD_ONLY);
+
+    if (protocolHandler.hasUri()) {
+      DebugUtils.loadFirstGameFound();
+    } else {
+      changeScene(SplashScene.class, SplashSceneStates.PRELOAD_ONLY);
+    }
   }
 
   public void render() {
@@ -305,5 +311,9 @@ public class TowerGame implements ApplicationListener {
 
   public static PlatformBrowserUtil getPlatformBrowserUtil() {
     return platformBrowserUtil;
+  }
+
+  public void setProtocolHandler(PlatformProtocolHandler protocolHandler) {
+    this.protocolHandler = protocolHandler;
   }
 }

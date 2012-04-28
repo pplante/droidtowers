@@ -7561,9 +7561,9 @@ com.happydroids.platform.DesktopUncaughtExceptionHandler -> c:
     java.lang.String TAG -> a
     void uncaughtException(java.lang.Thread,java.lang.Throwable) -> uncaughtException
 com.happydroids.platform.DesktopUncaughtExceptionHandler$1 -> d:
-    java.lang.Throwable val$throwable -> a
-    com.happydroids.platform.DesktopUncaughtExceptionHandler this$0 -> b
-    void run() -> run
+    com.happydroids.platform.DesktopUncaughtExceptionHandler this$0 -> a
+    void onError(org.apache.http.HttpResponse,int,com.happydroids.server.HappyDroidServiceObject) -> onError
+    void onSuccess(org.apache.http.HttpResponse,com.happydroids.server.HappyDroidServiceObject) -> onSuccess
 com.happydroids.platform.HappyDroidUncaughtExceptionHandler -> e:
     java.lang.StringBuilder generateExceptionErrorString(java.lang.Throwable) -> a
 com.happydroids.platform.Platform -> f:
@@ -7642,7 +7642,7 @@ com.happydroids.server.HappyDroidService -> com.happydroids.server.HappyDroidSer
     void withNetworkConnection(java.lang.Runnable) -> withNetworkConnection
     boolean haveNetworkConnection() -> haveNetworkConnection
     java.lang.String getDeviceId() -> getDeviceId
-    boolean hasAuthenticated() -> hasAuthenticated
+    boolean isAuthenticated() -> isAuthenticated
     java.lang.String access$000() -> access$000
     java.util.Set access$100(com.happydroids.server.HappyDroidService) -> access$100
 com.happydroids.server.HappyDroidService$1 -> com.happydroids.server.HappyDroidService$1:
@@ -7681,7 +7681,7 @@ com.happydroids.server.HappyDroidServiceObject -> com.happydroids.server.HappyDr
     void save() -> save
     void save(com.happydroids.server.ApiRunnable) -> save
     void saveBlocking() -> saveBlocking
-    void saveBlocking(com.happydroids.server.ApiRunnable) -> saveBlocking
+    org.apache.http.HttpResponse saveBlocking(com.happydroids.server.ApiRunnable) -> saveBlocking
     boolean beforeSaveValidation(com.happydroids.server.ApiRunnable) -> beforeSaveValidation
     void copyValuesFromResponse(org.apache.http.HttpResponse) -> copyValuesFromResponse
     void copyValueFromField(com.happydroids.server.HappyDroidServiceObject,java.lang.reflect.Field) -> copyValueFromField
@@ -7693,6 +7693,11 @@ com.happydroids.server.HappyDroidServiceObject$2 -> com.happydroids.server.Happy
     com.happydroids.server.ApiRunnable val$afterSave -> val$afterSave
     com.happydroids.server.HappyDroidServiceObject this$0 -> this$0
     void run() -> run
+com.happydroids.server.HappyDroidServiceObject$2$1 -> com.happydroids.server.HappyDroidServiceObject$2$1:
+    org.apache.http.HttpResponse httpResponse -> httpResponse
+    com.happydroids.server.HappyDroidServiceObject$2 this$1 -> this$1
+    void execute() -> execute
+    void afterExecute() -> afterExecute
 com.happydroids.server.HttpStatusCode -> com.happydroids.server.HttpStatusCode:
     int Success -> Success
     int ClientClosedRequest -> ClientClosedRequest
@@ -7871,6 +7876,7 @@ com.happydroids.utils.BackgroundTask -> h:
     void setUncaughtExceptionHandler(java.lang.Thread$UncaughtExceptionHandler) -> setUncaughtExceptionHandler
     java.lang.Thread$UncaughtExceptionHandler access$000() -> access$000
 com.happydroids.utils.BackgroundTask$1 -> i:
+    com.happydroids.utils.BackgroundTask this$0 -> a
     java.lang.Thread newThread(java.lang.Runnable) -> newThread
 com.happydroids.utils.BackgroundTask$2 -> j:
     com.happydroids.utils.BackgroundTask this$0 -> a

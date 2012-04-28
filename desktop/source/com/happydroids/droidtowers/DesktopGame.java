@@ -8,11 +8,16 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.platform.DesktopBrowserUtil;
+import com.happydroids.droidtowers.platform.PlatformProtocolHandler;
+import com.happydroids.droidtowers.platform.PlatformProtocolHandlerFactory;
 import com.happydroids.platform.DesktopUncaughtExceptionHandler;
 import com.happydroids.platform.Platform;
 
 public class DesktopGame {
   public static void main(String[] args) {
+    PlatformProtocolHandler protocolHandler = PlatformProtocolHandlerFactory.newInstance();
+    protocolHandler.initialize(args);
+
     TowerGameService.setDeviceOSName(Platform.getOSType().name());
     TowerGameService.setDeviceOSVersion(System.getProperty("os.version"));
 
@@ -29,6 +34,7 @@ public class DesktopGame {
     TowerGame towerGame = new TowerGame();
     towerGame.setUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
     towerGame.setPlatformBrowserUtil(new DesktopBrowserUtil());
+    towerGame.setProtocolHandler(protocolHandler);
 
     new LwjglApplication(new LwjglApplicationShim(towerGame), config);
   }
