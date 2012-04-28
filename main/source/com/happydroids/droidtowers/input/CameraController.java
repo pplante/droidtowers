@@ -17,7 +17,6 @@ import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
-import com.happydroids.droidtowers.gui.events.CameraControllerEvent;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
 public class CameraController implements GestureDetector.GestureListener {
@@ -147,7 +146,7 @@ public class CameraController implements GestureDetector.GestureListener {
     }
 
     if (!lastCameraPosition.equals(camera.position)) {
-      events.post(new CameraControllerEvent(camera.position, lastCameraPosition.sub(camera.position), camera.zoom));
+//      events.post(new CameraControllerEvent(camera.position, lastCameraPosition.sub(camera.position), camera.zoom));
       lastCameraPosition.set(camera.position);
     }
   }

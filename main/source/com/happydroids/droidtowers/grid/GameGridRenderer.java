@@ -36,9 +36,9 @@ import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import static com.happydroids.droidtowers.graphics.Overlays.POPULATION_LEVEL;
 
 public class GameGridRenderer extends GameLayer {
-  private GameGrid gameGrid;
+  protected GameGrid gameGrid;
   protected final OrthographicCamera camera;
-  private boolean shouldRenderGridLines;
+  protected boolean shouldRenderGridLines;
   protected final ShapeRenderer shapeRenderer;
   private Function<GridObject, Color> employmentLevelOverlayFunc;
   private Function<GridObject, Color> populationLevelOverlayFunc;
@@ -49,6 +49,7 @@ public class GameGridRenderer extends GameLayer {
   private List<GridObject> objectsRenderOrder;
   private List<TransitLine> transitLines;
   private boolean shouldRenderTransitLines;
+  protected Color renderTintColor;
 
   public GameGridRenderer(GameGrid gameGrid, OrthographicCamera camera) {
     this.gameGrid = gameGrid;
@@ -56,6 +57,7 @@ public class GameGridRenderer extends GameLayer {
 
     gameGrid.events().register(this);
 
+    renderTintColor = Color.WHITE;
     shouldRenderGridLines = true;
     shapeRenderer = new ShapeRenderer();
 
@@ -82,6 +84,7 @@ public class GameGridRenderer extends GameLayer {
 
   @Override
   public void render(SpriteBatch spriteBatch) {
+    shapeRenderer.setProjectionMatrix(camera.combined);
     if (shouldRenderGridLines) {
       renderGridLines();
     }
@@ -163,7 +166,7 @@ public class GameGridRenderer extends GameLayer {
     spriteBatch.begin();
 
     for (GridObject child : objectsRenderOrder) {
-      child.render(spriteBatch);
+      child.render(spriteBatch, renderTintColor);
     }
 
     spriteBatch.end();
@@ -255,5 +258,14 @@ public class GameGridRenderer extends GameLayer {
 
   public void toggleTransitLines() {
     shouldRenderTransitLines = !shouldRenderTransitLines;
+  }
+
+
+  public void setRenderTintColor(Color renderTintColor) {
+    this.renderTintColor = renderTintColor;
+  }
+
+  public Color getRenderTintColor() {
+    return renderTintColor;
   }
 }

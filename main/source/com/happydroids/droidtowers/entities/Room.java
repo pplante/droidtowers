@@ -17,6 +17,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.grid.NeighborGameGrid;
 import com.happydroids.droidtowers.types.ProviderType;
 import com.happydroids.droidtowers.types.RoomType;
 import com.happydroids.droidtowers.utils.Random;
@@ -92,10 +93,10 @@ public class Room extends GridObject {
   }
 
   @Override
-  public void render(SpriteBatch spriteBatch) {
-    super.render(spriteBatch);
+  public void render(SpriteBatch spriteBatch, Color renderTintColor) {
+    super.render(spriteBatch, renderTintColor);
 
-    if (!connectedToTransport) {
+    if (!connectedToTransport && !(gameGrid instanceof NeighborGameGrid)) {
       decalSprite.setPosition(sprite.getX(), sprite.getY());
       decalSprite.draw(spriteBatch);
     }

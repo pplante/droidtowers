@@ -30,6 +30,7 @@ import com.happydroids.droidtowers.jackson.TowerTypeIdResolver;
 import sk.seges.acris.json.server.migrate.JacksonTransformer;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -162,15 +163,19 @@ public class GameSave {
   }
 
   public static GameSave readFile(FileHandle fileHandle) throws Exception {
+    return readFile(fileHandle.read(), fileHandle.name());
+  }
+
+  public static GameSave readFile(InputStream read, String fileName) {
     try {
-      JacksonTransformer transformer = new JacksonTransformer(fileHandle.read(), fileHandle.name());
+      JacksonTransformer transformer = new JacksonTransformer(read, fileName);
       transformer.addTransform(Migration_GameSave_UnhappyrobotToDroidTowers.class);
 
       byte[] bytes = transformer.process();
 
       return TowerGameService.instance().getObjectMapper().readValue(bytes, GameSave.class);
     } catch (Exception e) {
-      throw new RuntimeException("There was a problem parsing: " + fileHandle.name(), e);
+      throw new RuntimeException("There was a problem parsing: " + fileName, e);
     }
   }
 
@@ -200,5 +205,9 @@ public class GameSave {
 
   public void setNewGame(boolean newGame) {
     this.newGame = newGame;
+  }
+
+  public boolean hasGridObjects() {
+    return gridObjects != null && !gridObjects.isEmpty();
   }
 }

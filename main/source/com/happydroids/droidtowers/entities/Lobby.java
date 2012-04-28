@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.entities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -24,7 +25,12 @@ public class Lobby extends Room {
     TextureAtlas atlas = roomType.getTextureAtlas();
 
     leftCap = new Sprite(atlas.findRegion("lobby-left"));
+    leftCap.setOrigin(0, 0);
+    leftCap.setScale(getGridScale().x, getGridScale().y);
+
     rightCap = new Sprite(atlas.findRegion("lobby-right"));
+    rightCap.setOrigin(0, 0);
+    rightCap.setScale(getGridScale().x, getGridScale().y);
   }
 
   @Override
@@ -33,14 +39,17 @@ public class Lobby extends Room {
   }
 
   @Override
-  public void render(SpriteBatch spriteBatch) {
-    super.render(spriteBatch);
+  public void render(SpriteBatch spriteBatch, Color renderTintColor) {
+    super.render(spriteBatch, renderTintColor);
+
 //TODO: Make this better?
     GridPoint left = getPosition().cpy();
     left.sub(2, 0);
 
+    Vector2 gridScale = getGridScale();
     if (gameGrid.positionCache().getObjectsAt(left, TWO_WIDE).size() == 0) {
-      leftCap.setPosition(getSprite().getX() - leftCap.getWidth(), left.getWorldY(gameGrid));
+      leftCap.setColor(renderColor);
+      leftCap.setPosition(worldPosition.x - (leftCap.getWidth() * gridScale.x), worldPosition.y);
       leftCap.draw(spriteBatch);
     }
 
@@ -48,7 +57,10 @@ public class Lobby extends Room {
     right.add(size.x, 0);
 
     if (gameGrid.positionCache().getObjectsAt(right, TWO_WIDE).size() == 0) {
-      rightCap.setPosition(right.getWorldX(gameGrid), right.getWorldY(gameGrid));
+      rightCap.setColor(renderColor);
+      rightCap.setOrigin(0, 0);
+      rightCap.setPosition(worldPosition.x + worldSize.x, worldPosition.y);
+      rightCap.setScale(gridScale.x, gridScale.y);
       rightCap.draw(spriteBatch);
     }
   }

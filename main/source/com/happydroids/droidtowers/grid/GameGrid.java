@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.grid;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
@@ -36,8 +37,10 @@ public class GameGrid extends GameLayer {
   private GridObject transitGridObjectA;
   private GridObject transitGridObjectB;
   private float highestPoint;
-  private GridPositionCache positionCache;
+  protected GridPositionCache positionCache;
   private Vector2 gridOrigin;
+  protected Rectangle worldBounds;
+  protected Vector2 gridScale;
 
   public GameGrid(OrthographicCamera camera) {
     this();
@@ -53,12 +56,14 @@ public class GameGrid extends GameLayer {
 
     gridSize = new Vector2(8, 8);
     gridOrigin = new Vector2();
+    gridScale = new Vector2(1, 1);
 
     updateWorldSize();
   }
 
   public void updateWorldSize() {
-    worldSize = new Vector2(gridSize.x * TowerConsts.GRID_UNIT_SIZE, gridSize.y * TowerConsts.GRID_UNIT_SIZE);
+    worldSize = new Vector2(gridSize.x * TowerConsts.GRID_UNIT_SIZE * gridScale.x, gridSize.y * TowerConsts.GRID_UNIT_SIZE * gridScale.y);
+    worldBounds = new Rectangle(gridOrigin.x, gridOrigin.y, worldSize.x, worldSize.y);
     events().post(new GameGridResizeEvent(this));
   }
 
@@ -231,8 +236,8 @@ public class GameGrid extends GameLayer {
   }
 
   public GridPoint closestGridPoint(float x, float y) {
-    float gridX = (float) Math.floor((int) x / TowerConsts.GRID_UNIT_SIZE);
-    float gridY = (float) Math.floor((int) y / TowerConsts.GRID_UNIT_SIZE);
+    float gridX = (float) Math.floor((int) (x - gridOrigin.x) / TowerConsts.GRID_UNIT_SIZE);
+    float gridY = (float) Math.floor((int) (y - gridOrigin.y) / TowerConsts.GRID_UNIT_SIZE);
 
     gridX = Math.max(0, Math.min(gridX, gridSize.x - 1));
     gridY = Math.max(0, Math.min(gridY, gridSize.y - 1));
@@ -266,5 +271,19 @@ public class GameGrid extends GameLayer {
     return gridOrigin;
   }
 
+  public Rectangle getWorldBounds() {
+    return worldBounds;
+  }
 
+  public Vector2 getGridScale() {
+    return gridScale;
+  }
+
+  public void setGridScale(Vector2 gridScale) {
+    this.gridScale = gridScale;
+  }
+
+  protected void setGridScale(float scaleX, float scaleY) {
+    gridScale.set(scaleX, scaleY);
+  }
 }

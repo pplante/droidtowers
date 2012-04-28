@@ -5,61 +5,64 @@
 package com.happydroids.droidtowers.grid;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
-
-import static java.lang.Math.abs;
+import com.happydroids.droidtowers.entities.GridObject;
+import com.happydroids.droidtowers.math.GridPoint;
 
 public class NeighborGameGrid extends GameGrid {
+  private Runnable clickListener;
+  private String ownerName;
+
   public NeighborGameGrid(OrthographicCamera camera, Vector2 gridOrigin) {
     super();
+
     setGridOrigin(gridOrigin);
-    gameGridRenderer = new NeighborGameGridRenderer(this, camera);
+    setGridScale(0.3f, 0.3f);
+    gameGridRenderer = new GameGridRenderer(this, camera);
   }
 
-  private class NeighborGameGridRenderer extends GameGridRenderer {
-    private Matrix4 transformMatrix;
-    private float zoom = 4f;
-    private Matrix4 projectionMatrix;
-    private Matrix4 previousTransformMatrix;
-    private Matrix4 previousProjectionMatrix;
+  public void findLimits() {
+    Vector2 min = new Vector2(Float.MAX_VALUE, Float.MAX_VALUE);
+    Vector2 max = new Vector2(Float.MIN_VALUE, Float.MIN_VALUE);
 
-    public NeighborGameGridRenderer(NeighborGameGrid neighborGameGrid, OrthographicCamera camera) {
-      super(neighborGameGrid, camera);
+    for (GridObject gridObject : getObjects()) {
+      GridPoint position = gridObject.getPosition();
+      GridPoint size = gridObject.getSize();
 
-      projectionMatrix = new Matrix4();
-      transformMatrix = new Matrix4();
-      Vector2 gridOrigin = neighborGameGrid.getGridOrigin();
-      transformMatrix.translate(gridOrigin.x, gridOrigin.y, 0f);
+      min.x = Math.min(position.x, min.x);
+      min.y = Math.min(position.y, min.y);
 
-      previousProjectionMatrix = new Matrix4();
-      previousTransformMatrix = new Matrix4();
+      max.x = Math.max(position.x + size.x, max.x);
+      max.y = Math.max(position.y + size.y, max.y);
+    }
+    setGridSize(max.x - min.x, max.y - min.y);
+    updateWorldSize();
+
+    for (GridObject gridObject : getObjects()) {
+      GridPoint position = gridObject.getPosition();
+      gridObject.setPosition(position.x - min.x, position.y - min.y);
+    }
+  }
+
+  public void setClickListener(Runnable clickListener) {
+    this.clickListener = clickListener;
+  }
+
+  @Override
+  public boolean touchDown(Vector2 worldPoint, int pointer) {
+    if (worldBounds.contains(worldPoint.x, worldPoint.y)) {
+      clickListener.run();
+      return true;
     }
 
-    @Override
-    public void render(SpriteBatch spriteBatch) {
-      previousTransformMatrix.set(spriteBatch.getTransformMatrix().cpy());
-      previousProjectionMatrix.set(spriteBatch.getProjectionMatrix().cpy());
+    return false;
+  }
 
-      try {
-        projectionMatrix.setToOrtho(zoom * -camera.viewportWidth / 2,
-                                           zoom * camera.viewportWidth / 2,
-                                           zoom * -camera.viewportHeight / 2,
-                                           zoom * camera.viewportHeight / 2,
-                                           abs(camera.near),
-                                           abs(camera.far));
+  public void setOwnerName(String ownerName) {
+    this.ownerName = ownerName;
+  }
 
-        spriteBatch.setTransformMatrix(transformMatrix);
-        spriteBatch.setProjectionMatrix(projectionMatrix);
-        shapeRenderer.setTransformMatrix(transformMatrix);
-        shapeRenderer.setProjectionMatrix(projectionMatrix);
-
-        super.render(spriteBatch);
-      } finally {
-        spriteBatch.setTransformMatrix(previousTransformMatrix);
-        spriteBatch.setProjectionMatrix(previousProjectionMatrix);
-      }
-    }
+  public String getOwnerName() {
+    return ownerName;
   }
 }

@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.entities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -62,25 +63,25 @@ public class Elevator extends Transit {
   }
 
   @Override
-  public void render(SpriteBatch spriteBatch) {
+  public void render(SpriteBatch spriteBatch, Color renderTintColor) {
     Vector2 renderPosition = position.cpy();
 
-    GridPoint gridPoint = new GridPoint(position.x, position.y);
+    Vector2 localPoint = worldPosition.cpy();
 
     if (selectedResizeHandle == ResizeHandle.BOTTOM) {
       bottomSprite.setColor(Colors.ICS_BLUE);
     } else {
       bottomSprite.setColor(renderColor);
     }
-    bottomSprite.setPosition(gridPoint.getWorldX(gameGrid), gridPoint.getWorldY(gameGrid));
+    bottomSprite.setPosition(localPoint.x, localPoint.y);
     bottomSprite.draw(spriteBatch);
 
     Sprite shaftToRender = drawShaft ? shaftSprite : emptyShaftSprite;
     shaftToRender.setColor(renderColor);
     for (int y = (int) position.y + 1; y < position.y + size.y - 1; y++) {
-      gridPoint.add(0, 1);
+      localPoint.add(0, TowerConsts.GRID_UNIT_SIZE * getGridScale().y);
 
-      shaftToRender.setPosition(gridPoint.getWorldX(gameGrid), gridPoint.getWorldY(gameGrid));
+      shaftToRender.setPosition(localPoint.x, localPoint.y);
       shaftToRender.draw(spriteBatch);
 
       String labelText = String.valueOf(y - TowerConsts.LOBBY_FLOOR + 1);
@@ -92,19 +93,19 @@ public class Elevator extends Transit {
 
       BitmapFont.TextBounds textBounds = floorFont.getBounds(labelText);
       floorFont.setColor(1, 1, 1, 0.5f);
-      floorFont.draw(spriteBatch, labelText, gridPoint.getWorldX(gameGrid) + ((TowerConsts.GRID_UNIT_SIZE - textBounds.width) / 2), gridPoint.getWorldY(gameGrid) + ((TowerConsts.GRID_UNIT_SIZE - textBounds.height) / 2));
+      floorFont.draw(spriteBatch, labelText, localPoint.x + ((TowerConsts.GRID_UNIT_SIZE - textBounds.width) / 2), localPoint.y + ((TowerConsts.GRID_UNIT_SIZE - textBounds.height) / 2));
     }
 
     elevatorCar.setColor(renderColor);
     elevatorCar.draw(spriteBatch);
 
-    gridPoint.add(0, 1);
+    localPoint.add(0, 1);
     if (selectedResizeHandle == ResizeHandle.TOP) {
       topSprite.setColor(Colors.ICS_BLUE);
     } else {
       topSprite.setColor(renderColor);
     }
-    topSprite.setPosition(gridPoint.getWorldX(gameGrid), gridPoint.getWorldY(gameGrid));
+    topSprite.setPosition(localPoint.x, localPoint.y);
     topSprite.draw(spriteBatch);
   }
 

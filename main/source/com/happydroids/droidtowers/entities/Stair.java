@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.entities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -36,7 +37,7 @@ public class Stair extends Transit {
   }
 
   @Override
-  public void render(SpriteBatch spriteBatch) {
+  public void render(SpriteBatch spriteBatch, Color renderTintColor) {
     // stairs need to support overflowing into adjacent cells.
     if (sprite != null) {
       sprite.setColor(renderColor);

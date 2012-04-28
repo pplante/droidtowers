@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.entities;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -29,7 +30,7 @@ public class MovieTheater extends CommercialSpace {
   }
 
   @Override
-  public void render(SpriteBatch spriteBatch) {
+  public void render(SpriteBatch spriteBatch, Color renderTintColor) {
     animationTime += Gdx.graphics.getDeltaTime();
     long currentMillis = System.currentTimeMillis();
     if (avengersTime <= currentMillis) {
@@ -39,9 +40,10 @@ public class MovieTheater extends CommercialSpace {
     }
 
     Vector2 worldCenter = getWorldCenter();
-    spriteBatch.draw(avengersMovie.getKeyFrame(animationTime, true), worldCenter.x - 53.5f, worldCenter.y - 19, 107, 44);
+    Vector2 gridScale = getGridScale();
+    spriteBatch.draw(avengersMovie.getKeyFrame(animationTime, true), worldCenter.x - 53.5f * gridScale.x, worldCenter.y - 19 * gridScale.y, 107 * gridScale.x, 44 * gridScale.y);
 
-    super.render(spriteBatch);
+    super.render(spriteBatch, renderTintColor);
   }
 /*
   @Override

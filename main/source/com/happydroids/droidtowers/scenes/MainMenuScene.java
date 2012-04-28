@@ -9,7 +9,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
@@ -22,7 +21,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.*;
 import com.happydroids.droidtowers.gamestate.GameSave;
-import com.happydroids.droidtowers.gamestate.NonInteractiveGameSave;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.NeighborGameGrid;
@@ -30,6 +28,7 @@ import com.happydroids.droidtowers.gui.*;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
@@ -40,6 +39,7 @@ public class MainMenuScene extends Scene {
 
   private SplashCloudLayer cloudLayer;
   private GameGrid testGrid;
+  private ArrayList<NeighborGameGrid> neighborGrids;
 
   @Override
   public void create(Object... args) {
@@ -141,21 +141,17 @@ public class MainMenuScene extends Scene {
       }
     });
     TowerAssetManager.assetManager().finishLoading();
-    testGrid = new NeighborGameGrid(getCamera(), new Vector2(-800, -400));
 
+//    DebugUtils.createNonSavableGame(true);
     DebugUtils.loadFirstGameFound(new VarArgRunnable() {
       public void run(Object... args) {
         try {
-          final GameSave gameLoaded = NonInteractiveGameSave.readFile((FileHandle) args[0]);
-          gameLoaded.attachToGame(testGrid, null);
+          TowerGame.changeScene(TowerScene.class, GameSave.readFile((FileHandle) args[0]));
         } catch (Exception e) {
           e.printStackTrace();
         }
       }
     });
-
-//    DebugUtils.createNonSavableGame(true);
-//    DebugUtils.loadFirstGameFound();
   }
 
   @Override
@@ -169,10 +165,6 @@ public class MainMenuScene extends Scene {
   @Override
   public void render(float deltaTime) {
     TowerAssetManager.assetManager().update();
-
-    testGrid.update(deltaTime);
-    testGrid.getRenderer().update(deltaTime);
-    testGrid.getRenderer().render(getSpriteBatch());
 
     cloudLayer.update(deltaTime);
     cloudLayer.render(getSpriteBatch());

@@ -103,7 +103,7 @@ public class LoadGameWindow extends ScrollableTowerWindow {
                 .addButton(ResponseType.POSITIVE, "Yes, delete it", new OnClickCallback() {
                   @Override
                   public void onClick(Dialog dialog) {
-//                    savedGameFile.delete();
+                    savedGameFile.delete();
 
                     content.getCell(fileRow).ignore();
                     content.removeActor(fileRow);

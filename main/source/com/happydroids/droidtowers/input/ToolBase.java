@@ -9,6 +9,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.grid.NeighborGameGrid;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ToolBase implements GestureDetector.GestureListener {
 
   public GameGrid getGameGrid() {
     for (GameLayer gameLayer : gameLayers) {
-      if (gameLayer instanceof GameGrid) {
+      if ((gameLayer instanceof GameGrid) && !(gameLayer instanceof NeighborGameGrid)) {
         return (GameGrid) gameLayer;
       }
     }

@@ -31,22 +31,28 @@ public abstract class GridObject {
   protected final GameGrid gameGrid;
   protected GridPoint position;
   protected GridPoint size;
+  protected Vector2 worldPosition;
+  protected Vector2 worldSize;
   protected GridObjectPlacementState placementState;
   protected Color renderColor;
   protected Bounds2d bounds;
   private Set<Action> actions;
   private EventBus myEventBus;
   protected float desirability;
+  private Vector2 worldCenter;
+  private Vector2 worldTop;
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
     this.gameGrid = gameGrid;
-    this.position = new GridPoint(0, 0);
-    this.size = new GridPoint(gridObjectType.getWidth(), gridObjectType.getHeight());
-    placementState = GridObjectPlacementState.INVALID;
-    renderColor = Color.WHITE;
+    position = new GridPoint(0, 0);
+    worldPosition = new Vector2();
+    size = new GridPoint(gridObjectType.getWidth(), gridObjectType.getHeight());
+    worldSize = new Vector2(size.getWorldX(gameGrid) * gameGrid.getGridScale().x, size.getWorldY(gameGrid) * gameGrid.getGridScale().y);
     bounds = new Bounds2d(position, size);
+    placementState = GridObjectPlacementState.INVALID;
     actions = new HashSet<Action>();
+    setRenderColor(Color.WHITE);
   }
 
   public boolean canShareSpace(GridObject gridObject) {
@@ -71,12 +77,12 @@ public abstract class GridObject {
     return gameGrid;
   }
 
-  public void render(SpriteBatch spriteBatch) {
+  public void render(SpriteBatch spriteBatch, Color renderTintColor) {
     Sprite sprite = getSprite();
     if (sprite != null) {
       sprite.setColor(renderColor);
-      sprite.setPosition(position.getWorldX(gameGrid), position.getWorldY(gameGrid));
-      sprite.setSize(size.getWorldX(gameGrid), size.getWorldY(gameGrid));
+      sprite.setPosition(worldPosition.x, worldPosition.y);
+      sprite.setSize(worldSize.x, worldSize.y);
       sprite.draw(spriteBatch);
     }
   }
@@ -102,11 +108,13 @@ public abstract class GridObject {
   }
 
   public void setSize(GridPoint size) {
-    this.size = size;
+    setSize(size.x, size.y);
   }
 
   public void setSize(float x, float y) {
     size.set(x, y);
+    worldSize.set(size.getWorldX(gameGrid) * gameGrid.getGridScale().x, size.getWorldY(gameGrid) * gameGrid.getGridScale().y);
+    updateWorldCenterAndTop();
   }
 
   public GridPoint getPosition() {
@@ -122,9 +130,16 @@ public abstract class GridObject {
 
     position.set(x, y);
     clampPosition();
+    worldPosition.set(gameGrid.getGridOrigin().x + (position.getWorldX(gameGrid) * gameGrid.getGridScale().x), gameGrid.getGridOrigin().y + (position.getWorldY(gameGrid) * gameGrid.getGridScale().y));
+    updateWorldCenterAndTop();
     updatePlacementStatus();
 
     broadcastEvent(new GridObjectBoundsChangeEvent(this, size, prevPosition));
+  }
+
+  private void updateWorldCenterAndTop() {
+    worldCenter = new Vector2(worldPosition.x + worldSize.x / 2, worldPosition.y + worldSize.y / 2);
+    worldTop = new Vector2(worldPosition.x + worldSize.x / 2, worldPosition.y + worldSize.y);
   }
 
   protected void clampPosition() {
@@ -145,9 +160,9 @@ public abstract class GridObject {
     Sprite sprite = getSprite();
     if (sprite != null) {
       if (placementState.equals(GridObjectPlacementState.INVALID)) {
-        renderColor = gameGrid.canObjectBeAt(this) ? Color.CYAN : Color.RED;
+        setRenderColor(gameGrid.canObjectBeAt(this) ? Color.CYAN : Color.RED);
       } else if (placementState.equals(GridObjectPlacementState.PLACED)) {
-        renderColor = Color.WHITE;
+        setRenderColor(Color.WHITE);
         broadcastEvent(new GridObjectPlacedEvent(this));
       }
     }
@@ -234,25 +249,16 @@ public abstract class GridObject {
   }
 
   public Vector2 getWorldCenter() {
-    Vector2 worldCenter = new Vector2();
-
-    worldCenter.x = position.getWorldX(gameGrid) + (size.getWorldX(gameGrid) / 2);
-    worldCenter.y = position.getWorldY(gameGrid) + (size.getWorldY(gameGrid) / 2);
-
     return worldCenter;
   }
 
   public Vector2 getWorldTop() {
-    Vector2 worldCenter = new Vector2();
-
-    worldCenter.x = position.getWorldX(gameGrid) + (size.getWorldX(gameGrid) / 2);
-    worldCenter.y = position.getWorldY(gameGrid) + size.getWorldY(gameGrid);
-
-    return worldCenter;
+    return worldTop;
   }
 
   public void setRenderColor(Color renderColor) {
-    this.renderColor = renderColor;
+    Color baseTint = new Color(gameGrid.getRenderer().getRenderTintColor());
+    this.renderColor = baseTint.mul(renderColor);
   }
 
   @Override
@@ -281,5 +287,9 @@ public abstract class GridObject {
 
   public float getDesirability() {
     return desirability;
+  }
+
+  protected Vector2 getGridScale() {
+    return gameGrid.getGridScale();
   }
 }
