@@ -4,8 +4,12 @@
 
 package com.happydroids.droidtowers.platform;
 
+import java.net.URI;
+
 public interface PlatformProtocolHandler {
   public void initialize(String[] applicationArgs);
 
   public boolean hasUri();
+
+  public URI consumeUri();
 }

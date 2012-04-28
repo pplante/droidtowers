@@ -7,6 +7,7 @@ package com.happydroids.jackson;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.happydroids.server.StackTraceSerializer;
 
@@ -17,6 +18,7 @@ public class HappyDroidObjectMapper extends ObjectMapper {
     super();
 
 //    setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);
+    configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
     happyModules = new SimpleModule();
     happyModules.addSerializer(new StackTraceSerializer());

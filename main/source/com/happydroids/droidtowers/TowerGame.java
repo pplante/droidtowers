@@ -30,6 +30,7 @@ import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.platform.PlatformBrowserUtil;
 import com.happydroids.droidtowers.platform.PlatformProtocolHandler;
+import com.happydroids.droidtowers.scenes.LaunchUriScene;
 import com.happydroids.droidtowers.scenes.MainMenuScene;
 import com.happydroids.droidtowers.scenes.Scene;
 import com.happydroids.droidtowers.scenes.SplashScene;
@@ -38,6 +39,7 @@ import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.types.*;
 import com.happydroids.utils.BackgroundTask;
 
+import java.net.URI;
 import java.util.LinkedList;
 
 public class TowerGame implements ApplicationListener {
@@ -79,7 +81,7 @@ public class TowerGame implements ApplicationListener {
       Gdx.app.setLogLevel(Application.LOG_ERROR);
     }
 
-    Thread.setDefaultUncaughtExceptionHandler(uncaughtExceptionHandler);
+    Thread.currentThread().setUncaughtExceptionHandler(uncaughtExceptionHandler);
 
     Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 
@@ -153,11 +155,7 @@ public class TowerGame implements ApplicationListener {
     Scene.setSpriteBatch(spriteBatch);
 
 
-    if (protocolHandler.hasUri()) {
-      DebugUtils.loadFirstGameFound();
-    } else {
-      changeScene(SplashScene.class, SplashSceneStates.PRELOAD_ONLY);
-    }
+    changeScene(SplashScene.class, SplashSceneStates.PRELOAD_ONLY);
   }
 
   public void render() {
@@ -201,6 +199,11 @@ public class TowerGame implements ApplicationListener {
       spriteBatch.begin();
       menloBitmapFont.drawMultiLine(spriteBatch, infoText, 5, 35);
       spriteBatch.end();
+    }
+
+    if (protocolHandler.hasUri()) {
+      URI launchUri = protocolHandler.consumeUri();
+      changeScene(LaunchUriScene.class, launchUri);
     }
   }
 

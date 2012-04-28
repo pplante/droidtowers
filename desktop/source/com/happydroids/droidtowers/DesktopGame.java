@@ -21,8 +21,6 @@ public class DesktopGame {
     TowerGameService.setDeviceOSName(Platform.getOSType().name());
     TowerGameService.setDeviceOSVersion(System.getProperty("os.version"));
 
-    Thread.setDefaultUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
-
     LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
     config.title = String.format("Droid Towers (%s)", TowerConsts.VERSION);
     config.resizable = false;

@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.happydroids.HappyDroidConsts;
 import com.happydroids.utils.BackgroundTask;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -52,7 +51,7 @@ public abstract class HappyDroidServiceObject {
       throw new RuntimeException("resourceUri must not be null when using reload()");
     }
 
-    HttpResponse response = HappyDroidService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + resourceUri);
+    HttpResponse response = HappyDroidService.instance().makeGetRequest(resourceUri);
     if (response != null && response.getStatusLine().getStatusCode() == 200) {
       copyValuesFromResponse(response);
     }
@@ -158,5 +157,15 @@ public abstract class HappyDroidServiceObject {
 
   protected ObjectMapper getObjectMapper() {
     return HappyDroidService.instance().getObjectMapper();
+  }
+
+  public void findById(int id) {
+    resourceUri = getBaseResourceUri() + id + "/";
+    System.out.println("resourceUri = " + resourceUri);
+    reload();
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 }

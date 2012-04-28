@@ -24,4 +24,10 @@ public class MacProtocolHandler implements PlatformProtocolHandler {
   public boolean hasUri() {
     return uri != null;
   }
+
+  public URI consumeUri() {
+    URI theUri = uri;
+    uri = null;
+    return theUri;
+  }
 }

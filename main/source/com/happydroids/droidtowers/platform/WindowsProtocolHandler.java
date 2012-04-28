@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.platform;
 
 import javax.swing.*;
+import java.net.URI;
 
 public class WindowsProtocolHandler implements PlatformProtocolHandler {
   public void initialize(String[] applicationArgs) {
@@ -13,5 +14,9 @@ public class WindowsProtocolHandler implements PlatformProtocolHandler {
 
   public boolean hasUri() {
     return false;
+  }
+
+  public URI consumeUri() {
+    return null;
   }
 }
