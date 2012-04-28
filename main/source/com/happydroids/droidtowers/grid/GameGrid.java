@@ -17,7 +17,6 @@ import com.happydroids.droidtowers.entities.GuavaSet;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.events.GridObjectAddedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
-import com.happydroids.droidtowers.math.Bounds2d;
 import com.happydroids.droidtowers.math.GridPoint;
 
 import java.util.HashMap;
@@ -28,7 +27,7 @@ import java.util.Set;
 public class GameGrid extends GameLayer {
   private EventBus eventBus = new EventBus(GameGrid.class.getSimpleName());
 
-  private Vector2 gridSize;
+  protected Vector2 gridSize;
   private GuavaSet<GridObject> objects;
   private Vector2 worldSize;
   protected GameGridRenderer gameGridRenderer;
@@ -123,10 +122,10 @@ public class GameGrid extends GameLayer {
       return false;
     }
 
-    Bounds2d boundsOfGridObjectToCheck = gridObject.getBounds();
+    Rectangle boundsOfGridObjectToCheck = gridObject.getBounds();
     for (GridObject child : objects) {
       if (child != gridObject) {
-        if (child.getBounds().intersects(boundsOfGridObjectToCheck) && !child.canShareSpace(gridObject)) {
+        if (child.getBounds().overlaps(boundsOfGridObjectToCheck) && !child.canShareSpace(gridObject)) {
           return false;
         }
       }

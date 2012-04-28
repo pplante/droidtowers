@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.scenes;
 
 import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -19,8 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.interpolators.OvershootInterpolator;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.droidtowers.*;
-import com.happydroids.droidtowers.gamestate.GameSave;
+import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.NeighborGameGrid;
@@ -43,7 +43,7 @@ public class MainMenuScene extends Scene {
 
   @Override
   public void create(Object... args) {
-    Table container = new Table(getGuiSkin());
+    final Table container = new Table(getGuiSkin());
     container.defaults().center().left();
 
     Label label = FontManager.Roboto64.makeLabel("Droid Towers");
@@ -60,13 +60,6 @@ public class MainMenuScene extends Scene {
             .repeatYoyo(Tween.INFINITY, 250)
             .start(TweenSystem.getTweenManager());
 
-    if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT && TowerGameService.instance().haveNetworkConnection() && !TowerGameService.instance().hasAuthenticated()) {
-      TextButton connectFacebookButton = FontManager.RobotoBold18.makeTextButton("login to happydroids.com", getGuiSkin());
-      connectFacebookButton.setClickListener(new LaunchWindowClickListener(ConnectToHappyDroidsWindow.class));
-      container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
-      container.row().padTop(BUTTON_SPACING);
-    }
-
     TextButton newGameButton = FontManager.RobotoBold18.makeTextButton("new game", getGuiSkin());
     container.add(newGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row().padTop(BUTTON_SPACING);
@@ -76,13 +69,29 @@ public class MainMenuScene extends Scene {
     container.row().padTop(BUTTON_SPACING);
 
 //    TextButton optionsButton = FontManager.RobotoBold18.makeTextButton("options", getGuiSkin());
-//    wrapper.add(optionsButton).fill().maxWidth(BUTTON_WIDTH);
+//    wrapper.push(optionsButton).fill().maxWidth(BUTTON_WIDTH);
 //    wrapper.row().padTop(BUTTON_SPACING);
+
+    if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT) {
+      final TextButton connectFacebookButton = FontManager.RobotoBold18.makeTextButton("login to happydroids.com", getGuiSkin());
+      connectFacebookButton.visible = false;
+      container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
+      container.row().padTop(BUTTON_SPACING);
+
+      TowerGameService.instance().afterAuthentication(new Runnable() {
+        public void run() {
+          if (!TowerGameService.instance().isAuthenticated()) {
+            connectFacebookButton.visible = true;
+            connectFacebookButton.setClickListener(new LaunchWindowClickListener(ConnectToHappyDroidsWindow.class));
+            connectFacebookButton.action(FadeIn.$(0.25f));
+          }
+        }
+      });
+    }
 
     TextButton exitGameButton = FontManager.RobotoBold18.makeTextButton("exit game", getGuiSkin());
     container.add(exitGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row();
-
 
     TextureAtlas atlas = TowerAssetManager.textureAtlas("hud/menus.txt");
     Image libGdxLogo = new Image(atlas.findRegion("powered-by-libgdx"));
@@ -140,18 +149,9 @@ public class MainMenuScene extends Scene {
         Gdx.app.exit();
       }
     });
-    TowerAssetManager.assetManager().finishLoading();
 
 //    DebugUtils.createNonSavableGame(true);
-    DebugUtils.loadFirstGameFound(new VarArgRunnable() {
-      public void run(Object... args) {
-        try {
-          TowerGame.changeScene(TowerScene.class, GameSave.readFile((FileHandle) args[0]));
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-      }
-    });
+//    DebugUtils.loadFirstGameFound();
   }
 
   @Override

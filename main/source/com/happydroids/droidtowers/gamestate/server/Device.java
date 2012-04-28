@@ -9,12 +9,12 @@ import com.happydroids.HappyDroidConsts;
 import com.happydroids.server.HappyDroidService;
 import com.happydroids.server.HappyDroidServiceObject;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
 public class Device extends HappyDroidServiceObject {
   public String uuid;
   public String type;
   public String osVersion;
-  private String appVersion;
+  public String appVersion;
   public boolean isAuthenticated;
 
   public Device() {

@@ -43,9 +43,14 @@ public class Elevator extends Transit {
     topSprite = elevatorAtlas.createSprite("elevator/top");
     topSprite.setScale(getGridScale());
     bottomSprite = elevatorAtlas.createSprite("elevator/bottom");
+    bottomSprite.setScale(getGridScale());
     shaftSprite = elevatorAtlas.createSprite("elevator/shaft");
+    shaftSprite.setScale(getGridScale());
     emptyShaftSprite = elevatorAtlas.createSprite("elevator/empty");
+    emptyShaftSprite.setScale(getGridScale());
     floorFont = TowerAssetManager.bitmapFont("fonts/bank_gothic_32.fnt");
+    floorFont.setScale(getGridScale());
+
     drawShaft = true;
 
     elevatorCar = new ElevatorCar(this, elevatorAtlas);
@@ -111,7 +116,7 @@ public class Elevator extends Transit {
     topSprite.draw(spriteBatch);
   }
 
-  private float scaledGridUnit() {
+  protected float scaledGridUnit() {
     return TowerConsts.GRID_UNIT_SIZE * getGridScale();
   }
 

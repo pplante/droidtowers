@@ -57,7 +57,7 @@ public class PlacementTool extends ToolBase {
     GridPoint gridPointAtFinger = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
     makeGridObjectAtFinger_whenGridObjectIsNull(gridPointAtFinger);
 
-    isDraggingGridObject = gridObject.getBounds().containsPoint(gridPointAtFinger);
+    isDraggingGridObject = gridObject.getBounds().contains(gridPointAtFinger.x, gridPointAtFinger.y);
 
     return true;
   }
@@ -109,7 +109,7 @@ public class PlacementTool extends ToolBase {
   public boolean tap(int x, int y, int count) {
     if (Gdx.app.getType().equals(Android) && count >= 2) {
       return finishPurchase();
-    } else if(Gdx.app.getType().equals(Desktop) && count >= 1) {
+    } else if (Gdx.app.getType().equals(Desktop) && count >= 1) {
       return finishPurchase();
     }
 

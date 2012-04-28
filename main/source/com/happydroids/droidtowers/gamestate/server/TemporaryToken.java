@@ -63,7 +63,7 @@ public class TemporaryToken extends TowerGameServiceObject {
   @Override
   public String toString() {
     return "TemporaryToken{" +
-                   "resourceUri='" + resourceUri + '\'' +
+                   "resourceUri='" + getResourceUri() + '\'' +
                    ", value=" + value +
                    ", session=" + session +
                    '}';

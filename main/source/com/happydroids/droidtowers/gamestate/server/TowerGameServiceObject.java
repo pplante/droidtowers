@@ -14,7 +14,7 @@ public abstract class TowerGameServiceObject extends HappyDroidServiceObject {
   protected boolean beforeSaveValidation(ApiRunnable afterSave) {
     if (!super.beforeSaveValidation(afterSave)) return false;
 
-    if (requireAuthentication() && !TowerGameService.instance().hasAuthenticated()) {
+    if (requireAuthentication() && !TowerGameService.instance().isAuthenticated()) {
       afterSave.onError(null, HttpStatusCode.NetworkAuthenticationRequired, this);
       return false;
     }

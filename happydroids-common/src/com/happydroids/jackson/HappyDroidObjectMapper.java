@@ -16,6 +16,8 @@ public class HappyDroidObjectMapper extends ObjectMapper {
   public HappyDroidObjectMapper() {
     super();
 
+//    setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);
+
     happyModules = new SimpleModule();
     happyModules.addSerializer(new StackTraceSerializer());
     registerModule(happyModules);

@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.scenes.SplashScene;
+import com.happydroids.droidtowers.scenes.TowerScene;
 
 import static com.happydroids.HappyDroidConsts.DEBUG;
 
@@ -50,5 +51,17 @@ public class DebugUtils {
     }
 
     throw new RuntimeException("CANNOT BE USED IN PRODUCTION.");
+  }
+
+  public static void loadFirstGameFound() {
+    loadFirstGameFound(new VarArgRunnable() {
+      public void run(Object... args) {
+        try {
+          TowerGame.changeScene(TowerScene.class, GameSave.readFile((FileHandle) args[0]));
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    });
   }
 }

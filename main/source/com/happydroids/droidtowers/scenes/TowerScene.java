@@ -140,7 +140,7 @@ public class TowerScene extends Scene {
       @Override
       public void onSuccess(HttpResponse response, HappyDroidServiceCollection<FriendCloudGameSave> collection) {
         for (final FriendCloudGameSave friendCloudGameSave : collection.getObjects()) {
-          NeighborGameGrid neighborGameGrid = new NeighborGameGrid(getCamera(), new Vector2(neighborGridX[0], 640));
+          NeighborGameGrid neighborGameGrid = new NeighborGameGrid(getCamera(), new Vector2(neighborGridX[0], TowerConsts.NEIGHBOR_GROUND_HEIGHT));
           neighborGameGrid.getRenderer().setRenderTintColor(Color.GRAY);
           GameSave gameSave = friendCloudGameSave.getGameSave();
 

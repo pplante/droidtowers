@@ -16,7 +16,6 @@ import com.happydroids.droidtowers.gui.OnClickCallback;
 import com.happydroids.droidtowers.gui.ResponseType;
 import com.happydroids.droidtowers.scenes.MainMenuScene;
 import com.happydroids.droidtowers.utils.PNG;
-import com.happydroids.utils.BackgroundTask;
 
 import java.io.OutputStream;
 
@@ -84,43 +83,28 @@ public class GameState {
       if (!gameGrid.isEmpty()) {
         currentGameSave.update();
 
-        new BackgroundTask() {
-          @Override
-          public synchronized void afterExecute() {
-            Gdx.app.debug(TAG, "After save.");
+        try {
+          if (!gameSaveLocation.exists()) {
+            gameSaveLocation.mkdirs();
           }
 
-          @Override
-          public synchronized void beforeExecute() {
-            Gdx.app.debug(TAG, "Before save.");
-            if (!gameSaveLocation.exists()) {
-              gameSaveLocation.mkdirs();
-            }
+          OutputStream stream = pngFile.write(false);
+          stream.write(PNG.toPNG(TowerMiniMap.redrawMiniMap(gameGrid, true, 2f)));
+          stream.flush();
+          stream.close();
 
-          }
-
-          @Override
-          public void execute() {
-            try {
-              OutputStream stream = pngFile.write(false);
-              stream.write(PNG.toPNG(TowerMiniMap.redrawMiniMap(gameGrid, true, 2f)));
-              stream.flush();
-              stream.close();
-
-              if (shouldForceCloudSave || currentGameSave.getCloudSaveUri() == null || currentGameSave.getFileGeneration() % 4 == 0) {
-                CloudGameSave cloudGameSave = new CloudGameSave(currentGameSave, pngFile);
-                cloudGameSave.save();
-                if (cloudGameSave.isSaved()) {
-                  currentGameSave.setCloudSaveUri(cloudGameSave.getResourceUri());
-                }
-              }
-
-              currentGameSave.save(gameFile);
-            } catch (Exception e) {
-              Gdx.app.log("GameSave", "Could not save game!", e);
+          if (shouldForceCloudSave || currentGameSave.getCloudSaveUri() == null || currentGameSave.getFileGeneration() % 4 == 0) {
+            CloudGameSave cloudGameSave = new CloudGameSave(currentGameSave, pngFile);
+            cloudGameSave.save();
+            if (cloudGameSave.isSaved()) {
+              currentGameSave.setCloudSaveUri(cloudGameSave.getResourceUri());
             }
           }
-        }.run();
+
+          currentGameSave.save(gameFile);
+        } catch (Exception e) {
+          Gdx.app.log("GameSave", "Could not save game!", e);
+        }
       }
     }
   }

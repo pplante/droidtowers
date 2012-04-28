@@ -223,7 +223,7 @@ public class HappyDroidService {
     return null;
   }
 
-  public boolean hasAuthenticated() {
+  public boolean isAuthenticated() {
     return false;
   }
 }

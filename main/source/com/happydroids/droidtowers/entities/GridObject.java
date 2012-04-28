@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.entities;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
@@ -18,7 +19,6 @@ import com.happydroids.droidtowers.events.GridObjectChangedEvent;
 import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
-import com.happydroids.droidtowers.math.Bounds2d;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.GridObjectType;
 
@@ -35,21 +35,28 @@ public abstract class GridObject {
   protected Vector2 worldSize;
   protected GridObjectPlacementState placementState;
   protected Color renderColor;
-  protected Bounds2d bounds;
+  protected Rectangle bounds;
   private Set<Action> actions;
   private EventBus myEventBus;
   protected float desirability;
   private Vector2 worldCenter;
   private Vector2 worldTop;
+  private Rectangle worldBounds;
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
     this.gameGrid = gameGrid;
+
     position = new GridPoint(0, 0);
-    worldPosition = new Vector2();
     size = new GridPoint(gridObjectType.getWidth(), gridObjectType.getHeight());
+    bounds = new Rectangle(position.x, position.y, size.x, size.y);
+
+    worldPosition = new Vector2();
     worldSize = new Vector2(size.getWorldX(gameGrid) * gameGrid.getGridScale(), size.getWorldY(gameGrid) * gameGrid.getGridScale());
-    bounds = new Bounds2d(position, size);
+    worldCenter = new Vector2();
+    worldTop = new Vector2();
+    worldBounds = new Rectangle();
+
     placementState = GridObjectPlacementState.INVALID;
     actions = new HashSet<Action>();
     setRenderColor(Color.WHITE);
@@ -59,7 +66,7 @@ public abstract class GridObject {
     return gridObjectType.canShareSpace(gridObject);
   }
 
-  public Bounds2d getBounds() {
+  public Rectangle getBounds() {
     return bounds;
   }
 
@@ -138,8 +145,9 @@ public abstract class GridObject {
   }
 
   private void updateWorldCenterAndTop() {
-    worldCenter = new Vector2(worldPosition.x + worldSize.x / 2, worldPosition.y + worldSize.y / 2);
-    worldTop = new Vector2(worldPosition.x + worldSize.x / 2, worldPosition.y + worldSize.y);
+    worldBounds.set(worldPosition.x, worldPosition.y, worldSize.x, worldSize.y);
+    worldCenter.set(worldPosition.x + worldSize.x / 2, worldPosition.y + worldSize.y / 2);
+    worldTop.set(worldPosition.x + worldSize.x / 2, worldPosition.y + worldSize.y);
   }
 
   protected void clampPosition() {
@@ -291,5 +299,13 @@ public abstract class GridObject {
 
   protected float getGridScale() {
     return gameGrid.getGridScale();
+  }
+
+  public Vector2 getWorldPosition() {
+    return worldPosition;
+  }
+
+  public Rectangle getWorldBounds() {
+    return worldBounds;
   }
 }

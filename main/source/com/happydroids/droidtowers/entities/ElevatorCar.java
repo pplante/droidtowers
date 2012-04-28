@@ -37,7 +37,10 @@ public class ElevatorCar extends GameObject {
 
     TextureAtlas.AtlasRegion carRegion = elevatorAtlas.findRegion("elevator/car");
     setRegion(carRegion);
-    setSize(carRegion.originalWidth, carRegion.originalHeight);
+    setOrigin(0, 0);
+    float gridScale = gameGrid.getGridScale();
+    setSize(carRegion.originalWidth * gridScale, carRegion.originalHeight * gridScale);
+    setScale(gridScale);
   }
 
   @Override
@@ -51,8 +54,7 @@ public class ElevatorCar extends GameObject {
 
   @Subscribe
   public void Elevator_boundsChanged(GridObjectBoundsChangeEvent event) {
-    Vector2 elevatorPos = elevator.getContentPosition().toWorldVector2(elevator.gameGrid);
-    setPosition(elevatorPos.x, elevatorPos.y);
+    setPosition(elevator.getWorldPosition());
   }
 
   public void moveToFloor(GridPosition nextFloor, TweenCallback tweenCallback) {
@@ -90,7 +92,7 @@ public class ElevatorCar extends GameObject {
     final AvatarSteeringManager steeringManager = currentElevatorPassenger.getSteeringManager();
     moveToFloor(currentElevatorPassenger.getBoardingFloor(), new TweenCallback() {
       public void onEvent(int type, BaseTween source) {
-        // add a bit of padding to move avatar into middle of car.
+        // push a bit of padding to move avatar into middle of car.
 
         Vector2 avatarWalkToElevator = steeringManager.getCurrentPosition().toWorldVector2(gameGrid);
         avatarWalkToElevator.x += currentElevatorPassenger.offsetX;

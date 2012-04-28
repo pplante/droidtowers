@@ -62,7 +62,7 @@ public class GdxTestRunner extends NonGLTestRunner implements ApplicationListene
 
   protected void runChild(FrameworkMethod method, RunNotifier notifier) {
     synchronized (invokeInRender) {
-      //add for invoking in render phase, where gl context is available
+      //push for invoking in render phase, where gl context is available
       invokeInRender.put(method, notifier);
     }
     //wait until that test was invoked

@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.gamestate.server;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.NonInteractiveGameSave;
@@ -16,11 +17,11 @@ import java.io.IOException;
 import java.util.Date;
 
 @SuppressWarnings("FieldCanBeLocal")
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
 public class CloudGameSave extends TowerGameServiceObject {
-  private String blob;
-  private String image;
-  private Date syncedOn;
+  protected String blob;
+  protected String image;
+  protected Date syncedOn;
 
   public CloudGameSave() {
 
@@ -28,7 +29,7 @@ public class CloudGameSave extends TowerGameServiceObject {
 
   public CloudGameSave(GameSave gameSave, FileHandle pngFile) {
     try {
-      resourceUri = gameSave.getCloudSaveUri();
+      setResourceUri(gameSave.getCloudSaveUri());
       blob = getObjectMapper().writeValueAsString(gameSave);
       image = GZIPUtils.compress(pngFile);
     } catch (IOException e) {
@@ -46,7 +47,8 @@ public class CloudGameSave extends TowerGameServiceObject {
     return true;
   }
 
+  @JsonIgnore
   public GameSave getGameSave() {
-    return NonInteractiveGameSave.readFile(new ByteArrayInputStream(blob.getBytes()), "cloudGameSave_" + id);
+    return NonInteractiveGameSave.readFile(new ByteArrayInputStream(blob.getBytes()), "cloudGameSave_" + hashCode());
   }
 }

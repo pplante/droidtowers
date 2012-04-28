@@ -20,6 +20,7 @@ public class TowerConsts extends HappyDroidConsts {
 
   public static final int LOBBY_FLOOR = 10;
   public static final float GROUND_HEIGHT = GRID_UNIT_SIZE * LOBBY_FLOOR;
+  public static final float NEIGHBOR_GROUND_HEIGHT = GRID_UNIT_SIZE * (LOBBY_FLOOR - 3);
 
   public static final String CURRENCY_SYMBOL = "$";
 

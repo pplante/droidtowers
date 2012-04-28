@@ -22,9 +22,14 @@ public class TowerGameService extends HappyDroidService {
   private Preferences preferences;
   private String deviceId;
   private boolean isAuthenticated;
+  private Device device;
+  private RunnableQueue postAuthRunnables;
+  private boolean authenticationFinished;
 
   public TowerGameService() {
     super();
+
+    postAuthRunnables = new RunnableQueue();
 
     preferences = Gdx.app.getPreferences("CONNECT");
     if (!preferences.contains("DEVICE_ID")) {
@@ -49,21 +54,27 @@ public class TowerGameService extends HappyDroidService {
   public void registerDevice() {
     withNetworkConnection(new Runnable() {
       public void run() {
-        Device device = new Device();
+        device = new Device();
         device.save(new ApiRunnable<Device>() {
           @Override
           public void onError(HttpResponse response, int statusCode, Device object) {
             Gdx.app.error(TAG, "Error registering device :(, status: " + statusCode);
+            authenticationFinished = true;
+            postAuthRunnables.runAll();
           }
 
           @Override
           public void onSuccess(HttpResponse response, Device object) {
+            authenticationFinished = true;
+
             isAuthenticated = object.isAuthenticated;
 
             if (!isAuthenticated) {
               preferences.remove("SESSION_TOKEN");
               preferences.flush();
             }
+
+            postAuthRunnables.runAll();
           }
         });
       }
@@ -83,7 +94,7 @@ public class TowerGameService extends HappyDroidService {
     preferences.flush();
   }
 
-  public boolean hasAuthenticated() {
+  public boolean isAuthenticated() {
     return isAuthenticated;
   }
 
@@ -94,6 +105,14 @@ public class TowerGameService extends HappyDroidService {
     request.setHeader("X-Device-UUID", HappyDroidService.instance().getDeviceId());
     if (getSessionToken() != null) {
       request.setHeader("X-Token", getSessionToken());
+    }
+  }
+
+  public void afterAuthentication(Runnable runnable) {
+    if (!authenticationFinished) {
+      postAuthRunnables.push(runnable);
+    } else {
+      runnable.run();
     }
   }
 }
