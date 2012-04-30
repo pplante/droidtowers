@@ -52,7 +52,7 @@ public abstract class GridObject {
     bounds = new Rectangle(position.x, position.y, size.x, size.y);
 
     worldPosition = new Vector2();
-    worldSize = new Vector2(size.getWorldX(gameGrid) * gameGrid.getGridScale(), size.getWorldY(gameGrid) * gameGrid.getGridScale());
+    worldSize = new Vector2(size.getWorldX() * gameGrid.getGridScale(), size.getWorldY() * gameGrid.getGridScale());
     worldCenter = new Vector2();
     worldTop = new Vector2();
     worldBounds = new Rectangle();
@@ -143,8 +143,8 @@ public abstract class GridObject {
   }
 
   public void updateWorldCoordinates() {
-    worldPosition.set(gameGrid.getGridOrigin().x + (position.getWorldX(gameGrid) * gameGrid.getGridScale()), gameGrid.getGridOrigin().y + (position.getWorldY(gameGrid) * gameGrid.getGridScale()));
-    worldSize.set(size.getWorldX(gameGrid) * gameGrid.getGridScale(), size.getWorldY(gameGrid) * gameGrid.getGridScale());
+    worldPosition.set(gameGrid.getGridOrigin().x + (position.getWorldX() * gameGrid.getGridScale()), gameGrid.getGridOrigin().y + (position.getWorldY() * gameGrid.getGridScale()));
+    worldSize.set(size.getWorldX() * gameGrid.getGridScale(), size.getWorldY() * gameGrid.getGridScale());
     worldBounds.set(worldPosition.x, worldPosition.y, worldSize.x, worldSize.y);
     worldCenter.set(worldPosition.x + worldSize.x / 2, worldPosition.y + worldSize.y / 2);
     worldTop.set(worldPosition.x + worldSize.x / 2, worldPosition.y + worldSize.y);

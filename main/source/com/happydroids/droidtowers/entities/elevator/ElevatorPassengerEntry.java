@@ -4,7 +4,11 @@
 
 package com.happydroids.droidtowers.entities.elevator;
 
+import aurelienribon.tweenengine.BaseTween;
+import aurelienribon.tweenengine.TweenCallback;
+import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
+import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
 import com.happydroids.droidtowers.utils.Random;
 
@@ -16,6 +20,8 @@ public class ElevatorPassengerEntry {
   public boolean hasBoarded;
   public boolean isQueued;
   public float offsetX;
+  private boolean isBoarding;
+  private boolean isDisembarking;
 
   public ElevatorPassengerEntry(AvatarSteeringManager steeringManager, GridPosition boardingFloor, GridPosition destinationFloor) {
     this.steeringManager = steeringManager;
@@ -55,5 +61,31 @@ public class ElevatorPassengerEntry {
 
   public AvatarSteeringManager getSteeringManager() {
     return steeringManager;
+  }
+
+  public void boardElevator(GameGrid gameGrid) {
+    isBoarding = true;
+    Vector2 avatarWalkToElevator = steeringManager.getCurrentPosition().toWorldVector2();
+    avatarWalkToElevator.x += offsetX;
+
+    steeringManager.moveAvatarTo(avatarWalkToElevator, new TweenCallback() {
+      public void onEvent(int type, BaseTween source) {
+        isBoarding = false;
+      }
+    });
+  }
+
+  public void disembarkFromElevator(GameGrid gameGrid) {
+    isDisembarking = true;
+    steeringManager.moveAvatarTo(steeringManager.getNextPosition().toWorldVector2(), new TweenCallback() {
+      public void onEvent(int type, BaseTween source) {
+        isDisembarking = false;
+        runCompleteCallback();
+      }
+    });
+  }
+
+  public boolean shouldWaitFor() {
+    return isBoarding || isDisembarking;
   }
 }

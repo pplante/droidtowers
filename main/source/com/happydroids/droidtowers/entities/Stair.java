@@ -41,7 +41,7 @@ public class Stair extends Transit {
     // stairs need to support overflowing into adjacent cells.
     if (sprite != null) {
       sprite.setColor(renderColor);
-      sprite.setPosition(position.getWorldX(gameGrid), position.getWorldY(gameGrid));
+      sprite.setPosition(position.getWorldX(), position.getWorldY());
       sprite.draw(spriteBatch);
     }
   }
@@ -66,13 +66,13 @@ public class Stair extends Transit {
     GridPoint point = new GridPoint(position);
     point.add(0, 1);
 
-    return point.toWorldVector2(gameGrid);
+    return point.toWorldVector2();
   }
 
   public Vector2 getBottomRightWorldPoint() {
     GridPoint point = new GridPoint(position);
     point.add(2, 0);
 
-    return point.toWorldVector2(gameGrid);
+    return point.toWorldVector2();
   }
 }

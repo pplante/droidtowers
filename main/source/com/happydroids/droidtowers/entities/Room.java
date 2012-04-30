@@ -103,9 +103,9 @@ public class Room extends GridObject {
 
     if (dynamicSprite) {
       BitmapFont.TextBounds textBounds = labelFont.getBounds(gridObjectType.getName());
-      Vector2 centerPoint = size.toWorldVector2(gameGrid).sub(textBounds.width, textBounds.height).mul(0.5f);
+      Vector2 centerPoint = size.toWorldVector2().sub(textBounds.width, textBounds.height).mul(0.5f);
 
-      labelFont.draw(spriteBatch, gridObjectType.getName(), position.getWorldX(gameGrid) + centerPoint.x, position.getWorldY(gameGrid) + centerPoint.y);
+      labelFont.draw(spriteBatch, gridObjectType.getName(), position.getWorldX() + centerPoint.x, position.getWorldY() + centerPoint.y);
     }
   }
 

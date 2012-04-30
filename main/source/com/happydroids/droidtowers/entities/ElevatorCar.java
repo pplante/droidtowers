@@ -9,31 +9,42 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Ordering;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
 import com.happydroids.droidtowers.entities.elevator.ElevatorPassengerEntry;
 import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
+import com.happydroids.droidtowers.math.Direction;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
+import javax.annotation.Nullable;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+
+import static com.happydroids.droidtowers.math.Direction.UP;
 
 public class ElevatorCar extends GameObject {
   private int floor;
   private final Elevator elevator;
-  private LinkedList<ElevatorPassengerEntry> elevatorPassengers;
+  private LinkedList<ElevatorPassengerEntry> passengerQueue;
   private boolean isInUse;
-  private ElevatorPassengerEntry currentElevatorPassenger;
+  private List<ElevatorPassengerEntry> currentPassengers;
   private final GameGrid gameGrid;
+  private GridPosition currentFloor;
+  private Direction currentDirection;
+  private int destinationFloor;
 
   public ElevatorCar(Elevator parent, TextureAtlas elevatorAtlas) {
     elevator = parent;
     elevator.eventBus().register(this);
     gameGrid = elevator.gameGrid;
-    elevatorPassengers = Lists.newLinkedList();
+    passengerQueue = Lists.newLinkedList();
 
     TextureAtlas.AtlasRegion carRegion = elevatorAtlas.findRegion("elevator/car");
     setRegion(carRegion);
@@ -54,76 +65,147 @@ public class ElevatorCar extends GameObject {
 
   @Subscribe
   public void Elevator_boundsChanged(GridObjectBoundsChangeEvent event) {
-    if (currentElevatorPassenger != null) {
-      currentElevatorPassenger.getSteeringManager().getAvatar().murderDeathKill187();
+    if (currentPassengers != null) {
+      for (ElevatorPassengerEntry passenger : currentPassengers) {
+        passenger.getSteeringManager().getAvatar().murderDeathKill187();
+      }
+
     }
     setPosition(elevator.getWorldPosition());
   }
 
-  public void moveToFloor(GridPosition nextFloor, TweenCallback tweenCallback) {
+  public void moveToFloor(GridPosition nextFloor) {
     TweenSystem.getTweenManager().killTarget(this);
-
-    Vector2 finalPosition = nextFloor.toWorldVector2(elevator.gameGrid);
-
+    currentFloor = nextFloor;
+    isInUse = true;
+    Vector2 finalPosition = nextFloor.toWorldVector2();
     int distanceBetweenStops = (int) (Math.abs(getY() - finalPosition.y) * 5);
-
     Tween.to(this, GameObjectAccessor.POSITION_Y, distanceBetweenStops)
             .delay(500)
             .target(finalPosition.y)
-            .setCallback(tweenCallback)
+            .setCallback(new TweenCallback() {
+              public void onEvent(int type, BaseTween source) {
+                isInUse = false;
+              }
+            })
             .setCallbackTriggers(TweenCallback.COMPLETE)
             .start(TweenSystem.getTweenManager());
   }
 
   @Override
   public void update(float timeDelta) {
-    if (currentElevatorPassenger == null && elevatorPassengers.size() > 0) {
-      currentElevatorPassenger = elevatorPassengers.poll();
+    if (isInUse) {
+      if (currentPassengers != null) {
+        for (ElevatorPassengerEntry passenger : currentPassengers) {
+          Avatar avatar = passenger.getSteeringManager().getAvatar();
+          avatar.setPosition(getX() + passenger.getOffsetX(), getY());
+        }
+      }
+      return;
     }
 
-    if (currentElevatorPassenger != null) {
-      if (currentElevatorPassenger.hasBoarded) {
-        currentElevatorPassenger.getSteeringManager().getAvatar().setPosition(getX() + currentElevatorPassenger.offsetX, getY());
-      } else if (!currentElevatorPassenger.isQueued && !isInUse) {
-        currentElevatorPassenger.isQueued = true;
-        beginCarMovement();
+    if (currentPassengers == null && passengerQueue.size() > 0) {
+      ElevatorPassengerEntry firstPassenger = passengerQueue.poll();
+      int boardingFloor = firstPassenger.getBoardingFloor().y;
+      destinationFloor = firstPassenger.getDestinationFloor().y;
+      currentDirection = boardingFloor < destinationFloor ? UP : Direction.DOWN;
+
+      List<ElevatorPassengerEntry> unsortedPassengers = Lists.newArrayList(firstPassenger);
+      for (ElevatorPassengerEntry passenger : passengerQueue) {
+        if (!passenger.isQueued() && passenger.getBoardingFloor().y >= boardingFloor && passenger.getDestinationFloor().y <= destinationFloor) {
+          passenger.isQueued = true;
+          unsortedPassengers.add(passenger);
+        }
+
+        if (unsortedPassengers.size() > 6) {
+          break;
+        }
       }
+
+      currentPassengers = Ordering.natural().onResultOf(new Function<ElevatorPassengerEntry, Comparable>() {
+        public Comparable apply(@Nullable ElevatorPassengerEntry input) {
+          return input.getBoardingFloor().y;
+        }
+      }).sortedCopy(unsortedPassengers);
+
+      currentFloor = currentPassengers.get(0).getBoardingFloor();
+    }
+
+    if (currentPassengers != null && !currentPassengers.isEmpty()) {
+      Iterator<ElevatorPassengerEntry> passengerIterator = currentPassengers.iterator();
+      boolean shouldWait = false;
+      while (passengerIterator.hasNext()) {
+        ElevatorPassengerEntry passenger = passengerIterator.next();
+        if (!passenger.shouldWaitFor()) {
+          if (passenger.getBoardingFloor().y == currentFloor.y) {
+            passenger.boardElevator(gameGrid);
+          } else if (passenger.getDestinationFloor().y == currentFloor.y) {
+            passenger.disembarkFromElevator(gameGrid);
+            passengerIterator.remove();
+          }
+        } else {
+          shouldWait = true;
+        }
+      }
+
+      if (!shouldWait) {
+        figureOutNextFloor();
+
+        if (currentFloor != null) {
+          moveToFloor(currentFloor);
+        }
+      }
+    } else {
+      resetAndGetReadyForNextPassenger();
     }
   }
 
-  private void beginCarMovement() {
-    final AvatarSteeringManager steeringManager = currentElevatorPassenger.getSteeringManager();
-    moveToFloor(currentElevatorPassenger.getBoardingFloor(), new TweenCallback() {
-      public void onEvent(int type, BaseTween source) {
-        // push a bit of padding to move avatar into middle of car.
+  private void resetAndGetReadyForNextPassenger() {
+    TweenSystem.getTweenManager().killTarget(this);
+    currentPassengers = null;
+    currentFloor = null;
+    currentDirection = null;
 
-        Vector2 avatarWalkToElevator = steeringManager.getCurrentPosition().toWorldVector2(gameGrid);
-        avatarWalkToElevator.x += currentElevatorPassenger.offsetX;
+    returnToLobby();
+  }
 
-        steeringManager.moveAvatarTo(avatarWalkToElevator, new TweenCallback() {
-          public void onEvent(int type, BaseTween source) {
-            currentElevatorPassenger.hasBoarded = true;
+  private void returnToLobby() {
+    moveToFloor(gameGrid.positionCache().getPosition(elevator.getContentPosition()));
+  }
 
-            moveToFloor(currentElevatorPassenger.getDestinationFloor(), new TweenCallback() {
-              public void onEvent(int type, BaseTween source) {
-                steeringManager.moveAvatarTo(steeringManager.getNextPosition().toWorldVector2(gameGrid), new TweenCallback() {
-                  public void onEvent(int type, BaseTween source) {
-                    currentElevatorPassenger.runCompleteCallback();
-                    currentElevatorPassenger = null;
-                  }
-                });
-              }
-            });
-          }
-        });
+  private void figureOutNextFloor() {
+    if (currentFloor != null) {
+      if (currentDirection.equals(UP)) {
+        currentFloor = gameGrid.positionCache().getPosition(currentFloor.x, currentFloor.y + 1);
+      } else {
+        currentFloor = gameGrid.positionCache().getPosition(currentFloor.x, currentFloor.y - 1);
       }
-    });
+    }
+
+    if (currentFloor == null) {
+      resetAndGetReadyForNextPassenger();
+    }
+  }
+
+  private boolean shouldWaitForPassengers() {
+    boolean waitingOnAnyone = false;
+    for (ElevatorPassengerEntry currentPassenger : currentPassengers) {
+      if (currentPassenger.shouldWaitFor()) {
+        waitingOnAnyone = true;
+        break;
+      }
+    }
+    return waitingOnAnyone;
+  }
+
+  private void beginCarMovement() {
+
   }
 
   public ElevatorPassengerEntry addPassenger(AvatarSteeringManager steeringManager) {
     final ElevatorPassengerEntry entryElevator = new ElevatorPassengerEntry(steeringManager, steeringManager.getCurrentPosition(), steeringManager.getNextPosition());
-    elevatorPassengers.add(entryElevator);
-
+    passengerQueue.add(entryElevator);
+    System.out.println(entryElevator + " has joined the queue!");
     return entryElevator;
   }
 

@@ -57,7 +57,7 @@ public class AvatarSteeringManager {
     transitLine = new TransitLine();
     transitLine.setColor(avatar.getColor());
     for (GridPosition position : Lists.newArrayList(discoveredPath)) {
-      transitLine.addPoint(position.toWorldVector2(gameGrid));
+      transitLine.addPoint(position.toWorldVector2());
     }
 
     gameGrid.getRenderer().addTransitLine(transitLine);
@@ -149,7 +149,7 @@ public class AvatarSteeringManager {
   }
 
   public void moveAvatarTo(GridPosition gridPosition, TweenCallback endCallback) {
-    moveAvatarTo(gridPosition.toWorldVector2(gameGrid), endCallback);
+    moveAvatarTo(gridPosition.toWorldVector2(), endCallback);
   }
 
   public void moveAvatarTo(Vector2 endPoint, TweenCallback endCallback) {

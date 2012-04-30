@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.math;
 
 import com.badlogic.gdx.math.Vector2;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.happydroids.droidtowers.grid.GameGrid;
 
 import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
 
@@ -24,12 +23,12 @@ public class GridPoint extends Vector2 {
   }
 
   @JsonIgnore
-  public float getWorldX(GameGrid gameGrid) {
+  public float getWorldX() {
     return (GRID_UNIT_SIZE * x);
   }
 
   @JsonIgnore
-  public float getWorldY(GameGrid gameGrid) {
+  public float getWorldY() {
     return (GRID_UNIT_SIZE * y);
   }
 
@@ -38,8 +37,8 @@ public class GridPoint extends Vector2 {
     return new GridPoint(x, y);
   }
 
-  public Vector2 toWorldVector2(GameGrid gameGrid) {
-    return new Vector2(getWorldX(gameGrid), getWorldY(gameGrid));
+  public Vector2 toWorldVector2() {
+    return new Vector2(getWorldX(), getWorldY());
   }
 
   public Vector2 toVector2() {

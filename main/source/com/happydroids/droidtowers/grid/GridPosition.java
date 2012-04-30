@@ -66,8 +66,8 @@ public class GridPosition {
     return new GridPoint(x, y);
   }
 
-  public Vector2 toWorldVector2(GameGrid gameGrid) {
-    return toGridPoint().toWorldVector2(gameGrid);
+  public Vector2 toWorldVector2() {
+    return toGridPoint().toWorldVector2();
   }
 
   @Override

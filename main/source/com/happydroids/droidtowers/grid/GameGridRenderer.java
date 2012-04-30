@@ -130,7 +130,7 @@ public class GameGridRenderer extends GameLayer {
       if (returnValue != null) {
         baseColor.a = returnValue;
         shapeRenderer.setColor(baseColor);
-        shapeRenderer.filledRect(gridObject.getPosition().getWorldX(gameGrid), gridObject.getPosition().getWorldY(gameGrid), gridObject.getSize().getWorldX(gameGrid), gridObject.getSize().getWorldY(gameGrid));
+        shapeRenderer.filledRect(gridObject.getPosition().getWorldX(), gridObject.getPosition().getWorldY(), gridObject.getSize().getWorldX(), gridObject.getSize().getWorldY());
       }
     }
 
@@ -151,7 +151,7 @@ public class GameGridRenderer extends GameLayer {
           position.sub(i, i);
           size.add(i * 2, i * 2);
 
-          shapeRenderer.filledRect(position.getWorldX(gameGrid), position.getWorldY(gameGrid), size.getWorldX(gameGrid), size.getWorldY(gameGrid));
+          shapeRenderer.filledRect(position.getWorldX(), position.getWorldY(), size.getWorldX(), size.getWorldY());
           shapeRenderer.setColor(Overlays.NOISE_LEVEL.getColor(noiseLevel));
 
           noiseLevel -= colorStep;
