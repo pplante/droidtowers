@@ -22,6 +22,8 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.events.CameraControllerEvent;
 import com.happydroids.droidtowers.input.CameraController;
 
+import static com.happydroids.droidtowers.TowerConsts.GAME_GRID_EXPAND_LAND_SIZE;
+
 public class ExpandLandOverlay extends WidgetGroup {
   private static final int PADDING = 300;
   private final GameGrid gameGrid;
@@ -46,26 +48,34 @@ public class ExpandLandOverlay extends WidgetGroup {
 
     leftButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        ExpandLandOverlay.this.gameGrid.setGridSize(ExpandLandOverlay.this.gameGrid.getGridSize().x + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE, ExpandLandOverlay.this.gameGrid.getGridSize().y);
-        ExpandLandOverlay.this.gameGrid.updateWorldSize();
-
-        for (GridObject gridObject : ExpandLandOverlay.this.gameGrid.getObjects()) {
-          gridObject.setPosition(gridObject.getPosition().x + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE, gridObject.getPosition().y);
-        }
-
-        Vector3 cameraPosition = CameraController.instance().getCamera().position.cpy();
-        CameraController.instance().getCamera().position.set(cameraPosition.x + (TowerConsts.GRID_UNIT_SIZE * TowerConsts.GAME_GRID_EXPAND_LAND_SIZE), cameraPosition.y, cameraPosition.z);
-        CameraController.instance().panTo(0, CameraController.instance().getCamera().position.y, true);
+        expandLandToWest();
       }
     });
 
     rightButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        ExpandLandOverlay.this.gameGrid.setGridSize(ExpandLandOverlay.this.gameGrid.getGridSize().x + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE, ExpandLandOverlay.this.gameGrid.getGridSize().y);
-        ExpandLandOverlay.this.gameGrid.updateWorldSize();
-        CameraController.instance().panTo(ExpandLandOverlay.this.gameGrid.getWorldSize().x - 10, CameraController.instance().getCamera().position.y, true);
+        expandLandToEast();
       }
     });
+  }
+
+  private void expandLandToEast() {
+    gameGrid.getGridSize().x += GAME_GRID_EXPAND_LAND_SIZE;
+    gameGrid.updateWorldSize();
+    CameraController.instance().panTo(gameGrid.getWorldSize().x, CameraController.instance().getCamera().position.y, true);
+  }
+
+  private void expandLandToWest() {
+    gameGrid.getGridSize().x += GAME_GRID_EXPAND_LAND_SIZE;
+    gameGrid.updateWorldSize();
+
+    for (GridObject gridObject : gameGrid.getObjects()) {
+      gridObject.getPosition().x += GAME_GRID_EXPAND_LAND_SIZE;
+    }
+
+    Vector3 cameraPosition = CameraController.instance().getCamera().position.cpy();
+    CameraController.instance().getCamera().position.set(cameraPosition.x + (TowerConsts.GRID_UNIT_SIZE * GAME_GRID_EXPAND_LAND_SIZE), cameraPosition.y, cameraPosition.z);
+    CameraController.instance().panTo(0, CameraController.instance().getCamera().position.y, true);
   }
 
   public float getPrefWidth() {

@@ -13,6 +13,7 @@ import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.*;
+import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.events.GridObjectAddedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -171,5 +172,10 @@ public class AvatarLayer extends GameLayer {
         removeChild(Iterables.getFirst(maids, null));
       }
     }
+  }
+
+  @Subscribe
+  public void GameGrid_onGameGridResize(GameGridResizeEvent event) {
+
   }
 }
