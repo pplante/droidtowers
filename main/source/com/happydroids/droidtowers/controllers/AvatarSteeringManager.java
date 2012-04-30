@@ -35,7 +35,7 @@ public class AvatarSteeringManager {
   private boolean running;
   private GridPosition currentPosition;
   private GridPosition nextPosition;
-  private TransitLine transitLine;
+  private TransitLine transitLine = new TransitLine();
   private boolean movingHorizontally;
   private Direction horizontalDirection;
   private Direction verticalDirection;
@@ -119,17 +119,10 @@ public class AvatarSteeringManager {
   }
 
   private void traverseElevator() {
-    final TransitLine elevatorLine = new TransitLine();
-    elevatorLine.addPoint(currentPosition.toWorldVector2(gameGrid));
-    elevatorLine.addPoint(nextPosition.toWorldVector2(gameGrid));
-
-    gameGrid.getRenderer().addTransitLine(elevatorLine);
-
     final ElevatorCar elevatorCar = currentPosition.elevator.getCar();
     elevatorCar.addPassenger(this)
             .addCallback(new Runnable() {
               public void run() {
-                gameGrid.getRenderer().removeTransitLine(elevatorLine);
                 advancePosition();
               }
             });
@@ -142,17 +135,10 @@ public class AvatarSteeringManager {
     final Vector2 start = verticalDir.equals(UP) ? stair.getBottomRightWorldPoint() : stair.getTopLeftWorldPoint();
     final Vector2 goal = verticalDir.equals(UP) ? stair.getTopLeftWorldPoint() : stair.getBottomRightWorldPoint();
 
-    final TransitLine stairLine = new TransitLine();
-    stairLine.addPoint(start);
-    stairLine.addPoint(goal);
-
-    gameGrid.getRenderer().addTransitLine(stairLine);
-
     moveAvatarTo(start, new TweenCallback() {
       public void onEvent(int type, BaseTween source) {
         moveAvatarTo(goal, new TweenCallback() {
           public void onEvent(int type, BaseTween source) {
-            gameGrid.getRenderer().removeTransitLine(stairLine);
             advancePosition();
           }
         });

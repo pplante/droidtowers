@@ -70,4 +70,8 @@ public class TransitLine {
   public void addPoints(List<Vector2> points) {
     this.points.addAll(points);
   }
+
+  public void clear() {
+    points.clear();
+  }
 }

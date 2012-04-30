@@ -54,6 +54,9 @@ public class ElevatorCar extends GameObject {
 
   @Subscribe
   public void Elevator_boundsChanged(GridObjectBoundsChangeEvent event) {
+    if (currentElevatorPassenger != null) {
+      currentElevatorPassenger.getSteeringManager().getAvatar().murderDeathKill187();
+    }
     setPosition(elevator.getWorldPosition());
   }
 

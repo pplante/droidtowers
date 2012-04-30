@@ -195,12 +195,13 @@ public class Avatar extends GameObject {
       PathSearchManager.instance().remove(pathFinder);
     }
 
-    lastPathFinderSearch = 0f;
+    lastPathFinderSearch = PATH_SEARCH_DELAY;
     steeringManager = null;
     pathFinder = null;
+  }
 
-    if (movingTo != null) {
-      navigateToGridObject(movingTo);
-    }
+  public void murderDeathKill187() {
+    cancelMovement();
+    AvatarLayer.instance().removeChild(this);
   }
 }

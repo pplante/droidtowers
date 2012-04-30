@@ -28,7 +28,7 @@ public class PathSearchManager {
     return _instance;
   }
 
-  public void queue(AStar pathFinder) {
+  public void queue(final AStar pathFinder) {
     pathFinders.add(pathFinder);
   }
 
