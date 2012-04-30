@@ -6,12 +6,13 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
@@ -20,8 +21,8 @@ import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
 import com.happydroids.droidtowers.input.GestureTool;
-import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.input.PickerTool;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.scenes.TowerScene;
 import com.happydroids.droidtowers.types.*;
@@ -30,19 +31,12 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class HeadsUpDisplay extends WidgetGroup {
   private TextureAtlas hudAtlas;
-  private Skin guiSkin;
   private OrthographicCamera camera;
   private GameGrid gameGrid;
-  private Menu addRoomMenu;
-  private Label statusLabel;
-  private float updateMoneyLabel;
   private static HeadsUpDisplay instance;
   private Toast toast;
-  private Menu overlayMenu;
-  private Table topBar;
   private ToolTip mouseToolTip;
   private GridObjectPurchaseMenu purchaseDialog;
-  private InputCallback closeDialogCallback = null;
   private RadialMenu toolMenu;
   private final StackGroup notificationStack;
   private ImageButton toolButton;
@@ -50,61 +44,41 @@ public class HeadsUpDisplay extends WidgetGroup {
   private TutorialStepNotification tutorialStep;
   private final StatusBarPanel statusBarPanel;
 
-  public HeadsUpDisplay(TowerScene towerScene) {
+  public HeadsUpDisplay(TowerScene towerScene, Stage stage, OrthographicCamera camera, GameGrid gameGrid) {
+    super();
+
     instance = this;
 
     notificationStack = new StackGroup();
 
-    this.stage = towerScene.getStage();
-    this.camera = towerScene.getCamera();
-    this.gameGrid = towerScene.getGameGrid();
-    guiSkin = TowerAssetManager.getGuiSkin();
+    this.stage = stage;
+    this.camera = camera;
+    this.gameGrid = gameGrid;
 
     hudAtlas = TowerAssetManager.textureAtlas("hud/buttons.txt");
 
     statusBarPanel = new StatusBarPanel(towerScene);
     statusBarPanel.x = 0;
-    statusBarPanel.y = stage.height() - statusBarPanel.height;
+    statusBarPanel.y = this.stage.height() - statusBarPanel.height;
     addActor(statusBarPanel);
 
     mouseToolTip = new ToolTip();
     addActor(mouseToolTip);
-    addActor(new ExpandLandOverlay(gameGrid));
+    addActor(new ExpandLandOverlay(this.gameGrid));
 
     buildToolButtonMenu();
 
-    buildHeaderButtons();
+    HeaderButtonBar headerButtonBar = new HeaderButtonBar(hudAtlas, gameGrid);
+    addActor(headerButtonBar);
+    headerButtonBar.x = stage.width() - headerButtonBar.width - 5;
+    headerButtonBar.y = stage.height() - headerButtonBar.height - 5;
 
     notificationStack.pad(10);
     notificationStack.x = 0;
     notificationStack.y = 0;
     addActor(notificationStack);
 
-    stage.addActor(this);
-  }
-
-  private void buildHeaderButtons() {
-    final AudioControl audioControl = new AudioControl(hudAtlas);
-    final OverlayControl overlayControl = new OverlayControl(hudAtlas, guiSkin, gameGrid.getRenderer());
-
-    ImageButton achievementsButton = new ImageButton(TowerAssetManager.textureFromAtlas("achievements", "hud/buttons.txt"));
-    achievementsButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        new AchievementListView(getStage(), guiSkin).show();
-      }
-    });
-
-    Table container = new Table(guiSkin);
-    container.defaults().center().right().space(5);
-    container.clear();
-    container.add(achievementsButton);
-    container.add(audioControl);
-    container.add(overlayControl);
-    container.pack();
-
-    container.x = stage.width() - container.width - 5;
-    container.y = stage.height() - container.height - 5;
-    addActor(container);
+    this.stage.addActor(this);
   }
 
   private void buildToolButtonMenu() {
@@ -168,14 +142,6 @@ public class HeadsUpDisplay extends WidgetGroup {
     });
   }
 
-  private void layoutTopLeftButtons(Table topLeftButtons, TextButton connectFacebookButton, AudioControl audioControl, OverlayControl overlayControl) {
-    topLeftButtons.clear();
-    topLeftButtons.add(connectFacebookButton);
-    topLeftButtons.add(audioControl);
-    topLeftButtons.add(overlayControl);
-    topLeftButtons.pack();
-  }
-
   private ClickListener makePurchaseButtonClickListener(final String dialogTitle, final GridObjectTypeFactory typeFactory) {
     return new VibrateClickListener() {
       public void onClick(Actor actor, float x, float y) {
@@ -197,7 +163,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   }
 
   private void makePurchaseDialog(String title, GridObjectTypeFactory typeFactory, ImageButton.ImageButtonStyle style) {
-    purchaseDialog = new GridObjectPurchaseMenu(getStage(), guiSkin, title, typeFactory, new Runnable() {
+    purchaseDialog = new GridObjectPurchaseMenu(getStage(), TowerAssetManager.getGuiSkin(), title, typeFactory, new Runnable() {
       public void run() {
         toolButton.setStyle(toolButtonStyle);
       }
@@ -206,18 +172,13 @@ public class HeadsUpDisplay extends WidgetGroup {
     purchaseDialog.setDismissCallback(new Runnable() {
       public void run() {
         purchaseDialog = null;
-        if (InputSystem.instance().getCurrentTool() == GestureTool.PICKER) {
+        if (InputSystem.instance().getCurrentTool() instanceof PickerTool) {
           toolButton.setStyle(toolButtonStyle);
         }
       }
     });
 
     purchaseDialog.show();
-  }
-
-  @Override
-  public void draw(SpriteBatch batch, float parentAlpha) {
-    super.draw(batch, parentAlpha);
   }
 
   @Override

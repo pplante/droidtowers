@@ -9,6 +9,7 @@ import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.happydroids.droidtowers.input.GestureTool;
@@ -21,6 +22,28 @@ import static com.happydroids.droidtowers.gui.WidgetAccessor.*;
 public class RadialMenu extends WidgetGroup {
   public float radius;
   public float arc;
+  private InputAdapter closeMenuInputAdapter = new InputAdapter() {
+    @Override
+    public boolean touchDown(int x, int y, int pointer, int button) {
+      Vector2 touchDown = new Vector2();
+      getStage().toStageCoordinates(x, y, touchDown);
+      toLocalCoordinates(touchDown);
+
+      if (hit(touchDown.x, touchDown.y) == null) {
+        hide();
+        return true;
+      }
+      return false;
+    }
+  };
+  private InputCallback closeMenuInputCallback = new InputCallback() {
+    public boolean run(float timeDelta) {
+      InputSystem.instance().switchTool(GestureTool.PICKER, null);
+      hide();
+      unbind();
+      return true;
+    }
+  };
 
   public RadialMenu() {
     visible = false;
@@ -36,23 +59,8 @@ public class RadialMenu extends WidgetGroup {
   }
 
   public void show() {
-    InputSystem.instance().bind(InputSystem.Keys.ESCAPE, new InputCallback() {
-      public boolean run(float timeDelta) {
-        InputSystem.instance().switchTool(GestureTool.PICKER, null);
-        hide();
-        unbind();
-        return true;
-      }
-    });
-    InputSystem.instance().addInputProcessor(new InputAdapter() {
-      @Override
-      public boolean touchDown(int x, int y, int pointer, int button) {
-        hide();
-        InputSystem.instance().removeInputProcessor(this);
-        return true;
-      }
-    }, 100000);
-
+    InputSystem.instance().bind(InputSystem.Keys.ESCAPE, closeMenuInputCallback);
+    InputSystem.instance().addInputProcessor(closeMenuInputAdapter, 0);
 
     visible = true;
 
@@ -65,7 +73,6 @@ public class RadialMenu extends WidgetGroup {
     for (Actor child : children) {
       child.color.a = 0;
       child.x = child.y = 0;
-//      child.scaleX = child.scaleY = 0;
 
       float radian = (float) ((angle * index + angle / 2) * (Math.PI / 180f));
 
@@ -81,6 +88,8 @@ public class RadialMenu extends WidgetGroup {
   }
 
   public void hide() {
+    InputSystem.instance().removeInputProcessor(closeMenuInputAdapter);
+
     Tween.to(this, OPACITY, 150)
             .target(0.0f)
             .setCallback(new TweenCallback() {

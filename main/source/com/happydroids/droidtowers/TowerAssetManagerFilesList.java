@@ -30,6 +30,7 @@ public class TowerAssetManagerFilesList {
     preloadFiles.put("hud/toast-bg.png", Texture.class);
     preloadFiles.put("hud/window-bg.png", Texture.class);
     files.put("rooms/generic.txt", TextureAtlas.class);
+    preloadFiles.put("swatches/swatch-white-triangle.png", Texture.class);
     files.put("fonts/roboto_white_12.fnt", BitmapFont.class);
     files.put("fonts/roboto_white_128.fnt", BitmapFont.class);
     files.put("fonts/roboto_white_48.fnt", BitmapFont.class);
@@ -39,8 +40,8 @@ public class TowerAssetManagerFilesList {
     files.put("fonts/roboto_white_14.fnt", BitmapFont.class);
     files.put("backgrounds/clouds.txt", TextureAtlas.class);
     files.put("backgrounds/ground-tile.png", Texture.class);
-    files.put("fonts/helvetica_neue_14_black.fnt", BitmapFont.class);
     files.put("backgrounds/clouds.png", Texture.class);
+    files.put("fonts/helvetica_neue_14_black.fnt", BitmapFont.class);
     files.put("fonts/hiragino_maru_14_white.fnt", BitmapFont.class);
     files.put("backgrounds/sky-gradient.png", Texture.class);
     files.put("fonts/menlo_14_bold_white.fnt", BitmapFont.class);

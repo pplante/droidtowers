@@ -86,7 +86,7 @@ public class TowerScene extends Scene {
     gameGridRenderer = gameGrid.getRenderer();
     gameState = new GameState(camera, gameSaveLocation, gameSave, gameGrid);
 
-    headsUpDisplay = new HeadsUpDisplay(this);
+    headsUpDisplay = new HeadsUpDisplay(this, this.getStage(), this.getCamera(), this.getGameGrid());
     weatherService = new WeatherService();
 
 //    towerMiniMap.x = 100;

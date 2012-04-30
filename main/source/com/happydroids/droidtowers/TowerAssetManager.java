@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Logger;
 import com.happydroids.HappyDroidConsts;
@@ -29,6 +30,7 @@ public class TowerAssetManager {
   private static final String TAG = TowerAssetManager.class.getSimpleName();
   private static MemoryTrackingAssetManager assetManager;
   public static final String WHITE_SWATCH = "swatches/swatch-white.png";
+  public static final String WHITE_SWATCH_TRIANGLE = "swatches/swatch-white-triangle.png";
   private static Skin skin;
 
   @SuppressWarnings("unchecked")
@@ -125,5 +127,9 @@ public class TowerAssetManager {
 
   public static Skin getGuiSkin() {
     return skin;
+  }
+
+  public static ImageButton imageButton(TextureAtlas.AtlasRegion region) {
+    return new ImageButton(region);
   }
 }
