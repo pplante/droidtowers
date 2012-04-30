@@ -30,7 +30,7 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
   private Runnable postConnectRunnable;
 
   public ConnectToHappyDroidsWindow(Stage stage, Skin skin) {
-    super("Connect to Happy Droids", stage, skin);
+    super("Connect to Happy Droids", stage);
 
     clear();
     row().pad(10);
@@ -41,7 +41,7 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
     add(FontManager.Roboto24.makeLabel("After logging in, type the code below to connect your game."));
     row().expand();
 
-    accessTokenButton = FontManager.RobotoBold18.makeTextButton("CODE: Reticulating splines...", skin);
+    accessTokenButton = FontManager.RobotoBold18.makeTextButton("CODE: Reticulating splines...");
     accessTokenButton.visible = false;
 
     final Label sessionStatus = FontManager.Roboto24.makeLabel("Waiting for You to login...");

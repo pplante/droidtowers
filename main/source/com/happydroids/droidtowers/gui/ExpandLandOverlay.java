@@ -11,7 +11,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.Colors;
@@ -30,7 +29,7 @@ public class ExpandLandOverlay extends WidgetGroup {
   private Button leftButton;
   private Button rightButton;
 
-  public ExpandLandOverlay(GameGrid gameGrid, Skin guiSkin) {
+  public ExpandLandOverlay(GameGrid gameGrid) {
     this.gameGrid = gameGrid;
     CameraController.events().register(this);
 

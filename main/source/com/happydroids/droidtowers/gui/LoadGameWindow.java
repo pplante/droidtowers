@@ -27,7 +27,7 @@ public class LoadGameWindow extends ScrollableTowerWindow {
   private boolean foundSaveFile;
 
   public LoadGameWindow(Stage stage, Skin skin) {
-    super("Load a Tower", stage, skin);
+    super("Load a Tower", stage);
 
     FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
     FileHandle[] files = storage.list(".json");
@@ -83,7 +83,7 @@ public class LoadGameWindow extends ScrollableTowerWindow {
   }
 
   private Table makeGameFileInfoBox(final Table fileRow, final FileHandle savedGameFile, GameSave towerData) {
-    TextButton launchButton = FontManager.RobotoBold18.makeTextButton("Play", skin);
+    TextButton launchButton = FontManager.RobotoBold18.makeTextButton("Play");
     launchButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         dismiss();
@@ -95,7 +95,7 @@ public class LoadGameWindow extends ScrollableTowerWindow {
       }
     });
 
-    TextButton deleteButton = FontManager.RobotoBold18.makeTextButton("Delete", skin);
+    TextButton deleteButton = FontManager.RobotoBold18.makeTextButton("Delete");
     deleteButton.setClickListener(new ClickListener() {
       public void click(final Actor actor, float x, float y) {
         new Dialog().setTitle("Are you sure you want to delete this Tower?")

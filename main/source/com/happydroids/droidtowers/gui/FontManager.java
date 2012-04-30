@@ -7,13 +7,17 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.google.common.collect.Maps;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.platform.Display;
 
 import java.util.HashMap;
 
+import static com.happydroids.droidtowers.TowerAssetManager.getGuiSkin;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public enum FontManager {
@@ -88,16 +92,16 @@ public enum FontManager {
     return makeLabel(text, Color.WHITE);
   }
 
-  public TransparentTextButton makeTransparentButton(String labelText, final Skin skin) {
-    return applyTextButtonLabelStyle(new TransparentTextButton(labelText, skin));
+  public TransparentTextButton makeTransparentButton(String labelText) {
+    return applyTextButtonLabelStyle(new TransparentTextButton(labelText, getGuiSkin()));
   }
 
-  public TextButton makeTextButton(String labelText, Skin skin) {
-    return applyTextButtonLabelStyle(new TextButton(labelText, skin));
+  public TextButton makeTextButton(String labelText) {
+    return applyTextButtonLabelStyle(new TextButton(labelText, getGuiSkin()));
   }
 
-  public CheckBox makeCheckBox(String labelText, Skin skin) {
-    return applyTextButtonLabelStyle(new CheckBox(labelText, skin));
+  public CheckBox makeCheckBox(String labelText) {
+    return applyTextButtonLabelStyle(new CheckBox(labelText, getGuiSkin()));
   }
 
   private <T extends TextButton> T applyTextButtonLabelStyle(T textButton) {
@@ -109,9 +113,9 @@ public enum FontManager {
     return textButton;
   }
 
-  public TextField makeTextField(String labelText, String hintText, Skin skin) {
+  public TextField makeTextField(String labelText, String hintText) {
     if (textFieldStyle == null) {
-      TextField.TextFieldStyle defaultStyle = skin.getStyle(TextField.TextFieldStyle.class);
+      TextField.TextFieldStyle defaultStyle = getGuiSkin().getStyle(TextField.TextFieldStyle.class);
       textFieldStyle = new TextField.TextFieldStyle(getFont(), Color.WHITE, getFont(), defaultStyle.messageFontColor, defaultStyle.cursor, defaultStyle.selection, defaultStyle.background);
     }
 

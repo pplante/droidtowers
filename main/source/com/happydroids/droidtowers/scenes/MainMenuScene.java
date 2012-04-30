@@ -60,11 +60,11 @@ public class MainMenuScene extends Scene {
             .repeatYoyo(Tween.INFINITY, 250)
             .start(TweenSystem.getTweenManager());
 
-    TextButton newGameButton = FontManager.RobotoBold18.makeTextButton("new game", TowerAssetManager.getGuiSkin());
+    TextButton newGameButton = FontManager.RobotoBold18.makeTextButton("new game");
     container.add(newGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row().padTop(BUTTON_SPACING);
 
-    TextButton loadGameButton = FontManager.RobotoBold18.makeTextButton("load game", TowerAssetManager.getGuiSkin());
+    TextButton loadGameButton = FontManager.RobotoBold18.makeTextButton("load game");
     container.add(loadGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row().padTop(BUTTON_SPACING);
 
@@ -73,7 +73,7 @@ public class MainMenuScene extends Scene {
 //    wrapper.row().padTop(BUTTON_SPACING);
 
     if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT) {
-      final TextButton connectFacebookButton = FontManager.RobotoBold18.makeTextButton("login to happydroids.com", TowerAssetManager.getGuiSkin());
+      final TextButton connectFacebookButton = FontManager.RobotoBold18.makeTextButton("login to happydroids.com");
       connectFacebookButton.visible = false;
       container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
       container.row().padTop(BUTTON_SPACING);
@@ -93,7 +93,7 @@ public class MainMenuScene extends Scene {
       });
     }
 
-    TextButton exitGameButton = FontManager.RobotoBold18.makeTextButton("exit game", TowerAssetManager.getGuiSkin());
+    TextButton exitGameButton = FontManager.RobotoBold18.makeTextButton("exit game");
     container.add(exitGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row();
 

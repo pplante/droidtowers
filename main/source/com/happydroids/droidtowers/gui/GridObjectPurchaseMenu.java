@@ -23,7 +23,7 @@ public class GridObjectPurchaseMenu extends TowerWindow {
   private final Runnable toolCleanupRunnable;
 
   public GridObjectPurchaseMenu(Stage stage, Skin skin, String objectTypeName, GridObjectTypeFactory typeFactory, final Runnable toolCleanupRunnable) {
-    super("Purchase " + objectTypeName, stage, skin);
+    super("Purchase " + objectTypeName, stage);
     this.toolCleanupRunnable = toolCleanupRunnable;
 
     Table container = new Table();

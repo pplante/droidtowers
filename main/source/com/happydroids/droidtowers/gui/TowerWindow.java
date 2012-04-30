@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.droidtowers.TowerAssetManager;
@@ -25,15 +24,13 @@ public class TowerWindow {
   private InputCallback closeDialogCallback;
   private Runnable dismissCallback;
   protected final Stage stage;
-  protected final Skin skin;
   protected Table content;
   protected Table wrapper;
   private final Label titleLabel;
   private final TransparentTextButton closeButton;
 
-  public TowerWindow(String title, Stage stage, Skin skin) {
+  public TowerWindow(String title, Stage stage) {
     this.stage = stage;
-    this.skin = skin;
 
     wrapper = new Table();
     wrapper.defaults().top().left();
@@ -50,7 +47,7 @@ public class TowerWindow {
     wrapper.size((int) stage.width(), (int) stage.height());
 
     titleLabel = FontManager.Roboto32.makeLabel(title);
-    closeButton = FontManager.Roboto18.makeTransparentButton("< back", skin);
+    closeButton = FontManager.Roboto18.makeTransparentButton("< back");
 
     Table topBar = new Table();
     topBar.row().fill();

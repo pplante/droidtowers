@@ -6,11 +6,10 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class ScrollableTowerWindow extends TowerWindow {
-  public ScrollableTowerWindow(String title, Stage stage, Skin skin) {
-    super(title, stage, skin);
+  public ScrollableTowerWindow(String title, Stage stage) {
+    super(title, stage);
   }
 
   @Override

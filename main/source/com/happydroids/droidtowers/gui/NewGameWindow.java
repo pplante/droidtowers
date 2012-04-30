@@ -27,14 +27,14 @@ public class NewGameWindow extends TowerWindow {
   private final TextButton beginButton;
 
   public NewGameWindow(Stage stage, Skin skin) {
-    super("Start a new Tower", stage, skin);
+    super("Start a new Tower", stage);
 
     clear();
 
     row().space(ROW_SPACE).padTop(scale(32));
     add(FontManager.RobotoBold18.makeLabel("Please provide a name for your Tower:")).right();
 
-    final TextField nameField = FontManager.Roboto32.makeTextField("", "Tower Name", skin);
+    final TextField nameField = FontManager.Roboto32.makeTextField("", "Tower Name");
     nameField.setTextFieldListener(new TextField.TextFieldListener() {
       public void keyTyped(TextField textField, char key) {
         beginButton.touchable = textField.getText().length() > 1;
@@ -51,9 +51,9 @@ public class NewGameWindow extends TowerWindow {
 
     add(FontManager.RobotoBold18.makeLabel("Select level of difficulty:")).right();
 
-    TextButton easy = FontManager.RobotoBold18.makeCheckBox("Easy", skin);
-    TextButton medium = FontManager.RobotoBold18.makeCheckBox("Medium", skin);
-    TextButton hard = FontManager.RobotoBold18.makeCheckBox("Hard", skin);
+    TextButton easy = FontManager.RobotoBold18.makeCheckBox("Easy");
+    TextButton medium = FontManager.RobotoBold18.makeCheckBox("Medium");
+    TextButton hard = FontManager.RobotoBold18.makeCheckBox("Hard");
 
     Table buttonContainer = new Table(skin);
     buttonContainer.row().pad(4);
@@ -82,14 +82,14 @@ public class NewGameWindow extends TowerWindow {
 
     difficultyGroup.setChecked("Easy");
 
-    TextButton cancelButton = FontManager.RobotoBold18.makeTextButton("cancel", skin);
+    TextButton cancelButton = FontManager.RobotoBold18.makeTextButton("cancel");
     cancelButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         dismiss();
       }
     });
 
-    beginButton = FontManager.RobotoBold18.makeTextButton("Begin Building!", skin);
+    beginButton = FontManager.RobotoBold18.makeTextButton("Begin Building!");
     beginButton.touchable = false;
     beginButton.action(FadeTo.$(0.6f, 0f));
 

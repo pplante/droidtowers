@@ -67,11 +67,9 @@ public class HeadsUpDisplay extends WidgetGroup {
     statusBarPanel.y = stage.height() - statusBarPanel.height;
     addActor(statusBarPanel);
 
-    mouseToolTip = new ToolTip(guiSkin);
+    mouseToolTip = new ToolTip();
     addActor(mouseToolTip);
-
-
-    addActor(new ExpandLandOverlay(gameGrid, guiSkin));
+    addActor(new ExpandLandOverlay(gameGrid));
 
     buildToolButtonMenu();
 

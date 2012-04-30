@@ -30,7 +30,7 @@ public class OverlayControl extends ImageButton {
     overlayMenu.defaults().pad(4);
 
     for (final Overlays overlay : Overlays.values()) {
-      final CheckBox checkBox = FontManager.Roboto18.makeCheckBox(overlay.toString(), skin);
+      final CheckBox checkBox = FontManager.Roboto18.makeCheckBox(overlay.toString());
       checkBox.getLabelCell().pad(null).padLeft(scale(6));
       checkBox.setClickListener(new ClickListener() {
         public void click(Actor actor, float x, float y) {
@@ -49,7 +49,7 @@ public class OverlayControl extends ImageButton {
     }
 
     overlayMenu.row().colspan(2).left().pad(6, 2, 2, 2);
-    TextButton clearAllButton = FontManager.Roboto18.makeTextButton("Clear All", skin);
+    TextButton clearAllButton = FontManager.Roboto18.makeTextButton("Clear All");
     clearAllButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         gameGridRenderer.clearOverlays();

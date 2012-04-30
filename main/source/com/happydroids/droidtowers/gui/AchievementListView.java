@@ -28,7 +28,7 @@ public class AchievementListView extends ScrollableTowerWindow {
   private NinePatch itemSelectBackground;
 
   public AchievementListView(Stage stage, Skin skin) {
-    super("Achievements", stage, skin);
+    super("Achievements", stage);
 
     itemSelectBackground = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.ICS_BLUE);
 
@@ -47,7 +47,7 @@ public class AchievementListView extends ScrollableTowerWindow {
     actor.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(final Actor actor, float x, float y) {
-        new AchievementDetailView(achievement, stage, skin).show();
+        new AchievementDetailView(achievement, stage).show();
       }
     });
     add(actor).fill();

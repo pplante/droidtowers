@@ -7,7 +7,6 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.Requirement;
 import org.apache.commons.lang3.StringUtils;
@@ -17,8 +16,8 @@ import java.util.List;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class AchievementDetailView extends ScrollableTowerWindow {
-  public AchievementDetailView(Achievement achievement, Stage stage, Skin skin) {
-    super("Achievements > " + achievement.getName(), stage, skin);
+  public AchievementDetailView(Achievement achievement, Stage stage) {
+    super("Achievements > " + achievement.getName(), stage);
 
     defaults().top().left().space(scale(6));
 
