@@ -19,7 +19,6 @@ import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
 import com.happydroids.droidtowers.controllers.PathSearchManager;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
-import com.happydroids.droidtowers.gui.SpeechBubble;
 import com.happydroids.droidtowers.pathfinding.TransitPathFinder;
 import com.happydroids.droidtowers.pathfinding.WanderPathFinder;
 import com.happydroids.droidtowers.utils.Random;
@@ -48,7 +47,6 @@ public class Avatar extends GameObject {
   private float satisfactionShops;
   private float satisfactionFood;
   private Color myColor;
-  private SpeechBubble speechBubble;
   private float lastPathFinderSearch;
   protected GridObject movingTo;
   private TransitPathFinder pathFinder;
@@ -186,5 +184,23 @@ public class Avatar extends GameObject {
     }
 
     setColor((Color) colorIterator.next());
+  }
+
+  public void cancelMovement() {
+    if (steeringManager != null) {
+      steeringManager.cancel();
+    }
+
+    if (pathFinder != null) {
+      PathSearchManager.instance().remove(pathFinder);
+    }
+
+    lastPathFinderSearch = 0f;
+    steeringManager = null;
+    pathFinder = null;
+
+    if (movingTo != null) {
+      navigateToGridObject(movingTo);
+    }
   }
 }

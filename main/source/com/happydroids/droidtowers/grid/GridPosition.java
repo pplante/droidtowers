@@ -73,7 +73,7 @@ public class GridPosition {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (!(o instanceof GridPosition)) return false;
 
     GridPosition that = (GridPosition) o;
 
@@ -85,16 +85,5 @@ public class GridPosition {
     int result = x;
     result = 31 * result + y;
     return result;
-  }
-
-  @Override
-  public String toString() {
-    return "GridPosition{" +
-                   "connectedToTransit=" + connectedToTransit +
-                   ", x=" + x +
-                   ", y=" + y +
-                   ", stair=" + stair +
-                   ", elevator=" + elevator +
-                   '}';
   }
 }

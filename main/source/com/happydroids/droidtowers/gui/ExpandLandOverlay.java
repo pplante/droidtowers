@@ -16,10 +16,13 @@ import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.audio.GameGridSoundDispatcher;
+import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.events.CameraControllerEvent;
 import com.happydroids.droidtowers.input.CameraController;
+import com.happydroids.droidtowers.math.GridPoint;
 
 import static com.happydroids.droidtowers.TowerConsts.GAME_GRID_EXPAND_LAND_SIZE;
 
@@ -59,22 +62,29 @@ public class ExpandLandOverlay extends WidgetGroup {
   }
 
   private void expandLandToEast() {
+    GameGridSoundDispatcher.setSoundsAllowed(false);
     gameGrid.getGridSize().x += GAME_GRID_EXPAND_LAND_SIZE;
     gameGrid.updateWorldSize();
+
     CameraController.instance().panTo(gameGrid.getWorldSize().x, CameraController.instance().getCamera().position.y, true);
+    GameGridSoundDispatcher.setSoundsAllowed(true);
   }
 
   private void expandLandToWest() {
+    GameGridSoundDispatcher.setSoundsAllowed(false);
     gameGrid.getGridSize().x += GAME_GRID_EXPAND_LAND_SIZE;
     gameGrid.updateWorldSize();
 
     for (GridObject gridObject : gameGrid.getObjects()) {
-      gridObject.getPosition().x += GAME_GRID_EXPAND_LAND_SIZE;
+      GridPoint position = gridObject.getPosition();
+      gridObject.setPosition(position.x + GAME_GRID_EXPAND_LAND_SIZE, position.y);
     }
+    AvatarLayer.instance().adjustAvatarPositions(GAME_GRID_EXPAND_LAND_SIZE);
 
     Vector3 cameraPosition = CameraController.instance().getCamera().position.cpy();
     CameraController.instance().getCamera().position.set(cameraPosition.x + (TowerConsts.GRID_UNIT_SIZE * GAME_GRID_EXPAND_LAND_SIZE), cameraPosition.y, cameraPosition.z);
     CameraController.instance().panTo(0, CameraController.instance().getCamera().position.y, true);
+    GameGridSoundDispatcher.setSoundsAllowed(true);
   }
 
   public float getPrefWidth() {

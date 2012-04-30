@@ -17,22 +17,27 @@ public class GameGridSoundDispatcher {
   private final Sound constructionSound;
   private Sound destructionSound;
   private GameGrid gameGrid;
+  private static boolean soundsAllowed;
 
   public GameGridSoundDispatcher() {
     constructionSound = Gdx.audio.newSound(Gdx.files.internal("sound/effects/construction-placement-1.wav"));
     destructionSound = Gdx.audio.newSound(Gdx.files.internal("sound/effects/construction-destroy-1.wav"));
   }
 
+  public static void setSoundsAllowed(boolean soundsAllowed) {
+    GameGridSoundDispatcher.soundsAllowed = soundsAllowed;
+  }
+
   @Subscribe
   public void GameGrid_onGridObjectPlaced(GridObjectPlacedEvent event) {
-    if (!TowerGame.isAudioEnabled()) return;
+    if (!TowerGame.isAudioEnabled() || !soundsAllowed) return;
 
     constructionSound.play();
   }
 
   @Subscribe
   public void GameGrid_onGridObjectRemoved(GridObjectRemovedEvent event) {
-    if (!TowerGame.isAudioEnabled()) return;
+    if (!TowerGame.isAudioEnabled() || !soundsAllowed) return;
 
     if (event.gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
       destructionSound.play();
@@ -55,4 +60,6 @@ public class GameGridSoundDispatcher {
       gameGrid.events().register(this);
     }
   }
+
+
 }

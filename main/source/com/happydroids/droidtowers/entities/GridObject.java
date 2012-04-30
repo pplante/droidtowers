@@ -142,7 +142,7 @@ public abstract class GridObject {
     broadcastEvent(new GridObjectBoundsChangeEvent(this, size, prevPosition));
   }
 
-  protected void updateWorldCoordinates() {
+  public void updateWorldCoordinates() {
     worldPosition.set(gameGrid.getGridOrigin().x + (position.getWorldX(gameGrid) * gameGrid.getGridScale()), gameGrid.getGridOrigin().y + (position.getWorldY(gameGrid) * gameGrid.getGridScale()));
     worldSize.set(size.getWorldX(gameGrid) * gameGrid.getGridScale(), size.getWorldY(gameGrid) * gameGrid.getGridScale());
     worldBounds.set(worldPosition.x, worldPosition.y, worldSize.x, worldSize.y);

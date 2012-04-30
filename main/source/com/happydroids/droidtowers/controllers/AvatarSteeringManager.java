@@ -65,9 +65,8 @@ public class AvatarSteeringManager {
     advancePosition();
   }
 
-  private void stop() {
-    running = false;
-    gameGrid.getRenderer().removeTransitLine(transitLine);
+  public void finished() {
+    cancel();
 
     if (completeCallback != null) {
       completeCallback.run();
@@ -75,9 +74,15 @@ public class AvatarSteeringManager {
     }
   }
 
+  public void cancel() {
+    running = false;
+    TweenSystem.getTweenManager().killTarget(avatar);
+    gameGrid.getRenderer().removeTransitLine(transitLine);
+  }
+
   private void advancePosition() {
     if (discoveredPath.peek() == null) {
-      stop();
+      finished();
       return;
     }
 
@@ -164,7 +169,7 @@ public class AvatarSteeringManager {
   public void moveAvatarTo(Vector2 endPoint, TweenCallback endCallback) {
     currentState.add(AvatarState.MOVING);
 
-    TweenSystem.getTweenManager().killTarget(this);
+    TweenSystem.getTweenManager().killTarget(avatar);
 
     horizontalDirection = (int) endPoint.x < (int) avatar.getX() ? LEFT : RIGHT;
     verticalDirection = (int) endPoint.y < (int) avatar.getY() ? DOWN : UP;

@@ -44,10 +44,6 @@ public class GridPositionCache {
         gridPositions[x][y] = new GridPosition(x, y);
       }
     }
-
-    for (GridObject gridObject : gameGrid.getObjects()) {
-      addGridObjectToPosition(gridObject);
-    }
   }
 
   @Subscribe

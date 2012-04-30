@@ -281,4 +281,8 @@ public class GameGrid extends GameLayer {
   public void setGridScale(float gridScale) {
     this.gridScale = gridScale;
   }
+
+  public float toWorldSpace(int gridSpaces) {
+    return TowerConsts.GRID_UNIT_SIZE * gridSpaces * gridScale;
+  }
 }

@@ -32,6 +32,13 @@ public abstract class AStar<T> {
     }
   }
 
+  public void cancel() {
+    working = false;
+    lastCost = Double.MAX_VALUE;
+    paths.clear();
+  }
+
+
   private class Path implements Comparable {
 
     public T point;
@@ -104,7 +111,7 @@ public abstract class AStar<T> {
    */
   protected abstract List<T> generateSuccessors(T node);
 
-  private PriorityQueue<Path> paths;
+  protected PriorityQueue<Path> paths;
 
 
   private HashMap<T, Double> mindists;
@@ -222,5 +229,42 @@ public abstract class AStar<T> {
 
   public LinkedList<T> getDiscoveredPath() {
     return discoveredPath;
+  }
+
+  @SuppressWarnings("RedundantIfStatement")
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof AStar)) return false;
+
+    AStar aStar = (AStar) o;
+
+    if (expandedCounter != aStar.expandedCounter) return false;
+    if (working != aStar.working) return false;
+    if (completeCallback != null ? !completeCallback.equals(aStar.completeCallback) : aStar.completeCallback != null)
+      return false;
+    if (discoveredPath != null ? !discoveredPath.equals(aStar.discoveredPath) : aStar.discoveredPath != null)
+      return false;
+    if (goal != null ? !goal.equals(aStar.goal) : aStar.goal != null) return false;
+    if (lastCost != null ? !lastCost.equals(aStar.lastCost) : aStar.lastCost != null) return false;
+    if (mindists != null ? !mindists.equals(aStar.mindists) : aStar.mindists != null) return false;
+    if (paths != null ? !paths.equals(aStar.paths) : aStar.paths != null) return false;
+    if (start != null ? !start.equals(aStar.start) : aStar.start != null) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = discoveredPath != null ? discoveredPath.hashCode() : 0;
+    result = 31 * result + (working ? 1 : 0);
+    result = 31 * result + (completeCallback != null ? completeCallback.hashCode() : 0);
+    result = 31 * result + (start != null ? start.hashCode() : 0);
+    result = 31 * result + (goal != null ? goal.hashCode() : 0);
+    result = 31 * result + (paths != null ? paths.hashCode() : 0);
+    result = 31 * result + (mindists != null ? mindists.hashCode() : 0);
+    result = 31 * result + (lastCost != null ? lastCost.hashCode() : 0);
+    result = 31 * result + expandedCounter;
+    return result;
   }
 }

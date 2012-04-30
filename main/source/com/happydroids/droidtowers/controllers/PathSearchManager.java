@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.controllers;
 
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.pathfinding.AStar;
+import com.happydroids.droidtowers.pathfinding.TransitPathFinder;
 
 import java.util.LinkedList;
 
@@ -45,5 +46,15 @@ public class PathSearchManager {
       currentPathFinder = pathFinders.poll();
       currentPathFinder.start();
     }
+  }
+
+  public void remove(TransitPathFinder pathFinder) {
+    pathFinders.remove(pathFinder);
+
+    if (pathFinder.equals(currentPathFinder)) {
+      currentPathFinder = null;
+    }
+
+    pathFinder.cancel();
   }
 }

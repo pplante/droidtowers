@@ -163,4 +163,11 @@ public class AvatarLayer extends GameLayer {
   public void GameGrid_onGameGridResize(GameGridResizeEvent event) {
 
   }
+
+  public void adjustAvatarPositions(int adjustX) {
+    for (Avatar avatar : avatars) {
+      avatar.setX(avatar.getX() + gameGrid.toWorldSpace(adjustX));
+      avatar.cancelMovement();
+    }
+  }
 }
