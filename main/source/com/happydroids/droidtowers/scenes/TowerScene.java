@@ -156,7 +156,7 @@ public class TowerScene extends Scene {
           neighborGameGrid.setOwnerName(friendCloudGameSave.getOwner().getFirstName());
           neighborGameGrid.setClickListener(new Runnable() {
             public void run() {
-              HeadsUpDisplay.instance().showToast("HELLO FROM " + friendCloudGameSave.getOwner().getFirstName());
+              HeadsUpDisplay.showToast("HELLO FROM " + friendCloudGameSave.getOwner().getFirstName());
             }
           });
 

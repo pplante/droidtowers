@@ -51,7 +51,7 @@ public class TutorialStepNotification extends Table {
   }
 
   public void show() {
-    HeadsUpDisplay.instance().setTutorialStep(this);
+    HeadsUpDisplay.setTutorialStepNotification(this);
 
     Timeline.createSequence()
             .push(Tween.set(this, WidgetAccessor.OPACITY).target(0.0f))

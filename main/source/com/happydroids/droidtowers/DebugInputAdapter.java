@@ -19,7 +19,7 @@ class DebugInputAdapter extends InputAdapter {
     if (TowerGame.getActiveScene() instanceof TowerScene) {
       if (keys.toString().endsWith("ggmoney")) {
         Player.instance().addCurrency(100000);
-        HeadsUpDisplay.instance().showToast("Money!!!!");
+        HeadsUpDisplay.showToast("Money!!!!");
       }
     }
 

@@ -43,7 +43,7 @@ public class CameraController implements GestureDetector.GestureListener {
 
   public static CameraController instance() {
     if (instance == null) {
-      throw new RuntimeException("Must call CameraController.bindKeys() before!");
+      throw new RuntimeException("Must call CameraController.initialize() before!");
     }
 
     return instance;

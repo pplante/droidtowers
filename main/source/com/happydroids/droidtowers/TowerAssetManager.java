@@ -29,6 +29,7 @@ public class TowerAssetManager {
   private static final String TAG = TowerAssetManager.class.getSimpleName();
   private static MemoryTrackingAssetManager assetManager;
   public static final String WHITE_SWATCH = "swatches/swatch-white.png";
+  private static Skin skin;
 
   @SuppressWarnings("unchecked")
   public static MemoryTrackingAssetManager assetManager() {
@@ -116,5 +117,13 @@ public class TowerAssetManager {
 
   public static Sprite sprite(String fileName) {
     return new Sprite(texture(fileName));
+  }
+
+  public static void setGuiSkin(Skin guiSkin) {
+    skin = guiSkin;
+  }
+
+  public static Skin getGuiSkin() {
+    return skin;
   }
 }

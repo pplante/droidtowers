@@ -10,11 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.platform.Display;
-import com.happydroids.droidtowers.scenes.Scene;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class Dialog extends TowerWindow {
   }
 
   public Dialog(Stage stage) {
-    super("Dialog", stage, Scene.getGuiSkin());
+    super("Dialog", stage, TowerAssetManager.getGuiSkin());
 
     buttons = Lists.newArrayList();
 

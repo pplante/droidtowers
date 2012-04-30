@@ -15,7 +15,6 @@
     <orderEntry type="library" exported="" name="apache-commons" level="project" />
     <orderEntry type="module" module-name="main" />
     <orderEntry type="library" name="desktop" level="project" />
-    <orderEntry type="library" name="jquery" level="application" />
   </component>
 </module>
 

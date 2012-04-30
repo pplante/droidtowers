@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.scenes;
 
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gui.ConnectToHappyDroidsWindow;
 
@@ -16,7 +17,7 @@ public class HappyDroidConnect extends Scene {
     if (args != null && args.length > 0) {
       postConnectRunnable = (Runnable) args[0];
     }
-    connectWindow = new ConnectToHappyDroidsWindow(getStage(), getGuiSkin());
+    connectWindow = new ConnectToHappyDroidsWindow(getStage(), TowerAssetManager.getGuiSkin());
     connectWindow.setDismissCallback(new Runnable() {
       public void run() {
         TowerGame.changeScene(MainMenuScene.class);

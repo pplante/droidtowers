@@ -36,7 +36,6 @@ public class MovieTheater extends CommercialSpace {
     if (avengersTime <= currentMillis) {
       avengersTime = currentMillis + 140000;
       animationTime = 0f;
-//      HeadsUpDisplay.instance().showTipBubble(this, "Now Playing: THE AVENGERS");
     }
 
     Vector2 worldCenter = getWorldCenter();

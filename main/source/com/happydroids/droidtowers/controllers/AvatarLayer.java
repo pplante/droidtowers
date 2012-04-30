@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.controllers;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -126,20 +125,6 @@ public class AvatarLayer extends GameLayer {
     } else {
       avatars.remove(gameObject);
     }
-  }
-
-  @Override
-  public boolean tap(Vector2 worldPoint, int count) {
-    for (GameObject gameObject : gameObjects) {
-      if (gameObject.getBoundingRectangle().contains(worldPoint.x, worldPoint.y)) {
-        Avatar avatar = (Avatar) gameObject;
-        avatar.tap(worldPoint, count);
-
-        return true;
-      }
-    }
-
-    return false;
   }
 
   @Subscribe

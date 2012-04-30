@@ -115,7 +115,7 @@ public class PlacementTool extends ToolBase {
 
   private boolean finishPurchase() {
     if (!gameGrid.canObjectBeAt(gridObject)) {
-      HeadsUpDisplay.instance().showToast("This object cannot be placed here.");
+      HeadsUpDisplay.showToast("This object cannot be placed here.");
       return true;
     } else {
       gridObject.setPlacementState(GridObjectPlacementState.PLACED);

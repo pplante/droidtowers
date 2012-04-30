@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
+import com.happydroids.droidtowers.Colors;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
@@ -22,7 +24,7 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 public class AchievementNotification extends Table {
 
   public AchievementNotification(Achievement achievement) {
-    setBackground(HeadsUpDisplay.instance().getGuiSkin().getPatch("default-round"));
+    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.TRANSPARENT_BLACK));
 
     defaults().top().left().pad(scale(4));
 
@@ -41,7 +43,7 @@ public class AchievementNotification extends Table {
   }
 
   public void show() {
-    HeadsUpDisplay.instance().getNotificationStack().addActor(this);
+    HeadsUpDisplay.getNotificationStack().addActor(this);
 
     Timeline.createSequence()
             .push(Tween.set(this, WidgetAccessor.OPACITY).target(0.0f))

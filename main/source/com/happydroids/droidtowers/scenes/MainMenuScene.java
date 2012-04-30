@@ -43,7 +43,7 @@ public class MainMenuScene extends Scene {
 
   @Override
   public void create(Object... args) {
-    final Table container = new Table(getGuiSkin());
+    final Table container = new Table(TowerAssetManager.getGuiSkin());
     container.defaults().center().left();
 
     Label label = FontManager.Roboto64.makeLabel("Droid Towers");
@@ -60,11 +60,11 @@ public class MainMenuScene extends Scene {
             .repeatYoyo(Tween.INFINITY, 250)
             .start(TweenSystem.getTweenManager());
 
-    TextButton newGameButton = FontManager.RobotoBold18.makeTextButton("new game", getGuiSkin());
+    TextButton newGameButton = FontManager.RobotoBold18.makeTextButton("new game", TowerAssetManager.getGuiSkin());
     container.add(newGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row().padTop(BUTTON_SPACING);
 
-    TextButton loadGameButton = FontManager.RobotoBold18.makeTextButton("load game", getGuiSkin());
+    TextButton loadGameButton = FontManager.RobotoBold18.makeTextButton("load game", TowerAssetManager.getGuiSkin());
     container.add(loadGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row().padTop(BUTTON_SPACING);
 
@@ -73,7 +73,7 @@ public class MainMenuScene extends Scene {
 //    wrapper.row().padTop(BUTTON_SPACING);
 
     if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT) {
-      final TextButton connectFacebookButton = FontManager.RobotoBold18.makeTextButton("login to happydroids.com", getGuiSkin());
+      final TextButton connectFacebookButton = FontManager.RobotoBold18.makeTextButton("login to happydroids.com", TowerAssetManager.getGuiSkin());
       connectFacebookButton.visible = false;
       container.add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
       container.row().padTop(BUTTON_SPACING);
@@ -93,7 +93,7 @@ public class MainMenuScene extends Scene {
       });
     }
 
-    TextButton exitGameButton = FontManager.RobotoBold18.makeTextButton("exit game", getGuiSkin());
+    TextButton exitGameButton = FontManager.RobotoBold18.makeTextButton("exit game", TowerAssetManager.getGuiSkin());
     container.add(exitGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row();
 
@@ -188,7 +188,7 @@ public class MainMenuScene extends Scene {
     public void click(Actor actor, float x, float y) {
       try {
         Constructor<? extends TowerWindow> constructor = windowClass.getConstructor(Stage.class, Skin.class);
-        TowerWindow window = constructor.newInstance(getStage(), getGuiSkin());
+        TowerWindow window = constructor.newInstance(getStage(), TowerAssetManager.getGuiSkin());
         window.show();
       } catch (Exception e) {
         throw new RuntimeException(e);

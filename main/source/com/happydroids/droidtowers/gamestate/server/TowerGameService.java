@@ -32,16 +32,18 @@ public class TowerGameService extends HappyDroidService {
 
     postAuthRunnables = new RunnableQueue();
 
+    getObjectMapper().addDeserializer(Class.class, new TowerGameClassDeserializer());
+    getObjectMapper().addSerializer(new Vector3Serializer());
+    getObjectMapper().addSerializer(new Vector2Serializer());
+  }
+
+  public void initializePreferences() {
     preferences = Gdx.app.getPreferences("CONNECT");
     if (!preferences.contains("DEVICE_ID")) {
       preferences.putString("DEVICE_ID", UUID.randomUUID().toString().replaceAll("-", ""));
       preferences.flush();
     }
     deviceId = preferences.getString("DEVICE_ID");
-
-    getObjectMapper().addDeserializer(Class.class, new TowerGameClassDeserializer());
-    getObjectMapper().addSerializer(new Vector3Serializer());
-    getObjectMapper().addSerializer(new Vector2Serializer());
   }
 
   public static TowerGameService instance() {

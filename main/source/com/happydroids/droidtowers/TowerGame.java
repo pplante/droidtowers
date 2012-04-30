@@ -75,7 +75,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     BackgroundTask.setPostExecuteManager(this);
 
     TowerGameService.setInstance(new TowerGameService());
-//    TowerGameService.instance().resetAuthentication();
+    TowerGameService.instance().initializePreferences();
 
     if (HappyDroidConsts.DEBUG) {
       Gdx.app.error("DEBUG", "Debug mode is enabled!");
@@ -153,7 +153,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     });
 
     final Skin skin = new Skin(Gdx.files.internal("default-skin.ui"));
-    Scene.setGuiSkin(skin);
+    TowerAssetManager.setGuiSkin(skin);
     Scene.setCamera(camera);
     Scene.setSpriteBatch(spriteBatch);
 

@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 import com.happydroids.HappyDroidConsts;
@@ -70,10 +69,6 @@ public class Avatar extends GameObject {
 
     walkAnimation = new Animation(FRAME_DURATION, droidAtlas.findRegions(addFramePrefix("walk")));
     walkAnimationTime = 0f;
-
-//    speechBubble = new SpeechBubble();
-//    speechBubble.followObject(this);
-//    HeadsUpDisplay.instance().addActor(speechBubble);
   }
 
   protected String addFramePrefix(String frameName) {
@@ -82,11 +77,6 @@ public class Avatar extends GameObject {
 
   protected TextureAtlas getTextureAtlas() {
     return TowerAssetManager.textureAtlas("characters.txt");
-  }
-
-  private void displaySpeechBubble(String newText) {
-//    speechBubble.setText(newText);
-//    speechBubble.show();
   }
 
   public void beginNextAction() {
@@ -196,9 +186,5 @@ public class Avatar extends GameObject {
     }
 
     setColor((Color) colorIterator.next());
-  }
-
-  public void tap(Vector2 worldPoint, int count) {
-    displaySpeechBubble("Hello!");
   }
 }

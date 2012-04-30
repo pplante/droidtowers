@@ -23,7 +23,6 @@ import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.math.GridPoint;
-import com.happydroids.droidtowers.scenes.Scene;
 import com.happydroids.droidtowers.scenes.TowerScene;
 import com.happydroids.droidtowers.types.*;
 
@@ -46,8 +45,8 @@ public class HeadsUpDisplay extends WidgetGroup {
   private InputCallback closeDialogCallback = null;
   private RadialMenu toolMenu;
   private final StackGroup notificationStack;
-  private final ImageButton toolButton;
-  private final ImageButton.ImageButtonStyle toolButtonStyle;
+  private ImageButton toolButton;
+  private ImageButton.ImageButtonStyle toolButtonStyle;
   private TutorialStepNotification tutorialStep;
   private final StatusBarPanel statusBarPanel;
 
@@ -59,7 +58,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     this.stage = towerScene.getStage();
     this.camera = towerScene.getCamera();
     this.gameGrid = towerScene.getGameGrid();
-    guiSkin = Scene.getGuiSkin();
+    guiSkin = TowerAssetManager.getGuiSkin();
 
     hudAtlas = TowerAssetManager.textureAtlas("hud/buttons.txt");
 
@@ -71,28 +70,65 @@ public class HeadsUpDisplay extends WidgetGroup {
     mouseToolTip = new ToolTip(guiSkin);
     addActor(mouseToolTip);
 
+
+    addActor(new ExpandLandOverlay(gameGrid, guiSkin));
+
+    buildToolButtonMenu();
+
+    buildHeaderButtons();
+
+    notificationStack.pad(10);
+    notificationStack.x = 0;
+    notificationStack.y = 0;
+    addActor(notificationStack);
+
+    stage.addActor(this);
+  }
+
+  private void buildHeaderButtons() {
+    final AudioControl audioControl = new AudioControl(hudAtlas);
+    final OverlayControl overlayControl = new OverlayControl(hudAtlas, guiSkin, gameGrid.getRenderer());
+
+    ImageButton achievementsButton = new ImageButton(TowerAssetManager.textureFromAtlas("achievements", "hud/buttons.txt"));
+    achievementsButton.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        new AchievementListView(getStage(), guiSkin).show();
+      }
+    });
+
+    Table container = new Table(guiSkin);
+    container.defaults().center().right().space(5);
+    container.clear();
+    container.add(achievementsButton);
+    container.add(audioControl);
+    container.add(overlayControl);
+    container.pack();
+
+    container.x = stage.width() - container.width - 5;
+    container.y = stage.height() - container.height - 5;
+    addActor(container);
+  }
+
+  private void buildToolButtonMenu() {
     toolMenu = new RadialMenu();
     toolMenu.arc = 35f;
     toolMenu.radius = scale(180);
     toolMenu.rotation = 3f;
 
-    addActor(new ExpandLandOverlay(gameGrid, guiSkin));
-
     ImageButton housingButton = new ImageButton(hudAtlas.findRegion("tool-housing"));
     housingButton.setClickListener(makePurchaseButtonClickListener("Housing", RoomTypeFactory.instance()));
-    toolMenu.addActor(housingButton);
+
 
     ImageButton transitButton = new ImageButton(hudAtlas.findRegion("tool-transit"));
     transitButton.setClickListener(makePurchaseButtonClickListener("Transit", TransitTypeFactory.instance()));
-    toolMenu.addActor(transitButton);
 
     ImageButton commerceButton = new ImageButton(hudAtlas.findRegion("tool-commerce"));
     commerceButton.setClickListener(makePurchaseButtonClickListener("Commerce", CommercialTypeFactory.instance()));
-    toolMenu.addActor(commerceButton);
+
 
     ImageButton servicesButton = new ImageButton(hudAtlas.findRegion("tool-services"));
     servicesButton.setClickListener(makePurchaseButtonClickListener("Services", ServiceRoomTypeFactory.instance()));
-    toolMenu.addActor(servicesButton);
+
 
     final ImageButton sellButton = new ImageButton(hudAtlas.findRegion("tool-sell"));
     sellButton.setClickListener(new VibrateClickListener() {
@@ -107,6 +143,10 @@ public class HeadsUpDisplay extends WidgetGroup {
       }
     });
 
+    toolMenu.addActor(housingButton);
+    toolMenu.addActor(transitButton);
+    toolMenu.addActor(commerceButton);
+    toolMenu.addActor(servicesButton);
     toolMenu.addActor(sellButton);
 
     toolButton = new ImageButton(hudAtlas.findRegion("tool-sprite"));
@@ -128,35 +168,6 @@ public class HeadsUpDisplay extends WidgetGroup {
         }
       }
     });
-
-    final AudioControl audioControl = new AudioControl(hudAtlas);
-    final OverlayControl overlayControl = new OverlayControl(hudAtlas, guiSkin, gameGrid.getRenderer());
-
-    ImageButton achievementsButton = new ImageButton(TowerAssetManager.textureFromAtlas("achievements", "hud/buttons.txt"));
-    achievementsButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        new AchievementListView(getStage(), getGuiSkin()).show();
-      }
-    });
-
-    final Table topLeftButtons = new Table(getGuiSkin());
-    topLeftButtons.defaults().center().right().space(5);
-    topLeftButtons.clear();
-    topLeftButtons.add(achievementsButton);
-    topLeftButtons.add(audioControl);
-    topLeftButtons.add(overlayControl);
-    topLeftButtons.pack();
-
-    topLeftButtons.x = stage.width() - topLeftButtons.width - 5;
-    topLeftButtons.y = stage.height() - topLeftButtons.height - 5;
-    addActor(topLeftButtons);
-
-    notificationStack.pad(10);
-    notificationStack.x = 0;
-    notificationStack.y = 0;
-    addActor(notificationStack);
-
-    stage.addActor(this);
   }
 
   private void layoutTopLeftButtons(Table topLeftButtons, TextButton connectFacebookButton, AudioControl audioControl, OverlayControl overlayControl) {
@@ -188,7 +199,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   }
 
   private void makePurchaseDialog(String title, GridObjectTypeFactory typeFactory, ImageButton.ImageButtonStyle style) {
-    purchaseDialog = new GridObjectPurchaseMenu(getStage(), getGuiSkin(), title, typeFactory, new Runnable() {
+    purchaseDialog = new GridObjectPurchaseMenu(getStage(), guiSkin, title, typeFactory, new Runnable() {
       public void run() {
         toolButton.setStyle(toolButtonStyle);
       }
@@ -204,10 +215,6 @@ public class HeadsUpDisplay extends WidgetGroup {
     });
 
     purchaseDialog.show();
-  }
-
-  public Skin getGuiSkin() {
-    return guiSkin;
   }
 
   @Override
@@ -251,14 +258,14 @@ public class HeadsUpDisplay extends WidgetGroup {
     }
   }
 
-  public void showToast(String message, Object... objects) {
-    if (toast == null) {
-      toast = new Toast();
-      addActor(toast);
+  public static void showToast(String message, Object... objects) {
+    if (instance.toast == null) {
+      instance.toast = new Toast();
+      instance.addActor(instance.toast);
     }
 
-    toast.setMessage(String.format(message, objects));
-    toast.show();
+    instance.toast.setMessage(String.format(message, objects));
+    instance.toast.show();
   }
 
   public float getPrefWidth() {
@@ -278,26 +285,26 @@ public class HeadsUpDisplay extends WidgetGroup {
     addActor(bubble);
   }
 
-  public StackGroup getNotificationStack() {
-    return notificationStack;
+  public static StackGroup getNotificationStack() {
+    return instance.notificationStack;
   }
 
   public static HeadsUpDisplay instance() {
     return instance;
   }
 
-  public void setTutorialStep(TutorialStepNotification nextStep) {
-    if (tutorialStep != null) {
-      tutorialStep.markToRemove(true);
+  public static void setTutorialStepNotification(TutorialStepNotification nextStep) {
+    if (instance.tutorialStep != null) {
+      instance.tutorialStep.markToRemove(true);
     }
 
-    tutorialStep = nextStep;
+    instance.tutorialStep = nextStep;
 
-    if (tutorialStep != null) {
-      getStage().addActor(tutorialStep);
+    if (instance.tutorialStep != null) {
+      instance.getStage().addActor(instance.tutorialStep);
 
-      tutorialStep.x = 10;
-      tutorialStep.y = ((int) (getStage().height() - (statusBarPanel.height + tutorialStep.height + 6)));
+      instance.tutorialStep.x = 10;
+      instance.tutorialStep.y = ((int) (instance.getStage().height() - (instance.statusBarPanel.height + instance.tutorialStep.height + 6)));
     }
   }
 }

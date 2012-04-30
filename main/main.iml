@@ -32,7 +32,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" scope="TEST" name="junit-mockito-great-expectations" level="project" />
-    <orderEntry type="library" name="guice-3.0-no_aop" level="project" />
     <orderEntry type="library" scope="TEST" name="commons-io" level="project" />
   </component>
 </module>
