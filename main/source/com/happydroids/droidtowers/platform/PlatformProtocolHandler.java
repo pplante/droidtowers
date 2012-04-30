@@ -12,4 +12,6 @@ public interface PlatformProtocolHandler {
   public boolean hasUri();
 
   public URI consumeUri();
+
+  void setUrl(URI uri);
 }

@@ -4,14 +4,11 @@
 
 package com.happydroids.droidtowers.actions;
 
-import com.google.common.collect.Sets;
-
-import java.util.Iterator;
-import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ActionManager {
   private static ActionManager instance_;
-  private Set<Action> actions;
+  private ConcurrentHashMap<Integer, Action> actions;
 
   public static ActionManager instance() {
     if (instance_ == null) {
@@ -22,27 +19,24 @@ public class ActionManager {
   }
 
   private ActionManager() {
-    actions = Sets.newHashSet();
+    actions = new ConcurrentHashMap<Integer, Action>();
   }
 
   public void addAction(Action action) {
-    actions.add(action);
+    actions.put(action.hashCode(), action);
   }
 
   public void update(float deltaTime) {
-    Iterator<Action> actionIterator = actions.iterator();
-
-    while (actionIterator.hasNext()) {
-      Action action = actionIterator.next();
+    for (Action action : actions.values()) {
       action.act(deltaTime);
 
       if (action.isMarkedForRemoval()) {
-        actionIterator.remove();
+        removeAction(action);
       }
     }
   }
 
   public void removeAction(Action action) {
-    actions.remove(action);
+    actions.remove(action.hashCode());
   }
 }

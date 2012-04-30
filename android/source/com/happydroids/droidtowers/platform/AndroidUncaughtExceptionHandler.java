@@ -28,7 +28,7 @@ public class AndroidUncaughtExceptionHandler extends HappyDroidUncaughtException
       public void run() {
         new BackgroundTask() {
           @Override
-          public void execute() {
+          protected void execute() {
             new CrashReport(throwable).save();
           }
         }.run();

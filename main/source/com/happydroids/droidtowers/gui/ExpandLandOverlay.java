@@ -28,8 +28,8 @@ public class ExpandLandOverlay extends WidgetGroup {
   private Button leftButton;
   private Button rightButton;
 
-  public ExpandLandOverlay(GameGrid _gameGrid, Skin guiSkin) {
-    this.gameGrid = _gameGrid;
+  public ExpandLandOverlay(GameGrid gameGrid, Skin guiSkin) {
+    this.gameGrid = gameGrid;
     CameraController.events().register(this);
 
     leftButton = new ExpandLandButton("left");
@@ -46,10 +46,10 @@ public class ExpandLandOverlay extends WidgetGroup {
 
     leftButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        gameGrid.setGridSize(gameGrid.getGridSize().x + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE, gameGrid.getGridSize().y);
-        gameGrid.updateWorldSize();
+        ExpandLandOverlay.this.gameGrid.setGridSize(ExpandLandOverlay.this.gameGrid.getGridSize().x + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE, ExpandLandOverlay.this.gameGrid.getGridSize().y);
+        ExpandLandOverlay.this.gameGrid.updateWorldSize();
 
-        for (GridObject gridObject : gameGrid.getObjects()) {
+        for (GridObject gridObject : ExpandLandOverlay.this.gameGrid.getObjects()) {
           gridObject.setPosition(gridObject.getPosition().x + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE, gridObject.getPosition().y);
         }
 
@@ -61,9 +61,9 @@ public class ExpandLandOverlay extends WidgetGroup {
 
     rightButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        gameGrid.setGridSize(gameGrid.getGridSize().x + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE, gameGrid.getGridSize().y);
-        gameGrid.updateWorldSize();
-        CameraController.instance().panTo(gameGrid.getWorldSize().x - 10, CameraController.instance().getCamera().position.y, true);
+        ExpandLandOverlay.this.gameGrid.setGridSize(ExpandLandOverlay.this.gameGrid.getGridSize().x + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE, ExpandLandOverlay.this.gameGrid.getGridSize().y);
+        ExpandLandOverlay.this.gameGrid.updateWorldSize();
+        CameraController.instance().panTo(ExpandLandOverlay.this.gameGrid.getWorldSize().x - 10, CameraController.instance().getCamera().position.y, true);
       }
     });
   }

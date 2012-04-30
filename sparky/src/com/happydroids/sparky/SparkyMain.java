@@ -96,7 +96,7 @@ public class SparkyMain extends JFrame {
 
         new BackgroundTask() {
           @Override
-          public void execute() {
+          protected void execute() {
             try {
               webPane.setPage(HappyDroidConsts.HAPPYDROIDS_URI + "/game-updates");
             } catch (IOException ignored) {

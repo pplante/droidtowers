@@ -42,7 +42,7 @@ import com.happydroids.utils.BackgroundTask;
 import java.net.URI;
 import java.util.LinkedList;
 
-public class TowerGame implements ApplicationListener {
+public class TowerGame implements ApplicationListener, BackgroundTask.PostExecuteManager {
   private static final String TAG = TowerGame.class.getSimpleName();
 
   private static OrthographicCamera camera;
@@ -72,7 +72,10 @@ public class TowerGame implements ApplicationListener {
   public void create() {
     Gdx.app.error("lifecycle", "create");
 
+    BackgroundTask.setPostExecuteManager(this);
+
     TowerGameService.setInstance(new TowerGameService());
+//    TowerGameService.instance().resetAuthentication();
 
     if (HappyDroidConsts.DEBUG) {
       Gdx.app.error("DEBUG", "Debug mode is enabled!");
@@ -89,7 +92,7 @@ public class TowerGame implements ApplicationListener {
 
     new BackgroundTask() {
       @Override
-      public void execute() {
+      protected void execute() {
         TowerGameService.instance().registerDevice();
       }
     }.run();
@@ -155,7 +158,16 @@ public class TowerGame implements ApplicationListener {
     Scene.setSpriteBatch(spriteBatch);
 
 
-    changeScene(SplashScene.class, SplashSceneStates.PRELOAD_ONLY);
+    changeScene(SplashScene.class, SplashSceneStates.PRELOAD_ONLY, new Runnable() {
+      public void run() {
+        if (protocolHandler.hasUri()) {
+          URI launchUri = protocolHandler.consumeUri();
+          changeScene(LaunchUriScene.class, launchUri);
+        } else {
+          changeScene(MainMenuScene.class);
+        }
+      }
+    });
   }
 
   public void render() {
@@ -200,11 +212,6 @@ public class TowerGame implements ApplicationListener {
       menloBitmapFont.drawMultiLine(spriteBatch, infoText, 5, 35);
       spriteBatch.end();
     }
-
-    if (protocolHandler.hasUri()) {
-      URI launchUri = protocolHandler.consumeUri();
-      changeScene(LaunchUriScene.class, launchUri);
-    }
   }
 
   public void resize(int width, int height) {
@@ -226,6 +233,11 @@ public class TowerGame implements ApplicationListener {
     Gdx.app.error("lifecycle", "resuming!");
 
     pushScene(SplashScene.class, SplashSceneStates.FULL_LOAD);
+
+    if (protocolHandler.hasUri()) {
+      URI launchUri = protocolHandler.consumeUri();
+      changeScene(LaunchUriScene.class, launchUri);
+    }
   }
 
   public void dispose() {
@@ -318,5 +330,9 @@ public class TowerGame implements ApplicationListener {
 
   public void setProtocolHandler(PlatformProtocolHandler protocolHandler) {
     this.protocolHandler = protocolHandler;
+  }
+
+  public void postRunnable(Runnable runnable) {
+    Gdx.app.postRunnable(runnable);
   }
 }

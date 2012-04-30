@@ -18,10 +18,11 @@ import java.util.UUID;
 
 public class TowerGameService extends HappyDroidService {
   private static final String TAG = TowerGameService.class.getSimpleName();
+  public static final String SESSION_TOKEN = "SESSION_TOKEN";
 
   private Preferences preferences;
   private String deviceId;
-  private boolean isAuthenticated;
+  private boolean authenticated;
   private Device device;
   private RunnableQueue postAuthRunnables;
   private boolean authenticationFinished;
@@ -67,10 +68,10 @@ public class TowerGameService extends HappyDroidService {
           public void onSuccess(HttpResponse response, Device object) {
             authenticationFinished = true;
 
-            isAuthenticated = object.isAuthenticated;
+            authenticated = object.isAuthenticated;
 
-            if (!isAuthenticated) {
-              preferences.remove("SESSION_TOKEN");
+            if (!authenticated) {
+              preferences.remove(SESSION_TOKEN);
               preferences.flush();
             }
 
@@ -82,7 +83,7 @@ public class TowerGameService extends HappyDroidService {
   }
 
   public String getSessionToken() {
-    return preferences.getString("SESSION_TOKEN", null);
+    return preferences.getString(SESSION_TOKEN, null);
   }
 
   public String getDeviceId() {
@@ -90,12 +91,21 @@ public class TowerGameService extends HappyDroidService {
   }
 
   public synchronized void setSessionToken(String token) {
-    preferences.putString("SESSION_TOKEN", token);
-    preferences.flush();
+    if (token != null) {
+      preferences.putString(SESSION_TOKEN, token);
+      preferences.flush();
+
+      authenticationFinished = true;
+      authenticated = true;
+      postAuthRunnables.runAll();
+    } else {
+      preferences.remove(SESSION_TOKEN);
+      preferences.flush();
+    }
   }
 
   public boolean isAuthenticated() {
-    return isAuthenticated;
+    return authenticated;
   }
 
   @Override
@@ -114,5 +124,13 @@ public class TowerGameService extends HappyDroidService {
     } else {
       runnable.run();
     }
+  }
+
+  public void resetAuthentication() {
+    setSessionToken(null);
+
+    authenticated = false;
+    authenticationFinished = false;
+    postAuthRunnables.clear();
   }
 }

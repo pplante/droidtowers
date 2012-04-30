@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.scenes;
 
 import aurelienribon.tweenengine.Tween;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
@@ -57,31 +58,41 @@ public class SplashScene extends Scene {
   private GameSave gameSave;
   private int progressLastChanged;
   private Set<String> messagesUsed;
+  private Runnable postLoadRunnable;
 
   @Override
   public void create(Object... args) {
     if (args != null) {
       splashState = ((SplashSceneStates) args[0]);
 
-      if (args.length > 1 && args[1] instanceof GameSave) {
-        gameSave = ((GameSave) args[1]);
+      if (args.length > 1) {
+        Object firstArg = args[1];
+        if (firstArg instanceof GameSave) {
+          gameSave = ((GameSave) firstArg);
+          postLoadRunnable = new Runnable() {
+            public void run() {
+              TowerGame.changeScene(TowerScene.class, gameSave);
+            }
+          };
+        } else if (firstArg instanceof Runnable) {
+          postLoadRunnable = (Runnable) firstArg;
+        }
       }
     }
 
     messagesUsed = Sets.newHashSet();
 
-    Label titleLabel = FontManager.Roboto64.makeLabel("Droid Towers");
-    titleLabel.setAlignment(Align.CENTER);
+    Label titleLabel = FontManager.Roboto64.makeLabel("Droid Towers", Color.WHITE, Align.CENTER);
     titleLabel.y = getStage().centerY() * 1.66f;
     centerHorizontally(titleLabel);
     addActor(titleLabel);
 
-    loadingMessage = FontManager.Roboto32.makeLabel(selectRandomMessage());
+    loadingMessage = FontManager.Roboto32.makeLabel(selectRandomMessage(), Color.WHITE, Align.CENTER);
     loadingMessage.setAlignment(Align.CENTER);
     center(loadingMessage);
     addActor(loadingMessage);
 
-    progressLabel = FontManager.Roboto64.makeLabel(null);
+    progressLabel = FontManager.Roboto64.makeLabel(null, Color.WHITE, Align.CENTER);
     progressLabel.setAlignment(Align.CENTER);
     centerHorizontally(progressLabel);
     progressLabel.y = scale(100);
@@ -121,8 +132,8 @@ public class SplashScene extends Scene {
 
     if (splashState == FULL_LOAD) {
       if (assetManagerFinished) {
-        if (gameSave != null) {
-          TowerGame.changeScene(TowerScene.class, gameSave);
+        if (postLoadRunnable != null) {
+          postLoadRunnable.run();
         } else {
           TowerGame.popScene();
         }
@@ -138,9 +149,13 @@ public class SplashScene extends Scene {
         loadingMessage.setText(selectRandomMessage());
       }
 
-      getSpriteBatch().begin();
-      happyDroid.draw(getSpriteBatch());
-      getSpriteBatch().end();
+      try {
+        getSpriteBatch().begin();
+        happyDroid.draw(getSpriteBatch());
+      } catch (Throwable ignored) {
+      } finally {
+        getSpriteBatch().end();
+      }
     }
   }
 
@@ -156,7 +171,9 @@ public class SplashScene extends Scene {
 
     if (splashState == PRELOAD_ONLY) {
       if (!hasFilesToPreload) {
-        TowerGame.changeScene(MainMenuScene.class);
+        if (postLoadRunnable != null) {
+          postLoadRunnable.run();
+        }
       }
     }
   }

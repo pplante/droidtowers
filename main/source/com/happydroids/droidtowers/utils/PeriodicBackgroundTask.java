@@ -21,7 +21,7 @@ public abstract class PeriodicBackgroundTask extends BackgroundTask {
   }
 
   @Override
-  public final void execute() {
+  protected final void execute() {
     while (update() && !canceled) {
       try {
         if (HappyDroidConsts.DEBUG) System.out.println("updateFrequency = " + updateFrequency);

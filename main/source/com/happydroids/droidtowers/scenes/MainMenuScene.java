@@ -82,7 +82,11 @@ public class MainMenuScene extends Scene {
         public void run() {
           if (!TowerGameService.instance().isAuthenticated()) {
             connectFacebookButton.visible = true;
-            connectFacebookButton.setClickListener(new LaunchWindowClickListener(ConnectToHappyDroidsWindow.class));
+            connectFacebookButton.setClickListener(new ClickListener() {
+              public void click(Actor actor, float x, float y) {
+                TowerGame.changeScene(HappyDroidConnect.class);
+              }
+            });
             connectFacebookButton.action(FadeIn.$(0.25f));
           }
         }

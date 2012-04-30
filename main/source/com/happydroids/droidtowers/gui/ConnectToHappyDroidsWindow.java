@@ -27,6 +27,7 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
   private TemporaryToken token;
   private PeriodicBackgroundTask periodicBackgroundTask;
   private final TextButton accessTokenButton;
+  private Runnable postConnectRunnable;
 
   public ConnectToHappyDroidsWindow(Stage stage, Skin skin) {
     super("Connect to Happy Droids", stage, skin);
@@ -41,6 +42,7 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
     row().expand();
 
     accessTokenButton = FontManager.RobotoBold18.makeTextButton("CODE: Reticulating splines...", skin);
+    accessTokenButton.visible = false;
 
     final Label sessionStatus = FontManager.Roboto24.makeLabel("Waiting for You to login...");
 
@@ -52,67 +54,94 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
     add(bottom).fill();
 
     token = new TemporaryToken();
-    token.save(new ApiRunnable() {
-      @Override
-      public void onError(HttpResponse response, int statusCode, HappyDroidServiceObject object) {
-        sessionStatus.setText("Login failed!");
-        bottom.pack();
+    token.save(new TemporaryTokenApiRunnable(sessionStatus, bottom));
+  }
 
-        new Dialog(TowerGame.getRootUiStage()).setMessage("Could not contact happydroids.com, please check that you have internet access and try again.\n\nERROR:ETFAIL2FONHOME").addButton("Dismiss", new OnClickCallback() {
-          @Override
-          public void onClick(Dialog dialog) {
-            dialog.dismiss();
-            ConnectToHappyDroidsWindow.this.dismiss();
+  public void setPostConnectRunnable(Runnable postConnectRunnable) {
+    this.postConnectRunnable = postConnectRunnable;
+  }
+
+  private class TemporaryTokenApiRunnable extends ApiRunnable {
+    private final Label sessionStatus;
+    private final Table bottom;
+
+    public TemporaryTokenApiRunnable(Label sessionStatus, Table bottom) {
+      this.sessionStatus = sessionStatus;
+      this.bottom = bottom;
+    }
+
+    @Override
+    public void onError(HttpResponse response, int statusCode, HappyDroidServiceObject object) {
+      sessionStatus.setText(String.format("Login failed: %d!", statusCode));
+      bottom.pack();
+
+      new Dialog(TowerGame.getRootUiStage())
+              .setTitle("Connection Error")
+              .setMessage("Could not contact happydroids.com, please check that you have internet access and try again.\n\nERROR:ETFAIL2FONHOME")
+              .addButton("Dismiss", new OnClickCallback() {
+                @Override
+                public void onClick(Dialog dialog) {
+                  dialog.dismiss();
+                  ConnectToHappyDroidsWindow.this.dismiss();
+                }
+              }).show();
+    }
+
+    @Override
+    public void onSuccess(HttpResponse response, HappyDroidServiceObject object) {
+      accessTokenButton.setText("CODE: " + token.getValue());
+      accessTokenButton.visible = true;
+      sessionStatus.visible = true;
+
+      accessTokenButton.setClickListener(new ClickListener() {
+        public void click(Actor actor, float x, float y) {
+          String uri = token.getClickableUri();
+
+          TowerGame.getPlatformBrowserUtil().launchWebBrowser(uri);
+        }
+      });
+
+      periodicBackgroundTask = new PeriodicBackgroundTask(TowerConsts.FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK) {
+        @Override
+        public boolean update() {
+          if (token == null) return false;
+          try {
+            token.validate();
+            if (HappyDroidConsts.DEBUG) System.out.println("token = " + token);
+            return !token.hasSessionToken();
+          } catch (RuntimeException e) {
+            Gdx.app.error(TAG, "Error validating the temporary token.", e);
           }
-        }).show();
-      }
 
-      @Override
-      public void onSuccess(HttpResponse response, HappyDroidServiceObject object) {
-        accessTokenButton.setText("CODE: " + token.getValue());
-        sessionStatus.visible = true;
+          return false;
+        }
 
-        accessTokenButton.setClickListener(new ClickListener() {
-          public void click(Actor actor, float x, float y) {
-            String uri = token.getClickableUri();
+        @Override
+        public synchronized void beforeExecute() {
+          TowerGameService.instance().resetAuthentication();
+        }
 
-            TowerGame.getPlatformBrowserUtil().launchWebBrowser(uri);
-          }
-        });
-
-        periodicBackgroundTask = new PeriodicBackgroundTask(TowerConsts.FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK) {
-          @Override
-          public boolean update() {
-            if (token == null) return false;
-            try {
-              token.validate();
-              if (HappyDroidConsts.DEBUG) System.out.println("token = " + token);
-              return !token.hasSessionToken();
-            } catch (RuntimeException e) {
-              Gdx.app.error(TAG, "Error validating the temporary token.", e);
-            }
-
-            return false;
+        @Override
+        public synchronized void afterExecute() {
+          if (token != null && token.hasSessionToken()) {
+            sessionStatus.setText("Login successful!");
+            TowerGameService.instance().setSessionToken(token.getSessionToken());
+          } else {
+            sessionStatus.setText("Login failed!");
           }
 
-          @Override
-          public synchronized void afterExecute() {
-            if (token != null && token.hasSessionToken()) {
-              sessionStatus.setText("Login successful!");
-              ((TowerGameService) TowerGameService.instance()).setSessionToken(token.getSessionToken());
-            } else {
-              sessionStatus.setText("Login failed!");
-            }
+          if (postConnectRunnable != null) {
+            postConnectRunnable.run();
           }
-        };
-        periodicBackgroundTask.run();
+        }
+      };
+      periodicBackgroundTask.run();
 
-        setDismissCallback(new Runnable() {
-          public void run() {
-            periodicBackgroundTask.cancel();
-          }
-        });
-      }
-    });
+      setDismissCallback(new Runnable() {
+        public void run() {
+          periodicBackgroundTask.cancel();
+        }
+      });
+    }
   }
 }

@@ -49,6 +49,8 @@ public class CloudGameSave extends TowerGameServiceObject {
 
   @JsonIgnore
   public GameSave getGameSave() {
-    return NonInteractiveGameSave.readFile(new ByteArrayInputStream(blob.getBytes()), "cloudGameSave_" + hashCode());
+    GameSave gameSave = NonInteractiveGameSave.readFile(new ByteArrayInputStream(blob.getBytes()), "cloudGameSave_" + hashCode());
+    gameSave.setCloudSaveUri(getResourceUri());
+    return gameSave;
   }
 }

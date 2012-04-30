@@ -24,4 +24,8 @@ public class RunnableQueue {
       queue.pop().run();
     }
   }
+
+  public void clear() {
+    queue.clear();
+  }
 }

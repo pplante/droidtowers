@@ -4,9 +4,8 @@
 
 package com.happydroids.droidtowers.scenes;
 
-import com.happydroids.droidtowers.SplashSceneStates;
-import com.happydroids.droidtowers.TowerGame;
-import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.happydroids.droidtowers.gui.FontManager;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 
@@ -14,21 +13,22 @@ import java.net.URI;
 import java.util.List;
 
 public class LaunchUriScene extends Scene {
+
   @Override
   public void create(Object... args) {
     if (args == null) {
       throw new RuntimeException("args cannot be null!");
     }
 
+    Label fetchingLabel = FontManager.Roboto64.makeLabel("fetching game :D");
+    getStage().addActor(fetchingLabel);
+
     URI launchUri = (URI) args[0];
     List<NameValuePair> queryParams = URLEncodedUtils.parse(launchUri, "utf8");
     if (launchUri.getHost().equals("launchgame")) {
-      NameValuePair gameId = getParam(queryParams, "id");
+      final NameValuePair gameId = getParam(queryParams, "id");
       if (gameId != null) {
-        CloudGameSave save = new CloudGameSave();
-        save.findById(Integer.parseInt(gameId.getValue()));
-
-        TowerGame.changeScene(SplashScene.class, SplashSceneStates.FULL_LOAD, save.getGameSave());
+        new LaunchGameUriAction().checkAuthAndLoadGame(gameId);
       }
     }
   }

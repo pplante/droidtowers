@@ -30,4 +30,8 @@ public class MacProtocolHandler implements PlatformProtocolHandler {
     uri = null;
     return theUri;
   }
+
+  public void setUrl(URI uri) {
+    this.uri = uri;
+  }
 }

@@ -19,4 +19,8 @@ public class WindowsProtocolHandler implements PlatformProtocolHandler {
   public URI consumeUri() {
     return null;
   }
+
+  public void setUrl(URI uri) {
+
+  }
 }

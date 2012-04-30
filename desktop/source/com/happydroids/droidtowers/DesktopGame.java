@@ -13,10 +13,19 @@ import com.happydroids.droidtowers.platform.PlatformProtocolHandlerFactory;
 import com.happydroids.platform.DesktopUncaughtExceptionHandler;
 import com.happydroids.platform.Platform;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 public class DesktopGame {
   public static void main(String[] args) {
     PlatformProtocolHandler protocolHandler = PlatformProtocolHandlerFactory.newInstance();
     protocolHandler.initialize(args);
+
+    try {
+      protocolHandler.setUrl(new URI("droidtowers://launchgame?id=4"));
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
 
     TowerGameService.setDeviceOSName(Platform.getOSType().name());
     TowerGameService.setDeviceOSVersion(System.getProperty("os.version"));

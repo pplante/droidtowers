@@ -16,16 +16,21 @@ public abstract class BackgroundTask {
 
   protected Thread thread;
   private static Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
+  private static PostExecuteManager postExecuteManager;
 
 
   public BackgroundTask() {
 
   }
 
+  public static void setPostExecuteManager(PostExecuteManager postExecuteManager) {
+    BackgroundTask.postExecuteManager = postExecuteManager;
+  }
+
   public synchronized void beforeExecute() {
   }
 
-  public abstract void execute();
+  protected abstract void execute();
 
   public synchronized void afterExecute() {
   }
@@ -49,7 +54,11 @@ public abstract class BackgroundTask {
       public void run() {
         beforeExecute();
         execute();
-        afterExecute();
+        postExecuteManager.postRunnable(new Runnable() {
+          public void run() {
+            afterExecute();
+          }
+        });
       }
     });
   }
@@ -69,5 +78,9 @@ public abstract class BackgroundTask {
 
   public static void setUncaughtExceptionHandler(Thread.UncaughtExceptionHandler uncaughtExceptionHandler) {
     BackgroundTask.uncaughtExceptionHandler = uncaughtExceptionHandler;
+  }
+
+  public interface PostExecuteManager {
+    public void postRunnable(Runnable runnable);
   }
 }

@@ -30,11 +30,14 @@ public class GenerateAssetManagerFileList {
 
     FileHandle template = new FileHandle("assets-raw/templates/TowerAssetManagerFilesList-template.coffee");
 
+    addEntryToPreloader(assetsDir.child("happy-droid.png"), Texture.class);
     addEntryToPreloader(assetsDir.child("default-skin.ui"), Skin.class);
     addEntryToPreloader(assetsDir.child("backgrounds/clouds.txt"), TextureAtlas.class);
     addEntryToPreloader(assetsDir.child("hud/menus.txt"), TextureAtlas.class);
+    addEntryToPreloader(assetsDir.child("hud/buttons.txt"), TextureAtlas.class);
     addEntryToPreloader(assetsDir.child("hud/window-bg.png"), Texture.class);
     addEntryToPreloader(assetsDir.child("hud/toast-bg.png"), Texture.class);
+    addDirectoryToPreloader("swatches/", ".png", Texture.class);
 
     addDirectoryToAssetManager("backgrounds/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("movies/", ".txt", TextureAtlas.class);
@@ -59,8 +62,6 @@ public class GenerateAssetManagerFileList {
     for (Overlays overlay : Overlays.values()) {
       makeSwatch(swatchesDir, overlay.getSwatchFilename(), overlay.getColor(1f));
     }
-
-    addDirectoryToAssetManager("swatches/", ".png", Texture.class);
 
     String javaFileContent = template.readString();
     javaFileContent = javaFileContent.replace("// REPLACEME", Joiner.on("\n").join(managedFiles));
