@@ -50,6 +50,7 @@ public class Avatar extends GameObject {
   private float lastPathFinderSearch;
   protected GridObject movingTo;
   private TransitPathFinder pathFinder;
+  private boolean justWandered;
 
   public Avatar(AvatarLayer avatarLayer) {
     super();
@@ -95,6 +96,7 @@ public class Avatar extends GameObject {
   }
 
   protected void wanderAround() {
+    lastPathFinderSearch = 0f;
     GridPosition start = gameGrid.positionCache().getPosition(gameGrid.closestGridPoint(getX(), getY()));
     if (HappyDroidConsts.DEBUG) System.out.println(String.format("%s is bored.", this.getClass().getSimpleName()));
 
@@ -116,6 +118,7 @@ public class Avatar extends GameObject {
 
   private void setupPathFinder(final TransitPathFinder finder) {
     pathFinder = finder;
+    justWandered = pathFinder instanceof WanderPathFinder;
     pathFinder.setCompleteCallback(new Runnable() {
       public void run() {
         createSteeringManagerFromPath();
@@ -126,7 +129,7 @@ public class Avatar extends GameObject {
   }
 
   private void createSteeringManagerFromPath() {
-    if (pathFinder.wasSuccessful()) {
+    if (pathFinder != null && pathFinder.wasSuccessful()) {
       steeringManager = new AvatarSteeringManager(this, gameGrid, pathFinder.getDiscoveredPath());
       steeringManager.setCompleteCallback(new Runnable() {
         public void run() {
@@ -144,6 +147,9 @@ public class Avatar extends GameObject {
       CommercialSpace.class.cast(movingTo).recordVisitor(this);
     }
 
+    if (!justWandered) {
+      wanderAround();
+    }
     movingTo = null;
   }
 

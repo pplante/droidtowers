@@ -70,6 +70,7 @@ public class GridPosition {
     return toGridPoint().toWorldVector2();
   }
 
+  @SuppressWarnings("RedundantIfStatement")
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -77,13 +78,24 @@ public class GridPosition {
 
     GridPosition that = (GridPosition) o;
 
-    return x == that.x && y == that.y;
+    if (connectedToTransit != that.connectedToTransit) return false;
+    if (x != that.x) return false;
+    if (y != that.y) return false;
+    if (elevator != null ? !elevator.equals(that.elevator) : that.elevator != null) return false;
+    if (objects != null ? !objects.equals(that.objects) : that.objects != null) return false;
+    if (stair != null ? !stair.equals(that.stair) : that.stair != null) return false;
+
+    return true;
   }
 
   @Override
   public int hashCode() {
     int result = x;
     result = 31 * result + y;
+    result = 31 * result + (objects != null ? objects.hashCode() : 0);
+    result = 31 * result + (connectedToTransit ? 1 : 0);
+    result = 31 * result + (elevator != null ? elevator.hashCode() : 0);
+    result = 31 * result + (stair != null ? stair.hashCode() : 0);
     return result;
   }
 }

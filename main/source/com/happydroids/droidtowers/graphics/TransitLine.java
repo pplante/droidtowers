@@ -20,6 +20,7 @@ public class TransitLine {
   private GridObject startObject;
   private GridObject endObject;
   private Color color = Color.RED;
+  private int highlightPoint;
 
   public TransitLine() {
     points = Lists.newArrayList();
@@ -48,8 +49,13 @@ public class TransitLine {
 
     shapeRenderer.begin(ShapeType.FilledCircle);
     for (Vector2 point : points) {
-      shapeRenderer.setColor(color);
-      shapeRenderer.filledCircle(point.x, point.y, 5f);
+      if (points.indexOf(point) == highlightPoint) {
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.filledCircle(point.x, point.y, 8f);
+      } else {
+        shapeRenderer.setColor(color);
+        shapeRenderer.filledCircle(point.x, point.y, 5f);
+      }
     }
 
     shapeRenderer.end();
@@ -73,5 +79,9 @@ public class TransitLine {
 
   public void clear() {
     points.clear();
+  }
+
+  public void highlightPoint(int highlightPoint) {
+    this.highlightPoint = highlightPoint;
   }
 }

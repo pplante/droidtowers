@@ -186,4 +186,46 @@ public abstract class GridObjectType {
       Gdx.app.debug(TAG, name + " unlocked.");
     }
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof GridObjectType)) return false;
+
+    GridObjectType that = (GridObjectType) o;
+
+    if (canShareSpace != that.canShareSpace) return false;
+    if (coins != that.coins) return false;
+    if (experienceAward != that.experienceAward) return false;
+    if (height != that.height) return false;
+    if (Float.compare(that.noiseLevel, noiseLevel) != 0) return false;
+    if (width != that.width) return false;
+    if (atlasFilename != null ? !atlasFilename.equals(that.atlasFilename) : that.atlasFilename != null) return false;
+    if (id != null ? !id.equals(that.id) : that.id != null) return false;
+    if (imageFilename != null ? !imageFilename.equals(that.imageFilename) : that.imageFilename != null) return false;
+    if (lock != null ? !lock.equals(that.lock) : that.lock != null) return false;
+    if (name != null ? !name.equals(that.name) : that.name != null) return false;
+    if (provides != that.provides) return false;
+    if (textureAtlas != null ? !textureAtlas.equals(that.textureAtlas) : that.textureAtlas != null) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = id != null ? id.hashCode() : 0;
+    result = 31 * result + (name != null ? name.hashCode() : 0);
+    result = 31 * result + height;
+    result = 31 * result + width;
+    result = 31 * result + coins;
+    result = 31 * result + experienceAward;
+    result = 31 * result + (atlasFilename != null ? atlasFilename.hashCode() : 0);
+    result = 31 * result + (imageFilename != null ? imageFilename.hashCode() : 0);
+    result = 31 * result + (canShareSpace ? 1 : 0);
+    result = 31 * result + (noiseLevel != +0.0f ? Float.floatToIntBits(noiseLevel) : 0);
+    result = 31 * result + (provides != null ? provides.hashCode() : 0);
+    result = 31 * result + (textureAtlas != null ? textureAtlas.hashCode() : 0);
+    result = 31 * result + (lock != null ? lock.hashCode() : 0);
+    return result;
+  }
 }

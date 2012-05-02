@@ -218,4 +218,21 @@ public class Elevator extends Transit {
 
     texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Elevator)) return false;
+
+    Elevator elevator = (Elevator) o;
+
+    if (elevatorCar != null ? !elevatorCar.equals(elevator.elevatorCar) : elevator.elevatorCar != null) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    return elevatorCar != null ? elevatorCar.hashCode() : 0;
+  }
 }

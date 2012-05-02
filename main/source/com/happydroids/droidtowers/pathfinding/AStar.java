@@ -207,11 +207,11 @@ public abstract class AStar<T> {
 
     if (isGoal(last)) {
       discoveredPath = new LinkedList<T>();
-
       for (Path i = p; i != null; i = i.parent) {
         T point = i.getPoint();
         discoveredPath.addFirst(point);
       }
+
       working = false;
       return;
     }

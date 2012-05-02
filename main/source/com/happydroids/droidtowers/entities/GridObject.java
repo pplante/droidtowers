@@ -308,4 +308,33 @@ public abstract class GridObject {
   public Rectangle getWorldBounds() {
     return worldBounds;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof GridObject)) return false;
+
+    GridObject that = (GridObject) o;
+
+    if (Float.compare(that.desirability, desirability) != 0) return false;
+    if (gameGrid != null ? !gameGrid.equals(that.gameGrid) : that.gameGrid != null) return false;
+    if (gridObjectType != null ? !gridObjectType.equals(that.gridObjectType) : that.gridObjectType != null)
+      return false;
+    if (placementState != that.placementState) return false;
+    if (position != null ? !position.equals(that.position) : that.position != null) return false;
+    if (size != null ? !size.equals(that.size) : that.size != null) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = gridObjectType != null ? gridObjectType.hashCode() : 0;
+    result = 31 * result + (gameGrid != null ? gameGrid.hashCode() : 0);
+    result = 31 * result + (position != null ? position.hashCode() : 0);
+    result = 31 * result + (size != null ? size.hashCode() : 0);
+    result = 31 * result + (placementState != null ? placementState.hashCode() : 0);
+    result = 31 * result + (desirability != +0.0f ? Float.floatToIntBits(desirability) : 0);
+    return result;
+  }
 }
