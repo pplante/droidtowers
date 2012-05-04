@@ -32,7 +32,7 @@ import static com.happydroids.droidtowers.math.Direction.LEFT;
 public class Avatar extends GameObject {
   public static final float FRAME_DURATION = 0.25f;
   public static final float WALKING_ANIMATION_DURATION = FRAME_DURATION * 3;
-  private static final float PATH_SEARCH_DELAY = 25f;
+  private static final float PATH_SEARCH_DELAY = 0f;
   private static final Set<Color> colors = Sets.newHashSet(Color.GREEN, Color.RED, Color.ORANGE, Color.MAGENTA, Color.PINK, Color.YELLOW);
 
   private static Iterator colorIterator;

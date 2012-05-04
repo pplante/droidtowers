@@ -218,7 +218,7 @@ public class AvatarSteeringManager {
     currentState.add(AvatarState.USING_ELEVATOR);
 
     Vector2 posInCar = currentPos.toWorldVector2();
-    posInCar.x += Random.randomInt(8, 32);
+    posInCar.x += Random.randomInt(8, 58);
     moveAvatarTo(posInCar, new TweenCallback() {
       @Override
       public void onEvent(int type, BaseTween source) {

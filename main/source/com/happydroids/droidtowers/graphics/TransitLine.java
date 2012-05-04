@@ -49,13 +49,8 @@ public class TransitLine {
 
     shapeRenderer.begin(ShapeType.FilledCircle);
     for (Vector2 point : points) {
-      if (points.indexOf(point) == highlightPoint) {
-        shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.filledCircle(point.x, point.y, 8f);
-      } else {
-        shapeRenderer.setColor(color);
-        shapeRenderer.filledCircle(point.x, point.y, 5f);
-      }
+      shapeRenderer.setColor(color);
+      shapeRenderer.filledCircle(point.x, point.y, points.indexOf(point) == highlightPoint ? 8f : 5f);
     }
 
     shapeRenderer.end();
