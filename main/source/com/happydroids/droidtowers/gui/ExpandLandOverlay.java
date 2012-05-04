@@ -66,6 +66,10 @@ public class ExpandLandOverlay extends WidgetGroup {
     gameGrid.getGridSize().x += GAME_GRID_EXPAND_LAND_SIZE;
     gameGrid.updateWorldSize();
 
+    for (GridObject gridObject : gameGrid.getObjects()) {
+      gridObject.setPosition(gridObject.getPosition());
+    }
+
     CameraController.instance().panTo(gameGrid.getWorldSize().x, CameraController.instance().getCamera().position.y, true);
     GameGridSoundDispatcher.setSoundsAllowed(true);
   }

@@ -24,11 +24,9 @@
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" line="75" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
+    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="avatar elevator movement is working betters&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarSteeringManager.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarSteeringManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/TransitLine.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/TransitLine.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ExpandLandOverlay.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ExpandLandOverlay.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -134,11 +132,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AvatarSteeringManager.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AvatarSteeringManager.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarSteeringManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="220" column="40" selection-start="6948" selection-end="6948" vertical-scroll-proportion="0.20683111">
+            <state line="220" column="40" selection-start="6948" selection-end="6948" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExpandLandOverlay.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ExpandLandOverlay.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="69" column="35" selection-start="2472" selection-end="2472" vertical-scroll-proportion="0.51361865">
+              <folding>
+                <element signature="e#0#4596#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -148,17 +157,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state line="34" column="50" selection-start="1439" selection-end="1439" vertical-scroll-proportion="0.0">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AvatarLayer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarLayer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="0" selection-start="1484" selection-end="1484" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#5083#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -185,7 +183,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorStop.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/elevator/ElevatorStop.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Elevator.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GridObject.java" />
@@ -201,6 +198,7 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/TransitLine.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarSteeringManager.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ExpandLandOverlay.java" />
       </list>
     </option>
   </component>
@@ -1474,7 +1472,11 @@
       <created>1335935825776</created>
       <updated>1335935825776</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="avatar elevator movement is working betters&#10;">
+      <created>1336155313430</created>
+      <updated>1336155313430</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1505,6 +1507,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3257403" sideWeight="0.95461786" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2093949" sideWeight="0.6180714" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2032419" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24918832" sideWeight="0.7441154" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32414308" sideWeight="0.0" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
@@ -1530,7 +1533,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3125" sideWeight="0.75587565" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20417288" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1578,7 +1580,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="much more improved elevators with realistic queues!" />
+    <option name="LAST_COMMIT_MESSAGE" value="avatar elevator movement is working betters&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1591,7 +1593,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="added vibrators" />
     <MESSAGE value="achievements viewer window works&#10;progress bar works&#10;woot." />
     <MESSAGE value="ugh i hate monolithic commits :(&#10;achievements menus all work&#10;status panel is different&#10;new icons for the expand land action&#10;lots of other improvements?" />
     <MESSAGE value="added coloring to the elevator dragging, maybe that will make it easier for users to know when they are interacting?" />
@@ -1616,6 +1617,7 @@
     <MESSAGE value="cleaned up some transit lines that were being left around" />
     <MESSAGE value="elevator car is much more realistic, minus that whole droids to heaven thing." />
     <MESSAGE value="much more improved elevators with realistic queues!" />
+    <MESSAGE value="avatar elevator movement is working betters&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1638,31 +1640,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="229" column="3" selection-start="6896" selection-end="6896" vertical-scroll-proportion="0.8013544" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GridObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="30" selection-start="1131" selection-end="1131" vertical-scroll-proportion="0.1738149" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Transit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="47" selection-start="325" selection-end="325" vertical-scroll-proportion="0.14682981" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Elevator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="36" selection-start="953" selection-end="953" vertical-scroll-proportion="0.1489842" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPosition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="4" selection-start="2312" selection-end="2312" vertical-scroll-proportion="0.503386" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/elevator/Passenger.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="23" selection-start="616" selection-end="616" vertical-scroll-proportion="-0.17463848" />
@@ -1705,15 +1682,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="0" selection-start="1484" selection-end="1484" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#5083#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="34" column="50" selection-start="1439" selection-end="1439" vertical-scroll-proportion="0.0">
@@ -1723,8 +1691,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarSteeringManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="220" column="40" selection-start="6948" selection-end="6948" vertical-scroll-proportion="0.20683111">
+        <state line="220" column="40" selection-start="6948" selection-end="6948" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarLayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="166" column="14" selection-start="4900" selection-end="4900" vertical-scroll-proportion="0.4573055">
+          <folding>
+            <element signature="e#0#5083#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPositionCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="45" selection-start="1449" selection-end="1449" vertical-scroll-proportion="0.4903226">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/CameraController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="204" column="36" selection-start="6013" selection-end="6013" vertical-scroll-proportion="0.6824147">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/events/GameGridResizeEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="23" selection-start="188" selection-end="188" vertical-scroll-proportion="0.17032258">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGrid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="26" selection-start="2237" selection-end="2237" vertical-scroll-proportion="0.31102362">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ExpandLandOverlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="35" selection-start="2472" selection-end="2472" vertical-scroll-proportion="0.51361865">
+          <folding>
+            <element signature="e#0#4596#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
