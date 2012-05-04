@@ -88,7 +88,7 @@ public class AvatarSteeringManager {
   private void advancePosition() {
     if (currentState.size() > 0) return;
 
-    if (path.peek() == null) {
+    if (path.isEmpty()) {
       finished();
       return;
     }
@@ -120,7 +120,6 @@ public class AvatarSteeringManager {
         }
 
         if (endOfElevator != null) {
-          System.out.printf("size: %d, %d\n", before, path.size());
           traverseElevator(endOfElevator);
           return;
         }
@@ -142,7 +141,19 @@ public class AvatarSteeringManager {
     moveAvatarTo(nextToElevator, new TweenCallback() {
       @Override
       public void onEvent(int type, BaseTween source) {
-        currentPos.elevator.getCar().enqueue(AvatarSteeringManager.this, currentPos.y, destination.y);
+        currentPos.elevator.getCar().enqueue(AvatarSteeringManager.this, currentPos.y, destination.y, new Runnable() {
+          @Override
+          public void run() {
+            currentPos = destination;
+            moveAvatarTo(currentPos, new TweenCallback() {
+              @Override
+              public void onEvent(int type, BaseTween source) {
+                currentState.remove(AvatarState.USING_ELEVATOR);
+                advancePosition();
+              }
+            });
+          }
+        });
       }
     });
   }
@@ -222,15 +233,8 @@ public class AvatarSteeringManager {
     moveAvatarTo(posInCar, new TweenCallback() {
       @Override
       public void onEvent(int type, BaseTween source) {
-        System.out.println("Boarded!");
         runnable.run();
       }
     });
-  }
-
-  public void disembarkElevator() {
-    System.out.println("Disembarked!");
-    currentState.remove(AvatarState.USING_ELEVATOR);
-    advancePosition();
   }
 }

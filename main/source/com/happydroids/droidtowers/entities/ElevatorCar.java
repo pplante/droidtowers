@@ -102,8 +102,8 @@ public class ElevatorCar extends GameObject {
   }
 
 
-  public void enqueue(AvatarSteeringManager steeringManager, int boarding, int destination) {
-    queue.add(new Passenger(steeringManager, boarding, destination));
+  public void enqueue(AvatarSteeringManager steeringManager, int boarding, int destination, Runnable disembarkCallback) {
+    queue.add(new Passenger(steeringManager, boarding, destination, disembarkCallback));
   }
 
   @Override

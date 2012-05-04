@@ -13,14 +13,16 @@ import static com.happydroids.droidtowers.math.Direction.UP;
 public class Passenger {
   public final int boardingFloor;
   public final int destinationFloor;
+  private final Runnable disembarkCallback;
   public final Direction travelDirection;
   private final AvatarSteeringManager steeringManager;
   private boolean waitFor;
 
-  public Passenger(AvatarSteeringManager steeringManager, int boarding, int destination) {
+  public Passenger(AvatarSteeringManager steeringManager, int boarding, int destination, Runnable disembarkCallback) {
     this.steeringManager = steeringManager;
     boardingFloor = boarding;
     destinationFloor = destination;
+    this.disembarkCallback = disembarkCallback;
 
     travelDirection = boardingFloor < destinationFloor ? UP : DOWN;
   }
@@ -53,7 +55,7 @@ public class Passenger {
 
   public void disembarkNow() {
     System.out.println("Disembarked.");
-    steeringManager.disembarkElevator();
+    disembarkCallback.run();
   }
 
   public boolean shouldWaitFor() {
