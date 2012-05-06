@@ -25,6 +25,8 @@ import java.util.Set;
 import static com.happydroids.droidtowers.entities.GridObjectPlacementState.PLACED;
 
 public class AvatarLayer extends GameLayer {
+  private static final String TAG = AvatarLayer.class.getSimpleName();
+
   private static AvatarLayer instance;
   private final GameGrid gameGrid;
   private static final int MAX_AVATARS = (Gdx.app.getType() == Application.ApplicationType.Android ? 20 : 60);
@@ -94,7 +96,20 @@ public class AvatarLayer extends GameLayer {
   }
 
   private void setupAvatar(Avatar avatar) {
-    avatar.setPosition(Random.randomInt(-64, gameGrid.getWorldSize().x + 64), TowerConsts.GROUND_HEIGHT);
+    GuavaSet<GridObject> rooms = getAllRooms().filterBy(new Predicate<GridObject>() {
+      @Override
+      public boolean apply(@Nullable GridObject input) {
+        return input instanceof Room && !((Room) input).hasResident();
+      }
+    });
+
+    if (!rooms.isEmpty()) {
+      GridObject avatarsHome = rooms.getRandomEntry();
+      Gdx.app.log(TAG, "Moving into " + avatarsHome);
+      avatar.setHome((Room) avatarsHome);
+    } else {
+      avatar.setPosition(Random.randomInt(-64, gameGrid.getWorldSize().x + 64), TowerConsts.GROUND_HEIGHT);
+    }
 
     avatar.beginNextAction();
     addChild(avatar);

@@ -352,4 +352,9 @@ public abstract class GridObject {
   public void adjustToNewLandSize() {
 
   }
+
+
+  public Vector2 getWorldCenterBottom() {
+    return worldCenter.cpy().sub(0, size.y / 2);
+  }
 }

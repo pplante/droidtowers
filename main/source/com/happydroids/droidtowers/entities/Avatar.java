@@ -50,6 +50,7 @@ public class Avatar extends GameObject {
   protected GridObject movingTo;
   private TransitPathFinder pathFinder;
   private boolean justWandered;
+  private Room home;
 
   public Avatar(AvatarLayer avatarLayer) {
     super();
@@ -207,5 +208,11 @@ public class Avatar extends GameObject {
   public void murderDeathKill187() {
     cancelMovement();
     AvatarLayer.instance().removeChild(this);
+  }
+
+  public void setHome(Room newHome) {
+    home = newHome;
+    home.setResident(this);
+    setPosition(home.getWorldCenterBottom());
   }
 }

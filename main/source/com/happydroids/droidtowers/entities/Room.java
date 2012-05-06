@@ -35,6 +35,7 @@ public class Room extends GridObject {
   private int populationRequired;
   private boolean connectedToTransport;
   private float surroundingNoiseLevel;
+  private Avatar resident;
 
   public Room(RoomType roomType, GameGrid gameGrid) {
     super(roomType, gameGrid);
@@ -152,5 +153,13 @@ public class Room extends GridObject {
 
   public void setSurroundingNoiseLevel(float noise) {
     this.surroundingNoiseLevel = noise;
+  }
+
+  public boolean hasResident() {
+    return resident != null;
+  }
+
+  public void setResident(Avatar avatar) {
+    resident = avatar;
   }
 }
