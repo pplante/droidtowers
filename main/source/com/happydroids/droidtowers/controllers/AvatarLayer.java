@@ -12,8 +12,7 @@ import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.*;
-import com.happydroids.droidtowers.events.GameGridResizeEvent;
-import com.happydroids.droidtowers.events.GridObjectAddedEvent;
+import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.types.ProviderType;
@@ -22,6 +21,8 @@ import com.happydroids.droidtowers.utils.Random;
 
 import javax.annotation.Nullable;
 import java.util.Set;
+
+import static com.happydroids.droidtowers.entities.GridObjectPlacementState.PLACED;
 
 public class AvatarLayer extends GameLayer {
   private static AvatarLayer instance;
@@ -103,10 +104,10 @@ public class AvatarLayer extends GameLayer {
   public void addChild(GameObject gameObject) {
     super.addChild(gameObject);
 
-    if (gameObject instanceof Janitor) {
-      janitors.add((Janitor) gameObject);
-    } else if (gameObject instanceof Maid) {
+    if (gameObject instanceof Maid) {
       maids.add((Maid) gameObject);
+    } else if (gameObject instanceof Janitor) {
+      janitors.add((Janitor) gameObject);
     } else {
       avatars.add((Avatar) gameObject);
     }
@@ -118,17 +119,13 @@ public class AvatarLayer extends GameLayer {
   public void removeChild(GameObject gameObject) {
     super.removeChild(gameObject);
 
-    if (gameObject instanceof Janitor) {
-      janitors.remove(gameObject);
-    } else if (gameObject instanceof Maid) {
-      maids.remove(gameObject);
-    } else {
-      avatars.remove(gameObject);
-    }
+    janitors.remove(gameObject);
+    maids.remove(gameObject);
+    avatars.remove(gameObject);
   }
 
   @Subscribe
-  public void GameEvent_GridObjectAdded(GridObjectAddedEvent event) {
+  public void GameGrid_onGridObjectPlaced(GridObjectPlacedEvent event) {
     if (event.gridObject instanceof Room) {
       RoomType roomType = (RoomType) event.gridObject.getGridObjectType();
       if (roomType.provides(ProviderType.JANITORS)) {
@@ -145,8 +142,10 @@ public class AvatarLayer extends GameLayer {
 
   @Subscribe
   public void GameEvent_GridObjectRemoved(GridObjectRemovedEvent event) {
-    if (event.gridObject instanceof Room) {
-      RoomType roomType = (RoomType) event.gridObject.getGridObjectType();
+    GridObject gridObject = event.gridObject;
+
+    if ((gridObject instanceof Room) && gridObject.getPlacementState().equals(PLACED)) {
+      RoomType roomType = (RoomType) gridObject.getGridObjectType();
       if (roomType.provides(ProviderType.JANITORS)) {
         removeChild(Iterables.getFirst(janitors, null));
         removeChild(Iterables.getFirst(janitors, null));
@@ -157,11 +156,6 @@ public class AvatarLayer extends GameLayer {
         removeChild(Iterables.getFirst(maids, null));
       }
     }
-  }
-
-  @Subscribe
-  public void GameGrid_onGameGridResize(GameGridResizeEvent event) {
-
   }
 
   public void adjustAvatarPositions(int adjustX) {

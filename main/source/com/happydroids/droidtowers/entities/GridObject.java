@@ -140,10 +140,10 @@ public abstract class GridObject {
 
     position.set(x, y);
     clampPosition();
+    updateWorldCoordinates();
 
     if (!position.equals(prevPosition)) {
-      updateWorldCoordinates();
-      updatePlacementStatus();
+      updatePlacementStatus(placementState);
 
       broadcastEvent(new GridObjectBoundsChangeEvent(this, size, prevPosition));
     }
@@ -171,7 +171,9 @@ public abstract class GridObject {
     }
   }
 
-  private void updatePlacementStatus() {
+  private void updatePlacementStatus(GridObjectPlacementState prevState) {
+    if (placementState.equals(prevState)) return;
+
     Sprite sprite = getSprite();
     if (sprite != null) {
       if (placementState.equals(GridObjectPlacementState.INVALID)) {
@@ -212,9 +214,10 @@ public abstract class GridObject {
     return gridObjectType.getUpkeepCost();
   }
 
-  public void setPlacementState(GridObjectPlacementState placementState) {
-    this.placementState = placementState;
-    updatePlacementStatus();
+  public void setPlacementState(GridObjectPlacementState state) {
+    GridObjectPlacementState prevState = placementState;
+    placementState = state;
+    updatePlacementStatus(prevState);
   }
 
   public GridObjectPlacementState getPlacementState() {
@@ -292,7 +295,7 @@ public abstract class GridObject {
     return myEventBus;
   }
 
-  protected void broadcastEvent(GridObjectEvent event) {
+  public void broadcastEvent(GridObjectEvent event) {
     if (myEventBus != null) {
       myEventBus.post(event);
     }
@@ -316,6 +319,7 @@ public abstract class GridObject {
     return worldBounds;
   }
 
+  @SuppressWarnings("RedundantIfStatement")
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -343,5 +347,9 @@ public abstract class GridObject {
     result = 31 * result + (placementState != null ? placementState.hashCode() : 0);
     result = 31 * result + (desirability != +0.0f ? Float.floatToIntBits(desirability) : 0);
     return result;
+  }
+
+  public void adjustToNewLandSize() {
+
   }
 }

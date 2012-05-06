@@ -63,4 +63,13 @@ public class Passenger {
   public void updatePosition(float y) {
     steeringManager.getAvatar().setY(y);
   }
+
+  public void killByElevator() {
+    waitFor = false;
+    steeringManager.getAvatar().murderDeathKill187();
+  }
+
+  public AvatarSteeringManager getSteeringManager() {
+    return steeringManager;
+  }
 }

@@ -10,13 +10,11 @@ import com.happydroids.droidtowers.types.ProviderType;
 public class Maid extends Janitor {
   public Maid(AvatarLayer avatarLayer) {
     super(avatarLayer);
+
+    setServicesTheseProviderTypes(ProviderType.HOTEL_ROOMS);
   }
 
   protected String addFramePrefix(String frameName) {
     return "maid/" + frameName;
-  }
-
-  public static boolean checkProviderType(ProviderType providerType) {
-    return providerType.equals(ProviderType.HOTEL_ROOMS);
   }
 }

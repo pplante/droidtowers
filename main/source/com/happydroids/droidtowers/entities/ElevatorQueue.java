@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.entities;
 import com.badlogic.gdx.Gdx;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
 import com.happydroids.droidtowers.entities.elevator.ElevatorStop;
 import com.happydroids.droidtowers.entities.elevator.Passenger;
 import com.happydroids.droidtowers.math.Direction;
@@ -19,46 +20,44 @@ import java.util.Set;
 import static com.happydroids.droidtowers.math.Direction.DOWN;
 
 public class ElevatorQueue {
-  private LinkedList<Passenger> passengers;
-  private int nextFloor;
+  private LinkedList<Passenger> passengersWaiting;
   private LinkedList<ElevatorStop> stops;
   private ElevatorStop currentStop;
   private Set<Passenger> currentRiders;
   private float queueTime;
 
   public ElevatorQueue() {
-    passengers = Lists.newLinkedList();
+    passengersWaiting = Lists.newLinkedList();
     currentRiders = Sets.newHashSet();
     queueTime = 0f;
+    stops = Lists.newLinkedList();
   }
 
   public void add(Passenger passenger) {
-    passengers.add(passenger);
+    passengersWaiting.add(passenger);
   }
 
-  public List<Passenger> getPassengers() {
-    return passengers;
-  }
-
-  public int getNextFloor() {
-    return passengers.get(0).destinationFloor;
+  public List<Passenger> getPassengersWaiting() {
+    return passengersWaiting;
   }
 
   public boolean determinePickups() {
     queueTime += Gdx.graphics.getDeltaTime();
 
-    if (passengers.isEmpty() || queueTime < 5f) return false;
-    Passenger firstPassenger = passengers.poll();
+    if (passengersWaiting.isEmpty() || queueTime < 5f) return false;
+    queueTime = 0f;
+
+    Passenger firstPassenger = passengersWaiting.poll();
     Set<Passenger> currentLoad = Sets.newHashSet();
 
-    for (Passenger otherPassenger : passengers) {
+    for (Passenger otherPassenger : passengersWaiting) {
       if (firstPassenger.travelContains(otherPassenger)) {
         currentLoad.add(otherPassenger);
       }
     }
 
     currentLoad.add(firstPassenger);
-    passengers.removeAll(currentLoad);
+    passengersWaiting.removeAll(currentLoad);
     makeStops(currentLoad, firstPassenger.travelDirection);
     moveToNextStop();
 
@@ -78,7 +77,6 @@ public class ElevatorQueue {
       Collections.reverse(floorNumbers);
     }
 
-    stops = Lists.newLinkedList();
     for (Integer floorNumber : floorNumbers) {
       ElevatorStop stop = new ElevatorStop(floorNumber);
       for (Passenger passenger : currentLoad) {
@@ -96,7 +94,7 @@ public class ElevatorQueue {
   public boolean moveToNextStop() {
     currentStop = null;
 
-    if (stops == null || stops.size() == 0) {
+    if (stops.isEmpty()) {
       return false;
     }
 
@@ -133,5 +131,28 @@ public class ElevatorQueue {
 
   public Set<Passenger> getCurrentRiders() {
     return currentRiders;
+  }
+
+  public void killPassengers() {
+    for (Passenger currentRider : currentRiders) {
+      currentRider.killByElevator();
+    }
+
+    currentRiders.clear();
+  }
+
+  public void removePassenger(AvatarSteeringManager avatarSteeringManager) {
+    for (Passenger rider : currentRiders) {
+      if (rider.getSteeringManager().equals(avatarSteeringManager)) {
+        currentRiders.remove(rider);
+        break;
+      }
+    }
+  }
+
+  public void clear() {
+    passengersWaiting.clear();
+    currentRiders.clear();
+    currentStop = null;
   }
 }

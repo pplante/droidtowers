@@ -50,6 +50,8 @@ public class ElevatorCar extends GameObject {
   @Subscribe
   public void Elevator_boundsChanged(GridObjectBoundsChangeEvent event) {
     setPosition(elevator.getWorldPosition());
+
+    queue.killPassengers();
   }
 
   public void moveToFloor(int nextFloor) {
@@ -112,13 +114,19 @@ public class ElevatorCar extends GameObject {
 
     ElevatorCar that = (ElevatorCar) o;
 
-    if (queue != null ? !queue.equals(that.queue) : that.queue != null) return false;
-
-    return true;
+    return !(queue != null ? !queue.equals(that.queue) : that.queue != null);
   }
 
   @Override
   public int hashCode() {
     return queue != null ? queue.hashCode() : 0;
+  }
+
+  public void removePassenger(AvatarSteeringManager avatarSteeringManager) {
+    queue.removePassenger(avatarSteeringManager);
+  }
+
+  public void clearQueue() {
+    queue.clear();
   }
 }

@@ -14,7 +14,6 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.eventbus.Subscribe;
-import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
@@ -24,7 +23,6 @@ import com.happydroids.droidtowers.events.GridObjectChangedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.graphics.Overlays;
 import com.happydroids.droidtowers.graphics.TransitLine;
-import com.happydroids.droidtowers.math.GridPoint;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -33,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
 import static com.happydroids.droidtowers.graphics.Overlays.POPULATION_LEVEL;
 
 public class GameGridRenderer extends GameLayer {
@@ -139,26 +138,19 @@ public class GameGridRenderer extends GameLayer {
 
   private void renderNoiseLevelOverlay() {
     shapeRenderer.begin(ShapeType.FilledRectangle);
-    for (GridObject gridObject : gameGrid.getObjects()) {
-      float noiseLevel = gridObject.getNoiseLevel();
 
-      if (noiseLevel > 0) {
-        GridPoint position = gridObject.getPosition().cpy();
-        GridPoint size = gridObject.getSize().cpy();
-        float colorStep = noiseLevel / 2f;
-
-        for (int i = 0; i < 2; i++) {
-          position.sub(i, i);
-          size.add(i * 2, i * 2);
-
-          shapeRenderer.filledRect(position.getWorldX(), position.getWorldY(), size.getWorldX(), size.getWorldY());
-          shapeRenderer.setColor(Overlays.NOISE_LEVEL.getColor(noiseLevel));
-
-          noiseLevel -= colorStep;
+    for (int x = 0; x < gameGrid.gridSize.x; x++) {
+      for (int y = 0; y < gameGrid.gridSize.y; y++) {
+        GridPosition position = gameGrid.positionCache().getPosition(x, y);
+        if (position.getNoiseLevel() > 0.01f) {
+          shapeRenderer.filledRect(x * GRID_UNIT_SIZE, (y - 1) * GRID_UNIT_SIZE, GRID_UNIT_SIZE, GRID_UNIT_SIZE);
+          shapeRenderer.setColor(Overlays.NOISE_LEVEL.getColor(position.getNoiseLevel()));
+        } else {
+          shapeRenderer.setColor(Color.CLEAR);
         }
-
       }
     }
+
     shapeRenderer.end();
   }
 
@@ -179,11 +171,11 @@ public class GameGridRenderer extends GameLayer {
     shapeRenderer.setColor(0.1f, 0.1f, 0.1f, 0.1f);
 
     for (int i = 0; i <= gameGrid.getGridSize().x; i++) {
-      shapeRenderer.line(i * TowerConsts.GRID_UNIT_SIZE, 0, i * TowerConsts.GRID_UNIT_SIZE, gameGrid.getGridSize().y * TowerConsts.GRID_UNIT_SIZE);
+      shapeRenderer.line(i * GRID_UNIT_SIZE, 0, i * GRID_UNIT_SIZE, gameGrid.getGridSize().y * GRID_UNIT_SIZE);
     }
 
     for (int i = 0; i <= gameGrid.getGridSize().y; i++) {
-      shapeRenderer.line(0, i * TowerConsts.GRID_UNIT_SIZE, gameGrid.getGridSize().x * TowerConsts.GRID_UNIT_SIZE, i * TowerConsts.GRID_UNIT_SIZE);
+      shapeRenderer.line(0, i * GRID_UNIT_SIZE, gameGrid.getGridSize().x * GRID_UNIT_SIZE, i * GRID_UNIT_SIZE);
     }
 
     shapeRenderer.end();

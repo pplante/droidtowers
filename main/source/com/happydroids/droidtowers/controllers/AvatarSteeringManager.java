@@ -9,11 +9,12 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.equations.Linear;
 import com.badlogic.gdx.math.Vector2;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.Avatar;
 import com.happydroids.droidtowers.entities.Stair;
+import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
 import com.happydroids.droidtowers.graphics.TransitLine;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
@@ -27,6 +28,7 @@ import java.util.Set;
 
 import static aurelienribon.tweenengine.TweenCallback.COMPLETE;
 import static com.happydroids.droidtowers.controllers.AvatarState.MOVING;
+import static com.happydroids.droidtowers.entities.GridObjectPlacementState.PLACED;
 import static com.happydroids.droidtowers.math.Direction.*;
 import static com.happydroids.droidtowers.tween.GameObjectAccessor.POSITION;
 
@@ -60,10 +62,11 @@ public class AvatarSteeringManager {
     stairsUsed = Sets.newHashSet();
     transitLine = new TransitLine();
     transitLine.setColor(avatar.getColor());
-    for (GridPosition position : Lists.newArrayList(path)) {
+    for (GridPosition position : path) {
       transitLine.addPoint(position.toWorldVector2());
     }
 
+    gameGrid.events().register(this);
     gameGrid.getRenderer().addTransitLine(transitLine);
 
     advancePosition();
@@ -79,6 +82,16 @@ public class AvatarSteeringManager {
   }
 
   public void cancel() {
+    if (!running) {
+      return;
+    }
+
+    if (currentPos != null && currentPos.elevator != null) {
+      currentPos.elevator.getCar().removePassenger(this);
+    }
+
+    gameGrid.events().unregister(this);
+
     running = false;
     pointsTraveled = 0;
     TweenSystem.getTweenManager().killTarget(avatar);
@@ -141,6 +154,11 @@ public class AvatarSteeringManager {
     moveAvatarTo(nextToElevator, new TweenCallback() {
       @Override
       public void onEvent(int type, BaseTween source) {
+        if (currentPos.elevator == null) {
+          cancel();
+          return;
+        }
+
         currentPos.elevator.getCar().enqueue(AvatarSteeringManager.this, currentPos.y, destination.y, new Runnable() {
           @Override
           public void run() {
@@ -159,6 +177,11 @@ public class AvatarSteeringManager {
   }
 
   private void traverseStair(GridPosition nextPosition) {
+    if (currentPos.stair == null) {
+      cancel();
+      return;
+    }
+
     currentState.add(AvatarState.USING_STAIRS);
 
     Stair stair = currentPos.stair;
@@ -236,5 +259,19 @@ public class AvatarSteeringManager {
         runnable.run();
       }
     });
+  }
+
+  @Subscribe
+  public void GameGrid_onGridObjectBoundsChange(GridObjectBoundsChangeEvent event) {
+    if (!event.gridObject.getPlacementState().equals(PLACED)) {
+      return;
+    }
+
+    for (GridPosition position : path) {
+      if (position.getObjects().contains(event.gridObject) || position.elevator == event.gridObject) {
+        cancel();
+        break;
+      }
+    }
   }
 }

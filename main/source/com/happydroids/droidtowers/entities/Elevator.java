@@ -187,8 +187,8 @@ public class Elevator extends Transit {
   }
 
   private void checkSize(GridPoint newSize) {
-    newSize.y = Math.max(size.y, 3);
-    newSize.y = Math.min(size.y, 17);
+    newSize.y = Math.max(newSize.y, 3);
+    newSize.y = Math.min(newSize.y, 17);
   }
 
   @Override
@@ -219,15 +219,18 @@ public class Elevator extends Transit {
   }
 
   @Override
+  public void adjustToNewLandSize() {
+    elevatorCar.clearQueue();
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof Elevator)) return false;
 
     Elevator elevator = (Elevator) o;
 
-    if (elevatorCar != null ? !elevatorCar.equals(elevator.elevatorCar) : elevator.elevatorCar != null) return false;
-
-    return true;
+    return !(elevatorCar != null ? !elevatorCar.equals(elevator.elevatorCar) : elevator.elevatorCar != null);
   }
 
   @Override

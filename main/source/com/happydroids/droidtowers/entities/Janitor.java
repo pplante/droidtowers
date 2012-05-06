@@ -15,9 +15,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class Janitor extends Avatar {
+  protected ProviderType[] servicesTheseProviderTypes;
+
   public Janitor(AvatarLayer avatarLayer) {
     super(avatarLayer);
     setColor(Color.WHITE);
+    setServicesTheseProviderTypes(ProviderType.FOOD, ProviderType.OFFICE_SERVICES, ProviderType.RESTROOM);
   }
 
   @Override
@@ -31,7 +34,7 @@ public class Janitor extends Avatar {
     if (commercialSpaces != null) {
       List<GridObject> sortedObjects = commercialSpaces.filterBy(new Predicate<GridObject>() {
         public boolean apply(@Nullable GridObject input) {
-          return ((CommercialSpace) input).getNumVisitors() > 0 && input.getGridObjectType().provides(ProviderType.FOOD, ProviderType.OFFICE_SERVICES);
+          return ((CommercialSpace) input).getNumVisitors() > 0 && input.getGridObjectType().provides(servicesTheseProviderTypes);
         }
       }).sortedBy(new Function<GridObject, Long>() {
         public Long apply(@Nullable GridObject gridObject) {
@@ -43,5 +46,9 @@ public class Janitor extends Avatar {
     } else {
       wanderAround();
     }
+  }
+
+  public void setServicesTheseProviderTypes(ProviderType... types) {
+    servicesTheseProviderTypes = types;
   }
 }

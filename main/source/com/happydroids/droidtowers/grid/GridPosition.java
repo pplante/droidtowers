@@ -18,6 +18,8 @@ public class GridPosition {
   public boolean connectedToTransit;
   public Elevator elevator;
   public Stair stair;
+  private float maxNoiseLevel;
+  private float noiseLevel;
 
   public GridPosition(int x, int y) {
     this.x = x;
@@ -103,5 +105,34 @@ public class GridPosition {
 
   public boolean isEmpty() {
     return objects.isEmpty();
+  }
+
+  public void findMaxNoise() {
+    for (GridObject gridObject : objects) {
+      maxNoiseLevel = Math.max(gridObject.getNoiseLevel(), maxNoiseLevel);
+    }
+  }
+
+  public float getMaxNoiseLevel() {
+    return maxNoiseLevel;
+  }
+
+  public void calculateNoise(GridPosition[][] gridPositions) {
+    float totalNoise = 0f;
+    int distance = 2;
+    for (int xx = x - distance; xx < x + distance; xx++) {
+      for (int yy = y - distance; yy < y + distance; yy++) {
+        if (xx < 0 || yy < 0 || xx >= gridPositions.length || yy >= gridPositions[xx].length) continue;
+        if (xx == x && yy == y) continue;
+
+        totalNoise += gridPositions[xx][yy].getMaxNoiseLevel();
+      }
+    }
+
+    noiseLevel = Math.min(1f, getMaxNoiseLevel() + totalNoise / 8);
+  }
+
+  public float getNoiseLevel() {
+    return noiseLevel;
   }
 }

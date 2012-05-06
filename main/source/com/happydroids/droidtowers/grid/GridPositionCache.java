@@ -25,6 +25,7 @@ public class GridPositionCache {
   private GridPosition[][] gridPositions;
   private Vector2 gridSize;
   private final GameGrid gameGrid;
+  private float[][] noiseLevels;
 
   public GridPositionCache(GameGrid gameGrid) {
     this.gameGrid = gameGrid;
@@ -175,5 +176,19 @@ public class GridPositionCache {
 
   public void resumeEvents() {
     gameGrid.events().register(this);
+  }
+
+  public void updateNoiseLevels() {
+    for (GridPosition[] row : gridPositions) {
+      for (GridPosition position : row) {
+        position.findMaxNoise();
+      }
+    }
+
+    for (GridPosition[] row : gridPositions) {
+      for (GridPosition position : row) {
+        position.calculateNoise(gridPositions);
+      }
+    }
   }
 }
