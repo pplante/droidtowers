@@ -27,8 +27,7 @@ public class LwjglApplicationShim implements ApplicationListener {
         Gdx.app.debug(TAG, "Reattaching input processor.");
         if (inputProcessor instanceof InputSystem) {
           Gdx.input.setInputProcessor(inputProcessor);
-        } else {
-          Gdx.app.error(TAG, "Got a dummy input processor some how?", new RuntimeException("Got a dummy input processor some how?"));
+          inputProcessor = null;
         }
 
         markToRemove();
