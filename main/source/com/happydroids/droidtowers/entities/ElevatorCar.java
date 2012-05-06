@@ -53,7 +53,6 @@ public class ElevatorCar extends GameObject {
   }
 
   public void moveToFloor(int nextFloor) {
-    System.out.println("Moving to: " + nextFloor);
     TweenSystem.getTweenManager().killTarget(this);
     GridPoint finalPosition = elevator.getContentPosition().cpy();
     finalPosition.y = nextFloor;

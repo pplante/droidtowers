@@ -163,33 +163,32 @@ public class Elevator extends Transit {
 
   @Override
   public boolean pan(Vector2 gridPointAtFinger, Vector2 gridPointDelta) {
-    GridPoint prevSize = size.cpy();
-    GridPoint prevPosition = position.cpy();
+    GridPoint newSize = size.cpy();
+    GridPoint newPosition = position.cpy();
 
     switch (selectedResizeHandle) {
       case BOTTOM:
-        position.y = gridPointAtFinger.y;
-        size.y = anchorPoint.y - position.y + 1;
-        checkSize();
-        position.y = anchorPoint.y - size.y;
+        newPosition.y = gridPointAtFinger.y;
+        newSize.y = anchorPoint.y - newPosition.y + 1;
+        checkSize(newSize);
+        newPosition.y = anchorPoint.y - newSize.y;
         break;
 
       case TOP:
-        size.y = gridPointAtFinger.y - anchorPoint.y;
-        checkSize();
+        newSize.y = gridPointAtFinger.y - anchorPoint.y;
+        checkSize(newSize);
         break;
     }
 
-    checkSize();
-
-    updateWorldCoordinates();
+    size.set(newSize);
+    setPosition(newPosition);
 
     return true;
   }
 
-  private void checkSize() {
-    size.y = Math.max(size.y, 3);
-    size.y = Math.min(size.y, 17);
+  private void checkSize(GridPoint newSize) {
+    newSize.y = Math.max(size.y, 3);
+    newSize.y = Math.min(size.y, 17);
   }
 
   @Override

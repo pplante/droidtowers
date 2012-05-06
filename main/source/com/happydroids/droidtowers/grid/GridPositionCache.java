@@ -10,8 +10,8 @@ import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.GridObjectPlacementState;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
-import com.happydroids.droidtowers.events.GridObjectAddedEvent;
 import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
+import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.math.GridPoint;
 
@@ -46,35 +46,6 @@ public class GridPositionCache {
     }
   }
 
-  @Subscribe
-  public void handleElevatorResizeEvent(GridObjectBoundsChangeEvent event) {
-    GridPoint currentPos = event.prevPosition.cpy();
-    for (float y = 0; y < event.prevSize.y; y++) {
-      GridPosition position = getObjectSetForPosition(currentPos);
-      if (position != null) {
-        position.remove(event.gridObject);
-      }
-      currentPos.add(0, 1);
-    }
-
-    for (GridPoint gridPoint : event.gridObject.getGridPointsOccupied()) {
-      GridPosition position = getObjectSetForPosition(gridPoint);
-      if (position != null) {
-        position.add(event.gridObject);
-      }
-    }
-  }
-
-  @Subscribe
-  public void handleGridObjectAdded(GridObjectAddedEvent event) {
-    GridObject gridObject = event.gridObject;
-    if (gridObject.getPlacementState().equals(GridObjectPlacementState.INVALID)) {
-      return;
-    }
-
-    addGridObjectToPosition(gridObject);
-  }
-
   private void addGridObjectToPosition(GridObject gridObject) {
     List<GridPoint> pointsOccupied = gridObject.getGridPointsOccupied();
     for (GridPoint gridPoint : pointsOccupied) {
@@ -86,9 +57,24 @@ public class GridPositionCache {
   }
 
   @Subscribe
-  public void handleGridObjectChanged(GridObjectBoundsChangeEvent event) {
-    for (float x = event.prevPosition.x; x < event.prevPosition.x + event.prevSize.x; x += 1f) {
-      for (float y = event.prevPosition.y; y < event.prevPosition.y + event.prevSize.y; y += 1f) {
+  public void GameGrid_onGridObjectPlaced(GridObjectPlacedEvent event) {
+    GridObject gridObject = event.gridObject;
+    if (gridObject.getPlacementState().equals(GridObjectPlacementState.INVALID)) {
+      return;
+    }
+
+    addGridObjectToPosition(gridObject);
+  }
+
+  @Subscribe
+  public void GameGrid_onGridObjectBoundsChange(GridObjectBoundsChangeEvent event) {
+    GridObject gridObject = event.gridObject;
+    if (!gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
+      return;
+    }
+    System.out.println(event);
+    for (int x = (int) event.prevPosition.x; x < event.prevPosition.x + event.prevSize.x; x += 1) {
+      for (int y = (int) event.prevPosition.y; y < event.prevPosition.y + event.prevSize.y; y += 1) {
         GridPosition position = getPosition(x, y);
         if (position != null) {
           position.remove(event.gridObject);
@@ -99,17 +85,14 @@ public class GridPositionCache {
     addGridObjectToPosition(event.gridObject);
   }
 
-  private GridPosition getPosition(float x, float y) {
-    return getPosition((int) x, (int) y);
-  }
-
   @Subscribe
-  public void handleGridObjectRemoved(GridObjectRemovedEvent event) {
-    List<GridPoint> pointsOccupied = event.gridObject.getGridPointsOccupied();
+  public void GameGrid_onGridObjectRemoved(GridObjectRemovedEvent event) {
+    GridObject gridObject = event.gridObject;
+    List<GridPoint> pointsOccupied = gridObject.getGridPointsOccupied();
     for (GridPoint gridPoint : pointsOccupied) {
       GridPosition position = getObjectSetForPosition(gridPoint);
       if (position != null) {
-        position.remove(event.gridObject);
+        position.remove(gridObject);
       }
     }
   }

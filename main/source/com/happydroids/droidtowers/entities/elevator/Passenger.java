@@ -43,7 +43,6 @@ public class Passenger {
   }
 
   public void boardNow() {
-    System.out.println("Boarded.");
     waitFor = true;
     steeringManager.boardElevator(new Runnable() {
       @Override
@@ -54,7 +53,6 @@ public class Passenger {
   }
 
   public void disembarkNow() {
-    System.out.println("Disembarked.");
     disembarkCallback.run();
   }
 

@@ -128,18 +128,25 @@ public abstract class GridObject {
   }
 
   public void setPosition(Vector2 gridPointAtFinger) {
-    setPosition(gridPointAtFinger.x, gridPointAtFinger.y);
+    setPosition((int) gridPointAtFinger.x, (int) gridPointAtFinger.y);
   }
 
   public void setPosition(float x, float y) {
+    setPosition((int) x, (int) y);
+  }
+
+  public void setPosition(int x, int y) {
     GridPoint prevPosition = position.cpy();
 
     position.set(x, y);
     clampPosition();
-    updateWorldCoordinates();
-    updatePlacementStatus();
 
-    broadcastEvent(new GridObjectBoundsChangeEvent(this, size, prevPosition));
+    if (!position.equals(prevPosition)) {
+      updateWorldCoordinates();
+      updatePlacementStatus();
+
+      broadcastEvent(new GridObjectBoundsChangeEvent(this, size, prevPosition));
+    }
   }
 
   public void updateWorldCoordinates() {

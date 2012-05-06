@@ -143,16 +143,14 @@ public class Room extends GridObject {
 
   @Override
   public float getDesirability() {
-    return desirability - (surroundingNoiseLevel * 0.5f);
+    if (placementState.equals(GridObjectPlacementState.PLACED) && connectedToTransport) {
+      return desirability - getNoiseLevel() - surroundingNoiseLevel;
+    }
+
+    return 0f;
   }
 
-  public void setSurroundingNoiseLevel(float desirability) {
-    this.surroundingNoiseLevel = desirability;
+  public void setSurroundingNoiseLevel(float noise) {
+    this.surroundingNoiseLevel = noise;
   }
-
-  public float getSurroundingNoiseLevel() {
-    return surroundingNoiseLevel;
-  }
-
-
 }

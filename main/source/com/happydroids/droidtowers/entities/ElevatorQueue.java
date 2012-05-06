@@ -91,8 +91,6 @@ public class ElevatorQueue {
 
       stops.add(stop);
     }
-
-    System.out.println("Stops: " + stops);
   }
 
   public boolean moveToNextStop() {

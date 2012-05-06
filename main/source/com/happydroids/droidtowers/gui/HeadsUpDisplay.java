@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Sets;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
@@ -26,6 +28,8 @@ import com.happydroids.droidtowers.input.PickerTool;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.scenes.TowerScene;
 import com.happydroids.droidtowers.types.*;
+
+import java.util.Set;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
@@ -201,14 +205,29 @@ public class HeadsUpDisplay extends WidgetGroup {
       GridPosition gridPosition = gameGrid.positionCache().getPosition(gridPointAtMouse);
       if (gridPosition != null) {
         int totalVisitors = 0;
+        float noiseLevel = 0f;
+        float desirabilityLevel = 0f;
+        Set<String> objectNames = Sets.newHashSet();
         for (GridObject gridObject : gridPosition.getObjects()) {
           if (gridObject instanceof CommercialSpace) {
-            totalVisitors = ((CommercialSpace) gridObject).getNumVisitors();
+            totalVisitors = Math.max(((CommercialSpace) gridObject).getNumVisitors(), totalVisitors);
           }
+
+          noiseLevel = Math.max(gridObject.getNoiseLevel(), noiseLevel);
+          desirabilityLevel = gridObject.getDesirability();
+
+          objectNames.add(gridObject.getGridObjectType().getName());
         }
 
         mouseToolTip.visible = true;
-        mouseToolTip.setText(String.format("%s\nobjects: %s\nelevator: %s\nstairs: %s\nvisitors: %d", gridPointAtMouse, gridPosition.size(), gridPosition.elevator != null, gridPosition.stair != null, totalVisitors));
+        mouseToolTip.setText(String.format("%s\nobjects: %s\n%s\nelevator: %s\nstairs: %s\nvisitors: %d\nnoise: %.2f\ndesirability: %.2f", gridPointAtMouse,
+                                                  gridPosition.size(),
+                                                  Joiner.on(", ").join(objectNames),
+                                                  gridPosition.elevator != null,
+                                                  gridPosition.stair != null,
+                                                  totalVisitors,
+                                                  noiseLevel,
+                                                  desirabilityLevel));
         mouseToolTip.x = x + 5;
         mouseToolTip.y = y + 5;
       } else {

@@ -4,80 +4,81 @@
 
 package com.happydroids.droidtowers.gamestate.actions;
 
+import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Room;
+import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.grid.GridPosition;
 import com.happydroids.droidtowers.math.GridPoint;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 public class DesirabilityCalculator extends GameGridAction {
-  private HashMap<GridPoint, List<Float>> noisyPositions;
+  private float[][] noiseLevels;
+  private int gridSizeX;
+  private int gridSizeY;
 
   public DesirabilityCalculator(GameGrid gameGrid, float roomUpdateFrequency) {
     super(gameGrid, roomUpdateFrequency);
 
-    noisyPositions = new HashMap<GridPoint, List<Float>>();
+    allocateLevelsStorage();
+    gameGrid.events().register(this);
   }
 
   @Override
   public void run() {
-    noisyPositions.clear();
+    for (int x = 0; x < gridSizeX; x++) {
+      for (int y = 0; y < gridSizeY; y++) {
 
-    for (GridObject gridObject : gameGrid.getObjects()) {
-      float noiseLevel = gridObject.getNoiseLevel();
-      if (noiseLevel > 0) {
-        GridPoint position = gridObject.getPosition();
-        GridPoint size = gridObject.getSize();
-        for (float x = -2; x < size.x + 2; x += 1f) {
-          for (float y = -2; y < size.y + 2; y += 1f) {
-            float xSum = (x > 0 && x < size.x ? x : x - size.x) - x;
-            float ySum = (y > 0 && y < size.y ? y : y - size.y) - y;
-            float distance = (float) Math.sqrt((xSum * xSum) + (ySum * ySum));
-            if (distance > 0.1f) {
-              getListForPosition(new GridPoint(position.x + x, position.y + y)).add(noiseLevel * distance);
-            }
-          }
+        GridPosition position = gameGrid.positionCache().getPosition(x, y);
+        if (!position.connectedToTransit || position.isEmpty()) {
+          continue;
         }
+        float totalNoise = 0f;
+        int objectCount = position.size();
+
+        for (GridObject gridObject : position.getObjects()) {
+          totalNoise += gridObject.getNoiseLevel();
+        }
+
+        noiseLevels[x][y] = totalNoise / objectCount;
       }
     }
 
-    Set<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
+
+    Set<GridObject> rooms = gameGrid.getObjects();
     if (rooms != null) {
       for (GridObject gridObject : rooms) {
+        if (!(gridObject instanceof Room)) continue;
+
         Room room = (Room) gridObject;
 
-        float total = 0;
-        int count = 0;
+        float maxNoiseLevel = 0f;
         for (GridPoint gridPoint : gridObject.getGridPointsOccupied()) {
-          if (noisyPositions.containsKey(gridPoint)) {
-            List<Float> floats = noisyPositions.get(gridPoint);
-            count += floats.size();
-            for (Float val : floats) {
-              total += val;
-            }
-          }
+          maxNoiseLevel = Math.max(maxNoiseLevel, noiseLevels[((int) gridPoint.x)][((int) gridPoint.y)]);
         }
-        if (count > 0f) {
-          room.setSurroundingNoiseLevel(0.9f * (total / count));
-        } else {
-          room.setSurroundingNoiseLevel(0.9f);
-        }
+
+        room.setSurroundingNoiseLevel(maxNoiseLevel);
       }
     }
   }
 
-  private List<Float> getListForPosition(GridPoint gridPoint) {
-    List<Float> values;
-    if (!noisyPositions.containsKey(gridPoint)) {
-      values = new ArrayList<Float>();
-      noisyPositions.put(gridPoint, values);
-    } else {
-      values = noisyPositions.get(gridPoint);
-    }
-    return values;
+  @Subscribe
+  public void GameGrid_onGameGridResize(GameGridResizeEvent event) {
+    allocateLevelsStorage();
   }
+
+  private void allocateLevelsStorage() {
+    gridSizeX = (int) gameGrid.getGridSize().x;
+    gridSizeY = (int) gameGrid.getGridSize().y;
+    noiseLevels = new float[gridSizeX][gridSizeY];
+
+    for (int x = 0; x < gridSizeX; x++) {
+      for (int y = 0; y < gridSizeY; y++) {
+        noiseLevels[x][y] = 0f;
+      }
+    }
+  }
+
 }

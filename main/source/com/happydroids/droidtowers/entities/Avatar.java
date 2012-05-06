@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
-import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
@@ -79,16 +78,16 @@ public class Avatar extends GameObject {
   }
 
   public void beginNextAction() {
-    GuavaSet<GridObject> commercialSpaces = gameGrid.getInstancesOf(Room.class);
-    if (commercialSpaces != null) {
-      commercialSpaces = commercialSpaces.filterBy(new Predicate<GridObject>() {
+    GuavaSet<GridObject> objects = gameGrid.getObjects();
+    if (objects != null) {
+      objects = objects.filterBy(new Predicate<GridObject>() {
         public boolean apply(@Nullable GridObject gridObject) {
-          return ((Room) gridObject).isConnectedToTransport();
+          return gridObject instanceof Room && ((Room) gridObject).isConnectedToTransport();
         }
       });
 
-      if (commercialSpaces.size() > 0) {
-        navigateToGridObject(commercialSpaces.getRandomEntry());
+      if (objects.size() > 0) {
+        navigateToGridObject(objects.getRandomEntry());
       }
     } else {
       wanderAround();
@@ -98,7 +97,6 @@ public class Avatar extends GameObject {
   protected void wanderAround() {
     lastPathFinderSearch = 0f;
     GridPosition start = gameGrid.positionCache().getPosition(gameGrid.closestGridPoint(getX(), getY()));
-    if (HappyDroidConsts.DEBUG) System.out.println(String.format("%s is bored.", this.getClass().getSimpleName()));
 
     setupPathFinder(new WanderPathFinder(gameGrid, start));
   }
