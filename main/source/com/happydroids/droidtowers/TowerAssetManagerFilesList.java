@@ -43,6 +43,7 @@ public class TowerAssetManagerFilesList {
     files.put("backgrounds/clouds.png", Texture.class);
     files.put("fonts/helvetica_neue_14_black.fnt", BitmapFont.class);
     files.put("fonts/hiragino_maru_14_white.fnt", BitmapFont.class);
+    files.put("hud/star.png", Texture.class);
     files.put("backgrounds/sky-gradient.png", Texture.class);
     files.put("fonts/menlo_14_bold_white.fnt", BitmapFont.class);
     files.put("fonts/helvetica_neue_12_white.fnt", BitmapFont.class);

@@ -22,7 +22,7 @@ import static com.happydroids.droidtowers.tween.GameObjectAccessor.POSITION_Y;
 public class ElevatorCar extends GameObject {
   private final Elevator elevator;
   private ElevatorQueue queue;
-  private boolean inUse;
+  protected boolean inUse;
 
   public ElevatorCar(Elevator parent, TextureAtlas elevatorAtlas) {
     elevator = parent;

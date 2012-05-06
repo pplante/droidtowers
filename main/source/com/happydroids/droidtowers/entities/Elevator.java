@@ -95,7 +95,7 @@ public class Elevator extends Transit {
     shaftToRender.draw(spriteBatch);
 
     for (int localFloorNum = 1; localFloorNum < size.y - 1; localFloorNum++) {
-      int worldFloorNum = (int) (position.y + localFloorNum + 1);
+      int worldFloorNum = (int) (position.y + localFloorNum);
       String labelText = String.valueOf(worldFloorNum - TowerConsts.LOBBY_FLOOR);
       if (worldFloorNum == TowerConsts.LOBBY_FLOOR) {
         labelText = "L";
