@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
+import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.GameLayer;
@@ -61,7 +62,7 @@ public class GameGridRenderer extends GameLayer {
 
     transitLines = Lists.newArrayList();
 
-    activeOverlays = new HashSet<Overlays>();
+    activeOverlays = Sets.newHashSet(Overlays.NOISE_LEVEL, Overlays.DESIRABILITY_LEVEL);
 
     objectsRenderOrder = Lists.newArrayList();
     objectRenderSortFunction = new Function<GridObject, Integer>() {

@@ -25,7 +25,7 @@ public class TowerConsts extends HappyDroidConsts {
   public static final float NEIGHBOR_GROUND_HEIGHT = GRID_UNIT_SIZE * (LOBBY_FLOOR - 3);
 
   public static final String CURRENCY_SYMBOL = "$";
-  public static final float HUD_UPDATE_FREQUENCY = 1f;
+  public static final float HUD_UPDATE_FREQUENCY = 0.5f;
   public static final float ROOM_UPDATE_FREQUENCY = 10f;
   public static final float JOB_UPDATE_FREQUENCY = ROOM_UPDATE_FREQUENCY + 0.1f;
   public static final float PLAYER_EARNOUT_FREQUENCY = 10.f;

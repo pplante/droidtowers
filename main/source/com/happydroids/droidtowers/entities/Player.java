@@ -24,6 +24,7 @@ public class Player {
   private int populationResidency;
   private int currentIncome;
   private int currentExpenses;
+  private float starRating;
 
   public static Player instance() {
     if (instance == null) {
@@ -124,5 +125,13 @@ public class Player {
 
   public int getCurrentExpenses() {
     return currentExpenses;
+  }
+
+  public float getStarRating() {
+    return starRating;
+  }
+
+  public void setStarRating(float starRating) {
+    this.starRating = starRating;
   }
 }

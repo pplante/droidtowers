@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.entities;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.types.CommercialType;
 import com.happydroids.droidtowers.utils.Random;
@@ -96,7 +97,7 @@ public class CommercialSpace extends Room {
 
   @Override
   public float getDesirability() {
-    return super.getDesirability() - (0.1f * numVisitors);
+    return MathUtils.clamp(super.getDesirability() - (0.1f * numVisitors), 0f, 1f);
   }
 
   public long getLastCleanedAt() {

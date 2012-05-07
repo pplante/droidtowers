@@ -65,6 +65,7 @@ public class TowerScene extends Scene {
   private DefaultKeybindings keybindings;
   private AchievementEngineCheck achievementEngineCheck;
   private AvatarLayer avatarLayer;
+  private StarRatingCalculator starRatingCalculator;
 
   public TowerScene() {
     gameSaveLocation = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
@@ -124,6 +125,7 @@ public class TowerScene extends Scene {
     earnoutCalculator = new EarnoutCalculator(gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
     employmentCalculator = new EmploymentCalculator(gameGrid, TowerConsts.JOB_UPDATE_FREQUENCY);
     desirabilityCalculator = new DesirabilityCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
+    starRatingCalculator = new StarRatingCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
     achievementEngineCheck = new AchievementEngineCheck(gameGrid, TowerConsts.ACHIEVEMENT_ENGINE_FREQUENCY);
     saveAction = new GameSaveAction(gameState);
     transportCalculator = new TransportCalculator(gameGrid, TowerConsts.TRANSPORT_CALCULATOR_FREQUENCY);
@@ -176,7 +178,14 @@ public class TowerScene extends Scene {
     ActionManager.instance().addAction(earnoutCalculator);
     ActionManager.instance().addAction(employmentCalculator);
     ActionManager.instance().addAction(desirabilityCalculator);
+    ActionManager.instance().addAction(starRatingCalculator);
     ActionManager.instance().addAction(achievementEngineCheck);
+    transportCalculator.run();
+    desirabilityCalculator.run();
+    populationCalculator.run();
+    earnoutCalculator.run();
+    employmentCalculator.run();
+    starRatingCalculator.run();
 
     // SHOULD ALWAYS BE LAST.
     ActionManager.instance().addAction(saveAction);
@@ -189,6 +198,7 @@ public class TowerScene extends Scene {
     ActionManager.instance().removeAction(earnoutCalculator);
     ActionManager.instance().removeAction(employmentCalculator);
     ActionManager.instance().removeAction(desirabilityCalculator);
+    ActionManager.instance().removeAction(starRatingCalculator);
 
     // SHOULD ALWAYS BE LAST.
     ActionManager.instance().removeAction(saveAction);

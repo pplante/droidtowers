@@ -18,6 +18,7 @@ import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.NeighborGameGrid;
+import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.ProviderType;
 import com.happydroids.droidtowers.types.RoomType;
 
@@ -117,7 +118,7 @@ public class Room extends GridObject {
   public int getCoinsEarned() {
     if (currentResidency > 0 && isConnectedToTransport()) {
       RoomType roomType = (RoomType) gridObjectType;
-      return (roomType.getCoinsEarned() / roomType.getPopulationMax()) * currentResidency;
+      return (int) ((roomType.getCoinsEarned() / roomType.getPopulationMax()) * getDesirability());
     }
 
     return 0;
@@ -144,14 +145,18 @@ public class Room extends GridObject {
   @Override
   public float getDesirability() {
     if (placed && connectedToTransport) {
-      return (desirability - getNoiseLevel() - surroundingNoiseLevel) - (getTransportModifier() * 0.5f);
+      return MathUtils.clamp((desirability - getNoiseLevel() - surroundingNoiseLevel) - (getTransportModifier() * 0.5f), 0, 1f);
     }
 
     return 0f;
   }
 
   private float getTransportModifier() {
-    return gameGrid.positionCache().getPosition((int) position.x, (int) position.y).normalizedDistanceFromTransit;
+    float minDist = Float.MAX_VALUE;
+    for (GridPoint gridPoint : getGridPointsTouched()) {
+      minDist = Math.min(gameGrid.positionCache().getPosition(gridPoint).normalizedDistanceFromTransit, minDist);
+    }
+    return minDist;
   }
 
   public void setSurroundingNoiseLevel(float noise) {

@@ -30,11 +30,14 @@ public class StatusBarPanel extends Table {
   private final Label experienceLabel;
   private final Label gameSpeedLabel;
   private final Label populationLabel;
-  private float lastUpdated = TowerConsts.HUD_UPDATE_FREQUENCY;
+  private final Label employmentLabel;
   private final Label moneyIncomeLabel;
   private final Label moneyExpensesLabel;
+  private final Label starRatingLabel;
   private final NoOpWidget starWidget;
   private final Sprite starSprite;
+  private float lastUpdated = TowerConsts.HUD_UPDATE_FREQUENCY;
+  private float starRating;
 
   public StatusBarPanel(TowerScene towerScene) {
     this.towerScene = towerScene;
@@ -44,7 +47,9 @@ public class StatusBarPanel extends Table {
     moneyExpensesLabel = makeValueLabel("0");
     experienceLabel = makeValueLabel("0");
     populationLabel = makeValueLabel("0");
+    employmentLabel = makeValueLabel("0");
     gameSpeedLabel = makeValueLabel("0x");
+    starRatingLabel = makeValueLabel("0x");
 
     setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.TRANSPARENT_BLACK));
 
@@ -57,17 +62,27 @@ public class StatusBarPanel extends Table {
     makeHeader("INCOME");
     makeHeader("EXPENSES");
     makeHeader("POPULATION");
+    makeHeader("EMPLOYMENT");
     makeHeader("GAME SPEED");
-    makeHeader("RATING");
+
+    Label label = FontManager.Roboto12.makeLabel("STAR RATING");
+    label.setAlignment(Align.CENTER);
+    label.setColor(Color.LIGHT_GRAY);
+
+    add(label).center().colspan(2);
 
     row().spaceRight(scale(8));
     add(moneyLabel);
     add(moneyIncomeLabel);
     add(moneyExpensesLabel);
     add(populationLabel);
+    add(employmentLabel);
     add(gameSpeedLabel);
+    add(starRatingLabel);
     starWidget = new NoOpWidget();
     add(starWidget).fill().width(80).height(16);
+
+
     starSprite = TowerAssetManager.sprite("hud/star.png");
     starSprite.getTexture().setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
@@ -99,13 +114,16 @@ public class StatusBarPanel extends Table {
     if (lastUpdated >= TowerConsts.HUD_UPDATE_FREQUENCY) {
       lastUpdated = 0f;
       Player player = Player.instance();
+      starRating = player.getStarRating();
+
       experienceLabel.setText(formatNumber(player.getExperience()));
       moneyLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + formatNumber(player.getCoins()));
       moneyIncomeLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + formatNumber(player.getCurrentIncome()));
       moneyExpensesLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + formatNumber(player.getCurrentExpenses()));
-      populationLabel.setText(formatNumber(player.getTotalPopulation()) + "/" + formatNumber(player.getMaxPopulation()));
-
+      populationLabel.setText(formatNumber(player.getPopulationResidency()) + "/" + formatNumber(player.getMaxPopulation()));
+      employmentLabel.setText(formatNumber(player.getJobsFilled()) + "/" + formatNumber(player.getJobsMax()));
       gameSpeedLabel.setText(towerScene.getTimeMultiplier() + "x");
+      starRatingLabel.setText(String.format("%.1f", starRating));
 
       pack();
     }
@@ -128,8 +146,9 @@ public class StatusBarPanel extends Table {
     Widget.toScreenCoordinates(starWidget, point);
     starSprite.setX(starWidget.x + x);
     starSprite.setY(starWidget.y + y);
-    starSprite.setSize(starWidget.width, starWidget.height);
-    starSprite.setU2(starWidget.width / starSprite.getTexture().getWidth());
+    float starWidth = starRating * starSprite.getTexture().getWidth();
+    starSprite.setSize(starWidth, starWidget.height);
+    starSprite.setU2(starWidth / starSprite.getTexture().getWidth());
     starSprite.setV2(starWidget.height / starSprite.getTexture().getHeight());
     starSprite.draw(batch);
   }
