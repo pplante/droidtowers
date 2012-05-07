@@ -117,6 +117,7 @@ public abstract class GridObject {
   public void setSize(float x, float y) {
     size.set(x, y);
     updateWorldCoordinates();
+    broadcastEvent(new GridObjectBoundsChangeEvent(this, size, position));
   }
 
   public GridPoint getPosition() {
@@ -225,7 +226,17 @@ public abstract class GridObject {
 
 
   public List<GridPoint> getGridPointsTouched() {
-    return getGridPointsOccupied();
+    List<GridPoint> points = Lists.newArrayList();
+
+    GridPoint contentSize = getContentSize();
+    GridPoint contentPosition = getContentPosition();
+    for (float x = contentPosition.x; x < contentPosition.x + contentSize.x; x += 1f) {
+      for (float y = contentPosition.y; y < contentPosition.y + contentSize.y; y += 1f) {
+        points.add(new GridPoint(x, y));
+      }
+    }
+
+    return points;
   }
 
   public float distanceToLobby() {
@@ -251,7 +262,7 @@ public abstract class GridObject {
 
   public EventBus eventBus() {
     if (myEventBus == null) {
-      myEventBus = new EventBus(this.getClass().getSimpleName());
+      myEventBus = new EventBus();
     }
 
     return myEventBus;

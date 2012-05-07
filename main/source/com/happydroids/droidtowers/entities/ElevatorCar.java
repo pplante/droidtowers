@@ -9,10 +9,12 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
 import com.happydroids.droidtowers.entities.elevator.Passenger;
-import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
+import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
+import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
@@ -28,7 +30,7 @@ public class ElevatorCar extends GameObject {
     elevator = parent;
     elevator.eventBus().register(this);
 
-    queue = new ElevatorQueue();
+    queue = new ElevatorQueue(elevator);
 
     TextureAtlas.AtlasRegion carRegion = elevatorAtlas.findRegion("elevator/car");
     setRegion(carRegion);
@@ -36,6 +38,7 @@ public class ElevatorCar extends GameObject {
     float gridScale = elevator.gameGrid.getGridScale();
     setSize(carRegion.originalWidth * gridScale, carRegion.originalHeight * gridScale);
     setScale(gridScale);
+    resetToBottomOfShaft();
   }
 
   @Override
@@ -45,13 +48,6 @@ public class ElevatorCar extends GameObject {
     }
 
     super.finalize();
-  }
-
-  @Subscribe
-  public void Elevator_boundsChanged(GridObjectBoundsChangeEvent event) {
-    setPosition(elevator.getWorldPosition());
-
-    queue.killPassengers();
   }
 
   public void moveToFloor(int nextFloor) {
@@ -103,9 +99,39 @@ public class ElevatorCar extends GameObject {
     moveToFloor((int) elevator.getContentPosition().y);
   }
 
+  public boolean addPassenger(AvatarSteeringManager steeringManager, int boarding, int destination, Runnable disembarkCallback) {
+    if (elevator.servicesFloor(boarding) && elevator.servicesFloor(destination)) {
+      queue.add(new Passenger(steeringManager, boarding, destination, disembarkCallback));
+      return true;
+    }
 
-  public void enqueue(AvatarSteeringManager steeringManager, int boarding, int destination, Runnable disembarkCallback) {
-    queue.add(new Passenger(steeringManager, boarding, destination, disembarkCallback));
+    return false;
+  }
+
+
+  public void removePassenger(AvatarSteeringManager avatarSteeringManager) {
+    queue.removePassenger(avatarSteeringManager);
+  }
+
+  public void clearQueue() {
+    queue.clear();
+  }
+
+  @Subscribe
+  public void Elevator_boundsChanged(ElevatorHeightChangeEvent event) {
+    resetToBottomOfShaft();
+  }
+
+  @Subscribe
+  public void Elevator_boundsChanged(GridObjectPlacedEvent event) {
+    resetToBottomOfShaft();
+  }
+
+  private void resetToBottomOfShaft() {
+    queue.killPassengers();
+    TweenSystem.getTweenManager().killTarget(this);
+    Vector2 elevatorWorldPosition = elevator.getWorldPosition();
+    setPosition(elevatorWorldPosition.x, elevatorWorldPosition.y + elevator.scaledGridUnit());
   }
 
   @Override
@@ -121,13 +147,5 @@ public class ElevatorCar extends GameObject {
   @Override
   public int hashCode() {
     return queue != null ? queue.hashCode() : 0;
-  }
-
-  public void removePassenger(AvatarSteeringManager avatarSteeringManager) {
-    queue.removePassenger(avatarSteeringManager);
-  }
-
-  public void clearQueue() {
-    queue.clear();
   }
 }

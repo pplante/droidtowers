@@ -21,6 +21,8 @@ import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.ElevatorType;
 import com.happydroids.droidtowers.types.ResizeHandle;
 
+import static com.happydroids.droidtowers.types.ResizeHandle.TOP;
+
 public class Elevator extends Transit {
   private Sprite topSprite;
   private Sprite shaftSprite;
@@ -112,13 +114,12 @@ public class Elevator extends Transit {
     elevatorCar.setColor(renderColor);
     elevatorCar.draw(spriteBatch);
 
-    localPoint.add(0, scaledGridUnit() * (size.y - 3));
-    if (selectedResizeHandle == ResizeHandle.TOP) {
+    if (selectedResizeHandle == TOP) {
       topSprite.setColor(Color.CYAN);
     } else {
       topSprite.setColor(renderColor);
     }
-    topSprite.setPosition(localPoint.x, localPoint.y + scaledGridUnit());
+    topSprite.setPosition(getWorldPosition().x, getWorldTop().y - scaledGridUnit());
     topSprite.draw(spriteBatch);
   }
 
@@ -138,7 +139,7 @@ public class Elevator extends Transit {
   @Override
   public boolean touchDown(Vector2 gameGridPoint, Vector2 worldPoint, int pointer) {
     if (topSprite.getBoundingRectangle().contains(worldPoint.x, worldPoint.y)) {
-      selectedResizeHandle = ResizeHandle.TOP;
+      selectedResizeHandle = TOP;
       anchorPoint = position.cpy();
     } else if (bottomSprite.getBoundingRectangle().contains(worldPoint.x, worldPoint.y)) {
       selectedResizeHandle = ResizeHandle.BOTTOM;
@@ -188,13 +189,13 @@ public class Elevator extends Transit {
 
   private void checkSize(GridPoint newSize) {
     newSize.y = Math.max(newSize.y, 3);
-    newSize.y = Math.min(newSize.y, 17);
+    newSize.y = Math.min(newSize.y, 20);
   }
 
   @Override
   public GridPoint getContentSize() {
     GridPoint cpy = size.cpy();
-    cpy.sub(0, 3);
+    cpy.sub(0, 2);
     return cpy;
   }
 
@@ -207,6 +208,12 @@ public class Elevator extends Transit {
 
   public ElevatorCar getCar() {
     return elevatorCar;
+  }
+
+  public boolean servicesFloor(int floorNumber) {
+    float minFloor = getContentPosition().y;
+    float maxFloor = minFloor + getContentSize().y;
+    return minFloor <= floorNumber && floorNumber <= maxFloor;
   }
 
   public void setWrap(Sprite shaftSprite) {

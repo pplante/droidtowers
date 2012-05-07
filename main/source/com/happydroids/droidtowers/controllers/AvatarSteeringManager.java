@@ -8,6 +8,7 @@ import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.equations.Linear;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
@@ -32,6 +33,7 @@ import static com.happydroids.droidtowers.math.Direction.*;
 import static com.happydroids.droidtowers.tween.GameObjectAccessor.POSITION;
 
 public class AvatarSteeringManager {
+  private static final String TAG = AvatarSteeringManager.class.getSimpleName();
   public static final float MOVEMENT_SPEED = 30;
 
   private final Avatar avatar;
@@ -158,21 +160,29 @@ public class AvatarSteeringManager {
           return;
         }
 
-        currentPos.elevator.getCar().enqueue(AvatarSteeringManager.this, currentPos.y, destination.y, new Runnable() {
+        boolean addedPassenger = currentPos.elevator.getCar().addPassenger(AvatarSteeringManager.this, currentPos.y, destination.y, uponArrivalAtElevatorDestination(destination));
+        if (!addedPassenger) {
+          Gdx.app.error(TAG, "ZOMG CANNOT REACH FLOOR!!!");
+          cancel();
+        }
+      }
+    });
+  }
+
+  private Runnable uponArrivalAtElevatorDestination(final GridPosition destination) {
+    return new Runnable() {
+      @Override
+      public void run() {
+        currentPos = destination;
+        moveAvatarTo(currentPos, new TweenCallback() {
           @Override
-          public void run() {
-            currentPos = destination;
-            moveAvatarTo(currentPos, new TweenCallback() {
-              @Override
-              public void onEvent(int type, BaseTween source) {
-                currentState.remove(AvatarState.USING_ELEVATOR);
-                advancePosition();
-              }
-            });
+          public void onEvent(int type, BaseTween source) {
+            currentState.remove(AvatarState.USING_ELEVATOR);
+            advancePosition();
           }
         });
       }
-    });
+    };
   }
 
   private void traverseStair(GridPosition nextPosition) {

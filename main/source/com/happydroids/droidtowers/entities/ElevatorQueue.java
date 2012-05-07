@@ -11,10 +11,7 @@ import com.happydroids.droidtowers.entities.elevator.ElevatorStop;
 import com.happydroids.droidtowers.entities.elevator.Passenger;
 import com.happydroids.droidtowers.math.Direction;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.happydroids.droidtowers.math.Direction.DOWN;
 
@@ -24,8 +21,11 @@ public class ElevatorQueue {
   private ElevatorStop currentStop;
   private Set<Passenger> currentRiders;
   private float queueTime;
+  private final Elevator elevator;
+  private boolean killingPassengers;
 
-  public ElevatorQueue() {
+  public ElevatorQueue(Elevator elevator) {
+    this.elevator = elevator;
     passengersWaiting = Lists.newLinkedList();
     currentRiders = Sets.newHashSet();
     stops = Lists.newLinkedList();
@@ -40,6 +40,15 @@ public class ElevatorQueue {
   }
 
   public boolean determinePickups() {
+    Iterator<Passenger> passengerIterator = passengersWaiting.iterator();
+    while (passengerIterator.hasNext()) {
+      Passenger passenger = passengerIterator.next();
+      if (!elevator.servicesFloor(passenger.boardingFloor) || !elevator.servicesFloor(passenger.destinationFloor)) {
+        passengerIterator.remove();
+        passenger.killByElevator();
+      }
+    }
+
     if (passengersWaiting.isEmpty()) return false;
 
     Passenger firstPassenger = passengersWaiting.poll();
@@ -129,17 +138,24 @@ public class ElevatorQueue {
   }
 
   public void killPassengers() {
+    killingPassengers = true;
     for (Passenger currentRider : currentRiders) {
       currentRider.killByElevator();
     }
 
     currentRiders.clear();
+    currentStop = null;
+    stops.clear();
+    killingPassengers = false;
   }
 
   public void removePassenger(AvatarSteeringManager avatarSteeringManager) {
+    if (killingPassengers) return;
+
     for (Passenger rider : currentRiders) {
       if (rider.getSteeringManager().equals(avatarSteeringManager)) {
         currentRiders.remove(rider);
+
         break;
       }
     }
