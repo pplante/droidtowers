@@ -6,12 +6,9 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.droidtowers.Colors;
@@ -35,7 +32,7 @@ public class StatusBarPanel extends Table {
   private final Label moneyExpensesLabel;
   private final Label starRatingLabel;
   private final NoOpWidget starWidget;
-  private final Sprite starSprite;
+  private final Texture starTexture;
   private float lastUpdated = TowerConsts.HUD_UPDATE_FREQUENCY;
   private float starRating;
 
@@ -82,12 +79,10 @@ public class StatusBarPanel extends Table {
     starWidget = new NoOpWidget();
     add(starWidget).fill().width(80).height(16);
 
-
-    starSprite = TowerAssetManager.sprite("hud/star.png");
-    starSprite.getTexture().setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+    starTexture = TowerAssetManager.texture("hud/star.png");
+    starTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
     pack();
-//    debug();
   }
 
 
@@ -141,15 +136,16 @@ public class StatusBarPanel extends Table {
   @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
     super.draw(batch, parentAlpha);
-    Vector2 point = new Vector2();
-    starWidget.toLocalCoordinates(point);
-    Widget.toScreenCoordinates(starWidget, point);
-    starSprite.setX(starWidget.x + x);
-    starSprite.setY(starWidget.y + y);
-    float starWidth = starRating * starSprite.getTexture().getWidth();
-    starSprite.setSize(starWidth, starWidget.height);
-    starSprite.setU2(starWidth / starSprite.getTexture().getWidth());
-    starSprite.setV2(starWidget.height / starSprite.getTexture().getHeight());
-    starSprite.draw(batch);
+
+    float starWidth = Math.round(starRating * starTexture.getWidth());
+    batch.setColor(Color.WHITE);
+    batch.draw(starTexture,
+                      x + starWidget.x,
+                      y + starWidget.y,
+                      starWidth,
+                      starWidget.height,
+                      0, 0,
+                      starWidth / starTexture.getWidth(),
+                      -starWidget.height / starTexture.getHeight());
   }
 }

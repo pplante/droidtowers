@@ -57,7 +57,7 @@ public class GameGridRenderer extends GameLayer {
     gameGrid.events().register(this);
 
     renderTintColor = Color.WHITE;
-    shouldRenderGridLines = true;
+    shouldRenderGridLines = false;
     shapeRenderer = new ShapeRenderer();
 
     transitLines = Lists.newArrayList();
