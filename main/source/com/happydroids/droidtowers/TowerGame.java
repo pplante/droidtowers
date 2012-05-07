@@ -10,8 +10,10 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -28,6 +30,7 @@ import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.input.CameraControllerAccessor;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.platform.PlatformBrowserUtil;
 import com.happydroids.droidtowers.platform.PlatformProtocolHandler;
 import com.happydroids.droidtowers.scenes.LaunchUriScene;
@@ -42,6 +45,8 @@ import com.happydroids.utils.BackgroundTask;
 import java.net.URI;
 import java.util.LinkedList;
 
+import static com.badlogic.gdx.Application.ApplicationType.Android;
+
 public class TowerGame implements ApplicationListener, BackgroundTask.PostExecuteManager {
   private static final String TAG = TowerGame.class.getSimpleName();
 
@@ -55,6 +60,8 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
   private static PlatformBrowserUtil platformBrowserUtil;
   private static LinkedList<Scene> pausedScenes;
   private PlatformProtocolHandler protocolHandler;
+  private SpriteBatch spriteBatchFBO;
+  private FrameBuffer frameBuffer;
 
   public TowerGame() {
     audioEnabled = true;
@@ -71,6 +78,11 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
   public void create() {
     Gdx.app.error("lifecycle", "create");
+
+    if (Gdx.graphics.isGL20Available() && Gdx.app.getType().equals(Android) && Display.isHDPIMode()) {
+      frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, 800, 480, false);
+      spriteBatchFBO = new SpriteBatch(100);
+    }
 
     BackgroundTask.setPostExecuteManager(this);
 
@@ -185,7 +197,18 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     spriteBatch.setProjectionMatrix(camera.combined);
 
-    activeScene.render(deltaTime);
+    if (frameBuffer != null) {
+      frameBuffer.begin();
+      activeScene.render(deltaTime);
+      frameBuffer.end();
+
+      spriteBatchFBO.begin();
+      spriteBatchFBO.draw(frameBuffer.getColorBufferTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0, 0, 1, 1);
+      spriteBatchFBO.end();
+    } else {
+      activeScene.render(deltaTime);
+    }
+
     activeScene.getStage().act(deltaTime);
     activeScene.getStage().draw();
 
