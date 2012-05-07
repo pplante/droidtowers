@@ -4,7 +4,6 @@
 
 package com.happydroids.droidtowers.entities;
 
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
@@ -30,7 +29,6 @@ public class GameLayer {
     if (!visible) return;
 
     spriteBatch.begin();
-    spriteBatch.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
     for (GameObject gameObject : gameObjects) {
       gameObject.draw(spriteBatch);
     }

@@ -4,9 +4,7 @@
 
 package com.happydroids.droidtowers.grid;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -62,7 +60,7 @@ public class GameGridRenderer extends GameLayer {
 
     transitLines = Lists.newArrayList();
 
-    activeOverlays = Sets.newHashSet(Overlays.NOISE_LEVEL, Overlays.DESIRABILITY_LEVEL);
+    activeOverlays = Sets.newHashSet();
 
     objectsRenderOrder = Lists.newArrayList();
     objectRenderSortFunction = new Function<GridObject, Integer>() {
@@ -91,8 +89,6 @@ public class GameGridRenderer extends GameLayer {
     renderGridObjects(spriteBatch);
 
     if (activeOverlays.size() > 0) {
-      Gdx.gl.glEnable(GL10.GL_BLEND);
-
       for (Overlays overlay : activeOverlays) {
         if (overlay.equals(Overlays.NOISE_LEVEL)) {
           renderNoiseLevelOverlay();
@@ -103,7 +99,6 @@ public class GameGridRenderer extends GameLayer {
     }
 
     if (shouldRenderTransitLines && transitLines.size() > 0) {
-      Gdx.gl.glEnable(GL10.GL_BLEND);
       for (TransitLine transitLine : transitLines) {
         transitLine.render(shapeRenderer);
       }
@@ -165,8 +160,6 @@ public class GameGridRenderer extends GameLayer {
   }
 
   private void renderGridLines() {
-    Gdx.gl.glEnable(GL10.GL_BLEND);
-
     shapeRenderer.begin(ShapeType.Line);
     shapeRenderer.setColor(0.1f, 0.1f, 0.1f, 0.1f);
 

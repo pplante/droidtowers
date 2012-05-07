@@ -55,8 +55,6 @@ class ProgressBar extends Widget {
   public void draw(SpriteBatch batch, float parentAlpha) {
     validate();
 
-    batch.disableBlending();
-
     patch.setColor(Color.DARK_GRAY);
     patch.draw(batch, x, y, width, height);
 
@@ -67,8 +65,6 @@ class ProgressBar extends Widget {
                         Math.min(((width / 100) * value), width) - (padding * 2),
                         height - (padding * 2));
     }
-
-    batch.enableBlending();
 
     valueLabel.x = x;
     valueLabel.y = y;
