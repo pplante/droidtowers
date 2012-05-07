@@ -8,7 +8,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerGame;
-import com.happydroids.droidtowers.entities.GridObjectPlacementState;
 import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -39,7 +38,7 @@ public class GameGridSoundDispatcher {
   public void GameGrid_onGridObjectRemoved(GridObjectRemovedEvent event) {
     if (!TowerGame.isAudioEnabled() || !soundsAllowed) return;
 
-    if (event.gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
+    if (event.gridObject.isPlaced()) {
       destructionSound.play();
     }
   }

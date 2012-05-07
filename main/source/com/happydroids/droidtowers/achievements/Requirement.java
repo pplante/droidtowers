@@ -15,7 +15,6 @@ import com.happydroids.droidtowers.types.ProviderType;
 import java.text.NumberFormat;
 
 import static com.happydroids.droidtowers.achievements.AchievementThing.*;
-import static com.happydroids.droidtowers.entities.GridObjectPlacementState.PLACED;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Requirement {
@@ -76,7 +75,7 @@ public class Requirement {
 
     currentWeight = 0;
     for (GridObject gridObject : gameGrid.getObjects()) {
-      if (!gridObject.getPlacementState().equals(PLACED)) {
+      if (!gridObject.isPlaced()) {
         continue;
       }
 

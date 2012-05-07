@@ -51,7 +51,7 @@ public class TransportCalculator extends GameGridAction {
     }
 
     for (GridObject transport : gameGrid.getInstancesOf(transportClasses)) {
-      if (transport.getPlacementState().equals(GridObjectPlacementState.INVALID)) continue;
+      if (!transport.isPlaced()) continue;
 
       for (GridPoint gridPoint : transport.getGridPointsTouched()) {
         int x = (int) gridPoint.x;

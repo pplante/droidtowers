@@ -51,6 +51,7 @@ public class Avatar extends GameObject {
   private TransitPathFinder pathFinder;
   private boolean justWandered;
   private Room home;
+  private float hungerLevel;
 
   public Avatar(AvatarLayer avatarLayer) {
     super();
@@ -88,7 +89,7 @@ public class Avatar extends GameObject {
       });
 
       if (objects.size() > 0) {
-        navigateToGridObject(objects.getRandomEntry());
+        navigateToGridObject(objects.randomEntry());
       }
     } else {
       wanderAround();
@@ -156,6 +157,8 @@ public class Avatar extends GameObject {
   public void update(float timeDelta) {
     super.update(timeDelta);
 
+    hungerLevel -= 0.001f * timeDelta;
+
     lastPathFinderSearch += timeDelta;
 
     if (steeringManager != null) {
@@ -207,12 +210,14 @@ public class Avatar extends GameObject {
 
   public void murderDeathKill187() {
     cancelMovement();
-    AvatarLayer.instance().removeChild(this);
+    markToRemove(true);
   }
 
-  public void setHome(Room newHome) {
-    home = newHome;
+  public void setHome(GridObject newHome) {
+    home = (Room) newHome;
     home.setResident(this);
     setPosition(home.getWorldCenterBottom());
   }
+
+
 }

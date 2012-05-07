@@ -18,6 +18,7 @@ import com.google.common.collect.Sets;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
+import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Room;
@@ -49,7 +50,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   private TutorialStepNotification tutorialStep;
   private final StatusBarPanel statusBarPanel;
 
-  public HeadsUpDisplay(TowerScene towerScene, Stage stage, OrthographicCamera camera, GameGrid gameGrid) {
+  public HeadsUpDisplay(TowerScene towerScene, Stage stage, OrthographicCamera camera, GameGrid gameGrid, AvatarLayer avatarLayer) {
     super();
 
     instance = this;
@@ -69,7 +70,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     mouseToolTip = new ToolTip();
     addActor(mouseToolTip);
-    addActor(new ExpandLandOverlay(this.gameGrid));
+    addActor(new ExpandLandOverlay(this.gameGrid, avatarLayer));
 
     buildToolButtonMenu();
 

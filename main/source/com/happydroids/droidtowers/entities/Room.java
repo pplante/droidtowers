@@ -130,7 +130,7 @@ public class Room extends GridObject {
   }
 
   public boolean isConnectedToTransport() {
-    return connectedToTransport && placementState.equals(GridObjectPlacementState.PLACED);
+    return connectedToTransport && placed;
   }
 
   @Override
@@ -144,7 +144,7 @@ public class Room extends GridObject {
 
   @Override
   public float getDesirability() {
-    if (placementState.equals(GridObjectPlacementState.PLACED) && connectedToTransport) {
+    if (placed && connectedToTransport) {
       return desirability - getNoiseLevel() - surroundingNoiseLevel;
     }
 

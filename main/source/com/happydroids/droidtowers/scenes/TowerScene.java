@@ -64,6 +64,7 @@ public class TowerScene extends Scene {
   private GameSaveAction saveAction;
   private DefaultKeybindings keybindings;
   private AchievementEngineCheck achievementEngineCheck;
+  private AvatarLayer avatarLayer;
 
   public TowerScene() {
     gameSaveLocation = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
@@ -85,8 +86,9 @@ public class TowerScene extends Scene {
     gameGrid = new GameGrid(camera);
     gameGridRenderer = gameGrid.getRenderer();
     gameState = new GameState(camera, gameSaveLocation, gameSave, gameGrid);
+    avatarLayer = new AvatarLayer(gameGrid);
 
-    headsUpDisplay = new HeadsUpDisplay(this, this.getStage(), this.getCamera(), this.getGameGrid());
+    headsUpDisplay = new HeadsUpDisplay(this, getStage(), getCamera(), gameGrid, avatarLayer);
     weatherService = new WeatherService();
 
 //    towerMiniMap.x = 100;
@@ -101,7 +103,7 @@ public class TowerScene extends Scene {
     gameLayers.add(new GroundLayer(gameGrid));
     gameLayers.add(gameGridRenderer);
     gameLayers.add(gameGrid);
-    gameLayers.add(AvatarLayer.initialize(gameGrid));
+    gameLayers.add(avatarLayer);
 
     gestureDelegater = new GestureDelegater(camera, gameLayers, gameGrid);
     gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, gestureDelegater);
@@ -252,10 +254,6 @@ public class TowerScene extends Scene {
     this.timeMultiplier = timeMultiplier;
   }
 
-  public GameGrid getGameGrid() {
-    return gameGrid;
-  }
-
   public GameGridRenderer getGameGridRenderer() {
     return gameGridRenderer;
   }
@@ -271,4 +269,5 @@ public class TowerScene extends Scene {
   public GameSave getCurrentGameSave() {
     return gameSave;
   }
+
 }

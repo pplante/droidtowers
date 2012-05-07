@@ -17,7 +17,6 @@ import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
-import com.happydroids.droidtowers.entities.GridObjectPlacementState;
 import com.happydroids.droidtowers.events.GridObjectAddedEvent;
 import com.happydroids.droidtowers.events.GridObjectChangedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
@@ -68,7 +67,7 @@ public class GameGridRenderer extends GameLayer {
     objectRenderSortFunction = new Function<GridObject, Integer>() {
       public Integer apply(@Nullable GridObject gridObject) {
         if (gridObject != null) {
-          if (gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
+          if (gridObject.isPlaced()) {
             return gridObject.getGridObjectType().getZIndex();
           } else {
             return Integer.MAX_VALUE;
@@ -224,7 +223,7 @@ public class GameGridRenderer extends GameLayer {
 
   @Subscribe
   public void handleEvent(GridObjectChangedEvent event) {
-    if (event.gridObject == null || !event.nameOfParamChanged.equals("placementState")) {
+    if (event.gridObject == null || !event.nameOfParamChanged.equals("isPlaced")) {
       return;
     }
 

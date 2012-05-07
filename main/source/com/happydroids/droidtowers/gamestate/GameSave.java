@@ -19,7 +19,6 @@ import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.GridObject;
-import com.happydroids.droidtowers.entities.GridObjectPlacementState;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_UnhappyrobotToDroidTowers;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
@@ -113,7 +112,7 @@ public class GameSave {
     objectCounts = Maps.newHashMap();
 
     for (GridObject gridObject : gameGrid.getObjects()) {
-      if (gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
+      if (gridObject.isPlaced()) {
         gridObjects.add(new GridObjectState(gridObject));
 
         String objectName = gridObject.getGridObjectType().getName();

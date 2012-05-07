@@ -34,7 +34,7 @@ public class PathSearchManager {
 
   public void update(float deltaTime) {
     if (currentPathFinder != null) {
-      for (int i = 0; i < 50 && currentPathFinder.isWorking(); i++) {
+      while (currentPathFinder.isWorking()) {
         currentPathFinder.step();
       }
 

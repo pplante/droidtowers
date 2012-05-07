@@ -153,7 +153,11 @@ public class GameGrid extends GameLayer {
   }
 
   public GuavaSet<GridObject> getInstancesOf(Class aClass) {
-    return gridObjectsByType.get(aClass);
+    if (gridObjectsByType.containsKey(aClass)) {
+      return gridObjectsByType.get(aClass);
+    }
+
+    return null;
   }
 
   public GuavaSet<GridObject> getInstancesOf(Class... classes) {

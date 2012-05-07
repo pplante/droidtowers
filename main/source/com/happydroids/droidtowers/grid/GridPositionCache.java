@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.entities.GridObject;
-import com.happydroids.droidtowers.entities.GridObjectPlacementState;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
 import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
@@ -60,7 +59,7 @@ public class GridPositionCache {
   @Subscribe
   public void GameGrid_onGridObjectPlaced(GridObjectPlacedEvent event) {
     GridObject gridObject = event.gridObject;
-    if (gridObject.getPlacementState().equals(GridObjectPlacementState.INVALID)) {
+    if (!gridObject.isPlaced()) {
       return;
     }
 
@@ -70,7 +69,7 @@ public class GridPositionCache {
   @Subscribe
   public void GameGrid_onGridObjectBoundsChange(GridObjectBoundsChangeEvent event) {
     GridObject gridObject = event.gridObject;
-    if (!gridObject.getPlacementState().equals(GridObjectPlacementState.PLACED)) {
+    if (!gridObject.isPlaced()) {
       return;
     }
     System.out.println(event);

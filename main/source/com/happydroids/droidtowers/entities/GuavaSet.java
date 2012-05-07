@@ -34,7 +34,7 @@ public class GuavaSet<T> extends HashSet<T> {
     return new GuavaSet<T>(Iterables.filter(this, predicate));
   }
 
-  public T getRandomEntry() {
+  public T randomEntry() {
     if (!isEmpty()) {
       return Iterables.get(this, Random.randomInt(size()), null);
     }

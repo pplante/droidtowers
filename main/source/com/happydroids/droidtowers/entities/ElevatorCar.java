@@ -59,9 +59,10 @@ public class ElevatorCar extends GameObject {
     GridPoint finalPosition = elevator.getContentPosition().cpy();
     finalPosition.y = nextFloor;
     float targetYPosition = finalPosition.toWorldVector2().y;
-    int distanceBetweenStops = (int) (Math.abs(getY() - targetYPosition) * 5);
+    int distanceBetweenStops = (int) (Math.abs(getY() - targetYPosition) * 2.5f);
     Tween.to(this, POSITION_Y, distanceBetweenStops)
             .target(targetYPosition)
+            .delay(500f)
             .setCallback(new TweenCallback() {
               public void onEvent(int type, BaseTween source) {
                 queue.informPassengers();

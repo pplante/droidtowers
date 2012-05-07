@@ -4,7 +4,6 @@
 
 package com.happydroids.droidtowers.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
@@ -29,7 +28,6 @@ public class ElevatorQueue {
   public ElevatorQueue() {
     passengersWaiting = Lists.newLinkedList();
     currentRiders = Sets.newHashSet();
-    queueTime = 0f;
     stops = Lists.newLinkedList();
   }
 
@@ -42,10 +40,7 @@ public class ElevatorQueue {
   }
 
   public boolean determinePickups() {
-    queueTime += Gdx.graphics.getDeltaTime();
-
-    if (passengersWaiting.isEmpty() || queueTime < 5f) return false;
-    queueTime = 0f;
+    if (passengersWaiting.isEmpty()) return false;
 
     Passenger firstPassenger = passengersWaiting.poll();
     Set<Passenger> currentLoad = Sets.newHashSet();

@@ -28,7 +28,6 @@ import java.util.Set;
 
 import static aurelienribon.tweenengine.TweenCallback.COMPLETE;
 import static com.happydroids.droidtowers.controllers.AvatarState.MOVING;
-import static com.happydroids.droidtowers.entities.GridObjectPlacementState.PLACED;
 import static com.happydroids.droidtowers.math.Direction.*;
 import static com.happydroids.droidtowers.tween.GameObjectAccessor.POSITION;
 
@@ -263,7 +262,7 @@ public class AvatarSteeringManager {
 
   @Subscribe
   public void GameGrid_onGridObjectBoundsChange(GridObjectBoundsChangeEvent event) {
-    if (!event.gridObject.getPlacementState().equals(PLACED)) {
+    if (!event.gridObject.isPlaced()) {
       return;
     }
 

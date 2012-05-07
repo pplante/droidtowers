@@ -11,7 +11,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
-import com.happydroids.droidtowers.entities.GridObjectPlacementState;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.math.GridPoint;
@@ -118,7 +117,7 @@ public class PlacementTool extends ToolBase {
       HeadsUpDisplay.showToast("This object cannot be placed here.");
       return true;
     } else {
-      gridObject.setPlacementState(GridObjectPlacementState.PLACED);
+      gridObject.setPlaced(true);
     }
 
     if (purchaseManager != null) {

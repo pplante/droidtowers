@@ -30,11 +30,13 @@ import static com.happydroids.droidtowers.TowerConsts.GAME_GRID_EXPAND_LAND_SIZE
 public class ExpandLandOverlay extends WidgetGroup {
   private static final int PADDING = 300;
   private final GameGrid gameGrid;
+  private final AvatarLayer avatarLayer;
   private Button leftButton;
   private Button rightButton;
 
-  public ExpandLandOverlay(GameGrid gameGrid) {
+  public ExpandLandOverlay(GameGrid gameGrid, AvatarLayer avatarLayer) {
     this.gameGrid = gameGrid;
+    this.avatarLayer = avatarLayer;
     CameraController.events().register(this);
 
     leftButton = new ExpandLandButton("left");
@@ -86,7 +88,7 @@ public class ExpandLandOverlay extends WidgetGroup {
       gridObject.setPosition(position.x + GAME_GRID_EXPAND_LAND_SIZE, position.y);
       gridObject.adjustToNewLandSize();
     }
-    AvatarLayer.instance().adjustAvatarPositions(GAME_GRID_EXPAND_LAND_SIZE);
+    avatarLayer.adjustAvatarPositions(GAME_GRID_EXPAND_LAND_SIZE);
 
     Vector3 cameraPosition = CameraController.instance().getCamera().position.cpy();
     CameraController.instance().getCamera().position.set(cameraPosition.x + (TowerConsts.GRID_UNIT_SIZE * GAME_GRID_EXPAND_LAND_SIZE), cameraPosition.y, cameraPosition.z);

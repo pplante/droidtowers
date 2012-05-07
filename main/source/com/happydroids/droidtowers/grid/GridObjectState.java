@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.grid;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.happydroids.droidtowers.entities.GridObject;
-import com.happydroids.droidtowers.entities.GridObjectPlacementState;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
@@ -35,7 +34,7 @@ public class GridObjectState {
       if (object != null) {
         object.setPosition(position.x, position.y);
         object.setSize(size.x, size.y);
-        object.setPlacementState(GridObjectPlacementState.PLACED);
+        object.setPlaced(true);
 
         gameGrid.addObject(object);
 
@@ -43,7 +42,7 @@ public class GridObjectState {
       }
     }
 
-    throw new RuntimeException("Cannot find type: "+ typeId);
+    throw new RuntimeException("Cannot find type: " + typeId);
   }
 
   public GridPoint getPosition() {

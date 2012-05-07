@@ -13,7 +13,6 @@ import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.actions.Action;
-import com.happydroids.droidtowers.actions.TimeDelayedAction;
 import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
 import com.happydroids.droidtowers.events.GridObjectChangedEvent;
 import com.happydroids.droidtowers.events.GridObjectEvent;
@@ -22,7 +21,6 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.GridObjectType;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -33,7 +31,6 @@ public abstract class GridObject {
   protected GridPoint size;
   protected Vector2 worldPosition;
   protected Vector2 worldSize;
-  protected GridObjectPlacementState placementState;
   protected Color renderColor;
   protected Rectangle bounds;
   private Set<Action> actions;
@@ -42,6 +39,7 @@ public abstract class GridObject {
   private Vector2 worldCenter;
   private Vector2 worldTop;
   private Rectangle worldBounds;
+  protected boolean placed;
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
@@ -57,8 +55,6 @@ public abstract class GridObject {
     worldTop = new Vector2();
     worldBounds = new Rectangle();
 
-    placementState = GridObjectPlacementState.INVALID;
-    actions = new HashSet<Action>();
     setRenderColor(Color.WHITE);
   }
 
@@ -143,8 +139,7 @@ public abstract class GridObject {
     updateWorldCoordinates();
 
     if (!position.equals(prevPosition)) {
-      updatePlacementStatus(placementState);
-
+      checkPlacement(placed);
       broadcastEvent(new GridObjectBoundsChangeEvent(this, size, prevPosition));
     }
   }
@@ -171,63 +166,38 @@ public abstract class GridObject {
     }
   }
 
-  private void updatePlacementStatus(GridObjectPlacementState prevState) {
-    if (placementState.equals(prevState)) return;
-
-    Sprite sprite = getSprite();
-    if (sprite != null) {
-      if (placementState.equals(GridObjectPlacementState.INVALID)) {
-        setRenderColor(gameGrid.canObjectBeAt(this) ? Color.CYAN : Color.RED);
-      } else if (placementState.equals(GridObjectPlacementState.PLACED)) {
-        setRenderColor(Color.WHITE);
-        broadcastEvent(new GridObjectPlacedEvent(this));
-      }
-    }
-
-    broadcastEvent(new GridObjectChangedEvent(this, "placementStatus"));
-  }
-
-  public void update(float deltaTime) {
-    if (placementState.equals(GridObjectPlacementState.PLACED)) {
-      long currentTime = System.currentTimeMillis();
-
-      for (Action action : actions) {
-        action.act(currentTime);
-      }
-    }
-  }
-
-
   public int getCoinsEarned() {
-    if (placementState == GridObjectPlacementState.INVALID) {
-      return 0;
-    }
-
-    return gridObjectType.getCoinsEarned();
+    return placed ? gridObjectType.getCoinsEarned() : 0;
   }
 
   public int getUpkeepCost() {
-    if (placementState == GridObjectPlacementState.INVALID) {
-      return 0;
+    return placed ? gridObjectType.getUpkeepCost() : 0;
+  }
+
+  public void setPlaced(boolean state) {
+    boolean prevState = placed;
+    placed = state;
+
+    checkPlacement(prevState);
+  }
+
+  private void checkPlacement(boolean prevState) {
+    if (placed) {
+      setRenderColor(Color.WHITE);
+      broadcastEvent(new GridObjectPlacedEvent(this));
+    } else {
+      setRenderColor(gameGrid.canObjectBeAt(this) ? Color.CYAN : Color.RED);
     }
 
-    return gridObjectType.getUpkeepCost();
+    if (placed != prevState) {
+      broadcastEvent(new GridObjectChangedEvent(this, "placementStatus"));
+    }
   }
 
-  public void setPlacementState(GridObjectPlacementState state) {
-    GridObjectPlacementState prevState = placementState;
-    placementState = state;
-    updatePlacementStatus(prevState);
+  public boolean isPlaced() {
+    return placed;
   }
 
-  public GridObjectPlacementState getPlacementState() {
-    return placementState;
-  }
-
-
-  protected void addAction(TimeDelayedAction action) {
-    actions.add(action);
-  }
 
   public float getNoiseLevel() {
     return gridObjectType.getNoiseLevel();
@@ -279,20 +249,15 @@ public abstract class GridObject {
     this.renderColor = baseTint.mul(renderColor);
   }
 
-  @Override
-  public String toString() {
-    return "GridObject{" +
-                   "position=" + position +
-                   ", gridObjectType=" + gridObjectType +
-                   '}';
-  }
-
   public EventBus eventBus() {
     if (myEventBus == null) {
       myEventBus = new EventBus(this.getClass().getSimpleName());
     }
 
     return myEventBus;
+  }
+
+  public void update(float deltaTime) {
   }
 
   public void broadcastEvent(GridObjectEvent event) {
@@ -319,6 +284,14 @@ public abstract class GridObject {
     return worldBounds;
   }
 
+  public void adjustToNewLandSize() {
+
+  }
+
+  public Vector2 getWorldCenterBottom() {
+    return worldCenter.cpy().sub(0, TowerConsts.GRID_UNIT_SIZE * size.y / 2);
+  }
+
   @SuppressWarnings("RedundantIfStatement")
   @Override
   public boolean equals(Object o) {
@@ -331,7 +304,7 @@ public abstract class GridObject {
     if (gameGrid != null ? !gameGrid.equals(that.gameGrid) : that.gameGrid != null) return false;
     if (gridObjectType != null ? !gridObjectType.equals(that.gridObjectType) : that.gridObjectType != null)
       return false;
-    if (placementState != that.placementState) return false;
+    if (placed != that.placed) return false;
     if (position != null ? !position.equals(that.position) : that.position != null) return false;
     if (size != null ? !size.equals(that.size) : that.size != null) return false;
 
@@ -344,17 +317,16 @@ public abstract class GridObject {
     result = 31 * result + (gameGrid != null ? gameGrid.hashCode() : 0);
     result = 31 * result + (position != null ? position.hashCode() : 0);
     result = 31 * result + (size != null ? size.hashCode() : 0);
-    result = 31 * result + (placementState != null ? placementState.hashCode() : 0);
+    result = 31 * result + (placed ? 1 : 0);
     result = 31 * result + (desirability != +0.0f ? Float.floatToIntBits(desirability) : 0);
     return result;
   }
 
-  public void adjustToNewLandSize() {
-
-  }
-
-
-  public Vector2 getWorldCenterBottom() {
-    return worldCenter.cpy().sub(0, TowerConsts.GRID_UNIT_SIZE * size.y / 2);
+  @Override
+  public String toString() {
+    return "GridObject{" +
+                   "position=" + position +
+                   ", gridObjectType=" + gridObjectType +
+                   '}';
   }
 }

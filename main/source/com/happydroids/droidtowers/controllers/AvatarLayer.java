@@ -4,11 +4,9 @@
 
 package com.happydroids.droidtowers.controllers;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.*;
@@ -20,40 +18,20 @@ import com.happydroids.droidtowers.types.RoomType;
 import com.happydroids.droidtowers.utils.Random;
 
 import javax.annotation.Nullable;
-import java.util.Set;
 
-import static com.happydroids.droidtowers.entities.GridObjectPlacementState.PLACED;
+import static com.happydroids.droidtowers.types.ProviderType.JANITORS;
+import static com.happydroids.droidtowers.types.ProviderType.MAIDS;
 
 public class AvatarLayer extends GameLayer {
   private static final String TAG = AvatarLayer.class.getSimpleName();
 
-  private static AvatarLayer instance;
   private final GameGrid gameGrid;
-  private static final int MAX_AVATARS = (Gdx.app.getType() == Application.ApplicationType.Android ? 20 : 120);
-  private Set<Avatar> avatars;
-  private Set<Janitor> janitors;
-  private Set<Maid> maids;
-  private static final float AVATAR_POPULATION_SCALE = 0.25f;
 
-  public static AvatarLayer initialize(GameGrid gameGrid) {
-    instance = new AvatarLayer(gameGrid);
-
-    return instance;
-  }
-
-  public static AvatarLayer instance() {
-    return instance;
-  }
-
-  AvatarLayer(GameGrid gameGrid) {
+  public AvatarLayer(GameGrid gameGrid) {
     super();
 
     this.gameGrid = gameGrid;
     setTouchEnabled(true);
-
-    avatars = Sets.newHashSet();
-    janitors = Sets.newHashSet();
-    maids = Sets.newHashSet();
 
     gameGrid.events().register(this);
   }
@@ -70,8 +48,8 @@ public class AvatarLayer extends GameLayer {
   }
 
   private void maintainAvatars() {
-    if (avatars.size() < maxAvatars()) {
-      int numToSpawn = maxAvatars() - avatars.size();
+    if (gameObjects.size() < maxAvatars()) {
+      int numToSpawn = maxAvatars() - gameObjects.size();
       for (int i = 0; i <= numToSpawn; i++) {
         Avatar avatar = new Avatar(this);
         setupAvatar(avatar);
@@ -80,70 +58,49 @@ public class AvatarLayer extends GameLayer {
   }
 
   private int maxAvatars() {
-    return (int) Math.min(Player.instance().getTotalPopulation() * AVATAR_POPULATION_SCALE, MAX_AVATARS);
-  }
-
-  private GuavaSet<GridObject> getAllRooms() {
-    GuavaSet<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
-    if (rooms != null) {
-      rooms.filterBy(new Predicate<GridObject>() {
-        public boolean apply(@Nullable GridObject gridObject) {
-          return ((Room) gridObject).isConnectedToTransport();
-        }
-      });
-    }
-    return rooms;
+    return (int) Math.min(Player.instance().getTotalPopulation() * TowerConsts.AVATAR_POPULATION_SCALE, TowerConsts.MAX_AVATARS);
   }
 
   private void setupAvatar(Avatar avatar) {
-    GuavaSet<GridObject> rooms = getAllRooms().filterBy(new Predicate<GridObject>() {
-      @Override
-      public boolean apply(@Nullable GridObject input) {
-        return input instanceof Room && !((Room) input).hasResident();
-      }
-    });
+    boolean positionSet = false;
 
-    if (!rooms.isEmpty()) {
-      GridObject avatarsHome = rooms.getRandomEntry();
-      Gdx.app.log(TAG, "Moving into " + avatarsHome);
-      avatar.setHome((Room) avatarsHome);
-    } else {
-      avatar.setPosition(Random.randomInt(-64, gameGrid.getWorldSize().x + 64), TowerConsts.GROUND_HEIGHT);
+    if (!(avatar instanceof Janitor || avatar instanceof Maid)) {
+      GuavaSet<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
+      if (rooms != null) {
+        GridObject avatarsHome = rooms.filterBy(AVATAR_HOME_FILTER).randomEntry();
+
+        if (avatarsHome != null) {
+          Gdx.app.log(TAG, "Moving into " + avatarsHome);
+          avatar.setHome(avatarsHome);
+          positionSet = true;
+        }
+      }
     }
 
-    avatar.beginNextAction();
+    if (!positionSet) {
+      avatar.setPosition(Random.randomInt(-avatar.getWidth(), gameGrid.getWorldSize().x + avatar.getWidth()), TowerConsts.GROUND_HEIGHT);
+    }
+
     addChild(avatar);
   }
 
-  @Override
-  public void addChild(GameObject gameObject) {
-    super.addChild(gameObject);
-
-    if (gameObject instanceof Maid) {
-      maids.add((Maid) gameObject);
-    } else if (gameObject instanceof Janitor) {
-      janitors.add((Janitor) gameObject);
-    } else {
-      avatars.add((Avatar) gameObject);
+  public void adjustAvatarPositions(int adjustX) {
+    for (GameObject avatar : gameObjects) {
+      avatar.setX(avatar.getX() + gameGrid.toWorldSpace(adjustX));
+      ((Avatar) avatar).cancelMovement();
     }
   }
 
-
-  @SuppressWarnings("SuspiciousMethodCalls")
   @Override
-  public void removeChild(GameObject gameObject) {
-    super.removeChild(gameObject);
-
-    janitors.remove(gameObject);
-    maids.remove(gameObject);
-    avatars.remove(gameObject);
+  public boolean touchDown(Vector2 worldPoint, int pointer) {
+    return false;
   }
 
   @Subscribe
   public void GameGrid_onGridObjectPlaced(GridObjectPlacedEvent event) {
     if (event.gridObject instanceof Room) {
       RoomType roomType = (RoomType) event.gridObject.getGridObjectType();
-      if (roomType.provides(ProviderType.JANITORS)) {
+      if (roomType.provides(JANITORS)) {
         setupAvatar(new Janitor(this));
         setupAvatar(new Janitor(this));
         setupAvatar(new Janitor(this));
@@ -159,24 +116,31 @@ public class AvatarLayer extends GameLayer {
   public void GameEvent_GridObjectRemoved(GridObjectRemovedEvent event) {
     GridObject gridObject = event.gridObject;
 
-    if ((gridObject instanceof Room) && gridObject.getPlacementState().equals(PLACED)) {
+    if ((gridObject instanceof Room) && gridObject.isPlaced()) {
       RoomType roomType = (RoomType) gridObject.getGridObjectType();
-      if (roomType.provides(ProviderType.JANITORS)) {
-        removeChild(Iterables.getFirst(janitors, null));
-        removeChild(Iterables.getFirst(janitors, null));
-        removeChild(Iterables.getFirst(janitors, null));
-      } else if (roomType.provides(ProviderType.MAIDS)) {
-        removeChild(Iterables.getFirst(maids, null));
-        removeChild(Iterables.getFirst(maids, null));
-        removeChild(Iterables.getFirst(maids, null));
+      if (!roomType.provides(MAIDS, JANITORS)) return;
+
+      int numDeleted = 0;
+      for (GameObject gameObject : gameObjects) {
+        if (numDeleted > 3) break;
+
+        if (gameObject instanceof Maid && roomType.provides(MAIDS) || gameObject instanceof Janitor && roomType.provides(JANITORS)) {
+          gameObject.markToRemove(true);
+          numDeleted++;
+        }
       }
     }
   }
 
-  public void adjustAvatarPositions(int adjustX) {
-    for (Avatar avatar : avatars) {
-      avatar.setX(avatar.getX() + gameGrid.toWorldSpace(adjustX));
-      avatar.cancelMovement();
+  public static final Predicate<GridObject> AVATAR_HOME_FILTER = new Predicate<GridObject>() {
+    @Override
+    public boolean apply(@Nullable GridObject input) {
+      if (input instanceof Room) {
+        Room room = (Room) input;
+        return room.isConnectedToTransport() && !room.hasResident();
+      }
+
+      return false;
     }
-  }
+  };
 }
