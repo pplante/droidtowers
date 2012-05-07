@@ -26,17 +26,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerConsts.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerConsts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Player.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Room.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Room.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/PopulationCalculator.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/PopulationCalculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/TransportCalculator.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/TransportCalculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/TransitLine.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/TransitLine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPosition.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPosition.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPositionCache.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPositionCache.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StatusBarPanel.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StatusBarPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pathfinding/TransitPathFinder.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pathfinding/TransitPathFinder.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -137,7 +127,10 @@
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Room.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="153" column="103" selection-start="4940" selection-end="4940" vertical-scroll-proportion="0.0">
-              <folding />
+              <folding>
+                <element signature="e#0#5195#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -147,7 +140,8 @@
           <provider selected="true" editor-type-id="text-editor">
             <state line="207" column="53" selection-start="5996" selection-end="5996" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#0#6153#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#3565#3577#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -156,9 +150,9 @@
       <file leaf-file-name="HeadsUpDisplay.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="227" column="0" selection-start="8333" selection-end="8333" vertical-scroll-proportion="0.3773585">
+            <state line="231" column="61" selection-start="8485" selection-end="8485" vertical-scroll-proportion="0.39391634">
               <folding>
-                <element signature="e#0#10818#0" expanded="true" />
+                <element signature="e#0#11379#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -169,7 +163,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state line="79" column="62" selection-start="2730" selection-end="2730" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#0#3250#0" expanded="true" />
+                <element signature="imports" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -180,7 +174,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state line="105" column="56" selection-start="3599" selection-end="3599" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#0#4518#0" expanded="true" />
+                <element signature="imports" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -190,7 +184,11 @@
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPosition.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="20" column="34" selection-start="679" selection-end="679" vertical-scroll-proportion="0.0">
-              <folding />
+              <folding>
+                <element signature="e#0#3999#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#542#554#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -199,7 +197,10 @@
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/PopulationCalculator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="50" column="0" selection-start="1630" selection-end="1630" vertical-scroll-proportion="0.0">
-              <folding />
+              <folding>
+                <element signature="e#0#1700#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1562,7 +1563,11 @@
       <created>1336361112829</created>
       <updated>1336361112829</updated>
     </task>
-    <option name="localTasksCounter" value="139" />
+    <task id="LOCAL-00139" summary="transportation distance is now calculated for desirability :D">
+      <created>1336376996565</created>
+      <updated>1336376996565</updated>
+    </task>
+    <option name="localTasksCounter" value="140" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1587,7 +1592,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="2560" height="1414" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3257403" sideWeight="0.95461786" order="7" side_tool="false" content_ui="tabs" />
@@ -1595,7 +1600,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2093949" sideWeight="0.6180714" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20268257" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24918832" sideWeight="0.7441154" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34798807" sideWeight="0.0" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34798807" sideWeight="0.0" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935917" sideWeight="0.50995225" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14375" sideWeight="0.73695976" order="1" side_tool="true" content_ui="tabs" />
@@ -1796,21 +1801,31 @@
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/PopulationCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="50" column="0" selection-start="1630" selection-end="1630" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <element signature="e#0#1700#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPosition.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="34" selection-start="679" selection-end="679" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <element signature="e#0#3999#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#542#554#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Room.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="153" column="103" selection-start="4940" selection-end="4940" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <element signature="e#0#5195#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1818,7 +1833,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="207" column="53" selection-start="5996" selection-end="5996" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#0#6153#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3565#3577#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1827,7 +1843,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="105" column="56" selection-start="3599" selection-end="3599" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#0#4518#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1836,16 +1852,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="79" column="62" selection-start="2730" selection-end="2730" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#0#3250#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="227" column="0" selection-start="8333" selection-end="8333" vertical-scroll-proportion="0.3773585">
+        <state line="231" column="61" selection-start="8485" selection-end="8485" vertical-scroll-proportion="0.39391634">
           <folding>
-            <element signature="e#0#10818#0" expanded="true" />
+            <element signature="e#0#11379#0" expanded="true" />
           </folding>
         </state>
       </provider>

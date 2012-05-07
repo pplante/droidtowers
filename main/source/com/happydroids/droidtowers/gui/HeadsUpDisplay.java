@@ -226,8 +226,19 @@ public class HeadsUpDisplay extends WidgetGroup {
           objectNames.add(gridObject.getGridObjectType().getName());
         }
 
+
         mouseToolTip.visible = true;
-        mouseToolTip.setText(String.format("%s\nobjects: %s\n%s\nelevator: %s\nstairs: %s\nvisitors: %d\npopulation: %d\npoint noise: %.2f\nobject noise: %.2f\ndesirability: %.2f\ntrans dist: %.0f", gridPointAtMouse,
+        mouseToolTip.setText(String.format("%s\n" +
+                                                   "objects: %s\n" +
+                                                   "%s\n" +
+                                                   "elevator: %s\n" +
+                                                   "stairs: %s\n" +
+                                                   "visitors: %d\n" +
+                                                   "population: %d\n" +
+                                                   "point noise: %.2f\n" +
+                                                   "object noise: %.2f\n" +
+                                                   "desirability: %.2f\n" +
+                                                   "trans dist: %.0f", gridPointAtMouse,
                                                   gridPosition.size(),
                                                   Joiner.on(", ").join(objectNames),
                                                   gridPosition.elevator != null,
