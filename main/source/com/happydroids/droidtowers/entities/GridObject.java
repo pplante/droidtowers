@@ -355,6 +355,6 @@ public abstract class GridObject {
 
 
   public Vector2 getWorldCenterBottom() {
-    return worldCenter.cpy().sub(0, size.y / 2);
+    return worldCenter.cpy().sub(0, TowerConsts.GRID_UNIT_SIZE * size.y / 2);
   }
 }

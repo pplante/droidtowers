@@ -29,7 +29,7 @@ public class AvatarLayer extends GameLayer {
 
   private static AvatarLayer instance;
   private final GameGrid gameGrid;
-  private static final int MAX_AVATARS = (Gdx.app.getType() == Application.ApplicationType.Android ? 20 : 60);
+  private static final int MAX_AVATARS = (Gdx.app.getType() == Application.ApplicationType.Android ? 20 : 120);
   private Set<Avatar> avatars;
   private Set<Janitor> janitors;
   private Set<Maid> maids;
