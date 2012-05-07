@@ -83,7 +83,7 @@ public class Player {
 
   @JsonIgnore
   public int getTotalPopulation() {
-    return populationResidency + populationAttracted;
+    return populationResidency;
   }
 
   public int getMaxPopulation() {

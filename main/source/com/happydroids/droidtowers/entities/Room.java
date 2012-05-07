@@ -20,7 +20,6 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.NeighborGameGrid;
 import com.happydroids.droidtowers.types.ProviderType;
 import com.happydroids.droidtowers.types.RoomType;
-import com.happydroids.droidtowers.utils.Random;
 
 public class Room extends GridObject {
   private static BitmapFont labelFont;
@@ -83,7 +82,7 @@ public class Room extends GridObject {
     if (isConnectedToTransport()) {
       int maxPopulation = ((RoomType) getGridObjectType()).getPopulationMax();
       if (maxPopulation > 0) {
-        currentResidency = Random.randomInt(maxPopulation / 2, maxPopulation);
+        currentResidency = (int) (maxPopulation * getDesirability());
       }
     }
   }
@@ -145,10 +144,14 @@ public class Room extends GridObject {
   @Override
   public float getDesirability() {
     if (placed && connectedToTransport) {
-      return desirability - getNoiseLevel() - surroundingNoiseLevel;
+      return (desirability - getNoiseLevel() - surroundingNoiseLevel) - (getTransportModifier() * 0.5f);
     }
 
     return 0f;
+  }
+
+  private float getTransportModifier() {
+    return gameGrid.positionCache().getPosition((int) position.x, (int) position.y).normalizedDistanceFromTransit;
   }
 
   public void setSurroundingNoiseLevel(float noise) {

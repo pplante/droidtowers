@@ -14,6 +14,7 @@ import com.happydroids.droidtowers.entities.GridObject;
 import java.util.List;
 
 import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import static com.happydroids.droidtowers.TowerConsts.HALF_GRID_UNIT_SIZE;
 
 public class TransitLine {
   private List<Vector2> points;
@@ -41,7 +42,7 @@ public class TransitLine {
     Vector2 prevGridPoint = points.get(0);
     for (int i = 1; i < points.size(); i++) {
       Vector2 point = points.get(i);
-      shapeRenderer.line(prevGridPoint.x, prevGridPoint.y, point.x, point.y);
+      shapeRenderer.line(prevGridPoint.x + HALF_GRID_UNIT_SIZE, prevGridPoint.y + HALF_GRID_UNIT_SIZE, point.x + HALF_GRID_UNIT_SIZE, point.y + HALF_GRID_UNIT_SIZE);
       prevGridPoint = point;
     }
 
@@ -50,7 +51,7 @@ public class TransitLine {
     shapeRenderer.begin(ShapeType.FilledCircle);
     for (Vector2 point : points) {
       shapeRenderer.setColor(color);
-      shapeRenderer.filledCircle(point.x, point.y, points.indexOf(point) == highlightPoint ? 8f : 5f);
+      shapeRenderer.filledCircle(point.x + HALF_GRID_UNIT_SIZE, point.y + HALF_GRID_UNIT_SIZE, points.indexOf(point) == highlightPoint ? 8f : 5f);
     }
 
     shapeRenderer.end();

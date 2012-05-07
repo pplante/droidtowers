@@ -227,7 +227,7 @@ public class HeadsUpDisplay extends WidgetGroup {
         }
 
         mouseToolTip.visible = true;
-        mouseToolTip.setText(String.format("%s\nobjects: %s\n%s\nelevator: %s\nstairs: %s\nvisitors: %d\npopulation: %d\npoint noise: %.2f\nobject noise: %.2f\ndesirability: %.2f", gridPointAtMouse,
+        mouseToolTip.setText(String.format("%s\nobjects: %s\n%s\nelevator: %s\nstairs: %s\nvisitors: %d\npopulation: %d\npoint noise: %.2f\nobject noise: %.2f\ndesirability: %.2f\ntrans dist: %.0f", gridPointAtMouse,
                                                   gridPosition.size(),
                                                   Joiner.on(", ").join(objectNames),
                                                   gridPosition.elevator != null,
@@ -236,7 +236,8 @@ public class HeadsUpDisplay extends WidgetGroup {
                                                   residents,
                                                   pointNoiseLevel,
                                                   objectNoiseLevel,
-                                                  desirabilityLevel));
+                                                  desirabilityLevel,
+                                                  gridPosition.distanceFromTransit));
         mouseToolTip.x = x + 15;
         mouseToolTip.y = y + 15;
       } else {

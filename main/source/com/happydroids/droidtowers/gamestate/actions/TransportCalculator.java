@@ -37,6 +37,7 @@ public class TransportCalculator extends GameGridAction {
     for (GridPosition[] gridPositions : gameGrid.positionCache().getPositions()) {
       for (GridPosition gridPosition : gridPositions) {
         gridPosition.connectedToTransit = false;
+        gridPosition.distanceFromTransit = 0f;
       }
     }
 
@@ -62,18 +63,21 @@ public class TransportCalculator extends GameGridAction {
           gridPosition.connectedToTransit = true;
         }
 
-        scanForRooms(x, y, -1);
-        scanForRooms(x, y, 1);
+        scanForRooms(x, y, -1, gridPosition.x);
+        scanForRooms(x, y, 1, gridPosition.x);
       }
     }
+
+    gameGrid.positionCache().normalizeTransitDistances();
 
     gameGrid.events().post(new GameGridTransportCalculationComplete(gameGrid));
   }
 
-  private void scanForRooms(int x, int y, int stepX) {
+  private void scanForRooms(int x, int y, int stepX, int transitX) {
     GridPosition gridPosition = gameGrid.positionCache().getPosition(x, y);
     while (gridPosition != null && gridPosition.size() > 0) {
       gridPosition.connectedToTransit = true;
+      gridPosition.distanceFromTransit = Math.abs(x - transitX);
       for (GridObject gridObject : gridPosition.getObjects()) {
         if (gridObject instanceof Room) {
           Room room = (Room) gridObject;

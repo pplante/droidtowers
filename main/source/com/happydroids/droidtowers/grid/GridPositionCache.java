@@ -47,7 +47,7 @@ public class GridPositionCache {
   }
 
   private void addGridObjectToPosition(GridObject gridObject) {
-    List<GridPoint> pointsOccupied = gridObject.getGridPointsOccupied();
+    List<GridPoint> pointsOccupied = gridObject.getGridPointsTouched();
     for (GridPoint gridPoint : pointsOccupied) {
       GridPosition position = getObjectSetForPosition(gridPoint);
       if (position != null) {
@@ -72,7 +72,7 @@ public class GridPositionCache {
     if (!gridObject.isPlaced()) {
       return;
     }
-    System.out.println(event);
+
     for (int x = (int) event.prevPosition.x; x < event.prevPosition.x + event.prevSize.x; x += 1) {
       for (int y = (int) event.prevPosition.y; y < event.prevPosition.y + event.prevSize.y; y += 1) {
         GridPosition position = getPosition(x, y);
@@ -187,6 +187,29 @@ public class GridPositionCache {
     for (GridPosition[] row : gridPositions) {
       for (GridPosition position : row) {
         position.calculateNoise(gridPositions);
+      }
+    }
+  }
+
+  public void normalizeTransitDistances() {
+    float minVal = Float.MAX_VALUE;
+    float maxVal = Float.MIN_VALUE;
+    for (GridPosition[] row : gridPositions) {
+      for (GridPosition position : row) {
+        minVal = Math.min(position.distanceFromTransit, minVal);
+        maxVal = Math.max(position.distanceFromTransit, maxVal);
+      }
+    }
+    System.out.println("maxVal = " + maxVal);
+    if (maxVal != Float.MIN_VALUE) {
+      for (GridPosition[] row : gridPositions) {
+        for (GridPosition position : row) {
+          if (position.distanceFromTransit > 5) {
+            position.normalizedDistanceFromTransit = position.distanceFromTransit / maxVal;
+          } else {
+            position.normalizedDistanceFromTransit = 0f;
+          }
+        }
       }
     }
   }

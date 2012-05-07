@@ -99,16 +99,20 @@ public class StatusBarPanel extends Table {
     if (lastUpdated >= TowerConsts.HUD_UPDATE_FREQUENCY) {
       lastUpdated = 0f;
       Player player = Player.instance();
-      experienceLabel.setText(NumberFormat.getInstance().format(player.getExperience()));
-      moneyLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + NumberFormat.getInstance().format(player.getCoins()));
-      moneyIncomeLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + NumberFormat.getInstance().format(player.getCurrentIncome()));
-      moneyExpensesLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + NumberFormat.getInstance().format(player.getCurrentExpenses()));
-      populationLabel.setText(NumberFormat.getInstance().format(player.getTotalPopulation()));
+      experienceLabel.setText(formatNumber(player.getExperience()));
+      moneyLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + formatNumber(player.getCoins()));
+      moneyIncomeLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + formatNumber(player.getCurrentIncome()));
+      moneyExpensesLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + formatNumber(player.getCurrentExpenses()));
+      populationLabel.setText(formatNumber(player.getTotalPopulation()) + "/" + formatNumber(player.getMaxPopulation()));
 
       gameSpeedLabel.setText(towerScene.getTimeMultiplier() + "x");
 
       pack();
     }
+  }
+
+  private CharSequence formatNumber(long i) {
+    return NumberFormat.getInstance().format(i);
   }
 
   @Override

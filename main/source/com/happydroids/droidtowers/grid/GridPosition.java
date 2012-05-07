@@ -15,11 +15,13 @@ public class GridPosition {
   public final int x;
   public final int y;
   private GuavaSet<GridObject> objects = new GuavaSet<GridObject>();
-  public boolean connectedToTransit;
   public Elevator elevator;
   public Stair stair;
+  public boolean connectedToTransit;
+  public float distanceFromTransit;
   private float maxNoiseLevel;
   private float noiseLevel;
+  public float normalizedDistanceFromTransit;
 
   public GridPosition(int x, int y) {
     this.x = x;
