@@ -9,28 +9,35 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
-import com.happydroids.droidtowers.entities.elevator.ElevatorStop;
 import com.happydroids.droidtowers.entities.elevator.Passenger;
 import com.happydroids.droidtowers.math.Direction;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 import static com.happydroids.droidtowers.math.Direction.DOWN;
 
 public class ElevatorQueue {
+  public static final int INVALID_FLOOR = -1;
   private LinkedList<Passenger> passengersWaiting;
-  private LinkedList<ElevatorStop> stops;
-  private ElevatorStop currentStop;
   private Set<Passenger> currentRiders;
-  private float queueTime;
-  private final Elevator elevator;
+  private List<Integer> floorNumbers;
+  private int currentFloor;
+  public static final Predicate<Passenger> PASSENGER_REMOVAL_PREDICATE = new Predicate<Passenger>() {
+    @Override
+    public boolean apply(@Nullable Passenger input) {
+      return input.isMarkedForRemoval();
+    }
+  };
 
   public ElevatorQueue(Elevator elevator) {
-    this.elevator = elevator;
     passengersWaiting = Lists.newLinkedList();
     currentRiders = Sets.newHashSet();
-    stops = Lists.newLinkedList();
+    currentFloor = INVALID_FLOOR;
+    floorNumbers = Lists.newArrayList();
   }
 
   public void add(Passenger passenger) {
@@ -42,37 +49,30 @@ public class ElevatorQueue {
   }
 
   public boolean determinePickups() {
-    Iterator<Passenger> passengerIterator = passengersWaiting.iterator();
-    while (passengerIterator.hasNext()) {
-      Passenger passenger = passengerIterator.next();
-      if (!elevator.servicesFloor(passenger.boardingFloor) || !elevator.servicesFloor(passenger.destinationFloor)) {
-        passengerIterator.remove();
-        passenger.killByElevator();
-      }
-    }
+    Iterables.removeIf(passengersWaiting, PASSENGER_REMOVAL_PREDICATE);
 
     if (passengersWaiting.isEmpty()) return false;
 
     Passenger firstPassenger = passengersWaiting.poll();
-    Set<Passenger> currentLoad = Sets.newHashSet();
+    currentRiders.clear();
+    currentRiders.add(firstPassenger);
 
     for (Passenger otherPassenger : passengersWaiting) {
       if (firstPassenger.travelContains(otherPassenger)) {
-        currentLoad.add(otherPassenger);
+        currentRiders.add(otherPassenger);
       }
     }
 
-    currentLoad.add(firstPassenger);
-    passengersWaiting.removeAll(currentLoad);
-    makeStops(currentLoad, firstPassenger.travelDirection);
+    passengersWaiting.removeAll(currentRiders);
+    makeStops(firstPassenger.travelDirection);
     moveToNextStop();
 
     return true;
   }
 
-  private void makeStops(Set<Passenger> currentLoad, Direction travelDirection) {
-    List<Integer> floorNumbers = Lists.newArrayList();
-    for (Passenger passenger : currentLoad) {
+  private void makeStops(Direction travelDirection) {
+    floorNumbers = Lists.newLinkedList();
+    for (Passenger passenger : currentRiders) {
       floorNumbers.add(passenger.boardingFloor);
       floorNumbers.add(passenger.destinationFloor);
     }
@@ -82,64 +82,39 @@ public class ElevatorQueue {
     if (travelDirection.equals(DOWN)) {
       Collections.reverse(floorNumbers);
     }
-
-    for (Integer floorNumber : floorNumbers) {
-      ElevatorStop stop = new ElevatorStop(floorNumber);
-      for (Passenger passenger : currentLoad) {
-        if (passenger.boardingFloor == floorNumber) {
-          stop.boarding.add(passenger);
-        } else if (passenger.destinationFloor == floorNumber) {
-          stop.disembarking.add(passenger);
-        }
-      }
-
-      stops.add(stop);
-    }
   }
 
   public boolean moveToNextStop() {
-    currentStop = null;
+    currentFloor = INVALID_FLOOR;
 
-    if (stops.isEmpty()) {
+    if (floorNumbers.isEmpty()) {
       return false;
     }
 
-    currentStop = stops.poll();
-
-    return currentStop != null;
+    currentFloor = floorNumbers.remove(0);
+    return true;
   }
 
-  public ElevatorStop getCurrentStop() {
-    return currentStop;
+  public int getCurrentFloor() {
+    return currentFloor;
   }
 
   public void informPassengers() {
-    for (Passenger passenger : currentStop.boarding) {
-      currentRiders.add(passenger);
-      passenger.boardNow();
-    }
-
-    for (Passenger passenger : currentStop.disembarking) {
-      currentRiders.remove(passenger);
-      passenger.disembarkNow();
+    for (Passenger currentRider : currentRiders) {
+      if (currentRider.boardingFloor == currentFloor) {
+        currentRider.boardNow();
+      } else if (currentRider.destinationFloor == currentFloor) {
+        currentRider.disembarkNow();
+      }
     }
   }
 
   public boolean waitingOnRiders() {
-    Iterator<Passenger> passengerIterator = passengersWaiting.iterator();
-    while (passengerIterator.hasNext()) {
-      Passenger passenger = passengerIterator.next();
-      if (passenger.isMarkedForRemoval()) {
-        passengerIterator.remove();
-      }
-    }
+    Iterables.removeIf(passengersWaiting, PASSENGER_REMOVAL_PREDICATE);
+    Iterables.removeIf(currentRiders, PASSENGER_REMOVAL_PREDICATE);
 
-    passengerIterator = currentRiders.iterator();
-    while (passengerIterator.hasNext()) {
-      Passenger passenger = passengerIterator.next();
-      if (passenger.isMarkedForRemoval()) {
-        passengerIterator.remove();
-      } else if (passenger.shouldWaitFor()) {
+    for (Passenger currentRider : currentRiders) {
+      if (currentRider.shouldWaitFor()) {
         return true;
       }
     }
@@ -155,15 +130,13 @@ public class ElevatorQueue {
     for (Passenger rider : currentRiders) {
       if (rider.getSteeringManager().equals(avatarSteeringManager)) {
         rider.markToRemove();
-
-        break;
+        return;
       }
     }
     for (Passenger rider : passengersWaiting) {
       if (rider.getSteeringManager().equals(avatarSteeringManager)) {
         rider.markToRemove();
-
-        break;
+        return;
       }
     }
   }
@@ -171,32 +144,18 @@ public class ElevatorQueue {
   public void clear() {
     passengersWaiting.clear();
     currentRiders.clear();
-    currentStop = null;
   }
 
   public void informPassengersOfServiceChange() {
-    Iterables.all(currentRiders, INFORM_PASSENGER_OF_SERVICE_CHANGE);
-    Iterables.all(passengersWaiting, INFORM_PASSENGER_OF_SERVICE_CHANGE);
-
-    if (currentStop != null) {
-      Iterables.all(currentStop.boarding, INFORM_PASSENGER_OF_SERVICE_CHANGE);
-      Iterables.all(currentStop.disembarking, INFORM_PASSENGER_OF_SERVICE_CHANGE);
-    }
-
-    for (ElevatorStop stop : stops) {
-      Iterables.all(stop.boarding, INFORM_PASSENGER_OF_SERVICE_CHANGE);
-      Iterables.all(stop.disembarking, INFORM_PASSENGER_OF_SERVICE_CHANGE);
-    }
-
-    currentStop = null;
-    stops.clear();
-  }
-
-  public static final Predicate<Passenger> INFORM_PASSENGER_OF_SERVICE_CHANGE = new Predicate<Passenger>() {
-    @Override
-    public boolean apply(@Nullable Passenger passenger) {
+    for (Passenger passenger : passengersWaiting) {
       passenger.informOfServiceChange();
-      return false;
     }
-  };
+
+    for (Passenger currentRider : currentRiders) {
+      currentRider.informOfServiceChange();
+    }
+
+    floorNumbers.clear();
+    currentFloor = INVALID_FLOOR;
+  }
 }

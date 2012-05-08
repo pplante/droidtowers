@@ -167,7 +167,7 @@ public class Elevator extends Transit {
     GridPoint newSize = size.cpy();
     GridPoint prevSize = size.cpy();
     GridPoint newPosition = position.cpy();
-    GridPoint prevPosition = position.cpy();
+    GridPoint oldPosition = position.cpy();
 
     switch (selectedResizeHandle) {
       case BOTTOM:
@@ -185,7 +185,7 @@ public class Elevator extends Transit {
 
     size.set(newSize);
     setPosition(newPosition);
-    broadcastEvent(new GridObjectBoundsChangeEvent(this, prevSize, prevPosition));
+    broadcastEvent(new GridObjectBoundsChangeEvent(this, prevSize, oldPosition));
 
     return true;
   }
@@ -198,7 +198,7 @@ public class Elevator extends Transit {
   @Override
   public GridPoint getContentSize() {
     GridPoint cpy = size.cpy();
-    cpy.sub(0, 2);
+    cpy.sub(0, 3);
     return cpy;
   }
 

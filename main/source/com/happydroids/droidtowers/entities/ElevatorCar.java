@@ -88,10 +88,10 @@ public class ElevatorCar extends GameObject {
       queue.determinePickups();
     }
 
-    if (queue.getCurrentStop() != null) {
+    if (queue.getCurrentFloor() != ElevatorQueue.INVALID_FLOOR) {
       inUse = true;
       setColor(Color.CYAN);
-      moveToFloor(queue.getCurrentStop().floorNumber);
+      moveToFloor(queue.getCurrentFloor());
     }
   }
 

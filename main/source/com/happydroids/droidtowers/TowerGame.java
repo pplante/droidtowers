@@ -80,7 +80,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     Gdx.app.error("lifecycle", "create");
 
     if (Gdx.graphics.isGL20Available() && Gdx.app.getType().equals(Android) && Display.isHDPIMode()) {
-      frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, 800, 480, false);
+      frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, 800, 480, true);
       spriteBatchFBO = new SpriteBatch(100);
     }
 
@@ -184,7 +184,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
   public void render() {
     Gdx.gl.glClearColor(0.48f, 0.729f, 0.870f, 1.0f);
-    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
     Gdx.gl.glEnable(GL10.GL_TEXTURE_2D);
 
     float deltaTime = Gdx.graphics.getDeltaTime();
@@ -201,8 +201,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
       frameBuffer.begin();
       activeScene.render(deltaTime);
       frameBuffer.end();
-
-      Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
       spriteBatchFBO.begin();
       spriteBatchFBO.draw(frameBuffer.getColorBufferTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0, 0, 1, 1);
