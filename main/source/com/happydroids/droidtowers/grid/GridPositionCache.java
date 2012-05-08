@@ -13,7 +13,6 @@ import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
 import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.math.GridPoint;
-import com.happydroids.droidtowers.math.Vector2i;
 
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.Set;
 
 public class GridPositionCache {
   private GridPosition[][] gridPositions;
-  private Vector2i gridSize;
+  private GridPoint gridSize;
   private final GameGrid gameGrid;
   private float[][] noiseLevels;
 
@@ -100,7 +99,7 @@ public class GridPositionCache {
     return !checkBounds(gridPoint.x, gridPoint.y) ? null : gridPositions[gridPoint.x][gridPoint.y];
   }
 
-  public Set<GridObject> getObjectsAt(GridPoint position, Vector2i size, GridObject... gridObjectsToIgnore) {
+  public Set<GridObject> getObjectsAt(GridPoint position, GridPoint size, GridObject... gridObjectsToIgnore) {
     Set<GridObject> objects = new HashSet<GridObject>();
 
     int maxX = Math.min(gridSize.x, position.x + size.x);
@@ -129,7 +128,7 @@ public class GridPositionCache {
     return getObjectsAt(gridPoint, TowerConsts.SINGLE_POINT);
   }
 
-  public GridPosition getPosition(Vector2i gridPoint) {
+  public GridPosition getPosition(GridPoint gridPoint) {
     return getPosition(gridPoint.x, gridPoint.y);
   }
 

@@ -8,13 +8,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.math.GridPoint;
-import com.happydroids.droidtowers.math.Vector2i;
 
 public class NeighborGameGrid extends GameGrid {
   private Runnable clickListener;
   private String ownerName;
 
-  public NeighborGameGrid(OrthographicCamera camera, Vector2i gridOrigin) {
+  public NeighborGameGrid(OrthographicCamera camera, GridPoint gridOrigin) {
     super(camera);
 
     setGridOrigin(gridOrigin);

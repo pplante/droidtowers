@@ -18,7 +18,6 @@ import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.math.GridPoint;
-import com.happydroids.droidtowers.math.Vector2i;
 import com.happydroids.droidtowers.types.ElevatorType;
 import com.happydroids.droidtowers.types.ResizeHandle;
 
@@ -35,7 +34,7 @@ public class Elevator extends Transit {
   private Action onResizeAction;
   private ElevatorCar elevatorCar;
   static TextureAtlas elevatorAtlas;
-  private Vector2i anchorPoint;
+  private GridPoint anchorPoint;
 
   public Elevator(ElevatorType elevatorType, final GameGrid gameGrid) {
     super(elevatorType, gameGrid);
@@ -74,7 +73,7 @@ public class Elevator extends Transit {
 
   @Override
   public void render(SpriteBatch spriteBatch, Color renderTintColor) {
-    Vector2i renderPosition = position.cpy();
+    GridPoint renderPosition = position.cpy();
     Vector2 localPoint = worldPosition.cpy();
 
     if (selectedResizeHandle == ResizeHandle.BOTTOM) {
@@ -128,7 +127,7 @@ public class Elevator extends Transit {
   }
 
   @Override
-  public boolean tap(Vector2i gridPointAtFinger, int count) {
+  public boolean tap(GridPoint gridPointAtFinger, int count) {
     if (count >= 2) {
       drawShaft = !drawShaft;
     }
@@ -137,8 +136,7 @@ public class Elevator extends Transit {
   }
 
   @Override
-  public boolean touchDown(Vector2i gameGridPoint, Vector2 worldPoint, int pointer) {
-    System.out.println(gameGridPoint);
+  public boolean touchDown(GridPoint gameGridPoint, Vector2 worldPoint, int pointer) {
     if (topSprite.getBoundingRectangle().contains(worldPoint.x, worldPoint.y)) {
       selectedResizeHandle = TOP;
       anchorPoint = position.cpy();
@@ -164,7 +162,7 @@ public class Elevator extends Transit {
   }
 
   @Override
-  public boolean pan(Vector2i gridPointAtFinger, Vector2i gridPointDelta) {
+  public boolean pan(GridPoint gridPointAtFinger, GridPoint gridPointDelta) {
     GridPoint newSize = size.cpy();
     GridPoint newPosition = position.cpy();
 

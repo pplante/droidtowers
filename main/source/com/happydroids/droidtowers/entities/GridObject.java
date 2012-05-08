@@ -19,7 +19,6 @@ import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.math.GridPoint;
-import com.happydroids.droidtowers.math.Vector2i;
 import com.happydroids.droidtowers.types.GridObjectType;
 
 import java.util.List;
@@ -91,15 +90,15 @@ public abstract class GridObject {
     }
   }
 
-  public boolean tap(Vector2i gridPointAtFinger, int count) {
+  public boolean tap(GridPoint gridPointAtFinger, int count) {
     return false;
   }
 
-  public boolean pan(Vector2i gridPointAtFinger, Vector2i gridPointDelta) {
+  public boolean pan(GridPoint gridPointAtFinger, GridPoint gridPointDelta) {
     return false;
   }
 
-  public boolean touchDown(Vector2i gameGridPoint, Vector2 worldPoint, int pointer) {
+  public boolean touchDown(GridPoint gameGridPoint, Vector2 worldPoint, int pointer) {
     return false;
   }
 
@@ -125,7 +124,7 @@ public abstract class GridObject {
     return position;
   }
 
-  public void setPosition(Vector2i gridPointAtFinger) {
+  public void setPosition(GridPoint gridPointAtFinger) {
     setPosition(gridPointAtFinger.x, gridPointAtFinger.y);
   }
 

@@ -196,7 +196,7 @@ public class AvatarSteeringManager {
     Stair stair = verticalDir.equals(UP) ? currentPos.stair : nextPosition.stair;
 
     Rectangle stairBounds = stair.getWorldBounds();
-    Vector2 stairBottomRight = new Vector2(stairBounds.x + stairBounds.width, stairBounds.y);
+    Vector2 stairBottomRight = new Vector2(stairBounds.x + stairBounds.width - avatar.getWidth(), stairBounds.y);
     final Vector2 stairTopLeft = new Vector2(stairBounds.x, stairBounds.y + stairBounds.height);
 
 

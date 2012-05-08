@@ -18,7 +18,7 @@ import com.happydroids.droidtowers.events.WeatherState;
 import com.happydroids.droidtowers.gamestate.actions.GameGridTransportCalculationComplete;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
-import com.happydroids.droidtowers.math.Vector2i;
+import com.happydroids.droidtowers.math.GridPoint;
 
 import static java.lang.Math.*;
 
@@ -42,7 +42,7 @@ public class TowerMiniMap extends Table {
 
   public static Pixmap redrawMiniMap(GameGrid gameGrid, boolean useCustomScale, float customScale) {
     Gdx.app.debug(TAG, "Redrawing minimap!");
-    Vector2i gridSize = gameGrid.getGridSize();
+    GridPoint gridSize = gameGrid.getGridSize();
 
     float maxSize = customScale;
     if (!useCustomScale) {

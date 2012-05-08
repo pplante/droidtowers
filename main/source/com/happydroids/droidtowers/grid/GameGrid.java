@@ -18,7 +18,6 @@ import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.events.GridObjectAddedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.math.GridPoint;
-import com.happydroids.droidtowers.math.Vector2i;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +30,7 @@ public class GameGrid extends GameLayer {
   private EventBus eventBus = new EventBus(GameGrid.class.getSimpleName());
 
   private GuavaSet<GridObject> objects;
-  protected Vector2i gridSize;
+  protected GridPoint gridSize;
   private Vector2 worldSize;
   protected GameGridRenderer gameGridRenderer;
   private Map<Class, GuavaSet<GridObject>> gridObjectsByType;
@@ -40,7 +39,7 @@ public class GameGrid extends GameLayer {
   private GridObject transitGridObjectB;
   private int highestPoint;
   protected GridPositionCache positionCache;
-  private Vector2i gridOrigin;
+  private GridPoint gridOrigin;
   protected Rectangle worldBounds;
   protected float gridScale;
 
@@ -56,8 +55,8 @@ public class GameGrid extends GameLayer {
     objects = new GuavaSet<GridObject>(25);
     positionCache = new GridPositionCache(this);
 
-    gridSize = new Vector2i(8, 8);
-    gridOrigin = new Vector2i();
+    gridSize = new GridPoint(8, 8);
+    gridOrigin = new GridPoint();
     gridScale = 1f;
 
     updateWorldSize();
@@ -85,7 +84,7 @@ public class GameGrid extends GameLayer {
     return worldSize.cpy();
   }
 
-  public Vector2i getGridSize() {
+  public GridPoint getGridSize() {
     return gridSize;
   }
 
@@ -270,11 +269,11 @@ public class GameGrid extends GameLayer {
     return positionCache;
   }
 
-  public void setGridOrigin(Vector2i gridOrigin) {
+  public void setGridOrigin(GridPoint gridOrigin) {
     this.gridOrigin.set(gridOrigin);
   }
 
-  public Vector2i getGridOrigin() {
+  public GridPoint getGridOrigin() {
     return gridOrigin;
   }
 

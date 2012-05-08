@@ -7,7 +7,7 @@ package com.happydroids.droidtowers;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.droidtowers.math.Vector2i;
+import com.happydroids.droidtowers.math.GridPoint;
 
 public class TowerConsts extends HappyDroidConsts {
   public static boolean ENABLE_HAPPYDROIDS_CONNECT = true;
@@ -21,9 +21,9 @@ public class TowerConsts extends HappyDroidConsts {
 
   public static final int GAME_WORLD_PADDING = GRID_UNIT_SIZE * 7;
   public static final int LOBBY_FLOOR = 10;
-  public static final float GROUND_HEIGHT = GRID_UNIT_SIZE * LOBBY_FLOOR;
+  public static final int GROUND_HEIGHT = GRID_UNIT_SIZE * LOBBY_FLOOR;
 
-  public static final float NEIGHBOR_GROUND_HEIGHT = GRID_UNIT_SIZE * (LOBBY_FLOOR - 3);
+  public static final int NEIGHBOR_GROUND_HEIGHT = GRID_UNIT_SIZE * (LOBBY_FLOOR - 3);
 
   public static final String CURRENCY_SYMBOL = "$";
   public static final float HUD_UPDATE_FREQUENCY = 0.5f;
@@ -41,7 +41,7 @@ public class TowerConsts extends HappyDroidConsts {
   public static final float ACHIEVEMENT_ENGINE_FREQUENCY = 5f;
   public static final int MAX_AVATARS = (Gdx.app.getType() == Application.ApplicationType.Android ? 20 : 120);
   public static final float AVATAR_POPULATION_SCALE = 0.25f;
-  public static final Vector2i SINGLE_POINT = new Vector2i(1, 1);
+  public static final GridPoint SINGLE_POINT = new GridPoint(1, 1);
 
   private TowerConsts() {
 

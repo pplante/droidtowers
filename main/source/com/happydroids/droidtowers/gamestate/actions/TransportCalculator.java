@@ -55,8 +55,8 @@ public class TransportCalculator extends GameGridAction {
       if (!transport.isPlaced()) continue;
 
       for (GridPoint gridPoint : transport.getGridPointsTouched()) {
-        int x = (int) gridPoint.x;
-        int y = (int) gridPoint.y;
+        int x = gridPoint.x;
+        int y = gridPoint.y;
 
         GridPosition gridPosition = gameGrid.positionCache().getPosition(x, y);
         if (gridPosition != null) {
