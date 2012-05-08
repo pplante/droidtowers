@@ -105,6 +105,7 @@ public class ElevatorQueue {
         currentRider.boardNow();
       } else if (currentRider.destinationFloor == currentFloor) {
         currentRider.disembarkNow();
+        currentRider.markToRemove();
       }
     }
   }

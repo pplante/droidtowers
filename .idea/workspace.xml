@@ -25,16 +25,9 @@
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" line="208" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="elevators now will inform passengers of service changes :D!">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/elevator/ElevatorStop.java" afterPath="" />
+    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Elevator.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Elevator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorCar.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorCar.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorQueue.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorQueue.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/StarRatingCalculator.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/StarRatingCalculator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pathfinding/TransitPathFinder.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pathfinding/TransitPathFinder.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -146,66 +139,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ElevatorCar.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorCar.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="11" selection-start="2530" selection-end="2530" vertical-scroll-proportion="0.38592234">
-              <folding>
-                <element signature="e#0#4597#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Elevator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Elevator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="200" column="16" selection-start="6454" selection-end="6454" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#7629#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TransitPathFinder.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pathfinding/TransitPathFinder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="41" selection-start="2145" selection-end="2145" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#2686#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GridPosition.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPosition.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="17" selection-start="1901" selection-end="1901" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StarRatingCalculator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/StarRatingCalculator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="24" selection-start="995" selection-end="996" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ElevatorQueue.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ElevatorQueue.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorQueue.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="0" selection-start="1529" selection-end="1529" vertical-scroll-proportion="0.0">
+            <state line="107" column="36" selection-start="3059" selection-end="3059" vertical-scroll-proportion="0.7208738">
               <folding>
-                <element signature="e#0#4203#0" expanded="true" />
-                <element signature="e#890#1037#0" expanded="true" />
-                <element signature="e#903#914#0" expanded="true" />
-                <element signature="e#1032#1033#0" expanded="true" />
+                <element signature="e#0#4324#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -234,12 +173,12 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPositionCache.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/elevator/ElevatorStop.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/StarRatingCalculator.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorQueue.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pathfinding/TransitPathFinder.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Elevator.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorCar.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorQueue.java" />
       </list>
     </option>
   </component>
@@ -1589,7 +1528,11 @@
       <created>1336461118465</created>
       <updated>1336461118465</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="turned back on blending for overlays and grid lines :(&#10;massively simplified the elevators">
+      <created>1336464036072</created>
+      <updated>1336464036072</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1693,7 +1636,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="elevators now will inform passengers of service changes :D!" />
+    <option name="LAST_COMMIT_MESSAGE" value="turned back on blending for overlays and grid lines :(&#10;massively simplified the elevators" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1706,7 +1649,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="killed some statics" />
     <MESSAGE value="moved the GUI skin to the TowerAssetManager" />
     <MESSAGE value="maked hud better" />
     <MESSAGE value="fixed the avatar floating when land expands" />
@@ -1731,6 +1673,7 @@
     <MESSAGE value="STAIRS WORK!&#10;also switched every vector that deals with grid points to use integers for simplicity in math ops" />
     <MESSAGE value="added the janitors closet&#10;changed the zoom levels" />
     <MESSAGE value="elevators now will inform passengers of service changes :D!" />
+    <MESSAGE value="turned back on blending for overlays and grid lines :(&#10;massively simplified the elevators" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1771,13 +1714,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/elevator/Passenger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="836" selection-end="836" vertical-scroll-proportion="0.4538835">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPositionCache.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="88" column="68" selection-start="2780" selection-end="2780" vertical-scroll-proportion="0.69417477">
@@ -1811,50 +1747,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/StarRatingCalculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="24" selection-start="995" selection-end="996" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="0" selection-start="1529" selection-end="1529" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#4203#0" expanded="true" />
-            <element signature="e#890#1037#0" expanded="true" />
-            <element signature="e#903#914#0" expanded="true" />
-            <element signature="e#1032#1033#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pathfinding/TransitPathFinder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="41" selection-start="2145" selection-end="2145" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#2686#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPosition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="17" selection-start="1901" selection-end="1901" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Elevator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="16" selection-start="6454" selection-end="6454" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#7629#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/graphics/glutils/FrameBuffer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="61" column="21" selection-start="2445" selection-end="2445" vertical-scroll-proportion="-0.3883495">
@@ -1880,11 +1772,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Elevator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="200" column="16" selection-start="6454" selection-end="6454" vertical-scroll-proportion="-0.14805825">
+          <folding>
+            <element signature="e#0#7629#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorCar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="11" selection-start="2530" selection-end="2530" vertical-scroll-proportion="0.38592234">
+        <state line="71" column="11" selection-start="2530" selection-end="2530" vertical-scroll-proportion="0.6529126">
           <folding>
             <element signature="e#0#4597#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPosition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="17" selection-start="1901" selection-end="1901" vertical-scroll-proportion="0.14563107">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pathfinding/TransitPathFinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="41" selection-start="2145" selection-end="2145" vertical-scroll-proportion="0.54611653">
+          <folding>
+            <element signature="e#0#2686#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/StarRatingCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="24" selection-start="995" selection-end="996" vertical-scroll-proportion="0.74757284">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/elevator/Passenger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="14" selection-start="1705" selection-end="1705" vertical-scroll-proportion="0.86650485">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="107" column="36" selection-start="3059" selection-end="3059" vertical-scroll-proportion="0.7208738">
+          <folding>
+            <element signature="e#0#4324#0" expanded="true" />
           </folding>
         </state>
       </provider>
