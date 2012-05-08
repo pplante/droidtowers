@@ -7,13 +7,13 @@ package com.happydroids.droidtowers.input;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.math.Vector2i;
 import com.happydroids.droidtowers.money.PurchaseManager;
 import com.happydroids.droidtowers.types.GridObjectType;
 
@@ -26,7 +26,7 @@ import static com.happydroids.droidtowers.input.InputSystem.Keys;
 public class PlacementTool extends ToolBase {
   private GridObjectType gridObjectType;
   private GridObject gridObject;
-  private Vector2 touchDownPointDelta;
+  private Vector2i touchDownPointDelta;
   private boolean isDraggingGridObject;
   private PurchaseManager purchaseManager;
   private final InputCallback cancelPlacementInputCallback;

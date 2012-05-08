@@ -218,6 +218,4 @@ public class Avatar extends GameObject {
     home.setResident(this);
     setPosition(home.getWorldCenterBottom());
   }
-
-
 }

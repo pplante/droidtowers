@@ -35,6 +35,12 @@ public class GridPosition {
   public void add(GridObject gridObject) {
     if (!objects.contains(gridObject) && objects.add(gridObject)) {
       if (gridObject instanceof Elevator) {
+        GridPoint position = gridObject.getPosition();
+        GridPoint size = gridObject.getSize();
+        if (position.x == x && (position.y == y || position.y + size.y == y)) {
+          return;
+        }
+
         elevator = (Elevator) gridObject;
       } else if (gridObject instanceof Stair) {
         stair = (Stair) gridObject;
@@ -60,20 +66,16 @@ public class GridPosition {
     return objects.size();
   }
 
-  public Vector2 getBiggestTransitSize() {
-    if (elevator == null && stair == null) {
-      return null;
-    }
-
-    return new Vector2(Math.max(stair.getSize().x, elevator.getSize().x), Math.max(stair.getSize().y, elevator.getSize().y));
+  public boolean isEmpty() {
+    return objects.isEmpty();
   }
 
-  public GridPoint toGridPoint() {
-    return new GridPoint(x, y);
+  public boolean contains(GridObject gridObject) {
+    return objects.contains(gridObject);
   }
 
   public Vector2 toWorldVector2() {
-    return toGridPoint().toWorldVector2();
+    return new GridPoint(x, y).toWorldVector2();
   }
 
   @SuppressWarnings("RedundantIfStatement")
@@ -103,10 +105,6 @@ public class GridPosition {
     result = 31 * result + (elevator != null ? elevator.hashCode() : 0);
     result = 31 * result + (stair != null ? stair.hashCode() : 0);
     return result;
-  }
-
-  public boolean isEmpty() {
-    return objects.isEmpty();
   }
 
   public void findMaxNoise() {

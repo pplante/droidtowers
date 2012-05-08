@@ -18,26 +18,29 @@ import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.events.GridObjectAddedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.math.Vector2i;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import static com.happydroids.droidtowers.TowerConsts.SINGLE_POINT;
+
 
 public class GameGrid extends GameLayer {
   private EventBus eventBus = new EventBus(GameGrid.class.getSimpleName());
 
-  protected Vector2 gridSize;
   private GuavaSet<GridObject> objects;
+  protected Vector2i gridSize;
   private Vector2 worldSize;
   protected GameGridRenderer gameGridRenderer;
   private Map<Class, GuavaSet<GridObject>> gridObjectsByType;
   private GridObject selectedGridObject;
   private GridObject transitGridObjectA;
   private GridObject transitGridObjectB;
-  private float highestPoint;
+  private int highestPoint;
   protected GridPositionCache positionCache;
-  private Vector2 gridOrigin;
+  private Vector2i gridOrigin;
   protected Rectangle worldBounds;
   protected float gridScale;
 
@@ -53,8 +56,8 @@ public class GameGrid extends GameLayer {
     objects = new GuavaSet<GridObject>(25);
     positionCache = new GridPositionCache(this);
 
-    gridSize = new Vector2(8, 8);
-    gridOrigin = new Vector2();
+    gridSize = new Vector2i(8, 8);
+    gridOrigin = new Vector2i();
     gridScale = 1f;
 
     updateWorldSize();
@@ -82,7 +85,7 @@ public class GameGrid extends GameLayer {
     return worldSize.cpy();
   }
 
-  public Vector2 getGridSize() {
+  public Vector2i getGridSize() {
     return gridSize;
   }
 
@@ -99,7 +102,7 @@ public class GameGrid extends GameLayer {
 
     gridObjectHashSet.add(gridObject);
 
-    float objectYPos = gridObject.getPosition().y;
+    int objectYPos = gridObject.getPosition().y;
     if (objectYPos > highestPoint) {
       highestPoint = objectYPos;
       if (highestPoint + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE > gridSize.y) {
@@ -191,7 +194,7 @@ public class GameGrid extends GameLayer {
   public boolean tap(Vector2 worldPoint, int count) {
     GridPoint gridPointAtFinger = closestGridPoint(worldPoint);
 
-    Set<GridObject> gridObjects = positionCache.getObjectsAt(gridPointAtFinger, new Vector2(1, 1));
+    Set<GridObject> gridObjects = positionCache.getObjectsAt(gridPointAtFinger, SINGLE_POINT);
     for (GridObject gridObject : gridObjects) {
       if (gridObject.tap(gridPointAtFinger, count)) {
         return true;
@@ -209,10 +212,11 @@ public class GameGrid extends GameLayer {
   public boolean touchDown(Vector2 worldPoint, int pointer) {
     GridPoint gameGridPoint = closestGridPoint(worldPoint);
 
-    Set<GridObject> gridObjects = positionCache.getObjectsAt(gameGridPoint, new Vector2(1, 1));
+    Set<GridObject> gridObjects = positionCache.getObjectsAt(gameGridPoint, SINGLE_POINT);
     for (GridObject gridObject : gridObjects) {
       if (gridObject.touchDown(gameGridPoint, worldPoint, pointer)) {
         selectedGridObject = gridObject;
+        System.out.println("Selected: " + gridObject);
         return true;
       }
     }
@@ -239,8 +243,8 @@ public class GameGrid extends GameLayer {
   }
 
   public GridPoint closestGridPoint(float x, float y) {
-    float gridX = (float) Math.floor((int) (x - gridOrigin.x) / TowerConsts.GRID_UNIT_SIZE);
-    float gridY = (float) Math.floor((int) (y - gridOrigin.y) / TowerConsts.GRID_UNIT_SIZE);
+    int gridX = (int) Math.floor((int) (x - gridOrigin.x) / TowerConsts.GRID_UNIT_SIZE);
+    int gridY = (int) Math.floor((int) (y - gridOrigin.y) / TowerConsts.GRID_UNIT_SIZE);
 
     gridX = Math.max(0, Math.min(gridX, gridSize.x - 1));
     gridY = Math.max(0, Math.min(gridY, gridSize.y - 1));
@@ -266,11 +270,11 @@ public class GameGrid extends GameLayer {
     return positionCache;
   }
 
-  public void setGridOrigin(Vector2 gridOrigin) {
+  public void setGridOrigin(Vector2i gridOrigin) {
     this.gridOrigin.set(gridOrigin);
   }
 
-  public Vector2 getGridOrigin() {
+  public Vector2i getGridOrigin() {
     return gridOrigin;
   }
 

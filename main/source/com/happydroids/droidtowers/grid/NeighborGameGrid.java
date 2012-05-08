@@ -8,12 +8,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.math.Vector2i;
 
 public class NeighborGameGrid extends GameGrid {
   private Runnable clickListener;
   private String ownerName;
 
-  public NeighborGameGrid(OrthographicCamera camera, Vector2 gridOrigin) {
+  public NeighborGameGrid(OrthographicCamera camera, Vector2i gridOrigin) {
     super(camera);
 
     setGridOrigin(gridOrigin);
@@ -23,9 +24,9 @@ public class NeighborGameGrid extends GameGrid {
   }
 
   public void findLimits() {
-    float minX = Float.MAX_VALUE;
-    float maxX = Float.MIN_VALUE;
-    float maxY = Float.MIN_VALUE;
+    int minX = Integer.MAX_VALUE;
+    int maxX = Integer.MIN_VALUE;
+    int maxY = Integer.MIN_VALUE;
 
     for (GridObject gridObject : getObjects()) {
       GridPoint position = gridObject.getPosition();

@@ -19,6 +19,7 @@ import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.math.Vector2i;
 import com.happydroids.droidtowers.types.GridObjectType;
 
 import java.util.List;
@@ -90,15 +91,15 @@ public abstract class GridObject {
     }
   }
 
-  public boolean tap(Vector2 gridPointAtFinger, int count) {
+  public boolean tap(Vector2i gridPointAtFinger, int count) {
     return false;
   }
 
-  public boolean pan(Vector2 gridPointAtFinger, Vector2 gridPointDelta) {
+  public boolean pan(Vector2i gridPointAtFinger, Vector2i gridPointDelta) {
     return false;
   }
 
-  public boolean touchDown(Vector2 gameGridPoint, Vector2 worldPoint, int pointer) {
+  public boolean touchDown(Vector2i gameGridPoint, Vector2 worldPoint, int pointer) {
     return false;
   }
 
@@ -114,7 +115,7 @@ public abstract class GridObject {
     setSize(size.x, size.y);
   }
 
-  public void setSize(float x, float y) {
+  public void setSize(int x, int y) {
     size.set(x, y);
     updateWorldCoordinates();
     broadcastEvent(new GridObjectBoundsChangeEvent(this, size, position));
@@ -124,12 +125,8 @@ public abstract class GridObject {
     return position;
   }
 
-  public void setPosition(Vector2 gridPointAtFinger) {
-    setPosition((int) gridPointAtFinger.x, (int) gridPointAtFinger.y);
-  }
-
-  public void setPosition(float x, float y) {
-    setPosition((int) x, (int) y);
+  public void setPosition(Vector2i gridPointAtFinger) {
+    setPosition(gridPointAtFinger.x, gridPointAtFinger.y);
   }
 
   public void setPosition(int x, int y) {
@@ -215,8 +212,8 @@ public abstract class GridObject {
   public List<GridPoint> getGridPointsOccupied() {
     List<GridPoint> points = Lists.newArrayList();
 
-    for (float x = position.x; x < position.x + size.x; x += 1f) {
-      for (float y = position.y; y < position.y + size.y; y += 1f) {
+    for (int x = position.x; x < position.x + size.x; x++) {
+      for (int y = position.y; y < position.y + size.y; y++) {
         points.add(new GridPoint(x, y));
       }
     }
@@ -230,8 +227,8 @@ public abstract class GridObject {
 
     GridPoint contentSize = getContentSize();
     GridPoint contentPosition = getContentPosition();
-    for (float x = contentPosition.x; x < contentPosition.x + contentSize.x; x += 1f) {
-      for (float y = contentPosition.y; y < contentPosition.y + contentSize.y; y += 1f) {
+    for (int x = contentPosition.x; x < contentPosition.x + contentSize.x; x++) {
+      for (int y = contentPosition.y; y < contentPosition.y + contentSize.y; y++) {
         points.add(new GridPoint(x, y));
       }
     }

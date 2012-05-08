@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.gamestate;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -26,6 +25,7 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridObjectState;
 import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.jackson.TowerTypeIdResolver;
+import com.happydroids.droidtowers.math.Vector2i;
 import sk.seges.acris.json.server.migrate.JacksonTransformer;
 
 import java.io.IOException;
@@ -48,7 +48,7 @@ public class GameSave {
   protected Player player;
   protected Vector3 cameraPosition;
   protected float cameraZoom;
-  protected Vector2 gridSize;
+  protected Vector2i gridSize;
   protected List<GridObjectState> gridObjects;
   protected HashMap<String, Integer> objectCounts;
   protected ArrayList<String> completedAchievements;
@@ -69,7 +69,7 @@ public class GameSave {
     this.difficultyLevel = difficultyLevel;
     baseFilename = generateFilename();
     player = new Player(difficultyLevel.getStartingMoney());
-    gridSize = new Vector2(TowerConsts.GAME_GRID_START_SIZE, TowerConsts.GAME_GRID_START_SIZE);
+    gridSize = new Vector2i(TowerConsts.GAME_GRID_START_SIZE, TowerConsts.GAME_GRID_START_SIZE);
   }
 
   public void attachToGame(GameGrid gameGrid, OrthographicCamera camera) {

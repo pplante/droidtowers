@@ -4,25 +4,24 @@
 
 package com.happydroids.droidtowers.grid;
 
-import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
 import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.math.Vector2i;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class GridPositionCache {
-  public static final Vector2 SINGLE_POINT = new Vector2(1, 1);
-
   private GridPosition[][] gridPositions;
-  private Vector2 gridSize;
+  private Vector2i gridSize;
   private final GameGrid gameGrid;
   private float[][] noiseLevels;
 
@@ -37,7 +36,7 @@ public class GridPositionCache {
 
     gridSize = gameGrid.getGridSize();
     System.out.println("gridSize = " + gridSize);
-    gridPositions = new GridPosition[(int) gridSize.x + 1][(int) gridSize.y + 1];
+    gridPositions = new GridPosition[gridSize.x + 1][gridSize.y + 1];
 
     for (int x = 0; x <= gridSize.x; x++) {
       for (int y = 0; y <= gridSize.y; y++) {
@@ -47,7 +46,7 @@ public class GridPositionCache {
   }
 
   private void addGridObjectToPosition(GridObject gridObject) {
-    List<GridPoint> pointsOccupied = gridObject.getGridPointsTouched();
+    List<GridPoint> pointsOccupied = gridObject.getGridPointsOccupied();
     for (GridPoint gridPoint : pointsOccupied) {
       GridPosition position = getObjectSetForPosition(gridPoint);
       if (position != null) {
@@ -73,8 +72,8 @@ public class GridPositionCache {
       return;
     }
 
-    for (int x = (int) event.prevPosition.x; x < event.prevPosition.x + event.prevSize.x; x += 1) {
-      for (int y = (int) event.prevPosition.y; y < event.prevPosition.y + event.prevSize.y; y += 1) {
+    for (int x = event.prevPosition.x; x < event.prevPosition.x + event.prevSize.x; x++) {
+      for (int y = event.prevPosition.y; y < event.prevPosition.y + event.prevSize.y; y++) {
         GridPosition position = getPosition(x, y);
         if (position != null) {
           position.remove(event.gridObject);
@@ -98,29 +97,18 @@ public class GridPositionCache {
   }
 
   private GridPosition getObjectSetForPosition(GridPoint gridPoint) {
-    Set<GridObject> objectsAtPoint;
-
-    int x = (int) gridPoint.x;
-    int y = (int) gridPoint.y;
-
-    if (!checkBounds(x, y)) return null;
-
-    if (gridPositions[x][y] == null) {
-      gridPositions[x][y] = new GridPosition(x, y);
-    }
-
-    return gridPositions[x][y];
+    return !checkBounds(gridPoint.x, gridPoint.y) ? null : gridPositions[gridPoint.x][gridPoint.y];
   }
 
-  public Set<GridObject> getObjectsAt(GridPoint position, Vector2 size, GridObject... gridObjectsToIgnore) {
+  public Set<GridObject> getObjectsAt(GridPoint position, Vector2i size, GridObject... gridObjectsToIgnore) {
     Set<GridObject> objects = new HashSet<GridObject>();
 
-    float maxX = Math.min(gridSize.x, position.x + size.x);
-    float maxY = Math.min(gridSize.y, position.y + size.y);
+    int maxX = Math.min(gridSize.x, position.x + size.x);
+    int maxY = Math.min(gridSize.y, position.y + size.y);
 
     GridPoint currentPos = position.cpy();
-    for (float x = position.x; x < maxX; x++) {
-      for (float y = position.y; y < maxY; y++) {
+    for (int x = position.x; x < maxX; x++) {
+      for (int y = position.y; y < maxY; y++) {
         currentPos.set(x, y);
 
         GridPosition forPosition = getObjectSetForPosition(currentPos);
@@ -138,17 +126,15 @@ public class GridPositionCache {
   }
 
   public Set<GridObject> getObjectsAt(GridPoint gridPoint) {
-    return getObjectsAt(gridPoint, SINGLE_POINT);
+    return getObjectsAt(gridPoint, TowerConsts.SINGLE_POINT);
   }
 
-  public GridPosition getPosition(Vector2 gridPoint) {
-    return getPosition((int) gridPoint.x, (int) gridPoint.y);
+  public GridPosition getPosition(Vector2i gridPoint) {
+    return getPosition(gridPoint.x, gridPoint.y);
   }
 
   public GridPosition getPosition(int x, int y) {
-    if (!checkBounds(x, y)) return null;
-
-    return gridPositions[x][y];
+    return !checkBounds(x, y) ? null : gridPositions[x][y];
   }
 
   private boolean checkBounds(int x, int y) {
@@ -162,10 +148,6 @@ public class GridPositionCache {
 
   public GridPosition[][] getPositions() {
     return gridPositions;
-  }
-
-  public Vector2 getGridSize() {
-    return gridSize;
   }
 
   public void pauseEvents() {

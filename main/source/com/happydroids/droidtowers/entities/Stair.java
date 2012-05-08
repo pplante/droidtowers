@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.math.GridPoint;
@@ -53,26 +52,5 @@ public class Stair extends Transit {
     points.add(new GridPoint(position.x + 1, position.y + 2));
 
     return points;
-  }
-
-  @Override
-  public GridPoint getContentSize() {
-    GridPoint point = size.cpy();
-    point.add(0, 1);
-    return point;
-  }
-
-  public Vector2 getTopLeftWorldPoint() {
-    GridPoint point = new GridPoint(position);
-    point.add(0, 1);
-
-    return point.toWorldVector2();
-  }
-
-  public Vector2 getBottomRightWorldPoint() {
-    GridPoint point = new GridPoint(position);
-    point.add(2, 0);
-
-    return point.toWorldVector2();
   }
 }

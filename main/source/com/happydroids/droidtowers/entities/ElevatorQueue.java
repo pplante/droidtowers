@@ -22,7 +22,6 @@ public class ElevatorQueue {
   private Set<Passenger> currentRiders;
   private float queueTime;
   private final Elevator elevator;
-  private boolean killingPassengers;
 
   public ElevatorQueue(Elevator elevator) {
     this.elevator = elevator;
@@ -124,8 +123,20 @@ public class ElevatorQueue {
   }
 
   public boolean waitingOnRiders() {
-    for (Passenger passenger : currentRiders) {
-      if (passenger.shouldWaitFor()) {
+    Iterator<Passenger> passengerIterator = passengersWaiting.iterator();
+    while (passengerIterator.hasNext()) {
+      Passenger passenger = passengerIterator.next();
+      if (passenger.isMarkedForRemoval()) {
+        passengerIterator.remove();
+      }
+    }
+
+    passengerIterator = currentRiders.iterator();
+    while (passengerIterator.hasNext()) {
+      Passenger passenger = passengerIterator.next();
+      if (passenger.isMarkedForRemoval()) {
+        passengerIterator.remove();
+      } else if (passenger.shouldWaitFor()) {
         return true;
       }
     }
@@ -138,23 +149,29 @@ public class ElevatorQueue {
   }
 
   public void killPassengers() {
-    killingPassengers = true;
     for (Passenger currentRider : currentRiders) {
       currentRider.killByElevator();
     }
 
-    currentRiders.clear();
+    for (Passenger passenger : passengersWaiting) {
+      passenger.killByElevator();
+    }
+
     currentStop = null;
     stops.clear();
-    killingPassengers = false;
   }
 
   public void removePassenger(AvatarSteeringManager avatarSteeringManager) {
-    if (killingPassengers) return;
-
     for (Passenger rider : currentRiders) {
       if (rider.getSteeringManager().equals(avatarSteeringManager)) {
-        currentRiders.remove(rider);
+        rider.markToRemove();
+
+        break;
+      }
+    }
+    for (Passenger rider : passengersWaiting) {
+      if (rider.getSteeringManager().equals(avatarSteeringManager)) {
+        rider.markToRemove();
 
         break;
       }

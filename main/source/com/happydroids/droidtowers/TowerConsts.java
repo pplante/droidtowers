@@ -7,6 +7,7 @@ package com.happydroids.droidtowers;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.happydroids.HappyDroidConsts;
+import com.happydroids.droidtowers.math.Vector2i;
 
 public class TowerConsts extends HappyDroidConsts {
   public static boolean ENABLE_HAPPYDROIDS_CONNECT = true;
@@ -40,6 +41,7 @@ public class TowerConsts extends HappyDroidConsts {
   public static final float ACHIEVEMENT_ENGINE_FREQUENCY = 5f;
   public static final int MAX_AVATARS = (Gdx.app.getType() == Application.ApplicationType.Android ? 20 : 120);
   public static final float AVATAR_POPULATION_SCALE = 0.25f;
+  public static final Vector2i SINGLE_POINT = new Vector2i(1, 1);
 
   private TowerConsts() {
 

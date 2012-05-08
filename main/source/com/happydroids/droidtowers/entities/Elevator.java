@@ -18,6 +18,7 @@ import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.math.Vector2i;
 import com.happydroids.droidtowers.types.ElevatorType;
 import com.happydroids.droidtowers.types.ResizeHandle;
 
@@ -34,7 +35,7 @@ public class Elevator extends Transit {
   private Action onResizeAction;
   private ElevatorCar elevatorCar;
   static TextureAtlas elevatorAtlas;
-  private Vector2 anchorPoint;
+  private Vector2i anchorPoint;
 
   public Elevator(ElevatorType elevatorType, final GameGrid gameGrid) {
     super(elevatorType, gameGrid);
@@ -73,8 +74,7 @@ public class Elevator extends Transit {
 
   @Override
   public void render(SpriteBatch spriteBatch, Color renderTintColor) {
-    Vector2 renderPosition = position.cpy();
-
+    Vector2i renderPosition = position.cpy();
     Vector2 localPoint = worldPosition.cpy();
 
     if (selectedResizeHandle == ResizeHandle.BOTTOM) {
@@ -97,7 +97,7 @@ public class Elevator extends Transit {
     shaftToRender.draw(spriteBatch);
 
     for (int localFloorNum = 1; localFloorNum < size.y - 1; localFloorNum++) {
-      int worldFloorNum = (int) (position.y + localFloorNum);
+      int worldFloorNum = position.y + localFloorNum;
       String labelText = String.valueOf(worldFloorNum - TowerConsts.LOBBY_FLOOR);
       if (worldFloorNum == TowerConsts.LOBBY_FLOOR) {
         labelText = "L";
@@ -128,7 +128,7 @@ public class Elevator extends Transit {
   }
 
   @Override
-  public boolean tap(Vector2 gridPointAtFinger, int count) {
+  public boolean tap(Vector2i gridPointAtFinger, int count) {
     if (count >= 2) {
       drawShaft = !drawShaft;
     }
@@ -137,7 +137,8 @@ public class Elevator extends Transit {
   }
 
   @Override
-  public boolean touchDown(Vector2 gameGridPoint, Vector2 worldPoint, int pointer) {
+  public boolean touchDown(Vector2i gameGridPoint, Vector2 worldPoint, int pointer) {
+    System.out.println(gameGridPoint);
     if (topSprite.getBoundingRectangle().contains(worldPoint.x, worldPoint.y)) {
       selectedResizeHandle = TOP;
       anchorPoint = position.cpy();
@@ -163,7 +164,7 @@ public class Elevator extends Transit {
   }
 
   @Override
-  public boolean pan(Vector2 gridPointAtFinger, Vector2 gridPointDelta) {
+  public boolean pan(Vector2i gridPointAtFinger, Vector2i gridPointDelta) {
     GridPoint newSize = size.cpy();
     GridPoint newPosition = position.cpy();
 

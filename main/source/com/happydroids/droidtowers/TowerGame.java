@@ -202,6 +202,8 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
       activeScene.render(deltaTime);
       frameBuffer.end();
 
+      Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+
       spriteBatchFBO.begin();
       spriteBatchFBO.draw(frameBuffer.getColorBufferTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0, 0, 1, 1);
       spriteBatchFBO.end();

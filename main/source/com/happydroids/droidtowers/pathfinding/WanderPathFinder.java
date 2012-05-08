@@ -4,12 +4,12 @@
 
 package com.happydroids.droidtowers.pathfinding;
 
-import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.GuavaSet;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
+import com.happydroids.droidtowers.math.Vector2i;
 import com.happydroids.droidtowers.utils.Random;
 
 public class WanderPathFinder extends TransitPathFinder {
@@ -28,7 +28,7 @@ public class WanderPathFinder extends TransitPathFinder {
     lastCost = 1.0;
     discoveredPath = Lists.newLinkedList();
 
-    Vector2 gridSize = gameGrid.getGridSize();
+    Vector2i gridSize = gameGrid.getGridSize();
 
     if (start.y == TowerConsts.LOBBY_FLOOR) {
       discoveredPath.add(gameGrid.positionCache().getPosition(Random.randomInt(0, gridSize.x), TowerConsts.LOBBY_FLOOR));

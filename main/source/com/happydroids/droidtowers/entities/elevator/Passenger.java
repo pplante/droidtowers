@@ -17,6 +17,7 @@ public class Passenger {
   public final Direction travelDirection;
   private final AvatarSteeringManager steeringManager;
   private boolean waitFor;
+  private boolean markedForRemoval;
 
   public Passenger(AvatarSteeringManager steeringManager, int boarding, int destination, Runnable disembarkCallback) {
     this.steeringManager = steeringManager;
@@ -71,5 +72,13 @@ public class Passenger {
 
   public AvatarSteeringManager getSteeringManager() {
     return steeringManager;
+  }
+
+  public void markToRemove() {
+    markedForRemoval = true;
+  }
+
+  public boolean isMarkedForRemoval() {
+    return markedForRemoval;
   }
 }

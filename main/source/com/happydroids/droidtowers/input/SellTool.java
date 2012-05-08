@@ -6,10 +6,10 @@ package com.happydroids.droidtowers.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.google.common.base.Function;
 import com.google.common.collect.Ordering;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
@@ -35,7 +35,7 @@ public class SellTool extends ToolBase {
     Vector3 worldPoint = camera.getPickRay(x, y).getEndPoint(1);
     GridPoint gridPointAtFinger = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
 
-    Set<GridObject> gridObjects = gameGrid.positionCache().getObjectsAt(gridPointAtFinger, new Vector2(1, 1));
+    Set<GridObject> gridObjects = gameGrid.positionCache().getObjectsAt(gridPointAtFinger, TowerConsts.SINGLE_POINT);
 
     if (gridObjects != null) {
       List<GridObject> zIndexSorted = Ordering.natural().reverse().onResultOf(new Function<GridObject, Integer>() {

@@ -8,14 +8,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.math.Vector2i;
 import com.happydroids.droidtowers.types.RoomType;
 
 public class Lobby extends Room {
 
-  private static final Vector2 TWO_WIDE = new Vector2(2, 1);
+  private static final Vector2i TWO_WIDE = new Vector2i(2, 1);
   private final Sprite leftCap;
   private final Sprite rightCap;
 

@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
@@ -19,6 +18,7 @@ import com.happydroids.droidtowers.events.WeatherState;
 import com.happydroids.droidtowers.gamestate.actions.GameGridTransportCalculationComplete;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
+import com.happydroids.droidtowers.math.Vector2i;
 
 import static java.lang.Math.*;
 
@@ -42,7 +42,7 @@ public class TowerMiniMap extends Table {
 
   public static Pixmap redrawMiniMap(GameGrid gameGrid, boolean useCustomScale, float customScale) {
     Gdx.app.debug(TAG, "Redrawing minimap!");
-    Vector2 gridSize = gameGrid.getGridSize();
+    Vector2i gridSize = gameGrid.getGridSize();
 
     float maxSize = customScale;
     if (!useCustomScale) {

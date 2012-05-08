@@ -9,16 +9,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
 
-public class GridPoint extends Vector2 {
+public class GridPoint extends Vector2i {
   public GridPoint() {
 
   }
 
-  public GridPoint(float x, float y) {
+  public GridPoint(int x, int y) {
     super(x, y);
   }
 
-  public GridPoint(Vector2 vec) {
+  public GridPoint(Vector2i vec) {
     this(vec.x, vec.y);
   }
 
