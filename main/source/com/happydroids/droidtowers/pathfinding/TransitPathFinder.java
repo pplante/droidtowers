@@ -82,8 +82,10 @@ public class TransitPathFinder extends AStar<GridPosition> {
 
   private void checkGridPositionY(List<GridPosition> successors, int x, int y) {
     GridPosition position = gameGrid.positionCache().getPosition(x, y);
-    if (position != null && (position.elevator != null || position.stair != null) && (position.connectedToTransit || y == TowerConsts.LOBBY_FLOOR)) {
-      successors.add(position);
+    if (position != null && (position.connectedToTransit || y == TowerConsts.LOBBY_FLOOR)) {
+      if (position.elevator != null && position.elevator.servicesFloor(y) || position.stair != null) {
+        successors.add(position);
+      }
     }
   }
 }

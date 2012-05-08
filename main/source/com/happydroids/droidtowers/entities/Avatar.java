@@ -196,7 +196,7 @@ public class Avatar extends GameObject {
 
   public void cancelMovement() {
     if (steeringManager != null) {
-      steeringManager.cancel();
+      steeringManager.finished();
     }
 
     if (pathFinder != null) {
@@ -217,5 +217,15 @@ public class Avatar extends GameObject {
     home = (Room) newHome;
     home.setResident(this);
     setPosition(home.getWorldCenterBottom());
+  }
+
+  public void recalculateCurrentPath() {
+    cancelMovement();
+
+    if (movingTo != null) {
+      navigateToGridObject(movingTo);
+    } else {
+      wanderAround();
+    }
   }
 }

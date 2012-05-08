@@ -4,6 +4,8 @@
 
 package com.happydroids.droidtowers.entities;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
@@ -11,6 +13,7 @@ import com.happydroids.droidtowers.entities.elevator.ElevatorStop;
 import com.happydroids.droidtowers.entities.elevator.Passenger;
 import com.happydroids.droidtowers.math.Direction;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 import static com.happydroids.droidtowers.math.Direction.DOWN;
@@ -148,19 +151,6 @@ public class ElevatorQueue {
     return currentRiders;
   }
 
-  public void killPassengers() {
-    for (Passenger currentRider : currentRiders) {
-      currentRider.killByElevator();
-    }
-
-    for (Passenger passenger : passengersWaiting) {
-      passenger.killByElevator();
-    }
-
-    currentStop = null;
-    stops.clear();
-  }
-
   public void removePassenger(AvatarSteeringManager avatarSteeringManager) {
     for (Passenger rider : currentRiders) {
       if (rider.getSteeringManager().equals(avatarSteeringManager)) {
@@ -183,4 +173,30 @@ public class ElevatorQueue {
     currentRiders.clear();
     currentStop = null;
   }
+
+  public void informPassengersOfServiceChange() {
+    Iterables.all(currentRiders, INFORM_PASSENGER_OF_SERVICE_CHANGE);
+    Iterables.all(passengersWaiting, INFORM_PASSENGER_OF_SERVICE_CHANGE);
+
+    if (currentStop != null) {
+      Iterables.all(currentStop.boarding, INFORM_PASSENGER_OF_SERVICE_CHANGE);
+      Iterables.all(currentStop.disembarking, INFORM_PASSENGER_OF_SERVICE_CHANGE);
+    }
+
+    for (ElevatorStop stop : stops) {
+      Iterables.all(stop.boarding, INFORM_PASSENGER_OF_SERVICE_CHANGE);
+      Iterables.all(stop.disembarking, INFORM_PASSENGER_OF_SERVICE_CHANGE);
+    }
+
+    currentStop = null;
+    stops.clear();
+  }
+
+  public static final Predicate<Passenger> INFORM_PASSENGER_OF_SERVICE_CHANGE = new Predicate<Passenger>() {
+    @Override
+    public boolean apply(@Nullable Passenger passenger) {
+      passenger.informOfServiceChange();
+      return false;
+    }
+  };
 }

@@ -78,15 +78,6 @@ public class AvatarSteeringManager {
   }
 
   public void finished() {
-    cancel();
-
-    if (completeCallback != null) {
-      completeCallback.run();
-      completeCallback = null;
-    }
-  }
-
-  public void cancel() {
     if (currentPos != null && currentPos.elevator != null) {
       currentPos.elevator.getCar().removePassenger(this);
     }
@@ -97,6 +88,11 @@ public class AvatarSteeringManager {
     pointsTraveled = 0;
     TweenSystem.getTweenManager().killTarget(avatar);
     gameGrid.getRenderer().removeTransitLine(transitLine);
+
+    if (completeCallback != null) {
+      completeCallback.run();
+      completeCallback = null;
+    }
   }
 
   private void advancePosition() {
@@ -155,14 +151,14 @@ public class AvatarSteeringManager {
       @Override
       public void onEvent(int type, BaseTween source) {
         if (currentPos.elevator == null) {
-          cancel();
+          finished();
           return;
         }
 
         boolean addedPassenger = currentPos.elevator.getCar().addPassenger(AvatarSteeringManager.this, currentPos.y, destination.y, uponArrivalAtElevatorDestination(destination));
         if (!addedPassenger) {
           Gdx.app.error(TAG, "ZOMG CANNOT REACH FLOOR!!!");
-          cancel();
+          finished();
         }
       }
     });
@@ -186,7 +182,7 @@ public class AvatarSteeringManager {
 
   private void traverseStair(final GridPosition nextPosition) {
     if (currentPos.stair == null) {
-      cancel();
+      finished();
       return;
     }
 
@@ -310,7 +306,7 @@ public class AvatarSteeringManager {
 
     for (GridPosition position : path) {
       if (position.contains(event.gridObject)) {
-        cancel();
+        finished();
         break;
       }
     }

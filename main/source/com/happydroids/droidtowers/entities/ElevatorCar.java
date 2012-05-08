@@ -96,7 +96,7 @@ public class ElevatorCar extends GameObject {
   }
 
   private void returnToLobby() {
-    moveToFloor((int) elevator.getContentPosition().y);
+    moveToFloor(elevator.getContentPosition().y);
   }
 
   public boolean addPassenger(AvatarSteeringManager steeringManager, int boarding, int destination, Runnable disembarkCallback) {
@@ -128,7 +128,8 @@ public class ElevatorCar extends GameObject {
   }
 
   private void resetToBottomOfShaft() {
-    queue.killPassengers();
+    inUse = false;
+    queue.informPassengersOfServiceChange();
     TweenSystem.getTweenManager().killTarget(this);
     Vector2 elevatorWorldPosition = elevator.getWorldPosition();
     setPosition(elevatorWorldPosition.x, elevatorWorldPosition.y + elevator.scaledGridUnit());

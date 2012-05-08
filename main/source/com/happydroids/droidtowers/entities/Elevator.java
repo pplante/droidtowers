@@ -15,6 +15,7 @@ import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.actions.Action;
 import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
+import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.math.GridPoint;
@@ -164,7 +165,9 @@ public class Elevator extends Transit {
   @Override
   public boolean pan(GridPoint gridPointAtFinger, GridPoint gridPointDelta) {
     GridPoint newSize = size.cpy();
+    GridPoint prevSize = size.cpy();
     GridPoint newPosition = position.cpy();
+    GridPoint prevPosition = position.cpy();
 
     switch (selectedResizeHandle) {
       case BOTTOM:
@@ -182,6 +185,7 @@ public class Elevator extends Transit {
 
     size.set(newSize);
     setPosition(newPosition);
+    broadcastEvent(new GridObjectBoundsChangeEvent(this, prevSize, prevPosition));
 
     return true;
   }

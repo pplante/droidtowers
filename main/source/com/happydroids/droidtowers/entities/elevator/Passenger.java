@@ -81,4 +81,8 @@ public class Passenger {
   public boolean isMarkedForRemoval() {
     return markedForRemoval;
   }
+
+  public void informOfServiceChange() {
+    steeringManager.getAvatar().recalculateCurrentPath();
+  }
 }
