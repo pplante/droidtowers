@@ -61,7 +61,7 @@ public class ElevatorCar extends GameObject {
             .delay(500f)
             .setCallback(new TweenCallback() {
               public void onEvent(int type, BaseTween source) {
-                queue.informPassengers();
+                queue.informPassengersOfStop();
                 inUse = false;
               }
             })

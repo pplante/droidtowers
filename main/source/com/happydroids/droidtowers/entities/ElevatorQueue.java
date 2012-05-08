@@ -10,7 +10,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
 import com.happydroids.droidtowers.entities.elevator.Passenger;
-import com.happydroids.droidtowers.math.Direction;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -64,13 +63,6 @@ public class ElevatorQueue {
     }
 
     passengersWaiting.removeAll(currentRiders);
-    makeStops(firstPassenger.travelDirection);
-    moveToNextStop();
-
-    return true;
-  }
-
-  private void makeStops(Direction travelDirection) {
     floorNumbers = Lists.newLinkedList();
     for (Passenger passenger : currentRiders) {
       floorNumbers.add(passenger.boardingFloor);
@@ -79,9 +71,11 @@ public class ElevatorQueue {
 
     Collections.sort(floorNumbers);
 
-    if (travelDirection.equals(DOWN)) {
+    if (firstPassenger.travelDirection.equals(DOWN)) {
       Collections.reverse(floorNumbers);
     }
+
+    return true;
   }
 
   public boolean moveToNextStop() {
@@ -99,7 +93,7 @@ public class ElevatorQueue {
     return currentFloor;
   }
 
-  public void informPassengers() {
+  public void informPassengersOfStop() {
     for (Passenger currentRider : currentRiders) {
       if (currentRider.boardingFloor == currentFloor) {
         currentRider.boardNow();
