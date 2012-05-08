@@ -45,8 +45,6 @@ public class PopulationCalculator extends GameGridAction {
       }
     }
 
-    maxPopulation = Math.min(maxPopulation, attractedPopulation);
-
     Player.instance().setPopulationMax(maxPopulation);
     Player.instance().setPopulationResidency(currentResidency);
   }

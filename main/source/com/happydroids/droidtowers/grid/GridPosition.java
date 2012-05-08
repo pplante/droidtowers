@@ -108,6 +108,7 @@ public class GridPosition {
   }
 
   public void findMaxNoise() {
+    maxNoiseLevel = 0;
     for (GridObject gridObject : objects) {
       maxNoiseLevel = Math.max(gridObject.getNoiseLevel(), maxNoiseLevel);
     }
@@ -118,6 +119,8 @@ public class GridPosition {
   }
 
   public void calculateNoise(GridPosition[][] gridPositions) {
+    noiseLevel = 0;
+
     float totalNoise = 0f;
     int distance = 2;
     for (int xx = x - distance; xx < x + distance; xx++) {

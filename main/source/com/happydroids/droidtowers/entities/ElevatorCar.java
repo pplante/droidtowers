@@ -77,7 +77,16 @@ public class ElevatorCar extends GameObject {
       passenger.updatePosition(getY());
     }
 
-    moveToNext();
+    if (!inUse) {
+      if (!queue.moveToNextStop()) {
+        queue.determinePickups();
+      }
+
+      if (queue.getCurrentFloor() != ElevatorQueue.INVALID_FLOOR) {
+        inUse = true;
+        moveToFloor(queue.getCurrentFloor());
+      }
+    }
   }
 
   private void moveToNext() {
