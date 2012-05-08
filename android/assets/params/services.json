@@ -25,7 +25,9 @@
     "populationRequired":20,
     "jobsProvided":4,
     "noiseLevel":0.2,
-    "provides":"JANITORS"
+    "provides":"JANITORS",
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"4x1-janitors-closet"
   },
   {
     "id":"MAIDS-CLOSET",

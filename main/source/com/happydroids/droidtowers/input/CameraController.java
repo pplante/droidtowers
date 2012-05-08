@@ -8,6 +8,7 @@ import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
@@ -25,8 +26,8 @@ public class CameraController implements GestureDetector.GestureListener {
 
   private static CameraController instance;
 
-  public static final float ZOOM_MAX = 3.0f;
-  public static final float ZOOM_MIN = 0.6f;
+  public static final float ZOOM_MAX = 3f;
+  public static final float ZOOM_MIN = 1f;
 
   private OrthographicCamera camera;
   private BoundingBox cameraBounds;
@@ -153,11 +154,7 @@ public class CameraController implements GestureDetector.GestureListener {
   }
 
   private void checkZoom() {
-    if (camera.zoom < ZOOM_MIN) {
-      camera.zoom = ZOOM_MIN;
-    } else if (camera.zoom > ZOOM_MAX) {
-      camera.zoom = ZOOM_MAX;
-    }
+    camera.zoom = MathUtils.clamp(camera.zoom, ZOOM_MIN, ZOOM_MAX);
   }
 
   public void checkBounds() {

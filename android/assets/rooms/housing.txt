@@ -4,14 +4,14 @@ filter: MipMapNearestNearest,Linear
 repeat: none
 3x1-small-office
   rotate: false
-  xy: 320, 0
+  xy: 320, 64
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
 2x1-sushi
   rotate: false
-  xy: 128, 448
+  xy: 320, 320
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
@@ -32,28 +32,28 @@ repeat: none
   index: -1
 2x1-hotel-room
   rotate: false
-  xy: 192, 384
+  xy: 192, 448
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 3x1-small-condo
   rotate: false
-  xy: 0, 320
+  xy: 0, 384
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
 1x1-bathroom
   rotate: false
-  xy: 256, 448
+  xy: 448, 320
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 3x1-small-apartment
   rotate: false
-  xy: 0, 384
+  xy: 0, 448
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
@@ -67,7 +67,7 @@ repeat: none
   index: -1
 lobby-left
   rotate: false
-  xy: 320, 384
+  xy: 320, 448
   size: 36, 64
   orig: 36, 64
   offset: 0, 0
@@ -102,9 +102,16 @@ bathroom
   index: -1
 lobby-right
   rotate: false
-  xy: 320, 320
+  xy: 320, 384
   size: 36, 64
   orig: 36, 64
+  offset: 0, 0
+  index: -1
+3x1-pizza-place
+  rotate: false
+  xy: 256, 256
+  size: 192, 64
+  orig: 192, 64
   offset: 0, 0
   index: -1
 5x1-penthouse
@@ -114,30 +121,30 @@ lobby-right
   orig: 320, 64
   offset: 0, 0
   index: -1
-3x1-pizza-place
-  rotate: false
-  xy: 320, 64
-  size: 192, 64
-  orig: 192, 64
-  offset: 0, 0
-  index: -1
 2x1-maids-closet
-  rotate: false
-  xy: 0, 448
-  size: 128, 64
-  orig: 128, 64
-  offset: 0, 0
-  index: -1
-2x1-bar
   rotate: false
   xy: 192, 320
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
+2x1-bar
+  rotate: false
+  xy: 192, 384
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
 3x1-burger-joint
   rotate: false
-  xy: 256, 256
+  xy: 0, 320
+  size: 192, 64
+  orig: 192, 64
+  offset: 0, 0
+  index: -1
+4x1-janitors-closet
+  rotate: false
+  xy: 320, 0
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
