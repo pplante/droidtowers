@@ -198,7 +198,7 @@ public class Elevator extends Transit {
   @Override
   public GridPoint getContentSize() {
     GridPoint cpy = size.cpy();
-    cpy.sub(0, 3);
+    cpy.sub(0, 2);
     return cpy;
   }
 

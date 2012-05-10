@@ -52,20 +52,9 @@ public class PlacementTool extends ToolBase {
     GridPoint gridPointAtFinger = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
     makeGridObjectAtFinger_whenGridObjectIsNull(gridPointAtFinger);
 
-    isDraggingGridObject = gridObject.getBounds().contains(gridPointAtFinger.x, gridPointAtFinger.y);
+    isDraggingGridObject = gridObject.getWorldBounds().contains(worldPoint.x, worldPoint.y);
 
     return true;
-  }
-
-  private void makeGridObjectAtFinger_whenGridObjectIsNull(GridPoint gridPointAtFinger) {
-    if (gridObject == null) {
-      gridObject = gridObjectType.makeGridObject(gameGrid);
-      gridObject.setPosition(gridPointAtFinger);
-
-      gameGrid.addObject(gridObject);
-    } else {
-      touchDownPointDelta = gridPointAtFinger.cpy().sub(gridObject.getPosition());
-    }
   }
 
   public boolean pan(int x, int y, int deltaX, int deltaY) {
@@ -98,6 +87,17 @@ public class PlacementTool extends ToolBase {
       if (gridObject != null) {
         gridObject.setPosition(gridPointAtFinger);
       }
+    }
+  }
+
+  private void makeGridObjectAtFinger_whenGridObjectIsNull(GridPoint gridPointAtFinger) {
+    if (gridObject == null) {
+      gridObject = gridObjectType.makeGridObject(gameGrid);
+      gridObject.setPosition(gridPointAtFinger);
+
+      gameGrid.addObject(gridObject);
+    } else {
+      touchDownPointDelta = gridPointAtFinger.cpy().sub(gridObject.getPosition());
     }
   }
 
