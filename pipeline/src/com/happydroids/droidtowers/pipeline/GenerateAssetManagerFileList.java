@@ -51,6 +51,8 @@ public class GenerateAssetManagerFileList {
     addFileEntry(assetsDir.child("transport.txt"), TextureAtlas.class);
     addFileEntry(assetsDir.child("rain-drop.png"), Texture.class);
     addFileEntry(assetsDir.child("hud/star.png"), Texture.class);
+    addFileEntry(assetsDir.child("hud/star-white.png"), Texture.class);
+    addFileEntry(assetsDir.child("hud/status-bar-bg.png"), Texture.class);
     addFileEntry(assetsDir.child("decals.png"), Texture.class);
 
     FileHandle swatchesDir = assetsDir.child("swatches");

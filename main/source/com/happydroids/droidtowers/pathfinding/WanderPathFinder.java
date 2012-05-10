@@ -36,7 +36,7 @@ public class WanderPathFinder extends TransitPathFinder {
     } else {
       for (int i = 1; i < 5; i++) {
         GridPosition positionRight = gameGrid.positionCache().getPosition(start.x + i, start.y);
-        if (positionRight.size() > 0) {
+        if (positionRight != null && positionRight.size() > 0) {
           discoveredPath.add(positionRight);
         } else {
           break;
@@ -45,7 +45,7 @@ public class WanderPathFinder extends TransitPathFinder {
 
       for (int i = 1; i < 5; i++) {
         GridPosition positionLeft = gameGrid.positionCache().getPosition(start.x - i, start.y);
-        if (positionLeft.size() > 0) {
+        if (positionLeft != null && positionLeft.size() > 0) {
           discoveredPath.add(positionLeft);
         } else {
           break;

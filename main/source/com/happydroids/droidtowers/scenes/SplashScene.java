@@ -26,6 +26,7 @@ import java.util.Set;
 import static com.happydroids.droidtowers.SplashSceneStates.FULL_LOAD;
 import static com.happydroids.droidtowers.SplashSceneStates.PRELOAD_ONLY;
 import static com.happydroids.droidtowers.TowerAssetManager.assetManager;
+import static com.happydroids.droidtowers.TowerAssetManager.checkForHDPI;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class SplashScene extends Scene {
@@ -126,19 +127,8 @@ public class SplashScene extends Scene {
 
   @Override
   public void render(float deltaTime) {
-    verifyFilesPreloaded();
-
     boolean assetManagerFinished = assetManager().update();
-
-    if (splashState == FULL_LOAD) {
-      if (assetManagerFinished) {
-        if (postLoadRunnable != null) {
-          postLoadRunnable.run();
-        } else {
-          TowerGame.popScene();
-        }
-      }
-    }
+    Thread.yield();
 
     if (!assetManagerFinished) {
       int progress = (int) (assetManager().getProgress() * 100f);
@@ -156,23 +146,30 @@ public class SplashScene extends Scene {
       } finally {
         getSpriteBatch().end();
       }
-    }
-  }
+    } else {
+      if (splashState == PRELOAD_ONLY) {
+        Set<String> preloadFiles = TowerAssetManagerFilesList.preloadFiles.keySet();
 
-  private void verifyFilesPreloaded() {
-    Set<String> preloadFiles = TowerAssetManagerFilesList.preloadFiles.keySet();
+        boolean hasFilesToPreload = false;
+        for (String preloadFile : preloadFiles) {
+          if (!assetManager().isLoaded(checkForHDPI(preloadFile))) {
+            hasFilesToPreload = true;
+            break;
+          }
+        }
 
-    boolean hasFilesToPreload = false;
-    for (String preloadFile : preloadFiles) {
-      if (!assetManager().isLoaded(preloadFile)) {
-        hasFilesToPreload = true;
-      }
-    }
-
-    if (splashState == PRELOAD_ONLY) {
-      if (!hasFilesToPreload) {
-        if (postLoadRunnable != null) {
-          postLoadRunnable.run();
+        if (!hasFilesToPreload) {
+          if (postLoadRunnable != null) {
+            postLoadRunnable.run();
+          }
+        }
+      } else if (splashState == FULL_LOAD) {
+        if (assetManagerFinished) {
+          if (postLoadRunnable != null) {
+            postLoadRunnable.run();
+          } else {
+            TowerGame.popScene();
+          }
         }
       }
     }

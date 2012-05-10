@@ -47,17 +47,6 @@ public class TowerAssetManager {
         assetManager.load(checkForHDPI(entry.getKey()), entry.getValue());
       }
 
-      for (Map.Entry<String, Class> entry : TowerAssetManagerFilesList.files.entrySet()) {
-        assetManager.load(checkForHDPI(entry.getKey()), entry.getValue());
-      }
-
-      TextureLoader.TextureParameter parameter = new TextureLoader.TextureParameter();
-      parameter.genMipMaps = true;
-      parameter.minFilter = MipMapNearestNearest;
-      parameter.magFilter = Linear;
-      assetManager.load(checkForHDPI("elevator/shaft.png"), Texture.class, parameter);
-      assetManager.load(checkForHDPI("elevator/empty.png"), Texture.class, parameter);
-
       assetManager.setErrorListener(new AssetErrorListener() {
         public void error(String fileName, Class type, Throwable throwable) {
           throw new RuntimeException("Error loading: " + fileName, throwable);
@@ -68,7 +57,20 @@ public class TowerAssetManager {
     return assetManager;
   }
 
-  private static String checkForHDPI(String fileName) {
+  public static void addOtherFilesToQueue() {
+    for (Map.Entry<String, Class> entry : TowerAssetManagerFilesList.files.entrySet()) {
+      assetManager.load(checkForHDPI(entry.getKey()), entry.getValue());
+    }
+
+    TextureLoader.TextureParameter parameter = new TextureLoader.TextureParameter();
+    parameter.genMipMaps = true;
+    parameter.minFilter = MipMapNearestNearest;
+    parameter.magFilter = Linear;
+    assetManager.load(checkForHDPI("elevator/shaft.png"), Texture.class, parameter);
+    assetManager.load(checkForHDPI("elevator/empty.png"), Texture.class, parameter);
+  }
+
+  public static String checkForHDPI(String fileName) {
     if (Display.isHDPIMode()) {
       FileHandle file = Gdx.files.internal(fileName);
       String hdpiFileName = file.parent() + "/" + file.nameWithoutExtension() + "-hd." + file.extension();

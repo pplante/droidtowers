@@ -49,6 +49,8 @@ public class HeadsUpDisplay extends WidgetGroup {
   private ImageButton.ImageButtonStyle toolButtonStyle;
   private TutorialStepNotification tutorialStep;
   private final StatusBarPanel statusBarPanel;
+  private ImageButton achievementsButton;
+  private final HeaderButtonBar headerButtonBar;
 
   public HeadsUpDisplay(TowerScene towerScene, Stage stage, OrthographicCamera camera, GameGrid gameGrid, AvatarLayer avatarLayer) {
     super();
@@ -65,7 +67,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     statusBarPanel = new StatusBarPanel(towerScene);
     statusBarPanel.x = 0;
-    statusBarPanel.y = this.stage.height() - statusBarPanel.height;
+    statusBarPanel.y = stage.height() - statusBarPanel.height;
     addActor(statusBarPanel);
 
     mouseToolTip = new ToolTip();
@@ -74,10 +76,22 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     buildToolButtonMenu();
 
-    HeaderButtonBar headerButtonBar = new HeaderButtonBar(hudAtlas, gameGrid);
+
+    headerButtonBar = new HeaderButtonBar(hudAtlas, gameGrid);
     addActor(headerButtonBar);
-    headerButtonBar.x = stage.width() - headerButtonBar.width - 5;
-    headerButtonBar.y = stage.height() - headerButtonBar.height - 5;
+    headerButtonBar.x = stage.width() - headerButtonBar.width - 10;
+    headerButtonBar.y = stage.height() - headerButtonBar.height - 10;
+
+    achievementsButton = new ImageButton(TowerAssetManager.textureFromAtlas("achievements", "hud/buttons.txt"));
+    achievementsButton.x = 10;
+    achievementsButton.y = stage.height() - statusBarPanel.height - achievementsButton.height - 10;
+    achievementsButton.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        new AchievementListView(getStage(), TowerAssetManager.getGuiSkin()).show();
+      }
+    });
+
+    addActor(achievementsButton);
 
     notificationStack.pad(10);
     notificationStack.x = 0;
@@ -128,8 +142,8 @@ public class HeadsUpDisplay extends WidgetGroup {
     toolMenu.addActor(sellButton);
 
     toolButton = new ImageButton(hudAtlas.findRegion("tool-sprite"));
-    toolButton.x = stage.width() - toolButton.width - 5;
-    toolButton.y = 5;
+    toolButton.x = stage.width() - toolButton.width - 10;
+    toolButton.y = 10;
     addActor(toolButton);
     toolButtonStyle = toolButton.getStyle();
     toolButton.setClickListener(new VibrateClickListener() {

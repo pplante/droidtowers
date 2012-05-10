@@ -81,7 +81,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     if (Gdx.graphics.isGL20Available() && Gdx.app.getType().equals(Android) && Display.isHDPIMode()) {
       frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, 800, 480, true);
-      spriteBatchFBO = new SpriteBatch(100);
+      spriteBatchFBO = new SpriteBatch();
     }
 
     BackgroundTask.setPostExecuteManager(this);
@@ -123,7 +123,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_14_bold_white.fnt"), false);
     camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    spriteBatch = new SpriteBatch(100);
+    spriteBatch = new SpriteBatch();
     rootUiStage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false, spriteBatch);
 
     InputSystem.instance().setup(camera);
@@ -172,7 +172,9 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     changeScene(SplashScene.class, SplashSceneStates.PRELOAD_ONLY, new Runnable() {
       public void run() {
-        if (protocolHandler.hasUri()) {
+        TowerAssetManager.addOtherFilesToQueue();
+
+        if (protocolHandler != null && protocolHandler.hasUri()) {
           URI launchUri = protocolHandler.consumeUri();
           changeScene(LaunchUriScene.class, launchUri);
         } else {
@@ -199,6 +201,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     if (frameBuffer != null) {
       frameBuffer.begin();
+      Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
       activeScene.render(deltaTime);
       frameBuffer.end();
 
@@ -256,7 +259,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     pushScene(SplashScene.class, SplashSceneStates.FULL_LOAD);
 
-    if (protocolHandler.hasUri()) {
+    if (protocolHandler != null && protocolHandler.hasUri()) {
       URI launchUri = protocolHandler.consumeUri();
       changeScene(LaunchUriScene.class, launchUri);
     }

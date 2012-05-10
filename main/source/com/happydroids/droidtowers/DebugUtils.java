@@ -20,10 +20,6 @@ public class DebugUtils {
       FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
       FileHandle[] files = storage.list(".json");
       if (files.length > 0) {
-        while (!TowerAssetManager.assetManager().update()) {
-          Thread.yield();
-        }
-
         for (FileHandle file : files) {
           if (!file.path().endsWith("png")) {
             loadGameRunnable.run(file);

@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeTo;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.TowerAssetManager;
@@ -27,33 +26,23 @@ public class HeaderButtonBar extends Table {
   private final AudioControl audioControl;
   private final ImageButton dataOverlayButton;
   private final DataOverlayMenu dataOverlayMenu;
-  private final ImageButton achievementsButton;
 
   public HeaderButtonBar(TextureAtlas hudAtlas, GameGrid gameGrid) {
     audioControl = new AudioControl(hudAtlas);
     dataOverlayButton = TowerAssetManager.imageButton(hudAtlas.findRegion("overlay-button"));
-    achievementsButton = new ImageButton(TowerAssetManager.textureFromAtlas("achievements", "hud/buttons.txt"));
 
     dataOverlayMenu = new DataOverlayMenu(gameGrid.getRenderer());
     dataOverlayMenu.visible = false;
 
     defaults().space(6);
     row().right();
-    add(achievementsButton);
-    add(audioControl);
-    add(dataOverlayButton);
+    add(audioControl).right().expandX();
+    add(dataOverlayButton).right();
 
-    row().colspan(3).right().padTop(-dataOverlayMenu.getOffset());
+    row().colspan(2).right().padTop(-dataOverlayMenu.getOffset());
     add(dataOverlayMenu);
 
     pack();
-    debug();
-
-    achievementsButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        new AchievementListView(getStage(), TowerAssetManager.getGuiSkin()).show();
-      }
-    });
 
     dataOverlayButton.setClickListener(new VibrateClickListener() {
       @Override
@@ -75,7 +64,6 @@ public class HeaderButtonBar extends Table {
     }
 
     dataOverlayButton.action(FadeTo.$(dataOverlayMenu.visible ? INACTIVE_BUTTON_ALPHA : 1f, BUTTON_FADE_DURATION));
-    achievementsButton.action(FadeTo.$(dataOverlayMenu.visible ? INACTIVE_BUTTON_ALPHA : 1f, BUTTON_FADE_DURATION));
     audioControl.action(FadeTo.$(dataOverlayMenu.visible ? INACTIVE_BUTTON_ALPHA : 1f, BUTTON_FADE_DURATION));
   }
 

@@ -24,6 +24,7 @@ public class TowerAssetManagerFilesList {
     preloadFiles.put("swatches/swatch-ff993f7f.png", Texture.class);
     files.put("sound/effects/click.wav", Sound.class);
     files.put("backgrounds/ground-top.png", Texture.class);
+    files.put("hud/star-white.png", Texture.class);
     preloadFiles.put("swatches/swatch-ff0000ff.png", Texture.class);
     files.put("sound/effects/construction-placement-1.wav", Sound.class);
     files.put("hud/misc.txt", TextureAtlas.class);
@@ -31,6 +32,7 @@ public class TowerAssetManagerFilesList {
     preloadFiles.put("hud/window-bg.png", Texture.class);
     files.put("rooms/generic.txt", TextureAtlas.class);
     preloadFiles.put("swatches/swatch-white-triangle.png", Texture.class);
+    files.put("hud/status-bar-bg.png", Texture.class);
     files.put("fonts/roboto_white_12.fnt", BitmapFont.class);
     files.put("fonts/roboto_white_128.fnt", BitmapFont.class);
     files.put("fonts/roboto_white_48.fnt", BitmapFont.class);
