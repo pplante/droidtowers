@@ -12,6 +12,7 @@ import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GameObject;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.platform.Display;
 
 public class GroundLayer extends GameLayer {
   public GroundLayer(GameGrid gameGrid) {
@@ -29,8 +30,8 @@ public class GroundLayer extends GameLayer {
     float tiledHeight = TowerConsts.GROUND_HEIGHT - topTexture.getHeight();
 
     GameObject top = new GameObject(topTexture);
-    top.setPosition(-TowerConsts.GAME_WORLD_PADDING, tiledHeight);
-    top.setSize(event.gameGrid.getWorldSize().x + (TowerConsts.GAME_WORLD_PADDING * 2), topTexture.getHeight());
+    top.setPosition(-Display.getBiggestScreenDimension(), tiledHeight);
+    top.setSize(event.gameGrid.getWorldSize().x + (Display.getBiggestScreenDimension() * 2), topTexture.getHeight());
     top.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
 
     addChild(top);
@@ -38,8 +39,8 @@ public class GroundLayer extends GameLayer {
     Texture tileTexture = TowerAssetManager.texture("backgrounds/ground-tile.png");
 
     GameObject tile = new GameObject(tileTexture);
-    tile.setPosition(-TowerConsts.GAME_WORLD_PADDING, 0);
-    tile.setSize(event.gameGrid.getWorldSize().x + (TowerConsts.GAME_WORLD_PADDING * 2), tiledHeight);
+    tile.setPosition(-Display.getBiggestScreenDimension(), 0);
+    tile.setSize(event.gameGrid.getWorldSize().x + (Display.getBiggestScreenDimension() * 2), tiledHeight);
     tile.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
     addChild(tile);

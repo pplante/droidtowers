@@ -10,8 +10,8 @@ import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.equations.Linear;
 import com.badlogic.gdx.graphics.Texture;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.utils.Random;
@@ -28,9 +28,9 @@ public class Rain extends GameObject {
 
     setTexture(rainDropTexture);
 
-    float width = gameGrid.getWorldSize().x + (TowerConsts.GAME_WORLD_PADDING * 4) + (RAIN_TEXURE_SIZE * 2);
-    float height = gameGrid.getWorldSize().y + (TowerConsts.GAME_WORLD_PADDING * 4) + (RAIN_TEXURE_SIZE * 2);
-    setPosition(-TowerConsts.GAME_WORLD_PADDING * 2, 0);
+    float width = gameGrid.getWorldSize().x + (Display.getBiggestScreenDimension() * 4) + (RAIN_TEXURE_SIZE * 2);
+    float height = gameGrid.getWorldSize().y + (Display.getBiggestScreenDimension() * 4) + (RAIN_TEXURE_SIZE * 2);
+    setPosition(-Display.getBiggestScreenDimension() * 2, 0);
     setSize(width, height);
     setRegion(0, 0, width / RAIN_TEXURE_SIZE, height / RAIN_TEXURE_SIZE);
 
@@ -48,7 +48,7 @@ public class Rain extends GameObject {
             .repeat(Tween.INFINITY, 0)
             .setCallback(new TweenCallback() {
               public void onEvent(int eventType, BaseTween source) {
-                setPosition(Random.randomInt(-TowerConsts.GAME_WORLD_PADDING * 2, -TowerConsts.GAME_WORLD_PADDING), 0);
+                setPosition(Random.randomInt(-Display.getBiggestScreenDimension() * 2, -Display.getBiggestScreenDimension()), 0);
               }
             })
             .setCallbackTriggers(TweenCallback.BEGIN)

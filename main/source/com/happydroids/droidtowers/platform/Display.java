@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 public class Display {
   private static float scaledDensity = 1f;
   private static boolean hdpiMode;
+  private static int biggestScreenDimension = -1;
 
   public static int scale(float pixels) {
     return scale((int) pixels);
@@ -37,5 +38,13 @@ public class Display {
 
   public static boolean isHDPIMode() {
     return hdpiMode;
+  }
+
+  public static int getBiggestScreenDimension() {
+    if (biggestScreenDimension == -1) {
+      biggestScreenDimension = Math.max(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()) / 2;
+    }
+
+    return biggestScreenDimension;
   }
 }

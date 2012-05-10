@@ -19,7 +19,6 @@ public class TowerConsts extends HappyDroidConsts {
   public static final int GAME_GRID_START_SIZE = 40;
   public static final int GAME_GRID_EXPAND_LAND_SIZE = 5;
 
-  public static final int GAME_WORLD_PADDING = GRID_UNIT_SIZE * 7;
   public static final int LOBBY_FLOOR = 10;
   public static final int GROUND_HEIGHT = GRID_UNIT_SIZE * LOBBY_FLOOR;
 

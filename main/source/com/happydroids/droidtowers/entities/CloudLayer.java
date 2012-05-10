@@ -17,6 +17,7 @@ import com.happydroids.droidtowers.WeatherService;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.events.WeatherStateChangeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.utils.Random;
@@ -27,7 +28,6 @@ import java.util.List;
 import static com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
 public class CloudLayer extends GameLayer {
-  public static final int PADDING = TowerConsts.GAME_WORLD_PADDING;
   public static final int CLOUD_SPAWN_DELAY = 2;
   public static final String CLOUDS_ATLAS = "backgrounds/clouds.txt";
   public double CLOUD_SPAWN_MIN = 0.35;
@@ -79,7 +79,6 @@ public class CloudLayer extends GameLayer {
     AtlasRegion cloudRegion = textureAtlas.findRegion("cloud", Random.randomInt(1, numberOfCloudTypes));
 
     float scale = Math.max(0.4f, Random.randomFloat());
-    float cloudX = (cloudRegion.getRegionWidth() * scale) + PADDING;
 
     GameObject cloud = new GameObject(cloudRegion);
 
@@ -90,7 +89,7 @@ public class CloudLayer extends GameLayer {
     if (spawnOnScreen) {
       cloud.setPosition(Random.randomInt(-cloud.getWidth(), worldSize.x), Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX));
     } else {
-      cloud.setPosition(-cloudX, Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX));
+      cloud.setPosition(-((cloudRegion.getRegionWidth() * scale) + Display.getBiggestScreenDimension()), Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX));
     }
     cloud.setVelocity(Random.randomInt(5, 25), 0);
     cloud.setScale(2f);
@@ -108,7 +107,7 @@ public class CloudLayer extends GameLayer {
     }
 
     for (final GameObject cloud : gameObjects) {
-      if (cloud.getX() >= worldSize.x + PADDING) {
+      if (cloud.getX() >= worldSize.x + Display.getBiggestScreenDimension()) {
         Tween.to(cloud, GameObjectAccessor.OPACITY, 2000)
                 .target(0f)
                 .setCallback(new TweenCallback() {

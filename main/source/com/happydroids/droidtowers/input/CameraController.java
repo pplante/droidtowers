@@ -19,6 +19,7 @@ import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.events.CameraControllerEvent;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
 public class CameraController implements GestureDetector.GestureListener {
@@ -61,7 +62,8 @@ public class CameraController implements GestureDetector.GestureListener {
   }
 
   private void updateCameraConstraints() {
-    this.cameraBounds = new BoundingBox(new Vector3(-TowerConsts.GAME_WORLD_PADDING, 0, 0), new Vector3(worldSize.x + TowerConsts.GAME_WORLD_PADDING, worldSize.y + TowerConsts.GAME_WORLD_PADDING, 0));
+    int gameWorldPadding = Display.getBiggestScreenDimension();
+    this.cameraBounds = new BoundingBox(new Vector3(-gameWorldPadding, 0, 0), new Vector3(worldSize.x + gameWorldPadding, worldSize.y + gameWorldPadding, 0));
     checkBounds();
   }
 

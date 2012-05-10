@@ -16,6 +16,7 @@ import com.happydroids.droidtowers.entities.GameObject;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.events.WeatherStateChangeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
@@ -42,8 +43,8 @@ public class SkyLayer extends GameLayer {
 
   @Subscribe
   public void GameGrid_onResize(GameGridResizeEvent event) {
-    sky.setPosition(-TowerConsts.GAME_WORLD_PADDING, TowerConsts.GROUND_HEIGHT);
-    sky.setSize(gameGrid.getWorldSize().x + (TowerConsts.GAME_WORLD_PADDING * 2), gameGrid.getWorldSize().y + TowerConsts.GAME_WORLD_PADDING);
+    sky.setPosition(-Display.getBiggestScreenDimension(), TowerConsts.GROUND_HEIGHT);
+    sky.setSize(gameGrid.getWorldSize().x + (Display.getBiggestScreenDimension() * 2), gameGrid.getWorldSize().y + Display.getBiggestScreenDimension());
     sky.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
   }
 
