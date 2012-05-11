@@ -78,7 +78,7 @@ public class GameSave {
 
     gameGrid.clearObjects();
     gameGrid.setGridSize(gridSize.x, gridSize.y);
-    gameGrid.updateWorldSize();
+    gameGrid.updateWorldSize(true);
 
     Player.setInstance(player);
 
@@ -101,7 +101,7 @@ public class GameSave {
       TutorialEngine.instance().completeAll();
     }
 
-    AchievementEngine.instance().loadCompletedAchievements(completedAchievements);
+    AchievementEngine.instance().loadCompletedAchievements(completedAchievements, gameGrid);
 
     newGame = false;
   }

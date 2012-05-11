@@ -8,9 +8,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.collections.TypeInstanceMap;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.GuavaSet;
@@ -19,8 +19,6 @@ import com.happydroids.droidtowers.events.GridObjectAddedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.math.GridPoint;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 import static com.happydroids.droidtowers.TowerConsts.SINGLE_POINT;
@@ -29,19 +27,16 @@ import static com.happydroids.droidtowers.TowerConsts.SINGLE_POINT;
 public class GameGrid extends GameLayer {
   private EventBus eventBus = new EventBus(GameGrid.class.getSimpleName());
 
-  private GuavaSet<GridObject> objects;
-  protected GridPoint gridSize;
-  private Vector2 worldSize;
-  protected GameGridRenderer gameGridRenderer;
-  private Map<Class, GuavaSet<GridObject>> gridObjectsByType;
-  private GridObject selectedGridObject;
-  private GridObject transitGridObjectA;
-  private GridObject transitGridObjectB;
-  private int highestPoint;
-  protected GridPositionCache positionCache;
-  private GridPoint gridOrigin;
-  protected Rectangle worldBounds;
   protected float gridScale;
+  protected GridPoint gridSize;
+  private int highestPoint;
+  private GridPoint gridOrigin;
+  private Vector2 worldSize;
+  protected Rectangle worldBounds;
+  protected GameGridRenderer gameGridRenderer;
+  protected GridPositionCache positionCache;
+  private TypeInstanceMap<GridObject> gridObjects;
+  private GridObject selectedGridObject;
 
   public GameGrid(OrthographicCamera camera) {
     this();
@@ -51,21 +46,21 @@ public class GameGrid extends GameLayer {
   public GameGrid() {
     setTouchEnabled(true);
 
-    gridObjectsByType = new HashMap<Class, GuavaSet<GridObject>>();
-    objects = new GuavaSet<GridObject>(25);
+    gridObjects = new TypeInstanceMap<GridObject>();
     positionCache = new GridPositionCache(this);
 
     gridSize = new GridPoint(8, 8);
     gridOrigin = new GridPoint();
     gridScale = 1f;
 
-    updateWorldSize();
+    updateWorldSize(true);
   }
 
-  public void updateWorldSize() {
+  public void updateWorldSize(boolean copyGridPositions) {
     worldSize = new Vector2(gridSize.x * TowerConsts.GRID_UNIT_SIZE * gridScale, gridSize.y * TowerConsts.GRID_UNIT_SIZE * gridScale);
     worldBounds = new Rectangle(gridOrigin.x, gridOrigin.y, worldSize.x, worldSize.y);
-    events().post(new GameGridResizeEvent(this));
+
+    events().post(new GameGridResizeEvent(this, copyGridPositions));
   }
 
   public void setGridSize(int width, int height) {
@@ -89,24 +84,14 @@ public class GameGrid extends GameLayer {
   }
 
   public boolean addObject(GridObject gridObject) {
-    objects.add(gridObject);
-
-    GuavaSet<GridObject> gridObjectHashSet;
-    if (!gridObjectsByType.containsKey(gridObject.getClass())) {
-      gridObjectHashSet = new GuavaSet<GridObject>();
-      gridObjectsByType.put(gridObject.getClass(), gridObjectHashSet);
-    } else {
-      gridObjectHashSet = gridObjectsByType.get(gridObject.getClass());
-    }
-
-    gridObjectHashSet.add(gridObject);
+    gridObjects.add(gridObject);
 
     int objectYPos = gridObject.getPosition().y;
     if (objectYPos > highestPoint) {
       highestPoint = objectYPos;
       if (highestPoint + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE > gridSize.y) {
         gridSize.y = highestPoint + TowerConsts.GAME_GRID_EXPAND_LAND_SIZE;
-        updateWorldSize();
+        updateWorldSize(true);
       }
     }
 
@@ -116,7 +101,7 @@ public class GameGrid extends GameLayer {
   }
 
   public GuavaSet<GridObject> getObjects() {
-    return objects;
+    return gridObjects.getInstances();
   }
 
   public boolean canObjectBeAt(GridObject gridObject) {
@@ -125,7 +110,7 @@ public class GameGrid extends GameLayer {
     }
 
     Rectangle boundsOfGridObjectToCheck = gridObject.getBounds();
-    for (GridObject child : objects) {
+    for (GridObject child : gridObjects.getInstances()) {
       if (child != gridObject) {
         if (child.getBounds().contains(boundsOfGridObjectToCheck) && !child.canShareSpace(gridObject)) {
           return false;
@@ -137,7 +122,7 @@ public class GameGrid extends GameLayer {
   }
 
   public void removeObject(GridObject gridObject) {
-    objects.remove(gridObject);
+    gridObjects.remove(gridObject);
 
     events().post(new GridObjectRemovedEvent(gridObject));
   }
@@ -149,40 +134,20 @@ public class GameGrid extends GameLayer {
       selectedGridObject = null;
     }
 
-    for (GridObject gridObject : objects) {
+    for (GridObject gridObject : gridObjects.getInstances()) {
       gridObject.update(deltaTime);
     }
   }
 
   public GuavaSet<GridObject> getInstancesOf(Class aClass) {
-    if (gridObjectsByType.containsKey(aClass)) {
-      return gridObjectsByType.get(aClass);
-    }
-
-    return null;
+    return gridObjects.setForType(aClass);
   }
 
   public GuavaSet<GridObject> getInstancesOf(Class... classes) {
     GuavaSet<GridObject> found = new GuavaSet<GridObject>();
     if (classes != null) {
       for (Class otherClass : classes) {
-        if (gridObjectsByType.containsKey(otherClass)) {
-          found.addAll(getInstancesOf(otherClass));
-        }
-      }
-    }
-
-    return found;
-  }
-
-  // TODO: GROT!
-  public GuavaSet<GridObject> getInstancesOf(Set<Class<? extends GridObject>> classes) {
-    GuavaSet<GridObject> found = new GuavaSet<GridObject>();
-    if (classes != null) {
-      for (Class otherClass : classes) {
-        if (gridObjectsByType.containsKey(otherClass)) {
-          found.addAll(getInstancesOf(otherClass));
-        }
+        found.addAll(getInstancesOf(otherClass));
       }
     }
 
@@ -256,13 +221,12 @@ public class GameGrid extends GameLayer {
   }
 
   public void clearObjects() {
-    gridObjectsByType = Maps.newHashMap();
-    objects = new GuavaSet<GridObject>();
+    gridObjects.clear();
     positionCache = new GridPositionCache(this);
   }
 
   public boolean isEmpty() {
-    return objects.isEmpty();
+    return gridObjects.isEmpty();
   }
 
   public GridPositionCache positionCache() {

@@ -33,7 +33,7 @@ public class GridPosition {
   }
 
   public void add(GridObject gridObject) {
-    if (!objects.contains(gridObject) && objects.add(gridObject)) {
+    if (objects.add(gridObject)) {
       if (gridObject instanceof Elevator) {
         GridPoint position = gridObject.getPosition();
         GridPoint size = gridObject.getSize();
@@ -45,8 +45,6 @@ public class GridPosition {
       } else if (gridObject instanceof Stair) {
         stair = (Stair) gridObject;
       }
-    } else {
-      System.out.println("Could not add: " + gridObject);
     }
   }
 
@@ -57,8 +55,6 @@ public class GridPosition {
       } else if (gridObject instanceof Stair) {
         stair = null;
       }
-    } else {
-      System.out.println("Could not remove: " + gridObject);
     }
   }
 

@@ -15,7 +15,6 @@ import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.math.GridPoint;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class GridPositionCache {
@@ -31,25 +30,49 @@ public class GridPositionCache {
 
   @Subscribe
   public void handleGameGridResizeEvent(GameGridResizeEvent event) {
-    gridPositions = null;
+    if (gridSize != null && gridSize.equals(gameGrid.getGridSize())) {
+      return;
+    }
 
-    gridSize = gameGrid.getGridSize();
-    System.out.println("gridSize = " + gridSize);
+    boolean copyExisting = false;
+    GridPosition[][] oldPositions = null;
+    if (event.copyGridPositions) {
+      if (gridSize != null && gridPositions != null) {
+        oldPositions = gridPositions;
+        copyExisting = true;
+      }
+    }
+
+    gridSize = gameGrid.getGridSize().cpy();
     gridPositions = new GridPosition[gridSize.x + 1][gridSize.y + 1];
+
+    if (copyExisting) {
+      for (int x = 0; x < oldPositions.length; x++) {
+        System.arraycopy(oldPositions[x], 0, gridPositions[x], 0, oldPositions[x].length);
+      }
+    }
 
     for (int x = 0; x <= gridSize.x; x++) {
       for (int y = 0; y <= gridSize.y; y++) {
-        gridPositions[x][y] = new GridPosition(x, y);
+        if (gridPositions[x][y] == null) {
+          gridPositions[x][y] = new GridPosition(x, y);
+        }
       }
     }
   }
 
   private void addGridObjectToPosition(GridObject gridObject) {
-    List<GridPoint> pointsOccupied = gridObject.getGridPointsOccupied();
-    for (GridPoint gridPoint : pointsOccupied) {
-      GridPosition position = getObjectSetForPosition(gridPoint);
-      if (position != null) {
-        position.add(gridObject);
+    for (int x = gridObject.getPosition().x; x < gridObject.getPosition().x + gridObject.getSize().x; x++) {
+      for (int y = gridObject.getPosition().y; y < gridObject.getPosition().y + gridObject.getSize().y; y++) {
+        getPosition(x, y).add(gridObject);
+      }
+    }
+  }
+
+  private void removeGridObjectFromPosition(GridObject gridObject, GridPoint position, GridPoint size) {
+    for (int x = position.x; x < position.x + size.x; x++) {
+      for (int y = position.y; y < position.y + size.y; y++) {
+        getPosition(x, y).remove(gridObject);
       }
     }
   }
@@ -71,27 +94,14 @@ public class GridPositionCache {
       return;
     }
 
-    for (int x = event.prevPosition.x; x < event.prevPosition.x + event.prevSize.x; x++) {
-      for (int y = event.prevPosition.y; y < event.prevPosition.y + event.prevSize.y; y++) {
-        GridPosition position = getPosition(x, y);
-        if (position != null) {
-          position.remove(event.gridObject);
-        }
-      }
-    }
+    removeGridObjectFromPosition(gridObject, event.prevPosition, event.prevSize);
 
-    addGridObjectToPosition(event.gridObject);
+    addGridObjectToPosition(gridObject);
   }
 
   @Subscribe
   public void GameGrid_onGridObjectRemoved(GridObjectRemovedEvent event) {
-    GridObject gridObject = event.gridObject;
-    for (GridPoint gridPoint : gridObject.getGridPointsOccupied()) {
-      GridPosition position = getObjectSetForPosition(gridPoint);
-      if (position != null) {
-        position.remove(gridObject);
-      }
-    }
+    removeGridObjectFromPosition(event.gridObject, event.gridObject.getPosition(), event.gridObject.getSize());
   }
 
   private GridPosition getObjectSetForPosition(GridPoint gridPoint) {
@@ -136,9 +146,9 @@ public class GridPositionCache {
   }
 
   private boolean checkBounds(int x, int y) {
-    if (x >= gridSize.x || x < 0) {
+    if (x >= gridPositions.length || x < 0) {
       return false;
-    } else if (y >= gridSize.y || y < 0) {
+    } else if (y >= gridPositions[x].length || y < 0) {
       return false;
     }
     return true;
@@ -180,7 +190,7 @@ public class GridPositionCache {
         maxVal = Math.max(position.distanceFromTransit, maxVal);
       }
     }
-    System.out.println("maxVal = " + maxVal);
+
     if (maxVal != Float.MIN_VALUE) {
       for (GridPosition[] row : gridPositions) {
         for (GridPosition position : row) {

@@ -52,6 +52,6 @@ public class GuavaSet<T> extends HashSet<T> {
 
   @SuppressWarnings("unchecked")
   public List<T> sortedBy(Function function) {
-    return Ordering.natural().onResultOf(function).sortedCopy(this);
+    return Ordering.natural().onResultOf(function).immutableSortedCopy(new GuavaSet(this));
   }
 }

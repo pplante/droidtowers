@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.TutorialStepNotification;
 
 import java.io.IOException;
@@ -36,9 +37,9 @@ public class TutorialEngine extends AchievementEngine {
   }
 
   @Override
-  public void checkAchievements() {
+  public void checkAchievements(GameGrid gameGrid) {
     if (enabled) {
-      super.checkAchievements();
+      super.checkAchievements(gameGrid);
     }
   }
 

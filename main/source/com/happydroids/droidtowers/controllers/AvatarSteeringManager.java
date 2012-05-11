@@ -78,6 +78,8 @@ public class AvatarSteeringManager {
   }
 
   public void finished() {
+    if (!running) return;
+
     if (currentPos != null && currentPos.elevator != null) {
       currentPos.elevator.getCar().removePassenger(this);
     }
@@ -190,6 +192,11 @@ public class AvatarSteeringManager {
 
     Direction verticalDir = nextPosition.y < currentPos.y ? DOWN : UP;
     Stair stair = verticalDir.equals(UP) ? currentPos.stair : nextPosition.stair;
+    if (stair == null) {
+      finished();
+      return;
+    }
+
 
     Rectangle stairBounds = stair.getWorldBounds();
     Vector2 stairBottomRight = new Vector2(stairBounds.x + stairBounds.width - avatar.getWidth(), stairBounds.y);

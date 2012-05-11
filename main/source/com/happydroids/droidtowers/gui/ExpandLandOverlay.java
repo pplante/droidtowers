@@ -67,7 +67,7 @@ public class ExpandLandOverlay extends WidgetGroup {
   private void expandLandToEast() {
     GameGridSoundDispatcher.setSoundsAllowed(false);
     gameGrid.getGridSize().x += GAME_GRID_EXPAND_LAND_SIZE;
-    gameGrid.updateWorldSize();
+    gameGrid.updateWorldSize(false);
 
     for (GridObject gridObject : gameGrid.getObjects()) {
       gridObject.setPosition(gridObject.getPosition());
@@ -81,7 +81,7 @@ public class ExpandLandOverlay extends WidgetGroup {
   private void expandLandToWest() {
     GameGridSoundDispatcher.setSoundsAllowed(false);
     gameGrid.getGridSize().x += GAME_GRID_EXPAND_LAND_SIZE;
-    gameGrid.updateWorldSize();
+    gameGrid.updateWorldSize(false);
 
     for (GridObject gridObject : gameGrid.getObjects()) {
       GridPoint position = gridObject.getPosition();

@@ -12,15 +12,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
-import com.happydroids.droidtowers.events.GridObjectAddedEvent;
-import com.happydroids.droidtowers.events.GridObjectChangedEvent;
-import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
+import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.graphics.Overlays;
 import com.happydroids.droidtowers.graphics.TransitLine;
 
@@ -39,9 +36,6 @@ public class GameGridRenderer extends GameLayer {
   protected final OrthographicCamera camera;
   protected boolean shouldRenderGridLines;
   protected final ShapeRenderer shapeRenderer;
-  private Function<GridObject, Color> employmentLevelOverlayFunc;
-  private Function<GridObject, Color> populationLevelOverlayFunc;
-  private Function<GridObject, Color> desirabilityLevelOverlayFunc;
   private HashSet<Overlays> activeOverlays;
   private Map<Overlays, Function<GridObject, Float>> overlayFunctions;
   private Function<GridObject, Integer> objectRenderSortFunction;
@@ -209,36 +203,10 @@ public class GameGridRenderer extends GameLayer {
     activeOverlays.clear();
   }
 
-  private void updateRenderOrder() {
+  @Subscribe
+  public void GameGrid_allGridObjectEvents(GridObjectEvent event) {
     objectsRenderOrder = null;
-    objectsRenderOrder = Ordering.natural().onResultOf(objectRenderSortFunction).sortedCopy(gameGrid.getObjects());
-  }
-
-  @Subscribe
-  public void handleEvent(GridObjectAddedEvent event) {
-    if (event.gridObject == null) {
-      return;
-    }
-
-    updateRenderOrder();
-  }
-
-  @Subscribe
-  public void handleEvent(GridObjectChangedEvent event) {
-    if (event.gridObject == null || !event.nameOfParamChanged.equals("isPlaced")) {
-      return;
-    }
-
-    updateRenderOrder();
-  }
-
-  @Subscribe
-  public void handleEvent(GridObjectRemovedEvent event) {
-    if (event.gridObject == null) {
-      return;
-    }
-
-    objectsRenderOrder.remove(event.gridObject);
+    objectsRenderOrder = gameGrid.getObjects().sortedBy(objectRenderSortFunction);
   }
 
   public void removeTransitLine(TransitLine transitLine) {

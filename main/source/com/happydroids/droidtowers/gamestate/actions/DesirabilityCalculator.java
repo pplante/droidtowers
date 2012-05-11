@@ -5,10 +5,9 @@
 package com.happydroids.droidtowers.gamestate.actions;
 
 import com.happydroids.droidtowers.entities.GridObject;
+import com.happydroids.droidtowers.entities.GuavaSet;
 import com.happydroids.droidtowers.entities.Room;
 import com.happydroids.droidtowers.grid.GameGrid;
-
-import java.util.Set;
 
 public class DesirabilityCalculator extends GameGridAction {
   private float[][] noiseLevels;
@@ -23,7 +22,7 @@ public class DesirabilityCalculator extends GameGridAction {
   public void run() {
     gameGrid.positionCache().updateNoiseLevels();
 
-    Set<GridObject> rooms = gameGrid.getObjects();
+    GuavaSet<GridObject> rooms = gameGrid.getObjects();
     if (rooms != null) {
       for (GridObject gridObject : rooms) {
         if (!(gridObject instanceof Room)) continue;
@@ -32,8 +31,8 @@ public class DesirabilityCalculator extends GameGridAction {
 
         float maxNoiseLevel = 0f;
 
-        for (int x = (int) room.getPosition().x; x < room.getPosition().x + room.getSize().x; x++) {
-          for (int y = (int) room.getPosition().y; y < room.getPosition().y + room.getSize().y; y++) {
+        for (int x = room.getPosition().x; x < room.getPosition().x + room.getSize().x; x++) {
+          for (int y = room.getPosition().y; y < room.getPosition().y + room.getSize().y; y++) {
             maxNoiseLevel = Math.max(maxNoiseLevel, gameGrid.positionCache().getPosition(x, y).getNoiseLevel());
           }
         }

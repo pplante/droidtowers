@@ -118,8 +118,6 @@ public class TowerScene extends Scene {
     keybindings.bindKeys();
 
     gameState.loadSavedGame();
-    AchievementEngine.instance().registerGameGrid(gameGrid);
-    TutorialEngine.instance().registerGameGrid(gameGrid);
 
     populationCalculator = new PopulationCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
     earnoutCalculator = new EarnoutCalculator(gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
@@ -232,11 +230,9 @@ public class TowerScene extends Scene {
     InputSystem.instance().setGestureDelegator(null);
     keybindings.unbindKeys();
 
-    TutorialEngine.instance().unregisterGameGrid();
     TutorialEngine.instance().resetState();
-
-    AchievementEngine.instance().unregisterGameGrid();
     AchievementEngine.instance().resetState();
+
     for (GridObjectTypeFactory typeFactory : GridObjectTypeFactory.allFactories()) {
       for (Object o : typeFactory.all()) {
         ((GridObjectType) o).removeLock();

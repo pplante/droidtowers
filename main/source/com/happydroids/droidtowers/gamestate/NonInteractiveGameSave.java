@@ -25,7 +25,7 @@ public class NonInteractiveGameSave extends GameSave {
   public void attachToGame(GameGrid gameGrid, OrthographicCamera camera) {
     gameGrid.clearObjects();
     gameGrid.setGridSize(gridSize.x, gridSize.y);
-    gameGrid.updateWorldSize();
+    gameGrid.updateWorldSize(true);
 
     if (gridObjects != null) {
       for (GridObjectState gridObjectState : gridObjects) {

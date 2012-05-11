@@ -6,9 +6,6 @@ package com.happydroids.droidtowers.achievements;
 
 import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.eventbus.Subscribe;
-import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
-import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.AchievementNotification;
@@ -22,7 +19,6 @@ public class AchievementEngine {
 
   protected static AchievementEngine instance;
   protected List<Achievement> achievements;
-  private GameGrid gameGrid;
 
   public static AchievementEngine instance() {
     if (instance == null) {
@@ -45,7 +41,7 @@ public class AchievementEngine {
     return achievements;
   }
 
-  public void checkAchievements() {
+  public void checkAchievements(GameGrid gameGrid) {
     Gdx.app.debug(TAG, "Checking achievements...");
     for (Achievement achievement : achievements) {
       achievement.checkRequirements(gameGrid);
@@ -82,7 +78,7 @@ public class AchievementEngine {
     throw new RuntimeException("Could not find achievement called: " + achievementId);
   }
 
-  public void loadCompletedAchievements(List<String> achievementIds) {
+  public void loadCompletedAchievements(List<String> achievementIds, GameGrid gameGrid) {
     resetState();
 
     if (achievementIds == null) {
@@ -127,39 +123,5 @@ public class AchievementEngine {
     }
 
     return null;
-  }
-
-  public boolean hasGameGrid() {
-    return gameGrid != null;
-  }
-
-  public void unregisterGameGrid() {
-    if (gameGrid != null) {
-      gameGrid.events().unregister(this);
-    }
-
-    gameGrid = null;
-  }
-
-  public void registerGameGrid(GameGrid gameGrid) {
-    this.gameGrid = gameGrid;
-    if (gameGrid != null) {
-      gameGrid.events().register(this);
-      checkAchievements();
-    }
-  }
-
-  public GameGrid getGameGrid() {
-    return gameGrid;
-  }
-
-  @Subscribe
-  public void GameEvent_handleGridObjectEvent(GridObjectEvent event) {
-    if (event instanceof ElevatorHeightChangeEvent) return;
-
-    if (event.gridObject.isPlaced()) {
-      Gdx.app.debug(TAG, "GameEvent_handleGridObjectEvent triggered by: " + event);
-      checkAchievements();
-    }
   }
 }
