@@ -8,7 +8,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -19,8 +18,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Logger;
 import com.happydroids.HappyDroidConsts;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.droidtowers.pipeline.AssetList;
 import com.happydroids.droidtowers.platform.Display;
 
+import java.io.IOException;
 import java.util.Map;
 
 import static com.badlogic.gdx.graphics.Texture.TextureFilter.Linear;
@@ -32,6 +34,7 @@ public class TowerAssetManager {
   public static final String WHITE_SWATCH = "swatches/swatch-white.png";
   public static final String WHITE_SWATCH_TRIANGLE = "swatches/swatch-white-triangle.png";
   private static Skin skin;
+  private static AssetList assetList;
 
   @SuppressWarnings("unchecked")
   public static MemoryTrackingAssetManager assetManager() {
@@ -43,9 +46,21 @@ public class TowerAssetManager {
 
       Texture.setAssetManager(assetManager);
 
-      for (Map.Entry<String, Class> entry : TowerAssetManagerFilesList.preloadFiles.entrySet()) {
-        assetManager.load(checkForHDPI(entry.getKey()), entry.getValue());
+      try {
+        assetList = TowerGameService.instance().getObjectMapper().readValue(Gdx.files.internal("assets.json").read(), AssetList.class);
+
+        addToAssetManager(assetList.preloadFiles, assetList.highDefFiles);
+        addToAssetManager(assetList.normalFiles, assetList.highDefFiles);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
       }
+
+      TextureLoader.TextureParameter parameter = new TextureLoader.TextureParameter();
+      parameter.genMipMaps = true;
+      parameter.minFilter = MipMapNearestNearest;
+      parameter.magFilter = Linear;
+      assetManager.load(checkForHDPI("elevator/shaft.png"), Texture.class, parameter);
+      assetManager.load(checkForHDPI("elevator/empty.png"), Texture.class, parameter);
 
       assetManager.setErrorListener(new AssetErrorListener() {
         public void error(String fileName, Class type, Throwable throwable) {
@@ -57,27 +72,21 @@ public class TowerAssetManager {
     return assetManager;
   }
 
-  public static void addOtherFilesToQueue() {
-    for (Map.Entry<String, Class> entry : TowerAssetManagerFilesList.files.entrySet()) {
-      assetManager.load(checkForHDPI(entry.getKey()), entry.getValue());
-    }
+  private static void addToAssetManager(Map<String, Class> preloadFiles, Map<String, String> highDefFiles) {
+    for (Map.Entry<String, Class> entry : preloadFiles.entrySet()) {
+      String fileName = entry.getKey();
+      Class clazz = entry.getValue();
+      if (Display.isHDPIMode() && highDefFiles.containsKey(fileName)) {
+        fileName = highDefFiles.get(fileName);
+      }
 
-    TextureLoader.TextureParameter parameter = new TextureLoader.TextureParameter();
-    parameter.genMipMaps = true;
-    parameter.minFilter = MipMapNearestNearest;
-    parameter.magFilter = Linear;
-    assetManager.load(checkForHDPI("elevator/shaft.png"), Texture.class, parameter);
-    assetManager.load(checkForHDPI("elevator/empty.png"), Texture.class, parameter);
+      assetManager.load(fileName, clazz);
+    }
   }
 
   public static String checkForHDPI(String fileName) {
-    if (Display.isHDPIMode()) {
-      FileHandle file = Gdx.files.internal(fileName);
-      String hdpiFileName = file.parent() + "/" + file.nameWithoutExtension() + "-hd." + file.extension();
-      Gdx.app.error(TAG, "Looking for: " + hdpiFileName + ", found: " + Gdx.files.internal(hdpiFileName).exists());
-      if (Gdx.files.internal(hdpiFileName).exists()) {
-        return hdpiFileName;
-      }
+    if (Display.isHDPIMode() && assetList.highDefFiles.containsKey(fileName)) {
+      return assetList.highDefFiles.get(fileName);
     }
 
     return fileName;
@@ -133,5 +142,9 @@ public class TowerAssetManager {
 
   public static ImageButton imageButton(TextureAtlas.AtlasRegion region) {
     return new ImageButton(region);
+  }
+
+  public static AssetList getAssetList() {
+    return assetList;
   }
 }

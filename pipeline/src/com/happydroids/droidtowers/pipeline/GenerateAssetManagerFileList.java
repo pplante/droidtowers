@@ -13,30 +13,29 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.GdxNativesLoader;
-import com.google.common.base.Joiner;
-import com.google.common.collect.Sets;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.happydroids.droidtowers.graphics.Overlays;
 import com.happydroids.droidtowers.utils.PNG;
 
 import java.io.IOException;
-import java.util.Set;
 
 public class GenerateAssetManagerFileList {
   private static FileHandle assetsDir = new FileHandle("assets/");
-  private static Set<String> managedFiles = Sets.newHashSet();
+  private static AssetList managedFiles = new AssetList();
 
   public static void main(String[] args) {
     GdxNativesLoader.load();
 
     FileHandle template = new FileHandle("assets-raw/templates/TowerAssetManagerFilesList-template.coffee");
 
-    addEntryToPreloader(assetsDir.child("happy-droid.png"), Texture.class);
-    addEntryToPreloader(assetsDir.child("default-skin.ui"), Skin.class);
-    addEntryToPreloader(assetsDir.child("backgrounds/clouds.txt"), TextureAtlas.class);
-    addEntryToPreloader(assetsDir.child("hud/menus.txt"), TextureAtlas.class);
-    addEntryToPreloader(assetsDir.child("hud/buttons.txt"), TextureAtlas.class);
-    addEntryToPreloader(assetsDir.child("hud/window-bg.png"), Texture.class);
-    addEntryToPreloader(assetsDir.child("hud/toast-bg.png"), Texture.class);
+    preloadEntry(assetsDir.child("happy-droid.png"), Texture.class);
+    preloadEntry(assetsDir.child("default-skin.ui"), Skin.class);
+    preloadEntry(assetsDir.child("backgrounds/clouds.txt"), TextureAtlas.class);
+    preloadEntry(assetsDir.child("hud/menus.txt"), TextureAtlas.class);
+    preloadEntry(assetsDir.child("hud/buttons.txt"), TextureAtlas.class);
+    preloadEntry(assetsDir.child("hud/window-bg.png"), Texture.class);
+    preloadEntry(assetsDir.child("hud/toast-bg.png"), Texture.class);
     addDirectoryToPreloader("swatches/", ".png", Texture.class);
 
     addDirectoryToAssetManager("backgrounds/", ".txt", TextureAtlas.class);
@@ -66,13 +65,19 @@ public class GenerateAssetManagerFileList {
       makeSwatch(swatchesDir, overlay.getSwatchFilename(), overlay.getColor(1f));
     }
 
-    String javaFileContent = template.readString();
-    javaFileContent = javaFileContent.replace("// REPLACEME", Joiner.on("\n").join(managedFiles));
+    try {
+      ObjectMapper mapper = new ObjectMapper();
+      mapper.enable(SerializationFeature.INDENT_OUTPUT);
+      new FileHandle("../android/assets/assets.json").writeString(mapper.writeValueAsString(managedFiles), false);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
-    FileHandle outputFile = new FileHandle("../main/source/com/happydroids/droidtowers/TowerAssetManagerFilesList.java");
-    outputFile.writeString(javaFileContent, false);
-
-    System.out.println("Generated: " + outputFile.path());
+//    String javaFileContent = template.readString();
+//    javaFileContent = javaFileContent.replace("// REPLACEME", Joiner.on("\n").join(managedFiles));
+//    FileHandle outputFile = new FileHandle("../main/source/com/happydroids/droidtowers/TowerAssetManagerFilesList.java");
+//    outputFile.writeString(javaFileContent, false);
+//    System.out.println("Generated: " + outputFile.path());
   }
 
   private static void makeSwatch(FileHandle swatchesDir, String swatchFilename, Color color) {
@@ -93,11 +98,11 @@ public class GenerateAssetManagerFileList {
 
   private static void addDirectoryToPreloader(String folder, String suffix, Class clazz) {
     for (FileHandle child : assetsDir.child(folder).list(suffix)) {
-      addEntryToPreloader(child, clazz);
+      preloadEntry(child, clazz);
     }
   }
 
-  private static void addEntryToPreloader(FileHandle child, Class clazz) {
+  private static void preloadEntry(FileHandle child, Class clazz) {
     if (!child.exists()) {
       throw new RuntimeException("File not found: " + child.path());
     } else if (child.name().contains("-hd")) {
@@ -105,7 +110,8 @@ public class GenerateAssetManagerFileList {
       return;
     }
 
-    managedFiles.add(String.format("preloadFiles.put(\"%s\", %s.class);", child.path().replace("assets/", ""), clazz.getSimpleName()));
+
+    managedFiles.preload(child.path().replace("assets/", ""), checkForHDVersion(child), clazz);
   }
 
   private static void addDirectoryToAssetManager(String folder, String suffix, Class clazz) {
@@ -122,7 +128,19 @@ public class GenerateAssetManagerFileList {
       return;
     }
 
-    managedFiles.add(String.format("files.put(\"%s\", %s.class);", child.path().replace("assets/", ""), clazz.getSimpleName()));
+    managedFiles.normal(child.path().replace("assets/", ""), checkForHDVersion(child), clazz);
   }
 
+  public static String checkForHDVersion(FileHandle fileHandle) {
+    String hdpiFileName = fileHandle.parent() + "/" + fileHandle.nameWithoutExtension() + "-hd." + fileHandle.extension();
+    if (hdpiFileName.startsWith("/")) {
+      hdpiFileName = hdpiFileName.substring(1);
+    }
+
+    if (new FileHandle(hdpiFileName).exists()) {
+      return hdpiFileName.replace("assets/", "");
+    }
+
+    return null;
+  }
 }

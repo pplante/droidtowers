@@ -4,7 +4,6 @@
 
 package com.happydroids.droidtowers.controllers;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -72,7 +71,6 @@ public class AvatarLayer extends GameLayer {
         GridObject avatarsHome = Iterables.find(rooms, AVATAR_HOME_FILTER, null);
 
         if (avatarsHome != null) {
-          Gdx.app.log(TAG, "Moving into " + avatarsHome);
           avatar.setHome(avatarsHome);
           positionSet = true;
         }

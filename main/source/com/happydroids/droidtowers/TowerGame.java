@@ -172,8 +172,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     changeScene(SplashScene.class, SplashSceneStates.PRELOAD_ONLY, new Runnable() {
       public void run() {
-        TowerAssetManager.addOtherFilesToQueue();
-
         if (protocolHandler != null && protocolHandler.hasUri()) {
           URI launchUri = protocolHandler.consumeUri();
           changeScene(LaunchUriScene.class, launchUri);

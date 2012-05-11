@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.SplashSceneStates;
-import com.happydroids.droidtowers.TowerAssetManagerFilesList;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.GameObject;
 import com.happydroids.droidtowers.gamestate.GameSave;
@@ -148,10 +148,8 @@ public class SplashScene extends Scene {
       }
     } else {
       if (splashState == PRELOAD_ONLY) {
-        Set<String> preloadFiles = TowerAssetManagerFilesList.preloadFiles.keySet();
-
         boolean hasFilesToPreload = false;
-        for (String preloadFile : preloadFiles) {
+        for (String preloadFile : TowerAssetManager.getAssetList().preloadFiles.keySet()) {
           if (!assetManager().isLoaded(checkForHDPI(preloadFile))) {
             hasFilesToPreload = true;
             break;
