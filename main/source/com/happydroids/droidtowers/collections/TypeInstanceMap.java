@@ -4,38 +4,40 @@
 
 package com.happydroids.droidtowers.collections;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.happydroids.droidtowers.entities.GuavaSet;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class TypeInstanceMap<T> {
-  private GuavaSet<T> instances;
-  private Map<Class<T>, GuavaSet<T>> instancesByType;
+  private LinkedList<T> instances;
+  private Map<Class, ArrayList<T>> instancesByType;
 
   public TypeInstanceMap() {
-    instances = new GuavaSet<T>();
+    instances = Lists.newLinkedList();
     instancesByType = Maps.newHashMap();
   }
 
   public void add(T instance) {
-    setForType(instance.getClass()).add(instance);
     instances.add(instance);
+    setForType(instance.getClass()).add(instance);
   }
 
   public void remove(T instance) {
-    setForType(instance.getClass()).remove(instance);
     instances.remove(instance);
+    setForType(instance.getClass()).remove(instance);
   }
 
-  public GuavaSet<T> getInstances() {
+  public LinkedList<T> getInstances() {
     return instances;
   }
 
-  public GuavaSet<T> setForType(Class instanceClass) {
+  public ArrayList<T> setForType(Class instanceClass) {
 
     if (!instancesByType.containsKey(instanceClass)) {
-      instancesByType.put(instanceClass, new GuavaSet<T>());
+      instancesByType.put(instanceClass, new ArrayList<T>());
     }
     return instancesByType.get(instanceClass);
   }

@@ -158,15 +158,6 @@ public class GridPositionCache {
     return gridPositions;
   }
 
-  public void pauseEvents() {
-    gameGrid.events().unregister(this);
-  }
-
-
-  public void resumeEvents() {
-    gameGrid.events().register(this);
-  }
-
   public void updateNoiseLevels() {
     for (GridPosition[] row : gridPositions) {
       for (GridPosition position : row) {

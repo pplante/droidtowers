@@ -8,17 +8,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.collections.TypeInstanceMap;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
-import com.happydroids.droidtowers.entities.GuavaSet;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.events.GridObjectAddedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.math.GridPoint;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import static com.happydroids.droidtowers.TowerConsts.SINGLE_POINT;
@@ -85,6 +88,7 @@ public class GameGrid extends GameLayer {
 
   public boolean addObject(GridObject gridObject) {
     gridObjects.add(gridObject);
+    gameGridRenderer.updateRenderOrder(Lists.newArrayList(gridObjects.getInstances()));
 
     int objectYPos = gridObject.getPosition().y;
     if (objectYPos > highestPoint) {
@@ -100,7 +104,7 @@ public class GameGrid extends GameLayer {
     return true;
   }
 
-  public GuavaSet<GridObject> getObjects() {
+  public LinkedList<GridObject> getObjects() {
     return gridObjects.getInstances();
   }
 
@@ -122,7 +126,11 @@ public class GameGrid extends GameLayer {
   }
 
   public void removeObject(GridObject gridObject) {
+    System.out.println(this);
     gridObjects.remove(gridObject);
+    ArrayList<GridObject> arrayList = Lists.newArrayList(gridObjects.getInstances());
+    arrayList.remove(gridObject);
+    gameGridRenderer.updateRenderOrder(arrayList);
 
     events().post(new GridObjectRemovedEvent(gridObject));
   }
@@ -139,12 +147,12 @@ public class GameGrid extends GameLayer {
     }
   }
 
-  public GuavaSet<GridObject> getInstancesOf(Class aClass) {
+  public ArrayList<GridObject> getInstancesOf(Class aClass) {
     return gridObjects.setForType(aClass);
   }
 
-  public GuavaSet<GridObject> getInstancesOf(Class... classes) {
-    GuavaSet<GridObject> found = new GuavaSet<GridObject>();
+  public List<GridObject> getInstancesOf(Class... classes) {
+    List<GridObject> found = Lists.newArrayList();
     if (classes != null) {
       for (Class otherClass : classes) {
         found.addAll(getInstancesOf(otherClass));

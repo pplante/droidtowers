@@ -5,9 +5,10 @@
 package com.happydroids.droidtowers.gamestate.actions;
 
 import com.happydroids.droidtowers.entities.GridObject;
-import com.happydroids.droidtowers.entities.GuavaSet;
 import com.happydroids.droidtowers.entities.Room;
 import com.happydroids.droidtowers.grid.GameGrid;
+
+import java.util.LinkedList;
 
 public class DesirabilityCalculator extends GameGridAction {
   private float[][] noiseLevels;
@@ -22,7 +23,7 @@ public class DesirabilityCalculator extends GameGridAction {
   public void run() {
     gameGrid.positionCache().updateNoiseLevels();
 
-    GuavaSet<GridObject> rooms = gameGrid.getObjects();
+    LinkedList<GridObject> rooms = gameGrid.getObjects();
     if (rooms != null) {
       for (GridObject gridObject : rooms) {
         if (!(gridObject instanceof Room)) continue;

@@ -6,11 +6,12 @@ package com.happydroids.droidtowers.pathfinding;
 
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.entities.GuavaSet;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.utils.Random;
+
+import java.util.List;
 
 public class WanderPathFinder extends TransitPathFinder {
   public WanderPathFinder(GameGrid gameGrid, GridPosition start) {
@@ -52,12 +53,12 @@ public class WanderPathFinder extends TransitPathFinder {
         }
       }
 
-      GuavaSet<GridPosition> positions = new GuavaSet<GridPosition>(discoveredPath);
+      List<GridPosition> positions = Lists.newArrayList(discoveredPath);
 
       discoveredPath = Lists.newLinkedList();
 
       for (int i = 0; i < positions.size() / 4; i++) {
-        discoveredPath.add(positions.randomEntry());
+        discoveredPath.add(discoveredPath.get(Random.randomInt(discoveredPath.size())));
       }
     }
   }

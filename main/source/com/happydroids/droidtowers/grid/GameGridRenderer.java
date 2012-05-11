@@ -13,19 +13,14 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
-import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.graphics.Overlays;
 import com.happydroids.droidtowers.graphics.TransitLine;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
@@ -47,8 +42,6 @@ public class GameGridRenderer extends GameLayer {
   public GameGridRenderer(GameGrid gameGrid, OrthographicCamera camera) {
     this.gameGrid = gameGrid;
     this.camera = camera;
-
-    gameGrid.events().register(this);
 
     renderTintColor = Color.WHITE;
     shouldRenderGridLines = true;
@@ -203,10 +196,9 @@ public class GameGridRenderer extends GameLayer {
     activeOverlays.clear();
   }
 
-  @Subscribe
-  public void GameGrid_allGridObjectEvents(GridObjectEvent event) {
-    objectsRenderOrder = null;
-    objectsRenderOrder = gameGrid.getObjects().sortedBy(objectRenderSortFunction);
+  public void updateRenderOrder(ArrayList<GridObject> gridObjects) {
+    objectsRenderOrder = gridObjects;
+//    Collections.sort(gridObjects);
   }
 
   public void removeTransitLine(TransitLine transitLine) {

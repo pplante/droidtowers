@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Ordering;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.types.ProviderType;
 
@@ -30,17 +31,17 @@ public class Janitor extends Avatar {
 
   @Override
   public void beginNextAction() {
-    GuavaSet<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
+    List<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
     if (commercialSpaces != null) {
-      List<GridObject> sortedObjects = commercialSpaces.filterBy(new Predicate<GridObject>() {
-        public boolean apply(@Nullable GridObject input) {
-          return ((CommercialSpace) input).getNumVisitors() > 0 && input.getGridObjectType().provides(servicesTheseProviderTypes);
-        }
-      }).sortedBy(new Function<GridObject, Long>() {
+      List<GridObject> sortedObjects = Ordering.natural().onResultOf(new Function<GridObject, Long>() {
         public Long apply(@Nullable GridObject gridObject) {
           return ((CommercialSpace) gridObject).getLastCleanedAt();
         }
-      });
+      }).sortedCopy(Iterables.filter(commercialSpaces, new Predicate<GridObject>() {
+        public boolean apply(@Nullable GridObject input) {
+          return ((CommercialSpace) input).getNumVisitors() > 0 && input.getGridObjectType().provides(servicesTheseProviderTypes);
+        }
+      }));
 
       navigateToGridObject(Iterables.getFirst(sortedObjects, null));
     } else {

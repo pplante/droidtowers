@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
@@ -24,6 +26,7 @@ import com.happydroids.droidtowers.utils.Random;
 
 import javax.annotation.Nullable;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Set;
 
 import static com.happydroids.droidtowers.math.Direction.LEFT;
@@ -80,16 +83,16 @@ public class Avatar extends GameObject {
   }
 
   public void beginNextAction() {
-    GuavaSet<GridObject> objects = gameGrid.getObjects();
+    LinkedList<GridObject> objects = gameGrid.getObjects();
     if (objects != null) {
-      objects = objects.filterBy(new Predicate<GridObject>() {
+      objects = Lists.newLinkedList(Iterables.filter(objects, new Predicate<GridObject>() {
         public boolean apply(@Nullable GridObject gridObject) {
           return gridObject instanceof Room && ((Room) gridObject).isConnectedToTransport();
         }
-      });
+      }));
 
       if (objects.size() > 0) {
-        navigateToGridObject(objects.randomEntry());
+        navigateToGridObject(objects.getFirst());
       }
     } else {
       wanderAround();

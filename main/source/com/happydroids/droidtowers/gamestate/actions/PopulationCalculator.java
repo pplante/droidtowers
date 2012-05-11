@@ -11,7 +11,7 @@ import com.happydroids.droidtowers.entities.Room;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.types.RoomType;
 
-import java.util.Set;
+import java.util.ArrayList;
 
 public class PopulationCalculator extends GameGridAction {
   public PopulationCalculator(GameGrid gameGrid, float frequency) {
@@ -20,8 +20,8 @@ public class PopulationCalculator extends GameGridAction {
 
   @Override
   public void run() {
-    Set<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
-    Set<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
+    ArrayList<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
+    ArrayList<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
     int currentResidency = 0;
     int attractedPopulation = 0;
     int maxPopulation = 0;

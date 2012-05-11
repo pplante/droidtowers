@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.controllers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.*;
@@ -18,6 +19,7 @@ import com.happydroids.droidtowers.types.RoomType;
 import com.happydroids.droidtowers.utils.Random;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 import static com.happydroids.droidtowers.types.ProviderType.JANITORS;
 import static com.happydroids.droidtowers.types.ProviderType.MAIDS;
@@ -65,9 +67,9 @@ public class AvatarLayer extends GameLayer {
     boolean positionSet = false;
 
     if (!(avatar instanceof Janitor || avatar instanceof Maid)) {
-      GuavaSet<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
+      List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
       if (rooms != null) {
-        GridObject avatarsHome = rooms.filterBy(AVATAR_HOME_FILTER).randomEntry();
+        GridObject avatarsHome = Iterables.find(rooms, AVATAR_HOME_FILTER, null);
 
         if (avatarsHome != null) {
           Gdx.app.log(TAG, "Moving into " + avatarsHome);

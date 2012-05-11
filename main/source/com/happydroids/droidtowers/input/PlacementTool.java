@@ -146,6 +146,7 @@ public class PlacementTool extends ToolBase {
   public void cleanup() {
     if (gridObject != null) {
       gameGrid.removeObject(gridObject);
+      gridObject = null;
     }
 
     InputSystem.instance().unbind(new int[]{Keys.ESCAPE, Keys.BACK}, cancelPlacementInputCallback);
