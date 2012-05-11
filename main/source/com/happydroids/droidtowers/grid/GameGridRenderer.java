@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.GameLayer;
@@ -197,8 +198,7 @@ public class GameGridRenderer extends GameLayer {
   }
 
   public void updateRenderOrder(ArrayList<GridObject> gridObjects) {
-    objectsRenderOrder = gridObjects;
-//    Collections.sort(gridObjects);
+    objectsRenderOrder = Ordering.natural().onResultOf(objectRenderSortFunction).sortedCopy(gridObjects);
   }
 
   public void removeTransitLine(TransitLine transitLine) {
