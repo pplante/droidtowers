@@ -29,14 +29,14 @@ public class GenerateAssetManagerFileList {
 
     FileHandle template = new FileHandle("assets-raw/templates/TowerAssetManagerFilesList-template.coffee");
 
-    preloadEntry(assetsDir.child("happy-droid.png"), Texture.class);
-    preloadEntry(assetsDir.child("default-skin.ui"), Skin.class);
-    preloadEntry(assetsDir.child("backgrounds/clouds.txt"), TextureAtlas.class);
-    preloadEntry(assetsDir.child("hud/menus.txt"), TextureAtlas.class);
-    preloadEntry(assetsDir.child("hud/buttons.txt"), TextureAtlas.class);
-    preloadEntry(assetsDir.child("hud/window-bg.png"), Texture.class);
-    preloadEntry(assetsDir.child("hud/toast-bg.png"), Texture.class);
-    addDirectoryToPreloader("swatches/", ".png", Texture.class);
+    preloadFile(assetsDir.child("happy-droid.png"), Texture.class);
+    preloadFile(assetsDir.child("default-skin.ui"), Skin.class);
+    preloadFile(assetsDir.child("backgrounds/clouds.txt"), TextureAtlas.class);
+    preloadFile(assetsDir.child("hud/menus.txt"), TextureAtlas.class);
+    preloadFile(assetsDir.child("hud/buttons.txt"), TextureAtlas.class);
+    preloadFile(assetsDir.child("hud/window-bg.png"), Texture.class);
+    preloadFile(assetsDir.child("hud/toast-bg.png"), Texture.class);
+    preloadDirectory("swatches/", ".png", Texture.class);
 
     addDirectoryToAssetManager("backgrounds/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("movies/", ".txt", TextureAtlas.class);
@@ -51,7 +51,6 @@ public class GenerateAssetManagerFileList {
     addFileEntry(assetsDir.child("rain-drop.png"), Texture.class);
     addFileEntry(assetsDir.child("hud/star.png"), Texture.class);
     addFileEntry(assetsDir.child("hud/star-white.png"), Texture.class);
-    addFileEntry(assetsDir.child("hud/status-bar-bg.png"), Texture.class);
     addFileEntry(assetsDir.child("decals.png"), Texture.class);
 
     FileHandle swatchesDir = assetsDir.child("swatches");
@@ -72,12 +71,6 @@ public class GenerateAssetManagerFileList {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-//    String javaFileContent = template.readString();
-//    javaFileContent = javaFileContent.replace("// REPLACEME", Joiner.on("\n").join(managedFiles));
-//    FileHandle outputFile = new FileHandle("../main/source/com/happydroids/droidtowers/TowerAssetManagerFilesList.java");
-//    outputFile.writeString(javaFileContent, false);
-//    System.out.println("Generated: " + outputFile.path());
   }
 
   private static void makeSwatch(FileHandle swatchesDir, String swatchFilename, Color color) {
@@ -96,22 +89,16 @@ public class GenerateAssetManagerFileList {
     }
   }
 
-  private static void addDirectoryToPreloader(String folder, String suffix, Class clazz) {
+  private static void preloadDirectory(String folder, String suffix, Class clazz) {
     for (FileHandle child : assetsDir.child(folder).list(suffix)) {
-      preloadEntry(child, clazz);
+      preloadFile(child, clazz);
     }
   }
 
-  private static void preloadEntry(FileHandle child, Class clazz) {
-    if (!child.exists()) {
-      throw new RuntimeException("File not found: " + child.path());
-    } else if (child.name().contains("-hd")) {
-      System.out.println("Skipping HD asset: " + child.path());
-      return;
+  private static void preloadFile(FileHandle child, Class clazz) {
+    if (!verifyFile(child)) {
+      managedFiles.preload(cleanFilename(child.path()), checkForHDVersion(child), clazz);
     }
-
-
-    managedFiles.preload(child.path().replace("assets/", ""), checkForHDVersion(child), clazz);
   }
 
   private static void addDirectoryToAssetManager(String folder, String suffix, Class clazz) {
@@ -121,14 +108,19 @@ public class GenerateAssetManagerFileList {
   }
 
   private static void addFileEntry(FileHandle child, Class clazz) {
+    if (!verifyFile(child)) {
+      managedFiles.normal(cleanFilename(child.path()), checkForHDVersion(child), clazz);
+    }
+  }
+
+  private static boolean verifyFile(FileHandle child) {
     if (!child.exists()) {
       throw new RuntimeException("File not found: " + child.path());
     } else if (child.name().contains("-hd")) {
       System.out.println("Skipping HD asset: " + child.path());
-      return;
+      return true;
     }
-
-    managedFiles.normal(child.path().replace("assets/", ""), checkForHDVersion(child), clazz);
+    return false;
   }
 
   public static String checkForHDVersion(FileHandle fileHandle) {
@@ -138,9 +130,13 @@ public class GenerateAssetManagerFileList {
     }
 
     if (new FileHandle(hdpiFileName).exists()) {
-      return hdpiFileName.replace("assets/", "");
+      return cleanFilename(hdpiFileName);
     }
 
     return null;
+  }
+
+  private static String cleanFilename(String fileName) {
+    return fileName.replace("assets/", "");
   }
 }

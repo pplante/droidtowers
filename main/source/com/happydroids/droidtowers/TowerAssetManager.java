@@ -36,7 +36,6 @@ public class TowerAssetManager {
   private static Skin skin;
   private static AssetList assetList;
 
-  @SuppressWarnings("unchecked")
   public static MemoryTrackingAssetManager assetManager() {
     if (assetManager == null) {
       assetManager = new MemoryTrackingAssetManager();
@@ -92,6 +91,10 @@ public class TowerAssetManager {
     return fileName;
   }
 
+  public static void dispose() {
+    assetManager.dispose();
+  }
+
   public static Skin skin(String s) {
     return assetManager().get(s, Skin.class);
   }
@@ -110,10 +113,6 @@ public class TowerAssetManager {
 
   public static Texture texture(String s) {
     return assetManager().get(checkForHDPI(s), Texture.class);
-  }
-
-  public static void dispose() {
-    assetManager.dispose();
   }
 
   public static TextureAtlas.AtlasRegion textureFromAtlas(String textureName, String atlasName) {

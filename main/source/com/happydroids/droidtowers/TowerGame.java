@@ -80,7 +80,8 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     Gdx.app.error("lifecycle", "create");
 
     if (Gdx.graphics.isGL20Available() && Gdx.app.getType().equals(Android) && Display.isHDPIMode()) {
-      frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, 800, 480, true);
+      float displayScalar = 0.75f;
+      frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, (int) (Gdx.graphics.getWidth() * displayScalar), (int) (Gdx.graphics.getHeight() * displayScalar), true);
       spriteBatchFBO = new SpriteBatch();
     }
 
