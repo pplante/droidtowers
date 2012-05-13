@@ -43,7 +43,11 @@ public class StatLog {
   }
 
   public float getAverage() {
-    return total / values.length;
+    if (total > 0f) {
+      return total / values.length;
+    }
+
+    return 0;
   }
 
   public float standardDeviation() {

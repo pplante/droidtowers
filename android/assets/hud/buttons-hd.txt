@@ -25,7 +25,7 @@ audio-off
   index: -1
 expand-land-right
   rotate: false
-  xy: 90, 179
+  xy: 90, 268
   size: 78, 88
   orig: 78, 88
   offset: 9, 3
@@ -39,7 +39,7 @@ overlay-button
   index: -1
 expand-land-left
   rotate: false
-  xy: 90, 268
+  xy: 90, 357
   size: 78, 88
   orig: 78, 88
   offset: 9, 4
@@ -75,6 +75,13 @@ audio-on
 tool-commerce
   rotate: false
   xy: 90, 1
+  size: 88, 88
+  orig: 88, 88
+  offset: 4, 4
+  index: -1
+achievements-active
+  rotate: false
+  xy: 90, 179
   size: 88, 88
   orig: 88, 88
   offset: 4, 4

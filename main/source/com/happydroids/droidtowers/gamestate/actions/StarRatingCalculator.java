@@ -22,7 +22,6 @@ public class StarRatingCalculator extends GameGridAction {
 
   @Override
   public void run() {
-
     roomDesirability.reset(gameGrid.getObjects().size());
     for (GridObject gridObject : gameGrid.getObjects()) {
       roomDesirability.record(gridObject.getDesirability());

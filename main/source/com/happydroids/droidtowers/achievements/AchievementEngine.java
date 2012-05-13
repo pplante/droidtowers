@@ -52,15 +52,12 @@ public class AchievementEngine {
     }
   }
 
-  private void complete(Achievement achievement) {
+  protected void complete(Achievement achievement) {
     if (achievement.isLocked() || achievement.hasGivenReward()) {
       return;
     }
 
     achievement.setCompleted(true);
-    achievement.giveReward();
-
-    displayNotification(achievement);
   }
 
   protected void displayNotification(Achievement achievement) {
@@ -123,5 +120,15 @@ public class AchievementEngine {
     }
 
     return null;
+  }
+
+  public boolean hasPendingAwards() {
+    for (Achievement achievement : achievements) {
+      if (achievement.isCompleted() && !achievement.hasGivenReward()) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

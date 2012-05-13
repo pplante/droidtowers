@@ -29,9 +29,9 @@ public class AchievementEngineCheck extends GameGridAction {
 
   @Subscribe
   public void GameEvent_handleGridObjectEvent(GridObjectEvent event) {
-    if (event instanceof ElevatorHeightChangeEvent) return;
-
-    if (event.gridObject.isPlaced()) {
+    if (event instanceof ElevatorHeightChangeEvent) {
+      TutorialEngine.instance().moveToStepWhenReady("tutorial-pan");
+    } else if (event.gridObject.isPlaced()) {
       Gdx.app.debug(TAG, "GameEvent_handleGridObjectEvent triggered by: " + event);
       reset();
     }

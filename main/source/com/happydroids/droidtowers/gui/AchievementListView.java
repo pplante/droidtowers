@@ -47,7 +47,13 @@ public class AchievementListView extends ScrollableTowerWindow {
     actor.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(final Actor actor, float x, float y) {
-        new AchievementDetailView(achievement, stage).show();
+        if (achievement.isCompleted() && !achievement.hasGivenReward()) {
+          dismiss();
+          achievement.giveReward();
+          new AchievementNotification(achievement).show();
+        } else {
+          new AchievementDetailView(achievement, stage).show();
+        }
       }
     });
     add(actor).fill();
@@ -59,7 +65,13 @@ public class AchievementListView extends ScrollableTowerWindow {
       row().pad(scale(16), scale(8), scale(16), scale(8));
       add(FontManager.Roboto18.makeLabel(achievement.getName())).expandX().left();
 
-      add(new ProgressBar(achievement.getPercentComplete())).width(scale(200));
+      Actor actor;
+      if (achievement.isCompleted() && !achievement.hasGivenReward()) {
+        actor = FontManager.Roboto18.makeLabel("Tap to Complete!");
+      } else {
+        actor = new ProgressBar(achievement.getPercentComplete());
+      }
+      add(actor).width(scale(200));
 
       Image arrowImg = new Image(TowerAssetManager.textureFromAtlas("right-arrow", "hud/menus.txt"), Scaling.fit);
       add(arrowImg).width((int) arrowImg.width);

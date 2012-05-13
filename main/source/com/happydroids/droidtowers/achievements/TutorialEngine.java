@@ -6,8 +6,6 @@ package com.happydroids.droidtowers.achievements;
 
 import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.eventbus.Subscribe;
-import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.TutorialStepNotification;
@@ -48,6 +46,18 @@ public class TutorialEngine extends AchievementEngine {
   }
 
   @Override
+  protected void complete(Achievement achievement) {
+    if (achievement.isLocked() || achievement.hasGivenReward()) {
+      return;
+    }
+
+    achievement.setCompleted(true);
+    achievement.giveReward();
+
+    displayNotification(achievement);
+  }
+
+  @Override
   protected void displayNotification(Achievement achievement) {
     if (enabled) {
       new TutorialStepNotification((TutorialStep) achievement).show();
@@ -58,10 +68,5 @@ public class TutorialEngine extends AchievementEngine {
     this.enabled = enabled;
 
     resetState();
-  }
-
-  @Subscribe
-  public void Elevator_onHeightChange(ElevatorHeightChangeEvent event) {
-    moveToStepWhenReady("tutorial-pan");
   }
 }

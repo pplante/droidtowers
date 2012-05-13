@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Widget;
@@ -55,10 +56,7 @@ class StarRatingBar extends Widget {
   }
 
   public void setValue(float value) {
-    this.stars = Math.min(maxStars, value);
-    if (stars == Float.NaN) {
-      stars = 0;
-    }
+    this.stars = MathUtils.clamp(value, 0, maxStars);
 
     valueLabel.setText(String.format("%.1f", stars));
   }

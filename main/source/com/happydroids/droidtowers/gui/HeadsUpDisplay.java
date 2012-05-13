@@ -17,6 +17,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Sets;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.entities.CommercialSpace;
@@ -49,13 +50,13 @@ public class HeadsUpDisplay extends WidgetGroup {
   private ImageButton.ImageButtonStyle toolButtonStyle;
   private TutorialStepNotification tutorialStep;
   private final StatusBarPanel statusBarPanel;
-  private ImageButton achievementsButton;
   private final HeaderButtonBar headerButtonBar;
+  private AchievementButton achievementButton;
 
-  public HeadsUpDisplay(TowerScene towerScene, Stage stage, OrthographicCamera camera, GameGrid gameGrid, AvatarLayer avatarLayer) {
+  public HeadsUpDisplay(TowerScene towerScene, Stage stage, OrthographicCamera camera, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine) {
     super();
 
-    instance = this;
+    HeadsUpDisplay.instance = this;
 
     notificationStack = new StackGroup();
 
@@ -82,16 +83,11 @@ public class HeadsUpDisplay extends WidgetGroup {
     headerButtonBar.x = stage.width() - headerButtonBar.width - 10;
     headerButtonBar.y = stage.height() - headerButtonBar.height - 10;
 
-    achievementsButton = new ImageButton(TowerAssetManager.textureFromAtlas("achievements", "hud/buttons.txt"));
-    achievementsButton.x = 10;
-    achievementsButton.y = stage.height() - statusBarPanel.height - achievementsButton.height - 10;
-    achievementsButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        new AchievementListView(getStage(), TowerAssetManager.getGuiSkin()).show();
-      }
-    });
+    achievementButton = new AchievementButton(achievementEngine);
+    achievementButton.x = 10;
+    achievementButton.y = stage.height() - statusBarPanel.height - achievementButton.height - 10;
 
-    addActor(achievementsButton);
+    addActor(achievementButton);
 
     notificationStack.pad(10);
     notificationStack.x = 0;
@@ -319,5 +315,9 @@ public class HeadsUpDisplay extends WidgetGroup {
       instance.tutorialStep.x = 10;
       instance.tutorialStep.y = ((int) (instance.getStage().height() - (instance.statusBarPanel.height + instance.tutorialStep.height + 6)));
     }
+  }
+
+  public AchievementButton getAchievementButton() {
+    return achievementButton;
   }
 }

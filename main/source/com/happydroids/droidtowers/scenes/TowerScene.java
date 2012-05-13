@@ -89,7 +89,7 @@ public class TowerScene extends Scene {
     gameState = new GameState(camera, gameSaveLocation, gameSave, gameGrid);
     avatarLayer = new AvatarLayer(gameGrid);
 
-    headsUpDisplay = new HeadsUpDisplay(this, getStage(), getCamera(), gameGrid, avatarLayer);
+    headsUpDisplay = new HeadsUpDisplay(this, getStage(), getCamera(), gameGrid, avatarLayer, AchievementEngine.instance(), TutorialEngine.instance());
     weatherService = new WeatherService();
 
 //    towerMiniMap.x = 100;
@@ -184,6 +184,7 @@ public class TowerScene extends Scene {
     earnoutCalculator.run();
     employmentCalculator.run();
     starRatingCalculator.run();
+    achievementEngineCheck.run();
 
     // SHOULD ALWAYS BE LAST.
     ActionManager.instance().addAction(saveAction);

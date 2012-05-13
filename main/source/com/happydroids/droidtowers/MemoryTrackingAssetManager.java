@@ -8,8 +8,8 @@ import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
-import com.google.common.collect.Maps;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.badlogic.gdx.assets.AssetLoaderParameters.LoadedCallback;
@@ -23,7 +23,7 @@ public class MemoryTrackingAssetManager extends AssetManager {
     super();
 
     currentMemory = 0;
-    memoryPerFile = Maps.newHashMap();
+    memoryPerFile = new HashMap<String, Integer>();
   }
 
   @SuppressWarnings("unchecked")
