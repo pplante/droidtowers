@@ -10,12 +10,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.input.GestureDetector;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.WeatherService;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.actions.ActionManager;
 import com.happydroids.droidtowers.actions.GameSaveAction;
-import com.happydroids.droidtowers.audio.GameGridSoundDispatcher;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.entities.CloudLayer;
 import com.happydroids.droidtowers.entities.GameLayer;
@@ -54,11 +54,10 @@ public class TowerScene extends Scene {
   private HeadsUpDisplay headsUpDisplay;
   private GestureDetector gestureDetector;
   private GestureDelegater gestureDelegater;
-  private GameGridSoundDispatcher gridSoundDispatcher;
   private TowerMiniMap towerMiniMap;
   private TransportCalculator transportCalculator;
   private PopulationCalculator populationCalculator;
-  private EarnoutCalculator earnoutCalculator;
+  private BudgetCalculator budgetCalculator;
   private EmploymentCalculator employmentCalculator;
   private DesirabilityCalculator desirabilityCalculator;
   private GameSaveAction saveAction;
@@ -89,6 +88,8 @@ public class TowerScene extends Scene {
     gameState = new GameState(camera, gameSaveLocation, gameSave, gameGrid);
     avatarLayer = new AvatarLayer(gameGrid);
 
+    gameGrid.events().register(TowerGame.getSoundController());
+
     headsUpDisplay = new HeadsUpDisplay(this, getStage(), getCamera(), gameGrid, avatarLayer, AchievementEngine.instance(), TutorialEngine.instance());
     weatherService = new WeatherService();
 
@@ -109,8 +110,6 @@ public class TowerScene extends Scene {
     gestureDelegater = new GestureDelegater(camera, gameLayers, gameGrid);
     gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, gestureDelegater);
 
-    gridSoundDispatcher = new GameGridSoundDispatcher();
-
     InputSystem.instance().addInputProcessor(gestureDetector, 100);
     InputSystem.instance().setGestureDelegator(gestureDelegater);
     InputSystem.instance().switchTool(GestureTool.PICKER, null);
@@ -120,7 +119,7 @@ public class TowerScene extends Scene {
     gameState.loadSavedGame();
 
     populationCalculator = new PopulationCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
-    earnoutCalculator = new EarnoutCalculator(gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
+    budgetCalculator = new BudgetCalculator(gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
     employmentCalculator = new EmploymentCalculator(gameGrid, TowerConsts.JOB_UPDATE_FREQUENCY);
     desirabilityCalculator = new DesirabilityCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
     starRatingCalculator = new StarRatingCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
@@ -173,7 +172,7 @@ public class TowerScene extends Scene {
   private void attachActions() {
     ActionManager.instance().addAction(transportCalculator);
     ActionManager.instance().addAction(populationCalculator);
-    ActionManager.instance().addAction(earnoutCalculator);
+    ActionManager.instance().addAction(budgetCalculator);
     ActionManager.instance().addAction(employmentCalculator);
     ActionManager.instance().addAction(desirabilityCalculator);
     ActionManager.instance().addAction(starRatingCalculator);
@@ -181,7 +180,7 @@ public class TowerScene extends Scene {
     transportCalculator.run();
     desirabilityCalculator.run();
     populationCalculator.run();
-    earnoutCalculator.run();
+    budgetCalculator.run();
     employmentCalculator.run();
     starRatingCalculator.run();
     achievementEngineCheck.run();
@@ -194,7 +193,7 @@ public class TowerScene extends Scene {
     ActionManager.instance().removeAction(achievementEngineCheck);
     ActionManager.instance().removeAction(transportCalculator);
     ActionManager.instance().removeAction(populationCalculator);
-    ActionManager.instance().removeAction(earnoutCalculator);
+    ActionManager.instance().removeAction(budgetCalculator);
     ActionManager.instance().removeAction(employmentCalculator);
     ActionManager.instance().removeAction(desirabilityCalculator);
     ActionManager.instance().removeAction(starRatingCalculator);
@@ -206,12 +205,10 @@ public class TowerScene extends Scene {
   @Override
   public void pause() {
     gameState.saveGame(true);
-    gridSoundDispatcher.setGameGrid(null);
   }
 
   @Override
   public void resume() {
-    gridSoundDispatcher.setGameGrid(gameGrid);
   }
 
   @Override
@@ -239,6 +236,8 @@ public class TowerScene extends Scene {
         ((GridObjectType) o).removeLock();
       }
     }
+
+    gameGrid.events().unregister(TowerGame.getSoundController());
   }
 
 

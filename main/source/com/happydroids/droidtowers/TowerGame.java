@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.actions.ActionManager;
+import com.happydroids.droidtowers.audio.GameSoundController;
 import com.happydroids.droidtowers.controllers.PathSearchManager;
 import com.happydroids.droidtowers.entities.GameObject;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
@@ -55,25 +56,16 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
   private BitmapFont menloBitmapFont;
   private static Scene activeScene;
   private static Stage rootUiStage;
-  private static boolean audioEnabled;
   private static Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
   private static PlatformBrowserUtil platformBrowserUtil;
   private static LinkedList<Scene> pausedScenes;
   private PlatformProtocolHandler protocolHandler;
   private SpriteBatch spriteBatchFBO;
   private FrameBuffer frameBuffer;
+  private static GameSoundController soundController;
 
   public TowerGame() {
-    audioEnabled = true;
     pausedScenes = Lists.newLinkedList();
-  }
-
-  public static boolean isAudioEnabled() {
-    return audioEnabled;
-  }
-
-  public static void setAudioEnabled(boolean audioEnabled) {
-    TowerGame.audioEnabled = audioEnabled;
   }
 
   public void create() {
@@ -84,6 +76,8 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
       frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, (int) (Gdx.graphics.getWidth() * displayScalar), (int) (Gdx.graphics.getHeight() * displayScalar), true);
       spriteBatchFBO = new SpriteBatch();
     }
+
+    soundController = new GameSoundController(null);
 
     BackgroundTask.setPostExecuteManager(this);
 
@@ -195,6 +189,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     InputSystem.instance().update(deltaTime);
     PathSearchManager.instance().update(deltaTime);
     TweenSystem.getTweenManager().update((int) (deltaTime * 1000 * activeScene.getTimeMultiplier()));
+    soundController.update(deltaTime);
 
     spriteBatch.setProjectionMatrix(camera.combined);
 
@@ -255,7 +250,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
   public void resume() {
     Gdx.app.error("lifecycle", "resuming!");
-
     pushScene(SplashScene.class, SplashSceneStates.FULL_LOAD);
 
     if (protocolHandler != null && protocolHandler.hasUri()) {
@@ -354,6 +348,10 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
   public void setProtocolHandler(PlatformProtocolHandler protocolHandler) {
     this.protocolHandler = protocolHandler;
+  }
+
+  public static GameSoundController getSoundController() {
+    return soundController;
   }
 
   public void postRunnable(Runnable runnable) {

@@ -16,7 +16,7 @@ import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.audio.GameGridSoundDispatcher;
+import com.happydroids.droidtowers.audio.GameSoundController;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
@@ -65,7 +65,7 @@ public class ExpandLandOverlay extends WidgetGroup {
   }
 
   private void expandLandToEast() {
-    GameGridSoundDispatcher.setSoundsAllowed(false);
+    GameSoundController.setSoundsAllowed(false);
     gameGrid.getGridSize().x += GAME_GRID_EXPAND_LAND_SIZE;
     gameGrid.updateWorldSize(false);
 
@@ -75,11 +75,11 @@ public class ExpandLandOverlay extends WidgetGroup {
     }
 
     CameraController.instance().panTo(gameGrid.getWorldSize().x, CameraController.instance().getCamera().position.y, true);
-    GameGridSoundDispatcher.setSoundsAllowed(true);
+    GameSoundController.setSoundsAllowed(true);
   }
 
   private void expandLandToWest() {
-    GameGridSoundDispatcher.setSoundsAllowed(false);
+    GameSoundController.setSoundsAllowed(false);
     gameGrid.getGridSize().x += GAME_GRID_EXPAND_LAND_SIZE;
     gameGrid.updateWorldSize(false);
 
@@ -93,7 +93,7 @@ public class ExpandLandOverlay extends WidgetGroup {
     Vector3 cameraPosition = CameraController.instance().getCamera().position.cpy();
     CameraController.instance().getCamera().position.set(cameraPosition.x + (TowerConsts.GRID_UNIT_SIZE * GAME_GRID_EXPAND_LAND_SIZE), cameraPosition.y, cameraPosition.z);
     CameraController.instance().panTo(0, CameraController.instance().getCamera().position.y, true);
-    GameGridSoundDispatcher.setSoundsAllowed(true);
+    GameSoundController.setSoundsAllowed(true);
   }
 
   public float getPrefWidth() {

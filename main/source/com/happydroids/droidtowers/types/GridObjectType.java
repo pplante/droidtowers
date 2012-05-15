@@ -85,7 +85,7 @@ public abstract class GridObjectType {
   }
 
   public int getUpkeepCost() {
-    return Math.round(coins / 1000);
+    return Math.round(coins / 10000);
   }
 
   public boolean canShareSpace(GridObject gridObject) {
@@ -187,6 +187,7 @@ public abstract class GridObjectType {
     }
   }
 
+  @SuppressWarnings("RedundantIfStatement")
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

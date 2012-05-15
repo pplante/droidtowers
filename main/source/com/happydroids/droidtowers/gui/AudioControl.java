@@ -16,7 +16,7 @@ public class AudioControl extends ImageButton {
 
     setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        TowerGame.setAudioEnabled(!TowerGame.isAudioEnabled());
+        TowerGame.getSoundController().toggleAudio();
       }
     });
   }

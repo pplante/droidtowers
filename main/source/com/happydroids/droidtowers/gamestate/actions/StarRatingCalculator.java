@@ -34,16 +34,21 @@ public class StarRatingCalculator extends GameGridAction {
     float incomeRatio = 0;
     roomDesirabilityAverage = roomDesirability.getAverage();
     if (player.getMaxPopulation() > 0) {
-      populationFilled = player.getPopulationResidency() / player.getMaxPopulation();
+      populationFilled = player.getPopulationResidency() / (float) player.getMaxPopulation();
     }
 
     if (player.getJobsMax() > 0) {
-      jobsFilled = player.getJobsFilled() / player.getJobsMax();
+      jobsFilled = player.getJobsFilled() / (float) player.getJobsMax();
     }
 
     if (player.getCurrentIncome() > 0) {
-      incomeRatio = (float) player.getCurrentExpenses() / player.getCurrentIncome();
+      incomeRatio = (player.getCurrentIncome() - player.getCurrentExpenses()) / (float) (player.getCurrentIncome() + player.getCurrentExpenses());
     }
+
+    player.setBudgetRating(incomeRatio);
+    player.setEmploymentRating(jobsFilled);
+    player.setPopulationRating(populationFilled);
+    player.setDesirabilityRating(roomDesirabilityAverage);
 
     float compositeRating = (roomDesirabilityAverage * 0.33f) + (((populationFilled + jobsFilled) * 0.5f) * 0.33f) + (incomeRatio * 0.33f);
 

@@ -33,7 +33,7 @@ public class AchievementEngineCheck extends GameGridAction {
       TutorialEngine.instance().moveToStepWhenReady("tutorial-pan");
     } else if (event.gridObject.isPlaced()) {
       Gdx.app.debug(TAG, "GameEvent_handleGridObjectEvent triggered by: " + event);
-      reset();
+      run();
     }
   }
 }

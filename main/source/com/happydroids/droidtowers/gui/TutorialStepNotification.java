@@ -28,7 +28,8 @@ public class TutorialStepNotification extends Table {
 
     defaults().top().left();
 
-    row().pad(scale(6));
+    int padding = scale(10);
+    row().pad(padding);
     add(FontManager.RobotoBold18.makeLabel(step.getName()));
 
     row();
@@ -37,11 +38,11 @@ public class TutorialStepNotification extends Table {
 
     Label descLabel = FontManager.Default.makeLabel(Strings.wrap(step.getDescription(), 40));
 
-    row().pad(scale(6));
+    row().pad(padding);
     add(descLabel).fillX();
 
     if (step.getId().equalsIgnoreCase("tutorial-finished")) {
-      row().pad(scale(6));
+      row().pad(padding);
       add(FontManager.Default.makeLabel("[ tap to dismiss ]"));
 
       allowDismiss = true;

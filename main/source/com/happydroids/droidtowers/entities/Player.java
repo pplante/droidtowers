@@ -25,6 +25,10 @@ public class Player {
   private int currentIncome;
   private int currentExpenses;
   private float starRating;
+  private float budgetRating;
+  private float employmentRating;
+  private float populationRating;
+  private float desirabilityRating;
 
   public static Player instance() {
     if (instance == null) {
@@ -133,5 +137,39 @@ public class Player {
 
   public void setStarRating(float starRating) {
     this.starRating = starRating;
+  }
+
+  public float getBudgetRating() {
+    return budgetRating;
+  }
+
+  public void setBudgetRating(float budgetRating) {
+    this.budgetRating = budgetRating;
+  }
+
+
+  public void setEmploymentRating(float employmentRating) {
+    this.employmentRating = employmentRating;
+  }
+
+  public void setPopulationRating(float populationRating) {
+    this.populationRating = populationRating;
+  }
+
+
+  public void setDesirabilityRating(float desirabilityRating) {
+    this.desirabilityRating = desirabilityRating;
+  }
+
+  public float getDesirabilityRating() {
+    return desirabilityRating;
+  }
+
+  public float getEmploymentRating() {
+    return employmentRating;
+  }
+
+  public float getPopulationRating() {
+    return populationRating;
   }
 }

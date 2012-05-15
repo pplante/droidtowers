@@ -47,7 +47,7 @@ class StarRatingBar extends Widget {
 
   @Override
   public float getMinWidth() {
-    return maxStars * starTextureWidth + valueLabel.getMinWidth() + scale(5);
+    return maxStars * starTextureWidth + valueLabel.getMinWidth() + scale(8);
   }
 
   @Override
@@ -63,7 +63,7 @@ class StarRatingBar extends Widget {
 
   @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
-    batch.setColor(0, 0, 0, parentAlpha - 0.25f);
+    batch.setColor(0, 0, 0, parentAlpha - 0.35f);
     batch.draw(starTextureMask,
                       x,
                       y,

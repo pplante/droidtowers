@@ -5,10 +5,7 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.graphics.Overlays;
 import com.happydroids.droidtowers.grid.GameGridRenderer;
@@ -18,6 +15,8 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 
 class DataOverlayMenu extends PopOverMenu {
   DataOverlayMenu(final GameGridRenderer gameGridRenderer) {
+    alignArrow(Align.RIGHT);
+
     for (final Overlays overlay : Overlays.values()) {
       final CheckBox checkBox = FontManager.Roboto18.makeCheckBox(overlay.toString());
       checkBox.getLabelCell().pad(0).spaceLeft(scale(8));

@@ -4,14 +4,16 @@
 
 package com.happydroids.droidtowers.gui;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeTo;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
@@ -23,7 +25,9 @@ import static com.happydroids.droidtowers.utils.StringUtils.formatNumber;
 
 public class StatusBarPanel extends Table {
   public static final float INACTIVE_BUTTON_ALPHA = 0.5f;
+  public static final float ACTIVE_BUTTON_ALPHA = 0.85f;
   public static final float BUTTON_FADE_DURATION = 0.25f;
+  public static final int LINE_WIDTH = 1;
 
   private final TowerScene towerScene;
   private final Label moneyLabel;
@@ -36,10 +40,14 @@ public class StatusBarPanel extends Table {
   private final StarRatingBar starWidget;
   private float lastUpdated = TowerConsts.HUD_UPDATE_FREQUENCY;
   private float starRating;
-  private StarRatingBar moneyRatingBar;
+  private StarRatingBar budgetRatingBar;
   private final PopOverMenu ratingOverlay;
   private final NinePatch background;
   private final Texture whiteSwatch;
+  private final PopOverMenu gameSpeedOverlay;
+  private StarRatingBar desirabilityRatingBar;
+  private StarRatingBar populationRatingBar;
+  private StarRatingBar employmentRatingBar;
 
   public StatusBarPanel(TowerScene towerScene) {
     this.towerScene = towerScene;
@@ -63,13 +71,13 @@ public class StatusBarPanel extends Table {
     pad(scale(4), scale(8), scale(4), scale(8));
 
     row().spaceRight(scale(10));
-    makeHeader("COINS");
-    makeHeader("INCOME");
-    makeHeader("EXPENSES");
-    makeHeader("POPULATION");
-    makeHeader("EMPLOYMENT");
-    makeHeader("GAME SPEED");
-    makeHeader("STAR RATING");
+    add(makeHeader("COINS", Colors.ALMOST_BLACK)).center();
+    add(makeHeader("INCOME", Colors.ALMOST_BLACK)).center();
+    add(makeHeader("EXPENSES", Colors.ALMOST_BLACK)).center();
+    add(makeHeader("POPULATION", Colors.ALMOST_BLACK)).center();
+    add(makeHeader("EMPLOYMENT", Colors.ALMOST_BLACK)).center();
+    add(makeHeader("GAME SPEED", Colors.ALMOST_BLACK)).center();
+    add(makeHeader("STAR RATING", Colors.ALMOST_BLACK)).center();
 
     row().spaceRight(scale(10));
     add(moneyLabel);
@@ -80,10 +88,35 @@ public class StatusBarPanel extends Table {
     add(gameSpeedLabel);
     add(starWidget);
 
-    moneyRatingBar = new StarRatingBar();
+
+    gameSpeedOverlay = new PopOverMenu();
+    gameSpeedOverlay.alignArrow(Align.LEFT);
+    gameSpeedOverlay.add(new Slider(1f, 4f, 0.5f, TowerAssetManager.getGuiSkin()));
+    gameSpeedOverlay.pack();
+    gameSpeedOverlay.visible = false;
+
+    budgetRatingBar = new StarRatingBar();
+    populationRatingBar = new StarRatingBar();
+    employmentRatingBar = new StarRatingBar();
+    desirabilityRatingBar = new StarRatingBar();
 
     ratingOverlay = new PopOverMenu();
-    ratingOverlay.add(moneyRatingBar);
+    ratingOverlay.row();
+    ratingOverlay.add(makeHeader("Monthly Budget", Color.WHITE));
+    ratingOverlay.row();
+    ratingOverlay.add(budgetRatingBar);
+    ratingOverlay.row();
+    ratingOverlay.add(makeHeader("Population", Color.WHITE));
+    ratingOverlay.row();
+    ratingOverlay.add(populationRatingBar);
+    ratingOverlay.row();
+    ratingOverlay.add(makeHeader("Employment", Color.WHITE));
+    ratingOverlay.row();
+    ratingOverlay.add(employmentRatingBar);
+    ratingOverlay.row();
+    ratingOverlay.add(makeHeader("Desirability", Color.WHITE));
+    ratingOverlay.row();
+    ratingOverlay.add(desirabilityRatingBar);
     ratingOverlay.pack();
     ratingOverlay.visible = false;
 
@@ -97,12 +130,12 @@ public class StatusBarPanel extends Table {
     return label;
   }
 
-  private Cell makeHeader(String headerText) {
+  private Label makeHeader(String headerText, Color tint) {
     Label label = FontManager.Roboto12.makeLabel(headerText);
     label.setAlignment(Align.CENTER);
-    label.setColor(Colors.ALMOST_BLACK);
+    label.setColor(tint);
 
-    return add(label).center();
+    return label;
   }
 
   @Override
@@ -115,6 +148,11 @@ public class StatusBarPanel extends Table {
       lastUpdated = 0f;
       Player player = Player.instance();
       starWidget.setValue(player.getStarRating());
+
+      budgetRatingBar.setValue(player.getBudgetRating() * 5f);
+      populationRatingBar.setValue(player.getPopulationRating() * 5f);
+      employmentRatingBar.setValue(player.getEmploymentRating() * 5f);
+      desirabilityRatingBar.setValue(player.getDesirabilityRating() * 5f);
 
       experienceLabel.setText(formatNumber(player.getExperience()));
       moneyLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + formatNumber(player.getCoins()));
@@ -130,23 +168,32 @@ public class StatusBarPanel extends Table {
 
   @Override
   public boolean touchDown(float x, float y, int pointer) {
-    if (hit(x, y) == starWidget) {
-      ratingOverlay.visible = !ratingOverlay.visible;
-
-      if (ratingOverlay.visible) {
-        ratingOverlay.parent = this.parent;
-        getStage().addActor(ratingOverlay);
-        ratingOverlay.x = this.x + starWidget.x;
-        ratingOverlay.y = this.y - starWidget.y - starWidget.height - ratingOverlay.getOffset();
-      }
-
-      action(FadeTo.$(ratingOverlay.visible ? INACTIVE_BUTTON_ALPHA : 1f, BUTTON_FADE_DURATION));
-      ratingOverlay.action(FadeTo.$(ratingOverlay.visible ? INACTIVE_BUTTON_ALPHA : 1f, BUTTON_FADE_DURATION));
+    Actor touched = hit(x, y);
+    if (touched == starWidget) {
+      togglePopOverMenu(starWidget, ratingOverlay);
+    } else if (touched == gameSpeedLabel) {
+      togglePopOverMenu(gameSpeedLabel, gameSpeedOverlay);
     }
 
-    System.out.println(ratingOverlay.visible);
-
     return true;
+  }
+
+  private void togglePopOverMenu(Actor parentWidget, PopOverMenu popOverMenu) {
+    popOverMenu.visible = !popOverMenu.visible;
+
+    if (popOverMenu.visible) {
+      if (popOverMenu.getStage() == null) {
+        popOverMenu.parent = this.parent;
+        getStage().addActor(popOverMenu);
+      }
+
+      popOverMenu.pack();
+      popOverMenu.x = x + parentWidget.x;
+      popOverMenu.y = y - parentWidget.y - popOverMenu.height;
+    }
+
+    action(FadeTo.$(popOverMenu.visible ? INACTIVE_BUTTON_ALPHA : 1f, BUTTON_FADE_DURATION));
+    popOverMenu.action(FadeTo.$(popOverMenu.visible ? ACTIVE_BUTTON_ALPHA : 1f, BUTTON_FADE_DURATION));
   }
 
   @Override
@@ -154,8 +201,8 @@ public class StatusBarPanel extends Table {
     super.draw(batch, parentAlpha);
 
     batch.setColor(0, 0, 0, color.a - 0.25f);
-    batch.draw(whiteSwatch, x, y - 2, width, 2);
-    batch.draw(whiteSwatch, x + width, y - 2, 2, height + 4);
+    batch.draw(whiteSwatch, x, y - LINE_WIDTH, width, LINE_WIDTH);
+    batch.draw(whiteSwatch, x + width, y - LINE_WIDTH, LINE_WIDTH, height + 4);
 
     batch.setColor(color);
   }
