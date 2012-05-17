@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
@@ -26,7 +25,7 @@ public class StatusBarPanel extends Table {
   public static final float INACTIVE_BUTTON_ALPHA = 0.5f;
   public static final float ACTIVE_BUTTON_ALPHA = 0.85f;
   public static final float BUTTON_FADE_DURATION = 0.25f;
-  public static final int LINE_WIDTH = 1;
+  public static final int LINE_WIDTH = 2;
 
   private final TowerScene towerScene;
   private final Label moneyLabel;
@@ -41,12 +40,12 @@ public class StatusBarPanel extends Table {
   private float starRating;
   private StarRatingBar budgetRatingBar;
   private final PopOverMenu ratingOverlay;
-  private final NinePatch background;
   private final Texture whiteSwatch;
   private final PopOverMenu gameSpeedOverlay;
   private StarRatingBar desirabilityRatingBar;
   private StarRatingBar populationRatingBar;
   private StarRatingBar employmentRatingBar;
+  private final Texture backgroundTexture;
 
   public StatusBarPanel(TowerScene towerScene) {
     this.towerScene = towerScene;
@@ -62,21 +61,21 @@ public class StatusBarPanel extends Table {
     starWidget = new StarRatingBar(0, 5);
 
     whiteSwatch = TowerAssetManager.texture(TowerAssetManager.WHITE_SWATCH);
-    background = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.ICS_BLUE_SEMI_TRANSPARENT);
-    setBackground(background);
+    backgroundTexture = TowerAssetManager.texture("hud/window-bg.png");
+    backgroundTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
     defaults();
     center();
     pad(scale(4), scale(8), scale(4), scale(8));
 
     row().spaceRight(scale(10));
-    add(makeHeader("COINS", Colors.ALMOST_BLACK)).center();
-    add(makeHeader("INCOME", Colors.ALMOST_BLACK)).center();
-    add(makeHeader("EXPENSES", Colors.ALMOST_BLACK)).center();
-    add(makeHeader("POPULATION", Colors.ALMOST_BLACK)).center();
-    add(makeHeader("EMPLOYMENT", Colors.ALMOST_BLACK)).center();
-    add(makeHeader("GAME SPEED", Colors.ALMOST_BLACK)).center();
-    add(makeHeader("STAR RATING", Colors.ALMOST_BLACK)).center();
+    add(makeHeader("COINS", Color.LIGHT_GRAY)).center();
+    add(makeHeader("INCOME", Color.LIGHT_GRAY)).center();
+    add(makeHeader("EXPENSES", Color.LIGHT_GRAY)).center();
+    add(makeHeader("POPULATION", Color.LIGHT_GRAY)).center();
+    add(makeHeader("EMPLOYMENT", Color.LIGHT_GRAY)).center();
+    add(makeHeader("GAME SPEED", Color.LIGHT_GRAY)).center();
+    add(makeHeader("STAR RATING", Color.LIGHT_GRAY)).center();
 
     row().spaceRight(scale(10));
     add(moneyLabel);
@@ -184,10 +183,15 @@ public class StatusBarPanel extends Table {
   public void draw(SpriteBatch batch, float parentAlpha) {
     super.draw(batch, parentAlpha);
 
-    batch.setColor(0, 0, 0, color.a - 0.25f);
+    batch.setColor(Colors.ICS_BLUE_SEMI_TRANSPARENT);
     batch.draw(whiteSwatch, x, y - LINE_WIDTH, width, LINE_WIDTH);
-    batch.draw(whiteSwatch, x + width, y - LINE_WIDTH, LINE_WIDTH, height + 4);
+    batch.draw(whiteSwatch, x + width, y - LINE_WIDTH, LINE_WIDTH, height + LINE_WIDTH * 2);
 
     batch.setColor(color);
+  }
+
+  @Override
+  protected void drawBackground(SpriteBatch batch, float parentAlpha) {
+    batch.draw(backgroundTexture, x, y, width, height);
   }
 }

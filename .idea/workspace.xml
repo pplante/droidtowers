@@ -25,21 +25,9 @@
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" line="205" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="refactored the popover menu quite a bit">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/psds/star.psd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/hud/star-hd.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/hud/star-white-hd.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sound/music/happy-upbeat.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sound/music/tower-jam.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/swatches/swatch-white-triangle-hd.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/hud/star-white.png" afterPath="$PROJECT_DIR$/android/assets/hud/star-white.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/hud/star.png" afterPath="$PROJECT_DIR$/android/assets/hud/star.png" />
+    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="changed the star rating image, added hd version&#10;added missing songs!">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/assets.json" afterPath="$PROJECT_DIR$/android/assets/assets.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DebugInputAdapter.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DebugInputAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StarRatingBar.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StarRatingBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline/src/com/happydroids/droidtowers/pipeline/GenerateAssetManagerFileList.java" afterPath="$PROJECT_DIR$/pipeline/src/com/happydroids/droidtowers/pipeline/GenerateAssetManagerFileList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StatusBarPanel.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StatusBarPanel.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -136,46 +124,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PopOverMenu.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/PopOverMenu.java">
+      <file leaf-file-name="StatusBarPanel.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StatusBarPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="187" column="16" selection-start="5674" selection-end="5674" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GenerateAssetManagerFileList.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pipeline/src/com/happydroids/droidtowers/pipeline/GenerateAssetManagerFileList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="42" selection-start="2357" selection-end="2357" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StarRatingBar.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StarRatingBar.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="27" selection-start="2486" selection-end="2486" vertical-scroll-proportion="0.4008016">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DebugInputAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DebugInputAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="41" selection-start="727" selection-end="727" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FontManager.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="18" selection-start="3388" selection-end="3388" vertical-scroll-proportion="0.0">
+            <state line="27" column="40" selection-start="1148" selection-end="1148" vertical-scroll-proportion="-0.67753625">
               <folding />
             </state>
           </provider>
@@ -203,13 +155,13 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/ColorUtil.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/Colors.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/DataOverlayMenu.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StatusBarPanel.java" />
         <option value="$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/ui/Slider.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/PopOverMenu.java" />
         <option value="$PROJECT_DIR$/pipeline/src/com/happydroids/droidtowers/pipeline/GenerateAssetManagerFileList.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DebugInputAdapter.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StarRatingBar.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StatusBarPanel.java" />
       </list>
     </option>
   </component>
@@ -1628,7 +1580,11 @@
       <created>1337240938325</created>
       <updated>1337240938326</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="changed the star rating image, added hd version&#10;added missing songs!">
+      <created>1337244606304</created>
+      <updated>1337244606304</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1653,10 +1609,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32303733" sideWeight="0.95461786" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32303733" sideWeight="0.95461786" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2093949" sideWeight="0.6180714" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24918832" sideWeight="0.7441154" order="1" side_tool="false" content_ui="tabs" />
@@ -1674,7 +1630,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283046" sideWeight="0.7441154" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39853895" sideWeight="0.7441154" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23706897" sideWeight="0.6486486" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25482625" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25482625" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="IntelliGuard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953683" sideWeight="0.48726115" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18351911" sideWeight="0.6180714" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1732,7 +1688,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactored the popover menu quite a bit" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the star rating image, added hd version&#10;added missing songs!" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1745,7 +1701,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="transportation distance is now calculated for desirability :D" />
     <MESSAGE value="changed hud debug tooltip format" />
     <MESSAGE value="ZAGAT RATED FOR YOUR PLEASURES" />
     <MESSAGE value="framebuffer for android HDPI devices to compensate for low fill rates." />
@@ -1770,6 +1725,7 @@
     <MESSAGE value="added background music!&#10;updated the hud to have a more detailed star rating bar&#10;made the achievements more responsive when grid changes." />
     <MESSAGE value="the lobby should not be desirable!" />
     <MESSAGE value="refactored the popover menu quite a bit" />
+    <MESSAGE value="changed the star rating image, added hd version&#10;added missing songs!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1822,11 +1778,6 @@
         <state line="42" column="9" selection-start="1643" selection-end="1643" vertical-scroll-proportion="-3.5043104" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StatusBarPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="48" selection-start="3560" selection-end="3560" vertical-scroll-proportion="0.1048218" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/android/assets/assets.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.673913" />
@@ -1847,29 +1798,44 @@
         <state line="351" column="21" selection-start="11927" selection-end="11927" vertical-scroll-proportion="0.33271718" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/PopOverMenu.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StarRatingBar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="187" column="16" selection-start="5674" selection-end="5674" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline/src/com/happydroids/droidtowers/pipeline/GenerateAssetManagerFileList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="42" selection-start="2357" selection-end="2357" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DebugInputAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="41" selection-start="727" selection-end="727" vertical-scroll-proportion="0.0" />
+        <state line="72" column="42" selection-start="2225" selection-end="2225" vertical-scroll-proportion="0.04809619">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="18" selection-start="3388" selection-end="3388" vertical-scroll-proportion="0.0" />
+        <state line="102" column="18" selection-start="3388" selection-end="3388" vertical-scroll-proportion="0.04526749">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StarRatingBar.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DebugInputAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="27" selection-start="2486" selection-end="2486" vertical-scroll-proportion="0.4008016">
+        <state line="22" column="41" selection-start="727" selection-end="727" vertical-scroll-proportion="0.044088177">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline/src/com/happydroids/droidtowers/pipeline/GenerateAssetManagerFileList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="42" selection-start="2357" selection-end="2357" vertical-scroll-proportion="0.044088177">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/PopOverMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="187" column="16" selection-start="5674" selection-end="5674" vertical-scroll-proportion="0.6032064">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StatusBarPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="40" selection-start="1148" selection-end="1148" vertical-scroll-proportion="-0.67753625">
           <folding />
         </state>
       </provider>
