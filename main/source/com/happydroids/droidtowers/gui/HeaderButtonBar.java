@@ -4,20 +4,12 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.FadeTo;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.grid.GameGrid;
-import com.happydroids.droidtowers.input.InputCallback;
-import com.happydroids.droidtowers.input.InputSystem;
-
-import static com.badlogic.gdx.Input.Keys.BACK;
-import static com.badlogic.gdx.Input.Keys.ESCAPE;
 
 public class HeaderButtonBar extends Table {
   public static final float INACTIVE_BUTTON_ALPHA = 0.25f;
@@ -39,56 +31,13 @@ public class HeaderButtonBar extends Table {
     add(audioControl).right().expandX();
     add(dataOverlayButton).right();
 
-    row().colspan(2).right().padTop(-dataOverlayMenu.getOffset());
-    add(dataOverlayMenu);
-
     pack();
 
     dataOverlayButton.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
-        toggleDataOverlayMenu();
+        dataOverlayMenu.toggle(HeaderButtonBar.this, dataOverlayButton);
       }
     });
   }
-
-  private void toggleDataOverlayMenu() {
-    dataOverlayMenu.visible = !dataOverlayMenu.visible;
-
-    if (dataOverlayMenu.visible) {
-      InputSystem.instance().bind(new int[]{ESCAPE, BACK}, dataOverlayMenuToggleCallback);
-      InputSystem.instance().addInputProcessor(dataOverlayMenuToggleClickCallback, 0);
-    } else {
-      InputSystem.instance().unbind(new int[]{ESCAPE, BACK}, dataOverlayMenuToggleCallback);
-      InputSystem.instance().removeInputProcessor(dataOverlayMenuToggleClickCallback);
-    }
-
-    dataOverlayButton.action(FadeTo.$(dataOverlayMenu.visible ? INACTIVE_BUTTON_ALPHA : 1f, BUTTON_FADE_DURATION));
-    audioControl.action(FadeTo.$(dataOverlayMenu.visible ? INACTIVE_BUTTON_ALPHA : 1f, BUTTON_FADE_DURATION));
-  }
-
-  private final InputCallback dataOverlayMenuToggleCallback = new InputCallback() {
-    @Override
-    public boolean run(float timeDelta) {
-      boolean menuWasVisible = dataOverlayMenu.visible;
-      toggleDataOverlayMenu();
-      return menuWasVisible;
-    }
-  };
-
-  private final InputAdapter dataOverlayMenuToggleClickCallback = new InputAdapter() {
-    @Override
-    public boolean touchDown(int x, int y, int pointer, int button) {
-      Vector2 touchDown = new Vector2();
-      getStage().toStageCoordinates(x, y, touchDown);
-      dataOverlayMenu.toLocalCoordinates(touchDown);
-
-      if (dataOverlayMenu.hit(touchDown.x, touchDown.y) == null) {
-        toggleDataOverlayMenu();
-        return true;
-      }
-
-      return false;
-    }
-  };
 }

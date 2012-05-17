@@ -19,7 +19,8 @@ class DataOverlayMenu extends PopOverMenu {
 
     for (final Overlays overlay : Overlays.values()) {
       final CheckBox checkBox = FontManager.Roboto18.makeCheckBox(overlay.toString());
-      checkBox.getLabelCell().pad(0).spaceLeft(scale(8));
+      checkBox.align(Align.LEFT);
+      checkBox.getLabelCell().padLeft(0).spaceLeft(scale(8));
       checkBox.setClickListener(new ClickListener() {
         public void click(Actor actor, float x, float y) {
           if (checkBox.isChecked()) {
@@ -31,7 +32,7 @@ class DataOverlayMenu extends PopOverMenu {
       });
 
       row().left();
-      add(checkBox).pad(0);
+      add(checkBox).pad(0).fillX();
 
       add(new Image(texture("swatches/" + overlay.getSwatchFilename()), Scaling.stretch))
               .width(16)

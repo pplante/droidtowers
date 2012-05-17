@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.FadeTo;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -169,31 +168,16 @@ public class StatusBarPanel extends Table {
   @Override
   public boolean touchDown(float x, float y, int pointer) {
     Actor touched = hit(x, y);
-    if (touched == starWidget) {
-      togglePopOverMenu(starWidget, ratingOverlay);
-    } else if (touched == gameSpeedLabel) {
-      togglePopOverMenu(gameSpeedLabel, gameSpeedOverlay);
+
+    if (touched == starWidget || touched == gameSpeedLabel) {
+      if (touched == starWidget) {
+        ratingOverlay.toggle(this, starWidget);
+      } else if (touched == gameSpeedLabel) {
+        gameSpeedOverlay.toggle(this, gameSpeedLabel);
+      }
     }
 
     return true;
-  }
-
-  private void togglePopOverMenu(Actor parentWidget, PopOverMenu popOverMenu) {
-    popOverMenu.visible = !popOverMenu.visible;
-
-    if (popOverMenu.visible) {
-      if (popOverMenu.getStage() == null) {
-        popOverMenu.parent = this.parent;
-        getStage().addActor(popOverMenu);
-      }
-
-      popOverMenu.pack();
-      popOverMenu.x = x + parentWidget.x;
-      popOverMenu.y = y - parentWidget.y - popOverMenu.height;
-    }
-
-    action(FadeTo.$(popOverMenu.visible ? INACTIVE_BUTTON_ALPHA : 1f, BUTTON_FADE_DURATION));
-    popOverMenu.action(FadeTo.$(popOverMenu.visible ? ACTIVE_BUTTON_ALPHA : 1f, BUTTON_FADE_DURATION));
   }
 
   @Override

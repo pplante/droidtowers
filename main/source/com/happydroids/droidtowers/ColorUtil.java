@@ -14,11 +14,11 @@ public class ColorUtil {
       colorStr = colorStr.substring(1);
     }
 
-    if (colorStr.length() < 6) {
+    if (colorStr.length() == 3 || colorStr.length() == 4) {
       String finalColor = "";
 
       for (char c : colorStr.toCharArray()) {
-        finalColor += c + c;
+        finalColor += String.valueOf(c) + String.valueOf(c);
       }
 
       colorStr = finalColor;

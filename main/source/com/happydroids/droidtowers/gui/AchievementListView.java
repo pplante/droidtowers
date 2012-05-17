@@ -77,7 +77,7 @@ public class AchievementListView extends ScrollableTowerWindow {
       add(arrowImg).width((int) arrowImg.width);
 
       row();
-      add(new HorizontalRule(Colors.DARKER_GRAY, 1)).colspan(3);
+      add(new HorizontalRule(Colors.DARK_GRAY, 1)).colspan(3);
     }
 
     @Override

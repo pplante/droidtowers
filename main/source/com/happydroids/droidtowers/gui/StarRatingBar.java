@@ -63,7 +63,7 @@ class StarRatingBar extends Widget {
 
   @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
-    batch.setColor(0, 0, 0, parentAlpha - 0.35f);
+    batch.setColor(1, 1, 1, 0.35f * parentAlpha);
     batch.draw(starTextureMask,
                       x,
                       y,
@@ -75,7 +75,7 @@ class StarRatingBar extends Widget {
 
     float starWidth = Math.round(stars * starTextureWidth);
 
-    batch.setColor(1f, 1f, 1f, Math.min(parentAlpha, 1f));
+    batch.setColor(1f, 1f, 1f, 1 * parentAlpha);
     batch.draw(starTexture,
                       x,
                       y,
