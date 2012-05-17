@@ -36,7 +36,6 @@ public class GenerateAssetManagerFileList {
     preloadFile(assetsDir.child("hud/buttons.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("hud/window-bg.png"), Texture.class);
     preloadFile(assetsDir.child("hud/toast-bg.png"), Texture.class);
-    preloadDirectory("swatches/", ".png", Texture.class);
 
     addDirectoryToAssetManager("backgrounds/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("movies/", ".txt", TextureAtlas.class);
@@ -63,6 +62,8 @@ public class GenerateAssetManagerFileList {
     for (Overlays overlay : Overlays.values()) {
       makeSwatch(swatchesDir, overlay.getSwatchFilename(), overlay.getColor(1f));
     }
+
+    preloadDirectory("swatches/", ".png", Texture.class);
 
     try {
       ObjectMapper mapper = new ObjectMapper();

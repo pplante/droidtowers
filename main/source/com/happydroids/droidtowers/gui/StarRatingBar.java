@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.gui;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -12,9 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.happydroids.droidtowers.TowerAssetManager;
 
+import static com.happydroids.droidtowers.ColorUtil.rgba;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 class StarRatingBar extends Widget {
+  public static final Color STAR_COLOR = rgba("#ffbb33");
   private final Label valueLabel;
   private float stars;
   private final int maxStars;
@@ -74,8 +77,7 @@ class StarRatingBar extends Widget {
                       -1f);
 
     float starWidth = Math.round(stars * starTextureWidth);
-
-    batch.setColor(1f, 1f, 1f, 1 * parentAlpha);
+    batch.setColor(1, 1, 1, 1 * parentAlpha);
     batch.draw(starTexture,
                       x,
                       y,
