@@ -21,14 +21,14 @@ public class DefaultKeybindings {
 
     speedUpTime = new InputCallback() {
       public boolean run(float timeDelta) {
-        towerScene.setTimeMultiplier(Math.min(towerScene.getTimeMultiplier() + 0.5f, 4f));
+        towerScene.setTimeMultiplier(towerScene.getTimeMultiplier() + 0.5f);
         return true;
       }
     };
 
     slowDownTime = new InputCallback() {
       public boolean run(float timeDelta) {
-        towerScene.setTimeMultiplier(Math.max(towerScene.getTimeMultiplier() - 0.5f, 0.5f));
+        towerScene.setTimeMultiplier(towerScene.getTimeMultiplier() - 0.5f);
         return true;
       }
     };

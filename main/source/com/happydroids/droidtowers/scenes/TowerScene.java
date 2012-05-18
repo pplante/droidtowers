@@ -47,7 +47,6 @@ public class TowerScene extends Scene {
   private GameGrid gameGrid;
   private GameGridRenderer gameGridRenderer;
   private GameState gameState;
-  private float timeMultiplier;
   private FileHandle gameSaveLocation;
   private GameSave gameSave;
   private WeatherService weatherService;
@@ -68,7 +67,6 @@ public class TowerScene extends Scene {
 
   public TowerScene() {
     gameSaveLocation = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
-    timeMultiplier = 1f;
   }
 
   @Override
@@ -242,7 +240,7 @@ public class TowerScene extends Scene {
 
 
   private void updateGameObjects(float deltaTime) {
-    deltaTime *= timeMultiplier;
+    deltaTime *= getTimeMultiplier();
 
     for (GameLayer layer : gameLayers) {
       layer.update(deltaTime);
@@ -250,14 +248,6 @@ public class TowerScene extends Scene {
 
     headsUpDisplay.act(deltaTime);
     weatherService.update(deltaTime);
-  }
-
-  public float getTimeMultiplier() {
-    return timeMultiplier;
-  }
-
-  public void setTimeMultiplier(float timeMultiplier) {
-    this.timeMultiplier = timeMultiplier;
   }
 
   public GameGridRenderer getGameGridRenderer() {

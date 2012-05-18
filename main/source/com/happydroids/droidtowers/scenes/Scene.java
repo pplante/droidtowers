@@ -7,16 +7,23 @@ package com.happydroids.droidtowers.scenes;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.google.common.eventbus.EventBus;
+import com.happydroids.droidtowers.events.GameSpeedChangeEvent;
 
 public abstract class Scene {
   private static SpriteBatch spriteBatch;
   private final Stage stage;
   protected static OrthographicCamera camera;
+  private float timeMultiplier;
+  private EventBus eventBus;
 
   public Scene() {
     stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false, getSpriteBatch());
+    eventBus = new EventBus(getClass().getSimpleName());
+    timeMultiplier = 1f;
   }
 
   public abstract void create(Object... args);
@@ -30,7 +37,12 @@ public abstract class Scene {
   public abstract void dispose();
 
   public float getTimeMultiplier() {
-    return 1f;
+    return timeMultiplier;
+  }
+
+  public void setTimeMultiplier(float value) {
+    timeMultiplier = MathUtils.clamp(value, 0.5f, 4f);
+    events().post(new GameSpeedChangeEvent(this));
   }
 
   public SpriteBatch getSpriteBatch() {
@@ -66,9 +78,12 @@ public abstract class Scene {
     actor.x = (int) (getStage().width() - actor.width) / 2;
   }
 
+
   private void centerVertically(Actor actor) {
     actor.y = (int) (getStage().height() - actor.height) / 2;
   }
 
-
+  public EventBus events() {
+    return eventBus;
+  }
 }

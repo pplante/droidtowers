@@ -101,7 +101,7 @@ public enum FontManager {
   }
 
   public CheckBox makeCheckBox(String labelText) {
-    return applyTextButtonLabelStyle(new CheckBox(labelText, getGuiSkin()));
+    return applyTextButtonLabelStyle(new CheckBox(labelText, TowerAssetManager.getCustomSkin()));
   }
 
   private <T extends TextButton> T applyTextButtonLabelStyle(T textButton) {
@@ -137,4 +137,6 @@ public enum FontManager {
     label.setAlignment(textAlignment);
     return label;
   }
+
+
 }

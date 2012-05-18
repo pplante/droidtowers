@@ -9,13 +9,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.Player;
+import com.happydroids.droidtowers.events.GameSpeedChangeEvent;
 import com.happydroids.droidtowers.scenes.TowerScene;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
@@ -46,6 +50,7 @@ public class StatusBarPanel extends Table {
   private StarRatingBar populationRatingBar;
   private StarRatingBar employmentRatingBar;
   private final Texture backgroundTexture;
+  private final Slider gameSpeedSlider;
 
   public StatusBarPanel(TowerScene towerScene) {
     this.towerScene = towerScene;
@@ -89,9 +94,22 @@ public class StatusBarPanel extends Table {
 
     gameSpeedOverlay = new PopOverMenu();
     gameSpeedOverlay.alignArrow(Align.LEFT);
-    gameSpeedOverlay.add(new Slider(1f, 4f, 0.5f, TowerAssetManager.getGuiSkin()));
+    gameSpeedOverlay.add(new Image(TowerAssetManager.textureFromAtlas("snail", "hud/buttons.txt"))).center();
+    gameSpeedSlider = new Slider(0.5f, 4f, 0.5f, TowerAssetManager.getCustomSkin());
+    gameSpeedOverlay.add(gameSpeedSlider);
+    gameSpeedOverlay.add(new Image(TowerAssetManager.textureFromAtlas("rabbit", "hud/buttons.txt"))).center();
     gameSpeedOverlay.pack();
     gameSpeedOverlay.visible = false;
+
+    gameSpeedSlider.setValueChangedListener(new Slider.ValueChangedListener() {
+      @Override
+      public void changed(Slider slider, float value) {
+        float remainder = value * 2f / 2f;
+        TowerGame.getActiveScene().setTimeMultiplier(remainder);
+      }
+    });
+
+    TowerGame.getActiveScene().events().register(this);
 
     budgetRatingBar = new StarRatingBar();
     populationRatingBar = new StarRatingBar();
@@ -158,7 +176,6 @@ public class StatusBarPanel extends Table {
       moneyExpensesLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + formatNumber(player.getCurrentExpenses()));
       populationLabel.setText(formatNumber(player.getPopulationResidency()) + "/" + formatNumber(player.getMaxPopulation()));
       employmentLabel.setText(formatNumber(player.getJobsFilled()) + "/" + formatNumber(player.getJobsMax()));
-      gameSpeedLabel.setText(towerScene.getTimeMultiplier() + "x");
 
       pack();
     }
@@ -193,5 +210,11 @@ public class StatusBarPanel extends Table {
   @Override
   protected void drawBackground(SpriteBatch batch, float parentAlpha) {
     batch.draw(backgroundTexture, x, y, width, height);
+  }
+
+  @Subscribe
+  public void TowerScene_onGameSpeedChange(GameSpeedChangeEvent event) {
+    gameSpeedSlider.setValue(event.scene.getTimeMultiplier());
+    gameSpeedLabel.setText(event.scene.getTimeMultiplier() + "x");
   }
 }

@@ -114,7 +114,7 @@ public class PopOverMenu extends WidgetGroup {
     } else {
       x = relativeX + ((relativeTo.width - triangle.getWidth()) / 2) - 8;
     }
-    y = relativeTo.y + parentWidget.y - height - (triangle.getHeight() / 4);
+    y = relativeTo.y + parentWidget.y - height;
     content.x = x + scale(10);
     content.y = y + scale(10);
 

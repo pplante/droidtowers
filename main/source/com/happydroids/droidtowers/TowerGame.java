@@ -159,7 +159,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
       }
     });
 
-    final Skin skin = new Skin(Gdx.files.internal("default-skin.ui"));
+    final Skin skin = new Skin(Gdx.files.internal("default-skin.json"));
     TowerAssetManager.setGuiSkin(skin);
     Scene.setCamera(camera);
     Scene.setSpriteBatch(spriteBatch);
