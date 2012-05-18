@@ -20,7 +20,7 @@ class GridObjectPurchaseItem extends Table {
   private final TextButton buyButton;
   private final GridObjectType gridObjectType;
 
-  public GridObjectPurchaseItem(final GridObjectType gridObjectType, Skin skin) {
+  public GridObjectPurchaseItem(final GridObjectType gridObjectType) {
     this.gridObjectType = gridObjectType;
 
     buyButton = FontManager.RobotoBold18.makeTextButton(gridObjectType.isLocked() ? "LOCKED" : "Buy");

@@ -179,7 +179,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   }
 
   private void makePurchaseDialog(String title, GridObjectTypeFactory typeFactory, ImageButton.ImageButtonStyle style) {
-    purchaseDialog = new GridObjectPurchaseMenu(getStage(), TowerAssetManager.getGuiSkin(), title, typeFactory, new Runnable() {
+    purchaseDialog = new GridObjectPurchaseMenu(getStage(), title, typeFactory, new Runnable() {
       public void run() {
         toolButton.setStyle(toolButtonStyle);
       }

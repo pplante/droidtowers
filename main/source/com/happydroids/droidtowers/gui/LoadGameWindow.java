@@ -10,7 +10,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Align;
+import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.SplashSceneStates;
@@ -26,7 +29,7 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 public class LoadGameWindow extends ScrollableTowerWindow {
   private boolean foundSaveFile;
 
-  public LoadGameWindow(Stage stage, Skin skin) {
+  public LoadGameWindow(Stage stage) {
     super("Load a Tower", stage);
 
     FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);

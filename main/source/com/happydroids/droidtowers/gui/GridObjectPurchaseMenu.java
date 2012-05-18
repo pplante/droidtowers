@@ -7,7 +7,6 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.input.GestureTool;
@@ -22,7 +21,7 @@ public class GridObjectPurchaseMenu extends TowerWindow {
   private Class gridObjectTypeClass;
   private final Runnable toolCleanupRunnable;
 
-  public GridObjectPurchaseMenu(Stage stage, Skin skin, String objectTypeName, GridObjectTypeFactory typeFactory, final Runnable toolCleanupRunnable) {
+  public GridObjectPurchaseMenu(Stage stage, String objectTypeName, GridObjectTypeFactory typeFactory, final Runnable toolCleanupRunnable) {
     super("Purchase " + objectTypeName, stage);
     this.toolCleanupRunnable = toolCleanupRunnable;
 
@@ -38,7 +37,7 @@ public class GridObjectPurchaseMenu extends TowerWindow {
     for (Object o : typeFactory.all()) {
       final GridObjectType gridObjectType = typeFactory.castToObjectType(o);
 
-      GridObjectPurchaseItem purchaseItem = new GridObjectPurchaseItem(gridObjectType, skin);
+      GridObjectPurchaseItem purchaseItem = new GridObjectPurchaseItem(gridObjectType);
       purchaseItem.setBuyClickListener(new VibrateClickListener() {
         @Override
         public void onClick(Actor actor, float x, float y) {

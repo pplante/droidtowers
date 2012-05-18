@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.utils.Logger;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.droidtowers.graphics.ResolutionIndependentAtlas;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.pipeline.AssetList;
 import com.happydroids.droidtowers.platform.Display;
@@ -71,31 +72,22 @@ public class TowerAssetManager {
         }
       });
 
-      TextureAtlas skinAtlas = new TextureAtlas(Gdx.files.internal("hud/skin.txt"));
+      ResolutionIndependentAtlas skinAtlas = new ResolutionIndependentAtlas(Gdx.files.internal("hud/skin.txt"));
 
       customSkin = new Skin();
 
       CheckBox.CheckBoxStyle checkBoxStyle = new CheckBox.CheckBoxStyle();
-      checkBoxStyle.checkboxOn = findRegion(skinAtlas, "checkbox-on");
+      checkBoxStyle.checkboxOn = skinAtlas.findRegion("checkbox-on");
       checkBoxStyle.checkboxOff = skinAtlas.findRegion("checkbox-off");
       checkBoxStyle.font = FontManager.Default.getFont();
       checkBoxStyle.fontColor = Color.WHITE;
       customSkin.addStyle("default", checkBoxStyle);
 
-      Slider.SliderStyle sliderStyle = new Slider.SliderStyle(new NinePatch(new Texture(Gdx.files.internal(WHITE_SWATCH)), Color.LIGHT_GRAY), findRegion(skinAtlas, "slider-handle"));
+      Slider.SliderStyle sliderStyle = new Slider.SliderStyle(new NinePatch(new Texture(Gdx.files.internal(WHITE_SWATCH)), Color.LIGHT_GRAY), skinAtlas.findRegion("slider-handle"));
       customSkin.addStyle("default", sliderStyle);
-
     }
 
     return assetManager;
-  }
-
-  private static TextureAtlas.AtlasRegion findRegion(TextureAtlas atlas, String name) {
-    if (Display.isHDPIMode()) {
-      return atlas.findRegion("hdpi/" + name);
-    }
-
-    return atlas.findRegion(name);
   }
 
   private static void addToAssetManager(Map<String, Class> preloadFiles, Map<String, String> highDefFiles) {

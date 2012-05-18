@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Delay;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.Colors;
@@ -27,7 +26,7 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 public class AchievementListView extends ScrollableTowerWindow {
   private NinePatch itemSelectBackground;
 
-  public AchievementListView(Stage stage, Skin skin) {
+  public AchievementListView(Stage stage) {
     super("Achievements", stage);
 
     itemSelectBackground = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.ICS_BLUE);

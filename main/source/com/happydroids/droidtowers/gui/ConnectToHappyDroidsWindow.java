@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
@@ -29,7 +28,7 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
   private final TextButton accessTokenButton;
   private Runnable postConnectRunnable;
 
-  public ConnectToHappyDroidsWindow(Stage stage, Skin skin) {
+  public ConnectToHappyDroidsWindow(Stage stage) {
     super("Connect to Happy Droids", stage);
 
     clear();

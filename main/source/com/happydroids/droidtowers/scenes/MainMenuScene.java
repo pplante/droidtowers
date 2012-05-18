@@ -44,7 +44,7 @@ public class MainMenuScene extends Scene {
 
   @Override
   public void create(Object... args) {
-    final Table container = new Table(TowerAssetManager.getGuiSkin());
+    final Table container = new Table();
     container.defaults().center().left();
 
     Label label = FontManager.Roboto64.makeLabel("Droid Towers");
@@ -186,8 +186,8 @@ public class MainMenuScene extends Scene {
 
     public void click(Actor actor, float x, float y) {
       try {
-        Constructor<? extends TowerWindow> constructor = windowClass.getConstructor(Stage.class, Skin.class);
-        TowerWindow window = constructor.newInstance(getStage(), TowerAssetManager.getGuiSkin());
+        Constructor<? extends TowerWindow> constructor = windowClass.getConstructor(Stage.class);
+        TowerWindow window = constructor.newInstance(getStage());
         window.show();
       } catch (Exception e) {
         throw new RuntimeException(e);

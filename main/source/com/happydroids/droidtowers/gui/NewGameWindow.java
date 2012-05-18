@@ -26,7 +26,7 @@ public class NewGameWindow extends TowerWindow {
   private DifficultyLevel difficultyLevel;
   private final TextButton beginButton;
 
-  public NewGameWindow(Stage stage, Skin skin) {
+  public NewGameWindow(Stage stage) {
     super("Start a new Tower", stage);
 
     clear();
@@ -55,7 +55,7 @@ public class NewGameWindow extends TowerWindow {
     TextButton medium = FontManager.RobotoBold18.makeCheckBox("Medium");
     TextButton hard = FontManager.RobotoBold18.makeCheckBox("Hard");
 
-    Table buttonContainer = new Table(skin);
+    Table buttonContainer = new Table();
     buttonContainer.row().pad(4);
     buttonContainer.add(easy).expand();
     buttonContainer.add(medium).expand();

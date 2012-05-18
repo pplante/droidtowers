@@ -18,7 +18,7 @@ public class AchievementButton extends ImageButton {
 
     setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        new AchievementListView(getStage(), TowerAssetManager.getGuiSkin()).show();
+        new AchievementListView(getStage()).show();
       }
     });
 
