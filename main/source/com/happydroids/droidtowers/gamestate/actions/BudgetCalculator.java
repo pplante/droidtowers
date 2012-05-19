@@ -12,6 +12,7 @@ import com.happydroids.droidtowers.grid.GameGrid;
 public class BudgetCalculator extends GameGridAction {
   public BudgetCalculator(GameGrid gameGrid, float frequency) {
     super(gameGrid, frequency);
+    reset();
   }
 
   @Override

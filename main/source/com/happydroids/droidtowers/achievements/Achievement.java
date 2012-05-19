@@ -199,4 +199,13 @@ public class Achievement {
   public boolean hasGivenReward() {
     return givenReward;
   }
+
+  public void unlockReward() {
+    givenReward = true;
+    if (rewards != null) {
+      for (Reward reward : rewards) {
+        reward.unlock();
+      }
+    }
+  }
 }

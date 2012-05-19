@@ -87,7 +87,7 @@ public class AchievementEngine {
 
       if (achievementIds.contains(achievement.getId())) {
         achievement.setCompleted(true);
-        achievement.giveReward();
+        achievement.unlockReward();
       }
     }
   }
@@ -108,7 +108,8 @@ public class AchievementEngine {
 
   public void completeAll() {
     for (Achievement achievement : achievements) {
-      complete(achievement);
+      achievement.setCompleted(true);
+      achievement.unlockReward();
     }
   }
 

@@ -178,7 +178,6 @@ public class TowerScene extends Scene {
     transportCalculator.run();
     desirabilityCalculator.run();
     populationCalculator.run();
-    budgetCalculator.run();
     employmentCalculator.run();
     starRatingCalculator.run();
     achievementEngineCheck.run();

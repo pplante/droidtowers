@@ -1,7 +1,8 @@
 [
   {
-    "id":"yourock",
-    "name":"YOU ROCK.",
+    "id":"neighbors",
+    "name":"The cake is a lie.",
+    "description":"Even Droids need to borrow a cup of sugar from their fellow Droids.\n\nBuild enough housing, then every Droid can bake cakes and cookies without worrying if they have enough sugar.\n\nThe cake is a lie, there was no cake, and never will be any cake.  Sorry for any confusion.",
     "requirements":[
       {
         "type":"POPULATION",
@@ -12,7 +13,7 @@
       {
         "type":"GIVE",
         "thing":"MONEY",
-        "amount":1000
+        "amount":10000
       }
     ]
   },

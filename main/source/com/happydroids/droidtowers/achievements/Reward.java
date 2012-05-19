@@ -50,6 +50,9 @@ public class Reward {
     }
 
     switch (type) {
+      case GIVE:
+        handleGiveReward();
+        break;
       case UNLOCK:
         handleUnlockReward();
         break;
@@ -64,11 +67,16 @@ public class Reward {
     }
   }
 
-  private void handleUnlockReward() {
+  private void handleGiveReward() {
     switch (thing) {
       case MONEY:
         Player.instance().addCurrency((int) amount);
         break;
+    }
+  }
+
+  private void handleUnlockReward() {
+    switch (thing) {
       case OBJECT_TYPE:
         getThingObjectType().removeLock();
         break;
@@ -165,4 +173,19 @@ public class Reward {
   }
 
 
+  public void unlock() {
+    switch (type) {
+      case UNLOCK:
+        handleUnlockReward();
+        break;
+
+      case COMPLETE:
+        if (thing.equals(ACHIEVEMENT)) {
+          Achievement achievement = Achievement.findById(thingId);
+          achievement.setCompleted(true);
+          achievement.giveReward();
+        }
+        break;
+    }
+  }
 }
