@@ -10,8 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.achievements.Achievement;
-import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.types.GridObjectType;
 
 import java.text.NumberFormat;
@@ -37,55 +35,22 @@ class GridObjectPurchaseItem extends Table {
 
     row().align(Align.LEFT);
     TextureRegion textureRegion = gridObjectType.getTextureRegion();
-    Actor actor;
+    Actor actor = null;
     if (textureRegion != null) {
       actor = new Image(textureRegion, Scaling.fit, Align.LEFT | Align.TOP);
-    } else {
-      actor = FontManager.Default.makeLabel("No image found.");
     }
+
     add(actor).maxHeight(scale(40)).maxWidth(scale(200));
-    add(buyButton).align(Align.RIGHT).width(scale(80));
+    add(buyButton).align(Align.RIGHT).width(scale(100));
+
+    debug = true;
   }
 
   public void setBuyClickListener(ClickListener clickListener) {
     if (!gridObjectType.isLocked()) {
       buyButton.setClickListener(clickListener);
     } else {
-      buyButton.setClickListener(new VibrateClickListener() {
-        @Override
-        public void onClick(Actor actor, float x, float y) {
-          Achievement lockedBy = null;
-          for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
-            if (achievement.getRewards().contains(gridObjectType.getLock())) {
-              lockedBy = achievement;
-              break;
-            }
-          }
-
-          if (lockedBy == null) {
-            return;
-          }
-
-          final Achievement finalLockedBy = lockedBy;
-          new Dialog()
-                  .setTitle("Item is Locked!")
-                  .setMessage("Sorry, this item is locked.\n\nYou may unlock it by completing this achievement: " + lockedBy.getName())
-                  .addButton("View Achievement", new OnClickCallback() {
-                    @Override
-                    public void onClick(Dialog dialog) {
-                      dialog.dismiss();
-                      new AchievementDetailView(finalLockedBy, getStage()).show();
-                    }
-                  })
-                  .addButton(ResponseType.NEGATIVE, "Dismiss", new OnClickCallback() {
-                    @Override
-                    public void onClick(Dialog dialog) {
-                      dialog.dismiss();
-                    }
-                  })
-                  .show();
-        }
-      });
+      buyButton.setClickListener(new GridObjectTypeLockedClickListener(gridObjectType));
     }
   }
 }

@@ -10,6 +10,7 @@ import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.tween.TweenSystem;
@@ -24,7 +25,7 @@ public class Toast extends Table {
     label = FontManager.RobotoBold18.makeLabel("");
 
     defaults();
-    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH));
+    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.DARKER_GRAY));
     pad(scale(12));
     add(label);
     pack();
