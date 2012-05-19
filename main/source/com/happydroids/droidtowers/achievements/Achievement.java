@@ -68,7 +68,7 @@ public class Achievement {
       }
 
       System.out.println(String.format("%s %d/%d %d", name, finishedWeight, totalWeight, getPercentComplete()));
-      completed = finishedWeight == totalWeight;
+      completed = finishedWeight >= totalWeight;
     }
   }
 

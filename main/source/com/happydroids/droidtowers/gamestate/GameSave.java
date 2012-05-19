@@ -104,6 +104,7 @@ public class GameSave {
     }
 
     AchievementEngine.instance().loadCompletedAchievements(completedAchievements, gameGrid);
+    AchievementEngine.instance().checkAchievements(gameGrid);
 
     newGame = false;
   }
@@ -128,7 +129,7 @@ public class GameSave {
     completedAchievements = Lists.newArrayList();
 
     for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
-      if (achievement.isCompleted()) {
+      if (achievement.isCompleted() && achievement.hasGivenReward()) {
         completedAchievements.add(achievement.getId());
       }
     }

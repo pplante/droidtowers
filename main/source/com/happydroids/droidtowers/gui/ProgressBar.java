@@ -47,7 +47,7 @@ class ProgressBar extends Widget {
   }
 
   public void setValue(int value) {
-    this.value = Math.min(100, value);
+    this.value = value;
     valueLabel.setText(this.value + "%");
   }
 

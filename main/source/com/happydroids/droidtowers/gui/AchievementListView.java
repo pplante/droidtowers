@@ -67,8 +67,12 @@ public class AchievementListView extends ScrollableTowerWindow {
       add(FontManager.Roboto18.makeLabel(achievement.getName())).expandX().left();
 
       Actor actor;
-      if (achievement.isCompleted() && !achievement.hasGivenReward()) {
-        actor = FontManager.Roboto18.makeLabel("Tap to Complete!");
+      if (achievement.isCompleted()) {
+        if (achievement.hasGivenReward()) {
+          actor = FontManager.Roboto18.makeLabel("Completed!");
+        } else {
+          actor = FontManager.Roboto18.makeLabel("Tap to Complete!");
+        }
       } else {
         actor = new ProgressBar(achievement.getPercentComplete());
       }
