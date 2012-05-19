@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.Requirement;
+import com.happydroids.droidtowers.achievements.Reward;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -21,8 +22,7 @@ public class AchievementDetailView extends ScrollableTowerWindow {
 
     defaults().top().left().space(scale(6));
 
-    row().height(scale(18));
-    add(new NoOpWidget());
+    makeDivider();
 
     String description = achievement.getDescription();
     if (!StringUtils.isEmpty(description)) {
@@ -33,18 +33,32 @@ public class AchievementDetailView extends ScrollableTowerWindow {
       descLabel.setWrap(true);
       add(descLabel).fill();
 
-      row().height(scale(18));
-      add(new NoOpWidget());
+      makeDivider();
     }
 
-
     List<Requirement> requirements = achievement.getRequirements();
+    List<Reward> rewards = achievement.getRewards();
+
     if (requirements != null) {
       row().expandX();
       add(new RequirementsTable(requirements)).fill();
     }
 
+    if (requirements != null && rewards != null) {
+      makeDivider();
+    }
+
+    if (rewards != null) {
+      row().expandX();
+      add(new RewardsTable(rewards)).fill();
+    }
+
     shoveContentUp();
+  }
+
+  private void makeDivider() {
+    row().height(scale(22));
+    add(new NoOpWidget());
   }
 
   private void addHeaderRow(String headerText) {

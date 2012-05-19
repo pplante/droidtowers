@@ -110,7 +110,7 @@ public class Achievement {
 
     if (rewards != null) {
       for (Reward reward : rewards) {
-        summary.add(reward.getRewardString());
+        summary.add(reward.getRewardString(true));
       }
     }
 

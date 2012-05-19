@@ -149,16 +149,16 @@ public class Reward {
     }
   }
 
-  public String getRewardString() {
-    return displayStringForType() + " " + AchievementThing.displayStringForThing(thing, amount, thingId, thingProviderTypes);
+  public String getRewardString(boolean pastTense) {
+    return displayStringForType() + (pastTense ? "ed" : "") + " " + AchievementThing.displayStringForThing(thing, amount, thingId, thingProviderTypes);
   }
 
   private String displayStringForType() {
     switch (type) {
       case GIVE:
-        return "Awarded";
+        return "Award";
       case UNLOCK:
-        return "Unlocked";
+        return "Unlock";
     }
 
     return "";
@@ -187,5 +187,9 @@ public class Reward {
         }
         break;
     }
+  }
+
+  public double getAmount() {
+    return amount;
   }
 }

@@ -16,7 +16,7 @@ public class RewardTest {
   @Test
   public void getRewardString_shouldWork_whenRewardIsMoney() {
     Reward reward = new Reward(RewardType.GIVE, AchievementThing.MONEY, 100);
-    expect(reward.getRewardString()).toEqual("Awarded $100");
+    expect(reward.getRewardString(true)).toEqual("Awarded $100");
   }
 
   @Test
@@ -24,6 +24,6 @@ public class RewardTest {
     ServiceRoomTypeFactory.instance();
 
     Reward reward = new Reward(RewardType.UNLOCK, AchievementThing.OBJECT_TYPE, "MAIDS_CLOSET");
-    expect(reward.getRewardString()).toEqual("Unlocked Maids Closet");
+    expect(reward.getRewardString(true)).toEqual("Unlocked Maids Closet");
   }
 }

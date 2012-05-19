@@ -18,6 +18,52 @@
     ]
   },
   {
+    "id":"neighbors-60",
+    "name":"More Subjects",
+    "description":"Your little tower is home to a few droids.  What if you built enough housing for 60 droids?\n\nSimple equation to live by: more residents + high desirability = more income.",
+    "requirements":[
+      {
+        "type":"POPULATION",
+        "amount":60
+      }
+    ],
+    "rewards":[
+      {
+        "type":"GIVE",
+        "thing":"MONEY",
+        "amount":30000
+      },
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingId":"LARGE-APARTMENT"
+      },
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingId":"LARGE-CONDO"
+      }
+    ]
+  },
+  {
+    "id":"neighbors-100",
+    "name":"High Class Society",
+    "description":"You've built quite the tower now, but you still lack a major addition!\n\nYou lack high class (residents)!",
+    "requirements":[
+      {
+        "type":"POPULATION",
+        "amount":100
+      }
+    ],
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingId":"PENTHOUSE"
+      }
+    ]
+  },
+  {
     "id":"employment-25",
     "name":"Small Business",
     "description":"A small stimulus package will be awarded after creating jobs for 25 droids.",
