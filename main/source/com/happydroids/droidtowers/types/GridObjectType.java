@@ -229,4 +229,8 @@ public abstract class GridObjectType {
     result = 31 * result + (lock != null ? lock.hashCode() : 0);
     return result;
   }
+
+  public Reward getLock() {
+    return lock;
+  }
 }

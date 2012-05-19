@@ -34,9 +34,7 @@ public class AchievementListView extends ScrollableTowerWindow {
     defaults();
 
     for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
-      if (!achievement.isLocked()) {
-        makeItem(achievement);
-      }
+      makeItem(achievement);
     }
 
     shoveContentUp();
@@ -73,6 +71,8 @@ public class AchievementListView extends ScrollableTowerWindow {
         } else {
           actor = FontManager.Roboto18.makeLabel("Tap to Complete!");
         }
+      } else if (achievement.isLocked()) {
+        actor = FontManager.Roboto18.makeLabel("Locked.");
       } else {
         actor = new ProgressBar(achievement.getPercentComplete());
       }

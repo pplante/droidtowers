@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.achievements.Achievement;
+import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.types.GridObjectType;
 
 import java.text.NumberFormat;
@@ -48,6 +50,42 @@ class GridObjectPurchaseItem extends Table {
   public void setBuyClickListener(ClickListener clickListener) {
     if (!gridObjectType.isLocked()) {
       buyButton.setClickListener(clickListener);
+    } else {
+      buyButton.setClickListener(new VibrateClickListener() {
+        @Override
+        public void onClick(Actor actor, float x, float y) {
+          Achievement lockedBy = null;
+          for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
+            if (achievement.getRewards().contains(gridObjectType.getLock())) {
+              lockedBy = achievement;
+              break;
+            }
+          }
+
+          if (lockedBy == null) {
+            return;
+          }
+
+          final Achievement finalLockedBy = lockedBy;
+          new Dialog()
+                  .setTitle("Item is Locked!")
+                  .setMessage("Sorry, this item is locked.\n\nYou may unlock it by completing this achievement: " + lockedBy.getName())
+                  .addButton("View Achievement", new OnClickCallback() {
+                    @Override
+                    public void onClick(Dialog dialog) {
+                      dialog.dismiss();
+                      new AchievementDetailView(finalLockedBy, getStage()).show();
+                    }
+                  })
+                  .addButton(ResponseType.NEGATIVE, "Dismiss", new OnClickCallback() {
+                    @Override
+                    public void onClick(Dialog dialog) {
+                      dialog.dismiss();
+                    }
+                  })
+                  .show();
+        }
+      });
     }
   }
 }
