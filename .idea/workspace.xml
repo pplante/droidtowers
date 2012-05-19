@@ -22,18 +22,12 @@
     <bookmark url="file://$PROJECT_DIR$/sparky/test/com/happydroids/sparky/GameUpdateCheckerTest.java" line="144" mnemonic="0" />
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" />
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" line="75" />
-    <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" line="202" />
+    <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" line="201" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="refactored some gui for object purchase&#10;fixed the background on toasts">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/hud/skin.png" afterPath="$PROJECT_DIR$/android/assets/hud/skin.png" />
+    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/hud/skin.txt" afterPath="$PROJECT_DIR$/android/assets/hud/skin.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerAssetManager.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerAssetManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -145,21 +139,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TowerAssetManager.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerAssetManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="172" column="2" selection-start="6624" selection-end="6624" vertical-scroll-proportion="0.9527559">
-              <folding>
-                <element signature="e#0#6925#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TowerGame.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="TowerGame.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="160" column="22" selection-start="6412" selection-end="6412" vertical-scroll-proportion="0.0">
+            <state line="162" column="0" selection-start="6451" selection-end="6451" vertical-scroll-proportion="0.47272727">
               <folding />
             </state>
           </provider>
@@ -178,7 +161,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementEngine.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/TowerScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/BudgetCalculator.java" />
         <option value="$PROJECT_DIR$/android/assets/params/achievements.json" />
@@ -191,9 +173,10 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/GridObjectPurchaseItem.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerAssetManager.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/Scene.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
       </list>
     </option>
   </component>
@@ -1705,7 +1688,11 @@
       <created>1337437455246</created>
       <updated>1337437455246</updated>
     </task>
-    <option name="localTasksCounter" value="173" />
+    <task id="LOCAL-00173" summary="finished the custom skin">
+      <created>1337439207311</created>
+      <updated>1337439207311</updated>
+    </task>
+    <option name="localTasksCounter" value="174" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1736,7 +1723,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32303733" sideWeight="0.95461786" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2093949" sideWeight="0.6180714" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1957606" sideWeight="0.32890624" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1957606" sideWeight="0.32890624" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24918832" sideWeight="0.7441154" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35037407" sideWeight="0.0" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
@@ -1809,7 +1796,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactored some gui for object purchase&#10;fixed the background on toasts" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished the custom skin" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1822,7 +1809,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="fixed a bug where passengers wouldn't be removed from rider queue" />
     <MESSAGE value="quick refactor" />
     <MESSAGE value="fixed some bugs with noise and population calculators" />
     <MESSAGE value="fixed a bunch of loading bugs, and the FBO clear problem on HDPI devices" />
@@ -1847,6 +1833,7 @@
     <MESSAGE value="fixed a bug where players could reload a game and receive their income upon load." />
     <MESSAGE value="clicking on a locked grid object in the purchase menu will display a dialog to let the player view the achievement" />
     <MESSAGE value="refactored some gui for object purchase&#10;fixed the background on toasts" />
+    <MESSAGE value="finished the custom skin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1969,20 +1956,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="160" column="22" selection-start="6412" selection-end="6412" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/Scene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="23" selection-start="1039" selection-end="1039" vertical-scroll-proportion="0.33290324">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="149" column="0" selection-start="5849" selection-end="5849" vertical-scroll-proportion="0.27483872">
@@ -1992,10 +1965,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerAssetManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="2" selection-start="6624" selection-end="6624" vertical-scroll-proportion="0.9527559">
+        <state line="156" column="48" selection-start="6228" selection-end="6228" vertical-scroll-proportion="0.49081364">
           <folding>
             <element signature="e#0#6925#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/Scene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="9" selection-start="597" selection-end="597" vertical-scroll-proportion="0.32038835">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="162" column="0" selection-start="6451" selection-end="6451" vertical-scroll-proportion="0.47272727">
+          <folding />
         </state>
       </provider>
     </entry>

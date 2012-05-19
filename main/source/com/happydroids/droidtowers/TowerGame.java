@@ -50,7 +50,7 @@ import static com.badlogic.gdx.Application.ApplicationType.Android;
 public class TowerGame implements ApplicationListener, BackgroundTask.PostExecuteManager {
   private static final String TAG = TowerGame.class.getSimpleName();
 
-  private static OrthographicCamera camera;
+  private OrthographicCamera camera;
   private SpriteBatch spriteBatch;
   private BitmapFont menloBitmapFont;
   private static Scene activeScene;
@@ -160,7 +160,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     Scene.setCamera(camera);
     Scene.setSpriteBatch(spriteBatch);
-
 
     changeScene(SplashScene.class, SplashSceneStates.PRELOAD_ONLY, new Runnable() {
       public void run() {
