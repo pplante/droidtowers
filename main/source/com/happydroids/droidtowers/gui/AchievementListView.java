@@ -34,7 +34,9 @@ public class AchievementListView extends ScrollableTowerWindow {
     defaults();
 
     for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
-      makeItem(achievement);
+      if (!achievement.isLocked()) {
+        makeItem(achievement);
+      }
     }
 
     shoveContentUp();

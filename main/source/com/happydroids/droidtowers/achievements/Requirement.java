@@ -28,6 +28,9 @@ public class Requirement {
 
   public boolean validate(GameGrid gameGrid) {
     switch (type) {
+      case EMPLOYMENT:
+        currentWeight = Player.instance().getJobsFilled();
+        return currentWeight >= amount;
       case POPULATION:
         currentWeight = Player.instance().getTotalPopulation();
         return currentWeight >= amount;
@@ -134,6 +137,9 @@ public class Requirement {
         if (thing.equals(ACHIEVEMENT)) {
           return "Complete Achievement: " + displayStringForThing(thing, amount, thingId, thingProviderTypes);
         }
+
+      case EMPLOYMENT:
+        return "Create " + NumberFormat.getInstance().format(amount) + " Jobs";
 
       case POPULATION:
         return "Attract " + NumberFormat.getInstance().format(amount) + " Residents";

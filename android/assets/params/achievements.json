@@ -17,6 +17,90 @@
     ]
   },
   {
+    "id":"employment-25",
+    "name":"Small Business",
+    "description":"A small stimulus package will be awarded after creating jobs for 25 droids.",
+    "requirements":[
+      {
+        "type":"EMPLOYMENT",
+        "amount":25
+      }
+    ],
+    "rewards":[
+      {
+        "type":"GIVE",
+        "thing":"MONEY",
+        "amount":25000
+      },
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingId":"PIZZA-PLACE"
+      },
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingId":"SUSHI-PLACE"
+      },
+      {
+        "type":"UNLOCK",
+        "thing":"ACHIEVEMENT",
+        "thingId":"employment-75"
+      }
+    ]
+  },
+  {
+    "id":"employment-75",
+    "name":"Master of Business Administration",
+    "description":"A stimulus package will be awarded after creating enough jobs for the droids living in your tower.\n\nUse this money to further boost your economy.",
+    "requirements":[
+      {
+        "type":"EMPLOYMENT",
+        "amount":75
+      }
+    ],
+    "rewards":[
+      {
+        "type":"GIVE",
+        "thing":"MONEY",
+        "amount":100000
+      },
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingId":"LARGE-OFFICE"
+      },
+      {
+        "type":"UNLOCK",
+        "thing":"ACHIEVEMENT",
+        "thingId":"employment-125"
+      }
+    ]
+  },
+  {
+    "id":"employment-125",
+    "name":"Executive Suites",
+    "description":"The executive suites are decorated with marble floor to ceiling.  The desks are made of pure mahogany, with the finest of silk chairs.\n\nYou're in the big leagues now.",
+    "requirements":[
+      {
+        "type":"EMPLOYMENT",
+        "amount":125
+      }
+    ],
+    "rewards":[
+      {
+        "type":"GIVE",
+        "thing":"MONEY",
+        "amount":150000
+      },
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingId":"MOVIE-THEATER"
+      }
+    ]
+  },
+  {
     "id":"build1hotelroom",
     "name":"Build 3 Hotel Rooms.",
     "description":"Hotel Rooms provide a place for temporary residents to stay, but they will get dirty over time.  The Maids Closet provides an employment source who will clean these rooms on a regular basis.",

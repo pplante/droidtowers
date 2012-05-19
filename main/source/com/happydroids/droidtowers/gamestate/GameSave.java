@@ -23,6 +23,7 @@ import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_Unhap
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridObjectState;
+import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.jackson.TowerTypeIdResolver;
 import com.happydroids.droidtowers.math.GridPoint;
@@ -99,6 +100,7 @@ public class GameSave {
       TutorialEngine.instance().moveToStepWhenReady("tutorial-welcome");
     } else {
       TutorialEngine.instance().completeAll();
+      HeadsUpDisplay.instance().getAchievementButton().visible = true;
     }
 
     AchievementEngine.instance().loadCompletedAchievements(completedAchievements, gameGrid);

@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.achievements;
 
 public enum RequirementType {
   POPULATION,
+  EMPLOYMENT,
   BUILD,
   UNLOCK
 }
