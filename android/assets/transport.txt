@@ -2,6 +2,13 @@ transport.png
 format: RGBA8888
 filter: MipMapNearestNearest,Linear
 repeat: none
+elevator/service-car
+  rotate: false
+  xy: 122, 66
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
 elevator/top
   rotate: false
   xy: 122, 1
@@ -11,7 +18,7 @@ elevator/top
   index: -1
 elevator/car
   rotate: false
-  xy: 187, 66
+  xy: 1, 80
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
@@ -32,14 +39,14 @@ stairs
   index: -1
 elevator/empty
   rotate: false
-  xy: 122, 66
+  xy: 187, 66
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 elevator/bottom
   rotate: false
-  xy: 1, 80
+  xy: 1, 145
   size: 64, 64
   orig: 64, 64
   offset: 0, 0

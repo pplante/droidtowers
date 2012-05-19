@@ -32,7 +32,7 @@ public class ElevatorCar extends GameObject {
 
     queue = new ElevatorQueue(elevator);
 
-    TextureAtlas.AtlasRegion carRegion = elevatorAtlas.findRegion("elevator/car");
+    TextureAtlas.AtlasRegion carRegion = elevatorAtlas.findRegion(elevator.getGridObjectType().getImageFilename());
     setRegion(carRegion);
     setOrigin(0, 0);
     float gridScale = elevator.gameGrid.getGridScale();

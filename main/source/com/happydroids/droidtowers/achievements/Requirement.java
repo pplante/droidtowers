@@ -34,6 +34,9 @@ public class Requirement {
       case POPULATION:
         currentWeight = Player.instance().getTotalPopulation();
         return currentWeight >= amount;
+      case DESIRABILITY:
+        currentWeight = (int) (Player.instance().getDesirabilityRating() * 100);
+        return currentWeight >= amount;
       case BUILD:
         return handleBuildRequirement(gameGrid);
       case UNLOCK:
@@ -137,6 +140,9 @@ public class Requirement {
         if (thing.equals(ACHIEVEMENT)) {
           return "Complete Achievement: " + displayStringForThing(thing, amount, thingId, thingProviderTypes);
         }
+
+      case DESIRABILITY:
+        return "Maintain a " + amount + "% desirability rating.";
 
       case EMPLOYMENT:
         return "Create " + NumberFormat.getInstance().format(amount) + " Jobs";

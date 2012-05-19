@@ -148,13 +148,13 @@
     ]
   },
   {
-    "id":"build1hotelroom",
-    "name":"Build 3 Hotel Rooms.",
-    "description":"Hotel Rooms provide a place for temporary residents to stay, but they will get dirty over time.  The Maids Closet provides an employment source who will clean these rooms on a regular basis.",
+    "id":"build8hotelroom",
+    "name":"Build 8 Hotel Rooms.",
+    "description":"Droids who are traveling on business trips will likely need somewhere to stay, a Hotel Room provides the perfect temporary housing option!",
     "requirements":[
       {
         "type":"BUILD",
-        "amount":3,
+        "amount":8,
         "thing":"PROVIDER_TYPE",
         "thingProviderTypes":["HOTEL_ROOMS"]
       }
@@ -168,8 +168,8 @@
     ]
   },
   {
-    "id":"build3commercialspaces",
-    "name":"Build 3 Commercial Spaces.",
+    "id":"build5commercialspaces",
+    "name":"Build 5 Commercial Spaces.",
     "requirements":[
       {
         "type":"BUILD",
@@ -212,6 +212,58 @@
         "type":"UNLOCK",
         "thing":"OBJECT_TYPE",
         "thingId":"SECURITY-CENTER"
+      }
+    ]
+  },
+  {
+    "id":"mass-transit",
+    "name":"Mass Transit",
+    "description":"Good transportation is essential to the success of your Tower.  Make sure to build enough elevators and stairs, otherwise droids will not be able to get anywhere and will become dissatisfied.",
+    "requirements":[
+      {
+        "type":"BUILD",
+        "amount":8,
+        "thing":"PROVIDER_TYPE",
+        "thingProviderTypes":["TRANSPORT"]
+      }
+    ],
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingId":"SERVICE-ELEVATOR"
+      }
+    ]
+  },
+  {
+    "id":"dubai-7-star-wonder",
+    "name":"7th star is free!",
+    "description":"Dubai is home to the worlds only 7 star hotels, breaking existing rating systems.  But wait, this is not the real world!\n\nYour tower is a world class one of a kind location, it should be properly rewarded with such a unique rating!\n\nUpon completion, your maximum star rating will increase to 7.",
+    "requirements":[
+      {
+        "type":"POPULATION",
+        "amount":600
+      },
+      {
+        "type":"EMPLOYMENT",
+        "amount":150
+      },
+      {
+        "type":"DESIRABILITY",
+        "amount":95
+      },
+      {
+        "type":"BUILD",
+        "thing":"OBJECT_TYPE",
+        "thingId":"PENTHOUSE",
+        "amount":30
+      }
+    ],
+    "rewards":[
+      {
+        "type":"GIVE",
+        "thing":"MONEY",
+        "amount":1000000
       }
     ]
   }

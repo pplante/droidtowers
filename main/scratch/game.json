@@ -1,29 +1,29 @@
 {"com.happydroids.droidtowers.gamestate.GameSave":{
-  "fileGeneration":6382,
+  "fileGeneration":6569,
   "fileFormat":0,
   "cloudSaveUri":"/api/v1/gamesave/21/",
   "towerName":"Cowtown Hills",
   "difficultyLevel":"EASY",
   "player":{
-    "coins":2385462,
-    "experience":462200,
-    "jobsFilled":30,
+    "coins":2795717,
+    "experience":463200,
+    "jobsFilled":33,
     "jobsMax":44,
     "populationAttracted":103,
-    "maxPopulation":440,
-    "populationMax":440,
-    "populationResidency":308,
-    "currentIncome":2824,
-    "currentExpenses":155,
-    "starRating":3.8885093,
-    "budgetRating":0.8959382,
-    "employmentRating":0.6363636,
-    "populationRating":0.7,
-    "desirabilityRating":0.79255223
+    "maxPopulation":442,
+    "populationMax":442,
+    "populationResidency":310,
+    "currentIncome":2579,
+    "currentExpenses":157,
+    "starRating":3.825542,
+    "budgetRating":0.9016917,
+    "employmentRating":0.54545456,
+    "populationRating":0.7013575,
+    "desirabilityRating":0.79341245
   },
   "cameraPosition":{
-    "x":14048.103,
-    "y":1935.0,
+    "x":14395.954,
+    "y":1949.1509,
     "z":0.0
   },
   "cameraZoom":3.0,
@@ -1745,7 +1745,7 @@
       },
       "size":{
         "x":1,
-        "y":19
+        "y":20
       }
     },
     {
@@ -2396,10 +2396,21 @@
         "x":5,
         "y":1
       }
+    },
+    {
+      "typeId":"SMALL-APARTMENT",
+      "position":{
+        "x":228,
+        "y":27
+      },
+      "size":{
+        "x":3,
+        "y":1
+      }
     }
   ],
   "objectCounts":{
-    "Small Apartment":49,
+    "Small Apartment":50,
     "Small Condo":47,
     "Large Apartment":72,
     "Large Office":4,
@@ -2411,7 +2422,7 @@
     "Large Condo":8,
     "Elevator Shaft":5
   },
-  "completedAchievements":["yourock", "build1hotelroom", "build3commercialspaces", "security center"],
+  "completedAchievements":["neighbors", "neighbors-60", "neighbors-100", "employment-25", "security center", "dubai-7-star-wonder"],
   "baseFilename":"53535c9f09634db787341df7f11d52c9.json",
   "newGame":false
 }}

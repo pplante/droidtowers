@@ -20,7 +20,7 @@ class StarRatingBar extends Widget {
   public static final Color STAR_COLOR = rgba("#ffbb33");
   private final Label valueLabel;
   private float stars;
-  private final int maxStars;
+  private int maxStars;
   private Texture starTexture;
   private Texture starTextureMask;
   private final int starTextureWidth;
@@ -95,5 +95,14 @@ class StarRatingBar extends Widget {
   public void layout() {
     valueLabel.width = starTextureWidth;
     valueLabel.height = height;
+  }
+
+
+  public int getMaxStars() {
+    return maxStars;
+  }
+
+  public void setMaxStars(int maxStars) {
+    this.maxStars = maxStars;
   }
 }

@@ -18,6 +18,8 @@ import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
+import com.happydroids.droidtowers.achievements.Achievement;
+import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.events.GameSpeedChangeEvent;
 import com.happydroids.droidtowers.scenes.TowerScene;
@@ -51,6 +53,7 @@ public class StatusBarPanel extends Table {
   private StarRatingBar employmentRatingBar;
   private final Texture backgroundTexture;
   private final Slider gameSpeedSlider;
+  private final Achievement dubai7StarWonder;
 
   public StatusBarPanel(TowerScene towerScene) {
     this.towerScene = towerScene;
@@ -91,6 +94,7 @@ public class StatusBarPanel extends Table {
     add(gameSpeedLabel);
     add(starWidget);
 
+    dubai7StarWonder = AchievementEngine.instance().findById("dubai-7-star-wonder");
 
     gameSpeedOverlay = new PopOverMenu();
     gameSpeedOverlay.alignArrow(Align.LEFT);
@@ -164,6 +168,10 @@ public class StatusBarPanel extends Table {
       lastUpdated = 0f;
       Player player = Player.instance();
       starWidget.setValue(player.getStarRating());
+
+      if (dubai7StarWonder.isCompleted() && starWidget.getMaxStars() == 5) {
+        starWidget.setMaxStars(7);
+      }
 
       budgetRatingBar.setValue(player.getBudgetRating() * 5f);
       populationRatingBar.setValue(player.getPopulationRating() * 5f);

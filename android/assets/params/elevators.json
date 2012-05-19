@@ -1,7 +1,7 @@
 [
   {
     "id":"ELEVATOR",
-    "name":"Elevator Shaft",
+    "name":"Elevator",
     "canShareSpace":true,
     "coins":15000,
     "experienceAward":2000,
@@ -10,6 +10,19 @@
     "provides":"ELEVATOR",
     "atlasFilename":"transport.txt",
     "imageFilename":"elevator/car",
+    "noiseLevel":0.1
+  },
+  {
+    "id":"SERVICE-ELEVATOR",
+    "name":"Service Elevator",
+    "canShareSpace":true,
+    "coins":15000,
+    "experienceAward":2000,
+    "height":1,
+    "width":1,
+    "provides":"ELEVATOR",
+    "atlasFilename":"transport.txt",
+    "imageFilename":"elevator/service-car",
     "noiseLevel":0.1
   }
 ]
