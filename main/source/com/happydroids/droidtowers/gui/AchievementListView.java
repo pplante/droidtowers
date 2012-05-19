@@ -15,10 +15,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
+import com.google.common.base.Function;
+import com.google.common.collect.Ordering;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
@@ -33,7 +38,21 @@ public class AchievementListView extends ScrollableTowerWindow {
 
     defaults();
 
-    for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
+    List<Achievement> achievements = AchievementEngine.instance().getAchievements();
+    List<Achievement> sortedAchievements = Ordering.natural().onResultOf(new Function<Achievement, Comparable>() {
+      @Override
+      public Comparable apply(@Nullable Achievement achievement) {
+        if (achievement.isCompleted()) {
+          return 50;
+        } else if (achievement.isLocked()) {
+          return 100;
+        }
+
+        return 0;
+      }
+    }).sortedCopy(achievements);
+
+    for (Achievement achievement : sortedAchievements) {
       makeItem(achievement);
     }
 
