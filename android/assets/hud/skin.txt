@@ -2,6 +2,13 @@ skin.png
 format: RGBA8888
 filter: Nearest,Linear
 repeat: none
+button-down
+  rotate: false
+  xy: 51, 19
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
 hdpi/checkbox-on
   rotate: false
   xy: 1, 34
@@ -30,11 +37,32 @@ slider-handle
   orig: 16, 16
   offset: 0, 0
   index: -1
+text-selection
+  rotate: false
+  xy: 60, 1
+  size: 2, 4
+  orig: 2, 4
+  offset: 0, 0
+  index: -1
 hdpi/slider-handle
   rotate: false
   xy: 1, 1
   size: 32, 32
   orig: 32, 32
+  offset: 0, 0
+  index: -1
+button
+  rotate: false
+  xy: 51, 10
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+text-cursor
+  rotate: false
+  xy: 51, 1
+  size: 8, 8
+  orig: 8, 8
   offset: 0, 0
   index: -1
 checkbox-off

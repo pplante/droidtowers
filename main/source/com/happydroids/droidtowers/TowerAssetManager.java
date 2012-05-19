@@ -14,10 +14,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Logger;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
@@ -37,7 +34,6 @@ public class TowerAssetManager {
   private static MemoryTrackingAssetManager assetManager;
   public static final String WHITE_SWATCH = "swatches/swatch-white.png";
   public static final String WHITE_SWATCH_TRIANGLE = "swatches/swatch-white-triangle.png";
-  private static Skin skin;
   private static AssetList assetList;
   private static Skin customSkin;
 
@@ -72,22 +68,46 @@ public class TowerAssetManager {
         }
       });
 
-      ResolutionIndependentAtlas skinAtlas = new ResolutionIndependentAtlas(Gdx.files.internal("hud/skin.txt"));
-
-      customSkin = new Skin();
-
-      CheckBox.CheckBoxStyle checkBoxStyle = new CheckBox.CheckBoxStyle();
-      checkBoxStyle.checkboxOn = skinAtlas.findRegion("checkbox-on");
-      checkBoxStyle.checkboxOff = skinAtlas.findRegion("checkbox-off");
-      checkBoxStyle.font = FontManager.Default.getFont();
-      checkBoxStyle.fontColor = Color.WHITE;
-      customSkin.addStyle("default", checkBoxStyle);
-
-      Slider.SliderStyle sliderStyle = new Slider.SliderStyle(new NinePatch(new Texture(Gdx.files.internal(WHITE_SWATCH)), Color.LIGHT_GRAY), skinAtlas.findRegion("slider-handle"));
-      customSkin.addStyle("default", sliderStyle);
+      makeCustomGUISkin();
     }
 
     return assetManager;
+  }
+
+  private static void makeCustomGUISkin() {
+    ResolutionIndependentAtlas skinAtlas = new ResolutionIndependentAtlas(Gdx.files.internal("hud/skin.txt"));
+
+    customSkin = new Skin();
+
+    CheckBox.CheckBoxStyle checkBoxStyle = new CheckBox.CheckBoxStyle();
+    checkBoxStyle.checkboxOn = skinAtlas.findRegion("checkbox-on");
+    checkBoxStyle.checkboxOff = skinAtlas.findRegion("checkbox-off");
+    checkBoxStyle.font = FontManager.Default.getFont();
+    checkBoxStyle.fontColor = Color.WHITE;
+    customSkin.addStyle("default", checkBoxStyle);
+
+    Slider.SliderStyle sliderStyle = new Slider.SliderStyle(new NinePatch(new Texture(Gdx.files.internal(WHITE_SWATCH)), Color.LIGHT_GRAY), skinAtlas.findRegion("slider-handle"));
+    customSkin.addStyle("default", sliderStyle);
+
+    TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+    textButtonStyle.up = new NinePatch(skinAtlas.findRegion("button"), 3, 3, 3, 3);
+    textButtonStyle.font = FontManager.Roboto18.getFont();
+    textButtonStyle.fontColor = Color.WHITE;
+    textButtonStyle.down = new NinePatch(skinAtlas.findRegion("button-down"), 3, 3, 3, 3);
+    textButtonStyle.downFontColor = Colors.ALMOST_BLACK;
+
+    customSkin.addStyle("default", textButtonStyle);
+
+    TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
+    textFieldStyle.background = new NinePatch(skinAtlas.findRegion("button"), 3, 3, 3, 3);
+    textFieldStyle.font = FontManager.Roboto18.getFont();
+    textFieldStyle.fontColor = Color.WHITE;
+    textFieldStyle.messageFont = FontManager.Roboto18.getFont();
+    textFieldStyle.messageFontColor = Color.LIGHT_GRAY;
+    textFieldStyle.cursor = new NinePatch(skinAtlas.findRegion("text-cursor"), 3, 3, 3, 3);
+    textFieldStyle.selection = skinAtlas.findRegion("text-selection");
+
+    customSkin.addStyle("default", textFieldStyle);
   }
 
   private static void addToAssetManager(Map<String, Class> preloadFiles, Map<String, String> highDefFiles) {
@@ -112,10 +132,6 @@ public class TowerAssetManager {
 
   public static void dispose() {
     assetManager.dispose();
-  }
-
-  public static Skin skin(String s) {
-    return assetManager().get(s, Skin.class);
   }
 
   public static BitmapFont bitmapFont(String s) {
@@ -150,23 +166,21 @@ public class TowerAssetManager {
     return new Sprite(texture(fileName));
   }
 
-  public static void setGuiSkin(Skin guiSkin) {
-    skin = guiSkin;
-  }
-
-  public static Skin getGuiSkin() {
-    return skin;
-  }
-
   public static ImageButton imageButton(TextureAtlas.AtlasRegion region) {
     return new ImageButton(region);
   }
 
-  public static AssetList getAssetList() {
-    return assetList;
-  }
-
   public static Skin getCustomSkin() {
     return customSkin;
+  }
+
+  public static boolean hasFilesToPreload() {
+    for (String preloadFile : assetList.preloadFiles.keySet()) {
+      if (!assetManager().isLoaded(checkForHDPI(preloadFile))) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

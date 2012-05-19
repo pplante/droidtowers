@@ -26,7 +26,6 @@ import java.util.Set;
 import static com.happydroids.droidtowers.SplashSceneStates.FULL_LOAD;
 import static com.happydroids.droidtowers.SplashSceneStates.PRELOAD_ONLY;
 import static com.happydroids.droidtowers.TowerAssetManager.assetManager;
-import static com.happydroids.droidtowers.TowerAssetManager.checkForHDPI;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class SplashScene extends Scene {
@@ -148,15 +147,7 @@ public class SplashScene extends Scene {
       }
     } else {
       if (splashState == PRELOAD_ONLY) {
-        boolean hasFilesToPreload = false;
-        for (String preloadFile : TowerAssetManager.getAssetList().preloadFiles.keySet()) {
-          if (!assetManager().isLoaded(checkForHDPI(preloadFile))) {
-            hasFilesToPreload = true;
-            break;
-          }
-        }
-
-        if (!hasFilesToPreload) {
+        if (!TowerAssetManager.hasFilesToPreload()) {
           if (postLoadRunnable != null) {
             postLoadRunnable.run();
           }

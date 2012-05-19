@@ -17,7 +17,6 @@ import com.happydroids.droidtowers.platform.Display;
 
 import java.util.HashMap;
 
-import static com.happydroids.droidtowers.TowerAssetManager.getGuiSkin;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public enum FontManager {
@@ -93,11 +92,11 @@ public enum FontManager {
   }
 
   public TransparentTextButton makeTransparentButton(String labelText) {
-    return applyTextButtonLabelStyle(new TransparentTextButton(labelText, getGuiSkin()));
+    return applyTextButtonLabelStyle(new TransparentTextButton(labelText, TowerAssetManager.getCustomSkin()));
   }
 
   public TextButton makeTextButton(String labelText) {
-    return applyTextButtonLabelStyle(new TextButton(labelText, getGuiSkin()));
+    return applyTextButtonLabelStyle(new TextButton(labelText, TowerAssetManager.getCustomSkin()));
   }
 
   public CheckBox makeCheckBox(String labelText) {
@@ -115,8 +114,8 @@ public enum FontManager {
 
   public TextField makeTextField(String labelText, String hintText) {
     if (textFieldStyle == null) {
-      TextField.TextFieldStyle defaultStyle = getGuiSkin().getStyle(TextField.TextFieldStyle.class);
-      textFieldStyle = new TextField.TextFieldStyle(getFont(), Color.WHITE, getFont(), defaultStyle.messageFontColor, defaultStyle.cursor, defaultStyle.selection, defaultStyle.background);
+      TextField.TextFieldStyle defaultStyle = TowerAssetManager.getCustomSkin().getStyle(TextField.TextFieldStyle.class);
+      textFieldStyle = new TextField.TextFieldStyle(getFont(), defaultStyle.fontColor, getFont(), defaultStyle.messageFontColor, defaultStyle.cursor, defaultStyle.selection, defaultStyle.background);
     }
 
     return new TextField(labelText, hintText, textFieldStyle);

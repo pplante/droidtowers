@@ -16,7 +16,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
 import com.happydroids.HappyDroidConsts;
@@ -159,8 +158,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
       }
     });
 
-    final Skin skin = new Skin(Gdx.files.internal("default-skin.json"));
-    TowerAssetManager.setGuiSkin(skin);
     Scene.setCamera(camera);
     Scene.setSpriteBatch(spriteBatch);
 
