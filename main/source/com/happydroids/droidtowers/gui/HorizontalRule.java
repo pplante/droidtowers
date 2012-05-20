@@ -8,18 +8,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Widget;
+import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 
-import static com.happydroids.droidtowers.ColorUtil.rgba;
-
 public class HorizontalRule extends Widget {
-  private static final Color DEFAULT_COLOR = rgba("#0099CC"); // android ICS blue!
   private final Color desiredColor;
   private final int desiredHeight;
   private Texture texture;
 
   public HorizontalRule() {
-    this(DEFAULT_COLOR, 2);
+    this(Colors.ICS_BLUE, 2);
   }
 
   public HorizontalRule(Color desiredColor, int desiredHeight) {
@@ -30,7 +28,7 @@ public class HorizontalRule extends Widget {
   }
 
   public HorizontalRule(int height) {
-    this(DEFAULT_COLOR, height);
+    this(Colors.ICS_BLUE, height);
   }
 
   @Override
