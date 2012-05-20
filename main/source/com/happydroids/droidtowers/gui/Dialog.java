@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.input.InputCallback;
@@ -103,21 +102,16 @@ public class Dialog extends TowerWindow {
   }
 
   public Dialog show() {
-    Table container = new Table();
-    container.defaults().pad(scale(12)).top().left();
     Label messageLabel = FontManager.Roboto24.makeLabel(messageText);
     messageLabel.setWrap(true);
 
-    container.row();
-    container.add(messageLabel).colspan(buttons.size()).width(Display.percentOfScreen(0.8f)).minHeight(scale(120));
+    row();
+    add(messageLabel).colspan(buttons.size()).width(Display.percentOfScreen(0.8f)).minHeight(scale(120));
 
-    container.row();
+    row().pad(scale(12));
     for (TextButton button : buttons) {
-      container.add(button).fill();
+      add(button).fillX();
     }
-    container.pack();
-
-    add(container);
 
     super.show();
 

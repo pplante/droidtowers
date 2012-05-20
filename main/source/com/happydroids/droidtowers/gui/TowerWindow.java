@@ -28,11 +28,15 @@ public class TowerWindow {
   protected Table wrapper;
   private final Label titleLabel;
   private final TransparentTextButton closeButton;
+  private ActionBar actionBar;
+  private final Cell actionBarCell;
+  private final Cell contentRow;
 
   public TowerWindow(String title, Stage stage) {
     this.stage = stage;
 
     wrapper = new Table();
+    wrapper.setFillParent(true);
     wrapper.defaults().top().left();
     wrapper.touchable = true;
     wrapper.setClickListener(new ClickListener() {
@@ -60,8 +64,12 @@ public class TowerWindow {
     wrapper.row();
     wrapper.add(new HorizontalRule(scale(2))).expandX();
 
-    wrapper.row().fill().height((int) (stage.height() - scale(46))).padLeft(scale(24)).padRight(scale(24));
-    wrapper.add(makeContentContainer()).fillX();
+    wrapper.row().fillX();
+    actionBarCell = wrapper.add();
+
+    contentRow = wrapper.row();
+    contentRow.fill().padLeft(scale(24)).padRight(scale(24));
+    wrapper.add(makeContentContainer()).expand();
 
     closeButton.setClickListener(new VibrateClickListener() {
       @Override
@@ -69,12 +77,14 @@ public class TowerWindow {
         dismiss();
       }
     });
+
+    wrapper.debug();
   }
 
   protected Actor makeContentContainer() {
     content = new Table();
     content.defaults();
-    content.row().expandX();
+    content.row().fill();
 
     return content;
   }
@@ -152,5 +162,12 @@ public class TowerWindow {
 
   protected Cell add() {
     return content.add();
+  }
+
+  public void setActionBar(ActionBar actionBar) {
+    this.actionBar = actionBar;
+    actionBarCell.setWidget(actionBar);
+    actionBarCell.expandX();
+    wrapper.pack();
   }
 }

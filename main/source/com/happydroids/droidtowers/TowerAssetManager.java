@@ -183,4 +183,11 @@ public class TowerAssetManager {
 
     return false;
   }
+
+  public static NinePatch ninePatch(String fileName, Color color, Texture.TextureFilter filterA, Texture.TextureFilter filterB) {
+    Texture texture = texture(fileName);
+    texture.setFilter(filterA, filterB);
+
+    return new NinePatch(texture, color);
+  }
 }

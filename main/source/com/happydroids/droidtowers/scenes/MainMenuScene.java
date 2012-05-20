@@ -18,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.interpolators.OvershootInterpolator;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.droidtowers.DebugUtils;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
@@ -156,7 +155,8 @@ public class MainMenuScene extends Scene {
     });
 
 //    DebugUtils.createNonSavableGame(true);
-    DebugUtils.loadFirstGameFound();
+//    DebugUtils.loadFirstGameFound();
+//    new FriendsListWindow(getStage()).show();
   }
 
   @Override
