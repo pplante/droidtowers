@@ -33,7 +33,9 @@ public enum AchievementThing {
         for (ProviderType providerType : thingProviderTypes) {
           Set<GridObjectType> gridObjectTypes = GridObjectTypeFactory.findByProviderTypeFromAnyFactory(providerType);
           for (GridObjectType gridObjectType : gridObjectTypes) {
-            objectNames.add(gridObjectType.getName());
+            if (!gridObjectType.isLocked()) {
+              objectNames.add(gridObjectType.getName());
+            }
           }
         }
 

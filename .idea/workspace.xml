@@ -27,10 +27,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ActionBar.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ActionBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FriendsListWindow.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FriendsListWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TowerWindow.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TowerWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementThing.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementThing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/audio/GameSoundController.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/audio/GameSoundController.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -127,11 +125,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TowerWindow.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TowerWindow.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TowerWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="0" selection-start="2681" selection-end="2681" vertical-scroll-proportion="0.6499134">
+            <state line="79" column="0" selection-start="2681" selection-end="2681" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameSoundController.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/audio/GameSoundController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="87" column="45" selection-start="2461" selection-end="2461" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#2525#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Requirement.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/Requirement.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="135" column="41" selection-start="4024" selection-end="4024" vertical-scroll-proportion="0.18085106">
+              <folding>
+                <element signature="e#0#4721#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -149,8 +169,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/StarRatingCalculator.java" />
-        <option value="$PROJECT_DIR$/main/scratch/game.json" />
         <option value="$PROJECT_DIR$/android/assets/params/achievements.json" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorCar.java" />
         <option value="$PROJECT_DIR$/android/assets/params/elevators.json" />
@@ -165,6 +183,8 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FriendsListWindow.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ActionBar.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TowerWindow.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/audio/GameSoundController.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementThing.java" />
       </list>
     </option>
   </component>
@@ -1654,7 +1674,11 @@
       <created>1337532940271</created>
       <updated>1337532940271</updated>
     </task>
-    <option name="localTasksCounter" value="179" />
+    <task id="LOCAL-00179" summary="scrollable windows can now have fixed content">
+      <created>1337533723474</created>
+      <updated>1337533723475</updated>
+    </task>
+    <option name="localTasksCounter" value="180" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1758,7 +1782,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the dialog and window classes so they properly fill the entire screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="scrollable windows can now have fixed content" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1771,7 +1795,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="wow majorly overhauled the various grid object storage mechanisms" />
     <MESSAGE value="fucked myself real bad with GuavaSet because it had an error where items would never be deleted. oh well it was stupid" />
     <MESSAGE value="reimplemented the render order sorting" />
     <MESSAGE value="switched the asset manager to use a json file rather than a class with static members.  that was a giant mess!" />
@@ -1796,6 +1819,7 @@
     <MESSAGE value="service elevator&#10;star rating goes to 7 with the dubai achievement&#10;" />
     <MESSAGE value="sort the achievements in the list" />
     <MESSAGE value="fixed the dialog and window classes so they properly fill the entire screen" />
+    <MESSAGE value="scrollable windows can now have fixed content" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1818,26 +1842,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/StarRatingCalculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="62" selection-start="871" selection-end="890" vertical-scroll-proportion="0.6241135" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/Requirement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="18" selection-start="2258" selection-end="2258" vertical-scroll-proportion="-0.095744684" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/ui/ClickListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="17" selection-start="182" selection-end="182" vertical-scroll-proportion="0.19870968" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="67" selection-start="2515" selection-end="2515" vertical-scroll-proportion="0.76859504" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/OnClickCallback.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="39" selection-start="150" selection-end="150" vertical-scroll-proportion="0.17032258" />
@@ -1917,8 +1921,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TowerWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="0" selection-start="2681" selection-end="2681" vertical-scroll-proportion="0.6499134">
+        <state line="79" column="0" selection-start="2681" selection-end="2681" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/RequirementType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#214#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/audio/GameSoundController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="45" selection-start="2461" selection-end="2461" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#2525#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementThing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="13" selection-start="1400" selection-end="1400" vertical-scroll-proportion="0.6377816">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/Requirement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="135" column="41" selection-start="4024" selection-end="4024" vertical-scroll-proportion="0.18085106">
+          <folding>
+            <element signature="e#0#4721#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -85,7 +85,7 @@ public class GameSoundController {
   }
 
   public void update(float deltaTime) {
-    if (audioEnabled && !activeSong.isPlaying()) {
+    if (audioEnabled && activeSong != null && !activeSong.isPlaying()) {
       moveToNextSong();
     }
   }
