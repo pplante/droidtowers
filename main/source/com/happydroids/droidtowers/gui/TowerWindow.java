@@ -28,7 +28,7 @@ public class TowerWindow {
   protected Table wrapper;
   private final Label titleLabel;
   private final TransparentTextButton closeButton;
-  private ActionBar actionBar;
+  private Actor staticHeaderContent;
   private final Cell actionBarCell;
   private final Cell contentRow;
 
@@ -77,8 +77,6 @@ public class TowerWindow {
         dismiss();
       }
     });
-
-    wrapper.debug();
   }
 
   protected Actor makeContentContainer() {
@@ -164,9 +162,9 @@ public class TowerWindow {
     return content.add();
   }
 
-  public void setActionBar(ActionBar actionBar) {
-    this.actionBar = actionBar;
-    actionBarCell.setWidget(actionBar);
+  public void setStaticHeader(Actor staticContent) {
+    this.staticHeaderContent = staticContent;
+    actionBarCell.setWidget(staticContent);
     actionBarCell.expandX();
     wrapper.pack();
   }

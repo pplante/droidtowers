@@ -13,8 +13,8 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class ActionBar extends Table {
   public ActionBar() {
-    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.DARKER_GRAY, Texture.TextureFilter.Linear, Texture.TextureFilter.Linear));
-    defaults().pad(scale(8)).fillX();
+    setBackground(TowerAssetManager.ninePatch("hud/action-bar.png", Colors.ICS_BLUE, Texture.TextureFilter.Linear, Texture.TextureFilter.Linear));
+    defaults().pad(scale(8));
     add(FontManager.Roboto24.makeLabel("Actions!")).expandX();
 
   }

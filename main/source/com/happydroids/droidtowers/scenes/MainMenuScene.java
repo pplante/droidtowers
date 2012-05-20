@@ -156,7 +156,7 @@ public class MainMenuScene extends Scene {
 
 //    DebugUtils.createNonSavableGame(true);
 //    DebugUtils.loadFirstGameFound();
-//    new FriendsListWindow(getStage()).show();
+    new FriendsListWindow(getStage()).show();
   }
 
   @Override

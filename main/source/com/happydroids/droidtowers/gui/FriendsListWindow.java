@@ -11,7 +11,12 @@ public class FriendsListWindow extends ScrollableTowerWindow {
   public FriendsListWindow(Stage stage) {
     super("My Friends", stage);
 
-    setActionBar(new ActionBar());
+    setStaticHeader(new ActionBar());
+
+    for (int i = 0; i < 25; i++) {
+      row();
+      add(FontManager.Roboto64.makeLabel("Row #" + i));
+    }
   }
 
 }
