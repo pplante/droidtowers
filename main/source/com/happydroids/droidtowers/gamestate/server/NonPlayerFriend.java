@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.gamestate.server;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.happydroids.HappyDroidConsts;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class NonPlayerFriend extends TowerGameServiceObject {
@@ -14,7 +15,7 @@ public class NonPlayerFriend extends TowerGameServiceObject {
 
   @Override
   public String getBaseResourceUri() {
-    throw new RuntimeException("NonPlayerFriend cannot be directly accessed!");
+    return HappyDroidConsts.HAPPYDROIDS_URI + "/api/v1/nonplayerfriend/";
   }
 
   @Override

@@ -42,4 +42,8 @@ public class PlayerProfile extends TowerGameServiceObject {
                    ", lastName='" + lastName + '\'' +
                    '}';
   }
+
+  public String getFullName() {
+    return firstName + " "+ lastName;
+  }
 }
