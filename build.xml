@@ -290,7 +290,7 @@
                 name="${ant.project.name}"
                 mainclass="com.happydroids.droidtowers.DesktopGame"
                 jar="${release-jar}"
-                icon="icons/${ant.project.name}.icns"
+                icon="./desktop/targets/mac/icon-512.icns"
                 version="${project.version}"/>
 
     <delete dir="${artifacts.temp.dir}"/>
