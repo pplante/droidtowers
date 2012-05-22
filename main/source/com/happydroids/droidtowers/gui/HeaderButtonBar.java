@@ -18,17 +18,27 @@ public class HeaderButtonBar extends Table {
   private final AudioControl audioControl;
   private final ImageButton dataOverlayButton;
   private final DataOverlayMenu dataOverlayMenu;
+  private ImageButton viewNeighbors;
 
   public HeaderButtonBar(TextureAtlas hudAtlas, GameGrid gameGrid) {
     audioControl = new AudioControl(hudAtlas);
     dataOverlayButton = TowerAssetManager.imageButton(hudAtlas.findRegion("overlay-button"));
+    viewNeighbors = TowerAssetManager.imageButton(hudAtlas.findRegion("view-neighbors"));
+
+    viewNeighbors.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        new FriendsListWindow(getStage()).show();
+      }
+    });
 
     dataOverlayMenu = new DataOverlayMenu(gameGrid.getRenderer());
     dataOverlayMenu.visible = false;
 
     defaults().space(6);
     row().right();
-    add(audioControl).right().expandX();
+    add(viewNeighbors).right().expandX();
+    add(audioControl);
     add(dataOverlayButton).right();
 
     pack();

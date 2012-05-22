@@ -173,7 +173,7 @@
     "requirements":[
       {
         "type":"BUILD",
-        "amount":3,
+        "amount":5,
         "thing":"PROVIDER_TYPE",
         "thingProviderTypes":["OFFICE_SERVICES", "FOOD"]
       }

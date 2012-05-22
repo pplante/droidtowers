@@ -4,12 +4,19 @@ filter: Linear,Linear
 repeat: none
 tool-housing
   rotate: false
-  xy: 1, 357
+  xy: 90, 1
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
   index: -1
 tool-transit
+  rotate: false
+  xy: 1, 90
+  size: 88, 88
+  orig: 96, 96
+  offset: 4, 4
+  index: -1
+view-neighbors
   rotate: false
   xy: 1, 1
   size: 88, 88
@@ -18,28 +25,28 @@ tool-transit
   index: -1
 audio-off
   rotate: false
-  xy: 357, 1
+  xy: 90, 90
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
   index: -1
 expand-land-right
   rotate: false
-  xy: 90, 268
+  xy: 90, 357
   size: 78, 88
   orig: 96, 96
   offset: 9, 3
   index: -1
 overlay-button
   rotate: false
-  xy: 179, 1
+  xy: 268, 1
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
   index: -1
 expand-land-left
   rotate: false
-  xy: 90, 357
+  xy: 169, 357
   size: 78, 88
   orig: 96, 96
   offset: 9, 4
@@ -53,42 +60,42 @@ rabbit
   index: -1
 tool-sprite
   rotate: false
-  xy: 1, 90
+  xy: 1, 179
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
   index: -1
 tool-sell
   rotate: false
-  xy: 1, 268
+  xy: 1, 357
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
   index: -1
 achievements
   rotate: false
-  xy: 90, 90
+  xy: 90, 179
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
   index: -1
 audio-on
   rotate: false
-  xy: 268, 1
+  xy: 357, 1
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
   index: -1
 tool-commerce
   rotate: false
-  xy: 90, 1
+  xy: 179, 1
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
   index: -1
 achievements-active
   rotate: false
-  xy: 90, 179
+  xy: 90, 268
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
@@ -102,7 +109,7 @@ snail
   index: -1
 tool-services
   rotate: false
-  xy: 1, 179
+  xy: 1, 268
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
