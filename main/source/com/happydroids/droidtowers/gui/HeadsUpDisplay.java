@@ -86,6 +86,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     achievementButton = new AchievementButton(achievementEngine);
     achievementButton.x = 10;
     achievementButton.y = stage.height() - statusBarPanel.height - achievementButton.height - 10;
+    achievementButton.getParticleEffect().setPosition(achievementButton.x + achievementButton.width / 2, achievementButton.y + achievementButton.height / 2);
 
     addActor(achievementButton);
 
@@ -100,8 +101,9 @@ public class HeadsUpDisplay extends WidgetGroup {
   private void buildToolButtonMenu() {
     toolMenu = new RadialMenu();
     toolMenu.arc = 35f;
+    toolMenu.arcStart = -3.5f;
     toolMenu.radius = scale(180);
-    toolMenu.rotation = 3f;
+    toolMenu.rotation = 0;
 
     ImageButton housingButton = new ImageButton(hudAtlas.findRegion("tool-housing"));
     housingButton.setClickListener(makePurchaseButtonClickListener("Housing", RoomTypeFactory.instance()));

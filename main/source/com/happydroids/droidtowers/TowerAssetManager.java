@@ -10,10 +10,7 @@ import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Logger;
 import com.happydroids.HappyDroidConsts;
@@ -189,5 +186,9 @@ public class TowerAssetManager {
     texture.setFilter(filterA, filterB);
 
     return new NinePatch(texture, color);
+  }
+
+  public static Animation animationFromAtlas(String framePrefix, String atlasName, float animationTime) {
+    return new Animation(animationTime, assetManager().get(atlasName, TextureAtlas.class).findRegions(framePrefix));
   }
 }

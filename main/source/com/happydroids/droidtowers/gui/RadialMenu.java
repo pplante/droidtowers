@@ -22,28 +22,7 @@ import static com.happydroids.droidtowers.gui.WidgetAccessor.*;
 public class RadialMenu extends WidgetGroup {
   public float radius;
   public float arc;
-  private InputAdapter closeMenuInputAdapter = new InputAdapter() {
-    @Override
-    public boolean touchDown(int x, int y, int pointer, int button) {
-      Vector2 touchDown = new Vector2();
-      getStage().toStageCoordinates(x, y, touchDown);
-      toLocalCoordinates(touchDown);
-
-      if (hit(touchDown.x, touchDown.y) == null) {
-        hide();
-        return true;
-      }
-      return false;
-    }
-  };
-  private InputCallback closeMenuInputCallback = new InputCallback() {
-    public boolean run(float timeDelta) {
-      InputSystem.instance().switchTool(GestureTool.PICKER, null);
-      hide();
-      unbind();
-      return true;
-    }
-  };
+  public float arcStart;
 
   public RadialMenu() {
     visible = false;
@@ -74,7 +53,7 @@ public class RadialMenu extends WidgetGroup {
       child.color.a = 0;
       child.x = child.y = 0;
 
-      float radian = (float) ((angle * index + angle / 2) * (Math.PI / 180f));
+      float radian = (float) ((arcStart + (angle * index + angle / 2)) * (Math.PI / 180f));
 
       float newX = (float) (-radius * Math.cos(radian));
       float newY = (float) (radius * Math.sin(radian));
@@ -100,4 +79,27 @@ public class RadialMenu extends WidgetGroup {
             .setCallbackTriggers(TweenCallback.COMPLETE)
             .start(TweenSystem.getTweenManager());
   }
+
+  private InputAdapter closeMenuInputAdapter = new InputAdapter() {
+    @Override
+    public boolean touchDown(int x, int y, int pointer, int button) {
+      Vector2 touchDown = new Vector2();
+      getStage().toStageCoordinates(x, y, touchDown);
+      toLocalCoordinates(touchDown);
+
+      if (hit(touchDown.x, touchDown.y) == null) {
+        hide();
+        return true;
+      }
+      return false;
+    }
+  };
+  private InputCallback closeMenuInputCallback = new InputCallback() {
+    public boolean run(float timeDelta) {
+      InputSystem.instance().switchTool(GestureTool.PICKER, null);
+      hide();
+      unbind();
+      return true;
+    }
+  };
 }
