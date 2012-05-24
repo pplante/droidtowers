@@ -15,7 +15,6 @@ import com.happydroids.droidtowers.grid.NeighborGameGrid;
 import com.happydroids.droidtowers.gui.FontManager;
 
 import static com.badlogic.gdx.graphics.Texture.TextureFilter.Linear;
-import static com.happydroids.droidtowers.Strings.wrap;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
 public class TowerNameBillboard extends GameObject {
@@ -35,13 +34,13 @@ public class TowerNameBillboard extends GameObject {
     billboardTexture.setFilter(Linear, Linear);
     billboardArea = new NinePatch(billboardTexture, 3, 3, 3, 3);
 
-    towerNameLabel = FontManager.BankGothic32.makeLabel(capitalize(wrap(gameGrid.getTowerName(), 16)));
+    towerNameLabel = FontManager.BankGothic32.makeLabel(capitalize(gameGrid.getTowerName() + "\nby " + gameGrid.getOwnerName()));
   }
 
   @Override
   public void draw(SpriteBatch spriteBatch) {
     spriteBatch.setColor(Color.WHITE);
-    spriteBatch.draw(pollTexture, getX() + 8 + towerNameLabel.width / 2, getY(), 8, towerNameLabel.height + 100);
+    spriteBatch.draw(pollTexture, getX() + 12 + towerNameLabel.width / 2, getY(), 8, towerNameLabel.height + 100);
 
     billboardArea.draw(spriteBatch, getX(), getY() + 100, towerNameLabel.width + 32, towerNameLabel.height + 8);
 

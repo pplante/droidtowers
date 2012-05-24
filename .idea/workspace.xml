@@ -26,23 +26,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/hud/buttons/achievements-active1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/hud/buttons/achievements-active2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/hud/buttons/achievements-active3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/hud/buttons/achievements-active4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/hud/buttons/achievements-active5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/hud/buttons/achievements-active6.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/hud/buttons/achievements-active7.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/particles/star.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/tower-sign-poll.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/tower-sign.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/TowerNameType.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/tower-sign-poll.png" afterPath="$PROJECT_DIR$/android/assets/tower-sign-poll.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/tower-sign.png" afterPath="$PROJECT_DIR$/android/assets/tower-sign.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/assets.json" afterPath="$PROJECT_DIR$/android/assets/assets.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/Strings.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/Strings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ViewNeighborScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ViewNeighborScene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ViewNeighborHUD.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ViewNeighborHUD.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/TowerNameBillboard.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/TowerNameBillboard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline/src/com/happydroids/droidtowers/pipeline/GenerateAssetManagerFileList.java" afterPath="$PROJECT_DIR$/pipeline/src/com/happydroids/droidtowers/pipeline/GenerateAssetManagerFileList.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -139,33 +127,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TowerNameBillboard.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/TowerNameBillboard.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="99" selection-start="1456" selection-end="1456" vertical-scroll-proportion="0.57715434">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Strings.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/Strings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="0" selection-start="692" selection-end="692" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ViewNeighborScene.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ViewNeighborScene.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="68" selection-start="4074" selection-end="4074" vertical-scroll-proportion="0.0">
+            <state line="43" column="28" selection-start="1808" selection-end="1808" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ViewNeighborHUD.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ViewNeighborHUD.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="83" selection-start="529" selection-end="529" vertical-scroll-proportion="0.352">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -189,7 +166,6 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/GroundLayer.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Toast.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ViewNeighborHUD.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/NeighborGameGrid.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/CameraController.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ViewNeighborSplashScene.java" />
@@ -199,6 +175,7 @@
         <option value="$PROJECT_DIR$/pipeline/src/com/happydroids/droidtowers/pipeline/GenerateAssetManagerFileList.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/Strings.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/TowerNameBillboard.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ViewNeighborHUD.java" />
       </list>
     </option>
   </component>
@@ -1812,7 +1789,11 @@
       <created>1337884335060</created>
       <updated>1337884335060</updated>
     </task>
-    <option name="localTasksCounter" value="190" />
+    <task id="LOCAL-00190" summary="tower name billboards now have some nice textures">
+      <created>1337886708246</created>
+      <updated>1337886708246</updated>
+    </task>
+    <option name="localTasksCounter" value="191" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1837,10 +1818,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32303733" sideWeight="0.95461786" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32303733" sideWeight="0.95461786" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2093949" sideWeight="0.6180714" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27155727" sideWeight="0.32890624" order="1" side_tool="false" content_ui="tabs" />
@@ -2004,13 +1985,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ViewNeighborHUD.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="30" selection-start="835" selection-end="835" vertical-scroll-proportion="0.92050207">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/NeighborGameGrid.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="37" column="39" selection-start="1087" selection-end="1087" vertical-scroll-proportion="0.5167364">
@@ -2036,15 +2010,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="19" selection-start="764" selection-end="764" vertical-scroll-proportion="0.24058577">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ViewNeighborScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="68" selection-start="4074" selection-end="4074" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2082,19 +2047,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/TowerNameBillboard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="67" selection-start="1368" selection-end="1368" vertical-scroll-proportion="0.4504749">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/Strings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="692" selection-end="692" vertical-scroll-proportion="0.0">
+        <state line="23" column="0" selection-start="692" selection-end="692" vertical-scroll-proportion="0.616">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/TowerNameBillboard.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ViewNeighborScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="99" selection-start="1456" selection-end="1456" vertical-scroll-proportion="0.57715434">
+        <state line="43" column="28" selection-start="1808" selection-end="1808" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ViewNeighborHUD.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="83" selection-start="529" selection-end="529" vertical-scroll-proportion="0.352">
+          <folding />
         </state>
       </provider>
     </entry>

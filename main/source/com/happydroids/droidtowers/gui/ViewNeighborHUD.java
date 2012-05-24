@@ -15,7 +15,7 @@ public class ViewNeighborHUD extends Table {
 
     defaults().top().left().expand();
 
-    TextButton backButton = FontManager.Roboto18.makeTextButton("< back");
+    TextButton backButton = FontManager.Roboto18.makeTextButton("< back to my tower");
     backButton.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
