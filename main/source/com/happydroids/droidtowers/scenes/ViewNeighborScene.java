@@ -37,7 +37,6 @@ import org.apache.http.HttpResponse;
 import java.util.List;
 
 public class ViewNeighborScene extends Scene {
-  private ViewNeighborHUD neighborHUD;
   private List<GameLayer> gameLayers;
   private Label fetchingLabel;
   private boolean fetchingNeighbors;
@@ -48,12 +47,10 @@ public class ViewNeighborScene extends Scene {
 
   @Override
   public void create(Object... args) {
-    recordCameraPosition();
-
     getCamera().position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
     getCamera().zoom = CameraController.ZOOM_MIN;
 
-    neighborHUD = new ViewNeighborHUD();
+    ViewNeighborHUD neighborHUD = new ViewNeighborHUD();
     neighborHUD.x = 0;
     neighborHUD.y = Gdx.graphics.getHeight();
 
@@ -204,7 +201,6 @@ public class ViewNeighborScene extends Scene {
   @Override
   public void dispose() {
     InputSystem.instance().unbind(TowerConsts.NEGATIVE_BUTTON_KEYS, goBackHomeCallback);
-    restorePreviousCameraPosition();
   }
 
   private InputCallback goBackHomeCallback = new InputCallback() {

@@ -83,8 +83,6 @@ public class SplashScene extends Scene {
       }
     }
 
-    recordCameraPosition();
-
     messagesUsed = Sets.newHashSet();
 
     Label titleLabel = FontManager.Roboto64.makeLabel("Droid Towers", Color.WHITE, Align.CENTER);
@@ -180,6 +178,5 @@ public class SplashScene extends Scene {
 
   @Override
   public void dispose() {
-    restorePreviousCameraPosition();
   }
 }

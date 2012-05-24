@@ -92,18 +92,6 @@ public abstract class Scene {
     return eventBus;
   }
 
-  protected void recordCameraPosition() {
-    previousCameraPosition = getCamera().position.cpy();
-    previousCameraZoom = getCamera().zoom;
-    cameraController.stopMovement();
-  }
-
-  protected void restorePreviousCameraPosition() {
-    camera.position.set(previousCameraPosition);
-    camera.zoom = previousCameraZoom;
-    cameraController.stopMovement();
-  }
-
   public CameraController getCameraController() {
     return cameraController;
   }
