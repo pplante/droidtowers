@@ -49,6 +49,8 @@ public class GenerateAssetManagerFileList {
     addFileEntry(assetsDir.child("hud/star.png"), Texture.class);
     addFileEntry(assetsDir.child("hud/star-white.png"), Texture.class);
     addFileEntry(assetsDir.child("decals.png"), Texture.class);
+    addFileEntry(assetsDir.child("tower-sign.png"), Texture.class);
+    addFileEntry(assetsDir.child("tower-sign-poll.png"), Texture.class);
 
     FileHandle swatchesDir = assetsDir.child("swatches");
     if (!swatchesDir.exists()) {

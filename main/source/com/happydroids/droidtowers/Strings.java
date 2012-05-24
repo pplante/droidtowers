@@ -6,16 +6,21 @@ package com.happydroids.droidtowers;
 
 public class Strings {
   public static String wrap(String text, int wrapAt) {
-    StringBuilder output = new StringBuilder();
+    if (text.length() <= wrapAt) {
+      return text;
+    }
 
+    StringBuilder output = new StringBuilder();
     int lineBegin = 0;
     int lineEnd = text.indexOf(" ", Math.min(wrapAt, text.length()));
-    do {
-      output.append(text.substring(lineBegin, lineEnd));
-      output.append("\n");
-      lineBegin = lineEnd + 1;
-      lineEnd = text.indexOf(' ', Math.min(lineBegin + wrapAt, text.length()));
-    } while (lineBegin < text.length() && lineEnd != -1);
+    if (lineEnd != -1) {
+      do {
+        output.append(text.substring(lineBegin, lineEnd));
+        output.append("\n");
+        lineBegin = lineEnd + 1;
+        lineEnd = text.indexOf(' ', Math.min(lineBegin + wrapAt, text.length()));
+      } while (lineBegin < text.length() && lineEnd != -1);
+    }
 
     output.append(text.substring(lineBegin));
     output.append("\n");

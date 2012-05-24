@@ -13,7 +13,6 @@ import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.WeatherService;
 import com.happydroids.droidtowers.entities.CloudLayer;
 import com.happydroids.droidtowers.entities.GameLayer;
-import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.events.RespondsToWorldSizeChange;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSave;
@@ -28,7 +27,7 @@ import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.math.GridPoint;
-import com.happydroids.droidtowers.types.TowerNameType;
+import com.happydroids.droidtowers.types.TowerNameBillboard;
 import com.happydroids.server.HappyDroidServiceCollection;
 
 import java.util.List;
@@ -38,6 +37,7 @@ public class ViewNeighborScene extends Scene {
   private GestureDelegater gestureDelegater;
   private GestureDetector gestureDetector;
   private ViewNeighborHUD neighborHUD;
+  private GameLayer billboardLayer;
 
   @Override
   public void create(Object... args) {
@@ -57,6 +57,8 @@ public class ViewNeighborScene extends Scene {
     gameLayers.add(new CloudLayer(weatherService));
     gameLayers.add(new RainLayer(weatherService));
     gameLayers.add(new GroundLayer());
+
+    billboardLayer = new GameLayer();
 
     gestureDelegater = new GestureDelegater(camera, gameLayers, null, getCameraController());
     gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, gestureDelegater);
@@ -91,11 +93,10 @@ public class ViewNeighborScene extends Scene {
         }
       });
 
-      TowerNameType towerNameType = new TowerNameType();
-      GridObject towerNameSign = towerNameType.makeGridObject(neighborGameGrid);
-      neighborGameGrid.addObject(towerNameSign);
-      towerNameSign.setPlaced(true);
-      towerNameSign.setPosition(0, TowerConsts.LOBBY_FLOOR);
+
+      TowerNameBillboard billboard = new TowerNameBillboard(neighborGameGrid);
+      billboard.setPosition(neighborGameGrid.getWorldBounds().x - (2 * TowerConsts.GRID_UNIT_SIZE), TowerConsts.GROUND_HEIGHT);
+      billboardLayer.addChild(billboard);
 
       worldSize.y = Math.max(worldSize.y, neighborGameGrid.getWorldSize().y);
       worldSize.x = neighborGameGrid.getWorldBounds().x + neighborGameGrid.getWorldBounds().width;
@@ -103,6 +104,8 @@ public class ViewNeighborScene extends Scene {
       gameLayers.add(neighborGameGrid.getRenderer());
       gameLayers.add(neighborGameGrid);
     }
+
+    gameLayers.add(billboardLayer);
 
     for (GameLayer gameLayer : gameLayers) {
       if (gameLayer instanceof RespondsToWorldSizeChange) {
