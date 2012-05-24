@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.happydroids.droidtowers.TowerGame;
 
@@ -16,8 +15,8 @@ public class AudioControl extends ImageButton {
 
     setChecked(!TowerGame.getSoundController().isAudioEnabled());
 
-    setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
+    setClickListener(new VibrateClickListener() {
+      public void onClick(Actor actor, float x, float y) {
         TowerGame.getSoundController().toggleAudio();
       }
     });

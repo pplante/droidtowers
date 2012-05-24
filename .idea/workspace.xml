@@ -26,11 +26,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/tower-sign-poll.png" afterPath="$PROJECT_DIR$/android/assets/tower-sign-poll.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/tower-sign.png" afterPath="$PROJECT_DIR$/android/assets/tower-sign.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ViewNeighborHUD.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ViewNeighborHUD.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/TowerNameBillboard.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/TowerNameBillboard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerAssetManager.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerAssetManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AudioControl.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AudioControl.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -138,11 +136,45 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ViewNeighborHUD.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ViewNeighborHUD.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ViewNeighborHUD.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="83" selection-start="529" selection-end="529" vertical-scroll-proportion="0.352">
+            <state line="17" column="83" selection-start="529" selection-end="529" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TowerAssetManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerAssetManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="191" column="62" selection-start="7199" selection-end="7199" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#7234#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HeadsUpDisplay.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#12022#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AudioControl.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AudioControl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="25" selection-start="632" selection-end="632" vertical-scroll-proportion="0.59782606">
+              <folding>
+                <element signature="e#0#742#0" expanded="true" />
+                <element signature="e#726#727#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -160,8 +192,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/CloudLayer.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Rain.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/RainLayer.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/GroundLayer.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Toast.java" />
@@ -176,6 +206,8 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/Strings.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/TowerNameBillboard.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ViewNeighborHUD.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerAssetManager.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AudioControl.java" />
       </list>
     </option>
   </component>
@@ -632,7 +664,7 @@
       <recent name="$PROJECT_DIR$/sparky/libs" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DesktopGame">
+  <component name="RunManager" selected="Android Application.Android">
     <configuration default="false" name="ElevatorQueueTest" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
@@ -1793,7 +1825,11 @@
       <created>1337886708246</created>
       <updated>1337886708246</updated>
     </task>
-    <option name="localTasksCounter" value="191" />
+    <task id="LOCAL-00191" summary="tweaked the billboard">
+      <created>1337888081981</created>
+      <updated>1337888081982</updated>
+    </task>
+    <option name="localTasksCounter" value="192" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1840,7 +1876,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283046" sideWeight="0.7441154" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39853895" sideWeight="0.7441154" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23635058" sideWeight="0.64993566" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25482625" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25482625" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18351911" sideWeight="0.6180714" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IntelliGuard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953683" sideWeight="0.48726115" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1897,7 +1933,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="tower name billboards now have some nice textures" />
+    <option name="LAST_COMMIT_MESSAGE" value="tweaked the billboard" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1910,7 +1946,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="began working on completely custom gui skin, finished the checkbox and slider controls&#10;added snail/rabbit icons to the game speed slider controls&#10;" />
     <MESSAGE value="tweak the gui" />
     <MESSAGE value="new achievements for employment levels" />
     <MESSAGE value="fixed a bug where achievements that were over 100% complete would be impossible to complete." />
@@ -1935,6 +1970,7 @@
     <MESSAGE value="viewing neighbors now shows the tower name in a label at 0,0" />
     <MESSAGE value="split the neighbor scene into a splash scene and game scene" />
     <MESSAGE value="tower name billboards now have some nice textures" />
+    <MESSAGE value="tweaked the billboard" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1957,27 +1993,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/concurrent/ExecutorService.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="65" selection-start="210" selection-end="210" vertical-scroll-proportion="0.18924731">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/concurrent/Executors.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="53" selection-start="851" selection-end="851" vertical-scroll-proportion="0.75698924">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Thread.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="20" selection-start="3761" selection-end="3761" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/utils/BackgroundTask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="90" column="20" selection-start="2445" selection-end="2445" vertical-scroll-proportion="0.44769874">
@@ -2074,8 +2089,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ViewNeighborHUD.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="83" selection-start="529" selection-end="529" vertical-scroll-proportion="0.352">
+        <state line="17" column="83" selection-start="529" selection-end="529" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerAssetManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="191" column="62" selection-start="7199" selection-end="7199" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#7234#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#12022#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AudioControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="25" selection-start="632" selection-end="632" vertical-scroll-proportion="0.59782606">
+          <folding>
+            <element signature="e#0#742#0" expanded="true" />
+            <element signature="e#726#727#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
