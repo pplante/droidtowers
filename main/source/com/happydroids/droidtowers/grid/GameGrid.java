@@ -40,6 +40,7 @@ public class GameGrid extends GameLayer {
   protected GridPositionCache positionCache;
   private TypeInstanceMap<GridObject> gridObjects;
   private GridObject selectedGridObject;
+  private String towerName;
 
   public GameGrid(OrthographicCamera camera) {
     this();
@@ -263,5 +264,14 @@ public class GameGrid extends GameLayer {
 
   public float toWorldSpace(int gridSpaces) {
     return TowerConsts.GRID_UNIT_SIZE * gridSpaces * gridScale;
+  }
+
+
+  public String getTowerName() {
+    return towerName;
+  }
+
+  public void setTowerName(String towerName) {
+    this.towerName = towerName;
   }
 }

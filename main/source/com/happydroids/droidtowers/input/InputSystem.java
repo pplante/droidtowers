@@ -15,6 +15,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
+import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.GameLayer;
 
 import java.util.*;
@@ -44,10 +45,9 @@ public class InputSystem extends InputAdapter {
     return instance;
   }
 
-  public void setup(OrthographicCamera orthographicCamera) {
+  public InputSystem() {
     inputProcessors = Lists.newArrayList();
     keyBindings = Maps.newHashMap();
-    camera = orthographicCamera;
   }
 
   public void addInputProcessor(InputProcessor inputProcessor, int priority) {
@@ -83,7 +83,7 @@ public class InputSystem extends InputAdapter {
 
   public void switchTool(GestureTool selectedTool, Runnable switchToolRunnable) {
     if (gestureDelegater != null) {
-      gestureDelegater.switchTool(camera, gestureDelegater.getGameLayers(), selectedTool, switchToolRunnable);
+      gestureDelegater.switchTool(TowerGame.getActiveScene().getCamera(), gestureDelegater.getGameLayers(), selectedTool, switchToolRunnable);
     }
   }
 

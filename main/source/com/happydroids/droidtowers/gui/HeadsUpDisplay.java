@@ -25,6 +25,7 @@ import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Room;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
+import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.input.PickerTool;
@@ -52,7 +53,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   private final HeaderButtonBar headerButtonBar;
   private AchievementButton achievementButton;
 
-  public HeadsUpDisplay(Stage stage, OrthographicCamera camera, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine) {
+  public HeadsUpDisplay(Stage stage, OrthographicCamera camera, CameraController cameraController, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine) {
     super();
 
     HeadsUpDisplay.instance = this;
@@ -72,7 +73,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     mouseToolTip = new ToolTip();
     addActor(mouseToolTip);
-    addActor(new ExpandLandOverlay(this.gameGrid, avatarLayer));
+    addActor(new ExpandLandOverlay(this.gameGrid, avatarLayer, cameraController));
 
     buildToolButtonMenu();
 
@@ -287,7 +288,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   }
 
   public void showTipBubble(GridObject gridObject, String message) {
-    SpeechBubble bubble = new SpeechBubble();
+    SpeechBubble bubble = new SpeechBubble(camera);
     bubble.setText(message);
     bubble.followObject(gridObject);
     bubble.show();

@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.input.GestureDetector;
 import com.google.common.collect.Lists;
+import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.WeatherService;
@@ -18,6 +19,7 @@ import com.happydroids.droidtowers.actions.GameSaveAction;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.entities.CloudLayer;
 import com.happydroids.droidtowers.entities.GameLayer;
+import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.GameState;
 import com.happydroids.droidtowers.gamestate.actions.*;
@@ -75,12 +77,14 @@ public class TowerScene extends Scene {
 
     gameGrid = new GameGrid(camera);
     gameGridRenderer = gameGrid.getRenderer();
-    gameState = new GameState(camera, gameSaveLocation, gameSave, gameGrid);
+    gameState = new GameState(camera, cameraController, gameSaveLocation, gameSave, gameGrid);
     avatarLayer = new AvatarLayer(gameGrid);
+
+    gameGrid.events().register(this);
 
     gameGrid.events().register(TowerGame.getSoundController());
 
-    headsUpDisplay = new HeadsUpDisplay(getStage(), getCamera(), gameGrid, avatarLayer, AchievementEngine.instance(), TutorialEngine.instance());
+    headsUpDisplay = new HeadsUpDisplay(getStage(), getCamera(), getCameraController(), gameGrid, avatarLayer, AchievementEngine.instance(), TutorialEngine.instance());
     weatherService = new WeatherService();
 
     gameLayers = Lists.newArrayList();
@@ -93,7 +97,7 @@ public class TowerScene extends Scene {
     gameLayers.add(gameGrid);
     gameLayers.add(avatarLayer);
 
-    gestureDelegater = new GestureDelegater(camera, gameLayers, gameGrid);
+    gestureDelegater = new GestureDelegater(camera, gameLayers, gameGrid, getCameraController());
     gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, gestureDelegater);
 
     InputSystem.instance().addInputProcessor(gestureDetector, 100);
@@ -152,10 +156,22 @@ public class TowerScene extends Scene {
   @Override
   public void pause() {
     gameState.saveGame(true);
+
+    detachActions();
+
+    InputSystem.instance().removeInputProcessor(gestureDetector);
+    InputSystem.instance().setGestureDelegator(null);
+    keybindings.unbindKeys();
   }
 
   @Override
   public void resume() {
+    attachActions();
+
+    InputSystem.instance().addInputProcessor(gestureDetector, 100);
+    InputSystem.instance().setGestureDelegator(gestureDelegater);
+    InputSystem.instance().switchTool(GestureTool.PICKER, null);
+    keybindings.bindKeys();
   }
 
   @Override
@@ -169,12 +185,6 @@ public class TowerScene extends Scene {
 
   @Override
   public void dispose() {
-    detachActions();
-
-    InputSystem.instance().removeInputProcessor(gestureDetector);
-    InputSystem.instance().setGestureDelegator(null);
-    keybindings.unbindKeys();
-
     TutorialEngine.instance().resetState();
     AchievementEngine.instance().resetState();
 
@@ -215,4 +225,8 @@ public class TowerScene extends Scene {
     return gameSave;
   }
 
+  @Subscribe
+  public void GameGrid_onGridResize(GameGridResizeEvent event) {
+    cameraController.updateCameraConstraints(gameGrid.getWorldSize());
+  }
 }

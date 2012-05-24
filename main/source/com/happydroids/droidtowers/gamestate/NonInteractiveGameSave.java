@@ -10,6 +10,7 @@ import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_Unhap
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridObjectState;
+import com.happydroids.droidtowers.input.CameraController;
 import sk.seges.acris.json.server.migrate.JacksonTransformer;
 
 import java.io.IOException;
@@ -22,8 +23,9 @@ public class NonInteractiveGameSave extends GameSave {
   }
 
   @Override
-  public void attachToGame(GameGrid gameGrid, OrthographicCamera camera) {
+  public void attachToGame(GameGrid gameGrid, OrthographicCamera camera, CameraController cameraController) {
     gameGrid.clearObjects();
+    gameGrid.setTowerName(towerName);
     gameGrid.setGridSize(gridSize.x, gridSize.y);
     gameGrid.updateWorldSize(true);
 

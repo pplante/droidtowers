@@ -31,13 +31,15 @@ public class ExpandLandOverlay extends WidgetGroup {
   private static final int PADDING = 300;
   private final GameGrid gameGrid;
   private final AvatarLayer avatarLayer;
+  private final CameraController cameraController;
   private Button leftButton;
   private Button rightButton;
 
-  public ExpandLandOverlay(GameGrid gameGrid, AvatarLayer avatarLayer) {
+  public ExpandLandOverlay(GameGrid gameGrid, AvatarLayer avatarLayer, CameraController cameraController) {
     this.gameGrid = gameGrid;
     this.avatarLayer = avatarLayer;
-    CameraController.events().register(this);
+    this.cameraController = cameraController;
+    cameraController.events().register(this);
 
     leftButton = new ExpandLandButton("left");
     leftButton.visible = false;
@@ -74,7 +76,7 @@ public class ExpandLandOverlay extends WidgetGroup {
       gridObject.broadcastEvent(new GridObjectBoundsChangeEvent(gridObject, gridObject.getSize(), gridObject.getPosition()));
     }
 
-    CameraController.instance().panTo(gameGrid.getWorldSize().x, CameraController.instance().getCamera().position.y, true);
+    cameraController.panTo(gameGrid.getWorldSize().x, cameraController.getCamera().position.y, true);
     GameSoundController.setSoundsAllowed(true);
   }
 
@@ -90,9 +92,9 @@ public class ExpandLandOverlay extends WidgetGroup {
     }
     avatarLayer.adjustAvatarPositions(GAME_GRID_EXPAND_LAND_SIZE);
 
-    Vector3 cameraPosition = CameraController.instance().getCamera().position.cpy();
-    CameraController.instance().getCamera().position.set(cameraPosition.x + (TowerConsts.GRID_UNIT_SIZE * GAME_GRID_EXPAND_LAND_SIZE), cameraPosition.y, cameraPosition.z);
-    CameraController.instance().panTo(0, CameraController.instance().getCamera().position.y, true);
+    Vector3 cameraPosition = cameraController.getCamera().position.cpy();
+    cameraController.getCamera().position.set(cameraPosition.x + (TowerConsts.GRID_UNIT_SIZE * GAME_GRID_EXPAND_LAND_SIZE), cameraPosition.y, cameraPosition.z);
+    cameraController.panTo(0, cameraController.getCamera().position.y, true);
     GameSoundController.setSoundsAllowed(true);
   }
 

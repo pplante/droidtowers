@@ -13,7 +13,7 @@ import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
-import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,8 +26,8 @@ public class GameSoundController {
   private Music activeSong;
   private final Iterator<FileHandle> availableSongs;
 
-  public GameSoundController(GameGrid gameGrid) {
-    audioEnabled = true;
+  public GameSoundController() {
+    audioEnabled = TowerGameService.instance().isAudioEnabled();
 
     constructionSound = Gdx.audio.newSound(Gdx.files.internal("sound/effects/construction-placement-1.wav"));
     destructionSound = Gdx.audio.newSound(Gdx.files.internal("sound/effects/construction-destroy-1.wav"));
@@ -82,11 +82,17 @@ public class GameSoundController {
     } else {
       activeSong.dispose();
     }
+
+    TowerGameService.instance().setAudioEnabled(audioEnabled);
   }
 
   public void update(float deltaTime) {
     if (audioEnabled && activeSong != null && !activeSong.isPlaying()) {
       moveToNextSong();
     }
+  }
+
+  public boolean isAudioEnabled() {
+    return audioEnabled;
   }
 }

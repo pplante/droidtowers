@@ -14,6 +14,8 @@ public class AudioControl extends ImageButton {
   public AudioControl(TextureAtlas hudAtlas) {
     super(hudAtlas.findRegion("audio-on"), null, hudAtlas.findRegion("audio-off"));
 
+    setChecked(!TowerGame.getSoundController().isAudioEnabled());
+
     setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         TowerGame.getSoundController().toggleAudio();

@@ -16,17 +16,15 @@ import static com.badlogic.gdx.input.GestureDetector.GestureListener;
 
 public class GestureDelegater implements GestureListener {
   private ToolBase currentTool;
-  private CameraController cameraController;
+  private final CameraController cameraController;
   private Runnable beforeSwitchToolRunnable;
-  private GameGrid gameGrid;
-  private List<GameLayer> gameLayers;
+  private final GameGrid gameGrid;
+  private final List<GameLayer> gameLayers;
 
-  public GestureDelegater(OrthographicCamera camera, List<GameLayer> gameLayers, GameGrid gameGrid) {
+  public GestureDelegater(OrthographicCamera camera, List<GameLayer> gameLayers, GameGrid gameGrid, CameraController cameraController) {
     this.gameLayers = gameLayers;
     this.gameGrid = gameGrid;
-
-    CameraController.initialize(camera, this.gameGrid);
-    this.cameraController = CameraController.instance();
+    this.cameraController = cameraController;
   }
 
   public void switchTool(OrthographicCamera camera, List<GameLayer> gameLayers, GestureTool tool, Runnable switchToolRunnable) {
@@ -46,10 +44,6 @@ public class GestureDelegater implements GestureListener {
 
   public GestureListener getCurrentTool() {
     return currentTool;
-  }
-
-  public CameraController getCameraController() {
-    return cameraController;
   }
 
   // GO AWAY, DEMONS AHEAD!

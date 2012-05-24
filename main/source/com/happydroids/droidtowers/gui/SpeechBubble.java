@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -17,7 +18,6 @@ import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.entities.GameObject;
 import com.happydroids.droidtowers.entities.GridObject;
-import com.happydroids.droidtowers.input.CameraController;
 
 public class SpeechBubble extends Toast {
   private static TextureAtlas textureAtlas;
@@ -26,9 +26,11 @@ public class SpeechBubble extends Toast {
   private final Label label;
   private GameObject gameObjectToFollow;
   private GridObject gridObjectToFollow;
+  private final OrthographicCamera camera;
 
-  public SpeechBubble() {
+  public SpeechBubble(OrthographicCamera camera) {
     super();
+    this.camera = camera;
     if (textureAtlas == null) {
       textureAtlas = TowerAssetManager.textureAtlas("hud/misc.txt");
       labelFont = TowerAssetManager.bitmapFont("fonts/helvetica_neue_14_black.fnt");
@@ -60,7 +62,7 @@ public class SpeechBubble extends Toast {
     }
 
     if (worldPoint != null) {
-      CameraController.instance().getCamera().project(worldPoint);
+      camera.project(worldPoint);
       x = (int) worldPoint.x - 4;
       y = (int) worldPoint.y + 4;
     }

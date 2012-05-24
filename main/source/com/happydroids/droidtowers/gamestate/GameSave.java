@@ -73,11 +73,12 @@ public class GameSave {
     gridSize = new GridPoint(TowerConsts.GAME_GRID_START_SIZE, TowerConsts.GAME_GRID_START_SIZE);
   }
 
-  public void attachToGame(GameGrid gameGrid, OrthographicCamera camera) {
+  public void attachToGame(GameGrid gameGrid, OrthographicCamera camera, CameraController cameraController) {
     this.gameGrid = gameGrid;
     this.camera = camera;
 
     gameGrid.clearObjects();
+    gameGrid.setTowerName(towerName);
     gameGrid.setGridSize(gridSize.x, gridSize.y);
     gameGrid.updateWorldSize(true);
 
@@ -85,8 +86,7 @@ public class GameSave {
 
     if (cameraPosition != null) {
       camera.zoom = cameraZoom;
-      CameraController.instance().panTo(cameraPosition, false);
-      CameraController.instance().checkBounds();
+      cameraController.panTo(cameraPosition, false);
     }
 
     if (gridObjects != null) {

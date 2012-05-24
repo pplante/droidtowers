@@ -14,6 +14,7 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.OnClickCallback;
 import com.happydroids.droidtowers.gui.ResponseType;
+import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.scenes.MainMenuScene;
 import com.happydroids.droidtowers.utils.PNG;
 
@@ -23,6 +24,7 @@ public class GameState {
   private static final String TAG = GameState.class.getSimpleName();
 
   private final OrthographicCamera camera;
+  private final CameraController cameraController;
   private final GameGrid gameGrid;
   private final FileHandle gameSaveLocation;
   private final GameSave currentGameSave;
@@ -31,8 +33,9 @@ public class GameState {
   private FileHandle pngFile;
   private int fileGeneration;
 
-  public GameState(OrthographicCamera camera, FileHandle gameSaveLocation, GameSave currentGameSave, final GameGrid gameGrid) {
+  public GameState(OrthographicCamera camera, CameraController cameraController, FileHandle gameSaveLocation, GameSave currentGameSave, final GameGrid gameGrid) {
     this.camera = camera;
+    this.cameraController = cameraController;
     this.gameGrid = gameGrid;
     this.gameSaveLocation = gameSaveLocation;
     this.currentGameSave = currentGameSave;
@@ -48,7 +51,7 @@ public class GameState {
 
     try {
       Gdx.app.debug(TAG, "Loading: " + currentGameSave.getBaseFilename());
-      currentGameSave.attachToGame(gameGrid, camera);
+      currentGameSave.attachToGame(gameGrid, camera, cameraController);
 
     } catch (Exception e) {
       shouldSaveGame = false;

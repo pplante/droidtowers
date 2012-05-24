@@ -9,7 +9,6 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -47,7 +46,6 @@ import static com.badlogic.gdx.Application.ApplicationType.Android;
 public class TowerGame implements ApplicationListener, BackgroundTask.PostExecuteManager {
   private static final String TAG = TowerGame.class.getSimpleName();
 
-  private OrthographicCamera camera;
   private SpriteBatch spriteBatch;
   private BitmapFont menloBitmapFont;
   private static Scene activeScene;
@@ -73,12 +71,13 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
       spriteBatchFBO = new SpriteBatch();
     }
 
-    soundController = new GameSoundController(null);
 
     BackgroundTask.setPostExecuteManager(this);
 
     TowerGameService.setInstance(new TowerGameService());
     TowerGameService.instance().initializePreferences();
+
+    soundController = new GameSoundController();
 
     if (HappyDroidConsts.DEBUG) {
       Gdx.app.error("DEBUG", "Debug mode is enabled!");
@@ -113,11 +112,9 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     Tween.registerAccessor(Actor.class, new WidgetAccessor());
 
     menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_14_bold_white.fnt"), false);
-    camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     spriteBatch = new SpriteBatch();
     rootUiStage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false, spriteBatch);
 
-    InputSystem.instance().setup(camera);
     Gdx.input.setInputProcessor(InputSystem.instance());
     InputSystem.instance().addInputProcessor(rootUiStage, 0);
 
@@ -155,7 +152,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
       }
     });
 
-    Scene.setCamera(camera);
     Scene.setSpriteBatch(spriteBatch);
 
     changeScene(SplashScene.class, SplashSceneStates.PRELOAD_ONLY, new Runnable() {
@@ -177,14 +173,14 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     float deltaTime = Gdx.graphics.getDeltaTime();
 
-    camera.update();
+    activeScene.getCamera().update();
     ActionManager.instance().update(deltaTime);
     InputSystem.instance().update(deltaTime);
     PathSearchManager.instance().update(deltaTime);
     TweenSystem.getTweenManager().update((int) (deltaTime * 1000 * activeScene.getTimeMultiplier()));
     soundController.update(deltaTime);
 
-    spriteBatch.setProjectionMatrix(camera.combined);
+    spriteBatch.setProjectionMatrix(activeScene.getCamera().combined);
 
     if (frameBuffer != null) {
       frameBuffer.begin();
@@ -214,9 +210,9 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
       String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f)\nmem: (java %.1f Mb, native %.1f Mb, gpu %.1f Mb)",
                                              Gdx.graphics.getFramesPerSecond(),
-                                             camera.position.x,
-                                             camera.position.y,
-                                             camera.zoom,
+                                             activeScene.getCamera().position.x,
+                                             activeScene.getCamera().position.y,
+                                             activeScene.getCamera().zoom,
                                              javaHeapInBytes,
                                              nativeHeapInBytes,
                                              TowerAssetManager.assetManager().getMemoryInMegabytes());
@@ -228,8 +224,8 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
   public void resize(int width, int height) {
     Gdx.app.log("lifecycle", "resizing!");
-    camera.viewportWidth = width;
-    camera.viewportHeight = height;
+    activeScene.getCamera().viewportWidth = width;
+    activeScene.getCamera().viewportHeight = height;
     spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
     activeScene.getSpriteBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
     Gdx.gl.glViewport(0, 0, width, height);
@@ -258,7 +254,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     activeScene = null;
     pausedScenes = null;
     rootUiStage = null;
-    camera = null;
     uncaughtExceptionHandler = null;
     platformBrowserUtil = null;
 

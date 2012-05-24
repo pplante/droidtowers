@@ -20,7 +20,6 @@ import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.GameObject;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gui.FontManager;
-import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.utils.Random;
@@ -84,8 +83,7 @@ public class SplashScene extends Scene {
       }
     }
 
-    getCamera().position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-    getCamera().zoom = CameraController.ZOOM_MIN;
+    recordCameraPosition();
 
     messagesUsed = Sets.newHashSet();
 
@@ -182,5 +180,6 @@ public class SplashScene extends Scene {
 
   @Override
   public void dispose() {
+    restorePreviousCameraPosition();
   }
 }

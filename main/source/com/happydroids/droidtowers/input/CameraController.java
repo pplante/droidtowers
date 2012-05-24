@@ -13,25 +13,20 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
-import com.happydroids.droidtowers.events.GameGridResizeEvent;
-import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.events.CameraControllerEvent;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
 public class CameraController implements GestureDetector.GestureListener {
-  private static EventBus events = new EventBus(CameraController.class.getSimpleName());
-
-  private static CameraController instance;
-
   public static final float ZOOM_MAX = 3f;
+
   public static final float ZOOM_MIN = 1f;
 
   private OrthographicCamera camera;
   private BoundingBox cameraBounds;
+  private EventBus events = new EventBus(CameraController.class.getSimpleName());
   private float initialScale = 1.0f;
   private boolean flinging = false;
   private float velX;
@@ -39,29 +34,15 @@ public class CameraController implements GestureDetector.GestureListener {
   private Vector2 worldSize;
   private Vector3 lastCameraPosition;
 
-  public static void initialize(OrthographicCamera camera, GameGrid gameGrid) {
-    instance = new CameraController(camera, gameGrid);
-  }
-
-  public static CameraController instance() {
-    if (instance == null) {
-      throw new RuntimeException("Must call CameraController.initialize() before!");
-    }
-
-    return instance;
-  }
-
-  private CameraController(OrthographicCamera camera_, GameGrid gameGrid) {
-    gameGrid.events().register(this);
-
+  public CameraController(OrthographicCamera camera_, Vector2 worldSize) {
     camera = camera_;
-    worldSize = gameGrid.getWorldSize();
     camera.position.set(worldSize.x / 2, TowerConsts.GROUND_HEIGHT + (TowerConsts.GRID_UNIT_SIZE * 2), 0);
     lastCameraPosition = new Vector3(camera.position);
-    updateCameraConstraints();
+    updateCameraConstraints(worldSize);
   }
 
-  private void updateCameraConstraints() {
+  public void updateCameraConstraints(Vector2 newWorldSize) {
+    worldSize = newWorldSize.cpy();
     int gameWorldPadding = Display.getBiggestScreenDimension();
     this.cameraBounds = new BoundingBox(new Vector3(-gameWorldPadding, 0, 0), new Vector3(worldSize.x + gameWorldPadding, worldSize.y + gameWorldPadding, 0));
     checkBounds();
@@ -181,7 +162,7 @@ public class CameraController implements GestureDetector.GestureListener {
     return camera;
   }
 
-  public static EventBus events() {
+  public EventBus events() {
     return events;
   }
 
@@ -193,17 +174,12 @@ public class CameraController implements GestureDetector.GestureListener {
               .start(TweenSystem.getTweenManager());
     } else {
       camera.position.set(x, y, 0f);
+      checkBounds();
     }
   }
 
   public void panTo(Vector3 position, boolean animate) {
     panTo(position.x, position.y, animate);
-  }
-
-  @Subscribe
-  public void GameGrid_onGridResize(GameGridResizeEvent event) {
-    worldSize = event.gameGrid.getWorldSize();
-    updateCameraConstraints();
   }
 
   public void stopMovement() {

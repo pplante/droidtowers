@@ -4,24 +4,33 @@
 
 package com.happydroids.droidtowers.scenes;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.events.GameSpeedChangeEvent;
+import com.happydroids.droidtowers.input.CameraController;
+
+import static com.badlogic.gdx.Gdx.graphics;
 
 public abstract class Scene {
   private static SpriteBatch spriteBatch;
   private final Stage stage;
-  protected static OrthographicCamera camera;
+  protected final OrthographicCamera camera;
   private float timeMultiplier;
   private EventBus eventBus;
+  private Vector3 previousCameraPosition;
+  private float previousCameraZoom;
+  protected CameraController cameraController;
 
   public Scene() {
-    stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false, getSpriteBatch());
+    camera = new OrthographicCamera(graphics.getWidth(), graphics.getHeight());
+    stage = new Stage(graphics.getWidth(), graphics.getHeight(), false, getSpriteBatch());
+    cameraController = new CameraController(camera, new Vector2(graphics.getWidth(), graphics.getHeight()));
     eventBus = new EventBus(getClass().getSimpleName());
     timeMultiplier = 1f;
   }
@@ -61,10 +70,6 @@ public abstract class Scene {
     return camera;
   }
 
-  public static void setCamera(OrthographicCamera camera) {
-    Scene.camera = camera;
-  }
-
   protected void addActor(Actor actor) {
     getStage().addActor(actor);
   }
@@ -85,5 +90,21 @@ public abstract class Scene {
 
   public EventBus events() {
     return eventBus;
+  }
+
+  protected void recordCameraPosition() {
+    previousCameraPosition = getCamera().position.cpy();
+    previousCameraZoom = getCamera().zoom;
+    cameraController.stopMovement();
+  }
+
+  protected void restorePreviousCameraPosition() {
+    camera.position.set(previousCameraPosition);
+    camera.zoom = previousCameraZoom;
+    cameraController.stopMovement();
+  }
+
+  public CameraController getCameraController() {
+    return cameraController;
   }
 }

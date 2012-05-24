@@ -10,8 +10,8 @@ import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerConsts;
@@ -23,12 +23,11 @@ import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSaveCollection;
 import com.happydroids.droidtowers.grid.NeighborGameGrid;
 import com.happydroids.droidtowers.gui.*;
-import com.happydroids.droidtowers.input.CameraController;
-import com.happydroids.droidtowers.input.InputCallback;
-import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.input.*;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
+import com.happydroids.droidtowers.types.TowerNameType;
 import com.happydroids.droidtowers.utils.Random;
 import com.happydroids.server.ApiCollectionRunnable;
 import com.happydroids.server.HappyDroidServiceCollection;
@@ -40,18 +39,16 @@ import java.util.List;
 public class ViewNeighborScene extends Scene {
   private ViewNeighborHUD neighborHUD;
   private List<GameLayer> gameLayers;
-  private Vector3 previousCameraPosition;
-  private float previousCameraZoom;
   private Label fetchingLabel;
   private boolean fetchingNeighbors;
   private float timeSinceDroidSpawn;
   private GameObject droid;
+  private GestureDelegater gestureDelegater;
+  private GestureDetector gestureDetector;
 
   @Override
   public void create(Object... args) {
-    previousCameraPosition = getCamera().position.cpy();
-    previousCameraZoom = getCamera().zoom;
-    CameraController.instance().stopMovement();
+    recordCameraPosition();
 
     getCamera().position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
     getCamera().zoom = CameraController.ZOOM_MIN;
@@ -84,6 +81,11 @@ public class ViewNeighborScene extends Scene {
     fetchingLabel = FontManager.Roboto64.makeLabel("fetching neighbors :D");
     getStage().addActor(fetchingLabel);
 
+    gestureDelegater = new GestureDelegater(camera, gameLayers, null, getCameraController());
+    gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, gestureDelegater);
+    InputSystem.instance().addInputProcessor(gestureDetector, 100);
+    InputSystem.instance().setGestureDelegator(gestureDelegater);
+    InputSystem.instance().switchTool(GestureTool.PICKER, null);
 
     new BackgroundTask() {
       private FriendCloudGameSaveCollection friendGames;
@@ -144,9 +146,9 @@ public class ViewNeighborScene extends Scene {
         continue;
       }
 
-      gameSave.attachToGame(neighborGameGrid, camera);
+      gameSave.attachToGame(neighborGameGrid, camera, cameraController);
       neighborGameGrid.findLimits();
-      gridX += (neighborGameGrid.getGridSize().x + 2) * TowerConsts.GRID_UNIT_SIZE;
+      gridX += (neighborGameGrid.getGridSize().x + 6) * TowerConsts.GRID_UNIT_SIZE;
 
       neighborGameGrid.setOwnerName(friendCloudGameSave.getOwner().getFirstName());
       neighborGameGrid.setClickListener(new Runnable() {
@@ -155,14 +157,17 @@ public class ViewNeighborScene extends Scene {
         }
       });
 
+      TowerNameType towerNameType = new TowerNameType();
+      neighborGameGrid.addObject(towerNameType.makeGridObject(neighborGameGrid));
+
       worldSize.y = Math.max(worldSize.y, neighborGameGrid.getWorldSize().y);
-      worldSize.x = gridX + neighborGameGrid.getWorldSize().x;
+      worldSize.x = neighborGameGrid.getWorldBounds().x + neighborGameGrid.getWorldBounds().width;
 
       gameLayers.add(neighborGameGrid.getRenderer());
       gameLayers.add(neighborGameGrid);
-
     }
 
+    cameraController.updateCameraConstraints(worldSize);
     camera.position.set(worldSize.x / 2 - Gdx.graphics.getWidth() / 2, TowerConsts.GROUND_HEIGHT + Gdx.graphics.getHeight(), 0f);
     fetchingLabel.markToRemove(true);
     fetchingNeighbors = false;
@@ -170,10 +175,15 @@ public class ViewNeighborScene extends Scene {
 
   @Override
   public void pause() {
+    InputSystem.instance().removeInputProcessor(gestureDetector);
+    InputSystem.instance().setGestureDelegator(null);
   }
 
   @Override
   public void resume() {
+    InputSystem.instance().addInputProcessor(gestureDetector, 100);
+    InputSystem.instance().setGestureDelegator(gestureDelegater);
+    InputSystem.instance().switchTool(GestureTool.PICKER, null);
   }
 
   @Override
@@ -194,9 +204,7 @@ public class ViewNeighborScene extends Scene {
   @Override
   public void dispose() {
     InputSystem.instance().unbind(TowerConsts.NEGATIVE_BUTTON_KEYS, goBackHomeCallback);
-    getCamera().position.set(previousCameraPosition);
-    getCamera().zoom = previousCameraZoom;
-    CameraController.instance().stopMovement();
+    restorePreviousCameraPosition();
   }
 
   private InputCallback goBackHomeCallback = new InputCallback() {
