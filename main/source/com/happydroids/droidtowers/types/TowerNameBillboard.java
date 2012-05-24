@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -18,6 +19,7 @@ import static com.badlogic.gdx.graphics.Texture.TextureFilter.Linear;
 public class TowerNameBillboard extends GridObject {
   private Sprite sprite;
   private final BitmapFont bitmapFont;
+  private Label towerNameLabel;
 
   public TowerNameBillboard(GridObjectType gridObjectType, GameGrid gameGrid) {
     super(gridObjectType, gameGrid);
@@ -26,6 +28,7 @@ public class TowerNameBillboard extends GridObject {
     sprite.getTexture().setFilter(Linear, Linear);
 
     bitmapFont = FontManager.Roboto32.getFont();
+    towerNameLabel = FontManager.Roboto32.makeLabel(gameGrid.getTowerName());
   }
 
   @Override
@@ -35,13 +38,12 @@ public class TowerNameBillboard extends GridObject {
 
   @Override
   public void render(SpriteBatch spriteBatch, Color renderTintColor) {
-    sprite.setColor(renderColor);
+    sprite.setColor(Color.DARK_GRAY);
     sprite.setPosition(worldPosition.x, worldPosition.y);
-    sprite.setSize(worldSize.x, worldSize.y);
+    sprite.setSize(towerNameLabel.width, towerNameLabel.height);
     sprite.draw(spriteBatch);
-
-    if (gameGrid.getTowerName() != null) {
-      bitmapFont.draw(spriteBatch, gameGrid.getTowerName(), worldPosition.x, worldPosition.y);
-    }
+    towerNameLabel.x = worldPosition.x;
+    towerNameLabel.y = worldPosition.y;
+    towerNameLabel.draw(spriteBatch, 1f);
   }
 }

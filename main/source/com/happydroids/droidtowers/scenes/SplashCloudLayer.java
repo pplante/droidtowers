@@ -12,7 +12,7 @@ import com.happydroids.droidtowers.utils.Random;
 
 public class SplashCloudLayer extends CloudLayer {
   public SplashCloudLayer() {
-    super(null, null);
+    super(null);
 
     CLOUD_SPAWN_MIN = 0;
     CLOUD_SPAWN_MAX = 1;

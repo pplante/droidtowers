@@ -20,6 +20,7 @@ import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.entities.CloudLayer;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
+import com.happydroids.droidtowers.events.RespondsToWorldSizeChange;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.GameState;
 import com.happydroids.droidtowers.gamestate.actions.*;
@@ -88,11 +89,11 @@ public class TowerScene extends Scene {
     weatherService = new WeatherService();
 
     gameLayers = Lists.newArrayList();
-    gameLayers.add(new SkyLayer(gameGrid, weatherService));
-    gameLayers.add(new CityScapeLayer(gameGrid));
-    gameLayers.add(new CloudLayer(gameGrid, weatherService));
-    gameLayers.add(new RainLayer(gameGrid, weatherService));
-    gameLayers.add(new GroundLayer(gameGrid));
+    gameLayers.add(new SkyLayer(weatherService));
+    gameLayers.add(new CityScapeLayer());
+    gameLayers.add(new CloudLayer(weatherService));
+    gameLayers.add(new RainLayer(weatherService));
+    gameLayers.add(new GroundLayer());
     gameLayers.add(gameGridRenderer);
     gameLayers.add(gameGrid);
     gameLayers.add(avatarLayer);
@@ -228,5 +229,11 @@ public class TowerScene extends Scene {
   @Subscribe
   public void GameGrid_onGridResize(GameGridResizeEvent event) {
     cameraController.updateCameraConstraints(gameGrid.getWorldSize());
+
+    for (GameLayer gameLayer : gameLayers) {
+      if (gameLayer instanceof RespondsToWorldSizeChange) {
+        ((RespondsToWorldSizeChange) gameLayer).updateWorldSize(gameGrid.getWorldSize());
+      }
+    }
   }
 }

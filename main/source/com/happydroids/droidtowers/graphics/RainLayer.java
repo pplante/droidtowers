@@ -4,23 +4,21 @@
 
 package com.happydroids.droidtowers.graphics;
 
+import com.badlogic.gdx.math.Vector2;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.WeatherService;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.Rain;
-import com.happydroids.droidtowers.events.GameGridResizeEvent;
+import com.happydroids.droidtowers.events.RespondsToWorldSizeChange;
 import com.happydroids.droidtowers.events.WeatherState;
 import com.happydroids.droidtowers.events.WeatherStateChangeEvent;
-import com.happydroids.droidtowers.grid.GameGrid;
 
-public class RainLayer extends GameLayer {
-  private final GameGrid gameGrid;
+public class RainLayer extends GameLayer implements RespondsToWorldSizeChange {
   private final WeatherService weatherService;
+  private Vector2 worldSize;
 
-  public RainLayer(GameGrid gameGrid, WeatherService weatherService) {
-    this.gameGrid = gameGrid;
+  public RainLayer(WeatherService weatherService) {
     this.weatherService = weatherService;
-    gameGrid.events().register(this);
     weatherService.events().register(this);
   }
 
@@ -28,18 +26,19 @@ public class RainLayer extends GameLayer {
     removeAllChildren();
 
     if (weatherService.currentState() == WeatherState.RAINING) {
-      addChild(new Rain(gameGrid));
-      addChild(new Rain(gameGrid));
+      addChild(new Rain(worldSize));
+      addChild(new Rain(worldSize));
     }
   }
 
   @Subscribe
-  public void GameGrid_onResize(GameGridResizeEvent event) {
+  public void WeatherService_onWeatherChange(WeatherStateChangeEvent event) {
     updateRain();
   }
 
-  @Subscribe
-  public void WeatherService_onWeatherChange(WeatherStateChangeEvent event) {
+  @Override
+  public void updateWorldSize(Vector2 worldSize) {
+    this.worldSize = worldSize;
     updateRain();
   }
 }

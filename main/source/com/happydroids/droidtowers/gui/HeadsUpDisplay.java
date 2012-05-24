@@ -41,7 +41,6 @@ public class HeadsUpDisplay extends WidgetGroup {
   private OrthographicCamera camera;
   private GameGrid gameGrid;
   private static HeadsUpDisplay instance;
-  private Toast toast;
   private ToolTip mouseToolTip;
   private GridObjectPurchaseMenu purchaseDialog;
   private RadialMenu toolMenu;
@@ -270,13 +269,10 @@ public class HeadsUpDisplay extends WidgetGroup {
   }
 
   public static void showToast(String message, Object... objects) {
-    if (instance.toast == null) {
-      instance.toast = new Toast();
-      instance.addActor(instance.toast);
-    }
-
-    instance.toast.setMessage(String.format(message, objects));
-    instance.toast.show();
+    Toast toast = new Toast();
+    toast.setMessage(String.format(message, objects));
+    instance().stage.addActor(toast);
+    toast.show();
   }
 
   public float getPrefWidth() {

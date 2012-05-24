@@ -35,7 +35,7 @@ public class NeighborGameGrid extends GameGrid {
       maxX = Math.max(position.x + size.x, maxX);
       maxY = Math.max(position.y + size.y, maxY);
     }
-    setGridSize(maxX - minX, maxY);
+    setGridSize(maxX - minX, gridSize.y);
     updateWorldSize(false);
 
     for (GridObject gridObject : getObjects()) {

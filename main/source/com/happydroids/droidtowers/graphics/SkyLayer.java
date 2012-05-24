@@ -7,44 +7,39 @@ package com.happydroids.droidtowers.graphics;
 import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.WeatherService;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GameObject;
-import com.happydroids.droidtowers.events.GameGridResizeEvent;
+import com.happydroids.droidtowers.events.RespondsToWorldSizeChange;
 import com.happydroids.droidtowers.events.WeatherStateChangeEvent;
-import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
-public class SkyLayer extends GameLayer {
-  private final GameGrid gameGrid;
+public class SkyLayer extends GameLayer implements RespondsToWorldSizeChange {
   private final WeatherService weatherService;
   private final GameObject sky;
 
-  public SkyLayer(GameGrid gameGrid, WeatherService weatherService) {
+  public SkyLayer(WeatherService weatherService) {
     super();
-    this.gameGrid = gameGrid;
     this.weatherService = weatherService;
 
-    gameGrid.events().register(this);
     weatherService.events().register(this);
 
     Texture texture = TowerAssetManager.texture("backgrounds/sky-gradient.png");
     sky = new GameObject(texture);
-    GameGrid_onResize(null);
     sky.setColor(weatherService.currentState().skyColor);
 
     addChild(sky);
   }
 
-  @Subscribe
-  public void GameGrid_onResize(GameGridResizeEvent event) {
+  public void updateWorldSize(Vector2 worldSize) {
     sky.setPosition(-Display.getBiggestScreenDimension(), TowerConsts.GROUND_HEIGHT);
-    sky.setSize(gameGrid.getWorldSize().x + (Display.getBiggestScreenDimension() * 2), gameGrid.getWorldSize().y + Display.getBiggestScreenDimension());
+    sky.setSize(worldSize.x + (Display.getBiggestScreenDimension() * 2), worldSize.y + Display.getBiggestScreenDimension());
     sky.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
   }
 

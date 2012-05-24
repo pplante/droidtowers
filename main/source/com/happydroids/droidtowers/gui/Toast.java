@@ -66,7 +66,7 @@ public class Toast extends Table {
             .delay(3000)
             .setCallback(new TweenCallback() {
               public void onEvent(int eventType, BaseTween source) {
-                visible = false;
+                markToRemove(true);
               }
             })
             .setCallbackTriggers(TweenCallback.COMPLETE)

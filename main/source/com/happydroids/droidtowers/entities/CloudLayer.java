@@ -14,9 +14,8 @@ import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.WeatherService;
-import com.happydroids.droidtowers.events.GameGridResizeEvent;
+import com.happydroids.droidtowers.events.RespondsToWorldSizeChange;
 import com.happydroids.droidtowers.events.WeatherStateChangeEvent;
-import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
@@ -27,7 +26,7 @@ import java.util.List;
 
 import static com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
-public class CloudLayer extends GameLayer {
+public class CloudLayer extends GameLayer implements RespondsToWorldSizeChange {
   public static final int CLOUD_SPAWN_DELAY = 2;
   public static final String CLOUDS_ATLAS = "backgrounds/clouds.txt";
   public double CLOUD_SPAWN_MIN = 0.35;
@@ -40,17 +39,13 @@ public class CloudLayer extends GameLayer {
   private final int numberOfCloudTypes;
   private final WeatherService weatherService;
 
-  public CloudLayer(GameGrid gameGrid, WeatherService weatherService) {
+  public CloudLayer(WeatherService weatherService) {
     super();
     this.weatherService = weatherService;
 
     textureAtlas = TowerAssetManager.textureAtlas(CLOUDS_ATLAS);
     numberOfCloudTypes = textureAtlas.getRegions().size();
     cloudsToRemove = new ArrayList<GameObject>(5);
-
-    if (gameGrid != null) {
-      gameGrid.events().register(this);
-    }
 
     if (weatherService != null) {
       weatherService.events().register(this);
@@ -126,17 +121,6 @@ public class CloudLayer extends GameLayer {
   }
 
   @Subscribe
-  public void GameGrid_onResize(GameGridResizeEvent event) {
-    worldSize = event.gameGrid.getWorldSize();
-
-    if (gameObjects.isEmpty()) {
-      for (int i = 0; i < MAX_ACTIVE_CLOUDS; i++) {
-        spawnCloudNow(true);
-      }
-    }
-  }
-
-  @Subscribe
   public void WeatherService_onWeatherChange(WeatherStateChangeEvent event) {
     Color cloudColor = null;
 
@@ -160,6 +144,17 @@ public class CloudLayer extends GameLayer {
   }
 
   public void setWorldSize(Vector2 worldSize) {
+
+  }
+
+  @Override
+  public void updateWorldSize(Vector2 worldSize) {
     this.worldSize = worldSize;
+
+    if (gameObjects.isEmpty()) {
+      for (int i = 0; i < MAX_ACTIVE_CLOUDS; i++) {
+        spawnCloudNow(true);
+      }
+    }
   }
 }

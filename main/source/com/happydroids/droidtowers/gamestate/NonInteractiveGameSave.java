@@ -18,6 +18,7 @@ import java.io.IOException;
 public class NonInteractiveGameSave extends GameSave {
   public NonInteractiveGameSave(GameSave gameSave) {
     super();
+    towerName = gameSave.towerName;
     gridSize = gameSave.gridSize;
     gridObjects = gameSave.gridObjects;
   }
@@ -54,7 +55,6 @@ public class NonInteractiveGameSave extends GameSave {
       byte[] bytes = transformer.process();
 
       final GameSave gameSave = TowerGameService.instance().getObjectMapper().readValue(bytes, GameSave.class);
-
 
       return new NonInteractiveGameSave(gameSave);
     } catch (Exception e) {

@@ -25,4 +25,11 @@ public class ViewNeighborHUD extends Table {
 
     add(backButton);
   }
+
+  public void showToast(String toastText) {
+    Toast toast = new Toast();
+    toast.setMessage(toastText);
+    getStage().addActor(toast);
+    toast.show();
+  }
 }

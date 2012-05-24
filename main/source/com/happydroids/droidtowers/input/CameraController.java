@@ -63,8 +63,6 @@ public class CameraController implements GestureDetector.GestureListener {
   }
 
   public boolean fling(float velocityX, float velocityY) {
-    Gdx.app.debug("camera", String.format("fling: %.2f, %.2f", velocityX, velocityY));
-
     if (Math.abs(velocityX) >= 300) {
       flinging = true;
       velX = camera.zoom * velocityX * 0.5f;

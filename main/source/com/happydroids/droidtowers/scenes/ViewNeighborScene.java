@@ -16,13 +16,24 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
+import com.happydroids.droidtowers.WeatherService;
+import com.happydroids.droidtowers.entities.CloudLayer;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GameObject;
+import com.happydroids.droidtowers.entities.GridObject;
+import com.happydroids.droidtowers.events.RespondsToWorldSizeChange;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSaveCollection;
+import com.happydroids.droidtowers.graphics.CityScapeLayer;
+import com.happydroids.droidtowers.graphics.GroundLayer;
+import com.happydroids.droidtowers.graphics.RainLayer;
+import com.happydroids.droidtowers.graphics.SkyLayer;
 import com.happydroids.droidtowers.grid.NeighborGameGrid;
-import com.happydroids.droidtowers.gui.*;
+import com.happydroids.droidtowers.gui.Dialog;
+import com.happydroids.droidtowers.gui.FontManager;
+import com.happydroids.droidtowers.gui.OnClickCallback;
+import com.happydroids.droidtowers.gui.ViewNeighborHUD;
 import com.happydroids.droidtowers.input.*;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
@@ -44,13 +55,16 @@ public class ViewNeighborScene extends Scene {
   private GameObject droid;
   private GestureDelegater gestureDelegater;
   private GestureDetector gestureDetector;
+  private SkyLayer skyLayer;
+  private WeatherService weatherService;
+  private ViewNeighborHUD neighborHUD;
 
   @Override
   public void create(Object... args) {
     getCamera().position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
     getCamera().zoom = CameraController.ZOOM_MIN;
 
-    ViewNeighborHUD neighborHUD = new ViewNeighborHUD();
+    neighborHUD = new ViewNeighborHUD();
     neighborHUD.x = 0;
     neighborHUD.y = Gdx.graphics.getHeight();
 
@@ -58,7 +72,14 @@ public class ViewNeighborScene extends Scene {
 
     InputSystem.instance().bind(TowerConsts.NEGATIVE_BUTTON_KEYS, goBackHomeCallback);
 
+    weatherService = new WeatherService();
+
     gameLayers = Lists.newArrayList();
+    gameLayers.add(new SkyLayer(weatherService));
+    gameLayers.add(new CityScapeLayer());
+    gameLayers.add(new CloudLayer(weatherService));
+    gameLayers.add(new RainLayer(weatherService));
+    gameLayers.add(new GroundLayer());
 
     fetchingNeighbors = true;
     droid = new GameObject(new Texture("happy-droid.png"));
@@ -134,7 +155,7 @@ public class ViewNeighborScene extends Scene {
     Vector2 worldSize = new Vector2();
     int gridX = 0;
     for (final FriendCloudGameSave friendCloudGameSave : collection.getObjects()) {
-      NeighborGameGrid neighborGameGrid = new NeighborGameGrid(getCamera(), new GridPoint(gridX, TowerConsts.NEIGHBOR_GROUND_HEIGHT));
+      NeighborGameGrid neighborGameGrid = new NeighborGameGrid(getCamera(), new GridPoint(gridX, 0));
       neighborGameGrid.setGridScale(1f);
       GameSave gameSave = friendCloudGameSave.getGameSave();
 
@@ -150,12 +171,15 @@ public class ViewNeighborScene extends Scene {
       neighborGameGrid.setOwnerName(friendCloudGameSave.getOwner().getFirstName());
       neighborGameGrid.setClickListener(new Runnable() {
         public void run() {
-          HeadsUpDisplay.showToast("HELLO FROM " + friendCloudGameSave.getOwner().getFirstName());
+          neighborHUD.showToast("HELLO FROM " + friendCloudGameSave.getOwner().getFirstName());
         }
       });
 
       TowerNameType towerNameType = new TowerNameType();
-      neighborGameGrid.addObject(towerNameType.makeGridObject(neighborGameGrid));
+      GridObject towerNameSign = towerNameType.makeGridObject(neighborGameGrid);
+      neighborGameGrid.addObject(towerNameSign);
+      towerNameSign.setPlaced(true);
+      towerNameSign.setPosition(0, TowerConsts.LOBBY_FLOOR);
 
       worldSize.y = Math.max(worldSize.y, neighborGameGrid.getWorldSize().y);
       worldSize.x = neighborGameGrid.getWorldBounds().x + neighborGameGrid.getWorldBounds().width;
@@ -164,8 +188,14 @@ public class ViewNeighborScene extends Scene {
       gameLayers.add(neighborGameGrid);
     }
 
+    for (GameLayer gameLayer : gameLayers) {
+      if (gameLayer instanceof RespondsToWorldSizeChange) {
+        ((RespondsToWorldSizeChange) gameLayer).updateWorldSize(worldSize);
+      }
+    }
+
     cameraController.updateCameraConstraints(worldSize);
-    camera.position.set(worldSize.x / 2 - Gdx.graphics.getWidth() / 2, TowerConsts.GROUND_HEIGHT + Gdx.graphics.getHeight(), 0f);
+    camera.position.set(worldSize.x / 2 - Gdx.graphics.getWidth() / 2, TowerConsts.GROUND_HEIGHT, 0f);
     fetchingLabel.markToRemove(true);
     fetchingNeighbors = false;
   }
