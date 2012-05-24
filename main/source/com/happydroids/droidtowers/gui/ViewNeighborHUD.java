@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.gui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
@@ -13,7 +14,7 @@ public class ViewNeighborHUD extends Table {
   public ViewNeighborHUD() {
     super();
 
-    defaults().top().left().expand();
+    defaults().top().left();
 
     TextButton backButton = FontManager.Roboto18.makeTextButton("< back to my tower");
     backButton.setClickListener(new VibrateClickListener() {
@@ -23,7 +24,23 @@ public class ViewNeighborHUD extends Table {
       }
     });
 
+    TextButton addNeighborsButton = FontManager.Roboto18.makeTextButton("add neighbors");
+    addNeighborsButton.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        new FriendsListWindow(getStage()).show();
+      }
+    });
+
+    row().top().left().fillX();
     add(backButton);
+    add().expandX();
+    add(addNeighborsButton).right();
+  }
+
+  @Override
+  public float getPrefWidth() {
+    return Gdx.graphics.getWidth();
   }
 
   public void showToast(String toastText) {

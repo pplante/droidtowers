@@ -42,9 +42,9 @@ public class ViewNeighborScene extends Scene {
   @Override
   public void create(Object... args) {
     neighborHUD = new ViewNeighborHUD();
+    neighborHUD.pack();
     neighborHUD.x = 0;
-    neighborHUD.y = Gdx.graphics.getHeight();
-
+    neighborHUD.y = Gdx.graphics.getHeight() - neighborHUD.height;
     getStage().addActor(neighborHUD);
 
     InputSystem.instance().bind(TowerConsts.NEGATIVE_BUTTON_KEYS, goBackHomeCallback);
