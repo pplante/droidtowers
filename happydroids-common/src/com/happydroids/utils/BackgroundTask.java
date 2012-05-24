@@ -17,6 +17,7 @@ public abstract class BackgroundTask {
   protected Thread thread;
   private static Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
   private static PostExecuteManager postExecuteManager;
+  private boolean canceled;
 
 
   public BackgroundTask() {
@@ -52,13 +53,19 @@ public abstract class BackgroundTask {
 
     threadPool.submit(new Runnable() {
       public void run() {
-        beforeExecute();
-        execute();
-        postExecuteManager.postRunnable(new Runnable() {
-          public void run() {
-            afterExecute();
-          }
-        });
+        if (!canceled) {
+          beforeExecute();
+        }
+        if (!canceled) {
+          execute();
+        }
+        if (!canceled) {
+          postExecuteManager.postRunnable(new Runnable() {
+            public void run() {
+              afterExecute();
+            }
+          });
+        }
       }
     });
   }
@@ -78,6 +85,10 @@ public abstract class BackgroundTask {
 
   public static void setUncaughtExceptionHandler(Thread.UncaughtExceptionHandler uncaughtExceptionHandler) {
     BackgroundTask.uncaughtExceptionHandler = uncaughtExceptionHandler;
+  }
+
+  public void cancel() {
+    canceled = true;
   }
 
   public interface PostExecuteManager {

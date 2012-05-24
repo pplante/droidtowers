@@ -11,26 +11,24 @@ import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.grid.GameGrid;
-import com.happydroids.droidtowers.scenes.ViewNeighborScene;
+import com.happydroids.droidtowers.scenes.ViewNeighborSplashScene;
 
 public class HeaderButtonBar extends Table {
   public static final float INACTIVE_BUTTON_ALPHA = 0.25f;
   public static final float BUTTON_FADE_DURATION = 0.25f;
 
-  private final AudioControl audioControl;
   private final ImageButton dataOverlayButton;
   private final DataOverlayMenu dataOverlayMenu;
-  private ImageButton viewNeighbors;
 
   public HeaderButtonBar(TextureAtlas hudAtlas, GameGrid gameGrid) {
-    audioControl = new AudioControl(hudAtlas);
+    AudioControl audioControl = new AudioControl(hudAtlas);
     dataOverlayButton = TowerAssetManager.imageButton(hudAtlas.findRegion("overlay-button"));
-    viewNeighbors = TowerAssetManager.imageButton(hudAtlas.findRegion("view-neighbors"));
+    ImageButton viewNeighbors = TowerAssetManager.imageButton(hudAtlas.findRegion("view-neighbors"));
 
     viewNeighbors.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
-        TowerGame.pushScene(ViewNeighborScene.class);
+        TowerGame.pushScene(ViewNeighborSplashScene.class);
       }
     });
 
