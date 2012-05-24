@@ -29,7 +29,6 @@ import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.input.PickerTool;
 import com.happydroids.droidtowers.math.GridPoint;
-import com.happydroids.droidtowers.scenes.TowerScene;
 import com.happydroids.droidtowers.types.*;
 
 import java.util.Set;
@@ -53,7 +52,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   private final HeaderButtonBar headerButtonBar;
   private AchievementButton achievementButton;
 
-  public HeadsUpDisplay(TowerScene towerScene, Stage stage, OrthographicCamera camera, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine) {
+  public HeadsUpDisplay(Stage stage, OrthographicCamera camera, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine) {
     super();
 
     HeadsUpDisplay.instance = this;
@@ -66,7 +65,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     hudAtlas = TowerAssetManager.textureAtlas("hud/buttons.txt");
 
-    statusBarPanel = new StatusBarPanel(towerScene);
+    statusBarPanel = new StatusBarPanel();
     statusBarPanel.x = 0;
     statusBarPanel.y = stage.height() - statusBarPanel.height;
     addActor(statusBarPanel);

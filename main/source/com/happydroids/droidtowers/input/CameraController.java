@@ -205,4 +205,9 @@ public class CameraController implements GestureDetector.GestureListener {
     worldSize = event.gameGrid.getWorldSize();
     updateCameraConstraints();
   }
+
+  public void stopMovement() {
+    velX = 0f;
+    velY = 0f;
+  }
 }

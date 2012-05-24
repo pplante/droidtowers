@@ -36,7 +36,6 @@ public class Avatar extends GameObject {
   public static final float WALKING_ANIMATION_DURATION = FRAME_DURATION * 3;
   private static final float PATH_SEARCH_DELAY = 0f;
   private static final Set<Color> colors = Sets.newHashSet(Color.GREEN, Color.RED, Color.ORANGE, Color.MAGENTA, Color.PINK, Color.YELLOW);
-
   private static Iterator colorIterator;
   private final Animation walkAnimation;
 

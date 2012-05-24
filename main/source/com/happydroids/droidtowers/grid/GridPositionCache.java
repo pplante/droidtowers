@@ -64,7 +64,10 @@ public class GridPositionCache {
   private void addGridObjectToPosition(GridObject gridObject) {
     for (int x = gridObject.getPosition().x; x < gridObject.getPosition().x + gridObject.getSize().x; x++) {
       for (int y = gridObject.getPosition().y; y < gridObject.getPosition().y + gridObject.getSize().y; y++) {
-        getPosition(x, y).add(gridObject);
+        GridPosition gridPosition = getPosition(x, y);
+        if (gridPosition != null) {
+          getPosition(x, y).add(gridObject);
+        }
       }
     }
   }
@@ -72,7 +75,10 @@ public class GridPositionCache {
   private void removeGridObjectFromPosition(GridObject gridObject, GridPoint position, GridPoint size) {
     for (int x = position.x; x < position.x + size.x; x++) {
       for (int y = position.y; y < position.y + size.y; y++) {
-        getPosition(x, y).remove(gridObject);
+        GridPosition gridPosition = getPosition(x, y);
+        if (gridPosition != null) {
+          gridPosition.remove(gridObject);
+        }
       }
     }
   }

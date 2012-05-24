@@ -118,8 +118,10 @@ public class TowerWindow {
     wrapper.markToRemove(true);
   }
 
-  public void setDismissCallback(Runnable dismissCallback) {
+  public TowerWindow setDismissCallback(Runnable dismissCallback) {
     this.dismissCallback = dismissCallback;
+
+    return this;
   }
 
   protected void debug() {

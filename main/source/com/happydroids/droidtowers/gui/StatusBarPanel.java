@@ -22,7 +22,6 @@ import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.events.GameSpeedChangeEvent;
-import com.happydroids.droidtowers.scenes.TowerScene;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 import static com.happydroids.droidtowers.utils.StringUtils.formatNumber;
@@ -33,7 +32,6 @@ public class StatusBarPanel extends Table {
   public static final float BUTTON_FADE_DURATION = 0.25f;
   public static final int LINE_WIDTH = 2;
 
-  private final TowerScene towerScene;
   private final Label moneyLabel;
   private final Label experienceLabel;
   private final Label gameSpeedLabel;
@@ -55,8 +53,7 @@ public class StatusBarPanel extends Table {
   private final Slider gameSpeedSlider;
   private final Achievement dubai7StarWonder;
 
-  public StatusBarPanel(TowerScene towerScene) {
-    this.towerScene = towerScene;
+  public StatusBarPanel() {
     touchable = true;
 
     moneyLabel = makeValueLabel("0");

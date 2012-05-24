@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.google.common.collect.Lists;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
@@ -19,7 +20,6 @@ import java.util.List;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class Dialog extends TowerWindow {
-  static final int[] NEGATIVE_BUTTON_KEYS = new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE};
   private List<TextButton> buttons;
   private TextButton positiveButton;
   private TextButton negativeButton;
@@ -125,12 +125,12 @@ public class Dialog extends TowerWindow {
     }
 
     if (negativeButton != null) {
-      InputSystem.instance().bind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
+      InputSystem.instance().bind(TowerConsts.NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
     }
   }
 
   @Override
   protected void unbindKeys() {
-    InputSystem.instance().unbind(NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
+    InputSystem.instance().unbind(TowerConsts.NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
   }
 }

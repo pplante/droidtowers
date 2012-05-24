@@ -9,7 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.scenes.ViewNeighborScene;
 
 public class HeaderButtonBar extends Table {
   public static final float INACTIVE_BUTTON_ALPHA = 0.25f;
@@ -28,7 +30,7 @@ public class HeaderButtonBar extends Table {
     viewNeighbors.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
-        new FriendsListWindow(getStage()).show();
+        TowerGame.pushScene(ViewNeighborScene.class);
       }
     });
 

@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.input.GestureDetector;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerConsts;
@@ -22,23 +21,16 @@ import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.GameState;
 import com.happydroids.droidtowers.gamestate.actions.*;
-import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSave;
-import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSaveCollection;
 import com.happydroids.droidtowers.graphics.*;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GameGridRenderer;
-import com.happydroids.droidtowers.grid.NeighborGameGrid;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.input.DefaultKeybindings;
 import com.happydroids.droidtowers.input.GestureDelegater;
 import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputSystem;
-import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
-import com.happydroids.server.ApiCollectionRunnable;
-import com.happydroids.server.HappyDroidServiceCollection;
-import org.apache.http.HttpResponse;
 
 import java.util.List;
 
@@ -88,12 +80,8 @@ public class TowerScene extends Scene {
 
     gameGrid.events().register(TowerGame.getSoundController());
 
-    headsUpDisplay = new HeadsUpDisplay(this, getStage(), getCamera(), gameGrid, avatarLayer, AchievementEngine.instance(), TutorialEngine.instance());
+    headsUpDisplay = new HeadsUpDisplay(getStage(), getCamera(), gameGrid, avatarLayer, AchievementEngine.instance(), TutorialEngine.instance());
     weatherService = new WeatherService();
-
-//    towerMiniMap.x = 100;
-//    towerMiniMap.y = 100;
-//    headsUpDisplay.addActor(towerMiniMap);
 
     gameLayers = Lists.newArrayList();
     gameLayers.add(new SkyLayer(gameGrid, weatherService));
@@ -127,44 +115,6 @@ public class TowerScene extends Scene {
     transportCalculator.run();
 
     attachActions();
-
-    final int[] neighborGridX = {0};
-    FriendCloudGameSaveCollection friendGames = new FriendCloudGameSaveCollection();
-    friendGames.fetch(new ApiCollectionRunnable<HappyDroidServiceCollection<FriendCloudGameSave>>() {
-      @Override
-      public void onError(HttpResponse response, int statusCode, HappyDroidServiceCollection<FriendCloudGameSave> collection) {
-        System.out.println("collection = " + collection);
-      }
-
-      @Override
-      public void onSuccess(HttpResponse response, HappyDroidServiceCollection<FriendCloudGameSave> collection) {
-        for (final FriendCloudGameSave friendCloudGameSave : collection.getObjects()) {
-          NeighborGameGrid neighborGameGrid = new NeighborGameGrid(getCamera(), new GridPoint(neighborGridX[0], TowerConsts.NEIGHBOR_GROUND_HEIGHT));
-          neighborGameGrid.getRenderer().setRenderTintColor(Color.GRAY);
-          GameSave gameSave = friendCloudGameSave.getGameSave();
-
-          if (!gameSave.hasGridObjects()) {
-            System.out.println("Skipping, no objects! " + friendCloudGameSave);
-            continue;
-          }
-
-          gameSave.attachToGame(neighborGameGrid, camera);
-          neighborGameGrid.findLimits();
-          neighborGridX[0] += (neighborGameGrid.getGridSize().x + 2) * TowerConsts.GRID_UNIT_SIZE;
-
-          neighborGameGrid.setOwnerName(friendCloudGameSave.getOwner().getFirstName());
-          neighborGameGrid.setClickListener(new Runnable() {
-            public void run() {
-              HeadsUpDisplay.showToast("HELLO FROM " + friendCloudGameSave.getOwner().getFirstName());
-            }
-          });
-
-          int indexOfPlayerGameGrid = gameLayers.indexOf(gameGrid);
-          gameLayers.add(indexOfPlayerGameGrid - 1, neighborGameGrid.getRenderer());
-          gameLayers.add(indexOfPlayerGameGrid - 1, neighborGameGrid);
-        }
-      }
-    });
   }
 
   private void attachActions() {

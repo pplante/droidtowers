@@ -2,17 +2,18 @@
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
 
-package com.happydroids.droidtowers;
+package com.happydroids.droidtowers.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Texture;
+import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
-import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.scenes.TowerScene;
 
-class DebugInputAdapter extends InputAdapter {
+public class DebugInputAdapter extends InputAdapter {
   public StringBuilder keys = new StringBuilder();
 
   @Override

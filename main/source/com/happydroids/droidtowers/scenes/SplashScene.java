@@ -4,7 +4,10 @@
 
 package com.happydroids.droidtowers.scenes;
 
+import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenCallback;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -17,6 +20,7 @@ import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.GameObject;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gui.FontManager;
+import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.utils.Random;
@@ -80,6 +84,9 @@ public class SplashScene extends Scene {
       }
     }
 
+    getCamera().position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+    getCamera().zoom = CameraController.ZOOM_MIN;
+
     messagesUsed = Sets.newHashSet();
 
     Label titleLabel = FontManager.Roboto64.makeLabel("Droid Towers", Color.WHITE, Align.CENTER);
@@ -99,9 +106,18 @@ public class SplashScene extends Scene {
     addActor(progressLabel);
 
     happyDroid = new GameObject(new Texture("happy-droid.png"));
-    happyDroid.setPosition(-happyDroid.getWidth() / 2, -happyDroid.getHeight() / 2);
-
-    Tween.to(happyDroid, GameObjectAccessor.OPACITY, 500).target(0f).repeatYoyo(-1, 0).start(TweenSystem.getTweenManager());
+    happyDroid.setPosition(Random.randomInt(Gdx.graphics.getWidth() / 2), Random.randomInt(Gdx.graphics.getHeight()) / 2);
+    Tween.to(happyDroid, GameObjectAccessor.OPACITY, 1000)
+            .target(0f)
+            .setCallback(new TweenCallback() {
+              @Override
+              public void onEvent(int type, BaseTween source) {
+                happyDroid.setPosition(Random.randomInt(Gdx.graphics.getWidth() / 2), Random.randomInt(Gdx.graphics.getHeight()) / 2);
+              }
+            })
+            .setCallbackTriggers(TweenCallback.END)
+            .repeat(Tween.INFINITY, 100)
+            .start(TweenSystem.getTweenManager());
   }
 
   private String selectRandomMessage() {

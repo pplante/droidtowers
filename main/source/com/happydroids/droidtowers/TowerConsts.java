@@ -7,6 +7,7 @@ package com.happydroids.droidtowers;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.happydroids.HappyDroidConsts;
+import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.math.GridPoint;
 
 public class TowerConsts extends HappyDroidConsts {
@@ -41,6 +42,7 @@ public class TowerConsts extends HappyDroidConsts {
   public static final int MAX_AVATARS = (Gdx.app.getType() == Application.ApplicationType.Android ? 20 : 120);
   public static final float AVATAR_POPULATION_SCALE = 0.25f;
   public static final GridPoint SINGLE_POINT = new GridPoint(1, 1);
+  public static final int[] NEGATIVE_BUTTON_KEYS = new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE};
 
   private TowerConsts() {
 
