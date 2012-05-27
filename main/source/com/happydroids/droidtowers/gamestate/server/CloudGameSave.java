@@ -23,7 +23,7 @@ public class CloudGameSave extends TowerGameServiceObject {
   protected String blob;
   protected String image;
   protected Date syncedOn;
-  protected List<FriendCloudGameSave> neighbors;
+  protected List<String> neighbors;
 
   public CloudGameSave() {
 
@@ -60,7 +60,7 @@ public class CloudGameSave extends TowerGameServiceObject {
     return gameSave;
   }
 
-  public List<FriendCloudGameSave> getNeighbors() {
+  public List<String> getNeighbors() {
     return neighbors;
   }
 }

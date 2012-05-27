@@ -10,6 +10,7 @@ import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.GameObject;
@@ -101,9 +102,10 @@ public class ViewNeighborSplashScene extends Scene {
     protected void execute() {
       CloudGameSave cloudGameSave = playerGameSave.getCloudGameSave();
       cloudGameSave.reloadBlocking();
-      friendGames = cloudGameSave.getNeighbors();
+      friendGames = Lists.newArrayList();
 
-      for (FriendCloudGameSave friendGame : friendGames) {
+      for (String friendGameResourceUri : cloudGameSave.getNeighbors()) {
+        FriendCloudGameSave friendGame = new FriendCloudGameSave(friendGameResourceUri);
         friendGame.reloadBlocking();
       }
 
