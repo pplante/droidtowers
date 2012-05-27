@@ -17,6 +17,11 @@ public class FriendCloudGameSave extends CloudGameSave {
     super();
   }
 
+  public FriendCloudGameSave(String resourceUri) {
+    this();
+    setResourceUri(resourceUri);
+  }
+
   @Override
   public String getBaseResourceUri() {
     return HappyDroidConsts.HAPPYDROIDS_URI + "/api/v1/friendgamesave/";

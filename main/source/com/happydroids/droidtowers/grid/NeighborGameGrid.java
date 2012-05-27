@@ -6,11 +6,12 @@ package com.happydroids.droidtowers.grid;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
+import com.happydroids.droidtowers.actions.GameGridClickListener;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.math.GridPoint;
 
 public class NeighborGameGrid extends GameGrid {
-  private Runnable clickListener;
+  private GameGridClickListener clickListener;
   private String ownerName;
 
   public NeighborGameGrid(OrthographicCamera camera, GridPoint gridOrigin) {
@@ -44,7 +45,7 @@ public class NeighborGameGrid extends GameGrid {
     }
   }
 
-  public void setClickListener(Runnable clickListener) {
+  public void setClickListener(GameGridClickListener clickListener) {
     this.clickListener = clickListener;
   }
 
@@ -53,7 +54,7 @@ public class NeighborGameGrid extends GameGrid {
     if (worldBounds.contains(worldPoint.x, worldPoint.y)) {
       for (GridObject gridObject : getObjects()) {
         if (gridObject.getWorldBounds().contains(worldPoint.x, worldPoint.y)) {
-          clickListener.run();
+          clickListener.click(this, gridObject, worldPoint.x, worldPoint.y);
           return true;
         }
       }

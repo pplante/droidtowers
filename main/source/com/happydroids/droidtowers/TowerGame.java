@@ -87,7 +87,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     }
 
     Thread.currentThread().setUncaughtExceptionHandler(uncaughtExceptionHandler);
-
     Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 
     TowerAssetManager.assetManager();

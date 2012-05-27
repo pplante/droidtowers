@@ -15,6 +15,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.StringEntity;
@@ -24,6 +25,8 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -89,7 +92,7 @@ public class HappyDroidService {
       try {
         BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
         if (entity != null && entity.getContentLength() > 0) {
-          String content = EntityUtils.toString(entity, HTTP.UTF_8);
+          String content = EntityUtils.toString(entity, Charset.forName("utf-8"));
           if (HappyDroidConsts.DEBUG)
             System.out.println("\tResponse: " + content);
           return mapper.readValue(content, aClazz);
@@ -165,14 +168,27 @@ public class HappyDroidService {
     request.setHeader("Content-Type", "application/json");
   }
 
-  public HttpResponse makeGetRequest(String uri) {
+  public HttpResponse makeGetRequest(String uri, HashMap<String, String> queryParams) {
     HttpClient client = new DefaultHttpClient();
     try {
       HttpGet request = new HttpGet(uri);
+      if (queryParams != null && queryParams.size() > 0) {
+        URIBuilder uriBuilder = new URIBuilder();
+        uriBuilder.setScheme(request.getURI().getScheme());
+        uriBuilder.setHost(request.getURI().getHost());
+        uriBuilder.setPath(request.getURI().getPath());
+        uriBuilder.setQuery(request.getURI().getQuery());
+        for (String paramName : queryParams.keySet()) {
+          uriBuilder.addParameter(paramName, queryParams.get(paramName));
+        }
+
+        request.setURI(uriBuilder.build());
+      }
+
       addDefaultHeaders(request);
-      if (HappyDroidConsts.DEBUG) System.out.println("REQ: GET " + uri);
+      if (HappyDroidConsts.DEBUG) System.out.println("REQ: GET " + request.getURI());
       HttpResponse response = client.execute(request);
-      if (HappyDroidConsts.DEBUG) System.out.println("RES: GET " + uri + ", " + response.getStatusLine());
+      if (HappyDroidConsts.DEBUG) System.out.println("RES: GET " + request.getURI() + ", " + response.getStatusLine());
       return response;
     } catch (HttpHostConnectException ignored) {
       if (HappyDroidConsts.DEBUG) System.out.println("Connection failed for: " + uri);

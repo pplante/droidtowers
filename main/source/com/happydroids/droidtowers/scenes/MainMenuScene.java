@@ -156,7 +156,8 @@ public class MainMenuScene extends Scene {
     });
 
 //    DebugUtils.createNonSavableGame(true);
-    DebugUtils.loadFirstGameFound();
+//    DebugUtils.loadFirstGameFound();
+    DebugUtils.loadGameFromCloud(19);
 //    new FriendsListWindow(getStage()).show();
   }
 

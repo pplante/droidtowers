@@ -13,8 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.GameObject;
+import com.happydroids.droidtowers.gamestate.GameSave;
+import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSave;
-import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSaveCollection;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.gui.OnClickCallback;
@@ -24,17 +25,19 @@ import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.utils.Random;
-import com.happydroids.server.ApiCollectionRunnable;
-import com.happydroids.server.HappyDroidServiceCollection;
 import com.happydroids.utils.BackgroundTask;
-import org.apache.http.HttpResponse;
+
+import java.util.List;
 
 public class ViewNeighborSplashScene extends Scene {
   private GameObject droid;
   private ViewNeighborSplashScene.FetchNeighborsList fetchNeighborsList;
+  private GameSave playerGameSave;
 
   @Override
   public void create(Object... args) {
+    playerGameSave = (GameSave) args[0];
+
     getCamera().position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
     getCamera().zoom = CameraController.ZOOM_MIN;
 
@@ -91,27 +94,25 @@ public class ViewNeighborSplashScene extends Scene {
   };
 
   private class FetchNeighborsList extends BackgroundTask {
-    private FriendCloudGameSaveCollection friendGames;
+    private List<FriendCloudGameSave> friendGames;
     public boolean fetchWasSuccessful;
 
     @Override
     protected void execute() {
-      friendGames = new FriendCloudGameSaveCollection();
-      friendGames.fetch(new ApiCollectionRunnable<HappyDroidServiceCollection<FriendCloudGameSave>>() {
-        @Override
-        public void onError(HttpResponse response, int statusCode, HappyDroidServiceCollection<FriendCloudGameSave> collection) {
-          System.out.println("collection = " + collection);
-        }
+      CloudGameSave cloudGameSave = playerGameSave.getCloudGameSave();
+      cloudGameSave.reloadBlocking();
+      friendGames = cloudGameSave.getNeighbors();
 
-        @Override
-        public void onSuccess(HttpResponse response, HappyDroidServiceCollection<FriendCloudGameSave> collection) {
-          fetchWasSuccessful = true;
-        }
-      });
+      for (FriendCloudGameSave friendGame : friendGames) {
+        friendGame.reloadBlocking();
+      }
+
+      fetchWasSuccessful = true;
     }
 
     @Override
     public synchronized void afterExecute() {
+      System.out.println("fetchWasSuccessful = " + fetchWasSuccessful);
       if (fetchWasSuccessful) {
         TowerGame.popScene();
         TowerGame.pushScene(ViewNeighborScene.class, friendGames);

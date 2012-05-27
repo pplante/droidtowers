@@ -23,6 +23,7 @@ import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Room;
+import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
 import com.happydroids.droidtowers.input.CameraController;
@@ -52,7 +53,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   private final HeaderButtonBar headerButtonBar;
   private AchievementButton achievementButton;
 
-  public HeadsUpDisplay(Stage stage, OrthographicCamera camera, CameraController cameraController, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine) {
+  public HeadsUpDisplay(Stage stage, OrthographicCamera camera, CameraController cameraController, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine, GameSave gameSave) {
     super();
 
     HeadsUpDisplay.instance = this;
@@ -77,7 +78,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     buildToolButtonMenu();
 
 
-    headerButtonBar = new HeaderButtonBar(hudAtlas, gameGrid);
+    headerButtonBar = new HeaderButtonBar(hudAtlas, gameGrid, gameSave);
     addActor(headerButtonBar);
     headerButtonBar.x = stage.width() - headerButtonBar.width - 10;
     headerButtonBar.y = stage.height() - headerButtonBar.height - 10;

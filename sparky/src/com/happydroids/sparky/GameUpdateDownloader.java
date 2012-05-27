@@ -73,7 +73,7 @@ public class GameUpdateDownloader {
   private File fetchGameUpdate(GameUpdate gameUpdate, boolean shouldUsePatch) throws IOException {
     String contentUrl = shouldUsePatch ? gameUpdate.patchFile.content : gameUpdate.fullRelease.content;
 
-    HttpResponse httpResponse = HappyDroidService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + contentUrl);
+    HttpResponse httpResponse = HappyDroidService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + contentUrl, null);
 
     if (httpResponse == null || httpResponse.getStatusLine() == null || httpResponse.getStatusLine().getStatusCode() != 200) {
       return null;

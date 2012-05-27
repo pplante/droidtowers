@@ -6,21 +6,25 @@ package com.happydroids.server;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Maps;
 import org.apache.http.HttpResponse;
 import org.apache.http.entity.BufferedHttpEntity;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.HashMap;
 import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServiceObject> {
   private Metadata meta;
   private List<ApiType> objects;
+  private HashMap<String, String> currentFilters;
 
   public HappyDroidServiceCollection(Class<ApiType> objectClazz) {
     objects = null;
+    currentFilters = Maps.newHashMap();
   }
 
   public void fetch(final ApiCollectionRunnable<HappyDroidServiceCollection<ApiType>> apiRunnable) {
@@ -75,7 +79,7 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
       return;
     }
 
-    HttpResponse response = HappyDroidService.instance().makeGetRequest(getBaseResourceUri());
+    HttpResponse response = HappyDroidService.instance().makeGetRequest(getBaseResourceUri(), currentFilters);
     if (response != null && response.getStatusLine() != null && response.getStatusLine().getStatusCode() == 200) {
       ObjectMapper objectMapper = HappyDroidService.instance().getObjectMapper();
       try {
@@ -86,6 +90,14 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
     }
 
     apiRunnable.handleResponse(response, this);
+  }
+
+  public void filterBy(final String fieldName, final String filterValue) {
+    if (currentFilters == null) {
+      currentFilters = new HashMap<String, String>();
+    }
+
+    currentFilters.put(fieldName, filterValue);
   }
 
   @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)

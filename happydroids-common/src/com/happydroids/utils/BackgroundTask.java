@@ -53,16 +53,24 @@ public abstract class BackgroundTask {
 
     threadPool.submit(new Runnable() {
       public void run() {
-        if (!canceled) {
-          beforeExecute();
-        }
-        if (!canceled) {
-          execute();
-        }
-        if (!canceled) {
+        try {
+          if (!canceled) {
+            beforeExecute();
+          }
+          if (!canceled) {
+            execute();
+          }
+          if (!canceled) {
+            postExecuteManager.postRunnable(new Runnable() {
+              public void run() {
+                afterExecute();
+              }
+            });
+          }
+        } catch (final Throwable throwable) {
           postExecuteManager.postRunnable(new Runnable() {
             public void run() {
-              afterExecute();
+              throw new RuntimeException(throwable);
             }
           });
         }

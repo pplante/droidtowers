@@ -7,6 +7,8 @@ package com.happydroids.server;
 import com.happydroids.HttpTestHelper;
 import org.apache.http.HttpResponse;
 
+import java.util.HashMap;
+
 public class TestHappyDroidService extends HappyDroidService {
   public TestHappyDroidService() {
     super(13);
@@ -14,7 +16,7 @@ public class TestHappyDroidService extends HappyDroidService {
   }
 
   @Override
-  public HttpResponse makeGetRequest(String uri) {
+  public HttpResponse makeGetRequest(String uri, HashMap<String, String> queryParams) {
     return HttpTestHelper.instance().makeGetRequest(uri);
   }
 

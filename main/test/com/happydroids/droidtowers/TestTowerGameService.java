@@ -8,6 +8,8 @@ import com.happydroids.HttpTestHelper;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import org.apache.http.HttpResponse;
 
+import java.util.HashMap;
+
 class TestTowerGameService extends TowerGameService {
   public TestTowerGameService() {
     super();
@@ -15,7 +17,7 @@ class TestTowerGameService extends TowerGameService {
   }
 
   @Override
-  public HttpResponse makeGetRequest(String uri) {
+  public HttpResponse makeGetRequest(String uri, HashMap<String, String> queryParams) {
     return HttpTestHelper.instance().makeGetRequest(uri);
   }
 

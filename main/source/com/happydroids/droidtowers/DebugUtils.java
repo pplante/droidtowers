@@ -7,7 +7,10 @@ package com.happydroids.droidtowers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.happydroids.droidtowers.gamestate.GameSave;
+import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
 import com.happydroids.droidtowers.scenes.SplashScene;
+import com.happydroids.server.ApiRunnable;
+import org.apache.http.HttpResponse;
 
 import static com.happydroids.HappyDroidConsts.DEBUG;
 import static com.happydroids.droidtowers.SplashSceneStates.FULL_LOAD;
@@ -57,6 +60,15 @@ public class DebugUtils {
         } catch (Exception e) {
           e.printStackTrace();
         }
+      }
+    });
+  }
+
+  public static void loadGameFromCloud(int gameId) {
+    new CloudGameSave().findById(gameId, new ApiRunnable<CloudGameSave>() {
+      @Override
+      public void onSuccess(HttpResponse response, CloudGameSave object) {
+        TowerGame.changeScene(SplashScene.class, FULL_LOAD, object.getGameSave());
       }
     });
   }

@@ -71,6 +71,10 @@ public class CloudLayer extends GameLayer implements RespondsToWorldSizeChange {
   }
 
   protected void spawnCloudNow(boolean spawnOnScreen) {
+    if (worldSize.x == 0 || worldSize.y == 0) {
+      return;
+    }
+
     AtlasRegion cloudRegion = textureAtlas.findRegion("cloud", Random.randomInt(1, numberOfCloudTypes));
 
     float scale = Math.max(0.4f, Random.randomFloat());

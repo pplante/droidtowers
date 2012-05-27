@@ -8,6 +8,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 import com.google.common.collect.Lists;
@@ -20,6 +21,7 @@ import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_UnhappyrobotToDroidTowers;
+import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridObjectState;
@@ -44,6 +46,7 @@ public class GameSave {
   protected int fileGeneration;
   protected int fileFormat;
   protected String cloudSaveUri;
+  protected String neighborhoodUri;
   protected String towerName;
   protected DifficultyLevel difficultyLevel;
   protected Player player;
@@ -211,5 +214,19 @@ public class GameSave {
 
   public boolean hasGridObjects() {
     return gridObjects != null && !gridObjects.isEmpty();
+  }
+
+
+  public void setNeighborhoodUri(String neighborhoodUri) {
+    this.neighborhoodUri = neighborhoodUri;
+  }
+
+  public String getNeighborhoodUri() {
+    return neighborhoodUri;
+  }
+
+  @JsonIgnore
+  public CloudGameSave getCloudGameSave() {
+    return new CloudGameSave(cloudSaveUri);
   }
 }

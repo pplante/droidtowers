@@ -21,16 +21,16 @@ import com.happydroids.droidtowers.graphics.GroundLayer;
 import com.happydroids.droidtowers.graphics.RainLayer;
 import com.happydroids.droidtowers.graphics.SkyLayer;
 import com.happydroids.droidtowers.grid.NeighborGameGrid;
+import com.happydroids.droidtowers.gui.NeighborMenuBuilder;
 import com.happydroids.droidtowers.gui.ViewNeighborHUD;
-import com.happydroids.droidtowers.input.GestureDelegater;
-import com.happydroids.droidtowers.input.GestureTool;
-import com.happydroids.droidtowers.input.InputCallback;
-import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.input.*;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.TowerNameBillboard;
-import com.happydroids.server.HappyDroidServiceCollection;
 
 import java.util.List;
+
+import static com.happydroids.droidtowers.TowerConsts.GAME_GRID_START_SIZE;
+import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
 
 public class ViewNeighborScene extends Scene {
   private List<GameLayer> gameLayers;
@@ -66,13 +66,21 @@ public class ViewNeighborScene extends Scene {
     InputSystem.instance().setGestureDelegator(gestureDelegater);
     InputSystem.instance().switchTool(GestureTool.PICKER, null);
 
-    createNeighborTowers((HappyDroidServiceCollection<FriendCloudGameSave>) args[0]);
+    updateWorldSize(new Vector2(4000, 4000));
+    cameraController.updateCameraConstraints(new Vector2(4000, 2000));
+
+
+    createNeighborTowers((List<FriendCloudGameSave>) args[0]);
   }
 
-  private void createNeighborTowers(HappyDroidServiceCollection<FriendCloudGameSave> collection) {
+  private void createNeighborTowers(List<FriendCloudGameSave> friendGameSaves) {
+    if (friendGameSaves.size() == 0) {
+      return;
+    }
+
     Vector2 worldSize = new Vector2();
     int gridX = 0;
-    for (final FriendCloudGameSave friendCloudGameSave : collection.getObjects()) {
+    for (final FriendCloudGameSave friendCloudGameSave : friendGameSaves) {
       NeighborGameGrid neighborGameGrid = new NeighborGameGrid(getCamera(), new GridPoint(gridX, 0));
       neighborGameGrid.setGridScale(1f);
       GameSave gameSave = friendCloudGameSave.getGameSave();
@@ -84,18 +92,14 @@ public class ViewNeighborScene extends Scene {
 
       gameSave.attachToGame(neighborGameGrid, camera, cameraController);
       neighborGameGrid.findLimits();
-      gridX += (neighborGameGrid.getGridSize().x + 6) * TowerConsts.GRID_UNIT_SIZE;
+      gridX += (neighborGameGrid.getGridSize().x + 6) * GRID_UNIT_SIZE;
 
       neighborGameGrid.setOwnerName(friendCloudGameSave.getOwner().getFirstName());
-      neighborGameGrid.setClickListener(new Runnable() {
-        public void run() {
-          neighborHUD.showToast("HELLO FROM " + friendCloudGameSave.getOwner().getFirstName());
-        }
-      });
+      neighborGameGrid.setClickListener(new NeighborMenuBuilder(this));
 
 
       TowerNameBillboard billboard = new TowerNameBillboard(neighborGameGrid);
-      billboard.setPosition(neighborGameGrid.getWorldBounds().x - (2 * TowerConsts.GRID_UNIT_SIZE), TowerConsts.GROUND_HEIGHT);
+      billboard.setPosition(neighborGameGrid.getWorldBounds().x - (2 * GRID_UNIT_SIZE), TowerConsts.GROUND_HEIGHT);
       billboardLayer.addChild(billboard);
 
       worldSize.y = Math.max(worldSize.y, neighborGameGrid.getWorldSize().y);
@@ -107,14 +111,21 @@ public class ViewNeighborScene extends Scene {
 
     gameLayers.add(billboardLayer);
 
+    updateWorldSize(worldSize);
+
+    cameraController.updateCameraConstraints(worldSize);
+    camera.zoom = CameraController.ZOOM_MAX / 2;
+    camera.position.set(worldSize.x / 2 - Gdx.graphics.getWidth() / 2, TowerConsts.GROUND_HEIGHT, 0f);
+  }
+
+  private void updateWorldSize(Vector2 worldSize) {
+    worldSize.x = Math.max(GAME_GRID_START_SIZE * GRID_UNIT_SIZE, worldSize.x);
+    worldSize.y = Math.max(GAME_GRID_START_SIZE * GRID_UNIT_SIZE, worldSize.y);
     for (GameLayer gameLayer : gameLayers) {
       if (gameLayer instanceof RespondsToWorldSizeChange) {
         ((RespondsToWorldSizeChange) gameLayer).updateWorldSize(worldSize);
       }
     }
-
-    cameraController.updateCameraConstraints(worldSize);
-    camera.position.set(worldSize.x / 2 - Gdx.graphics.getWidth() / 2, TowerConsts.GROUND_HEIGHT, 0f);
   }
 
   @Override
@@ -150,4 +161,8 @@ public class ViewNeighborScene extends Scene {
       return true;
     }
   };
+
+  public ViewNeighborHUD getNeighborHUD() {
+    return neighborHUD;
+  }
 }

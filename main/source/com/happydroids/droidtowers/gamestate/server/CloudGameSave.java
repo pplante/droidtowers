@@ -15,6 +15,7 @@ import com.happydroids.droidtowers.utils.GZIPUtils;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("FieldCanBeLocal")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
@@ -22,9 +23,14 @@ public class CloudGameSave extends TowerGameServiceObject {
   protected String blob;
   protected String image;
   protected Date syncedOn;
+  protected List<FriendCloudGameSave> neighbors;
 
   public CloudGameSave() {
 
+  }
+
+  public CloudGameSave(String resourceUri) {
+    setResourceUri(resourceUri);
   }
 
   public CloudGameSave(GameSave gameSave, FileHandle pngFile) {
@@ -52,5 +58,9 @@ public class CloudGameSave extends TowerGameServiceObject {
     GameSave gameSave = NonInteractiveGameSave.readFile(new ByteArrayInputStream(blob.getBytes()), "cloudGameSave_" + hashCode());
     gameSave.setCloudSaveUri(getResourceUri());
     return gameSave;
+  }
+
+  public List<FriendCloudGameSave> getNeighbors() {
+    return neighbors;
   }
 }

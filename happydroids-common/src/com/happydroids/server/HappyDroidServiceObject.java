@@ -44,6 +44,10 @@ public abstract class HappyDroidServiceObject {
   protected abstract boolean requireAuthentication();
 
   public void setResourceUri(String resourceUri) {
+    if (!resourceUri.contains(HappyDroidConsts.HAPPYDROIDS_URI)) {
+      resourceUri = HappyDroidConsts.HAPPYDROIDS_URI + resourceUri;
+    }
+
     this.resourceUri = resourceUri;
   }
 
@@ -57,7 +61,7 @@ public abstract class HappyDroidServiceObject {
     reload(NO_OP_API_RUNNABLE);
   }
 
-  private void reload(final ApiRunnable apiRunnable) {
+  public void reload(final ApiRunnable apiRunnable) {
     if (resourceUri == null) {
       throw new RuntimeException("resourceUri must not be null when using reload()");
     }
@@ -83,8 +87,8 @@ public abstract class HappyDroidServiceObject {
     });
   }
 
-  private HttpResponse reloadBlocking() {
-    HttpResponse response = HappyDroidService.instance().makeGetRequest(resourceUri);
+  public HttpResponse reloadBlocking() {
+    HttpResponse response = HappyDroidService.instance().makeGetRequest(resourceUri, null);
     if (response != null && response.getStatusLine().getStatusCode() == 200) {
       copyValuesFromResponse(response);
     }

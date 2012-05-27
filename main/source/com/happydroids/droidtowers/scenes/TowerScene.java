@@ -85,7 +85,7 @@ public class TowerScene extends Scene {
 
     gameGrid.events().register(TowerGame.getSoundController());
 
-    headsUpDisplay = new HeadsUpDisplay(getStage(), getCamera(), getCameraController(), gameGrid, avatarLayer, AchievementEngine.instance(), TutorialEngine.instance());
+    headsUpDisplay = new HeadsUpDisplay(getStage(), getCamera(), getCameraController(), gameGrid, avatarLayer, AchievementEngine.instance(), TutorialEngine.instance(), gameSave);
     weatherService = new WeatherService();
 
     gameLayers = Lists.newArrayList();
