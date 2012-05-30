@@ -6,9 +6,6 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.esotericsoftware.tablelayout.Cell;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.gamestate.server.NonPlayerFriend;
@@ -17,9 +14,8 @@ import com.happydroids.droidtowers.gamestate.server.PlayerFriendCollection;
 import com.happydroids.droidtowers.gamestate.server.PlayerProfile;
 import com.happydroids.droidtowers.gui.friends.NonPlayerFriendItem;
 import com.happydroids.droidtowers.gui.friends.PlayerFriendItem;
-import com.happydroids.server.ApiCollectionRunnable;
 import com.happydroids.server.HappyDroidServiceCollection;
-import org.apache.http.HttpResponse;
+import com.happydroids.utils.BackgroundTask;
 
 import java.util.List;
 
@@ -28,103 +24,134 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 public class FriendsListWindow extends ScrollableTowerWindow {
 
   private final TextureAtlas.AtlasRegion facebookIcon;
-  private List<PlayerFriendItem> friendRows;
-  private boolean friendsFetched;
-  private boolean nonFriendsFetched;
+  private List<PlayerFriendItem> playerFriendRows;
+  private List<PlayerFriendItem> nonPlayerFriendRows;
+  private boolean playerFriendsFetched;
+  private boolean nonPlayerFriendsFetched;
 
   public FriendsListWindow(Stage stage) {
     super("My Friends", stage);
 
     facebookIcon = TowerAssetManager.textureFromAtlas("facebook-logo", "hud/menus.txt");
-    friendRows = Lists.newArrayList();
+    playerFriendRows = Lists.newArrayList();
+    nonPlayerFriendRows = Lists.newArrayList();
 
     defaults().left().space(scale(6));
 
-    NonPlayerFriendSearchBox friendSearchBox = new NonPlayerFriendSearchBox();
+    add(FontManager.Roboto32.makeLabel("making friends :]"));
+
+    NonPlayerFriendSearchBox friendSearchBox = new NonPlayerFriendSearchBox(this);
     setStaticHeader(friendSearchBox);
 
+    new BackgroundTask() {
+      private PlayerFriendCollection friendCollection;
 
-    new PlayerFriendCollection().fetch(new ApiCollectionRunnable<HappyDroidServiceCollection<PlayerProfile>>() {
       @Override
-      public void onError(HttpResponse response, int statusCode, HappyDroidServiceCollection<PlayerProfile> collection) {
-        friendsFetched = true;
-        updateViewWhenFinished();
+      protected void execute() {
+        friendCollection = new PlayerFriendCollection();
+        friendCollection.fetch();
       }
 
       @Override
-      public void onSuccess(HttpResponse response, HappyDroidServiceCollection<PlayerProfile> collection) {
-        for (PlayerProfile profile : collection.getObjects()) {
-          addPlayerFriendRow(new PlayerFriendItem(profile));
-        }
-
-        friendsFetched = true;
-        updateViewWhenFinished();
+      public synchronized void afterExecute() {
+        processPlayerFriends(friendCollection);
       }
-    });
+    }.run();
 
-    new NonPlayerFriendCollection().fetch(new ApiCollectionRunnable<HappyDroidServiceCollection<NonPlayerFriend>>() {
+    new BackgroundTask() {
+
+      private NonPlayerFriendCollection friendCollection;
+
       @Override
-      public void onError(HttpResponse response, int statusCode, HappyDroidServiceCollection<NonPlayerFriend> collection) {
-        nonFriendsFetched = true;
-        updateViewWhenFinished();
+      protected void execute() {
+        friendCollection = new NonPlayerFriendCollection();
+        friendCollection.fetch();
       }
 
       @Override
-      public void onSuccess(HttpResponse response, HappyDroidServiceCollection<NonPlayerFriend> collection) {
-        for (NonPlayerFriend profile : collection.getObjects()) {
-          addPlayerFriendRow(new NonPlayerFriendItem(profile));
-        }
-
-        nonFriendsFetched = true;
-        updateViewWhenFinished();
+      public synchronized void afterExecute() {
+        processNonPlayerFriends(friendCollection);
       }
-    });
+    }.run();
+  }
+
+  private void processNonPlayerFriends(HappyDroidServiceCollection<NonPlayerFriend> collection) {
+    if (collection != null && !collection.isEmpty()) {
+      for (NonPlayerFriend profile : collection.getObjects()) {
+        PlayerFriendItem playerFriendItem = new NonPlayerFriendItem(profile);
+        playerFriendItem.createChildren(facebookIcon);
+        nonPlayerFriendRows.add(playerFriendItem);
+      }
+    }
+
+    nonPlayerFriendsFetched = true;
+    updateViewWhenFinished();
+  }
+
+  private void processPlayerFriends(HappyDroidServiceCollection<PlayerProfile> collection) {
+    playerFriendsFetched = true;
+
+    if (collection != null && !collection.isEmpty()) {
+      for (PlayerProfile profile : collection.getObjects()) {
+        PlayerFriendItem playerFriendItem = new PlayerFriendItem(profile);
+        playerFriendItem.createChildren(facebookIcon);
+        playerFriendRows.add(playerFriendItem);
+      }
+    }
+
+    updateViewWhenFinished();
   }
 
   private void updateViewWhenFinished() {
-    if (!friendsFetched || !nonFriendsFetched) {
+    if (!playerFriendsFetched || !nonPlayerFriendsFetched) {
       return;
     }
 
-    for (PlayerFriendItem friendRow : friendRows) {
+    clear();
+
+    row().fillX();
+    add(FontManager.Roboto24.makeLabel("Friends playing Droid Towers")).expandX();
+    row().fillX();
+    add(new HorizontalRule()).expandX();
+
+
+    if (!playerFriendRows.isEmpty()) {
+      for (PlayerFriendItem friendRow : playerFriendRows) {
+        row().fillX();
+        add(friendRow).expandX();
+      }
+    } else {
       row().fillX();
-      add(friendRow).expandX();
+      add(FontManager.Roboto18.makeLabel("You should invite some of your friends to play with.")).expandX();
+    }
+
+    row().fillX().padTop(scale(32));
+    add(FontManager.Roboto24.makeLabel("Friends on Facebook")).expandX();
+    row().fillX();
+    add(new HorizontalRule()).expandX();
+    if (!nonPlayerFriendRows.isEmpty()) {
+      for (PlayerFriendItem friendRow : nonPlayerFriendRows) {
+        row().fillX();
+        add(friendRow).expandX();
+      }
+    } else {
+      row().fillX();
+      if (playerFriendRows.isEmpty()) {
+        add(FontManager.Roboto18.makeLabel("Wow, terribly sorry to tell you this..\n\nBut you appear to have no friends.\n\n")).expandX();
+      } else {
+        add(FontManager.Roboto18.makeLabel("You have already invited everyone, thanks!")).expandX();
+      }
     }
 
     shoveContentUp();
     content.invalidateHierarchy();
   }
 
-  private void addPlayerFriendRow(PlayerFriendItem playerFriendItem) {
-    playerFriendItem.createChildren(facebookIcon);
-    friendRows.add(playerFriendItem);
+  public List<PlayerFriendItem> getNonPlayerFriendRows() {
+    return nonPlayerFriendRows;
   }
 
-  private class NonPlayerFriendSearchBox extends Table {
-    private NonPlayerFriendSearchBox() {
-      defaults().pad(scale(10));
-      row().left();
-      TextField searchField = FontManager.Roboto24.makeTextField("", "Search by name");
-      add(searchField).width(400);
-      add(FontManager.Roboto18.makeTextButton("Apply"));
-
-      searchField.setTextFieldListener(new TextField.TextFieldListener() {
-        @Override
-        public void keyTyped(TextField textField, char key) {
-          filterFriends(textField.getText().toLowerCase());
-        }
-
-        private void filterFriends(String text) {
-          for (PlayerFriendItem friendRow : friendRows) {
-            Cell friendCell = FriendsListWindow.this.content.getCell(friendRow);
-            boolean nameMatches = friendRow.playerNameMatches(text);
-            friendRow.visible = nameMatches;
-            friendCell.ignore(!nameMatches);
-          }
-
-          FriendsListWindow.this.content.invalidateHierarchy();
-        }
-      });
-    }
+  public List<PlayerFriendItem> getPlayerFriendRows() {
+    return playerFriendRows;
   }
 }

@@ -18,6 +18,8 @@ import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServiceObject> {
+  private static final ApiCollectionRunnable NO_OP_API_RUNNABLE = new ApiCollectionRunnable();
+
   private Metadata meta;
   private List<ApiType> objects;
   private HashMap<String, String> currentFilters;
@@ -98,6 +100,10 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
     }
 
     currentFilters.put(fieldName, filterValue);
+  }
+
+  public void fetch() {
+    fetch(NO_OP_API_RUNNABLE);
   }
 
   @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
