@@ -23,7 +23,7 @@ public class NonPlayerFriend extends TowerGameServiceObject {
     return true;
   }
 
-  public int getId() {
+  public long getId() {
     return id;
   }
 
@@ -42,5 +42,13 @@ public class NonPlayerFriend extends TowerGameServiceObject {
                    ", id=" + id +
                    ", provider=" + provider +
                    '}';
+  }
+
+  public String getFirstName() {
+    if (friendName.contains(" ")) {
+      return friendName.substring(0, friendName.indexOf(" "));
+    }
+
+    return getFriendName();
   }
 }

@@ -33,11 +33,12 @@ import java.util.List;
 public class ViewNeighborSplashScene extends Scene {
   private GameObject droid;
   private ViewNeighborSplashScene.FetchNeighborsList fetchNeighborsList;
-  private GameSave playerGameSave;
+  private CloudGameSave playerCloudGameSave;
 
   @Override
   public void create(Object... args) {
-    playerGameSave = (GameSave) args[0];
+    GameSave playerGameSave = (GameSave) args[0];
+    playerCloudGameSave = playerGameSave.getCloudGameSave();
 
     getCamera().position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
     getCamera().zoom = CameraController.ZOOM_MIN;
@@ -100,16 +101,10 @@ public class ViewNeighborSplashScene extends Scene {
 
     @Override
     protected void execute() {
-      CloudGameSave cloudGameSave = playerGameSave.getCloudGameSave();
-      cloudGameSave.reloadBlocking();
+      playerCloudGameSave.reloadBlocking();
       friendGames = Lists.newArrayList();
 
-      for (String friendGameResourceUri : cloudGameSave.getNeighbors()) {
-        FriendCloudGameSave friendGame = new FriendCloudGameSave(friendGameResourceUri);
-        friendGame.reloadBlocking();
-      }
-
-      fetchWasSuccessful = true;
+      fetchWasSuccessful = playerCloudGameSave.fetchNeighbors();
     }
 
     @Override
@@ -117,7 +112,7 @@ public class ViewNeighborSplashScene extends Scene {
       System.out.println("fetchWasSuccessful = " + fetchWasSuccessful);
       if (fetchWasSuccessful) {
         TowerGame.popScene();
-        TowerGame.pushScene(ViewNeighborScene.class, friendGames);
+        TowerGame.pushScene(ViewNeighborScene.class, playerCloudGameSave, friendGames);
       } else {
         new Dialog()
                 .setTitle("Connection Failed")

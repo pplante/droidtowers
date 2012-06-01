@@ -8,10 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.gamestate.server.NonPlayerFriend;
-import com.happydroids.droidtowers.gamestate.server.NonPlayerFriendCollection;
-import com.happydroids.droidtowers.gamestate.server.PlayerFriendCollection;
-import com.happydroids.droidtowers.gamestate.server.PlayerProfile;
+import com.happydroids.droidtowers.gamestate.server.*;
 import com.happydroids.droidtowers.gui.friends.NonPlayerFriendItem;
 import com.happydroids.droidtowers.gui.friends.PlayerFriendItem;
 import com.happydroids.server.HappyDroidServiceCollection;
@@ -28,9 +25,11 @@ public class FriendsListWindow extends ScrollableTowerWindow {
   private List<PlayerFriendItem> nonPlayerFriendRows;
   private boolean playerFriendsFetched;
   private boolean nonPlayerFriendsFetched;
+  private final CloudGameSave playerGameSave;
 
-  public FriendsListWindow(Stage stage) {
+  public FriendsListWindow(Stage stage, CloudGameSave playerGameSave) {
     super("My Friends", stage);
+    this.playerGameSave = playerGameSave;
 
     facebookIcon = TowerAssetManager.textureFromAtlas("facebook-logo", "hud/menus.txt");
     playerFriendRows = Lists.newArrayList();
@@ -59,7 +58,6 @@ public class FriendsListWindow extends ScrollableTowerWindow {
     }.run();
 
     new BackgroundTask() {
-
       private NonPlayerFriendCollection friendCollection;
 
       @Override
@@ -78,7 +76,7 @@ public class FriendsListWindow extends ScrollableTowerWindow {
   private void processNonPlayerFriends(HappyDroidServiceCollection<NonPlayerFriend> collection) {
     if (collection != null && !collection.isEmpty()) {
       for (NonPlayerFriend profile : collection.getObjects()) {
-        PlayerFriendItem playerFriendItem = new NonPlayerFriendItem(profile);
+        PlayerFriendItem playerFriendItem = new NonPlayerFriendItem(profile, playerGameSave);
         playerFriendItem.createChildren(facebookIcon);
         nonPlayerFriendRows.add(playerFriendItem);
       }
@@ -93,7 +91,7 @@ public class FriendsListWindow extends ScrollableTowerWindow {
 
     if (collection != null && !collection.isEmpty()) {
       for (PlayerProfile profile : collection.getObjects()) {
-        PlayerFriendItem playerFriendItem = new PlayerFriendItem(profile);
+        PlayerFriendItem playerFriendItem = new PlayerFriendItem(profile, playerGameSave);
         playerFriendItem.createChildren(facebookIcon);
         playerFriendRows.add(playerFriendItem);
       }

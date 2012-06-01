@@ -9,9 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.TowerGame;
+import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
 
 public class ViewNeighborHUD extends Table {
-  public ViewNeighborHUD() {
+  public ViewNeighborHUD(final CloudGameSave playerGameSave) {
     super();
 
     defaults().top().left();
@@ -28,7 +29,7 @@ public class ViewNeighborHUD extends Table {
     addNeighborsButton.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
-        new FriendsListWindow(getStage()).show();
+        new FriendsListWindow(getStage(), playerGameSave).show();
       }
     });
 

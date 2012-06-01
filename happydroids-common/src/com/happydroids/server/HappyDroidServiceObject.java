@@ -26,9 +26,9 @@ public abstract class HappyDroidServiceObject {
     }
   };
 
-  @JsonIgnore
-  private int id;
+  private long id;
   private String resourceUri;
+
 
   @JsonIgnore
   public abstract String getBaseResourceUri();
@@ -206,5 +206,9 @@ public abstract class HappyDroidServiceObject {
 
   public void setId(int id) {
     this.id = id;
+  }
+
+  public long getId() {
+    return id;
   }
 }

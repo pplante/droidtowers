@@ -6,7 +6,10 @@ package com.happydroids.server;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.eventbus.EventBus;
+import com.happydroids.events.CollectionChangeEvent;
 import org.apache.http.HttpResponse;
 import org.apache.http.entity.BufferedHttpEntity;
 
@@ -23,9 +26,10 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
   private Metadata meta;
   private List<ApiType> objects;
   private HashMap<String, String> currentFilters;
+  private EventBus eventBus;
 
   public HappyDroidServiceCollection(Class<ApiType> objectClazz) {
-    objects = null;
+    objects = Lists.newArrayList();
     currentFilters = Maps.newHashMap();
   }
 
@@ -94,16 +98,44 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
     apiRunnable.handleResponse(response, this);
   }
 
-  public void filterBy(final String fieldName, final String filterValue) {
+  public HappyDroidServiceCollection<ApiType> filterBy(final String fieldName, final String filterValue) {
     if (currentFilters == null) {
       currentFilters = new HashMap<String, String>();
     }
 
     currentFilters.put(fieldName, filterValue);
+
+    return this;
+  }
+
+  public HappyDroidServiceCollection<ApiType> filterBy(final String fieldName, long filterValue) {
+    return filterBy(fieldName, "" + filterValue);
   }
 
   public void fetch() {
     fetch(NO_OP_API_RUNNABLE);
+  }
+
+  public void add(ApiType object) {
+    for (ApiType apiType : objects) {
+      if (apiType.getResourceUri() != null && apiType.getResourceUri().equals(object.getResourceUri())) {
+        return;
+      }
+    }
+
+    objects.add(object);
+
+    if (eventBus != null) {
+      eventBus.post(new CollectionChangeEvent(object));
+    }
+  }
+
+  public EventBus events() {
+    if (eventBus == null) {
+      eventBus = new EventBus();
+    }
+
+    return eventBus;
   }
 
   @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)

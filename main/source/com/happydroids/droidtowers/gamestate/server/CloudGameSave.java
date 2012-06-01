@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.gamestate.server;
 import com.badlogic.gdx.files.FileHandle;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.collect.Lists;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.NonInteractiveGameSave;
@@ -24,6 +25,7 @@ public class CloudGameSave extends TowerGameServiceObject {
   protected String image;
   protected Date syncedOn;
   protected List<String> neighbors;
+  private FriendCloudGameSaveCollection neighborGameSaves;
 
   public CloudGameSave() {
 
@@ -60,7 +62,32 @@ public class CloudGameSave extends TowerGameServiceObject {
     return gameSave;
   }
 
+  @JsonIgnore
+  public boolean fetchNeighbors() {
+    neighborGameSaves = new FriendCloudGameSaveCollection();
+
+    for (String friendGameResourceUri : neighbors) {
+      FriendCloudGameSave friendGame = new FriendCloudGameSave(friendGameResourceUri);
+      friendGame.reloadBlocking();
+
+      neighborGameSaves.add(friendGame);
+    }
+
+    return true;
+  }
+
+  @JsonIgnore
+  public FriendCloudGameSaveCollection getNeighborGameSaves() {
+    return neighborGameSaves;
+  }
+
   public List<String> getNeighbors() {
-    return neighbors;
+    List<String> neighborUris = Lists.newArrayList();
+
+    for (FriendCloudGameSave gameSave : neighborGameSaves.getObjects()) {
+      neighborUris.add(gameSave.getResourceUri());
+    }
+
+    return neighborUris;
   }
 }

@@ -50,6 +50,10 @@ public class MemoryTrackingAssetManager extends AssetManager {
         break;
     }
 
+    if (textureData.useMipMaps()) {
+      textureSize *= 1.33f;
+    }
+
     memoryPerFile.put(fileName, textureSize);
 
     return textureSize;

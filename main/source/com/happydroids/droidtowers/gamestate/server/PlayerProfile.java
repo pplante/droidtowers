@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class PlayerProfile extends TowerGameServiceObject {
-  private int id;
   private String firstName;
   private String lastName;
 
@@ -26,10 +25,6 @@ public class PlayerProfile extends TowerGameServiceObject {
     return firstName;
   }
 
-  public int getId() {
-    return id;
-  }
-
   public String getLastName() {
     return lastName;
   }
@@ -37,8 +32,7 @@ public class PlayerProfile extends TowerGameServiceObject {
   @Override
   public String toString() {
     return "PlayerProfile{" +
-                   "id=" + id +
-                   ", firstName='" + firstName + '\'' +
+                   "firstName='" + firstName + '\'' +
                    ", lastName='" + lastName + '\'' +
                    '}';
   }
