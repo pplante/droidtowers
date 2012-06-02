@@ -6,6 +6,7 @@ package com.happydroids.server;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -18,17 +19,16 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
+@JsonIgnoreProperties(value = {"id"})
 public abstract class HappyDroidServiceObject {
-  private static final ApiRunnable NO_OP_API_RUNNABLE = new ApiRunnable() {
+  public static final ApiRunnable NO_OP_API_RUNNABLE = new ApiRunnable() {
     @Override
     void handleResponse(HttpResponse response, HappyDroidServiceObject ignored) {
       // stub this so we do not waste cycles.
     }
   };
 
-  private long id;
   private String resourceUri;
-
 
   @JsonIgnore
   public abstract String getBaseResourceUri();
@@ -57,37 +57,21 @@ public abstract class HappyDroidServiceObject {
     }
   }
 
-  public void reload() {
-    reload(NO_OP_API_RUNNABLE);
-  }
-
-  public void reload(final ApiRunnable apiRunnable) {
+  public void fetch(final ApiRunnable apiRunnable) {
     if (resourceUri == null) {
-      throw new RuntimeException("resourceUri must not be null when using reload()");
+      throw new RuntimeException("resourceUri must not be null when using fetch()");
     }
 
     validateResourceUri();
 
     HappyDroidService.instance().withNetworkConnection(new Runnable() {
       public void run() {
-        new BackgroundTask() {
-          private HttpResponse httpResponse;
-
-          @Override
-          protected void execute() {
-            httpResponse = reloadBlocking();
-          }
-
-          @Override
-          public synchronized void afterExecute() {
-            apiRunnable.handleResponse(httpResponse, HappyDroidServiceObject.this);
-          }
-        }.run();
+        apiRunnable.handleResponse(fetchBlocking(), HappyDroidServiceObject.this);
       }
     });
   }
 
-  public HttpResponse reloadBlocking() {
+  public HttpResponse fetchBlocking() {
     HttpResponse response = HappyDroidService.instance().makeGetRequest(resourceUri, null);
     if (response != null && response.getStatusLine().getStatusCode() == 200) {
       copyValuesFromResponse(response);
@@ -170,7 +154,6 @@ public abstract class HappyDroidServiceObject {
 
       do {
         for (Field field : currentClass.getDeclaredFields()) {
-
           copyValueFromField(serverInstance, field);
         }
 
@@ -197,18 +180,5 @@ public abstract class HappyDroidServiceObject {
 
   protected ObjectMapper getObjectMapper() {
     return HappyDroidService.instance().getObjectMapper();
-  }
-
-  public void findById(int id, ApiRunnable apiRunnable) {
-    resourceUri = getBaseResourceUri() + id + "/";
-    reload(apiRunnable);
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public long getId() {
-    return id;
   }
 }

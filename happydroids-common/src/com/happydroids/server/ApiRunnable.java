@@ -4,14 +4,24 @@
 
 package com.happydroids.server;
 
+import com.happydroids.HappyDroidConsts;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 
 public class ApiRunnable<T extends HappyDroidServiceObject> {
   public void onSuccess(HttpResponse response, T object) {
+    if (HappyDroidConsts.DEBUG)
+      System.out.println("Object: " + object);
   }
 
   public void onError(HttpResponse response, int statusCode, T object) {
+    if (HappyDroidConsts.DEBUG) {
+      if (HappyDroidConsts.DEBUG)
+        System.out.println("HTTP ERR: " + statusCode);
+      if (response != null) {
+        System.out.println("HTTP RES: " + response.getStatusLine());
+      }
+    }
   }
 
   void handleResponse(HttpResponse response, T object) {

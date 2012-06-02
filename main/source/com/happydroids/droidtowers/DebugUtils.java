@@ -8,8 +8,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
+import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
+import com.happydroids.droidtowers.gui.Dialog;
+import com.happydroids.droidtowers.gui.OnClickCallback;
 import com.happydroids.droidtowers.scenes.SplashScene;
-import com.happydroids.server.ApiRunnable;
+import com.happydroids.server.ApiCollectionRunnable;
+import com.happydroids.server.HappyDroidServiceCollection;
 import org.apache.http.HttpResponse;
 
 import static com.happydroids.HappyDroidConsts.DEBUG;
@@ -64,12 +68,28 @@ public class DebugUtils {
     });
   }
 
-  public static void loadGameFromCloud(int gameId) {
-    new CloudGameSave().findById(gameId, new ApiRunnable<CloudGameSave>() {
-      @Override
-      public void onSuccess(HttpResponse response, CloudGameSave object) {
-        TowerGame.changeScene(SplashScene.class, FULL_LOAD, object.getGameSave());
-      }
-    });
+  public static void loadGameFromCloud(final int gameId) {
+    new CloudGameSaveCollection()
+            .filterBy("id", gameId)
+            .fetch(new ApiCollectionRunnable<HappyDroidServiceCollection<CloudGameSave>>() {
+              @Override
+              public void onSuccess(HttpResponse response, HappyDroidServiceCollection<CloudGameSave> collection) {
+                TowerGame.changeScene(SplashScene.class, FULL_LOAD, collection.getObjects().get(0).getGameSave());
+              }
+
+              @Override
+              public void onError(HttpResponse response, int statusCode, HappyDroidServiceCollection<CloudGameSave> collection) {
+                new Dialog()
+                        .setTitle("Could not find game: " + gameId)
+                        .setMessage("Not able to load game: " + gameId + "\n\nReason: " + response.getStatusLine())
+                        .addButton("Dismiss", new OnClickCallback() {
+                          @Override
+                          public void onClick(Dialog dialog) {
+                            dialog.dismiss();
+                          }
+                        })
+                        .show();
+              }
+            });
   }
 }

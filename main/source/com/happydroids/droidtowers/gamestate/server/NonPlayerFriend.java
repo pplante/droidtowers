@@ -23,10 +23,6 @@ public class NonPlayerFriend extends TowerGameServiceObject {
     return true;
   }
 
-  public long getId() {
-    return id;
-  }
-
   public String getFriendName() {
     return friendName;
   }

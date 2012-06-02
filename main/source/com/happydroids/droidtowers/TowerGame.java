@@ -75,7 +75,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     BackgroundTask.setPostExecuteManager(this);
 
     TowerGameService.setInstance(new TowerGameService());
-    TowerGameService.instance().initializePreferences();
 
     soundController = new GameSoundController();
 

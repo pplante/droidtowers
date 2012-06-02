@@ -19,6 +19,6 @@ public class FriendCloudGameSaveCollection extends HappyDroidServiceCollection<F
   }
 
   public FriendCloudGameSaveCollection() {
-    super(FriendCloudGameSave.class);
+    super();
   }
 }

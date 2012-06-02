@@ -29,7 +29,7 @@ public class TemporaryToken extends TowerGameServiceObject {
   }
 
   public boolean validate() {
-    reload();
+    fetch(NO_OP_API_RUNNABLE);
     return hasSessionToken();
   }
 

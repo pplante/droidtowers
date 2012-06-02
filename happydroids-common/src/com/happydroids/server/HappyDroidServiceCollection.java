@@ -28,7 +28,7 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
   private HashMap<String, String> currentFilters;
   private EventBus eventBus;
 
-  public HappyDroidServiceCollection(Class<ApiType> objectClazz) {
+  public HappyDroidServiceCollection() {
     objects = Lists.newArrayList();
     currentFilters = Maps.newHashMap();
   }

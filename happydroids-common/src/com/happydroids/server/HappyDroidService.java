@@ -9,6 +9,7 @@ import com.google.common.collect.Sets;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.jackson.HappyDroidObjectMapper;
 import com.happydroids.utils.BackgroundTask;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -20,7 +21,6 @@ import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -115,12 +115,27 @@ public class HappyDroidService {
 
       if (objectForServer != null) {
         ObjectMapper mapper = getObjectMapper();
-        StringEntity entity = new StringEntity(mapper.writeValueAsString(objectForServer));
+        String apiObjectAsString = mapper.writeValueAsString(objectForServer);
+        StringEntity entity = new StringEntity(apiObjectAsString);
+        if (HappyDroidConsts.DEBUG)
+          System.out.println("HTTP ENTITY: " + apiObjectAsString);
         entity.setContentType("multipart/form-data");
         request.setEntity(entity);
       }
 
-      return client.execute(request);
+      HttpResponse response = client.execute(request);
+      if (HappyDroidConsts.DEBUG) System.out.println("\t" + response.getStatusLine());
+      int statusCode = response.getStatusLine().getStatusCode();
+      if (statusCode != 201 && statusCode != 200) {
+        HttpEntity responseEntity = response.getEntity();
+        if (responseEntity != null) {
+          String content = EntityUtils.toString(responseEntity);
+          if (HappyDroidConsts.DEBUG) System.out.println("\tResponse: " + content);
+        } else {
+          if (HappyDroidConsts.DEBUG) System.out.println("\tResponse: NULL");
+        }
+      }
+      return response;
     } catch (HttpHostConnectException ignored) {
       if (HappyDroidConsts.DEBUG)
         System.out.println("Connection failed for: " + uri);
@@ -149,8 +164,9 @@ public class HappyDroidService {
       HttpResponse response = client.execute(request);
       if (HappyDroidConsts.DEBUG) System.out.println("\t" + response.getStatusLine());
 
-      if (response.getStatusLine().getStatusCode() == 500) {
-        String content = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
+      int statusCode = response.getStatusLine().getStatusCode();
+      if (statusCode != 201 && statusCode != 200) {
+        String content = EntityUtils.toString(response.getEntity());
         if (HappyDroidConsts.DEBUG) System.out.println("\tResponse: " + content);
       }
 

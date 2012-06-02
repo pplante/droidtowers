@@ -15,6 +15,7 @@ import com.happydroids.droidtowers.utils.GZIPUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.util.Date;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class CloudGameSave extends TowerGameServiceObject {
 
     for (String friendGameResourceUri : neighbors) {
       FriendCloudGameSave friendGame = new FriendCloudGameSave(friendGameResourceUri);
-      friendGame.reloadBlocking();
+      friendGame.fetchBlocking();
 
       neighborGameSaves.add(friendGame);
     }
@@ -84,8 +85,10 @@ public class CloudGameSave extends TowerGameServiceObject {
   public List<String> getNeighbors() {
     List<String> neighborUris = Lists.newArrayList();
 
-    for (FriendCloudGameSave gameSave : neighborGameSaves.getObjects()) {
-      neighborUris.add(gameSave.getResourceUri());
+    if (neighborGameSaves != null) {
+      for (FriendCloudGameSave gameSave : neighborGameSaves.getObjects()) {
+        neighborUris.add(URI.create(gameSave.getResourceUri()).getPath());
+      }
     }
 
     return neighborUris;

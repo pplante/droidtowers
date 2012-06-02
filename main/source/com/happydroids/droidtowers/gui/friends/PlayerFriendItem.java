@@ -20,6 +20,8 @@ import com.happydroids.server.ApiCollectionRunnable;
 import com.happydroids.server.HappyDroidServiceCollection;
 import org.apache.http.HttpResponse;
 
+import java.net.URI;
+
 import static com.happydroids.droidtowers.Colors.DARK_GRAY;
 import static com.happydroids.droidtowers.gui.FontManager.Roboto18;
 import static com.happydroids.droidtowers.platform.Display.scale;
@@ -60,7 +62,7 @@ public class PlayerFriendItem extends Table {
       @Override
       public void onClick(Actor actor, float x, float y) {
         new FriendCloudGameSaveCollection()
-                .filterBy("owner", profile.getId())
+                .filterBy("owner_resource_uri", URI.create(profile.getResourceUri()).getPath())
                 .fetch(new ApiCollectionRunnable<HappyDroidServiceCollection<FriendCloudGameSave>>() {
                   @Override
                   public void onSuccess(HttpResponse response, HappyDroidServiceCollection<FriendCloudGameSave> collection) {

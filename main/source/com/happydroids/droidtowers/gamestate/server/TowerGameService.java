@@ -35,6 +35,8 @@ public class TowerGameService extends HappyDroidService {
     getObjectMapper().addDeserializer(Class.class, new TowerGameClassDeserializer());
     getObjectMapper().addSerializer(new Vector3Serializer());
     getObjectMapper().addSerializer(new Vector2Serializer());
+
+    initializePreferences();
   }
 
   public void initializePreferences() {

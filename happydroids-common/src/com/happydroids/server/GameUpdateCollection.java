@@ -10,7 +10,7 @@ import com.happydroids.HappyDroidConsts;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class GameUpdateCollection extends HappyDroidServiceCollection<GameUpdate> {
   public GameUpdateCollection() {
-    super(GameUpdate.class);
+    super();
   }
 
   @Override

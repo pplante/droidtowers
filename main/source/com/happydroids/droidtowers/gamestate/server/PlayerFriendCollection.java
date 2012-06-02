@@ -9,7 +9,7 @@ import com.happydroids.server.HappyDroidServiceCollection;
 
 public class PlayerFriendCollection extends HappyDroidServiceCollection<PlayerProfile> {
   public PlayerFriendCollection() {
-    super(PlayerProfile.class);
+    super();
   }
 
   @Override
