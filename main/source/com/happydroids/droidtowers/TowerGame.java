@@ -73,6 +73,8 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
 
     BackgroundTask.setPostExecuteManager(this);
+    BackgroundTask.setUncaughtExceptionHandler(uncaughtExceptionHandler);
+    Thread.currentThread().setUncaughtExceptionHandler(uncaughtExceptionHandler);
 
     TowerGameService.setInstance(new TowerGameService());
 
@@ -92,7 +94,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     new BackgroundTask() {
       @Override
-      protected void execute() {
+      protected void execute() throws Exception {
         TowerGameService.instance().registerDevice();
       }
     }.run();

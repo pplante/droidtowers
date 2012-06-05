@@ -100,7 +100,7 @@ public class ViewNeighborSplashScene extends Scene {
     public boolean fetchWasSuccessful;
 
     @Override
-    protected void execute() {
+    protected void execute() throws Exception {
       playerCloudGameSave.fetchBlocking();
       friendGames = Lists.newArrayList();
 

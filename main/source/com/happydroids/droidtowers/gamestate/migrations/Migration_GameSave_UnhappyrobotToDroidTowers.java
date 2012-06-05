@@ -28,15 +28,8 @@ public class Migration_GameSave_UnhappyrobotToDroidTowers extends JacksonTransfo
 
   @Override
   protected void process(ObjectNode node, String fileName) {
-    ObjectNode gameSaveNode = (ObjectNode) node.findValue("com.unhappyrobot.gamestate.GameSave");
-    if (gameSaveNode == null) {
-      return;
-    }
-
-    JsonNode fileFormat = gameSaveNode.findValue("fileFormat");
-    if (fileFormat != null && fileFormat.asInt() >= 2) {
-      return;
-    }
+    ObjectNode gameSaveNode = getGameSaveUnlessFileFormatIsNewer(node, "com.unhappyrobot.gamestate.GameSave", 1);
+    if (gameSaveNode == null) return;
 
     ArrayNode gridObjects = gameSaveNode.withArray("gridObjects");
     for (JsonNode gridObjectNode : gridObjects) {

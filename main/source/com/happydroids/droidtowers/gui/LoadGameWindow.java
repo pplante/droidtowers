@@ -20,7 +20,12 @@ import com.happydroids.droidtowers.SplashSceneStates;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.GameSave;
+import com.happydroids.droidtowers.gamestate.GameSaveFactory;
+import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
+import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.scenes.SplashScene;
+import com.happydroids.utils.BackgroundTask;
 
 import java.text.NumberFormat;
 
@@ -28,10 +33,36 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class LoadGameWindow extends ScrollableTowerWindow {
   private boolean foundSaveFile;
+  private final CloudGameSaveCollection cloudGameSaves;
 
-  public LoadGameWindow(Stage stage) {
+  public LoadGameWindow(Stage stage, CloudGameSaveCollection cloudGameSaveCollection) {
     super("Load a Tower", stage);
+    this.cloudGameSaves = cloudGameSaveCollection;
 
+    if (TowerGameService.instance().haveNetworkConnection() && cloudGameSaves.isFetching()) {
+      new BackgroundTask() {
+        @Override
+        protected void execute() throws Exception {
+          while (cloudGameSaves.isFetching()) {
+            Thread.sleep(200);
+            Thread.yield();
+          }
+        }
+
+        @Override
+        public synchronized void afterExecute() {
+          buildGameSaveList();
+        }
+
+        @Override
+        public synchronized void onError(Exception e) {
+
+        }
+      }.run();
+    }
+  }
+
+  private void buildGameSaveList() {
     FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
     FileHandle[] files = storage.list(".json");
 
@@ -46,19 +77,30 @@ public class LoadGameWindow extends ScrollableTowerWindow {
           }
         }
       }
+    }
 
-      shoveContentUp();
+    if (!cloudGameSaves.isEmpty()) {
+      for (CloudGameSave cloudGameSave : cloudGameSaves.getObjects()) {
+//        Table fileRow = makeGameFileRow(cloudGameSave);
+//        if (fileRow != null) {
+//          row().fillX();
+//          add(fileRow).expandX();
+//          foundSaveFile = true;
+//        }
+      }
     }
 
     if (!foundSaveFile) {
       add(FontManager.RobotoBold18.makeLabel("No saved games were found on this device."));
+    } else {
+      shoveContentUp();
     }
   }
 
   private Table makeGameFileRow(final FileHandle gameSave) {
     GameSave towerData;
     try {
-      towerData = GameSave.readFile(gameSave);
+      towerData = GameSaveFactory.readFile(gameSave);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
@@ -91,7 +133,7 @@ public class LoadGameWindow extends ScrollableTowerWindow {
       public void click(Actor actor, float x, float y) {
         dismiss();
         try {
-          TowerGame.changeScene(SplashScene.class, SplashSceneStates.FULL_LOAD, GameSave.readFile(savedGameFile));
+          TowerGame.changeScene(SplashScene.class, SplashSceneStates.FULL_LOAD, GameSaveFactory.readFile(savedGameFile));
         } catch (Exception e) {
           throw new RuntimeException(e);
         }

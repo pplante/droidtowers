@@ -84,7 +84,7 @@ public class GameState {
   public void saveGame(final boolean shouldForceCloudSave) {
     if (shouldSaveGame) {
       if (!gameGrid.isEmpty()) {
-        currentGameSave.update();
+        currentGameSave.update(camera, gameGrid);
 
         try {
           if (!gameSaveLocation.exists()) {
@@ -104,7 +104,7 @@ public class GameState {
             }
           }
 
-          currentGameSave.save(gameFile);
+          GameSaveFactory.save(currentGameSave, gameFile);
         } catch (Exception e) {
           Gdx.app.log("GameSave", "Could not save game!", e);
         }

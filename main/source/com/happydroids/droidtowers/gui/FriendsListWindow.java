@@ -46,7 +46,7 @@ public class FriendsListWindow extends ScrollableTowerWindow {
       private PlayerFriendCollection friendCollection;
 
       @Override
-      protected void execute() {
+      protected void execute() throws Exception {
         friendCollection = new PlayerFriendCollection();
         friendCollection.fetch();
       }
@@ -61,7 +61,7 @@ public class FriendsListWindow extends ScrollableTowerWindow {
       private NonPlayerFriendCollection friendCollection;
 
       @Override
-      protected void execute() {
+      protected void execute() throws Exception {
         friendCollection = new NonPlayerFriendCollection();
         friendCollection.fetch();
       }

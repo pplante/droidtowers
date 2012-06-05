@@ -94,16 +94,20 @@ public class SparkyMain extends JFrame {
         updateCheckerWorker.execute();
 
 
-        new BackgroundTask() {
-          @Override
-          protected void execute() {
-            try {
-              webPane.setPage(HappyDroidConsts.HAPPYDROIDS_URI + "/game-updates");
-            } catch (IOException ignored) {
+        try {
+          new BackgroundTask() {
+            @Override
+            protected void execute() throws Exception {
+              try {
+                webPane.setPage(HappyDroidConsts.HAPPYDROIDS_URI + "/game-updates");
+              } catch (IOException ignored) {
 
+              }
             }
-          }
-        }.execute();
+          }.execute();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
       }
     });
   }

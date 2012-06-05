@@ -99,4 +99,17 @@ public abstract class JacksonTransformationScript<T extends JsonNode> {
     }
     return (N) formerLayoutParamsField;
   }
+
+  protected ObjectNode getGameSaveUnlessFileFormatIsNewer(ObjectNode node, String gameSaveFieldName, int fileFormatNumber) {
+    ObjectNode gameSaveNode = (ObjectNode) node.findValue(gameSaveFieldName);
+    if (gameSaveNode == null) {
+      return null;
+    }
+
+    JsonNode fileFormat = gameSaveNode.findValue("fileFormat");
+    if (fileFormat != null && fileFormat.asInt() >= fileFormatNumber) {
+      return null;
+    }
+    return gameSaveNode;
+  }
 }

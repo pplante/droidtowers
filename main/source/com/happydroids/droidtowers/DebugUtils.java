@@ -7,6 +7,7 @@ package com.happydroids.droidtowers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.happydroids.droidtowers.gamestate.GameSave;
+import com.happydroids.droidtowers.gamestate.GameSaveFactory;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gui.Dialog;
@@ -60,7 +61,7 @@ public class DebugUtils {
     loadFirstGameFound(new VarArgRunnable() {
       public void run(Object... args) {
         try {
-          TowerGame.changeScene(SplashScene.class, FULL_LOAD, GameSave.readFile((FileHandle) args[0]));
+          TowerGame.changeScene(SplashScene.class, FULL_LOAD, GameSaveFactory.readFile((FileHandle) args[0]));
         } catch (Exception e) {
           e.printStackTrace();
         }

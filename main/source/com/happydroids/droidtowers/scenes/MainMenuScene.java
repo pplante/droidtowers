@@ -9,7 +9,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveBy;
 import com.badlogic.gdx.scenes.scene2d.actions.ScaleTo;
@@ -18,16 +17,18 @@ import com.badlogic.gdx.scenes.scene2d.interpolators.OvershootInterpolator;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
+import com.happydroids.droidtowers.DebugUtils;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
+import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.NeighborGameGrid;
 import com.happydroids.droidtowers.gui.*;
 import com.happydroids.droidtowers.tween.TweenSystem;
+import com.happydroids.utils.BackgroundTask;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
@@ -40,9 +41,12 @@ public class MainMenuScene extends Scene {
   private SplashCloudLayer cloudLayer;
   private GameGrid testGrid;
   private ArrayList<NeighborGameGrid> neighborGrids;
+  private CloudGameSaveCollection cloudGameSaves;
 
   @Override
   public void create(Object... args) {
+    cloudGameSaves = new CloudGameSaveCollection();
+
     final Table container = new Table();
     container.defaults().center().left();
 
@@ -82,8 +86,9 @@ public class MainMenuScene extends Scene {
         public void run() {
           if (!TowerGameService.instance().isAuthenticated()) {
             connectFacebookButton.visible = true;
-            connectFacebookButton.setClickListener(new ClickListener() {
-              public void click(Actor actor, float x, float y) {
+            connectFacebookButton.setClickListener(new VibrateClickListener() {
+              @Override
+              public void onClick(Actor actor, float x, float y) {
                 TowerGame.changeScene(HappyDroidConnect.class);
               }
             });
@@ -145,8 +150,18 @@ public class MainMenuScene extends Scene {
 
     cloudLayer = new SplashCloudLayer();
 
-    newGameButton.setClickListener(new LaunchWindowClickListener(NewGameWindow.class));
-    loadGameButton.setClickListener(new LaunchWindowClickListener(LoadGameWindow.class));
+    newGameButton.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        new NewGameWindow(getStage()).show();
+      }
+    });
+    loadGameButton.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        new LoadGameWindow(getStage(), cloudGameSaves).show();
+      }
+    });
 
     exitGameButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
@@ -155,9 +170,16 @@ public class MainMenuScene extends Scene {
     });
 
 //    DebugUtils.createNonSavableGame(true);
-//    DebugUtils.loadFirstGameFound();
+    DebugUtils.loadFirstGameFound();
 //    DebugUtils.loadGameFromCloud(19);
 //    new FriendsListWindow(getStage()).show();
+
+    new BackgroundTask() {
+      @Override
+      protected void execute() throws Exception {
+        cloudGameSaves.fetch();
+      }
+    }.run();
   }
 
   @Override
@@ -176,23 +198,5 @@ public class MainMenuScene extends Scene {
 
   @Override
   public void dispose() {
-  }
-
-  private class LaunchWindowClickListener implements ClickListener {
-    private final Class<? extends TowerWindow> windowClass;
-
-    public LaunchWindowClickListener(Class<? extends TowerWindow> windowClass) {
-      this.windowClass = windowClass;
-    }
-
-    public void click(Actor actor, float x, float y) {
-      try {
-        Constructor<? extends TowerWindow> constructor = windowClass.getConstructor(Stage.class);
-        TowerWindow window = constructor.newInstance(getStage());
-        window.show();
-      } catch (Exception e) {
-        throw new RuntimeException(e);
-      }
-    }
   }
 }

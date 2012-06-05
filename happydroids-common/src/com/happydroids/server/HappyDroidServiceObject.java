@@ -92,7 +92,7 @@ public abstract class HappyDroidServiceObject {
           private HttpResponse httpResponse;
 
           @Override
-          protected void execute() {
+          protected void execute() throws Exception {
             httpResponse = saveBlocking(afterSave);
           }
 

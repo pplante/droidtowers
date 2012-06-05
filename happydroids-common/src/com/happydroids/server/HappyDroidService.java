@@ -220,7 +220,7 @@ public class HappyDroidService {
 
     new BackgroundTask() {
       @Override
-      protected void execute() {
+      protected void execute() throws Exception {
         try {
           InetAddress remote = InetAddress.getByName(HappyDroidConsts.HAPPYDROIDS_SERVER);
           hasNetworkConnection = remote.isReachable(1500);

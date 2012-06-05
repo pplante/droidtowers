@@ -27,6 +27,7 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
   private List<ApiType> objects;
   private HashMap<String, String> currentFilters;
   private EventBus eventBus;
+  private boolean fetching;
 
   public HappyDroidServiceCollection() {
     objects = Lists.newArrayList();
@@ -80,12 +81,14 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
   }
 
   public void fetchBlocking(ApiCollectionRunnable<HappyDroidServiceCollection<ApiType>> apiRunnable) {
+    fetching = true;
     if (!HappyDroidService.instance().haveNetworkConnection()) {
       apiRunnable.onError(null, HttpStatusCode.ClientClosedRequest, this);
       return;
     }
 
     HttpResponse response = HappyDroidService.instance().makeGetRequest(getBaseResourceUri(), currentFilters);
+    fetching = false;
     if (response != null && response.getStatusLine() != null && response.getStatusLine().getStatusCode() == 200) {
       ObjectMapper objectMapper = HappyDroidService.instance().getObjectMapper();
       try {
@@ -136,6 +139,10 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
     }
 
     return eventBus;
+  }
+
+  public boolean isFetching() {
+    return fetching;
   }
 
   @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)

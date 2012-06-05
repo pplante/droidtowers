@@ -4,7 +4,10 @@
 
 package com.happydroids.utils;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public abstract class BackgroundTask {
@@ -28,9 +31,13 @@ public abstract class BackgroundTask {
   public synchronized void beforeExecute() {
   }
 
-  protected abstract void execute();
+  protected abstract void execute() throws Exception;
 
   public synchronized void afterExecute() {
+  }
+
+  public synchronized void onError(Exception e) {
+    throw new RuntimeException(e);
   }
 
   public final void run() {
@@ -38,9 +45,7 @@ public abstract class BackgroundTask {
       threadPool = Executors.newCachedThreadPool(new ThreadFactory() {
         public Thread newThread(Runnable r) {
           Thread thread = new Thread(r, "BackgroundTaskThread");
-          if (uncaughtExceptionHandler != null) {
-            thread.setUncaughtExceptionHandler(uncaughtExceptionHandler);
-          }
+          thread.setUncaughtExceptionHandler(uncaughtExceptionHandler);
           thread.setPriority(Thread.MIN_PRIORITY);
           thread.setDaemon(true);
           return thread;
@@ -64,10 +69,10 @@ public abstract class BackgroundTask {
               }
             });
           }
-        } catch (final Throwable throwable) {
+        } catch (final Exception e) {
           postExecuteManager.postRunnable(new Runnable() {
             public void run() {
-              throw new RuntimeException(throwable);
+              onError(e);
             }
           });
         }

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.GameSave;
-import com.happydroids.droidtowers.gamestate.NonInteractiveGameSave;
+import com.happydroids.droidtowers.gamestate.GameSaveFactory;
 import com.happydroids.droidtowers.utils.GZIPUtils;
 
 import java.io.ByteArrayInputStream;
@@ -25,6 +25,7 @@ public class CloudGameSave extends TowerGameServiceObject {
   protected String blob;
   protected String image;
   protected Date syncedOn;
+  protected int fileGeneration;
   protected List<String> neighbors;
   private FriendCloudGameSaveCollection neighborGameSaves;
 
@@ -38,6 +39,7 @@ public class CloudGameSave extends TowerGameServiceObject {
 
   public CloudGameSave(GameSave gameSave, FileHandle pngFile) {
     try {
+      fileGeneration = gameSave.getFileGeneration();
       setResourceUri(gameSave.getCloudSaveUri());
       blob = getObjectMapper().writeValueAsString(gameSave);
       image = GZIPUtils.compress(pngFile);
@@ -58,7 +60,7 @@ public class CloudGameSave extends TowerGameServiceObject {
 
   @JsonIgnore
   public GameSave getGameSave() {
-    GameSave gameSave = NonInteractiveGameSave.readFile(new ByteArrayInputStream(blob.getBytes()), "cloudGameSave_" + hashCode());
+    GameSave gameSave = GameSaveFactory.readFile(new ByteArrayInputStream(blob.getBytes()), "cloudGameSave_" + hashCode());
     gameSave.setCloudSaveUri(getResourceUri());
     return gameSave;
   }
