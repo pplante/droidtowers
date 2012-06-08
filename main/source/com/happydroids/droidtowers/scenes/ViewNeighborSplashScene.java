@@ -14,7 +14,7 @@ import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.GameObject;
-import com.happydroids.droidtowers.gamestate.GameSave;
+import com.happydroids.droidtowers.gamestate.GameState;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSave;
 import com.happydroids.droidtowers.gui.Dialog;
@@ -37,8 +37,8 @@ public class ViewNeighborSplashScene extends Scene {
 
   @Override
   public void create(Object... args) {
-    GameSave playerGameSave = (GameSave) args[0];
-    playerCloudGameSave = playerGameSave.getCloudGameSave();
+    GameState playerGameState = (GameState) args[0];
+    playerCloudGameSave = playerGameState.getCloudGameSave();
 
     getCamera().position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
     getCamera().zoom = CameraController.ZOOM_MIN;

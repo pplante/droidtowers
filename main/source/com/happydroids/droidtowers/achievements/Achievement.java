@@ -27,7 +27,6 @@ public class Achievement {
   protected List<Reward> rewards;
   private boolean completed;
   private Reward lockedBy;
-  private int percentComplete;
   private int totalWeight;
   private int finishedWeight;
   private boolean givenReward;
@@ -87,7 +86,7 @@ public class Achievement {
   public void resetState() {
     Gdx.app.debug(TAG, "Reset: " + id);
     completed = false;
-
+    givenReward = false;
     if (rewards != null) {
       for (Reward reward : rewards) {
         reward.resetState();
@@ -97,11 +96,14 @@ public class Achievement {
     }
 
     totalWeight = 0;
+    finishedWeight = 0;
     if (requirements != null) {
       for (Requirement requirement : requirements) {
         totalWeight += requirement.getAmount();
       }
     }
+
+    removeLock();
   }
 
   public String toRewardString() {

@@ -112,15 +112,17 @@ public class PlacementTool extends ToolBase {
   }
 
   private boolean finishPurchase() {
-    if (!gameGrid.canObjectBeAt(gridObject)) {
-      HeadsUpDisplay.showToast("This object cannot be placed here.");
-      return true;
-    } else {
-      gridObject.setPlaced(true);
-    }
+    if (gridObject != null) {
+      if (!gameGrid.canObjectBeAt(gridObject)) {
+        HeadsUpDisplay.showToast("This object cannot be placed here.");
+        return true;
+      } else {
+        gridObject.setPlaced(true);
+      }
 
-    if (purchaseManager != null) {
-      purchaseManager.makePurchase();
+      if (purchaseManager != null) {
+        purchaseManager.makePurchase();
+      }
     }
 
     gridObject = null;

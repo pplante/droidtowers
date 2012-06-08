@@ -17,6 +17,9 @@ import com.happydroids.droidtowers.gui.ResponseType;
 import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.scenes.MainMenuScene;
 import com.happydroids.droidtowers.utils.PNG;
+import com.happydroids.server.ApiRunnable;
+import com.happydroids.server.HappyDroidServiceObject;
+import org.apache.http.HttpResponse;
 
 import java.io.OutputStream;
 
@@ -32,6 +35,7 @@ public class GameState {
   private boolean shouldSaveGame;
   private FileHandle pngFile;
   private int fileGeneration;
+  private CloudGameSave cloudGameSave;
 
   public GameState(OrthographicCamera camera, CameraController cameraController, FileHandle gameSaveLocation, GameSave currentGameSave, final GameGrid gameGrid) {
     this.camera = camera;
@@ -39,8 +43,9 @@ public class GameState {
     this.gameGrid = gameGrid;
     this.gameSaveLocation = gameSaveLocation;
     this.currentGameSave = currentGameSave;
-    this.gameFile = gameSaveLocation.child(currentGameSave.getBaseFilename());
-    this.pngFile = gameSaveLocation.child(currentGameSave.getBaseFilename() + ".png");
+    gameFile = gameSaveLocation.child(currentGameSave.getBaseFilename());
+    pngFile = gameSaveLocation.child(currentGameSave.getBaseFilename() + ".png");
+    cloudGameSave = new CloudGameSave(currentGameSave, pngFile);
   }
 
   public void loadSavedGame() {
@@ -97,11 +102,14 @@ public class GameState {
           stream.close();
 
           if (shouldForceCloudSave || currentGameSave.getCloudSaveUri() == null || currentGameSave.getFileGeneration() % 4 == 0) {
-            CloudGameSave cloudGameSave = new CloudGameSave(currentGameSave, pngFile);
-            cloudGameSave.save();
-            if (cloudGameSave.isSaved()) {
-              currentGameSave.setCloudSaveUri(cloudGameSave.getResourceUri());
-            }
+            cloudGameSave.save(new ApiRunnable() {
+              @Override
+              public void onSuccess(HttpResponse response, HappyDroidServiceObject object) {
+                if (cloudGameSave.isSaved()) {
+                  currentGameSave.setCloudSaveUri(cloudGameSave.getResourceUri());
+                }
+              }
+            });
           }
 
           GameSaveFactory.save(currentGameSave, gameFile);
@@ -110,5 +118,9 @@ public class GameState {
         }
       }
     }
+  }
+
+  public CloudGameSave getCloudGameSave() {
+    return cloudGameSave;
   }
 }

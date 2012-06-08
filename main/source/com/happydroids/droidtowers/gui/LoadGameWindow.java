@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
+import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.SplashSceneStates;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
@@ -28,10 +29,13 @@ import com.happydroids.droidtowers.scenes.SplashScene;
 import com.happydroids.utils.BackgroundTask;
 
 import java.text.NumberFormat;
+import java.util.Set;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class LoadGameWindow extends ScrollableTowerWindow {
+  private static final String TAG = LoadGameWindow.class.getSimpleName();
+
   private boolean foundSaveFile;
   private final CloudGameSaveCollection cloudGameSaves;
 
@@ -59,34 +63,62 @@ public class LoadGameWindow extends ScrollableTowerWindow {
 
         }
       }.run();
+    } else {
+      buildGameSaveList();
+    }
+  }
+
+  private void syncCloudGameSaves() {
+    FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
+    FileHandle[] files = storage.list(".json");
+
+    Set<String> towersProcessed = Sets.newHashSet();
+    if (files != null && files.length > 0) {
+      for (FileHandle file : files) {
+        try {
+          GameSave towerData = GameSaveFactory.readMetadata(file.read());
+          for (CloudGameSave cloudGameSave : cloudGameSaves.getObjects()) {
+            if (towerData.getCloudSaveUri() != null && towerData.getCloudSaveUri().equals(cloudGameSave.getResourceUri())) {
+              if (towerData.getFileGeneration() < cloudGameSave.getFileGeneration()) {
+                file.writeString(cloudGameSave.getBlob(), false);
+              }
+            }
+          }
+
+          towersProcessed.add(towerData.getCloudSaveUri());
+        } catch (Exception e) {
+//          throw new RuntimeException(e);
+        }
+      }
+    }
+
+    for (CloudGameSave cloudGameSave : cloudGameSaves.getObjects()) {
+      if (!towersProcessed.contains(cloudGameSave.getResourceUri())) {
+        try {
+          Gdx.app.debug(TAG, "Could not find: " + cloudGameSave.getResourceUri() + " on disk!");
+          GameSave gameSave = cloudGameSave.getGameSave();
+          GameSaveFactory.save(gameSave, storage.child(gameSave.getBaseFilename()));
+        } catch (Exception e) {
+//          throw new RuntimeException(e);
+        }
+      }
     }
   }
 
   private void buildGameSaveList() {
+    syncCloudGameSaves();
+
     FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
     FileHandle[] files = storage.list(".json");
 
     if (files != null && files.length > 0) {
       for (FileHandle file : files) {
-        if (file.name().endsWith(".json")) {
-          Table fileRow = makeGameFileRow(file);
-          if (fileRow != null) {
-            row().fillX();
-            add(fileRow).expandX();
-            foundSaveFile = true;
-          }
+        Table fileRow = makeGameFileRow(file);
+        if (fileRow != null) {
+          row().fillX();
+          add(fileRow).expandX();
+          foundSaveFile = true;
         }
-      }
-    }
-
-    if (!cloudGameSaves.isEmpty()) {
-      for (CloudGameSave cloudGameSave : cloudGameSaves.getObjects()) {
-//        Table fileRow = makeGameFileRow(cloudGameSave);
-//        if (fileRow != null) {
-//          row().fillX();
-//          add(fileRow).expandX();
-//          foundSaveFile = true;
-//        }
       }
     }
 
@@ -97,16 +129,16 @@ public class LoadGameWindow extends ScrollableTowerWindow {
     }
   }
 
-  private Table makeGameFileRow(final FileHandle gameSave) {
+  private Table makeGameFileRow(final FileHandle gameSaveFile) {
     GameSave towerData;
     try {
-      towerData = GameSaveFactory.readFile(gameSave);
+      towerData = GameSaveFactory.readMetadata(gameSaveFile.read());
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      Gdx.app.log(TAG, "Failed to parse file.", e);
+      return null;
     }
 
-    FileHandle imageFile = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY + gameSave.name() + ".png");
-
+    FileHandle imageFile = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY + gameSaveFile.name() + ".png");
 
     Actor imageActor;
     if (imageFile.exists()) {
@@ -120,7 +152,7 @@ public class LoadGameWindow extends ScrollableTowerWindow {
     fileRow.defaults().fillX().pad(scale(10)).space(scale(10));
     fileRow.row();
     fileRow.add(imageActor).width(scale(64)).height(scale(64)).center();
-    fileRow.add(makeGameFileInfoBox(fileRow, gameSave, towerData)).expandX().top();
+    fileRow.add(makeGameFileInfoBox(fileRow, gameSaveFile, towerData)).expandX().top();
     fileRow.row().fillX();
     fileRow.add(new HorizontalRule(Color.DARK_GRAY, 2)).colspan(2);
 

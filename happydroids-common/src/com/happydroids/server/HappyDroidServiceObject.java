@@ -44,7 +44,7 @@ public abstract class HappyDroidServiceObject {
   protected abstract boolean requireAuthentication();
 
   public void setResourceUri(String resourceUri) {
-    if (!resourceUri.contains(HappyDroidConsts.HAPPYDROIDS_URI)) {
+    if (resourceUri != null && !resourceUri.contains(HappyDroidConsts.HAPPYDROIDS_URI)) {
       resourceUri = HappyDroidConsts.HAPPYDROIDS_URI + resourceUri;
     }
 

@@ -107,9 +107,11 @@ public abstract class JacksonTransformationScript<T extends JsonNode> {
     }
 
     JsonNode fileFormat = gameSaveNode.findValue("fileFormat");
-    if (fileFormat != null && fileFormat.asInt() >= fileFormatNumber) {
+    if (fileFormat != null && fileFormat.asInt() > fileFormatNumber) {
+      System.out.println("\tSkipping migration.");
       return null;
     }
+
     return gameSaveNode;
   }
 }

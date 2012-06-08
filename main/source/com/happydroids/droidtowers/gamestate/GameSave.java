@@ -7,8 +7,8 @@ package com.happydroids.droidtowers.gamestate;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.DifficultyLevel;
@@ -29,39 +29,33 @@ import com.happydroids.droidtowers.math.GridPoint;
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
-@JsonTypeInfo(use = JsonTypeInfo.Id.MINIMAL_CLASS, include = JsonTypeInfo.As.WRAPPER_OBJECT, property = "class")
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.MINIMAL_CLASS;
+
+@JsonAutoDetect(fieldVisibility = PROTECTED_AND_PUBLIC, getterVisibility = NONE, setterVisibility = NONE, isGetterVisibility = NONE)
+@JsonTypeInfo(use = MINIMAL_CLASS, include = WRAPPER_OBJECT, property = "class")
 @JsonTypeIdResolver(TowerTypeIdResolver.class)
 public class GameSave {
+  @JsonView({Views.Metadata.class, Views.All.class})
   protected Player player;
+  @JsonView(Views.All.class)
   protected Vector3 cameraPosition;
+  @JsonView(Views.All.class)
   protected float cameraZoom;
+  @JsonView(Views.All.class)
   protected GridPoint gridSize;
+  @JsonView(Views.All.class)
   protected List<GridObjectState> gridObjects;
+  @JsonView(Views.All.class)
   protected ArrayList<String> completedAchievements;
   private boolean newGame;
   private boolean saveToDiskDisabled;
-  protected Metadata metadata;
 
-  @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
-  public static class Metadata {
-    public int fileGeneration;
-    public int fileFormat;
-    public String cloudSaveUri;
-    public String baseFilename;
-    public String towerName;
-    public DifficultyLevel difficultyLevel;
-
-    public Metadata() {
-      baseFilename = GameSaveFactory.generateFilename();
-    }
-
-    public Metadata(String towerName, DifficultyLevel difficultyLevel) {
-      this();
-      this.towerName = towerName;
-      this.difficultyLevel = difficultyLevel;
-    }
-  }
+  @JsonView({Views.Metadata.class, Views.All.class})
+  protected GameSaveMetadata metadata;
+  protected int fileFormat = 4;
 
   public GameSave() {
     newGame = false;
@@ -70,7 +64,7 @@ public class GameSave {
   public GameSave(String towerName, DifficultyLevel difficultyLevel) {
     newGame = true;
 
-    this.metadata = new Metadata(towerName, difficultyLevel);
+    this.metadata = new GameSaveMetadata(towerName, difficultyLevel);
     player = new Player(difficultyLevel.getStartingMoney());
     gridSize = new GridPoint(TowerConsts.GAME_GRID_START_SIZE, TowerConsts.GAME_GRID_START_SIZE);
   }
@@ -133,32 +127,26 @@ public class GameSave {
     metadata.fileGeneration += 1;
   }
 
-  @JsonIgnore
   public String getCloudSaveUri() {
     return metadata.cloudSaveUri;
   }
 
-  @JsonIgnore
   public String getBaseFilename() {
     return metadata.baseFilename;
   }
 
-  @JsonIgnore
   public boolean isNewGame() {
     return newGame;
   }
 
-  @JsonIgnore
   public void setCloudSaveUri(String cloudSaveUri) {
     metadata.cloudSaveUri = cloudSaveUri;
   }
 
-  @JsonIgnore
   public int getFileGeneration() {
     return metadata.fileGeneration;
   }
 
-  @JsonIgnore
   public String getTowerName() {
     return metadata.towerName;
   }
@@ -183,8 +171,19 @@ public class GameSave {
     return saveToDiskDisabled;
   }
 
-  @JsonIgnore
   public CloudGameSave getCloudGameSave() {
     return new CloudGameSave(metadata.cloudSaveUri);
+  }
+
+  public GameSaveMetadata getMetadata() {
+    return metadata;
+  }
+
+  public static class Views {
+    public static class Metadata {
+    }
+
+    public static class All {
+    }
   }
 }

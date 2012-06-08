@@ -12,7 +12,7 @@ import com.happydroids.droidtowers.input.CameraController;
 public class NonInteractiveGameSave extends GameSave {
   public NonInteractiveGameSave(GameSave gameSave) {
     super();
-    metadata.towerName = gameSave.metadata.towerName;
+    metadata = gameSave.metadata;
     gridSize = gameSave.gridSize;
     gridObjects = gameSave.gridObjects;
   }

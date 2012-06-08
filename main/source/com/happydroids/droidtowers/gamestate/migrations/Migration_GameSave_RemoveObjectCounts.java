@@ -17,6 +17,7 @@ public class Migration_GameSave_RemoveObjectCounts extends JacksonTransformation
     gameSaveNode.remove("neighborhoodUri");
     gameSaveNode.put("fileFormat", 3);
 
+    node.removeAll();
     node.put("com.happydroids.droidtowers.gamestate.GameSave", gameSaveNode);
   }
 }

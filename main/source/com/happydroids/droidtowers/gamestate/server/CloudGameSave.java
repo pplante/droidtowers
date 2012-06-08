@@ -95,4 +95,16 @@ public class CloudGameSave extends TowerGameServiceObject {
 
     return neighborUris;
   }
+
+  public GameSave getGameSaveMetadata() {
+    return GameSaveFactory.readMetadata(new ByteArrayInputStream(blob.getBytes()));
+  }
+
+  public int getFileGeneration() {
+    return fileGeneration;
+  }
+
+  public String getBlob() {
+    return blob;
+  }
 }

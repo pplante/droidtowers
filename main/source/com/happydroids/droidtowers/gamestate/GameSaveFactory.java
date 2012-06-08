@@ -10,6 +10,7 @@ import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_MoveM
 import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_RemoveObjectCounts;
 import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_UnhappyrobotToDroidTowers;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.jackson.HappyDroidObjectMapper;
 import sk.seges.acris.json.server.migrate.JacksonTransformer;
 
 import java.io.IOException;
@@ -33,9 +34,7 @@ public class GameSaveFactory {
       transformer.addTransform(Migration_GameSave_RemoveObjectCounts.class);
       transformer.addTransform(Migration_GameSave_MoveMetadata.class);
 
-      byte[] bytes = transformer.process();
-
-      return TowerGameService.instance().getObjectMapper().readValue(bytes, GameSave.class);
+      return TowerGameService.instance().getObjectMapper().readValue(transformer.process(), GameSave.class);
     } catch (Exception e) {
       throw new RuntimeException("There was a problem parsing: " + fileName, e);
     }
@@ -49,5 +48,19 @@ public class GameSaveFactory {
     TowerGameService.instance().getObjectMapper().writeValue(stream, gameSave);
     stream.flush();
     stream.close();
+  }
+
+  public static GameSave readMetadata(InputStream read) {
+    try {
+      JacksonTransformer transformer = new JacksonTransformer(read, null);
+      transformer.addTransform(Migration_GameSave_UnhappyrobotToDroidTowers.class);
+      transformer.addTransform(Migration_GameSave_RemoveObjectCounts.class);
+      transformer.addTransform(Migration_GameSave_MoveMetadata.class);
+
+      HappyDroidObjectMapper objectMapper = TowerGameService.instance().getObjectMapper();
+      return objectMapper.reader(GameSave.class).withView(GameSave.Views.Metadata.class).readValue(transformer.process());
+    } catch (Exception e) {
+      throw new RuntimeException("There was a problem parsing gamesave metadata.", e);
+    }
   }
 }

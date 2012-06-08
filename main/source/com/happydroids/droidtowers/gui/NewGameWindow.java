@@ -82,7 +82,7 @@ public class NewGameWindow extends TowerWindow {
 
     difficultyGroup.setChecked("Easy");
 
-    TextButton cancelButton = FontManager.RobotoBold18.makeTextButton("finished");
+    TextButton cancelButton = FontManager.RobotoBold18.makeTextButton("cancel");
     cancelButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         dismiss();
