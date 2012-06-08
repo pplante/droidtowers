@@ -4,11 +4,12 @@
 
 package com.happydroids.server;
 
+import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Sets;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.jackson.HappyDroidObjectMapper;
-import com.happydroids.utils.BackgroundTask;
+import com.happydroids.tasks.CheckForNetworkTask;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -24,11 +25,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class HappyDroidService {
@@ -78,6 +77,10 @@ public class HappyDroidService {
     return deviceType;
   }
 
+  public static void setConnectionState(boolean connectionState) {
+    HappyDroidService.hasNetworkConnection = connectionState;
+  }
+
   public HappyDroidObjectMapper getObjectMapper() {
     if (objectMapper == null) {
       objectMapper = new HappyDroidObjectMapper();
@@ -124,15 +127,15 @@ public class HappyDroidService {
       }
 
       HttpResponse response = client.execute(request);
-      if (HappyDroidConsts.DEBUG) System.out.println("\t" + response.getStatusLine());
+      Gdx.app.debug(TAG, "\t" + response.getStatusLine());
       int statusCode = response.getStatusLine().getStatusCode();
       if (statusCode != 201 && statusCode != 200) {
         HttpEntity responseEntity = response.getEntity();
         if (responseEntity != null) {
           String content = EntityUtils.toString(responseEntity);
-          if (HappyDroidConsts.DEBUG) System.out.println("\tResponse: " + content);
+          Gdx.app.debug(TAG, "\tResponse: " + content);
         } else {
-          if (HappyDroidConsts.DEBUG) System.out.println("\tResponse: NULL");
+          Gdx.app.debug(TAG, "\tResponse: NULL");
         }
       }
       return response;
@@ -149,30 +152,30 @@ public class HappyDroidService {
   public HttpResponse makePostRequest(String uri, Object objectForServer) {
     HttpClient client = new DefaultHttpClient();
     try {
-      if (HappyDroidConsts.DEBUG) System.out.println("POST " + uri);
+      Gdx.app.debug(TAG, "POST " + uri);
       HttpPost request = new HttpPost(uri);
       addDefaultHeaders(request);
 
       if (objectForServer != null) {
         ObjectMapper mapper = getObjectMapper();
-        if (HappyDroidConsts.DEBUG) System.out.println(mapper.writeValueAsString(objectForServer));
+        Gdx.app.debug(TAG, "JSON: " + mapper.writeValueAsString(objectForServer));
         StringEntity entity = new StringEntity(mapper.writeValueAsString(objectForServer));
         entity.setContentType("multipart/form-data");
         request.setEntity(entity);
       }
 
       HttpResponse response = client.execute(request);
-      if (HappyDroidConsts.DEBUG) System.out.println("\t" + response.getStatusLine());
+      Gdx.app.debug(TAG, "RES: " + response.getStatusLine());
 
       int statusCode = response.getStatusLine().getStatusCode();
       if (statusCode != 201 && statusCode != 200) {
         String content = EntityUtils.toString(response.getEntity());
-        if (HappyDroidConsts.DEBUG) System.out.println("\tResponse: " + content);
+        Gdx.app.debug(TAG, "\tResponse: " + content);
       }
 
       return response;
     } catch (HttpHostConnectException ignored) {
-      if (HappyDroidConsts.DEBUG) System.out.println("Connection failed for: " + uri);
+      Gdx.app.debug(TAG, "Connection failed for: " + uri);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -202,14 +205,12 @@ public class HappyDroidService {
       }
 
       addDefaultHeaders(request);
-      if (HappyDroidConsts.DEBUG) System.out.println("REQ: GET " + request.getURI());
+      Gdx.app.debug(TAG, "REQ: GET " + request.getURI());
       HttpResponse response = client.execute(request);
-      if (HappyDroidConsts.DEBUG) System.out.println("RES: GET " + request.getURI() + ", " + response.getStatusLine());
+      Gdx.app.debug(TAG, "RES: GET " + request.getURI() + ", " + response.getStatusLine());
       return response;
-    } catch (HttpHostConnectException ignored) {
-      if (HappyDroidConsts.DEBUG) System.out.println("Connection failed for: " + uri);
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (Exception ignored) {
+      Gdx.app.error(TAG, "Connection failed for: " + uri, ignored);
     }
 
     return null;
@@ -218,25 +219,7 @@ public class HappyDroidService {
   public void checkForNetwork() {
     Logger.getLogger(TAG).info("Checking for network connection...");
 
-    new BackgroundTask() {
-      @Override
-      protected void execute() throws Exception {
-        try {
-          InetAddress remote = InetAddress.getByName(HappyDroidConsts.HAPPYDROIDS_SERVER);
-          hasNetworkConnection = remote.isReachable(1500);
-          Logger.getLogger(TAG).info("Network status: " + hasNetworkConnection);
-          synchronized (withNetworkConnectionRunnables) {
-            for (Runnable runnable : withNetworkConnectionRunnables) {
-              runnable.run();
-            }
-
-            withNetworkConnectionRunnables.clear();
-          }
-        } catch (IOException e) {
-          Logger.getLogger(TAG).log(Level.ALL, "Network error!", e);
-        }
-      }
-    }.run();
+    new CheckForNetworkTask().run();
   }
 
   public void withNetworkConnection(Runnable runnable) {
@@ -257,5 +240,15 @@ public class HappyDroidService {
 
   public boolean isAuthenticated() {
     return false;
+  }
+
+  public void runAfterNetworkCheckRunnables() {
+    synchronized (withNetworkConnectionRunnables) {
+      for (Runnable runnable : withNetworkConnectionRunnables) {
+        runnable.run();
+      }
+
+      withNetworkConnectionRunnables.clear();
+    }
   }
 }

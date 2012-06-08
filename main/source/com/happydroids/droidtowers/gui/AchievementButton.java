@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
@@ -33,8 +32,8 @@ public class AchievementButton extends ImageButton {
     particleEffect = new ParticleEffect();
     particleEffect.load(Gdx.files.internal("particles/sparkle.p"), Gdx.files.internal("particles"));
 
-    setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
+    setClickListener(new VibrateClickListener() {
+      public void onClick(Actor actor, float x, float y) {
         new AchievementListView(getStage()).show();
       }
     });

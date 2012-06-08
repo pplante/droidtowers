@@ -9,9 +9,7 @@ import com.badlogic.gdx.Preferences;
 import com.happydroids.droidtowers.jackson.TowerGameClassDeserializer;
 import com.happydroids.droidtowers.jackson.Vector2Serializer;
 import com.happydroids.droidtowers.jackson.Vector3Serializer;
-import com.happydroids.server.ApiRunnable;
 import com.happydroids.server.HappyDroidService;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
 
 import java.util.UUID;
@@ -54,36 +52,6 @@ public class TowerGameService extends HappyDroidService {
     }
 
     return (TowerGameService) _instance;
-  }
-
-  public void registerDevice() {
-    withNetworkConnection(new Runnable() {
-      public void run() {
-        device = new Device();
-        device.save(new ApiRunnable<Device>() {
-          @Override
-          public void onError(HttpResponse response, int statusCode, Device object) {
-            Gdx.app.error(TAG, "Error registering device :(, status: " + statusCode);
-            authenticationFinished = true;
-            postAuthRunnables.runAll();
-          }
-
-          @Override
-          public void onSuccess(HttpResponse response, Device object) {
-            authenticationFinished = true;
-
-            authenticated = object.isAuthenticated;
-
-            if (!authenticated) {
-              preferences.remove(SESSION_TOKEN);
-              preferences.flush();
-            }
-
-            postAuthRunnables.runAll();
-          }
-        });
-      }
-    });
   }
 
   public String getSessionToken() {
@@ -145,5 +113,20 @@ public class TowerGameService extends HappyDroidService {
 
   public boolean isAudioEnabled() {
     return preferences.getBoolean("audioEnabled", true);
+  }
+
+  public RunnableQueue getPostAuthRunnables() {
+    return postAuthRunnables;
+  }
+
+  public void setAuthenticated(boolean authenticated) {
+    this.authenticated = authenticated;
+
+    if (!this.authenticated) {
+      preferences.remove(SESSION_TOKEN);
+      preferences.flush();
+    }
+
+    authenticationFinished = true;
   }
 }

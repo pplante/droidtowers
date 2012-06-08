@@ -4,15 +4,13 @@
 
 package com.happydroids.droidtowers.scenes;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.happydroids.droidtowers.gui.FontManager;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 
 import java.net.URI;
 import java.util.List;
 
-public class LaunchUriScene extends Scene {
+public class LaunchUriScene extends DroidSplashScene {
 
   @Override
   public void create(Object... args) {
@@ -20,8 +18,7 @@ public class LaunchUriScene extends Scene {
       throw new RuntimeException("args cannot be null!");
     }
 
-    Label fetchingLabel = FontManager.Roboto64.makeLabel("fetching game :D");
-    getStage().addActor(fetchingLabel);
+    setStatusText("fetching tower :D");
 
     URI launchUri = (URI) args[0];
     List<NameValuePair> queryParams = URLEncodedUtils.parse(launchUri, "utf8");
@@ -44,18 +41,6 @@ public class LaunchUriScene extends Scene {
   }
 
   @Override
-  public void pause() {
-  }
-
-  @Override
-  public void resume() {
-  }
-
-  @Override
-  public void render(float deltaTime) {
-  }
-
-  @Override
-  public void dispose() {
+  protected void handleBackButton() {
   }
 }

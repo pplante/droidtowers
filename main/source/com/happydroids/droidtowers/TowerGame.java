@@ -23,6 +23,7 @@ import com.happydroids.droidtowers.actions.ActionManager;
 import com.happydroids.droidtowers.audio.GameSoundController;
 import com.happydroids.droidtowers.controllers.PathSearchManager;
 import com.happydroids.droidtowers.entities.GameObject;
+import com.happydroids.droidtowers.gamestate.server.Device;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.*;
 import com.happydroids.droidtowers.input.*;
@@ -36,7 +37,9 @@ import com.happydroids.droidtowers.scenes.SplashScene;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.types.*;
+import com.happydroids.server.ApiRunnable;
 import com.happydroids.utils.BackgroundTask;
+import org.apache.http.HttpResponse;
 
 import java.net.URI;
 import java.util.LinkedList;
@@ -92,12 +95,29 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     TowerAssetManager.assetManager();
 
-    new BackgroundTask() {
+    TowerGameService.instance().withNetworkConnection(new Runnable() {
       @Override
-      protected void execute() throws Exception {
-        TowerGameService.instance().registerDevice();
+      public void run() {
+        final Device device = new Device();
+        device.save(new ApiRunnable<Device>() {
+          @Override
+          public void onError(HttpResponse response, int statusCode, Device object) {
+            afterRequest();
+          }
+
+          @Override
+          public void onSuccess(HttpResponse response, Device object) {
+            afterRequest();
+          }
+
+          private void afterRequest() {
+            Gdx.app.debug(TAG, "Authentication finished, state: " + device.isAuthenticated);
+            TowerGameService.instance().setAuthenticated(device.isAuthenticated);
+            TowerGameService.instance().getPostAuthRunnables().runAll();
+          }
+        });
       }
-    }.run();
+    });
 
     RoomTypeFactory.instance();
     CommercialTypeFactory.instance();

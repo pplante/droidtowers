@@ -9,7 +9,6 @@ import com.happydroids.HappyDroidConsts;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class NonPlayerFriend extends TowerGameServiceObject {
-  private int id;
   private String friendName;
   private PlayerProfileProvider provider;
 
@@ -35,7 +34,6 @@ public class NonPlayerFriend extends TowerGameServiceObject {
   public String toString() {
     return "NonPlayerFriend{" +
                    "friendName='" + friendName + '\'' +
-                   ", id=" + id +
                    ", provider=" + provider +
                    '}';
   }

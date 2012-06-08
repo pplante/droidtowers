@@ -173,12 +173,21 @@ public class MainMenuScene extends Scene {
 //    DebugUtils.loadGameFromCloud(19);
 //    new FriendsListWindow(getStage()).show();
 
-    new BackgroundTask() {
+    TowerGameService.instance().afterAuthentication(new Runnable() {
       @Override
-      protected void execute() throws Exception {
-        cloudGameSaves.fetch();
+      public void run() {
+        if (!TowerGameService.instance().isAuthenticated()) {
+          return;
+        }
+
+        new BackgroundTask() {
+          @Override
+          protected void execute() throws Exception {
+            cloudGameSaves.fetch();
+          }
+        }.run();
       }
-    }.run();
+    });
   }
 
   @Override

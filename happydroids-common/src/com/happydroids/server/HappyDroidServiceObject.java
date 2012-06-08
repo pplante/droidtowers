@@ -5,8 +5,8 @@
 package com.happydroids.server;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
-@JsonIgnoreProperties(value = {"id"})
+@JsonFilter(value = "HappyDroidServiceObject")
 public abstract class HappyDroidServiceObject {
   public static final ApiRunnable NO_OP_API_RUNNABLE = new ApiRunnable() {
     @Override
@@ -28,6 +28,7 @@ public abstract class HappyDroidServiceObject {
     }
   };
 
+  private long id;
   private String resourceUri;
 
   @JsonIgnore
@@ -35,6 +36,14 @@ public abstract class HappyDroidServiceObject {
 
   protected HappyDroidServiceObject() {
 
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
   }
 
   public String getResourceUri() {

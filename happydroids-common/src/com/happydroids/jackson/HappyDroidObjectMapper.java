@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.happydroids.server.StackTraceSerializer;
 
 public class HappyDroidObjectMapper extends ObjectMapper {
@@ -22,6 +24,8 @@ public class HappyDroidObjectMapper extends ObjectMapper {
     happyModules = new SimpleModule();
     happyModules.addSerializer(new StackTraceSerializer());
     registerModule(happyModules);
+
+    setFilters(new SimpleFilterProvider().addFilter("HappyDroidServiceObject", SimpleBeanPropertyFilter.serializeAllExcept("id")));
   }
 
   public void addSerializer(JsonSerializer serializer) {

@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.gui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -191,6 +192,7 @@ public class StatusBarPanel extends Table {
     Actor touched = hit(x, y);
 
     if (touched == starWidget || touched == gameSpeedLabel) {
+      Gdx.input.vibrate(15);
       if (touched == starWidget) {
         ratingOverlay.toggle(this, starWidget);
       } else if (touched == gameSpeedLabel) {

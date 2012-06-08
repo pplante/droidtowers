@@ -15,6 +15,10 @@ import java.util.zip.GZIPOutputStream;
 public class GZIPUtils {
   public static String compress(FileHandle pngFile) {
     try {
+      if (!pngFile.exists()) {
+        return null;
+      }
+
       ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
       GZIPOutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream);
       gzipOutputStream.write(pngFile.readBytes());
