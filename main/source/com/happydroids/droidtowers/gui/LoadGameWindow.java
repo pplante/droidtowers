@@ -57,11 +57,6 @@ public class LoadGameWindow extends ScrollableTowerWindow {
         public synchronized void afterExecute() {
           buildGameSaveList();
         }
-
-        @Override
-        public synchronized void onError(Exception e) {
-
-        }
       }.run();
     } else {
       buildGameSaveList();
