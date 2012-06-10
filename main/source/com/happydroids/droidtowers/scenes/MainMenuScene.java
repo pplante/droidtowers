@@ -4,7 +4,6 @@
 
 package com.happydroids.droidtowers.scenes;
 
-import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -24,8 +23,10 @@ import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.NeighborGameGrid;
-import com.happydroids.droidtowers.gui.*;
-import com.happydroids.droidtowers.tween.TweenSystem;
+import com.happydroids.droidtowers.gui.FontManager;
+import com.happydroids.droidtowers.gui.LoadTowerWindow;
+import com.happydroids.droidtowers.gui.NewTowerWindow;
+import com.happydroids.droidtowers.gui.VibrateClickListener;
 import com.happydroids.utils.BackgroundTask;
 
 import java.util.ArrayList;
@@ -58,16 +59,11 @@ public class MainMenuScene extends Scene {
     container.add(versionLabel).right().padTop(scale(-8));
     container.row().padTop(30);
 
-    Tween.to(label, WidgetAccessor.COLOR, 500)
-            .target(1, 1, 1, 0.65f)
-            .repeatYoyo(Tween.INFINITY, 250)
-            .start(TweenSystem.getTweenManager());
-
-    TextButton newGameButton = FontManager.RobotoBold18.makeTextButton("new game");
+    TextButton newGameButton = FontManager.RobotoBold18.makeTextButton("new tower");
     container.add(newGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row().padTop(BUTTON_SPACING);
 
-    TextButton loadGameButton = FontManager.RobotoBold18.makeTextButton("load game");
+    TextButton loadGameButton = FontManager.RobotoBold18.makeTextButton("load tower");
     container.add(loadGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row().padTop(BUTTON_SPACING);
 
@@ -97,7 +93,7 @@ public class MainMenuScene extends Scene {
       });
     }
 
-    TextButton exitGameButton = FontManager.RobotoBold18.makeTextButton("exit game");
+    TextButton exitGameButton = FontManager.RobotoBold18.makeTextButton("exit");
     container.add(exitGameButton).fill().maxWidth(BUTTON_WIDTH);
     container.row();
 
@@ -152,13 +148,13 @@ public class MainMenuScene extends Scene {
     newGameButton.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
-        new NewGameWindow(getStage()).show();
+        new NewTowerWindow(getStage()).show();
       }
     });
     loadGameButton.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
-        new LoadGameWindow(getStage(), cloudGameSaves).show();
+        new LoadTowerWindow(getStage(), cloudGameSaves).show();
       }
     });
 

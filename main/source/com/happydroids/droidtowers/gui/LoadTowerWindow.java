@@ -33,13 +33,13 @@ import java.util.Set;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class LoadGameWindow extends ScrollableTowerWindow {
-  private static final String TAG = LoadGameWindow.class.getSimpleName();
+public class LoadTowerWindow extends ScrollableTowerWindow {
+  private static final String TAG = LoadTowerWindow.class.getSimpleName();
 
   private boolean foundSaveFile;
   private final CloudGameSaveCollection cloudGameSaves;
 
-  public LoadGameWindow(Stage stage, CloudGameSaveCollection cloudGameSaveCollection) {
+  public LoadTowerWindow(Stage stage, CloudGameSaveCollection cloudGameSaveCollection) {
     super("Load a Tower", stage);
     this.cloudGameSaves = cloudGameSaveCollection;
 

@@ -19,14 +19,14 @@ import java.text.NumberFormat;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class NewGameWindow extends TowerWindow {
+public class NewTowerWindow extends TowerWindow {
 
   public static final int ROW_SPACE = scale(16);
 
   private DifficultyLevel difficultyLevel;
   private final TextButton beginButton;
 
-  public NewGameWindow(Stage stage) {
+  public NewTowerWindow(Stage stage) {
     super("Start a new Tower", stage);
 
     clear();
