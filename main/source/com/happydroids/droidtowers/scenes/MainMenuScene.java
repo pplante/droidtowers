@@ -4,14 +4,14 @@
 
 package com.happydroids.droidtowers.scenes;
 
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenEquations;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveBy;
 import com.badlogic.gdx.scenes.scene2d.actions.ScaleTo;
-import com.badlogic.gdx.scenes.scene2d.actions.Sequence;
 import com.badlogic.gdx.scenes.scene2d.interpolators.OvershootInterpolator;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
@@ -23,41 +23,37 @@ import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.NeighborGameGrid;
-import com.happydroids.droidtowers.gui.FontManager;
-import com.happydroids.droidtowers.gui.LoadTowerWindow;
-import com.happydroids.droidtowers.gui.NewTowerWindow;
-import com.happydroids.droidtowers.gui.VibrateClickListener;
+import com.happydroids.droidtowers.gui.*;
+import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.utils.BackgroundTask;
 
 import java.util.ArrayList;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class MainMenuScene extends Scene {
+public class MainMenuScene extends SplashScene {
   private static final String TAG = MainMenuScene.class.getSimpleName();
   public static final int BUTTON_WIDTH = scale(280);
   public static final int BUTTON_SPACING = scale(16);
 
-  private SplashCloudLayer cloudLayer;
   private GameGrid testGrid;
   private ArrayList<NeighborGameGrid> neighborGrids;
   private CloudGameSaveCollection cloudGameSaves;
 
   @Override
   public void create(Object... args) {
+    buildSplashScene(false);
+
     cloudGameSaves = new CloudGameSaveCollection();
 
     final Table container = new Table();
-    container.defaults().center().left();
-
-    Label label = FontManager.Roboto64.makeLabel("Droid Towers");
-    container.add(label).align(Align.CENTER);
-    container.row();
+    container.defaults().left();
 
     Label versionLabel = FontManager.Default.makeLabel(String.format("%s (%s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA.substring(0, 8)));
     versionLabel.setColor(Color.DARK_GRAY);
-    container.add(versionLabel).right().padTop(scale(-8));
-    container.row().padTop(30);
+    versionLabel.x = getStage().width() - versionLabel.width - 5;
+    versionLabel.y = getStage().height() - versionLabel.height - 5;
+    addActor(versionLabel);
 
     TextButton newGameButton = FontManager.RobotoBold18.makeTextButton("new tower");
     container.add(newGameButton).fill().maxWidth(BUTTON_WIDTH);
@@ -131,19 +127,15 @@ public class MainMenuScene extends Scene {
                                    .setInterpolator(OvershootInterpolator.$(1.75f)));
 
     container.pack();
+    container.y = (int) (getStage().centerY() - (container.height) / 2);
+    container.x = -droidTowersLogo.getImageWidth();
     addActor(container);
-    center(container);
 
-    container.color.a = 0f;
-
-    container.action(FadeIn.$(0.85f));
-    container.action(Sequence.$(
-                                       MoveBy.$(0, -container.height, 0f),
-                                       MoveBy.$(0, container.height, 0.75f)
-                                               .setInterpolator(OvershootInterpolator.$(3f)
-                                               )));
-
-    cloudLayer = new SplashCloudLayer();
+    Tween.to(container, WidgetAccessor.POSITION, 1000)
+            .delay(50)
+            .target(50 + (45 * (droidTowersLogo.getImageWidth() / droidTowersLogo.getRegion().getRegionWidth())), container.y)
+            .ease(TweenEquations.easeInOutExpo)
+            .start(TweenSystem.getTweenManager());
 
     newGameButton.setClickListener(new VibrateClickListener() {
       @Override
@@ -196,8 +188,7 @@ public class MainMenuScene extends Scene {
 
   @Override
   public void render(float deltaTime) {
-    cloudLayer.update(deltaTime);
-    cloudLayer.render(getSpriteBatch());
+    renderSplashScene(deltaTime);
   }
 
   @Override

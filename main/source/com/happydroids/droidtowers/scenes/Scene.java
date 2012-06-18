@@ -84,7 +84,7 @@ public abstract class Scene {
   }
 
 
-  private void centerVertically(Actor actor) {
+  protected void centerVertically(Actor actor) {
     actor.y = (int) (getStage().height() - actor.height) / 2;
   }
 

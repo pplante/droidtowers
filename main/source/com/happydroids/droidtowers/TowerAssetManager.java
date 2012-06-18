@@ -191,4 +191,8 @@ public class TowerAssetManager {
   public static Animation animationFromAtlas(String framePrefix, String atlasName, float animationTime) {
     return new Animation(animationTime, textureAtlas(atlasName).findRegions(framePrefix));
   }
+
+  public static Image image(String fileName) {
+    return new Image(texture(fileName));
+  }
 }
