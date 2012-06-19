@@ -39,9 +39,9 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
   private boolean foundSaveFile;
   private final CloudGameSaveCollection cloudGameSaves;
 
-  public LoadTowerWindow(Stage stage, CloudGameSaveCollection cloudGameSaveCollection) {
+  public LoadTowerWindow(Stage stage) {
     super("Load a Tower", stage);
-    this.cloudGameSaves = cloudGameSaveCollection;
+    this.cloudGameSaves = TowerGame.getCloudGameSaves();
 
     if (TowerGameService.instance().haveNetworkConnection() && cloudGameSaves.isFetching()) {
       new BackgroundTask() {

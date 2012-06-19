@@ -23,6 +23,7 @@ import com.happydroids.droidtowers.actions.ActionManager;
 import com.happydroids.droidtowers.audio.GameSoundController;
 import com.happydroids.droidtowers.controllers.PathSearchManager;
 import com.happydroids.droidtowers.entities.GameObject;
+import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gamestate.server.Device;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.*;
@@ -61,8 +62,15 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
   private FrameBuffer frameBuffer;
   private static GameSoundController soundController;
 
+  private static CloudGameSaveCollection cloudGameSaves;
+
   public TowerGame() {
     pausedScenes = Lists.newLinkedList();
+    cloudGameSaves = new CloudGameSaveCollection();
+  }
+
+  public static CloudGameSaveCollection getCloudGameSaves() {
+    return cloudGameSaves;
   }
 
   public void create() {
@@ -116,6 +124,22 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
             TowerGameService.instance().getPostAuthRunnables().runAll();
           }
         });
+      }
+    });
+
+    TowerGameService.instance().afterAuthentication(new Runnable() {
+      @Override
+      public void run() {
+        if (!TowerGameService.instance().isAuthenticated()) {
+          return;
+        }
+
+        new BackgroundTask() {
+          @Override
+          protected void execute() throws Exception {
+            cloudGameSaves.fetch();
+          }
+        }.run();
       }
     });
 

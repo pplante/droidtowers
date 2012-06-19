@@ -7,57 +7,38 @@ package com.happydroids.droidtowers.scenes;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenEquations;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.OnActionCompleted;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateBy;
-import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
-import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.SplashSceneStates;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.SplashCloudLayer;
 import com.happydroids.droidtowers.gamestate.GameSave;
-import com.happydroids.droidtowers.gui.FontManager;
+import com.happydroids.droidtowers.gui.AnimatedImage;
 import com.happydroids.droidtowers.gui.Sunburst;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
+import com.happydroids.droidtowers.scenes.components.AssetLoadProgressPanel;
 import com.happydroids.droidtowers.tween.TweenSystem;
-import com.happydroids.droidtowers.utils.Random;
-
-import java.util.List;
-import java.util.Set;
 
 import static com.badlogic.gdx.graphics.Texture.TextureFilter.Linear;
 import static com.badlogic.gdx.utils.Scaling.fit;
 import static com.happydroids.droidtowers.SplashSceneStates.FULL_LOAD;
 import static com.happydroids.droidtowers.SplashSceneStates.PRELOAD_ONLY;
 import static com.happydroids.droidtowers.TowerAssetManager.assetManager;
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class SplashScene extends Scene {
-  private Label progressLabel;
-  private Label loadingMessage;
-  private boolean selectedNewMessage;
   private Sprite happyDroid;
   private SplashSceneStates splashState = PRELOAD_ONLY;
   private GameSave gameSave;
-  private int progressLastChanged;
-  private Set<String> messagesUsed;
   private Runnable postLoadRunnable;
   protected SplashCloudLayer cloudLayer;
   private TextureAtlas mainAtlas;
-  private Animation happyDroidAnimation;
-  private float happyDroidAnimationTime;
-  private Image happyDroidImage;
-  protected Table happyDroidsLogoGroup;
   protected Image droidTowersLogo;
 
   @Override
@@ -80,20 +61,11 @@ public class SplashScene extends Scene {
       }
     }
 
-    messagesUsed = Sets.newHashSet();
-
     buildSplashScene(true);
 
-    loadingMessage = FontManager.Roboto32.makeLabel(selectRandomMessage(), Color.WHITE, Align.CENTER);
-    loadingMessage.setAlignment(Align.CENTER);
-    center(loadingMessage);
-    addActor(loadingMessage);
-
-    progressLabel = FontManager.Roboto64.makeLabel(null, Color.WHITE, Align.CENTER);
-    progressLabel.setAlignment(Align.CENTER);
-    centerHorizontally(progressLabel);
-    progressLabel.y = scale(100);
-    addActor(progressLabel);
+    AssetLoadProgressPanel progressPanel = new AssetLoadProgressPanel();
+    center(progressPanel);
+    addActor(progressPanel);
   }
 
   protected void buildSplashScene(boolean animateBuildOut) {
@@ -107,6 +79,7 @@ public class SplashScene extends Scene {
     makeCloudLayer();
     makeMainBuilding(animateBuildOut);
     makeDroidTowersLogo(animateBuildOut);
+    makeHappyDroid(animateBuildOut);
   }
 
   private void makeSkyGradient() {
@@ -148,14 +121,6 @@ public class SplashScene extends Scene {
     droidTowersLogo.y = getStage().height() - droidTowersLogo.getImageHeight() - 150;
     droidTowersLogo.x = 50;
 
-    List<TextureAtlas.AtlasRegion> happyDroidFrames = mainAtlas.findRegions("happy-droid");
-    happyDroidAnimation = new Animation(0.1f, happyDroidFrames);
-    happyDroidImage = new Image(happyDroidFrames.get(0), Scaling.fit);
-    happyDroidImage.width = (int) Math.min(getStage().width() * 0.15f, happyDroidImage.getRegion().getRegionWidth());
-    happyDroidImage.pack();
-
-    happyDroidImage.x = (int) getStage().centerX();
-
     if (animateBuildOut) {
       droidTowersLogo.x = -droidTowersLogo.getImageWidth();
       Tween.to(droidTowersLogo, WidgetAccessor.POSITION, 1000)
@@ -163,7 +128,19 @@ public class SplashScene extends Scene {
               .target(50, droidTowersLogo.y)
               .ease(TweenEquations.easeInOutExpo)
               .start(TweenSystem.getTweenManager());
+    }
 
+    addActor(droidTowersLogo);
+  }
+
+  private void makeHappyDroid(boolean animateBuildOut) {
+    AnimatedImage happyDroidImage = new AnimatedImage(mainAtlas.findRegions("happy-droid"), 0.05f, true);
+    happyDroidImage.delayAfterPlayback(5f);
+    happyDroidImage.setScaling(Scaling.fill);
+    happyDroidImage.width = (int) Math.min(getStage().width() * 0.15f, happyDroidImage.getRegion().getRegionWidth());
+    happyDroidImage.x = (int) getStage().centerX();
+
+    if (animateBuildOut) {
       happyDroidImage.y = -happyDroidImage.height;
       Tween.to(happyDroidImage, WidgetAccessor.POSITION, 500)
               .delay(500)
@@ -172,7 +149,6 @@ public class SplashScene extends Scene {
               .start(TweenSystem.getTweenManager());
     }
 
-    addActor(droidTowersLogo);
     addActor(happyDroidImage);
   }
 
@@ -191,17 +167,6 @@ public class SplashScene extends Scene {
     addActor(sunburst);
   }
 
-  private String selectRandomMessage() {
-    String msg;
-    do {
-      msg = STRINGS[Random.randomInt(STRINGS.length - 1)];
-    } while (messagesUsed.contains(msg));
-
-    messagesUsed.add(msg);
-
-    return msg;
-  }
-
   @Override
   public void pause() {
   }
@@ -216,17 +181,7 @@ public class SplashScene extends Scene {
     boolean assetManagerFinished = assetManager().update();
     Thread.yield();
 
-    renderSplashScene(deltaTime);
-
-    if (!assetManagerFinished) {
-      int progress = (int) (assetManager().getProgress() * 100f);
-      progressLabel.setText(progress + "%");
-
-      if (progress - progressLastChanged >= 33) {
-        progressLastChanged = progress;
-        loadingMessage.setText(selectRandomMessage());
-      }
-    } else {
+    if (assetManagerFinished) {
       if (splashState == PRELOAD_ONLY) {
         if (!TowerAssetManager.hasFilesToPreload()) {
           if (postLoadRunnable != null) {
@@ -245,38 +200,7 @@ public class SplashScene extends Scene {
     }
   }
 
-  protected void renderSplashScene(float deltaTime) {
-    happyDroidAnimationTime += deltaTime;
-    happyDroidImage.setRegion(happyDroidAnimation.getKeyFrame(happyDroidAnimationTime, false));
-
-    if (happyDroidAnimationTime >= 5) {
-      happyDroidAnimationTime = 0f;
-    }
-  }
-
   @Override
   public void dispose() {
   }
-
-  private static final String[] STRINGS = new String[]{
-                                                              "reticulating splines...",
-                                                              "manufacturing robots",
-                                                              "tickling random number generator",
-                                                              "wasting your time",
-                                                              "infinite recursion",
-                                                              "are we there yet?",
-                                                              "solving world hunger",
-                                                              "booting skynet...SUCCESS!",
-                                                              "GLaDOS loves you.",
-                                                              "priming buttons for clicking",
-                                                              "calculating shipping and handling",
-                                                              "contacting the authorities",
-                                                              "I'm still alive...",
-                                                              "downloading pictures of cats",
-                                                              "spinning up ftl drives",
-                                                              "so, uhh...how are you?",
-                                                              "its going to be\na beautiful day!",
-                                                              "de-fuzzing logic pathways",
-                                                              "cleaning the tubes",
-  };
 }
