@@ -10,15 +10,15 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import java.net.URI;
 import java.util.List;
 
-public class LaunchUriScene extends DroidSplashScene {
+public class LaunchUriScene extends SplashScene {
 
   @Override
   public void create(Object... args) {
+    super.create(args);
+
     if (args == null) {
       throw new RuntimeException("args cannot be null!");
     }
-
-    setStatusText("fetching tower :D");
 
     URI launchUri = (URI) args[0];
     List<NameValuePair> queryParams = URLEncodedUtils.parse(launchUri, "utf8");
@@ -38,9 +38,5 @@ public class LaunchUriScene extends DroidSplashScene {
     }
 
     return null;
-  }
-
-  @Override
-  protected void handleBackButton() {
   }
 }

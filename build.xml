@@ -291,7 +291,8 @@
                 mainclass="com.happydroids.droidtowers.DesktopGame"
                 jar="${release-jar}"
                 icon="./desktop/targets/mac/icon-512.icns"
-                version="${project.version}"/>
+                version="${project.version}"
+                customplistfile="sparky/customPListForUrlProtocol.plist"/>
 
     <delete dir="${artifacts.temp.dir}"/>
   </target>

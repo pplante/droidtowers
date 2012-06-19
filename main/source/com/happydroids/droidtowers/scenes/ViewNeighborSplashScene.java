@@ -17,7 +17,7 @@ import com.happydroids.utils.BackgroundTask;
 
 import java.util.List;
 
-public class ViewNeighborSplashScene extends DroidSplashScene {
+public class ViewNeighborSplashScene extends SplashScene {
   private GameObject droid;
   private ViewNeighborSplashScene.FetchNeighborsList fetchNeighborsList;
   private CloudGameSave playerCloudGameSave;
@@ -31,11 +31,6 @@ public class ViewNeighborSplashScene extends DroidSplashScene {
     fetchNeighborsList = new FetchNeighborsList();
     fetchNeighborsList.run();
 
-  }
-
-  @Override
-  protected void handleBackButton() {
-    fetchNeighborsList.cancel();
   }
 
   private class FetchNeighborsList extends BackgroundTask {
