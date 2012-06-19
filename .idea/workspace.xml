@@ -32,37 +32,7 @@
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/LoadTowerWindow.java" line="47" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="massively cleaned up the splash scene, added specialized scenes for different scenarios rather than abusing the shit out of a single scene">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ApplicationResumeScene.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/LoadTowerSplashScene.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/PreloadAsssetsSplashScene.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/SceneManager.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/SplashSceneStates.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DebugUtils.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DebugUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerAssetManager.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerAssetManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameState.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Dialog.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Dialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/GridObjectTypeLockedClickListener.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/GridObjectTypeLockedClickListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeaderButtonBar.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeaderButtonBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/LoadTowerWindow.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/LoadTowerWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/NewTowerWindow.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/NewTowerWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StatusBarPanel.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/StatusBarPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Toast.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Toast.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ViewNeighborHUD.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ViewNeighborHUD.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/friends/InviteNonPlayerFriendWindow.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/friends/InviteNonPlayerFriendWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/DebugInputAdapter.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/DebugInputAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/InputSystem.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/InputSystem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/DroidSplashScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/DroidSplashScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/HappyDroidConnect.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/HappyDroidConnect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/LaunchGameUriAction.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/LaunchGameUriAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ViewNeighborScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ViewNeighborScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ViewNeighborSplashScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ViewNeighborSplashScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java" />
-    </list>
+    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="" />
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -172,19 +142,7 @@
     <favorites_list name="testgame" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="InviteNonPlayerFriendWindow.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/friends/InviteNonPlayerFriendWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="31" selection-start="753" selection-end="753" vertical-scroll-proportion="0.38260868">
-              <folding>
-                <element signature="e#492#544#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -1806,7 +1764,11 @@
       <created>1340109280896</created>
       <updated>1340109280896</updated>
     </task>
-    <option name="localTasksCounter" value="205" />
+    <task id="LOCAL-00205" summary="massively cleaned up the splash scene, added specialized scenes for different scenarios rather than abusing the shit out of a single scene">
+      <created>1340112029692</created>
+      <updated>1340112029692</updated>
+    </task>
+    <option name="localTasksCounter" value="206" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1831,7 +1793,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32303733" sideWeight="0.95461786" order="7" side_tool="false" content_ui="tabs" />
@@ -1845,7 +1807,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14367816" sideWeight="0.64993566" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.7441154" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3264996" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24937657" sideWeight="0.79100317" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24937657" sideWeight="0.79100317" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32294264" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19176319" sideWeight="0.49748382" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
@@ -2098,7 +2060,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/friends/InviteNonPlayerFriendWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="31" selection-start="753" selection-end="753" vertical-scroll-proportion="0.38260868">
+        <state line="18" column="31" selection-start="753" selection-end="753" vertical-scroll-proportion="0.31225806">
           <folding>
             <element signature="e#492#544#0" expanded="true" />
           </folding>

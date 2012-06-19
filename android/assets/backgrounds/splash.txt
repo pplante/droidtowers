@@ -1,0 +1,102 @@
+splash.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+sky-gradient
+  rotate: false
+  xy: 853, 1
+  size: 8, 64
+  orig: 8, 64
+  offset: 0, 0
+  index: -1
+happy-droid
+  rotate: false
+  xy: 761, 1128
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 1
+main-building
+  rotate: false
+  xy: 1, 212
+  size: 759, 1024
+  orig: 759, 1024
+  offset: 0, 0
+  index: -1
+cloud-
+  rotate: false
+  xy: 402, 1237
+  size: 300, 195
+  orig: 300, 195
+  offset: 0, 0
+  index: 2
+cloud-
+  rotate: false
+  xy: 1, 1237
+  size: 400, 260
+  orig: 400, 260
+  offset: 0, 0
+  index: 3
+happy-droid
+  rotate: false
+  xy: 761, 212
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 6
+droid-towers-logo
+  rotate: false
+  xy: 1, 1
+  size: 851, 210
+  orig: 851, 210
+  offset: 0, 0
+  index: -1
+happy-droid
+  rotate: false
+  xy: 761, 212
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 7
+happy-droid
+  rotate: false
+  xy: 761, 1128
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 8
+happy-droid
+  rotate: false
+  xy: 761, 899
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 2
+cloud-
+  rotate: false
+  xy: 703, 1357
+  size: 200, 130
+  orig: 200, 130
+  offset: 0, 0
+  index: 1
+happy-droid
+  rotate: false
+  xy: 761, 670
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 3
+happy-droid
+  rotate: false
+  xy: 761, 441
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 4
+happy-droid
+  rotate: false
+  xy: 761, 212
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 5
