@@ -4,16 +4,17 @@
 
 package com.happydroids.droidtowers.gui.friends;
 
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.server.NonPlayerFriend;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.gui.TowerWindow;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class InviteNonPlayerFriendWindow extends TowerWindow {
+  @SuppressWarnings("StringBufferReplaceableByString")
   public InviteNonPlayerFriendWindow(NonPlayerFriend profile) {
-    super("Invite " + profile.getFriendName() + " to Droid Towers!", TowerGame.getActiveScene().getStage());
+    super("Invite " + profile.getFriendName() + " to Droid Towers!", SceneManager.getActiveScene().getStage());
 
     String inviteText = new StringBuilder()
                                 .append("Hey ").append(profile.getFirstName()).append(",\n\n")

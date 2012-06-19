@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.WeatherService;
 import com.happydroids.droidtowers.entities.CloudLayer;
 import com.happydroids.droidtowers.entities.GameLayer;
@@ -28,6 +27,7 @@ import com.happydroids.droidtowers.gui.NeighborMenuBuilder;
 import com.happydroids.droidtowers.gui.ViewNeighborHUD;
 import com.happydroids.droidtowers.input.*;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.types.TowerNameBillboard;
 import com.happydroids.events.CollectionChangeEvent;
 
@@ -177,7 +177,7 @@ public class ViewNeighborScene extends Scene {
   private InputCallback goBackHomeCallback = new InputCallback() {
     @Override
     public boolean run(float timeDelta) {
-      TowerGame.popScene();
+      SceneManager.popScene();
       return true;
     }
   };

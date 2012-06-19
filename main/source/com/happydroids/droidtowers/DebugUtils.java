@@ -12,13 +12,13 @@ import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.OnClickCallback;
-import com.happydroids.droidtowers.scenes.SplashScene;
+import com.happydroids.droidtowers.scenes.LoadTowerSplashScene;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.server.ApiCollectionRunnable;
 import com.happydroids.server.HappyDroidServiceCollection;
 import org.apache.http.HttpResponse;
 
 import static com.happydroids.HappyDroidConsts.DEBUG;
-import static com.happydroids.droidtowers.SplashSceneStates.FULL_LOAD;
 
 public class DebugUtils {
   public static void loadFirstGameFound(VarArgRunnable loadGameRunnable) {
@@ -46,7 +46,7 @@ public class DebugUtils {
     GameSave gameSave = new GameSave("DO NOT SAVE!", DifficultyLevel.EASY);
     gameSave.setNewGame(newGame);
     gameSave.disableSaving();
-    TowerGame.changeScene(SplashScene.class, FULL_LOAD, gameSave);
+    SceneManager.changeScene(LoadTowerSplashScene.class, gameSave);
   }
 
   private static void verifyEnvironment() {
@@ -61,7 +61,7 @@ public class DebugUtils {
     loadFirstGameFound(new VarArgRunnable() {
       public void run(Object... args) {
         try {
-          TowerGame.changeScene(SplashScene.class, FULL_LOAD, GameSaveFactory.readFile((FileHandle) args[0]));
+          SceneManager.changeScene(LoadTowerSplashScene.class, GameSaveFactory.readFile((FileHandle) args[0]));
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -75,7 +75,7 @@ public class DebugUtils {
             .fetch(new ApiCollectionRunnable<HappyDroidServiceCollection<CloudGameSave>>() {
               @Override
               public void onSuccess(HttpResponse response, HappyDroidServiceCollection<CloudGameSave> collection) {
-                TowerGame.changeScene(SplashScene.class, FULL_LOAD, collection.getObjects().get(0).getGameSave());
+                SceneManager.changeScene(LoadTowerSplashScene.class, collection.getObjects().get(0).getGameSave());
               }
 
               @Override

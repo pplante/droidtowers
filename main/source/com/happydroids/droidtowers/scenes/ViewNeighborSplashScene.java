@@ -5,7 +5,6 @@
 package com.happydroids.droidtowers.scenes;
 
 import com.google.common.collect.Lists;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.GameObject;
 import com.happydroids.droidtowers.gamestate.GameState;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
@@ -13,6 +12,7 @@ import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.OnClickCallback;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.utils.BackgroundTask;
 
 import java.util.List;
@@ -54,8 +54,8 @@ public class ViewNeighborSplashScene extends DroidSplashScene {
     @Override
     public synchronized void afterExecute() {
       if (fetchWasSuccessful) {
-        TowerGame.popScene();
-        TowerGame.pushScene(ViewNeighborScene.class, playerCloudGameSave, friendGames);
+        SceneManager.popScene();
+        SceneManager.pushScene(ViewNeighborScene.class, playerCloudGameSave, friendGames);
       } else {
         displayConnectionErrorDialog();
       }
@@ -75,7 +75,7 @@ public class ViewNeighborSplashScene extends DroidSplashScene {
             .setDismissCallback(new Runnable() {
               @Override
               public void run() {
-                TowerGame.popScene();
+                SceneManager.popScene();
               }
             })
             .show();

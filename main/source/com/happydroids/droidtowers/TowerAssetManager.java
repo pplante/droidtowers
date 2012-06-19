@@ -171,14 +171,14 @@ public class TowerAssetManager {
     return customSkin;
   }
 
-  public static boolean hasFilesToPreload() {
+  public static boolean preloadFinished() {
     for (String preloadFile : assetList.preloadFiles.keySet()) {
       if (!assetManager().isLoaded(checkForHDPI(preloadFile))) {
-        return true;
+        return false;
       }
     }
 
-    return false;
+    return true;
   }
 
   public static NinePatch ninePatch(String fileName, Color color, Texture.TextureFilter filterA, Texture.TextureFilter filterB) {

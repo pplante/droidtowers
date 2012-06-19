@@ -18,7 +18,6 @@ import com.happydroids.droidtowers.gui.NewTowerWindow;
 import com.happydroids.droidtowers.gui.VibrateClickListener;
 import com.happydroids.droidtowers.scenes.HappyDroidConnect;
 
-import static com.happydroids.droidtowers.TowerGame.changeScene;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class MainMenuButtonPanel extends Table {
@@ -54,7 +53,7 @@ public class MainMenuButtonPanel extends Table {
             connectFacebookButton.setClickListener(new VibrateClickListener() {
               @Override
               public void onClick(Actor actor, float x, float y) {
-                changeScene(HappyDroidConnect.class);
+                SceneManager.pushScene(HappyDroidConnect.class);
               }
             });
             connectFacebookButton.action(FadeIn.$(0.25f));

@@ -10,10 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.platform.Display;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class Dialog extends TowerWindow {
   private final InputCallback negativeButtonInputCallback;
 
   public Dialog() {
-    this(TowerGame.getActiveScene().getStage());
+    this(SceneManager.getActiveScene().getStage());
   }
 
   public Dialog(Stage stage) {

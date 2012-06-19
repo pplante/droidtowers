@@ -17,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.google.common.collect.Sets;
-import com.happydroids.droidtowers.SplashSceneStates;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.GameSave;
@@ -25,7 +24,8 @@ import com.happydroids.droidtowers.gamestate.GameSaveFactory;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
-import com.happydroids.droidtowers.scenes.SplashScene;
+import com.happydroids.droidtowers.scenes.LoadTowerSplashScene;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.utils.BackgroundTask;
 
 import java.text.NumberFormat;
@@ -160,7 +160,7 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
       public void click(Actor actor, float x, float y) {
         dismiss();
         try {
-          TowerGame.changeScene(SplashScene.class, SplashSceneStates.FULL_LOAD, GameSaveFactory.readFile(savedGameFile));
+          SceneManager.changeScene(LoadTowerSplashScene.class, GameSaveFactory.readFile(savedGameFile));
         } catch (Exception e) {
           throw new RuntimeException(e);
         }

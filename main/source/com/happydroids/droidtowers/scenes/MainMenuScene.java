@@ -9,14 +9,11 @@ import aurelienribon.tweenengine.TweenEquations;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.ScaleTo;
-import com.badlogic.gdx.scenes.scene2d.interpolators.OvershootInterpolator;
-import com.badlogic.gdx.scenes.scene2d.ui.Align;
+import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gui.FontManager;
@@ -24,6 +21,8 @@ import com.happydroids.droidtowers.gui.WidgetAccessor;
 import com.happydroids.droidtowers.scenes.components.MainMenuButtonPanel;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
+import static com.happydroids.droidtowers.TowerAssetManager.preloadFinished;
+import static com.happydroids.droidtowers.TowerAssetManager.textureAtlas;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class MainMenuScene extends SplashScene {
@@ -32,10 +31,11 @@ public class MainMenuScene extends SplashScene {
   public static final int BUTTON_SPACING = scale(16);
 
   private CloudGameSaveCollection cloudGameSaves;
+  private boolean builtOutMenu;
 
   @Override
   public void create(Object... args) {
-    buildSplashScene(false);
+    super.create(args);
 
     cloudGameSaves = new CloudGameSaveCollection();
 
@@ -44,51 +44,6 @@ public class MainMenuScene extends SplashScene {
     versionLabel.x = getStage().width() - versionLabel.width - 5;
     versionLabel.y = getStage().height() - versionLabel.height - 5;
     addActor(versionLabel);
-
-    TextureAtlas atlas = TowerAssetManager.textureAtlas("hud/menus.txt");
-    Image libGdxLogo = new Image(atlas.findRegion("powered-by-libgdx"));
-    libGdxLogo.setAlign(Align.CENTER);
-    libGdxLogo.x = libGdxLogo.y = scale(5);
-    libGdxLogo.scaleX = libGdxLogo.scaleY = 0f;
-    libGdxLogo.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        TowerGame.getPlatformBrowserUtil().launchWebBrowser("http://libgdx.badlogicgames.com");
-      }
-    });
-    addActor(libGdxLogo);
-
-
-    libGdxLogo.action(ScaleTo.$(1f, 1f, 0.55f)
-                              .setInterpolator(OvershootInterpolator.$(1.75f)));
-
-    Image happyDroidsLogo = new Image(atlas.findRegion("happy-droids-logo"));
-    happyDroidsLogo.setAlign(Align.CENTER);
-    happyDroidsLogo.x = getStage().width() - happyDroidsLogo.width - scale(5);
-    happyDroidsLogo.y = scale(5);
-    happyDroidsLogo.scaleX = happyDroidsLogo.scaleY = 0f;
-    happyDroidsLogo.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        TowerGame.getPlatformBrowserUtil().launchWebBrowser("http://www.happydroids.com");
-      }
-    });
-    addActor(happyDroidsLogo);
-
-
-    happyDroidsLogo.action(ScaleTo.$(1f, 1f, 0.55f)
-                                   .setInterpolator(OvershootInterpolator.$(1.75f)));
-
-
-    MainMenuButtonPanel menuButtonPanel = new MainMenuButtonPanel();
-    menuButtonPanel.pack();
-    menuButtonPanel.y = droidTowersLogo.y - menuButtonPanel.height;
-    menuButtonPanel.x = -droidTowersLogo.getImageWidth();
-    addActor(menuButtonPanel);
-
-    Tween.to(menuButtonPanel, WidgetAccessor.POSITION, 500)
-            .target(50 + (45 * (droidTowersLogo.getImageWidth() / droidTowersLogo.getRegion().getRegionWidth())), menuButtonPanel.y)
-            .ease(TweenEquations.easeInOutExpo)
-            .start(TweenSystem.getTweenManager());
-
 
 //    DebugUtils.createNonSavableGame(true);
 //    DebugUtils.loadFirstGameFound();
@@ -106,9 +61,62 @@ public class MainMenuScene extends SplashScene {
 
   @Override
   public void render(float deltaTime) {
+    super.render(deltaTime);
+
+    if (!builtOutMenu && preloadFinished()) {
+      builtOutMenu = true;
+
+      buildMenuComponents();
+    }
   }
 
   @Override
   public void dispose() {
+  }
+
+  private void buildMenuComponents() {
+    progressPanel.markToRemove(true);
+
+    TextureAtlas menuButtonAtlas = textureAtlas("hud/menus.txt");
+    addActor(makeLibGDXLogo(menuButtonAtlas));
+    addActor(makeHappyDroidsLogo(menuButtonAtlas));
+
+    MainMenuButtonPanel menuButtonPanel = new MainMenuButtonPanel();
+    menuButtonPanel.pack();
+    menuButtonPanel.y = droidTowersLogo.y - menuButtonPanel.height;
+    menuButtonPanel.x = -droidTowersLogo.getImageWidth();
+    addActor(menuButtonPanel);
+
+    Tween.to(menuButtonPanel, WidgetAccessor.POSITION, 500)
+            .target(50 + (45 * (droidTowersLogo.getImageWidth() / droidTowersLogo.getRegion().getRegionWidth())), menuButtonPanel.y)
+            .ease(TweenEquations.easeInOutExpo)
+            .start(TweenSystem.getTweenManager());
+  }
+
+  private Image makeHappyDroidsLogo(TextureAtlas atlas) {
+    Image happyDroidsLogo = new Image(atlas.findRegion("happy-droids-logo"));
+    happyDroidsLogo.color.a = 0f;
+    happyDroidsLogo.action(FadeIn.$(0.125f));
+    happyDroidsLogo.x = getStage().width() - happyDroidsLogo.width - scale(5);
+    happyDroidsLogo.y = scale(5);
+    happyDroidsLogo.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        TowerGame.getPlatformBrowserUtil().launchWebBrowser("http://www.happydroids.com");
+      }
+    });
+    return happyDroidsLogo;
+  }
+
+  private Image makeLibGDXLogo(TextureAtlas atlas) {
+    Image libGdxLogo = new Image(atlas.findRegion("powered-by-libgdx"));
+    libGdxLogo.color.a = 0f;
+    libGdxLogo.action(FadeIn.$(0.125f));
+    libGdxLogo.x = libGdxLogo.y = scale(5);
+    libGdxLogo.setClickListener(new ClickListener() {
+      public void click(Actor actor, float x, float y) {
+        TowerGame.getPlatformBrowserUtil().launchWebBrowser("http://libgdx.badlogicgames.com");
+      }
+    });
+    return libGdxLogo;
   }
 }

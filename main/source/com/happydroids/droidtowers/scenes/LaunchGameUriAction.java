@@ -4,19 +4,17 @@
 
 package com.happydroids.droidtowers.scenes;
 
-import com.happydroids.droidtowers.SplashSceneStates;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.OnClickCallback;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.server.ApiCollectionRunnable;
 import com.happydroids.server.HappyDroidServiceCollection;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 
-import static com.happydroids.droidtowers.SplashSceneStates.FULL_LOAD;
 
 public class LaunchGameUriAction {
   void checkAuthAndLoadGame(final NameValuePair gameId) {
@@ -32,9 +30,9 @@ public class LaunchGameUriAction {
   }
 
   void forceAuthentication(final NameValuePair gameId) {
-    TowerGame.changeScene(SplashScene.class, SplashSceneStates.PRELOAD_ONLY, new Runnable() {
+    SceneManager.changeScene(PreloadAsssetsSplashScene.class, new Runnable() {
       public void run() {
-        TowerGame.changeScene(HappyDroidConnect.class, new Runnable() {
+        SceneManager.changeScene(HappyDroidConnect.class, new Runnable() {
           public void run() {
             checkAuthAndLoadGame(gameId);
           }
@@ -50,7 +48,7 @@ public class LaunchGameUriAction {
             .fetch(new ApiCollectionRunnable<HappyDroidServiceCollection<CloudGameSave>>() {
               @Override
               public void onSuccess(HttpResponse response, HappyDroidServiceCollection<CloudGameSave> collection) {
-                TowerGame.changeScene(SplashScene.class, FULL_LOAD, collection.getObjects().get(0).getGameSave());
+                SceneManager.changeScene(LoadTowerSplashScene.class, collection.getObjects().get(0).getGameSave());
               }
 
               @Override

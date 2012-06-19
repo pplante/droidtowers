@@ -5,9 +5,9 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.types.GridObjectType;
 
 class GridObjectTypeLockedClickListener extends VibrateClickListener {
@@ -39,7 +39,7 @@ class GridObjectTypeLockedClickListener extends VibrateClickListener {
               @Override
               public void onClick(Dialog dialog) {
                 dialog.dismiss();
-                new AchievementDetailView(finalLockedBy, TowerGame.getActiveScene().getStage()).show();
+                new AchievementDetailView(finalLockedBy, SceneManager.getActiveScene().getStage()).show();
               }
             })
             .addButton(ResponseType.NEGATIVE, "Dismiss", new OnClickCallback() {

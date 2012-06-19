@@ -15,8 +15,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.GameLayer;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import java.util.*;
 
@@ -83,7 +83,7 @@ public class InputSystem extends InputAdapter {
 
   public void switchTool(GestureTool selectedTool, Runnable switchToolRunnable) {
     if (gestureDelegater != null) {
-      gestureDelegater.switchTool(TowerGame.getActiveScene().getCamera(), gestureDelegater.getGameLayers(), selectedTool, switchToolRunnable);
+      gestureDelegater.switchTool(SceneManager.getActiveScene().getCamera(), gestureDelegater.getGameLayers(), selectedTool, switchToolRunnable);
     }
   }
 

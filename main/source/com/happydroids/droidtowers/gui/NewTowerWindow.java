@@ -11,9 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.actions.FadeTo;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.DifficultyLevel;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.scenes.TowerScene;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import java.text.NumberFormat;
 
@@ -96,7 +96,7 @@ public class NewTowerWindow extends TowerWindow {
     beginButton.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
         dismiss();
-        TowerGame.changeScene(TowerScene.class, new GameSave(nameField.getText(), difficultyLevel));
+        SceneManager.changeScene(TowerScene.class, new GameSave(nameField.getText(), difficultyLevel));
       }
     });
 

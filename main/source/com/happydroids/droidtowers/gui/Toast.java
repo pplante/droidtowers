@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.TowerGame;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
@@ -39,7 +39,7 @@ public class Toast extends Table {
   public void show() {
     pack();
 
-    x = (TowerGame.getActiveScene().getStage().width() - width) / 2;
+    x = (SceneManager.getActiveScene().getStage().width() - width) / 2;
     y = height + scale(10);
 
     color.a = 0f;

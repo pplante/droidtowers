@@ -11,12 +11,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.GameObject;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.utils.Random;
@@ -80,7 +80,7 @@ public abstract class DroidSplashScene extends Scene {
     @Override
     public boolean run(float timeDelta) {
       handleBackButton();
-      TowerGame.popScene();
+      SceneManager.popScene();
       return true;
     }
   };

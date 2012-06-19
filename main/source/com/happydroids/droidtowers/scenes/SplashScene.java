@@ -15,11 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.OnActionCompleted;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateBy;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Scaling;
-import com.happydroids.droidtowers.SplashSceneStates;
-import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.SplashCloudLayer;
-import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gui.AnimatedImage;
 import com.happydroids.droidtowers.gui.Sunburst;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
@@ -28,42 +24,30 @@ import com.happydroids.droidtowers.tween.TweenSystem;
 
 import static com.badlogic.gdx.graphics.Texture.TextureFilter.Linear;
 import static com.badlogic.gdx.utils.Scaling.fit;
-import static com.happydroids.droidtowers.SplashSceneStates.FULL_LOAD;
-import static com.happydroids.droidtowers.SplashSceneStates.PRELOAD_ONLY;
 import static com.happydroids.droidtowers.TowerAssetManager.assetManager;
 
-public class SplashScene extends Scene {
+public abstract class SplashScene extends Scene {
   private Sprite happyDroid;
-  private SplashSceneStates splashState = PRELOAD_ONLY;
-  private GameSave gameSave;
-  private Runnable postLoadRunnable;
   protected SplashCloudLayer cloudLayer;
   private TextureAtlas mainAtlas;
   protected Image droidTowersLogo;
+  protected AssetLoadProgressPanel progressPanel;
 
   @Override
   public void create(Object... args) {
-    if (args != null) {
-      splashState = ((SplashSceneStates) args[0]);
-
-      if (args.length > 1) {
-        Object firstArg = args[1];
-        if (firstArg instanceof GameSave) {
-          gameSave = ((GameSave) firstArg);
-          postLoadRunnable = new Runnable() {
-            public void run() {
-              TowerGame.changeScene(TowerScene.class, gameSave);
-            }
-          };
-        } else if (firstArg instanceof Runnable) {
-          postLoadRunnable = (Runnable) firstArg;
-        }
-      }
+    mainAtlas = new TextureAtlas("backgrounds/splash.txt");
+    for (Texture texture : mainAtlas.getTextures()) {
+      texture.setFilter(Linear, Linear);
     }
 
-    buildSplashScene(true);
+    makeSkyGradient();
+    makeSunburst();
+    makeCloudLayer();
+    makeMainBuilding(true);
+    makeDroidTowersLogo(true);
+    makeHappyDroid(true);
 
-    AssetLoadProgressPanel progressPanel = new AssetLoadProgressPanel();
+    progressPanel = new AssetLoadProgressPanel();
     center(progressPanel);
     addActor(progressPanel);
   }
@@ -180,24 +164,6 @@ public class SplashScene extends Scene {
   public void render(float deltaTime) {
     boolean assetManagerFinished = assetManager().update();
     Thread.yield();
-
-    if (assetManagerFinished) {
-      if (splashState == PRELOAD_ONLY) {
-        if (!TowerAssetManager.hasFilesToPreload()) {
-          if (postLoadRunnable != null) {
-            postLoadRunnable.run();
-          }
-        }
-      } else if (splashState == FULL_LOAD) {
-        if (assetManagerFinished) {
-          if (postLoadRunnable != null) {
-            postLoadRunnable.run();
-          } else {
-            TowerGame.popScene();
-          }
-        }
-      }
-    }
   }
 
   @Override

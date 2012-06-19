@@ -18,11 +18,11 @@ import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.events.GameSpeedChangeEvent;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 import static com.happydroids.droidtowers.utils.StringUtils.formatNumber;
@@ -107,11 +107,11 @@ public class StatusBarPanel extends Table {
       @Override
       public void changed(Slider slider, float value) {
         float remainder = value * 2f / 2f;
-        TowerGame.getActiveScene().setTimeMultiplier(remainder);
+        SceneManager.getActiveScene().setTimeMultiplier(remainder);
       }
     });
 
-    TowerGame.getActiveScene().events().register(this);
+    SceneManager.getActiveScene().events().register(this);
 
     budgetRatingBar = new StarRatingBar();
     populationRatingBar = new StarRatingBar();
