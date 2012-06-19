@@ -142,7 +142,37 @@
     <favorites_list name="testgame" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="EmploymentCalculator.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/EmploymentCalculator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="43" selection-start="744" selection-end="744" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#1209#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameGrid.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGrid.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="40" column="38" selection-start="1431" selection-end="1431" vertical-scroll-proportion="0.33333334">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TypeInstanceMap.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/collections/TypeInstanceMap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="23" selection-start="781" selection-end="781" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -155,9 +185,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/AssetLoadProgressPanel.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerAssetManager.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DebugUtils.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/LoadTowerWindow.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" />
@@ -171,6 +198,9 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/HappyDroidConnect.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/SceneManager.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/friends/InviteNonPlayerFriendWindow.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/LaunchUriScene.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ViewNeighborSplashScene.java" />
+        <option value="$PROJECT_DIR$/build.xml" />
       </list>
     </option>
   </component>
@@ -430,6 +460,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="254" />
     <property name="DEBUGGABLE_PROCESS" value="com.happydroids.droidtowers" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="android-arm-403" />
     <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -469,7 +500,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="664C002600000001" />
     <property name="KeystoreLocation" value="$PROJECT_DIR$/happydroids-droidtowers" />
     <property name="KeyAlias" value="key0" />
     <property name="GenerateAntBuildDialog.backupFiles" value="false" />
@@ -1768,7 +1799,11 @@
       <created>1340112029692</created>
       <updated>1340112029692</updated>
     </task>
-    <option name="localTasksCounter" value="206" />
+    <task id="LOCAL-00206" summary="refactored the launch uri scene and view neighbor splash to use the newer splash scene as a base">
+      <created>1340115134452</created>
+      <updated>1340115134455</updated>
+    </task>
+    <option name="localTasksCounter" value="207" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1793,7 +1828,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32303733" sideWeight="0.95461786" order="7" side_tool="false" content_ui="tabs" />
@@ -1872,7 +1907,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="massively cleaned up the splash scene, added specialized scenes for different scenarios rather than abusing the shit out of a single scene" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactored the launch uri scene and view neighbor splash to use the newer splash scene as a base" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1885,7 +1920,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="basic friend list with search filtering :D" />
     <MESSAGE value="upgraded libgdx to latest nightly :D" />
     <MESSAGE value="added view neighbors button to header bar" />
     <MESSAGE value="gui tweaking" />
@@ -1910,6 +1944,7 @@
     <MESSAGE value="new splash scene!!!" />
     <MESSAGE value="refactored some of the splash scene so it can be reusable" />
     <MESSAGE value="massively cleaned up the splash scene, added specialized scenes for different scenarios rather than abusing the shit out of a single scene" />
+    <MESSAGE value="refactored the launch uri scene and view neighbor splash to use the newer splash scene as a base" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1932,80 +1967,45 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/friends/InviteNonPlayerFriendWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="12" selection-start="2321" selection-end="2321" vertical-scroll-proportion="0.40925267">
-          <folding />
+        <state line="18" column="31" selection-start="753" selection-end="753" vertical-scroll-proportion="0.31225806">
+          <folding>
+            <element signature="e#492#544#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/utils/GZIPUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.37777779">
+          <folding>
+            <element signature="e#0#945#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.26666668">
+          <folding>
+            <element signature="e#0#1746#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="22" selection-start="1189" selection-end="1189" vertical-scroll-proportion="0.3321739">
+        <state line="36" column="14" selection-start="1433" selection-end="1433" vertical-scroll-proportion="0.33333334">
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AnimatedImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1032" selection-end="1032" vertical-scroll-proportion="0.773913">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/PreloadAsssetsSplashScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="29" selection-start="745" selection-end="745" vertical-scroll-proportion="0.92347825">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/assets/AssetManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="298" column="21" selection-start="11929" selection-end="11929" vertical-scroll-proportion="0.51952463">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/AssetLoadProgressPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="50" selection-start="1052" selection-end="1052" vertical-scroll-proportion="-0.76363635">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="279" column="5" selection-start="10833" selection-end="10833" vertical-scroll-proportion="0.35301837">
-          <folding>
-            <element signature="e#0#12365#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/LoadTowerSplashScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="44" selection-start="674" selection-end="674" vertical-scroll-proportion="0.68774194">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/LoadTowerWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="162" column="35" selection-start="5733" selection-end="5733" vertical-scroll-proportion="0.23483871">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ApplicationResumeScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="376" selection-end="376" vertical-scroll-proportion="0.34064516">
+        <state line="16" column="13" selection-start="462" selection-end="462" vertical-scroll-proportion="0.5555556">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2014,56 +2014,79 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/LaunchGameUriAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="69" selection-start="1931" selection-end="1931" vertical-scroll-proportion="0.45419356">
+        <state line="50" column="50" selection-start="1912" selection-end="1912" vertical-scroll-proportion="0.5555556">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1187#1414#0" expanded="true" />
-            <element signature="e#1407#1408#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/SceneManager.java">
+    <entry file="file://$PROJECT_DIR$/sparky/customPListForUrlProtocol.plist">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="4" selection-start="2189" selection-end="2189" vertical-scroll-proportion="0.82222223">
+        <state line="0" column="0" selection-start="0" selection-end="388" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/Scene.java">
+    <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.95555556">
+        <state line="123" column="16" selection-start="4909" selection-end="4909" vertical-scroll-proportion="0.077419356">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sparky/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="243" column="16" selection-start="8669" selection-end="8718" vertical-scroll-proportion="0.56774193">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ViewNeighborSplashScene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="0" selection-start="1199" selection-end="1199" vertical-scroll-proportion="0.48818898">
           <folding>
-            <element signature="e#0#2630#0" expanded="true" />
+            <element signature="e#0#2581#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/HappyDroidConnect.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/LaunchUriScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="40" selection-start="722" selection-end="722" vertical-scroll-proportion="0.75555557">
+        <state line="27" column="43" selection-start="769" selection-end="769" vertical-scroll-proportion="0.40387097">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#639#886#0" expanded="true" />
-            <element signature="e#879#880#0" expanded="true" />
+            <element signature="e#0#3546#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/EmploymentCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="40" selection-start="2475" selection-end="2475" vertical-scroll-proportion="0.36565655">
+        <state line="23" column="43" selection-start="744" selection-end="744" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#0#3346#0" expanded="true" />
+            <element signature="e#0#1209#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/friends/InviteNonPlayerFriendWindow.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/collections/TypeInstanceMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="31" selection-start="753" selection-end="753" vertical-scroll-proportion="0.31225806">
-          <folding>
-            <element signature="e#492#544#0" expanded="true" />
-          </folding>
+        <state line="32" column="23" selection-start="781" selection-end="781" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGrid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="38" selection-start="1431" selection-end="1431" vertical-scroll-proportion="0.33333334">
+          <folding />
         </state>
       </provider>
     </entry>
