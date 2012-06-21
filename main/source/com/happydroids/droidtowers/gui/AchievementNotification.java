@@ -54,11 +54,11 @@ public class AchievementNotification extends Table {
               }
             })
             .setCallbackTriggers(TweenCallback.END)
-            .start(TweenSystem.getTweenManager());
+            .start(TweenSystem.manager());
   }
 
   public void hide(final boolean useDelay) {
-    TweenSystem.getTweenManager().killTarget(this);
+    TweenSystem.manager().killTarget(this);
 
     final WidgetGroup targetParent = (WidgetGroup) AchievementNotification.this.parent;
 
@@ -78,7 +78,7 @@ public class AchievementNotification extends Table {
               }
             })
             .setCallbackTriggers(TweenCallback.END)
-            .start(TweenSystem.getTweenManager());
+            .start(TweenSystem.manager());
   }
 
   @Override

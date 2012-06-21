@@ -22,7 +22,7 @@ public class NonGLTestRunner extends HappyDroidTestRunner {
     Gdx.files = new TestGdxFiles();
     Gdx.app = new TestGdxApplication(null, null);
 
-    TweenSystem.getTweenManager();
+    TweenSystem.manager();
     TowerGameService.setInstance(new TestTowerGameService());
   }
 

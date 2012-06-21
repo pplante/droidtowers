@@ -6,13 +6,11 @@ package com.happydroids.droidtowers.scenes;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenEquations;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.OnActionCompleted;
-import com.badlogic.gdx.scenes.scene2d.actions.RotateBy;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.entities.SplashCloudLayer;
@@ -24,25 +22,34 @@ import com.happydroids.droidtowers.tween.TweenSystem;
 
 import static com.badlogic.gdx.graphics.Texture.TextureFilter.Linear;
 import static com.badlogic.gdx.utils.Scaling.fit;
+import static com.badlogic.gdx.utils.Scaling.stretchX;
 import static com.happydroids.droidtowers.TowerAssetManager.assetManager;
 
 public abstract class SplashScene extends Scene {
+  public static final int CAMERA_PAN_DOWN_DURATION = 1000;
   private Sprite happyDroid;
   protected SplashCloudLayer cloudLayer;
-  private TextureAtlas mainAtlas;
+  private TextureAtlas atlas1;
+  private TextureAtlas atlas2;
   protected Image droidTowersLogo;
   protected AssetLoadProgressPanel progressPanel;
+  private Image mainBuilding;
 
   @Override
   public void create(Object... args) {
-    mainAtlas = new TextureAtlas("backgrounds/splash.txt");
-    for (Texture texture : mainAtlas.getTextures()) {
+    atlas1 = new TextureAtlas("backgrounds/splash1.txt");
+    for (Texture texture : atlas1.getTextures()) {
+      texture.setFilter(Linear, Linear);
+    }
+    atlas2 = new TextureAtlas("backgrounds/splash2.txt");
+    for (Texture texture : atlas2.getTextures()) {
       texture.setFilter(Linear, Linear);
     }
 
     makeSkyGradient();
     makeSunburst();
     makeCloudLayer();
+    makeCityScape();
     makeMainBuilding(true);
     makeDroidTowersLogo(true);
     makeHappyDroid(true);
@@ -52,35 +59,66 @@ public abstract class SplashScene extends Scene {
     addActor(progressPanel);
   }
 
-  protected void buildSplashScene(boolean animateBuildOut) {
-    mainAtlas = new TextureAtlas("backgrounds/splash.txt");
-    for (Texture texture : mainAtlas.getTextures()) {
-      texture.setFilter(Linear, Linear);
-    }
-
-    makeSkyGradient();
-    makeSunburst();
-    makeCloudLayer();
-    makeMainBuilding(animateBuildOut);
-    makeDroidTowersLogo(animateBuildOut);
-    makeHappyDroid(animateBuildOut);
-  }
-
   private void makeSkyGradient() {
-    TextureAtlas.AtlasRegion skyGradientTexture = mainAtlas.findRegion("sky-gradient");
-    Image skyImage = new Image(skyGradientTexture, Scaling.fill);
-    skyImage.width = Gdx.graphics.getWidth();
-    skyImage.height = Gdx.graphics.getHeight();
+    Texture skyGradient = new Texture("backgrounds/splash-skygradient.png");
+    skyGradient.setFilter(Linear, Linear);
+    Image skyImage = new Image(skyGradient, Scaling.stretch);
+    skyImage.width = getStage().width();
+    skyImage.height = getStage().height();
+    skyImage.x = -1;
+    skyImage.y = -1;
     addActor(skyImage);
   }
 
+  private void makeSunburst() {
+    final Sunburst sunburst = new Sunburst(getStage());
+
+    Tween.to(sunburst, WidgetAccessor.ROTATION, 5000)
+            .target(8)
+            .repeatYoyo(Tween.INFINITY, 0)
+            .start(TweenSystem.manager());
+
+    addActor(sunburst);
+  }
+
   private void makeCloudLayer() {
-    cloudLayer = new SplashCloudLayer(getStage(), mainAtlas.findRegions("cloud-"));
+    cloudLayer = new SplashCloudLayer(getStage(), atlas2.findRegions("cloud"));
     addActor(cloudLayer);
   }
 
+  private void makeCityScape() {
+    Group cityScape = new Group();
+
+    Image cityScapeLeft = new Image(atlas2.findRegion("cityscape-left"), fit, Align.BOTTOM | Align.LEFT);
+    cityScapeLeft.height = ((int) Math.min(cityScapeLeft.getRegion().getRegionHeight(), getStage().height() * 0.45f));
+    cityScapeLeft.layout();
+
+    Image cityScapeRight = new Image(atlas2.findRegion("cityscape-right"), fit, Align.BOTTOM);
+    cityScapeRight.height = ((int) Math.min(cityScapeRight.getRegion().getRegionHeight(), getStage().height() * 0.45f));
+    cityScapeRight.layout();
+    cityScapeRight.x = ((int) (getStage().right() - cityScapeRight.getImageWidth()));
+
+    Image cityScapeMiddle = new Image(atlas1.findRegion("cityscape-middle"), stretchX, Align.BOTTOM);
+    cityScapeMiddle.x = ((int) (cityScapeLeft.getImageWidth() + 1));
+    cityScapeMiddle.width = ((int) getStage().width() - cityScapeLeft.getImageWidth() - cityScapeRight.getImageWidth() - 2);
+    cityScapeMiddle.layout();
+
+    cityScape.addActor(cityScapeLeft);
+    cityScape.addActor(cityScapeMiddle);
+    cityScape.addActor(cityScapeRight);
+
+    addActor(cityScape);
+
+    cityScape.y = -getStage().height();
+    Tween.to(cityScape, WidgetAccessor.POSITION, CAMERA_PAN_DOWN_DURATION)
+            .delay(50)
+            .target(cityScape.x, 0)
+            .ease(TweenEquations.easeInOutExpo)
+            .start(TweenSystem.manager());
+  }
+
   private void makeMainBuilding(boolean animateBuildOut) {
-    Image mainBuilding = new Image(mainAtlas.findRegion("main-building"), fit);
+    Image mainBuilding = new Image(atlas1.findRegion("main-building"), fit);
     mainBuilding.height = getStage().height() * 0.85f;
     mainBuilding.layout();
     mainBuilding.x = getStage().centerX() - (mainBuilding.width / 2);
@@ -88,17 +126,17 @@ public abstract class SplashScene extends Scene {
     addActor(mainBuilding);
 
     if (animateBuildOut) {
-      mainBuilding.y = -mainBuilding.height;
-      Tween.to(mainBuilding, WidgetAccessor.POSITION, 1000)
+      mainBuilding.y = -getStage().height();
+      Tween.to(mainBuilding, WidgetAccessor.POSITION, CAMERA_PAN_DOWN_DURATION)
               .delay(50)
               .target(mainBuilding.x, 0)
               .ease(TweenEquations.easeInOutExpo)
-              .start(TweenSystem.getTweenManager());
+              .start(TweenSystem.manager());
     }
   }
 
   private void makeDroidTowersLogo(boolean animateBuildOut) {
-    TextureAtlas.AtlasRegion droidTowersLogoTexture = mainAtlas.findRegion("droid-towers-logo");
+    TextureAtlas.AtlasRegion droidTowersLogoTexture = atlas2.findRegion("droid-towers-logo");
     droidTowersLogo = new Image(droidTowersLogoTexture, fit);
     droidTowersLogo.width = Math.min(getStage().width() * 0.5f, droidTowersLogo.getRegion().getRegionWidth());
     droidTowersLogo.layout();
@@ -107,48 +145,34 @@ public abstract class SplashScene extends Scene {
 
     if (animateBuildOut) {
       droidTowersLogo.x = -droidTowersLogo.getImageWidth();
-      Tween.to(droidTowersLogo, WidgetAccessor.POSITION, 1000)
+      Tween.to(droidTowersLogo, WidgetAccessor.POSITION, CAMERA_PAN_DOWN_DURATION)
               .delay(50)
               .target(50, droidTowersLogo.y)
               .ease(TweenEquations.easeInOutExpo)
-              .start(TweenSystem.getTweenManager());
+              .start(TweenSystem.manager());
     }
 
     addActor(droidTowersLogo);
   }
 
   private void makeHappyDroid(boolean animateBuildOut) {
-    AnimatedImage happyDroidImage = new AnimatedImage(mainAtlas.findRegions("happy-droid"), 0.05f, true);
+    AnimatedImage happyDroidImage = new AnimatedImage(atlas2.findRegions("happy-droid"), 0.05f, true);
+    happyDroidImage.setAlign(Align.RIGHT);
+    happyDroidImage.setScaling(fit);
     happyDroidImage.delayAfterPlayback(5f);
-    happyDroidImage.setScaling(Scaling.fill);
-    happyDroidImage.width = (int) Math.min(getStage().width() * 0.15f, happyDroidImage.getRegion().getRegionWidth());
+    happyDroidImage.height = (int) Math.min(getStage().height() * 0.25f, happyDroidImage.getRegion().getRegionHeight());
+    happyDroidImage.layout();
     happyDroidImage.x = (int) getStage().centerX();
 
     if (animateBuildOut) {
-      happyDroidImage.y = -happyDroidImage.height;
-      Tween.to(happyDroidImage, WidgetAccessor.POSITION, 500)
-              .delay(500)
+      happyDroidImage.y = -getStage().height();
+      Tween.to(happyDroidImage, WidgetAccessor.POSITION, CAMERA_PAN_DOWN_DURATION)
               .target(happyDroidImage.x, 0)
               .ease(TweenEquations.easeInOutExpo)
-              .start(TweenSystem.getTweenManager());
+              .start(TweenSystem.manager());
     }
 
     addActor(happyDroidImage);
-  }
-
-  private void makeSunburst() {
-    final Sunburst sunburst = new Sunburst(getStage());
-    final RotateBy rotateBy = RotateBy.$(-180, 120f);
-    rotateBy.setCompletionListener(new OnActionCompleted() {
-      @Override
-      public void completed(Action action) {
-        sunburst.rotation = 0;
-        sunburst.action(rotateBy);
-      }
-    });
-
-    sunburst.action(rotateBy);
-    addActor(sunburst);
   }
 
   @Override

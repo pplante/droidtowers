@@ -63,7 +63,7 @@ public class RadialMenu extends WidgetGroup {
       timeline.push(Tween.to(child, OPACITY, 200).delay(10 * index++).target(1f));
     }
 
-    timeline.start(TweenSystem.getTweenManager());
+    timeline.start(TweenSystem.manager());
   }
 
   public void hide() {
@@ -77,7 +77,7 @@ public class RadialMenu extends WidgetGroup {
               }
             })
             .setCallbackTriggers(TweenCallback.COMPLETE)
-            .start(TweenSystem.getTweenManager());
+            .start(TweenSystem.manager());
   }
 
   private InputAdapter closeMenuInputAdapter = new InputAdapter() {

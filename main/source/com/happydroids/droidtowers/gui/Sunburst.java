@@ -75,20 +75,22 @@ public class Sunburst extends Actor {
     vertices[i++] = 0f;
     vertices[i++] = 0f;
     vertices[i++] = 0.5f;
-    vertices[i++] = 0.065f;
+    vertices[i++] = 0.15f;
     return i;
   }
 
   @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
-    Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+    batch.end();
     Gdx.gl.glEnable(GL10.GL_BLEND);
+    Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
     shader.begin();
     shader.setUniformMatrix("u_transformMatrix", transformMatrix.setToRotation(0, 0, 1, rotation));
     shader.setUniformMatrix("u_projectionViewMatrix", getStage().getCamera().combined);
     mesh.render(shader, GL10.GL_TRIANGLES);
     shader.end();
     Gdx.gl.glDisable(GL10.GL_BLEND);
+    batch.begin();
   }
 
   @Override

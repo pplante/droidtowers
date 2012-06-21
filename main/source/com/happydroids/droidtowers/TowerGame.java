@@ -212,7 +212,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     ActionManager.instance().update(deltaTime);
     InputSystem.instance().update(deltaTime);
     PathSearchManager.instance().update(deltaTime);
-    TweenSystem.getTweenManager().update((int) (deltaTime * 1000 * SceneManager.activeScene.getTimeMultiplier()));
+    TweenSystem.manager().update((int) (deltaTime * 1000 * SceneManager.activeScene.getTimeMultiplier()));
     soundController.update(deltaTime);
 
     spriteBatch.setProjectionMatrix(SceneManager.activeScene.getCamera().combined);

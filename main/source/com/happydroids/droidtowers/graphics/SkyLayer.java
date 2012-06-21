@@ -49,6 +49,6 @@ public class SkyLayer extends GameLayer implements RespondsToWorldSizeChange {
 
     Tween.to(sky, GameObjectAccessor.COLOR, TowerConsts.WEATHER_SERVICE_STATE_CHANGE_DURATION)
             .target(tweenColor.r, tweenColor.g, tweenColor.b, tweenColor.a)
-            .start(TweenSystem.getTweenManager());
+            .start(TweenSystem.manager());
   }
 }

@@ -1,0 +1,102 @@
+splash2.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+cityscape-right
+  rotate: false
+  xy: 412, 1
+  size: 378, 284
+  orig: 378, 362
+  offset: 0, 78
+  index: -1
+cloud
+  rotate: false
+  xy: 791, 230
+  size: 215, 131
+  orig: 221, 135
+  offset: 2, 1
+  index: 1
+happy-droid
+  rotate: false
+  xy: 564, 793
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 1
+happy-droid
+  rotate: false
+  xy: 615, 564
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 6
+droid-towers-logo
+  rotate: false
+  xy: 1, 363
+  size: 841, 200
+  orig: 851, 210
+  offset: 3, 3
+  index: -1
+happy-droid
+  rotate: false
+  xy: 615, 564
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 7
+happy-droid
+  rotate: false
+  xy: 564, 793
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 8
+happy-droid
+  rotate: false
+  xy: 1, 780
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 2
+cloud
+  rotate: false
+  xy: 311, 564
+  size: 303, 181
+  orig: 309, 185
+  offset: 3, 2
+  index: 3
+happy-droid
+  rotate: false
+  xy: 311, 746
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 3
+happy-droid
+  rotate: false
+  xy: 791, 1
+  size: 226, 228
+  orig: 252, 228
+  offset: 26, 0
+  index: 4
+cityscape-left
+  rotate: false
+  xy: 1, 1
+  size: 410, 361
+  orig: 410, 361
+  offset: 0, 0
+  index: -1
+cloud
+  rotate: false
+  xy: 1, 564
+  size: 309, 215
+  orig: 315, 219
+  offset: 3, 2
+  index: 5
+happy-droid
+  rotate: false
+  xy: 615, 564
+  size: 252, 228
+  orig: 252, 228
+  offset: 0, 0
+  index: 5

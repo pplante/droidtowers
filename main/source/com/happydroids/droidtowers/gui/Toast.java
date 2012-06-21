@@ -51,7 +51,7 @@ public class Toast extends Table {
   protected void fadeIn() {
     Tween.to(this, WidgetAccessor.OPACITY, 500)
             .target(1.0f)
-            .start(TweenSystem.getTweenManager())
+            .start(TweenSystem.manager())
             .setCallback(new TweenCallback() {
               public void onEvent(int eventType, BaseTween source) {
                 fadeOut();
@@ -70,7 +70,7 @@ public class Toast extends Table {
               }
             })
             .setCallbackTriggers(TweenCallback.COMPLETE)
-            .start(TweenSystem.getTweenManager());
+            .start(TweenSystem.manager());
   }
 
   @Override

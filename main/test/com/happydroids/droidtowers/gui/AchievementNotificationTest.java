@@ -42,11 +42,11 @@ public class AchievementNotificationTest {
   public void show_shouldQueueTweenThatModifiesAlpha() {
     notification.show();
 
-    expect(TweenSystem.getTweenManager().containsTarget(notification)).toBeTrue();
+    expect(TweenSystem.manager().containsTarget(notification)).toBeTrue();
 
-    TweenSystem.getTweenManager().update(1);
+    TweenSystem.manager().update(1);
     expect(notification.color.a).toEqual(0.005f);
-    TweenSystem.getTweenManager().update(300);
+    TweenSystem.manager().update(300);
     expect(notification.color.a).toEqual(1f);
   }
 
@@ -54,10 +54,10 @@ public class AchievementNotificationTest {
   public void hide_shouldQueueTweenThatModifiesAlpha() {
     notification.hide(false);
 
-    expect(TweenSystem.getTweenManager().containsTarget(notification)).toBeTrue();
+    expect(TweenSystem.manager().containsTarget(notification)).toBeTrue();
 
     expect(notification.color.a).toEqual(1f);
-    TweenSystem.getTweenManager().update(300);
+    TweenSystem.manager().update(300);
     expect(notification.color.a).toEqual(0f);
   }
 }

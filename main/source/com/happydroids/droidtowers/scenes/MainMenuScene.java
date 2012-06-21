@@ -90,7 +90,7 @@ public class MainMenuScene extends SplashScene {
     Tween.to(menuButtonPanel, WidgetAccessor.POSITION, 500)
             .target(50 + (45 * (droidTowersLogo.getImageWidth() / droidTowersLogo.getRegion().getRegionWidth())), menuButtonPanel.y)
             .ease(TweenEquations.easeInOutExpo)
-            .start(TweenSystem.getTweenManager());
+            .start(TweenSystem.manager());
   }
 
   private Image makeHappyDroidsLogo(TextureAtlas atlas) {

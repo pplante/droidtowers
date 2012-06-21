@@ -94,7 +94,7 @@ public class CloudLayer extends GameLayer implements RespondsToWorldSizeChange {
     cloud.setScale(2f);
 
     cloud.setOpacity(0);
-    Tween.to(cloud, GameObjectAccessor.OPACITY, 2000).target(1.0f).start(TweenSystem.getTweenManager());
+    Tween.to(cloud, GameObjectAccessor.OPACITY, 2000).target(1.0f).start(TweenSystem.manager());
 
     addChild(cloud);
   }
@@ -115,7 +115,7 @@ public class CloudLayer extends GameLayer implements RespondsToWorldSizeChange {
                   }
                 })
                 .setCallbackTriggers(TweenCallback.COMPLETE)
-                .start(TweenSystem.getTweenManager());
+                .start(TweenSystem.manager());
       }
     }
   }
@@ -142,7 +142,7 @@ public class CloudLayer extends GameLayer implements RespondsToWorldSizeChange {
       for (GameObject cloud : gameObjects) {
         Tween.to(cloud, GameObjectAccessor.COLOR, TowerConsts.WEATHER_SERVICE_STATE_CHANGE_DURATION)
                 .target(cloudColor.r, cloudColor.g, cloudColor.b, cloudColor.a)
-                .start(TweenSystem.getTweenManager());
+                .start(TweenSystem.manager());
       }
     }
   }

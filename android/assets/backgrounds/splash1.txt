@@ -1,0 +1,25 @@
+splash1.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+sky-gradient
+  rotate: false
+  xy: 770, 1
+  size: 8, 64
+  orig: 8, 64
+  offset: 0, 0
+  index: -1
+main-building
+  rotate: false
+  xy: 1, 1
+  size: 759, 1022
+  orig: 759, 1024
+  offset: 0, 2
+  index: -1
+cityscape-middle
+  rotate: false
+  xy: 761, 1
+  size: 8, 272
+  orig: 8, 362
+  offset: 0, 90
+  index: -1

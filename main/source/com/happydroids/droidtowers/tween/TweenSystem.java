@@ -13,7 +13,7 @@ public class TweenSystem {
 
   static TweenManager tweenManager;
 
-  public static TweenManager getTweenManager() {
+  public static TweenManager manager() {
     if (tweenManager == null) {
       tweenManager = new TweenManager();
     }

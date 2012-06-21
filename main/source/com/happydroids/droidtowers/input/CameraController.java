@@ -166,10 +166,10 @@ public class CameraController implements GestureDetector.GestureListener {
 
   public void panTo(float x, float y, boolean animate) {
     if (animate) {
-      TweenSystem.getTweenManager().killTarget(this);
+      TweenSystem.manager().killTarget(this);
       Tween.to(this, CameraControllerAccessor.PAN, 500)
               .target(x, y)
-              .start(TweenSystem.getTweenManager());
+              .start(TweenSystem.manager());
     } else {
       camera.position.set(x, y, 0f);
       checkBounds();

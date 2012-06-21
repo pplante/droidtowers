@@ -39,7 +39,7 @@ public class Rain extends GameObject {
             .ease(Linear.INOUT)
             .target(1f)
             .repeatYoyo(Tween.INFINITY, 500)
-            .start(TweenSystem.getTweenManager());
+            .start(TweenSystem.manager());
 
     Tween.to(this, GameObjectAccessor.TEXTURE_VV2, Random.randomInt(10000, 12000))
             .ease(Linear.INOUT)
@@ -51,6 +51,6 @@ public class Rain extends GameObject {
               }
             })
             .setCallbackTriggers(TweenCallback.BEGIN)
-            .start(TweenSystem.getTweenManager());
+            .start(TweenSystem.manager());
   }
 }

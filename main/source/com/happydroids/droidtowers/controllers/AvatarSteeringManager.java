@@ -88,7 +88,7 @@ public class AvatarSteeringManager {
 
     running = false;
     pointsTraveled = 0;
-    TweenSystem.getTweenManager().killTarget(avatar);
+    TweenSystem.manager().killTarget(avatar);
     gameGrid.getRenderer().removeTransitLine(transitLine);
 
     if (completeCallback != null) {
@@ -235,7 +235,7 @@ public class AvatarSteeringManager {
         advancePosition();
       }
     });
-    sequence.start(TweenSystem.getTweenManager());
+    sequence.start(TweenSystem.manager());
   }
 
   public void moveAvatarTo(GridPosition gridPosition, TweenCallback endCallback) {
@@ -245,7 +245,7 @@ public class AvatarSteeringManager {
   public void moveAvatarTo(Vector2 endPoint, final TweenCallback endCallback) {
     currentState.add(MOVING);
 
-    TweenSystem.getTweenManager().killTarget(avatar);
+    TweenSystem.manager().killTarget(avatar);
 
     horizontalDirection = (int) endPoint.x < (int) avatar.getX() ? LEFT : RIGHT;
     float distanceBetweenPoints = endPoint.dst(avatar.getX(), avatar.getY());
@@ -260,7 +260,7 @@ public class AvatarSteeringManager {
               }
             })
             .setCallbackTriggers(COMPLETE)
-            .start(TweenSystem.getTweenManager());
+            .start(TweenSystem.manager());
   }
 
   public boolean isRunning() {

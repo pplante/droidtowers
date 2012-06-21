@@ -51,7 +51,7 @@ public class ElevatorCar extends GameObject {
   }
 
   public void moveToFloor(int nextFloor) {
-    TweenSystem.getTweenManager().killTarget(this);
+    TweenSystem.manager().killTarget(this);
     GridPoint finalPosition = elevator.getContentPosition().cpy();
     finalPosition.y = nextFloor;
     float targetYPosition = finalPosition.toWorldVector2().y;
@@ -66,7 +66,7 @@ public class ElevatorCar extends GameObject {
               }
             })
             .setCallbackTriggers(COMPLETE)
-            .start(TweenSystem.getTweenManager());
+            .start(TweenSystem.manager());
   }
 
   @Override
@@ -139,7 +139,7 @@ public class ElevatorCar extends GameObject {
   private void resetToBottomOfShaft() {
     inUse = false;
     queue.informPassengersOfServiceChange();
-    TweenSystem.getTweenManager().killTarget(this);
+    TweenSystem.manager().killTarget(this);
     Vector2 elevatorWorldPosition = elevator.getWorldPosition();
     setPosition(elevatorWorldPosition.x, elevatorWorldPosition.y + elevator.scaledGridUnit());
   }

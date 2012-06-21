@@ -32,7 +32,7 @@ public class GdxTestRunner extends NonGLTestRunner implements ApplicationListene
 
   @Override
   protected void beforeTestRun() {
-    TweenSystem.getTweenManager();
+    TweenSystem.manager();
     TowerGameService.setInstance(new TowerGameService());
   }
 

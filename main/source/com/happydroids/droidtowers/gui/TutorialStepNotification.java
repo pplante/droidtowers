@@ -58,11 +58,11 @@ public class TutorialStepNotification extends Table {
             .push(Tween.set(this, WidgetAccessor.OPACITY).target(0.0f))
             .push(Tween.to(this, WidgetAccessor.OPACITY, 200).target(1.0f))
             .setCallbackTriggers(TweenCallback.END)
-            .start(TweenSystem.getTweenManager());
+            .start(TweenSystem.manager());
   }
 
   public void hide() {
-    TweenSystem.getTweenManager().killTarget(this);
+    TweenSystem.manager().killTarget(this);
 
     Timeline.createSequence()
             .push(Tween.set(this, WidgetAccessor.SIZE).target(this.width, this.height))
@@ -77,7 +77,7 @@ public class TutorialStepNotification extends Table {
               }
             })
             .setCallbackTriggers(TweenCallback.END)
-            .start(TweenSystem.getTweenManager());
+            .start(TweenSystem.manager());
   }
 
   @Override

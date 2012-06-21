@@ -27,6 +27,7 @@ public class SplashCloudLayer extends Group {
 
   public SplashCloudLayer(Stage stage, List<TextureAtlas.AtlasRegion> cloudRegions) {
     super();
+    this.stage = stage;
     worldSize = new Vector2(stage.width(), stage.height());
     this.cloudRegions = cloudRegions;
 
@@ -38,7 +39,7 @@ public class SplashCloudLayer extends Group {
 
     float cloudWidths = 0;
     for (Actor cloud : children) {
-      cloudWidths += cloud.width;
+      cloudWidths += ((Image) cloud).getImageWidth();
     }
 
     float spawnDistanceX = (worldSize.x - cloudWidths) / cloudsToSpawn;
@@ -52,7 +53,8 @@ public class SplashCloudLayer extends Group {
       return null;
     }
 
-    final Image cloud = new Image(Iterables.get(cloudRegions, MathUtils.random(cloudRegions.size() - 1)), Scaling.none);
+    final Image cloud = new Image(Iterables.get(cloudRegions, MathUtils.random(cloudRegions.size() - 1)), Scaling.fit);
+    cloud.height = Math.min(cloud.getRegion().getRegionHeight(), stage.height() * 0.18f);
     if (spawnOnScreen) {
       cloud.x = Random.randomInt(0, worldSize.x);
       cloud.y = Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX);
