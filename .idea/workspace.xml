@@ -30,66 +30,14 @@
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" line="229" />
     <bookmark url="file://$PROJECT_DIR$/android" />
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/LoadTowerWindow.java" line="47" />
+    <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" line="49" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/cityscape-left.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/cityscape-middle.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/cityscape-right.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/clouds/cloud1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/clouds/cloud3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/clouds/cloud5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happydroid/happy-droid1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happydroid/happy-droid2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happydroid/happy-droid3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happydroid/happy-droid4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happydroid/happy-droid5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happydroid/happy-droid6.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happydroid/happy-droid7.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happydroid/happy-droid8.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/texturepacker/splash1.tps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets-raw/texturepacker/splash2.tps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/backgrounds/splash-skygradient.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/backgrounds/splash1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/backgrounds/splash2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/backgrounds/splash1.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/backgrounds/splash2.txt" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/cloud-1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/cloud-2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/cloud-3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happy-droid1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happy-droid2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happy-droid3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happy-droid4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happy-droid5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happy-droid6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happy-droid7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets-raw/backgrounds/splash/happy-droid8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/backgrounds/splash.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/backgrounds/splash.txt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets-raw/psds/splash screen.psd" afterPath="$PROJECT_DIR$/android/assets-raw/psds/splash screen.psd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets-raw/texturepacker/splash.tps" afterPath="$PROJECT_DIR$/android/assets-raw/texturepacker/splash.tps" />
+    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="finished the splash screen :D">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/assets.json" afterPath="$PROJECT_DIR$/android/assets/assets.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarSteeringManager.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarSteeringManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/CloudLayer.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/CloudLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorCar.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorCar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Rain.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Rain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/SplashCloudLayer.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/SplashCloudLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/SkyLayer.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/SkyLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AchievementNotification.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AchievementNotification.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/RadialMenu.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/RadialMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Sunburst.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Sunburst.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Toast.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Toast.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TutorialStepNotification.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TutorialStepNotification.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/CameraController.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/CameraController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/PlacementTool.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/PlacementTool.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/tween/TweenSystem.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/tween/TweenSystem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/GdxTestRunner.java" afterPath="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/GdxTestRunner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/NonGLTestRunner.java" afterPath="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/NonGLTestRunner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/gui/AchievementNotificationTest.java" afterPath="$PROJECT_DIR$/main/test/com/happydroids/droidtowers/gui/AchievementNotificationTest.java" />
     </list>
     <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
     <ignored path="underwater.iws" />
@@ -191,8 +139,8 @@
       <property name="field_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByClasses" value="true" />
       <property name="exception_breakpoints_viewId" value="TABLE" />
-      <property name="field_breakpoints_viewId" value="TABLE" />
       <property name="exception_breakpoints_groupByClasses" value="true" />
+      <property name="field_breakpoints_viewId" value="TABLE" />
       <property name="method_breakpoints_groupByMethods" value="false" />
     </ui_properties>
   </component>
@@ -200,46 +148,7 @@
     <favorites_list name="testgame" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Sunburst.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Sunburst.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="8" selection-start="3740" selection-end="3740" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SplashScene.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="0" selection-start="1870" selection-end="1870" vertical-scroll-proportion="0.5250501">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpriteBatch.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/SpriteBatch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1050" column="13" selection-start="32582" selection-end="32582" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ParticleEmitter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/ParticleEmitter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="226" column="30" selection-start="7595" selection-end="7595" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -252,9 +161,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/LaunchGameUriAction.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ApplicationResumeScene.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/LoadGameSplashScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/LoadTowerSplashScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java" />
@@ -268,6 +174,9 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/SplashCloudLayer.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Sunburst.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/PlacementTool.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" />
       </list>
     </option>
   </component>
@@ -494,7 +403,7 @@
     </ignored-problems>
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages ProjectPane="false" />
       <showMembers />
       <showModules />
@@ -506,6 +415,27 @@
       <sortByType ProjectPane="false" />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
       <pane id="Favorites" />
     </panes>
   </component>
@@ -530,11 +460,11 @@
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="android-arm-403" />
     <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="Downloaded.Files.Path" value="$PROJECT_DIR$/main/libs" />
+    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="download.sources.last.used.dir" value="$PROJECT_DIR$/happydroids-common/libs/sources" />
     <property name="options.lastSelected" value="preferences.keymap" />
+    <property name="download.sources.last.used.dir" value="$PROJECT_DIR$/happydroids-common/libs/sources" />
     <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -559,10 +489,10 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="AndroidTargetDevices" value="30324F52864200EC" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="Repository.Attach.Sources" value="true" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/tasks" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
@@ -571,8 +501,8 @@
     <property name="KeystoreLocation" value="$PROJECT_DIR$/happydroids-droidtowers" />
     <property name="KeyAlias" value="key0" />
     <property name="GenerateAntBuildDialog.backupFiles" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -677,6 +607,28 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings">
@@ -728,28 +680,6 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -759,30 +689,6 @@
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <module name="" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="MULTIPROCESS" value="false" />
-      <RunnerSettings RunnerId="Profile ">
-        <option name="myExternalizedOptions" />
-      </RunnerSettings>
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
@@ -871,6 +777,17 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" runner="idea" />
       <module name="" />
@@ -897,17 +814,6 @@
         <option name="AntTarget" enabled="false" antfile="file://$PROJECT_DIR$/build.xml" target="debug-preprocess" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSDebuggerConfigurationSettings>
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
@@ -1870,7 +1776,11 @@
       <created>1340115134452</created>
       <updated>1340115134455</updated>
     </task>
-    <option name="localTasksCounter" value="207" />
+    <task id="LOCAL-00207" summary="finished the splash screen :D">
+      <created>1340299903218</created>
+      <updated>1340299903219</updated>
+    </task>
+    <option name="localTasksCounter" value="208" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1894,32 +1804,30 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="874" extended-state="0" />
+    <frame x="0" y="22" width="1440" height="874" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32303733" sideWeight="0.95461786" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32303733" sideWeight="0.95461786" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2093949" sideWeight="0.6180714" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2693267" sideWeight="0.32890624" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24918832" sideWeight="0.7441154" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34912717" sideWeight="0.0" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34877735" sideWeight="0.0" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19895679" sideWeight="0.6683594" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23166023" sideWeight="0.092672415" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14367816" sideWeight="0.64993566" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.7441154" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3264996" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24937657" sideWeight="0.79100317" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24839126" sideWeight="0.7866379" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32294264" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19176319" sideWeight="0.49748382" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.08945312" sideWeight="0.74388677" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283046" sideWeight="0.7441154" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39853895" sideWeight="0.7441154" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23635058" sideWeight="0.75032175" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2319202" sideWeight="0.90746754" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="IntelliGuard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953683" sideWeight="0.48726115" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23635058" sideWeight="0.76833975" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23166023" sideWeight="0.90229887" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18351911" sideWeight="0.6180714" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="IntelliGuard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953683" sideWeight="0.48726115" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24918832" sideWeight="0.7441154" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32961783" sideWeight="0.6173121" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1927,6 +1835,8 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3125" sideWeight="0.75032175" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2693267" sideWeight="0.32890624" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2034,36 +1944,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ViewNeighborSplashScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="0" selection-start="1199" selection-end="1199" vertical-scroll-proportion="0.48818898" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/LaunchUriScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="43" selection-start="769" selection-end="769" vertical-scroll-proportion="0.40387097" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGrid.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="38" selection-start="1431" selection-end="1431" vertical-scroll-proportion="0.028871391" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/collections/TypeInstanceMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="23" selection-start="781" selection-end="781" vertical-scroll-proportion="0.23354839" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/EmploymentCalculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="43" selection-start="744" selection-end="744" vertical-scroll-proportion="0.43225807" />
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/Stage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="153" column="15" selection-start="6672" selection-end="6672" vertical-scroll-proportion="0.3327674" />
@@ -2094,33 +1974,63 @@
         <state line="186" column="24" selection-start="6664" selection-end="6664" vertical-scroll-proportion="4.0304112" />
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/SpriteBatch.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1050" column="13" selection-start="32582" selection-end="32582" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/ParticleEmitter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="226" column="30" selection-start="7595" selection-end="7595" vertical-scroll-proportion="0.0">
+        <state line="51" column="20" selection-start="1932" selection-end="1932" vertical-scroll-proportion="0.54937166">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Sunburst.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="8" selection-start="3740" selection-end="3740" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+        <state line="91" column="8" selection-start="3740" selection-end="3740" vertical-scroll-proportion="0.5735294" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/ParticleEmitter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="226" column="30" selection-start="7595" selection-end="7595" vertical-scroll-proportion="-0.46691176" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/SpriteBatch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1050" column="13" selection-start="32582" selection-end="32582" vertical-scroll-proportion="0.3915441" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/assets/params/achievements.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="150" column="16" selection-start="3588" selection-end="3588" vertical-scroll-proportion="-3.6535008" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DebugUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="21" selection-start="1943" selection-end="1943" vertical-scroll-proportion="0.3622795" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/PlacementTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="0" selection-start="3658" selection-end="3658" vertical-scroll-proportion="0.6889353" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="15" selection-start="2074" selection-end="2074" vertical-scroll-proportion="0.75536484" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/TowerScene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="179" selection-start="3622" selection-end="3622" vertical-scroll-proportion="0.029850746">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="0" selection-start="1870" selection-end="1870" vertical-scroll-proportion="0.5250501">
-          <folding />
+        <state line="62" column="0" selection-start="2663" selection-end="2663" vertical-scroll-proportion="0.20895523">
+          <folding>
+            <element signature="e#0#12160#0" expanded="true" />
+            <element signature="e#7162#7264#0" expanded="true" />
+            <element signature="e#7257#7258#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

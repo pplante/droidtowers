@@ -35,6 +35,7 @@ import com.happydroids.droidtowers.types.*;
 
 import java.util.Set;
 
+import static com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class HeadsUpDisplay extends WidgetGroup {
@@ -47,7 +48,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   private RadialMenu toolMenu;
   private final StackGroup notificationStack;
   private ImageButton toolButton;
-  private ImageButton.ImageButtonStyle toolButtonStyle;
+  private ImageButtonStyle toolButtonStyle;
   private TutorialStepNotification tutorialStep;
   private final StatusBarPanel statusBarPanel;
   private final HeaderButtonBar headerButtonBar;
@@ -76,7 +77,6 @@ public class HeadsUpDisplay extends WidgetGroup {
     addActor(new ExpandLandOverlay(this.gameGrid, avatarLayer, cameraController));
 
     buildToolButtonMenu();
-
 
     headerButtonBar = new HeaderButtonBar(hudAtlas, gameGrid, gameState);
     addActor(headerButtonBar);
@@ -171,7 +171,6 @@ public class HeadsUpDisplay extends WidgetGroup {
           }
 
           makePurchaseDialog(dialogTitle, typeFactory, ((ImageButton) actor).getStyle());
-          toolButton.setStyle(((ImageButton) actor).getStyle());
         } else {
           purchaseDialog.dismiss();
           purchaseDialog = null;
@@ -180,7 +179,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     };
   }
 
-  private void makePurchaseDialog(String title, GridObjectTypeFactory typeFactory, ImageButton.ImageButtonStyle style) {
+  private void makePurchaseDialog(String title, GridObjectTypeFactory typeFactory, final ImageButtonStyle style) {
     purchaseDialog = new GridObjectPurchaseMenu(getStage(), title, typeFactory, new Runnable() {
       public void run() {
         toolButton.setStyle(toolButtonStyle);
@@ -192,6 +191,8 @@ public class HeadsUpDisplay extends WidgetGroup {
         purchaseDialog = null;
         if (InputSystem.instance().getCurrentTool() instanceof PickerTool) {
           toolButton.setStyle(toolButtonStyle);
+        } else {
+          toolButton.setStyle(style);
         }
       }
     });

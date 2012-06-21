@@ -18,8 +18,6 @@ import com.happydroids.droidtowers.types.GridObjectType;
 
 import java.util.List;
 
-import static com.badlogic.gdx.Application.ApplicationType.Android;
-import static com.badlogic.gdx.Application.ApplicationType.Desktop;
 import static com.happydroids.droidtowers.input.InputSystem.Keys;
 
 public class PlacementTool extends ToolBase {
@@ -102,10 +100,11 @@ public class PlacementTool extends ToolBase {
   }
 
   public boolean tap(int x, int y, int count) {
-    if (Gdx.app.getType().equals(Android) && count >= 2) {
-      return finishPurchase();
-    } else if (Gdx.app.getType().equals(Desktop) && count >= 1) {
-      return finishPurchase();
+    switch (Gdx.app.getType()) {
+      case Android:
+        return count >= 2 && finishPurchase();
+      case Desktop:
+        return count >= 1 && finishPurchase();
     }
 
     return false;
