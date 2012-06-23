@@ -12,10 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
-import com.happydroids.droidtowers.gui.FontManager;
-import com.happydroids.droidtowers.gui.LoadTowerWindow;
-import com.happydroids.droidtowers.gui.NewTowerWindow;
-import com.happydroids.droidtowers.gui.VibrateClickListener;
+import com.happydroids.droidtowers.gui.*;
 import com.happydroids.droidtowers.scenes.HappyDroidConnect;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
@@ -36,9 +33,9 @@ public class MainMenuButtonPanel extends Table {
     add(loadGameButton).fill().maxWidth(BUTTON_WIDTH);
     row().padTop(BUTTON_SPACING);
 
-    //    TextButton optionsButton = FontManager.RobotoBold18.makeTextButton("options");
-    //    wrapper.push(optionsButton).fill().maxWidth(BUTTON_WIDTH);
-    //    wrapper.row().padTop(BUTTON_SPACING);
+    TextButton optionsButton = FontManager.RobotoBold18.makeTextButton("options");
+    add(optionsButton).fill().maxWidth(BUTTON_WIDTH);
+    row().padTop(BUTTON_SPACING);
 
     if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT) {
       final TextButton connectFacebookButton = FontManager.RobotoBold18.makeTextButton("login to happydroids.com");
@@ -76,6 +73,13 @@ public class MainMenuButtonPanel extends Table {
       @Override
       public void onClick(Actor actor, float x, float y) {
         new LoadTowerWindow(getStage()).show();
+      }
+    });
+
+    optionsButton.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        new OptionsWindow(getStage()).show();
       }
     });
 

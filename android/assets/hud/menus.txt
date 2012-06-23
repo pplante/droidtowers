@@ -7,7 +7,7 @@ happy-droids-logo
   xy: 0, 35
   size: 98, 62
   orig: 98, 62
-  offset: 3, 2
+  offset: 4, 2
   index: -1
 facebook-logo
   rotate: false

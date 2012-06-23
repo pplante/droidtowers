@@ -106,13 +106,13 @@ public class TowerGameService extends HappyDroidService {
     postAuthRunnables.clear();
   }
 
-  public void setAudioEnabled(boolean audioEnabled) {
-    preferences.putBoolean("audioEnabled", audioEnabled);
+  public void setAudioState(boolean audioEnabled) {
+    preferences.putBoolean("audioState", audioEnabled);
     preferences.flush();
   }
 
-  public boolean isAudioEnabled() {
-    return preferences.getBoolean("audioEnabled", true);
+  public boolean getAudioState() {
+    return preferences.getBoolean("audioState", true);
   }
 
   public RunnableQueue getPostAuthRunnables() {
@@ -129,4 +129,6 @@ public class TowerGameService extends HappyDroidService {
 
     authenticationFinished = true;
   }
+
+
 }

@@ -71,6 +71,10 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
   public void create() {
     Gdx.app.error("lifecycle", "create");
 
+//    if (Gdx.app.getType().equals(Desktop)) {
+//      Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode());
+//    }
+
     if (Gdx.graphics.isGL20Available() && Gdx.app.getType().equals(Android) && Display.isHDPIMode()) {
       float displayScalar = 0.75f;
       frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, (int) (Gdx.graphics.getWidth() * displayScalar), (int) (Gdx.graphics.getHeight() * displayScalar), true);

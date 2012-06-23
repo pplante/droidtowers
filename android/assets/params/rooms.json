@@ -12,6 +12,18 @@
     "provides":"LOBBY"
   },
   {
+    "id":"SKY-LOBBY",
+    "name":"Sky Lobby",
+    "isSkyLobby":true,
+    "coins":15000,
+    "experienceAward":1000,
+    "height":1,
+    "width":4,
+    "atlasFilename":"rooms/housing.txt",
+    "imageFilename":"4x1-sky-lobby",
+    "provides":"SKY_LOBBY"
+  },
+  {
     "id":"SMALL-APARTMENT",
     "name":"Small Apartment",
     "coins":8000,

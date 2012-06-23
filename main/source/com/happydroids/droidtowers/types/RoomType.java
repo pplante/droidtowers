@@ -5,22 +5,28 @@
 package com.happydroids.droidtowers.types;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.*;
 import com.happydroids.droidtowers.grid.GameGrid;
 
 import java.util.Set;
 
+import static com.happydroids.droidtowers.TowerConsts.LOBBY_FLOOR;
+import static com.happydroids.droidtowers.types.ProviderType.LOBBY;
+import static com.happydroids.droidtowers.types.ProviderType.SKY_LOBBY;
+
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class RoomType extends GridObjectType {
   private boolean isLobby;
+  private boolean isSkyLobby;
   private int populationMax;
   private int populationRequired;
 
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {
-    if (provides == ProviderType.LOBBY) {
+    if (provides == LOBBY) {
       return new Lobby(this, gameGrid);
+    } else if (provides == SKY_LOBBY) {
+      return new SkyLobby(this, gameGrid);
     }
 
     return new Room(this, gameGrid);
@@ -33,8 +39,13 @@ public class RoomType extends GridObjectType {
 
   @Override
   public boolean canBeAt(GridObject gridObject) {
-    if (provides == ProviderType.LOBBY) {
-      return gridObject.getPosition().y == TowerConsts.LOBBY_FLOOR && checkForOverlap(gridObject);
+    int yPos = gridObject.getPosition().y;
+    if (provides == LOBBY) {
+      return yPos == LOBBY_FLOOR && checkForOverlap(gridObject);
+    } else if (provides == SKY_LOBBY) {
+      if (yPos <= LOBBY_FLOOR || (yPos - LOBBY_FLOOR) % 15 != 0) {
+        return false;
+      }
     }
 
     return checkIfTouchingAnotherObject(gridObject) && checkForOverlap(gridObject);

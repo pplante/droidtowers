@@ -19,15 +19,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class GameSoundController {
-  public boolean audioEnabled;
+  private boolean backgroundMusicEnabled;
+  public boolean audioState;
   private final Sound constructionSound;
   private Sound destructionSound;
-  private static boolean soundsAllowed;
   private Music activeSong;
   private final Iterator<FileHandle> availableSongs;
+  private static boolean soundsAllowed;
 
   public GameSoundController() {
-    audioEnabled = TowerGameService.instance().isAudioEnabled();
+    audioState = TowerGameService.instance().getAudioState();
 
     constructionSound = Gdx.audio.newSound(Gdx.files.internal("sound/effects/construction-placement-1.wav"));
     destructionSound = Gdx.audio.newSound(Gdx.files.internal("sound/effects/construction-destroy-1.wav"));
@@ -48,7 +49,7 @@ public class GameSoundController {
       activeSong = Gdx.audio.newMusic(availableSongs.next());
       activeSong.setVolume(0.5f);
 
-      if (audioEnabled) {
+      if (audioState) {
         activeSong.play();
       }
     }
@@ -60,14 +61,14 @@ public class GameSoundController {
 
   @Subscribe
   public void GameGrid_onGridObjectPlaced(GridObjectPlacedEvent event) {
-    if (!audioEnabled || !soundsAllowed) return;
+    if (!audioState || !soundsAllowed) return;
 
     constructionSound.play();
   }
 
   @Subscribe
   public void GameGrid_onGridObjectRemoved(GridObjectRemovedEvent event) {
-    if (!audioEnabled || !soundsAllowed) return;
+    if (!audioState || !soundsAllowed) return;
 
     if (event.gridObject.isPlaced()) {
       destructionSound.play();
@@ -75,24 +76,24 @@ public class GameSoundController {
   }
 
   public void toggleAudio() {
-    audioEnabled = !audioEnabled;
+    audioState = !audioState;
 
-    if (audioEnabled) {
+    if (audioState) {
       moveToNextSong();
     } else {
       activeSong.dispose();
     }
 
-    TowerGameService.instance().setAudioEnabled(audioEnabled);
+    TowerGameService.instance().setAudioState(audioState);
   }
 
   public void update(float deltaTime) {
-    if (audioEnabled && activeSong != null && !activeSong.isPlaying()) {
+    if (audioState && activeSong != null && !activeSong.isPlaying()) {
       moveToNextSong();
     }
   }
 
-  public boolean isAudioEnabled() {
-    return audioEnabled;
+  public boolean isAudioState() {
+    return audioState;
   }
 }

@@ -33,6 +33,7 @@ public class TowerAssetManager {
   public static final String WHITE_SWATCH_TRIANGLE = "swatches/swatch-white-triangle.png";
   private static AssetList assetList;
   private static Skin customSkin;
+  private static Skin defaultSkin;
 
   public static MemoryTrackingAssetManager assetManager() {
     if (assetManager == null) {
@@ -65,6 +66,7 @@ public class TowerAssetManager {
         }
       });
 
+      defaultSkin = new Skin(Gdx.files.internal("default-skin.json"));
       makeCustomGUISkin();
     }
 
@@ -194,5 +196,9 @@ public class TowerAssetManager {
 
   public static Image image(String fileName) {
     return new Image(texture(fileName));
+  }
+
+  public static Skin getDefaultSkin() {
+    return defaultSkin;
   }
 }

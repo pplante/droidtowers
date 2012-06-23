@@ -11,7 +11,7 @@ repeat: none
   index: -1
 2x1-sushi
   rotate: false
-  xy: 320, 320
+  xy: 192, 384
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
@@ -25,63 +25,70 @@ repeat: none
   index: -1
 4x1-large-condo
   rotate: false
-  xy: 256, 192
+  xy: 0, 256
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
 2x1-hotel-room
   rotate: false
-  xy: 192, 448
+  xy: 320, 384
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 3x1-small-condo
   rotate: false
-  xy: 0, 384
+  xy: 0, 448
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
 1x1-bathroom
   rotate: false
-  xy: 448, 320
+  xy: 320, 448
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 3x1-small-apartment
   rotate: false
-  xy: 0, 448
+  xy: 192, 320
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
   index: -1
+4x1-sky-lobby
+  rotate: false
+  xy: 256, 128
+  size: 256, 64
+  orig: 256, 64
+  offset: 0, 0
+  index: -1
 4x1-large-apartment
   rotate: false
-  xy: 0, 256
+  xy: 256, 256
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
 lobby-left
   rotate: false
-  xy: 320, 448
+  xy: 420, 448
   size: 36, 64
   orig: 36, 64
   offset: 0, 0
   index: -1
 4x1-movie-theater
   rotate: false
-  xy: 0, 192
+  xy: 256, 192
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
 4x1-lobby
   rotate: false
-  xy: 256, 128
+  xy: 0, 192
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
@@ -95,21 +102,21 @@ lobby-left
   index: -1
 bathroom
   rotate: false
-  xy: 448, 256
+  xy: 448, 384
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 lobby-right
   rotate: false
-  xy: 320, 384
+  xy: 384, 448
   size: 36, 64
   orig: 36, 64
   offset: 0, 0
   index: -1
 3x1-pizza-place
   rotate: false
-  xy: 256, 256
+  xy: 0, 320
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
@@ -123,21 +130,21 @@ lobby-right
   index: -1
 2x1-maids-closet
   rotate: false
-  xy: 192, 320
+  xy: 384, 320
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 2x1-bar
   rotate: false
-  xy: 192, 384
+  xy: 192, 448
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 3x1-burger-joint
   rotate: false
-  xy: 0, 320
+  xy: 0, 384
   size: 192, 64
   orig: 192, 64
   offset: 0, 0

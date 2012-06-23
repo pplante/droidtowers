@@ -187,6 +187,24 @@
     ]
   },
   {
+    "id":"add-1-friend",
+    "name":"Add a Neighbor",
+    "description":"By adding a neighbor, you will begin creating your own virtual neighborhood.  Each neighbor you add will unlock more opportunity for success.",
+    "requirements":[
+      {
+        "type":"ADD_NEIGHBOR",
+        "amount":1
+      }
+    ],
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingId":"JANITORS-CLOSET"
+      }
+    ]
+  },
+  {
     "id":"security center",
     "name":"Big Brother is Everywhere",
     "requirements":[
@@ -205,6 +223,9 @@
       {
         "type":"POPULATION",
         "amount":120
+      },
+      {
+        "type":"HAPPYDROIDS_CONNECT"
       }
     ],
     "rewards":[

@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.server.TemporaryToken;
@@ -100,40 +99,9 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
         }
       });
 
-      periodicBackgroundTask = new PeriodicBackgroundTask(TowerConsts.FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK) {
-        @Override
-        public boolean update() {
-          if (token == null) return false;
-          try {
-            token.validate();
-            if (HappyDroidConsts.DEBUG) System.out.println("token = " + token);
-            return !token.hasSessionToken();
-          } catch (RuntimeException e) {
-            Gdx.app.error(TAG, "Error validating the temporary token.", e);
-          }
+      TowerGame.getPlatformBrowserUtil().launchWebBrowser(token.getClickableUri());
 
-          return false;
-        }
-
-        @Override
-        public synchronized void beforeExecute() {
-          TowerGameService.instance().resetAuthentication();
-        }
-
-        @Override
-        public synchronized void afterExecute() {
-          if (token != null && token.hasSessionToken()) {
-            sessionStatus.setText("Login successful!");
-            TowerGameService.instance().setSessionToken(token.getSessionToken());
-          } else {
-            sessionStatus.setText("Login failed!");
-          }
-
-          if (postConnectRunnable != null) {
-            postConnectRunnable.run();
-          }
-        }
-      };
+      periodicBackgroundTask = new AccessTokenCheckStateTask();
       periodicBackgroundTask.run();
 
       setDismissCallback(new Runnable() {
@@ -141,6 +109,45 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
           periodicBackgroundTask.cancel();
         }
       });
+    }
+
+    private class AccessTokenCheckStateTask extends PeriodicBackgroundTask {
+      public AccessTokenCheckStateTask() {
+        super(TowerConsts.FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK);
+      }
+
+      @Override
+      public boolean update() {
+        if (token == null) return false;
+        try {
+          token.validate();
+          Gdx.app.debug(TAG, "Checking token: " + token);
+          return !token.hasSessionToken();
+        } catch (RuntimeException e) {
+          Gdx.app.error(TAG, "Error validating the temporary token.", e);
+        }
+
+        return false;
+      }
+
+      @Override
+      public synchronized void beforeExecute() {
+        TowerGameService.instance().resetAuthentication();
+      }
+
+      @Override
+      public synchronized void afterExecute() {
+        if (token != null && token.hasSessionToken()) {
+          sessionStatus.setText("Login successful!");
+          TowerGameService.instance().setSessionToken(token.getSessionToken());
+        } else {
+          sessionStatus.setText("Login failed!");
+        }
+
+        if (postConnectRunnable != null) {
+          postConnectRunnable.run();
+        }
+      }
     }
   }
 }

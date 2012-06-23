@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.achievements;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
@@ -41,6 +42,8 @@ public class Requirement {
         return handleBuildRequirement(gameGrid);
       case UNLOCK:
         return handleUnlockRequirement(gameGrid);
+      case HAPPYDROIDS_CONNECT:
+        return TowerGameService.instance().isAuthenticated();
       default:
         assert false;
         break;
@@ -149,6 +152,8 @@ public class Requirement {
 
       case POPULATION:
         return "Attract " + NumberFormat.getInstance().format(amount) + " Residents";
+      case HAPPYDROIDS_CONNECT:
+        return "Connect your Device to happydroids.com.";
     }
 
     return display;

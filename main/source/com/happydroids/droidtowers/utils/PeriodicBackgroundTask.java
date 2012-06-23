@@ -34,7 +34,7 @@ public abstract class PeriodicBackgroundTask extends BackgroundTask {
 
   public abstract boolean update();
 
-  public void cancel() {
+  public synchronized void cancel() {
     canceled = true;
   }
 }

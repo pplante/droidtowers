@@ -9,6 +9,7 @@ import java.util.Set;
 public enum ProviderType {
   NONE,
   LOBBY,
+  SKY_LOBBY,
   FOOD,
   ENTERTAINMENT,
   HOTEL_ROOMS,

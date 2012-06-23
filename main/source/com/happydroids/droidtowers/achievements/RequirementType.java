@@ -9,5 +9,7 @@ public enum RequirementType {
   EMPLOYMENT,
   DESIRABILITY,
   BUILD,
-  UNLOCK
+  UNLOCK,
+  HAPPYDROIDS_CONNECT,
+  ADD_NEIGHBOR
 }
