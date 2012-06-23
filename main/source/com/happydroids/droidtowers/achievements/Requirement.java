@@ -44,6 +44,9 @@ public class Requirement {
         return handleUnlockRequirement(gameGrid);
       case HAPPYDROIDS_CONNECT:
         return TowerGameService.instance().isAuthenticated();
+      case ADD_NEIGHBOR:
+        return false;
+
       default:
         assert false;
         break;
@@ -154,6 +157,9 @@ public class Requirement {
         return "Attract " + NumberFormat.getInstance().format(amount) + " Residents";
       case HAPPYDROIDS_CONNECT:
         return "Connect your Device to happydroids.com.";
+
+      case ADD_NEIGHBOR:
+        return "Add a Neighbor to your Tower.";
     }
 
     return display;
