@@ -107,4 +107,12 @@ public class CloudGameSave extends TowerGameServiceObject {
   public String getBlob() {
     return blob;
   }
+
+  public boolean hasNeighbors() {
+    return ((neighbors != null) && !neighbors.isEmpty()) || ((neighborGameSaves != null) && !neighborGameSaves.isEmpty());
+  }
+
+  public int numNeighbors() {
+    return getNeighbors().size();
+  }
 }

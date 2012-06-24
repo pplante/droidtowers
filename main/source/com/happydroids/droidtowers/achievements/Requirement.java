@@ -7,8 +7,12 @@ package com.happydroids.droidtowers.achievements;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
+import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.scenes.Scene;
+import com.happydroids.droidtowers.scenes.TowerScene;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
 import com.happydroids.droidtowers.types.ProviderType;
@@ -45,13 +49,24 @@ public class Requirement {
       case HAPPYDROIDS_CONNECT:
         return TowerGameService.instance().isAuthenticated();
       case ADD_NEIGHBOR:
-        return false;
-
+        return handleAddNeighborRequirement();
       default:
         assert false;
         break;
     }
 
+    return false;
+  }
+
+  private boolean handleAddNeighborRequirement() {
+    Scene activeScene = SceneManager.getActiveScene();
+    currentWeight = 0;
+    if (activeScene instanceof TowerScene) {
+      GameSave cloudGameSave = ((TowerScene) activeScene).getCurrentGameSave();
+      currentWeight = cloudGameSave.numNeighbors();
+
+      return currentWeight >= amount;
+    }
     return false;
   }
 

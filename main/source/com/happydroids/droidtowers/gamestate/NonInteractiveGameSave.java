@@ -9,6 +9,8 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridObjectState;
 import com.happydroids.droidtowers.input.CameraController;
 
+import java.util.List;
+
 public class NonInteractiveGameSave extends GameSave {
   public NonInteractiveGameSave(GameSave gameSave) {
     super();
@@ -32,7 +34,7 @@ public class NonInteractiveGameSave extends GameSave {
   }
 
   @Override
-  public void update(OrthographicCamera camera, GameGrid gameGrid) {
+  public void update(OrthographicCamera camera, GameGrid gameGrid, List<String> neighbors) {
 
   }
 }

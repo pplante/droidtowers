@@ -20,11 +20,11 @@ import java.util.HashMap;
 import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServiceObject> {
+public abstract class HappyDroidServiceCollection<CollectionType extends HappyDroidServiceObject> {
   private static final ApiCollectionRunnable NO_OP_API_RUNNABLE = new ApiCollectionRunnable();
 
   private Metadata meta;
-  private List<ApiType> objects;
+  private List<CollectionType> objects;
   private HashMap<String, String> currentFilters;
   private EventBus eventBus;
   private boolean fetching;
@@ -34,7 +34,7 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
     currentFilters = Maps.newHashMap();
   }
 
-  public void fetch(final ApiCollectionRunnable<HappyDroidServiceCollection<ApiType>> apiRunnable) {
+  public void fetch(final ApiCollectionRunnable<HappyDroidServiceCollection<CollectionType>> apiRunnable) {
     HappyDroidService.instance().withNetworkConnection(new Runnable() {
       public void run() {
         fetchBlocking(apiRunnable);
@@ -72,7 +72,7 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
 
   public abstract String getBaseResourceUri();
 
-  public List<ApiType> getObjects() {
+  public List<CollectionType> getObjects() {
     return objects;
   }
 
@@ -80,7 +80,7 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
     return objects == null || objects.isEmpty();
   }
 
-  public void fetchBlocking(ApiCollectionRunnable<HappyDroidServiceCollection<ApiType>> apiRunnable) {
+  public void fetchBlocking(ApiCollectionRunnable<HappyDroidServiceCollection<CollectionType>> apiRunnable) {
     fetching = true;
     if (!HappyDroidService.instance().haveNetworkConnection()) {
       apiRunnable.onError(null, HttpStatusCode.ClientClosedRequest, this);
@@ -101,7 +101,7 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
     apiRunnable.handleResponse(response, this);
   }
 
-  public HappyDroidServiceCollection<ApiType> filterBy(final String fieldName, final String filterValue) {
+  public HappyDroidServiceCollection<CollectionType> filterBy(final String fieldName, final String filterValue) {
     if (currentFilters == null) {
       currentFilters = new HashMap<String, String>();
     }
@@ -111,7 +111,7 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
     return this;
   }
 
-  public HappyDroidServiceCollection<ApiType> filterBy(final String fieldName, long filterValue) {
+  public HappyDroidServiceCollection<CollectionType> filterBy(final String fieldName, long filterValue) {
     return filterBy(fieldName, "" + filterValue);
   }
 
@@ -119,9 +119,9 @@ public abstract class HappyDroidServiceCollection<ApiType extends HappyDroidServ
     fetch(NO_OP_API_RUNNABLE);
   }
 
-  public void add(ApiType object) {
-    for (ApiType apiType : objects) {
-      if (apiType.getResourceUri() != null && apiType.getResourceUri().equals(object.getResourceUri())) {
+  public void add(CollectionType object) {
+    for (CollectionType collectionType : objects) {
+      if (collectionType.getResourceUri() != null && collectionType.getResourceUri().equals(object.getResourceUri())) {
         return;
       }
     }

@@ -13,6 +13,7 @@ import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
 import com.happydroids.droidtowers.types.ProviderType;
 
+import java.text.NumberFormat;
 import java.util.Set;
 
 public enum AchievementThing {
@@ -24,7 +25,7 @@ public enum AchievementThing {
   static String displayStringForThing(AchievementThing thing, double amount, String thingId, ProviderType[] thingProviderTypes) {
     switch (thing) {
       case MONEY:
-        return TowerConsts.CURRENCY_SYMBOL + (int) amount;
+        return TowerConsts.CURRENCY_SYMBOL + NumberFormat.getInstance().format(amount);
       case OBJECT_TYPE:
         return Inflection.pluralize(getThingObjectType(thing, thingId).getName());
       case PROVIDER_TYPE:

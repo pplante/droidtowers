@@ -18,7 +18,6 @@ import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
-import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridObjectState;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
@@ -50,9 +49,11 @@ public class GameSave {
   protected List<GridObjectState> gridObjects;
   @JsonView(Views.All.class)
   protected ArrayList<String> completedAchievements;
+  @JsonView(Views.All.class)
+  protected List<String> neighbors;
   private boolean newGame;
-  private boolean saveToDiskDisabled;
 
+  private boolean saveToDiskDisabled;
   @JsonView({Views.Metadata.class, Views.All.class})
   protected GameSaveMetadata metadata;
   protected int fileFormat = 4;
@@ -102,7 +103,7 @@ public class GameSave {
     newGame = false;
   }
 
-  public void update(OrthographicCamera camera, GameGrid gameGrid) {
+  public void update(OrthographicCamera camera, GameGrid gameGrid, List<String> neighbors) {
     gridSize = gameGrid.getGridSize();
     gridObjects = Lists.newArrayList();
 
@@ -123,7 +124,7 @@ public class GameSave {
     cameraZoom = camera.zoom;
 
     player = Player.instance();
-
+    this.neighbors = neighbors;
     metadata.fileGeneration += 1;
   }
 
@@ -171,12 +172,20 @@ public class GameSave {
     return saveToDiskDisabled;
   }
 
-  public CloudGameSave getCloudGameSave() {
-    return new CloudGameSave(metadata.cloudSaveUri);
-  }
-
   public GameSaveMetadata getMetadata() {
     return metadata;
+  }
+
+  public void setNeighbors(List<String> neighbors) {
+    this.neighbors = neighbors;
+  }
+
+  public int numNeighbors() {
+    if (neighbors != null) {
+      return neighbors.size();
+    }
+
+    return 0;
   }
 
   public static class Views {

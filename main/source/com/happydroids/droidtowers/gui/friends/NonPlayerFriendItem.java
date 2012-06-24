@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerGame;
-import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
+import com.happydroids.droidtowers.gamestate.GameState;
 import com.happydroids.droidtowers.gamestate.server.NonPlayerFriend;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.FontManager;
@@ -17,8 +17,8 @@ import com.happydroids.droidtowers.gui.VibrateClickListener;
 public class NonPlayerFriendItem extends PlayerFriendItem {
   public final NonPlayerFriend profile;
 
-  public NonPlayerFriendItem(NonPlayerFriend profile, CloudGameSave playerGameSave) {
-    super(playerGameSave);
+  public NonPlayerFriendItem(NonPlayerFriend profile, GameState gameState) {
+    super(gameState);
     this.profile = profile;
   }
 

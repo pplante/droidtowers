@@ -15,7 +15,7 @@ import com.happydroids.droidtowers.entities.CloudLayer;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.events.RespondsToWorldSizeChange;
 import com.happydroids.droidtowers.gamestate.GameSave;
-import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
+import com.happydroids.droidtowers.gamestate.GameState;
 import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSaveCollection;
 import com.happydroids.droidtowers.graphics.CityScapeLayer;
@@ -42,15 +42,15 @@ public class ViewNeighborScene extends Scene {
   private GestureDetector gestureDetector;
   private ViewNeighborHUD neighborHUD;
   private GameLayer billboardLayer;
-  private CloudGameSave playerGameSave;
+  private GameState playerGameState;
   private Vector2 worldSize;
   private int neighborGameGridX;
 
   @Override
   public void create(Object... args) {
-    playerGameSave = (CloudGameSave) args[0];
+    playerGameState = (GameState) args[0];
 
-    neighborHUD = new ViewNeighborHUD(playerGameSave);
+    neighborHUD = new ViewNeighborHUD(playerGameState);
     neighborHUD.pack();
     neighborHUD.x = 0;
     neighborHUD.y = Gdx.graphics.getHeight() - neighborHUD.height;
@@ -81,8 +81,8 @@ public class ViewNeighborScene extends Scene {
     worldSize = new Vector2();
     neighborGameGridX = 0;
 
-    createNeighborTowers(playerGameSave.getNeighborGameSaves());
-    playerGameSave.getNeighborGameSaves().events().register(this);
+    createNeighborTowers(playerGameState.getCloudGameSave().getNeighborGameSaves());
+    playerGameState.getCloudGameSave().getNeighborGameSaves().events().register(this);
   }
 
   private void createNeighborTowers(FriendCloudGameSaveCollection friendGameSaves) {
@@ -170,7 +170,7 @@ public class ViewNeighborScene extends Scene {
 
   @Override
   public void dispose() {
-    playerGameSave.getNeighborGameSaves().events().unregister(this);
+    playerGameState.getCloudGameSave().getNeighborGameSaves().events().unregister(this);
     InputSystem.instance().unbind(TowerConsts.NEGATIVE_BUTTON_KEYS, goBackHomeCallback);
   }
 

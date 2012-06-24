@@ -7,7 +7,6 @@ package com.happydroids.droidtowers.scenes;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.entities.GameObject;
 import com.happydroids.droidtowers.gamestate.GameState;
-import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.Dialog;
@@ -20,13 +19,12 @@ import java.util.List;
 public class ViewNeighborSplashScene extends SplashScene {
   private GameObject droid;
   private ViewNeighborSplashScene.FetchNeighborsList fetchNeighborsList;
-  private CloudGameSave playerCloudGameSave;
+  private GameState playerGameState;
 
   @Override
   public void create(Object... args) {
     super.create(args);
-    GameState playerGameState = (GameState) args[0];
-    playerCloudGameSave = playerGameState.getCloudGameSave();
+    playerGameState = (GameState) args[0];
 
     fetchNeighborsList = new FetchNeighborsList();
     fetchNeighborsList.run();
@@ -40,9 +38,9 @@ public class ViewNeighborSplashScene extends SplashScene {
     @Override
     protected void execute() throws Exception {
       if (TowerGameService.instance().isAuthenticated()) {
-        playerCloudGameSave.fetchBlocking();
+        playerGameState.getCloudGameSave().fetchBlocking();
         friendGames = Lists.newArrayList();
-        fetchWasSuccessful = playerCloudGameSave.fetchNeighbors();
+        fetchWasSuccessful = playerGameState.getCloudGameSave().fetchNeighbors();
       }
     }
 
@@ -50,7 +48,7 @@ public class ViewNeighborSplashScene extends SplashScene {
     public synchronized void afterExecute() {
       if (fetchWasSuccessful) {
         SceneManager.popScene();
-        SceneManager.pushScene(ViewNeighborScene.class, playerCloudGameSave, friendGames);
+        SceneManager.pushScene(ViewNeighborScene.class, playerGameState, friendGames);
       } else {
         displayConnectionErrorDialog();
       }

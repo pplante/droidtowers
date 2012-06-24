@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
-import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
+import com.happydroids.droidtowers.gamestate.GameState;
 import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSaveCollection;
 import com.happydroids.droidtowers.gamestate.server.PlayerProfile;
@@ -28,15 +28,15 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class PlayerFriendItem extends Table {
   private PlayerProfile profile;
-  private final CloudGameSave playerGameSave;
+  private final GameState playerGameState;
 
-  public PlayerFriendItem(PlayerProfile profile, CloudGameSave playerGameSave) {
+  public PlayerFriendItem(PlayerProfile profile, GameState playerGameState) {
     this.profile = profile;
-    this.playerGameSave = playerGameSave;
+    this.playerGameState = playerGameState;
   }
 
-  public PlayerFriendItem(CloudGameSave playerGameSave) {
-    this.playerGameSave = playerGameSave;
+  public PlayerFriendItem(GameState playerGameState) {
+    this.playerGameState = playerGameState;
   }
 
   protected String getPlayerName() {
@@ -67,10 +67,10 @@ public class PlayerFriendItem extends Table {
                   @Override
                   public void onSuccess(HttpResponse response, HappyDroidServiceCollection<FriendCloudGameSave> collection) {
                     for (FriendCloudGameSave cloudGameSave : collection.getObjects()) {
-                      playerGameSave.getNeighborGameSaves().add(cloudGameSave);
+                      playerGameState.getCloudGameSave().getNeighborGameSaves().add(cloudGameSave);
                     }
 
-                    playerGameSave.save();
+                    playerGameState.saveGame(true);
                   }
                 });
       }

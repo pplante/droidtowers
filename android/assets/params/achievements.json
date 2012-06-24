@@ -198,9 +198,9 @@
     ],
     "rewards":[
       {
-        "type":"UNLOCK",
-        "thing":"OBJECT_TYPE",
-        "thingId":"JANITORS-CLOSET"
+        "type":"GIVE",
+        "thing":"MONEY",
+        "amount":50000
       }
     ]
   },

@@ -236,4 +236,8 @@ public class TowerScene extends Scene {
       }
     }
   }
+
+  public GameState getGameState() {
+    return gameState;
+  }
 }

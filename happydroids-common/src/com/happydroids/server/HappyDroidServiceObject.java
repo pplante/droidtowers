@@ -22,10 +22,6 @@ import java.lang.reflect.Modifier;
 @JsonFilter(value = "HappyDroidServiceObject")
 public abstract class HappyDroidServiceObject {
   public static final ApiRunnable NO_OP_API_RUNNABLE = new ApiRunnable() {
-    @Override
-    void handleResponse(HttpResponse response, HappyDroidServiceObject ignored) {
-      // stub this so we do not waste cycles.
-    }
   };
 
   private long id;
