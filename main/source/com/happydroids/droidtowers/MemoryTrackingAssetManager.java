@@ -95,4 +95,9 @@ public class MemoryTrackingAssetManager extends AssetManager {
   public float getMemoryInMegabytes() {
     return (float) currentMemory / 1024f / 1024f;
   }
+
+  public void resetMemoryTracking() {
+    currentMemory = 0;
+    memoryPerFile.clear();
+  }
 }

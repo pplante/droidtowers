@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.droidtowers.DebugUtils;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gui.FontManager;
@@ -47,7 +46,7 @@ public class MainMenuScene extends SplashScene {
     addActor(versionLabel);
 
 //    DebugUtils.createNonSavableGame(true);
-    DebugUtils.loadFirstGameFound();
+//    DebugUtils.loadFirstGameFound();
 //    DebugUtils.loadGameFromCloud(19);
   }
 

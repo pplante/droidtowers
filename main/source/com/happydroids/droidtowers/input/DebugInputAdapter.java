@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.input;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.happydroids.droidtowers.TowerAssetManager;
@@ -21,7 +22,12 @@ public class DebugInputAdapter extends InputAdapter {
     switch (keycode) {
       case InputSystem.Keys.F1:
         Texture.invalidateAllTextures(Gdx.app);
+        TowerAssetManager.assetManager().resetMemoryTracking();
         TowerAssetManager.assetManager().finishLoading();
+        return true;
+
+      case Input.Keys.F2:
+        SceneManager.restartActiveScene();
         return true;
     }
 

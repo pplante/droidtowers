@@ -39,9 +39,9 @@ class DataOverlayMenu extends PopOverMenu {
       });
 
 
-      Image actor = new Image(texture(TowerAssetManager.WHITE_SWATCH), Scaling.stretch);
-      actor.color.set(overlay.getColor(1f));
-      actor.setClickListener(new VibrateClickListener() {
+      Image colorSwatch = new Image(texture(TowerAssetManager.WHITE_SWATCH), Scaling.stretch);
+      colorSwatch.color.set(overlay.getColor(1f));
+      colorSwatch.setClickListener(new VibrateClickListener() {
         @Override
         public void onClick(Actor actor, float x, float y) {
           checkBox.click(x, y);
@@ -50,7 +50,7 @@ class DataOverlayMenu extends PopOverMenu {
 
       row().left();
       add(checkBox).pad(0).fillX();
-      add(actor)
+      add(colorSwatch)
               .width(16)
               .height(16);
     }

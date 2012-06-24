@@ -18,6 +18,7 @@ import com.happydroids.droidtowers.input.CameraController;
 import static com.badlogic.gdx.Gdx.graphics;
 
 public abstract class Scene {
+  private Object[] startArgs;
   private static SpriteBatch spriteBatch;
   private final Stage stage;
   protected final OrthographicCamera camera;
@@ -94,5 +95,13 @@ public abstract class Scene {
 
   public CameraController getCameraController() {
     return cameraController;
+  }
+
+  public void setStartArgs(Object[] startArgs) {
+    this.startArgs = startArgs;
+  }
+
+  public Object[] getStartArgs() {
+    return startArgs;
   }
 }

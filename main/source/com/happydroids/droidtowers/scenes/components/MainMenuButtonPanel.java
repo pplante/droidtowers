@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.happydroids.droidtowers.Colors;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.*;
@@ -25,6 +27,10 @@ public class MainMenuButtonPanel extends Table {
   public MainMenuButtonPanel() {
     super();
 
+    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.WHITE_SEMI_TRANSPARENT));
+
+    pad(scale(32));
+
     TextButton newGameButton = FontManager.RobotoBold18.makeTextButton("new tower");
     add(newGameButton).fill().maxWidth(BUTTON_WIDTH);
     row().padTop(BUTTON_SPACING);
@@ -33,8 +39,8 @@ public class MainMenuButtonPanel extends Table {
     add(loadGameButton).fill().maxWidth(BUTTON_WIDTH);
     row().padTop(BUTTON_SPACING);
 
-    TextButton optionsButton = FontManager.RobotoBold18.makeTextButton("options");
-    add(optionsButton).fill().maxWidth(BUTTON_WIDTH);
+    TextButton aboutButton = FontManager.RobotoBold18.makeTextButton("about");
+    add(aboutButton).fill().maxWidth(BUTTON_WIDTH);
     row().padTop(BUTTON_SPACING);
 
     if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT) {
@@ -76,10 +82,10 @@ public class MainMenuButtonPanel extends Table {
       }
     });
 
-    optionsButton.setClickListener(new VibrateClickListener() {
+    aboutButton.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
-        new OptionsWindow(getStage()).show();
+        new AboutWindow(getStage()).show();
       }
     });
 

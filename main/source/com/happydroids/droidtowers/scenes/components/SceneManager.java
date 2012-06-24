@@ -32,6 +32,7 @@ public class SceneManager {
       }
 
       activeScene = sceneClass.newInstance();
+      activeScene.setStartArgs(args);
       activeScene.create(args);
       activeScene.resume();
       InputSystem.instance().addInputProcessor(activeScene.getStage(), 10);
@@ -71,5 +72,11 @@ public class SceneManager {
     }
 
     return null;
+  }
+
+  public static void restartActiveScene() {
+    if (activeScene != null) {
+      changeScene(activeScene.getClass(), activeScene.getStartArgs());
+    }
   }
 }
