@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.GdxNativesLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.happydroids.droidtowers.graphics.Overlays;
 import com.happydroids.droidtowers.utils.PNG;
 
 import java.io.IOException;
@@ -58,10 +57,6 @@ public class GenerateAssetManagerFileList {
     }
 
     makeSwatch(swatchesDir, "swatch-white.png", Color.WHITE);
-
-    for (Overlays overlay : Overlays.values()) {
-      makeSwatch(swatchesDir, overlay.getSwatchFilename(), overlay.getColor(1f));
-    }
 
     preloadDirectory("swatches/", ".png", Texture.class);
 

@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Scaling;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.graphics.Overlays;
 import com.happydroids.droidtowers.grid.GameGridRenderer;
 
@@ -34,7 +35,9 @@ class DataOverlayMenu extends PopOverMenu {
       row().left();
       add(checkBox).pad(0).fillX();
 
-      add(new Image(texture("swatches/" + overlay.getSwatchFilename()), Scaling.stretch))
+      Image actor = new Image(texture(TowerAssetManager.WHITE_SWATCH), Scaling.stretch);
+      actor.color.set(overlay.getColor(1f));
+      add(actor)
               .width(16)
               .height(16);
     }

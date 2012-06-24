@@ -98,6 +98,7 @@
     "height":1,
     "width":2,
     "noiseLevel":0.2,
+    "crimeLevel":0.2,
     "provides":"ENTERTAINMENT",
     "atlasFilename":"rooms/housing.txt",
     "imageFilename":"2x1-bar"
@@ -112,6 +113,7 @@
     "height":1,
     "width":4,
     "noiseLevel":1.0,
+    "crimeLevel":0.2,
     "provides":"ENTERTAINMENT",
     "atlasFilename":"rooms/housing.txt",
     "imageFilename":"4x1-movie-theater"

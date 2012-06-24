@@ -34,6 +34,7 @@ public abstract class GridObjectType {
   protected String imageFilename;
   protected boolean canShareSpace;
   protected float noiseLevel;
+  protected float crimeLevel;
 
   protected ProviderType provides;
   private static WeakHashMap<String, TextureAtlas> atlases;
@@ -80,6 +81,10 @@ public abstract class GridObjectType {
     return noiseLevel;
   }
 
+  public float getCrimeLevel() {
+    return crimeLevel;
+  }
+
   public int getCoinsEarned() {
     return Math.round(coins / 1000);
   }
@@ -116,15 +121,6 @@ public abstract class GridObjectType {
     return objectsOverlapped.size() > 0;
   }
 
-  @Override
-  public String toString() {
-    return "GridObjectType{" +
-                   "name='" + name + '\'' +
-                   ", height=" + height +
-                   ", width=" + width +
-                   '}';
-  }
-
   public TextureRegion getTextureRegion() {
     if (atlasFilename != null) {
       TextureAtlas objectAtlas = getTextureAtlas();
@@ -149,10 +145,6 @@ public abstract class GridObjectType {
     return objectAtlas;
   }
 
-  public boolean isLocked() {
-    return lock != null;
-  }
-
   public String getId() {
     return id;
   }
@@ -169,6 +161,14 @@ public abstract class GridObjectType {
     }
 
     return false;
+  }
+
+  public boolean isLocked() {
+    return lock != null;
+  }
+
+  public Reward getLock() {
+    return lock;
   }
 
   public void addLock(Reward reward) {
@@ -230,7 +230,12 @@ public abstract class GridObjectType {
     return result;
   }
 
-  public Reward getLock() {
-    return lock;
+  @Override
+  public String toString() {
+    return "GridObjectType{" +
+                   "name='" + name + '\'' +
+                   ", height=" + height +
+                   ", width=" + width +
+                   '}';
   }
 }

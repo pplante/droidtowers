@@ -167,13 +167,13 @@ public class GridPositionCache {
   public void updateNoiseLevels() {
     for (GridPosition[] row : gridPositions) {
       for (GridPosition position : row) {
-        position.findMaxNoise();
+        position.findMaxValues();
       }
     }
 
     for (GridPosition[] row : gridPositions) {
       for (GridPosition position : row) {
-        position.calculateNoise(gridPositions);
+        position.calculateValuesForPosition(gridPositions);
       }
     }
   }

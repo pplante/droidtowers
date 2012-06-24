@@ -1,17 +1,13 @@
 {
   "preloadFiles":{
-    "hud/buttons.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
-    "swatches/swatch-white.png":"com.badlogic.gdx.graphics.Texture",
-    "swatches/swatch-ff993f7f.png":"com.badlogic.gdx.graphics.Texture",
-    "hud/action-bar.png":"com.badlogic.gdx.graphics.Texture",
-    "backgrounds/clouds.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
-    "swatches/swatch-ff0000ff.png":"com.badlogic.gdx.graphics.Texture",
     "happy-droid.png":"com.badlogic.gdx.graphics.Texture",
-    "swatches/swatch-ff00ff00.png":"com.badlogic.gdx.graphics.Texture",
+    "swatches/swatch-white.png":"com.badlogic.gdx.graphics.Texture",
     "hud/window-bg.png":"com.badlogic.gdx.graphics.Texture",
+    "hud/buttons.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "swatches/swatch-white-triangle.png":"com.badlogic.gdx.graphics.Texture",
-    "swatches/swatch-ffff0000.png":"com.badlogic.gdx.graphics.Texture",
+    "hud/action-bar.png":"com.badlogic.gdx.graphics.Texture",
     "hud/menus.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
+    "backgrounds/clouds.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "default-skin.json":"com.badlogic.gdx.scenes.scene2d.ui.Skin"
   },
   "normalFiles":{
@@ -19,6 +15,7 @@
     "rain-drop.png":"com.badlogic.gdx.graphics.Texture",
     "backgrounds/clouds.png":"com.badlogic.gdx.graphics.Texture",
     "characters.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
+    "backgrounds/splash-skygradient.png":"com.badlogic.gdx.graphics.Texture",
     "backgrounds/splash1.png":"com.badlogic.gdx.graphics.Texture",
     "fonts/roboto_white_28.fnt":"com.badlogic.gdx.graphics.g2d.BitmapFont",
     "fonts/roboto_white_48.fnt":"com.badlogic.gdx.graphics.g2d.BitmapFont",

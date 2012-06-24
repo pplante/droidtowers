@@ -336,4 +336,8 @@ public abstract class GridObject {
                    ", gridObjectType=" + gridObjectType +
                    '}';
   }
+
+  public float getCrimeLevel() {
+    return gridObjectType.getCrimeLevel();
+  }
 }

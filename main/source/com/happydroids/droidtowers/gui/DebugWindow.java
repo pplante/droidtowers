@@ -8,9 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
+import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.Player;
-import com.happydroids.droidtowers.scenes.TowerScene;
-import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
@@ -18,15 +17,28 @@ public class DebugWindow extends ScrollableTowerWindow {
   public DebugWindow(Stage stage) {
     super("Debug", stage);
 
-    defaults().pad(scale(10));
+    defaults().pad(scale(10)).left();
 
     row();
     add(makeResetAchievementsButton());
+    add(makeCompleteAllAchievementsButton());
 
     row();
     add(makeGiveMoneyButton());
 
     shoveContentUp();
+  }
+
+  private Actor makeCompleteAllAchievementsButton() {
+    TextButton button = FontManager.Roboto24.makeTextButton("Complete all achievements");
+    button.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        AchievementEngine.instance().completeAll();
+        TutorialEngine.instance().completeAll();
+      }
+    });
+    return button;
   }
 
   private TextButton makeGiveMoneyButton() {
@@ -41,12 +53,12 @@ public class DebugWindow extends ScrollableTowerWindow {
   }
 
   private TextButton makeResetAchievementsButton() {
-    TextButton resetAchievements = FontManager.Roboto24.makeTextButton("Reset Achievements");
+    TextButton resetAchievements = FontManager.Roboto24.makeTextButton("Reset all achievements");
     resetAchievements.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
         AchievementEngine.instance().resetState();
-        ((TowerScene) SceneManager.getActiveScene()).getGameState().saveGame(true);
+        TutorialEngine.instance().resetState();
       }
     });
     return resetAchievements;

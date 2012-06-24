@@ -139,7 +139,7 @@
       {
         "type":"UNLOCK",
         "thing":"PROVIDER_TYPE",
-        "thingProviderTypes":["HOUSING", "COMMERCIAL", "TRANSPORT", "SERVICE"]
+        "thingProviderTypes":["HOUSING", "COMMERCIAL", "TRANSPORT", "SERVICE", "SKY_LOBBY"]
       }
     ]
   }

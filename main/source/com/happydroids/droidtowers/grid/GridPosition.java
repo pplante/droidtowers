@@ -21,9 +21,11 @@ public class GridPosition {
   public Stair stair;
   public boolean connectedToTransit;
   public float distanceFromTransit;
-  private float maxNoiseLevel;
-  private float noiseLevel;
   public float normalizedDistanceFromTransit;
+  private float maxNoiseLevel;
+  private float maxCrimeLevel;
+  private float noiseLevel;
+  private float crimeLevel;
 
   public GridPosition(int x, int y) {
     this.x = x;
@@ -105,35 +107,41 @@ public class GridPosition {
     return result;
   }
 
-  public void findMaxNoise() {
+  public void findMaxValues() {
     maxNoiseLevel = 0;
+    maxCrimeLevel = 0;
     for (GridObject gridObject : objects) {
       maxNoiseLevel = Math.max(gridObject.getNoiseLevel(), maxNoiseLevel);
+      maxCrimeLevel = Math.max(gridObject.getCrimeLevel(), maxCrimeLevel);
     }
   }
 
-  public float getMaxNoiseLevel() {
-    return maxNoiseLevel;
-  }
-
-  public void calculateNoise(GridPosition[][] gridPositions) {
+  public void calculateValuesForPosition(GridPosition[][] gridPositions) {
     noiseLevel = 0;
+    crimeLevel = 0;
 
     float totalNoise = 0f;
+    float totalCrime = 0f;
     int distance = 2;
     for (int xx = x - distance; xx < x + distance; xx++) {
       for (int yy = y - distance; yy < y + distance; yy++) {
         if (xx < 0 || yy < 0 || xx >= gridPositions.length || yy >= gridPositions[xx].length) continue;
         if (xx == x && yy == y) continue;
 
-        totalNoise += gridPositions[xx][yy].getMaxNoiseLevel();
+        totalNoise += gridPositions[xx][yy].maxNoiseLevel;
+        totalCrime += gridPositions[xx][yy].maxCrimeLevel;
       }
     }
 
-    noiseLevel = Math.min(1f, getMaxNoiseLevel() + totalNoise / 8);
+    noiseLevel = Math.min(1f, maxNoiseLevel + totalNoise / 8);
+    crimeLevel = Math.min(1f, maxCrimeLevel + totalCrime / 8);
   }
 
   public float getNoiseLevel() {
     return noiseLevel;
+  }
+
+  public float getCrimeLevel() {
+    return crimeLevel;
   }
 }

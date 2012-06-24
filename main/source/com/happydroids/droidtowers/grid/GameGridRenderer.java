@@ -83,10 +83,16 @@ public class GameGridRenderer extends GameLayer {
     Gdx.graphics.getGLCommon().glEnable(GL10.GL_BLEND);
     if (activeOverlays.size() > 0) {
       for (Overlays overlay : activeOverlays) {
-        if (overlay.equals(Overlays.NOISE_LEVEL)) {
-          renderNoiseLevelOverlay();
-        } else {
-          renderGenericOverlay(overlay);
+        switch (overlay) {
+          case NOISE_LEVEL:
+            renderNoiseLevelOverlay();
+            break;
+          case CRIME_LEVEL:
+            renderCrimeLevelOverlay();
+            break;
+          default:
+            renderGenericOverlay(overlay);
+            break;
         }
       }
 
@@ -121,6 +127,24 @@ public class GameGridRenderer extends GameLayer {
         baseColor.a = returnValue;
         shapeRenderer.setColor(baseColor);
         shapeRenderer.filledRect(gridObject.getPosition().getWorldX(), gridObject.getPosition().getWorldY(), gridObject.getSize().getWorldX(), gridObject.getSize().getWorldY());
+      }
+    }
+
+    shapeRenderer.end();
+  }
+
+  private void renderCrimeLevelOverlay() {
+    shapeRenderer.begin(ShapeType.FilledRectangle);
+
+    for (int x = 0; x < gameGrid.gridSize.x; x++) {
+      for (int y = 0; y < gameGrid.gridSize.y; y++) {
+        GridPosition position = gameGrid.positionCache().getPosition(x, y);
+        if (position.getCrimeLevel() > 0.01f) {
+          shapeRenderer.filledRect(x * GRID_UNIT_SIZE, (y - 1) * GRID_UNIT_SIZE, GRID_UNIT_SIZE, GRID_UNIT_SIZE);
+          shapeRenderer.setColor(Overlays.CRIME_LEVEL.getColor(position.getNoiseLevel()));
+        } else {
+          shapeRenderer.setColor(Color.CLEAR);
+        }
       }
     }
 

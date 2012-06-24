@@ -11,37 +11,26 @@ import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Room;
 import com.happydroids.droidtowers.types.CommercialType;
 import com.happydroids.droidtowers.types.RoomType;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 
+import static com.happydroids.droidtowers.ColorUtil.rgba;
+
 public enum Overlays {
-  NOISE_LEVEL {
-    @Override
-    public Color getColor(float alpha) {
-      return new Color(1, 0, 0, alpha);
-    }
-
-    @Override
-    public String toString() {
-      return "Noise";
-    }
-
+  NOISE_LEVEL("#f20000") {
     @Override
     public Function<GridObject, Float> getMethod() {
       return null;
     }
   },
-  POPULATION_LEVEL {
+  CRIME_LEVEL("#8100c2") {
     @Override
-    public Color getColor(float alpha) {
-      return new Color(0, 0, 1, alpha);
+    public Function<GridObject, Float> getMethod() {
+      return null;
     }
-
-    @Override
-    public String toString() {
-      return "Population";
-    }
-
+  },
+  POPULATION_LEVEL("#2000c2") {
     @Override
     public Function<GridObject, Float> getMethod() {
       return new Function<GridObject, Float>() {
@@ -58,17 +47,7 @@ public enum Overlays {
       };
     }
   },
-  EMPLOYMENT_LEVEL {
-    @Override
-    public Color getColor(float alpha) {
-      return new Color(0, 1, 0, alpha);
-    }
-
-    @Override
-    public String toString() {
-      return "Employment";
-    }
-
+  EMPLOYMENT_LEVEL("#00c200") {
     @Override
     public Function<GridObject, Float> getMethod() {
       return new Function<GridObject, Float>() {
@@ -85,17 +64,7 @@ public enum Overlays {
       };
     }
   },
-  DESIRABILITY_LEVEL {
-    @Override
-    public Color getColor(float alpha) {
-      return new Color(0.5f, 0.25f, 0.6f, alpha);
-    }
-
-    @Override
-    public String toString() {
-      return "Desirability";
-    }
-
+  DESIRABILITY_LEVEL("#a3da00") {
     @Override
     public Function<GridObject, Float> getMethod() {
       return new Function<GridObject, Float>() {
@@ -110,13 +79,24 @@ public enum Overlays {
     }
   };
 
-  public abstract String toString();
+  private Overlays(Color color) {
+    this.color = color;
+  }
 
-  public abstract Color getColor(float alpha);
+  private Overlays(String colorAsHex) {
+    this(rgba(colorAsHex));
+  }
+
+  public Color getColor(float alpha) {
+    this.color.a = alpha;
+    return this.color;
+  }
+
+  private final Color color;
+
+  public String toString() {
+    return StringUtils.capitalize(name().substring(0, name().indexOf("_LEVEL")).toLowerCase());
+  }
 
   public abstract Function<GridObject, Float> getMethod();
-
-  public String getSwatchFilename() {
-    return String.format("swatch-%s.png", getColor(1f));
-  }
 }
