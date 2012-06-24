@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
-import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
@@ -21,7 +20,10 @@ import com.happydroids.droidtowers.graphics.Overlays;
 import com.happydroids.droidtowers.graphics.TransitLine;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
@@ -32,7 +34,7 @@ public class GameGridRenderer extends GameLayer {
   protected final OrthographicCamera camera;
   protected boolean shouldRenderGridLines;
   protected final ShapeRenderer shapeRenderer;
-  private HashSet<Overlays> activeOverlays;
+  private Overlays activeOverlay;
   private Map<Overlays, Function<GridObject, Float>> overlayFunctions;
   private Function<GridObject, Integer> objectRenderSortFunction;
   private List<GridObject> objectsRenderOrder;
@@ -50,7 +52,7 @@ public class GameGridRenderer extends GameLayer {
 
     transitLines = Lists.newArrayList();
 
-    activeOverlays = Sets.newHashSet();
+    activeOverlay = null;
 
     objectsRenderOrder = Lists.newArrayList();
     objectRenderSortFunction = new Function<GridObject, Integer>() {
@@ -81,15 +83,10 @@ public class GameGridRenderer extends GameLayer {
     renderGridObjects(spriteBatch);
 
     Gdx.graphics.getGLCommon().glEnable(GL10.GL_BLEND);
-    if (activeOverlays.size() > 0) {
-      for (Overlays overlay : activeOverlays) {
-        if (overlay == Overlays.NOISE_LEVEL) {
-          renderNoiseLevelOverlay();
-        } else {
-          renderGenericOverlay(overlay);
-        }
-      }
-
+    if (activeOverlay == Overlays.NOISE_LEVEL) {
+      renderNoiseLevelOverlay();
+    } else if (activeOverlay != null) {
+      renderGenericOverlay(activeOverlay);
     }
 
     if (shouldRenderTransitLines && transitLines.size() > 0) {
@@ -175,27 +172,16 @@ public class GameGridRenderer extends GameLayer {
     shouldRenderGridLines = !shouldRenderGridLines;
   }
 
-  public void addActiveOverlay(Overlays overlay) {
-    activeOverlays.add(overlay);
+  public void setActiveOverlay(Overlays overlay) {
+    if (activeOverlay == null && overlay.equals(POPULATION_LEVEL)) {
+          TutorialEngine.instance().moveToStepWhenReady("tutorial-finished");
+        }
 
-    if (overlay.equals(POPULATION_LEVEL)) {
-      TutorialEngine.instance().moveToStepWhenReady("tutorial-turn-off-population-overlay");
-    }
-  }
+        activeOverlay = overlay;
 
-  public void removeActiveOverlay(Overlays overlay) {
-    activeOverlays.remove(overlay);
-
-    if (overlay.equals(POPULATION_LEVEL)) {
-      TutorialEngine.instance().moveToStepWhenReady("tutorial-finished");
-    }
-  }
-
-  public void clearOverlays() {
-    if (activeOverlays.contains(POPULATION_LEVEL)) {
-      TutorialEngine.instance().moveToStepWhenReady("tutorial-finished");
-    }
-    activeOverlays.clear();
+        if (activeOverlay == POPULATION_LEVEL && overlay == null) {
+          TutorialEngine.instance().moveToStepWhenReady("tutorial-finished");
+        }
   }
 
   public void updateRenderOrder(ArrayList<GridObject> gridObjects) {

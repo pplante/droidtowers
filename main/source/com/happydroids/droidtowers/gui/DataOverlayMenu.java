@@ -22,41 +22,37 @@ class DataOverlayMenu extends PopOverMenu {
       final CheckBox checkBox = FontManager.Roboto18.makeCheckBox(overlay.toString());
       checkBox.align(Align.LEFT);
       checkBox.getLabelCell().padLeft(0).spaceLeft(scale(8));
-      checkBox.setClickListener(new ClickListener() {
-        public void click(Actor actor, float x, float y) {
+      checkBox.setClickListener(new VibrateClickListener() {
+        public void onClick(Actor actor, float x, float y) {
           if (checkBox.isChecked()) {
-            gameGridRenderer.addActiveOverlay(overlay);
+            for (Actor otherCheckbox : getActors()) {
+              if (otherCheckbox instanceof CheckBox && otherCheckbox != checkBox) {
+                ((CheckBox) otherCheckbox).setChecked(false);
+              }
+            }
+
+            gameGridRenderer.setActiveOverlay(overlay);
           } else {
-            gameGridRenderer.removeActiveOverlay(overlay);
+            gameGridRenderer.setActiveOverlay(null);
           }
+        }
+      });
+
+
+      Image actor = new Image(texture(TowerAssetManager.WHITE_SWATCH), Scaling.stretch);
+      actor.color.set(overlay.getColor(1f));
+      actor.setClickListener(new VibrateClickListener() {
+        @Override
+        public void onClick(Actor actor, float x, float y) {
+          checkBox.click(x, y);
         }
       });
 
       row().left();
       add(checkBox).pad(0).fillX();
-
-      Image actor = new Image(texture(TowerAssetManager.WHITE_SWATCH), Scaling.stretch);
-      actor.color.set(overlay.getColor(1f));
       add(actor)
               .width(16)
               .height(16);
     }
-
-    TextButton clearAllButton = FontManager.Roboto18.makeTextButton("Clear All");
-    clearAllButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        gameGridRenderer.clearOverlays();
-
-        for (Actor child : getActors()) {
-          if (child instanceof CheckBox) {
-            ((CheckBox) child).setChecked(false);
-          }
-        }
-      }
-    });
-
-    row().colspan(2);
-    add(clearAllButton).fillX();
   }
-
 }

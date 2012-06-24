@@ -122,7 +122,7 @@
   {
     "id":"tutorial-turn-off-population-overlay",
     "name":"Population Overlays",
-    "description":"Look at the Apartment you built, notice the blue coloring? This shows there are Droids living there. Overlays provide insight into the management of your Tower's overall success. Now turn off the Population overlay by tapping 'Clear All'",
+    "description":"Look at the Apartment you built, notice the blue coloring? This shows there are Droids living there. Overlays provide insight into the management of your Tower's overall success. Now turn off the Population overlay.",
     "rewards":[
       {
         "type":"UNLOCK",
