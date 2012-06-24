@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.HappyDroidConsts;
+import com.happydroids.droidtowers.Colors;
+import com.happydroids.droidtowers.Strings;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 
@@ -43,9 +45,16 @@ public class AboutWindow extends ScrollableTowerWindow {
     add(willPhillipsButton).spaceBottom(scale(16));
 
     addLabel("Alex Miller", FontManager.Roboto24);
-    addLabel("Lead Artist", FontManager.Roboto18);
+    addLabel("Lead Artist", FontManager.Roboto18).spaceBottom(scale(32));
 
-    addLabel("Device ID: " + TowerGameService.instance().getDeviceId(), FontManager.Roboto18).padTop(scale(50));
+    addLabel("Thank you to the following Friends who helped test:", FontManager.RobotoBold18);
+    row();
+    add(new HorizontalRule(Colors.DARK_GRAY, 1));
+    addLabel(Strings.wrap(Gdx.files.internal("testers.txt").readString(), 100), FontManager.Roboto18);
+
+    row().padTop(scale(50));
+    add(new HorizontalRule(Colors.DARK_GRAY, 1));
+    addLabel("Device ID: " + TowerGameService.instance().getDeviceId(), FontManager.Roboto18);
     addLabel("Game Version: " + HappyDroidConsts.VERSION + " (" + HappyDroidConsts.GIT_SHA.substring(0, 8) + ")", FontManager.Roboto18);
 
     row().spaceTop(scale(40));
