@@ -11,14 +11,14 @@ snail
   index: -1
 achievements-active
   rotate: false
-  xy: 60, 60
+  xy: 60, 237
   size: 58, 58
   orig: 64, 64
   offset: 3, 3
   index: 2
 achievements-active
   rotate: false
-  xy: 60, 1
+  xy: 60, 178
   size: 58, 58
   orig: 64, 64
   offset: 3, 3
@@ -32,127 +32,134 @@ rabbit
   index: -1
 view-neighbors
   rotate: false
-  xy: 178, 60
+  xy: 1, 1
   size: 58, 58
   orig: 64, 64
   offset: 3, 3
   index: -1
 tool-services
   rotate: false
-  xy: 119, 119
+  xy: 178, 1
   size: 58, 58
   orig: 64, 64
   offset: 3, 3
   index: -1
 expand-land-left
   rotate: false
-  xy: 172, 237
+  xy: 1, 296
   size: 52, 58
   orig: 64, 64
   offset: 6, 3
   index: -1
 achievements-active
   rotate: false
-  xy: 119, 60
+  xy: 119, 237
   size: 58, 58
   orig: 64, 64
   offset: 3, 3
   index: 1
 achievements-active
   rotate: false
-  xy: 119, 1
+  xy: 119, 178
   size: 58, 58
   orig: 64, 64
   offset: 3, 3
   index: 5
 overlay-button
   rotate: false
-  xy: 119, 178
+  xy: 178, 60
   size: 58, 58
   orig: 64, 64
   offset: 3, 3
   index: -1
 expand-land-right
   rotate: false
-  xy: 119, 237
+  xy: 178, 237
   size: 52, 58
   orig: 64, 64
   offset: 6, 3
   index: -1
 tool-sell
   rotate: false
-  xy: 178, 119
+  xy: 1, 60
   size: 58, 58
   orig: 64, 64
   offset: 3, 3
   index: -1
-audio-on
-  rotate: false
-  xy: 178, 178
-  size: 58, 58
-  orig: 64, 64
-  offset: 3, 3
-  index: -1
-achievements-active
-  rotate: false
-  xy: 178, 1
-  size: 58, 58
-  orig: 64, 64
-  offset: 3, 3
-  index: 4
-tool-commerce
-  rotate: false
-  xy: 60, 178
-  size: 58, 58
-  orig: 64, 64
-  offset: 3, 3
-  index: -1
-audio-off
-  rotate: false
-  xy: 1, 237
-  size: 58, 58
-  orig: 64, 64
-  offset: 3, 3
-  index: -1
-tool-sprite
-  rotate: false
-  xy: 60, 119
-  size: 58, 58
-  orig: 64, 64
-  offset: 3, 3
-  index: -1
-tool-transit
+debug-menu
   rotate: false
   xy: 1, 119
   size: 58, 58
   orig: 64, 64
   offset: 3, 3
   index: -1
-achievements
+audio-on
   rotate: false
-  xy: 60, 237
+  xy: 60, 119
   size: 58, 58
   orig: 64, 64
   offset: 3, 3
   index: -1
 achievements-active
   rotate: false
-  xy: 1, 60
+  xy: 178, 178
+  size: 58, 58
+  orig: 64, 64
+  offset: 3, 3
+  index: 4
+tool-commerce
+  rotate: false
+  xy: 119, 60
+  size: 58, 58
+  orig: 64, 64
+  offset: 3, 3
+  index: -1
+audio-off
+  rotate: false
+  xy: 119, 119
+  size: 58, 58
+  orig: 64, 64
+  offset: 3, 3
+  index: -1
+tool-sprite
+  rotate: false
+  xy: 119, 1
+  size: 58, 58
+  orig: 64, 64
+  offset: 3, 3
+  index: -1
+tool-transit
+  rotate: false
+  xy: 60, 1
+  size: 58, 58
+  orig: 64, 64
+  offset: 3, 3
+  index: -1
+achievements
+  rotate: false
+  xy: 178, 119
+  size: 58, 58
+  orig: 64, 64
+  offset: 3, 3
+  index: -1
+achievements-active
+  rotate: false
+  xy: 1, 237
   size: 58, 58
   orig: 64, 64
   offset: 3, 3
   index: 3
-tool-housing
+achievements-active
   rotate: false
   xy: 1, 178
   size: 58, 58
   orig: 64, 64
   offset: 3, 3
-  index: -1
-achievements-active
+  index: 7
+tool-housing
   rotate: false
-  xy: 1, 1
+  xy: 60, 60
   size: 58, 58
   orig: 64, 64
   offset: 3, 3
-  index: 7
+  index: -1

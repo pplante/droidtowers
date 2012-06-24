@@ -26,7 +26,7 @@ public enum FontManager {
   Roboto32("fonts/roboto_white_32.fnt", "fonts/roboto_white_48.fnt"),
   Roboto64("fonts/roboto_white_64.fnt", "fonts/roboto_white_96.fnt"),
   Roboto64WithShadow("fonts/roboto_white_with_shadow_64.fnt", "fonts/roboto_white_with_shadow_64.fnt"),
-  Roboto24("fonts/roboto_white_24.fnt", "fonts/roboto_white_36.fnt"),
+  Roboto24("fonts/roboto_white_24.fnt", "fonts/roboto_white_36.fnt", 8, 16),
   Roboto12("fonts/roboto_white_12.fnt", "fonts/roboto_white_18.fnt"),
   BankGothic32("fonts/bank_gothic_32.fnt", Color.WHITE); // elevators shouldn't scale!
 
