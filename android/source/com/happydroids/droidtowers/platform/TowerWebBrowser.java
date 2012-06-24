@@ -9,15 +9,20 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import com.happydroids.droidtowers.R;
 
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.view.Window.FEATURE_NO_TITLE;
 import static android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN;
 
@@ -28,7 +33,7 @@ public class TowerWebBrowser extends Dialog {
 
   private WebView webView;
   private Activity activity;
-  private ProgressDialog mSpinner;
+  private ProgressDialog progressDialog;
   private FrameLayout container;
   private final String uriToLoad;
 
@@ -42,21 +47,32 @@ public class TowerWebBrowser extends Dialog {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    mSpinner = new ProgressDialog(getContext());
-    mSpinner.requestWindowFeature(FEATURE_NO_TITLE);
-    mSpinner.setCancelable(false);
-    mSpinner.setMessage("Loading...");
+    progressDialog = new ProgressDialog(getContext());
+    progressDialog.requestWindowFeature(FEATURE_NO_TITLE);
+    progressDialog.setCancelable(false);
+    progressDialog.setMessage("Loading...");
 
     requestWindowFeature(FEATURE_NO_TITLE);
 
     buildWebView();
 
     container = new FrameLayout(getContext());
-    LinearLayout webViewContainer = new LinearLayout(getContext());
 
+    ImageView closeImage = new ImageView(getContext());
+    closeImage.setImageResource(R.drawable.close);
+    closeImage.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        TowerWebBrowser.this.dismiss();
+      }
+    });
+
+    LinearLayout webViewContainer = new LinearLayout(getContext());
     webViewContainer.addView(webView);
     webViewContainer.setPadding(20, 20, 20, 20);
+
     container.addView(webViewContainer);
+    container.addView(closeImage, new ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
 
     addContentView(container, FILL);
   }
@@ -64,8 +80,11 @@ public class TowerWebBrowser extends Dialog {
   private void buildWebView() {
     webView = new WebView(getContext());
     webView.setLayoutParams(FILL);
+    webView.setHorizontalScrollBarEnabled(false);
+    webView.setVerticalScrollBarEnabled(false);
     webView.getSettings().setJavaScriptEnabled(true);
     webView.getSettings().setSavePassword(false);
+    webView.getSettings().setSaveFormData(false);
 
     webView.setWebChromeClient(new WebChromeClient() {
       @Override
@@ -82,15 +101,17 @@ public class TowerWebBrowser extends Dialog {
 
       @Override
       public void onPageStarted(WebView view, String url, Bitmap favicon) {
-        mSpinner.show();
-        mSpinner.getWindow().setFlags(FLAG_FULLSCREEN, FLAG_FULLSCREEN);
+        progressDialog.show();
+        progressDialog.getWindow().setFlags(FLAG_FULLSCREEN, FLAG_FULLSCREEN);
       }
 
       @Override
       public void onPageFinished(WebView view, String url) {
-        mSpinner.dismiss();
+        super.onPageFinished(view, url);
+        progressDialog.dismiss();
 
         setTitle(view.getTitle());
+        container.setBackgroundColor(Color.TRANSPARENT);
       }
     });
 
