@@ -59,6 +59,7 @@ public class TowerScene extends Scene {
   private AchievementEngineCheck achievementEngineCheck;
   private AvatarLayer avatarLayer;
   private StarRatingCalculator starRatingCalculator;
+  private CrimeCalculator crimeCalculator;
 
   public TowerScene() {
     gameSaveLocation = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
@@ -117,13 +118,14 @@ public class TowerScene extends Scene {
     achievementEngineCheck = new AchievementEngineCheck(gameGrid, TowerConsts.ACHIEVEMENT_ENGINE_FREQUENCY);
     saveAction = new GameSaveAction(gameState);
     transportCalculator = new TransportCalculator(gameGrid, TowerConsts.TRANSPORT_CALCULATOR_FREQUENCY);
-    transportCalculator.run();
+    crimeCalculator = new CrimeCalculator(gameGrid, TowerConsts.CRIME_CALCULATOR_FREQUENCY);
 
     attachActions();
   }
 
   private void attachActions() {
     ActionManager.instance().addAction(transportCalculator);
+    ActionManager.instance().addAction(crimeCalculator);
     ActionManager.instance().addAction(populationCalculator);
     ActionManager.instance().addAction(budgetCalculator);
     ActionManager.instance().addAction(employmentCalculator);
@@ -131,6 +133,7 @@ public class TowerScene extends Scene {
     ActionManager.instance().addAction(starRatingCalculator);
     ActionManager.instance().addAction(achievementEngineCheck);
     transportCalculator.run();
+    crimeCalculator.run();
     desirabilityCalculator.run();
     populationCalculator.run();
     employmentCalculator.run();
@@ -144,6 +147,7 @@ public class TowerScene extends Scene {
   private void detachActions() {
     ActionManager.instance().removeAction(achievementEngineCheck);
     ActionManager.instance().removeAction(transportCalculator);
+    ActionManager.instance().removeAction(crimeCalculator);
     ActionManager.instance().removeAction(populationCalculator);
     ActionManager.instance().removeAction(budgetCalculator);
     ActionManager.instance().removeAction(employmentCalculator);

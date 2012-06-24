@@ -83,16 +83,10 @@ public class GameGridRenderer extends GameLayer {
     Gdx.graphics.getGLCommon().glEnable(GL10.GL_BLEND);
     if (activeOverlays.size() > 0) {
       for (Overlays overlay : activeOverlays) {
-        switch (overlay) {
-          case NOISE_LEVEL:
-            renderNoiseLevelOverlay();
-            break;
-          case CRIME_LEVEL:
-            renderCrimeLevelOverlay();
-            break;
-          default:
-            renderGenericOverlay(overlay);
-            break;
+        if (overlay == Overlays.NOISE_LEVEL) {
+          renderNoiseLevelOverlay();
+        } else {
+          renderGenericOverlay(overlay);
         }
       }
 
@@ -110,6 +104,7 @@ public class GameGridRenderer extends GameLayer {
   private void makeOverlayFunctions() {
     overlayFunctions = new HashMap<Overlays, Function<GridObject, Float>>();
 
+    overlayFunctions.put(Overlays.CRIME_LEVEL, Overlays.CRIME_LEVEL.getMethod());
     overlayFunctions.put(Overlays.EMPLOYMENT_LEVEL, Overlays.EMPLOYMENT_LEVEL.getMethod());
     overlayFunctions.put(Overlays.POPULATION_LEVEL, Overlays.POPULATION_LEVEL.getMethod());
     overlayFunctions.put(Overlays.DESIRABILITY_LEVEL, Overlays.DESIRABILITY_LEVEL.getMethod());
@@ -127,24 +122,6 @@ public class GameGridRenderer extends GameLayer {
         baseColor.a = returnValue;
         shapeRenderer.setColor(baseColor);
         shapeRenderer.filledRect(gridObject.getPosition().getWorldX(), gridObject.getPosition().getWorldY(), gridObject.getSize().getWorldX(), gridObject.getSize().getWorldY());
-      }
-    }
-
-    shapeRenderer.end();
-  }
-
-  private void renderCrimeLevelOverlay() {
-    shapeRenderer.begin(ShapeType.FilledRectangle);
-
-    for (int x = 0; x < gameGrid.gridSize.x; x++) {
-      for (int y = 0; y < gameGrid.gridSize.y; y++) {
-        GridPosition position = gameGrid.positionCache().getPosition(x, y);
-        if (position.getCrimeLevel() > 0.01f) {
-          shapeRenderer.filledRect(x * GRID_UNIT_SIZE, (y - 1) * GRID_UNIT_SIZE, GRID_UNIT_SIZE, GRID_UNIT_SIZE);
-          shapeRenderer.setColor(Overlays.CRIME_LEVEL.getColor(position.getNoiseLevel()));
-        } else {
-          shapeRenderer.setColor(Color.CLEAR);
-        }
       }
     }
 

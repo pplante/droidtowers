@@ -31,15 +31,15 @@ public class Janitor extends Avatar {
 
   @Override
   public void beginNextAction() {
-    List<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
+    List<GridObject> commercialSpaces = gameGrid.getObjects();
     if (commercialSpaces != null) {
       List<GridObject> sortedObjects = Ordering.natural().onResultOf(new Function<GridObject, Long>() {
         public Long apply(@Nullable GridObject gridObject) {
-          return ((CommercialSpace) gridObject).getLastCleanedAt();
+          return gridObject.getLastServicedAt();
         }
       }).sortedCopy(Iterables.filter(commercialSpaces, new Predicate<GridObject>() {
         public boolean apply(@Nullable GridObject input) {
-          return ((CommercialSpace) input).getNumVisitors() > 0 && input.getGridObjectType().provides(servicesTheseProviderTypes);
+          return input.getNumVisitors() > 0 && input.getGridObjectType().provides(servicesTheseProviderTypes);
         }
       }));
 

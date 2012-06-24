@@ -13,8 +13,6 @@ public class CommercialSpace extends Room {
   private int attractedPopulation;
   private int jobsFilled;
   private long lastJobUpdateTime;
-  private int numVisitors;
-  private long lastCleanedAt;
 
   public CommercialSpace(CommercialType commercialType, GameGrid gameGrid) {
     super(commercialType, gameGrid);
@@ -82,25 +80,8 @@ public class CommercialSpace extends Room {
     return 0;
   }
 
-  public void recordVisitor(Avatar avatar) {
-    if (avatar instanceof Janitor || avatar instanceof Maid) {
-      numVisitors = 0;
-      lastCleanedAt = System.currentTimeMillis();
-    } else {
-      numVisitors += 1;
-    }
-  }
-
-  public int getNumVisitors() {
-    return numVisitors;
-  }
-
   @Override
   public float getDesirability() {
-    return MathUtils.clamp(super.getDesirability() - (0.1f * numVisitors), 0f, 1f);
-  }
-
-  public long getLastCleanedAt() {
-    return lastCleanedAt;
+    return MathUtils.clamp(super.getDesirability() - (0.1f * getNumVisitors()), 0f, 1f);
   }
 }

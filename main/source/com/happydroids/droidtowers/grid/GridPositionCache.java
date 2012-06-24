@@ -200,4 +200,27 @@ public class GridPositionCache {
       }
     }
   }
+
+  public void normalizeSecurityDistances() {
+    float minVal = Float.MAX_VALUE;
+    float maxVal = Float.MIN_VALUE;
+    for (GridPosition[] row : gridPositions) {
+      for (GridPosition position : row) {
+        minVal = Math.min(position.distanceFromSecurity, minVal);
+        maxVal = Math.max(position.distanceFromSecurity, maxVal);
+      }
+    }
+
+    if (maxVal != Float.MIN_VALUE) {
+      for (GridPosition[] row : gridPositions) {
+        for (GridPosition position : row) {
+          if (position.distanceFromSecurity > 5) {
+            position.normalizedDistanceFromSecurity = position.distanceFromSecurity / maxVal;
+          } else {
+            position.normalizedDistanceFromSecurity = 0f;
+          }
+        }
+      }
+    }
+  }
 }

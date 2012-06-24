@@ -30,6 +30,8 @@ import java.util.LinkedList;
 import java.util.Set;
 
 import static com.happydroids.droidtowers.math.Direction.LEFT;
+import static com.happydroids.droidtowers.types.ProviderType.COMMERCIAL;
+import static com.happydroids.droidtowers.types.ProviderType.RESTROOM;
 
 public class Avatar extends GameObject {
   public static final float FRAME_DURATION = 0.25f;
@@ -54,6 +56,7 @@ public class Avatar extends GameObject {
   private boolean justWandered;
   private Room home;
   private float hungerLevel;
+  private LinkedList<Object> lastVisitedPlaces;
 
   public Avatar(AvatarLayer avatarLayer) {
     super();
@@ -71,6 +74,7 @@ public class Avatar extends GameObject {
 
     walkAnimation = new Animation(FRAME_DURATION, droidAtlas.findRegions(addFramePrefix("walk")));
     walkAnimationTime = 0f;
+    lastVisitedPlaces = Lists.newLinkedList();
   }
 
   protected String addFramePrefix(String frameName) {
@@ -82,13 +86,17 @@ public class Avatar extends GameObject {
   }
 
   public void beginNextAction() {
+    justWandered = false;
+
     LinkedList<GridObject> objects = gameGrid.getObjects();
     if (objects != null) {
       objects = Lists.newLinkedList(Iterables.filter(objects, new Predicate<GridObject>() {
         public boolean apply(@Nullable GridObject gridObject) {
-          return gridObject instanceof Room && ((Room) gridObject).isConnectedToTransport();
+          return (gridObject.provides(COMMERCIAL, RESTROOM) || gridObject.equals(home)) && gridObject.isConnectedToTransport();
         }
       }));
+
+      objects.removeAll(lastVisitedPlaces);
 
       if (objects.size() > 0) {
         navigateToGridObject(objects.getFirst());
@@ -145,8 +153,12 @@ public class Avatar extends GameObject {
   }
 
   private void afterReachingTarget() {
-    if (movingTo instanceof CommercialSpace) {
-      CommercialSpace.class.cast(movingTo).recordVisitor(this);
+    if (movingTo != null) {
+      movingTo.recordVisitor(this);
+      lastVisitedPlaces.add(movingTo);
+      if (lastVisitedPlaces.size() > 3) {
+        lastVisitedPlaces.pop();
+      }
     }
 
     if (!justWandered) {

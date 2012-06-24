@@ -54,6 +54,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   private final HeaderButtonBar headerButtonBar;
   private AchievementButton achievementButton;
 
+
   public HeadsUpDisplay(Stage stage, OrthographicCamera camera, CameraController cameraController, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine, GameState gameState) {
     super();
 
@@ -233,20 +234,20 @@ public class HeadsUpDisplay extends WidgetGroup {
       if (gridPosition != null) {
         int totalVisitors = 0;
         int residents = 0;
-        float pointNoiseLevel = gridPosition.getNoiseLevel();
         float objectNoiseLevel = 0f;
         float desirabilityLevel = 0f;
+        float objectCrimeLevel = 0f;
         Set<String> objectNames = Sets.newHashSet();
         for (GridObject gridObject : gridPosition.getObjects()) {
           if (gridObject instanceof CommercialSpace) {
-            totalVisitors = Math.max(((CommercialSpace) gridObject).getNumVisitors(), totalVisitors);
+            totalVisitors = Math.max(gridObject.getNumVisitors(), totalVisitors);
           } else if (gridObject instanceof Room) {
             residents = ((Room) gridObject).getCurrentResidency();
           }
 
-
           objectNoiseLevel = gridObject.getNoiseLevel();
           desirabilityLevel = gridObject.getDesirability();
+          objectCrimeLevel = gridObject.getCrimeLevel();
 
           objectNames.add(gridObject.getGridObjectType().getName());
         }
@@ -256,24 +257,35 @@ public class HeadsUpDisplay extends WidgetGroup {
         mouseToolTip.setText(String.format("%s\n" +
                                                    "objects: %s\n" +
                                                    "%s\n" +
+                                                   "transit: %s\n" +
+                                                   "security: %s\n" +
                                                    "elevator: %s\n" +
                                                    "stairs: %s\n" +
                                                    "visitors: %d\n" +
                                                    "population: %d\n" +
+                                                   "point crime: %.2f\n" +
+                                                   "object crime: %.2f\n" +
                                                    "point noise: %.2f\n" +
                                                    "object noise: %.2f\n" +
                                                    "desirability: %.2f\n" +
-                                                   "trans dist: %.0f", gridPointAtMouse,
+                                                   "trans dist: %.0f\n" +
+                                                   "security dist: %.0f",
+                                                  gridPointAtMouse,
                                                   gridPosition.size(),
                                                   Joiner.on(", ").join(objectNames),
+                                                  gridPosition.connectedToTransit,
+                                                  gridPosition.connectedToSecurity,
                                                   gridPosition.elevator != null,
                                                   gridPosition.stair != null,
                                                   totalVisitors,
                                                   residents,
-                                                  pointNoiseLevel,
+                                                  gridPosition.getCrimeLevel(),
+                                                  objectCrimeLevel,
+                                                  gridPosition.getNoiseLevel(),
                                                   objectNoiseLevel,
                                                   desirabilityLevel,
-                                                  gridPosition.distanceFromTransit));
+                                                  gridPosition.distanceFromTransit,
+                                                  gridPosition.distanceFromSecurity));
         mouseToolTip.x = x + 15;
         mouseToolTip.y = y + 15;
       } else {

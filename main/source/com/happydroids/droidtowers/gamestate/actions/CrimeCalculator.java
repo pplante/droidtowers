@@ -5,55 +5,21 @@
 package com.happydroids.droidtowers.gamestate.actions;
 
 import com.google.common.eventbus.Subscribe;
-import com.happydroids.droidtowers.entities.*;
+import com.happydroids.droidtowers.entities.GridObject;
+import com.happydroids.droidtowers.entities.ServiceRoom;
 import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.ProviderType;
 
-public class TransportCalculator extends GameGridAction {
-  private static final String TAG = TransportCalculator.class.getSimpleName();
+public class CrimeCalculator extends GameGridAction {
+  private static final String TAG = CrimeCalculator.class.getSimpleName();
 
-  private final Class transportClasses[] = {Elevator.class, Stair.class};
-  private final Class roomClasses[] = {Room.class, CommercialSpace.class};
-
-  public TransportCalculator(GameGrid gameGrid, float frequency) {
+  public CrimeCalculator(GameGrid gameGrid, float frequency) {
     super(gameGrid, frequency, false);
 
     gameGrid.events().register(this);
-  }
-
-  @Override
-  public void run() {
-    for (GridPosition[] gridPositions : gameGrid.positionCache().getPositions()) {
-      for (GridPosition gridPosition : gridPositions) {
-        gridPosition.connectedToTransit = false;
-        gridPosition.distanceFromTransit = 0f;
-      }
-    }
-
-    for (GridObject gridObject : gameGrid.getInstancesOf(roomClasses)) {
-      gridObject.setConnectedToTransport(gridObject.provides(ProviderType.LOBBY));
-    }
-
-    for (GridObject transport : gameGrid.getInstancesOf(transportClasses)) {
-      if (!transport.isPlaced()) continue;
-
-      for (GridPoint gridPoint : transport.getGridPointsTouched()) {
-        int x = gridPoint.x;
-        int y = gridPoint.y;
-
-        GridPosition gridPosition = gameGrid.positionCache().getPosition(x, y);
-        if (gridPosition != null) {
-          gridPosition.connectedToTransit = true;
-          scanForRooms(x, y, -1, gridPosition.x);
-          scanForRooms(x, y, 1, gridPosition.x);
-        }
-      }
-    }
-
-    gameGrid.positionCache().normalizeTransitDistances();
   }
 
   @Subscribe
@@ -63,16 +29,47 @@ public class TransportCalculator extends GameGridAction {
     reset();
   }
 
-  private void scanForRooms(int x, int y, int stepX, int transitX) {
+  @Override
+  public void run() {
+    for (GridPosition[] gridPositions : gameGrid.positionCache().getPositions()) {
+      for (GridPosition gridPosition : gridPositions) {
+        gridPosition.connectedToSecurity = false;
+        gridPosition.distanceFromSecurity = 0f;
+        gridPosition.normalizedDistanceFromSecurity = 0f;
+      }
+    }
+
+    for (GridObject gridObject : gameGrid.getObjects()) {
+      gridObject.setConnectedToSecurity(gridObject.provides(ProviderType.SECURITY));
+    }
+
+    for (GridObject serviceRoom : gameGrid.getInstancesOf(ServiceRoom.class)) {
+      if (!serviceRoom.isPlaced()) continue;
+
+      for (GridPoint gridPoint : serviceRoom.getGridPointsTouched()) {
+        int x = gridPoint.x;
+        int y = gridPoint.y;
+
+        GridPosition gridPosition = gameGrid.positionCache().getPosition(x, y);
+        if (gridPosition != null) {
+          gridPosition.connectedToSecurity = true;
+
+          scanForRooms(x, y, -1, gridPosition.x);
+          scanForRooms(x, y, 1, gridPosition.x);
+        }
+      }
+    }
+
+    gameGrid.positionCache().normalizeSecurityDistances();
+  }
+
+  private void scanForRooms(int x, int y, int stepX, int parentPosX) {
     GridPosition gridPosition = gameGrid.positionCache().getPosition(x, y);
     while (gridPosition != null && gridPosition.size() > 0) {
-      gridPosition.connectedToTransit = true;
-      gridPosition.distanceFromTransit = Math.abs(x - transitX);
+      gridPosition.connectedToSecurity = true;
+      gridPosition.distanceFromSecurity = Math.abs(x - parentPosX);
       for (GridObject gridObject : gridPosition.getObjects()) {
-        if (gridObject instanceof Room) {
-          Room room = (Room) gridObject;
-          room.setConnectedToTransport(true);
-        }
+        gridObject.setConnectedToSecurity(true);
       }
 
       x += stepX;

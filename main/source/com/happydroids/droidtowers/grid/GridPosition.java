@@ -22,6 +22,9 @@ public class GridPosition {
   public boolean connectedToTransit;
   public float distanceFromTransit;
   public float normalizedDistanceFromTransit;
+  public boolean connectedToSecurity;
+  public float distanceFromSecurity;
+  public float normalizedDistanceFromSecurity;
   private float maxNoiseLevel;
   private float maxCrimeLevel;
   private float noiseLevel;

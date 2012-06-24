@@ -20,6 +20,7 @@ import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.GridObjectType;
+import com.happydroids.droidtowers.types.ProviderType;
 
 import java.util.List;
 import java.util.Set;
@@ -40,6 +41,12 @@ public abstract class GridObject {
   private Vector2 worldTop;
   private Rectangle worldBounds;
   protected boolean placed;
+  protected boolean connectedToTransport;
+  private boolean connectedToSecurity;
+  protected int numVisitors;
+  protected long lastCleanedAt;
+  protected float surroundingNoiseLevel;
+  protected float surroundingCrimeLevel;
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
@@ -339,5 +346,58 @@ public abstract class GridObject {
 
   public float getCrimeLevel() {
     return gridObjectType.getCrimeLevel();
+  }
+
+  public boolean isConnectedToSecurity() {
+    return connectedToSecurity;
+  }
+
+  public void setConnectedToTransport(boolean connectedToTransport) {
+    this.connectedToTransport = connectedToTransport;
+  }
+
+  public boolean isConnectedToTransport() {
+    return connectedToTransport && placed;
+  }
+
+  public void setConnectedToSecurity(boolean connectedToSecurity) {
+    this.connectedToSecurity = connectedToSecurity;
+  }
+
+  public boolean provides(ProviderType... providerType) {
+    return gridObjectType.provides(providerType);
+  }
+
+  public int getNumVisitors() {
+    return numVisitors;
+  }
+
+  public long getLastServicedAt() {
+    return lastCleanedAt;
+  }
+
+  public void recordVisitor(Avatar avatar) {
+    if (avatar instanceof Janitor || avatar instanceof Maid) {
+      numVisitors = 0;
+      lastCleanedAt = System.currentTimeMillis();
+    } else {
+      numVisitors += 1;
+    }
+  }
+
+  public float getNormalizedCrimeLevel() {
+    if (getCrimeLevel() > 0f) {
+      return getCrimeLevel() * Math.max(1, getNumVisitors()) - gameGrid.positionCache().getPosition(position).normalizedDistanceFromSecurity;
+    } else {
+      return 0;
+    }
+  }
+
+  public void setSurroundingNoiseLevel(float noise) {
+    surroundingNoiseLevel = noise;
+  }
+
+  public void setSurroundingCrimeLevel(float crimeLevel) {
+    surroundingCrimeLevel = crimeLevel;
   }
 }

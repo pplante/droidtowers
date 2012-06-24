@@ -5,8 +5,8 @@
 package com.happydroids.droidtowers.gamestate.actions;
 
 import com.happydroids.droidtowers.entities.GridObject;
-import com.happydroids.droidtowers.entities.Room;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.math.GridPoint;
 
 import java.util.LinkedList;
 
@@ -26,19 +26,21 @@ public class DesirabilityCalculator extends GameGridAction {
     LinkedList<GridObject> rooms = gameGrid.getObjects();
     if (rooms != null) {
       for (GridObject gridObject : rooms) {
-        if (!(gridObject instanceof Room)) continue;
-
-        Room room = (Room) gridObject;
-
         float maxNoiseLevel = 0f;
+        float maxCrimeLevel = 0f;
 
-        for (int x = room.getPosition().x; x < room.getPosition().x + room.getSize().x; x++) {
-          for (int y = room.getPosition().y; y < room.getPosition().y + room.getSize().y; y++) {
+        GridPoint position = gridObject.getPosition();
+        GridPoint size = gridObject.getSize();
+
+        for (int x = position.x; x < position.x + size.x; x++) {
+          for (int y = position.y; y < position.y + size.y; y++) {
             maxNoiseLevel = Math.max(maxNoiseLevel, gameGrid.positionCache().getPosition(x, y).getNoiseLevel());
+            maxCrimeLevel = Math.max(maxCrimeLevel, gameGrid.positionCache().getPosition(x, y).getCrimeLevel());
           }
         }
 
-        room.setSurroundingNoiseLevel(maxNoiseLevel);
+        gridObject.setSurroundingNoiseLevel(maxNoiseLevel);
+        gridObject.setSurroundingCrimeLevel(maxCrimeLevel);
       }
     }
   }

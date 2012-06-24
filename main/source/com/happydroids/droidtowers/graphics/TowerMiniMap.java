@@ -7,15 +7,10 @@ package com.happydroids.droidtowers.graphics;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.ui.Align;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.events.WeatherState;
-import com.happydroids.droidtowers.gamestate.actions.GameGridTransportCalculationComplete;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
 import com.happydroids.droidtowers.math.GridPoint;
@@ -85,20 +80,5 @@ public class TowerMiniMap extends Table {
     }
 
     return pixmap;
-  }
-
-  //  @Subscribe
-  public void GameGrid_onGameGridTransportCalculationComplete(GameGridTransportCalculationComplete event) {
-    Gdx.app.debug(TAG, "Requesting redraw because the game grid recalculated transport.");
-    if (pixmap != null) {
-      pixmap.dispose();
-    }
-
-    pixmap = redrawMiniMap(gameGrid, false, 1f);
-
-    clear();
-    Image image = new Image(new Texture(pixmap), Scaling.fit, Align.CENTER | Align.BOTTOM);
-    add(image).size(150, 150);
-    pack();
   }
 }

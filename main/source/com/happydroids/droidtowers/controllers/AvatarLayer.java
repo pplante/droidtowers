@@ -22,11 +22,13 @@ import java.util.List;
 
 import static com.happydroids.droidtowers.types.ProviderType.JANITORS;
 import static com.happydroids.droidtowers.types.ProviderType.MAIDS;
+import static com.happydroids.droidtowers.types.ProviderType.SECURITY;
 
 public class AvatarLayer extends GameLayer {
   private static final String TAG = AvatarLayer.class.getSimpleName();
 
   private final GameGrid gameGrid;
+  private int specialAvatars;
 
   public AvatarLayer(GameGrid gameGrid) {
     super();
@@ -59,7 +61,7 @@ public class AvatarLayer extends GameLayer {
   }
 
   private int maxAvatars() {
-    return (int) Math.min(Player.instance().getTotalPopulation() * TowerConsts.AVATAR_POPULATION_SCALE, TowerConsts.MAX_AVATARS);
+    return (int) Math.min(Player.instance().getTotalPopulation() * TowerConsts.AVATAR_POPULATION_SCALE, TowerConsts.MAX_AVATARS) + specialAvatars;
   }
 
   private void setupAvatar(Avatar avatar) {
@@ -79,6 +81,10 @@ public class AvatarLayer extends GameLayer {
 
     if (!positionSet) {
       avatar.setPosition(Random.randomInt(-avatar.getWidth(), gameGrid.getWorldSize().x + avatar.getWidth()), TowerConsts.GROUND_HEIGHT);
+    }
+
+    if(avatar instanceof Janitor) {
+      specialAvatars++;
     }
 
     addChild(avatar);
@@ -108,6 +114,10 @@ public class AvatarLayer extends GameLayer {
         setupAvatar(new Maid(this));
         setupAvatar(new Maid(this));
         setupAvatar(new Maid(this));
+      } else if (roomType.provides(ProviderType.SECURITY)) {
+        setupAvatar(new SecurityGuard(this));
+        setupAvatar(new SecurityGuard(this));
+        setupAvatar(new SecurityGuard(this));
       }
     }
   }
@@ -118,16 +128,23 @@ public class AvatarLayer extends GameLayer {
 
     if ((gridObject instanceof Room) && gridObject.isPlaced()) {
       RoomType roomType = (RoomType) gridObject.getGridObjectType();
-      if (!roomType.provides(MAIDS, JANITORS)) return;
+      if (!roomType.provides(MAIDS, JANITORS, SECURITY)) return;
 
       int numDeleted = 0;
-      for (GameObject gameObject : gameObjects) {
+      for (GameObject avatar : gameObjects) {
         if (numDeleted > 3) break;
 
-        if (gameObject instanceof Maid && roomType.provides(MAIDS) || gameObject instanceof Janitor && roomType.provides(JANITORS)) {
-          gameObject.markToRemove(true);
-          numDeleted++;
+        if (!(avatar instanceof Maid) || !roomType.provides(MAIDS)) {
+          continue;
+        } else if (!(avatar instanceof Janitor) || !roomType.provides(JANITORS)) {
+          continue;
+        } else if (!(avatar instanceof SecurityGuard) || !roomType.provides(JANITORS)) {
+          continue;
         }
+
+        avatar.markToRemove(true);
+        numDeleted++;
+        specialAvatars--;
       }
     }
   }

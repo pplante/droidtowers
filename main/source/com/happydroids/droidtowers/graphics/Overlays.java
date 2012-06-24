@@ -27,7 +27,11 @@ public enum Overlays {
   CRIME_LEVEL("#8100c2") {
     @Override
     public Function<GridObject, Float> getMethod() {
-      return null;
+      return new Function<GridObject, Float>() {
+        public Float apply(@Nullable GridObject gridObject) {
+          return gridObject.getNormalizedCrimeLevel();
+        }
+      };
     }
   },
   POPULATION_LEVEL("#2000c2") {

@@ -19,7 +19,6 @@ import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.NeighborGameGrid;
 import com.happydroids.droidtowers.math.GridPoint;
-import com.happydroids.droidtowers.types.ProviderType;
 import com.happydroids.droidtowers.types.RoomType;
 
 public class Room extends GridObject {
@@ -33,14 +32,10 @@ public class Room extends GridObject {
   private long lastUpdateTime;
   protected int currentResidency;
   private int populationRequired;
-  private boolean connectedToTransport;
-  private float surroundingNoiseLevel;
   private Avatar resident;
 
   public Room(RoomType roomType, GameGrid gameGrid) {
     super(roomType, gameGrid);
-
-    connectedToTransport = roomType.provides(ProviderType.LOBBY);
 
     if (labelFont == null) {
       labelFont = TowerAssetManager.bitmapFont("fonts/helvetica_neue_18.fnt");
@@ -49,8 +44,8 @@ public class Room extends GridObject {
     if (roomType.getTextureRegion() != null) {
       sprite = new Sprite(roomType.getTextureRegion());
     } else {
-      int width = (int) (TowerConsts.GRID_UNIT_SIZE * size.x);
-      int height = (int) (TowerConsts.GRID_UNIT_SIZE * size.y);
+      int width = TowerConsts.GRID_UNIT_SIZE * size.x;
+      int height = TowerConsts.GRID_UNIT_SIZE * size.y;
       int pixmapSize = MathUtils.nextPowerOfTwo(Math.max(width, height));
       Pixmap pixmap = new Pixmap(pixmapSize, pixmapSize, Pixmap.Format.RGB565);
       pixmap.setColor(Color.BLACK);
@@ -125,14 +120,6 @@ public class Room extends GridObject {
   }
 
 
-  public void setConnectedToTransport(boolean connectedToTransport, boolean broadcastEvent) {
-    this.connectedToTransport = connectedToTransport;
-  }
-
-  public boolean isConnectedToTransport() {
-    return connectedToTransport && placed;
-  }
-
   @Override
   public float getNoiseLevel() {
     if (((RoomType) gridObjectType).getPopulationMax() > 0) {
@@ -145,7 +132,7 @@ public class Room extends GridObject {
   @Override
   public float getDesirability() {
     if (placed && connectedToTransport) {
-      return MathUtils.clamp((desirability - getNoiseLevel() - surroundingNoiseLevel) - (getTransportModifier() * 0.5f), 0, 1f);
+      return MathUtils.clamp((desirability - getNoiseLevel() - surroundingNoiseLevel) - (getTransportModifier() * 0.33f) - ((getCrimeLevel() - surroundingCrimeLevel) * 0.33f), 0, 1f);
     }
 
     return 0f;
@@ -159,10 +146,6 @@ public class Room extends GridObject {
     return minDist;
   }
 
-  public void setSurroundingNoiseLevel(float noise) {
-    this.surroundingNoiseLevel = noise;
-  }
-
   public boolean hasResident() {
     return resident != null;
   }
@@ -170,4 +153,5 @@ public class Room extends GridObject {
   public void setResident(Avatar avatar) {
     resident = avatar;
   }
+
 }

@@ -1,59 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AndroidLayoutPreviewToolWindow">
-    <option name="state">
-      <GlobalState>
-        <option name="device" value="4in WVGA (Nexus S)" />
-        <option name="dockMode" value="" />
-        <option name="nightMode" value="notnight" />
-        <option name="targetHashString" value="android-15" />
-        <option name="theme" value="Theme" />
-      </GlobalState>
-    </option>
-    <device-configurations>
-      <entry key="file://$PROJECT_DIR$/android/res/layout/web_browser.xml" value="Landscape" />
-    </device-configurations>
-  </component>
-  <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
-  </component>
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="jarbundler:jar" />
-    </artifacts-to-build>
-  </component>
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/.idea/workspace.xml" />
-    <bookmark url="file://$PROJECT_DIR$/sparky/test/com/happydroids/sparky/GameUpdateCheckerTest.java" line="144" mnemonic="0" />
-    <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" />
-    <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" line="72" />
-    <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" line="233" />
-    <bookmark url="file://$PROJECT_DIR$/android" />
-    <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/LoadTowerWindow.java" line="47" />
-    <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" line="47" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/swatches/swatch-ff0000ff.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/swatches/swatch-ff00ff00.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/swatches/swatch-ff993f7f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android/assets/swatches/swatch-ffff0000.png" afterPath="" />
+    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/SecurityGuard.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/CrimeCalculator.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/GameGridTransportCalculationComplete.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/assets.json" afterPath="$PROJECT_DIR$/android/assets/assets.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/params/commercial-spaces.json" afterPath="$PROJECT_DIR$/android/assets/params/commercial-spaces.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/params/tutorial-steps.json" afterPath="$PROJECT_DIR$/android/assets/params/tutorial-steps.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerConsts.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerConsts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarLayer.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarLayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/CommercialSpace.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/CommercialSpace.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GridObject.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GridObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Janitor.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Janitor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Room.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Room.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/DesirabilityCalculator.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/DesirabilityCalculator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/TransportCalculator.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/TransportCalculator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/Overlays.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/Overlays.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/TowerMiniMap.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/TowerMiniMap.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPosition.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPosition.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPositionCache.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPositionCache.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/DataOverlayMenu.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/DataOverlayMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/DebugWindow.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/DebugWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline/src/com/happydroids/droidtowers/pipeline/GenerateAssetManagerFileList.java" afterPath="$PROJECT_DIR$/pipeline/src/com/happydroids/droidtowers/pipeline/GenerateAssetManagerFileList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/TowerScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/TowerScene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/ServiceRoomType.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/ServiceRoomType.java" />
     </list>
-    <list id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
-    <ignored path="underwater.iws" />
+    <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,27 +33,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
-  <component name="Commander">
-    <leftPanel />
-    <rightPanel />
-    <splitter proportion="0.5" />
-  </component>
-  <component name="CompilerWorkspaceConfiguration">
-    <option name="AUTO_SHOW_ERRORS_IN_EDITOR" value="false" />
-  </component>
-  <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/testgame$AchievementNotificationTest.ic" NAME="AchievementNotificationTest Coverage Results" MODIFIED="1330172088117" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>com.unhappyrobot.gui.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/testgame$DesktopGame.ic" NAME="DesktopGame Coverage Results" MODIFIED="1325301740206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true" />
-    <SUITE FILE_PATH="coverage/testgame$com_unhappyrobot_in_main.ic" NAME="com.unhappyrobot in main Coverage Results" MODIFIED="1330172130303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>com.unhappyrobot.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/testgame$All_in_main_lib.ic" NAME="All in main lib Coverage Results" MODIFIED="1334125671745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true" />
-  </component>
-  <component name="CoverageOptionsProvider">
-    <option name="myAddOrReplace" value="0" />
-  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -90,21 +40,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGrid.java" line="112" class="com.happydroids.droidtowers.grid.GameGrid" package="com.happydroids.droidtowers.grid">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="gridObject == null&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-    </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -118,8 +53,8 @@
         <option name="CONDITION_ENABLED" value="false" />
         <option name="CLASS_FILTERS_ENABLED" value="false" />
         <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
       </breakpoint>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -133,59 +68,22 @@
         <option name="CONDITION_ENABLED" value="false" />
         <option name="CLASS_FILTERS_ENABLED" value="false" />
         <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
     <breakpoint_rules />
-    <ui_properties>
-      <property name="line_breakpoints_groupByMethods" value="false" />
-      <property name="line_breakpoints_viewId" value="TABLE" />
-      <property name="exception_breakpoints_flattenPackages" value="true" />
-      <property name="method_breakpoints_flattenPackages" value="true" />
-      <property name="field_breakpoints_flattenPackages" value="true" />
-      <property name="exception_breakpoints_groupByMethods" value="false" />
-      <property name="line_breakpoints_groupByClasses" value="true" />
-      <property name="method_breakpoints_viewId" value="TABLE" />
-      <property name="field_breakpoints_groupByMethods" value="false" />
-      <property name="line_breakpoints_flattenPackages" value="true" />
-      <property name="field_breakpoints_groupByClasses" value="true" />
-      <property name="method_breakpoints_groupByClasses" value="true" />
-      <property name="exception_breakpoints_viewId" value="TABLE" />
-      <property name="exception_breakpoints_groupByClasses" value="true" />
-      <property name="field_breakpoints_viewId" value="TABLE" />
-      <property name="method_breakpoints_groupByMethods" value="false" />
-    </ui_properties>
+    <ui_properties />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="testgame" />
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Overlays.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/Overlays.java">
+      <file leaf-file-name="Room.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Room.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="53" selection-start="2705" selection-end="2705" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#2814#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameGridRenderer.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="141" column="34" selection-start="4863" selection-end="4863" vertical-scroll-proportion="0.4806867">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataOverlayMenu.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/DataOverlayMenu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="68" selection-start="1360" selection-end="1360" vertical-scroll-proportion="0.0">
+            <state line="47" column="20" selection-start="1631" selection-end="1631" vertical-scroll-proportion="0.33277312">
               <folding />
             </state>
           </provider>
@@ -193,261 +91,41 @@
       </file>
     </leaf>
   </component>
-  <component name="FindManager">
-    <FindUsagesManager>
-      <setting name="OPEN_NEW_TAB" value="false" />
-    </FindUsagesManager>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/friends/NonPlayerFriendItem.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/friends/PlayerFriendItem.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/ViewNeighborScene.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeaderButtonBar.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java" />
-        <option value="$PROJECT_DIR$/android/assets/params/tutorial-steps.json" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/DebugWindow.java" />
-        <option value="$PROJECT_DIR$/android/assets/params/commercial-spaces.json" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/DataOverlayMenu.java" />
-        <option value="$PROJECT_DIR$/pipeline/src/com/happydroids/droidtowers/pipeline/GenerateAssetManagerFileList.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/Overlays.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/DesirabilityCalculator.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GridObject.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPosition.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Room.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" />
       </list>
     </option>
-  </component>
-  <component name="LogFilters">
-    <option name="FILTER_ERRORS" value="false" />
-    <option name="FILTER_WARNINGS" value="false" />
-    <option name="FILTER_INFO" value="true" />
-    <option name="FILTER_DEBUG" value="true" />
-    <option name="CUSTOM_FILTER" />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
-        <option name="keepSourceFolders" value="false" />
-      </MavenImportingSettings>
-    </option>
-  </component>
-  <component name="MavenProjectNavigator">
-    <treeState />
-  </component>
-  <component name="MavenRunner">
-    <option name="jreName" value="1.7" />
-  </component>
-  <component name="ModuleEditorState">
-    <option name="LAST_EDITED_MODULE_NAME" />
-    <option name="LAST_EDITED_TAB_NAME" />
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="22" />
     <option name="width" value="1440" />
     <option name="height" value="874" />
   </component>
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state>
-        <expanded-state>
-          <State>
-            <id />
-          </State>
-          <State>
-            <id>Abstraction issues</id>
-          </State>
-          <State>
-            <id>Android</id>
-          </State>
-          <State>
-            <id>Assignment issues</id>
-          </State>
-          <State>
-            <id>Bash</id>
-          </State>
-          <State>
-            <id>CSS</id>
-          </State>
-          <State>
-            <id>Class metrics</id>
-          </State>
-          <State>
-            <id>Class structure</id>
-          </State>
-          <State>
-            <id>Cloning issues</id>
-          </State>
-          <State>
-            <id>Code maturity issues</id>
-          </State>
-          <State>
-            <id>Code style issues</id>
-          </State>
-          <State>
-            <id>Code style issuesJavaScript</id>
-          </State>
-          <State>
-            <id>Concurrency annotation issues</id>
-          </State>
-          <State>
-            <id>Control flow issues</id>
-          </State>
-          <State>
-            <id>Control flow issuesJavaScript</id>
-          </State>
-          <State>
-            <id>Data flow issues</id>
-          </State>
-          <State>
-            <id>Declaration redundancy</id>
-          </State>
-          <State>
-            <id>Encapsulation issues</id>
-          </State>
-          <State>
-            <id>Error handling</id>
-          </State>
-          <State>
-            <id>Error handlingGroovy</id>
-          </State>
-          <State>
-            <id>Error handlingJavaScript</id>
-          </State>
-          <State>
-            <id>Finalization issues</id>
-          </State>
-          <State>
-            <id>General</id>
-          </State>
-          <State>
-            <id>Google App Engine (Python)</id>
-          </State>
-          <State>
-            <id>Groovy</id>
-          </State>
-          <State>
-            <id>HTML</id>
-          </State>
-          <State>
-            <id>Imports</id>
-          </State>
-          <State>
-            <id>Inheritance issues</id>
-          </State>
-          <State>
-            <id>Initialization issues</id>
-          </State>
-          <State>
-            <id>J2ME issues</id>
-          </State>
-          <State>
-            <id>JUnit issues</id>
-          </State>
-          <State>
-            <id>Java language level issues</id>
-          </State>
-          <State>
-            <id>Java language level migration aids</id>
-          </State>
-          <State>
-            <id>JavaScript</id>
-          </State>
-          <State>
-            <id>Logging issues</id>
-          </State>
-          <State>
-            <id>Memory issues</id>
-          </State>
-          <State>
-            <id>Naming ConventionsGroovy</id>
-          </State>
-          <State>
-            <id>Naming conventions</id>
-          </State>
-          <State>
-            <id>Performance issues</id>
-          </State>
-          <State>
-            <id>Potentially confusing code constructsJavaScript</id>
-          </State>
-          <State>
-            <id>Probable bugs</id>
-          </State>
-          <State>
-            <id>Python</id>
-          </State>
-          <State>
-            <id>RELAX NG</id>
-          </State>
-          <State>
-            <id>Resource management issues</id>
-          </State>
-          <State>
-            <id>Security issues</id>
-          </State>
-          <State>
-            <id>Serialization issues</id>
-          </State>
-          <State>
-            <id>Threading issues</id>
-          </State>
-          <State>
-            <id>Threading issuesGroovy</id>
-          </State>
-          <State>
-            <id>UI Form Problems</id>
-          </State>
-          <State>
-            <id>Verbose or redundant code constructs</id>
-          </State>
-          <State>
-            <id>Visibility issues</id>
-          </State>
-        </expanded-state>
-        <selected-state>
-          <State>
-            <id>Code maturity issues</id>
-          </State>
-        </selected-state>
-      </profile-state>
-    </entry>
-  </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
   </component>
-  <component name="ProjectStructureProblems">
-    <ignored-problems>
-      <problem id="library-invalid-classes-path(library:project:apache-commons)" />
-      <problem id="library-invalid-classes-path(library:project:apache-httpclient)" />
-      <problem id="library-invalid-classes-path(library:project:guava)" />
-      <problem id="library-invalid-classes-path(library:project:jackson)" />
-      <problem id="library-invalid-source-javadoc-path(library:project:apache-commons)" />
-      <problem id="library-invalid-source-javadoc-path(library:project:guava)" />
-      <problem id="library-invalid-source-javadoc-path(library:project:junit-mockito-great-expectations)" />
-      <problem id="unused-library(library:project:examples)" />
-      <problem id="unused-library(library:project:gwt-user)" />
-    </ignored-problems>
-  </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1" splitterProportion="0.5">
-      <flattenPackages ProjectPane="false" />
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
       <showMembers />
       <showModules />
       <showLibraryContents />
@@ -455,250 +133,53 @@
       <abbreviatePackageNames />
       <autoscrollToSource />
       <autoscrollFromSource />
-      <sortByType ProjectPane="false" />
+      <sortByType />
     </navigator>
     <panes>
-      <pane id="Favorites" />
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="250" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="254" />
-    <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="ExportedUnsignedApkPath" value="$USER_HOME$/Desktop/droidtowers.apk" />
-    <property name="ExportedApkPath" value="$PROJECT_DIR$/android/android.apk" />
-    <property name="MemberChooser.sorted" value="false" />
-    <property name="recentsLimit" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="253" />
-    <property name="ExportedModule" value="android" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="257" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="634" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="636" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="256" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="254" />
-    <property name="DEBUGGABLE_PROCESS" value="com.happydroids.droidtowers" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="android-arm-403" />
-    <property name="FullScreen" value="false" />
-    <property name="GoToClass.includeLibraries" value="false" />
-    <property name="Downloaded.Files.Path" value="$PROJECT_DIR$/main/libs" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="options.lastSelected" value="preferences.keymap" />
-    <property name="download.sources.last.used.dir" value="$PROJECT_DIR$/happydroids-common/libs/sources" />
-    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="AndroidRunProguardForReleaseBuild" value="false" />
-    <property name="findjar.last.used.dir" value="$PROJECT_DIR$/main/libs/test" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLanguage" value="Java" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="OverrideImplement.combined" value="true" />
-    <property name="Repository.Attach.JavaDocs" value="true" />
-    <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="true" />
-    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="idea-build" />
-    <property name="DEBUGGABLE_DEVICE" value="0146BF4F17012018" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
-    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="AndroidTargetDevices" value="30324F52864200EC" />
-    <property name="Repository.Attach.Sources" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="664C002600000001" />
-    <property name="KeystoreLocation" value="$PROJECT_DIR$/happydroids-droidtowers" />
-    <property name="KeyAlias" value="key0" />
-    <property name="GenerateAntBuildDialog.backupFiles" value="false" />
+    <property name="GoToClass.includeLibraries" value="false" />
     <property name="dynamic.classpath" value="false" />
-    <property name="options.searchVisible" value="true" />
-  </component>
-  <component name="PyConsoleOptionsProvider">
-    <option name="myPythonConsoleState">
-      <PyConsoleSettings />
-    </option>
-    <option name="myDjangoConsoleState">
-      <PyConsoleSettings />
-    </option>
-  </component>
-  <component name="RecentsManager">
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="com.happydroids.droidtowers.entities" />
-      <recent name="com.happydroids.droidtowers" />
-      <recent name="com.happydroids.droidtowers.gamestate.actions" />
-      <recent name="com.happydroids.droidtowers.gamestate.migrations" />
-      <recent name="com.happydroids.droidtowers.achievements" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.happydroids.droidtowers.gui" />
-      <recent name="com.happydroids.droidtowers.scenes" />
-      <recent name="com.happydroids.droidtowers.entities" />
-      <recent name="com.happydroids.droidtowers.gamestate.migrations" />
-      <recent name="com.happydroids.droidtowers.actions" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/main/fixtures/migrations" />
-      <recent name="$PROJECT_DIR$/winregedit" />
-      <recent name="$PROJECT_DIR$/android/assets-raw/templates" />
-      <recent name="$PROJECT_DIR$/android/assets/params" />
-    </key>
-    <key name="ExtractSuperBase.RECENT_KEYS">
-      <recent name="com.happydroids.droidtowers.gui" />
-      <recent name="com.unhappyrobot.gui" />
-      <recent name="com.unhappyrobot.entities" />
-      <recent name="com.unhappyrobot.types" />
-    </key>
-    <key name="IntroduceConstantDialog.RECENTS_KEY">
-      <recent name="com.happydroids.droidtowers.gui.AchievementListView" />
-      <recent name="com.happydroids.droidtowers.gui.HorizontalRule" />
-      <recent name="com.happydroids.utils.Platform" />
-      <recent name="com.happydroids.droidtowers.scenes.SplashScene" />
-      <recent name="com.happydroids.sparky.JarJoiner" />
-    </key>
-    <key name="MoveMembersDialog.RECENTS_KEY">
-      <recent name="com.happydroids.server.HappyDroidServiceObject" />
-      <recent name="com.happydroids.droidtowers.scenes.components.SceneManager" />
-      <recent name="com.happydroids.droidtowers.scenes.components.SplashScenePreloader" />
-      <recent name="com.happydroids.droidtowers.gamestate.GameSaveFactory" />
-      <recent name="com.happydroids.droidtowers.TowerConsts" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.happydroids.droidtowers.gui" />
-      <recent name="com.happydroids.server.events" />
-      <recent name="com.happydroids.droidtowers.types" />
-      <recent name="com.happydroids.droidtowers.scenes" />
-      <recent name="com.happydroids.droidtowers.scenes.components" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.happydroids.utils" />
-      <recent name="com.happydroids.droidtowers.gamestate.GameSave.Views" />
-      <recent name="com.happydroids.events" />
-      <recent name="com.happydroids.droidtowers.input" />
-      <recent name="com.happydroids.droidtowers.gui.friends" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/main" />
-      <recent name="$PROJECT_DIR$/happydroids-common/libs/main" />
-      <recent name="$PROJECT_DIR$/sparky/src/com/happydroids/sparky" />
-      <recent name="$PROJECT_DIR$/winregedit/libs" />
-      <recent name="$PROJECT_DIR$/sparky/libs" />
-    </key>
+    <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
   <component name="RunManager" selected="Application.DesktopGame">
-    <configuration default="false" name="ElevatorQueueTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.happydroids.droidtowers.entities.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="main" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="com.happydroids.droidtowers.entities" />
-      <option name="MAIN_CLASS_NAME" value="com.happydroids.droidtowers.entities.ElevatorQueueTest" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Profile ">
-        <option name="myExternalizedOptions" value="&#10;additional-options2=onexit\=snapshot&#10;" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
+      <option name="PROGRAM_PARAMETERS" />
       <method>
-        <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
-      <MavenSettings>
-        <option name="myGeneralSettings">
-          <MavenGeneralSettings>
-            <option name="checksumPolicy" value="FAIL" />
-            <option name="failureBehavior" value="FAST" />
-            <option name="localRepository" value="" />
-            <option name="mavenHome" value="" />
-            <option name="nonRecursive" value="false" />
-            <option name="outputLevel" value="INFO" />
-            <option name="pluginUpdatePolicy" value="DO_NOT_UPDATE" />
-            <option name="printErrorStackTraces" value="false" />
-            <option name="snapshotUpdatePolicy" value="ALWAYS_UPDATE" />
-            <option name="usePluginRegistry" value="false" />
-            <option name="userSettingsFile" value="" />
-            <option name="workOffline" value="false" />
-          </MavenGeneralSettings>
-        </option>
-        <option name="myRunnerSettings">
-          <MavenRunnerSettings>
-            <option name="jreName" value="1.6" />
-            <option name="mavenProperties">
-              <map />
-            </option>
-            <option name="runMavenInBackground" value="true" />
-            <option name="skipTests" value="false" />
-            <option name="vmOptions" value="" />
-          </MavenRunnerSettings>
-        </option>
-        <option name="myRunnerParameters">
-          <MavenRunnerParameters>
-            <option name="profiles">
-              <set />
-            </option>
-            <option name="goals">
-              <list />
-            </option>
-            <option name="profilesMap">
-              <map />
-            </option>
-            <option name="workingDirPath" value="" />
-          </MavenRunnerParameters>
-        </option>
-      </MavenSettings>
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="false" />
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
@@ -709,50 +190,37 @@
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
       <method>
-        <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="#com.intellij.j2meplugin.run.J2MEConfigurationType" factoryName="J2ME">
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
-      <USER_OPTIONS />
-      <option name="TARGET_DEVICE_NAME" />
-      <option name="COMMAND_LINE_PARAMETERS" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="JAD_NAME" value="" />
-      <option name="IS_CLASSES" value="false" />
-      <option name="IS_OTA" value="false" />
-      <option name="INSTALL" />
-      <option name="REMOVE" />
-      <option name="RUN" />
-      <option name="TRANSIENT" />
-      <option name="FORCE" />
-      <option name="TO_START" />
-      <option name="SELECTION" value="0" />
-      <RunnerSettings RunnerId="Profile ">
-        <option name="myExternalizedOptions" />
-      </RunnerSettings>
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" class_name="" method_name="" output_log_level="" package_name="" scope="Class">
-      <option name="BCName" value="" />
-      <option name="launcherParameters">
-        <LauncherParameters>
-          <option name="browserFamily" value="FIREFOX" />
-          <option name="launcherType" value="OSDefault" />
-          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
-        </LauncherParameters>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
       </option>
-      <option name="moduleName" value="" />
-      <option name="trusted" value="true" />
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
       <method>
-        <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
@@ -770,58 +238,42 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <method>
-        <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
-      <RunnerSettings RunnerId="Profile ">
-        <option name="myExternalizedOptions" value="&#10;additional-options2=onexit\=snapshot&#10;" />
-      </RunnerSettings>
       <method>
-        <option name="AntTarget" enabled="false" antfile="file://$PROJECT_DIR$/build.xml" target="debug-preprocess" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSDebuggerConfigurationSettings>
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" runner="idea" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
@@ -829,11 +281,7 @@
       </option>
       <envs />
       <patterns />
-      <RunnerSettings RunnerId="Profile ">
-        <option name="myExternalizedOptions" value="&#10;additional-options2=onexit\=snapshot&#10;" />
-      </RunnerSettings>
       <method>
-        <option name="AntTarget" enabled="false" antfile="file://$PROJECT_DIR$/build.xml" target="debug-preprocess" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
@@ -844,7 +292,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="USB_DEVICE" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
       <option name="PREFERRED_AVD" value="" />
       <option name="COMMAND_LINE" value="" />
       <option name="WIPE_USER_DATA" value="false" />
@@ -852,77 +300,16 @@
       <option name="NETWORK_SPEED" value="full" />
       <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="false" />
-      <RunnerSettings RunnerId="Profile ">
-        <option name="myExternalizedOptions" value="&#10;additional-options2=onexit\=snapshot&#10;" />
-      </RunnerSettings>
       <method>
-        <option name="AntTarget" enabled="false" antfile="file://$PROJECT_DIR$/build.xml" target="debug-preprocess" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="false" name="GenerateAssetManagerFileList" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="com.happydroids.droidtowers.pipeline.GenerateAssetManagerFileList" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/android" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="pipeline" />
-      <envs />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Profile ">
-        <option name="myExternalizedOptions" value="&#10;additional-options2=onexit\=snapshot&#10;" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="SparkyMain" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="com.happydroids.sparky.SparkyMain" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/sparky/" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="sparky" />
-      <envs />
-      <RunnerSettings RunnerId="Cover" />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Profile ">
-        <option name="myExternalizedOptions" value="&#10;additional-options2=onexit\=snapshot&#10;" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Cover" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <list size="6">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Android Application.Android" />
       <item index="1" class="java.lang.String" itemvalue="Application.DesktopGame" />
-      <item index="2" class="java.lang.String" itemvalue="Application.GenerateAssetManagerFileList" />
-      <item index="3" class="java.lang.String" itemvalue="Application.SparkyMain" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.All in main lib" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.ElevatorQueueTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.All in main lib" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -930,964 +317,51 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SliceManager">
-    <option name="analysisUIOptions">
-      <AnalysisUIOptions />
-    </option>
-  </component>
-  <component name="SvnConfiguration" maxAnnotateRevisions="500">
-    <option name="USER" value="" />
-    <option name="PASSWORD" value="" />
-    <option name="mySSHConnectionTimeout" value="30000" />
-    <option name="mySSHReadTimeout" value="30000" />
-    <option name="LAST_MERGED_REVISION" />
-    <option name="MERGE_DRY_RUN" value="false" />
-    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
-    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="DETECT_NESTED_COPIES" value="true" />
-    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
-    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <option name="FORCE_UPDATE" value="false" />
-    <configuration useDefault="true">$USER_HOME$/.subversion_IDEA</configuration>
-    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
-  </component>
-  <component name="SvnConfiguration17" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false">
-    <option name="USER" value="" />
-    <option name="PASSWORD" value="" />
-    <option name="mySSHConnectionTimeout" value="30000" />
-    <option name="mySSHReadTimeout" value="30000" />
-    <option name="LAST_MERGED_REVISION" />
-    <option name="MERGE_DRY_RUN" value="false" />
-    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
-    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="DETECT_NESTED_COPIES" value="true" />
-    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
-    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <option name="FORCE_UPDATE" value="false" />
-    <configuration useDefault="false">$USER_HOME$/.subversion_IDEA</configuration>
-    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6a38cc38-e073-49b0-9943-fbc3aa470d76" name="Default" comment="" />
-      <changelist id="ab251a36-a211-4076-bb08-8f598318f1e7" name="Ignored" comment="" />
-      <created>1313200894372</created>
-      <updated>1313200894372</updated>
+      <changelist id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="" />
+      <created>1340555552791</created>
+      <updated>1340555552791</updated>
     </task>
-    <task id="LOCAL-00002" summary="added the elevator car class">
-      <created>1328871698446</created>
-      <updated>1328871698446</updated>
-    </task>
-    <task id="LOCAL-00003" summary="added time scaling">
-      <created>1328919191570</created>
-      <updated>1328919191570</updated>
-    </task>
-    <task id="LOCAL-00004" summary="lots of refactoring">
-      <created>1329115578198</created>
-      <updated>1329115578198</updated>
-    </task>
-    <task id="LOCAL-00005" summary="lots of refactoring of the avatar movement code, fixed a few bugs with the elevator car and passenger prioritization.">
-      <created>1329121099196</created>
-      <updated>1329121099196</updated>
-    </task>
-    <task id="LOCAL-00006" summary="lots of refactoring of the avatar movement code, fixed a few bugs with the elevator car and passenger prioritization.">
-      <created>1329121490644</created>
-      <updated>1329121490644</updated>
-    </task>
-    <task id="LOCAL-00007" summary="lots of refactoring of the avatar movement code, fixed a few bugs with the elevator car and passenger prioritization.">
-      <created>1329121683881</created>
-      <updated>1329121683881</updated>
-    </task>
-    <task id="LOCAL-00008" summary="cleaned up some hud elements which were using screen height/width rather than gui stage height/width.">
-      <created>1329123851121</created>
-      <updated>1329123851121</updated>
-    </task>
-    <task id="LOCAL-00009" summary="started working on radial menus">
-      <created>1329209954232</created>
-      <updated>1329209954232</updated>
-    </task>
-    <task id="LOCAL-00010" summary="some more art from miller, and the start to a new HUD.">
-      <created>1329640857479</created>
-      <updated>1329640857479</updated>
-    </task>
-    <task id="LOCAL-00011" summary="added transit purchase menu">
-      <created>1329643646038</created>
-      <updated>1329643646038</updated>
-    </task>
-    <task id="LOCAL-00012" summary="switched to ogl es 2.0 and updated libgdx">
-      <created>1329645501334</created>
-      <updated>1329645501334</updated>
-    </task>
-    <task id="LOCAL-00013" summary="began splitting out the HUD into diff components.">
-      <created>1329699301863</created>
-      <updated>1329699301863</updated>
-    </task>
-    <task id="LOCAL-00014" summary="began splitting out the HUD into diff components.">
-      <created>1329699321297</created>
-      <updated>1329699321297</updated>
-    </task>
-    <task id="LOCAL-00015" summary="began working on janitors!">
-      <created>1329788230591</created>
-      <updated>1329788230591</updated>
-    </task>
-    <task id="LOCAL-00016" summary="janitors now janitate commercial spaces!">
-      <created>1329803952596</created>
-      <updated>1329803952596</updated>
-    </task>
-    <task id="LOCAL-00017" summary="janitors now janitate commercial spaces!">
-      <created>1329810587449</created>
-      <updated>1329810587449</updated>
-    </task>
-    <task id="LOCAL-00018" summary="maids clean shit too">
-      <created>1329900032410</created>
-      <updated>1329900032410</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Achievement engine works!">
-      <created>1329985974876</created>
-      <updated>1329985974876</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Achievement engine now handles unlock rewards!">
-      <created>1329987338092</created>
-      <updated>1329987338092</updated>
-    </task>
-    <task id="LOCAL-00021" summary="achievement notifications">
-      <created>1330019402449</created>
-      <updated>1330019402449</updated>
-    </task>
-    <task id="LOCAL-00022" summary="cleaned up some code and added some tests for ui elements">
-      <created>1330174247413</created>
-      <updated>1330174247413</updated>
-    </task>
-    <task id="LOCAL-00023" summary="cleaned up some code and added some tests for ui elements">
-      <created>1330174269812</created>
-      <updated>1330174269812</updated>
-    </task>
-    <task id="LOCAL-00024" summary="cleaned up some code and added some tests for ui elements">
-      <created>1330174752957</created>
-      <updated>1330174752957</updated>
-    </task>
-    <task id="LOCAL-00025" summary="fixed camera bounds checking, added city scape background!">
-      <created>1330393978559</created>
-      <updated>1330393978559</updated>
-    </task>
-    <task id="LOCAL-00026" summary=" moved the rain into its own layer so the clouds would be on top.">
-      <created>1330394404283</created>
-      <updated>1330394404283</updated>
-    </task>
-    <task id="LOCAL-00027" summary="weather service is starting">
-      <created>1330396456576</created>
-      <updated>1330396456576</updated>
-    </task>
-    <task id="LOCAL-00028" summary="weather service now changes weather every minute, fixed stair movement, added wander ability to avatars.">
-      <created>1330665537090</created>
-      <updated>1330665537090</updated>
-    </task>
-    <task id="LOCAL-00029" summary="fixed a few bugs found by sarah">
-      <created>1330753144808</created>
-      <updated>1330753144808</updated>
-    </task>
-    <task id="LOCAL-00030" summary="* NullPointerException when dragging stuff to the bottom of the world (Sarah)&#10;* Avatars wouldn't move, they were lazy and indecisive.&#10;* Upgraded all third party libs in prep for Facebook connect.">
-      <created>1330913578742</created>
-      <updated>1330913578742</updated>
-    </task>
-    <task id="LOCAL-00031" summary="api is more stable, have a weird integer conversion problem.">
-      <created>1331804600925</created>
-      <updated>1331804600925</updated>
-    </task>
-    <task id="LOCAL-00032" summary="apis are more resilient.">
-      <created>1331889496394</created>
-      <updated>1331889496394</updated>
-    </task>
-    <task id="LOCAL-00033" summary="added new art for the burger joint.">
-      <created>1332024506037</created>
-      <updated>1332024506037</updated>
-    </task>
-    <task id="LOCAL-00034" summary="grid will now automatically resize as the tower grows upwards, there are also now buttons for the user to expand land left or right.">
-      <created>1332141935235</created>
-      <updated>1332141935235</updated>
-    </task>
-    <task id="LOCAL-00035" summary="increased the number of avatars for desktop builds only.&#10;fixed a bug where lobbies could exist above level 4.&#10;game grid automatically grows taller as needed.">
-      <created>1332213742708</created>
-      <updated>1332213742708</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Everything works after that massive refactor now.">
-      <created>1332229610329</created>
-      <updated>1332229610330</updated>
-    </task>
-    <task id="LOCAL-00037" summary="extracted some constants&#10;removed rhino">
-      <created>1332312448180</created>
-      <updated>1332312448180</updated>
-    </task>
-    <task id="LOCAL-00038" summary="upgraded universal tween engine&#10;added object counts to game save as some metadata&#10;changed speed of rain.">
-      <created>1332369171258</created>
-      <updated>1332369171259</updated>
-    </task>
-    <task id="LOCAL-00039" summary="added a shim to the desktop app so i could intercept the state of window focus&#10;fixed a few missing function calls in the input system&#10;added action manager">
-      <created>1332395076590</created>
-      <updated>1332395076590</updated>
-    </task>
-    <task id="LOCAL-00040" summary="more of the main menu">
-      <created>1332398830044</created>
-      <updated>1332398830044</updated>
-    </task>
-    <task id="LOCAL-00041" summary="new game starts a game, but does not set it up properly yet.">
-      <created>1332402624984</created>
-      <updated>1332402624984</updated>
-    </task>
-    <task id="LOCAL-00042" summary="removed a bunch more singletons and statics throughout the codebase.&#10;game grid no longer can use custom unit sizes.&#10;new art from alex for: sushi, bar, pizza place&#10;city scape later now cycles through the regions available rather than randomly choose.">
-      <created>1332532351745</created>
-      <updated>1332532351745</updated>
-    </task>
-    <task id="LOCAL-00043" summary="all api requests now work perfectly!">
-      <created>1332635629348</created>
-      <updated>1332635629348</updated>
-    </task>
-    <task id="LOCAL-00044" summary="loading and saving games works, along with pngs!">
-      <created>1332659989068</created>
-      <updated>1332659989068</updated>
-    </task>
-    <task id="LOCAL-00045" summary="load game window is a bit nicer.">
-      <created>1332662212038</created>
-      <updated>1332662212038</updated>
-    </task>
-    <task id="LOCAL-00046" summary="cleaned up the UI a bit.">
-      <created>1332664945306</created>
-      <updated>1332664945306</updated>
-    </task>
-    <task id="LOCAL-00047" summary="moved the connect to happy droids window to the main menu now">
-      <created>1332670520154</created>
-      <updated>1332670520154</updated>
-    </task>
-    <task id="LOCAL-00048" summary="fixed the font rounding errors">
-      <created>1332673904546</created>
-      <updated>1332673904546</updated>
-    </task>
-    <task id="LOCAL-00049" summary="fixed alignment in grid object purchase menu">
-      <created>1332717773098</created>
-      <updated>1332717773098</updated>
-    </task>
-    <task id="LOCAL-00050" summary="updated gdx and added the ability to force cloud saves">
-      <created>1332833078870</created>
-      <updated>1332833078870</updated>
-    </task>
-    <task id="LOCAL-00051" summary="switched to using the asset manager for all assets.&#10;added platform specific clases for uncaught exceptions and browser utils">
-      <created>1332898520537</created>
-      <updated>1332898520537</updated>
-    </task>
-    <task id="LOCAL-00052" summary="removed an errant runtime exception that blew up the game.">
-      <created>1333004516893</created>
-      <updated>1333004516893</updated>
-    </task>
-    <task id="LOCAL-00053" summary="removed debug keybindings&#10;added close button to connect window&#10;added cousin vinnie">
-      <created>1333008962814</created>
-      <updated>1333008962814</updated>
-    </task>
-    <task id="LOCAL-00054" summary="removed debug keybindings&#10;added close button to connect window&#10;added cousin vinnie">
-      <created>1333008976153</created>
-      <updated>1333008976153</updated>
-    </task>
-    <task id="LOCAL-00055" summary="added new art for the lobby">
-      <created>1333093856535</created>
-      <updated>1333093856535</updated>
-    </task>
-    <task id="LOCAL-00056" summary="added new art for the lobby">
-      <created>1333093881780</created>
-      <updated>1333093881780</updated>
-    </task>
-    <task id="LOCAL-00057" summary="upgraded to jackson 2.0">
-      <created>1333339947472</created>
-      <updated>1333339947472</updated>
-    </task>
-    <task id="LOCAL-00058" summary="upgraded to jackson 2.0">
-      <created>1333341204256</created>
-      <updated>1333341204256</updated>
-    </task>
-    <task id="LOCAL-00059" summary="upgraded to jackson 2.0">
-      <created>1333517509963</created>
-      <updated>1333517509963</updated>
-    </task>
-    <task id="LOCAL-00060" summary="added copyright to all files.">
-      <created>1333518194859</created>
-      <updated>1333518194859</updated>
-    </task>
-    <task id="LOCAL-00061" summary="moved a bunch of code out to happydroids-common so it can be shared amongst the other projects easily">
-      <created>1333610854853</created>
-      <updated>1333610854853</updated>
-    </task>
-    <task id="LOCAL-00062" summary="renamed all the packages, should write a migration for old game files.">
-      <created>1333698765931</created>
-      <updated>1333698765931</updated>
-    </task>
-    <task id="LOCAL-00063" summary="added the game update checker to sparky">
-      <created>1333863815286</created>
-      <updated>1333863815286</updated>
-    </task>
-    <task id="LOCAL-00064" summary="game update checker can now handle releases without a patch, the full download will then be used.">
-      <created>1333869076089</created>
-      <updated>1333869076090</updated>
-    </task>
-    <task id="LOCAL-00065" summary="sparky mostly works now!">
-      <created>1333895706278</created>
-      <updated>1333895706279</updated>
-    </task>
-    <task id="LOCAL-00066" summary="added clickable libgdx logo to the main menu">
-      <created>1333994294010</created>
-      <updated>1333994294010</updated>
-    </task>
-    <task id="LOCAL-00067" summary="upgraded the achievements engine quite a bit, much more robust now!&#10;merged all the avatars into a single image&#10;wrote some migration code that could work lol">
-      <created>1334046025576</created>
-      <updated>1334046025576</updated>
-    </task>
-    <task id="LOCAL-00068" summary="achievements is much much more robust now&#10;everything has a provider type, got rid of the notion of isLobby too!">
-      <created>1334128983655</created>
-      <updated>1334128983655</updated>
-    </task>
-    <task id="LOCAL-00069" summary="fixed a bug in GameSave where newGame was never set to false!">
-      <created>1334129489119</created>
-      <updated>1334129489119</updated>
-    </task>
-    <task id="LOCAL-00070" summary="added migration from format 1 to format 2">
-      <created>1334357556925</created>
-      <updated>1334357556925</updated>
-    </task>
-    <task id="LOCAL-00071" summary="added new art for the penthouse">
-      <created>1334462999308</created>
-      <updated>1334462999308</updated>
-    </task>
-    <task id="LOCAL-00072" summary="fixed proguard for game">
-      <created>1334643540514</created>
-      <updated>1334643540514</updated>
-    </task>
-    <task id="LOCAL-00073" summary="fixed proguard for game&#10;tweaked how much is earned by rooms and commercial spaces">
-      <created>1334650680837</created>
-      <updated>1334650680838</updated>
-    </task>
-    <task id="LOCAL-00074" summary="fixed proguard for game&#10;tweaked how much is earned by rooms and commercial spaces">
-      <created>1334650699799</created>
-      <updated>1334650699799</updated>
-    </task>
-    <task id="LOCAL-00075" summary="tweaked the income and expenses a lot">
-      <created>1334652749920</created>
-      <updated>1334652749920</updated>
-    </task>
-    <task id="LOCAL-00076" summary="removed the notion of continuous placement since its annoying to users">
-      <created>1334712427125</created>
-      <updated>1334712427125</updated>
-    </task>
-    <task id="LOCAL-00077" summary="tweaked load game window and the difficulty levels">
-      <created>1334714257835</created>
-      <updated>1334714257835</updated>
-    </task>
-    <task id="LOCAL-00078" summary="fixed migration of gamefiles">
-      <created>1334722659285</created>
-      <updated>1334722659285</updated>
-    </task>
-    <task id="LOCAL-00079" summary="added movie theater, allow buildings to be built underground!">
-      <created>1334723828232</created>
-      <updated>1334723828232</updated>
-    </task>
-    <task id="LOCAL-00080" summary="added the avengers movie spike">
-      <created>1334794867932</created>
-      <updated>1334794867932</updated>
-    </task>
-    <task id="LOCAL-00081" summary="restyled the new game and load game windows">
-      <created>1334818777528</created>
-      <updated>1334818777528</updated>
-    </task>
-    <task id="LOCAL-00082" summary="scaled the new game window and load game window to work on desktop and galaxy nexus">
-      <created>1334820689714</created>
-      <updated>1334820689715</updated>
-    </task>
-    <task id="LOCAL-00083" summary="scaling works on Desktop and Android HDPI &amp; MDPI devices">
-      <created>1334822257486</created>
-      <updated>1334822257486</updated>
-    </task>
-    <task id="LOCAL-00084" summary="restyled the status bar panel">
-      <created>1334822971902</created>
-      <updated>1334822971903</updated>
-    </task>
-    <task id="LOCAL-00085" summary="restyled the status bar panel and fixed the dialog scaling">
-      <created>1334824459218</created>
-      <updated>1334824459218</updated>
-    </task>
-    <task id="LOCAL-00086" summary="fixed ALL THE THINGS">
-      <created>1334827347531</created>
-      <updated>1334827347531</updated>
-    </task>
-    <task id="LOCAL-00087" summary="fixed the connect to happydroids button!">
-      <created>1334829186132</created>
-      <updated>1334829186133</updated>
-    </task>
-    <task id="LOCAL-00088" summary="fixed the connect to happydroids button!">
-      <created>1334829437704</created>
-      <updated>1334829437704</updated>
-    </task>
-    <task id="LOCAL-00089" summary="ooops renamed the window class to fix proguard">
-      <created>1334829954956</created>
-      <updated>1334829954957</updated>
-    </task>
-    <task id="LOCAL-00090" summary="TUTORIAL WORKS!">
-      <created>1334994809341</created>
-      <updated>1334994809341</updated>
-    </task>
-    <task id="LOCAL-00091" summary="added restrooms to the services provider type">
-      <created>1334994882416</created>
-      <updated>1334994882416</updated>
-    </task>
-    <task id="LOCAL-00092" summary="fixed a bunch of static instance bugs with the achievements and tutorials">
-      <created>1334999785252</created>
-      <updated>1334999785253</updated>
-    </task>
-    <task id="LOCAL-00093" summary="achievements can now unlock or depend on other achievements (so many dependencies)&#10;&#10;expanded the tutorial to include steps to pan, zoom, and turn on overlays.">
-      <created>1335051274238</created>
-      <updated>1335051274238</updated>
-    </task>
-    <task id="LOCAL-00094" summary="runtime pixmap generator to manage pixmaps upon reload">
-      <created>1335055368844</created>
-      <updated>1335055368844</updated>
-    </task>
-    <task id="LOCAL-00095" summary="okay so generating pixmaps on the fly is a very bad idea.">
-      <created>1335152714355</created>
-      <updated>1335152714355</updated>
-    </task>
-    <task id="LOCAL-00096" summary="textures aint no thang">
-      <created>1335161927044</created>
-      <updated>1335161927045</updated>
-    </task>
-    <task id="LOCAL-00097" summary="resized the tool buttons on HDPI screen">
-      <created>1335167019342</created>
-      <updated>1335167019343</updated>
-    </task>
-    <task id="LOCAL-00098" summary="fixed the bug where achievements would not be marked completed">
-      <created>1335210608196</created>
-      <updated>1335210608197</updated>
-    </task>
-    <task id="LOCAL-00099" summary="fixed the bug where achievements would not be marked completed">
-      <created>1335210716238</created>
-      <updated>1335210716238</updated>
-    </task>
-    <task id="LOCAL-00100" summary="added the ability to customize messages for mobile">
-      <created>1335211283629</created>
-      <updated>1335211283629</updated>
-    </task>
-    <task id="LOCAL-00101" summary="added the ability to customize messages for mobile">
-      <created>1335211321518</created>
-      <updated>1335211321518</updated>
-    </task>
-    <task id="LOCAL-00102" summary="fixed the button touch area on the windows, also added a memory tracker for the gpu">
-      <created>1335239548752</created>
-      <updated>1335239548752</updated>
-    </task>
-    <task id="LOCAL-00103" summary="added vibrators">
-      <created>1335249671241</created>
-      <updated>1335249671241</updated>
-    </task>
-    <task id="LOCAL-00104" summary="achievements viewer window works&#10;progress bar works&#10;woot.">
-      <created>1335342483407</created>
-      <updated>1335342483408</updated>
-    </task>
-    <task id="LOCAL-00105" summary="ugh i hate monolithic commits :(&#10;achievements menus all work&#10;status panel is different&#10;new icons for the expand land action&#10;lots of other improvements?">
-      <created>1335431538539</created>
-      <updated>1335431538539</updated>
-    </task>
-    <task id="LOCAL-00106" summary="added coloring to the elevator dragging, maybe that will make it easier for users to know when they are interacting?">
-      <created>1335432752291</created>
-      <updated>1335432752291</updated>
-    </task>
-    <task id="LOCAL-00107" summary="fixed a bunch of the dialogs and the achievements notification&#10;still have an unknown bug in the android splash screen...">
-      <created>1335435808927</created>
-      <updated>1335435808927</updated>
-    </task>
-    <task id="LOCAL-00108" summary="moved the grid position cache away from being a singleton, and instead be owned by the game grid whom its caching for&#10;">
-      <created>1335488048891</created>
-      <updated>1335488048891</updated>
-    </task>
-    <task id="LOCAL-00109" summary="other game grids can be rendered independently of the active game">
-      <created>1335489735850</created>
-      <updated>1335489735850</updated>
-    </task>
-    <task id="LOCAL-00110" summary="neighbor game grid is finally independent of the main game grid">
-      <created>1335510072535</created>
-      <updated>1335510072535</updated>
-    </task>
-    <task id="LOCAL-00111" summary="fixed movie theater scaling">
-      <created>1335583494822</created>
-      <updated>1335583494823</updated>
-    </task>
-    <task id="LOCAL-00112" summary="changed grid scale to a float">
-      <created>1335583796243</created>
-      <updated>1335583796243</updated>
-    </task>
-    <task id="LOCAL-00113" summary="fixed the fucking api, stupid intellij">
-      <created>1335601273955</created>
-      <updated>1335601273956</updated>
-    </task>
-    <task id="LOCAL-00114" summary="fixed the tools">
-      <created>1335601662144</created>
-      <updated>1335601662145</updated>
-    </task>
-    <task id="LOCAL-00115" summary="fixed the elevators!!!!">
-      <created>1335607096969</created>
-      <updated>1335607096970</updated>
-    </task>
-    <task id="LOCAL-00116" summary="custom uri protocol handler for mac :D">
-      <created>1335610796934</created>
-      <updated>1335610796934</updated>
-    </task>
-    <task id="LOCAL-00117" summary="first part of the game launcher works">
-      <created>1335650116708</created>
-      <updated>1335650116708</updated>
-    </task>
-    <task id="LOCAL-00118" summary="intergnat game launcher is working now, with the connect for auth too!">
-      <created>1335757366976</created>
-      <updated>1335757366976</updated>
-    </task>
-    <task id="LOCAL-00119" summary="cleaned up the expand land overlay">
-      <created>1335757857487</created>
-      <updated>1335757857487</updated>
-    </task>
-    <task id="LOCAL-00120" summary="killed some statics">
-      <created>1335759422938</created>
-      <updated>1335759422938</updated>
-    </task>
-    <task id="LOCAL-00121" summary="moved the GUI skin to the TowerAssetManager">
-      <created>1335759753725</created>
-      <updated>1335759753725</updated>
-    </task>
-    <task id="LOCAL-00122" summary="moved the GUI skin to the TowerAssetManager">
-      <created>1335759807464</created>
-      <updated>1335759807464</updated>
-    </task>
-    <task id="LOCAL-00123" summary="maked hud better">
-      <created>1335769236226</created>
-      <updated>1335769236227</updated>
-    </task>
-    <task id="LOCAL-00124" summary="fixed the avatar floating when land expands">
-      <created>1335772302705</created>
-      <updated>1335772302705</updated>
-    </task>
-    <task id="LOCAL-00125" summary="cleaned up some transit lines that were being left around">
-      <created>1335773285492</created>
-      <updated>1335773285492</updated>
-    </task>
-    <task id="LOCAL-00126" summary="elevator car is much more realistic, minus that whole droids to heaven thing.">
-      <created>1335779118468</created>
-      <updated>1335779118469</updated>
-    </task>
-    <task id="LOCAL-00127" summary="much more improved elevators with realistic queues!">
-      <created>1335935825776</created>
-      <updated>1335935825776</updated>
-    </task>
-    <task id="LOCAL-00128" summary="avatar elevator movement is working betters&#10;">
-      <created>1336155313430</created>
-      <updated>1336155313430</updated>
-    </task>
-    <task id="LOCAL-00129" summary="fixed a bug in the expand land overlay, when expanding to the east the position cache would not be updated correctly.">
-      <created>1336155581601</created>
-      <updated>1336155581601</updated>
-    </task>
-    <task id="LOCAL-00130" summary="fixed the sync problem with avatar steering managers position post elevator rides">
-      <created>1336164356480</created>
-      <updated>1336164356480</updated>
-    </task>
-    <task id="LOCAL-00131" summary="changed the way noise levels affects desirability">
-      <created>1336290343104</created>
-      <updated>1336290343104</updated>
-    </task>
-    <task id="LOCAL-00132" summary="bug fixes">
-      <created>1336298537788</created>
-      <updated>1336298537788</updated>
-    </task>
-    <task id="LOCAL-00133" summary="add the star rating, adjust population sizes, fix the elevator floor labels">
-      <created>1336340116127</created>
-      <updated>1336340116128</updated>
-    </task>
-    <task id="LOCAL-00134" summary="removed logging">
-      <created>1336340312694</created>
-      <updated>1336340312694</updated>
-    </task>
-    <task id="LOCAL-00135" summary="avatars have homes!">
-      <created>1336341288628</created>
-      <updated>1336341288628</updated>
-    </task>
-    <task id="LOCAL-00136" summary="avatars have homes!">
-      <created>1336351721369</created>
-      <updated>1336351721370</updated>
-    </task>
-    <task id="LOCAL-00137" summary="some clean up for avatars">
-      <created>1336355106835</created>
-      <updated>1336355106835</updated>
-    </task>
-    <task id="LOCAL-00138" summary="fix elevator car reset on shaft resize, if an avatar cannot figure out how to get somewhere they will cancel their movement.">
-      <created>1336361112829</created>
-      <updated>1336361112829</updated>
-    </task>
-    <task id="LOCAL-00139" summary="transportation distance is now calculated for desirability :D">
-      <created>1336376996565</created>
-      <updated>1336376996565</updated>
-    </task>
-    <task id="LOCAL-00140" summary="changed hud debug tooltip format">
-      <created>1336377110615</created>
-      <updated>1336377110615</updated>
-    </task>
-    <task id="LOCAL-00141" summary="ZAGAT RATED FOR YOUR PLEASURES">
-      <created>1336381340510</created>
-      <updated>1336381340510</updated>
-    </task>
-    <task id="LOCAL-00142" summary="framebuffer for android HDPI devices to compensate for low fill rates.">
-      <created>1336427654820</created>
-      <updated>1336427654820</updated>
-    </task>
-    <task id="LOCAL-00143" summary="STAIRS WORK!&#10;also switched every vector that deals with grid points to use integers for simplicity in math ops">
-      <created>1336453460674</created>
-      <updated>1336453460674</updated>
-    </task>
-    <task id="LOCAL-00144" summary="STAIRS WORK!&#10;also switched every vector that deals with grid points to use integers for simplicity in math ops">
-      <created>1336454272010</created>
-      <updated>1336454272010</updated>
-    </task>
-    <task id="LOCAL-00145" summary="added the janitors closet&#10;changed the zoom levels">
-      <created>1336455274158</created>
-      <updated>1336455274158</updated>
-    </task>
-    <task id="LOCAL-00146" summary="elevators now will inform passengers of service changes :D!">
-      <created>1336461118465</created>
-      <updated>1336461118465</updated>
-    </task>
-    <task id="LOCAL-00147" summary="turned back on blending for overlays and grid lines :(&#10;massively simplified the elevators">
-      <created>1336464036072</created>
-      <updated>1336464036072</updated>
-    </task>
-    <task id="LOCAL-00148" summary="fixed a bug where passengers wouldn't be removed from rider queue">
-      <created>1336464245804</created>
-      <updated>1336464245804</updated>
-    </task>
-    <task id="LOCAL-00149" summary="quick refactor">
-      <created>1336465513346</created>
-      <updated>1336465513346</updated>
-    </task>
-    <task id="LOCAL-00150" summary="fixed some bugs with noise and population calculators">
-      <created>1336470017081</created>
-      <updated>1336470017081</updated>
-    </task>
-    <task id="LOCAL-00151" summary="fixed a bunch of loading bugs, and the FBO clear problem on HDPI devices">
-      <created>1336637422528</created>
-      <updated>1336637422528</updated>
-    </task>
-    <task id="LOCAL-00152" summary="fixed most of the screen problems on hdpi devices">
-      <created>1336638201920</created>
-      <updated>1336638201921</updated>
-    </task>
-    <task id="LOCAL-00153" summary="fixed elevators!">
-      <created>1336639199081</created>
-      <updated>1336639199081</updated>
-    </task>
-    <task id="LOCAL-00154" summary="wow majorly overhauled the various grid object storage mechanisms">
-      <created>1336723867869</created>
-      <updated>1336723867870</updated>
-    </task>
-    <task id="LOCAL-00155" summary="fucked myself real bad with GuavaSet because it had an error where items would never be deleted. oh well it was stupid">
-      <created>1336726557104</created>
-      <updated>1336726557105</updated>
-    </task>
-    <task id="LOCAL-00156" summary="reimplemented the render order sorting">
-      <created>1336729410800</created>
-      <updated>1336729410800</updated>
-    </task>
-    <task id="LOCAL-00157" summary="switched the asset manager to use a json file rather than a class with static members.  that was a giant mess!">
-      <created>1336777180145</created>
-      <updated>1336777180146</updated>
-    </task>
-    <task id="LOCAL-00158" summary="added missing assets, cleaned up the asset file list generator">
-      <created>1336856740043</created>
-      <updated>1336856740043</updated>
-    </task>
-    <task id="LOCAL-00159" summary="refactored some of the achievements engine stuff so the button could monitor the state and change its image when there is a pending achievement to award the player">
-      <created>1336915755287</created>
-      <updated>1336915755288</updated>
-    </task>
-    <task id="LOCAL-00160" summary="refactored some of the achievements engine stuff so the button could monitor the state and change its image when there is a pending achievement to award the player">
-      <created>1336915773840</created>
-      <updated>1336915773841</updated>
-    </task>
-    <task id="LOCAL-00161" summary="added background music!&#10;updated the hud to have a more detailed star rating bar&#10;made the achievements more responsive when grid changes.">
-      <created>1337109522749</created>
-      <updated>1337109522749</updated>
-    </task>
-    <task id="LOCAL-00162" summary="the lobby should not be desirable!">
-      <created>1337109793385</created>
-      <updated>1337109793385</updated>
-    </task>
-    <task id="LOCAL-00163" summary="refactored the popover menu quite a bit">
-      <created>1337240938325</created>
-      <updated>1337240938326</updated>
-    </task>
-    <task id="LOCAL-00164" summary="changed the star rating image, added hd version&#10;added missing songs!">
-      <created>1337244606304</created>
-      <updated>1337244606304</updated>
-    </task>
-    <task id="LOCAL-00165" summary="adjusted the status bar panel background">
-      <created>1337245500115</created>
-      <updated>1337245500116</updated>
-    </task>
-    <task id="LOCAL-00166" summary="began working on completely custom gui skin, finished the checkbox and slider controls&#10;added snail/rabbit icons to the game speed slider controls&#10;">
-      <created>1337327691289</created>
-      <updated>1337327691290</updated>
-    </task>
-    <task id="LOCAL-00167" summary="tweak the gui">
-      <created>1337329059453</created>
-      <updated>1337329059453</updated>
-    </task>
-    <task id="LOCAL-00168" summary="new achievements for employment levels">
-      <created>1337427965254</created>
-      <updated>1337427965254</updated>
-    </task>
-    <task id="LOCAL-00169" summary="fixed a bug where achievements that were over 100% complete would be impossible to complete.">
-      <created>1337429624955</created>
-      <updated>1337429624956</updated>
-    </task>
-    <task id="LOCAL-00170" summary="fixed a bug where players could reload a game and receive their income upon load.">
-      <created>1337435111472</created>
-      <updated>1337435111473</updated>
-    </task>
-    <task id="LOCAL-00171" summary="clicking on a locked grid object in the purchase menu will display a dialog to let the player view the achievement">
-      <created>1337436090251</created>
-      <updated>1337436090251</updated>
-    </task>
-    <task id="LOCAL-00172" summary="refactored some gui for object purchase&#10;fixed the background on toasts">
-      <created>1337437455246</created>
-      <updated>1337437455246</updated>
-    </task>
-    <task id="LOCAL-00173" summary="finished the custom skin">
-      <created>1337439207311</created>
-      <updated>1337439207311</updated>
-    </task>
-    <task id="LOCAL-00174" summary="removed static state on camera">
-      <created>1337439683456</created>
-      <updated>1337439683456</updated>
-    </task>
-    <task id="LOCAL-00175" summary="added some new population achievements&#10;added a rewards table to the achievement detail view">
-      <created>1337441094147</created>
-      <updated>1337441094147</updated>
-    </task>
-    <task id="LOCAL-00176" summary="service elevator&#10;star rating goes to 7 with the dubai achievement&#10;">
-      <created>1337443190203</created>
-      <updated>1337443190203</updated>
-    </task>
-    <task id="LOCAL-00177" summary="sort the achievements in the list">
-      <created>1337443483563</created>
-      <updated>1337443483563</updated>
-    </task>
-    <task id="LOCAL-00178" summary="fixed the dialog and window classes so they properly fill the entire screen">
-      <created>1337532940271</created>
-      <updated>1337532940271</updated>
-    </task>
-    <task id="LOCAL-00179" summary="scrollable windows can now have fixed content">
-      <created>1337533723474</created>
-      <updated>1337533723475</updated>
-    </task>
-    <task id="LOCAL-00180" summary="fixed a few minor bugs">
-      <created>1337548104219</created>
-      <updated>1337548104219</updated>
-    </task>
-    <task id="LOCAL-00181" summary="basic friend list with search filtering :D">
-      <created>1337552181588</created>
-      <updated>1337552181589</updated>
-    </task>
-    <task id="LOCAL-00182" summary="upgraded libgdx to latest nightly :D">
-      <created>1337694651388</created>
-      <updated>1337694651389</updated>
-    </task>
-    <task id="LOCAL-00183" summary="added view neighbors button to header bar">
-      <created>1337694667740</created>
-      <updated>1337694667741</updated>
-    </task>
-    <task id="LOCAL-00184" summary="gui tweaking">
-      <created>1337792728700</created>
-      <updated>1337792728700</updated>
-    </task>
-    <task id="LOCAL-00185" summary="view neighbor has a splash scene, and connection error dialog">
-      <created>1337876696990</created>
-      <updated>1337876696990</updated>
-    </task>
-    <task id="LOCAL-00186" summary="pretty big refactor to remove static state of camera and camera controller&#10;audio control also records state between sessions now :D">
-      <created>1337881441969</created>
-      <updated>1337881441969</updated>
-    </task>
-    <task id="LOCAL-00187" summary="removed the save/restore methods for camera state, unneeded since the camera is no longer static">
-      <created>1337881555753</created>
-      <updated>1337881555753</updated>
-    </task>
-    <task id="LOCAL-00188" summary="viewing neighbors now shows the tower name in a label at 0,0">
-      <created>1337883515766</created>
-      <updated>1337883515766</updated>
-    </task>
-    <task id="LOCAL-00189" summary="split the neighbor scene into a splash scene and game scene">
-      <created>1337884335060</created>
-      <updated>1337884335060</updated>
-    </task>
-    <task id="LOCAL-00190" summary="tower name billboards now have some nice textures">
-      <created>1337886708246</created>
-      <updated>1337886708246</updated>
-    </task>
-    <task id="LOCAL-00191" summary="tweaked the billboard">
-      <created>1337888081981</created>
-      <updated>1337888081982</updated>
-    </task>
-    <task id="LOCAL-00192" summary="audio control is vibrating">
-      <created>1337888411717</created>
-      <updated>1337888411717</updated>
-    </task>
-    <task id="LOCAL-00193" summary="added the add neighbors button">
-      <created>1337891292536</created>
-      <updated>1337891292536</updated>
-    </task>
-    <task id="LOCAL-00194" summary="switched how the neighbors are pulled from the server&#10;started working on neighbor interaction menu">
-      <created>1338148167046</created>
-      <updated>1338148167046</updated>
-    </task>
-    <task id="LOCAL-00195" summary="neighbors are stored as resource uri string">
-      <created>1338148328777</created>
-      <updated>1338148328778</updated>
-    </task>
-    <task id="LOCAL-00196" summary="cleaned up the friends window quite a bit">
-      <created>1338404770467</created>
-      <updated>1338404770468</updated>
-    </task>
-    <task id="LOCAL-00197" summary="adding a neighbor works, but it is overwritten when returning to home tower because the cloud save isn't the same instance">
-      <created>1338632407557</created>
-      <updated>1338632407558</updated>
-    </task>
-    <task id="LOCAL-00198" summary="cleaned up the gamesave a bit, moved the tower metadata into an object">
-      <created>1338928685259</created>
-      <updated>1338928685259</updated>
-    </task>
-    <task id="LOCAL-00199" summary="lots of changes to the game saves, they are no longer backwards compatible.  i am leaving the migrations so i can keep around that functionality for the future.&#10;neighbors works fully :D">
-      <created>1339155857280</created>
-      <updated>1339155857304</updated>
-    </task>
-    <task id="LOCAL-00200" summary="fixed some bugs&#10;&#10;still have an outstanding bug with the authentication task at game launch.  it doesn't trigger the callbacks when the request finishes???">
-      <created>1339174926941</created>
-      <updated>1339174926941</updated>
-    </task>
-    <task id="LOCAL-00201" summary="removed noise">
-      <created>1339335714773</created>
-      <updated>1339335714773</updated>
-    </task>
-    <task id="LOCAL-00202" summary="renamed windows">
-      <created>1339335926667</created>
-      <updated>1339335926668</updated>
-    </task>
-    <task id="LOCAL-00203" summary="new splash scene!!!">
-      <created>1340056410892</created>
-      <updated>1340056410892</updated>
-    </task>
-    <task id="LOCAL-00204" summary="refactored some of the splash scene so it can be reusable">
-      <created>1340109280896</created>
-      <updated>1340109280896</updated>
-    </task>
-    <task id="LOCAL-00205" summary="massively cleaned up the splash scene, added specialized scenes for different scenarios rather than abusing the shit out of a single scene">
-      <created>1340112029692</created>
-      <updated>1340112029692</updated>
-    </task>
-    <task id="LOCAL-00206" summary="refactored the launch uri scene and view neighbor splash to use the newer splash scene as a base">
-      <created>1340115134452</created>
-      <updated>1340115134455</updated>
-    </task>
-    <task id="LOCAL-00207" summary="finished the splash screen :D">
-      <created>1340299903218</created>
-      <updated>1340299903219</updated>
-    </task>
-    <task id="LOCAL-00208" summary="slight refactor">
-      <created>1340303828455</created>
-      <updated>1340303828456</updated>
-    </task>
-    <task id="LOCAL-00209" summary="added the sky lobby and requirement to connect to happydroid services for the security center">
-      <created>1340465392174</created>
-      <updated>1340465392175</updated>
-    </task>
-    <task id="LOCAL-00210" summary="added the sky lobby and requirement to connect to happydroid services for the security center">
-      <created>1340465404179</created>
-      <updated>1340465404180</updated>
-    </task>
-    <task id="LOCAL-00211" summary="fixed the add neighbor requirement for achievements">
-      <created>1340535954572</created>
-      <updated>1340535954572</updated>
-    </task>
-    <task id="LOCAL-00212" summary="added basic debug menu">
-      <created>1340537076888</created>
-      <updated>1340537076888</updated>
-    </task>
-    <option name="localTasksCounter" value="213" />
     <servers />
-  </component>
-  <component name="TodoView" selected-index="0">
-    <todo-panel id="selected-file">
-      <are-packages-shown value="false" />
-      <are-modules-shown value="false" />
-      <flatten-packages value="false" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <are-modules-shown value="false" />
-      <flatten-packages value="false" />
-      <is-autoscroll-to-source value="false" />
-    </todo-panel>
-    <todo-panel id="default-changelist">
-      <are-packages-shown value="false" />
-      <are-modules-shown value="false" />
-      <flatten-packages value="false" />
-      <is-autoscroll-to-source value="false" />
-    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32303733" sideWeight="0.95461786" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32862645" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2093949" sideWeight="0.6180714" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26898327" sideWeight="0.32890624" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34877735" sideWeight="0.0" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24839126" sideWeight="0.21264368" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14367816" sideWeight="0.64993566" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.7441154" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32561132" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24839126" sideWeight="0.7823276" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32294264" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19176319" sideWeight="0.49748382" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917705" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.08945312" sideWeight="0.74388677" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283046" sideWeight="0.7441154" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39853895" sideWeight="0.7441154" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23635058" sideWeight="0.65122265" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23166023" sideWeight="0.90229887" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18351911" sideWeight="0.6180714" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="IntelliGuard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953683" sideWeight="0.48726115" order="16" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24918832" sideWeight="0.7441154" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32961783" sideWeight="0.6173121" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41305998" sideWeight="0.51508623" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18275419" sideWeight="0.20545977" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18318966" sideWeight="0.22649007" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32997844" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18275419" sideWeight="0.7895115" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32904884" sideWeight="0.49748382" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32961783" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3994253" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15014368" sideWeight="0.81724584" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35521236" sideWeight="0.9490446" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946082" sideWeight="0.6709347" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3125" sideWeight="0.75032175" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3125" sideWeight="0.75587565" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3088803" sideWeight="0.0" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36066818" sideWeight="0.28821656" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="JsTestDriver Server" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3297953" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297953" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36071888" sideWeight="0.28821656" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="JsTestDriver Server" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3297953" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
     </layout>
-  </component>
-  <component name="UpdateCopyrightCheckinHandler">
-    <option name="UPDATE_COPYRIGHT" value="true" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -1926,11 +400,11 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="added crime level :D" />
+    <option name="LAST_COMMIT_MESSAGE" value="crime level works." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
-    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
-    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
     <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
     <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
@@ -1939,301 +413,61 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="viewing neighbors now shows the tower name in a label at 0,0" />
-    <MESSAGE value="split the neighbor scene into a splash scene and game scene" />
-    <MESSAGE value="tower name billboards now have some nice textures" />
-    <MESSAGE value="tweaked the billboard" />
-    <MESSAGE value="audio control is vibrating" />
-    <MESSAGE value="added the add neighbors button" />
-    <MESSAGE value="switched how the neighbors are pulled from the server&#10;started working on neighbor interaction menu" />
-    <MESSAGE value="neighbors are stored as resource uri string" />
-    <MESSAGE value="cleaned up the friends window quite a bit" />
-    <MESSAGE value="adding a neighbor works, but it is overwritten when returning to home tower because the cloud save isn't the same instance" />
-    <MESSAGE value="cleaned up the gamesave a bit, moved the tower metadata into an object" />
-    <MESSAGE value="lots of changes to the game saves, they are no longer backwards compatible.  i am leaving the migrations so i can keep around that functionality for the future.&#10;neighbors works fully :D" />
-    <MESSAGE value="fixed some bugs&#10;&#10;still have an outstanding bug with the authentication task at game launch.  it doesn't trigger the callbacks when the request finishes???" />
-    <MESSAGE value="removed noise" />
-    <MESSAGE value="renamed windows" />
-    <MESSAGE value="new splash scene!!!" />
-    <MESSAGE value="refactored some of the splash scene so it can be reusable" />
-    <MESSAGE value="massively cleaned up the splash scene, added specialized scenes for different scenarios rather than abusing the shit out of a single scene" />
-    <MESSAGE value="refactored the launch uri scene and view neighbor splash to use the newer splash scene as a base" />
-    <MESSAGE value="finished the splash screen :D" />
-    <MESSAGE value="slight refactor" />
-    <MESSAGE value="added the sky lobby and requirement to connect to happydroid services for the security center" />
-    <MESSAGE value="fixed the add neighbor requirement for achievements" />
-    <MESSAGE value="added basic debug menu" />
-    <MESSAGE value="added crime level :D" />
+    <MESSAGE value="crime level works." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
-  <component name="XPathView.XPathProjectComponent">
-    <history />
-    <find-history />
-  </component>
-  <component name="antWorkspaceConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
-    <option name="FILTER_TARGETS" value="false" />
-    <buildFile url="file://$PROJECT_DIR$/build.xml">
-      <antCommandLine value="" />
-      <runInBackground value="true" />
-      <targetFilters />
-      <treeView value="true" />
-      <verbose value="true" />
-      <viewClosedWhenNoErrors value="false" />
-      <expanded value="true" />
-    </buildFile>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeaderButtonBar.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GridObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="9" selection-start="888" selection-end="888" vertical-scroll-proportion="0.27557412">
+        <state line="396" column="4" selection-start="10994" selection-end="10994" vertical-scroll-proportion="0.70149255">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/DesirabilityCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="43" selection-start="1453" selection-end="1453" vertical-scroll-proportion="0.8208955">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/Graphics.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="216" column="14" selection-start="9039" selection-end="9039" vertical-scroll-proportion="0.029850746">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="23" selection-start="3093" selection-end="3093" vertical-scroll-proportion="0.53731346">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="8" selection-start="1435" selection-end="1435" vertical-scroll-proportion="0.56">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="73" selection-start="4090" selection-end="4090" vertical-scroll-proportion="0.6051502">
-          <folding>
-            <element signature="e#4129#4281#0" expanded="true" />
-            <element signature="e#4274#4275#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="31" selection-start="4731" selection-end="4731" vertical-scroll-proportion="1.1051502">
+        <state line="241" column="39" selection-start="9031" selection-end="9031" vertical-scroll-proportion="0.29579833">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Room.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="74" selection-start="1254" selection-end="1254" vertical-scroll-proportion="0.33261803">
+        <state line="47" column="20" selection-start="1631" selection-end="1631" vertical-scroll-proportion="0.33277312">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/DebugWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="38" selection-start="1544" selection-end="1544" vertical-scroll-proportion="0.7244259">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1009#1227#0" expanded="true" />
-            <element signature="e#1220#1221#0" expanded="true" />
-            <element signature="e#1402#1566#0" expanded="true" />
-            <element signature="e#1559#1560#0" expanded="true" />
-            <element signature="e#1783#1999#0" expanded="true" />
-            <element signature="e#1992#1993#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/assets/params/tutorial-steps.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="90" selection-start="4349" selection-end="4349" vertical-scroll-proportion="0.4806867">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/assets/params/rooms.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/scenes/scene2d/Actor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="21" selection-start="3998" selection-end="3998" vertical-scroll-proportion="0.7083333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/DataOverlayMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="68" selection-start="1360" selection-end="1360" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline/src/com/happydroids/droidtowers/pipeline/GenerateAssetManagerFileList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="0" selection-start="5149" selection-end="5149" vertical-scroll-proportion="1.2901878">
-          <folding>
-            <element signature="e#0#5149#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/assets/params/commercial-spaces.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="20" selection-start="2606" selection-end="2606" vertical-scroll-proportion="1.2296451">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/Overlays.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="53" selection-start="2705" selection-end="2705" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#2814#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="19" selection-start="2060" selection-end="2060" vertical-scroll-proportion="0.14925373">
-          <folding>
-            <element signature="e#0#7085#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GridObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="340" column="39" selection-start="9497" selection-end="9497" vertical-scroll-proportion="0.73134327">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridPosition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="3" selection-start="4178" selection-end="4178" vertical-scroll-proportion="3.2">
-          <folding>
-            <element signature="e#0#4181#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="34" selection-start="4863" selection-end="4863" vertical-scroll-proportion="0.4806867">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor>
-            <show-content>
-              <type id="library" />
-              <type id="artifact" />
-            </show-content>
-          </artifact-editor>
-          <last-edited>jarbundler:jar</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="Copyright.UI">
-        <settings>
-          <last-edited>happydroids llc</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>Android (android)|Android</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>jquery</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.6</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>main</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.5" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>apache-httpclient</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ScopeChooserConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>
 
