@@ -17,23 +17,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/Android.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Android.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/android.iml" afterPath="$PROJECT_DIR$/android/android.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/res/layout/web_browser.xml" afterPath="$PROJECT_DIR$/android/res/layout/web_browser.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/source/com/happydroids/droidtowers/platform/AndroidBrowserUtil.java" afterPath="$PROJECT_DIR$/android/source/com/happydroids/droidtowers/platform/AndroidBrowserUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/source/com/happydroids/droidtowers/platform/TowerWebBrowser.java" afterPath="$PROJECT_DIR$/android/source/com/happydroids/droidtowers/platform/TowerWebBrowser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidServiceObject.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidServiceObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/utils/BackgroundTask.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/utils/BackgroundTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/MemoryTrackingAssetManager.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/MemoryTrackingAssetManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/TowerGameService.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/TowerGameService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/DebugWindow.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/DebugWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/DebugInputAdapter.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/DebugInputAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/SceneManager.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/SceneManager.java" />
     </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -209,7 +194,17 @@
     <favorites_list name="testgame" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="TowerWebBrowser.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/android/source/com/happydroids/droidtowers/platform/TowerWebBrowser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="104" column="66" selection-start="3136" selection-end="3136" vertical-scroll-proportion="0.886076">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -229,7 +224,6 @@
         <option value="$PROJECT_DIR$/android/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/android/source/com/happydroids/droidtowers/platform/TowerWebBrowserActivity.java" />
         <option value="$PROJECT_DIR$/android/source/com/happydroids/droidtowers/platform/AndroidBrowserUtil.java" />
-        <option value="$PROJECT_DIR$/android/source/com/happydroids/droidtowers/platform/TowerWebBrowser.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/DebugWindow.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" />
@@ -238,6 +232,7 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
         <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidServiceObject.java" />
         <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java" />
+        <option value="$PROJECT_DIR$/android/source/com/happydroids/droidtowers/platform/TowerWebBrowser.java" />
       </list>
     </option>
   </component>
@@ -696,12 +691,16 @@
       <created>1340570593458</created>
       <updated>1340570593458</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fixed stupid bug where android was unable to parse the http responses, so everything using http fell over.">
+      <created>1340579231503</created>
+      <updated>1340579231503</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32818532" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -774,7 +773,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="added testers to the about window :D" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed stupid bug where android was unable to parse the http responses, so everything using http fell over." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -791,6 +790,7 @@
     <MESSAGE value="made the overlays only allow a single active selection" />
     <MESSAGE value="added software licenses and the about window to display them." />
     <MESSAGE value="added testers to the about window :D" />
+    <MESSAGE value="fixed stupid bug where android was unable to parse the http responses, so everything using http fell over." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -820,13 +820,6 @@
     <entry file="jar:///usr/local/Cellar/android-sdk/r12/platforms/android-10/android.jar!/android/R.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="57" column="28" selection-start="3074" selection-end="3074" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/source/com/happydroids/droidtowers/platform/TowerWebBrowser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="48" selection-start="1796" selection-end="1796" vertical-scroll-proportion="0.721519">
           <folding />
         </state>
       </provider>
@@ -932,6 +925,13 @@
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/DebugWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="55" column="40" selection-start="1805" selection-end="1805" vertical-scroll-proportion="0.6666667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/source/com/happydroids/droidtowers/platform/TowerWebBrowser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="104" column="66" selection-start="3136" selection-end="3136" vertical-scroll-proportion="0.886076">
           <folding />
         </state>
       </provider>
