@@ -40,6 +40,11 @@
     <orderEntry type="module" module-name="main" exported="" />
     <orderEntry type="jdk" jdkName="Android 2.3.3 Google APIs" jdkType="Android SDK" />
     <orderEntry type="module" module-name="happydroids-common" exported="" />
+    <orderEntry type="library" exported="" name="jackson" level="project" />
+    <orderEntry type="library" exported="" name="apache-httpclient" level="project" />
+    <orderEntry type="library" exported="" name="apache-commons" level="project" />
+    <orderEntry type="library" exported="" name="commons-io" level="project" />
+    <orderEntry type="library" exported="" name="guava" level="project" />
     <orderEntry type="library" scope="TEST" name="junit-mockito-great-expectations" level="project" />
   </component>
 </module>

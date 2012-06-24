@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -99,5 +100,11 @@ public class MemoryTrackingAssetManager extends AssetManager {
   public void resetMemoryTracking() {
     currentMemory = 0;
     memoryPerFile.clear();
+  }
+
+  public void invalidateAllTextures() {
+    Texture.invalidateAllTextures(Gdx.app);
+    resetMemoryTracking();
+    finishLoading();
   }
 }

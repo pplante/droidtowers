@@ -16,7 +16,6 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.google.common.collect.Lists;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.actions.ActionManager;
@@ -60,7 +59,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
   private static CloudGameSaveCollection cloudGameSaves;
 
   public TowerGame() {
-    SceneManager.pausedScenes = Lists.newLinkedList();
     cloudGameSaves = new CloudGameSaveCollection();
   }
 
@@ -102,27 +100,22 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     TowerAssetManager.assetManager();
 
-    TowerGameService.instance().withNetworkConnection(new Runnable() {
+    final Device device = new Device();
+    device.save(new ApiRunnable<Device>() {
       @Override
-      public void run() {
-        final Device device = new Device();
-        device.save(new ApiRunnable<Device>() {
-          @Override
-          public void onError(HttpResponse response, int statusCode, Device object) {
-            afterRequest();
-          }
+      public void onError(HttpResponse response, int statusCode, Device object) {
+        afterRequest();
+      }
 
-          @Override
-          public void onSuccess(HttpResponse response, Device object) {
-            afterRequest();
-          }
+      @Override
+      public void onSuccess(HttpResponse response, Device object) {
+        afterRequest();
+      }
 
-          private void afterRequest() {
-            Gdx.app.debug(TAG, "Authentication finished, state: " + device.isAuthenticated);
-            TowerGameService.instance().setAuthenticated(device.isAuthenticated);
-            TowerGameService.instance().getPostAuthRunnables().runAll();
-          }
-        });
+      private void afterRequest() {
+        Gdx.app.debug(TAG, "Authentication finished, state: " + device.isAuthenticated);
+        TowerGameService.instance().setAuthenticated(device.isAuthenticated);
+        TowerGameService.instance().getPostAuthRunnables().runAll();
       }
     });
 
@@ -167,7 +160,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     InputSystem.instance().bind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, new InputCallback() {
       public boolean run(float timeDelta) {
-        final boolean mainMenuIsActive = SceneManager.activeScene instanceof MainMenuScene;
+        final boolean mainMenuIsActive = SceneManager.getActiveScene() instanceof MainMenuScene;
 
         new Dialog(rootUiStage)
                 .setTitle("Awe, don't leave me.")
@@ -212,36 +205,36 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     float deltaTime = Gdx.graphics.getDeltaTime();
 
-    SceneManager.activeScene.getCamera().update();
+    SceneManager.getActiveScene().getCamera().update();
     ActionManager.instance().update(deltaTime);
     InputSystem.instance().update(deltaTime);
     PathSearchManager.instance().update(deltaTime);
-    TweenSystem.manager().update((int) (deltaTime * 1000 * SceneManager.activeScene.getTimeMultiplier()));
+    TweenSystem.manager().update((int) (deltaTime * 1000 * SceneManager.getActiveScene().getTimeMultiplier()));
     soundController.update(deltaTime);
 
-    spriteBatch.setProjectionMatrix(SceneManager.activeScene.getCamera().combined);
+    spriteBatch.setProjectionMatrix(SceneManager.getActiveScene().getCamera().combined);
 
     if (frameBuffer != null) {
       frameBuffer.begin();
       Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
-      SceneManager.activeScene.render(deltaTime);
+      SceneManager.getActiveScene().render(deltaTime);
       frameBuffer.end();
 
       spriteBatchFBO.begin();
       spriteBatchFBO.draw(frameBuffer.getColorBufferTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0, 0, 1, 1);
       spriteBatchFBO.end();
     } else {
-      SceneManager.activeScene.render(deltaTime);
+      SceneManager.getActiveScene().render(deltaTime);
     }
 
-    SceneManager.activeScene.getStage().act(deltaTime);
-    SceneManager.activeScene.getStage().draw();
+    SceneManager.getActiveScene().getStage().act(deltaTime);
+    SceneManager.getActiveScene().getStage().draw();
 
     rootUiStage.act(deltaTime);
     rootUiStage.draw();
 
     if (HappyDroidConsts.DEBUG) {
-      Table.drawDebug(SceneManager.activeScene.getStage());
+      Table.drawDebug(SceneManager.getActiveScene().getStage());
       Table.drawDebug(rootUiStage);
 
       float javaHeapInBytes = Gdx.app.getJavaHeap() / TowerConsts.ONE_MEGABYTE;
@@ -249,9 +242,9 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
       String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f)\nmem: (java %.1f Mb, native %.1f Mb, gpu %.1f Mb)",
                                              Gdx.graphics.getFramesPerSecond(),
-                                             SceneManager.activeScene.getCamera().position.x,
-                                             SceneManager.activeScene.getCamera().position.y,
-                                             SceneManager.activeScene.getCamera().zoom,
+                                             SceneManager.getActiveScene().getCamera().position.x,
+                                             SceneManager.getActiveScene().getCamera().position.y,
+                                             SceneManager.getActiveScene().getCamera().zoom,
                                              javaHeapInBytes,
                                              nativeHeapInBytes,
                                              TowerAssetManager.assetManager().getMemoryInMegabytes());
@@ -263,17 +256,17 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
   public void resize(int width, int height) {
     Gdx.app.log("lifecycle", "resizing!");
-    SceneManager.activeScene.getCamera().viewportWidth = width;
-    SceneManager.activeScene.getCamera().viewportHeight = height;
+    SceneManager.getActiveScene().getCamera().viewportWidth = width;
+    SceneManager.getActiveScene().getCamera().viewportHeight = height;
     spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
-    SceneManager.activeScene.getSpriteBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
+    SceneManager.getActiveScene().getSpriteBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
     Gdx.gl.glViewport(0, 0, width, height);
   }
 
 
   public void pause() {
     Gdx.app.error("lifecycle", "pausing!");
-    SceneManager.activeScene.pause();
+    SceneManager.getActiveScene().pause();
   }
 
   public void resume() {
@@ -291,14 +284,13 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
   public void dispose() {
     Gdx.app.error("lifecycle", "dispose");
-    SceneManager.activeScene.dispose();
+    SceneManager.getActiveScene().dispose();
 
-    SceneManager.activeScene = null;
-    SceneManager.pausedScenes = null;
     rootUiStage = null;
     uncaughtExceptionHandler = null;
     platformBrowserUtil = null;
 
+    SceneManager.dispose();
     spriteBatch.dispose();
     BackgroundTask.dispose();
     TowerAssetManager.dispose();

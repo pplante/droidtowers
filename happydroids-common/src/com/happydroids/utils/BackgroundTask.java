@@ -42,7 +42,7 @@ public abstract class BackgroundTask {
 
   public final void run() {
     if (threadPool == null) {
-      threadPool = Executors.newCachedThreadPool(new ThreadFactory() {
+      threadPool = Executors.newFixedThreadPool(1, new ThreadFactory() {
         public Thread newThread(Runnable r) {
           Thread thread = new Thread(r, "BackgroundTaskThread");
           thread.setUncaughtExceptionHandler(uncaughtExceptionHandler);

@@ -29,7 +29,7 @@ public class MainMenuButtonPanel extends Table {
 
     setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.WHITE_SEMI_TRANSPARENT));
 
-    pad(scale(32));
+    pad(scale(16));
 
     TextButton newGameButton = FontManager.RobotoBold18.makeTextButton("new tower");
     add(newGameButton).fill().maxWidth(BUTTON_WIDTH);
@@ -44,22 +44,23 @@ public class MainMenuButtonPanel extends Table {
     row().padTop(BUTTON_SPACING);
 
     if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT) {
-      final TextButton connectFacebookButton = FontManager.RobotoBold18.makeTextButton("login to happydroids.com");
-      connectFacebookButton.visible = false;
-      add(connectFacebookButton).fill().maxWidth(BUTTON_WIDTH);
+      final TextButton connectToHappyDroids = FontManager.RobotoBold18.makeTextButton("login to happydroids.com");
+      connectToHappyDroids.visible = false;
+      add(connectToHappyDroids).fill().maxWidth(BUTTON_WIDTH);
       row().padTop(BUTTON_SPACING);
 
       TowerGameService.instance().afterAuthentication(new Runnable() {
         public void run() {
+          Gdx.app.debug(TAG, "After auth, hide/show connect button.");
           if (!TowerGameService.instance().isAuthenticated()) {
-            connectFacebookButton.visible = true;
-            connectFacebookButton.setClickListener(new VibrateClickListener() {
+            connectToHappyDroids.visible = true;
+            connectToHappyDroids.setClickListener(new VibrateClickListener() {
               @Override
               public void onClick(Actor actor, float x, float y) {
                 SceneManager.pushScene(HappyDroidConnect.class);
               }
             });
-            connectFacebookButton.action(FadeIn.$(0.25f));
+            connectToHappyDroids.action(FadeIn.$(0.25f));
           }
         }
       });

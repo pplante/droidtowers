@@ -128,7 +128,6 @@ public class TowerGameService extends HappyDroidService {
     }
 
     authenticationFinished = true;
+    postAuthRunnables.runAll();
   }
-
-
 }

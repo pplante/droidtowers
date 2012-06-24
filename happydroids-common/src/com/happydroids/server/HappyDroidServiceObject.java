@@ -103,9 +103,7 @@ public abstract class HappyDroidServiceObject {
 
           @Override
           public synchronized void afterExecute() {
-            if (httpResponse != null) {
-              afterSave.handleResponse(httpResponse, HappyDroidServiceObject.this);
-            }
+            afterSave.handleResponse(httpResponse, HappyDroidServiceObject.this);
           }
         }.run();
       }

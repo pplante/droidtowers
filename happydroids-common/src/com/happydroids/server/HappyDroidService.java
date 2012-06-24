@@ -24,8 +24,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -95,13 +94,13 @@ public class HappyDroidService {
       try {
         BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
         if (entity != null && entity.getContentLength() > 0) {
-          String content = EntityUtils.toString(entity, Charset.forName("utf-8"));
+          byte[] content = EntityUtils.toByteArray(entity);
           if (HappyDroidConsts.DEBUG)
-            System.out.println("\tResponse: " + content);
+            System.out.println("\tResponse: " + Arrays.toString(content));
           return mapper.readValue(content, aClazz);
         }
-      } catch (IOException e) {
-        e.printStackTrace();
+      } catch (Exception e) {
+        throw new RuntimeException(e);
       }
     }
 

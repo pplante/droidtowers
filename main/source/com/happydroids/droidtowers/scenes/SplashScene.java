@@ -140,7 +140,7 @@ public abstract class SplashScene extends Scene {
     droidTowersLogo = new Image(droidTowersLogoTexture, fit);
     droidTowersLogo.width = Math.min(getStage().width() * 0.5f, droidTowersLogo.getRegion().getRegionWidth());
     droidTowersLogo.layout();
-    droidTowersLogo.y = getStage().height() - droidTowersLogo.getImageHeight() - 150;
+    droidTowersLogo.y = getStage().height() - droidTowersLogo.getImageHeight() - 75;
     droidTowersLogo.x = 50;
 
     if (animateBuildOut) {

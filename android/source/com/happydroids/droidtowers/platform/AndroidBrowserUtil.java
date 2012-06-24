@@ -13,13 +13,11 @@ public class AndroidBrowserUtil implements PlatformBrowserUtil {
     this.activity = activity;
   }
 
-  public void launchWebBrowser(final String uri) {
+  public void launchWebBrowser(final String uriToLoad) {
     activity.runOnUiThread(new Runnable() {
       @Override
       public void run() {
-        new TowerWebBrowser(activity)
-                .openUrl(uri)
-                .show();
+        new TowerWebBrowser(activity, uriToLoad).show();
       }
     });
   }
