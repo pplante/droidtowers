@@ -19,14 +19,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/happydroids-common/libs/sources/httpclient-4.2-sources.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/apache_httpclient.xml" afterPath="$PROJECT_DIR$/.idea/libraries/apache_httpclient.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/android.iml" afterPath="$PROJECT_DIR$/android/android.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/source/com/happydroids/platform/AndroidConnectionMonitor.java" afterPath="$PROJECT_DIR$/android/source/com/happydroids/platform/AndroidConnectionMonitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/source/com/happydroids/platform/TowerWebBrowser.java" afterPath="$PROJECT_DIR$/android/source/com/happydroids/platform/TowerWebBrowser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/CameraController.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/CameraController.java" />
     </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -135,7 +128,7 @@
       <file leaf-file-name="AndroidConnectionMonitor.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/android/source/com/happydroids/platform/AndroidConnectionMonitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="64" selection-start="709" selection-end="709" vertical-scroll-proportion="0.616">
+            <state line="21" column="64" selection-start="709" selection-end="709" vertical-scroll-proportion="0.6962025">
               <folding>
                 <element signature="e#0#763#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -615,7 +608,11 @@
       <created>1340655796204</created>
       <updated>1340655796204</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="FIXED THE STUPID ANDROID HTTP CLIENT SHIT">
+      <created>1340659627568</created>
+      <updated>1340659627568</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -661,7 +658,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32961783" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3994253" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21623564" sideWeight="0.64478767" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35521236" sideWeight="0.9490446" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35521236" sideWeight="0.9490446" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946082" sideWeight="0.6709347" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -713,7 +710,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="made the desktop connection monitor use a thread so it can periodically check&#10;added an audio control to all splash screens so players are happy if they hate nice things." />
+    <option name="LAST_COMMIT_MESSAGE" value="FIXED THE STUPID ANDROID HTTP CLIENT SHIT" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -736,6 +733,7 @@
     <MESSAGE value="lots of refactoring and rejiggering of platform specific code" />
     <MESSAGE value="fixed a blending bug and removed the notion of &quot;non-blocking&quot; api requests, handle them with background tasks if needed on a case by case basis" />
     <MESSAGE value="made the desktop connection monitor use a thread so it can periodically check&#10;added an audio control to all splash screens so players are happy if they hate nice things." />
+    <MESSAGE value="FIXED THE STUPID ANDROID HTTP CLIENT SHIT" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -868,7 +866,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/android/source/com/happydroids/platform/AndroidConnectionMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="64" selection-start="709" selection-end="709" vertical-scroll-proportion="0.616">
+        <state line="21" column="64" selection-start="709" selection-end="709" vertical-scroll-proportion="0.6962025">
           <folding>
             <element signature="e#0#763#0" expanded="true" />
             <element signature="imports" expanded="true" />

@@ -5,7 +5,6 @@
 package com.happydroids.sparky;
 
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.platform.Platform;
 import com.happydroids.server.HappyDroidService;
 import com.happydroids.utils.BackgroundTask;
 
@@ -69,7 +68,7 @@ public class SparkyMain extends JFrame {
     }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     updateProgressStatus(null);
-    gameStorage = Platform.getAppRoot();
+    gameStorage = PlatformUtil.getAppRoot();
 
     gameJar = new File(gameStorage, "DroidTowers.jar");
 

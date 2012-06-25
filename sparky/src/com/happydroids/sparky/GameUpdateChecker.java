@@ -5,6 +5,7 @@
 package com.happydroids.sparky;
 
 import com.google.common.collect.Lists;
+import com.happydroids.platform.Platform;
 import com.happydroids.server.*;
 
 import java.io.File;
@@ -105,7 +106,7 @@ public class GameUpdateChecker {
   }
 
   public boolean hasCurrentVersion() {
-    if (!HappyDroidService.instance().haveNetworkConnection()) {
+    if (!Platform.getConnectionMonitor().isConnectedOrConnecting()) {
       return localGameJarVersionSHA != null;
     }
 
