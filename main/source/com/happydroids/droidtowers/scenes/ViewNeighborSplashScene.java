@@ -38,7 +38,7 @@ public class ViewNeighborSplashScene extends SplashScene {
     @Override
     protected void execute() throws Exception {
       if (TowerGameService.instance().isAuthenticated()) {
-        playerGameState.getCloudGameSave().fetchBlocking();
+        playerGameState.getCloudGameSave().fetch();
         friendGames = Lists.newArrayList();
         fetchWasSuccessful = playerGameState.getCloudGameSave().fetchNeighbors();
       }

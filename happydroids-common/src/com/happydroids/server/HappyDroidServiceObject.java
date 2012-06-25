@@ -73,16 +73,12 @@ public abstract class HappyDroidServiceObject {
       return;
     }
 
-    apiRunnable.handleResponse(fetchBlocking(), HappyDroidServiceObject.this);
-  }
-
-  public HttpResponse fetchBlocking() {
     HttpResponse response = HappyDroidService.instance().makeGetRequest(resourceUri, null);
     if (response != null && response.getStatusLine().getStatusCode() == 200) {
       copyValuesFromResponse(response);
     }
 
-    return response;
+    apiRunnable.handleResponse(response, HappyDroidServiceObject.this);
   }
 
   public void save() {
@@ -94,20 +90,10 @@ public abstract class HappyDroidServiceObject {
     if (!Platform.getConnectionMonitor().isConnectedOrConnecting()) {
       apiRunnable.onError(null, HttpStatusCode.ClientClosedRequest, this);
       return;
+    } else if (!beforeSaveValidation(apiRunnable)) {
+      apiRunnable.onError(null, HttpStatusCode.ClientValidationFailed, this);
+      return;
     }
-
-    apiRunnable.handleResponse(saveBlocking(apiRunnable), HappyDroidServiceObject.this);
-  }
-
-  public void saveBlocking() {
-    HttpResponse response = saveBlocking(NO_OP_API_RUNNABLE);
-    if (response != null) {
-      NO_OP_API_RUNNABLE.handleResponse(response, this);
-    }
-  }
-
-  public HttpResponse saveBlocking(ApiRunnable afterSave) {
-    if (!beforeSaveValidation(afterSave)) return null;
 
     validateResourceUri();
 
@@ -126,7 +112,7 @@ public abstract class HappyDroidServiceObject {
       response = HappyDroidService.instance().makePutRequest(resourceUri, this);
     }
 
-    return response;
+    apiRunnable.handleResponse(response, HappyDroidServiceObject.this);
   }
 
   @SuppressWarnings("unchecked")

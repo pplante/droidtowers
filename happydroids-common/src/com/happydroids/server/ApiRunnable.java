@@ -16,8 +16,7 @@ public class ApiRunnable<T extends HappyDroidServiceObject> {
 
   public void onError(HttpResponse response, int statusCode, T object) {
     if (HappyDroidConsts.DEBUG) {
-      if (HappyDroidConsts.DEBUG)
-        System.out.println("HTTP ERR: " + statusCode);
+      System.out.println("HTTP ERR: " + statusCode);
       if (response != null) {
         System.out.println("HTTP RES: " + response.getStatusLine());
       }

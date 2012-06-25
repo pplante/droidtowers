@@ -4,8 +4,10 @@
 
 package com.happydroids.droidtowers.gui;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
@@ -35,7 +37,15 @@ public class TowerWindow {
   public TowerWindow(String title, Stage stage) {
     this.stage = stage;
 
-    wrapper = new Table();
+    wrapper = new Table() {
+//      TODO: GROT, I have no clue why this texture is blending with the stuff behind it..
+      @Override
+      protected void drawBackground(SpriteBatch batch, float parentAlpha) {
+        batch.disableBlending();
+        super.drawBackground(batch, 1f);
+        batch.enableBlending();
+      }
+    };
     wrapper.setFillParent(true);
     wrapper.defaults().top().left();
     wrapper.touchable = true;
@@ -100,6 +110,7 @@ public class TowerWindow {
 
     wrapper.invalidate();
     wrapper.pack();
+    wrapper.color.set(Color.WHITE);
     stage.addActor(wrapper);
 
     return this;
