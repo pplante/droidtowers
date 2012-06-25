@@ -17,6 +17,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Sets;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
@@ -96,17 +97,19 @@ public class HeadsUpDisplay extends WidgetGroup {
     notificationStack.y = 0;
     addActor(notificationStack);
 
-    ImageButton debugMenuButton = new ImageButton(hudAtlas.findRegion("debug-menu"));
-    debugMenuButton.x = 10;
-    debugMenuButton.y = achievementButton.y - debugMenuButton.height - 10;
-    debugMenuButton.setClickListener(new ClickListener() {
-      @Override
-      public void click(Actor actor, float x, float y) {
-        new DebugWindow(getStage()).show();
-      }
-    });
+    if (TowerConsts.DEBUG) {
+      ImageButton debugMenuButton = new ImageButton(hudAtlas.findRegion("debug-menu"));
+      debugMenuButton.x = 10;
+      debugMenuButton.y = achievementButton.y - debugMenuButton.height - 10;
+      debugMenuButton.setClickListener(new ClickListener() {
+        @Override
+        public void click(Actor actor, float x, float y) {
+          new DebugWindow(getStage()).show();
+        }
+      });
 
-    addActor(debugMenuButton);
+      addActor(debugMenuButton);
+    }
 
     this.stage.addActor(this);
   }
