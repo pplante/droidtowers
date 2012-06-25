@@ -6,6 +6,7 @@ package com.happydroids.platform;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 public class AndroidConnectionMonitor implements PlatformConnectionMonitor {
   private final Context context;
@@ -16,6 +17,11 @@ public class AndroidConnectionMonitor implements PlatformConnectionMonitor {
 
   public boolean isConnectedOrConnecting() {
     ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-    return cm.getActiveNetworkInfo().isConnectedOrConnecting();
+    if (cm != null) {
+      NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
+      return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
+    }
+
+    return false;
   }
 }

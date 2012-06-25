@@ -21,8 +21,7 @@ import com.happydroids.droidtowers.tween.TweenSystem;
 
 public class CameraController implements GestureDetector.GestureListener {
   public static final float ZOOM_MAX = 3f;
-
-  public static final float ZOOM_MIN = 1f;
+  public static final float ZOOM_MIN = 0.75f;
 
   private OrthographicCamera camera;
   private BoundingBox cameraBounds;

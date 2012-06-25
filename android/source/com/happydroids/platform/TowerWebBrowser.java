@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.happydroids.droidtowers.R;
 
+import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.view.Window.FEATURE_NO_TITLE;
 import static android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN;
@@ -32,8 +33,7 @@ import static android.webkit.WebSettings.RenderPriority.HIGH;
 
 public class TowerWebBrowser extends Dialog {
   static final FrameLayout.LayoutParams FILL =
-          new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
-                                              ViewGroup.LayoutParams.FILL_PARENT);
+          new FrameLayout.LayoutParams(FILL_PARENT, FILL_PARENT);
 
   private WebView webView;
   private Activity activity;
@@ -69,9 +69,16 @@ public class TowerWebBrowser extends Dialog {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    progressDialog = new ProgressDialog(getContext(), android.R.style.Theme_Light_NoTitleBar_Fullscreen);
+    progressDialog = new ProgressDialog(getContext(), android.R.style.Theme_Translucent_NoTitleBar);
     progressDialog.requestWindowFeature(FEATURE_NO_TITLE);
-    progressDialog.setCancelable(false);
+    progressDialog.getWindow().setLayout(FILL_PARENT, FILL_PARENT);
+    progressDialog.setIndeterminate(true);
+    progressDialog.setOnCancelListener(new OnCancelListener() {
+      @Override
+      public void onCancel(DialogInterface dialogInterface) {
+        webView.stopLoading();
+      }
+    });
     progressDialog.setMessage("Loading...");
 
     requestWindowFeature(FEATURE_NO_TITLE);

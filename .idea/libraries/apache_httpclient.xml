@@ -9,6 +9,8 @@
     <JAVADOC>
       <root url="file://$PROJECT_DIR$/happydroids-common/libs/docs/httpclient4.2" />
     </JAVADOC>
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/happydroids-common/libs/sources/httpclient-4.2-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

@@ -6,24 +6,30 @@ package com.happydroids.server;
 
 import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.jackson.HappyDroidObjectMapper;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.client.utils.URIUtils;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 public class HappyDroidService {
@@ -177,30 +183,28 @@ public class HappyDroidService {
     request.setHeader("Content-Type", "application/json");
   }
 
-  public HttpResponse makeGetRequest(String uri, HashMap<String, String> queryParams) {
+  public HttpResponse makeGetRequest(String urlString, HashMap<String, String> queryParams) {
     HttpClient client = new DefaultHttpClient();
     try {
-      HttpGet request = new HttpGet(uri);
+      URI uri = new URI(urlString);
+
       if (queryParams != null && queryParams.size() > 0) {
-        URIBuilder uriBuilder = new URIBuilder();
-        uriBuilder.setScheme(request.getURI().getScheme());
-        uriBuilder.setHost(request.getURI().getHost());
-        uriBuilder.setPath(request.getURI().getPath());
-        uriBuilder.setQuery(request.getURI().getQuery());
+        List<NameValuePair> pairs = Lists.newArrayListWithCapacity(queryParams.size());
         for (String paramName : queryParams.keySet()) {
-          uriBuilder.addParameter(paramName, queryParams.get(paramName));
+          pairs.add(new BasicNameValuePair(paramName, queryParams.get(paramName)));
         }
 
-        request.setURI(uriBuilder.build());
+        uri = URIUtils.createURI(uri.getScheme(), uri.getHost(), uri.getPort(), uri.getPath(), URLEncodedUtils.format(pairs, "UTF-8"), uri.getFragment());
       }
 
+      HttpGet request = new HttpGet(uri);
       addDefaultHeaders(request);
-      Gdx.app.debug(TAG, "REQ: GET " + request.getURI());
+      Gdx.app.debug(TAG, "REQ: GET " + uri);
       HttpResponse response = client.execute(request);
-      Gdx.app.debug(TAG, "RES: GET " + request.getURI() + ", " + response.getStatusLine());
+      Gdx.app.debug(TAG, "RES: GET " + uri + ", " + response.getStatusLine());
       return response;
     } catch (Exception ignored) {
-      Gdx.app.error(TAG, "Connection failed for: " + uri, ignored);
+      Gdx.app.error(TAG, "Connection failed for: " + urlString, ignored);
     }
 
     return null;
