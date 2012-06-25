@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.platform;
 import com.apple.eawt.AppEvent;
 import com.apple.eawt.Application;
 import com.apple.eawt.OpenURIHandler;
+import com.happydroids.platform.PlatformProtocolHandler;
 
 import java.net.URI;
 

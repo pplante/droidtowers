@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public abstract class BackgroundTask {
-  private static final String TAG = BackgroundTask.class.getSimpleName();
+  protected static final String TAG = BackgroundTask.class.getSimpleName();
   protected static ExecutorService threadPool;
 
   protected Thread thread;

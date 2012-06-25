@@ -16,6 +16,7 @@ import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.server.TemporaryToken;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.utils.PeriodicBackgroundTask;
+import com.happydroids.platform.Platform;
 import com.happydroids.server.ApiRunnable;
 import com.happydroids.server.HappyDroidServiceObject;
 import org.apache.http.HttpResponse;
@@ -93,13 +94,11 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
 
       accessTokenButton.setClickListener(new ClickListener() {
         public void click(Actor actor, float x, float y) {
-          String uri = token.getClickableUri();
-
-          TowerGame.getPlatformBrowserUtil().launchWebBrowser(uri);
+          Platform.getBrowserUtil().launchWebBrowser(token.getClickableUri());
         }
       });
 
-      TowerGame.getPlatformBrowserUtil().launchWebBrowser(token.getClickableUri());
+      Platform.getBrowserUtil().launchWebBrowser(token.getClickableUri());
 
       periodicBackgroundTask = new AccessTokenCheckStateTask();
       periodicBackgroundTask.run();

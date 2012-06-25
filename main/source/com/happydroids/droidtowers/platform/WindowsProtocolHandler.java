@@ -4,6 +4,8 @@
 
 package com.happydroids.droidtowers.platform;
 
+import com.happydroids.platform.PlatformProtocolHandler;
+
 import javax.swing.*;
 import java.net.URI;
 

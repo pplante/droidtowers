@@ -46,7 +46,7 @@ public class MovieTheater extends CommercialSpace {
 /*
   @Override
   public boolean touchDown(Vector2 gameGridPoint) {
-    TowerGame.getPlatformBrowserUtil().launchWebBrowser("http://www.tkqlhce.com/da74cy63y5LRTPTMPTLNMRVVTUR");
+    TowerGame.getBrowserUtil().launchWebBrowser("http://www.tkqlhce.com/da74cy63y5LRTPTMPTLNMRVVTUR");
     return true;
   }
  */

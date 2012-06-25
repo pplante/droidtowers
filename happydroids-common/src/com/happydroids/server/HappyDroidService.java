@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Sets;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.jackson.HappyDroidObjectMapper;
-import com.happydroids.tasks.CheckForNetworkTask;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -24,10 +23,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.logging.Logger;
 
 public class HappyDroidService {
   private static final String TAG = HappyDroidService.class.getSimpleName();
@@ -35,7 +32,6 @@ public class HappyDroidService {
   private static String deviceType;
   private static String deviceOSVersion;
 
-  protected static boolean hasNetworkConnection;
   private final Set<Runnable> withNetworkConnectionRunnables = Sets.newHashSet();
 
   protected HappyDroidObjectMapper objectMapper;
@@ -53,7 +49,6 @@ public class HappyDroidService {
   }
 
   protected HappyDroidService() {
-    checkForNetwork();
   }
 
   protected HappyDroidService(int fuckYouJava) {
@@ -76,10 +71,6 @@ public class HappyDroidService {
     return deviceType;
   }
 
-  public static void setConnectionState(boolean connectionState) {
-    HappyDroidService.hasNetworkConnection = connectionState;
-  }
-
   public HappyDroidObjectMapper getObjectMapper() {
     if (objectMapper == null) {
       objectMapper = new HappyDroidObjectMapper();
@@ -94,9 +85,9 @@ public class HappyDroidService {
       try {
         BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
         if (entity != null && entity.getContentLength() > 0) {
-          byte[] content = EntityUtils.toByteArray(entity);
+          String content = EntityUtils.toString(entity);
           if (HappyDroidConsts.DEBUG)
-            System.out.println("\tResponse: " + Arrays.toString(content));
+            System.out.println("\tResponse: " + content);
           return mapper.readValue(content, aClazz);
         }
       } catch (Exception e) {
@@ -215,39 +206,11 @@ public class HappyDroidService {
     return null;
   }
 
-  public void checkForNetwork() {
-    Logger.getLogger(TAG).info("Checking for network connection...");
-
-    new CheckForNetworkTask().run();
-  }
-
-  public void withNetworkConnection(Runnable runnable) {
-    if (hasNetworkConnection) {
-      runnable.run();
-    } else {
-      withNetworkConnectionRunnables.add(runnable);
-    }
-  }
-
-  public boolean haveNetworkConnection() {
-    return hasNetworkConnection;
-  }
-
   public String getDeviceId() {
     return null;
   }
 
   public boolean isAuthenticated() {
     return false;
-  }
-
-  public void runAfterNetworkCheckRunnables() {
-    synchronized (withNetworkConnectionRunnables) {
-      for (Runnable runnable : withNetworkConnectionRunnables) {
-        runnable.run();
-      }
-
-      withNetworkConnectionRunnables.clear();
-    }
   }
 }

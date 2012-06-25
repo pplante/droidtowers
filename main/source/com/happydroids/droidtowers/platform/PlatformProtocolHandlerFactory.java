@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.platform;
 
 import com.happydroids.platform.Platform;
+import com.happydroids.platform.PlatformProtocolHandler;
 import com.happydroids.platform.Platforms;
 
 public class PlatformProtocolHandlerFactory {

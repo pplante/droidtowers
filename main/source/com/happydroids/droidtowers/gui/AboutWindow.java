@@ -13,8 +13,8 @@ import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.Strings;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.platform.Platform;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
@@ -39,7 +39,7 @@ public class AboutWindow extends ScrollableTowerWindow {
     willPhillipsButton.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
-        TowerGame.getPlatformBrowserUtil().launchWebBrowser("http://www.facebook.com/willphillipsmusic");
+        Platform.getBrowserUtil().launchWebBrowser("http://www.facebook.com/willphillipsmusic");
       }
     });
     add(willPhillipsButton).spaceBottom(scale(16));
@@ -50,7 +50,7 @@ public class AboutWindow extends ScrollableTowerWindow {
     addLabel("Thank you to the following Friends who helped test:", FontManager.RobotoBold18);
     row();
     add(new HorizontalRule(Colors.DARK_GRAY, 1));
-    addLabel(Strings.wrap(Gdx.files.internal("testers.txt").readString(), 100), FontManager.Roboto18);
+    addLabel(Strings.wrap(Gdx.files.internal("testers.txt").readString(), 60), FontManager.Roboto18);
 
     row().padTop(scale(50));
     add(new HorizontalRule(Colors.DARK_GRAY, 1));

@@ -2,7 +2,7 @@
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
 
-package com.happydroids.droidtowers.platform;
+package com.happydroids.platform;
 
 import java.net.URI;
 

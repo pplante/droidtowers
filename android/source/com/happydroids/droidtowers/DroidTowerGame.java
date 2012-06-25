@@ -9,13 +9,19 @@ import android.util.DisplayMetrics;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
-import com.happydroids.droidtowers.platform.AndroidBrowserUtil;
-import com.happydroids.droidtowers.platform.AndroidUncaughtExceptionHandler;
 import com.happydroids.droidtowers.platform.Display;
+import com.happydroids.platform.AndroidBrowserUtil;
+import com.happydroids.platform.AndroidConnectionMonitor;
+import com.happydroids.platform.AndroidUncaughtExceptionHandler;
+import com.happydroids.platform.Platform;
 
 public class DroidTowerGame extends AndroidApplication {
   public void onCreate(android.os.Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    Platform.setConnectionMonitor(new AndroidConnectionMonitor(this));
+    Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(this));
+    Platform.setBrowserUtil(new AndroidBrowserUtil(this));
 
     DisplayMetrics metrics = new DisplayMetrics();
     getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -26,11 +32,7 @@ public class DroidTowerGame extends AndroidApplication {
     TowerGameService.setDeviceOSName("android");
     TowerGameService.setDeviceOSVersion("sdk" + getVersion());
 
-    TowerGame towerGame = new TowerGame();
-    towerGame.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(this));
-    towerGame.setPlatformBrowserUtil(new AndroidBrowserUtil(this));
-
-    initialize(towerGame, true);
+    initialize(new TowerGame(), true);
 
     Gdx.input.setCatchBackKey(true);
     Gdx.input.setCatchMenuKey(true);

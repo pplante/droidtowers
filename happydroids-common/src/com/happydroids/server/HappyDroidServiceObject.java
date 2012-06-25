@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.utils.BackgroundTask;
+import com.happydroids.platform.Platform;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 
@@ -21,8 +21,7 @@ import java.lang.reflect.Modifier;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
 @JsonFilter(value = "HappyDroidServiceObject")
 public abstract class HappyDroidServiceObject {
-  public static final ApiRunnable NO_OP_API_RUNNABLE = new ApiRunnable() {
-  };
+  public static final ApiRunnable NO_OP_API_RUNNABLE = new ApiRunnable();
 
   private long id;
   private String resourceUri;
@@ -69,11 +68,12 @@ public abstract class HappyDroidServiceObject {
 
     validateResourceUri();
 
-    HappyDroidService.instance().withNetworkConnection(new Runnable() {
-      public void run() {
-        apiRunnable.handleResponse(fetchBlocking(), HappyDroidServiceObject.this);
-      }
-    });
+    if (!Platform.getConnectionMonitor().isConnectedOrConnecting()) {
+      apiRunnable.onError(null, HttpStatusCode.ClientClosedRequest, this);
+      return;
+    }
+
+    apiRunnable.handleResponse(fetchBlocking(), HappyDroidServiceObject.this);
   }
 
   public HttpResponse fetchBlocking() {
@@ -90,24 +90,13 @@ public abstract class HappyDroidServiceObject {
   }
 
   @SuppressWarnings("unchecked")
-  public void save(final ApiRunnable afterSave) {
-    HappyDroidService.instance().withNetworkConnection(new Runnable() {
-      public void run() {
-        new BackgroundTask() {
-          private HttpResponse httpResponse;
+  public void save(final ApiRunnable apiRunnable) {
+    if (!Platform.getConnectionMonitor().isConnectedOrConnecting()) {
+      apiRunnable.onError(null, HttpStatusCode.ClientClosedRequest, this);
+      return;
+    }
 
-          @Override
-          protected void execute() throws Exception {
-            httpResponse = saveBlocking(afterSave);
-          }
-
-          @Override
-          public synchronized void afterExecute() {
-            afterSave.handleResponse(httpResponse, HappyDroidServiceObject.this);
-          }
-        }.run();
-      }
-    });
+    apiRunnable.handleResponse(saveBlocking(apiRunnable), HappyDroidServiceObject.this);
   }
 
   public void saveBlocking() {
@@ -142,7 +131,7 @@ public abstract class HappyDroidServiceObject {
 
   @SuppressWarnings("unchecked")
   protected boolean beforeSaveValidation(ApiRunnable afterSave) {
-    if (!HappyDroidService.instance().haveNetworkConnection()) {
+    if (!Platform.getConnectionMonitor().isConnectedOrConnecting()) {
       afterSave.onError(null, HttpStatusCode.ClientClosedRequest, this);
       return false;
     }
@@ -183,5 +172,9 @@ public abstract class HappyDroidServiceObject {
 
   protected ObjectMapper getObjectMapper() {
     return HappyDroidService.instance().getObjectMapper();
+  }
+
+  public void fetch() {
+    fetch(NO_OP_API_RUNNABLE);
   }
 }

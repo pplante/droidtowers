@@ -23,21 +23,18 @@ import com.happydroids.droidtowers.audio.GameSoundController;
 import com.happydroids.droidtowers.controllers.PathSearchManager;
 import com.happydroids.droidtowers.entities.GameObject;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
-import com.happydroids.droidtowers.gamestate.server.Device;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.*;
 import com.happydroids.droidtowers.input.*;
 import com.happydroids.droidtowers.platform.Display;
-import com.happydroids.droidtowers.platform.PlatformBrowserUtil;
-import com.happydroids.droidtowers.platform.PlatformProtocolHandler;
 import com.happydroids.droidtowers.scenes.*;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.types.*;
-import com.happydroids.server.ApiRunnable;
+import com.happydroids.platform.Platform;
+import com.happydroids.platform.PlatformConnectionMonitor;
 import com.happydroids.utils.BackgroundTask;
-import org.apache.http.HttpResponse;
 
 import java.net.URI;
 
@@ -49,14 +46,12 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
   private SpriteBatch spriteBatch;
   private BitmapFont menloBitmapFont;
   private static Stage rootUiStage;
-  private static Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
-  private static PlatformBrowserUtil platformBrowserUtil;
-  private PlatformProtocolHandler protocolHandler;
   private SpriteBatch spriteBatchFBO;
   private FrameBuffer frameBuffer;
   private static GameSoundController soundController;
 
   private static CloudGameSaveCollection cloudGameSaves;
+  private PlatformConnectionMonitor platformConnectionMonitor;
 
   public TowerGame() {
     cloudGameSaves = new CloudGameSaveCollection();
@@ -68,6 +63,12 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
   public void create() {
     Gdx.app.error("lifecycle", "create");
+    BackgroundTask.setPostExecuteManager(this);
+    BackgroundTask.setUncaughtExceptionHandler(Platform.uncaughtExceptionHandler);
+    Thread.currentThread().setUncaughtExceptionHandler(Platform.uncaughtExceptionHandler);
+
+    TowerGameService.setInstance(new TowerGameService());
+    new RegisterDeviceTask().run();
 
 //    if (Gdx.app.getType().equals(Desktop)) {
 //      Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode());
@@ -79,13 +80,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
       spriteBatchFBO = new SpriteBatch();
     }
 
-
-    BackgroundTask.setPostExecuteManager(this);
-    BackgroundTask.setUncaughtExceptionHandler(uncaughtExceptionHandler);
-    Thread.currentThread().setUncaughtExceptionHandler(uncaughtExceptionHandler);
-
-    TowerGameService.setInstance(new TowerGameService());
-
     soundController = new GameSoundController();
 
     if (HappyDroidConsts.DEBUG) {
@@ -95,29 +89,10 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
       Gdx.app.setLogLevel(Application.LOG_ERROR);
     }
 
-    Thread.currentThread().setUncaughtExceptionHandler(uncaughtExceptionHandler);
+    Thread.currentThread().setUncaughtExceptionHandler(Platform.uncaughtExceptionHandler);
     Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 
     TowerAssetManager.assetManager();
-
-    final Device device = new Device();
-    device.save(new ApiRunnable<Device>() {
-      @Override
-      public void onError(HttpResponse response, int statusCode, Device object) {
-        afterRequest();
-      }
-
-      @Override
-      public void onSuccess(HttpResponse response, Device object) {
-        afterRequest();
-      }
-
-      private void afterRequest() {
-        Gdx.app.debug(TAG, "Authentication finished, state: " + device.isAuthenticated);
-        TowerGameService.instance().setAuthenticated(device.isAuthenticated);
-        TowerGameService.instance().getPostAuthRunnables().runAll();
-      }
-    });
 
     TowerGameService.instance().afterAuthentication(new Runnable() {
       @Override
@@ -191,8 +166,8 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     Scene.setSpriteBatch(spriteBatch);
 
 
-    if (protocolHandler != null && protocolHandler.hasUri()) {
-      SceneManager.changeScene(LaunchUriScene.class, protocolHandler.consumeUri());
+    if (Platform.protocolHandler != null && Platform.protocolHandler.hasUri()) {
+      SceneManager.changeScene(LaunchUriScene.class, Platform.protocolHandler.consumeUri());
     } else {
       SceneManager.changeScene(MainMenuScene.class);
     }
@@ -276,8 +251,8 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
       SceneManager.pushScene(ApplicationResumeScene.class);
     }
 
-    if (protocolHandler != null && protocolHandler.hasUri()) {
-      URI launchUri = protocolHandler.consumeUri();
+    if (Platform.protocolHandler != null && Platform.protocolHandler.hasUri()) {
+      URI launchUri = Platform.protocolHandler.consumeUri();
       SceneManager.changeScene(LaunchUriScene.class, launchUri);
     }
   }
@@ -287,8 +262,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     SceneManager.getActiveScene().dispose();
 
     rootUiStage = null;
-    uncaughtExceptionHandler = null;
-    platformBrowserUtil = null;
+    Platform.dispose();
 
     SceneManager.dispose();
     spriteBatch.dispose();
@@ -303,26 +277,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     return rootUiStage;
   }
 
-
-  public void setUncaughtExceptionHandler(Thread.UncaughtExceptionHandler uncaughtExceptionHandler) {
-    TowerGame.uncaughtExceptionHandler = uncaughtExceptionHandler;
-  }
-
-  public static Thread.UncaughtExceptionHandler getUncaughtExceptionHandler() {
-    return uncaughtExceptionHandler;
-  }
-
-  public void setPlatformBrowserUtil(PlatformBrowserUtil platformBrowserUtil) {
-    TowerGame.platformBrowserUtil = platformBrowserUtil;
-  }
-
-  public static PlatformBrowserUtil getPlatformBrowserUtil() {
-    return platformBrowserUtil;
-  }
-
-  public void setProtocolHandler(PlatformProtocolHandler protocolHandler) {
-    this.protocolHandler = protocolHandler;
-  }
 
   public static GameSoundController getSoundController() {
     return soundController;

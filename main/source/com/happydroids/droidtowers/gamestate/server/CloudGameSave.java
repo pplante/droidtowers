@@ -71,7 +71,7 @@ public class CloudGameSave extends TowerGameServiceObject {
 
     for (String friendGameResourceUri : neighbors) {
       FriendCloudGameSave friendGame = new FriendCloudGameSave(friendGameResourceUri);
-      friendGame.fetchBlocking();
+      friendGame.fetch();
 
       neighborGameSaves.add(friendGame);
     }

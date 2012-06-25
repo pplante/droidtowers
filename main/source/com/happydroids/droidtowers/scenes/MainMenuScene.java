@@ -14,12 +14,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.droidtowers.TowerGame;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
 import com.happydroids.droidtowers.scenes.components.MainMenuButtonPanel;
 import com.happydroids.droidtowers.tween.TweenSystem;
+import com.happydroids.platform.Platform;
 
 import static com.happydroids.droidtowers.TowerAssetManager.preloadFinished;
 import static com.happydroids.droidtowers.TowerAssetManager.textureAtlas;
@@ -100,7 +101,7 @@ public class MainMenuScene extends SplashScene {
     happyDroidsLogo.y = scale(5);
     happyDroidsLogo.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        TowerGame.getPlatformBrowserUtil().launchWebBrowser("http://www.happydroids.com");
+        Platform.getBrowserUtil().launchWebBrowser(TowerConsts.HAPPYDROIDS_URI);
       }
     });
     return happyDroidsLogo;
@@ -113,7 +114,7 @@ public class MainMenuScene extends SplashScene {
     libGdxLogo.x = libGdxLogo.y = scale(5);
     libGdxLogo.setClickListener(new ClickListener() {
       public void click(Actor actor, float x, float y) {
-        TowerGame.getPlatformBrowserUtil().launchWebBrowser("http://libgdx.badlogicgames.com");
+        Platform.getBrowserUtil().launchWebBrowser("http://libgdx.badlogicgames.com");
       }
     });
     return libGdxLogo;

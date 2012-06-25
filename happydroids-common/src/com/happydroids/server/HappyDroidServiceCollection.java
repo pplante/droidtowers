@@ -10,6 +10,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.events.CollectionChangeEvent;
+import com.happydroids.platform.Platform;
 import org.apache.http.HttpResponse;
 import org.apache.http.entity.BufferedHttpEntity;
 
@@ -35,11 +36,7 @@ public abstract class HappyDroidServiceCollection<CollectionType extends HappyDr
   }
 
   public void fetch(final ApiCollectionRunnable<HappyDroidServiceCollection<CollectionType>> apiRunnable) {
-    HappyDroidService.instance().withNetworkConnection(new Runnable() {
-      public void run() {
-        fetchBlocking(apiRunnable);
-      }
-    });
+    fetchBlocking(apiRunnable);
   }
 
   private void copyValuesFromResponse(HttpResponse response) throws IOException {
@@ -81,12 +78,12 @@ public abstract class HappyDroidServiceCollection<CollectionType extends HappyDr
   }
 
   public void fetchBlocking(ApiCollectionRunnable<HappyDroidServiceCollection<CollectionType>> apiRunnable) {
-    fetching = true;
-    if (!HappyDroidService.instance().haveNetworkConnection()) {
+    if (!Platform.getConnectionMonitor().isConnectedOrConnecting()) {
       apiRunnable.onError(null, HttpStatusCode.ClientClosedRequest, this);
       return;
     }
 
+    fetching = true;
     HttpResponse response = HappyDroidService.instance().makeGetRequest(getBaseResourceUri(), currentFilters);
     fetching = false;
     if (response != null && response.getStatusLine() != null && response.getStatusLine().getStatusCode() == 200) {

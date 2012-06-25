@@ -2,13 +2,12 @@
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
 
-package com.happydroids.droidtowers.platform;
+package com.happydroids.platform;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import com.badlogic.gdx.Gdx;
-import com.happydroids.platform.HappyDroidUncaughtExceptionHandler;
 import com.happydroids.server.CrashReport;
 import com.happydroids.utils.BackgroundTask;
 

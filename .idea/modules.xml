@@ -8,7 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/tools/jarbundler/jarbundler.iml" filepath="$PROJECT_DIR$/tools/jarbundler/jarbundler.iml" />
       <module fileurl="file://$PROJECT_DIR$/main/main.iml" filepath="$PROJECT_DIR$/main/main.iml" />
       <module fileurl="file://$PROJECT_DIR$/pipeline/pipeline.iml" filepath="$PROJECT_DIR$/pipeline/pipeline.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sparky/sparky.iml" filepath="$PROJECT_DIR$/sparky/sparky.iml" />
     </modules>
   </component>
 </project>

@@ -6,6 +6,8 @@ package com.happydroids.droidtowers;
 
 import com.happydroids.HttpTestHelper;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.platform.Platform;
+import com.happydroids.platform.PlatformConnectionMonitor;
 import org.apache.http.HttpResponse;
 
 import java.util.HashMap;
@@ -13,7 +15,12 @@ import java.util.HashMap;
 class TestTowerGameService extends TowerGameService {
   public TestTowerGameService() {
     super();
-    hasNetworkConnection = true;
+    Platform.setConnectionMonitor(new PlatformConnectionMonitor() {
+      @Override
+      public boolean isConnectedOrConnecting() {
+        return true;
+      }
+    });
   }
 
   @Override
@@ -27,13 +34,12 @@ class TestTowerGameService extends TowerGameService {
   }
 
   public static void disableNetworkConnection() {
-    hasNetworkConnection = false;
+    Platform.setConnectionMonitor(new PlatformConnectionMonitor() {
+      @Override
+      public boolean isConnectedOrConnecting() {
+        return false;
+      }
+    });
   }
 
-  @Override
-  public void withNetworkConnection(Runnable runnable) {
-    if (hasNetworkConnection) {
-      runnable.run();
-    }
-  }
 }

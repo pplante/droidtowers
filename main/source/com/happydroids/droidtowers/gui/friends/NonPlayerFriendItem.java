@@ -7,12 +7,12 @@ package com.happydroids.droidtowers.gui.friends;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.GameState;
 import com.happydroids.droidtowers.gamestate.server.NonPlayerFriend;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.gui.VibrateClickListener;
+import com.happydroids.platform.Platform;
 
 public class NonPlayerFriendItem extends PlayerFriendItem {
   public final NonPlayerFriend profile;
@@ -39,7 +39,7 @@ public class NonPlayerFriendItem extends PlayerFriendItem {
       @Override
       public void onClick(Actor actor, float x, float y) {
 //        new InviteNonPlayerFriendWindow(profile).show();
-        TowerGame.getPlatformBrowserUtil().launchWebBrowser(HappyDroidConsts.HAPPYDROIDS_URI + "/login?token=" + TowerGameService.instance().getSessionToken() + "&next=/friend/" + profile.getId() + "/invite/");
+        Platform.getBrowserUtil().launchWebBrowser(HappyDroidConsts.HAPPYDROIDS_URI + "/login?token=" + TowerGameService.instance().getSessionToken() + "&next=/friend/" + profile.getId() + "/invite/");
       }
     });
     return inviteButton;

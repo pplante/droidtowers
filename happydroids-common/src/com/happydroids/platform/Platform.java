@@ -1,14 +1,41 @@
-/*
+package com.happydroids.platform;/*
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
-
-package com.happydroids.platform;
 
 import java.io.File;
 
 public class Platform {
-  private Platform() {
+  public static Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
+  public static PlatformBrowserUtil browserUtil;
+  public static PlatformProtocolHandler protocolHandler;
+  private static PlatformConnectionMonitor connectionMonitor;
 
+  public static Thread.UncaughtExceptionHandler getUncaughtExceptionHandler() {
+    return uncaughtExceptionHandler;
+  }
+
+  public static PlatformBrowserUtil getBrowserUtil() {
+    return browserUtil;
+  }
+
+  public static void setUncaughtExceptionHandler(Thread.UncaughtExceptionHandler uncaughtExceptionHandler) {
+    Platform.uncaughtExceptionHandler = uncaughtExceptionHandler;
+  }
+
+  public static void setBrowserUtil(PlatformBrowserUtil browserUtil) {
+    Platform.browserUtil = browserUtil;
+  }
+
+  public static void setProtocolHandler(PlatformProtocolHandler protocolHandler) {
+    Platform.protocolHandler = protocolHandler;
+  }
+
+  public static PlatformProtocolHandler getProtocolHandler() {
+    return protocolHandler;
+  }
+
+  public static void setConnectionMonitor(PlatformConnectionMonitor connectionMonitor) {
+    Platform.connectionMonitor = connectionMonitor;
   }
 
   public static Platforms getOSType() {
@@ -38,7 +65,7 @@ public class Platform {
         break;
       case Windows:
         String appDataPath = System.getenv("APPDATA");
-        if(appDataPath != null) {
+        if (appDataPath != null) {
           path = String.format("%s/.%s", appDataPath, appName);
         } else {
           path = String.format("%s/.%s", userHome, appName);
@@ -47,13 +74,24 @@ public class Platform {
     }
 
     File workingDir = new File(path);
-    if(!workingDir.exists()) {
+    if (!workingDir.exists()) {
       boolean madeDir = workingDir.mkdir();
-      if(!madeDir) {
+      if (!madeDir) {
         throw new RuntimeException("Could not create the required local storage.");
       }
     }
 
     return workingDir;
+  }
+
+  public static void dispose() {
+    protocolHandler = null;
+    browserUtil = null;
+    uncaughtExceptionHandler = null;
+    connectionMonitor = null;
+  }
+
+  public static PlatformConnectionMonitor getConnectionMonitor() {
+    return connectionMonitor;
   }
 }

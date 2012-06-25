@@ -23,9 +23,9 @@ import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.GameSaveFactory;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
-import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.scenes.LoadTowerSplashScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
+import com.happydroids.platform.Platform;
 import com.happydroids.utils.BackgroundTask;
 
 import java.text.NumberFormat;
@@ -43,7 +43,7 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     super("Load a Tower", stage);
     this.cloudGameSaves = TowerGame.getCloudGameSaves();
 
-    if (TowerGameService.instance().haveNetworkConnection() && cloudGameSaves.isFetching()) {
+    if (Platform.getConnectionMonitor().isConnectedOrConnecting() && cloudGameSaves.isFetching()) {
       new BackgroundTask() {
         @Override
         protected void execute() throws Exception {
