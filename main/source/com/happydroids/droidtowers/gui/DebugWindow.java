@@ -4,6 +4,8 @@
 
 package com.happydroids.droidtowers.gui;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -44,8 +46,22 @@ public class DebugWindow extends ScrollableTowerWindow {
 
     row();
     add(makeDisconnectHappyDroidsButton());
+    add(makeGenerateNewDeviceIdButton());
 
     shoveContentUp();
+  }
+
+  private Actor makeGenerateNewDeviceIdButton() {
+    TextButton button = FontManager.Roboto24.makeTextButton("Generate new Device ID");
+    button.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        Preferences preferences = Gdx.app.getPreferences("CONNECT");
+        preferences.clear();
+        preferences.flush();
+      }
+    });
+    return button;
   }
 
   private Actor makeDisconnectHappyDroidsButton() {

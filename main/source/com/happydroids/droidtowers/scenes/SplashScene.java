@@ -13,8 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Scaling;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.entities.SplashCloudLayer;
 import com.happydroids.droidtowers.gui.AnimatedImage;
+import com.happydroids.droidtowers.gui.AudioControl;
 import com.happydroids.droidtowers.gui.Sunburst;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
 import com.happydroids.droidtowers.scenes.components.AssetLoadProgressPanel;
@@ -34,6 +36,7 @@ public abstract class SplashScene extends Scene {
   protected Image droidTowersLogo;
   protected AssetLoadProgressPanel progressPanel;
   private Image mainBuilding;
+  private boolean createdAudioControls;
 
   @Override
   public void create(Object... args) {
@@ -188,6 +191,15 @@ public abstract class SplashScene extends Scene {
   public void render(float deltaTime) {
     boolean assetManagerFinished = assetManager().update();
     Thread.yield();
+
+    if (!createdAudioControls && assetManager().isLoaded("hud/buttons.txt", TextureAtlas.class)) {
+      createdAudioControls = true;
+
+      AudioControl audioControl = new AudioControl(TowerAssetManager.textureAtlas("hud/buttons.txt"));
+      audioControl.x = getStage().right() - audioControl.width - 16;
+      audioControl.y = getStage().top() - audioControl.height - 32;
+      addActor(audioControl);
+    }
   }
 
   @Override

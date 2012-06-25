@@ -160,7 +160,7 @@ public class TowerScene extends Scene {
 
   @Override
   public void pause() {
-    gameState.saveGame(true);
+    gameState.saveGame(false);
 
     detachActions();
 

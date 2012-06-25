@@ -69,11 +69,13 @@ public class CloudGameSave extends TowerGameServiceObject {
   public boolean fetchNeighbors() {
     neighborGameSaves = new FriendCloudGameSaveCollection();
 
-    for (String friendGameResourceUri : neighbors) {
-      FriendCloudGameSave friendGame = new FriendCloudGameSave(friendGameResourceUri);
-      friendGame.fetch();
+    if (neighbors != null) {
+      for (String friendGameResourceUri : neighbors) {
+        FriendCloudGameSave friendGame = new FriendCloudGameSave(friendGameResourceUri);
+        friendGame.fetch();
 
-      neighborGameSaves.add(friendGame);
+        neighborGameSaves.add(friendGame);
+      }
     }
 
     return true;

@@ -14,12 +14,22 @@ public class DesktopConnectionMonitor implements PlatformConnectionMonitor {
 
   public DesktopConnectionMonitor() {
     monitorThread = new Thread() {
+      @SuppressWarnings("InfiniteLoopStatement")
       @Override
       public void run() {
-        try {
-          networkState = InetAddress.getByName(HappyDroidConsts.HAPPYDROIDS_SERVER).isReachable(50);
-        } catch (IOException e) {
-          networkState = false;
+        while (true) {
+          try {
+            networkState = InetAddress.getByName(HappyDroidConsts.HAPPYDROIDS_SERVER).isReachable(50);
+          } catch (IOException e) {
+            networkState = false;
+          }
+
+          try {
+            Thread.yield();
+            Thread.sleep(5000);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
         }
       }
     };
