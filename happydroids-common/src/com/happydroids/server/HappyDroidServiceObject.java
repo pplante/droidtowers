@@ -56,7 +56,7 @@ public abstract class HappyDroidServiceObject {
   }
 
   private void validateResourceUri() {
-    if (resourceUri != null && !resourceUri.startsWith(HappyDroidConsts.HAPPYDROIDS_URI)) {
+    if (resourceUri != null && !resourceUri.startsWith("http")) {
       resourceUri = HappyDroidConsts.HAPPYDROIDS_URI + resourceUri;
     }
   }

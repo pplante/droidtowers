@@ -115,10 +115,10 @@ public class HappyDroidService {
       if (objectForServer != null) {
         ObjectMapper mapper = getObjectMapper();
         String apiObjectAsString = mapper.writeValueAsString(objectForServer);
-        StringEntity entity = new StringEntity(apiObjectAsString);
+        StringEntity entity = new StringEntity(apiObjectAsString, "UTF-8");
         if (HappyDroidConsts.DEBUG)
           System.out.println("HTTP ENTITY: " + apiObjectAsString);
-        entity.setContentType("multipart/form-data");
+        entity.setContentType("application/x-www-form-urlencoded");
         request.setEntity(entity);
       }
 
@@ -155,8 +155,8 @@ public class HappyDroidService {
       if (objectForServer != null) {
         ObjectMapper mapper = getObjectMapper();
         Gdx.app.debug(TAG, "JSON: " + mapper.writeValueAsString(objectForServer));
-        StringEntity entity = new StringEntity(mapper.writeValueAsString(objectForServer));
-        entity.setContentType("multipart/form-data");
+        StringEntity entity = new StringEntity(mapper.writeValueAsString(objectForServer), "UTF-8");
+        entity.setContentType("application/x-www-form-urlencoded");
         request.setEntity(entity);
       }
 
@@ -180,6 +180,7 @@ public class HappyDroidService {
   }
 
   protected void addDefaultHeaders(HttpRequestBase request) {
+    request.setHeader("Accept-Charset", "utf-8");
     request.setHeader("Content-Type", "application/json");
   }
 

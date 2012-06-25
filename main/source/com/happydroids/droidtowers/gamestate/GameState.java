@@ -19,6 +19,7 @@ import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.utils.PNG;
 import com.happydroids.server.ApiRunnable;
 import com.happydroids.server.HappyDroidServiceObject;
+import com.happydroids.utils.BackgroundTask;
 import org.apache.http.HttpResponse;
 
 import java.io.OutputStream;
@@ -91,31 +92,35 @@ public class GameState {
       if (!gameGrid.isEmpty()) {
         currentGameSave.update(camera, gameGrid, cloudGameSave.getNeighbors());
 
-        try {
-          if (!gameSaveLocation.exists()) {
-            gameSaveLocation.mkdirs();
-          }
-
-          OutputStream stream = pngFile.write(false);
-          stream.write(PNG.toPNG(TowerMiniMap.redrawMiniMap(gameGrid, true, 2f)));
-          stream.flush();
-          stream.close();
-
-          if (shouldForceCloudSave || currentGameSave.getCloudSaveUri() == null || currentGameSave.getFileGeneration() % 4 == 0) {
-            cloudGameSave.save(new ApiRunnable() {
-              @Override
-              public void onSuccess(HttpResponse response, HappyDroidServiceObject object) {
-                if (cloudGameSave.isSaved()) {
-                  currentGameSave.setCloudSaveUri(cloudGameSave.getResourceUri());
-                }
+        new BackgroundTask() {
+          @Override
+          protected void execute() throws Exception {
+            try {
+              if (!gameSaveLocation.exists()) {
+                gameSaveLocation.mkdirs();
               }
-            });
-          }
+              OutputStream stream = pngFile.write(false);
+              stream.write(PNG.toPNG(TowerMiniMap.redrawMiniMap(gameGrid, true, 2f)));
+              stream.flush();
+              stream.close();
 
-          GameSaveFactory.save(currentGameSave, gameFile);
-        } catch (Exception e) {
-          Gdx.app.log("GameSave", "Could not save game!", e);
-        }
+              if (shouldForceCloudSave || currentGameSave.getCloudSaveUri() == null || currentGameSave.getFileGeneration() % 4 == 0) {
+                cloudGameSave.save(new ApiRunnable() {
+                  @Override
+                  public void onSuccess(HttpResponse response, HappyDroidServiceObject object) {
+                    if (cloudGameSave.isSaved()) {
+                      currentGameSave.setCloudSaveUri(cloudGameSave.getResourceUri());
+                    }
+                  }
+                });
+              }
+
+              GameSaveFactory.save(currentGameSave, gameFile);
+            } catch (Exception e) {
+              Gdx.app.log("GameSave", "Could not save game!", e);
+            }
+          }
+        }.run();
       }
     }
   }

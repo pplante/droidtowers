@@ -142,6 +142,14 @@ public abstract class HappyDroidServiceCollection<CollectionType extends HappyDr
     return fetching;
   }
 
+  public int size() {
+    return objects.size();
+  }
+
+  public void clear() {
+    objects.clear();
+  }
+
   @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
   public static class Metadata {
     public int limit;

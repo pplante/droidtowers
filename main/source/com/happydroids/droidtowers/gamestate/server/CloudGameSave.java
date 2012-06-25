@@ -26,18 +26,22 @@ public class CloudGameSave extends TowerGameServiceObject {
   protected String image;
   protected Date syncedOn;
   protected int fileGeneration;
-  protected List<String> neighbors;
+  private List<String> neighbors;
   private FriendCloudGameSaveCollection neighborGameSaves;
 
   public CloudGameSave() {
-
+    neighborGameSaves = new FriendCloudGameSaveCollection();
   }
 
   public CloudGameSave(String resourceUri) {
+    this();
+
     setResourceUri(resourceUri);
   }
 
   public CloudGameSave(GameSave gameSave, FileHandle pngFile) {
+    this();
+
     try {
       fileGeneration = gameSave.getFileGeneration();
       setResourceUri(gameSave.getCloudSaveUri());
@@ -66,22 +70,6 @@ public class CloudGameSave extends TowerGameServiceObject {
   }
 
   @JsonIgnore
-  public boolean fetchNeighbors() {
-    neighborGameSaves = new FriendCloudGameSaveCollection();
-
-    if (neighbors != null) {
-      for (String friendGameResourceUri : neighbors) {
-        FriendCloudGameSave friendGame = new FriendCloudGameSave(friendGameResourceUri);
-        friendGame.fetch();
-
-        neighborGameSaves.add(friendGame);
-      }
-    }
-
-    return true;
-  }
-
-  @JsonIgnore
   public FriendCloudGameSaveCollection getNeighborGameSaves() {
     return neighborGameSaves;
   }
@@ -98,6 +86,14 @@ public class CloudGameSave extends TowerGameServiceObject {
     return neighborUris;
   }
 
+  public void setNeighbors(List<String> neighborUris) {
+    neighborGameSaves.clear();
+
+    for (String neighborUri : neighborUris) {
+      neighborGameSaves.add(new FriendCloudGameSave(neighborUri));
+    }
+  }
+
   public GameSave getGameSaveMetadata() {
     return GameSaveFactory.readMetadata(new ByteArrayInputStream(blob.getBytes()));
   }
@@ -110,10 +106,12 @@ public class CloudGameSave extends TowerGameServiceObject {
     return blob;
   }
 
+  @JsonIgnore
   public boolean hasNeighbors() {
     return ((neighbors != null) && !neighbors.isEmpty()) || ((neighborGameSaves != null) && !neighborGameSaves.isEmpty());
   }
 
+  @JsonIgnore
   public int numNeighbors() {
     return getNeighbors().size();
   }

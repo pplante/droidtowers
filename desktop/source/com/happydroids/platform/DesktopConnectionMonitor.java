@@ -19,7 +19,7 @@ public class DesktopConnectionMonitor implements PlatformConnectionMonitor {
       public void run() {
         while (true) {
           try {
-            networkState = InetAddress.getByName(HappyDroidConsts.HAPPYDROIDS_SERVER).isReachable(50);
+            networkState = InetAddress.getByName(HappyDroidConsts.HAPPYDROIDS_SERVER).isReachable(1500);
           } catch (IOException e) {
             networkState = false;
           }

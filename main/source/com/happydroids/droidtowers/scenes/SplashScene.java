@@ -20,6 +20,7 @@ import com.happydroids.droidtowers.gui.AudioControl;
 import com.happydroids.droidtowers.gui.Sunburst;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
 import com.happydroids.droidtowers.scenes.components.AssetLoadProgressPanel;
+import com.happydroids.droidtowers.scenes.components.ProgressPanel;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
 import static com.badlogic.gdx.graphics.Texture.TextureFilter.Linear;
@@ -34,7 +35,7 @@ public abstract class SplashScene extends Scene {
   private TextureAtlas atlas1;
   private TextureAtlas atlas2;
   protected Image droidTowersLogo;
-  protected AssetLoadProgressPanel progressPanel;
+  protected ProgressPanel progressPanel;
   private Image mainBuilding;
   private boolean createdAudioControls;
 

@@ -10,7 +10,7 @@ import com.happydroids.droidtowers.gamestate.GameState;
 public class GameSaveAction extends TimeDelayedAction {
   private final GameState gameState;
 
-  public GameSaveAction(GameState gameState) {
+  public GameSaveAction(final GameState gameState) {
     super(TowerConsts.GAME_SAVE_FREQUENCY);
     this.gameState = gameState;
     reset();
