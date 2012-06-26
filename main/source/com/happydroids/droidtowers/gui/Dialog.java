@@ -25,7 +25,8 @@ public class Dialog extends TowerWindow {
   private TextButton negativeButton;
   private String messageText;
   private final InputCallback positiveButtonInputCallback;
-  private final InputCallback negativeButtonInputCallback;
+  private InputCallback negativeButtonInputCallback;
+  private boolean cancelable = true;
 
   public Dialog() {
     this(SceneManager.getActiveScene().getStage());
@@ -131,6 +132,20 @@ public class Dialog extends TowerWindow {
 
   @Override
   protected void unbindKeys() {
+    InputSystem.instance().unbind(InputSystem.Keys.ENTER, positiveButtonInputCallback);
     InputSystem.instance().unbind(TowerConsts.NEGATIVE_BUTTON_KEYS, negativeButtonInputCallback);
+  }
+
+  public void setCancelable(boolean state) {
+    closeButton.visible = state;
+    closeButtonLine.visible = state;
+    cancelable = state;
+  }
+
+  @Override
+  public void dismiss() {
+    if (cancelable) {
+      super.dismiss();
+    }
   }
 }

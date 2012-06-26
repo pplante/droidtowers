@@ -7,7 +7,7 @@ package com.happydroids.droidtowers;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
-import com.happydroids.droidtowers.platform.DesktopBrowserUtil;
+import com.happydroids.platform.DesktopBrowserUtil;
 import com.happydroids.droidtowers.platform.PlatformProtocolHandlerFactory;
 import com.happydroids.platform.DesktopConnectionMonitor;
 import com.happydroids.platform.DesktopUncaughtExceptionHandler;

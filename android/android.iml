@@ -35,8 +35,8 @@
       <sourceFolder url="file://$MODULE_DIR$/source" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Android 2.3.3 Google APIs (1)" jdkType="Android SDK" />
-    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="jdk" jdkName="Android 2.3.3 Google APIs" jdkType="Android SDK" />
+    <orderEntry type="module" module-name="play-licensing" exported="" />
     <orderEntry type="library" exported="" name="android" level="project" />
     <orderEntry type="module" module-name="main" exported="" />
     <orderEntry type="library" exported="" name="jackson" level="project" />
@@ -46,6 +46,7 @@
     <orderEntry type="library" exported="" name="guava" level="project" />
     <orderEntry type="module" module-name="happydroids-common" exported="" />
     <orderEntry type="library" scope="TEST" name="junit-mockito-great-expectations" level="project" />
+    <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
 

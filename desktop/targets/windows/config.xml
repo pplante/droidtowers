@@ -9,8 +9,11 @@
   <errTitle>DroidTowers</errTitle>
   <chdir>.</chdir>
   <customProcName>true</customProcName>
-  <icon>DroidTowers.ico</icon>
+  <icon>icon-512.ico</icon>
   <jre>
-    <minVersion>1.5.0</minVersion>
+    <minVersion>1.6.0</minVersion>
   </jre>
+   <splash>
+    <file>splash.bmp</file>
+  </splash>
 </launch4jConfig>

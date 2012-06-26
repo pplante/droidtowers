@@ -1,4 +1,5 @@
 *.apk
+Thumbs.db
 sparky/bin/
 out/
 android/gen

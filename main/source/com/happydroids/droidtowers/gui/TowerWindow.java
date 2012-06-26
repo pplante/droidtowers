@@ -29,10 +29,11 @@ public class TowerWindow {
   protected Table content;
   protected Table wrapper;
   private final Label titleLabel;
-  private final TransparentTextButton closeButton;
+  protected final TransparentTextButton closeButton;
   private Actor staticHeaderContent;
   private final Cell actionBarCell;
   private final Cell contentRow;
+  protected final VerticalRule closeButtonLine;
 
   public TowerWindow(String title, Stage stage) {
     this.stage = stage;
@@ -62,11 +63,12 @@ public class TowerWindow {
 
     titleLabel = FontManager.Roboto32.makeLabel(title);
     closeButton = FontManager.Roboto18.makeTransparentButton("< back");
+    closeButtonLine = new VerticalRule(scale(2));
 
     Table topBar = new Table();
     topBar.row().fill();
     topBar.add(closeButton).fill();
-    topBar.add(new VerticalRule(scale(2))).fillY();
+    topBar.add(closeButtonLine).fillY();
     topBar.add(titleLabel).center().left().expand().pad(scale(4)).padLeft(scale(12));
 
     wrapper.add(topBar).fill();

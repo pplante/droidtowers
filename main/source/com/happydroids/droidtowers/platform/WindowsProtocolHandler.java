@@ -6,12 +6,11 @@ package com.happydroids.droidtowers.platform;
 
 import com.happydroids.platform.PlatformProtocolHandler;
 
-import javax.swing.*;
 import java.net.URI;
 
 public class WindowsProtocolHandler implements PlatformProtocolHandler {
   public void initialize(String[] applicationArgs) {
-    JOptionPane.showMessageDialog(null, applicationArgs, "URI!!", JOptionPane.INFORMATION_MESSAGE);
+
   }
 
   public boolean hasUri() {
