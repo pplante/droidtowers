@@ -119,6 +119,7 @@ public class TowerWindow {
   }
 
   public void dismiss() {
+    wrapper.visible = false;
     unbindKeys();
 
     if (dismissCallback != null) {

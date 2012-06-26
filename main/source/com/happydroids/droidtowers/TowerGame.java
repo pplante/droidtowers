@@ -17,7 +17,6 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.actions.ActionManager;
 import com.happydroids.droidtowers.audio.GameSoundController;
@@ -41,6 +40,8 @@ import java.net.URI;
 
 import static com.badlogic.gdx.Application.ApplicationType.Android;
 import static com.badlogic.gdx.Application.ApplicationType.Desktop;
+import static com.happydroids.HappyDroidConsts.DEBUG;
+import static com.happydroids.HappyDroidConsts.DISPLAY_DEBUG_INFO;
 
 public class TowerGame implements ApplicationListener, BackgroundTask.PostExecuteManager {
   private static final String TAG = TowerGame.class.getSimpleName();
@@ -87,7 +88,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     soundController = new GameSoundController();
 
-    if (HappyDroidConsts.DEBUG) {
+    if (DEBUG) {
       Gdx.app.error("DEBUG", "Debug mode is enabled!");
       Gdx.app.setLogLevel(Application.LOG_DEBUG);
     } else {
@@ -134,7 +135,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     Gdx.input.setInputProcessor(InputSystem.instance());
     InputSystem.instance().addInputProcessor(rootUiStage, 0);
 
-    if (HappyDroidConsts.DEBUG) {
+    if (DEBUG) {
       InputSystem.instance().addInputProcessor(new DebugInputAdapter(), 1000);
     }
 
@@ -213,7 +214,8 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     rootUiStage.act(deltaTime);
     rootUiStage.draw();
 
-    if (HappyDroidConsts.DEBUG) {
+    //noinspection PointlessBooleanExpression
+    if (DEBUG && DISPLAY_DEBUG_INFO) {
       Table.drawDebug(SceneManager.getActiveScene().getStage());
       Table.drawDebug(rootUiStage);
 

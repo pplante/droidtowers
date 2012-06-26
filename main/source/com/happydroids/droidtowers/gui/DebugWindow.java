@@ -9,6 +9,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
@@ -17,6 +18,7 @@ import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.scenes.TowerScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
+import com.happydroids.droidtowers.utils.ScreenShot;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
@@ -48,7 +50,39 @@ public class DebugWindow extends ScrollableTowerWindow {
     add(makeDisconnectHappyDroidsButton());
     add(makeGenerateNewDeviceIdButton());
 
+    row();
+    add(makeTakeScreenshotButton());
+    add(makeToggleDebugInfoButton());
+
     shoveContentUp();
+  }
+
+  private TextButton makeToggleDebugInfoButton() {
+    TextButton button = FontManager.Roboto24.makeTextButton("Toggle Debug Info");
+    button.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        HappyDroidConsts.DISPLAY_DEBUG_INFO = !HappyDroidConsts.DISPLAY_DEBUG_INFO;
+      }
+    });
+    return button;
+  }
+
+  private Actor makeTakeScreenshotButton() {
+    TextButton button = FontManager.Roboto24.makeTextButton("Take Screenshot");
+    button.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        dismiss();
+        Gdx.app.postRunnable(new Runnable() {
+          @Override
+          public void run() {
+            ScreenShot.capture();
+          }
+        });
+      }
+    });
+    return button;
   }
 
   private Actor makeGenerateNewDeviceIdButton() {
