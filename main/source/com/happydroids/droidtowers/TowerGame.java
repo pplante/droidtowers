@@ -8,6 +8,7 @@ import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -39,6 +40,7 @@ import com.happydroids.utils.BackgroundTask;
 import java.net.URI;
 
 import static com.badlogic.gdx.Application.ApplicationType.Android;
+import static com.badlogic.gdx.Application.ApplicationType.Desktop;
 
 public class TowerGame implements ApplicationListener, BackgroundTask.PostExecuteManager {
   private static final String TAG = TowerGame.class.getSimpleName();
@@ -63,16 +65,19 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
   public void create() {
     Gdx.app.error("lifecycle", "create");
+    if (Gdx.app.getType().equals(Desktop)) {
+      Preferences displayPrefs = Gdx.app.getPreferences("DISPLAY");
+      if (displayPrefs.contains("width") && displayPrefs.contains("height")) {
+        Gdx.graphics.setDisplayMode(displayPrefs.getInteger("width"), displayPrefs.getInteger("height"), false);
+      }
+    }
+
     BackgroundTask.setPostExecuteManager(this);
     BackgroundTask.setUncaughtExceptionHandler(Platform.uncaughtExceptionHandler);
     Thread.currentThread().setUncaughtExceptionHandler(Platform.uncaughtExceptionHandler);
 
     TowerGameService.setInstance(new TowerGameService());
     new RegisterDeviceTask().run();
-
-//    if (Gdx.app.getType().equals(Desktop)) {
-//      Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode());
-//    }
 
     if (Gdx.graphics.isGL20Available() && Gdx.app.getType().equals(Android) && Display.isHDPIMode()) {
       float displayScalar = 0.75f;

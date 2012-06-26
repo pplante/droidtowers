@@ -28,7 +28,7 @@ public class DesktopGame {
     LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
     config.title = String.format("Droid Towers (%s)", TowerConsts.VERSION);
     config.resizable = false;
-    config.width = 1200;
+    config.width = 1280;
     config.height = 800;
     config.useGL20 = true;
 //    config.vSyncEnabled = false;

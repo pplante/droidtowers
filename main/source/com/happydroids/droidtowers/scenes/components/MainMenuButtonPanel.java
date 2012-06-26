@@ -17,6 +17,7 @@ import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.*;
 import com.happydroids.droidtowers.scenes.HappyDroidConnect;
 
+import static com.badlogic.gdx.Application.ApplicationType.Desktop;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class MainMenuButtonPanel extends Table {
@@ -38,6 +39,19 @@ public class MainMenuButtonPanel extends Table {
     TextButton loadGameButton = FontManager.RobotoBold18.makeTextButton("load tower");
     add(loadGameButton).fill().maxWidth(BUTTON_WIDTH);
     row().padTop(BUTTON_SPACING);
+
+    if (Gdx.app.getType().equals(Desktop)) {
+      TextButton optionsButton = FontManager.RobotoBold18.makeTextButton("options");
+      add(optionsButton).fill().maxWidth(BUTTON_WIDTH);
+      row().padTop(BUTTON_SPACING);
+
+      optionsButton.setClickListener(new VibrateClickListener() {
+        @Override
+        public void onClick(Actor actor, float x, float y) {
+          new OptionsWindow(getStage()).show();
+        }
+      });
+    }
 
     TextButton aboutButton = FontManager.RobotoBold18.makeTextButton("about");
     add(aboutButton).fill().maxWidth(BUTTON_WIDTH);
