@@ -8,7 +8,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
@@ -19,7 +21,9 @@ import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.scenes.TowerScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.utils.ScreenShot;
+import com.happydroids.platform.Platform;
 
+import static com.badlogic.gdx.Application.ApplicationType.Android;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class DebugWindow extends ScrollableTowerWindow {
@@ -54,7 +58,34 @@ public class DebugWindow extends ScrollableTowerWindow {
     add(makeTakeScreenshotButton());
     add(makeToggleDebugInfoButton());
 
+    row();
+    add(makeAndroidTestPurchaseButton()).colspan(2);
+
     shoveContentUp();
+  }
+
+  private Actor makeAndroidTestPurchaseButton() {
+    Table table = new Table();
+    final SelectBox selectBox = new SelectBox(TowerAssetManager.getCustomSkin());
+    table.add(selectBox);
+
+    if (Gdx.app.getType().equals(Android)) {
+      selectBox.setItems(new String[]{"android.test.purchased", "android.test.canceled", "android.test.refunded", "android.test.item_unavailable"});
+    } else {
+      selectBox.setItems(new String[]{"desktop.test.purchased", "desktop.test.canceled", "desktop.test.refunded", "desktop.test.item_unavailable"});
+    }
+
+    TextButton button = FontManager.Roboto24.makeTextButton("Fake Purchase");
+    button.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        Platform.getPurchaseManager().requestPurchase(selectBox.getSelection());
+      }
+    });
+
+    table.add(button);
+
+    return table;
   }
 
   private TextButton makeToggleDebugInfoButton() {

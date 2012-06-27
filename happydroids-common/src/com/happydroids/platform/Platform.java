@@ -9,6 +9,7 @@ public class Platform {
   public static PlatformBrowserUtil browserUtil;
   public static PlatformProtocolHandler protocolHandler;
   private static PlatformConnectionMonitor connectionMonitor;
+  private static PlatformPurchaseManger purchaseManager;
 
   public static Thread.UncaughtExceptionHandler getUncaughtExceptionHandler() {
     return uncaughtExceptionHandler;
@@ -93,5 +94,14 @@ public class Platform {
 
   public static PlatformConnectionMonitor getConnectionMonitor() {
     return connectionMonitor;
+  }
+
+  public static PlatformPurchaseManger getPurchaseManager() {
+    return purchaseManager;
+  }
+
+
+  public static void setPurchaseManager(PlatformPurchaseManger purchaseManager) {
+    Platform.purchaseManager = purchaseManager;
   }
 }

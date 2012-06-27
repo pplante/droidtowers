@@ -34,6 +34,7 @@ public abstract class SplashScene extends Scene {
   protected SplashCloudLayer cloudLayer;
   private TextureAtlas atlas1;
   private TextureAtlas atlas2;
+  private TextureAtlas happyDroidAtlas;
   protected Image droidTowersLogo;
   protected ProgressPanel progressPanel;
   private Image mainBuilding;
@@ -42,13 +43,12 @@ public abstract class SplashScene extends Scene {
   @Override
   public void create(Object... args) {
     atlas1 = new TextureAtlas("backgrounds/splash1.txt");
-    for (Texture texture : atlas1.getTextures()) {
-      texture.setFilter(Linear, Linear);
-    }
     atlas2 = new TextureAtlas("backgrounds/splash2.txt");
-    for (Texture texture : atlas2.getTextures()) {
-      texture.setFilter(Linear, Linear);
-    }
+    happyDroidAtlas = new TextureAtlas("backgrounds/splash-happydroid.txt");
+
+    changeAtlasTextureFilter(atlas1);
+    changeAtlasTextureFilter(atlas2);
+    changeAtlasTextureFilter(happyDroidAtlas);
 
     makeSkyGradient();
     makeSunburst();
@@ -61,6 +61,12 @@ public abstract class SplashScene extends Scene {
     progressPanel = new AssetLoadProgressPanel();
     center(progressPanel);
     addActor(progressPanel);
+  }
+
+  private void changeAtlasTextureFilter(TextureAtlas atlas) {
+    for (Texture texture : atlas.getTextures()) {
+      texture.setFilter(Linear, Linear);
+    }
   }
 
   private void makeSkyGradient() {
@@ -140,7 +146,7 @@ public abstract class SplashScene extends Scene {
   }
 
   private void makeDroidTowersLogo(boolean animateBuildOut) {
-    TextureAtlas.AtlasRegion droidTowersLogoTexture = atlas2.findRegion("droid-towers-logo");
+    TextureAtlas.AtlasRegion droidTowersLogoTexture = atlas2.findRegion("droid-towers-logo-unlimited");
     droidTowersLogo = new Image(droidTowersLogoTexture, fit);
     droidTowersLogo.width = Math.min(getStage().width() * 0.5f, droidTowersLogo.getRegion().getRegionWidth());
     droidTowersLogo.layout();
@@ -160,7 +166,7 @@ public abstract class SplashScene extends Scene {
   }
 
   private void makeHappyDroid(boolean animateBuildOut) {
-    AnimatedImage happyDroidImage = new AnimatedImage(atlas2.findRegions("happy-droid"), 0.05f, true);
+    AnimatedImage happyDroidImage = new AnimatedImage(happyDroidAtlas.findRegions("happy-droid"), 0.05f, true);
     happyDroidImage.setAlign(Align.RIGHT);
     happyDroidImage.setScaling(fit);
     happyDroidImage.delayAfterPlayback(5f);

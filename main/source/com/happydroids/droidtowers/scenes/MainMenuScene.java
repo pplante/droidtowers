@@ -83,7 +83,7 @@ public class MainMenuScene extends SplashScene {
 
     MainMenuButtonPanel menuButtonPanel = new MainMenuButtonPanel();
     menuButtonPanel.pack();
-    menuButtonPanel.y = droidTowersLogo.y - menuButtonPanel.height;
+    menuButtonPanel.y = droidTowersLogo.y - menuButtonPanel.height + scale(30);
     menuButtonPanel.x = -droidTowersLogo.getImageWidth();
     addActor(menuButtonPanel);
 

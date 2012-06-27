@@ -6,14 +6,14 @@
 <!--suppress AndroidDomInspection -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.happydroids.droidtowers"
-          android:versionCode="100"
-          android:versionName="v0.30.3">
+          android:versionCode="101"
+          android:versionName="v0.30.4">
 
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.VIBRATE"/>
-  <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+  <uses-permission android:name="com.android.vending.BILLING"/>
 
   <supports-screens android:anyDensity="true"/>
   <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
@@ -30,5 +30,13 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+    <service android:name="net.robotmedia.billing.BillingService"/>
+    <receiver android:name="net.robotmedia.billing.BillingReceiver">
+      <intent-filter>
+        <action android:name="com.android.vending.billing.IN_APP_NOTIFY"/>
+        <action android:name="com.android.vending.billing.RESPONSE_CODE"/>
+        <action android:name="com.android.vending.billing.PURCHASE_STATE_CHANGED"/>
+      </intent-filter>
+    </receiver>
   </application>
 </manifest>

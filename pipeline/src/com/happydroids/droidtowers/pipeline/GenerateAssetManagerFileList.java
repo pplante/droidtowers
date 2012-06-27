@@ -57,6 +57,8 @@ public class GenerateAssetManagerFileList {
     }
 
     makeSwatch(swatchesDir, "swatch-white.png", Color.WHITE);
+    makeSwatch(swatchesDir, "swatch-white-black-border.png", Color.WHITE);
+    makeSwatch(swatchesDir, "swatch-white-semi-black-border.png", Color.WHITE);
 
     preloadDirectory("swatches/", ".png", Texture.class);
 

@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.scenes.components;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
@@ -28,7 +29,9 @@ public class MainMenuButtonPanel extends Table {
   public MainMenuButtonPanel() {
     super();
 
-    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.WHITE_SEMI_TRANSPARENT));
+    NinePatch background = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH_SEMI_BLACK_BORDER, 2, 2, 2, 2);
+    background.setColor(Colors.WHITE_SEMI_TRANSPARENT);
+    setBackground(background);
 
     pad(scale(16));
 

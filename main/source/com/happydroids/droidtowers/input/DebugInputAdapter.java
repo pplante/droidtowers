@@ -11,12 +11,14 @@ import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.gui.DebugWindow;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
+import com.happydroids.droidtowers.gui.TowerWindow;
 import com.happydroids.droidtowers.scenes.TowerScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.utils.ScreenShot;
 
 public class DebugInputAdapter extends InputAdapter {
   public StringBuilder keys = new StringBuilder();
+  private TowerWindow debugWindow;
 
   @Override
   public boolean keyDown(int keycode) {
@@ -35,7 +37,12 @@ public class DebugInputAdapter extends InputAdapter {
 
       case Input.Keys.ALT_RIGHT:
       case Input.Keys.MENU:
-        new DebugWindow(TowerGame.getRootUiStage()).show();
+        if (debugWindow != null) {
+          debugWindow.dismiss();
+          debugWindow = null;
+        } else {
+          debugWindow = new DebugWindow(TowerGame.getRootUiStage()).show();
+        }
         return true;
     }
 

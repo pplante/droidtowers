@@ -25,11 +25,14 @@ import java.util.Map;
 
 import static com.badlogic.gdx.graphics.Texture.TextureFilter.Linear;
 import static com.badlogic.gdx.graphics.Texture.TextureFilter.MipMapNearestNearest;
+import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class TowerAssetManager {
   private static final String TAG = TowerAssetManager.class.getSimpleName();
   private static MemoryTrackingAssetManager assetManager;
   public static final String WHITE_SWATCH = "swatches/swatch-white.png";
+  public static final String WHITE_SWATCH_BLACK_BORDER = "swatches/swatch-white-black-border.png";
+  public static final String WHITE_SWATCH_SEMI_BLACK_BORDER = "swatches/swatch-white-semi-black-border.png";
   public static final String WHITE_SWATCH_TRIANGLE = "swatches/swatch-white-triangle.png";
   private static AssetList assetList;
   private static Skin customSkin;
@@ -107,6 +110,16 @@ public class TowerAssetManager {
     textFieldStyle.selection = skinAtlas.findRegion("text-selection");
 
     customSkin.addStyle("default", textFieldStyle);
+
+    SelectBox.SelectBoxStyle selectBoxStyle = new SelectBox.SelectBoxStyle();
+    selectBoxStyle.background = new NinePatch(skinAtlas.findRegion("button"), 3, 3, 3, 3);
+    selectBoxStyle.font = FontManager.Roboto18.getFont();
+    selectBoxStyle.fontColor = Color.WHITE;
+    selectBoxStyle.itemSpacing = scale(5);
+    selectBoxStyle.listBackground = new NinePatch(skinAtlas.findRegion("button"), 3, 3, 3, 3);
+    selectBoxStyle.listSelection = new NinePatch(skinAtlas.findRegion("button-down"), 3, 3, 3, 3);
+
+    customSkin.addStyle("default", selectBoxStyle);
   }
 
   private static void addToAssetManager(Map<String, Class> preloadFiles, Map<String, String> highDefFiles) {
@@ -200,5 +213,9 @@ public class TowerAssetManager {
 
   public static Skin getDefaultSkin() {
     return defaultSkin;
+  }
+
+  public static NinePatch ninePatch(String whiteSwatchBlackBorder, int left, int right, int top, int bottom) {
+    return new NinePatch(texture(whiteSwatchBlackBorder), left, right, top, bottom);
   }
 }
