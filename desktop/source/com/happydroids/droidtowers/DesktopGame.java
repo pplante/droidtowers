@@ -7,11 +7,13 @@ package com.happydroids.droidtowers;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
-import com.happydroids.platform.*;
 import com.happydroids.droidtowers.platform.PlatformProtocolHandlerFactory;
+import com.happydroids.platform.*;
 
 public class DesktopGame {
   public static void main(String[] args) {
+    PlatformQuitHandlerFactory.initialize();
+
     Platform.setProtocolHandler(PlatformProtocolHandlerFactory.newInstance());
     Platform.getProtocolHandler().initialize(args);
 
