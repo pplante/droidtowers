@@ -8,7 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/tools/jarbundler/jarbundler.iml" filepath="$PROJECT_DIR$/tools/jarbundler/jarbundler.iml" />
       <module fileurl="file://$PROJECT_DIR$/main/main.iml" filepath="$PROJECT_DIR$/main/main.iml" />
       <module fileurl="file://$PROJECT_DIR$/pipeline/pipeline.iml" filepath="$PROJECT_DIR$/pipeline/pipeline.iml" />
-      <module fileurl="file:///usr/local/var/lib/android-sdk/extras/google/play_licensing/library/play-licensing.iml" filepath="/usr/local/var/lib/android-sdk/extras/google/play_licensing/library/play-licensing.iml" />
     </modules>
   </component>
 </project>
