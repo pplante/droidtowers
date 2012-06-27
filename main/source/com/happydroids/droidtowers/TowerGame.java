@@ -73,6 +73,8 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
       }
     }
 
+    Platform.initPurchaseManger();
+
     BackgroundTask.setPostExecuteManager(this);
     BackgroundTask.setUncaughtExceptionHandler(Platform.uncaughtExceptionHandler);
     Thread.currentThread().setUncaughtExceptionHandler(Platform.uncaughtExceptionHandler);

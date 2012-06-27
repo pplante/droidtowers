@@ -9,6 +9,7 @@ import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.types.GridObjectType;
+import com.happydroids.platform.Platform;
 
 class GridObjectTypeLockedClickListener extends VibrateClickListener {
   private final GridObjectType gridObjectType;
@@ -19,19 +20,24 @@ class GridObjectTypeLockedClickListener extends VibrateClickListener {
 
   @Override
   public void onClick(Actor actor, float x, float y) {
-    Achievement lockedBy = null;
-    for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
-      if (achievement.getRewards().contains(gridObjectType.getLock())) {
-        lockedBy = achievement;
-        break;
-      }
-    }
-
-    if (lockedBy == null) {
+    if (gridObjectType.requiresUnlimitedVersion() && !Platform.getPurchaseManager().hasPurchasedUnlimitedVersion()) {
+      showLockedByUnlimitedVersionDialog();
       return;
     }
 
-    final Achievement finalLockedBy = lockedBy;
+    for (Achievement achievement : AchievementEngine.instance().getAchievements()) {
+      if (achievement.getRewards().contains(gridObjectType.getLock())) {
+        showLockedByAchievementDialog(achievement);
+        return;
+      }
+    }
+  }
+
+  private void showLockedByUnlimitedVersionDialog() {
+    new PurchaseDroidTowersUnlimitedPrompt().show();
+  }
+
+  private void showLockedByAchievementDialog(final Achievement lockedBy) {
     new Dialog()
             .setTitle("Item is Locked!")
             .setMessage("Sorry, this item is locked.\n\nYou may unlock it by completing this achievement: " + lockedBy.getName())
@@ -39,7 +45,7 @@ class GridObjectTypeLockedClickListener extends VibrateClickListener {
               @Override
               public void onClick(Dialog dialog) {
                 dialog.dismiss();
-                new AchievementDetailView(finalLockedBy, SceneManager.getActiveScene().getStage()).show();
+                new AchievementDetailView(lockedBy, SceneManager.getActiveScene().getStage()).show();
               }
             })
             .addButton(ResponseType.NEGATIVE, "Dismiss", new OnClickCallback() {

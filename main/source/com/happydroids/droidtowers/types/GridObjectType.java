@@ -15,6 +15,7 @@ import com.happydroids.droidtowers.achievements.Reward;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.platform.Platform;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,6 +36,7 @@ public abstract class GridObjectType {
   protected boolean canShareSpace;
   protected float noiseLevel;
   protected float crimeLevel;
+  protected boolean unlimitedVersion = false;
 
   protected ProviderType provides;
   private static WeakHashMap<String, TextureAtlas> atlases;
@@ -164,7 +166,7 @@ public abstract class GridObjectType {
   }
 
   public boolean isLocked() {
-    return lock != null;
+    return lock != null || (unlimitedVersion && !Platform.getPurchaseManager().hasPurchasedUnlimitedVersion());
   }
 
   public Reward getLock() {
@@ -237,5 +239,9 @@ public abstract class GridObjectType {
                    ", height=" + height +
                    ", width=" + width +
                    '}';
+  }
+
+  public boolean requiresUnlimitedVersion() {
+    return unlimitedVersion;
   }
 }

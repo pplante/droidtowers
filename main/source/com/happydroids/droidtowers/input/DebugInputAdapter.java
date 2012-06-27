@@ -42,6 +42,12 @@ public class DebugInputAdapter extends InputAdapter {
           debugWindow = null;
         } else {
           debugWindow = new DebugWindow(TowerGame.getRootUiStage()).show();
+          debugWindow.setDismissCallback(new Runnable() {
+            @Override
+            public void run() {
+              debugWindow = null;
+            }
+          });
         }
         return true;
     }

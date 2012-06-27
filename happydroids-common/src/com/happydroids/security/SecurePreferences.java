@@ -23,12 +23,16 @@ public class SecurePreferences implements Preferences {
 
   private void encrypt(String key, Object val) {
     Gdx.app.error(TAG, String.format("encrypting: key (%s): %s, value(%s): %s", key, obfuscator.obfuscate(key), val, obfuscator.obfuscate(String.valueOf(val))));
-    preferences.putString(obfuscator.obfuscate(key), obfuscator.obfuscate(String.valueOf(val)));
+    preferences.putString(obfuscator.obfuscate(key), obfuscator.obfuscate(obfuscator.obfuscate(key) + String.valueOf(val)));
   }
 
   private String decrypt(String key) {
     try {
-      return obfuscator.unobfuscate(preferences.getString(key));
+      String obfuscatedKey = obfuscator.obfuscate(key);
+      String encryptedValue = preferences.getString(obfuscatedKey);
+      String decryptedValue = obfuscator.unobfuscate(encryptedValue).replace(obfuscatedKey, "");
+      Gdx.app.error(TAG, String.format("decrypting: key (%s): %s, value(%s): %s", key, obfuscatedKey, encryptedValue, decryptedValue));
+      return decryptedValue;
     } catch (AESObfuscator.ValidationException e) {
       throw new RuntimeException(e);
     }
@@ -69,42 +73,42 @@ public class SecurePreferences implements Preferences {
 
   @Override
   public boolean getBoolean(String key) {
-    return Boolean.getBoolean(decrypt(key));
+    return getBoolean(key, false);
   }
 
   @Override
   public int getInteger(String key) {
-    return Integer.parseInt(decrypt(key));
+    return getInteger(key, 0);
   }
 
   @Override
   public long getLong(String key) {
-    return Long.parseLong(decrypt(key));
+    return getLong(key, 0);
   }
 
   @Override
   public float getFloat(String key) {
-    return Float.parseFloat(decrypt(key));
+    return getFloat(key, 0f);
   }
 
   @Override
   public String getString(String key) {
-    return decrypt(key);
+    return getString(key, null);
   }
 
   @Override
   public boolean getBoolean(String key, boolean defValue) {
-    return contains(key) ? Boolean.getBoolean(decrypt(key)) : defValue;
+    return contains(key) ? Boolean.parseBoolean(decrypt(key)) : defValue;
   }
 
   @Override
   public int getInteger(String key, int defValue) {
-    return contains(key) ? Integer.getInteger(decrypt(key)) : defValue;
+    return contains(key) ? Integer.parseInt(decrypt(key)) : defValue;
   }
 
   @Override
   public long getLong(String key, long defValue) {
-    return contains(key) ? Long.getLong(decrypt(key)) : defValue;
+    return contains(key) ? Long.parseLong(decrypt(key)) : defValue;
   }
 
   @Override

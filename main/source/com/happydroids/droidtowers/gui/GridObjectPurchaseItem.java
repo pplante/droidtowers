@@ -47,10 +47,10 @@ class GridObjectPurchaseItem extends Table {
   }
 
   public void setBuyClickListener(ClickListener clickListener) {
-    if (!gridObjectType.isLocked()) {
-      buyButton.setClickListener(clickListener);
-    } else {
+    if (gridObjectType.isLocked()) {
       buyButton.setClickListener(new GridObjectTypeLockedClickListener(gridObjectType));
+    } else {
+      buyButton.setClickListener(clickListener);
     }
   }
 }

@@ -5,12 +5,14 @@
 package com.happydroids.droidtowers.gamestate;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_MoveMetadata;
 import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_RemoveObjectCounts;
 import com.happydroids.droidtowers.gamestate.migrations.Migration_GameSave_UnhappyrobotToDroidTowers;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.jackson.HappyDroidObjectMapper;
+import com.happydroids.security.AESObfuscator;
 import sk.seges.acris.json.server.migrate.JacksonTransformer;
 
 import java.io.IOException;
@@ -29,6 +31,7 @@ public class GameSaveFactory {
 
   public static GameSave readFile(InputStream read, String fileName) {
     try {
+      AESObfuscator obfuscator = new AESObfuscator(HappyDroidConsts.OBFUSCATION_SALT, HappyDroidConsts.OBFUSCATION_KEY);
       JacksonTransformer transformer = new JacksonTransformer(read, fileName);
       transformer.addTransform(Migration_GameSave_UnhappyrobotToDroidTowers.class);
       transformer.addTransform(Migration_GameSave_RemoveObjectCounts.class);

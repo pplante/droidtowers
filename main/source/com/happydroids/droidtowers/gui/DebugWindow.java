@@ -22,6 +22,7 @@ import com.happydroids.droidtowers.scenes.TowerScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.utils.ScreenShot;
 import com.happydroids.platform.Platform;
+import com.happydroids.platform.PlatformPurchaseManger;
 
 import static com.badlogic.gdx.Application.ApplicationType.Android;
 import static com.happydroids.droidtowers.platform.Display.scale;
@@ -59,13 +60,34 @@ public class DebugWindow extends ScrollableTowerWindow {
     add(makeToggleDebugInfoButton());
 
     row();
-    add(makeAndroidTestPurchaseButton()).colspan(2);
+    add(makeAndroidTestPurchaseButton());
+    add(makeTogglePurchaseUnlimitedButton());
 
     shoveContentUp();
   }
 
+  private Actor makeTogglePurchaseUnlimitedButton() {
+    final PlatformPurchaseManger purchaseManger = Platform.getPurchaseManager();
+
+    final TextButton button = FontManager.Roboto24.makeTextButton(purchaseManger.hasPurchasedUnlimitedVersion() ? "Refund" : "Purchase" + " Unlimited Version");
+    button.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        if (purchaseManger.hasPurchasedUnlimitedVersion()) {
+          purchaseManger.revokeItem("droidtowers.version.unlimited");
+        } else {
+          purchaseManger.purchaseItem("droidtowers.version.unlimited");
+        }
+
+        dismiss();
+      }
+    });
+    return button;
+  }
+
   private Actor makeAndroidTestPurchaseButton() {
     Table table = new Table();
+    table.defaults().space(scale(16));
     final SelectBox selectBox = new SelectBox(TowerAssetManager.getCustomSkin());
     table.add(selectBox);
 

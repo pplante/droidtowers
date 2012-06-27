@@ -7,11 +7,8 @@ package com.happydroids.droidtowers;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
-import com.happydroids.platform.DesktopBrowserUtil;
+import com.happydroids.platform.*;
 import com.happydroids.droidtowers.platform.PlatformProtocolHandlerFactory;
-import com.happydroids.platform.DesktopConnectionMonitor;
-import com.happydroids.platform.DesktopUncaughtExceptionHandler;
-import com.happydroids.platform.Platform;
 
 public class DesktopGame {
   public static void main(String[] args) {
@@ -33,7 +30,7 @@ public class DesktopGame {
     config.useGL20 = true;
 //    config.vSyncEnabled = false;
 
+    Platform.setPurchaseManagerClass(DesktopPurchaseManager.class);
     new LwjglApplication(new LwjglApplicationShim(new TowerGame()), config);
   }
-
 }

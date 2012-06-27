@@ -8,6 +8,7 @@ import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.platform.Platform;
 
 public class BudgetCalculator extends GameGridAction {
   public BudgetCalculator(GameGrid gameGrid, float frequency) {
@@ -22,6 +23,11 @@ public class BudgetCalculator extends GameGridAction {
     for (GridObject object : gameGrid.getObjects()) {
       coinsEarnedFromRent += object.getCoinsEarned();
       coinsSpentOnUpkeep += object.getUpkeepCost();
+    }
+
+    if (!Platform.getPurchaseManager().hasPurchasedUnlimitedVersion()) {
+      coinsEarnedFromRent *= 0.5f;
+      coinsSpentOnUpkeep *= 0.5f;
     }
 
     if (HappyDroidConsts.DEBUG)

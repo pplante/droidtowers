@@ -10,6 +10,7 @@ public class Platform {
   public static PlatformProtocolHandler protocolHandler;
   private static PlatformConnectionMonitor connectionMonitor;
   private static PlatformPurchaseManger purchaseManager;
+  private static Class<? extends PlatformPurchaseManger> purchaseManagerClass;
 
   public static Thread.UncaughtExceptionHandler getUncaughtExceptionHandler() {
     return uncaughtExceptionHandler;
@@ -103,5 +104,19 @@ public class Platform {
 
   public static void setPurchaseManager(PlatformPurchaseManger purchaseManager) {
     Platform.purchaseManager = purchaseManager;
+  }
+
+  public static void setPurchaseManagerClass(Class<? extends PlatformPurchaseManger> purchaseManagerClass) {
+    Platform.purchaseManagerClass = purchaseManagerClass;
+  }
+
+  public static void initPurchaseManger() {
+    try {
+      purchaseManager = purchaseManagerClass.newInstance();
+    } catch (InstantiationException e) {
+      throw new RuntimeException(e);
+    } catch (IllegalAccessException e) {
+      throw new RuntimeException(e);
+    }
   }
 }

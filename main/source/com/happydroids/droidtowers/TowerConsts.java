@@ -44,6 +44,7 @@ public class TowerConsts extends HappyDroidConsts {
   public static final float AVATAR_POPULATION_SCALE = 0.25f;
   public static final GridPoint SINGLE_POINT = new GridPoint(1, 1);
   public static final int[] NEGATIVE_BUTTON_KEYS = new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE};
+  public static final int LIMITED_VERSION_MAX_FLOOR = LOBBY_FLOOR + 15;
 
   private TowerConsts() {
 

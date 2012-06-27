@@ -15,11 +15,12 @@ import com.happydroids.droidtowers.utils.Random;
 
 import java.text.NumberFormat;
 
-public class PurchaseManager {
-  public static final String LOG_TAG = "PurchaseManager";
+public class GridObjectPurchaseChecker {
+  public static final String LOG_TAG = GridObjectPurchaseChecker.class.getSimpleName();
+
   private GridObjectType gridObjectType;
 
-  public PurchaseManager(GridObjectType gridObjectType) {
+  public GridObjectPurchaseChecker(GridObjectType gridObjectType) {
     this.gridObjectType = gridObjectType;
   }
 

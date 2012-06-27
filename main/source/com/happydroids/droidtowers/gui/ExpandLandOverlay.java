@@ -24,6 +24,7 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.events.CameraControllerEvent;
 import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.platform.Platform;
 
 import static com.happydroids.droidtowers.TowerConsts.GAME_GRID_EXPAND_LAND_SIZE;
 
@@ -67,6 +68,11 @@ public class ExpandLandOverlay extends WidgetGroup {
   }
 
   private void expandLandToEast() {
+    if (!Platform.getPurchaseManager().hasPurchasedUnlimitedVersion()) {
+      new PurchaseDroidTowersUnlimitedPrompt().show();
+      return;
+    }
+
     GameSoundController.setSoundsAllowed(false);
     gameGrid.getGridSize().x += GAME_GRID_EXPAND_LAND_SIZE;
     gameGrid.updateWorldSize(false);
@@ -81,6 +87,11 @@ public class ExpandLandOverlay extends WidgetGroup {
   }
 
   private void expandLandToWest() {
+    if (!Platform.getPurchaseManager().hasPurchasedUnlimitedVersion()) {
+      new PurchaseDroidTowersUnlimitedPrompt().show();
+      return;
+    }
+
     GameSoundController.setSoundsAllowed(false);
     gameGrid.getGridSize().x += GAME_GRID_EXPAND_LAND_SIZE;
     gameGrid.updateWorldSize(false);

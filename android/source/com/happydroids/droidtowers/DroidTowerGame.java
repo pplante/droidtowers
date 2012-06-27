@@ -15,7 +15,7 @@ import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.platform.*;
-import com.happydroids.platform.purchase.DummyPurchaseManager;
+import com.happydroids.platform.purchase.AndroidPurchaseManager;
 import net.robotmedia.billing.BillingController;
 import net.robotmedia.billing.BillingRequest;
 import net.robotmedia.billing.helper.AbstractBillingObserver;
@@ -31,6 +31,7 @@ public class DroidTowerGame extends AndroidApplication implements BillingControl
     Platform.setConnectionMonitor(new AndroidConnectionMonitor(this));
     Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(this));
     Platform.setBrowserUtil(new AndroidBrowserUtil(this));
+    Platform.setPurchaseManagerClass(AndroidPurchaseManager.class);
 
     DisplayMetrics metrics = new DisplayMetrics();
     getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -45,8 +46,6 @@ public class DroidTowerGame extends AndroidApplication implements BillingControl
 
     Gdx.input.setCatchBackKey(true);
     Gdx.input.setCatchMenuKey(true);
-
-    Platform.setPurchaseManager(new DummyPurchaseManager(this));
 
     setupAndroidBilling();
   }

@@ -22,6 +22,7 @@ import com.happydroids.droidtowers.gui.WidgetAccessor;
 import com.happydroids.droidtowers.scenes.components.AssetLoadProgressPanel;
 import com.happydroids.droidtowers.scenes.components.ProgressPanel;
 import com.happydroids.droidtowers.tween.TweenSystem;
+import com.happydroids.platform.Platform;
 
 import static com.badlogic.gdx.graphics.Texture.TextureFilter.Linear;
 import static com.badlogic.gdx.utils.Scaling.fit;
@@ -146,7 +147,8 @@ public abstract class SplashScene extends Scene {
   }
 
   private void makeDroidTowersLogo(boolean animateBuildOut) {
-    TextureAtlas.AtlasRegion droidTowersLogoTexture = atlas2.findRegion("droid-towers-logo-unlimited");
+    boolean purchasedUnlimited = Platform.getPurchaseManager().hasPurchasedUnlimitedVersion();
+    TextureAtlas.AtlasRegion droidTowersLogoTexture = purchasedUnlimited ? atlas2.findRegion("droid-towers-logo-unlimited") : atlas2.findRegion("droid-towers-logo");
     droidTowersLogo = new Image(droidTowersLogoTexture, fit);
     droidTowersLogo.width = Math.min(getStage().width() * 0.5f, droidTowersLogo.getRegion().getRegionWidth());
     droidTowersLogo.layout();

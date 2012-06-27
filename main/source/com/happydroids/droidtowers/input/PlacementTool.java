@@ -12,12 +12,16 @@ import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
+import com.happydroids.droidtowers.gui.PurchaseDroidTowersUnlimitedPrompt;
 import com.happydroids.droidtowers.math.GridPoint;
-import com.happydroids.droidtowers.money.PurchaseManager;
+import com.happydroids.droidtowers.money.GridObjectPurchaseChecker;
 import com.happydroids.droidtowers.types.GridObjectType;
+import com.happydroids.platform.Platform;
 
 import java.util.List;
 
+import static com.happydroids.droidtowers.TowerConsts.LIMITED_VERSION_MAX_FLOOR;
+import static com.happydroids.droidtowers.TowerConsts.LOBBY_FLOOR;
 import static com.happydroids.droidtowers.input.InputSystem.Keys;
 
 public class PlacementTool extends ToolBase {
@@ -25,7 +29,7 @@ public class PlacementTool extends ToolBase {
   private GridObject gridObject;
   private GridPoint touchDownPointDelta;
   private boolean isDraggingGridObject;
-  private PurchaseManager purchaseManager;
+  private GridObjectPurchaseChecker gridObjectPurchaseChecker;
   private final InputCallback cancelPlacementInputCallback;
 
   public PlacementTool(OrthographicCamera camera, List<GameLayer> gameLayers, GameGrid gameGrid) {
@@ -112,15 +116,19 @@ public class PlacementTool extends ToolBase {
 
   private boolean finishPurchase() {
     if (gridObject != null) {
-      if (!gameGrid.canObjectBeAt(gridObject)) {
+      if (gridObject.getPosition().y > LIMITED_VERSION_MAX_FLOOR && !Platform.getPurchaseManager().hasPurchasedUnlimitedVersion()) {
+        new PurchaseDroidTowersUnlimitedPrompt()
+                .setMessage("Sorry, but the technology to build Towers higher than " + (LIMITED_VERSION_MAX_FLOOR - LOBBY_FLOOR) + " floors requires Droid Towers: Unlimited version.\n\nWould you like to unlock it?").show();
+        return true;
+      } else if (!gameGrid.canObjectBeAt(gridObject)) {
         HeadsUpDisplay.showToast("This object cannot be placed here.");
         return true;
       } else {
         gridObject.setPlaced(true);
       }
 
-      if (purchaseManager != null) {
-        purchaseManager.makePurchase();
+      if (gridObjectPurchaseChecker != null) {
+        gridObjectPurchaseChecker.makePurchase();
       }
     }
 
@@ -132,13 +140,13 @@ public class PlacementTool extends ToolBase {
   }
 
   private void verifyAbilityToPurchase() {
-    if (purchaseManager != null && !purchaseManager.canPurchase()) {
+    if (gridObjectPurchaseChecker != null && !gridObjectPurchaseChecker.canPurchase()) {
       InputSystem.instance().switchTool(GestureTool.PICKER, null);
     }
   }
 
   public void enterPurchaseMode() {
-    purchaseManager = new PurchaseManager(gridObjectType);
+    gridObjectPurchaseChecker = new GridObjectPurchaseChecker(gridObjectType);
 
     verifyAbilityToPurchase();
   }
