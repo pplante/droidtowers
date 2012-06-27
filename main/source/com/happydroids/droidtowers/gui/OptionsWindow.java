@@ -62,22 +62,20 @@ public class OptionsWindow extends ScrollableTowerWindow {
   }
 
   private SelectBox makeResolutionSelectBox() {
-    Graphics.DisplayMode[] displayModes = Gdx.graphics.getDisplayModes();
-
     displayModeList = Ordering.natural().onResultOf(new Function<Graphics.DisplayMode, Comparable>() {
       @Override
       public Comparable apply(@Nullable Graphics.DisplayMode input) {
         return input.width * input.height * input.bitsPerPixel;
       }
-    }).sortedCopy(Lists.newArrayList(displayModes));
+    }).sortedCopy(Lists.newArrayList(Gdx.graphics.getDisplayModes()));
 
     List<String> displayModeStrings = Lists.newArrayList();
     for (Graphics.DisplayMode displayMode : displayModeList) {
-      displayModeStrings.add(formatDisplayMode(displayMode));
+      displayModeStrings.add(displayMode.width + "x" + displayMode.height);
     }
 
     displayResolution = new SelectBox(displayModeStrings.toArray(), TowerAssetManager.getCustomSkin());
-    displayResolution.setSelection(displayModeStrings.indexOf(formatDisplayMode(Gdx.graphics.getDesktopDisplayMode())));
+    displayResolution.setSelection(displayModeStrings.indexOf(Gdx.graphics.getWidth() + "x" + Gdx.graphics.getHeight()));
 
     displayResolution.setSelectionListener(new SelectionListener() {
       @Override
