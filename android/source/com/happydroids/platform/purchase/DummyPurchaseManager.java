@@ -4,19 +4,17 @@
 
 package com.happydroids.platform.purchase;
 
-import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.DroidTowerGame;
 import com.happydroids.platform.PlatformPurchaseManger;
-
-import java.util.Set;
+import com.happydroids.security.SecurePreferences;
 
 public class DummyPurchaseManager implements PlatformPurchaseManger {
-  private Set<String> purchasedItems;
   private final DroidTowerGame droidTowerGame;
+  private final SecurePreferences purchases;
 
   public DummyPurchaseManager(DroidTowerGame droidTowerGame) {
     this.droidTowerGame = droidTowerGame;
-    this.purchasedItems = Sets.newHashSet();
+    purchases = new SecurePreferences("purchases");
   }
 
   @Override
@@ -26,12 +24,12 @@ public class DummyPurchaseManager implements PlatformPurchaseManger {
 
   @Override
   public void purchaseItem(String itemId) {
-    purchasedItems.add(itemId);
+    purchases.putBoolean(itemId, true);
   }
 
   @Override
   public void revokeItem(String itemId) {
-    purchasedItems.remove(itemId);
+    purchases.putBoolean(itemId, false);
   }
 
   @Override

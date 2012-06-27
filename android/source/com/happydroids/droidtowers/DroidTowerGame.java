@@ -31,7 +31,6 @@ public class DroidTowerGame extends AndroidApplication implements BillingControl
     Platform.setConnectionMonitor(new AndroidConnectionMonitor(this));
     Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(this));
     Platform.setBrowserUtil(new AndroidBrowserUtil(this));
-    Platform.setPurchaseManager(new DummyPurchaseManager(this));
 
     DisplayMetrics metrics = new DisplayMetrics();
     getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -46,6 +45,8 @@ public class DroidTowerGame extends AndroidApplication implements BillingControl
 
     Gdx.input.setCatchBackKey(true);
     Gdx.input.setCatchMenuKey(true);
+
+    Platform.setPurchaseManager(new DummyPurchaseManager(this));
 
     setupAndroidBilling();
   }
@@ -144,11 +145,11 @@ public class DroidTowerGame extends AndroidApplication implements BillingControl
 
   @Override
   public byte[] getObfuscationSalt() {
-    return "ad076e981c2ea4103f1a6e30b5e8d0bd81bca536".getBytes();
+    return HappyDroidConsts.OBFUSCATION_SALT;
   }
 
   @Override
   public String getPublicKey() {
-    return "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr1epMa3vopbqUJAfVe90GqfjfYUQB7Edb5fBUfTyLJ6lXQORZyvpiF+vTtCA0FEHI4jB9V4TMaJcFrnTk5MZDUHi1zkj0cSn9OG7znzEvSFwfJ63b/UWBZIdgx5/bE63Mkv3LL87aNFWlg5TzgR7mQtIxHjP4iP0y4mxJJujt49ArFxYWoIIBZCv0e5zyUtQDLPYfirp3nNUPLg/wW1VNeUutkR+71r6+z/a1MeKMfUzVOoSJisnNhqWhlSkrN4Mlz5ehJhDt/ubf9n0AFafusGnmrdYFwGrOjpWDCkOpLEvkvlZiNV+sshRVaRUCwFKPBbjV/NFsDKlkdgZnms2WwIDAQAB";
+    return HappyDroidConsts.OBFUSCATION_KEY;
   }
 }
