@@ -68,8 +68,8 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     Gdx.app.error("lifecycle", "create");
     if (Gdx.app.getType().equals(Desktop)) {
       Preferences displayPrefs = Gdx.app.getPreferences("DISPLAY");
-      if (displayPrefs.contains("width") && displayPrefs.contains("height")) {
-        Gdx.graphics.setDisplayMode(displayPrefs.getInteger("width"), displayPrefs.getInteger("height"), false);
+      if (displayPrefs.contains("width") && displayPrefs.contains("height") && displayPrefs.contains("fullscreen")) {
+        Gdx.graphics.setDisplayMode(displayPrefs.getInteger("width"), displayPrefs.getInteger("height"), displayPrefs.getBoolean("fullscreen"));
       }
     }
 

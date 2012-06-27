@@ -22,17 +22,13 @@ public class SecurePreferences implements Preferences {
   }
 
   private void encrypt(String key, Object val) {
-    Gdx.app.error(TAG, String.format("encrypting: key (%s): %s, value(%s): %s", key, obfuscator.obfuscate(key), val, obfuscator.obfuscate(String.valueOf(val))));
     preferences.putString(obfuscator.obfuscate(key), obfuscator.obfuscate(obfuscator.obfuscate(key) + String.valueOf(val)));
   }
 
   private String decrypt(String key) {
     try {
       String obfuscatedKey = obfuscator.obfuscate(key);
-      String encryptedValue = preferences.getString(obfuscatedKey);
-      String decryptedValue = obfuscator.unobfuscate(encryptedValue).replace(obfuscatedKey, "");
-      Gdx.app.error(TAG, String.format("decrypting: key (%s): %s, value(%s): %s", key, obfuscatedKey, encryptedValue, decryptedValue));
-      return decryptedValue;
+      return obfuscator.unobfuscate(preferences.getString(obfuscatedKey)).replace(obfuscatedKey, "");
     } catch (AESObfuscator.ValidationException e) {
       throw new RuntimeException(e);
     }

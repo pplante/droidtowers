@@ -23,6 +23,7 @@ import java.util.List;
 import static com.happydroids.droidtowers.TowerConsts.LIMITED_VERSION_MAX_FLOOR;
 import static com.happydroids.droidtowers.TowerConsts.LOBBY_FLOOR;
 import static com.happydroids.droidtowers.input.InputSystem.Keys;
+import static com.happydroids.droidtowers.types.ProviderType.SKY_LOBBY;
 
 public class PlacementTool extends ToolBase {
   private GridObjectType gridObjectType;
@@ -118,10 +119,11 @@ public class PlacementTool extends ToolBase {
     if (gridObject != null) {
       if (gridObject.getPosition().y > LIMITED_VERSION_MAX_FLOOR && !Platform.getPurchaseManager().hasPurchasedUnlimitedVersion()) {
         new PurchaseDroidTowersUnlimitedPrompt()
-                .setMessage("Sorry, but the technology to build Towers higher than " + (LIMITED_VERSION_MAX_FLOOR - LOBBY_FLOOR) + " floors requires Droid Towers: Unlimited version.\n\nWould you like to unlock it?").show();
+                .setMessage("Sorry, but the technology to build Towers higher than " + (LIMITED_VERSION_MAX_FLOOR - LOBBY_FLOOR) + " floors requires Droid Towers: Unlimited version.\n\nWould you like to unlock it?")
+                .show();
         return true;
       } else if (!gameGrid.canObjectBeAt(gridObject)) {
-        HeadsUpDisplay.showToast("This object cannot be placed here.");
+        HeadsUpDisplay.showToast(gridObjectType.provides(SKY_LOBBY) ? "The Sky Lobby can only be built every 15 floors." : "This object cannot be placed here.");
         return true;
       } else {
         gridObject.setPlaced(true);
