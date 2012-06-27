@@ -16,6 +16,7 @@ public class ScrollableTowerWindow extends TowerWindow {
   @Override
   protected Actor makeContentContainer() {
     WheelScrollFlickScrollPane scrollPane = new WheelScrollFlickScrollPane();
+    scrollPane.setScrollingDisabled(true, false);
     scrollPane.setWidget(super.makeContentContainer());
 
     return scrollPane;

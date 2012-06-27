@@ -65,8 +65,6 @@ public class AboutWindow extends ScrollableTowerWindow {
     for (FileHandle fileHandle : Gdx.files.internal("licenses/").list(".txt")) {
       addLabel(fileHandle.readString(), FontManager.Roboto18).spaceBottom(scale(32));
     }
-
-    shoveContentUp();
   }
 
   private Cell addLabel(String text, FontManager labelFont) {
