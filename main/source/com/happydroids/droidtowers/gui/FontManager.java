@@ -65,12 +65,17 @@ public enum FontManager {
       BitmapFont font;
       if (TowerAssetManager.assetManager().isLoaded(fontPath)) {
         font = TowerAssetManager.bitmapFont(fontPath);
+        font.setUseIntegerPositions(true);
+        bitmapFonts.put(fontPath, font);
       } else {
         font = new BitmapFont(Gdx.files.internal(fontPath), false);
-      }
+        font.setUseIntegerPositions(true);
+        if (!TowerAssetManager.assetManager().containsAsset(fontPath)) {
+          TowerAssetManager.assetManager().load(fontPath, BitmapFont.class);
+        }
 
-      font.setUseIntegerPositions(true);
-      bitmapFonts.put(fontPath, font);
+        return font;
+      }
     }
 
     return bitmapFonts.get(fontPath);
