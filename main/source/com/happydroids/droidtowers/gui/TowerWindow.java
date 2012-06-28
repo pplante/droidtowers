@@ -31,7 +31,9 @@ public class TowerWindow {
   private final Label titleLabel;
   protected final TransparentTextButton closeButton;
   private Actor staticHeaderContent;
+  private Actor staticFooterContent;
   private final Cell actionBarCell;
+  private final Cell footerBarCell;
   private final Cell contentRow;
   protected final VerticalRule closeButtonLine;
 
@@ -62,7 +64,7 @@ public class TowerWindow {
     wrapper.size((int) stage.width(), (int) stage.height());
 
     titleLabel = FontManager.Roboto32.makeLabel(title);
-    closeButton = FontManager.Roboto18.makeTransparentButton("< back");
+    closeButton = FontManager.Roboto18.makeTransparentButton("« back");
     closeButtonLine = new VerticalRule(scale(2));
 
     Table topBar = new Table();
@@ -82,6 +84,9 @@ public class TowerWindow {
     contentRow = wrapper.row();
     contentRow.fill().padLeft(scale(24)).padRight(scale(24));
     wrapper.add(makeContentContainer()).expand();
+
+    wrapper.row().fillX();
+    footerBarCell = wrapper.add();
 
     closeButton.setClickListener(new VibrateClickListener() {
       @Override
@@ -182,6 +187,13 @@ public class TowerWindow {
     this.staticHeaderContent = staticContent;
     actionBarCell.setWidget(staticContent);
     actionBarCell.expandX();
+    wrapper.pack();
+  }
+
+  public void setStaticFooter(Actor staticContent) {
+    this.staticFooterContent = staticContent;
+    footerBarCell.setWidget(staticContent);
+    footerBarCell.expandX();
     wrapper.pack();
   }
 }

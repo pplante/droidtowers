@@ -7,11 +7,19 @@ package com.happydroids.platform;
 import com.happydroids.security.SecurePreferences;
 
 public abstract class PlatformPurchaseManger {
-  public static final String DROIDTOWERS_VERSION_UNLIMITED = "droidtowers.version.unlimited";
+  public static final String DROIDTOWERS_VERSION_UNLIMITED = "com.happydroids.droidtowers.version.unlimited299";
   protected final SecurePreferences purchases;
+  private static Runnable initializeRunnable;
 
   public PlatformPurchaseManger() {
     purchases = new SecurePreferences("purchases");
+    if (initializeRunnable != null) {
+      initializeRunnable.run();
+    }
+  }
+
+  public static void setInitializeRunnable(Runnable initializeRunnable) {
+    PlatformPurchaseManger.initializeRunnable = initializeRunnable;
   }
 
   public void purchaseItem(String itemId) {
@@ -29,6 +37,7 @@ public abstract class PlatformPurchaseManger {
   }
 
   public abstract void requestPurchase(String itemId);
+
   public abstract void enablePurchases();
 
   public void requestPurchaseForUnlimitedVersion() {

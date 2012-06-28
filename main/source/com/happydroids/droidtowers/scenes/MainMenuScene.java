@@ -17,6 +17,7 @@ import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gui.FontManager;
+import com.happydroids.droidtowers.gui.PurchaseDroidTowersUnlimitedPrompt;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
 import com.happydroids.droidtowers.scenes.components.MainMenuButtonPanel;
 import com.happydroids.droidtowers.tween.TweenSystem;
@@ -67,6 +68,8 @@ public class MainMenuScene extends SplashScene {
       builtOutMenu = true;
 
       buildMenuComponents();
+
+      new PurchaseDroidTowersUnlimitedPrompt().show();
     }
   }
 

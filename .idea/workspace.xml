@@ -11,19 +11,28 @@
       </GlobalState>
     </option>
   </component>
-  <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
-  </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/PlatformProtocolHandler.java" line="9" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/desktop/source/com/happydroids/platform/MacQuitHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/desktop/source/com/happydroids/platform/PlatformQuitHandlerFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/source/com/happydroids/server/Payment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidBillingLibrary" afterPath="$PROJECT_DIR$/AndroidBillingLibrary" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" afterPath="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/project.properties" afterPath="$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/project.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/src/net/robotmedia/billing/helper/AbstractBillingActivity.java" afterPath="$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/src/net/robotmedia/billing/helper/AbstractBillingActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/source/com/happydroids/droidtowers/DroidTowerGame.java" afterPath="$PROJECT_DIR$/android/source/com/happydroids/droidtowers/DroidTowerGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/source/com/happydroids/platform/purchase/AndroidPurchaseManager.java" afterPath="$PROJECT_DIR$/android/source/com/happydroids/platform/purchase/AndroidPurchaseManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/PlatformPurchaseManger.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/PlatformPurchaseManger.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/PurchaseDroidTowersUnlimitedPrompt.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/PurchaseDroidTowersUnlimitedPrompt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ScrollableTowerWindow.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ScrollableTowerWindow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TowerWindow.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TowerWindow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/PlacementTool.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/PlacementTool.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
     </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,6 +65,19 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
       <breakpoint url="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidServiceObject.java" line="59" class="com.happydroids.server.HappyDroidServiceObject" package="com.happydroids.server">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidServiceObject.java" line="89" class="com.happydroids.server.HappyDroidServiceObject" package="com.happydroids.server">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -109,39 +131,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="OptionsWindow.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/OptionsWindow.java">
+      <file leaf-file-name="Payment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android/source/com/happydroids/server/Payment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="85" selection-start="2836" selection-end="2836" vertical-scroll-proportion="0.0">
+            <state line="14" column="11" selection-start="452" selection-end="452" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TowerGame.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java">
+      <file leaf-file-name="AbstractBillingActivity.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/src/net/robotmedia/billing/helper/AbstractBillingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="74" selection-start="3199" selection-end="3199" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DesktopGame.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="44" selection-start="530" selection-end="530" vertical-scroll-proportion="0.24034335">
-              <folding>
-                <element signature="e#0#1461#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlatformProtocolHandlerFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/platform/PlatformProtocolHandlerFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="13" selection-start="272" selection-end="272" vertical-scroll-proportion="0.0">
+            <state line="89" column="7" selection-start="3227" selection-end="3227" vertical-scroll-proportion="0.35959595">
               <folding />
             </state>
           </provider>
@@ -160,22 +162,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/PurchaseDroidTowersUnlimitedPrompt.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/GridObjectTypeLockedClickListener.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ExpandLandOverlay.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/money/PurchaseManager.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/money/GridObjectPurchaseChecker.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerConsts.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/PlacementTool.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
+        <option value="$PROJECT_DIR$/android/source/com/happydroids/platform/purchase/AndroidPurchaseManager.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ScrollableTowerWindow.java" />
-        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/security/SecurePreferences.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/OptionsWindow.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
-        <option value="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/LwjglApplicationShim.java" />
-        <option value="$PROJECT_DIR$/desktop/source/com/happydroids/platform/PlatformQuitHandlerFactory.java" />
-        <option value="$PROJECT_DIR$/desktop/source/com/happydroids/platform/MacQuitHandler.java" />
-        <option value="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/PlacementTool.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/PurchaseDroidTowersUnlimitedPrompt.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TowerWindow.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerConsts.java" />
+        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/PlatformPurchaseManger.java" />
+        <option value="$PROJECT_DIR$/android/source/com/happydroids/droidtowers/DroidTowerGame.java" />
+        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java" />
+        <option value="$PROJECT_DIR$/android/source/com/happydroids/server/Payment.java" />
+        <option value="$PROJECT_DIR$/android/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
+        <option value="$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/project.properties" />
+        <option value="$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/src/net/robotmedia/billing/helper/AbstractBillingActivity.java" />
       </list>
     </option>
   </component>
@@ -198,7 +200,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -209,51 +211,20 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Modules" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="OverrideImplement.combined" value="true" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="ExportedApkPath" value="$USER_HOME$/Desktop/droidtowers.apk" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
     <property name="ExportedModule" value="android" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="DEBUGGABLE_DEVICE" value="0123456789ABCDEF" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="DEBUGGABLE_PROCESS" value="com.happydroids.droidtowers" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -272,8 +243,8 @@
     <property name="AndroidRunProguardForReleaseBuild" value="false" />
     <property name="KeystoreLocation" value="$PROJECT_DIR$/release-key.keystore" />
     <property name="KeyAlias" value="happy" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -304,11 +275,11 @@
       <recent name="com.happydroids.HappyDroidConsts" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.happydroids.server" />
       <recent name="com.happydroids.platform" />
       <recent name="com.happydroids.droidtowers.gui" />
       <recent name="com.happydroids.security" />
       <recent name="com.happydroids.platform.purchase" />
-      <recent name="com.happydroids.droidtowers.platform" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.happydroids.utils" />
@@ -318,7 +289,7 @@
       <recent name="com.happydroids.droidtowers.platform" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DesktopGame">
+  <component name="RunManager" selected="Android Application.Android">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -337,6 +308,23 @@
       <option name="PORT" value="5005" />
       <method>
         <option name="BuildArtifacts" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method>
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
@@ -366,23 +354,6 @@
       <envs />
       <properties />
       <listeners />
-      <method>
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
@@ -596,7 +567,15 @@
       <created>1340826070545</created>
       <updated>1340826070545</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="fixed the bug where it was impossible to quit on OSX without crashing and burning.">
+      <created>1340827351111</created>
+      <updated>1340827351111</updated>
+    </task>
+    <task id="LOCAL-00027" summary="fixed a bug on the about window where it would scroll on the X axis">
+      <created>1340827694477</created>
+      <updated>1340827694477</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -624,7 +603,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32818532" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32818532" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.81724584" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32303733" sideWeight="0.51508623" order="3" side_tool="false" content_ui="tabs" />
@@ -641,7 +620,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32961783" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3994253" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20833333" sideWeight="0.7369077" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36550838" sideWeight="0.9490446" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36550838" sideWeight="0.9490446" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.81724584" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24946082" sideWeight="0.6709347" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -695,7 +674,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the bug where it was impossible to quit on OSX without crashing and burning." />
+    <option name="LAST_COMMIT_MESSAGE" value="sending payment information to the server works" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -731,102 +710,98 @@
     <MESSAGE value="removed security issue with secure prefs logging everything, lol?&#10;added better display settings to about box." />
     <MESSAGE value="removed security issue with secure prefs logging everything, lol?&#10;added better display settings to options window." />
     <MESSAGE value="fixed the bug where it was impossible to quit on OSX without crashing and burning." />
+    <MESSAGE value="fixed a bug on the about window where it would scroll on the X axis" />
+    <MESSAGE value="sending payment information to the server works" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ScrollableTowerWindow.java">
+    <entry file="file://$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/src/net/robotmedia/billing/model/BillingDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="20" selection-start="626" selection-end="626" vertical-scroll-proportion="0.38276553" />
+        <state line="43" column="11" selection-start="1687" selection-end="1687" vertical-scroll-proportion="0.12347354" />
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/desktop/libs/sources/gdx-backend-lwjgl-sources.jar!/com/badlogic/gdx/backends/lwjgl/LwjglGraphics.java">
+    <entry file="file://$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/src/net/robotmedia/billing/model/TransactionManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="367" column="21" selection-start="10253" selection-end="10253" vertical-scroll-proportion="0.33261803" />
+        <state line="49" column="31" selection-start="1641" selection-end="1641" vertical-scroll-proportion="0.36266667" />
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/Graphics.java">
+    <entry file="file://$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/src/net/robotmedia/billing/BillingController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="190" column="21" selection-start="7716" selection-end="7716" vertical-scroll-proportion="0.33333334" />
+        <state line="214" column="56" selection-start="6849" selection-end="6849" vertical-scroll-proportion="0.36266667" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/security/SecurePreferences.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/CloudGameSave.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="82" selection-start="1031" selection-end="1031" vertical-scroll-proportion="1.4569536" />
+        <state line="22" column="81" selection-start="658" selection-end="776" vertical-scroll-proportion="0.20533334" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/PlacementTool.java">
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="159" selection-start="4775" selection-end="4775" vertical-scroll-proportion="0.45474613" />
+        <state line="177" column="5" selection-start="5927" selection-end="5927" vertical-scroll-proportion="0.4789688" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java">
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidServiceObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="60" selection-start="5162" selection-end="5162" vertical-scroll-proportion="0.048565123" />
+        <state line="101" column="51" selection-start="2942" selection-end="2942" vertical-scroll-proportion="0.192" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerConsts.java">
+    <entry file="file://$PROJECT_DIR$/android/source/com/happydroids/droidtowers/DroidTowerGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="70" selection-start="2392" selection-end="2392" vertical-scroll-proportion="0.49006623" />
+        <state line="123" column="23" selection-start="4474" selection-end="4474" vertical-scroll-proportion="0.22133334" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/money/GridObjectPurchaseChecker.java">
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/PlatformPurchaseManger.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="20" selection-start="2239" selection-end="2239" vertical-scroll-proportion="1.1169978" />
+        <state line="25" column="24" selection-start="794" selection-end="794" vertical-scroll-proportion="0.36266667" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/LwjglApplicationShim.java">
+    <entry file="file://$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/src/net/robotmedia/billing/BillingRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="24" selection-start="1527" selection-end="1527" vertical-scroll-proportion="0.029333333" />
+        <state line="72" column="13" selection-start="2139" selection-end="2139" vertical-scroll-proportion="0.33242875" />
       </provider>
     </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/ui.jar!/com/apple/eawt/QuitStrategy.class">
+    <entry file="file://$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/src/net/robotmedia/billing/BillingService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="10" selection-start="444" selection-end="444" vertical-scroll-proportion="0.32266667" />
+        <state line="133" column="52" selection-start="5115" selection-end="5115" vertical-scroll-proportion="0.27466667" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/OptionsWindow.java">
+    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/Sprite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="85" selection-start="2836" selection-end="2836" vertical-scroll-proportion="0.0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java">
+    <entry file="file://$PROJECT_DIR$/android/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="74" selection-start="3199" selection-end="3199" vertical-scroll-proportion="0.0" />
+        <state line="8" column="34" selection-start="302" selection-end="302" vertical-scroll-proportion="0.1941392" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/platform/PlatformProtocolHandlerFactory.java">
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="13" selection-start="272" selection-end="272" vertical-scroll-proportion="0.0">
+        <state line="9" column="104" selection-start="385" selection-end="385" vertical-scroll-proportion="0.20895523">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/platform/MacQuitHandler.java">
+    <entry file="file://$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/project.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="23" selection-start="536" selection-end="536" vertical-scroll-proportion="0.44">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#378#550#0" expanded="true" />
-            <element signature="e#543#544#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/platform/PlatformQuitHandlerFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="10" selection-start="470" selection-end="470" vertical-scroll-proportion="0.32266667">
+        <state line="13" column="0" selection-start="581" selection-end="581" vertical-scroll-proportion="0.52380955">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java">
+    <entry file="file://$PROJECT_DIR$/android/source/com/happydroids/server/Payment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="44" selection-start="530" selection-end="530" vertical-scroll-proportion="0.24034335">
-          <folding>
-            <element signature="e#0#1461#0" expanded="true" />
-          </folding>
+        <state line="14" column="11" selection-start="452" selection-end="452" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/src/net/robotmedia/billing/helper/AbstractBillingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="89" column="7" selection-start="3227" selection-end="3227" vertical-scroll-proportion="0.35959595">
+          <folding />
         </state>
       </provider>
     </entry>

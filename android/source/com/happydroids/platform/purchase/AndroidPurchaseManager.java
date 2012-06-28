@@ -8,11 +8,12 @@ import com.happydroids.droidtowers.DroidTowerGame;
 import com.happydroids.platform.PlatformPurchaseManger;
 
 public class AndroidPurchaseManager extends PlatformPurchaseManger {
-  private final DroidTowerGame droidTowerGame;
+  private static DroidTowerGame droidTowerGame;
+  private static DroidTowerGame activity;
 
-  public AndroidPurchaseManager(DroidTowerGame droidTowerGame) {
-    super();
-    this.droidTowerGame = droidTowerGame;
+
+  public static void setActivity(DroidTowerGame activity) {
+    AndroidPurchaseManager.droidTowerGame = activity;
   }
 
   @Override

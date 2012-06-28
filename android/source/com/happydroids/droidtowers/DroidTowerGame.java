@@ -16,10 +16,14 @@ import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.platform.*;
 import com.happydroids.platform.purchase.AndroidPurchaseManager;
+import com.happydroids.server.Payment;
+import com.happydroids.utils.BackgroundTask;
 import net.robotmedia.billing.BillingController;
 import net.robotmedia.billing.BillingRequest;
 import net.robotmedia.billing.helper.AbstractBillingObserver;
 import net.robotmedia.billing.model.Transaction;
+
+import java.util.List;
 
 public class DroidTowerGame extends AndroidApplication implements BillingController.IConfiguration {
   private static final String TAG = DroidTowerGame.class.getSimpleName();
@@ -32,6 +36,18 @@ public class DroidTowerGame extends AndroidApplication implements BillingControl
     Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(this));
     Platform.setBrowserUtil(new AndroidBrowserUtil(this));
     Platform.setPurchaseManagerClass(AndroidPurchaseManager.class);
+    AndroidPurchaseManager.setActivity(this);
+    PlatformPurchaseManger.setInitializeRunnable(new Runnable() {
+      @Override
+      public void run() {
+        runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+            setupAndroidBilling();
+          }
+        });
+      }
+    });
 
     DisplayMetrics metrics = new DisplayMetrics();
     getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -46,8 +62,6 @@ public class DroidTowerGame extends AndroidApplication implements BillingControl
 
     Gdx.input.setCatchBackKey(true);
     Gdx.input.setCatchMenuKey(true);
-
-    setupAndroidBilling();
   }
 
   private void setupAndroidBilling() {
@@ -85,13 +99,14 @@ public class DroidTowerGame extends AndroidApplication implements BillingControl
     // notifications after
     // destroy
     BillingController.setConfiguration(null);
+    AndroidPurchaseManager.setActivity(null);
   }
 
   private void onRequestPurchaseResponse(String itemId, BillingRequest.ResponseCode response) {
 
   }
 
-  private void onPurchaseStateChanged(String itemId, Transaction.PurchaseState state) {
+  private void onPurchaseStateChanged(final String itemId, Transaction.PurchaseState state) {
     PlatformPurchaseManger purchaseManager = Platform.getPurchaseManager();
 
     Gdx.app.error(TAG, "Purchase of: " + itemId + " state: " + state.name());
@@ -99,6 +114,17 @@ public class DroidTowerGame extends AndroidApplication implements BillingControl
     switch (state) {
       case PURCHASED:
         purchaseManager.purchaseItem(itemId);
+
+        new BackgroundTask() {
+          @Override
+          protected void execute() throws Exception {
+            List<Transaction> transactions = BillingController.getTransactions(DroidTowerGame.this, itemId);
+            for (Transaction transaction : transactions) {
+              Payment payment = new Payment(itemId, transaction.orderId, "googleplay");
+              payment.save();
+            }
+          }
+        }.run();
         break;
       default:
         purchaseManager.revokeItem(itemId);

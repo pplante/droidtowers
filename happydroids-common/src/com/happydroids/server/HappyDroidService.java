@@ -172,11 +172,10 @@ public class HappyDroidService {
       return response;
     } catch (HttpHostConnectException ignored) {
       Gdx.app.debug(TAG, "Connection failed for: " + uri);
+      throw new RuntimeException(ignored);
     } catch (Exception e) {
-      e.printStackTrace();
+      throw new RuntimeException(e);
     }
-
-    return null;
   }
 
   protected void addDefaultHeaders(HttpRequestBase request) {
@@ -206,9 +205,8 @@ public class HappyDroidService {
       return response;
     } catch (Exception ignored) {
       Gdx.app.error(TAG, "Connection failed for: " + urlString, ignored);
+      throw new RuntimeException(ignored);
     }
-
-    return null;
   }
 
   public String getDeviceId() {

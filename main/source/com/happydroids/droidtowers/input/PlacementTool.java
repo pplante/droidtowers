@@ -21,7 +21,6 @@ import com.happydroids.platform.Platform;
 import java.util.List;
 
 import static com.happydroids.droidtowers.TowerConsts.LIMITED_VERSION_MAX_FLOOR;
-import static com.happydroids.droidtowers.TowerConsts.LOBBY_FLOOR;
 import static com.happydroids.droidtowers.input.InputSystem.Keys;
 import static com.happydroids.droidtowers.types.ProviderType.SKY_LOBBY;
 
@@ -118,9 +117,7 @@ public class PlacementTool extends ToolBase {
   private boolean finishPurchase() {
     if (gridObject != null) {
       if (gridObject.getPosition().y > LIMITED_VERSION_MAX_FLOOR && !Platform.getPurchaseManager().hasPurchasedUnlimitedVersion()) {
-        new PurchaseDroidTowersUnlimitedPrompt()
-                .setMessage("Sorry, but the technology to build Towers higher than " + (LIMITED_VERSION_MAX_FLOOR - LOBBY_FLOOR) + " floors requires Droid Towers: Unlimited version.\n\nWould you like to unlock it?")
-                .show();
+        new PurchaseDroidTowersUnlimitedPrompt().show();
         return true;
       } else if (!gameGrid.canObjectBeAt(gridObject)) {
         HeadsUpDisplay.showToast(gridObjectType.provides(SKY_LOBBY) ? "The Sky Lobby can only be built every 15 floors." : "This object cannot be placed here.");

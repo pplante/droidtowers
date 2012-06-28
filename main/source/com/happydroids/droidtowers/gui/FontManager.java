@@ -7,10 +7,7 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.google.common.collect.Maps;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.platform.Display;
@@ -23,7 +20,7 @@ public enum FontManager {
   Default("fonts/roboto_white_14.fnt", "fonts/roboto_white_24.fnt"),
   Roboto18("fonts/roboto_white_18.fnt", "fonts/roboto_white_32.fnt", 8, 16),
   RobotoBold18("fonts/roboto_bold_white_18.fnt", "fonts/roboto_white_32.fnt", 8, 16),
-  Roboto32("fonts/roboto_white_32.fnt", "fonts/roboto_white_48.fnt"),
+  Roboto32("fonts/roboto_white_32.fnt", "fonts/roboto_white_48.fnt", 16, 32),
   Roboto64("fonts/roboto_white_64.fnt", "fonts/roboto_white_96.fnt"),
   Roboto64WithShadow("fonts/roboto_white_with_shadow_64.fnt", "fonts/roboto_white_with_shadow_64.fnt"),
   Roboto24("fonts/roboto_white_24.fnt", "fonts/roboto_white_36.fnt", 8, 16),
@@ -93,19 +90,29 @@ public enum FontManager {
   }
 
   public TransparentTextButton makeTransparentButton(String labelText) {
-    return applyTextButtonLabelStyle(new TransparentTextButton(labelText, TowerAssetManager.getCustomSkin()));
+    return applyTextButtonLabelStyle(new TransparentTextButton(labelText, TowerAssetManager.getCustomSkin()), Color.WHITE);
   }
 
   public TextButton makeTextButton(String labelText) {
-    return applyTextButtonLabelStyle(new TextButton(labelText, TowerAssetManager.getCustomSkin()));
+    return makeTextButton(labelText, Color.WHITE);
+  }
+
+  public TextButton makeTextButton(String buttonText, Color color) {
+    return applyTextButtonLabelStyle(new TextButton(buttonText, TowerAssetManager.getCustomSkin()), color);
   }
 
   public CheckBox makeCheckBox(String labelText) {
-    return applyTextButtonLabelStyle(new CheckBox(labelText, TowerAssetManager.getCustomSkin()));
+    return applyTextButtonLabelStyle(new CheckBox(labelText, TowerAssetManager.getCustomSkin()), Color.WHITE);
   }
 
-  private <T extends TextButton> T applyTextButtonLabelStyle(T textButton) {
-    textButton.getLabel().setStyle(labelStyle());
+  private <T extends TextButton> T applyTextButtonLabelStyle(T textButton, Color labelColor) {
+    if (labelColor != Color.WHITE) {
+      TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(textButton.getStyle());
+      style.fontColor = labelColor;
+
+      textButton.setStyle(style);
+    }
+    textButton.getLabel().setStyle(labelStyle(labelColor));
     textButton.getLabelCell().pad(buttonPadTop, buttonPadLeft, buttonPadTop, buttonPadLeft);
     textButton.invalidate();
     textButton.pack();
@@ -132,11 +139,10 @@ public enum FontManager {
     return new Label(text, labelStyle(fontColor));
   }
 
+
   public Label makeLabel(String text, Color fontColor, int textAlignment) {
     Label label = new Label(text, labelStyle(fontColor));
     label.setAlignment(textAlignment);
     return label;
   }
-
-
 }

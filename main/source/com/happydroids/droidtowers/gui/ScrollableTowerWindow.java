@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class ScrollableTowerWindow extends TowerWindow {
-
   public ScrollableTowerWindow(String title, Stage stage) {
     super(title, stage);
   }
