@@ -9,7 +9,6 @@ import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.OnClickCallback;
-import com.happydroids.droidtowers.gui.ResponseType;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.utils.Random;
 
@@ -50,7 +49,7 @@ public class GridObjectPurchaseChecker {
                 dialog.dismiss();
               }
             })
-            .addButton(ResponseType.NEGATIVE, "No thanks!", new OnClickCallback() {
+            .addButton("No thanks!", new OnClickCallback() {
               @Override
               public void onClick(Dialog dialog) {
                 dialog.dismiss();

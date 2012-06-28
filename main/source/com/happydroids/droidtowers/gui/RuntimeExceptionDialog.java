@@ -27,7 +27,7 @@ public class RuntimeExceptionDialog extends Dialog {
     }
 
     setMessage(message);
-    addButton(ResponseType.POSITIVE, "Dismiss", new OnClickCallback() {
+    addButton("Dismiss", new OnClickCallback() {
       @Override
       public void onClick(Dialog dialog) {
         dialog.dismiss();

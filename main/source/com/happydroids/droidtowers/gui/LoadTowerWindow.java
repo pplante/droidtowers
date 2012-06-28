@@ -172,7 +172,7 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
       public void click(final Actor actor, float x, float y) {
         new Dialog().setTitle("Are you sure you want to delete this Tower?")
                 .setMessage("If you delete this tower, it will disappear forever.\n\nAre you sure?")
-                .addButton(ResponseType.POSITIVE, "Yes, delete it", new OnClickCallback() {
+                .addButton("Yes, delete it", new OnClickCallback() {
                   @Override
                   public void onClick(Dialog dialog) {
                     savedGameFile.delete();
@@ -184,7 +184,7 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
                     dialog.dismiss();
                   }
                 })
-                .addButton(ResponseType.NEGATIVE, "Keep it!", new OnClickCallback() {
+                .addButton("Keep it!", new OnClickCallback() {
                   @Override
                   public void onClick(Dialog dialog) {
                     dialog.dismiss();

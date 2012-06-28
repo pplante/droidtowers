@@ -48,7 +48,7 @@ class GridObjectTypeLockedClickListener extends VibrateClickListener {
                 new AchievementDetailView(lockedBy, SceneManager.getActiveScene().getStage()).show();
               }
             })
-            .addButton(ResponseType.NEGATIVE, "Dismiss", new OnClickCallback() {
+            .addButton("Dismiss", new OnClickCallback() {
               @Override
               public void onClick(Dialog dialog) {
                 dialog.dismiss();

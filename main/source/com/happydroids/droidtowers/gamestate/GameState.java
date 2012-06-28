@@ -12,7 +12,6 @@ import com.happydroids.droidtowers.graphics.TowerMiniMap;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.OnClickCallback;
-import com.happydroids.droidtowers.gui.ResponseType;
 import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.scenes.MainMenuScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
@@ -63,7 +62,7 @@ public class GameState {
       shouldSaveGame = false;
 
       Gdx.app.log("GameSave", "Could not load saved game!", e);
-      new Dialog().setMessage("Saved game could not be loaded, want to reset?").addButton(ResponseType.POSITIVE, "Yes", new OnClickCallback() {
+      new Dialog().setMessage("Saved game could not be loaded, want to reset?").addButton("Yes", new OnClickCallback() {
         @Override
         public void onClick(Dialog dialog) {
           if (gameFile.exists()) {
@@ -75,7 +74,7 @@ public class GameState {
           dialog.dismiss();
           shouldSaveGame = true;
         }
-      }).addButton(ResponseType.NEGATIVE, "No, exit game", new OnClickCallback() {
+      }).addButton("No, exit game", new OnClickCallback() {
         @Override
         public void onClick(Dialog dialog) {
           dialog.dismiss();

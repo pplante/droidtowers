@@ -68,28 +68,6 @@ public class MainMenuScene extends SplashScene {
       buildMenuComponents();
 
 //      new PurchaseDroidTowersUnlimitedPrompt().show();
-      new Dialog2(getStage())
-              .setTitle("My Dialog")
-              .setMessage("This is a short message.")
-              .addButton("Okay", new OnClickCallback2() {
-                @Override
-                public void onClick(Dialog2 dialog) {
-                  dialog.dismiss();
-                }
-              })
-              .addButton("Okay2", new OnClickCallback2() {
-                @Override
-                public void onClick(Dialog2 dialog) {
-                  dialog.dismiss();
-                }
-              })
-              .addButton("Okay3", new OnClickCallback2() {
-                @Override
-                public void onClick(Dialog2 dialog) {
-                  dialog.dismiss();
-                }
-              })
-              .show();
     }
   }
 

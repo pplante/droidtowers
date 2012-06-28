@@ -23,9 +23,6 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Set;
 
-import static com.happydroids.droidtowers.gui.ResponseType.NEGATIVE;
-import static com.happydroids.droidtowers.gui.ResponseType.POSITIVE;
-
 public class SellTool extends ToolBase {
   public SellTool(OrthographicCamera camera, List<GameLayer> gameLayers, GameGrid gameGrid) {
     super(camera, gameLayers, gameGrid);
@@ -50,7 +47,7 @@ public class SellTool extends ToolBase {
         new Dialog()
                 .setTitle("Are you sure?")
                 .setMessage("Are you sure you want to sell this " + objectToSell.getGridObjectType().getName() + "?\n\nCurrent market price is: $" + NumberFormat.getInstance().format(sellPrice))
-                .addButton(POSITIVE, "Yes", new OnClickCallback() {
+                .addButton("Yes", new OnClickCallback() {
                   @Override
                   public void onClick(Dialog dialog) {
                     dialog.dismiss();
@@ -59,7 +56,7 @@ public class SellTool extends ToolBase {
                     Player.instance().addCurrency(sellPrice);
                   }
                 })
-                .addButton(NEGATIVE, "No", new OnClickCallback() {
+                .addButton("No", new OnClickCallback() {
                   @Override
                   public void onClick(Dialog dialog) {
                     dialog.dismiss();
