@@ -35,6 +35,7 @@ public class Dialog extends Table {
   private List<TextButton> buttons;
   private Runnable dismissCallback;
   private InputCallback dismissInputCallback;
+  private Actor view;
 
   public Dialog(Stage stage) {
     super();
@@ -102,7 +103,11 @@ public class Dialog extends Table {
     row();
     int padSide = scale(32);
     int padTop = scale(20);
-    add(FontManager.Roboto18.makeLabel(message, Color.WHITE)).pad(padTop, padSide, padTop, padSide);
+    if (view != null) {
+      add(view).pad(padTop, padSide, padTop, padSide);
+    } else {
+      add(FontManager.Roboto18.makeLabel(message, Color.WHITE)).pad(padTop, padSide, padTop, padSide);
+    }
 
     row().fillX();
     add(new HorizontalRule(Color.GRAY, 1));
@@ -187,5 +192,9 @@ public class Dialog extends Table {
     this.dismissCallback = dismissCallback;
 
     return this;
+  }
+
+  public void setView(Actor view) {
+    this.view = view;
   }
 }

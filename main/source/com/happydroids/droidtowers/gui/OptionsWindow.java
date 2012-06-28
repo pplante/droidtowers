@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectionListener;
+import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
@@ -22,27 +23,24 @@ import java.util.List;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class OptionsWindow extends ScrollableTowerWindow {
-
+public class OptionsWindow extends Dialog {
   private final Preferences displayPrefs;
   private final CheckBox fullscreenCheckbox;
   private SelectBox displayResolution;
   private List<Graphics.DisplayMode> displayModeList;
 
   public OptionsWindow(Stage stage) {
-    super("Options", stage);
+    super(stage);
 
-    defaults().top().left().space(scale(16));
+    setTitle("Options");
 
-    row().padTop(scale(16));
-    add(FontManager.Roboto24.makeLabel("Display Settings")).colspan(3);
-    row();
-    add(new HorizontalRule()).colspan(3);
+    Table body = new Table();
+    body.defaults().top().left().space(scale(16));
 
-    row().fillX();
-    add(FontManager.RobotoBold18.makeLabel("Resolution: "));
-    add(makeResolutionSelectBox());
-    add(FontManager.Roboto12.makeLabel("* requires restart")).expandX();
+    body.row().fillX();
+    body.add(FontManager.RobotoBold18.makeLabel("Resolution: "));
+    body.add(makeResolutionSelectBox());
+    body.add(FontManager.Roboto12.makeLabel("* requires restart")).expandX();
 
     fullscreenCheckbox = FontManager.RobotoBold18.makeCheckBox("Fullscreen");
     fullscreenCheckbox.setChecked(Gdx.graphics.isFullscreen());
@@ -52,13 +50,14 @@ public class OptionsWindow extends ScrollableTowerWindow {
         saveDisplayChanges(displayModeList.get(displayResolution.getSelectionIndex()));
       }
     });
-    row();
-    add();
-    add(fullscreenCheckbox);
-    add(FontManager.Roboto12.makeLabel("* requires restart"));
+    body.row();
+    body.add();
+    body.add(fullscreenCheckbox);
+    body.add(FontManager.Roboto12.makeLabel("* requires restart"));
 
-    shoveContentUp(3);
     displayPrefs = Gdx.app.getPreferences("DISPLAY");
+
+    setView(body);
   }
 
   private SelectBox makeResolutionSelectBox() {
@@ -97,4 +96,5 @@ public class OptionsWindow extends ScrollableTowerWindow {
     displayPrefs.putBoolean("fullscreen", fullscreenCheckbox.isChecked());
     displayPrefs.flush();
   }
+
 }
