@@ -29,6 +29,7 @@ public class OptionsDialog extends Dialog {
   private final CheckBox fullscreenCheckbox;
   private SelectBox displayResolution;
   private List<Graphics.DisplayMode> displayModeList;
+  private boolean displayModeChanged;
 
   public OptionsDialog(Stage stage) {
     super(stage);
@@ -41,7 +42,6 @@ public class OptionsDialog extends Dialog {
     body.row().fillX();
     body.add(FontManager.RobotoBold18.makeLabel("Resolution: "));
     body.add(makeResolutionSelectBox());
-    body.add(FontManager.Roboto12.makeLabel("* requires restart")).expandX();
 
     fullscreenCheckbox = FontManager.RobotoBold18.makeCheckBox("Fullscreen");
     fullscreenCheckbox.setChecked(Gdx.graphics.isFullscreen());
@@ -54,7 +54,6 @@ public class OptionsDialog extends Dialog {
     body.row();
     body.add();
     body.add(fullscreenCheckbox);
-    body.add(FontManager.Roboto12.makeLabel("* requires restart"));
 
     displayPrefs = Gdx.app.getPreferences("DISPLAY");
 
@@ -63,8 +62,10 @@ public class OptionsDialog extends Dialog {
     setDismissCallback(new Runnable() {
       @Override
       public void run() {
-        Gdx.graphics.setDisplayMode(displayPrefs.getInteger("width"), displayPrefs.getInteger("height"), displayPrefs.getBoolean("fullscreen"));
-        SceneManager.restartActiveScene();
+        if (displayModeChanged) {
+          Gdx.graphics.setDisplayMode(displayPrefs.getInteger("width"), displayPrefs.getInteger("height"), displayPrefs.getBoolean("fullscreen"));
+          SceneManager.restartActiveScene();
+        }
       }
     });
   }
@@ -100,6 +101,7 @@ public class OptionsDialog extends Dialog {
   }
 
   private void saveDisplayChanges(Graphics.DisplayMode displayMode) {
+    displayModeChanged = true;
     displayPrefs.putInteger("width", displayMode.width);
     displayPrefs.putInteger("height", displayMode.height);
     displayPrefs.putBoolean("fullscreen", fullscreenCheckbox.isChecked());
