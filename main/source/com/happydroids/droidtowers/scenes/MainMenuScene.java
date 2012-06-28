@@ -16,9 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
-import com.happydroids.droidtowers.gui.FontManager;
-import com.happydroids.droidtowers.gui.PurchaseDroidTowersUnlimitedPrompt;
-import com.happydroids.droidtowers.gui.WidgetAccessor;
+import com.happydroids.droidtowers.gui.*;
 import com.happydroids.droidtowers.scenes.components.MainMenuButtonPanel;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.platform.Platform;
@@ -69,7 +67,29 @@ public class MainMenuScene extends SplashScene {
 
       buildMenuComponents();
 
-      new PurchaseDroidTowersUnlimitedPrompt().show();
+//      new PurchaseDroidTowersUnlimitedPrompt().show();
+      new Dialog2(getStage())
+              .setTitle("My Dialog")
+              .setMessage("This is a short message.")
+              .addButton("Okay", new OnClickCallback2() {
+                @Override
+                public void onClick(Dialog2 dialog) {
+                  dialog.dismiss();
+                }
+              })
+              .addButton("Okay2", new OnClickCallback2() {
+                @Override
+                public void onClick(Dialog2 dialog) {
+                  dialog.dismiss();
+                }
+              })
+              .addButton("Okay3", new OnClickCallback2() {
+                @Override
+                public void onClick(Dialog2 dialog) {
+                  dialog.dismiss();
+                }
+              })
+              .show();
     }
   }
 

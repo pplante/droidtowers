@@ -17,7 +17,7 @@ import java.util.HashMap;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public enum FontManager {
-  Default("fonts/roboto_white_14.fnt", "fonts/roboto_white_24.fnt"),
+  Default("fonts/roboto_white_14.fnt", "fonts/roboto_white_24.fnt", 8, 16),
   Roboto18("fonts/roboto_white_18.fnt", "fonts/roboto_white_32.fnt", 8, 16),
   RobotoBold18("fonts/roboto_bold_white_18.fnt", "fonts/roboto_white_32.fnt", 8, 16),
   Roboto32("fonts/roboto_white_32.fnt", "fonts/roboto_white_48.fnt", 16, 32),
@@ -89,8 +89,8 @@ public enum FontManager {
     return makeLabel(text, Color.WHITE);
   }
 
-  public TransparentTextButton makeTransparentButton(String labelText) {
-    return applyTextButtonLabelStyle(new TransparentTextButton(labelText, TowerAssetManager.getCustomSkin()), Color.WHITE);
+  public TransparentTextButton makeTransparentButton(String labelText, Color downColor, Color upColor) {
+    return applyTextButtonLabelStyle(new TransparentTextButton(labelText, TowerAssetManager.getCustomSkin(), upColor, downColor), Color.WHITE);
   }
 
   public TextButton makeTextButton(String labelText) {

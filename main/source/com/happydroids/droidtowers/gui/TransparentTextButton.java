@@ -4,28 +4,20 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 
-import static com.happydroids.droidtowers.ColorUtil.rgba;
-
 public class TransparentTextButton extends TextButton {
-  public TransparentTextButton(String text, Skin skin) {
+  public TransparentTextButton(String text, Skin skin, Color upColor, Color downColor) {
     super(text, skin);
 
-    setStyle(new TextButtonStyle(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.DARK_GRAY),
-                                        new NinePatch(TowerAssetManager.texture(TowerAssetManager.WHITE_SWATCH), rgba("#007399")),
-                                        new NinePatch(TowerAssetManager.texture(TowerAssetManager.WHITE_SWATCH), rgba("#007399")),
-                                        getStyle().pressedOffsetX,
-                                        getStyle().pressedOffsetY,
-                                        getStyle().unpressedOffsetX,
-                                        getStyle().unpressedOffsetY,
-                                        getStyle().font,
-                                        getStyle().fontColor,
-                                        getStyle().downFontColor,
-                                        getStyle().checkedFontColor));
+    TextButtonStyle style = new TextButtonStyle(getStyle());
+    style.down = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, upColor);
+    style.up = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, downColor);
+    style.checked = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, downColor);
+
+    setStyle(style);
   }
 }

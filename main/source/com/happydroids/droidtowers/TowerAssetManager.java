@@ -215,7 +215,9 @@ public class TowerAssetManager {
     return defaultSkin;
   }
 
-  public static NinePatch ninePatch(String whiteSwatchBlackBorder, int left, int right, int top, int bottom) {
-    return new NinePatch(texture(whiteSwatchBlackBorder), left, right, top, bottom);
+  public static NinePatch ninePatch(String fileName, Color color, int left, int right, int top, int bottom) {
+    NinePatch ninePatch = new NinePatch(texture(fileName), left, right, top, bottom);
+    ninePatch.setColor(color);
+    return ninePatch;
   }
 }

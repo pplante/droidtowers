@@ -14,10 +14,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.esotericsoftware.tablelayout.Cell;
+import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
 
+import static com.happydroids.droidtowers.ColorUtil.rgba;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class TowerWindow {
@@ -64,7 +66,7 @@ public class TowerWindow {
     wrapper.size((int) stage.width(), (int) stage.height());
 
     titleLabel = FontManager.Roboto32.makeLabel(title);
-    closeButton = FontManager.Roboto18.makeTransparentButton("« back");
+    closeButton = FontManager.Roboto18.makeTransparentButton("« back", rgba("#007399"), Colors.DARK_GRAY);
     closeButtonLine = new VerticalRule(scale(2));
 
     Table topBar = new Table();

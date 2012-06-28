@@ -18,6 +18,7 @@ public class TiledImage extends Image {
 
   public TiledImage(Texture texture) {
     this.texture = texture;
+    texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
   }
 
   @Override
