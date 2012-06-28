@@ -48,7 +48,7 @@ public class MainMenuButtonPanel extends Table {
       optionsButton.setClickListener(new VibrateClickListener() {
         @Override
         public void onClick(Actor actor, float x, float y) {
-          new OptionsWindow(getStage()).show();
+          new OptionsDialog(getStage()).show();
         }
       });
     }

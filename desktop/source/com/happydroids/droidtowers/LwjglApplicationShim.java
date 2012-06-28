@@ -5,10 +5,13 @@
 package com.happydroids.droidtowers;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.backends.lwjgl.LwjglGraphics;
 import com.happydroids.droidtowers.actions.ActionManager;
 import com.happydroids.droidtowers.actions.TimeDelayedAction;
 import com.happydroids.droidtowers.input.InputSystem;
 import org.lwjgl.opengl.Display;
+
+import java.lang.reflect.Field;
 
 public class LwjglApplicationShim implements ApplicationListener {
   private static final String TAG = LwjglApplicationShim.class.getSimpleName();
@@ -43,6 +46,14 @@ public class LwjglApplicationShim implements ApplicationListener {
   }
 
   public void resize(int width, int height) {
+    try {
+      Field resizeField = LwjglGraphics.class.getDeclaredField("resize");
+      resizeField.setAccessible(true);
+      resizeField.set(Gdx.graphics, false);
+    } catch (IllegalAccessException ignored) {
+    } catch (NoSuchFieldException ignored) {
+    }
+
     applicationListener.resize(width, height);
   }
 

@@ -17,19 +17,20 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class OptionsWindow extends Dialog {
+public class OptionsDialog extends Dialog {
   private final Preferences displayPrefs;
   private final CheckBox fullscreenCheckbox;
   private SelectBox displayResolution;
   private List<Graphics.DisplayMode> displayModeList;
 
-  public OptionsWindow(Stage stage) {
+  public OptionsDialog(Stage stage) {
     super(stage);
 
     setTitle("Options");
@@ -58,6 +59,14 @@ public class OptionsWindow extends Dialog {
     displayPrefs = Gdx.app.getPreferences("DISPLAY");
 
     setView(body);
+
+    setDismissCallback(new Runnable() {
+      @Override
+      public void run() {
+        Gdx.graphics.setDisplayMode(displayPrefs.getInteger("width"), displayPrefs.getInteger("height"), displayPrefs.getBoolean("fullscreen"));
+        SceneManager.restartActiveScene();
+      }
+    });
   }
 
   private SelectBox makeResolutionSelectBox() {
