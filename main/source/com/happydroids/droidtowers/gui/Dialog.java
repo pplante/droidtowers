@@ -44,6 +44,7 @@ public class Dialog extends Table {
 
     buttons = Lists.newArrayList();
 
+    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.DARK_GRAY));
     dropShadowPatch = TowerAssetManager.ninePatch("swatches/drop-shadow.png", Color.WHITE, 22, 22, 22, 22);
     modalNoise = new TiledImage(TowerAssetManager.texture("swatches/modal-noise.png"));
     modalNoise.touchable = true;
@@ -92,8 +93,6 @@ public class Dialog extends Table {
     stage.addActor(this);
 
     defaults().top().left();
-
-    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.DARK_GRAY));
 
     add(FontManager.Default.makeLabel(title, Colors.ICS_BLUE)).pad(scale(6));
 

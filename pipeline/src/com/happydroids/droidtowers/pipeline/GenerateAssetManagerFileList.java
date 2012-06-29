@@ -8,7 +8,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.GdxNativesLoader;
@@ -27,18 +26,15 @@ public class GenerateAssetManagerFileList {
 
     FileHandle template = new FileHandle("assets-raw/templates/TowerAssetManagerFilesList-template.coffee");
 
-    preloadFile(assetsDir.child("happy-droid.png"), Texture.class);
     preloadFile(assetsDir.child("default-skin.json"), Skin.class);
     preloadFile(assetsDir.child("backgrounds/clouds.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("hud/menus.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("hud/buttons.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("hud/window-bg.png"), Texture.class);
-    preloadFile(assetsDir.child("hud/action-bar.png"), Texture.class);
 
     addDirectoryToAssetManager("backgrounds/", ".txt", TextureAtlas.class);
-    addDirectoryToAssetManager("movies/", ".txt", TextureAtlas.class);
+//    addDirectoryToAssetManager("movies/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("backgrounds/", ".png", Texture.class);
-    addDirectoryToAssetManager("fonts/", ".fnt", BitmapFont.class);
     addDirectoryToAssetManager("hud/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("rooms/", ".txt", TextureAtlas.class);
 
