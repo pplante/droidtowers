@@ -18,6 +18,7 @@ import sk.seges.acris.json.server.migrate.JacksonTransformer;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.UUID;
 
 public class GameSaveFactory {
@@ -46,7 +47,7 @@ public class GameSaveFactory {
   @SuppressWarnings("PointlessBooleanExpression")
   public static void save(GameSave gameSave, FileHandle gameFile) throws IOException {
     if (TowerConsts.DEBUG && gameSave.isSaveToDiskDisabled()) return;
-
+    gameSave.getMetadata().lastPlayed = new Date();
     OutputStream stream = gameFile.write(false);
     TowerGameService.instance().getObjectMapper().writeValue(stream, gameSave);
     stream.flush();

@@ -6,16 +6,11 @@ package com.happydroids.droidtowers.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
-import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.NeighborGameGrid;
 import com.happydroids.droidtowers.math.GridPoint;
@@ -27,7 +22,6 @@ public class Room extends GridObject {
   private Sprite sprite;
   private Sprite decalSprite;
 
-  private boolean dynamicSprite;
   private static final int UPDATE_FREQUENCY = 10000;
   private long lastUpdateTime;
   protected int currentResidency;
@@ -37,31 +31,7 @@ public class Room extends GridObject {
   public Room(RoomType roomType, GameGrid gameGrid) {
     super(roomType, gameGrid);
 
-    if (labelFont == null) {
-      labelFont = TowerAssetManager.bitmapFont("fonts/helvetica_neue_18.fnt");
-    }
-
-    if (roomType.getTextureRegion() != null) {
-      sprite = new Sprite(roomType.getTextureRegion());
-    } else {
-      int width = TowerConsts.GRID_UNIT_SIZE * size.x;
-      int height = TowerConsts.GRID_UNIT_SIZE * size.y;
-      int pixmapSize = MathUtils.nextPowerOfTwo(Math.max(width, height));
-      Pixmap pixmap = new Pixmap(pixmapSize, pixmapSize, Pixmap.Format.RGB565);
-      pixmap.setColor(Color.BLACK);
-      pixmap.fill();
-      pixmap.setColor(Color.GRAY);
-      pixmap.fillRectangle(1, 1, width - 2, height - 2);
-
-      Texture texture = new Texture(pixmap, false);
-      texture.setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Nearest);
-      texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-
-      TextureRegion textureRegion = new TextureRegion(texture, 0, 0, width, height);
-
-      sprite = new Sprite(textureRegion);
-      dynamicSprite = true;
-    }
+    sprite = new Sprite(roomType.getTextureRegion());
 
     if (roomDecals == null) {
       roomDecals = new Texture(Gdx.files.internal("decals.png"));
@@ -95,13 +65,6 @@ public class Room extends GridObject {
     if (!connectedToTransport && !(gameGrid instanceof NeighborGameGrid)) {
       decalSprite.setPosition(sprite.getX(), sprite.getY());
       decalSprite.draw(spriteBatch);
-    }
-
-    if (dynamicSprite) {
-      BitmapFont.TextBounds textBounds = labelFont.getBounds(gridObjectType.getName());
-      Vector2 centerPoint = size.toWorldVector2().sub(textBounds.width, textBounds.height).mul(0.5f);
-
-      labelFont.draw(spriteBatch, gridObjectType.getName(), position.getWorldX() + centerPoint.x, position.getWorldY() + centerPoint.y);
     }
   }
 

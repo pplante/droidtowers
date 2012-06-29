@@ -27,11 +27,13 @@ import com.happydroids.droidtowers.scenes.LoadTowerSplashScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.platform.Platform;
 import com.happydroids.utils.BackgroundTask;
+import org.ocpsoft.pretty.time.PrettyTime;
 
-import java.text.NumberFormat;
+import java.util.Date;
 import java.util.Set;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
+import static java.text.NumberFormat.getNumberInstance;
 
 public class LoadTowerWindow extends ScrollableTowerWindow {
   private static final String TAG = LoadTowerWindow.class.getSimpleName();
@@ -48,7 +50,6 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
         @Override
         protected void execute() throws Exception {
           while (cloudGameSaves.isFetching()) {
-            Thread.sleep(200);
             Thread.yield();
           }
         }
@@ -194,20 +195,30 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
       }
     });
 
-    StackGroup group = new StackGroup();
-    String population = NumberFormat.getNumberInstance().format(towerData.getPlayer().getTotalPopulation());
-    group.addActor(FontManager.Default.makeLabel(String.format("Population: %s", population)));
-    group.addActor(FontManager.RobotoBold18.makeLabel(towerData.getTowerName()));
+    Table metadata = new Table();
+    metadata.defaults().top().left().fillX();
+    addLabelRow(metadata, towerData.getTowerName(), FontManager.RobotoBold18, Color.WHITE);
+    addLabelRow(metadata, String.format("Population: %s", getNumberInstance().format(towerData.getPlayer().getTotalPopulation())), FontManager.Default, Color.GRAY);
+    Date lastPlayed = towerData.getMetadata().lastPlayed;
+    if (lastPlayed != null) {
+      PrettyTime prettyTime = new PrettyTime();
+      addLabelRow(metadata, "Last played:" + prettyTime.format(lastPlayed), FontManager.Default, Color.GRAY);
+    }
 
     Table box = new Table();
     box.defaults().fillX().space(scale(5));
     box.row().top().left().fillX();
-    box.add(group).top().left().expandX();
+    box.add(metadata).top().left().expandX();
     box.add(deleteButton).width(scale(80));
     box.add(launchButton).width(scale(80));
 
 //    box.debug();
 
     return box;
+  }
+
+  private void addLabelRow(Table table, String content, FontManager font, Color fontColor) {
+    table.row().fillX();
+    table.add(font.makeLabel(content, fontColor)).expandX();
   }
 }

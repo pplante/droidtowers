@@ -8,10 +8,13 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.happydroids.droidtowers.DifficultyLevel;
 
+import java.util.Date;
+
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GameSaveMetadata {
   public int fileGeneration;
+  public Date lastPlayed;
   public String cloudSaveUri;
   public String baseFilename;
   public String towerName;

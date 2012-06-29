@@ -33,7 +33,7 @@ public class GenerateAssetManagerFileList {
     preloadFile(assetsDir.child("hud/window-bg.png"), Texture.class);
 
     addDirectoryToAssetManager("backgrounds/", ".txt", TextureAtlas.class);
-//    addDirectoryToAssetManager("movies/", ".txt", TextureAtlas.class);
+    addDirectoryToAssetManager("movies/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("backgrounds/", ".png", Texture.class);
     addDirectoryToAssetManager("hud/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("rooms/", ".txt", TextureAtlas.class);

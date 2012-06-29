@@ -33,6 +33,7 @@
     </orderEntry>
     <orderEntry type="library" scope="TEST" name="junit-mockito-great-expectations" level="project" />
     <orderEntry type="library" scope="TEST" name="commons-io" level="project" />
+    <orderEntry type="library" name="prettytime" level="project" />
   </component>
 </module>
 

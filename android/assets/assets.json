@@ -23,6 +23,7 @@
     "backgrounds/splash1.png" : "com.badlogic.gdx.graphics.Texture",
     "tower-sign.png" : "com.badlogic.gdx.graphics.Texture",
     "backgrounds/sky-gradient.png" : "com.badlogic.gdx.graphics.Texture",
+    "movies/avengers.txt" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "transport.txt" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "backgrounds/cityscape.png" : "com.badlogic.gdx.graphics.Texture",
     "hud/misc.txt" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
