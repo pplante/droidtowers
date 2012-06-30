@@ -26,6 +26,10 @@ public class GenerateAssetManagerFileList {
 
     FileHandle template = new FileHandle("assets-raw/templates/TowerAssetManagerFilesList-template.coffee");
 
+    preloadFile(assetsDir.child("backgrounds/splash1.txt"), TextureAtlas.class);
+    preloadFile(assetsDir.child("backgrounds/splash2.txt"), TextureAtlas.class);
+    preloadFile(assetsDir.child("backgrounds/splash-happydroid.txt"), TextureAtlas.class);
+
     preloadFile(assetsDir.child("default-skin.json"), Skin.class);
     preloadFile(assetsDir.child("backgrounds/clouds.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("hud/menus.txt"), TextureAtlas.class);

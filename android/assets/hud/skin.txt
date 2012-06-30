@@ -4,9 +4,9 @@ filter: Nearest,Linear
 repeat: none
 button-down
   rotate: false
-  xy: 98, 18
-  size: 8, 8
-  orig: 8, 8
+  xy: 98, 35
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 hdpi/checkbox-on
@@ -53,9 +53,9 @@ hdpi/slider-handle
   index: -1
 button
   rotate: false
-  xy: 115, 10
-  size: 8, 8
-  orig: 8, 8
+  xy: 98, 18
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 text-cursor

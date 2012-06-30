@@ -7,6 +7,7 @@ package com.happydroids.droidtowers;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Debug;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
 import com.badlogic.gdx.Gdx;
@@ -32,6 +33,7 @@ public class DroidTowerGame extends AndroidApplication implements BillingControl
 
   public void onCreate(android.os.Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    Debug.startMethodTracing("droidtowers");
     Platform.setConnectionMonitor(new AndroidConnectionMonitor(this));
     Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(this));
     Platform.setBrowserUtil(new AndroidBrowserUtil(this));
@@ -89,6 +91,12 @@ public class DroidTowerGame extends AndroidApplication implements BillingControl
     if (!mBillingObserver.isTransactionsRestored()) {
       BillingController.restoreTransactions(this);
     }
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    Debug.stopMethodTracing();
   }
 
   @Override

@@ -40,24 +40,17 @@ public abstract class SplashScene extends Scene {
   protected ProgressPanel progressPanel;
   private Image mainBuilding;
   private boolean createdAudioControls;
+  private Group container;
+  private boolean createdSplashScene;
+
 
   @Override
   public void create(Object... args) {
-    atlas1 = new TextureAtlas("backgrounds/splash1.txt");
-    atlas2 = new TextureAtlas("backgrounds/splash2.txt");
-    happyDroidAtlas = new TextureAtlas("backgrounds/splash-happydroid.txt");
-
-    changeAtlasTextureFilter(atlas1);
-    changeAtlasTextureFilter(atlas2);
-    changeAtlasTextureFilter(happyDroidAtlas);
-
     makeSkyGradient();
     makeSunburst();
-    makeCloudLayer();
-    makeCityScape();
-    makeMainBuilding(true);
-    makeDroidTowersLogo(true);
-    makeHappyDroid(true);
+
+    container = new Group();
+    addActor(container);
 
     progressPanel = new AssetLoadProgressPanel();
     center(progressPanel);
@@ -94,7 +87,7 @@ public abstract class SplashScene extends Scene {
 
   private void makeCloudLayer() {
     cloudLayer = new SplashCloudLayer(getStage(), atlas2.findRegions("cloud"));
-    addActor(cloudLayer);
+    container.addActor(cloudLayer);
   }
 
   private void makeCityScape() {
@@ -118,7 +111,7 @@ public abstract class SplashScene extends Scene {
     cityScape.addActor(cityScapeMiddle);
     cityScape.addActor(cityScapeRight);
 
-    addActor(cityScape);
+    container.addActor(cityScape);
 
     cityScape.y = -getStage().height();
     Tween.to(cityScape, WidgetAccessor.POSITION, CAMERA_PAN_DOWN_DURATION)
@@ -134,7 +127,7 @@ public abstract class SplashScene extends Scene {
     mainBuilding.layout();
     mainBuilding.x = getStage().centerX() - (mainBuilding.width / 2);
     mainBuilding.y = 0;
-    addActor(mainBuilding);
+    container.addActor(mainBuilding);
 
     if (animateBuildOut) {
       mainBuilding.y = -getStage().height();
@@ -164,7 +157,7 @@ public abstract class SplashScene extends Scene {
               .start(TweenSystem.manager());
     }
 
-    addActor(droidTowersLogo);
+    container.addActor(droidTowersLogo);
   }
 
   private void makeHappyDroid(boolean animateBuildOut) {
@@ -184,7 +177,7 @@ public abstract class SplashScene extends Scene {
               .start(TweenSystem.manager());
     }
 
-    addActor(happyDroidImage);
+    container.addActor(happyDroidImage);
   }
 
   @Override
@@ -201,6 +194,12 @@ public abstract class SplashScene extends Scene {
     boolean assetManagerFinished = assetManager().update();
     Thread.yield();
 
+    if (!createdSplashScene) {
+      if (assetManager().isLoaded("backgrounds/splash1.txt") && assetManager().isLoaded("backgrounds/splash2.txt") && assetManager().isLoaded("backgrounds/splash-happydroid.txt")) {
+        buildSplashScene();
+      }
+    }
+
     if (!createdAudioControls && assetManager().isLoaded("hud/buttons.txt", TextureAtlas.class)) {
       createdAudioControls = true;
 
@@ -209,6 +208,24 @@ public abstract class SplashScene extends Scene {
       audioControl.y = getStage().top() - audioControl.height - 32;
       addActor(audioControl);
     }
+  }
+
+  private void buildSplashScene() {
+    createdSplashScene = true;
+
+    atlas1 = TowerAssetManager.textureAtlas("backgrounds/splash1.txt");
+    atlas2 = TowerAssetManager.textureAtlas("backgrounds/splash2.txt");
+    happyDroidAtlas = TowerAssetManager.textureAtlas("backgrounds/splash-happydroid.txt");
+
+    changeAtlasTextureFilter(atlas1);
+    changeAtlasTextureFilter(atlas2);
+    changeAtlasTextureFilter(happyDroidAtlas);
+
+    makeCloudLayer();
+    makeCityScape();
+    makeMainBuilding(true);
+    makeDroidTowersLogo(true);
+    makeHappyDroid(true);
   }
 
   @Override

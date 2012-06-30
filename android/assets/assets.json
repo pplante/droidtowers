@@ -2,14 +2,17 @@
   "preloadFiles" : {
     "swatches/modal-noise.png" : "com.badlogic.gdx.graphics.Texture",
     "swatches/swatch-white.png" : "com.badlogic.gdx.graphics.Texture",
-    "hud/window-bg.png" : "com.badlogic.gdx.graphics.Texture",
     "hud/buttons.txt" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
-    "swatches/swatch-white-triangle.png" : "com.badlogic.gdx.graphics.Texture",
-    "swatches/swatch-white-black-border.png" : "com.badlogic.gdx.graphics.Texture",
     "swatches/drop-shadow.png" : "com.badlogic.gdx.graphics.Texture",
-    "hud/menus.txt" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+    "backgrounds/splash1.txt" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "backgrounds/clouds.txt" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "swatches/swatch-white-semi-black-border.png" : "com.badlogic.gdx.graphics.Texture",
+    "hud/window-bg.png" : "com.badlogic.gdx.graphics.Texture",
+    "backgrounds/splash-happydroid.txt" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+    "swatches/swatch-white-triangle.png" : "com.badlogic.gdx.graphics.Texture",
+    "backgrounds/splash2.txt" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+    "swatches/swatch-white-black-border.png" : "com.badlogic.gdx.graphics.Texture",
+    "hud/menus.txt" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "default-skin.json" : "com.badlogic.gdx.scenes.scene2d.ui.Skin"
   },
   "normalFiles" : {

@@ -79,6 +79,10 @@ public class TowerAssetManager {
   private static void makeCustomGUISkin() {
     ResolutionIndependentAtlas skinAtlas = new ResolutionIndependentAtlas(Gdx.files.internal("hud/skin.txt"));
 
+    int size = 4;
+    NinePatch buttonNormal = new NinePatch(skinAtlas.findRegion("button"), size, size, size, size);
+    NinePatch buttonDown = new NinePatch(skinAtlas.findRegion("button-down"), size, size, size, size);
+
     customSkin = new Skin();
 
     CheckBox.CheckBoxStyle checkBoxStyle = new CheckBox.CheckBoxStyle();
@@ -92,32 +96,32 @@ public class TowerAssetManager {
     customSkin.addStyle("default", sliderStyle);
 
     TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-    textButtonStyle.up = new NinePatch(skinAtlas.findRegion("button"), 3, 3, 3, 3);
+    textButtonStyle.up = buttonNormal;
     textButtonStyle.font = FontManager.Roboto18.getFont();
     textButtonStyle.fontColor = Color.WHITE;
-    textButtonStyle.down = new NinePatch(skinAtlas.findRegion("button-down"), 3, 3, 3, 3);
-    textButtonStyle.downFontColor = Colors.ALMOST_BLACK;
+    textButtonStyle.down = buttonDown;
+    textButtonStyle.downFontColor = Color.WHITE;
 
     customSkin.addStyle("default", textButtonStyle);
 
     TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
-    textFieldStyle.background = new NinePatch(skinAtlas.findRegion("button"), 3, 3, 3, 3);
+    textFieldStyle.background = buttonNormal;
     textFieldStyle.font = FontManager.Roboto18.getFont();
     textFieldStyle.fontColor = Color.WHITE;
     textFieldStyle.messageFont = FontManager.Roboto18.getFont();
     textFieldStyle.messageFontColor = Color.LIGHT_GRAY;
-    textFieldStyle.cursor = new NinePatch(skinAtlas.findRegion("text-cursor"), 3, 3, 3, 3);
+    textFieldStyle.cursor = new NinePatch(skinAtlas.findRegion("text-cursor"), size, size, size, size);
     textFieldStyle.selection = skinAtlas.findRegion("text-selection");
 
     customSkin.addStyle("default", textFieldStyle);
 
     SelectBox.SelectBoxStyle selectBoxStyle = new SelectBox.SelectBoxStyle();
-    selectBoxStyle.background = new NinePatch(skinAtlas.findRegion("button"), 3, 3, 3, 3);
+    selectBoxStyle.background = buttonNormal;
     selectBoxStyle.font = FontManager.Roboto18.getFont();
     selectBoxStyle.fontColor = Color.WHITE;
     selectBoxStyle.itemSpacing = scale(5);
-    selectBoxStyle.listBackground = new NinePatch(skinAtlas.findRegion("button"), 3, 3, 3, 3);
-    selectBoxStyle.listSelection = new NinePatch(skinAtlas.findRegion("button-down"), 3, 3, 3, 3);
+    selectBoxStyle.listBackground = buttonNormal;
+    selectBoxStyle.listSelection = buttonDown;
 
     customSkin.addStyle("default", selectBoxStyle);
   }

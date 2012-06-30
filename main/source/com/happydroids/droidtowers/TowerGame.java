@@ -150,6 +150,12 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
         new Dialog(rootUiStage)
                 .setTitle("Awe, don't leave me.")
                 .setMessage("Are you sure you want to exit " + (mainMenuIsActive ? "the game?" : "to the Main Menu?"))
+                .addButton("No way!", new OnClickCallback() {
+                  @Override
+                  public void onClick(Dialog dialog) {
+                    dialog.dismiss();
+                  }
+                })
                 .addButton("Yes", new OnClickCallback() {
                   @Override
                   public void onClick(Dialog dialog) {
@@ -159,12 +165,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
                     } else {
                       SceneManager.changeScene(MainMenuScene.class);
                     }
-                  }
-                })
-                .addButton("No way!", new OnClickCallback() {
-                  @Override
-                  public void onClick(Dialog dialog) {
-                    dialog.dismiss();
                   }
                 })
                 .show();

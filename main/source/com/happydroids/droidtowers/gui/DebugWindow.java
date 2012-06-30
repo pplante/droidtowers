@@ -36,11 +36,12 @@ public class DebugWindow extends ScrollableTowerWindow {
       throw new RuntimeException("ZOMG WUT?");
     }
 
-    defaults().pad(scale(10)).left();
+    defaults().pad(scale(10)).left().expandX().fillX();
 
     if (SceneManager.getActiveScene() instanceof TowerScene) {
       row();
       add(makeResetAchievementsButton());
+      row();
       add(makeCompleteAllAchievementsButton());
 
       row();
@@ -49,18 +50,22 @@ public class DebugWindow extends ScrollableTowerWindow {
 
     row();
     add(makeInvalidateTexturesButton());
+    row();
     add(makeRestartActiveSceneButton());
 
     row();
     add(makeDisconnectHappyDroidsButton());
+    row();
     add(makeGenerateNewDeviceIdButton());
 
     row();
     add(makeTakeScreenshotButton());
+    row();
     add(makeToggleDebugInfoButton());
 
     row();
     add(makeAndroidTestPurchaseButton());
+    row();
     add(makeTogglePurchaseUnlimitedButton());
 
     shoveContentUp();

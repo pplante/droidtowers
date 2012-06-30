@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Scaling;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerConsts;
@@ -136,13 +137,18 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
 
     FileHandle imageFile = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY + gameSaveFile.name() + ".png");
 
-    Actor imageActor;
+    Actor imageActor = null;
     if (imageFile.exists()) {
-      imageActor = new Image(new Texture(imageFile), Scaling.fit, Align.TOP);
-    } else {
-      imageActor = FontManager.Default.makeLabel("No image.");
+      try {
+        imageActor = new Image(new Texture(imageFile), Scaling.fit, Align.TOP);
+      } catch (GdxRuntimeException ignored) {
+        imageActor = null;
+      }
     }
 
+    if (imageActor == null) {
+      imageActor = FontManager.Default.makeLabel("No image.");
+    }
 
     Table fileRow = new Table();
     fileRow.defaults().fillX().pad(scale(10)).space(scale(10));
@@ -198,11 +204,11 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     Table metadata = new Table();
     metadata.defaults().top().left().fillX();
     addLabelRow(metadata, towerData.getTowerName(), FontManager.RobotoBold18, Color.WHITE);
-    addLabelRow(metadata, String.format("Population: %s", getNumberInstance().format(towerData.getPlayer().getTotalPopulation())), FontManager.Default, Color.GRAY);
+    addLabelRow(metadata, "Population: " + getNumberInstance().format(towerData.getPlayer().getTotalPopulation()), FontManager.Default, Color.GRAY);
     Date lastPlayed = towerData.getMetadata().lastPlayed;
     if (lastPlayed != null) {
       PrettyTime prettyTime = new PrettyTime();
-      addLabelRow(metadata, "Last played:" + prettyTime.format(lastPlayed), FontManager.Default, Color.GRAY);
+      addLabelRow(metadata, "Last played: " + prettyTime.format(lastPlayed), FontManager.Default, Color.GRAY);
     }
 
     Table box = new Table();
@@ -211,8 +217,6 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     box.add(metadata).top().left().expandX();
     box.add(deleteButton).width(scale(80));
     box.add(launchButton).width(scale(80));
-
-//    box.debug();
 
     return box;
   }

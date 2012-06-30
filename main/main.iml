@@ -6,7 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/source" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.6" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library>
@@ -33,7 +33,7 @@
     </orderEntry>
     <orderEntry type="library" scope="TEST" name="junit-mockito-great-expectations" level="project" />
     <orderEntry type="library" scope="TEST" name="commons-io" level="project" />
-    <orderEntry type="library" name="prettytime" level="project" />
+    <orderEntry type="library" exported="" name="prettytime" level="project" />
   </component>
 </module>
 
