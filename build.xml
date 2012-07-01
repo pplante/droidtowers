@@ -129,16 +129,16 @@
         <attribute name="Class-Path" value="."/>
       </manifest>
       <fileset dir="${build.dir}/classes"/>
-      <zipgroupfileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
-      <zipgroupfileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
-      <zipgroupfileset dir="${droidtowers.desktop.libs}" includes="**/*.jar"/>
+      <!--<zipgroupfileset dir="${happydroids.common.libs}" includes="**/*.jar"/>-->
+      <!--<zipgroupfileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>-->
+      <!--<zipgroupfileset dir="${droidtowers.desktop.libs}" includes="**/*.jar"/>-->
       <zipfileset dir="${root.dir}/android/assets/"/>
     </jar>
   </target>
 
   <target name="proguard" depends="jar">
     <taskdef resource="proguard/ant/task.properties"
-             classpath="${tools.dir}/proguard/lib/proguard.jar"/>
+             classpath="/usr/local/Cellar/proguard/4.8/libexec/proguard.jar"/>
     <proguard allowaccessmodification="true"
               usemixedcaseclassnames="false"
               skipnonpubliclibraryclasses="false"
@@ -165,6 +165,13 @@
       </keep>
       <keep name="com.happydroids.server.**" allowobfuscation="false" allowoptimization="false" allowshrinking="false">
         <method name="main"/>
+        <constructor/>
+        <method/>
+        <field/>
+      </keep>
+
+      <keep name="com.happydroids.droidtowers.math.**" allowobfuscation="false" allowoptimization="false"
+            allowshrinking="false">
         <constructor/>
         <method/>
         <field/>
@@ -198,11 +205,6 @@
         <constructor/>
       </keep>
 
-      <keep extends="com.happydroids.droidtowers.gui.TowerWindow" allowobfuscation="true" allowoptimization="false"
-            allowshrinking="false">
-        <constructor/>
-      </keep>
-
       <keep>
         <method name="click"/>
         <method name="onClick"/>
@@ -218,7 +220,7 @@
         <field name="out"/>
       </assumenosideeffects>
 
-      <keep name="org.apache.**" allowshrinking="false" allowobfuscation="false"
+      <keep name="org.apache.**" allowshrinking="true" allowobfuscation="false"
             allowoptimization="true">
         <constructor/>
         <method/>
@@ -232,7 +234,7 @@
         <field/>
       </keep>
 
-      <keep name="com.fasterxml.**">
+      <keep name="com.fasterxml.**" allowshrinking="true">
         <constructor/>
         <method/>
         <field/>
@@ -262,8 +264,6 @@
         <method type="java.lang.Class" name="class$" parameters="java.lang.String"/>
         <method type="java.lang.Class" name="class$" parameters="java.lang.String,boolean"/>
       </keepclassmembernames>
-
-
       <dontwarn/>
       <dontnote/>
     </proguard>

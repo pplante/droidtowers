@@ -2,7 +2,6 @@
   <library name="apache-httpclient">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/httpclient-4.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/httpclient-cache-4.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/httpcore-4.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/httpmime-4.2.jar!/" />
     </CLASSES>

@@ -10,11 +10,16 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.esotericsoftware.tablelayout.Cell;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.Strings;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.platform.Platform;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
@@ -62,8 +67,16 @@ public class AboutWindow extends ScrollableTowerWindow {
     row();
     add(new HorizontalRule());
 
-    for (FileHandle fileHandle : Gdx.files.internal("licenses/").list(".txt")) {
-      addLabel(fileHandle.readString(), FontManager.Roboto18).spaceBottom(scale(32));
+    try {
+      ObjectMapper mapper = new ObjectMapper();
+      List<String> licenseFiles = mapper.readValue(Gdx.files.internal("licenses/index.json").readBytes(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, String.class));
+      for (String licenseFile : licenseFiles) {
+        FileHandle licenseFileHandle = Gdx.files.internal(licenseFile);
+        if (licenseFileHandle.exists()) {
+          addLabel(licenseFileHandle.readString(), FontManager.Roboto18).spaceBottom(scale(32));
+        }
+      }
+    } catch (IOException ignored) {
     }
   }
 

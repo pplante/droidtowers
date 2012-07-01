@@ -24,8 +24,6 @@ public class GenerateAssetManagerFileList {
   public static void main(String[] args) {
     GdxNativesLoader.load();
 
-    FileHandle template = new FileHandle("assets-raw/templates/TowerAssetManagerFilesList-template.coffee");
-
     preloadFile(assetsDir.child("backgrounds/splash1.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("backgrounds/splash2.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("backgrounds/splash-happydroid.txt"), TextureAtlas.class);

@@ -28,6 +28,7 @@
     <ConfigurationWrapper RunnerId="Run" />
     <method>
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="GenerateAssetManagerFileList" run_configuration_type="Application" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="GenerateLicenseFileList" run_configuration_type="Application" />
       <option name="Make" enabled="true" />
     </method>
   </configuration>

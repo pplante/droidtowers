@@ -80,7 +80,9 @@ public class GameSoundController {
 
     if (audioState) {
       moveToNextSong();
-    } else {
+    }
+
+    if (activeSong != null) {
       activeSong.dispose();
     }
 
