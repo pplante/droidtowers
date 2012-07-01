@@ -8,8 +8,10 @@ import com.badlogic.gdx.files.FileHandle;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.StringUtils;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 public class GZIPUtils {
@@ -24,6 +26,19 @@ public class GZIPUtils {
       gzipOutputStream.write(pngFile.readBytes());
       gzipOutputStream.close();
       return StringUtils.newStringUtf8(Base64.encodeBase64(byteArrayOutputStream.toByteArray(), true));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public static byte[] decompress(String bytes) {
+    try {
+      GZIPInputStream gzipInputStream = new GZIPInputStream(new ByteArrayInputStream(Base64.decodeBase64(bytes)));
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+      outputStream.write(gzipInputStream.read());
+      gzipInputStream.close();
+
+      return outputStream.toByteArray();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

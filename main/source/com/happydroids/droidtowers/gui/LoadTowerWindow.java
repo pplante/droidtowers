@@ -65,8 +65,7 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     }
   }
 
-  private void syncCloudGameSaves() {
-    FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
+  private void syncCloudGameSaves(FileHandle storage) {
     FileHandle[] files = storage.list(".json");
 
     Set<String> towersProcessed = Sets.newHashSet();
@@ -95,6 +94,7 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
           Gdx.app.debug(TAG, "Could not find: " + cloudGameSave.getResourceUri() + " on disk!");
           GameSave gameSave = cloudGameSave.getGameSave();
           GameSaveFactory.save(gameSave, storage.child(gameSave.getBaseFilename()));
+          storage.child(gameSave.getBaseFilename() + ".png").writeBytes(cloudGameSave.getImage(), false);
         } catch (Exception e) {
 //          throw new RuntimeException(e);
         }
@@ -103,9 +103,9 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
   }
 
   private void buildGameSaveList() {
-    syncCloudGameSaves();
-
     FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
+    syncCloudGameSaves(storage);
+
     FileHandle[] files = storage.list(".json");
 
     if (files != null && files.length > 0) {

@@ -18,7 +18,7 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class AchievementDetailView extends ScrollableTowerWindow {
   public AchievementDetailView(Achievement achievement, Stage stage) {
-    super("Achievements > " + achievement.getName(), stage);
+    super(achievement.getName(), stage);
 
     defaults().top().left().space(scale(6));
 

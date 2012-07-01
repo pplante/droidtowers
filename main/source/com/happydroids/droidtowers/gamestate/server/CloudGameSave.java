@@ -115,4 +115,8 @@ public class CloudGameSave extends TowerGameServiceObject {
   public int numNeighbors() {
     return getNeighbors().size();
   }
+
+  public byte[] getImage() {
+    return GZIPUtils.decompress(image);
+  }
 }
