@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.droidtowers.Colors;
+import com.happydroids.droidtowers.Strings;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
@@ -65,7 +66,7 @@ public class TowerWindow {
     wrapper.setBackground(new NinePatch(texture));
     wrapper.size((int) stage.width(), (int) stage.height());
 
-    titleLabel = FontManager.Roboto32.makeLabel(title);
+    titleLabel = FontManager.Roboto32.makeLabel(Strings.truncate(title, 40));
     closeButton = FontManager.Roboto18.makeTransparentButton("« back", rgba("#007399"), Colors.DARK_GRAY);
     closeButtonLine = new VerticalRule(scale(2));
 
@@ -77,7 +78,7 @@ public class TowerWindow {
 
     wrapper.add(topBar).fill();
 
-    wrapper.row();
+    wrapper.row().fillX();
     wrapper.add(new HorizontalRule(scale(2))).expandX();
 
     wrapper.row().fillX();
@@ -100,7 +101,7 @@ public class TowerWindow {
 
   protected Actor makeContentContainer() {
     content = new Table();
-    content.defaults();
+    content.defaults().top().left();
     content.row().fill();
 
     return content;
@@ -197,5 +198,19 @@ public class TowerWindow {
     footerBarCell.setWidget(staticContent);
     footerBarCell.expandX();
     wrapper.pack();
+  }
+
+  protected Cell addHorizontalRule(Color darkGray, int desiredHeight, int colspan) {
+    row().fillX();
+    return add(new HorizontalRule(darkGray, desiredHeight)).expandX().colspan(colspan);
+  }
+
+  protected Cell addLabel(String labelText, FontManager labelFont, Color fontColor) {
+    row();
+    return add(labelFont.makeLabel(labelText, fontColor));
+  }
+
+  public Cell addLabel(String text, FontManager labelFont) {
+    return addLabel(text, labelFont, Color.WHITE);
   }
 }

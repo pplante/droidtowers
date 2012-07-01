@@ -15,7 +15,7 @@ public class ResolutionIndependentAtlas extends TextureAtlas {
 
   @Override
   public AtlasRegion findRegion(String name) {
-    if (Display.isHDPIMode()) {
+    if (Display.isXHDPIMode()) {
       AtlasRegion hdpiRegion = super.findRegion("hdpi/" + name);
       if (hdpiRegion != null) {
         return hdpiRegion;

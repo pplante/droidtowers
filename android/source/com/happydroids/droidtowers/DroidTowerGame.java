@@ -7,7 +7,6 @@ package com.happydroids.droidtowers;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.os.Debug;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
 import com.badlogic.gdx.Gdx;
@@ -33,28 +32,28 @@ public class DroidTowerGame extends AndroidApplication implements BillingControl
 
   public void onCreate(android.os.Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    Debug.startMethodTracing("droidtowers");
     Platform.setConnectionMonitor(new AndroidConnectionMonitor(this));
     Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(this));
     Platform.setBrowserUtil(new AndroidBrowserUtil(this));
-    Platform.setPurchaseManagerClass(AndroidPurchaseManager.class);
-    AndroidPurchaseManager.setActivity(this);
-    PlatformPurchaseManger.setInitializeRunnable(new Runnable() {
-      @Override
-      public void run() {
-        runOnUiThread(new Runnable() {
-          @Override
-          public void run() {
-            setupAndroidBilling();
-          }
-        });
-      }
-    });
+    Platform.setPurchaseManagerClass(DebugPurchaseManager.class);
+//    Platform.setPurchaseManagerClass(AndroidPurchaseManager.class);
+//    AndroidPurchaseManager.setActivity(this);
+//    PlatformPurchaseManger.setInitializeRunnable(new Runnable() {
+//      @Override
+//      public void run() {
+//        runOnUiThread(new Runnable() {
+//          @Override
+//          public void run() {
+//            setupAndroidBilling();
+//          }
+//        });
+//      }
+//    });
 
     DisplayMetrics metrics = new DisplayMetrics();
     getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-    Display.setHDPI(metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH);
+    Display.setXHDPI(metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH);
     Display.setScaledDensity(metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH ? 1.5f : 1f);
 
     TowerGameService.setDeviceOSName("android");
@@ -91,12 +90,6 @@ public class DroidTowerGame extends AndroidApplication implements BillingControl
     if (!mBillingObserver.isTransactionsRestored()) {
       BillingController.restoreTransactions(this);
     }
-  }
-
-  @Override
-  protected void onPause() {
-    super.onPause();
-    Debug.stopMethodTracing();
   }
 
   @Override

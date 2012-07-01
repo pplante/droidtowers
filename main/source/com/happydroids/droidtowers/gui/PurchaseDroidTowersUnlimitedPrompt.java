@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.types.RoomTypeFactory;
@@ -56,8 +55,6 @@ public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
       }
     });
 
-
-
     Table buttons = new Table();
     buttons.row().pad(scale(12)).fill();
     buttons.add(purchaseButton).expandX();
@@ -65,12 +62,4 @@ public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
     setStaticFooter(buttons);
   }
 
-  private Cell addLabel(String text, FontManager labelFont) {
-    return addLabel(text, labelFont, Color.WHITE);
-  }
-
-  private Cell addLabel(String text, FontManager labelFont, Color color) {
-    row();
-    return add(labelFont.makeLabel(text, color)).colspan(2);
-  }
 }

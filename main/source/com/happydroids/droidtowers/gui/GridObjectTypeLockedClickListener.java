@@ -40,18 +40,18 @@ class GridObjectTypeLockedClickListener extends VibrateClickListener {
   private void showLockedByAchievementDialog(final Achievement lockedBy) {
     new Dialog()
             .setTitle("Item is Locked!")
-            .setMessage("Sorry, this item is locked.\n\nYou may unlock it by completing this achievement: " + lockedBy.getName())
+            .setMessage("Sorry, this item is locked.\n\nYou may unlock it by completing this achievement:\n" + lockedBy.getName())
+            .addButton("Dismiss", new OnClickCallback() {
+              @Override
+              public void onClick(Dialog dialog) {
+                dialog.dismiss();
+              }
+            })
             .addButton("View Achievement", new OnClickCallback() {
               @Override
               public void onClick(Dialog dialog) {
                 dialog.dismiss();
                 new AchievementDetailView(lockedBy, SceneManager.getActiveScene().getStage()).show();
-              }
-            })
-            .addButton("Dismiss", new OnClickCallback() {
-              @Override
-              public void onClick(Dialog dialog) {
-                dialog.dismiss();
               }
             })
             .show();

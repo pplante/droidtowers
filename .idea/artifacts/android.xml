@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="apk" name="android">
+    <output-path>$PROJECT_DIR$/out/artifacts/android</output-path>
+    <properties id="android-properties">
+      <options>
+        <option name="keyStoreUrl" value="file://" />
+        <option name="proGuardCfgFileUrl" value="file://" />
+      </options>
+    </properties>
+    <root id="archive" name="android.apk">
+      <element id="android-final-package" facet="android/android/Android" />
+    </root>
+  </artifact>
+</component>

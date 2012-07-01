@@ -19,8 +19,6 @@
     <RunnerSettings RunnerId="Run" />
     <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
     <ConfigurationWrapper RunnerId="Run" />
-    <method>
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="GenerateAssetManagerFileList" run_configuration_type="Application" />
-    </method>
+    <method />
   </configuration>
 </component>

@@ -53,9 +53,4 @@ public class HorizontalRule extends Widget {
   public float getMinHeight() {
     return desiredHeight;
   }
-
-  @Override
-  public float getPrefWidth() {
-    return parent.width;
-  }
 }

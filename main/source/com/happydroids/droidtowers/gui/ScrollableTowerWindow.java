@@ -27,6 +27,6 @@ public class ScrollableTowerWindow extends TowerWindow {
 
   protected void shoveContentUp(int colSpan) {
     row().fill().space(0);
-    add().expand().colspan(3);
+    add().expand().colspan(colSpan);
   }
 }

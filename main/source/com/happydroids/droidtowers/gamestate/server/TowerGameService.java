@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.gamestate.server;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.happydroids.droidtowers.jackson.TowerGameClassDeserializer;
 import com.happydroids.droidtowers.jackson.Vector2Serializer;
 import com.happydroids.droidtowers.jackson.Vector3Serializer;
 import com.happydroids.server.HappyDroidService;
@@ -30,7 +29,7 @@ public class TowerGameService extends HappyDroidService {
 
     postAuthRunnables = new RunnableQueue();
 
-    getObjectMapper().addDeserializer(Class.class, new TowerGameClassDeserializer());
+//    getObjectMapper().addDeserializer(Class.class, new TowerGameClassDeserializer());
     getObjectMapper().addSerializer(new Vector3Serializer());
     getObjectMapper().addSerializer(new Vector2Serializer());
 

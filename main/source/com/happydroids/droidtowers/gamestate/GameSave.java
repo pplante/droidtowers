@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.DifficultyLevel;
 import com.happydroids.droidtowers.TowerConsts;
@@ -22,7 +21,6 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridObjectState;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.input.CameraController;
-import com.happydroids.droidtowers.jackson.TowerTypeIdResolver;
 import com.happydroids.droidtowers.math.GridPoint;
 
 import java.util.ArrayList;
@@ -35,7 +33,7 @@ import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.MINIMAL_CLASS;
 
 @JsonAutoDetect(fieldVisibility = PROTECTED_AND_PUBLIC, getterVisibility = NONE, setterVisibility = NONE, isGetterVisibility = NONE)
 @JsonTypeInfo(use = MINIMAL_CLASS, include = WRAPPER_OBJECT, property = "class")
-@JsonTypeIdResolver(TowerTypeIdResolver.class)
+//@JsonTypeIdResolver(TowerTypeIdResolver.class)
 public class GameSave {
   @JsonView({Views.Metadata.class, Views.All.class})
   protected Player player;

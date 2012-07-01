@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.controllers;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -20,6 +21,8 @@ import com.happydroids.droidtowers.utils.Random;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static com.happydroids.droidtowers.TowerConsts.AVATAR_POPULATION_SCALE;
+import static com.happydroids.droidtowers.TowerConsts.MAX_AVATARS;
 import static com.happydroids.droidtowers.types.ProviderType.JANITORS;
 import static com.happydroids.droidtowers.types.ProviderType.MAIDS;
 import static com.happydroids.droidtowers.types.ProviderType.SECURITY;
@@ -61,7 +64,12 @@ public class AvatarLayer extends GameLayer {
   }
 
   private int maxAvatars() {
-    return (int) Math.min(Player.instance().getTotalPopulation() * TowerConsts.AVATAR_POPULATION_SCALE, TowerConsts.MAX_AVATARS) + specialAvatars;
+    int totalPopulation = Player.instance().getTotalPopulation();
+    if (totalPopulation > 0) {
+      return (int) MathUtils.clamp(totalPopulation * AVATAR_POPULATION_SCALE, 1, MAX_AVATARS);
+    }
+
+    return 0;
   }
 
   private void setupAvatar(Avatar avatar) {
@@ -83,7 +91,7 @@ public class AvatarLayer extends GameLayer {
       avatar.setPosition(Random.randomInt(-avatar.getWidth(), gameGrid.getWorldSize().x + avatar.getWidth()), TowerConsts.GROUND_HEIGHT);
     }
 
-    if(avatar instanceof Janitor) {
+    if (avatar instanceof Janitor) {
       specialAvatars++;
     }
 

@@ -130,7 +130,7 @@ public class TowerAssetManager {
     for (Map.Entry<String, Class> entry : preloadFiles.entrySet()) {
       String fileName = entry.getKey();
       Class clazz = entry.getValue();
-      if (Display.isHDPIMode() && highDefFiles.containsKey(fileName)) {
+      if (Display.isXHDPIMode() && highDefFiles.containsKey(fileName)) {
         fileName = highDefFiles.get(fileName);
       }
 
@@ -139,7 +139,7 @@ public class TowerAssetManager {
   }
 
   public static String checkForHDPI(String fileName) {
-    if (Display.isHDPIMode() && assetList.highDefFiles.containsKey(fileName)) {
+    if (Display.isXHDPIMode() && assetList.highDefFiles.containsKey(fileName)) {
       return assetList.highDefFiles.get(fileName);
     }
 

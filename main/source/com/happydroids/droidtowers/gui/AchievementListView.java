@@ -80,7 +80,7 @@ public class AchievementListView extends ScrollableTowerWindow {
   private class AchievementListViewItem extends Table {
     public AchievementListViewItem(Achievement achievement) {
 
-      row().pad(scale(16), scale(8), scale(16), scale(8));
+      row().pad(scale(16), scale(8), scale(16), scale(8)).fillX();
       add(FontManager.Roboto18.makeLabel(achievement.getName())).expandX().left();
 
       Actor actor;
@@ -100,8 +100,8 @@ public class AchievementListView extends ScrollableTowerWindow {
       Image arrowImg = new Image(TowerAssetManager.textureFromAtlas("right-arrow", "hud/menus.txt"), Scaling.fit);
       add(arrowImg).width((int) arrowImg.width);
 
-      row();
-      add(new HorizontalRule(Colors.DARK_GRAY, 1)).colspan(3);
+      row().fillX();
+      add(new HorizontalRule(Color.DARK_GRAY, 1)).expandX().colspan(3);
     }
 
     @Override

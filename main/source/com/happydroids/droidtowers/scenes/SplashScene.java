@@ -191,9 +191,6 @@ public abstract class SplashScene extends Scene {
 
   @Override
   public void render(float deltaTime) {
-    boolean assetManagerFinished = assetManager().update();
-    Thread.yield();
-
     if (!createdSplashScene) {
       if (assetManager().isLoaded("backgrounds/splash1.txt") && assetManager().isLoaded("backgrounds/splash2.txt") && assetManager().isLoaded("backgrounds/splash-happydroid.txt")) {
         buildSplashScene();

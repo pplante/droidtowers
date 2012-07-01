@@ -27,4 +27,12 @@ public class Strings {
 
     return output.toString().trim();
   }
+
+  public static String truncate(String title, int finalSize) {
+    if (title.length() <= finalSize) {
+      return title;
+    }
+
+    return title.substring(0, finalSize - 3) + "...";
+  }
 }

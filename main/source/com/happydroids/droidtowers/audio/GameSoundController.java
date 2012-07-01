@@ -21,7 +21,7 @@ import java.util.Iterator;
 public class GameSoundController {
   private boolean backgroundMusicEnabled;
   public boolean audioState;
-  private final Sound constructionSound;
+  private Sound constructionSound;
   private Sound destructionSound;
   private Music activeSong;
   private final Iterator<FileHandle> availableSongs;
@@ -90,8 +90,11 @@ public class GameSoundController {
   }
 
   public void update(float deltaTime) {
-    if (audioState && activeSong != null && !activeSong.isPlaying()) {
-      moveToNextSong();
+    try {
+      if (audioState && activeSong != null && !activeSong.isPlaying()) {
+        moveToNextSong();
+      }
+    } catch (Exception ignored) {
     }
   }
 

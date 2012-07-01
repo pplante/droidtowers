@@ -8,7 +8,7 @@ import com.badlogic.gdx.Gdx;
 
 public class Display {
   private static float scaledDensity = 1f;
-  private static boolean hdpiMode;
+  private static boolean xHdpiMode;
   private static int biggestScreenDimension = -1;
 
   public static int scale(float pixels) {
@@ -32,12 +32,12 @@ public class Display {
     return (int) (Gdx.graphics.getWidth() * percent);
   }
 
-  public static void setHDPI(boolean hdpi) {
-    hdpiMode = hdpi;
+  public static void setXHDPI(boolean hdpi) {
+    xHdpiMode = hdpi;
   }
 
-  public static boolean isHDPIMode() {
-    return hdpiMode;
+  public static boolean isXHDPIMode() {
+    return xHdpiMode;
   }
 
   public static int getBiggestScreenDimension() {

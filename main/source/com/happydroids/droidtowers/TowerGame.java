@@ -24,7 +24,10 @@ import com.happydroids.droidtowers.controllers.PathSearchManager;
 import com.happydroids.droidtowers.entities.GameObject;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
-import com.happydroids.droidtowers.gui.*;
+import com.happydroids.droidtowers.gui.Dialog;
+import com.happydroids.droidtowers.gui.FontManager;
+import com.happydroids.droidtowers.gui.OnClickCallback;
+import com.happydroids.droidtowers.gui.WidgetAccessor;
 import com.happydroids.droidtowers.input.*;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.*;
@@ -65,6 +68,8 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
   }
 
   public void create() {
+    Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
+
     Gdx.app.error("lifecycle", "create");
     if (Gdx.app.getType().equals(Desktop)) {
       Preferences displayPrefs = Gdx.app.getPreferences("DISPLAY");
@@ -84,7 +89,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     TowerGameService.setInstance(new TowerGameService());
     new RegisterDeviceTask().run();
 
-    if (Gdx.graphics.isGL20Available() && Gdx.app.getType().equals(Android) && Display.isHDPIMode()) {
+    if (Gdx.graphics.isGL20Available() && Gdx.app.getType().equals(Android) && Display.isXHDPIMode()) {
       float displayScalar = 0.75f;
       frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, (int) (Gdx.graphics.getWidth() * displayScalar), (int) (Gdx.graphics.getHeight() * displayScalar), true);
       spriteBatchFBO = new SpriteBatch();
@@ -100,7 +105,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
     }
 
     Thread.currentThread().setUncaughtExceptionHandler(Platform.uncaughtExceptionHandler);
-    Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 
     TowerAssetManager.assetManager();
 
@@ -184,6 +188,9 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
   }
 
   public void render() {
+    TowerAssetManager.assetManager().update();
+    Thread.yield();
+
     Gdx.gl.glClearColor(0.48f, 0.729f, 0.870f, 1.0f);
     Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
     Gdx.gl.glEnable(GL10.GL_TEXTURE_2D);
