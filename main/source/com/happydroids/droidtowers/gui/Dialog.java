@@ -151,7 +151,11 @@ public class Dialog extends Table {
   protected void drawBackground(SpriteBatch batch, float parentAlpha) {
     if (this.dropShadowPatch != null) {
       batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-      this.dropShadowPatch.draw(batch, (int) (x - dropShadowPatch.getLeftWidth()), ((int) (y - dropShadowPatch.getTopHeight())), ((int) (width + dropShadowPatch.getRightWidth() + dropShadowPatch.getLeftWidth())), ((int) (height + dropShadowPatch.getBottomHeight() + dropShadowPatch.getTopHeight())) - 2);
+      this.dropShadowPatch.draw(batch,
+                                       (int) (x - dropShadowPatch.getLeftWidth()),
+                                       ((int) (y - dropShadowPatch.getTopHeight())),
+                                       ((int) (width + dropShadowPatch.getRightWidth() + dropShadowPatch.getLeftWidth())),
+                                       ((int) (height - 2 + dropShadowPatch.getBottomHeight() + dropShadowPatch.getTopHeight())));
     }
 
     super.drawBackground(batch, parentAlpha);

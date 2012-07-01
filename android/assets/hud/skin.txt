@@ -4,7 +4,7 @@ filter: Nearest,Linear
 repeat: none
 button-down
   rotate: false
-  xy: 98, 35
+  xy: 96, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -12,63 +12,63 @@ button-down
 hdpi/checkbox-on
   rotate: false
   xy: 1, 1
-  size: 96, 32
-  orig: 96, 32
+  size: 94, 28
+  orig: 94, 28
   offset: 0, 0
   index: -1
 hdpi/checkbox-off
   rotate: false
-  xy: 1, 34
-  size: 96, 32
-  orig: 96, 32
+  xy: 1, 30
+  size: 94, 28
+  orig: 94, 28
   offset: 0, 0
   index: -1
 checkbox-on
   rotate: false
-  xy: 1, 100
-  size: 48, 16
-  orig: 48, 16
+  xy: 1, 92
+  size: 60, 18
+  orig: 60, 18
   offset: 0, 0
   index: -1
 slider-handle
   rotate: false
-  xy: 98, 1
+  xy: 96, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 text-selection
   rotate: false
-  xy: 124, 1
+  xy: 122, 1
   size: 2, 4
   orig: 2, 4
   offset: 0, 0
   index: -1
 hdpi/slider-handle
   rotate: false
-  xy: 1, 67
+  xy: 1, 59
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button
   rotate: false
-  xy: 98, 18
+  xy: 96, 18
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 text-cursor
   rotate: false
-  xy: 115, 1
+  xy: 113, 1
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 checkbox-off
   rotate: false
-  xy: 34, 67
-  size: 48, 16
-  orig: 48, 16
+  xy: 62, 59
+  size: 60, 18
+  orig: 60, 18
   offset: 0, 0
   index: -1
