@@ -3,8 +3,12 @@
     <output-path>$PROJECT_DIR$/out/artifacts/android</output-path>
     <properties id="android-properties">
       <options>
-        <option name="keyStoreUrl" value="file://" />
+        <option name="keyAlias" value="happydroids" />
+        <option name="keyPassword" value="aGFwcHlkcm9pZHMyMDEy" />
+        <option name="keyStorePassword" value="aGFwcHlkcm9pZHMyMDEy" />
+        <option name="keyStoreUrl" value="file://$PROJECT_DIR$/release-key.keystore" />
         <option name="proGuardCfgFileUrl" value="file://" />
+        <option name="signingMode" value="RELEASE_SIGNED" />
       </options>
     </properties>
     <root id="archive" name="android.apk">
