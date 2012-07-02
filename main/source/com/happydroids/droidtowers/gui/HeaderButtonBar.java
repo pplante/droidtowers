@@ -9,10 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.gamestate.GameState;
 import com.happydroids.droidtowers.grid.GameGrid;
-import com.happydroids.droidtowers.scenes.ViewNeighborSplashScene;
-import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 public class HeaderButtonBar extends Table {
   public static final float INACTIVE_BUTTON_ALPHA = 0.25f;
@@ -21,25 +18,16 @@ public class HeaderButtonBar extends Table {
   private final ImageButton dataOverlayButton;
   private final DataOverlayMenu dataOverlayMenu;
 
-  public HeaderButtonBar(TextureAtlas hudAtlas, final GameGrid gameGrid, final GameState gameState) {
+  public HeaderButtonBar(TextureAtlas hudAtlas, final GameGrid gameGrid) {
     AudioControl audioControl = new AudioControl(hudAtlas);
     dataOverlayButton = TowerAssetManager.imageButton(hudAtlas.findRegion("overlay-button"));
-    ImageButton viewNeighbors = TowerAssetManager.imageButton(hudAtlas.findRegion("view-neighbors"));
-
-    viewNeighbors.setClickListener(new VibrateClickListener() {
-      @Override
-      public void onClick(Actor actor, float x, float y) {
-        SceneManager.pushScene(ViewNeighborSplashScene.class, gameState);
-      }
-    });
 
     dataOverlayMenu = new DataOverlayMenu(gameGrid.getRenderer());
     dataOverlayMenu.visible = false;
 
     defaults().space(6);
     row().right();
-    add(viewNeighbors).right().expandX();
-    add(audioControl);
+    add(audioControl).expandX();
     add(dataOverlayButton).right();
 
     pack();

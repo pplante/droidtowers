@@ -30,6 +30,8 @@ import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.input.PickerTool;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.scenes.ViewNeighborSplashScene;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.types.*;
 
 import java.util.Set;
@@ -54,9 +56,10 @@ public class HeadsUpDisplay extends WidgetGroup {
   private final StatusBarPanel statusBarPanel;
   private final HeaderButtonBar headerButtonBar;
   private AchievementButton achievementButton;
+  private final ImageButton viewNeighborsButton;
 
 
-  public HeadsUpDisplay(Stage stage, OrthographicCamera camera, CameraController cameraController, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine, GameState gameState) {
+  public HeadsUpDisplay(Stage stage, OrthographicCamera camera, CameraController cameraController, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine, final GameState gameState) {
     super();
 
     HeadsUpDisplay.instance = this;
@@ -80,7 +83,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     buildToolButtonMenu();
 
-    headerButtonBar = new HeaderButtonBar(hudAtlas, gameGrid, gameState);
+    headerButtonBar = new HeaderButtonBar(hudAtlas, gameGrid);
     addActor(headerButtonBar);
     headerButtonBar.x = stage.width() - headerButtonBar.width - 10;
     headerButtonBar.y = stage.height() - headerButtonBar.height - 10;
@@ -91,6 +94,20 @@ public class HeadsUpDisplay extends WidgetGroup {
     achievementButton.getParticleEffect().setPosition(achievementButton.x + achievementButton.width / 2, achievementButton.y + achievementButton.height / 2);
 
     addActor(achievementButton);
+
+    viewNeighborsButton = TowerAssetManager.imageButton(hudAtlas.findRegion("view-neighbors"));
+    viewNeighborsButton.layout();
+    viewNeighborsButton.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        SceneManager.pushScene(ViewNeighborSplashScene.class, gameState);
+      }
+    });
+
+    viewNeighborsButton.x = 10;
+    viewNeighborsButton.y = stage.height() - statusBarPanel.height - achievementButton.height - viewNeighborsButton.height - 20;
+
+    addActor(viewNeighborsButton);
 
     notificationStack.pad(10);
     notificationStack.x = 0;
@@ -337,5 +354,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     return achievementButton;
   }
 
-
+  public ImageButton getViewNeighborsButton() {
+    return viewNeighborsButton;
+  }
 }

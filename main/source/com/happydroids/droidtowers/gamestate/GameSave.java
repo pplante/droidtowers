@@ -93,6 +93,7 @@ public class GameSave {
     } else {
       TutorialEngine.instance().completeAll();
       HeadsUpDisplay.instance().getAchievementButton().visible = true;
+      HeadsUpDisplay.instance().getViewNeighborsButton().visible = true;
     }
 
     AchievementEngine.instance().loadCompletedAchievements(completedAchievements, gameGrid);
