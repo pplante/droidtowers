@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.gamestate;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerConsts;
@@ -66,5 +67,9 @@ public class GameSaveFactory {
     } catch (Exception e) {
       throw new RuntimeException("There was a problem parsing gamesave metadata.", e);
     }
+  }
+
+  public static FileHandle getStorageRoot() {
+    return Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
   }
 }

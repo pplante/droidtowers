@@ -17,21 +17,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Scaling;
-import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.GameSaveFactory;
-import com.happydroids.droidtowers.gamestate.server.CloudGameSave;
-import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.scenes.LoadTowerSplashScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
-import com.happydroids.platform.Platform;
+import com.happydroids.droidtowers.tasks.SyncCloudGamesTask;
 import com.happydroids.utils.BackgroundTask;
 import org.ocpsoft.pretty.time.PrettyTime;
 
 import java.util.Date;
-import java.util.Set;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 import static java.text.NumberFormat.getNumberInstance;
@@ -40,72 +35,31 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
   private static final String TAG = LoadTowerWindow.class.getSimpleName();
 
   private boolean foundSaveFile;
-  private final CloudGameSaveCollection cloudGameSaves;
+  private final Dialog progressDialog;
+  private final LoadTowerWindow.WaitForCloudSyncTask waitForCloudSyncTask;
 
   public LoadTowerWindow(Stage stage) {
     super("Load a Tower", stage);
-    this.cloudGameSaves = TowerGame.getCloudGameSaves();
 
-    if (Platform.getConnectionMonitor().isConnectedOrConnecting() && cloudGameSaves.isFetching()) {
-      new BackgroundTask() {
-        @Override
-        protected void execute() throws Exception {
-          while (cloudGameSaves.isFetching()) {
-            Thread.yield();
-          }
-        }
+    progressDialog = new ProgressDialog()
+                             .setMessage("looking for towers")
+                             .hideButtons(true)
+                             .show();
 
-        @Override
-        public synchronized void afterExecute() {
-          buildGameSaveList();
-        }
-      }.run();
-    } else {
-      buildGameSaveList();
-    }
-  }
+    waitForCloudSyncTask = new WaitForCloudSyncTask();
+    waitForCloudSyncTask.run();
 
-  private void syncCloudGameSaves(FileHandle storage) {
-    FileHandle[] files = storage.list(".json");
-
-    Set<String> towersProcessed = Sets.newHashSet();
-    if (files != null && files.length > 0) {
-      for (FileHandle file : files) {
-        try {
-          GameSave towerData = GameSaveFactory.readMetadata(file.read());
-          for (CloudGameSave cloudGameSave : cloudGameSaves.getObjects()) {
-            if (towerData.getCloudSaveUri() != null && towerData.getCloudSaveUri().equals(cloudGameSave.getResourceUri())) {
-              if (towerData.getFileGeneration() < cloudGameSave.getFileGeneration()) {
-                file.writeString(cloudGameSave.getBlob(), false);
-              }
-            }
-          }
-
-          towersProcessed.add(towerData.getCloudSaveUri());
-        } catch (Exception e) {
-//          throw new RuntimeException(e);
-        }
+    setDismissCallback(new Runnable() {
+      @Override
+      public void run() {
+        progressDialog.dismiss();
+        waitForCloudSyncTask.cancel();
       }
-    }
-
-    for (CloudGameSave cloudGameSave : cloudGameSaves.getObjects()) {
-      if (!towersProcessed.contains(cloudGameSave.getResourceUri())) {
-        try {
-          Gdx.app.debug(TAG, "Could not find: " + cloudGameSave.getResourceUri() + " on disk!");
-          GameSave gameSave = cloudGameSave.getGameSave();
-          GameSaveFactory.save(gameSave, storage.child(gameSave.getBaseFilename()));
-          storage.child(gameSave.getBaseFilename() + ".png").writeBytes(cloudGameSave.getImage(), false);
-        } catch (Exception e) {
-//          throw new RuntimeException(e);
-        }
-      }
-    }
+    });
   }
 
   private void buildGameSaveList() {
     FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
-    syncCloudGameSaves(storage);
-
     FileHandle[] files = storage.list(".json");
 
     if (files != null && files.length > 0) {
@@ -124,6 +78,8 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     } else {
       shoveContentUp();
     }
+
+    progressDialog.dismiss();
   }
 
   private Table makeGameFileRow(final FileHandle gameSaveFile) {
@@ -224,5 +180,19 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
   private void addLabelRow(Table table, String content, FontManager font, Color fontColor) {
     table.row().fillX();
     table.add(font.makeLabel(content, fontColor)).expandX();
+  }
+
+  private class WaitForCloudSyncTask extends BackgroundTask {
+    @Override
+    protected void execute() throws Exception {
+      while (SyncCloudGamesTask.isSyncing()) {
+        Thread.yield();
+      }
+    }
+
+    @Override
+    public synchronized void afterExecute() {
+      buildGameSaveList();
+    }
   }
 }

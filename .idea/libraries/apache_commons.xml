@@ -6,6 +6,8 @@
       <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/commons-codec-1.6.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/happydroids-common/libs/sources/commons-codec-1.6-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

@@ -22,7 +22,6 @@ import com.happydroids.droidtowers.actions.ActionManager;
 import com.happydroids.droidtowers.audio.GameSoundController;
 import com.happydroids.droidtowers.controllers.PathSearchManager;
 import com.happydroids.droidtowers.entities.GameObject;
-import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.FontManager;
@@ -32,11 +31,11 @@ import com.happydroids.droidtowers.input.*;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.*;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
+import com.happydroids.droidtowers.tasks.SyncCloudGamesTask;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.types.*;
 import com.happydroids.platform.Platform;
-import com.happydroids.platform.PlatformConnectionMonitor;
 import com.happydroids.utils.BackgroundTask;
 
 import java.net.URI;
@@ -56,15 +55,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
   private FrameBuffer frameBuffer;
   private static GameSoundController soundController;
 
-  private static CloudGameSaveCollection cloudGameSaves;
-  private PlatformConnectionMonitor platformConnectionMonitor;
-
   public TowerGame() {
-    cloudGameSaves = new CloudGameSaveCollection();
-  }
-
-  public static CloudGameSaveCollection getCloudGameSaves() {
-    return cloudGameSaves;
   }
 
   public void create() {
@@ -115,12 +106,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
           return;
         }
 
-        new BackgroundTask() {
-          @Override
-          protected void execute() throws Exception {
-            cloudGameSaves.fetch();
-          }
-        }.run();
+        new SyncCloudGamesTask().run();
       }
     });
 

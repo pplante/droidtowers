@@ -19,12 +19,10 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" name="apache-commons" level="project" />
     <orderEntry type="library" exported="" name="apache-httpclient" level="project" />
     <orderEntry type="library" exported="" name="jackson" level="project" />
     <orderEntry type="library" exported="" name="guava" level="project" />
     <orderEntry type="library" name="junit-mockito-great-expectations" level="project" />
-    <orderEntry type="library" scope="TEST" name="commons-io" level="project" />
     <orderEntry type="library" exported="" name="commons-io" level="project" />
     <orderEntry type="module-library">
       <library>
@@ -37,6 +35,7 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="apache-commons" level="project" />
   </component>
 </module>
 

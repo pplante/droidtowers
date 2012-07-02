@@ -36,15 +36,23 @@ public class Dialog extends Table {
   private Runnable dismissCallback;
   private InputCallback dismissInputCallback;
   private Actor view;
+  private boolean hideButtons;
+  private NinePatch borderPatch;
+
+  public Dialog() {
+    this(TowerGame.getRootUiStage());
+  }
 
   public Dialog(Stage stage) {
     super();
     this.stage = stage;
     touchable = true;
+    hideButtons = false;
 
     buttons = Lists.newArrayList();
 
     setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.DARK_GRAY));
+    borderPatch = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.WHITE_SEMI_TRANSPARENT);
     dropShadowPatch = TowerAssetManager.ninePatch("swatches/drop-shadow.png", Color.WHITE, 22, 22, 22, 22);
     modalNoise = new TiledImage(TowerAssetManager.texture("swatches/modal-noise.png"));
     modalNoise.touchable = true;
@@ -70,10 +78,6 @@ public class Dialog extends Table {
     };
   }
 
-  public Dialog() {
-    this(TowerGame.getRootUiStage());
-  }
-
   public Dialog setTitle(String title) {
     this.title = title;
 
@@ -86,7 +90,7 @@ public class Dialog extends Table {
     return this;
   }
 
-  public void show() {
+  public Dialog show() {
     clearActions();
     clear();
     stage.addActor(modalNoise);
@@ -94,50 +98,61 @@ public class Dialog extends Table {
 
     defaults().top().left();
 
-    add(FontManager.Default.makeLabel(title, Colors.ICS_BLUE)).pad(scale(6));
+    if (title != null) {
+      add(FontManager.Default.makeLabel(title, Colors.ICS_BLUE)).pad(scale(6));
+      row().fillX();
+      add(new HorizontalRule()).expandX();
+    }
 
-    row().fillX();
-    add(new HorizontalRule()).expandX();
-
-    row();
     int padSide = scale(32);
     int padTop = scale(20);
     if (view != null) {
-      add(view).pad(padTop, padSide, padTop, padSide);
-    } else {
-      add(FontManager.Roboto18.makeLabel(message, Color.WHITE)).pad(padTop, padSide, padTop, padSide);
+      row();
+      add(view).pad(padTop, padSide, padTop, padSide).center();
     }
 
-    row().fillX();
-    add(new HorizontalRule(Color.GRAY, 1));
-
-    if (buttons.isEmpty()) {
-      addButton("Dismiss", new OnClickCallback() {
-        @Override
-        public void onClick(Dialog dialog) {
-          dialog.dismiss();
-        }
-      });
+    if (message != null) {
+      row().pad(padTop, padSide, padTop, padSide);
+      add(FontManager.Roboto18.makeLabel(message, Color.WHITE));
     }
 
-    Table buttonBar = new Table();
-    buttonBar.row().fillX();
-    for (int i = 0; i < buttons.size(); i++) {
-      buttonBar.add(buttons.get(i)).expandX().uniformX();
+    if (!hideButtons) {
+      row().fillX();
+      add(new HorizontalRule(Color.GRAY, 1));
 
-      if (i < buttons.size() - 1) {
-        buttonBar.add(new VerticalRule(Color.GRAY, 1)).width(1);
+      if (buttons.isEmpty()) {
+        addButton("Dismiss", new OnClickCallback() {
+          @Override
+          public void onClick(Dialog dialog) {
+            dialog.dismiss();
+          }
+        });
       }
+
+      Table buttonBar = new Table();
+      buttonBar.row().fillX();
+      for (int i = 0; i < buttons.size(); i++) {
+        buttonBar.add(buttons.get(i)).expandX().uniformX();
+
+        if (i < buttons.size() - 1) {
+          buttonBar.add(new VerticalRule(Color.GRAY, 1)).width(1);
+        }
+      }
+
+      row().fillX();
+      add(buttonBar).expandX();
     }
 
-    row().fillX();
-    add(buttonBar).expandX();
     pack();
 
     x = getStage().centerX() - width / 2;
     y = getStage().centerY() - height / 2;
 
-    InputSystem.instance().bind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, dismissInputCallback);
+    if (!hideButtons) {
+      InputSystem.instance().bind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, dismissInputCallback);
+    }
+
+    return this;
   }
 
   @Override
@@ -157,6 +172,9 @@ public class Dialog extends Table {
                                        ((int) (width + dropShadowPatch.getRightWidth() + dropShadowPatch.getLeftWidth())),
                                        ((int) (height - 2 + dropShadowPatch.getBottomHeight() + dropShadowPatch.getTopHeight())));
     }
+
+    batch.setColor(borderPatch.getColor());
+    borderPatch.draw(batch, x - 1, y + 1, width, height);
 
     super.drawBackground(batch, parentAlpha);
   }
@@ -199,5 +217,11 @@ public class Dialog extends Table {
 
   public void setView(Actor view) {
     this.view = view;
+  }
+
+  public Dialog hideButtons(boolean cancelable) {
+    this.hideButtons = cancelable;
+
+    return this;
   }
 }
