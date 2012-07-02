@@ -1,3 +1,15 @@
 Manifest-Version: 1.0
+Class-Path: gdx.jar commons-io-2.2.jar jackson-annotations-2.0.0.jar j
+ ackson-core-2.0.0.jar jackson-databind-2.0.0.jar httpclient-4.2.jar h
+ ttpcore-4.2.jar httpmime-4.2.jar asm-3.3.1.jar asm-commons-3.3.1.jar 
+ cglib-nodep-2.2.jar great-expectations-0.10.jar javassist-3.16.1-GA.j
+ ar junit-4.7.jar junit-4.9.jar mockito-all-1.9.0.jar objenesis-1.2.ja
+ r powermock-classloading-base-1.4.12.jar powermock-classloading-xstre
+ am-1.4.12.jar powermock-mockito-1.4.12-full.jar powermock-module-juni
+ t4-rule-1.4.12.jar bcprov-jdk15on-147.jar guava-11.0.2.jar jsr305-2.0
+ .0.jar bcpkix-jdk15on-147.jar prettytime-1.0.8.Final.jar commons-lang
+ 3-3.1.jar commons-logging-1.1.1.jar commons-codec-1.6.jar gdx-backend
+ -lwjgl-natives.jar gdx-backend-lwjgl.jar gdx-natives.jar gdx.jar twee
+ n-engine-api.jar prettytime-1.0.8.Final.jar tween-engine-api.jar
 Main-Class: com.happydroids.droidtowers.DesktopGame
 

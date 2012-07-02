@@ -129,9 +129,9 @@
         <attribute name="Class-Path" value="."/>
       </manifest>
       <fileset dir="${build.dir}/classes"/>
-      <zipgroupfileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
-      <zipgroupfileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
-      <zipgroupfileset dir="${droidtowers.desktop.libs}" includes="**/*.jar"/>
+      <zipgroupfileset dir="${happydroids.common.libs}" includes="**/*.jar" excludes="META-INF/*.SF"/>
+      <zipgroupfileset dir="${droidtowers.main.libs}" includes="**/*.jar" excludes="META-INF/*.SF"/>
+      <zipgroupfileset dir="${droidtowers.desktop.libs}" includes="**/*.jar" excludes="META-INF/*.SF"/>
       <zipfileset dir="${root.dir}/android/assets/"/>
     </jar>
   </target>

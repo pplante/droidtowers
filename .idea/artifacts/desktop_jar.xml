@@ -1,0 +1,29 @@
+<component name="ArtifactManager">
+  <artifact name="desktop:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/desktop_jar</output-path>
+    <root id="root">
+      <element id="archive" name="desktop.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/desktop/source/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="desktop" />
+        <element id="module-output" name="main" />
+        <element id="module-output" name="happydroids-common" />
+        <element id="dir-copy" path="$PROJECT_DIR$/android/assets" />
+      </element>
+      <element id="file-copy" path="$PROJECT_DIR$/main/libs/main/gdx.jar" />
+      <element id="library" level="project" name="commons-io" />
+      <element id="library" level="project" name="jackson" />
+      <element id="library" level="project" name="apache-httpclient" />
+      <element id="library" level="project" name="junit-mockito-great-expectations" />
+      <element id="library" level="project" name="bouncy-castle-provider" />
+      <element id="library" level="project" name="guava" />
+      <element id="library" level="project" name="bouncey-castle" />
+      <element id="library" level="project" name="prettytime" />
+      <element id="library" level="project" name="apache-commons" />
+      <element id="library" level="project" name="desktop" />
+      <element id="library" level="project" name="main" />
+      <element id="file-copy" path="$PROJECT_DIR$/main/libs/main/tween-engine-api.jar" />
+    </root>
+  </artifact>
+</component>
