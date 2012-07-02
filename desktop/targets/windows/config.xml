@@ -15,5 +15,6 @@
   </jre>
    <splash>
     <file>splash.bmp</file>
+     <timeout>60</timeout>
   </splash>
 </launch4jConfig>
