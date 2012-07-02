@@ -103,6 +103,7 @@ public class HeadsUpDisplay extends WidgetGroup {
       }
     });
 
+    viewNeighborsButton.visible = false;
     viewNeighborsButton.x = 10;
     viewNeighborsButton.y = stage.height() - statusBarPanel.height - achievementButton.height - viewNeighborsButton.height - 20;
 

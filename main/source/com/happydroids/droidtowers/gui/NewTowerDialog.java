@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.DifficultyLevel;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.GameSave;
-import com.happydroids.droidtowers.scenes.TowerScene;
+import com.happydroids.droidtowers.scenes.LoadTowerSplashScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import org.apache.commons.lang3.StringUtils;
 
@@ -98,7 +98,7 @@ public class NewTowerDialog extends Dialog {
           return;
         }
         dismiss();
-        SceneManager.changeScene(TowerScene.class, new GameSave(nameField.getText(), difficultyLevel));
+        SceneManager.changeScene(LoadTowerSplashScene.class, new GameSave(nameField.getText(), difficultyLevel));
       }
     });
 
