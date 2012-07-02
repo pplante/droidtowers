@@ -37,8 +37,6 @@
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidBillingLibrary" afterPath="$PROJECT_DIR$/AndroidBillingLibrary" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/assets.json" afterPath="$PROJECT_DIR$/android/assets/assets.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/targets/windows/config.xml" afterPath="$PROJECT_DIR$/desktop/targets/windows/config.xml" />
     </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -160,11 +158,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="config.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/desktop/targets/windows/config.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="16" selection-start="464" selection-end="464" vertical-scroll-proportion="0.6812386">
+            <state line="17" column="16" selection-start="464" selection-end="464" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HappyDroidConsts.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#1150#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -200,7 +209,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/happydroids-common/src/org/apache/happydroids/commons/codec/binary/BaseNCodec.java" />
         <option value="$PROJECT_DIR$/happydroids-common/src/org/apache/happydroids/commons/codec/binary/Base64.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/AssetLoadProgressPanel.java" />
@@ -216,6 +224,7 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java" />
         <option value="$PROJECT_DIR$/desktop/targets/windows/config.xml" />
+        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
       </list>
     </option>
   </component>
@@ -1033,13 +1042,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/audio/GameSoundController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="0" selection-start="2457" selection-end="2457" vertical-scroll-proportion="0.8486141">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AudioControl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="46" selection-start="724" selection-end="724" vertical-scroll-proportion="0.6567164">
@@ -1154,8 +1156,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/desktop/targets/windows/config.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="16" selection-start="464" selection-end="464" vertical-scroll-proportion="0.6812386">
+        <state line="17" column="16" selection-start="464" selection-end="464" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#1150#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
