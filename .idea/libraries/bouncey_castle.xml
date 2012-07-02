@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="bouncey-castle">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/bcpkix-jdk15on-147.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

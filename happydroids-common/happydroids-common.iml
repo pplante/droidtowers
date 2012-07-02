@@ -36,8 +36,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="apache-commons" level="project" />
-    <orderEntry type="library" name="bouncey-castle" level="project" />
-    <orderEntry type="library" name="bouncy-castle-provider" level="project" />
   </component>
 </module>
 
