@@ -21,7 +21,7 @@ import java.security.spec.KeySpec;
 public class AESObfuscator {
   private static final String UTF8 = "UTF-8";
   private static final String KEYGEN_ALGORITHM = "PBKDF2WithHmacSHA1";
-  private static final String CIPHER_ALGORITHM = "AES/CBC/PKCS5Padding";
+  private static final String CIPHER_ALGORITHM = "AES/CTR/NoPadding";
   private static final byte[] IV =
           {16, 74, 71, -80, 32, 101, -47, 72, 117, -14, 0, -29, 70, 65, -12, 74};
   private static final String header = AESObfuscator.class.getName() + "|";
@@ -33,7 +33,7 @@ public class AESObfuscator {
     try {
       SecretKeyFactory factory = SecretKeyFactory.getInstance(KEYGEN_ALGORITHM);
       KeySpec keySpec =
-              new PBEKeySpec(password.toCharArray(), salt, 1024, 256);
+              new PBEKeySpec(password.toCharArray(), salt, 1024, 128);
       SecretKey tmp = factory.generateSecret(keySpec);
       SecretKey secret = new SecretKeySpec(tmp.getEncoded(), "AES");
       mEncryptor = Cipher.getInstance(CIPHER_ALGORITHM);
