@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputSystem;
@@ -38,11 +39,11 @@ public class ToolMenu extends RadialMenu {
     radius = scale(180);
     rotation = 0;
 
-    housingButton = new ImageButton(hudAtlas.findRegion("tool-housing"));
-    transitButton = new ImageButton(hudAtlas.findRegion("tool-transit"));
-    commerceButton = new ImageButton(hudAtlas.findRegion("tool-commerce"));
-    servicesButton = new ImageButton(hudAtlas.findRegion("tool-services"));
-    sellButton = new ImageButton(hudAtlas.findRegion("tool-sell"));
+    housingButton = new ColorizedImageButton(hudAtlas.findRegion("tool-housing"), Colors.ICS_BLUE);
+    transitButton = new ColorizedImageButton(hudAtlas.findRegion("tool-transit"), Colors.ICS_BLUE);
+    commerceButton = new ColorizedImageButton(hudAtlas.findRegion("tool-commerce"), Colors.ICS_BLUE);
+    servicesButton = new ColorizedImageButton(hudAtlas.findRegion("tool-services"), Colors.ICS_BLUE);
+    sellButton = new ColorizedImageButton(hudAtlas.findRegion("tool-sell"), Colors.ICS_BLUE);
 
     addActor(housingButton);
     addActor(transitButton);

@@ -87,7 +87,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     headerButtonBar.x = stage.width() - headerButtonBar.width - 10;
     headerButtonBar.y = stage.height() - headerButtonBar.height - 10;
 
-    achievementButton = new AchievementButton(achievementEngine);
+    achievementButton = new AchievementButton(hudAtlas, achievementEngine);
     achievementButton.x = 10;
     achievementButton.y = stage.height() - statusBarPanel.height - achievementButton.height - 10;
     achievementButton.getParticleEffect().setPosition(achievementButton.x + achievementButton.width / 2, achievementButton.y + achievementButton.height / 2);

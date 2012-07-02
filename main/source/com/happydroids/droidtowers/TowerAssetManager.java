@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Logger;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.graphics.ResolutionIndependentAtlas;
+import com.happydroids.droidtowers.gui.ColorizedImageButton;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.pipeline.AssetList;
 import com.happydroids.droidtowers.platform.Display;
@@ -183,7 +184,7 @@ public class TowerAssetManager {
   }
 
   public static ImageButton imageButton(TextureAtlas.AtlasRegion region) {
-    return new ImageButton(region);
+    return new ColorizedImageButton(region, Colors.ICS_BLUE);
   }
 
   public static Skin getCustomSkin() {

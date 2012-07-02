@@ -5,13 +5,13 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.happydroids.droidtowers.Colors;
 
-public class HudToolButton extends ImageButton {
+public class HudToolButton extends ColorizedImageButton {
   private final ImageButtonStyle originalStyle;
 
   public HudToolButton(TextureAtlas hudAtlas) {
-    super(hudAtlas.findRegion("tool-sprite"));
+    super(hudAtlas.findRegion("tool-sprite"), Colors.ICS_BLUE);
 
     originalStyle = getStyle();
   }

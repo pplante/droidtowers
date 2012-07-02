@@ -8,12 +8,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 
-public class AchievementButton extends ImageButton {
+public class AchievementButton extends ColorizedImageButton {
 
   public static final float ANIMATION_DURATION = 0.125f;
   public static final int ANIMATION_DELAY = 15000;
@@ -23,10 +23,10 @@ public class AchievementButton extends ImageButton {
   private boolean waitToAnimate;
   private final ParticleEffect particleEffect;
 
-  public AchievementButton(AchievementEngine achievementEngine) {
-    super(TowerAssetManager.textureFromAtlas("achievements", "hud/buttons.txt"));
+  public AchievementButton(TextureAtlas hudAtlas, AchievementEngine achievementEngine) {
+    super(hudAtlas.findRegion("achievements"), Colors.ICS_BLUE);
 
-    activeAnimation = TowerAssetManager.animationFromAtlas("achievements-active", "hud/buttons.txt", ANIMATION_DURATION);
+    activeAnimation = new Animation(ANIMATION_DURATION, hudAtlas.findRegions("achievements-active"));
     nextAnimationTime = 0;
 
     particleEffect = new ParticleEffect();
