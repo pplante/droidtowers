@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.google.common.base.Joiner;
@@ -32,16 +31,16 @@ import com.happydroids.droidtowers.input.PickerTool;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.scenes.ViewNeighborSplashScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
-import com.happydroids.droidtowers.types.*;
 
 import java.util.Set;
 
 import static com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import static com.happydroids.HappyDroidConsts.DEBUG;
 import static com.happydroids.HappyDroidConsts.DISPLAY_DEBUG_INFO;
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class HeadsUpDisplay extends WidgetGroup {
+  private static final String TAG = HeadsUpDisplay.class.getSimpleName();
+
   private TextureAtlas hudAtlas;
   private OrthographicCamera camera;
   private GameGrid gameGrid;
@@ -50,7 +49,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   private GridObjectPurchaseMenu purchaseDialog;
   private RadialMenu toolMenu;
   private final StackGroup notificationStack;
-  private ImageButton toolButton;
+  private HudToolButton toolButton;
   private ImageButtonStyle toolButtonStyle;
   private TutorialStepNotification tutorialStep;
   private final StatusBarPanel statusBarPanel;
@@ -118,105 +117,34 @@ public class HeadsUpDisplay extends WidgetGroup {
   }
 
   private void buildToolButtonMenu() {
-    toolMenu = new RadialMenu();
-    toolMenu.arc = 35f;
-    toolMenu.arcStart = -3.5f;
-    toolMenu.radius = scale(180);
-    toolMenu.rotation = 0;
-
-    ImageButton housingButton = new ImageButton(hudAtlas.findRegion("tool-housing"));
-    housingButton.setClickListener(makePurchaseButtonClickListener("Housing", RoomTypeFactory.instance()));
-
-
-    ImageButton transitButton = new ImageButton(hudAtlas.findRegion("tool-transit"));
-    transitButton.setClickListener(makePurchaseButtonClickListener("Transit", TransitTypeFactory.instance()));
-
-    ImageButton commerceButton = new ImageButton(hudAtlas.findRegion("tool-commerce"));
-    commerceButton.setClickListener(makePurchaseButtonClickListener("Commerce", CommercialTypeFactory.instance()));
-
-
-    ImageButton servicesButton = new ImageButton(hudAtlas.findRegion("tool-services"));
-    servicesButton.setClickListener(makePurchaseButtonClickListener("Services", ServiceRoomTypeFactory.instance()));
-
-
-    final ImageButton sellButton = new ImageButton(hudAtlas.findRegion("tool-sell"));
-    sellButton.setClickListener(new VibrateClickListener() {
-      public void onClick(Actor actor, float x, float y) {
-        toolMenu.hide();
-        toolButton.setStyle(sellButton.getStyle());
-        InputSystem.instance().switchTool(GestureTool.SELL, new Runnable() {
-          public void run() {
-            toolButton.setStyle(toolButtonStyle);
-          }
-        });
-      }
-    });
-
-    toolMenu.addActor(housingButton);
-    toolMenu.addActor(transitButton);
-    toolMenu.addActor(commerceButton);
-    toolMenu.addActor(servicesButton);
-    toolMenu.addActor(sellButton);
-
-    toolButton = new ImageButton(hudAtlas.findRegion("tool-sprite"));
-    toolButton.x = stage.width() - toolButton.width - 10;
+    toolButton = new HudToolButton(hudAtlas);
+    toolButton.x = stage.right() - toolButton.width - 10;
     toolButton.y = 10;
     addActor(toolButton);
+
+    toolMenu = new ToolMenu(hudAtlas, toolButton);
+
+
     toolButtonStyle = toolButton.getStyle();
     toolButton.setClickListener(new VibrateClickListener() {
       public void onClick(Actor actor, float x, float y) {
-        if (!toolMenu.visible) {
-          stage.addActor(toolMenu);
-          toolMenu.x = toolButton.x + 20f;
-          toolMenu.y = toolButton.y;
-          toolMenu.show();
-          TutorialEngine.instance().moveToStepWhenReady("tutorial-unlock-lobby");
-        } else {
-          toolMenu.hide();
-          toolMenu.markToRemove(true);
-        }
-      }
-    });
-  }
-
-  private ClickListener makePurchaseButtonClickListener(final String dialogTitle, final GridObjectTypeFactory typeFactory) {
-    return new VibrateClickListener() {
-      public void onClick(Actor actor, float x, float y) {
-        toolMenu.hide();
-
-        if (purchaseDialog == null) {
-          if (typeFactory instanceof RoomTypeFactory) {
+        Gdx.app.log(TAG, "Current tool: " + InputSystem.instance().getCurrentTool());
+        if (InputSystem.instance().getCurrentTool() instanceof PickerTool) {
+          if (toolMenu.visible) {
+            toolMenu.close();
+            toolMenu.markToRemove(true);
+          } else {
+            stage.addActor(toolMenu);
+            toolMenu.x = toolButton.x + 20f;
+            toolMenu.y = toolButton.y;
+            toolMenu.show();
             TutorialEngine.instance().moveToStepWhenReady("tutorial-unlock-lobby");
           }
-
-          makePurchaseDialog(dialogTitle, typeFactory, ((ImageButton) actor).getStyle());
         } else {
-          purchaseDialog.dismiss();
-          purchaseDialog = null;
-        }
-      }
-    };
-  }
-
-  private void makePurchaseDialog(String title, GridObjectTypeFactory typeFactory, final ImageButtonStyle style) {
-    purchaseDialog = new GridObjectPurchaseMenu(getStage(), title, typeFactory, new Runnable() {
-      public void run() {
-        toolButton.setStyle(toolButtonStyle);
-      }
-    });
-
-    purchaseDialog.setDismissCallback(new Runnable() {
-      public void run() {
-        purchaseDialog = null;
-        if (InputSystem.instance().getCurrentTool() instanceof PickerTool) {
-          toolButton.setStyle(toolButtonStyle);
-        } else {
-          toolButton.setStyle(style);
+          InputSystem.instance().switchTool(GestureTool.PICKER, null);
         }
       }
     });
-
-    purchaseDialog.show();
   }
 
   @Override
@@ -235,7 +163,6 @@ public class HeadsUpDisplay extends WidgetGroup {
   }
 
   private void updateGridPointTooltip(float x, float y) {
-
     Vector3 worldPoint = camera.getPickRay(Gdx.input.getX(), Gdx.input.getY()).getEndPoint(1);
 
     GridPoint gridPointAtMouse = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);

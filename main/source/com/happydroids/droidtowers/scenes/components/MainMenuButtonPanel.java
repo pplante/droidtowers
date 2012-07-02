@@ -69,7 +69,7 @@ public class MainMenuButtonPanel extends Table {
 
       TowerGameService.instance().afterAuthentication(new Runnable() {
         public void run() {
-          Gdx.app.debug(TAG, "After auth, hide/show connect button.");
+          Gdx.app.debug(TAG, "After auth, close/show connect button.");
           if (!TowerGameService.instance().isAuthenticated()) {
             connectToHappyDroids.visible = true;
             connectToHappyDroids.setClickListener(new VibrateClickListener() {

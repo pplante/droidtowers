@@ -52,7 +52,7 @@ public class Dialog extends Table {
     buttons = Lists.newArrayList();
 
     setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.DARK_GRAY));
-    borderPatch = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.WHITE_SEMI_TRANSPARENT);
+    borderPatch = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Color.GRAY);
     dropShadowPatch = TowerAssetManager.ninePatch("swatches/drop-shadow.png", Color.WHITE, 22, 22, 22, 22);
     modalNoise = new TiledImage(TowerAssetManager.texture("swatches/modal-noise.png"));
     modalNoise.touchable = true;
@@ -174,7 +174,7 @@ public class Dialog extends Table {
     }
 
     batch.setColor(borderPatch.getColor());
-    borderPatch.draw(batch, x - 1, y + 1, width, height);
+    borderPatch.draw(batch, x - 1, y, width + 1, height + 1);
 
     super.drawBackground(batch, parentAlpha);
   }

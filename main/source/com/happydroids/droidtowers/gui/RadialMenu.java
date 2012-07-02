@@ -66,7 +66,7 @@ public class RadialMenu extends WidgetGroup {
     timeline.start(TweenSystem.manager());
   }
 
-  public void hide() {
+  public void close() {
     InputSystem.instance().removeInputProcessor(closeMenuInputAdapter);
 
     Tween.to(this, OPACITY, 150)
@@ -88,7 +88,7 @@ public class RadialMenu extends WidgetGroup {
       toLocalCoordinates(touchDown);
 
       if (hit(touchDown.x, touchDown.y) == null) {
-        hide();
+        close();
         return true;
       }
       return false;
@@ -97,7 +97,7 @@ public class RadialMenu extends WidgetGroup {
   private InputCallback closeMenuInputCallback = new InputCallback() {
     public boolean run(float timeDelta) {
       InputSystem.instance().switchTool(GestureTool.PICKER, null);
-      hide();
+      close();
       unbind();
       return true;
     }
