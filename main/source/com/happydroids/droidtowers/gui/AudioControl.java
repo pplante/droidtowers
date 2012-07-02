@@ -12,6 +12,7 @@ import com.happydroids.droidtowers.TowerGame;
 public class AudioControl extends ImageButton {
   public AudioControl(TextureAtlas hudAtlas) {
     super(hudAtlas.findRegion("audio-on"), null, hudAtlas.findRegion("audio-off"));
+    layout();
 
     setChecked(!TowerGame.getSoundController().isAudioState());
 

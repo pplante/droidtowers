@@ -174,9 +174,6 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
   }
 
   public void render() {
-    TowerAssetManager.assetManager().update();
-    Thread.yield();
-
     Gdx.gl.glClearColor(0.48f, 0.729f, 0.870f, 1.0f);
     Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
     Gdx.gl.glEnable(GL10.GL_TEXTURE_2D);

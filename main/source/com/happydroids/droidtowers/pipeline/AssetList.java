@@ -24,16 +24,20 @@ public class AssetList {
   public void preload(String fileName, String hdVersion, Class clazz) {
     preloadFiles.put(fileName, clazz);
 
+    normalFiles.remove(fileName);
+
     if (hdVersion != null && !hdVersion.isEmpty()) {
       highDefFiles.put(fileName, hdVersion);
     }
   }
 
   public void normal(String fileName, String hdVersion, Class clazz) {
-    normalFiles.put(fileName, clazz);
+    if (!preloadFiles.containsKey(fileName)) {
+      normalFiles.put(fileName, clazz);
 
-    if (hdVersion != null && !hdVersion.isEmpty()) {
-      highDefFiles.put(fileName, hdVersion);
+      if (hdVersion != null && !hdVersion.isEmpty()) {
+        highDefFiles.put(fileName, hdVersion);
+      }
     }
   }
 }

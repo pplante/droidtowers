@@ -78,12 +78,12 @@ public class GameSoundController {
   public void toggleAudio() {
     audioState = !audioState;
 
-    if (audioState) {
-      moveToNextSong();
-    }
-
     if (activeSong != null) {
       activeSong.dispose();
+    }
+
+    if (audioState) {
+      moveToNextSong();
     }
 
     TowerGameService.instance().setAudioState(audioState);

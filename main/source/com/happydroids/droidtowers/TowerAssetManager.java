@@ -224,4 +224,8 @@ public class TowerAssetManager {
     ninePatch.setColor(color);
     return ninePatch;
   }
+
+  public static boolean isLoaded(String fileName) {
+    return assetManager().isLoaded(checkForHDPI(fileName));
+  }
 }

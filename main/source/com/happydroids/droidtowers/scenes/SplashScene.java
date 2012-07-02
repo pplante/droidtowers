@@ -197,7 +197,7 @@ public abstract class SplashScene extends Scene {
       }
     }
 
-    if (!createdAudioControls && assetManager().isLoaded("hud/buttons.txt", TextureAtlas.class)) {
+    if (!createdAudioControls && TowerAssetManager.isLoaded("hud/buttons.txt")) {
       createdAudioControls = true;
 
       AudioControl audioControl = new AudioControl(TowerAssetManager.textureAtlas("hud/buttons.txt"));
