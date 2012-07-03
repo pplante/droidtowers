@@ -5,13 +5,12 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.OnActionCompleted;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.FadeOut;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
@@ -30,12 +29,13 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 public class Dialog extends Table {
   private String title;
   private String message;
-  private final TiledImage modalNoise;
   private List<TextButton> buttons;
   private Runnable dismissCallback;
   private InputCallback dismissInputCallback;
   private Actor view;
   private boolean hideButtons;
+  private Texture modalNoiseTexture;
+  private Group youCantTouchThis;
 
   public Dialog() {
     this(TowerGame.getRootUiStage());
@@ -49,21 +49,14 @@ public class Dialog extends Table {
 
     buttons = Lists.newArrayList();
 
-    setBackground(TowerAssetManager.ninePatch("hud/dialog-bg.png", Color.WHITE, 1, 1, 1, 1));
-    modalNoise = new TiledImage(TowerAssetManager.texture("swatches/modal-noise.png"));
-    modalNoise.touchable = true;
-    modalNoise.color.a = 0.45f;
-    modalNoise.x = 0;
-    modalNoise.y = 0;
-    modalNoise.width = getStage().width();
-    modalNoise.height = getStage().height();
-    modalNoise.layout();
-    modalNoise.setClickListener(new ClickListener() {
-      @Override
-      public void click(Actor actor, float x, float y) {
+    modalNoiseTexture = TowerAssetManager.texture("swatches/modal-noise.png");
+    modalNoiseTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
-      }
-    });
+    setBackground(TowerAssetManager.ninePatch("hud/dialog-bg.png", Color.WHITE, 1, 1, 1, 1));
+
+    youCantTouchThis = new TouchSwallower();
+    youCantTouchThis.width = getStage().width();
+    youCantTouchThis.height = getStage().height();
 
     dismissInputCallback = new InputCallback() {
       @Override
@@ -89,10 +82,14 @@ public class Dialog extends Table {
   public Dialog show() {
     clearActions();
     clear();
-    stage.addActor(modalNoise);
+
+    stage.addActor(youCantTouchThis);
     stage.addActor(this);
 
     defaults().top().left();
+
+    color.a = 0f;
+    action(FadeIn.$(0.25f));
 
     if (title != null) {
       add(FontManager.Default.makeLabel(title, Colors.ICS_BLUE)).pad(scale(6));
@@ -160,6 +157,9 @@ public class Dialog extends Table {
 
   @Override
   protected void drawBackground(SpriteBatch batch, float parentAlpha) {
+    batch.setColor(1, 1, 1, 0.45f * color.a);
+    batch.draw(modalNoiseTexture, 0, 0, getStage().width(), getStage().height(), 0, 0, getStage().width() / modalNoiseTexture.getWidth(), getStage().height() / modalNoiseTexture.getHeight());
+
     SceneManager.activeScene().effects().drawDropShadow(batch, parentAlpha, this);
 
     super.drawBackground(batch, parentAlpha);
@@ -183,12 +183,7 @@ public class Dialog extends Table {
     InputSystem.instance().unbind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, dismissInputCallback);
 
     markToRemove(true);
-    modalNoise.action(FadeOut.$(0.125f).setCompletionListener(new OnActionCompleted() {
-      @Override
-      public void completed(Action action) {
-        modalNoise.markToRemove(true);
-      }
-    }));
+    youCantTouchThis.markToRemove(true);
 
     if (dismissCallback != null) {
       dismissCallback.run();
