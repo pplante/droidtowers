@@ -14,7 +14,7 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 public class InviteNonPlayerFriendWindow extends TowerWindow {
   @SuppressWarnings("StringBufferReplaceableByString")
   public InviteNonPlayerFriendWindow(NonPlayerFriend profile) {
-    super("Invite " + profile.getFriendName() + " to Droid Towers!", SceneManager.getActiveScene().getStage());
+    super("Invite " + profile.getFriendName() + " to Droid Towers!", SceneManager.activeScene().getStage());
 
     String inviteText = new StringBuilder()
                                 .append("Hey ").append(profile.getFirstName()).append(",\n\n")

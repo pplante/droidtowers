@@ -1,0 +1,225 @@
+The Alehouse of the Eagles
+The Broken Bottle Saloon
+The Centaur's Tavern
+The Corrupt Imp's Inn
+The Crusader and Soldier
+The Destitute Bawd Tavern
+The Dragon's Bar
+The Flagon and Sword
+The Goat and the Lemure
+The Goblin's Barrel
+The Good Emperess Hall
+The Highwayman and Naga
+The Joyous Horse
+The Joyous Warrior's Bar
+The Knight's Inn
+The Mad Spider Hall
+The Merchant and the Eagle
+The Robber's Hall
+The Saloon of the Snakes
+The Travelling Raven Tavern
+The Unique Wineskin Tavern
+The Violent Cleric
+The Wandering Ogre's Hall
+The Wise Harpy Alehouse
+The Worn Book
+The Alert Wolf Tavern
+The Amulet and Barrel
+The Blue Lab Hall
+The Bold Paladin
+The Cheap Club Tavern
+The Common Mug Hall
+The Common Sword
+The Cursed Elixir
+The Cursed Lab
+The Destitute Conjurer's Hall
+The Expensive Club Alehouse
+The Fish and the Cleric
+The Hall of Jackals
+The Highwayman's Wineskin
+The Howling Lion
+The Inexpensive Club Hall
+The Intelligent Dragon
+The Jealous Priestess' Hall
+The Keen Dragon
+The New Sword
+The Priestess' Flask
+The Sad Fox's Hall
+The Stein and the Club
+The Wandering Owl Alehouse
+The Wet Wineskin
+The Angel and Centaur
+The Bird's Alehouse
+The Club and Book
+The Common Bottle
+The Common Scripture Hall
+The Creative Ape
+The Deadly Serpent's Inn
+The Dragon's Alehouse
+The Enchanted Staff
+The Fine Chant
+The Grimoire and Chant
+The Howling Hobgoblin
+The King's Sword
+The Lemure and the Goblin
+The Magic Wand
+The Marquis and the Minister
+The Morose Priestess' Inn
+The Priest's Flagon
+The Queer Wineskin
+The Rare Amulet Hall
+The Silver Cauldron Saloon
+The Swindler's Booty
+The Troll and Artisan
+The Virtuous Magus Saloon
+The Worn Club Hall
+The Bar of the Wolves
+The Bold Unicorn Tavern
+The Cleric's Prayer
+The Crying Imp Tavern
+The Cup and Sword
+The Duke's Stein
+The Foul Barrel
+The Harlot's Alehouse
+The Howling Wolf's Saloon
+The Imp's Hand
+The Inn of the Goblins
+The Knight's Tavern
+The Lion's Cup
+The Mad Knight's Tavern
+The Mystic	 Lab Saloon
+The Outrageous Bawd's Inn
+The Outrageous Footpad Bar
+The Priestess and Warrior
+The Saloon of the Queens
+The Swaggering Footpad
+The Talisman and the Staff
+The Virtuous Priestess' Inn
+The Wet Flagon Hall
+The Wineskin and the Elixir
+The Worn Blessing
+The Alchemist's Saloon
+The Colorful Flask Tavern
+The Conjurer and the Conjurer
+The Demon's Alehouse
+The Fox and the Unicorn
+The Giant and Warrior
+The Glad Magus' Alehouse
+The Howling Lemure Saloon
+The Imp's Alehouse
+The Inn of Lemures
+The Inn of the Hobgoblins
+The Knight's Club
+The Loving Bodyguard
+The Modest Sword Inn
+The Old Sword
+The Prayer and Talisman
+The Prince's Saloon
+The Saloon of Fishes
+The Saloon of Nagas
+The Screaming Virgin Saloon
+The Snake's Hall
+The Stein and the Cup
+The Swindler's Saloon
+The Tavern of the Imps
+The Wand and Scroll
+The Ape and the Paladin
+The Cats's Cup
+The Chant and the Talisman
+The Cheap Scripture Saloon
+The Dry Bottle
+The Eagle and the Merchant
+The Flask and Club
+The Footpad's Victim
+The Good Fish
+The Harlot and Quail
+The Harpy's Alehouse
+The Highwayman and Thief
+The Horse's Bar
+The Killing Lemure's Tavern
+The Magus' Wand
+The Needy Bird Inn
+The Open Flagon Hall
+The Outrageous Warrior
+The Priestess' Prayer
+The Princess and the Troll
+The Shattered Blessing
+The Strong Eagle Hall
+The Strong Minotaur
+The Tiger's Bar
+The Virtuous Highwayman's Bar
+The Alchemist's Bottle
+The Club and Cauldron
+The Common Scripture
+The Courier's Bottle
+The Dragon and Warrior
+The Enchanted Grimoire
+The Foul Barrel Inn
+The Funny Bodyguard Hall
+The Good Minotaur's Alehouse
+The Green Elixir Hall
+The Harpy's Stein
+The Imp and the Dutchess
+The Inn of Rogues
+The Joyous Father's Hall
+The New Club
+The Queen's Lineage
+The Queen's Tavern
+The Saloon of Harlots
+The Saloon of Priestesses
+The Servant and Minister
+The Talisman and the Stein
+The Troll's Hall
+The Unquiet Thief
+The Wand and Book
+The Wealthy Snake
+The Bar of Centaurs
+The Devil's Club
+The Elegant Chant Inn
+The Elixir and the Sword
+The Glimmering Sword
+The Immoral Demon's Saloon
+The Immoral Giant's Bar
+The Inexpensive Book
+The Inn of the Emperesses
+The Keen Monkey Tavern
+The Laughing Goblin
+The Marked Grimoire
+The Minister's Flask
+The Modest Casque
+The Mug and Casque
+The Pedlar's Barrel
+The Quail's Wing
+The Screaming Ogre's Bar
+The Shattered Blessing
+The Swaggering Knight Tavern
+The Sword and Staff
+The Tavern of the Ministers
+The Travelling Cleric Hall
+The Violent Lion's Bar
+The Zestful Coachman's Alehouse
+The Alchemist's Flask
+The Bar of Wizards
+The Crusader's Alehouse
+The Damned Cup
+The Dry Cup
+The Dutchess and the Paladin
+The Dutchess and the Phoenix
+The Excited Minister Alehouse
+The Full Cup Bar
+The Goblin's Bar
+The Harpy and Spider
+The Inn of Emperesses
+The Keen Marquessa
+The Killing Centaur
+The Killing Troll's Bar
+The Laughing Warrior's Tavern
+The Minister and the Imp
+The Prince's Sword
+The Purple Club
+The Shattered Sword Tavern
+The Staff and Talisman
+The Violent Bird's Inn
+The Vulgar Rogue
+The Wand and Club
+The Wet Barrel

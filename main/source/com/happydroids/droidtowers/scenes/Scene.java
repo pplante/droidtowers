@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.events.GameSpeedChangeEvent;
+import com.happydroids.droidtowers.graphics.Effects;
 import com.happydroids.droidtowers.input.CameraController;
 
 import static com.badlogic.gdx.Gdx.graphics;
@@ -27,6 +28,7 @@ public abstract class Scene {
   private Vector3 previousCameraPosition;
   private float previousCameraZoom;
   protected CameraController cameraController;
+  private final Effects effects;
 
   public Scene() {
     camera = new OrthographicCamera(graphics.getWidth(), graphics.getHeight());
@@ -34,6 +36,8 @@ public abstract class Scene {
     cameraController = new CameraController(camera, new Vector2(graphics.getWidth(), graphics.getHeight()));
     eventBus = new EventBus(getClass().getSimpleName());
     timeMultiplier = 1f;
+
+    effects = new Effects();
   }
 
   public abstract void create(Object... args);
@@ -103,5 +107,9 @@ public abstract class Scene {
 
   public Object[] getStartArgs() {
     return startArgs;
+  }
+
+  public Effects effects() {
+    return effects;
   }
 }

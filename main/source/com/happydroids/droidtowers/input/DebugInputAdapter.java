@@ -59,7 +59,7 @@ public class DebugInputAdapter extends InputAdapter {
   public boolean keyTyped(char character) {
     keys.append(character);
 
-    if (SceneManager.getActiveScene() instanceof TowerScene) {
+    if (SceneManager.activeScene() instanceof TowerScene) {
       if (keys.toString().endsWith("ggmoney")) {
         Player.instance().addCurrency(100000);
         HeadsUpDisplay.showToast("Money!!!!");

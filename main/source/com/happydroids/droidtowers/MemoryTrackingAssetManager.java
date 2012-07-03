@@ -9,6 +9,7 @@ import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -86,10 +87,14 @@ public class MemoryTrackingAssetManager extends AssetManager {
 
   @Override
   public synchronized void unload(String fileName) {
-    super.unload(fileName);
+    try {
+      super.unload(fileName);
 
-    if (memoryPerFile.containsKey(fileName)) {
-      currentMemory -= memoryPerFile.get(fileName);
+      if (memoryPerFile.containsKey(fileName)) {
+        currentMemory -= memoryPerFile.get(fileName);
+      }
+    } catch (GdxRuntimeException ignored) {
+
     }
   }
 

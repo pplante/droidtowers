@@ -22,6 +22,7 @@ import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ import static com.happydroids.droidtowers.input.InputSystem.Keys.BACK;
 import static com.happydroids.droidtowers.input.InputSystem.Keys.ESCAPE;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class PopOverMenu extends WidgetGroup {
+public class PopOverLayer extends WidgetGroup {
   public static final float INACTIVE_BUTTON_ALPHA = 0.5f;
   public static final float ACTIVE_BUTTON_ALPHA = 0.85f;
   public static final float BUTTON_FADE_DURATION = 0.125f;
@@ -41,7 +42,7 @@ public class PopOverMenu extends WidgetGroup {
   private final Texture background;
   private Table content;
 
-  public PopOverMenu() {
+  public PopOverLayer() {
     triangle = texture(TowerAssetManager.WHITE_SWATCH_TRIANGLE);
     swatch = texture(TowerAssetManager.WHITE_SWATCH);
     background = TowerAssetManager.texture("hud/window-bg.png");
@@ -71,6 +72,8 @@ public class PopOverMenu extends WidgetGroup {
 
   @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
+    SceneManager.activeScene().effects().drawDropShadow(batch, parentAlpha, this);
+
     float xOffset = (arrowAlignment & Align.RIGHT) != 0 ? width - triangle.getWidth() - 8 : 8;
     batch.setColor(Colors.ICS_BLUE);
     batch.draw(triangle, x + xOffset + 2, y + height + 2, 2, 3, triangle.getWidth() - 4, triangle.getHeight() - 6);

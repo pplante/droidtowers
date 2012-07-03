@@ -35,6 +35,7 @@ public class TowerAssetManager {
   public static final String WHITE_SWATCH_BLACK_BORDER = "swatches/swatch-white-black-border.png";
   public static final String WHITE_SWATCH_SEMI_BLACK_BORDER = "swatches/swatch-white-semi-black-border.png";
   public static final String WHITE_SWATCH_TRIANGLE = "swatches/swatch-white-triangle.png";
+  public static final String WHITE_SWATCH_TRIANGLE_LEFT = "swatches/swatch-white-triangle-left.png";
   private static AssetList assetList;
   private static Skin customSkin;
   private static Skin defaultSkin;
@@ -51,8 +52,7 @@ public class TowerAssetManager {
       try {
         assetList = TowerGameService.instance().getObjectMapper().readValue(Gdx.files.internal("assets.json").read(), AssetList.class);
 
-        addToAssetManager(assetList.preloadFiles, assetList.highDefFiles);
-        addToAssetManager(assetList.normalFiles, assetList.highDefFiles);
+        ensureAssetsAreLoaded();
       } catch (IOException e) {
         throw new RuntimeException(e);
       }
@@ -75,6 +75,11 @@ public class TowerAssetManager {
     }
 
     return assetManager;
+  }
+
+  protected static void ensureAssetsAreLoaded() {
+    addToAssetManager(assetList.preloadFiles, assetList.highDefFiles);
+    addToAssetManager(assetList.normalFiles, assetList.highDefFiles);
   }
 
   private static void makeCustomGUISkin() {
@@ -129,13 +134,7 @@ public class TowerAssetManager {
 
   private static void addToAssetManager(Map<String, Class> preloadFiles, Map<String, String> highDefFiles) {
     for (Map.Entry<String, Class> entry : preloadFiles.entrySet()) {
-      String fileName = entry.getKey();
-      Class clazz = entry.getValue();
-      if (Display.isXHDPIMode() && highDefFiles.containsKey(fileName)) {
-        fileName = highDefFiles.get(fileName);
-      }
-
-      assetManager.load(fileName, clazz);
+      assetManager().load(checkForHDPI(entry.getKey()), entry.getValue());
     }
   }
 
@@ -229,4 +228,5 @@ public class TowerAssetManager {
   public static boolean isLoaded(String fileName) {
     return assetManager().isLoaded(checkForHDPI(fileName));
   }
+
 }

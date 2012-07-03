@@ -25,6 +25,8 @@ public class GenerateAssetManagerFileList {
   public static void main(String[] args) {
     GdxNativesLoader.load();
 
+    preloadDirectory("swatches/", ".png", Texture.class);
+
     preloadFile(assetsDir.child("backgrounds/splash1.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("backgrounds/splash2.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("backgrounds/splash-happydroid.txt"), TextureAtlas.class);
@@ -35,6 +37,7 @@ public class GenerateAssetManagerFileList {
     preloadFile(assetsDir.child("hud/menus.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("hud/buttons.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("hud/window-bg.png"), Texture.class);
+    preloadFile(assetsDir.child("hud/dialog-bg.png"), Texture.class);
 
     addDirectoryToAssetManager("backgrounds/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("movies/", ".txt", TextureAtlas.class);
@@ -51,17 +54,6 @@ public class GenerateAssetManagerFileList {
     addFileEntry(assetsDir.child("decals.png"), Texture.class);
     addFileEntry(assetsDir.child("tower-sign.png"), Texture.class);
     addFileEntry(assetsDir.child("tower-sign-poll.png"), Texture.class);
-
-    FileHandle swatchesDir = assetsDir.child("swatches");
-    if (!swatchesDir.exists()) {
-      swatchesDir.mkdirs();
-    }
-
-    makeSwatch(swatchesDir, "swatch-white.png", Color.WHITE);
-    makeSwatch(swatchesDir, "swatch-white-black-border.png", Color.WHITE);
-    makeSwatch(swatchesDir, "swatch-white-semi-black-border.png", Color.WHITE);
-
-    preloadDirectory("swatches/", ".png", Texture.class);
 
     try {
       ObjectMapper mapper = new ObjectMapper();

@@ -63,7 +63,7 @@ public class SceneManager {
     }
   }
 
-  public static Scene getActiveScene() {
+  public static Scene activeScene() {
     return activeScene;
   }
 

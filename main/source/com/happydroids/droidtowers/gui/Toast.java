@@ -39,7 +39,7 @@ public class Toast extends Table {
   public void show() {
     pack();
 
-    x = (SceneManager.getActiveScene().getStage().width() - width) / 2;
+    x = (SceneManager.activeScene().getStage().width() - width) / 2;
     y = height + scale(10);
 
     color.a = 0f;

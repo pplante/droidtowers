@@ -16,13 +16,13 @@ public class HeaderButtonBar extends Table {
   public static final float BUTTON_FADE_DURATION = 0.25f;
 
   private final ImageButton dataOverlayButton;
-  private final DataOverlayMenu dataOverlayMenu;
+  private final DataOverlayLayer dataOverlayMenu;
 
   public HeaderButtonBar(TextureAtlas hudAtlas, final GameGrid gameGrid) {
     AudioControl audioControl = new AudioControl(hudAtlas);
     dataOverlayButton = TowerAssetManager.imageButton(hudAtlas.findRegion("overlay-button"));
 
-    dataOverlayMenu = new DataOverlayMenu(gameGrid.getRenderer());
+    dataOverlayMenu = new DataOverlayLayer(gameGrid.getRenderer());
     dataOverlayMenu.visible = false;
 
     defaults().space(6);

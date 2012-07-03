@@ -400,4 +400,8 @@ public abstract class GridObject {
   public void setSurroundingCrimeLevel(float crimeLevel) {
     surroundingCrimeLevel = crimeLevel;
   }
+
+  public float getSurroundingNoiseLevel() {
+    return surroundingNoiseLevel;
+  }
 }

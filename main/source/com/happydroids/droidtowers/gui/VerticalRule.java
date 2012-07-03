@@ -42,25 +42,6 @@ public class VerticalRule extends Widget {
   }
 
   @Override
-  public float getPrefHeight() {
-    if (parent != null) {
-      return parent.height;
-    }
-
-    return 0;
-  }
-
-  @Override
-  public float getMaxHeight() {
-    return getPrefHeight();
-  }
-
-  @Override
-  public float getMinHeight() {
-    return getPrefHeight();
-  }
-
-  @Override
   public float getPrefWidth() {
     return desiredWidth;
   }

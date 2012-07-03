@@ -38,7 +38,7 @@ public class DebugWindow extends ScrollableTowerWindow {
 
     defaults().pad(scale(10)).left().expandX().fillX();
 
-    if (SceneManager.getActiveScene() instanceof TowerScene) {
+    if (SceneManager.activeScene() instanceof TowerScene) {
       row();
       add(makeResetAchievementsButton());
       row();

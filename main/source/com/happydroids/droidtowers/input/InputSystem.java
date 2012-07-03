@@ -83,7 +83,7 @@ public class InputSystem extends InputAdapter {
 
   public void switchTool(GestureTool selectedTool, Runnable switchToolRunnable) {
     if (gestureDelegater != null) {
-      gestureDelegater.switchTool(SceneManager.getActiveScene().getCamera(), gestureDelegater.getGameLayers(), selectedTool, switchToolRunnable);
+      gestureDelegater.switchTool(SceneManager.activeScene().getCamera(), gestureDelegater.getGameLayers(), selectedTool, switchToolRunnable);
     }
   }
 

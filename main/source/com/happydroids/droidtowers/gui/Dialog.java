@@ -5,7 +5,6 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -21,6 +20,7 @@ import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import java.util.List;
 
@@ -30,14 +30,12 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 public class Dialog extends Table {
   private String title;
   private String message;
-  private final NinePatch dropShadowPatch;
   private final TiledImage modalNoise;
   private List<TextButton> buttons;
   private Runnable dismissCallback;
   private InputCallback dismissInputCallback;
   private Actor view;
   private boolean hideButtons;
-  private NinePatch borderPatch;
 
   public Dialog() {
     this(TowerGame.getRootUiStage());
@@ -51,12 +49,10 @@ public class Dialog extends Table {
 
     buttons = Lists.newArrayList();
 
-    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.DARK_GRAY));
-    borderPatch = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Color.GRAY);
-    dropShadowPatch = TowerAssetManager.ninePatch("swatches/drop-shadow.png", Color.WHITE, 22, 22, 22, 22);
+    setBackground(TowerAssetManager.ninePatch("hud/dialog-bg.png", Color.WHITE, 1, 1, 1, 1));
     modalNoise = new TiledImage(TowerAssetManager.texture("swatches/modal-noise.png"));
     modalNoise.touchable = true;
-    modalNoise.color.a = 0.5f;
+    modalNoise.color.a = 0.45f;
     modalNoise.x = 0;
     modalNoise.y = 0;
     modalNoise.width = getStage().width();
@@ -135,7 +131,7 @@ public class Dialog extends Table {
         buttonBar.add(buttons.get(i)).expandX().uniformX();
 
         if (i < buttons.size() - 1) {
-          buttonBar.add(new VerticalRule(Color.GRAY, 1)).width(1);
+          buttonBar.add(new VerticalRule(Color.GRAY, 1)).width(1).fillY();
         }
       }
 
@@ -164,23 +160,13 @@ public class Dialog extends Table {
 
   @Override
   protected void drawBackground(SpriteBatch batch, float parentAlpha) {
-    if (this.dropShadowPatch != null) {
-      batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-      this.dropShadowPatch.draw(batch,
-                                       (int) (x - dropShadowPatch.getLeftWidth()),
-                                       ((int) (y - dropShadowPatch.getTopHeight())),
-                                       ((int) (width + dropShadowPatch.getRightWidth() + dropShadowPatch.getLeftWidth())),
-                                       ((int) (height - 2 + dropShadowPatch.getBottomHeight() + dropShadowPatch.getTopHeight())));
-    }
-
-    batch.setColor(borderPatch.getColor());
-    borderPatch.draw(batch, x - 1, y, width + 1, height + 1);
+    SceneManager.activeScene().effects().drawDropShadow(batch, parentAlpha, this);
 
     super.drawBackground(batch, parentAlpha);
   }
 
   public Dialog addButton(String buttonText, final OnClickCallback clickCallback) {
-    TransparentTextButton button = FontManager.Roboto18.makeTransparentButton(buttonText, Colors.DARK_GRAY, rgba("#007399"));
+    TransparentTextButton button = FontManager.Roboto18.makeTransparentButton(buttonText, Color.CLEAR, rgba("#007399"));
     button.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {

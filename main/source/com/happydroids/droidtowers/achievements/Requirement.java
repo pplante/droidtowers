@@ -59,7 +59,7 @@ public class Requirement {
   }
 
   private boolean handleAddNeighborRequirement() {
-    Scene activeScene = SceneManager.getActiveScene();
+    Scene activeScene = SceneManager.activeScene();
     currentWeight = 0;
     if (activeScene instanceof TowerScene) {
       GameSave cloudGameSave = ((TowerScene) activeScene).getCurrentGameSave();

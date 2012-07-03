@@ -51,7 +51,7 @@ class GridObjectTypeLockedClickListener extends VibrateClickListener {
               @Override
               public void onClick(Dialog dialog) {
                 dialog.dismiss();
-                new AchievementDetailView(lockedBy, SceneManager.getActiveScene().getStage()).show();
+                new AchievementDetailView(lockedBy, SceneManager.activeScene().getStage()).show();
               }
             })
             .show();

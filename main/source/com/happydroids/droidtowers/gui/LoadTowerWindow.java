@@ -15,8 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Scaling;
+import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.GameSaveFactory;
@@ -27,6 +27,7 @@ import com.happydroids.utils.BackgroundTask;
 import org.ocpsoft.pretty.time.PrettyTime;
 
 import java.util.Date;
+import java.util.Set;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 import static java.text.NumberFormat.getNumberInstance;
@@ -37,10 +38,12 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
   private boolean foundSaveFile;
   private final Dialog progressDialog;
   private final LoadTowerWindow.WaitForCloudSyncTask waitForCloudSyncTask;
+  private Set<Texture> towerImageTextures;
+
 
   public LoadTowerWindow(Stage stage) {
     super("Load a Tower", stage);
-
+    towerImageTextures = Sets.newHashSet();
     progressDialog = new ProgressDialog()
                              .setMessage("looking for towers")
                              .hideButtons(true)
@@ -96,8 +99,8 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     Actor imageActor = null;
     if (imageFile.exists()) {
       try {
-        imageActor = new Image(new Texture(imageFile), Scaling.fit, Align.TOP);
-      } catch (GdxRuntimeException ignored) {
+        imageActor = new Image(loadTowerImage(imageFile), Scaling.fit, Align.TOP);
+      } catch (Exception ignored) {
         imageActor = null;
       }
     }
@@ -115,6 +118,12 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     fileRow.add(new HorizontalRule(Color.DARK_GRAY, 2)).colspan(2);
 
     return fileRow;
+  }
+
+  private Texture loadTowerImage(FileHandle imageFile) {
+    Texture texture = new Texture(imageFile);
+    towerImageTextures.add(texture);
+    return texture;
   }
 
   private Table makeGameFileInfoBox(final Table fileRow, final FileHandle savedGameFile, GameSave towerData) {
@@ -194,5 +203,20 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     public synchronized void afterExecute() {
       buildGameSaveList();
     }
+  }
+
+  @Override
+  public void dismiss() {
+    super.dismiss();
+
+    for (Texture texture : towerImageTextures) {
+      try {
+        texture.dispose();
+      } catch (Exception ignored) {
+
+      }
+    }
+
+    towerImageTextures.clear();
   }
 }

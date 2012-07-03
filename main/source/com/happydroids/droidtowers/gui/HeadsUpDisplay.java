@@ -5,11 +5,14 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.google.common.base.Joiner;
@@ -56,10 +59,14 @@ public class HeadsUpDisplay extends WidgetGroup {
   private final HeaderButtonBar headerButtonBar;
   private AchievementButton achievementButton;
   private final ImageButton viewNeighborsButton;
+  private GridObjectPopOver gridObjectPopOver;
+  private final HeadsUpDisplay.GridObjectPopOverCloser inputProcespopOverCloseror;
 
 
   public HeadsUpDisplay(Stage stage, OrthographicCamera camera, CameraController cameraController, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine, final GameState gameState) {
     super();
+
+    touchable = true;
 
     HeadsUpDisplay.instance = this;
 
@@ -115,6 +122,9 @@ public class HeadsUpDisplay extends WidgetGroup {
     addActor(notificationStack);
 
     this.stage.addActor(this);
+
+    inputProcespopOverCloseror = new GridObjectPopOverCloser();
+    InputSystem.instance().addInputProcessor(inputProcespopOverCloseror, 10000);
   }
 
   private void buildToolButtonMenu() {
@@ -152,12 +162,12 @@ public class HeadsUpDisplay extends WidgetGroup {
   public boolean touchMoved(float x, float y) {
     //noinspection PointlessBooleanExpression
     if (DEBUG && DISPLAY_DEBUG_INFO) {
-      Actor hit = hit(x, y);
-      if (hit == null || hit == mouseToolTip) {
-        updateGridPointTooltip(x, y);
-      } else {
-        mouseToolTip.visible = false;
-      }
+//      Actor hit = hit(x, y);
+//      if (hit == null || hit == mouseToolTip) {
+//        updateGridPointTooltip(x, y);
+//      } else {
+//        mouseToolTip.visible = false;
+//      }
     }
 
     return super.touchMoved(x, y);
@@ -284,5 +294,48 @@ public class HeadsUpDisplay extends WidgetGroup {
 
   public ImageButton getViewNeighborsButton() {
     return viewNeighborsButton;
+  }
+
+  public void setGridObjectPopOver(GridObjectPopOver newPopOver) {
+    if (gridObjectPopOver != null) {
+      gridObjectPopOver.markToRemove(true);
+      gridObjectPopOver.visible = false;
+    }
+
+    gridObjectPopOver = newPopOver;
+
+    if (gridObjectPopOver != null) {
+      addActor(gridObjectPopOver);
+      gridObjectPopOver.pack();
+      gridObjectPopOver.color.a = 0f;
+      gridObjectPopOver.visible = true;
+      gridObjectPopOver.action(FadeIn.$(0.25f));
+    }
+  }
+
+  private class GridObjectPopOverCloser extends InputAdapter {
+    @Override
+    public boolean touchDown(int x, int y, int pointer, int button) {
+      if (gridObjectPopOver != null) {
+        setGridObjectPopOver(null);
+
+        return true;
+      }
+
+      return false;
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+      if (gridObjectPopOver != null) {
+        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
+          setGridObjectPopOver(null);
+
+          return true;
+        }
+      }
+
+      return false;
+    }
   }
 }

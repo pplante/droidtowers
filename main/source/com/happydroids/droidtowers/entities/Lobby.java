@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.RoomType;
 
@@ -33,6 +34,11 @@ public class Lobby extends Room {
   }
 
   @Override
+  public GridObjectPopOver makePopOver() {
+    return new GridObjectPopOver(this);
+  }
+
+  @Override
   public void updatePopulation() {
     // do nothing!
   }
@@ -48,8 +54,13 @@ public class Lobby extends Room {
   }
 
   @Override
-  public float getDesirability() {
+  public float getResidencyLevel() {
     return 0f;
+  }
+
+  @Override
+  public float getDesirability() {
+    return 1f;
   }
 
   @Override

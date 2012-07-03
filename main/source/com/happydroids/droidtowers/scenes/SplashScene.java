@@ -186,7 +186,8 @@ public abstract class SplashScene extends Scene {
 
   @Override
   public void resume() {
-
+    createdSplashScene = false;
+    container.clear();
   }
 
   @Override
@@ -196,6 +197,7 @@ public abstract class SplashScene extends Scene {
         buildSplashScene();
       }
     }
+
 
     if (!createdAudioControls && TowerAssetManager.isLoaded("hud/buttons.txt")) {
       createdAudioControls = true;

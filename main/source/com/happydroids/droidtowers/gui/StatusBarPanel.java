@@ -44,9 +44,9 @@ public class StatusBarPanel extends Table {
   private float lastUpdated = TowerConsts.HUD_UPDATE_FREQUENCY;
   private float starRating;
   private StarRatingBar budgetRatingBar;
-  private final PopOverMenu ratingOverlay;
+  private final PopOverLayer ratingOverlay;
   private final Texture whiteSwatch;
-  private final PopOverMenu gameSpeedOverlay;
+  private final PopOverLayer gameSpeedOverlay;
   private StarRatingBar desirabilityRatingBar;
   private StarRatingBar populationRatingBar;
   private StarRatingBar employmentRatingBar;
@@ -63,7 +63,7 @@ public class StatusBarPanel extends Table {
     experienceLabel = makeValueLabel("0");
     populationLabel = makeValueLabel("0");
     employmentLabel = makeValueLabel("0");
-    gameSpeedLabel = makeValueLabel("0x");
+    gameSpeedLabel = makeValueLabel(SceneManager.activeScene().getTimeMultiplier() + "x");
     starWidget = new StarRatingBar(0, 5);
 
     whiteSwatch = TowerAssetManager.texture(TowerAssetManager.WHITE_SWATCH);
@@ -94,7 +94,7 @@ public class StatusBarPanel extends Table {
 
     dubai7StarWonder = AchievementEngine.instance().findById("dubai-7-star-wonder");
 
-    gameSpeedOverlay = new PopOverMenu();
+    gameSpeedOverlay = new PopOverLayer();
     gameSpeedOverlay.alignArrow(Align.LEFT);
     gameSpeedOverlay.add(new Image(TowerAssetManager.textureFromAtlas("snail", "hud/buttons.txt"))).center();
     gameSpeedSlider = new Slider(0.5f, 4f, 0.5f, TowerAssetManager.getCustomSkin());
@@ -107,18 +107,18 @@ public class StatusBarPanel extends Table {
       @Override
       public void changed(Slider slider, float value) {
         float remainder = value * 2f / 2f;
-        SceneManager.getActiveScene().setTimeMultiplier(remainder);
+        SceneManager.activeScene().setTimeMultiplier(remainder);
       }
     });
 
-    SceneManager.getActiveScene().events().register(this);
+    SceneManager.activeScene().events().register(this);
 
     budgetRatingBar = new StarRatingBar();
     populationRatingBar = new StarRatingBar();
     employmentRatingBar = new StarRatingBar();
     desirabilityRatingBar = new StarRatingBar();
 
-    ratingOverlay = new PopOverMenu();
+    ratingOverlay = new PopOverLayer();
     ratingOverlay.row();
     ratingOverlay.add(makeHeader("Monthly Budget", Color.WHITE));
     ratingOverlay.row();

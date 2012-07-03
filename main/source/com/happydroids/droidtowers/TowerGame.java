@@ -23,13 +23,16 @@ import com.happydroids.droidtowers.audio.GameSoundController;
 import com.happydroids.droidtowers.controllers.PathSearchManager;
 import com.happydroids.droidtowers.entities.GameObject;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.droidtowers.generators.NameGenerator;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.gui.OnClickCallback;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
 import com.happydroids.droidtowers.input.*;
 import com.happydroids.droidtowers.platform.Display;
-import com.happydroids.droidtowers.scenes.*;
+import com.happydroids.droidtowers.scenes.LaunchUriScene;
+import com.happydroids.droidtowers.scenes.MainMenuScene;
+import com.happydroids.droidtowers.scenes.Scene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.tasks.SyncCloudGamesTask;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
@@ -110,6 +113,8 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
       }
     });
 
+    NameGenerator.initialize();
+
     RoomTypeFactory.instance();
     CommercialTypeFactory.instance();
     ServiceRoomTypeFactory.instance();
@@ -135,7 +140,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     InputSystem.instance().bind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, new InputCallback() {
       public boolean run(float timeDelta) {
-        final boolean mainMenuIsActive = SceneManager.getActiveScene() instanceof MainMenuScene;
+        final boolean mainMenuIsActive = SceneManager.activeScene() instanceof MainMenuScene;
 
         new Dialog(rootUiStage)
                 .setTitle("Awe, don't leave me.")
@@ -180,37 +185,37 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
     float deltaTime = Gdx.graphics.getDeltaTime();
 
-    SceneManager.getActiveScene().getCamera().update();
+    SceneManager.activeScene().getCamera().update();
     ActionManager.instance().update(deltaTime);
     InputSystem.instance().update(deltaTime);
     PathSearchManager.instance().update(deltaTime);
-    TweenSystem.manager().update((int) (deltaTime * 1000 * SceneManager.getActiveScene().getTimeMultiplier()));
+    TweenSystem.manager().update((int) (deltaTime * 1000 * SceneManager.activeScene().getTimeMultiplier()));
     soundController.update(deltaTime);
 
-    spriteBatch.setProjectionMatrix(SceneManager.getActiveScene().getCamera().combined);
+    spriteBatch.setProjectionMatrix(SceneManager.activeScene().getCamera().combined);
 
     if (frameBuffer != null) {
       frameBuffer.begin();
       Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
-      SceneManager.getActiveScene().render(deltaTime);
+      SceneManager.activeScene().render(deltaTime);
       frameBuffer.end();
 
       spriteBatchFBO.begin();
       spriteBatchFBO.draw(frameBuffer.getColorBufferTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0, 0, 1, 1);
       spriteBatchFBO.end();
     } else {
-      SceneManager.getActiveScene().render(deltaTime);
+      SceneManager.activeScene().render(deltaTime);
     }
 
-    SceneManager.getActiveScene().getStage().act(deltaTime);
-    SceneManager.getActiveScene().getStage().draw();
+    SceneManager.activeScene().getStage().act(deltaTime);
+    SceneManager.activeScene().getStage().draw();
 
     rootUiStage.act(deltaTime);
     rootUiStage.draw();
 
     //noinspection PointlessBooleanExpression
     if (DEBUG && DISPLAY_DEBUG_INFO) {
-      Table.drawDebug(SceneManager.getActiveScene().getStage());
+      Table.drawDebug(SceneManager.activeScene().getStage());
       Table.drawDebug(rootUiStage);
 
       float javaHeapInBytes = Gdx.app.getJavaHeap() / TowerConsts.ONE_MEGABYTE;
@@ -218,9 +223,9 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
       String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f)\nmem: (java %.1f Mb, native %.1f Mb, gpu %.1f Mb)",
                                              Gdx.graphics.getFramesPerSecond(),
-                                             SceneManager.getActiveScene().getCamera().position.x,
-                                             SceneManager.getActiveScene().getCamera().position.y,
-                                             SceneManager.getActiveScene().getCamera().zoom,
+                                             SceneManager.activeScene().getCamera().position.x,
+                                             SceneManager.activeScene().getCamera().position.y,
+                                             SceneManager.activeScene().getCamera().zoom,
                                              javaHeapInBytes,
                                              nativeHeapInBytes,
                                              TowerAssetManager.assetManager().getMemoryInMegabytes());
@@ -232,25 +237,25 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
   public void resize(int width, int height) {
     Gdx.app.log("lifecycle", "resizing!");
-    SceneManager.getActiveScene().getCamera().viewportWidth = width;
-    SceneManager.getActiveScene().getCamera().viewportHeight = height;
+    SceneManager.activeScene().getCamera().viewportWidth = width;
+    SceneManager.activeScene().getCamera().viewportHeight = height;
     spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
-    SceneManager.getActiveScene().getSpriteBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
+    SceneManager.activeScene().getSpriteBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
     Gdx.gl.glViewport(0, 0, width, height);
   }
 
 
   public void pause() {
     Gdx.app.error("lifecycle", "pausing!");
-    SceneManager.getActiveScene().pause();
+    SceneManager.activeScene().pause();
   }
 
   public void resume() {
     Gdx.app.error("lifecycle", "resuming!");
 
-    if (!(SceneManager.getActiveScene() instanceof SplashScene)) {
-      SceneManager.pushScene(ApplicationResumeScene.class);
-    }
+    FontManager.resetAll();
+    TowerAssetManager.assetManager().resetMemoryTracking();
+    TowerAssetManager.assetManager().finishLoading();
 
     if (Platform.protocolHandler != null && Platform.protocolHandler.hasUri()) {
       URI launchUri = Platform.protocolHandler.consumeUri();
@@ -260,7 +265,7 @@ public class TowerGame implements ApplicationListener, BackgroundTask.PostExecut
 
   public void dispose() {
     Gdx.app.error("lifecycle", "dispose");
-    SceneManager.getActiveScene().dispose();
+    SceneManager.activeScene().dispose();
 
     rootUiStage = null;
     Platform.dispose();

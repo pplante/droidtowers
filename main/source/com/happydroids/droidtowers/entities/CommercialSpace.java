@@ -5,7 +5,10 @@
 package com.happydroids.droidtowers.entities;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.happydroids.droidtowers.generators.NameGenerator;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.gui.CommercialSpacePopOver;
+import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.types.CommercialType;
 import com.happydroids.droidtowers.utils.Random;
 
@@ -16,6 +19,15 @@ public class CommercialSpace extends Room {
 
   public CommercialSpace(CommercialType commercialType, GameGrid gameGrid) {
     super(commercialType, gameGrid);
+
+    if (name == null) {
+      name = NameGenerator.randomCorporationName();
+    }
+  }
+
+  @Override
+  public GridObjectPopOver makePopOver() {
+    return new CommercialSpacePopOver(this);
   }
 
   public void updateJobs() {
@@ -83,5 +95,9 @@ public class CommercialSpace extends Room {
   @Override
   public float getDesirability() {
     return MathUtils.clamp(super.getDesirability() - (0.1f * getNumVisitors()), 0f, 1f);
+  }
+
+  public float getEmploymentLevel() {
+    return jobsFilled / ((CommercialType) gridObjectType).getJobsProvided();
   }
 }

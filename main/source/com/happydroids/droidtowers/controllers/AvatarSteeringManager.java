@@ -285,12 +285,14 @@ public class AvatarSteeringManager {
 
   public void boardElevator(final Runnable runnable) {
     currentState.add(AvatarState.USING_ELEVATOR);
+    currentState.add(AvatarState.MOVING);
 
     Vector2 posInCar = currentPos.toWorldVector2();
     posInCar.x += Random.randomInt(8, 58);
     moveAvatarTo(posInCar, new TweenCallback() {
       @Override
       public void onEvent(int type, BaseTween source) {
+        currentState.remove(AvatarState.MOVING);
         runnable.run();
       }
     });
