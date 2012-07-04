@@ -1,0 +1,116 @@
+characters.png
+format: RGBA8888
+filter: MipMapNearestNearest,Linear
+repeat: none
+janitor/stationary
+  rotate: false
+  xy: 86, 1
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: -1
+droid/walk
+  rotate: false
+  xy: 35, 32
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: 2
+droid/stationary
+  rotate: false
+  xy: 35, 94
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: -1
+janitor/walk
+  rotate: false
+  xy: 69, 1
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: 1
+janitor/walk
+  rotate: false
+  xy: 52, 1
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: 2
+droid/walk
+  rotate: false
+  xy: 103, 1
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: 3
+janitor/walk
+  rotate: false
+  xy: 35, 1
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: 3
+security-guard/stationary
+  rotate: false
+  xy: 1, 94
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: -1
+maid/walk
+  rotate: false
+  xy: 18, 32
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: 2
+droid/walk
+  rotate: false
+  xy: 35, 63
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: 1
+maid/walk
+  rotate: false
+  xy: 18, 1
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: 3
+security-guard/walk
+  rotate: false
+  xy: 1, 63
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: 1
+maid/stationary
+  rotate: false
+  xy: 18, 94
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: -1
+maid/walk
+  rotate: false
+  xy: 18, 63
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: 1
+security-guard/walk
+  rotate: false
+  xy: 1, 32
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: 2
+security-guard/walk
+  rotate: false
+  xy: 1, 1
+  size: 16, 30
+  orig: 16, 30
+  offset: 7, 1
+  index: 3

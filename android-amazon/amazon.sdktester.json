@@ -1,0 +1,9 @@
+{
+  "com.happydroids.droidtowers.amazon.purchase.unlimited299":{
+    "itemType":"ENTITLED",
+    "price":2.99,
+    "title":"Droid Towers: Unlimited",
+    "description":"Click your button!",
+    "smallIconUrl":"http://some/image.jpg"
+  }
+}

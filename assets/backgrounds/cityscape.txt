@@ -1,0 +1,25 @@
+cityscape.png
+format: RGBA4444
+filter: Linear,Linear
+repeat: none
+small
+  rotate: false
+  xy: 2, 280
+  size: 233, 128
+  orig: 233, 128
+  offset: 0, 0
+  index: -1
+medium
+  rotate: false
+  xy: 2, 168
+  size: 301, 111
+  orig: 301, 111
+  offset: 0, 0
+  index: -1
+large
+  rotate: false
+  xy: 2, 2
+  size: 508, 165
+  orig: 508, 165
+  offset: 0, 0
+  index: -1

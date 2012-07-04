@@ -1,0 +1,32 @@
+menus.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+happy-droids-logo
+  rotate: false
+  xy: 0, 35
+  size: 98, 62
+  orig: 98, 62
+  offset: 4, 2
+  index: -1
+facebook-logo
+  rotate: false
+  xy: 98, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+right-arrow
+  rotate: false
+  xy: 114, 35
+  size: 14, 16
+  orig: 14, 16
+  offset: 1, 0
+  index: -1
+powered-by-libgdx
+  rotate: false
+  xy: 0, 0
+  size: 117, 35
+  orig: 117, 35
+  offset: 0, 0
+  index: -1

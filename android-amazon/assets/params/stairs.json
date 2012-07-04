@@ -1,0 +1,14 @@
+[
+  {
+    "id":"GLASS-STAIRS",
+    "name":"Glass Stairs",
+    "canShareSpace":true,
+    "coins":5000,
+    "experienceAward":500,
+    "height":1,
+    "width":2,
+    "provides":"STAIRS",
+    "atlasFilename":"transport.txt",
+    "imageFilename":"stairs"
+  }
+]

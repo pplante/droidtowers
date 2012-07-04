@@ -1,0 +1,88 @@
+skin.png
+format: RGBA8888
+filter: Nearest,Linear
+repeat: none
+progress-indeterminate
+  rotate: false
+  xy: 1, 124
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+button-down
+  rotate: false
+  xy: 96, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+hdpi/checkbox-on
+  rotate: false
+  xy: 1, 1
+  size: 94, 28
+  orig: 94, 28
+  offset: 0, 0
+  index: -1
+hdpi/checkbox-off
+  rotate: false
+  xy: 1, 30
+  size: 94, 28
+  orig: 94, 28
+  offset: 0, 0
+  index: -1
+checkbox-on
+  rotate: false
+  xy: 66, 59
+  size: 60, 18
+  orig: 60, 18
+  offset: 0, 0
+  index: -1
+hdpi/progress-indeterminate
+  rotate: false
+  xy: 1, 59
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+slider-handle
+  rotate: false
+  xy: 96, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+text-selection
+  rotate: false
+  xy: 122, 1
+  size: 2, 4
+  orig: 2, 4
+  offset: 0, 0
+  index: -1
+hdpi/slider-handle
+  rotate: false
+  xy: 66, 97
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+button
+  rotate: false
+  xy: 96, 18
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+text-cursor
+  rotate: false
+  xy: 113, 1
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+checkbox-off
+  rotate: false
+  xy: 66, 78
+  size: 60, 18
+  orig: 60, 18
+  offset: 0, 0
+  index: -1

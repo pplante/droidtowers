@@ -1,0 +1,146 @@
+[
+  {
+    "id":"tutorial-welcome",
+    "name":"Welcome to Droid Towers!",
+    "description":"To start building your Tower, tap the Build menu in the bottom right."
+  },
+  {
+    "id":"tutorial-unlock-lobby",
+    "name":"Breaking ground",
+    "description":"Tap on the house icon to open the buy menu. Then tap \"BUY\" next to the Lobby.",
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingId":"GROUND-FLOOR-LOBBY"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-purchased-lobby",
+    "name":"Pillars of Success",
+    "description":"Your cursor now is in \"Placement\" mode. Tap to place the Lobby.\n\nPress the ESCAPE key to exit \"Placement\" mode.",
+    "descriptionMobile":"Your cursor now is in \"Placement\" mode. Tap to place the Lobby.\n\nPress the BACK button to exit \"Placement\" mode."
+  },
+  {
+    "id":"tutorial-build-lobby",
+    "name":"There is no place like Home",
+    "description":"The Lobby serves as the base for a Tower. Droids need a place to call home. You should buy an Apartment for them.",
+    "requirements":[
+      {
+        "type":"BUILD",
+        "thing":"OBJECT_TYPE",
+        "thingId":"GROUND-FLOOR-LOBBY",
+        "amount":1
+      }
+    ],
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingId":"SMALL-APARTMENT"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-build-apartment",
+    "name":"Beam me up, Scotty",
+    "description":"Notice the little red box on your Apartment? That means it is not connected to the Main Lobby. Lets build an Elevator so the Droids can move in.",
+    "requirements":[
+      {
+        "type":"BUILD",
+        "thing":"OBJECT_TYPE",
+        "thingId":"SMALL-APARTMENT",
+        "amount":1
+      }
+    ],
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingId":"ELEVATOR"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-stretch-elevator",
+    "name":"Sky's the limit!",
+    "description":"Elevators need to service each floor of your Tower. Connect your elevator by dragging the top or bottom of the elevator shaft.",
+    "requirements":[
+      {
+        "type":"BUILD",
+        "thing":"OBJECT_TYPE",
+        "thingId":"ELEVATOR",
+        "amount":1
+      }
+    ],
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"ACHIEVEMENT",
+        "thingId":"tutorial-pan"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-pan",
+    "name":"Navigation",
+    "description":"Now that your Tower is up and running, lets learn how to control your camera. To move the screen around, tap anywhere and drag.",
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"ACHIEVEMENT",
+        "thingId":"tutorial-zoom"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-zoom",
+    "name":"Magnification",
+    "description":"Great! You can also zoom in via your mouse's scroll wheel. It works just like scrolling a document. Try it now.",
+    "descriptionMobile":"Great! You can also zoom in & out by pinching the screen. Try it now.",
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"ACHIEVEMENT",
+        "thingId":"tutorial-turn-on-population-overlay"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-turn-on-population-overlay",
+    "name":"Population Overlays",
+    "description":"Now that you've mastered the camera controls, it is time to introduce the data overlays. In the top right corner tap the Overlays button.",
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"ACHIEVEMENT",
+        "thingId":"tutorial-turn-off-population-overlay"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-turn-off-population-overlay",
+    "name":"Population Overlays",
+    "description":"Look at the Apartment you built, notice the blue coloring? This shows there are Droids living there. Overlays provide insight into the management of your Tower's overall success. Now turn off the Population overlay.",
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"ACHIEVEMENT",
+        "thingId":"tutorial-finished"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-finished",
+    "name":"Congratulations!",
+    "description":"Congratulations! You are now ready to conquer the sky's! ",
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"PROVIDER_TYPE",
+        "thingProviderTypes":["HOUSING", "COMMERCIAL", "TRANSPORT", "SERVICE", "SKY_LOBBY"]
+      }
+    ]
+  }
+]

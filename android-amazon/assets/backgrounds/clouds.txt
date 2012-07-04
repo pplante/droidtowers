@@ -1,0 +1,32 @@
+clouds.png
+format: RGBA8888
+filter: MipMapNearestNearest,Linear
+repeat: none
+cloud
+  rotate: false
+  xy: 0, 0
+  size: 330, 262
+  orig: 330, 262
+  offset: 0, 65
+  index: 1
+cloud
+  rotate: false
+  xy: 0, 458
+  size: 290, 50
+  orig: 290, 50
+  offset: 20, 129
+  index: 2
+cloud
+  rotate: true
+  xy: 330, 0
+  size: 146, 330
+  orig: 330, 146
+  offset: 15, 101
+  index: 4
+cloud
+  rotate: false
+  xy: 0, 262
+  size: 296, 196
+  orig: 296, 196
+  offset: 17, 95
+  index: 3

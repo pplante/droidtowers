@@ -1,0 +1,53 @@
+splash2.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+cityscape-right
+  rotate: false
+  xy: 412, 450
+  size: 378, 284
+  orig: 378, 362
+  offset: 0, 78
+  index: -1
+droid-towers-logo-unlimited
+  rotate: false
+  xy: 1, 1
+  size: 841, 247
+  orig: 851, 255
+  offset: 4, 2
+  index: -1
+cloud
+  rotate: false
+  xy: 305, 812
+  size: 215, 131
+  orig: 221, 135
+  offset: 2, 1
+  index: 1
+droid-towers-logo
+  rotate: false
+  xy: 1, 249
+  size: 841, 200
+  orig: 851, 210
+  offset: 3, 3
+  index: -1
+cloud
+  rotate: false
+  xy: 1, 812
+  size: 303, 181
+  orig: 309, 185
+  offset: 3, 2
+  index: 3
+cityscape-left
+  rotate: false
+  xy: 1, 450
+  size: 410, 361
+  orig: 410, 361
+  offset: 0, 0
+  index: -1
+cloud
+  rotate: false
+  xy: 521, 735
+  size: 309, 215
+  orig: 315, 219
+  offset: 3, 2
+  index: 5

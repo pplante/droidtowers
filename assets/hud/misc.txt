@@ -1,0 +1,18 @@
+misc.png
+format: RGBA8888
+filter: MipMapNearestNearest,Linear
+repeat: none
+speech-bubble-tip
+  rotate: false
+  xy: 0, 26
+  size: 12, 8
+  orig: 12, 8
+  offset: 0, 0
+  index: -1
+speech-bubble-box
+  rotate: false
+  xy: 0, 0
+  size: 58, 26
+  orig: 58, 26
+  offset: 0, 0
+  index: -1
