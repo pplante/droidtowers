@@ -6,6 +6,8 @@ package com.happydroids.droidtowers.scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.input.GestureDetector;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
@@ -35,7 +37,9 @@ import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class TowerScene extends Scene {
   private List<GameLayer> gameLayers;
@@ -60,6 +64,11 @@ public class TowerScene extends Scene {
   private AvatarLayer avatarLayer;
   private StarRatingCalculator starRatingCalculator;
   private CrimeCalculator crimeCalculator;
+  private ParticleEffectPool effectPool;
+  private Set<ParticleEffect> activeEffects;
+  private Set<ParticleEffect> reactivatedEffects;
+  private Iterator<float[]> colorsIterator;
+
 
   public TowerScene() {
     gameSaveLocation = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
@@ -83,7 +92,6 @@ public class TowerScene extends Scene {
     avatarLayer = new AvatarLayer(gameGrid);
 
     gameGrid.events().register(this);
-
     gameGrid.events().register(DroidTowersGame.getSoundController());
 
     headsUpDisplay = new HeadsUpDisplay(getStage(), getCamera(), getCameraController(), gameGrid, avatarLayer, AchievementEngine.instance(), TutorialEngine.instance(), gameState);
@@ -94,6 +102,7 @@ public class TowerScene extends Scene {
     gameLayers.add(new CityScapeLayer());
     gameLayers.add(new CloudLayer(weatherService));
     gameLayers.add(new RainLayer(weatherService));
+    gameLayers.add(new FireWorksLayer(gameGrid));
     gameLayers.add(new GroundLayer());
     gameLayers.add(gameGridRenderer);
     gameLayers.add(gameGrid);
@@ -251,4 +260,5 @@ public class TowerScene extends Scene {
   public GameState getGameState() {
     return gameState;
   }
+
 }

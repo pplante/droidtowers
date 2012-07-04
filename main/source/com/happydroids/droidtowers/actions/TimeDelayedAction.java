@@ -6,7 +6,7 @@ package com.happydroids.droidtowers.actions;
 
 public abstract class TimeDelayedAction extends Action {
   private float currentTime;
-  private final float updateFrequency;
+  private float updateFrequency;
   private boolean shouldRepeat;
   private boolean hasRunBefore;
   private boolean paused;
@@ -17,7 +17,7 @@ public abstract class TimeDelayedAction extends Action {
 
   public TimeDelayedAction(float updateFrequency, boolean shouldRepeat) {
     this.updateFrequency = updateFrequency;
-    currentTime = updateFrequency;
+    currentTime = 0;
     this.shouldRepeat = shouldRepeat;
   }
 
@@ -57,4 +57,8 @@ public abstract class TimeDelayedAction extends Action {
   }
 
   public abstract void run();
+
+  public void setFrequency(float frequency) {
+    this.updateFrequency = frequency;
+  }
 }

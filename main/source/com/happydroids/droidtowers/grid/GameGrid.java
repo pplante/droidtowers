@@ -127,7 +127,6 @@ public class GameGrid extends GameLayer {
   }
 
   public void removeObject(GridObject gridObject) {
-    System.out.println(this);
     gridObjects.remove(gridObject);
     ArrayList<GridObject> arrayList = Lists.newArrayList(gridObjects.getInstances());
     arrayList.remove(gridObject);
@@ -137,6 +136,8 @@ public class GameGrid extends GameLayer {
   }
 
   public void update(float deltaTime) {
+    super.update(deltaTime);
+
 //    HACK: have to figure out a better way to clear out previously selected grid objects, until then...
     if (selectedGridObject != null && !Gdx.input.isTouched()) {
       selectedGridObject.touchUp();
@@ -274,6 +275,4 @@ public class GameGrid extends GameLayer {
   public void setTowerName(String towerName) {
     this.towerName = towerName;
   }
-
-
 }

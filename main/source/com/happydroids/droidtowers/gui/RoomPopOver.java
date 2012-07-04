@@ -30,10 +30,16 @@ public class RoomPopOver extends GridObjectPopOver {
 
     residencyBar.setValue(room.getResidencyLevel() * 5f);
 
+    boolean updatedLayout = false;
+
     if (room.hasResident() && avatarImage.getRegion() == null) {
       Avatar avatar = room.getResident();
       avatarImage.setRegion(avatar);
       avatarImage.color.set(avatar.getColor());
+      updatedLayout = true;
+    }
+
+    if (updatedLayout) {
       invalidateHierarchy();
       pack();
     }

@@ -68,7 +68,7 @@ public class AchievementListView extends ScrollableTowerWindow {
         if (achievement.isCompleted() && !achievement.hasGivenReward()) {
           dismiss();
           achievement.giveReward();
-          new AchievementNotification(achievement).show();
+          AchievementEngine.instance().displayNotification(achievement);
         } else {
           new AchievementDetailView(achievement, stage).show();
         }

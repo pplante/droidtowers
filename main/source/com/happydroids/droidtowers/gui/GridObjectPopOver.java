@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.entities.Room;
@@ -21,11 +22,14 @@ public class GridObjectPopOver extends Table {
   public static final float INACTIVE_BUTTON_ALPHA = 0.5f;
   public static final float ACTIVE_BUTTON_ALPHA = 0.85f;
   public static final float BUTTON_FADE_DURATION = 0.125f;
+  public static final String CONNECTED_TO_TRANSIT = "Connected to Transit";
+  public static final String NOT_CONNECTED_TO_TRANSIT = "Disconnected from Transit";
 
   private final Sprite triangle;
   protected final Room room;
   private final StarRatingBar desirabilityBar;
   private final StarRatingBar noiseBar;
+  protected final Label transitLabel;
 
   public GridObjectPopOver(Room room) {
     super();
@@ -48,6 +52,10 @@ public class GridObjectPopOver extends Table {
 
     row().fillX().pad(-8).padTop(0).padBottom(0);
     add(new HorizontalRule()).expandX();
+
+    row();
+    transitLabel = FontManager.Default.makeLabel(CONNECTED_TO_TRANSIT);
+    add(transitLabel);
 
     desirabilityBar = makeStarRatingBar("Desirability");
     noiseBar = makeStarRatingBar("Noise");
@@ -91,5 +99,21 @@ public class GridObjectPopOver extends Table {
 
     desirabilityBar.setValue(room.getDesirability() * 5f);
     noiseBar.setValue(room.getSurroundingNoiseLevel() * 5f);
+
+    boolean updatedLayout = false;
+    if (room.isConnectedToTransport() && !transitLabel.getText().equals(CONNECTED_TO_TRANSIT)) {
+      transitLabel.setText(CONNECTED_TO_TRANSIT);
+      transitLabel.setColor(Color.WHITE);
+      updatedLayout = true;
+    } else if (!room.isConnectedToTransport() && !transitLabel.getText().equals(NOT_CONNECTED_TO_TRANSIT)) {
+      transitLabel.setText(NOT_CONNECTED_TO_TRANSIT);
+      transitLabel.setColor(Color.RED);
+      updatedLayout = true;
+    }
+
+    if (updatedLayout) {
+      invalidateHierarchy();
+      pack();
+    }
   }
 }

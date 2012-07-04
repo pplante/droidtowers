@@ -148,7 +148,7 @@ public class Elevator extends Transit {
       selectedResizeHandle = null;
     }
 
-    return selectedResizeHandle != null;
+    return true;
   }
 
   @Override

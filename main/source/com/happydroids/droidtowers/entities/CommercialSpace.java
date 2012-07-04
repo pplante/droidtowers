@@ -98,6 +98,11 @@ public class CommercialSpace extends Room {
   }
 
   public float getEmploymentLevel() {
-    return jobsFilled / ((CommercialType) gridObjectType).getJobsProvided();
+    int jobsProvided = ((CommercialType) gridObjectType).getJobsProvided();
+    if (jobsProvided > 0) {
+      return jobsFilled / jobsProvided;
+    }
+
+    return 0;
   }
 }

@@ -154,11 +154,12 @@ public class Room extends GridObject {
   public boolean touchDown(GridPoint gameGridPoint, Vector2 worldPoint, int pointer) {
     if (popOverLayer != null && !popOverLayer.visible) {
       HeadsUpDisplay.instance().setGridObjectPopOver(popOverLayer);
+      return true;
     } else {
       HeadsUpDisplay.instance().setGridObjectPopOver(null);
     }
 
-    return true;
+    return false;
   }
 
   public String getName() {

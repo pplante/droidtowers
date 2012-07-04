@@ -6,6 +6,8 @@ package com.happydroids.droidtowers.achievements;
 
 import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.eventbus.EventBus;
+import com.happydroids.droidtowers.events.AchievementCompletionEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.AchievementNotification;
@@ -19,6 +21,8 @@ public class AchievementEngine {
 
   protected static AchievementEngine instance;
   protected List<Achievement> achievements;
+  protected EventBus eventBus;
+
 
   public static AchievementEngine instance() {
     if (instance == null) {
@@ -30,6 +34,7 @@ public class AchievementEngine {
 
   protected AchievementEngine() {
     try {
+      eventBus = new EventBus();
       ObjectMapper mapper = TowerGameService.instance().getObjectMapper();
       achievements = mapper.readValue(Gdx.files.internal("params/achievements.json").reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, Achievement.class));
     } catch (IOException e) {
@@ -60,8 +65,9 @@ public class AchievementEngine {
     achievement.setCompleted(true);
   }
 
-  protected void displayNotification(Achievement achievement) {
+  public void displayNotification(Achievement achievement) {
     new AchievementNotification(achievement).show();
+    eventBus.post(new AchievementCompletionEvent(achievement));
   }
 
   public void complete(String achievementId) {
@@ -131,5 +137,9 @@ public class AchievementEngine {
     }
 
     return false;
+  }
+
+  public EventBus eventBus() {
+    return eventBus;
   }
 }

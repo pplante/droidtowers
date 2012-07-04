@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.achievements;
 
 import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.happydroids.droidtowers.events.AchievementCompletionEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.TutorialStepNotification;
@@ -54,13 +55,10 @@ public class TutorialEngine extends AchievementEngine {
     achievement.setCompleted(true);
     achievement.giveReward();
 
-    displayNotification(achievement);
-  }
-
-  @Override
-  protected void displayNotification(Achievement achievement) {
     if (enabled) {
       new TutorialStepNotification((TutorialStep) achievement).show();
+
+      eventBus.post(new AchievementCompletionEvent(achievement));
     }
   }
 

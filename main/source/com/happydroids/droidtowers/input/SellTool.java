@@ -13,6 +13,7 @@ import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
+import com.happydroids.droidtowers.graphics.effects.SmokeParticleEffect;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.OnClickCallback;
@@ -54,6 +55,13 @@ public class SellTool extends ToolBase {
                     Gdx.input.vibrate(100);
                     gameGrid.removeObject(objectToSell);
                     Player.instance().addCurrency(sellPrice);
+
+
+                    SmokeParticleEffect smokeParticleEffect = new SmokeParticleEffect();
+                    smokeParticleEffect.setPosition(objectToSell.getWorldCenter());
+                    smokeParticleEffect.setSize(objectToSell.getWorldBounds().width, objectToSell.getWorldBounds().height);
+                    smokeParticleEffect.start();
+                    gameGrid.addChild(smokeParticleEffect);
                   }
                 })
                 .addButton("No", new OnClickCallback() {
@@ -70,4 +78,5 @@ public class SellTool extends ToolBase {
 
     return false;
   }
+
 }
