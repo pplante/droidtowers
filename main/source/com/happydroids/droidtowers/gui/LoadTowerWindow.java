@@ -22,8 +22,7 @@ import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.GameSaveFactory;
 import com.happydroids.droidtowers.scenes.LoadTowerSplashScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
-import com.happydroids.droidtowers.tasks.SyncCloudGamesTask;
-import com.happydroids.utils.BackgroundTask;
+import com.happydroids.droidtowers.tasks.WaitForCloudSyncTask;
 import org.ocpsoft.pretty.time.PrettyTime;
 
 import java.util.Date;
@@ -37,7 +36,7 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
 
   private boolean foundSaveFile;
   private final Dialog progressDialog;
-  private final LoadTowerWindow.WaitForCloudSyncTask waitForCloudSyncTask;
+  private final WaitForCloudSyncTask waitForCloudSyncTask;
   private Set<Texture> towerImageTextures;
 
 
@@ -46,10 +45,9 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     towerImageTextures = Sets.newHashSet();
     progressDialog = new ProgressDialog()
                              .setMessage("looking for towers")
-                             .hideButtons(true)
-                             .show();
+                             .hideButtons(true);
 
-    waitForCloudSyncTask = new WaitForCloudSyncTask();
+    waitForCloudSyncTask = new WaitForCloudSyncTask(this);
     waitForCloudSyncTask.run();
 
     setDismissCallback(new Runnable() {
@@ -61,7 +59,7 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     });
   }
 
-  private void buildGameSaveList() {
+  public void buildGameSaveList() {
     FileHandle storage = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
     FileHandle[] files = storage.list(".json");
 
@@ -191,18 +189,13 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     table.add(font.makeLabel(content, fontColor)).expandX();
   }
 
-  private class WaitForCloudSyncTask extends BackgroundTask {
-    @Override
-    protected void execute() throws Exception {
-      while (SyncCloudGamesTask.isSyncing()) {
-        Thread.yield();
-      }
-    }
+  @Override
+  public TowerWindow show() {
+    super.show();
 
-    @Override
-    public synchronized void afterExecute() {
-      buildGameSaveList();
-    }
+    progressDialog.show();
+
+    return this;
   }
 
   @Override

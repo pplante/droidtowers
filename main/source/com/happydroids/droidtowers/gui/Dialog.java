@@ -7,10 +7,9 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
+import com.badlogic.gdx.scenes.scene2d.actions.FadeOut;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
@@ -183,7 +182,14 @@ public class Dialog extends Table {
   public void dismiss() {
     InputSystem.instance().unbind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, dismissInputCallback);
 
-    markToRemove(true);
+
+    action(FadeOut.$(0.125f).setCompletionListener(new OnActionCompleted() {
+      @Override
+      public void completed(Action action) {
+        markToRemove(true);
+      }
+    }));
+
     youCantTouchThis.markToRemove(true);
 
     if (dismissCallback != null) {

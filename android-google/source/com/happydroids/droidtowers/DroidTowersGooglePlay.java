@@ -30,23 +30,6 @@ public class DroidTowersGooglePlay extends AndroidApplication implements Billing
 
   public void onCreate(android.os.Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    Platform.setConnectionMonitor(new AndroidConnectionMonitor(this));
-    Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(this));
-    Platform.setBrowserUtil(new AndroidBrowserUtil(this));
-    Platform.setPurchaseManagerClass(GooglePlayPurchaseManager.class);
-    GooglePlayPurchaseManager.setActivity(this);
-    PlatformPurchaseManger.setInitializeRunnable(new Runnable() {
-      @Override
-      public void run() {
-        runOnUiThread(new Runnable() {
-          @Override
-          public void run() {
-            setupAndroidBilling();
-          }
-        });
-      }
-    });
-
     DisplayMetrics metrics = new DisplayMetrics();
     getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
@@ -57,7 +40,22 @@ public class DroidTowersGooglePlay extends AndroidApplication implements Billing
     TowerGameService.setDeviceOSMarketName("google-play");
     TowerGameService.setDeviceOSVersion("sdk" + getVersion());
 
-    initialize(new DroidTowersGame(null), true);
+    initialize(new DroidTowersGame(new Runnable() {
+      @Override
+      public void run() {
+        Platform.setConnectionMonitor(new AndroidConnectionMonitor(DroidTowersGooglePlay.this));
+        Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(DroidTowersGooglePlay.this));
+        Platform.setBrowserUtil(new AndroidBrowserUtil(DroidTowersGooglePlay.this));
+        Platform.setPurchaseManager(new GooglePlayPurchaseManager(DroidTowersGooglePlay.this));
+
+        runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+            setupAndroidBilling();
+          }
+        });
+      }
+    }), true);
 
     Gdx.input.setCatchBackKey(true);
     Gdx.input.setCatchMenuKey(true);

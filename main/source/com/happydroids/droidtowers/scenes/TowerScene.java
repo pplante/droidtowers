@@ -101,12 +101,9 @@ public class TowerScene extends Scene {
 
     gestureDelegater = new GestureDelegater(camera, gameLayers, gameGrid, getCameraController());
     gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, gestureDelegater);
-
-    InputSystem.instance().addInputProcessor(gestureDetector, 100);
-    InputSystem.instance().setGestureDelegator(gestureDelegater);
-    InputSystem.instance().switchTool(GestureTool.PICKER, null);
     keybindings = new DefaultKeybindings(this);
-    keybindings.bindKeys();
+
+    attachToInputSystem();
 
     gameState.loadSavedGame();
 
@@ -164,6 +161,17 @@ public class TowerScene extends Scene {
 
     detachActions();
 
+    detachFromInputSystem();
+  }
+
+  private void attachToInputSystem() {
+    InputSystem.instance().addInputProcessor(gestureDetector, 100);
+    InputSystem.instance().setGestureDelegator(gestureDelegater);
+    InputSystem.instance().switchTool(GestureTool.PICKER, null);
+    keybindings.bindKeys();
+  }
+
+  private void detachFromInputSystem() {
     InputSystem.instance().removeInputProcessor(gestureDetector);
     InputSystem.instance().setGestureDelegator(null);
     keybindings.unbindKeys();
@@ -173,10 +181,7 @@ public class TowerScene extends Scene {
   public void resume() {
     attachActions();
 
-    InputSystem.instance().addInputProcessor(gestureDetector, 100);
-    InputSystem.instance().setGestureDelegator(gestureDelegater);
-    InputSystem.instance().switchTool(GestureTool.PICKER, null);
-    keybindings.bindKeys();
+    attachToInputSystem();
   }
 
   @Override
@@ -198,6 +203,8 @@ public class TowerScene extends Scene {
         ((GridObjectType) o).removeLock();
       }
     }
+
+    detachActions();
 
     gameGrid.events().unregister(DroidTowersGame.getSoundController());
   }

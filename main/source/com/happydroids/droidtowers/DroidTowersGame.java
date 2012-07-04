@@ -266,6 +266,8 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
     if (Platform.protocolHandler != null && Platform.protocolHandler.hasUri()) {
       URI launchUri = Platform.protocolHandler.consumeUri();
       SceneManager.changeScene(LaunchUriScene.class, launchUri);
+    } else {
+      SceneManager.activeScene().resume();
     }
   }
 

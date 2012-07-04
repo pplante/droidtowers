@@ -11,15 +11,8 @@ import com.happydroids.droidtowers.platform.PlatformProtocolHandlerFactory;
 import com.happydroids.platform.*;
 
 public class DesktopGame {
-  public static void main(String[] args) {
+  public static void main(final String[] args) {
     PlatformQuitHandlerFactory.initialize();
-
-    Platform.setProtocolHandler(PlatformProtocolHandlerFactory.newInstance());
-    Platform.getProtocolHandler().initialize(args);
-
-    Platform.setUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
-    Platform.setBrowserUtil(new DesktopBrowserUtil());
-    Platform.setConnectionMonitor(new DesktopConnectionMonitor());
 
     TowerGameService.setDeviceType(Platform.getOSType().name());
     TowerGameService.setDeviceOSVersion(System.getProperty("os.version"));
@@ -32,7 +25,17 @@ public class DesktopGame {
     config.useGL20 = true;
 //    config.vSyncEnabled = false;
 
-    Platform.setPurchaseManagerClass(DesktopPurchaseManager.class);
-    new LwjglApplication(new LwjglApplicationShim(new DroidTowersGame(null)), config);
+    new LwjglApplication(new LwjglApplicationShim(new DroidTowersGame(new Runnable() {
+      @Override
+      public void run() {
+        Platform.setProtocolHandler(PlatformProtocolHandlerFactory.newInstance());
+        Platform.getProtocolHandler().initialize(args);
+
+        Platform.setUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
+        Platform.setBrowserUtil(new DesktopBrowserUtil());
+        Platform.setConnectionMonitor(new DesktopConnectionMonitor());
+        Platform.setPurchaseManager(new DebugPurchaseManager());
+      }
+    })), config);
   }
 }

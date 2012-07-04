@@ -5,8 +5,6 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector3;
@@ -60,7 +58,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   private AchievementButton achievementButton;
   private final ImageButton viewNeighborsButton;
   private GridObjectPopOver gridObjectPopOver;
-  private final HeadsUpDisplay.GridObjectPopOverCloser inputProcespopOverCloseror;
+  private final GridObjectPopOverCloser inputProcespopOverCloseror;
 
 
   public HeadsUpDisplay(Stage stage, OrthographicCamera camera, CameraController cameraController, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine, final GameState gameState) {
@@ -121,7 +119,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     this.stage.addActor(this);
 
-    inputProcespopOverCloseror = new GridObjectPopOverCloser();
+    inputProcespopOverCloseror = new GridObjectPopOverCloser(this);
     InputSystem.instance().addInputProcessor(inputProcespopOverCloseror, 10000);
   }
 
@@ -311,29 +309,7 @@ public class HeadsUpDisplay extends WidgetGroup {
     }
   }
 
-  private class GridObjectPopOverCloser extends InputAdapter {
-    @Override
-    public boolean touchDown(int x, int y, int pointer, int button) {
-      if (gridObjectPopOver != null && gridObjectPopOver.visible) {
-        setGridObjectPopOver(null);
-
-        return true;
-      }
-
-      return false;
-    }
-
-    @Override
-    public boolean keyDown(int keycode) {
-      if (gridObjectPopOver != null) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
-          setGridObjectPopOver(null);
-
-          return true;
-        }
-      }
-
-      return false;
-    }
+  public GridObjectPopOver getGridObjectPopOver() {
+    return gridObjectPopOver;
   }
 }

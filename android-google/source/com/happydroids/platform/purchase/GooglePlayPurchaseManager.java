@@ -18,7 +18,7 @@ public class GooglePlayPurchaseManager extends PlatformPurchaseManger {
   private final HashMap<Object, Object> itemSkus;
 
 
-  public GooglePlayPurchaseManager() {
+  public GooglePlayPurchaseManager(DroidTowersGooglePlay droidTowersGooglePlay) {
     itemSkus = Maps.newHashMap();
     itemSkus.put(UNLIMITED_299, "com.happydroids.droidtowers.version.unlimited299");
   }

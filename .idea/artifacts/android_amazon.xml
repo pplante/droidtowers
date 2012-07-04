@@ -8,7 +8,6 @@
         <option name="keyStorePassword" value="aGFwcHlkcm9pZHMyMDEy" />
         <option name="keyStoreUrl" value="file://$PROJECT_DIR$/release-key.keystore" />
         <option name="proGuardCfgFileUrl" value="file://" />
-        <option name="signingMode" value="RELEASE_SIGNED" />
       </options>
     </properties>
     <root id="archive" name="android-amazon.apk">

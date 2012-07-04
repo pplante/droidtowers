@@ -14,7 +14,6 @@ public class Platform {
   public static PlatformProtocolHandler protocolHandler;
   private static PlatformConnectionMonitor connectionMonitor;
   private static PlatformPurchaseManger purchaseManager;
-  private static Class<? extends PlatformPurchaseManger> purchaseManagerClass;
 
   public static Thread.UncaughtExceptionHandler getUncaughtExceptionHandler() {
     return uncaughtExceptionHandler;
@@ -92,6 +91,7 @@ public class Platform {
 
   public static void dispose() {
     protocolHandler = null;
+    purchaseManager = null;
     browserUtil = null;
     uncaughtExceptionHandler = null;
     connectionMonitor = null;
@@ -108,9 +108,5 @@ public class Platform {
 
   public static void setPurchaseManager(PlatformPurchaseManger purchaseManager) {
     Platform.purchaseManager = purchaseManager;
-  }
-
-  public static void setPurchaseManagerClass(Class<? extends PlatformPurchaseManger> purchaseManagerClass) {
-    Platform.purchaseManagerClass = purchaseManagerClass;
   }
 }

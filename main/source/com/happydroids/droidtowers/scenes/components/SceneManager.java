@@ -35,7 +35,6 @@ public class SceneManager {
       activeScene = sceneClass.newInstance();
       activeScene.setStartArgs(args);
       activeScene.create(args);
-      activeScene.resume();
       InputSystem.instance().addInputProcessor(activeScene.getStage(), 10);
     } catch (InstantiationException e) {
       throw new RuntimeException(e);
