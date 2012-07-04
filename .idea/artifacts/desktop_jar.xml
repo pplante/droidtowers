@@ -32,7 +32,7 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/guava-11.0.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/tools/jsr305-2.0.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/main/libs/main/prettytime-1.0.8.Final.jar" path-in-jar="/" />
-      <element id="dir-copy" path="$PROJECT_DIR$/android/assets" />
+      <element id="dir-copy" path="$PROJECT_DIR$/android-google/assets" />
       <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/commons-lang3-3.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/commons-logging-1.1.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/happydroids-common/libs/main/commons-codec-1.6.jar" path-in-jar="/" />

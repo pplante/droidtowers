@@ -4,43 +4,87 @@
 
 package com.happydroids.platform;
 
+import com.google.common.collect.Maps;
+import com.google.common.eventbus.EventBus;
+import com.happydroids.droidtowers.events.PurchaseEvent;
+import com.happydroids.platform.purchase.DroidTowerVersions;
 import com.happydroids.security.SecurePreferences;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.happydroids.platform.purchase.DroidTowerVersions.UNLIMITED_299;
+
 public abstract class PlatformPurchaseManger {
-  public static final String DROIDTOWERS_VERSION_UNLIMITED = "com.happydroids.droidtowers.version.unlimited299";
-  protected final SecurePreferences purchases;
   private static Runnable initializeRunnable;
+  protected final HashMap<DroidTowerVersions, String> itemSkus;
+  protected final SecurePreferences purchases;
+  private boolean purchasesEnabled;
+  private EventBus eventBus;
+
 
   public PlatformPurchaseManger() {
+    eventBus = new EventBus(PlatformPurchaseManger.class.getSimpleName());
+    purchasesEnabled = false;
     purchases = new SecurePreferences("purchases");
     if (initializeRunnable != null) {
       initializeRunnable.run();
     }
+
+    itemSkus = Maps.newHashMap();
   }
 
   public static void setInitializeRunnable(Runnable initializeRunnable) {
     PlatformPurchaseManger.initializeRunnable = initializeRunnable;
   }
 
-  public void purchaseItem(String itemId) {
-    purchases.putBoolean(itemId, true);
+  public void purchaseItem(String source, String itemId, String purchaseToken) {
+    purchases.putString(itemId, purchaseToken);
     purchases.flush();
+    eventBus.post(new PurchaseEvent(purchaseToken, source, itemId));
   }
 
   public void revokeItem(String itemId) {
-    purchases.putBoolean(itemId, false);
+    purchases.remove(itemId);
     purchases.flush();
   }
 
   public boolean hasPurchasedUnlimitedVersion() {
-    return purchases.getBoolean(DROIDTOWERS_VERSION_UNLIMITED, false);
+    return purchases.contains(getSkuForVersion(UNLIMITED_299));
   }
 
   public abstract void requestPurchase(String itemId);
 
-  public abstract void enablePurchases();
+  public void enablePurchases() {
+    purchasesEnabled = true;
+  }
 
   public void requestPurchaseForUnlimitedVersion() {
-    requestPurchase(DROIDTOWERS_VERSION_UNLIMITED);
+    requestPurchase(getSkuForVersion(UNLIMITED_299));
+  }
+
+  public SecurePreferences getPurchases() {
+    return purchases;
+  }
+
+  public abstract void onStart();
+
+  public abstract void onResume();
+
+  private DroidTowerVersions getVersionForSku(String itemSku) {
+    for (Map.Entry<DroidTowerVersions, String> entry : itemSkus.entrySet()) {
+      if (entry.getValue().equals(itemSku)) {
+        return entry.getKey();
+      }
+    }
+    return null;
+  }
+
+  public String getSkuForVersion(DroidTowerVersions version) {
+    return itemSkus.get(version);
+  }
+
+  public EventBus events() {
+    return eventBus;
   }
 }

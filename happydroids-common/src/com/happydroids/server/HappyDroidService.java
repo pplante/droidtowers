@@ -37,9 +37,9 @@ public class HappyDroidService {
   protected static HappyDroidService _instance;
   private static String deviceType;
   private static String deviceOSVersion;
+  private static String deviceOSMarketName = "none";
 
   private final Set<Runnable> withNetworkConnectionRunnables = Sets.newHashSet();
-
   protected HappyDroidObjectMapper objectMapper;
 
   public static HappyDroidService instance() {
@@ -61,8 +61,12 @@ public class HappyDroidService {
     // leave this for tests.
   }
 
-  public static void setDeviceOSName(String deviceType) {
+  public static void setDeviceType(String deviceType) {
     HappyDroidService.deviceType = deviceType;
+  }
+
+  public static void setDeviceOSMarketName(String deviceOSMarketName) {
+    HappyDroidService.deviceOSMarketName = deviceOSMarketName;
   }
 
   public static void setDeviceOSVersion(String deviceOSVersion) {
@@ -71,6 +75,10 @@ public class HappyDroidService {
 
   public static String getDeviceOSVersion() {
     return deviceOSVersion;
+  }
+
+  public static String getDeviceOSMarketName() {
+    return deviceOSMarketName;
   }
 
   public static String getDeviceType() {

@@ -9,8 +9,8 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.input.GestureDetector;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
+import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.WeatherService;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
@@ -84,7 +84,7 @@ public class TowerScene extends Scene {
 
     gameGrid.events().register(this);
 
-    gameGrid.events().register(TowerGame.getSoundController());
+    gameGrid.events().register(DroidTowersGame.getSoundController());
 
     headsUpDisplay = new HeadsUpDisplay(getStage(), getCamera(), getCameraController(), gameGrid, avatarLayer, AchievementEngine.instance(), TutorialEngine.instance(), gameState);
     weatherService = new WeatherService();
@@ -199,7 +199,7 @@ public class TowerScene extends Scene {
       }
     }
 
-    gameGrid.events().unregister(TowerGame.getSoundController());
+    gameGrid.events().unregister(DroidTowersGame.getSoundController());
   }
 
 

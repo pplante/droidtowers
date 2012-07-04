@@ -23,6 +23,7 @@ import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.utils.ScreenShot;
 import com.happydroids.platform.Platform;
 import com.happydroids.platform.PlatformPurchaseManger;
+import com.happydroids.platform.purchase.DroidTowerVersions;
 
 import static com.badlogic.gdx.Application.ApplicationType.Android;
 import static com.happydroids.droidtowers.platform.Display.scale;
@@ -79,9 +80,9 @@ public class DebugWindow extends ScrollableTowerWindow {
       @Override
       public void onClick(Actor actor, float x, float y) {
         if (purchaseManger.hasPurchasedUnlimitedVersion()) {
-          purchaseManger.revokeItem("droidtowers.version.unlimited");
+          purchaseManger.revokeItem(purchaseManger.getSkuForVersion(DroidTowerVersions.UNLIMITED_299));
         } else {
-          purchaseManger.purchaseItem("droidtowers.version.unlimited");
+          purchaseManger.purchaseItem("DebugWindow", purchaseManger.getSkuForVersion(DroidTowerVersions.UNLIMITED_299), "DEBUG WINDOW LOL");
         }
 
         dismiss();

@@ -21,6 +21,7 @@ import com.happydroids.droidtowers.gui.WidgetAccessor;
 import com.happydroids.droidtowers.scenes.components.MainMenuButtonPanel;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.platform.Platform;
+import com.happydroids.server.HappyDroidService;
 
 import static com.happydroids.droidtowers.TowerAssetManager.preloadFinished;
 import static com.happydroids.droidtowers.TowerAssetManager.textureAtlas;
@@ -40,7 +41,7 @@ public class MainMenuScene extends SplashScene {
 
     cloudGameSaves = new CloudGameSaveCollection();
 
-    Label versionLabel = FontManager.Default.makeLabel(String.format("%s (%s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA.substring(0, 8)));
+    Label versionLabel = FontManager.Default.makeLabel(String.format("%s (%s, %s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA.substring(0, 8), HappyDroidService.getDeviceOSMarketName()));
     versionLabel.setColor(Color.DARK_GRAY);
     versionLabel.x = getStage().width() - versionLabel.width - 5;
     versionLabel.y = getStage().height() - versionLabel.height - 5;

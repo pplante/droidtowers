@@ -13,13 +13,16 @@ import com.happydroids.server.HappyDroidServiceObject;
 public class Device extends HappyDroidServiceObject {
   public String uuid;
   public String type;
+  public String market;
   public String osVersion;
   public String appVersion;
   public boolean isAuthenticated;
 
+
   public Device() {
     uuid = TowerGameService.instance().getDeviceId();
     type = HappyDroidService.getDeviceType();
+    market = HappyDroidService.getDeviceOSMarketName();
     osVersion = HappyDroidService.getDeviceOSVersion();
     appVersion = HappyDroidConsts.VERSION;
   }

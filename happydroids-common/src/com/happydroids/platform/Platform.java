@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+ */
+
 package com.happydroids.platform;/*
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
@@ -108,15 +112,5 @@ public class Platform {
 
   public static void setPurchaseManagerClass(Class<? extends PlatformPurchaseManger> purchaseManagerClass) {
     Platform.purchaseManagerClass = purchaseManagerClass;
-  }
-
-  public static void initPurchaseManger() {
-    try {
-      purchaseManager = purchaseManagerClass.newInstance();
-    } catch (InstantiationException e) {
-      throw new RuntimeException(e);
-    } catch (IllegalAccessException e) {
-      throw new RuntimeException(e);
-    }
   }
 }

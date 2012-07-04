@@ -66,8 +66,6 @@ public class HeadsUpDisplay extends WidgetGroup {
   public HeadsUpDisplay(Stage stage, OrthographicCamera camera, CameraController cameraController, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine, final GameState gameState) {
     super();
 
-    touchable = true;
-
     HeadsUpDisplay.instance = this;
 
     notificationStack = new StackGroup();
@@ -316,7 +314,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   private class GridObjectPopOverCloser extends InputAdapter {
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
-      if (gridObjectPopOver != null) {
+      if (gridObjectPopOver != null && gridObjectPopOver.visible) {
         setGridObjectPopOver(null);
 
         return true;

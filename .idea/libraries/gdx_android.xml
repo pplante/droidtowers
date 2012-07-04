@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="gdx-android">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/android-shared/libs" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/android-shared/libs" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/android-shared/libs" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/android-shared/libs" recursive="false" type="SOURCES" />
+  </library>
+</component>

@@ -6,8 +6,8 @@ package com.happydroids.droidtowers.input;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.gui.DebugWindow;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
@@ -41,7 +41,7 @@ public class DebugInputAdapter extends InputAdapter {
           debugWindow.dismiss();
           debugWindow = null;
         } else {
-          debugWindow = new DebugWindow(TowerGame.getRootUiStage()).show();
+          debugWindow = new DebugWindow(DroidTowersGame.getRootUiStage()).show();
           debugWindow.setDismissCallback(new Runnable() {
             @Override
             public void run() {

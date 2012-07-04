@@ -11,8 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.gamestate.server.TemporaryToken;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.utils.PeriodicBackgroundTask;
@@ -74,7 +74,7 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
       sessionStatus.setText(String.format("Login failed: %d!", statusCode));
       bottom.pack();
 
-      new Dialog(TowerGame.getRootUiStage())
+      new Dialog(DroidTowersGame.getRootUiStage())
               .setTitle("Connection Error")
               .setMessage("Could not contact happydroids.com, please check that you have internet access and try again.\n\nERROR:ETFAIL2FONHOME")
               .addButton("Dismiss", new OnClickCallback() {

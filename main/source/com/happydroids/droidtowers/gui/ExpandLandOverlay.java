@@ -117,13 +117,8 @@ public class ExpandLandOverlay extends WidgetGroup {
     return 0;
   }
 
-  @Subscribe
-  public void CameraController_onPan(CameraControllerEvent event) {
-    leftButton.visible = event.position.x <= PADDING * event.zoom;
-    rightButton.visible = event.position.x + (PADDING * event.zoom) >= gameGrid.getWorldSize().x;
-  }
-
   private static class ExpandLandButton extends Button {
+
     public ExpandLandButton(String textureSuffix) {
       super(new ButtonStyle(
                                    makeNinePatch(textureSuffix, new Color(1f, 1f, 1f, 0.5f)),
@@ -136,5 +131,12 @@ public class ExpandLandOverlay extends WidgetGroup {
     private static NinePatch makeNinePatch(String textureSuffix, Color color) {
       return new NinePatch(TowerAssetManager.textureFromAtlas("expand-land-" + textureSuffix, "hud/buttons.txt"), color);
     }
+
+  }
+
+  @Subscribe
+  public void CameraController_onPan(CameraControllerEvent event) {
+    leftButton.visible = event.position.x <= PADDING * event.zoom;
+    rightButton.visible = event.position.x + (PADDING * event.zoom) >= gameGrid.getWorldSize().x;
   }
 }

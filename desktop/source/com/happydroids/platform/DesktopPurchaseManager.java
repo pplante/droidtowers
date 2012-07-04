@@ -10,6 +10,10 @@ public class DesktopPurchaseManager extends PlatformPurchaseManger {
   }
 
   @Override
-  public void enablePurchases() {
+  public void onStart() {
+  }
+
+  @Override
+  public void onResume() {
   }
 }

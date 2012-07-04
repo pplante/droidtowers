@@ -9,8 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.types.RoomTypeFactory;
 import com.happydroids.platform.Platform;
 
@@ -19,7 +19,7 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
 
   public PurchaseDroidTowersUnlimitedPrompt() {
-    super("Purchase Droid Towers: Unlimited", TowerGame.getRootUiStage());
+    super("Purchase Droid Towers: Unlimited", DroidTowersGame.getRootUiStage());
 
     TowerAssetManager.assetManager().finishLoading();
 

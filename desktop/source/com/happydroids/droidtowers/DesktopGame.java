@@ -21,7 +21,7 @@ public class DesktopGame {
     Platform.setBrowserUtil(new DesktopBrowserUtil());
     Platform.setConnectionMonitor(new DesktopConnectionMonitor());
 
-    TowerGameService.setDeviceOSName(Platform.getOSType().name());
+    TowerGameService.setDeviceType(Platform.getOSType().name());
     TowerGameService.setDeviceOSVersion(System.getProperty("os.version"));
 
     LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
@@ -33,6 +33,6 @@ public class DesktopGame {
 //    config.vSyncEnabled = false;
 
     Platform.setPurchaseManagerClass(DesktopPurchaseManager.class);
-    new LwjglApplication(new LwjglApplicationShim(new TowerGame()), config);
+    new LwjglApplication(new LwjglApplicationShim(new DroidTowersGame(null)), config);
   }
 }

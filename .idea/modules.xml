@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/AndroidBillingLibrary.iml" filepath="$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/AndroidBillingLibrary.iml" group="android-platform" />
       <module fileurl="file:///usr/local/var/lib/android-sdk/extras/google/play_billing/GooglePlayBilling.iml" filepath="/usr/local/var/lib/android-sdk/extras/google/play_billing/GooglePlayBilling.iml" group="android-platform" />
-      <module fileurl="file://$PROJECT_DIR$/android/android.iml" filepath="$PROJECT_DIR$/android/android.iml" group="android-platform" />
+      <module fileurl="file://$PROJECT_DIR$/android-amazon/android-amazon.iml" filepath="$PROJECT_DIR$/android-amazon/android-amazon.iml" group="android-platform" />
+      <module fileurl="file://$PROJECT_DIR$/android-google/android-google.iml" filepath="$PROJECT_DIR$/android-google/android-google.iml" group="android-platform" />
+      <module fileurl="file://$PROJECT_DIR$/android-shared/android-shared.iml" filepath="$PROJECT_DIR$/android-shared/android-shared.iml" group="android-platform" />
       <module fileurl="file://$PROJECT_DIR$/desktop/desktop.iml" filepath="$PROJECT_DIR$/desktop/desktop.iml" />
       <module fileurl="file://$PROJECT_DIR$/happydroids-common/happydroids-common.iml" filepath="$PROJECT_DIR$/happydroids-common/happydroids-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/tools/jarbundler/jarbundler.iml" filepath="$PROJECT_DIR$/tools/jarbundler/jarbundler.iml" />

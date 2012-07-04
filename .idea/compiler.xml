@@ -3,10 +3,12 @@
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
     <excludeFromCompile>
-      <directory url="file://$PROJECT_DIR$/android/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/android-google/gen" includeSubdirectories="true" />
       <directory url="file:///usr/local/var/lib/android-sdk/extras/google/play_licensing/library/gen" includeSubdirectories="true" />
       <directory url="file:///usr/local/var/lib/android-sdk/extras/google/play_billing/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/android-amazon/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/android-shared/gen" includeSubdirectories="true" />
     </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>

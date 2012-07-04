@@ -15,8 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.Colors;
+import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.TowerGame;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
@@ -38,7 +38,7 @@ public class Dialog extends Table {
   private Group youCantTouchThis;
 
   public Dialog() {
-    this(TowerGame.getRootUiStage());
+    this(DroidTowersGame.getRootUiStage());
   }
 
   public Dialog(Stage stage) {
@@ -162,6 +162,7 @@ public class Dialog extends Table {
 
     SceneManager.activeScene().effects().drawDropShadow(batch, parentAlpha, this);
 
+    batch.setColor(Color.WHITE);
     super.drawBackground(batch, parentAlpha);
   }
 

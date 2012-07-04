@@ -6,15 +6,19 @@ package com.happydroids.platform;
 
 public class DebugPurchaseManager extends PlatformPurchaseManger {
   @Override
-  public void requestPurchase(String itemId) {
+  public void onStart() {
   }
 
   @Override
-  public void enablePurchases() {
+  public void onResume() {
   }
 
   @Override
   public boolean hasPurchasedUnlimitedVersion() {
     return true;
+  }
+
+  @Override
+  public void requestPurchase(String itemId) {
   }
 }
