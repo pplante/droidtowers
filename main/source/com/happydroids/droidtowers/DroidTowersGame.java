@@ -25,9 +25,7 @@ import com.happydroids.droidtowers.entities.GameObject;
 import com.happydroids.droidtowers.events.InGamePurchaseReceiver;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.generators.NameGenerator;
-import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.FontManager;
-import com.happydroids.droidtowers.gui.OnClickCallback;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
 import com.happydroids.droidtowers.input.*;
 import com.happydroids.droidtowers.platform.Display;
@@ -143,35 +141,7 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
       InputSystem.instance().addInputProcessor(new DebugInputAdapter(), 1000);
     }
 
-    InputSystem.instance().bind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, new InputCallback() {
-      public boolean run(float timeDelta) {
-        final boolean mainMenuIsActive = SceneManager.activeScene() instanceof MainMenuScene;
-
-        new Dialog(rootUiStage)
-                .setTitle("Awe, don't leave me.")
-                .setMessage("Are you sure you want to exit " + (mainMenuIsActive ? "the game?" : "to the Main Menu?"))
-                .addButton("No way!", new OnClickCallback() {
-                  @Override
-                  public void onClick(Dialog dialog) {
-                    dialog.dismiss();
-                  }
-                })
-                .addButton("Yes", new OnClickCallback() {
-                  @Override
-                  public void onClick(Dialog dialog) {
-                    dialog.dismiss();
-                    if (mainMenuIsActive) {
-                      Gdx.app.exit();
-                    } else {
-                      SceneManager.changeScene(MainMenuScene.class);
-                    }
-                  }
-                })
-                .show();
-
-        return true;
-      }
-    });
+    InputSystem.instance().addInputProcessor(new QuitGameInputAdapter(), 1000000);
 
     Scene.setSpriteBatch(spriteBatch);
 
@@ -298,4 +268,5 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
   public void postRunnable(Runnable runnable) {
     Gdx.app.postRunnable(runnable);
   }
+
 }

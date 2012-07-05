@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.TowerConsts;
@@ -114,16 +115,11 @@ public abstract class GridObject {
   }
 
   public boolean touchDown(GridPoint gameGridPoint, Vector2 worldPoint, int pointer) {
-    if (popOverLayer == null) {
-      popOverLayer = makePopOver();
-      HeadsUpDisplay.instance().setGridObjectPopOver(popOverLayer);
-      return true;
-    } else {
-      HeadsUpDisplay.instance().setGridObjectPopOver(null);
-      popOverLayer = null;
-    }
-
-    return false;
+    popOverLayer = makePopOver();
+    popOverLayer.color.a = 0f;
+    popOverLayer.action(FadeIn.$(0.125f));
+    HeadsUpDisplay.instance().addActor(popOverLayer);
+    return true;
   }
 
   public boolean touchUp() {
@@ -293,7 +289,12 @@ public abstract class GridObject {
   }
 
   protected void updatePopOverPosition() {
-    if (popOverLayer != null && popOverLayer.parent != null) {
+    if (popOverLayer != null) {
+      if (popOverLayer.parent == null) {
+        popOverLayer = null;
+        return;
+      }
+
       Vector3 vec = new Vector3(getWorldCenter().x + (worldSize.x / 2), getWorldCenter().y - popOverLayer.getPrefHeight() / 2, 1f);
       SceneManager.activeScene().getCamera().project(vec);
       popOverLayer.x = vec.x;

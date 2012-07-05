@@ -6,35 +6,30 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.happydroids.droidtowers.input.InputSystem;
 
 class GridObjectPopOverCloser extends InputAdapter {
-  private HeadsUpDisplay headsUpDisplay;
+  private final GridObjectPopOver objectPopOver;
 
-  public GridObjectPopOverCloser(HeadsUpDisplay headsUpDisplay) {
-    this.headsUpDisplay = headsUpDisplay;
+  public GridObjectPopOverCloser(GridObjectPopOver objectPopOver) {
+    this.objectPopOver = objectPopOver;
+  }
+
+  private boolean closePopOver() {
+    objectPopOver.markToRemove(true);
+
+    InputSystem.instance().removeInputProcessor(this);
+
+    return true;
   }
 
   @Override
   public boolean touchDown(int x, int y, int pointer, int button) {
-    if (headsUpDisplay.getGridObjectPopOver() != null && headsUpDisplay.getGridObjectPopOver().visible) {
-      headsUpDisplay.setGridObjectPopOver(null);
-
-      return true;
-    }
-
-    return false;
+    return closePopOver();
   }
 
   @Override
   public boolean keyDown(int keycode) {
-    if (headsUpDisplay.getGridObjectPopOver() != null) {
-      if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
-        headsUpDisplay.setGridObjectPopOver(null);
-
-        return true;
-      }
-    }
-
-    return false;
+    return (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) && closePopOver();
   }
 }

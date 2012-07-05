@@ -15,35 +15,15 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class ManageCommercialSpaceDialog extends Dialog {
   private final CommercialSpace commercialSpace;
+  private TextField textField;
 
   public ManageCommercialSpaceDialog(final CommercialSpace commercialSpace) {
     this.commercialSpace = commercialSpace;
 
-    defaults().top().left();
+    textField = FontManager.Roboto18.makeTextField(commercialSpace.getName(), "");
 
     setTitle("Manage: " + commercialSpace.getName());
-
-    Table content = new Table();
-    content.defaults().pad(scale(4));
-
-    content.row().fillX();
-    content.add(FontManager.Roboto18.makeLabel("Name of " + commercialSpace.getGridObjectType().getName())).expandX().colspan(2);
-
-    content.row();
-    final TextField textField = FontManager.Roboto18.makeTextField(commercialSpace.getName(), "");
-    content.add(textField).width(400);
-
-    TextButton randomNameButton = FontManager.Roboto12.makeTextButton("Random Name");
-    randomNameButton.setClickListener(new VibrateClickListener() {
-      @Override
-      public void onClick(Actor actor, float x, float y) {
-        textField.setText(NameGenerator.randomCorporationName());
-      }
-    });
-    content.add(randomNameButton);
-
-
-    setView(content);
+    setView(makeContentView());
 
     addButton("Save", new OnClickCallback() {
       @Override
@@ -60,5 +40,37 @@ public class ManageCommercialSpaceDialog extends Dialog {
         dismiss();
       }
     });
+  }
+
+  private Actor makeContentView() {
+    Table content = new Table();
+    content.defaults().pad(scale(4));
+
+    content.row().fillX();
+    content.add(FontManager.Roboto18.makeLabel("Name of " + commercialSpace.getGridObjectType().getName())).expandX().colspan(2);
+
+    content.row();
+    content.add(textField).width(400);
+    content.add(makeRandomNameButton());
+
+    content.row();
+    content.add(FontManager.Roboto18.makeLabel("Current Employees"));
+
+    content.row();
+    content.add(FontManager.Roboto18.makeLabel(commercialSpace.getJobsFilled() + "/" + commercialSpace.getJobsProvided()));
+
+    return content;
+  }
+
+  private TextButton makeRandomNameButton() {
+    TextButton randomNameButton = FontManager.Roboto12.makeTextButton("Random Name");
+    randomNameButton.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        textField.setText(NameGenerator.randomCorporationName());
+      }
+    });
+
+    return randomNameButton;
   }
 }

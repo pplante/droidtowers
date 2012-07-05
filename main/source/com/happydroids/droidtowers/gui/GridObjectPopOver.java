@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.entities.GridObject;
+import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import static com.happydroids.droidtowers.TowerAssetManager.sprite;
@@ -34,9 +35,9 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
 
   public GridObjectPopOver(T gridObject) {
     super();
-    visible = false;
-
     this.gridObject = gridObject;
+
+    InputSystem.instance().addInputProcessor(new GridObjectPopOverCloser(this), -100);
 
     touchable = true;
     triangle = sprite(TowerAssetManager.WHITE_SWATCH_TRIANGLE_LEFT);

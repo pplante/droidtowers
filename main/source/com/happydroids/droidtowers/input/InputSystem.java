@@ -128,24 +128,23 @@ public class InputSystem extends InputAdapter {
 
   @SuppressWarnings("WhileLoopReplaceableByForEach")
   public boolean keyDown(int keycode) {
-    if (inputProcessorsSorted != null) {
-      for (InputProcessorEntry entry : inputProcessorsSorted) {
-        if (entry.getInputProcessor().keyDown(keycode)) {
-          return true;
-        }
-      }
-    }
-
     if (keyBindings != null && keyBindings.containsKey(keycode)) {
       float deltaTime = Gdx.graphics.getDeltaTime();
 
       List<InputCallback> actionsForKeyCode = Lists.newArrayList(keyBindings.get(keycode));
       for (InputCallback inputCallback : actionsForKeyCode) {
         if (inputCallback.run(deltaTime)) {
-          break;
+          return true;
         }
       }
-      return true;
+    }
+
+    if (inputProcessorsSorted != null) {
+      for (InputProcessorEntry entry : inputProcessorsSorted) {
+        if (entry.getInputProcessor().keyDown(keycode)) {
+          return true;
+        }
+      }
     }
 
     return false;

@@ -100,4 +100,8 @@ public class CommercialSpace extends Room {
 
     return 0;
   }
+
+  public int getJobsProvided() {
+    return ((CommercialType) gridObjectType).getJobsProvided();
+  }
 }
