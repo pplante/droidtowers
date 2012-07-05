@@ -30,6 +30,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
   private final StarRatingBar desirabilityBar;
   private final StarRatingBar noiseBar;
   protected final Label transitLabel;
+  private final Label nameLabel;
 
   public GridObjectPopOver(T gridObject) {
     super();
@@ -47,7 +48,8 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     pad(scale(8));
 
     row();
-    add(FontManager.RobotoBold18.makeLabel(gridObject.getName()));
+    nameLabel = FontManager.RobotoBold18.makeLabel(gridObject.getName());
+    add(nameLabel);
 
     row().fillX().pad(-8).padTop(0).padBottom(0);
     add(new HorizontalRule()).expandX();
@@ -99,18 +101,23 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     desirabilityBar.setValue(gridObject.getDesirability() * 5f);
     noiseBar.setValue(gridObject.getSurroundingNoiseLevel() * 5f);
 
-    boolean updatedLayout = false;
+    boolean updatedData = false;
     if (gridObject.isConnectedToTransport() && !transitLabel.getText().equals(CONNECTED_TO_TRANSIT)) {
       transitLabel.setText(CONNECTED_TO_TRANSIT);
       transitLabel.setColor(Color.WHITE);
-      updatedLayout = true;
+      updatedData = true;
     } else if (!gridObject.isConnectedToTransport() && !transitLabel.getText().equals(NOT_CONNECTED_TO_TRANSIT)) {
       transitLabel.setText(NOT_CONNECTED_TO_TRANSIT);
       transitLabel.setColor(Color.RED);
-      updatedLayout = true;
+      updatedData = true;
     }
 
-    if (updatedLayout) {
+    if (!gridObject.getName().equals(nameLabel.getText())) {
+      nameLabel.setText(gridObject.getName());
+      updatedData = true;
+    }
+
+    if (updatedData) {
       invalidateHierarchy();
       pack();
     }

@@ -7,7 +7,10 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.google.common.collect.Maps;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.platform.Display;
@@ -24,7 +27,7 @@ public enum FontManager {
   Roboto64("fonts/roboto_white_64.fnt", "fonts/roboto_white_96.fnt"),
   Roboto64WithShadow("fonts/roboto_white_with_shadow_64.fnt", "fonts/roboto_white_with_shadow_64.fnt"),
   Roboto24("fonts/roboto_white_24.fnt", "fonts/roboto_white_36.fnt", 8, 16),
-  Roboto12("fonts/roboto_white_12.fnt", "fonts/roboto_white_18.fnt"),
+  Roboto12("fonts/roboto_white_12.fnt", "fonts/roboto_white_18.fnt", 4, 8),
   BankGothic32("fonts/bank_gothic_32.fnt", Color.WHITE); // elevators shouldn't scale!
 
   private static HashMap<String, BitmapFont> bitmapFonts = Maps.newHashMap();
