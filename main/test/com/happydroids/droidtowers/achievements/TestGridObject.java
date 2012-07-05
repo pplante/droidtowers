@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.achievements;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.gui.GridObjectPopOver;
 
 public class TestGridObject extends GridObject {
   public TestGridObject(TestGridObjectType type, GameGrid gameGrid) {
@@ -16,5 +17,10 @@ public class TestGridObject extends GridObject {
   @Override
   public Sprite getSprite() {
     return new Sprite();
+  }
+
+  @Override
+  public GridObjectPopOver makePopOver() {
+    return null;
   }
 }

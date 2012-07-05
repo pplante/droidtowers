@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.entities.Avatar;
 import com.happydroids.droidtowers.entities.Room;
 
-public class RoomPopOver extends GridObjectPopOver {
+public class RoomPopOver extends GridObjectPopOver<Room> {
   private final StarRatingBar residencyBar;
   private final Image avatarImage;
 
@@ -28,12 +28,12 @@ public class RoomPopOver extends GridObjectPopOver {
   public void act(float delta) {
     super.act(delta);
 
-    residencyBar.setValue(room.getResidencyLevel() * 5f);
+    residencyBar.setValue(gridObject.getResidencyLevel() * 5f);
 
     boolean updatedLayout = false;
 
-    if (room.hasResident() && avatarImage.getRegion() == null) {
-      Avatar avatar = room.getResident();
+    if (gridObject.hasResident() && avatarImage.getRegion() == null) {
+      Avatar avatar = gridObject.getResident();
       avatarImage.setRegion(avatar);
       avatarImage.color.set(avatar.getColor());
       updatedLayout = true;

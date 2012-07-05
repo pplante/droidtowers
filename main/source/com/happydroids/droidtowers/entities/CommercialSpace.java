@@ -5,7 +5,6 @@
 package com.happydroids.droidtowers.entities;
 
 import com.badlogic.gdx.math.MathUtils;
-import com.happydroids.droidtowers.generators.NameGenerator;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.CommercialSpacePopOver;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
@@ -19,10 +18,6 @@ public class CommercialSpace extends Room {
 
   public CommercialSpace(CommercialType commercialType, GameGrid gameGrid) {
     super(commercialType, gameGrid);
-
-    if (name == null) {
-      name = NameGenerator.randomCorporationName();
-    }
   }
 
   @Override

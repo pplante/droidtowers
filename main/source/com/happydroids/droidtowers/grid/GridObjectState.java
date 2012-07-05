@@ -15,6 +15,7 @@ public class GridObjectState {
   private String typeId;
   private GridPoint position;
   private GridPoint size;
+  private String name;
 
   public GridObjectState() {
 
@@ -24,6 +25,7 @@ public class GridObjectState {
     typeId = gridObject.getGridObjectType().getId();
     position = gridObject.getPosition();
     size = gridObject.getSize();
+    name = gridObject.hasCustomName() ? gridObject.getName() : null;
   }
 
   public GridObject materialize(GameGrid gameGrid) {
@@ -32,6 +34,9 @@ public class GridObjectState {
       GridObject object = objectType.makeGridObject(gameGrid);
 
       if (object != null) {
+        if (name != null) {
+          object.setName(name);
+        }
         object.setPosition(position.x, position.y);
         object.setSize(size.x, size.y);
         object.setPlaced(true);
@@ -43,29 +48,5 @@ public class GridObjectState {
     }
 
     throw new RuntimeException("Cannot find type: " + typeId);
-  }
-
-  public GridPoint getPosition() {
-    return position;
-  }
-
-  public void setPosition(GridPoint position) {
-    this.position = position;
-  }
-
-  public GridPoint getSize() {
-    return size;
-  }
-
-  public void setSize(GridPoint size) {
-    this.size = size;
-  }
-
-  public String getTypeId() {
-    return typeId;
-  }
-
-  public void setTypeId(String typeId) {
-    this.typeId = typeId;
   }
 }

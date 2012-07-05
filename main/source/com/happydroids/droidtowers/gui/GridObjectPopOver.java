@@ -12,13 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.entities.Room;
+import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import static com.happydroids.droidtowers.TowerAssetManager.sprite;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class GridObjectPopOver extends Table {
+public class GridObjectPopOver<T extends GridObject> extends Table {
   public static final float INACTIVE_BUTTON_ALPHA = 0.5f;
   public static final float ACTIVE_BUTTON_ALPHA = 0.85f;
   public static final float BUTTON_FADE_DURATION = 0.125f;
@@ -26,17 +26,16 @@ public class GridObjectPopOver extends Table {
   public static final String NOT_CONNECTED_TO_TRANSIT = "Disconnected from Transit";
 
   private final Sprite triangle;
-  protected final Room room;
+  protected final T gridObject;
   private final StarRatingBar desirabilityBar;
   private final StarRatingBar noiseBar;
   protected final Label transitLabel;
 
-  public GridObjectPopOver(Room room) {
+  public GridObjectPopOver(T gridObject) {
     super();
-
     visible = false;
 
-    this.room = room;
+    this.gridObject = gridObject;
 
     touchable = true;
     triangle = sprite(TowerAssetManager.WHITE_SWATCH_TRIANGLE_LEFT);
@@ -48,7 +47,7 @@ public class GridObjectPopOver extends Table {
     pad(scale(8));
 
     row();
-    add(FontManager.RobotoBold18.makeLabel(room.getName()));
+    add(FontManager.RobotoBold18.makeLabel(gridObject.getName()));
 
     row().fillX().pad(-8).padTop(0).padBottom(0);
     add(new HorizontalRule()).expandX();
@@ -97,15 +96,15 @@ public class GridObjectPopOver extends Table {
   public void act(float delta) {
     super.act(delta);
 
-    desirabilityBar.setValue(room.getDesirability() * 5f);
-    noiseBar.setValue(room.getSurroundingNoiseLevel() * 5f);
+    desirabilityBar.setValue(gridObject.getDesirability() * 5f);
+    noiseBar.setValue(gridObject.getSurroundingNoiseLevel() * 5f);
 
     boolean updatedLayout = false;
-    if (room.isConnectedToTransport() && !transitLabel.getText().equals(CONNECTED_TO_TRANSIT)) {
+    if (gridObject.isConnectedToTransport() && !transitLabel.getText().equals(CONNECTED_TO_TRANSIT)) {
       transitLabel.setText(CONNECTED_TO_TRANSIT);
       transitLabel.setColor(Color.WHITE);
       updatedLayout = true;
-    } else if (!room.isConnectedToTransport() && !transitLabel.getText().equals(NOT_CONNECTED_TO_TRANSIT)) {
+    } else if (!gridObject.isConnectedToTransport() && !transitLabel.getText().equals(NOT_CONNECTED_TO_TRANSIT)) {
       transitLabel.setText(NOT_CONNECTED_TO_TRANSIT);
       transitLabel.setColor(Color.RED);
       updatedLayout = true;

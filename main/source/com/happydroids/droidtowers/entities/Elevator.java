@@ -18,6 +18,7 @@ import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
 import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.FontManager;
+import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.ElevatorType;
 import com.happydroids.droidtowers.types.ResizeHandle;
@@ -246,5 +247,10 @@ public class Elevator extends Transit {
   @Override
   public int hashCode() {
     return elevatorCar != null ? elevatorCar.hashCode() : 0;
+  }
+
+  @Override
+  public GridObjectPopOver makePopOver() {
+    return null;
   }
 }

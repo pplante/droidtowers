@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.TowerConsts;
@@ -17,8 +18,12 @@ import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
 import com.happydroids.droidtowers.events.GridObjectChangedEvent;
 import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
+import com.happydroids.droidtowers.generators.NameGenerator;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.gui.GridObjectPopOver;
+import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.ProviderType;
 
@@ -47,11 +52,14 @@ public abstract class GridObject {
   protected long lastCleanedAt;
   protected float surroundingNoiseLevel;
   protected float surroundingCrimeLevel;
+  protected GridObjectPopOver popOverLayer;
+  protected String name;
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
     this.gameGrid = gameGrid;
 
+    name = NameGenerator.randomNameForGridObjectType(getGridObjectType());
     position = new GridPoint(0, 0);
     size = new GridPoint(gridObjectType.getWidth(), gridObjectType.getHeight());
     bounds = new Rectangle(position.x, position.y, size.x, size.y);
@@ -106,6 +114,15 @@ public abstract class GridObject {
   }
 
   public boolean touchDown(GridPoint gameGridPoint, Vector2 worldPoint, int pointer) {
+    if (popOverLayer == null) {
+      popOverLayer = makePopOver();
+      HeadsUpDisplay.instance().setGridObjectPopOver(popOverLayer);
+      return true;
+    } else {
+      HeadsUpDisplay.instance().setGridObjectPopOver(null);
+      popOverLayer = null;
+    }
+
     return false;
   }
 
@@ -272,6 +289,16 @@ public abstract class GridObject {
   }
 
   public void update(float deltaTime) {
+    updatePopOverPosition();
+  }
+
+  protected void updatePopOverPosition() {
+    if (popOverLayer != null && popOverLayer.parent != null) {
+      Vector3 vec = new Vector3(getWorldCenter().x + (worldSize.x / 2), getWorldCenter().y - popOverLayer.getPrefHeight() / 2, 1f);
+      SceneManager.activeScene().getCamera().project(vec);
+      popOverLayer.x = vec.x;
+      popOverLayer.y = vec.y;
+    }
   }
 
   public void broadcastEvent(GridObjectEvent event) {
@@ -403,5 +430,19 @@ public abstract class GridObject {
 
   public float getSurroundingNoiseLevel() {
     return surroundingNoiseLevel;
+  }
+
+  public abstract GridObjectPopOver makePopOver();
+
+  public String getName() {
+    return name != null ? name : gridObjectType.getName();
+  }
+
+  public boolean hasCustomName() {
+    return name != null;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 }

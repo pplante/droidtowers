@@ -11,16 +11,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
-import com.happydroids.droidtowers.generators.NameGenerator;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.NeighborGameGrid;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
-import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.gui.RoomPopOver;
 import com.happydroids.droidtowers.math.GridPoint;
-import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.types.RoomType;
 
 public class Room extends GridObject {
@@ -36,9 +31,6 @@ public class Room extends GridObject {
 
   private Avatar resident;
 
-  protected GridObjectPopOver popOverLayer;
-  protected String name;
-
   public Room(RoomType roomType, GameGrid gameGrid) {
     super(roomType, gameGrid);
 
@@ -51,12 +43,6 @@ public class Room extends GridObject {
     decalSprite = new Sprite(roomDecals);
 
     desirability = 1f;
-    name = NameGenerator.randomNameForGridObjectType(getGridObjectType());
-    popOverLayer = makePopOver();
-  }
-
-  public GridObjectPopOver makePopOver() {
-    return new RoomPopOver(this);
   }
 
   public void updatePopulation() {
@@ -118,6 +104,11 @@ public class Room extends GridObject {
     return 0f;
   }
 
+  @Override
+  public GridObjectPopOver makePopOver() {
+    return new RoomPopOver(this);
+  }
+
   private float getTransportModifier() {
     float minDist = Float.MAX_VALUE;
     for (GridPoint gridPoint : getGridPointsTouched()) {
@@ -132,38 +123,6 @@ public class Room extends GridObject {
 
   public void setResident(Avatar avatar) {
     resident = avatar;
-  }
-
-  protected void updatePopOverPosition() {
-    if (popOverLayer.parent != null) {
-      Vector3 vec = new Vector3(getWorldCenter().x + (worldSize.x / 2), getWorldCenter().y - popOverLayer.getPrefHeight() / 2, 1f);
-      SceneManager.activeScene().getCamera().project(vec);
-      popOverLayer.x = vec.x;
-      popOverLayer.y = vec.y;
-    }
-  }
-
-  @Override
-  public void update(float deltaTime) {
-    super.update(deltaTime);
-
-    updatePopOverPosition();
-  }
-
-  @Override
-  public boolean touchDown(GridPoint gameGridPoint, Vector2 worldPoint, int pointer) {
-    if (popOverLayer != null && !popOverLayer.visible) {
-      HeadsUpDisplay.instance().setGridObjectPopOver(popOverLayer);
-      return true;
-    } else {
-      HeadsUpDisplay.instance().setGridObjectPopOver(null);
-    }
-
-    return false;
-  }
-
-  public String getName() {
-    return name != null ? name : gridObjectType.getName();
   }
 
   public float getResidencyLevel() {

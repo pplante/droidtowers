@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.TransitType;
 
@@ -52,5 +53,10 @@ public class Stair extends Transit {
     points.add(new GridPoint(position.x + 1, position.y + 2));
 
     return points;
+  }
+
+  @Override
+  public GridObjectPopOver makePopOver() {
+    return null;
   }
 }
