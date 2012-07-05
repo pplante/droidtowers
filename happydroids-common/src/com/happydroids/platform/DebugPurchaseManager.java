@@ -4,7 +4,16 @@
 
 package com.happydroids.platform;
 
+import com.happydroids.platform.purchase.DroidTowerVersions;
+
+import java.util.UUID;
+
 public class DebugPurchaseManager extends PlatformPurchaseManger {
+  public DebugPurchaseManager() {
+    super();
+    itemSkus.put(DroidTowerVersions.UNLIMITED_299, DroidTowerVersions.UNLIMITED_299.name());
+  }
+
   @Override
   public void onStart() {
   }
@@ -13,12 +22,9 @@ public class DebugPurchaseManager extends PlatformPurchaseManger {
   public void onResume() {
   }
 
-  @Override
-  public boolean hasPurchasedUnlimitedVersion() {
-    return true;
-  }
 
   @Override
   public void requestPurchase(String itemId) {
+    purchaseItem("debugger", itemId, UUID.randomUUID().toString());
   }
 }

@@ -167,7 +167,6 @@ public class PopOverLayer extends WidgetGroup {
 
       if (hit(touchDown.x, touchDown.y) == null) {
         hide();
-        return true;
       }
 
       return false;

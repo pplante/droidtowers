@@ -253,4 +253,9 @@ public class Elevator extends Transit {
   public GridObjectPopOver makePopOver() {
     return null;
   }
+
+  @Override
+  protected boolean hasPopOver() {
+    return false;
+  }
 }

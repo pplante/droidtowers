@@ -25,7 +25,7 @@ public class GenerateLicenseFileList {
     try {
       ObjectMapper mapper = new ObjectMapper();
       mapper.enable(SerializationFeature.INDENT_OUTPUT);
-      new FileHandle("../android/assets/licenses/index.json").writeString(mapper.writeValueAsString(licenseFiles), false);
+      new FileHandle("assets/licenses/index.json").writeString(mapper.writeValueAsString(licenseFiles), false);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -33,7 +33,7 @@ public class GenerateLicenseFileList {
 
   private static void addDirectoryToAssetManager(String folder, String suffix) {
     for (FileHandle child : assetsDir.child(folder).list(suffix)) {
-      System.out.println("Found license: "+ child.path());
+      System.out.println("Found license: " + child.path());
       licenseFiles.add(child.path().replace("assets/", ""));
     }
   }

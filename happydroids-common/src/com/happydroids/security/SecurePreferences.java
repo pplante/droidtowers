@@ -134,7 +134,8 @@ public class SecurePreferences implements Preferences {
 
   @Override
   public void remove(String key) {
-    preferences.remove(obfuscator.obfuscate(key));
+    String obfuscate = obfuscator.obfuscate(key);
+    preferences.remove(obfuscate);
   }
 
   @Override

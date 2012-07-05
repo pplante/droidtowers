@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -37,7 +38,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     super();
     this.gridObject = gridObject;
 
-    InputSystem.instance().addInputProcessor(new GridObjectPopOverCloser(this), -100);
+    InputSystem.instance().addInputProcessor(new GridObjectPopOverCloser(this), 10);
 
     touchable = true;
     triangle = sprite(TowerAssetManager.WHITE_SWATCH_TRIANGLE_LEFT);
@@ -68,8 +69,6 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
       public void click(Actor actor, float x, float y) {
       }
     });
-
-//    debug();
   }
 
   protected StarRatingBar makeStarRatingBar(String labelText) {
@@ -122,5 +121,10 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
       invalidateHierarchy();
       pack();
     }
+
+    Vector3 vec = new Vector3(gridObject.getWorldCenter().x + (gridObject.getWorldBounds().width / 2), gridObject.getWorldCenter().y - getPrefHeight() / 2, 1f);
+    SceneManager.activeScene().getCamera().project(vec);
+    x = vec.x;
+    y = vec.y;
   }
 }

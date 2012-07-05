@@ -29,7 +29,7 @@ public class GenerateAssetManagerFileList {
 
     preloadFile(assetsDir.child("backgrounds/splash1.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("backgrounds/splash2.txt"), TextureAtlas.class);
-    preloadFile(assetsDir.child("backgrounds/splash-happydroid.txt"), TextureAtlas.class);
+    preloadFile(assetsDir.child("happy-droid.txt"), TextureAtlas.class);
 
     preloadFile(assetsDir.child("default-skin.json"), Skin.class);
     preloadFile(assetsDir.child("backgrounds/clouds.txt"), TextureAtlas.class);
@@ -58,7 +58,7 @@ public class GenerateAssetManagerFileList {
     try {
       ObjectMapper mapper = new ObjectMapper();
       mapper.enable(SerializationFeature.INDENT_OUTPUT);
-      new FileHandle("../android/assets/assets.json").writeString(mapper.writeValueAsString(managedFiles), false);
+      new FileHandle("assets/assets.json").writeString(mapper.writeValueAsString(managedFiles), false);
     } catch (IOException e) {
       e.printStackTrace();
     }

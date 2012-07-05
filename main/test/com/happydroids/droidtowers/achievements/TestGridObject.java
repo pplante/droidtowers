@@ -23,4 +23,9 @@ public class TestGridObject extends GridObject {
   public GridObjectPopOver makePopOver() {
     return null;
   }
+
+  @Override
+  protected boolean hasPopOver() {
+    return false;
+  }
 }

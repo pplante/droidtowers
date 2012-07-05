@@ -109,6 +109,11 @@ public class Room extends GridObject {
     return new RoomPopOver(this);
   }
 
+  @Override
+  protected boolean hasPopOver() {
+    return true;
+  }
+
   private float getTransportModifier() {
     float minDist = Float.MAX_VALUE;
     for (GridPoint gridPoint : getGridPointsTouched()) {

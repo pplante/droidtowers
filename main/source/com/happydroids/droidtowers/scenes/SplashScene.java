@@ -193,7 +193,7 @@ public abstract class SplashScene extends Scene {
   @Override
   public void render(float deltaTime) {
     if (!createdSplashScene) {
-      if (assetManager().isLoaded("backgrounds/splash1.txt") && assetManager().isLoaded("backgrounds/splash2.txt") && assetManager().isLoaded("backgrounds/splash-happydroid.txt")) {
+      if (assetManager().isLoaded("backgrounds/splash1.txt") && assetManager().isLoaded("backgrounds/splash2.txt") && assetManager().isLoaded("happy-droid.txt")) {
         buildSplashScene();
       }
     }
@@ -214,7 +214,7 @@ public abstract class SplashScene extends Scene {
 
     atlas1 = TowerAssetManager.textureAtlas("backgrounds/splash1.txt");
     atlas2 = TowerAssetManager.textureAtlas("backgrounds/splash2.txt");
-    happyDroidAtlas = TowerAssetManager.textureAtlas("backgrounds/splash-happydroid.txt");
+    happyDroidAtlas = TowerAssetManager.textureAtlas("happy-droid.txt");
 
     changeAtlasTextureFilter(atlas1);
     changeAtlasTextureFilter(atlas2);

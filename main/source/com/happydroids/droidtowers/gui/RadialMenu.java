@@ -89,8 +89,8 @@ public class RadialMenu extends WidgetGroup {
 
       if (hit(touchDown.x, touchDown.y) == null) {
         close();
-        return true;
       }
+
       return false;
     }
   };

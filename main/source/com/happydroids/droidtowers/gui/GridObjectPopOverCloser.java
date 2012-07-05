@@ -20,7 +20,7 @@ class GridObjectPopOverCloser extends InputAdapter {
 
     InputSystem.instance().removeInputProcessor(this);
 
-    return true;
+    return false;
   }
 
   @Override

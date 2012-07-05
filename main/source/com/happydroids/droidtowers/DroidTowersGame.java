@@ -245,7 +245,6 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
     SceneManager.activeScene().dispose();
 
     rootUiStage = null;
-    Platform.dispose();
 
     SceneManager.dispose();
     spriteBatch.dispose();
@@ -253,6 +252,7 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
     TowerAssetManager.dispose();
     FontManager.resetAll();
 
+    Platform.dispose();
     System.exit(0);
   }
 
