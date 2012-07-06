@@ -5,6 +5,7 @@
       <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/commons-logging-1.1.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/commons-codec-1.6.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/happydroids-common/libs/sources/commons-codec-1.6-sources.jar!/" />
     </SOURCES>
