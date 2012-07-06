@@ -160,11 +160,15 @@ public class Elevator extends Transit {
 
     selectedResizeHandle = null;
 
-    return false;
+    return true;
   }
 
   @Override
   public boolean pan(GridPoint gridPointAtFinger, GridPoint gridPointDelta) {
+    if (selectedResizeHandle == null) {
+      return false;
+    }
+
     GridPoint newSize = size.cpy();
     GridPoint prevSize = size.cpy();
     GridPoint newPosition = position.cpy();
