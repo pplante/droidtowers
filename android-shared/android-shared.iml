@@ -28,6 +28,11 @@
         <additionalNativeLibs />
       </configuration>
     </facet>
+    <facet type="gwt" name="GWT">
+      <configuration>
+        <setting name="gwtSdkUrl" value="file://$USER_HOME$/Sources/gwt-2.4.0" />
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
@@ -40,6 +45,7 @@
     <orderEntry type="module" module-name="happydroids-common" exported="" />
     <orderEntry type="module" module-name="main" exported="" />
     <orderEntry type="library" exported="" name="gdx-android" level="project" />
+    <orderEntry type="library" name="gwt-user" level="project" />
   </component>
 </module>
 
