@@ -35,658 +35,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="fixed the elevator pan npe bug&#10;improved the fireworks">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/cityscape/large.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/cityscape/medium.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/cityscape/small.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/cityscape-left.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/cityscape-middle.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/cityscape-right.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/clouds/cloud1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/clouds/cloud3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/clouds/cloud5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/droid-towers-logo-unlimited.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/droid-towers-logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/happydroid/happy-droid1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/happydroid/happy-droid2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/happydroid/happy-droid3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/happydroid/happy-droid4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/happydroid/happy-droid5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/happydroid/happy-droid6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/happydroid/happy-droid7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/happydroid/happy-droid8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/main-building.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/backgrounds/splash/sky-gradient.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/characters.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/droid/stationary.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/droid/walk1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/droid/walk2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/droid/walk3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/janitor/stationary.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/janitor/walk1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/janitor/walk2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/janitor/walk3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/maid/stationary.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/maid/walk1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/maid/walk2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/maid/walk3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/security-guard/stationary.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/security-guard/walk1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/security-guard/walk2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/characters/security-guard/walk3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/clouds/cloud1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/clouds/cloud2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/clouds/cloud3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/clouds/cloud4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/fonts/Menlo 14 bold white.GlyphProject" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/fonts/Roboto.GlyphProject" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/fonts/bank gothic 32.GlyphProject" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/fonts/bank gothic 64.GlyphProject" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/fonts/helvetica_neue_10_bold_white.GlyphProject" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/fonts/helvetica_neue_10_bold_white.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/fonts/helvetica_neue_10_bold_white.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/fonts/helvetica_neue_14_black.GlyphProject" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/fonts/helvetica_neue_18.GlyphProject" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/fonts/helvetica_neue_18_white.GlyphProject" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/fonts/hiragino_maru_14.GlyphProject" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons-hd.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/achievements-active1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/achievements-active2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/achievements-active3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/achievements-active4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/achievements-active5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/achievements-active6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/achievements-active7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/achievements.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/audio-off.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/audio-on.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/debug-menu.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/expand-land-left.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/expand-land-right.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/overlay-button.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/tool-commerce.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/tool-housing.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/tool-sell.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/tool-services.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/tool-sprite.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/tool-transit.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/buttons/view-neighbors.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/menus/facebook-logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/menus/google-play-large.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/menus/happy-droids-logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/menus/powered-by-libgdx.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/menus/right-arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/misc.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/rabbit.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/skin/button-down.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/skin/button.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/skin/checkbox-off.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/skin/checkbox-on.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/skin/hdpi/checkbox-off.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/skin/hdpi/checkbox-on.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/skin/hdpi/progress-indeterminate.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/skin/hdpi/slider-handle.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/skin/progress-indeterminate.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/skin/slider-handle.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/skin/text-cursor.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/skin/text-selection.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/snail.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/speech-bubble-box.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/speech-bubble-tip.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/speech-bubble.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/hud/trophy.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-001.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-002.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-003.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-004.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-005.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-006.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-007.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-008.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-009.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-010.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-011.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-012.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-013.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-014.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-015.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-016.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-017.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-018.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-019.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-020.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-021.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-022.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-023.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-024.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-025.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-026.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-027.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-028.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-029.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-030.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-031.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-032.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-033.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-034.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-035.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-036.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-037.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-038.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-039.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-040.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-041.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-042.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-043.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-044.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-045.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-046.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-047.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-048.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-049.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-050.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-051.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-052.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-053.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-054.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-055.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-056.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-057.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-058.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-059.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-060.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-061.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-062.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-063.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-064.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-065.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-066.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-067.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-068.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-069.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-070.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-071.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-072.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-073.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-074.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-075.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-076.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-077.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-078.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-079.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-080.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-081.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-082.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-083.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-084.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-085.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-086.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-087.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-088.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-089.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-090.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-091.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-092.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-093.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-094.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-095.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-096.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-097.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-098.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-099.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-100.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-101.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-102.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-103.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-104.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-105.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-106.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-107.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-108.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-109.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-110.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-111.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-112.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-113.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-114.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-115.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-116.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-117.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-118.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-119.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-120.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-121.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-122.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-123.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-124.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-125.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-126.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-127.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-128.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-129.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-130.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-131.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-132.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-133.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-134.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-135.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-136.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-137.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-138.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-139.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-140.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-141.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-142.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-143.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-144.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-145.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-146.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-147.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-148.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-149.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-150.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-151.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-152.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-153.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-154.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-155.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-156.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-157.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-158.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-159.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-160.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-161.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-162.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-163.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-164.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-165.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-166.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-167.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-168.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-169.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-170.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-171.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-172.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-173.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-174.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-175.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-176.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-177.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-178.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-179.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-180.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-181.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-182.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-183.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-184.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-185.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-186.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-187.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-188.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-189.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-190.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-191.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-192.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-193.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-194.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-195.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-196.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-197.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-198.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-199.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-200.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-201.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-202.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-203.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-204.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-205.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-206.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-207.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-208.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-209.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-210.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-211.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-212.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-213.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-214.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-215.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-216.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-217.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-218.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-219.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-220.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-221.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-222.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-223.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-224.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-225.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-226.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-227.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-228.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-229.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-230.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-231.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-232.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-233.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-234.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-235.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-236.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-237.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-238.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-239.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-240.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-241.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-242.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-243.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-244.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-245.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-246.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-247.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-248.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-249.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-250.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-251.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-252.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-253.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-254.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-255.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-256.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-257.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-258.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-259.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-260.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-261.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-262.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-263.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-264.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-265.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-266.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-267.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-268.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-269.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-270.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-271.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-272.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-273.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-274.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-275.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-276.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-277.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-278.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-279.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-280.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-281.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-282.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-283.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-284.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-285.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-286.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-287.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-288.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-289.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-290.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-291.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-292.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-293.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-294.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-295.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-296.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-297.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-298.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-299.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-300.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/movies/avengers/image-301.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/Apartment.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/Condo_256.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/Hotel_Room.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/Maids.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/MovieTheater_off.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/MovieTheater_on.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/Security.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/background1.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/bathroom.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/city scape.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/clouds.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/decals.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/default-skin.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/droid.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/elevator shaft.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/expand land.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/fireworks.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/game speed.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/ground.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/gui skin/button.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/gui skin/checkbox - toggle-hdpi.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/gui skin/checkbox - toggle.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/gui skin/checkbox.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/gui skin/cursor.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/gui skin/slider.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/janitor.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/janitors closet.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/large apartment.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/maid.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/main lobby.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/rain.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/security-guard.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/sky lobby.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/smoke.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/splash screen.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/stairs.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/star.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/tool sprite.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/tower-tiles.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/web dialog close button.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/psds/window-bg.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/commercial/2x1-bar.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/commercial/2x1-sushi.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/commercial/3x1-burger-joint.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/commercial/3x1-pizza-place.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/commercial/3x1-small-office.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/commercial/4x1-movie-theater.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/commercial/5x1-large-office.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/generic/4x1-lobby.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/generic/4x1-sky-lobby.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/generic/lobby-left.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/generic/lobby-right.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/housing/2x1-hotel-room.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/housing/3x1-small-apartment.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/housing/3x1-small-condo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/housing/4x1-large-apartment.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/housing/4x1-large-condo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/housing/5x1-penthouse.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/services/1x1-bathroom.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/services/2x1-maids-closet.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/services/4x1-janitors-closet.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/services/4x1-security-center.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/rooms/services/bathroom.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/texturepacker/background1.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/texturepacker/cityscape.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/texturepacker/clouds.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/texturepacker/elevator.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/texturepacker/generic rooms.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/texturepacker/housing.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/texturepacker/hud-buttons.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/texturepacker/menus.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/texturepacker/skin-hd.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/texturepacker/skin.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/texturepacker/splash - happydroid.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/texturepacker/splash.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/texturepacker/splash1.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/texturepacker/splash2.tps" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/transport/elevator/bottom.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/transport/elevator/car.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/transport/elevator/empty.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/transport/elevator/service-car.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/transport/elevator/shaft.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/transport/elevator/top.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets-raw/assets-raw/transport/stairs.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/assets.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/backgrounds/cityscape.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/backgrounds/cityscape.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/backgrounds/clouds.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/backgrounds/clouds.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/backgrounds/ground-tile.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/backgrounds/ground-top.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/backgrounds/sky-gradient.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/backgrounds/splash-skygradient.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/backgrounds/splash1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/backgrounds/splash1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/backgrounds/splash2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/backgrounds/splash2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/backgrounds/tower-sign.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/characters.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/characters.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/decals.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/default-skin-hd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/default-skin.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/default-skin.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/elevator/empty.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/elevator/shaft.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/bank_gothic_32.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/bank_gothic_32.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/bank_gothic_64.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/bank_gothic_64.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/helvetica_neue_10_bold_white.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/helvetica_neue_10_bold_white.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/helvetica_neue_12_white.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/helvetica_neue_12_white.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/helvetica_neue_14_black.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/helvetica_neue_14_black.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/helvetica_neue_18.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/helvetica_neue_18.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/helvetica_neue_18_white.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/helvetica_neue_18_white.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/hiragino_maru_14_white.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/hiragino_maru_14_white.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/menlo_14_bold_white.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/menlo_14_bold_white.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/menlo_16.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/menlo_16.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_bold_white_18.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_bold_white_18.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_12.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_12.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_128.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_128.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_14.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_14.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_18.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_18.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_24.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_24.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_28.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_28.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_32.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_32.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_36.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_36.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_48.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_48.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_64.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_64.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_96.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_96.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_with_shadow_64.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_with_shadow_64.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_with_shadow_96.fnt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/fonts/roboto_white_with_shadow_96.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/generators/corporations.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/generators/places.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/happy-droid.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/happy-droid.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/action-bar.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/buttons-hd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/buttons-hd.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/buttons.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/buttons.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/dialog-bg.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/menus-hd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/menus-hd.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/menus.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/menus.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/misc.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/misc.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/skin.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/skin.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/star-hd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/star-white-hd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/star-white.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/star.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/trophy.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/hud/window-bg.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/licenses/android-billing-library.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/licenses/apache-httpclient.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/licenses/guava.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/licenses/index.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/licenses/jackson.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/licenses/libgdx.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/licenses/universal-tween.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/movies/avengers.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/movies/avengers.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/params/achievements.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/params/commercial-spaces.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/params/elevators.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/params/rooms.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/params/services.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/params/stairs.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/params/tutorial-steps.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/particles/firework-smoke.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/particles/firework-spark.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/particles/firework.p" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/particles/smoke.p" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/particles/smoke.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/particles/solid.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/particles/spark.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/particles/sparkle.p" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/particles/star.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/rain-drop.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/rooms/generic.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/rooms/generic.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/rooms/housing.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/rooms/housing.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/sound/effects/click.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/sound/effects/construction-destroy-1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/sound/effects/construction-placement-1.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/sound/music/happy-upbeat.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/sound/music/nighttime.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/sound/music/tower-jam.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/swatches/drop-shadow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/swatches/modal-noise.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/swatches/swatch-white-black-border.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/swatches/swatch-white-semi-black-border.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/swatches/swatch-white-triangle-hd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/swatches/swatch-white-triangle-left-hd.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/swatches/swatch-white-triangle-left.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/swatches/swatch-white-triangle.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/swatches/swatch-white.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/testers.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/tiles/blank-tower.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/tower-sign-poll.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/tower-sign.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/transport.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/assets/assets/transport.txt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/androidDexCompiler.xml" afterPath="$PROJECT_DIR$/.idea/androidDexCompiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/DesktopGame.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/DesktopGame.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-amazon/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android-amazon/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-amazon/android-amazon.iml" afterPath="$PROJECT_DIR$/android-amazon/android-amazon.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-amazon/custom_rules.xml" afterPath="$PROJECT_DIR$/android-amazon/custom_rules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-google/android-google.iml" afterPath="$PROJECT_DIR$/android-google/android-google.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-google/custom_rules.xml" afterPath="$PROJECT_DIR$/android-google/custom_rules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-shared/android-shared.iml" afterPath="$PROJECT_DIR$/android-shared/android-shared.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-shared/src/com/happydroids/platform/TowerWebBrowser.java" afterPath="$PROJECT_DIR$/android-shared/src/com/happydroids/platform/TowerWebBrowser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-release.py" afterPath="$PROJECT_DIR$/build-release.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/desktop.iml" afterPath="$PROJECT_DIR$/desktop/desktop.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" afterPath="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/happydroids-common.iml" afterPath="$PROJECT_DIR$/happydroids-common/happydroids-common.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html5/html5.iml" afterPath="$PROJECT_DIR$/html5/html5.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/main.iml" afterPath="$PROJECT_DIR$/main/main.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TowerWindow.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TowerWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline/pipeline.iml" afterPath="$PROJECT_DIR$/pipeline/pipeline.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/jarbundler/Jarbundler.iml" afterPath="$PROJECT_DIR$/tools/jarbundler/Jarbundler.iml" />
     </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -804,13 +153,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HappyDroidConsts.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
+      <file leaf-file-name="build.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="0" selection-start="0" selection-end="1142" vertical-scroll-proportion="0.7375746">
-              <folding>
-                <element signature="e#0#1142#0" expanded="true" />
-              </folding>
+            <state line="113" column="90" selection-start="4614" selection-end="4614" vertical-scroll-proportion="0.5074627">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -835,15 +182,15 @@
         <option value="$PROJECT_DIR$/html5/src/com/happydroids/droidtowers/client/GwtLauncher.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TowerWindow.java" />
         <option value="$PROJECT_DIR$/android-shared/src/com/happydroids/platform/TowerWebBrowser.java" />
-        <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/android-amazon/custom_rules.xml" />
         <option value="$PROJECT_DIR$/android-google/custom_rules.xml" />
         <option value="$PROJECT_DIR$/android-amazon/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AboutWindow.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
-        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
         <option value="$PROJECT_DIR$/build-release.py" />
+        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
+        <option value="$PROJECT_DIR$/build.xml" />
       </list>
     </option>
   </component>
@@ -1057,6 +404,20 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="android-platform" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="droidtowers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleGroupNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-shared" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1660,7 +1021,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32818532" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.81724584" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3011583" sideWeight="0.38235295" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3011583" sideWeight="0.38235295" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24892396" sideWeight="0.63799745" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31964058" sideWeight="0.51508623" order="3" side_tool="false" content_ui="tabs" />
@@ -1888,11 +1249,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DroidTowersGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="9" selection-start="2736" selection-end="2736" vertical-scroll-proportion="0.3572395" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerAssetManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="120" column="0" selection-start="5312" selection-end="5312" vertical-scroll-proportion="0.4046008" />
@@ -1932,13 +1288,6 @@
     <entry file="file://$PROJECT_DIR$/android-amazon/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="38" selection-start="342" selection-end="342" vertical-scroll-proportion="0.264">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="323" column="25" selection-start="11917" selection-end="11917" vertical-scroll-proportion="0.58208954">
           <folding />
         </state>
       </provider>
@@ -1987,10 +1336,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="0" selection-end="1142" vertical-scroll-proportion="0.7375746">
+        <state line="17" column="0" selection-start="0" selection-end="1150" vertical-scroll-proportion="0.7375746">
           <folding>
-            <element signature="e#0#1142#0" expanded="true" />
+            <element signature="e#0#1150#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-shared/custom_rules.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="12" selection-start="1504" selection-end="1757" vertical-scroll-proportion="0.61866665">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="113" column="90" selection-start="4614" selection-end="4614" vertical-scroll-proportion="0.5074627">
+          <folding />
         </state>
       </provider>
     </entry>

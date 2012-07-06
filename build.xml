@@ -111,7 +111,7 @@
     </javac2>
     <java classname="com.happydroids.droidtowers.pipeline.GenerateAssetManagerFileList"
           classpath="${build.dir}/tool-classes/"
-          failonerror="true" classpathref="classpath" fork="true" dir="${root.dir}"/>
+          failonerror="true" classpathref="classpath" fork="true" dir="${droidtowers.main}"/>
 
     <javac2 destdir="${classes.dir}" debug="${compiler.debug}">
       <classpath refid="classpath"/>
@@ -122,8 +122,7 @@
   </target>
 
   <target name="jar" depends="compile">
-    <jar destfile="${release-jar}" basedir="${build.dir}/classes"
-         filesetmanifest="mergewithoutmain" duplicate="preserve">
+    <jar destfile="${release-jar}" filesetmanifest="mergewithoutmain" duplicate="preserve">
       <manifest>
         <attribute name="Main-Class" value="com.happydroids.droidtowers.DesktopGame"/>
         <attribute name="Class-Path" value="."/>
@@ -132,7 +131,7 @@
       <zipgroupfileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
       <zipgroupfileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
       <zipgroupfileset dir="${droidtowers.desktop.libs}" includes="**/*.jar"/>
-      <zipfileset dir="${root.dir}/assets/"/>
+      <zipfileset dir="${droidtowers.main}/assets"/>
     </jar>
   </target>
 
