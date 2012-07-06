@@ -8,3 +8,4 @@ android-amazon/assets
 android-google/assets
 libbullet.so
 sparky/tmp/
+local.properties

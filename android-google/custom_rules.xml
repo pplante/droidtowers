@@ -3,7 +3,7 @@
   ~ Copyright (c) 2012. HappyDroids LLC, All rights reserved.
   -->
 
-<project name="android_google" default="help">
+<project name="android_google-custom" default="help">
   <property name="root.dir" value="../"/>
 
   <property name="droidtowers.android-shared" value="${root.dir}/android-shared"/>
