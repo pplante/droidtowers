@@ -34,9 +34,7 @@
     <bookmark url="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/PlatformProtocolHandler.java" line="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="fixed the elevator pan npe bug&#10;improved the fireworks">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-    </list>
+    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="fixed the elevator pan npe bug&#10;improved the fireworks" />
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />

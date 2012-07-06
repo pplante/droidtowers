@@ -91,7 +91,7 @@ if __name__ == '__main__':
 
         ant('release', _fg=True)
 
-        root_dir = pwd()
+        root_dir = pwd().strip()
 
         cd('%s/android-google' % (root_dir,))
 
