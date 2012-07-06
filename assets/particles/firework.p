@@ -68,7 +68,7 @@ highMin: 64.0
 highMax: 64.0
 relative: false
 scalingCount: 2
-scaling0: 0.49019608
+scaling0: 0.0
 scaling1: 1.0
 timelineCount: 2
 timeline0: 0.0
@@ -129,12 +129,12 @@ timeline1: 0.369863
 timeline2: 0.53424656
 - Tint - 
 colorsCount: 6
-colors0: 0.7411765
-colors1: 0.7411765
-colors2: 0.7411765
-colors3: 1.0
-colors4: 1.0
-colors5: 1.0
+colors0: 0.37254903
+colors1: 0.37254903
+colors2: 0.37254903
+colors3: 0.8
+colors4: 0.8
+colors5: 0.8
 timelineCount: 2
 timeline0: 0.0
 timeline1: 1.0
@@ -145,21 +145,21 @@ highMin: 1.0
 highMax: 1.0
 relative: false
 scalingCount: 3
-scaling0: 0.0
-scaling1: 1.0
+scaling0: 0.47368422
+scaling1: 0.64912283
 scaling2: 0.0
 timelineCount: 3
 timeline0: 0.0
-timeline1: 0.14383562
+timeline1: 0.5068493
 timeline2: 1.0
 - Options - 
 attached: false
 continuous: false
 aligned: false
-additive: false
+additive: true
 behind: true
 - Image Path -
-Z:\pplante On My Mac\Projects\testgame\assets\particles\firework-smoke.png
+/Users/pplante/Projects/testgame/assets/particles/firework-smoke.png
 
 
 elipse
@@ -320,4 +320,4 @@ aligned: false
 additive: false
 behind: false
 - Image Path -
-Z:\pplante On My Mac\Projects\testgame\assets\particles\firework-spark.png
+/Users/pplante/Projects/testgame/assets/particles/firework-spark.png
