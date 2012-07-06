@@ -35,14 +35,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="fixed the elevator pan npe bug&#10;improved the fireworks">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android-google/gen/com/happydroids/droidtowers/BuildConfig.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android-google/gen/com/happydroids/droidtowers/Manifest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android-google/gen/com/happydroids/droidtowers/R.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android-shared/gen/com/happydroids/android/BuildConfig.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android-shared/gen/com/happydroids/android/Manifest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android-shared/gen/com/happydroids/android/R.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-shared/custom_rules.xml" afterPath="$PROJECT_DIR$/android-shared/custom_rules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android-amazon/custom_rules.xml" />
     </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -160,50 +153,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="JacksonTransformer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/happydroids-common/src/sk/seges/acris/json/server/migrate/JacksonTransformer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="5" selection-start="2391" selection-end="2391" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#2398#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FireWorksLayer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/FireWorksLayer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="92" column="51" selection-start="3526" selection-end="3526" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#4284#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android-google/build.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="23" selection-start="2795" selection-end="2795" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="custom_rules.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android-google/custom_rules.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="11" selection-start="1145" selection-end="1145" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="custom_rules.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/android-shared/custom_rules.xml">
+        <entry file="file://$PROJECT_DIR$/android-amazon/custom_rules.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="50" selection-start="1744" selection-end="1744" vertical-scroll-proportion="0.73670214">
+            <state line="22" column="0" selection-start="1046" selection-end="1046" vertical-scroll-proportion="0.6549391">
               <folding />
             </state>
           </provider>
@@ -222,7 +175,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/audio/GameSoundController.java" />
         <option value="$PROJECT_DIR$/android-google/local.properties" />
         <option value="$PROJECT_DIR$/android-google/build.xml" />
         <option value="$PROJECT_DIR$/android-shared/project.properties" />
@@ -238,6 +190,7 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/FireWorksLayer.java" />
         <option value="$PROJECT_DIR$/android-google/custom_rules.xml" />
         <option value="$PROJECT_DIR$/android-shared/custom_rules.xml" />
+        <option value="$PROJECT_DIR$/android-amazon/custom_rules.xml" />
       </list>
     </option>
   </component>
@@ -463,87 +416,21 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleGroupNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="android-shared" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="droidtowers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android-platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleGroupNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android-shared" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="happydroids" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="droidtowers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android-platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleGroupNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android-shared" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="happydroids" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="droidtowers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android-platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleGroupNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android-shared" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="droidtowers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android-platform" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleGroupNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="android-google" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="droidtowers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleGroupNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-amazon" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -614,6 +501,7 @@
       <recent name="net.robotmedia.billing.utils" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/android-amazon" />
       <recent name="$PROJECT_DIR$/android/assets/licenses" />
     </key>
     <key name="IntroduceConstantDialog.RECENTS_KEY">
@@ -1444,6 +1332,13 @@
     <entry file="file://$PROJECT_DIR$/android-shared/custom_rules.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="37" column="50" selection-start="1744" selection-end="1744" vertical-scroll-proportion="0.73670214">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-amazon/custom_rules.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="0" selection-start="1046" selection-end="1046" vertical-scroll-proportion="0.6549391">
           <folding />
         </state>
       </provider>
