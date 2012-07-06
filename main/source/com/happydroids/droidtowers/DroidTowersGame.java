@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.actions.ActionManager;
+import com.happydroids.droidtowers.actions.TimeDelayedAction;
 import com.happydroids.droidtowers.audio.GameSoundController;
 import com.happydroids.droidtowers.controllers.PathSearchManager;
 import com.happydroids.droidtowers.entities.GameObject;
@@ -92,8 +93,6 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
       spriteBatchFBO = new SpriteBatch();
     }
 
-    soundController = new GameSoundController();
-
     if (DEBUG) {
       Gdx.app.error("DEBUG", "Debug mode is enabled!");
       Gdx.app.setLogLevel(Application.LOG_DEBUG);
@@ -102,6 +101,14 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
     }
 
     TowerAssetManager.assetManager();
+
+    ActionManager.instance().addAction(new TimeDelayedAction(1f) {
+      @Override
+      public void run() {
+        soundController = new GameSoundController();
+        markToRemove();
+      }
+    });
 
     TowerGameService.instance().afterAuthentication(new Runnable() {
       @Override
@@ -117,7 +124,6 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
     Platform.getPurchaseManager().events().register(new InGamePurchaseReceiver());
 
     NameGenerator.initialize();
-
     RoomTypeFactory.instance();
     CommercialTypeFactory.instance();
     ServiceRoomTypeFactory.instance();
@@ -165,7 +171,9 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
     InputSystem.instance().update(deltaTime);
     PathSearchManager.instance().update(deltaTime);
     TweenSystem.manager().update((int) (deltaTime * 1000 * SceneManager.activeScene().getTimeMultiplier()));
-    soundController.update(deltaTime);
+    if (soundController != null) {
+      soundController.update(deltaTime);
+    }
 
     spriteBatch.setProjectionMatrix(SceneManager.activeScene().getCamera().combined);
 

@@ -4,7 +4,9 @@
       <root url="file://$PROJECT_DIR$/happydroids-common/libs/main/commons-io-2.2" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/happydroids-common/libs/sources/commons-io-2.2-sources.jar!/" />
+    </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/happydroids-common/libs/main/commons-io-2.2" recursive="false" />
   </library>
 </component>

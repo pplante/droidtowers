@@ -4,27 +4,18 @@
 
 package com.happydroids.platform.purchase;
 
-import com.google.common.collect.Maps;
 import com.happydroids.droidtowers.DroidTowersGooglePlay;
 import com.happydroids.platform.PlatformPurchaseManger;
-
-import java.util.HashMap;
 
 import static com.happydroids.platform.purchase.DroidTowerVersions.UNLIMITED_299;
 
 public class GooglePlayPurchaseManager extends PlatformPurchaseManger {
-  private static DroidTowersGooglePlay droidTowersGooglePlay;
-  private static DroidTowersGooglePlay activity;
-  private final HashMap<Object, Object> itemSkus;
+  private DroidTowersGooglePlay droidTowersGooglePlay;
 
 
   public GooglePlayPurchaseManager(DroidTowersGooglePlay droidTowersGooglePlay) {
-    itemSkus = Maps.newHashMap();
+    this.droidTowersGooglePlay = droidTowersGooglePlay;
     itemSkus.put(UNLIMITED_299, "com.happydroids.droidtowers.version.unlimited299");
-  }
-
-  public static void setActivity(DroidTowersGooglePlay activity) {
-    GooglePlayPurchaseManager.droidTowersGooglePlay = activity;
   }
 
   @Override

@@ -2,6 +2,9 @@
 Thumbs.db
 sparky/bin/
 out/
-android/gen
+gen
+bin
+android-amazon/assets
+android-google/assets
 libbullet.so
 sparky/tmp/

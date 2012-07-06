@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.pipeline;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -45,6 +46,7 @@ public class GenerateAssetManagerFileList {
     addDirectoryToAssetManager("hud/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("rooms/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("sound/effects/", ".wav", Sound.class);
+    addDirectoryToAssetManager("sound/music/", ".mp3", Music.class);
 
     addFileEntry(assetsDir.child("characters.txt"), TextureAtlas.class);
     addFileEntry(assetsDir.child("transport.txt"), TextureAtlas.class);

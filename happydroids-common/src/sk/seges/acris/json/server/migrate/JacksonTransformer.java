@@ -4,9 +4,9 @@
 
 package sk.seges.acris.json.server.migrate;
 
+import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.io.IOUtils;
 
 import javax.script.ScriptException;
 import java.io.*;
@@ -18,6 +18,9 @@ import java.io.*;
  * @see sk.seges.acris.json.server.migrate.JacksonTransformationScript
  */
 public class JacksonTransformer extends Transformer<String> {
+  private static final String TAG = JacksonTransformer.class.getSimpleName();
+  private static final int EOF = -1;
+
   private final String fileName;
 
   public JacksonTransformer(InputStream inputStream, String fileName) throws ScriptException, FileNotFoundException {
@@ -31,7 +34,7 @@ public class JacksonTransformer extends Transformer<String> {
     ObjectMapper mapper = new ObjectMapper();
     try {
       JsonNode jsonNode = mapper.readValue(input, JsonNode.class);
-      System.out.println("Executing migration: " + transformationClass.getSimpleName());
+      Gdx.app.debug(TAG, "Executing migration: " + transformationClass.getSimpleName());
       JacksonTransformationScript transformation = transformationClass.newInstance();
 
       transformation.process(jsonNode, fileName);
@@ -45,7 +48,7 @@ public class JacksonTransformer extends Transformer<String> {
   @Override
   public byte[] process() throws IOException {
     byte bytes[] = new byte[inputStream.available()];
-    IOUtils.readFully(inputStream, bytes);
+    readFully(inputStream, bytes);
     ByteArrayOutputStream output = new ByteArrayOutputStream();
     for (Class<? extends JacksonTransformationScript> transformClass : transforms) {
       ByteArrayInputStream input = new ByteArrayInputStream(bytes);
@@ -53,5 +56,19 @@ public class JacksonTransformer extends Transformer<String> {
     }
 
     return bytes;
+  }
+
+  private void readFully(InputStream inputStream, byte[] bytes) throws IOException {
+    int length = bytes.length;
+    int remaining = length;
+
+    while (remaining > 0) {
+      int location = length - remaining;
+      int count = inputStream.read(bytes, location, remaining);
+      if (EOF == count) { // EOF
+        break;
+      }
+      remaining -= count;
+    }
   }
 }

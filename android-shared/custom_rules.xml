@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+  -->
+
+<project name="android_google" default="help">
+  <property name="root.dir" value="../"/>
+  <property name="tools.dir" value="${root.dir}/tools"/>
+
+  <property name="happydroids.common" value="${root.dir}/happydroids-common"/>
+  <property name="happydroids.common.source" value="${happydroids.common}/src"/>
+  <property name="happydroids.common.libs" value="${happydroids.common}/libs/main"/>
+
+  <property name="droidtowers.main" value="${root.dir}/main"/>
+  <property name="droidtowers.main.source" value="${droidtowers.main}/source"/>
+  <property name="droidtowers.main.libs" value="${droidtowers.main}/libs/main"/>
+
+  <property name="droidtowers.android-shared" value="${root.dir}/android-shared"/>
+  <property name="droidtowers.android-shared.source" value="${droidtowers.android-shared}/src"/>
+  <property name="droidtowers.android-shared.libs" value="${droidtowers.android-shared}/libs"/>
+
+  <path id="happydroids-classpath">
+    <fileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
+    <fileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
+    <file file="${tools.dir}/jsr305-2.0.0.jar"/>
+  </path>
+
+  <target name="-pre-build">
+    <mkdir dir="${out.dir}/classes-shared"/>
+    <javac destdir="${out.dir}/classes-shared" classpathref="happydroids-classpath">
+      <src path="${happydroids.common.source}"/>
+      <src path="${droidtowers.main.source}"/>
+    </javac>
+
+    <jar destfile="${droidtowers.android-shared.libs}/droidtowers-shared.jar"
+         filesetmanifest="mergewithoutmain" duplicate="fail">
+      <fileset dir="${out.dir}/classes-shared"/>
+    </jar>
+    <copy todir="${droidtowers.android-shared.libs}" verbose="true">
+      <fileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
+      <fileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
+    </copy>
+  </target>
+</project>

@@ -45,13 +45,13 @@ public class ExpandLandOverlay extends WidgetGroup {
     leftButton = new ExpandLandButton("left");
     leftButton.visible = false;
     leftButton.x = 5;
-    leftButton.y = Gdx.graphics.getHeight() / 2;
+    leftButton.y = (Gdx.graphics.getHeight() - leftButton.height) / 2;
     addActor(leftButton);
 
     rightButton = new ExpandLandButton("right");
     rightButton.visible = false;
     rightButton.x = Gdx.graphics.getWidth() - rightButton.width - 5;
-    rightButton.y = Gdx.graphics.getHeight() / 2;
+    rightButton.y = (Gdx.graphics.getHeight() - rightButton.height) / 2;
     addActor(rightButton);
 
     leftButton.setClickListener(new ClickListener() {

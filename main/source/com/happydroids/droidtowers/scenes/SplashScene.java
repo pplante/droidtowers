@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Scaling;
+import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.entities.SplashCloudLayer;
 import com.happydroids.droidtowers.gui.AnimatedImage;
@@ -199,7 +200,7 @@ public abstract class SplashScene extends Scene {
     }
 
 
-    if (!createdAudioControls && TowerAssetManager.isLoaded("hud/buttons.txt")) {
+    if (!createdAudioControls && TowerAssetManager.isLoaded("hud/buttons.txt") && DroidTowersGame.getSoundController() != null) {
       createdAudioControls = true;
 
       AudioControl audioControl = new AudioControl(TowerAssetManager.textureAtlas("hud/buttons.txt"));

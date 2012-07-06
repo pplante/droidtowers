@@ -8,7 +8,6 @@ package com.happydroids.droidtowers;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.util.DisplayMetrics;
-import android.widget.Toast;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.happydroids.HappyDroidConsts;
@@ -96,7 +95,6 @@ public class DroidTowersGooglePlay extends AndroidApplication implements Billing
     // notifications after
     // destroy
     BillingController.setConfiguration(null);
-    GooglePlayPurchaseManager.setActivity(null);
   }
 
   private void onRequestPurchaseResponse(String itemId, BillingRequest.ResponseCode response) {
@@ -153,7 +151,6 @@ public class DroidTowersGooglePlay extends AndroidApplication implements Billing
   public void restoreTransactions() {
     if (!mBillingObserver.isTransactionsRestored()) {
       BillingController.restoreTransactions(this);
-      Toast.makeText(this, "Restoring previously purchased items.", Toast.LENGTH_LONG).show();
     }
   }
 

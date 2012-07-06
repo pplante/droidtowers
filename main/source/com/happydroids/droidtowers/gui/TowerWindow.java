@@ -67,7 +67,7 @@ public class TowerWindow {
     wrapper.size((int) stage.width(), (int) stage.height());
 
     titleLabel = FontManager.Roboto32.makeLabel(Strings.truncate(title, 40));
-    closeButton = FontManager.Roboto18.makeTransparentButton("« back", rgba("#007399"), Colors.DARK_GRAY);
+    closeButton = FontManager.Roboto18.makeTransparentButton("< back", rgba("#007399"), Colors.DARK_GRAY);
     closeButtonLine = new VerticalRule(scale(2));
 
     Table topBar = new Table();

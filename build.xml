@@ -111,7 +111,7 @@
     </javac2>
     <java classname="com.happydroids.droidtowers.pipeline.GenerateAssetManagerFileList"
           classpath="${build.dir}/tool-classes/"
-          failonerror="true" classpathref="classpath" fork="true" dir="${root.dir}/android"/>
+          failonerror="true" classpathref="classpath" fork="true" dir="${root.dir}"/>
 
     <javac2 destdir="${classes.dir}" debug="${compiler.debug}">
       <classpath refid="classpath"/>
@@ -132,7 +132,7 @@
       <zipgroupfileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
       <zipgroupfileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
       <zipgroupfileset dir="${droidtowers.desktop.libs}" includes="**/*.jar"/>
-      <zipfileset dir="${root.dir}/android/assets/"/>
+      <zipfileset dir="${root.dir}/assets/"/>
     </jar>
   </target>
 
@@ -164,7 +164,6 @@
         <method name="main"/>
       </keep>
       <keep name="com.happydroids.server.**" allowobfuscation="false" allowoptimization="false" allowshrinking="false">
-        <method name="main"/>
         <constructor/>
         <method/>
         <field/>
@@ -316,5 +315,17 @@
       <arg value="DroidTowers.zip"/>
       <arg value="DroidTowers.app"/>
     </exec>
+  </target>
+
+
+  <target name="sync-android-assets">
+    <mkdir dir="android-amazon/assets"/>
+    <sync todir="android-amazon/assets" includeemptydirs="true" overwrite="true" failonerror="true">
+      <fileset dir="assets" followsymlinks="true"/>
+    </sync>
+    <mkdir dir="android-google/assets"/>
+    <sync todir="android-google/assets" includeemptydirs="true" overwrite="true" failonerror="true">
+      <fileset dir="assets" followsymlinks="true"/>
+    </sync>
   </target>
 </project>

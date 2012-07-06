@@ -1,4 +1,4 @@
-splash-happydroid.png
+happy-droid.png
 format: RGBA8888
 filter: MipMapNearestNearest,Linear
 repeat: none
