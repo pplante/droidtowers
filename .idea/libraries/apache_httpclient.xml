@@ -5,7 +5,6 @@
       <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/httpcore-4.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/httpmime-4.2.jar!/" />
     </CLASSES>
-    <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/happydroids-common/libs/sources/httpclient-4.2-sources.jar!/" />
     </SOURCES>

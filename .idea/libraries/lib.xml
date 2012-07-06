@@ -4,7 +4,6 @@
       <root url="jar://$PROJECT_DIR$/html5/war/WEB-INF/lib/gdx-backend-gwt.jar!/" />
       <root url="jar://$PROJECT_DIR$/html5/war/WEB-INF/lib/gdx-backend-gwt-sources.jar!/" />
     </CLASSES>
-    <JAVADOC />
     <SOURCES />
   </library>
 </component>

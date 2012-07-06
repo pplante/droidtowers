@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
-    <exclude-output />
+  <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
@@ -15,7 +14,6 @@
           <root url="jar://$MODULE_DIR$/../main/libs/main/jackson-core-2.0.0.jar!/" />
           <root url="jar://$MODULE_DIR$/../main/libs/main/jackson-databind-2.0.0.jar!/" />
         </CLASSES>
-        <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
@@ -29,7 +27,6 @@
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../main/libs/main/gdx.jar!/" />
         </CLASSES>
-        <JAVADOC />
         <SOURCES>
           <root url="jar://$MODULE_DIR$/../main/libs/sources/gdx-sources.jar!/" />
         </SOURCES>

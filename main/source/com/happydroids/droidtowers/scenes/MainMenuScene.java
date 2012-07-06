@@ -41,7 +41,7 @@ public class MainMenuScene extends SplashScene {
 
     cloudGameSaves = new CloudGameSaveCollection();
 
-    Label versionLabel = FontManager.Default.makeLabel(String.format("%s (%s, %s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA.substring(0, 8), HappyDroidService.getDeviceOSMarketName()));
+    Label versionLabel = FontManager.Default.makeLabel(String.format("v%s (%s, %s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA.substring(0, 8), HappyDroidService.getDeviceOSMarketName()));
     versionLabel.setColor(Color.DARK_GRAY);
     versionLabel.x = getStage().width() - versionLabel.width - 5;
     versionLabel.y = getStage().height() - versionLabel.height - 5;

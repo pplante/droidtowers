@@ -21,6 +21,8 @@ import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
 
 import static com.happydroids.droidtowers.ColorUtil.rgba;
+import static com.happydroids.droidtowers.gui.FontManager.Roboto18;
+import static com.happydroids.droidtowers.gui.FontManager.Roboto32;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class TowerWindow {
@@ -66,8 +68,8 @@ public class TowerWindow {
     wrapper.setBackground(new NinePatch(texture));
     wrapper.size((int) stage.width(), (int) stage.height());
 
-    titleLabel = FontManager.Roboto32.makeLabel(Strings.truncate(title, 40));
-    closeButton = FontManager.Roboto18.makeTransparentButton("< back", rgba("#007399"), Colors.DARK_GRAY);
+    titleLabel = Roboto32.makeLabel(Strings.truncate(title, 40));
+    closeButton = Roboto18.makeTransparentButton("< back", rgba("#007399"), Colors.DARK_GRAY);
     closeButtonLine = new VerticalRule(scale(2));
 
     Table topBar = new Table();

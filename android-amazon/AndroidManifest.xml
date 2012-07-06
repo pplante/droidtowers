@@ -7,7 +7,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.happydroids.droidtowers"
           android:versionCode="102"
-          android:versionName="v0.30.5">
+          android:versionName="0.30.5">
 
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>

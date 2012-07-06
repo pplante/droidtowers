@@ -3,7 +3,6 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/main/libs/main/prettytime-1.0.8.Final.jar!/" />
     </CLASSES>
-    <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/main/libs/sources/prettytime-1.0.8.Final-sources.jar!/" />
     </SOURCES>

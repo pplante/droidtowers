@@ -3,7 +3,6 @@
     <CLASSES>
       <root url="file://$PROJECT_DIR$/main/libs/main" />
     </CLASSES>
-    <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/main/libs/sources/tween-engine-api-sources.jar!/" />

@@ -17,7 +17,7 @@
   <target name="-pre-build">
     <mkdir dir="${droidtowers.android-google}/assets"/>
     <sync todir="${droidtowers.android-google}/assets" includeemptydirs="true" overwrite="true" failonerror="true">
-      <fileset dir="${root.dir}/assets" followsymlinks="true"/>
+      <fileset dir="${root.dir}/main/assets" followsymlinks="true"/>
     </sync>
   </target>
 

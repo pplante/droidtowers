@@ -321,11 +321,11 @@
   <target name="sync-android-assets">
     <mkdir dir="android-amazon/assets"/>
     <sync todir="android-amazon/assets" includeemptydirs="true" overwrite="true" failonerror="true">
-      <fileset dir="assets" followsymlinks="true"/>
+      <fileset dir="main/assets" followsymlinks="true"/>
     </sync>
     <mkdir dir="android-google/assets"/>
     <sync todir="android-google/assets" includeemptydirs="true" overwrite="true" failonerror="true">
-      <fileset dir="assets" followsymlinks="true"/>
+      <fileset dir="main/assets" followsymlinks="true"/>
     </sync>
   </target>
 </project>

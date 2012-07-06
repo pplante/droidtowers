@@ -18,7 +18,7 @@ public class DesktopGame {
     TowerGameService.setDeviceOSVersion(System.getProperty("os.version"));
 
     LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-    config.title = String.format("Droid Towers (%s)", TowerConsts.VERSION);
+    config.title = String.format("Droid Towers (v%s)", TowerConsts.VERSION);
     config.resizable = false;
     config.width = 800;
     config.height = 600;

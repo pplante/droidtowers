@@ -69,7 +69,7 @@ public class TowerWebBrowser extends Dialog {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    progressDialog = new ProgressDialog(getContext(), android.R.style.Theme_Translucent_NoTitleBar);
+    progressDialog = new ProgressDialog(getContext());
     progressDialog.requestWindowFeature(FEATURE_NO_TITLE);
     progressDialog.getWindow().setLayout(FILL_PARENT, FILL_PARENT);
     progressDialog.setIndeterminate(true);
