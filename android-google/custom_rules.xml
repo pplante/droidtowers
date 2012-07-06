@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+  -->
+
+<project name="android_google" default="help">
+  <property name="root.dir" value="../"/>
+
+  <property name="droidtowers.android-shared" value="${root.dir}/android-shared"/>
+  <property name="droidtowers.android-shared.source" value="${droidtowers.android-shared}/src"/>
+  <property name="droidtowers.android-shared.libs" value="${droidtowers.android-shared}/libs"/>
+
+  <property name="droidtowers.android-google" value="${root.dir}/android-google"/>
+  <property name="droidtowers.android-google.source" value="${droidtowers.android-google}/src"/>
+  <property name="droidtowers.android-google.libs" value="${droidtowers.android-google}/libs"/>
+
+  <target name="-pre-build">
+    <mkdir dir="${droidtowers.android-google}/assets"/>
+    <sync todir="${droidtowers.android-google}/assets" includeemptydirs="true" overwrite="true" failonerror="true">
+      <fileset dir="${root.dir}/assets" followsymlinks="true"/>
+    </sync>
+  </target>
+
+  <target name="-post-build">
+    <delete dir="${droidtowers.android-google}/assets"/>
+  </target>
+</project>

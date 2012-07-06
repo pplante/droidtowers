@@ -27,18 +27,19 @@
 
   <target name="-pre-build">
     <mkdir dir="${out.dir}/classes-shared"/>
-    <javac destdir="${out.dir}/classes-shared" classpathref="happydroids-classpath">
+    <javac destdir="${out.dir}/classes" classpathref="happydroids-classpath">
       <src path="${happydroids.common.source}"/>
       <src path="${droidtowers.main.source}"/>
     </javac>
 
-    <jar destfile="${droidtowers.android-shared.libs}/droidtowers-shared.jar"
-         filesetmanifest="mergewithoutmain" duplicate="fail">
-      <fileset dir="${out.dir}/classes-shared"/>
-    </jar>
-    <copy todir="${droidtowers.android-shared.libs}" verbose="true">
+    <unjar dest="${out.dir}/classes" overwrite="false">
       <fileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
       <fileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
-    </copy>
+      <file file="${tools.dir}/jsr305-2.0.0.jar"/>
+    </unjar>
+  </target>
+
+  <target name="-post-build">
+    <delete dir="${droidtowers.android-google}/assets"/>
   </target>
 </project>
