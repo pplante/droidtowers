@@ -17,6 +17,7 @@ import javax.annotation.Nullable;
 
 import static com.happydroids.droidtowers.ColorUtil.rgba;
 
+@SuppressWarnings("ALL")
 public enum Overlays {
   NOISE_LEVEL("#f20000") {
     @Override
@@ -29,7 +30,7 @@ public enum Overlays {
     public Function<GridObject, Float> getMethod() {
       return new Function<GridObject, Float>() {
         public Float apply(@Nullable GridObject gridObject) {
-          return gridObject.getNormalizedCrimeLevel();
+          return gridObject.getSurroundingCrimeLevel();
         }
       };
     }

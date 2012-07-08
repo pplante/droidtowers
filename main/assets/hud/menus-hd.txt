@@ -16,6 +16,20 @@ facebook-logo
   orig: 32, 32
   offset: 0, 0
   index: -1
+google-play-large
+  rotate: false
+  xy: 0, 403
+  size: 172, 60
+  orig: 172, 60
+  offset: 0, 0
+  index: -1
+droid-cousin-vinnie
+  rotate: false
+  xy: 0, 194
+  size: 184, 209
+  orig: 184, 209
+  offset: 4, 0
+  index: -1
 right-arrow
   rotate: false
   xy: 228, 70

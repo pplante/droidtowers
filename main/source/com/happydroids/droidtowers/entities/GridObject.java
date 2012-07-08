@@ -53,6 +53,8 @@ public abstract class GridObject {
   protected float surroundingCrimeLevel;
   protected String name;
   private boolean displayedPopOver;
+  protected int loanFromCousinVinnie;
+
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
     this.gridObjectType = gridObjectType;
@@ -367,7 +369,7 @@ public abstract class GridObject {
   }
 
   public float getCrimeLevel() {
-    return gridObjectType.getCrimeLevel();
+    return loanFromCousinVinnie > 0 ? 1f : gridObjectType.getCrimeLevel();
   }
 
   public boolean isConnectedToSecurity() {
@@ -427,6 +429,10 @@ public abstract class GridObject {
     return surroundingNoiseLevel;
   }
 
+  public float getSurroundingCrimeLevel() {
+    return surroundingCrimeLevel;
+  }
+
   public abstract GridObjectPopOver makePopOver();
 
   public String getName() {
@@ -442,4 +448,16 @@ public abstract class GridObject {
   }
 
   protected abstract boolean hasPopOver();
+
+  public void addLoanFromCousinVinnie(int amountLoaned) {
+    loanFromCousinVinnie += amountLoaned;
+  }
+
+  public int getAmountLoanedFromCousinVinnie() {
+    return loanFromCousinVinnie;
+  }
+
+  public boolean hasLoanFromCousinVinnie() {
+    return loanFromCousinVinnie > 0;
+  }
 }

@@ -5,21 +5,18 @@
 package com.happydroids.droidtowers.money;
 
 import com.badlogic.gdx.Gdx;
-import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.Player;
-import com.happydroids.droidtowers.gui.Dialog;
-import com.happydroids.droidtowers.gui.OnClickCallback;
+import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.types.GridObjectType;
-import com.happydroids.droidtowers.utils.Random;
-
-import java.text.NumberFormat;
 
 public class GridObjectPurchaseChecker {
   public static final String LOG_TAG = GridObjectPurchaseChecker.class.getSimpleName();
 
+  private final GameGrid gameGrid;
   private GridObjectType gridObjectType;
 
-  public GridObjectPurchaseChecker(GridObjectType gridObjectType) {
+  public GridObjectPurchaseChecker(GameGrid gameGrid, GridObjectType gridObjectType) {
+    this.gameGrid = gameGrid;
     this.gridObjectType = gridObjectType;
   }
 
@@ -36,26 +33,7 @@ public class GridObjectPurchaseChecker {
 
   private void displayCurrencyDialog() {
     Gdx.app.log(LOG_TAG, "Out of money for purchase: " + gridObjectType.getName());
-
-    final int moneyFromVinnie = Random.randomInt(1000, 50000);
-    String message = String.format("So it looks like you ran out of money.\n\nLuckily, Cousin Vinnie has offered to loan you %s%s.\n\nSo, how about it?", TowerConsts.CURRENCY_SYMBOL, NumberFormat.getInstance().format(moneyFromVinnie));
-    new Dialog()
-            .setTitle("Not enough money :(")
-            .setMessage(message)
-            .addButton("Yes", new OnClickCallback() {
-              @Override
-              public void onClick(Dialog dialog) {
-                Player.instance().addCurrency(moneyFromVinnie);
-                dialog.dismiss();
-              }
-            })
-            .addButton("No thanks!", new OnClickCallback() {
-              @Override
-              public void onClick(Dialog dialog) {
-                dialog.dismiss();
-              }
-            })
-            .show();
+    new CousinVinnieLoanDialog(gameGrid).show();
   }
 
   public void makePurchase() {

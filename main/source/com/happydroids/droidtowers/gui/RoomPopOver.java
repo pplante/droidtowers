@@ -12,10 +12,13 @@ import com.happydroids.droidtowers.entities.Room;
 public class RoomPopOver extends GridObjectPopOver<Room> {
   private final StarRatingBar residencyBar;
   private final Image avatarImage;
+  private final StarRatingBar crimeBar;
+
 
   public RoomPopOver(Room room) {
     super(room);
 
+    crimeBar = makeStarRatingBar("Crime");
     residencyBar = makeStarRatingBar("Residents");
 
     row().fillX();
@@ -28,6 +31,7 @@ public class RoomPopOver extends GridObjectPopOver<Room> {
   public void act(float delta) {
     super.act(delta);
 
+    crimeBar.setValue(gridObject.getSurroundingCrimeLevel() * 5f);
     residencyBar.setValue(gridObject.getResidencyLevel() * 5f);
 
     boolean updatedLayout = false;

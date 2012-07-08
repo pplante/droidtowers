@@ -54,11 +54,11 @@ public class Player {
     return coins;
   }
 
-  public void subtractCurrency(int coins) {
+  public void subtractCurrency(long coins) {
     this.coins -= coins;
   }
 
-  public void addCurrency(int coins) {
+  public void addCurrency(long coins) {
     this.coins += coins;
   }
 

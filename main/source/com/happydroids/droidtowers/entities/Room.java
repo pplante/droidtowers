@@ -4,13 +4,12 @@
 
 package com.happydroids.droidtowers.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.NeighborGameGrid;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
@@ -18,11 +17,13 @@ import com.happydroids.droidtowers.gui.RoomPopOver;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.RoomType;
 
+import java.util.Set;
+
+import static com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+
 public class Room extends GridObject {
   private static BitmapFont labelFont;
-  private static Texture roomDecals;
   private Sprite sprite;
-  private Sprite decalSprite;
 
   private static final int UPDATE_FREQUENCY = 10000;
   private long lastUpdateTime;
@@ -30,19 +31,26 @@ public class Room extends GridObject {
   private int populationRequired;
 
   private Avatar resident;
+  private static AtlasRegion transportDisconnectedDecal;
+  private static AtlasRegion cousinVinnieDecal;
+  private Set<AtlasRegion> decalsToDraw;
+
 
   public Room(RoomType roomType, GameGrid gameGrid) {
     super(roomType, gameGrid);
 
-    sprite = new Sprite(roomType.getTextureRegion());
-
-    if (roomDecals == null) {
-      roomDecals = new Texture(Gdx.files.internal("decals.png"));
+    if (transportDisconnectedDecal == null) {
+      transportDisconnectedDecal = getGridObjectType().getTextureAtlas().findRegion("transport-disconnected");
     }
 
-    decalSprite = new Sprite(roomDecals);
+    if (cousinVinnieDecal == null) {
+      cousinVinnieDecal = getGridObjectType().getTextureAtlas().findRegion("cousin-vinnie");
+    }
+
+    sprite = new Sprite(roomType.getTextureRegion());
 
     desirability = 1f;
+    decalsToDraw = Sets.newHashSet();
   }
 
   public void updatePopulation() {
@@ -65,9 +73,40 @@ public class Room extends GridObject {
   public void render(SpriteBatch spriteBatch, Color renderTintColor) {
     super.render(spriteBatch, renderTintColor);
 
+
+    if (!decalsToDraw.isEmpty()) {
+      spriteBatch.setColor(Color.WHITE);
+
+      if (decalsToDraw.size() == 1) {
+        for (AtlasRegion region : decalsToDraw) {
+          spriteBatch.draw(region, getWorldCenter().x - region.getRegionWidth() / 2, getWorldCenter().y - region.getRegionHeight() / 2);
+        }
+      } else {
+        int decalsWidth = 0;
+        for (AtlasRegion atlasRegion : decalsToDraw) {
+          decalsWidth = atlasRegion.getRegionWidth();
+        }
+
+        float startX = getWorldCenter().x - decalsWidth;
+        for (AtlasRegion region : decalsToDraw) {
+          spriteBatch.draw(region, startX, getWorldCenter().y - region.getRegionHeight() / 2);
+          startX += region.getRegionWidth();
+        }
+      }
+    }
+  }
+
+  @Override
+  public void update(float deltaTime) {
+    super.update(deltaTime);
+    decalsToDraw.clear();
+
+    if (loanFromCousinVinnie > 0) {
+      decalsToDraw.add(cousinVinnieDecal);
+    }
+
     if (!connectedToTransport && !(gameGrid instanceof NeighborGameGrid)) {
-      decalSprite.setPosition(sprite.getX(), sprite.getY());
-      decalSprite.draw(spriteBatch);
+      decalsToDraw.add(transportDisconnectedDecal);
     }
   }
 
@@ -98,7 +137,7 @@ public class Room extends GridObject {
   @Override
   public float getDesirability() {
     if (placed && connectedToTransport) {
-      return MathUtils.clamp((desirability - getNoiseLevel() - surroundingNoiseLevel) - (getTransportModifier() * 0.33f) - ((getCrimeLevel() - surroundingCrimeLevel) * 0.33f), 0, 1f);
+      return MathUtils.clamp(Math.abs(desirability - getNoiseLevel() - surroundingNoiseLevel) - (getTransportModifier() * 0.33f) - (surroundingCrimeLevel * 0.75f), 0, 1f);
     }
 
     return 0f;

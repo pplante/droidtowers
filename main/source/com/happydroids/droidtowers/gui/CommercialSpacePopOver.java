@@ -48,7 +48,7 @@ public class CommercialSpacePopOver extends GridObjectPopOver<CommercialSpace> {
   public void act(float delta) {
     super.act(delta);
 
-    crimeBar.setValue(gridObject.getCrimeLevel() * 5f);
+    crimeBar.setValue(gridObject.getSurroundingCrimeLevel() * 5f);
     employmentBar.setValue(gridObject.getEmploymentLevel() * 5f);
   }
 }

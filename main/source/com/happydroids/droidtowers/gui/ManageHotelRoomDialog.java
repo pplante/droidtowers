@@ -54,10 +54,10 @@ public class ManageHotelRoomDialog extends Dialog {
     content.add(makeRandomNameButton());
 
     content.row();
-    content.add(FontManager.Roboto18.makeLabel("Uses between Cleanings"));
+    content.add(FontManager.Roboto18.makeLabel("Uses between Cleanings")).colspan(2);
 
     content.row();
-    content.add(FontManager.Roboto18.makeLabel(String.valueOf(commercialSpace.getNumVisitors())));
+    content.add(FontManager.Roboto18.makeLabel(String.valueOf(commercialSpace.getNumVisitors()))).colspan(2);
 
     return content;
   }

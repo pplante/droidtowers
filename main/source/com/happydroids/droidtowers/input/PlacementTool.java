@@ -145,7 +145,7 @@ public class PlacementTool extends ToolBase {
   }
 
   public void enterPurchaseMode() {
-    gridObjectPurchaseChecker = new GridObjectPurchaseChecker(gridObjectType);
+    gridObjectPurchaseChecker = new GridObjectPurchaseChecker(gameGrid, gridObjectType);
 
     verifyAbilityToPurchase();
   }

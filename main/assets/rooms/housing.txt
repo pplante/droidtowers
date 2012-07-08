@@ -11,9 +11,16 @@ repeat: none
   index: -1
 2x1-sushi
   rotate: false
-  xy: 192, 384
+  xy: 384, 384
   size: 128, 64
   orig: 128, 64
+  offset: 0, 0
+  index: -1
+cousin-vinnie
+  rotate: false
+  xy: 424, 448
+  size: 40, 40
+  orig: 40, 40
   offset: 0, 0
   index: -1
 4x1-security-center
@@ -32,14 +39,14 @@ repeat: none
   index: -1
 2x1-hotel-room
   rotate: false
-  xy: 320, 384
+  xy: 128, 448
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 3x1-small-condo
   rotate: false
-  xy: 0, 448
+  xy: 0, 384
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
@@ -53,7 +60,7 @@ repeat: none
   index: -1
 3x1-small-apartment
   rotate: false
-  xy: 192, 320
+  xy: 192, 384
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
@@ -65,6 +72,13 @@ repeat: none
   orig: 256, 64
   offset: 0, 0
   index: -1
+transport-disconnected
+  rotate: false
+  xy: 384, 448
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
 4x1-large-apartment
   rotate: false
   xy: 256, 256
@@ -74,7 +88,7 @@ repeat: none
   index: -1
 lobby-left
   rotate: false
-  xy: 420, 448
+  xy: 384, 488
   size: 36, 64
   orig: 36, 64
   offset: 0, 0
@@ -102,14 +116,14 @@ lobby-left
   index: -1
 bathroom
   rotate: false
-  xy: 448, 384
+  xy: 256, 448
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 lobby-right
   rotate: false
-  xy: 384, 448
+  xy: 464, 448
   size: 36, 64
   orig: 36, 64
   offset: 0, 0
@@ -137,14 +151,14 @@ lobby-right
   index: -1
 2x1-bar
   rotate: false
-  xy: 192, 448
+  xy: 0, 448
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
 3x1-burger-joint
   rotate: false
-  xy: 0, 384
+  xy: 192, 320
   size: 192, 64
   orig: 192, 64
   offset: 0, 0

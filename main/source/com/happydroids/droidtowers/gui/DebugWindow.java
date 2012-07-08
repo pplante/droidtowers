@@ -47,6 +47,9 @@ public class DebugWindow extends ScrollableTowerWindow {
 
       row();
       add(makeGiveMoneyButton());
+
+      row();
+      add(makeTakeAllMoneyButton());
     }
 
     row();
@@ -70,6 +73,17 @@ public class DebugWindow extends ScrollableTowerWindow {
     add(makeTogglePurchaseUnlimitedButton());
 
     shoveContentUp();
+  }
+
+  private Actor makeTakeAllMoneyButton() {
+    TextButton button = FontManager.Roboto24.makeTextButton("Take ALL Money");
+    button.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        Player.instance().subtractCurrency(Player.instance().getCoins());
+      }
+    });
+    return button;
   }
 
   private Actor makeTogglePurchaseUnlimitedButton() {

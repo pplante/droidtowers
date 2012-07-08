@@ -26,13 +26,16 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
   public static final float BUTTON_FADE_DURATION = 0.125f;
   public static final String CONNECTED_TO_TRANSIT = "Connected to Transit";
   public static final String NOT_CONNECTED_TO_TRANSIT = "Disconnected from Transit";
+  private static final String COUSIN_VINNIES_HIDEOUT = "Cousin Vinnies Hideout";
 
   private final Sprite triangle;
   protected final T gridObject;
   private final StarRatingBar desirabilityBar;
   private final StarRatingBar noiseBar;
   protected final Label transitLabel;
+  private final Label cousinVinniesHideout;
   private final Label nameLabel;
+
 
   public GridObjectPopOver(T gridObject) {
     super();
@@ -59,6 +62,9 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     row();
     transitLabel = FontManager.Default.makeLabel(CONNECTED_TO_TRANSIT);
     add(transitLabel);
+    row();
+    cousinVinniesHideout = FontManager.Default.makeLabel(COUSIN_VINNIES_HIDEOUT);
+    add(cousinVinniesHideout);
 
     desirabilityBar = makeStarRatingBar("Desirability");
     noiseBar = makeStarRatingBar("Noise");
@@ -109,6 +115,16 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     } else if (!gridObject.isConnectedToTransport() && !transitLabel.getText().equals(NOT_CONNECTED_TO_TRANSIT)) {
       transitLabel.setText(NOT_CONNECTED_TO_TRANSIT);
       transitLabel.setColor(Color.RED);
+      updatedData = true;
+    }
+
+    if (gridObject.hasLoanFromCousinVinnie() && !cousinVinniesHideout.visible) {
+      cousinVinniesHideout.visible = true;
+      getCell(cousinVinniesHideout).ignore(false);
+      updatedData = true;
+    } else if (!gridObject.hasLoanFromCousinVinnie() && cousinVinniesHideout.visible) {
+      cousinVinniesHideout.visible = false;
+      getCell(cousinVinniesHideout).ignore(true);
       updatedData = true;
     }
 

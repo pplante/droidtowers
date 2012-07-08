@@ -47,10 +47,6 @@ public class MainMenuScene extends SplashScene {
     versionLabel.x = getStage().width() - versionLabel.width - 5;
     versionLabel.y = getStage().height() - versionLabel.height - 5;
     addActor(versionLabel);
-
-//    DebugUtils.createNonSavableGame(true);
-    DebugUtils.loadFirstGameFound();
-//    DebugUtils.loadGameFromCloud(19);
   }
 
   @Override
@@ -69,7 +65,7 @@ public class MainMenuScene extends SplashScene {
       builtOutMenu = true;
 
       buildMenuComponents();
-//      DebugUtils.loadFirstGameFound();
+      DebugUtils.loadFirstGameFound();
 //      new PurchaseDroidTowersUnlimitedPrompt().show();
     }
   }

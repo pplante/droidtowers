@@ -200,4 +200,8 @@ public class Dialog extends Table {
 
     return this;
   }
+
+  protected void clearButtons() {
+    buttons.clear();
+  }
 }
