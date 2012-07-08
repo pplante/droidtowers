@@ -5,8 +5,10 @@
 package com.happydroids.droidtowers.money;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.types.GridObjectType;
 
 public class GridObjectPurchaseChecker {
@@ -33,7 +35,11 @@ public class GridObjectPurchaseChecker {
 
   private void displayCurrencyDialog() {
     Gdx.app.log(LOG_TAG, "Out of money for purchase: " + gridObjectType.getName());
-    new CousinVinnieLoanDialog(gameGrid).show();
+    if (MathUtils.random(10) % 5 == 0) {
+      new CousinVinnieLoanDialog(gameGrid).show();
+    } else {
+      HeadsUpDisplay.showToast("You do not have enough money for this purchase.");
+    }
   }
 
   public void makePurchase() {
