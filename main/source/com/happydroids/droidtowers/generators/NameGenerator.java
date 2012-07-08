@@ -18,11 +18,12 @@ import static com.happydroids.droidtowers.types.ProviderType.*;
 public class NameGenerator {
   private static List<String> placeNames;
   private static List<String> corporationNames;
-
+  private static List<String> femaleNames;
 
   public static void initialize() {
     placeNames = parseFile("generators/places.txt");
     corporationNames = parseFile("generators/corporations.txt");
+    femaleNames = parseFile("generators/names-female.txt");
   }
 
   private static List<String> parseFile(String fileName) {
@@ -58,5 +59,9 @@ public class NameGenerator {
     }
 
     return null;
+  }
+
+  public static String randomFemaleName() {
+    return randomEntry(femaleNames);
   }
 }

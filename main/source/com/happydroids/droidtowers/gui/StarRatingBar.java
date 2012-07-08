@@ -105,4 +105,8 @@ class StarRatingBar extends Widget {
   public void setMaxStars(int maxStars) {
     this.maxStars = maxStars;
   }
+
+  public void setValue(double experienceLevel) {
+    setValue((float) experienceLevel);
+  }
 }

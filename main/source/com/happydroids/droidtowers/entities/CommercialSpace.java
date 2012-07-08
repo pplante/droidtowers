@@ -47,7 +47,7 @@ public class CommercialSpace extends Room {
       CommercialType commercialType = (CommercialType) getGridObjectType();
       int populationAttraction = commercialType.getPopulationAttraction();
       if (populationAttraction > 0) {
-        attractedPopulation = Random.randomInt(populationAttraction / 2, populationAttraction);
+        attractedPopulation = Random.randomInt(0, populationAttraction);
       }
     }
   }
@@ -103,5 +103,14 @@ public class CommercialSpace extends Room {
 
   public int getJobsProvided() {
     return ((CommercialType) gridObjectType).getJobsProvided();
+  }
+
+  public float getAttractedPopulationLevel() {
+    int populationAttraction = ((CommercialType) gridObjectType).getPopulationAttraction();
+    if (populationAttraction == 0) {
+      return 0.0f;
+    }
+
+    return attractedPopulation / populationAttraction;
   }
 }

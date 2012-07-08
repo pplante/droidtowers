@@ -13,11 +13,11 @@ import com.happydroids.droidtowers.generators.NameGenerator;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class ManageCommercialSpaceDialog extends Dialog {
+public class ManageHotelRoomDialog extends Dialog {
   private final CommercialSpace commercialSpace;
   private TextField textField;
 
-  public ManageCommercialSpaceDialog(final CommercialSpace commercialSpace) {
+  public ManageHotelRoomDialog(final CommercialSpace commercialSpace) {
     this.commercialSpace = commercialSpace;
 
     textField = FontManager.Roboto18.makeTextField(commercialSpace.getName(), "");
@@ -54,21 +54,10 @@ public class ManageCommercialSpaceDialog extends Dialog {
     content.add(makeRandomNameButton());
 
     content.row();
-    content.add(FontManager.Roboto18.makeLabel("Current Employees"));
+    content.add(FontManager.Roboto18.makeLabel("Uses between Cleanings"));
 
     content.row();
-    content.add(FontManager.Roboto18.makeLabel(commercialSpace.getJobsFilled() + "/" + commercialSpace.getJobsProvided()));
-
-    TextButton hireButton = FontManager.Roboto18.makeTextButton("Hire Employee");
-    hireButton.setClickListener(new VibrateClickListener() {
-      @Override
-      public void onClick(Actor actor, float x, float y) {
-        new AvailableJobCandidateDialog().show();
-      }
-    });
-
-    content.row();
-    content.add(hireButton);
+    content.add(FontManager.Roboto18.makeLabel(String.valueOf(commercialSpace.getNumVisitors())));
 
     return content;
   }

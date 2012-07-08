@@ -12,17 +12,16 @@ import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeOut;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.gui.controls.ButtonBar;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import java.util.List;
 
-import static com.happydroids.droidtowers.ColorUtil.rgba;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class Dialog extends Table {
@@ -35,6 +34,7 @@ public class Dialog extends Table {
   private boolean hideButtons;
   private Texture modalNoiseTexture;
   private Group youCantTouchThis;
+  private ButtonBar buttonBar;
 
   public Dialog() {
     this(DroidTowersGame.getRootUiStage());
@@ -46,7 +46,7 @@ public class Dialog extends Table {
     touchable = true;
     hideButtons = false;
 
-    buttons = Lists.newArrayList();
+    buttonBar = new ButtonBar();
 
     modalNoiseTexture = TowerAssetManager.texture("swatches/modal-noise.png");
     modalNoiseTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -109,26 +109,13 @@ public class Dialog extends Table {
     }
 
     if (!hideButtons) {
-      row().fillX();
-      add(new HorizontalRule(Color.GRAY, 1));
-
-      if (buttons.isEmpty()) {
+      if (buttonBar.getButtonCount() == 0) {
         addButton("Dismiss", new OnClickCallback() {
           @Override
           public void onClick(Dialog dialog) {
             dialog.dismiss();
           }
         });
-      }
-
-      Table buttonBar = new Table();
-      buttonBar.row().fillX();
-      for (int i = 0; i < buttons.size(); i++) {
-        buttonBar.add(buttons.get(i)).expandX().uniformX();
-
-        if (i < buttons.size() - 1) {
-          buttonBar.add(new VerticalRule(Color.GRAY, 1)).width(1).fillY();
-        }
       }
 
       row().fillX();
@@ -166,15 +153,16 @@ public class Dialog extends Table {
   }
 
   public Dialog addButton(String buttonText, final OnClickCallback clickCallback) {
-    TransparentTextButton button = FontManager.Roboto18.makeTransparentButton(buttonText, Color.CLEAR, rgba("#007399"));
-    button.setClickListener(new VibrateClickListener() {
+    return addButton(buttonText, new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
         clickCallback.onClick(Dialog.this);
       }
     });
+  }
 
-    buttons.add(button);
+  public Dialog addButton(String buttonText, VibrateClickListener clickListener) {
+    buttonBar.addButton(buttonText, clickListener);
 
     return this;
   }
