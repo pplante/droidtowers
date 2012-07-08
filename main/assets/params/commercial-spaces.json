@@ -40,7 +40,8 @@
     "noiseLevel":0.2,
     "provides":"HOTEL_ROOMS",
     "atlasFilename":"rooms/housing.txt",
-    "imageFilename":"2x1-hotel-room"
+    "imageFilename":"2x1-hotel-room",
+    "numVariations":2
   },
   {
     "id":"BURGER-JOINT",

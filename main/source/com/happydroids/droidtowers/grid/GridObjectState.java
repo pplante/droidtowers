@@ -16,6 +16,7 @@ public class GridObjectState {
   private GridPoint position;
   private GridPoint size;
   private String name;
+  private int variationId;
   private int loanFromCousinVinnie;
 
   public GridObjectState() {
@@ -26,8 +27,9 @@ public class GridObjectState {
     typeId = gridObject.getGridObjectType().getId();
     position = gridObject.getPosition();
     size = gridObject.getSize();
-    loanFromCousinVinnie = gridObject.getAmountLoanedFromCousinVinnie();
     name = gridObject.hasCustomName() ? gridObject.getName() : null;
+    variationId = gridObject.getVariationId();
+    loanFromCousinVinnie = gridObject.getAmountLoanedFromCousinVinnie();
   }
 
   public GridObject materialize(GameGrid gameGrid) {
@@ -42,7 +44,11 @@ public class GridObjectState {
         object.setPosition(position.x, position.y);
         object.setSize(size.x, size.y);
         object.setPlaced(true);
+        if (variationId > 0) {
+          object.setVariationId(variationId);
+        }
         object.addLoanFromCousinVinnie(loanFromCousinVinnie);
+        object.updateSprite();
 
         gameGrid.addObject(object);
 

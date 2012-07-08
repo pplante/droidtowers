@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.entities;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
@@ -54,6 +55,7 @@ public abstract class GridObject {
   protected String name;
   private boolean displayedPopOver;
   protected int loanFromCousinVinnie;
+  private int variationId;
 
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
@@ -71,6 +73,10 @@ public abstract class GridObject {
     worldTop = new Vector2();
     worldBounds = new Rectangle();
 
+    if (gridObjectType.getNumVariations() > 0) {
+      variationId = MathUtils.random(1, gridObjectType.getNumVariations());
+    }
+
     setRenderColor(Color.WHITE);
   }
 
@@ -87,6 +93,10 @@ public abstract class GridObject {
   }
 
   public abstract Sprite getSprite();
+
+  public void updateSprite() {
+
+  }
 
   public boolean canBeAt() {
     return gridObjectType.canBeAt(this);
@@ -459,5 +469,13 @@ public abstract class GridObject {
 
   public boolean hasLoanFromCousinVinnie() {
     return loanFromCousinVinnie > 0;
+  }
+
+  public int getVariationId() {
+    return variationId;
+  }
+
+  public void setVariationId(int variationId) {
+    this.variationId = variationId;
   }
 }

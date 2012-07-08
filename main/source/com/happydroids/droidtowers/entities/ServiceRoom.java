@@ -15,7 +15,7 @@ public class ServiceRoom extends CommercialSpace {
 
   @Override
   public GridObjectPopOver makePopOver() {
-    return new GridObjectPopOver(this);
+    return new ServiceRoomPopOver(this);
   }
 
   @Override

@@ -47,7 +47,7 @@ public class Room extends GridObject {
       cousinVinnieDecal = getGridObjectType().getTextureAtlas().findRegion("cousin-vinnie");
     }
 
-    sprite = new Sprite(roomType.getTextureRegion());
+    sprite = new Sprite(roomType.getTextureRegion(getVariationId()));
 
     desirability = 1f;
     decalsToDraw = Sets.newHashSet();
@@ -67,6 +67,11 @@ public class Room extends GridObject {
   @Override
   public Sprite getSprite() {
     return sprite;
+  }
+
+  @Override
+  public void updateSprite() {
+    sprite.setRegion(gridObjectType.getTextureRegion(getVariationId()));
   }
 
   @Override

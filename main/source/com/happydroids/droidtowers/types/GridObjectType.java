@@ -31,13 +31,14 @@ public abstract class GridObjectType {
   protected int width;
   protected int coins;
   protected int experienceAward;
+  protected int numVariations;
   protected String atlasFilename;
   protected String imageFilename;
   protected boolean canShareSpace;
   protected float noiseLevel;
   protected float crimeLevel;
-  protected boolean unlimitedVersion = false;
 
+  protected boolean unlimitedVersion = false;
   protected ProviderType provides;
   private static WeakHashMap<String, TextureAtlas> atlases;
   private TextureAtlas textureAtlas;
@@ -123,11 +124,20 @@ public abstract class GridObjectType {
     return objectsOverlapped.size() > 0;
   }
 
-  public TextureRegion getTextureRegion() {
+  public TextureRegion getTextureRegion(int variationId) {
     if (atlasFilename != null) {
-      TextureAtlas objectAtlas = getTextureAtlas();
+      TextureRegion region;
+      if (numVariations > 0) {
+        region = getTextureAtlas().findRegion(imageFilename, variationId);
+      } else {
+        region = getTextureAtlas().findRegion(imageFilename);
+      }
 
-      return objectAtlas.findRegion(imageFilename);
+      if (region == null) {
+        throw new RuntimeException("Cannot find texture region named: " + imageFilename + ", index: " + variationId);
+      }
+
+      return region;
     }
 
     return null;
@@ -243,5 +253,10 @@ public abstract class GridObjectType {
 
   public boolean requiresUnlimitedVersion() {
     return unlimitedVersion;
+  }
+
+
+  public int getNumVariations() {
+    return numVariations;
   }
 }

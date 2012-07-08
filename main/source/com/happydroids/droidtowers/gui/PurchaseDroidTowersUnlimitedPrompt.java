@@ -30,7 +30,7 @@ public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
     addLabel("* Towers taller up to 250 floors", FontManager.RobotoBold18).padLeft(indentPixels);
     addLabel("* Unlock the Sky Lobby:", FontManager.RobotoBold18).padLeft(indentPixels);
     row();
-    add(new Image(RoomTypeFactory.findTypeById("SKY-LOBBY").getTextureRegion())).center();
+    add(new Image(RoomTypeFactory.findTypeById("SKY-LOBBY").getTextureRegion(0))).center();
     addLabel("* Unlock Land expansions", FontManager.RobotoBold18).padLeft(indentPixels);
     addLabel("* Earn income 50% faster", FontManager.RobotoBold18).padLeft(indentPixels);
     addLabel("* Feeds the developers for less than $0.01 USD per day!", FontManager.RobotoBold18).padLeft(indentPixels);

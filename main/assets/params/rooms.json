@@ -22,7 +22,7 @@
     "atlasFilename":"rooms/housing.txt",
     "imageFilename":"4x1-sky-lobby",
     "provides":"SKY_LOBBY",
-    "unlimitedVersion": true
+    "unlimitedVersion":true
   },
   {
     "id":"SMALL-APARTMENT",
@@ -34,7 +34,8 @@
     "width":3,
     "provides":"APARTMENT",
     "atlasFilename":"rooms/housing.txt",
-    "imageFilename":"3x1-small-apartment"
+    "imageFilename":"3x1-small-apartment",
+    "numVariations":3
   },
   {
     "id":"LARGE-APARTMENT",

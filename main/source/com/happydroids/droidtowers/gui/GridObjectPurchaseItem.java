@@ -34,7 +34,7 @@ class GridObjectPurchaseItem extends Table {
     add(priceLabel).right().fill().padBottom(scale(8));
 
     row().align(Align.LEFT);
-    TextureRegion textureRegion = gridObjectType.getTextureRegion();
+    TextureRegion textureRegion = gridObjectType.getTextureRegion(0);
     Actor actor = null;
     if (textureRegion != null) {
       actor = new Image(textureRegion, Scaling.fit, Align.LEFT | Align.TOP);
