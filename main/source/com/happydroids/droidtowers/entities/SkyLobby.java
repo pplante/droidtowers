@@ -28,7 +28,7 @@ public class SkyLobby extends Room {
 
   @Override
   public float getDesirability() {
-    return 0f;
+    return 1f;
   }
 
   @Override

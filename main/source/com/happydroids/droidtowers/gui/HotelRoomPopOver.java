@@ -12,14 +12,12 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class HotelRoomPopOver extends GridObjectPopOver<HotelRoom> {
   private final StarRatingBar crimeBar;
-  private final StarRatingBar vacancyBar;
   private final StarRatingBar cleanlinessBar;
 
   public HotelRoomPopOver(final HotelRoom hotelRoom) {
     super(hotelRoom);
 
     crimeBar = makeStarRatingBar("Crime");
-    vacancyBar = makeStarRatingBar("Vacancy");
     cleanlinessBar = makeStarRatingBar("Cleanliness");
 
     ButtonBar buttonBar = new ButtonBar();
@@ -47,7 +45,6 @@ public class HotelRoomPopOver extends GridObjectPopOver<HotelRoom> {
     super.act(delta);
 
     crimeBar.setValue(gridObject.getCrimeLevel() * 5f);
-    vacancyBar.setValue(gridObject.getAttractedPopulationLevel() * 5f);
     cleanlinessBar.setValue(5 - gridObject.getNumVisitors());
   }
 }

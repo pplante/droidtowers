@@ -116,7 +116,7 @@ public class TowerScene extends Scene {
 
     gameState.loadSavedGame();
 
-    populationCalculator = new PopulationCalculator(gameGrid, avatarLayer, TowerConsts.ROOM_UPDATE_FREQUENCY);
+    populationCalculator = new PopulationCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);
     budgetCalculator = new BudgetCalculator(gameGrid, TowerConsts.PLAYER_EARNOUT_FREQUENCY);
     employmentCalculator = new EmploymentCalculator(gameGrid, TowerConsts.JOB_UPDATE_FREQUENCY);
     desirabilityCalculator = new DesirabilityCalculator(gameGrid, TowerConsts.ROOM_UPDATE_FREQUENCY);

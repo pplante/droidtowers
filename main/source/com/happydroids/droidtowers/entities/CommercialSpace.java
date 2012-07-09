@@ -18,7 +18,6 @@ import com.happydroids.droidtowers.utils.Random;
 import java.util.Set;
 
 public class CommercialSpace extends Room {
-  private int attractedPopulation;
   private int jobsFilled;
   private long lastJobUpdateTime;
   protected Set<JobCandidate> employees;
@@ -51,10 +50,6 @@ public class CommercialSpace extends Room {
     return employees.size();
   }
 
-  public int getAttractedPopulation() {
-    return attractedPopulation;
-  }
-
   @Override
   public float getNoiseLevel() {
     if (jobsFilled > 0) {
@@ -67,7 +62,7 @@ public class CommercialSpace extends Room {
   @Override
   public int getCoinsEarned() {
     if (jobsFilled > 0 && isConnectedToTransport()) {
-      return (gridObjectType.getCoinsEarned()) * attractedPopulation;
+      return (int) Math.ceil(gridObjectType.getCoinsEarned() * getEmploymentLevel());
     }
 
     return 0;
@@ -108,15 +103,6 @@ public class CommercialSpace extends Room {
 
   public int getJobsProvided() {
     return ((CommercialType) gridObjectType).getJobsProvided();
-  }
-
-  public float getAttractedPopulationLevel() {
-    int populationAttraction = ((CommercialType) gridObjectType).getPopulationAttraction();
-    if (populationAttraction == 0) {
-      return 0.0f;
-    }
-
-    return attractedPopulation / populationAttraction;
   }
 
   @Override

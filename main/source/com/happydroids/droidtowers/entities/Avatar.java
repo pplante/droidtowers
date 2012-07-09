@@ -185,6 +185,23 @@ public class Avatar extends GameObject {
   public void update(float timeDelta) {
     super.update(timeDelta);
 
+    if (home == null) {
+      List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
+      if (rooms != null) {
+        List<GridObject> roomsSorted = Ordering.natural().reverse().onResultOf(new Function<GridObject, Comparable>() {
+          @Override
+          public Comparable apply(@Nullable GridObject input) {
+            return input.getDesirability();
+          }
+        }).sortedCopy(rooms);
+        GridObject avatarsHome = Iterables.find(roomsSorted, AVATAR_HOME_FILTER, null);
+
+        if (avatarsHome != null) {
+          setHome(avatarsHome);
+        }
+      }
+    }
+
     hungerLevel -= 0.001f * timeDelta;
 
     lastPathFinderSearch += timeDelta;
@@ -256,4 +273,17 @@ public class Avatar extends GameObject {
       wanderAround();
     }
   }
+
+
+  public static final Predicate<GridObject> AVATAR_HOME_FILTER = new Predicate<GridObject>() {
+    @Override
+    public boolean apply(@Nullable GridObject input) {
+      if (input instanceof Room) {
+        Room room = (Room) input;
+        return room.isConnectedToTransport() && (room.getNumResidents() == 0 || room.getNumResidents() < room.getNumSupportedResidents());
+      }
+
+      return false;
+    }
+  };
 }

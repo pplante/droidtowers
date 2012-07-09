@@ -5,10 +5,6 @@
 package com.happydroids.droidtowers.controllers;
 
 import com.badlogic.gdx.math.Vector2;
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Ordering;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.employee.JobCandidate;
@@ -20,9 +16,7 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.types.ProviderType;
 import com.happydroids.droidtowers.utils.Random;
 
-import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
-import java.util.List;
 
 import static com.happydroids.droidtowers.types.ProviderType.JANITORS;
 
@@ -67,22 +61,6 @@ public class AvatarLayer extends GameLayer {
 
   private void setupAvatar(Avatar avatar) {
     boolean positionSet = false;
-
-    List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
-    if (rooms != null) {
-      List<GridObject> roomsSorted = Ordering.natural().reverse().onResultOf(new Function<GridObject, Comparable>() {
-        @Override
-        public Comparable apply(@Nullable GridObject input) {
-          return input.getDesirability();
-        }
-      }).sortedCopy(rooms);
-      GridObject avatarsHome = Iterables.find(roomsSorted, AVATAR_HOME_FILTER, null);
-
-      if (avatarsHome != null) {
-        avatar.setHome(avatarsHome);
-        positionSet = true;
-      }
-    }
 
     if (!positionSet) {
       avatar.setPosition(Random.randomInt(-avatar.getWidth(), gameGrid.getWorldSize().x + avatar.getWidth()), TowerConsts.GROUND_HEIGHT);
@@ -150,16 +128,4 @@ public class AvatarLayer extends GameLayer {
       event.employee.getAvatar().markToRemove(true);
     }
   }
-
-  public static final Predicate<GridObject> AVATAR_HOME_FILTER = new Predicate<GridObject>() {
-    @Override
-    public boolean apply(@Nullable GridObject input) {
-      if (input instanceof Room) {
-        Room room = (Room) input;
-        return room.isConnectedToTransport() && (room.getNumResidents() == 0 || room.getNumResidents() < room.getNumSupportedResidents());
-      }
-
-      return false;
-    }
-  };
 }
