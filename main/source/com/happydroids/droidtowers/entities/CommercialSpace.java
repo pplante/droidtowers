@@ -17,7 +17,6 @@ import com.happydroids.droidtowers.utils.Random;
 import java.util.Set;
 
 public class CommercialSpace extends Room {
-  public static final String DECAL_NEEDS_DROIDS = "needs-droids";
   private int attractedPopulation;
   private int jobsFilled;
   private long lastJobUpdateTime;

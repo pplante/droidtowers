@@ -74,6 +74,11 @@ public class Elevator extends Transit {
   }
 
   @Override
+  public float getDesirability() {
+    return 0;
+  }
+
+  @Override
   public void render(SpriteBatch spriteBatch, Color renderTintColor) {
     GridPoint renderPosition = position.cpy();
     Vector2 localPoint = worldPosition.cpy();

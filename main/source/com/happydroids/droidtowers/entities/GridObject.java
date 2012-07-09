@@ -41,7 +41,6 @@ public abstract class GridObject {
   protected Rectangle bounds;
   private Set<Action> actions;
   private EventBus myEventBus;
-  protected float desirability;
   private Vector2 worldCenter;
   private Vector2 worldTop;
   private Rectangle worldBounds;
@@ -316,9 +315,7 @@ public abstract class GridObject {
     gameGrid.events().post(event);
   }
 
-  public float getDesirability() {
-    return desirability;
-  }
+  public abstract float getDesirability();
 
   protected float getGridScale() {
     return gameGrid.getGridScale();
@@ -348,7 +345,6 @@ public abstract class GridObject {
 
     GridObject that = (GridObject) o;
 
-    if (Float.compare(that.desirability, desirability) != 0) return false;
     if (gameGrid != null ? !gameGrid.equals(that.gameGrid) : that.gameGrid != null) return false;
     if (gridObjectType != null ? !gridObjectType.equals(that.gridObjectType) : that.gridObjectType != null)
       return false;
@@ -366,7 +362,6 @@ public abstract class GridObject {
     result = 31 * result + (position != null ? position.hashCode() : 0);
     result = 31 * result + (size != null ? size.hashCode() : 0);
     result = 31 * result + (placed ? 1 : 0);
-    result = 31 * result + (desirability != +0.0f ? Float.floatToIntBits(desirability) : 0);
     return result;
   }
 

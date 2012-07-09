@@ -20,6 +20,11 @@ public class TestGridObject extends GridObject {
   }
 
   @Override
+  public float getDesirability() {
+    return 0;
+  }
+
+  @Override
   public GridObjectPopOver makePopOver() {
     return null;
   }

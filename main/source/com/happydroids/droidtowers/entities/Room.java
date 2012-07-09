@@ -17,6 +17,7 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.gui.RoomPopOver;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.types.ProviderType;
 import com.happydroids.droidtowers.types.RoomType;
 
 import java.util.Map;
@@ -28,6 +29,7 @@ public class Room extends GridObject {
   private static BitmapFont labelFont;
   public static final String DECAL_COUSIN_VINNIE = "cousin-vinnie";
   public static final String DECAL_TRANSPORT_DISCONNECTED = "transport-disconnected";
+  public static final String DECAL_NEEDS_DROIDS = "needs-droids";
   private Sprite sprite;
 
   private static final int UPDATE_FREQUENCY = 10000;
@@ -53,7 +55,6 @@ public class Room extends GridObject {
 
     sprite = new Sprite(roomType.getTextureRegion(getVariationId()));
 
-    desirability = 1f;
     decalsToDraw = Sets.newHashSet();
     residents = Sets.newHashSet();
   }
@@ -113,6 +114,14 @@ public class Room extends GridObject {
     } else {
       decalsToDraw.remove(DECAL_TRANSPORT_DISCONNECTED);
     }
+
+    if (provides(ProviderType.HOUSING) && loanFromCousinVinnie == 0) {
+      if (residents.size() == 0) {
+        decalsToDraw.add(DECAL_NEEDS_DROIDS);
+      } else {
+        decalsToDraw.remove(DECAL_NEEDS_DROIDS);
+      }
+    }
   }
 
   public int getNumResidents() {
@@ -143,13 +152,22 @@ public class Room extends GridObject {
   public float getDesirability() {
     if (placed && connectedToTransport) {
       float value = 1f;
-      value -= getSurroundingNoiseLevel();
-      value -= getTransportModifier();
-      value -= getSurroundingCrimeLevel();
+      value -= getSurroundingNoiseLevel() * 0.5f;
+      value -= getTransportModifier() * 0.5f;
+      value -= getSecurityModifier() * 0.5f;
+      value -= getSurroundingCrimeLevel() * 0.5f;
       return MathUtils.clamp(value, 0, 1f);
     }
 
     return 0f;
+  }
+
+  private float getSecurityModifier() {
+    float minDist = Float.MAX_VALUE;
+    for (GridPoint gridPoint : getGridPointsTouched()) {
+      minDist = Math.min(gameGrid.positionCache().getPosition(gridPoint).normalizedDistanceFromSecurity, minDist);
+    }
+    return minDist;
   }
 
   @Override
@@ -184,7 +202,7 @@ public class Room extends GridObject {
       return 0;
     }
 
-    return residents.size() / populationMax;
+    return residents.size() / (float) populationMax;
   }
 
   public Set<Avatar> getResidents() {
@@ -209,6 +227,12 @@ public class Room extends GridObject {
   }
 
   public int getNumSupportedResidents() {
-    return (int) (((RoomType) gridObjectType).getPopulationMax() * getDesirability());
+    int populationMax = ((RoomType) gridObjectType).getPopulationMax();
+    float desirability = getDesirability();
+    if (desirability > 0.75f) {
+      return populationMax;
+    }
+
+    return (int) Math.ceil(populationMax * desirability);
   }
 }
