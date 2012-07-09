@@ -5,8 +5,10 @@
 package com.happydroids.droidtowers.controllers;
 
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Ordering;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.employee.JobCandidate;
@@ -69,7 +71,13 @@ public class AvatarLayer extends GameLayer {
 
     List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
     if (rooms != null) {
-      GridObject avatarsHome = Iterables.find(rooms, AVATAR_HOME_FILTER, null);
+      List<GridObject> roomsSorted = Ordering.natural().reverse().onResultOf(new Function<GridObject, Comparable>() {
+        @Override
+        public Comparable apply(@Nullable GridObject input) {
+          return input.getDesirability();
+        }
+      }).sortedCopy(rooms);
+      GridObject avatarsHome = Iterables.find(roomsSorted, AVATAR_HOME_FILTER, null);
 
       if (avatarsHome != null) {
         avatar.setHome(avatarsHome);

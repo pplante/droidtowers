@@ -123,7 +123,7 @@ public class Room extends GridObject {
   public int getCoinsEarned() {
     if (getNumResidents() > 0 && isConnectedToTransport()) {
       RoomType roomType = (RoomType) gridObjectType;
-      return (int) ((roomType.getCoinsEarned() / roomType.getPopulationMax()) * getDesirability());
+      return roomType.getCoinsEarned() * getNumResidents();
     }
 
     return 0;
@@ -142,7 +142,11 @@ public class Room extends GridObject {
   @Override
   public float getDesirability() {
     if (placed && connectedToTransport) {
-      return MathUtils.clamp(Math.abs(desirability - getNoiseLevel() - surroundingNoiseLevel) - (getTransportModifier() * 0.33f) - (surroundingCrimeLevel * 0.75f), 0, 1f);
+      float value = 1f;
+      value -= getSurroundingNoiseLevel();
+      value -= getTransportModifier();
+      value -= getSurroundingCrimeLevel();
+      return MathUtils.clamp(value, 0, 1f);
     }
 
     return 0f;
@@ -205,6 +209,6 @@ public class Room extends GridObject {
   }
 
   public int getNumSupportedResidents() {
-    return (int) Math.ceil(((RoomType) gridObjectType).getPopulationMax() * getDesirability());
+    return (int) (((RoomType) gridObjectType).getPopulationMax() * getDesirability());
   }
 }
