@@ -9,6 +9,7 @@ import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.entities.Room;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.types.RoomType;
 
 import java.util.ArrayList;
 
@@ -24,17 +25,18 @@ public class PopulationCalculator extends GameGridAction {
   @Override
   public void run() {
     ArrayList<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
-    int currentResidency = 0;
+    int supportedResidency = 0;
     int maxPopulation = 0;
 
     if (rooms != null) {
       for (GridObject gridObject : rooms) {
-        Room room = (Room) gridObject;
-        maxPopulation += room.getNumSupportedResidents();
+        maxPopulation += ((RoomType) gridObject.getGridObjectType()).getPopulationMax();
+        supportedResidency += ((Room) gridObject).getNumSupportedResidents();
       }
     }
 
     Player.instance().setPopulationMax(maxPopulation);
+    Player.instance().setSupportedResidency(supportedResidency);
     Player.instance().setPopulationResidency(avatarLayer.getNumAvatars());
   }
 }

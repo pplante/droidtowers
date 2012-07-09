@@ -25,10 +25,12 @@ public class ElevatorCar extends GameObject {
   private final Elevator elevator;
   private ElevatorQueue queue;
   protected boolean inUse;
+  private GridPoint finalPosition;
 
   public ElevatorCar(Elevator parent, TextureAtlas elevatorAtlas) {
     elevator = parent;
     elevator.eventBus().register(this);
+    finalPosition = new GridPoint();
 
     queue = new ElevatorQueue(elevator);
 
@@ -52,9 +54,9 @@ public class ElevatorCar extends GameObject {
 
   public void moveToFloor(int nextFloor) {
     TweenSystem.manager().killTarget(this);
-    GridPoint finalPosition = elevator.getContentPosition().cpy();
+    finalPosition.set(elevator.getContentPosition());
     finalPosition.y = nextFloor;
-    float targetYPosition = finalPosition.toWorldVector2().y;
+    float targetYPosition = finalPosition.getWorldY();
     int distanceBetweenStops = (int) (Math.abs(getY() - targetYPosition) * 2.5f);
     Tween.to(this, POSITION_Y, distanceBetweenStops)
             .target(targetYPosition)

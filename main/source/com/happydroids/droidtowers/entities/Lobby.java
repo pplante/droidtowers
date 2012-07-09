@@ -68,15 +68,14 @@ public class Lobby extends Room {
   }
 
   @Override
-  public boolean hasResident() {
-    return false;
-  }
-
-  @Override
   public void render(SpriteBatch spriteBatch, Color renderTintColor) {
     super.render(spriteBatch, renderTintColor);
 
-//TODO: Make this better?
+//    drawEndCaps(spriteBatch);
+  }
+
+  //TODO: Make this better?
+  private void drawEndCaps(SpriteBatch spriteBatch) {
     GridPoint left = getPosition().cpy();
     left.sub(2, 0);
 

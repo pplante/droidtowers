@@ -8,69 +8,72 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.google.common.collect.Lists;
+import com.happydroids.droidtowers.Colors;
+import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.generators.NameGenerator;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class ManageCommercialSpaceDialog extends Dialog {
+public class ManageCommercialSpaceDialog extends ScrollableTowerWindow {
   private final CommercialSpace commercialSpace;
   private TextField textField;
 
   public ManageCommercialSpaceDialog(final CommercialSpace commercialSpace) {
+    super("Manage " + commercialSpace.getName(), DroidTowersGame.getRootUiStage());
     this.commercialSpace = commercialSpace;
 
-    textField = FontManager.Roboto18.makeTextField(commercialSpace.getName(), "");
+    textField = FontManager.Roboto24.makeTextField(commercialSpace.getName(), "");
 
-    setTitle("Manage: " + commercialSpace.getName());
-    setView(makeContentView());
+    defaults().pad(scale(4));
 
-    addButton("Save", new OnClickCallback() {
-      @Override
-      public void onClick(Dialog dialog) {
-        dismiss();
+    setStaticHeader(makeNameHeader());
 
-        commercialSpace.setName(textField.getText());
-      }
-    });
+    addLabel("Current Employees", FontManager.Roboto24);
 
-    addButton("Discard", new OnClickCallback() {
-      @Override
-      public void onClick(Dialog dialog) {
-        dismiss();
-      }
-    });
-  }
+    addHorizontalRule(Colors.ICS_BLUE, 2, 2);
 
-  private Actor makeContentView() {
-    Table content = new Table();
-    content.defaults().pad(scale(4));
+    JobCandidateListView candidateListView = new JobCandidateListView();
+//    candidateListView.setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Color.DARK_GRAY));
+    candidateListView.pad(scale(20));
+    candidateListView.setCountLabelSuffix("employees");
+    candidateListView.setCandidates(Lists.newArrayList(this.commercialSpace.getEmployees()));
 
-    content.row().fillX();
-    content.add(FontManager.Roboto18.makeLabel("Name of " + commercialSpace.getGridObjectType().getName())).expandX().colspan(2);
+    row();
+    add(candidateListView).spaceBottom(scale(20));
 
-    content.row();
-    content.add(textField).width(400);
-    content.add(makeRandomNameButton());
-
-    content.row();
-    content.add(FontManager.Roboto18.makeLabel("Current Employees"));
-
-    content.row();
-    content.add(FontManager.Roboto18.makeLabel(commercialSpace.getJobsFilled() + "/" + commercialSpace.getJobsProvided()));
-
-    TextButton hireButton = FontManager.Roboto18.makeTextButton("Hire Employee");
+    TextButton hireButton = FontManager.Roboto18.makeTextButton("Employee Search");
     hireButton.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
-        new AvailableJobCandidateDialog(commercialSpace).show();
+        new AvailableJobCandidateDialog(ManageCommercialSpaceDialog.this.commercialSpace).show();
       }
     });
 
-    content.row();
-    content.add(hireButton);
+    TextButton fireButton = FontManager.Roboto18.makeTextButton("Fire Employee");
 
-    return content;
+
+    row();
+    add(fireButton).padLeft(scale(70));
+    add(hireButton);
+
+    shoveContentUp();
+  }
+
+  private Actor makeNameHeader() {
+    Table c = new Table();
+    c.pad(scale(22));
+    c.defaults().space(scale(4)).top().left();
+
+    c.row();
+    c.add(FontManager.Roboto18.makeLabel("Name of " + this.commercialSpace.getGridObjectType().getName())).colspan(2);
+
+    c.row();
+    c.add(textField).minWidth(400);
+    c.add(makeRandomNameButton()).fill();
+
+    return c;
   }
 
   private TextButton makeRandomNameButton() {

@@ -11,7 +11,7 @@ repeat: none
   index: -1
 3x1-small-apartment
   rotate: false
-  xy: 0, 192
+  xy: 192, 128
   size: 192, 64
   orig: 192, 64
   offset: 0, 0
@@ -46,7 +46,7 @@ repeat: none
   index: -1
 3x1-small-apartment
   rotate: false
-  xy: 192, 128
+  xy: 0, 192
   size: 192, 64
   orig: 192, 64
   offset: 0, 0

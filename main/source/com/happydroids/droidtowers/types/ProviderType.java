@@ -4,8 +4,6 @@
 
 package com.happydroids.droidtowers.types;
 
-import java.util.Set;
-
 public enum ProviderType {
   NONE,
   LOBBY,
@@ -44,11 +42,13 @@ public enum ProviderType {
     return subTypes != null;
   }
 
-  public boolean matchesSubType(Set<ProviderType> typeSet) {
+  public boolean matchesSubType(ProviderType... otherTypes) {
     if (subTypes != null) {
       for (ProviderType subType : subTypes) {
-        if (typeSet.contains(subType)) {
-          return true;
+        for (ProviderType otherType : otherTypes) {
+          if (otherType.equals(subType)) {
+            return true;
+          }
         }
       }
     }
@@ -56,7 +56,13 @@ public enum ProviderType {
     return false;
   }
 
-  public boolean matches(Set<ProviderType> types) {
-    return types.contains(this) || matchesSubType(types);
+  public boolean matches(ProviderType... types) {
+    for (ProviderType type : types) {
+      if (type.equals(this) || type.matchesSubType(this)) {
+        return true;
+      }
+    }
+
+    return matchesSubType(types);
   }
 }

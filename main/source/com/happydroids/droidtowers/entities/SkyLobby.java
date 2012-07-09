@@ -36,8 +36,4 @@ public class SkyLobby extends Room {
     return 0f;
   }
 
-  @Override
-  public boolean hasResident() {
-    return false;
-  }
 }

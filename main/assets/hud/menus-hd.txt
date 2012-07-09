@@ -11,7 +11,7 @@ happy-droids-logo
   index: -1
 facebook-logo
   rotate: false
-  xy: 196, 70
+  xy: 184, 198
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -30,12 +30,26 @@ droid-cousin-vinnie
   orig: 184, 209
   offset: 4, 0
   index: -1
+large-left-arrow
+  rotate: false
+  xy: 196, 70
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
 right-arrow
   rotate: false
   xy: 228, 70
   size: 28, 32
   orig: 28, 32
   offset: 2, 0
+  index: -1
+large-right-arrow
+  rotate: false
+  xy: 196, 134
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
   index: -1
 powered-by-libgdx
   rotate: false

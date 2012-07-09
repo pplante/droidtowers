@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.Reward;
 import com.happydroids.droidtowers.entities.GridObject;
@@ -17,7 +16,6 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.platform.Platform;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.WeakHashMap;
 
@@ -161,17 +159,7 @@ public abstract class GridObjectType {
   }
 
   public boolean provides(ProviderType... thingProviderTypes) {
-    if (provides != null) {
-      HashSet<ProviderType> typeHashSet = Sets.newHashSet(provides);
-
-      for (ProviderType otherType : thingProviderTypes) {
-        if (otherType.matches(typeHashSet)) {
-          return true;
-        }
-      }
-    }
-
-    return false;
+    return provides != null && provides.matches(thingProviderTypes);
   }
 
   public boolean isLocked() {

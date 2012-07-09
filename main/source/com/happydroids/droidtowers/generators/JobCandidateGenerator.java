@@ -17,12 +17,31 @@ public class JobCandidateGenerator {
     for (int i = 0; i < numToGenerate; i++) {
       JobCandidate candidate = new JobCandidate();
       candidate.setGender(Gender.FEMALE);
-      candidate.setName(NameGenerator.randomFemaleName());
+      candidate.setName(generateUniqueName(candidates));
       candidate.randomizeAttributes();
 
       candidates.add(candidate);
     }
 
     return candidates;
+  }
+
+  private static String generateUniqueName(List<JobCandidate> candidates) {
+    boolean hasDupes = true;
+    while (hasDupes) {
+      String name = NameGenerator.randomFemaleName();
+      hasDupes = false;
+      for (JobCandidate candidate : candidates) {
+        if (candidate.getName().equalsIgnoreCase(name)) {
+          hasDupes = true;
+        }
+      }
+
+      if (!hasDupes) {
+        return name;
+      }
+    }
+
+    return null;
   }
 }

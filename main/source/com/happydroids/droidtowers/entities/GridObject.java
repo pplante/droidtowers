@@ -55,6 +55,7 @@ public abstract class GridObject {
   private boolean displayedPopOver;
   protected int loanFromCousinVinnie;
   private int variationId;
+  private List<GridPoint> pointsTouched;
 
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
@@ -187,6 +188,8 @@ public abstract class GridObject {
     worldBounds.set(worldPosition.x, worldPosition.y, worldSize.x, worldSize.y);
     worldCenter.set(worldPosition.x + worldSize.x / 2, worldPosition.y + worldSize.y / 2);
     worldTop.set(worldPosition.x + worldSize.x / 2, worldPosition.y + worldSize.y);
+
+    updateGridPointsTouched();
   }
 
   protected void clampPosition() {
@@ -248,30 +251,20 @@ public abstract class GridObject {
     return position;
   }
 
-  public List<GridPoint> getGridPointsOccupied() {
-    List<GridPoint> points = Lists.newArrayList();
-
-    for (int x = position.x; x < position.x + size.x; x++) {
-      for (int y = position.y; y < position.y + size.y; y++) {
-        points.add(new GridPoint(x, y));
-      }
-    }
-
-    return points;
+  public List<GridPoint> getGridPointsTouched() {
+    return pointsTouched;
   }
 
-  public List<GridPoint> getGridPointsTouched() {
-    List<GridPoint> points = Lists.newArrayList();
+  public void updateGridPointsTouched() {
+    pointsTouched = Lists.newArrayList();
 
     GridPoint contentSize = getContentSize();
     GridPoint contentPosition = getContentPosition();
     for (int x = contentPosition.x; x < contentPosition.x + contentSize.x; x++) {
       for (int y = contentPosition.y; y < contentPosition.y + contentSize.y; y++) {
-        points.add(new GridPoint(x, y));
+        pointsTouched.add(new GridPoint(x, y));
       }
     }
-
-    return points;
   }
 
 

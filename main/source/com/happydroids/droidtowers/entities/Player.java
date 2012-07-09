@@ -21,6 +21,7 @@ public class Player {
   private int populationAttracted;
   private int maxPopulation;
   private int populationMax;
+  private int supportedResidency;
   private int populationResidency;
   private int currentIncome;
   private int currentExpenses;
@@ -171,5 +172,13 @@ public class Player {
 
   public float getPopulationRating() {
     return populationRating;
+  }
+
+  public void setSupportedResidency(int supportedResidency) {
+    this.supportedResidency = supportedResidency;
+  }
+
+  public int getSupportedResidency() {
+    return supportedResidency;
   }
 }

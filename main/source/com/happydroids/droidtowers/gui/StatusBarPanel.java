@@ -180,8 +180,8 @@ public class StatusBarPanel extends Table {
       moneyLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + formatNumber(player.getCoins()));
       moneyIncomeLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + formatNumber(player.getCurrentIncome()));
       moneyExpensesLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + formatNumber(player.getCurrentExpenses()));
-      populationLabel.setText(formatNumber(player.getPopulationResidency()));
-      employmentLabel.setText(formatNumber(player.getJobsFilled()));
+      populationLabel.setText(formatNumber(player.getPopulationResidency()) + "/" + formatNumber(player.getMaxPopulation()));
+      employmentLabel.setText(formatNumber(player.getJobsFilled()) + "/" + formatNumber(player.getJobsMax()));
 
       pack();
     }

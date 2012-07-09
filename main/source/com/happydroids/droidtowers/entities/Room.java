@@ -36,10 +36,10 @@ public class Room extends GridObject {
   private long lastUpdateTime;
   private int populationRequired;
 
-  private Avatar resident;
   private Set<Avatar> residents;
   protected Set<String> decalsToDraw;
   private static Map<String, TextureRegion> availableDecals;
+  private float lastCheckedDecals;
 
 
   public Room(RoomType roomType, GameGrid gameGrid) {
@@ -103,23 +103,27 @@ public class Room extends GridObject {
   public void update(float deltaTime) {
     super.update(deltaTime);
 
-    if (loanFromCousinVinnie > 0) {
-      decalsToDraw.add(DECAL_COUSIN_VINNIE);
-    } else {
-      decalsToDraw.remove(DECAL_COUSIN_VINNIE);
-    }
-
-    if (!connectedToTransport) {
-      decalsToDraw.add(DECAL_TRANSPORT_DISCONNECTED);
-    } else {
-      decalsToDraw.remove(DECAL_TRANSPORT_DISCONNECTED);
-    }
-
-    if (provides(ProviderType.HOUSING) && loanFromCousinVinnie == 0) {
-      if (residents.size() == 0) {
-        decalsToDraw.add(DECAL_NEEDS_DROIDS);
+    lastCheckedDecals += deltaTime;
+    if (lastCheckedDecals >= 2.5f) {
+      lastCheckedDecals = 0f;
+      if (loanFromCousinVinnie > 0) {
+        decalsToDraw.add(DECAL_COUSIN_VINNIE);
       } else {
-        decalsToDraw.remove(DECAL_NEEDS_DROIDS);
+        decalsToDraw.remove(DECAL_COUSIN_VINNIE);
+      }
+
+      if (!connectedToTransport) {
+        decalsToDraw.add(DECAL_TRANSPORT_DISCONNECTED);
+      } else {
+        decalsToDraw.remove(DECAL_TRANSPORT_DISCONNECTED);
+      }
+
+      if (provides(ProviderType.HOUSING) && loanFromCousinVinnie == 0) {
+        if (residents.size() == 0) {
+          decalsToDraw.add(DECAL_NEEDS_DROIDS);
+        } else {
+          decalsToDraw.remove(DECAL_NEEDS_DROIDS);
+        }
       }
     }
   }
@@ -188,14 +192,6 @@ public class Room extends GridObject {
     return minDist;
   }
 
-  public boolean hasResident() {
-    return resident != null;
-  }
-
-  public void setResident(Avatar avatar) {
-    resident = avatar;
-  }
-
   public float getResidencyLevel() {
     int populationMax = ((RoomType) gridObjectType).getPopulationMax();
     if (populationMax == 0) {
@@ -212,7 +208,8 @@ public class Room extends GridObject {
   @Override
   public String toString() {
     return "Room{" +
-                   "currentResidency=" + getNumResidents() +
+                   "name=" + getName() +
+                   ", currentResidency=" + getNumResidents() +
                    ", populationRequired=" + populationRequired +
                    ", residents=" + residents +
                    '}';

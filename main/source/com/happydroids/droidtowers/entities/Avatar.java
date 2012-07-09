@@ -4,15 +4,13 @@
 
 package com.happydroids.droidtowers.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
@@ -60,6 +58,8 @@ public class Avatar extends GameObject {
   private Room home;
   private float hungerLevel;
   private LinkedList<Object> lastVisitedPlaces;
+  private boolean lookedForHome;
+
 
   public Avatar(AvatarLayer avatarLayer) {
     super();
@@ -96,23 +96,19 @@ public class Avatar extends GameObject {
       if (home != null && !lastVisitedPlaces.contains(home)) {
         navigateToGridObject(home);
       } else {
-        objects = Lists.newLinkedList(Iterables.filter(objects, new Predicate<GridObject>() {
-          public boolean apply(@Nullable GridObject gridObject) {
-            return (gridObject.provides(COMMERCIAL, RESTROOM) || gridObject.equals(home)) && gridObject.isConnectedToTransport();
-          }
-        }));
+        GridObject mostDesirable = null;
+        for (GridObject gridObject : objects) {
+          if (!gridObject.isConnectedToTransport() || lastVisitedPlaces.contains(gridObject)) continue;
 
-        objects.removeAll(lastVisitedPlaces);
-
-        if (objects.size() > 0) {
-          List<GridObject> gridObjectsSorted = Ordering.natural().reverse().onResultOf(new Function<GridObject, Comparable>() {
-            @Override
-            public Comparable apply(@Nullable GridObject input) {
-              return input.getDesirability();
+          if (gridObject.provides(COMMERCIAL, RESTROOM)) {
+            if (mostDesirable == null || mostDesirable.getDesirability() < gridObject.getDesirability()) {
+              mostDesirable = gridObject;
             }
-          }).sortedCopy(objects);
-
-          navigateToGridObject(gridObjectsSorted.get(0));
+          }
+        }
+        Gdx.app.log("Avatar", "Found: " + mostDesirable);
+        if (mostDesirable != null) {
+          navigateToGridObject(mostDesirable);
         }
       }
     } else {
@@ -185,20 +181,20 @@ public class Avatar extends GameObject {
   public void update(float timeDelta) {
     super.update(timeDelta);
 
-    if (home == null) {
+    if (!lookedForHome) {
+      lookedForHome = true;
       List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
       if (rooms != null) {
-        List<GridObject> roomsSorted = Ordering.natural().reverse().onResultOf(new Function<GridObject, Comparable>() {
-          @Override
-          public Comparable apply(@Nullable GridObject input) {
-            return input.getDesirability();
+        GridObject mostDesirable = rooms.get(0);
+        for (GridObject gridObject : rooms) {
+          if (AVATAR_HOME_FILTER.apply(gridObject)) {
+            if (mostDesirable.getDesirability() < gridObject.getDesirability()) {
+              mostDesirable = gridObject;
+            }
           }
-        }).sortedCopy(rooms);
-        GridObject avatarsHome = Iterables.find(roomsSorted, AVATAR_HOME_FILTER, null);
-
-        if (avatarsHome != null) {
-          setHome(avatarsHome);
         }
+
+        setHome(mostDesirable);
       }
     }
 
@@ -260,8 +256,11 @@ public class Avatar extends GameObject {
 
   public void setHome(GridObject newHome) {
     home = (Room) newHome;
-    home.addResident(this);
-    setPosition(home.getWorldCenterBottom());
+
+    if (home != null) {
+      home.addResident(this);
+      setPosition(home.getWorldCenterBottom());
+    }
   }
 
   public void recalculateCurrentPath() {

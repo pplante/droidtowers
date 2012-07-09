@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.collect.Maps;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.actions.Action;
@@ -22,6 +23,8 @@ import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.ElevatorType;
 import com.happydroids.droidtowers.types.ResizeHandle;
+
+import java.util.HashMap;
 
 import static com.happydroids.droidtowers.types.ResizeHandle.TOP;
 
@@ -37,6 +40,8 @@ public class Elevator extends Transit {
   private ElevatorCar elevatorCar;
   static TextureAtlas elevatorAtlas;
   private GridPoint anchorPoint;
+  private final HashMap<Integer, String> shaftLabels;
+
 
   public Elevator(ElevatorType elevatorType, final GameGrid gameGrid) {
     super(elevatorType, gameGrid);
@@ -59,6 +64,8 @@ public class Elevator extends Transit {
     drawShaft = true;
 
     elevatorCar = new ElevatorCar(this, elevatorAtlas);
+
+    shaftLabels = Maps.newHashMap();
   }
 
   @Override
@@ -104,17 +111,21 @@ public class Elevator extends Transit {
 
     for (int localFloorNum = 1; localFloorNum < size.y - 1; localFloorNum++) {
       int worldFloorNum = position.y + localFloorNum;
-      String labelText = String.valueOf(worldFloorNum - TowerConsts.LOBBY_FLOOR);
-      if (worldFloorNum == TowerConsts.LOBBY_FLOOR) {
-        labelText = "L";
-      } else if (worldFloorNum < TowerConsts.LOBBY_FLOOR) {
-        labelText = "B" + (TowerConsts.LOBBY_FLOOR - worldFloorNum);
+      int normalizedWorldFloor = worldFloorNum - TowerConsts.LOBBY_FLOOR;
+      if (!shaftLabels.containsKey(normalizedWorldFloor)) {
+        String labelText = String.valueOf(normalizedWorldFloor);
+        if (worldFloorNum == TowerConsts.LOBBY_FLOOR) {
+          labelText = "L";
+        } else if (worldFloorNum < TowerConsts.LOBBY_FLOOR) {
+          labelText = "B" + (TowerConsts.LOBBY_FLOOR - worldFloorNum);
+        }
+        shaftLabels.put(normalizedWorldFloor, labelText);
       }
 
-      textBounds = floorFont.getBounds(labelText);
+      textBounds = floorFont.getBounds(shaftLabels.get(normalizedWorldFloor));
       floorFont.setColor(1, 1, 1, 0.5f);
       floorFont.setScale(getGridScale());
-      floorFont.draw(spriteBatch, labelText, worldPosition.x + ((TowerConsts.GRID_UNIT_SIZE - textBounds.width) / 2), worldPosition.y + (scaledGridUnit() * localFloorNum) + ((TowerConsts.GRID_UNIT_SIZE - textBounds.height) / 2));
+      floorFont.draw(spriteBatch, shaftLabels.get(normalizedWorldFloor), worldPosition.x + ((TowerConsts.GRID_UNIT_SIZE - textBounds.width) / 2), worldPosition.y + (scaledGridUnit() * localFloorNum) + ((TowerConsts.GRID_UNIT_SIZE - textBounds.height) / 2));
     }
 
     elevatorCar.setColor(renderColor);

@@ -52,11 +52,19 @@ public class AvatarLayer extends GameLayer {
         Avatar avatar = new Avatar(this);
         setupAvatar(avatar);
       }
+    } else if (gameObjects.size() - 1 > maxAvatars()) {
+      int numToKill = gameObjects.size() - maxAvatars();
+      for (int i = 0; i <= numToKill; i++) {
+        GameObject gameObject = gameObjects.get(i);
+        if (!(gameObject instanceof Janitor)) {
+          gameObject.markToRemove(true);
+        }
+      }
     }
   }
 
   private int maxAvatars() {
-    return Player.instance().getMaxPopulation() + Player.instance().getJobsFilled();
+    return Player.instance().getSupportedResidency();
   }
 
   private void setupAvatar(Avatar avatar) {
@@ -130,6 +138,6 @@ public class AvatarLayer extends GameLayer {
   }
 
   public int getNumAvatars() {
-    return gameObjects.size();
+    return gameObjects.size() - 1;
   }
 }

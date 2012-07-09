@@ -18,11 +18,15 @@ import java.util.List;
 
 public class ButtonBar extends Table {
   private List<TextButton> buttons;
+  private boolean showTopLine;
+  private boolean showBottomLine;
+
 
   public ButtonBar() {
     super();
 
     buttons = Lists.newArrayList();
+    showTopLine = true;
   }
 
   public ButtonBar addButton(String labelText, VibrateClickListener clickListener) {
@@ -38,8 +42,13 @@ public class ButtonBar extends Table {
 
   private void updateLayout() {
     clear();
-    row().fillX();
-    add(new HorizontalRule(Color.GRAY, 1)).height(1).fillX().colspan(buttons.size() * 2 - 1);
+
+    int lineColSpan = buttons.size() * 2 - 1;
+    if (showTopLine) {
+      row().fillX();
+      add(new HorizontalRule(Color.GRAY, 1)).height(1).fillX().colspan(lineColSpan);
+    }
+
     row().fillX();
 
     int numButtons = buttons.size();
@@ -50,9 +59,22 @@ public class ButtonBar extends Table {
         add(new VerticalRule(Color.GRAY, 1)).width(1).fillY();
       }
     }
+
+    if (showBottomLine) {
+      row().fillX();
+      add(new HorizontalRule(Color.GRAY, 1)).height(1).fillX().colspan(lineColSpan);
+    }
   }
 
   public int getButtonCount() {
     return buttons.size();
+  }
+
+  public void toggleTopLine(boolean b) {
+    showTopLine = b;
+  }
+
+  public void toggleBottomLine(boolean b) {
+    showBottomLine = b;
   }
 }

@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeOut;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerAssetManager;
@@ -35,6 +36,7 @@ public class Dialog extends Table {
   private Texture modalNoiseTexture;
   private Group youCantTouchThis;
   private ButtonBar buttonBar;
+  private boolean viewPadding;
 
   public Dialog() {
     this(DroidTowersGame.getRootUiStage());
@@ -45,6 +47,7 @@ public class Dialog extends Table {
     this.stage = stage;
     touchable = true;
     hideButtons = false;
+    viewPadding = true;
 
     buttonBar = new ButtonBar();
 
@@ -100,7 +103,11 @@ public class Dialog extends Table {
     int padTop = scale(20);
     if (view != null) {
       row();
-      add(view).pad(padTop, padSide, padTop, padSide).center();
+      Cell viewCell = add(view).center();
+
+      if (viewPadding) {
+        viewCell.pad(padTop, padSide, padTop, padSide);
+      }
     }
 
     if (message != null) {
@@ -203,5 +210,9 @@ public class Dialog extends Table {
 
   protected void clearButtons() {
     buttons.clear();
+  }
+
+  protected void useViewPadding(boolean b) {
+    viewPadding = b;
   }
 }
