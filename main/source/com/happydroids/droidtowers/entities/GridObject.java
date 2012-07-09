@@ -208,7 +208,7 @@ public abstract class GridObject {
   }
 
   public int getUpkeepCost() {
-    return placed ? gridObjectType.getUpkeepCost() : 0;
+    return 0;
   }
 
   public void setPlaced(boolean state) {

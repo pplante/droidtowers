@@ -92,10 +92,6 @@ public abstract class GridObjectType {
     return Math.round(coins / 20);
   }
 
-  public int getUpkeepCost() {
-    return Math.round(coins / 10000);
-  }
-
   public boolean canShareSpace(GridObject gridObject) {
     return canShareSpace;
   }
@@ -104,13 +100,16 @@ public abstract class GridObjectType {
     GridPoint gridPointBelow = gridObject.getPosition().cpy();
     gridPointBelow.sub(0, 1);
 
+    Set<GridObject> objectsBelow = gridObject.getGameGrid().positionCache().getObjectsAt(gridPointBelow, gridObject.getSize(), gridObject);
+    if (!objectsBelow.isEmpty()) {
+      return true;
+    }
+
     GridPoint gridPointAbove = gridObject.getPosition().cpy();
     gridPointAbove.add(0, 1);
-
-    Set<GridObject> objectsBelow = gridObject.getGameGrid().positionCache().getObjectsAt(gridPointBelow, gridObject.getSize(), gridObject);
     Set<GridObject> objectsAbove = gridObject.getGameGrid().positionCache().getObjectsAt(gridPointAbove, gridObject.getSize(), gridObject);
 
-    return objectsBelow.size() != 0 || objectsAbove.size() != 0;
+    return !objectsAbove.isEmpty();
   }
 
   protected boolean checkForOverlap(GridObject gridObject) {
