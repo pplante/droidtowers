@@ -15,7 +15,7 @@ import java.util.List;
 
 public class WanderPathFinder extends TransitPathFinder {
   public WanderPathFinder(GameGrid gameGrid, GridPosition start) {
-    super(gameGrid, start, null);
+    super(gameGrid, start, null, false);
   }
 
   @Override

@@ -11,12 +11,16 @@ import com.happydroids.droidtowers.grid.GridPosition;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.happydroids.droidtowers.types.ProviderType.SERVICE_ELEVATOR;
+
 public class TransitPathFinder extends AStar<GridPosition> {
   protected final GameGrid gameGrid;
+  private final boolean canUseServiceRoutes;
 
-  public TransitPathFinder(GameGrid gameGrid, GridPosition start, GridPosition goal) {
+  public TransitPathFinder(GameGrid gameGrid, GridPosition start, GridPosition goal, boolean canUseServiceRoutes) {
     super(start, goal);
     this.gameGrid = gameGrid;
+    this.canUseServiceRoutes = canUseServiceRoutes;
   }
 
   @Override
@@ -32,6 +36,10 @@ public class TransitPathFinder extends AStar<GridPosition> {
 
     if (to != null) {
       if (to.elevator != null) {
+        if (canUseServiceRoutes && to.elevator.provides(SERVICE_ELEVATOR)) {
+          return 0.05;
+        }
+
         return 0.25;
       } else if (to.stair != null) {
         return 0.75;
@@ -62,7 +70,12 @@ public class TransitPathFinder extends AStar<GridPosition> {
     int x = point.x;
     int y = point.y;
 
-    if (point.elevator != null || point.stair != null) {
+    if (point.elevator != null) {
+      if ((canUseServiceRoutes && point.elevator.provides(SERVICE_ELEVATOR) || !canUseServiceRoutes && !point.elevator.provides(SERVICE_ELEVATOR))) {
+        checkGridPositionY(successors, x, y + 1);
+        checkGridPositionY(successors, x, y - 1);
+      }
+    } else if (point.stair != null) {
       checkGridPositionY(successors, x, y + 1);
       checkGridPositionY(successors, x, y - 1);
     }

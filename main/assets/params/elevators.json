@@ -20,7 +20,7 @@
     "experienceAward":2000,
     "height":1,
     "width":1,
-    "provides":"ELEVATOR",
+    "provides":"SERVICE_ELEVATOR",
     "atlasFilename":"transport.txt",
     "imageFilename":"elevator/service-car",
     "noiseLevel":0.1

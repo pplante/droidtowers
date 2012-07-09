@@ -406,7 +406,7 @@ public abstract class GridObject {
   }
 
   public void recordVisitor(Avatar avatar) {
-    if (avatar instanceof Janitor || avatar instanceof Maid) {
+    if (Janitor.class.isInstance(avatar)) {
       numVisitors = 0;
       lastCleanedAt = System.currentTimeMillis();
     } else {

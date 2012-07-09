@@ -23,4 +23,6 @@ public class HotelRoom extends CommercialSpace {
   protected boolean canEmployDroids() {
     return false;
   }
+
+
 }

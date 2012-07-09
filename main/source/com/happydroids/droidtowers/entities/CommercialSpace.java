@@ -88,7 +88,7 @@ public class CommercialSpace extends Room {
 
   @Override
   public float getDesirability() {
-    if (getEmployees().isEmpty()) {
+    if (canEmployDroids() && getEmployees().isEmpty()) {
       return 0f;
     }
 

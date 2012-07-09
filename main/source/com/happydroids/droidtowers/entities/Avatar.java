@@ -137,7 +137,7 @@ public class Avatar extends GameObject {
     GridPosition start = gameGrid.positionCache().getPosition(gameGrid.closestGridPoint(getX(), getY()));
     GridPosition goal = gameGrid.positionCache().getPosition(gridObject.getPosition());
 
-    setupPathFinder(new TransitPathFinder(gameGrid, start, goal));
+    setupPathFinder(new TransitPathFinder(gameGrid, start, goal, this instanceof Janitor));
   }
 
   private void setupPathFinder(final TransitPathFinder finder) {
