@@ -58,7 +58,7 @@ public class Avatar extends GameObject {
   private Room home;
   private float hungerLevel;
   private LinkedList<Object> lastVisitedPlaces;
-  private boolean lookedForHome;
+  private float lastSeachedForHome = Float.MAX_VALUE;
 
 
   public Avatar(AvatarLayer avatarLayer) {
@@ -181,20 +181,24 @@ public class Avatar extends GameObject {
   public void update(float timeDelta) {
     super.update(timeDelta);
 
-    if (!lookedForHome) {
-      lookedForHome = true;
-      List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
-      if (rooms != null) {
-        GridObject mostDesirable = rooms.get(0);
-        for (GridObject gridObject : rooms) {
-          if (AVATAR_HOME_FILTER.apply(gridObject)) {
-            if (mostDesirable.getDesirability() < gridObject.getDesirability()) {
-              mostDesirable = gridObject;
+    if (home == null) {
+      lastSeachedForHome += timeDelta;
+      if (lastSeachedForHome > 10f) {
+        lastSeachedForHome = 0f;
+        List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
+        if (rooms != null) {
+          GridObject mostDesirable = rooms.get(0);
+          for (GridObject gridObject : rooms) {
+            Room room = (Room) gridObject;
+            if (room.isConnectedToTransport() && room.getNumSupportedResidents() > 0) {
+              if (room.getNumResidents() == 0 || (room.getNumResidents() < room.getNumSupportedResidents() && mostDesirable.getDesirability() < room.getDesirability())) {
+                mostDesirable = room;
+              }
             }
           }
-        }
 
-        setHome(mostDesirable);
+          setHome(mostDesirable);
+        }
       }
     }
 
@@ -259,6 +263,7 @@ public class Avatar extends GameObject {
 
     if (home != null) {
       home.addResident(this);
+      cancelMovement();
       setPosition(home.getWorldCenterBottom());
     }
   }

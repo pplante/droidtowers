@@ -106,8 +106,8 @@ public class CommercialSpace extends Room {
   }
 
   @Override
-  public void update(float deltaTime) {
-    super.update(deltaTime);
+  protected void checkDecals() {
+    super.checkDecals();
 
     if (canEmployDroids()) {
       if (employees.size() == 0) {
@@ -115,6 +115,12 @@ public class CommercialSpace extends Room {
       } else {
         decalsToDraw.remove(DECAL_NEEDS_DROIDS);
       }
+    }
+
+    if (getNumVisitors() > 0 && getDesirability() < 0.25f) {
+      decalsToDraw.add(DECAL_DIRTY);
+    } else {
+      decalsToDraw.remove(DECAL_DIRTY);
     }
   }
 

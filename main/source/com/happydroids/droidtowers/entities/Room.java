@@ -30,6 +30,7 @@ public class Room extends GridObject {
   public static final String DECAL_COUSIN_VINNIE = "cousin-vinnie";
   public static final String DECAL_TRANSPORT_DISCONNECTED = "transport-disconnected";
   public static final String DECAL_NEEDS_DROIDS = "needs-droids";
+  public static final String DECAL_DIRTY = "dirty";
   private Sprite sprite;
 
   private static final int UPDATE_FREQUENCY = 10000;
@@ -106,24 +107,28 @@ public class Room extends GridObject {
     lastCheckedDecals += deltaTime;
     if (lastCheckedDecals >= 2.5f) {
       lastCheckedDecals = 0f;
-      if (loanFromCousinVinnie > 0) {
-        decalsToDraw.add(DECAL_COUSIN_VINNIE);
-      } else {
-        decalsToDraw.remove(DECAL_COUSIN_VINNIE);
-      }
+      checkDecals();
+    }
+  }
 
-      if (!connectedToTransport) {
-        decalsToDraw.add(DECAL_TRANSPORT_DISCONNECTED);
-      } else {
-        decalsToDraw.remove(DECAL_TRANSPORT_DISCONNECTED);
-      }
+  protected void checkDecals() {
+    if (loanFromCousinVinnie > 0) {
+      decalsToDraw.add(DECAL_COUSIN_VINNIE);
+    } else {
+      decalsToDraw.remove(DECAL_COUSIN_VINNIE);
+    }
 
-      if (provides(ProviderType.HOUSING) && loanFromCousinVinnie == 0) {
-        if (residents.size() == 0) {
-          decalsToDraw.add(DECAL_NEEDS_DROIDS);
-        } else {
-          decalsToDraw.remove(DECAL_NEEDS_DROIDS);
-        }
+    if (!connectedToTransport) {
+      decalsToDraw.add(DECAL_TRANSPORT_DISCONNECTED);
+    } else {
+      decalsToDraw.remove(DECAL_TRANSPORT_DISCONNECTED);
+    }
+
+    if (provides(ProviderType.HOUSING) && loanFromCousinVinnie == 0) {
+      if (residents.size() == 0) {
+        decalsToDraw.add(DECAL_NEEDS_DROIDS);
+      } else {
+        decalsToDraw.remove(DECAL_NEEDS_DROIDS);
       }
     }
   }
@@ -209,7 +214,7 @@ public class Room extends GridObject {
   public String toString() {
     return "Room{" +
                    "name=" + getName() +
-                   ", currentResidency=" + getNumResidents() +
+                   ", supportedResidency=" + getNumSupportedResidents() +
                    ", populationRequired=" + populationRequired +
                    ", residents=" + residents +
                    '}';
