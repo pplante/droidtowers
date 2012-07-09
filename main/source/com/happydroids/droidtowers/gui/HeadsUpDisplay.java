@@ -179,7 +179,7 @@ public class HeadsUpDisplay extends WidgetGroup {
         if (gridObject instanceof CommercialSpace) {
           totalVisitors = Math.max(gridObject.getNumVisitors(), totalVisitors);
         } else if (gridObject instanceof Room) {
-          residents = ((Room) gridObject).getCurrentResidency();
+          residents = ((Room) gridObject).getNumResidents();
         }
 
         objectNoiseLevel = gridObject.getNoiseLevel();

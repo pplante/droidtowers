@@ -18,4 +18,9 @@ public class HotelRoom extends CommercialSpace {
   public GridObjectPopOver makePopOver() {
     return new HotelRoomPopOver(this);
   }
+
+  @Override
+  protected boolean canEmployDroids() {
+    return false;
+  }
 }

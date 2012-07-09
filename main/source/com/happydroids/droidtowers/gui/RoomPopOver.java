@@ -5,14 +5,17 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.entities.Avatar;
 import com.happydroids.droidtowers.entities.Room;
 
+import static com.happydroids.droidtowers.platform.Display.scale;
+
 public class RoomPopOver extends GridObjectPopOver<Room> {
   private final StarRatingBar residencyBar;
-  private final Image avatarImage;
   private final StarRatingBar crimeBar;
+  private final Table residentImages;
 
 
   public RoomPopOver(Room room) {
@@ -21,10 +24,11 @@ public class RoomPopOver extends GridObjectPopOver<Room> {
     crimeBar = makeStarRatingBar("Crime");
     residencyBar = makeStarRatingBar("Residents");
 
+    residentImages = new Table();
+    residentImages.defaults().pad(scale(2));
+
     row().fillX();
-    avatarImage = new Image();
-    avatarImage.setScaling(Scaling.none);
-    add(avatarImage).center();
+    add(residentImages).center();
   }
 
   @Override
@@ -36,11 +40,18 @@ public class RoomPopOver extends GridObjectPopOver<Room> {
 
     boolean updatedLayout = false;
 
-    if (gridObject.hasResident() && avatarImage.getRegion() == null) {
-      Avatar avatar = gridObject.getResident();
-      avatarImage.setRegion(avatar);
-      avatarImage.color.set(avatar.getColor());
-      updatedLayout = true;
+    if (gridObject.hasResidents()) {
+      if (residentImages.getActors().size() < gridObject.getResidents().size()) {
+        residentImages.clear();
+
+        for (Avatar avatar : gridObject.getResidents()) {
+          Image image = new Image(avatar, Scaling.none);
+          image.color.set(avatar.getColor());
+          residentImages.add(image).width((int) avatar.getWidth());
+        }
+        residentImages.pack();
+        updatedLayout = true;
+      }
     }
 
     if (updatedLayout) {

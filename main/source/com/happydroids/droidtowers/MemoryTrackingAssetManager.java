@@ -72,6 +72,7 @@ public class MemoryTrackingAssetManager extends AssetManager {
       final LoadedCallback prevCallback = parameter.loadedCallback;
       parameter.loadedCallback = new LoadedCallback() {
         public void finishedLoading(AssetManager assetManager, String fileName, Class type) {
+          Gdx.app.log(MemoryTrackingAssetManager.class.getSimpleName(), "Loaded: " + fileName);
           if (prevCallback != null) {
             prevCallback.finishedLoading(assetManager, fileName, type);
           }
@@ -99,17 +100,11 @@ public class MemoryTrackingAssetManager extends AssetManager {
   }
 
   public float getMemoryInMegabytes() {
-    return (float) currentMemory / 1024f / 1024f;
-  }
-
-  public void resetMemoryTracking() {
-    currentMemory = 0;
-    memoryPerFile.clear();
+    return currentMemory / 1024f / 1024f;
   }
 
   public void invalidateAllTextures() {
     Texture.invalidateAllTextures(Gdx.app);
-    resetMemoryTracking();
     finishLoading();
   }
 }

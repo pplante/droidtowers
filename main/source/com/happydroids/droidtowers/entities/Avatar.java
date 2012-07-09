@@ -229,7 +229,7 @@ public class Avatar extends GameObject {
 
   public void setHome(GridObject newHome) {
     home = (Room) newHome;
-    home.setResident(this);
+    home.addResident(this);
     setPosition(home.getWorldCenterBottom());
   }
 

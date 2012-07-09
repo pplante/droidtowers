@@ -11,7 +11,7 @@
     "jobsProvided":4,
     "noiseLevel":0.4,
     "provides":"OFFICE_SERVICES",
-    "atlasFilename":"rooms/housing.txt",
+    "atlasFilename":"rooms/commercial.txt",
     "imageFilename":"3x1-small-office"
   },
   {
@@ -26,7 +26,7 @@
     "jobsProvided":10,
     "noiseLevel":0.7,
     "provides":"OFFICE_SERVICES",
-    "atlasFilename":"rooms/housing.txt",
+    "atlasFilename":"rooms/commercial.txt",
     "imageFilename":"5x1-large-office"
   },
   {
@@ -39,7 +39,7 @@
     "width":2,
     "noiseLevel":0.2,
     "provides":"HOTEL_ROOMS",
-    "atlasFilename":"rooms/housing.txt",
+    "atlasFilename":"rooms/commercial.txt",
     "imageFilename":"2x1-hotel-room",
     "numVariations":2
   },
@@ -55,7 +55,7 @@
     "jobsProvided":4,
     "noiseLevel":0.3,
     "provides":"FOOD",
-    "atlasFilename":"rooms/housing.txt",
+    "atlasFilename":"rooms/commercial.txt",
     "imageFilename":"3x1-burger-joint"
   },
   {
@@ -70,7 +70,7 @@
     "jobsProvided":4,
     "noiseLevel":0.3,
     "provides":"FOOD",
-    "atlasFilename":"rooms/housing.txt",
+    "atlasFilename":"rooms/commercial.txt",
     "imageFilename":"3x1-pizza-place"
   },
   {
@@ -85,7 +85,7 @@
     "width":2,
     "noiseLevel":0.2,
     "provides":"FOOD",
-    "atlasFilename":"rooms/housing.txt",
+    "atlasFilename":"rooms/commercial.txt",
     "imageFilename":"2x1-sushi"
   },
   {
@@ -101,7 +101,7 @@
     "noiseLevel":0.2,
     "crimeLevel":0.2,
     "provides":"ENTERTAINMENT",
-    "atlasFilename":"rooms/housing.txt",
+    "atlasFilename":"rooms/commercial.txt",
     "imageFilename":"2x1-bar"
   },
   {
@@ -116,7 +116,7 @@
     "noiseLevel":1.0,
     "crimeLevel":0.2,
     "provides":"ENTERTAINMENT",
-    "atlasFilename":"rooms/housing.txt",
+    "atlasFilename":"rooms/commercial.txt",
     "imageFilename":"4x1-movie-theater"
   }
 ]

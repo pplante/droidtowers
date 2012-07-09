@@ -20,12 +20,14 @@ class GridObjectPopOverCloser extends InputAdapter {
 
     InputSystem.instance().removeInputProcessor(this);
 
-    return false;
+    return true;
   }
 
   @Override
   public boolean touchDown(int x, int y, int pointer, int button) {
-    return closePopOver();
+    closePopOver();
+
+    return false;
   }
 
   @Override

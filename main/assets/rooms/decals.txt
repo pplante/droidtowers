@@ -1,0 +1,32 @@
+decals.png
+format: RGBA8888
+filter: MipMapLinearNearest,Linear
+repeat: none
+needs-droids
+  rotate: false
+  xy: 0, 80
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+cousin-vinnie
+  rotate: false
+  xy: 40, 0
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+transport-disconnected
+  rotate: false
+  xy: 0, 0
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+not-profitable
+  rotate: false
+  xy: 0, 40
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1

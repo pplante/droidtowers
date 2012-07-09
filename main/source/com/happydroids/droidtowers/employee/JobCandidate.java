@@ -5,14 +5,21 @@
 package com.happydroids.droidtowers.employee;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.happydroids.droidtowers.entities.Avatar;
 
+
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class JobCandidate {
-  private String name;
-  private Gender gender;
-  private double workEthic;
-  private double experienceLevel;
-  private double salaryRequired;
-
+  protected String name;
+  protected Gender gender;
+  protected double workEthic;
+  protected double experienceLevel;
+  protected double salary;
+  private Avatar avatar;
 
   public void setName(String name) {
     this.name = name;
@@ -30,7 +37,7 @@ public class JobCandidate {
     workEthic = MathUtils.random(5f);
     experienceLevel = MathUtils.random(5f);
 
-    salaryRequired = 2500f * ((workEthic + experienceLevel) / 10f);
+    salary = 2500f * ((workEthic + experienceLevel) / 10f);
   }
 
   public double getExperienceLevel() {
@@ -42,6 +49,11 @@ public class JobCandidate {
   }
 
   public double getSalary() {
-    return salaryRequired;
+    return salary;
+  }
+
+  @JsonIgnore
+  public void setAvatar(Avatar avatar) {
+    this.avatar = avatar;
   }
 }

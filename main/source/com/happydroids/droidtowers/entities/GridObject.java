@@ -478,4 +478,6 @@ public abstract class GridObject {
   public void setVariationId(int variationId) {
     this.variationId = variationId;
   }
+
+
 }

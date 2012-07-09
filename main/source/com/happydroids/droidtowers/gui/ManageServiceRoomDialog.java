@@ -6,7 +6,8 @@ package com.happydroids.droidtowers.gui;
 
 import com.happydroids.droidtowers.entities.ServiceRoom;
 
-public class ManageServiceRoomDialog extends Dialog {
+public class ManageServiceRoomDialog extends ManageCommercialSpaceDialog {
   public ManageServiceRoomDialog(ServiceRoom serviceRoom) {
+    super(serviceRoom);
   }
 }

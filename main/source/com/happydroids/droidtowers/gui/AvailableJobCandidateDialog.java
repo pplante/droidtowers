@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.employee.JobCandidate;
+import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.generators.JobCandidateGenerator;
 
 import java.text.NumberFormat;
@@ -26,10 +27,12 @@ public class AvailableJobCandidateDialog extends Dialog {
   private final Label salaryLabel;
   private final StarRatingBar workEthicRating;
   private final StarRatingBar experienceRating;
+  private final CommercialSpace commercialSpace;
 
 
-  public AvailableJobCandidateDialog() {
+  public AvailableJobCandidateDialog(CommercialSpace commercialSpace) {
     super();
+    this.commercialSpace = commercialSpace;
 
     nameLabel = FontManager.Roboto18.makeLabel("");
     salaryLabel = FontManager.RobotoBold18.makeLabel("");
@@ -110,7 +113,7 @@ public class AvailableJobCandidateDialog extends Dialog {
   private class HireCandidateClickListener extends VibrateClickListener {
     @Override
     public void onClick(Actor actor, float x, float y) {
-
+      commercialSpace.addEmployee(selectedCandidate);
     }
   }
 

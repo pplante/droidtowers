@@ -22,8 +22,8 @@
     "sound/music/happy-upbeat.mp3":"com.badlogic.gdx.audio.Music",
     "rain-drop.png":"com.badlogic.gdx.graphics.Texture",
     "sound/effects/click.wav":"com.badlogic.gdx.audio.Sound",
-    "backgrounds/clouds.png":"com.badlogic.gdx.graphics.Texture",
     "hud/star-white.png":"com.badlogic.gdx.graphics.Texture",
+    "backgrounds/clouds.png":"com.badlogic.gdx.graphics.Texture",
     "characters.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "backgrounds/splash-skygradient.png":"com.badlogic.gdx.graphics.Texture",
     "backgrounds/splash2.png":"com.badlogic.gdx.graphics.Texture",
@@ -36,6 +36,7 @@
     "transport.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "backgrounds/cityscape.png":"com.badlogic.gdx.graphics.Texture",
     "hud/misc.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
+    "rooms/commercial.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "backgrounds/ground-tile.png":"com.badlogic.gdx.graphics.Texture",
     "backgrounds/ground-top.png":"com.badlogic.gdx.graphics.Texture",
     "backgrounds/cityscape.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
@@ -44,8 +45,10 @@
     "backgrounds/tower-sign.png":"com.badlogic.gdx.graphics.Texture",
     "rooms/housing.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "sound/music/nighttime.mp3":"com.badlogic.gdx.audio.Music",
-    "hud/star.png":"com.badlogic.gdx.graphics.Texture",
-    "decals.png":"com.badlogic.gdx.graphics.Texture"
+    "rooms/generic.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
+    "rooms/decals.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
+    "decals.png":"com.badlogic.gdx.graphics.Texture",
+    "hud/star.png":"com.badlogic.gdx.graphics.Texture"
   },
   "highDefFiles":{
     "hud/star.png":"hud/star-hd.png",

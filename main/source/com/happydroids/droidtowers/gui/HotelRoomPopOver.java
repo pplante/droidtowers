@@ -31,6 +31,13 @@ public class HotelRoomPopOver extends GridObjectPopOver<HotelRoom> {
       }
     });
 
+    buttonBar.addButton("Redecorate", new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        new ConfirmRedecorationDialog(gridObject).show();
+      }
+    });
+
     row().fillX().pad(scale(-8)).padTop(scale(16));
     add(buttonBar).expandX().minWidth(200);
   }

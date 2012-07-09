@@ -5,7 +5,6 @@
 package com.happydroids.droidtowers.entities;
 
 import com.happydroids.droidtowers.grid.GameGrid;
-import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.types.ServiceRoomType;
 
 public class ServiceRoom extends CommercialSpace {
@@ -13,13 +12,14 @@ public class ServiceRoom extends CommercialSpace {
     super(serviceRoomType, gameGrid);
   }
 
-  @Override
-  public GridObjectPopOver makePopOver() {
-    return new ServiceRoomPopOver(this);
-  }
+//  @Override
+//  public GridObjectPopOver makePopOver() {
+//    return new ServiceRoomPopOver(this);
+//  }
 
   @Override
   public int getCoinsEarned() {
     return 0;
   }
+
 }

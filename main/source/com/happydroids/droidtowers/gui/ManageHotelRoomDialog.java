@@ -8,21 +8,21 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.happydroids.droidtowers.entities.CommercialSpace;
+import com.happydroids.droidtowers.entities.HotelRoom;
 import com.happydroids.droidtowers.generators.NameGenerator;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class ManageHotelRoomDialog extends Dialog {
-  private final CommercialSpace commercialSpace;
+  private final HotelRoom hotelRoom;
   private TextField textField;
 
-  public ManageHotelRoomDialog(final CommercialSpace commercialSpace) {
-    this.commercialSpace = commercialSpace;
+  public ManageHotelRoomDialog(final HotelRoom hotelRoom) {
+    this.hotelRoom = hotelRoom;
 
-    textField = FontManager.Roboto18.makeTextField(commercialSpace.getName(), "");
+    textField = FontManager.Roboto18.makeTextField(hotelRoom.getName(), "");
 
-    setTitle("Manage: " + commercialSpace.getName());
+    setTitle("Manage: " + hotelRoom.getName());
     setView(makeContentView());
 
     addButton("Save", new OnClickCallback() {
@@ -30,7 +30,7 @@ public class ManageHotelRoomDialog extends Dialog {
       public void onClick(Dialog dialog) {
         dismiss();
 
-        commercialSpace.setName(textField.getText());
+        hotelRoom.setName(textField.getText());
       }
     });
 
@@ -47,7 +47,7 @@ public class ManageHotelRoomDialog extends Dialog {
     content.defaults().pad(scale(4));
 
     content.row().fillX();
-    content.add(FontManager.Roboto18.makeLabel("Name of " + commercialSpace.getGridObjectType().getName())).expandX().colspan(2);
+    content.add(FontManager.Roboto18.makeLabel("Name of " + hotelRoom.getGridObjectType().getName())).expandX().colspan(2);
 
     content.row();
     content.add(textField).width(400);
@@ -57,7 +57,7 @@ public class ManageHotelRoomDialog extends Dialog {
     content.add(FontManager.Roboto18.makeLabel("Uses between Cleanings")).colspan(2);
 
     content.row();
-    content.add(FontManager.Roboto18.makeLabel(String.valueOf(commercialSpace.getNumVisitors()))).colspan(2);
+    content.add(FontManager.Roboto18.makeLabel(String.valueOf(hotelRoom.getNumVisitors()))).colspan(2);
 
     return content;
   }

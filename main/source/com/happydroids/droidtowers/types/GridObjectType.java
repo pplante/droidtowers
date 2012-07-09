@@ -89,7 +89,7 @@ public abstract class GridObjectType {
   }
 
   public int getCoinsEarned() {
-    return Math.round(coins / 1000);
+    return Math.round(coins / 10);
   }
 
   public int getUpkeepCost() {
@@ -127,7 +127,7 @@ public abstract class GridObjectType {
   public TextureRegion getTextureRegion(int variationId) {
     if (atlasFilename != null) {
       TextureRegion region;
-      if (numVariations > 0) {
+      if (numVariations > 0 && variationId > 0) {
         region = getTextureAtlas().findRegion(imageFilename, variationId);
       } else {
         region = getTextureAtlas().findRegion(imageFilename);

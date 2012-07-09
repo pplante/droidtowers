@@ -237,7 +237,6 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
     Gdx.app.error("lifecycle", "resuming!");
 
     FontManager.resetAll();
-    TowerAssetManager.assetManager().resetMemoryTracking();
     TowerAssetManager.assetManager().finishLoading();
 
     if (Platform.protocolHandler != null && Platform.protocolHandler.hasUri()) {

@@ -4,14 +4,14 @@
 
 package com.happydroids.droidtowers.controllers;
 
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.employee.JobCandidate;
 import com.happydroids.droidtowers.entities.*;
-import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
+import com.happydroids.droidtowers.events.EmployeeHiredEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.types.ProviderType;
@@ -19,13 +19,10 @@ import com.happydroids.droidtowers.types.RoomType;
 import com.happydroids.droidtowers.utils.Random;
 
 import javax.annotation.Nullable;
+import java.lang.reflect.Constructor;
 import java.util.List;
 
-import static com.happydroids.droidtowers.TowerConsts.AVATAR_POPULATION_SCALE;
-import static com.happydroids.droidtowers.TowerConsts.MAX_AVATARS;
-import static com.happydroids.droidtowers.types.ProviderType.JANITORS;
-import static com.happydroids.droidtowers.types.ProviderType.MAIDS;
-import static com.happydroids.droidtowers.types.ProviderType.SECURITY;
+import static com.happydroids.droidtowers.types.ProviderType.*;
 
 public class AvatarLayer extends GameLayer {
   private static final String TAG = AvatarLayer.class.getSimpleName();
@@ -64,35 +61,24 @@ public class AvatarLayer extends GameLayer {
   }
 
   private int maxAvatars() {
-    int totalPopulation = Player.instance().getTotalPopulation();
-    if (totalPopulation > 0) {
-      return (int) MathUtils.clamp(totalPopulation * AVATAR_POPULATION_SCALE, 1, MAX_AVATARS);
-    }
-
-    return 0;
+    return Player.instance().getMaxPopulation() + Player.instance().getJobsFilled();
   }
 
   private void setupAvatar(Avatar avatar) {
     boolean positionSet = false;
 
-    if (!(avatar instanceof Janitor || avatar instanceof Maid)) {
-      List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
-      if (rooms != null) {
-        GridObject avatarsHome = Iterables.find(rooms, AVATAR_HOME_FILTER, null);
+    List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
+    if (rooms != null) {
+      GridObject avatarsHome = Iterables.find(rooms, AVATAR_HOME_FILTER, null);
 
-        if (avatarsHome != null) {
-          avatar.setHome(avatarsHome);
-          positionSet = true;
-        }
+      if (avatarsHome != null) {
+        avatar.setHome(avatarsHome);
+        positionSet = true;
       }
     }
 
     if (!positionSet) {
       avatar.setPosition(Random.randomInt(-avatar.getWidth(), gameGrid.getWorldSize().x + avatar.getWidth()), TowerConsts.GROUND_HEIGHT);
-    }
-
-    if (avatar instanceof Janitor) {
-      specialAvatars++;
     }
 
     addChild(avatar);
@@ -110,22 +96,15 @@ public class AvatarLayer extends GameLayer {
     return false;
   }
 
-  @Subscribe
-  public void GameGrid_onGridObjectPlaced(GridObjectPlacedEvent event) {
-    if (event.gridObject instanceof Room) {
-      RoomType roomType = (RoomType) event.gridObject.getGridObjectType();
-      if (roomType.provides(JANITORS)) {
-        setupAvatar(new Janitor(this));
-        setupAvatar(new Janitor(this));
-        setupAvatar(new Janitor(this));
-      } else if (roomType.provides(ProviderType.MAIDS)) {
-        setupAvatar(new Maid(this));
-        setupAvatar(new Maid(this));
-        setupAvatar(new Maid(this));
-      } else if (roomType.provides(ProviderType.SECURITY)) {
-        setupAvatar(new SecurityGuard(this));
-        setupAvatar(new SecurityGuard(this));
-        setupAvatar(new SecurityGuard(this));
+  private void setupSpecialAvatar(CommercialSpace commercialSpace, Class<? extends Avatar> avatarClass) {
+    for (JobCandidate employee : commercialSpace.getEmployees()) {
+      try {
+        Constructor<? extends Avatar> constructor = avatarClass.getDeclaredConstructor(AvatarLayer.class);
+        Avatar avatar = constructor.newInstance(this);
+        setupAvatar(avatar);
+        employee.setAvatar(avatar);
+      } catch (Exception e) {
+        throw new RuntimeException(e);
       }
     }
   }
@@ -157,12 +136,26 @@ public class AvatarLayer extends GameLayer {
     }
   }
 
+  @Subscribe
+  public void GameGrid_onEmployeeHired(EmployeeHiredEvent event) {
+    if (event.gridObject instanceof CommercialSpace) {
+      CommercialSpace commercialSpace = (CommercialSpace) event.gridObject;
+      if (commercialSpace.provides(JANITORS)) {
+        setupSpecialAvatar(commercialSpace, Janitor.class);
+      } else if (commercialSpace.provides(ProviderType.MAIDS)) {
+        setupSpecialAvatar(commercialSpace, Maid.class);
+      } else if (commercialSpace.provides(ProviderType.SECURITY)) {
+        setupSpecialAvatar(commercialSpace, SecurityGuard.class);
+      }
+    }
+  }
+
   public static final Predicate<GridObject> AVATAR_HOME_FILTER = new Predicate<GridObject>() {
     @Override
     public boolean apply(@Nullable GridObject input) {
       if (input instanceof Room) {
         Room room = (Room) input;
-        return room.isConnectedToTransport() && !room.hasResident();
+        return room.isConnectedToTransport() && (room.getNumResidents() == 0 || room.getNumResidents() < room.getNumSupportedResidents());
       }
 
       return false;

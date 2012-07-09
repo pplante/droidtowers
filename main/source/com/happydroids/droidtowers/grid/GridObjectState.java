@@ -5,10 +5,14 @@
 package com.happydroids.droidtowers.grid;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.happydroids.droidtowers.employee.JobCandidate;
+import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
+
+import java.util.Set;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class GridObjectState {
@@ -18,6 +22,7 @@ public class GridObjectState {
   private String name;
   private int variationId;
   private int loanFromCousinVinnie;
+  private Set<JobCandidate> employees;
 
   public GridObjectState() {
 
@@ -30,6 +35,10 @@ public class GridObjectState {
     name = gridObject.hasCustomName() ? gridObject.getName() : null;
     variationId = gridObject.getVariationId();
     loanFromCousinVinnie = gridObject.getAmountLoanedFromCousinVinnie();
+
+    if (gridObject instanceof CommercialSpace) {
+      employees = ((CommercialSpace) gridObject).getEmployees();
+    }
   }
 
   public GridObject materialize(GameGrid gameGrid) {
@@ -48,6 +57,12 @@ public class GridObjectState {
           object.setVariationId(variationId);
         }
         object.addLoanFromCousinVinnie(loanFromCousinVinnie);
+
+
+        if (object instanceof CommercialSpace && employees != null) {
+          ((CommercialSpace) object).setEmployees(employees);
+        }
+
         object.updateSprite();
 
         gameGrid.addObject(object);

@@ -43,7 +43,7 @@ public enum Overlays {
           if (gridObject instanceof Room) {
             float populationMax = ((RoomType) gridObject.getGridObjectType()).getPopulationMax();
             if (populationMax > 0f) {
-              return ((Room) gridObject).getCurrentResidency() / populationMax;
+              return ((Room) gridObject).getNumResidents() / populationMax;
             }
           }
 

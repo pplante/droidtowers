@@ -12,8 +12,7 @@ public class SkyLobby extends Room {
     super(roomType, gameGrid);
   }
 
-  @Override
-  public void updatePopulation() {
+  private void updatePopulation() {
     // do nothing!
   }
 
@@ -23,7 +22,7 @@ public class SkyLobby extends Room {
   }
 
   @Override
-  public int getCurrentResidency() {
+  public int getNumResidents() {
     return 0;
   }
 

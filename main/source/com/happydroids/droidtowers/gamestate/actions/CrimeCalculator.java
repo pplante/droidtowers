@@ -11,7 +11,9 @@ import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
 import com.happydroids.droidtowers.math.GridPoint;
-import com.happydroids.droidtowers.types.ProviderType;
+
+import static com.happydroids.droidtowers.types.ProviderType.ELEVATOR;
+import static com.happydroids.droidtowers.types.ProviderType.SECURITY;
 
 public class CrimeCalculator extends GameGridAction {
   private static final String TAG = CrimeCalculator.class.getSimpleName();
@@ -40,7 +42,7 @@ public class CrimeCalculator extends GameGridAction {
     }
 
     for (GridObject gridObject : gameGrid.getObjects()) {
-      gridObject.setConnectedToSecurity(gridObject.provides(ProviderType.SECURITY));
+      gridObject.setConnectedToSecurity(gridObject.provides(SECURITY, ELEVATOR));
     }
 
     for (GridObject serviceRoom : gameGrid.getInstancesOf(ServiceRoom.class)) {

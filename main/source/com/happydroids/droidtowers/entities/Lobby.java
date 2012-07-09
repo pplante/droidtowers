@@ -38,8 +38,7 @@ public class Lobby extends Room {
     return new GridObjectPopOver(this);
   }
 
-  @Override
-  public void updatePopulation() {
+  private void updatePopulation() {
     // do nothing!
   }
 
@@ -49,7 +48,7 @@ public class Lobby extends Room {
   }
 
   @Override
-  public int getCurrentResidency() {
+  public int getNumResidents() {
     return 0;
   }
 

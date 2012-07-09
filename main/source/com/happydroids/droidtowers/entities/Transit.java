@@ -16,4 +16,14 @@ public abstract class Transit extends GridObject {
   public boolean connectsToFloor(float floor) {
     return ((TransitType) getGridObjectType()).connectsToFloor(this, floor);
   }
+
+  @Override
+  public float getNormalizedCrimeLevel() {
+    return 0f;
+  }
+
+  @Override
+  public float getSurroundingCrimeLevel() {
+    return 0f;
+  }
 }

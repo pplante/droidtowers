@@ -1,0 +1,32 @@
+generic.png
+format: RGBA8888
+filter: MipMapNearestNearest,Linear
+repeat: none
+4x1-sky-lobby
+  rotate: false
+  xy: 0, 0
+  size: 256, 64
+  orig: 256, 64
+  offset: 0, 0
+  index: -1
+lobby-left
+  rotate: false
+  xy: 0, 192
+  size: 36, 64
+  orig: 36, 64
+  offset: 0, 0
+  index: -1
+lobby-right
+  rotate: false
+  xy: 0, 128
+  size: 36, 64
+  orig: 36, 64
+  offset: 0, 0
+  index: -1
+4x1-lobby
+  rotate: false
+  xy: 0, 64
+  size: 256, 64
+  orig: 256, 64
+  offset: 0, 0
+  index: -1

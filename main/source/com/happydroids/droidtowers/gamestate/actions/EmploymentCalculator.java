@@ -9,7 +9,6 @@ import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.types.CommercialType;
-import com.happydroids.droidtowers.types.ProviderType;
 
 public class EmploymentCalculator extends GameGridAction {
   public EmploymentCalculator(GameGrid gameGrid, float frequency) {
@@ -22,7 +21,7 @@ public class EmploymentCalculator extends GameGridAction {
     int maxJobs = 0;
 
     for (GridObject gridObject : gameGrid.getObjects()) {
-      if (gridObject.getGridObjectType().provides(ProviderType.COMMERCIAL)) {
+      if (gridObject instanceof CommercialSpace) {
         CommercialSpace commercialSpace = (CommercialSpace) gridObject;
         commercialSpace.updateJobs();
 

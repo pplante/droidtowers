@@ -63,7 +63,7 @@ public class ManageCommercialSpaceDialog extends Dialog {
     hireButton.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
-        new AvailableJobCandidateDialog().show();
+        new AvailableJobCandidateDialog(commercialSpace).show();
       }
     });
 

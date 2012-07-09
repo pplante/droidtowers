@@ -7,7 +7,7 @@
     "experienceAward":1000,
     "height":1,
     "width":4,
-    "atlasFilename":"rooms/housing.txt",
+    "atlasFilename":"rooms/generic.txt",
     "imageFilename":"4x1-lobby",
     "provides":"LOBBY"
   },
@@ -19,7 +19,7 @@
     "experienceAward":1000,
     "height":1,
     "width":4,
-    "atlasFilename":"rooms/housing.txt",
+    "atlasFilename":"rooms/generic.txt",
     "imageFilename":"4x1-sky-lobby",
     "provides":"SKY_LOBBY",
     "unlimitedVersion":true

@@ -5,19 +5,27 @@
 package com.happydroids.droidtowers.entities;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.google.common.collect.Sets;
+import com.happydroids.droidtowers.employee.JobCandidate;
+import com.happydroids.droidtowers.events.EmployeeHiredEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.CommercialSpacePopOver;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.types.CommercialType;
 import com.happydroids.droidtowers.utils.Random;
 
+import java.util.Set;
+
 public class CommercialSpace extends Room {
+  public static final String DECAL_NEEDS_DROIDS = "needs-droids";
   private int attractedPopulation;
   private int jobsFilled;
   private long lastJobUpdateTime;
+  protected Set<JobCandidate> employees;
 
   public CommercialSpace(CommercialType commercialType, GameGrid gameGrid) {
     super(commercialType, gameGrid);
+    employees = Sets.newHashSet();
   }
 
   @Override
@@ -39,21 +47,8 @@ public class CommercialSpace extends Room {
     }
   }
 
-  @Override
-  public void updatePopulation() {
-    attractedPopulation = 0;
-
-    if (isConnectedToTransport()) {
-      CommercialType commercialType = (CommercialType) getGridObjectType();
-      int populationAttraction = commercialType.getPopulationAttraction();
-      if (populationAttraction > 0) {
-        attractedPopulation = Random.randomInt(0, populationAttraction);
-      }
-    }
-  }
-
   public int getJobsFilled() {
-    return jobsFilled;
+    return employees.size();
   }
 
   public int getAttractedPopulation() {
@@ -80,11 +75,16 @@ public class CommercialSpace extends Room {
 
   @Override
   public int getUpkeepCost() {
-    if (jobsFilled > 0 && isConnectedToTransport()) {
-      return (int) Math.ceil((float) gridObjectType.getUpkeepCost() * ((float) jobsFilled / (float) ((CommercialType) gridObjectType).getJobsProvided()));
+    if (employees.isEmpty()) {
+      return 0;
     }
 
-    return 0;
+    int totalSalaries = 0;
+    for (JobCandidate employee : employees) {
+      totalSalaries += employee.getSalary();
+    }
+
+    return totalSalaries;
   }
 
   @Override
@@ -94,8 +94,9 @@ public class CommercialSpace extends Room {
 
   public float getEmploymentLevel() {
     int jobsProvided = ((CommercialType) gridObjectType).getJobsProvided();
+
     if (jobsProvided > 0) {
-      return jobsFilled / jobsProvided;
+      return employees.size() / (float) jobsProvided;
     }
 
     return 0;
@@ -112,5 +113,39 @@ public class CommercialSpace extends Room {
     }
 
     return attractedPopulation / populationAttraction;
+  }
+
+  @Override
+  public void update(float deltaTime) {
+    super.update(deltaTime);
+
+    if (canEmployDroids()) {
+      if (employees.size() == 0) {
+        decalsToDraw.add(DECAL_NEEDS_DROIDS);
+      } else {
+        decalsToDraw.remove(DECAL_NEEDS_DROIDS);
+      }
+    }
+  }
+
+  protected boolean canEmployDroids() {
+    return true;
+  }
+
+  public void addEmployee(JobCandidate selectedCandidate) {
+    employees.add(selectedCandidate);
+    gameGrid.events().post(new EmployeeHiredEvent(this, selectedCandidate));
+  }
+
+  public Set<JobCandidate> getEmployees() {
+    return employees;
+  }
+
+  public void setEmployees(Set<JobCandidate> employees) {
+    this.employees.clear();
+
+    for (JobCandidate employee : employees) {
+      addEmployee(employee);
+    }
   }
 }
