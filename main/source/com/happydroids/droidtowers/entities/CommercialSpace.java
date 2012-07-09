@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.entities;
 import com.badlogic.gdx.math.MathUtils;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.employee.JobCandidate;
+import com.happydroids.droidtowers.events.EmployeeFiredEvent;
 import com.happydroids.droidtowers.events.EmployeeHiredEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.CommercialSpacePopOver;
@@ -150,5 +151,18 @@ public class CommercialSpace extends Room {
     for (JobCandidate employee : employees) {
       addEmployee(employee);
     }
+  }
+
+  public void fireAllEmployees() {
+    for (JobCandidate employee : employees) {
+      gameGrid.events().post(new EmployeeFiredEvent(this, employee));
+    }
+
+    employees.clear();
+  }
+
+  private void removeEmployee(JobCandidate employee) {
+    employees.remove(employee);
+    gameGrid.events().post(new EmployeeFiredEvent(this, employee));
   }
 }

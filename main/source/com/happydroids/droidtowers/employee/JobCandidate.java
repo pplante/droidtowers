@@ -56,4 +56,12 @@ public class JobCandidate {
   public void setAvatar(Avatar avatar) {
     this.avatar = avatar;
   }
+
+  public Avatar getAvatar() {
+    return avatar;
+  }
+
+  public boolean hasAvatar() {
+    return avatar != null;
+  }
 }

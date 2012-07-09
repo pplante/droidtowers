@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.input;
 
 import com.badlogic.gdx.Gdx;
 import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.graphics.effects.SmokeParticleEffect;
@@ -61,6 +62,11 @@ public class SellGridObjectConfirmationDialog extends Dialog {
   private void sellGridObject(GameGrid gameGrid, GridObject objectToSell, int sellPrice) {
     dismiss();
     Gdx.input.vibrate(100);
+
+    if (objectToSell instanceof CommercialSpace) {
+      ((CommercialSpace) objectToSell).fireAllEmployees();
+    }
+
     gameGrid.removeObject(objectToSell);
     Player.instance().addCurrency(sellPrice);
 
