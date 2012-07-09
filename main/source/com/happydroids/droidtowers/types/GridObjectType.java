@@ -89,7 +89,7 @@ public abstract class GridObjectType {
   }
 
   public int getCoinsEarned() {
-    return Math.round(coins / 10);
+    return Math.round(coins / 20);
   }
 
   public int getUpkeepCost() {

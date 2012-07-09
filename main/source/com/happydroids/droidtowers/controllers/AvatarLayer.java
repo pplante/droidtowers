@@ -128,4 +128,8 @@ public class AvatarLayer extends GameLayer {
       event.employee.getAvatar().markToRemove(true);
     }
   }
+
+  public int getNumAvatars() {
+    return gameObjects.size();
+  }
 }
