@@ -8,9 +8,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
@@ -27,6 +29,7 @@ import com.happydroids.droidtowers.utils.Random;
 import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import static com.happydroids.droidtowers.math.Direction.LEFT;
@@ -90,16 +93,27 @@ public class Avatar extends GameObject {
 
     LinkedList<GridObject> objects = gameGrid.getObjects();
     if (objects != null) {
-      objects = Lists.newLinkedList(Iterables.filter(objects, new Predicate<GridObject>() {
-        public boolean apply(@Nullable GridObject gridObject) {
-          return (gridObject.provides(COMMERCIAL, RESTROOM) || gridObject.equals(home)) && gridObject.isConnectedToTransport();
+      if (home != null && !lastVisitedPlaces.contains(home)) {
+        navigateToGridObject(home);
+      } else {
+        objects = Lists.newLinkedList(Iterables.filter(objects, new Predicate<GridObject>() {
+          public boolean apply(@Nullable GridObject gridObject) {
+            return (gridObject.provides(COMMERCIAL, RESTROOM) || gridObject.equals(home)) && gridObject.isConnectedToTransport();
+          }
+        }));
+
+        objects.removeAll(lastVisitedPlaces);
+
+        if (objects.size() > 0) {
+          List<GridObject> gridObjectsSorted = Ordering.natural().reverse().onResultOf(new Function<GridObject, Comparable>() {
+            @Override
+            public Comparable apply(@Nullable GridObject input) {
+              return input.getDesirability();
+            }
+          }).sortedCopy(objects);
+
+          navigateToGridObject(gridObjectsSorted.get(0));
         }
-      }));
-
-      objects.removeAll(lastVisitedPlaces);
-
-      if (objects.size() > 0) {
-        navigateToGridObject(objects.getFirst());
       }
     } else {
       wanderAround();

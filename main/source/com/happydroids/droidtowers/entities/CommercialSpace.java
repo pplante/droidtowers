@@ -88,6 +88,10 @@ public class CommercialSpace extends Room {
 
   @Override
   public float getDesirability() {
+    if (getEmployees().isEmpty()) {
+      return 0f;
+    }
+
     return MathUtils.clamp(super.getDesirability() - (0.1f * getNumVisitors()), 0f, 1f);
   }
 
