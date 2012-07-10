@@ -4,11 +4,14 @@
 
 package com.happydroids.droidtowers.gui;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.entities.Avatar;
 import com.happydroids.droidtowers.entities.Room;
+import com.happydroids.droidtowers.gui.controls.ButtonBar;
+import com.happydroids.droidtowers.gui.dialogs.CousinVinnieRepayLoanDialog;import sun.jvm.hotspot.debugger.win32.coff.COFFException;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
@@ -29,6 +32,19 @@ public class RoomPopOver extends GridObjectPopOver<Room> {
 
     row().fillX();
     add(residentImages).center();
+
+    if (gridObject.hasLoanFromCousinVinnie()) {
+      ButtonBar buttonBar = new ButtonBar();
+      buttonBar.addButton("Repay loan from Vinnie", new VibrateClickListener() {
+        @Override
+        public void onClick(Actor actor, float x, float y) {
+          new CousinVinnieRepayLoanDialog(gridObject).show();
+        }
+      });
+
+      row().fillX().pad(scale(-8)).padTop(scale(16));
+      add(buttonBar).expandX().minWidth(200);
+    }
   }
 
   @Override

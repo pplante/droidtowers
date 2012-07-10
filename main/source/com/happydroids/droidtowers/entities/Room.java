@@ -237,4 +237,6 @@ public class Room extends GridObject {
 
     return (int) Math.ceil(populationMax * desirability);
   }
+
+
 }

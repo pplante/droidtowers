@@ -113,8 +113,6 @@ public class NewTowerDialog extends Dialog {
       }
     });
 
-    c.debug();
-
     setView(c);
   }
 }

@@ -133,6 +133,10 @@
       <zipgroupfileset dir="${droidtowers.desktop.libs}" includes="**/*.jar"/>
       <zipfileset dir="${droidtowers.main}/assets"/>
     </jar>
+
+    <signjar jar="${release-jar}"
+             alias="happydroids" keystore="release-key.keystore" storepass="happydroids2012" keypass="happydroids2012"/>
+
   </target>
 
   <target name="proguard" depends="jar">

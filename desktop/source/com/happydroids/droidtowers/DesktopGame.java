@@ -28,8 +28,11 @@ public class DesktopGame {
     new LwjglApplication(new LwjglApplicationShim(new DroidTowersGame(new Runnable() {
       @Override
       public void run() {
-        Platform.setProtocolHandler(PlatformProtocolHandlerFactory.newInstance());
-        Platform.getProtocolHandler().initialize(args);
+        PlatformProtocolHandler protocolHandler = PlatformProtocolHandlerFactory.newInstance();
+        if (protocolHandler != null) {
+          protocolHandler.initialize(args);
+          Platform.setProtocolHandler(protocolHandler);
+        }
 
         Platform.setUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
         Platform.setBrowserUtil(new DesktopBrowserUtil());

@@ -15,6 +15,7 @@ public class PlatformProtocolHandlerFactory {
     } else if (Platform.getOSType().equals(Platforms.Windows)) {
       return new WindowsProtocolHandler();
     }
+
     return null;
   }
 }

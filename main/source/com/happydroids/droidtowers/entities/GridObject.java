@@ -476,4 +476,8 @@ public abstract class GridObject {
   public Set<Avatar> getVisitorQueue() {
     return visitorQueue;
   }
+
+  public void removeLoanFromVinnie() {
+    loanFromCousinVinnie = 0;
+  }
 }
