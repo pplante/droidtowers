@@ -64,4 +64,8 @@ public class JobCandidate {
   public boolean hasAvatar() {
     return avatar != null;
   }
+
+  public Gender getGender() {
+    return gender;
+  }
 }

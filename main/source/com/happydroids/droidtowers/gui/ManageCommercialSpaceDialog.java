@@ -54,14 +54,12 @@ public class ManageCommercialSpaceDialog extends ScrollableTowerWindow {
     setStaticHeader(makeNameHeader());
 
     addLabel("Current Employees", FontManager.Roboto24).bottom();
-    add(hireButton).fillY();
+    add(hireButton).fillY().right();
 
     addHorizontalRule(Colors.ICS_BLUE, 2, 2);
 
     row();
     add(candidateListView).spaceBottom(scale(20));
-
-    row();
     add(fireButton).padLeft(scale(70));
 
     shoveContentUp();

@@ -31,6 +31,13 @@ class GridObjectPopOverCloser extends InputAdapter {
   }
 
   @Override
+  public boolean touchDragged(int x, int y, int pointer) {
+    closePopOver();
+
+    return false;
+  }
+
+  @Override
   public boolean keyDown(int keycode) {
     return (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) && closePopOver();
   }

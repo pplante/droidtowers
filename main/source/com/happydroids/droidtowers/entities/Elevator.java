@@ -21,6 +21,7 @@ import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
 import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
 import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.gui.ElevatorPopOver;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.math.GridPoint;
@@ -171,25 +172,30 @@ public class Elevator extends Transit {
     if (topSprite.getBoundingRectangle().contains(worldPoint.x, worldPoint.y)) {
       selectedResizeHandle = TOP;
       anchorPoint = position.cpy();
+
+      return true;
     } else if (bottomSprite.getBoundingRectangle().contains(worldPoint.x, worldPoint.y)) {
       selectedResizeHandle = ResizeHandle.BOTTOM;
       anchorPoint = position.cpy().add(size);
+
+      return true;
     } else {
       selectedResizeHandle = null;
     }
 
-    return true;
+    return super.touchDown(gameGridPoint, worldPoint, pointer);
   }
 
   @Override
   public boolean touchUp() {
     if (selectedResizeHandle != null) {
+      selectedResizeHandle = null;
       broadcastEvent(new ElevatorHeightChangeEvent(this));
+
+      return true;
     }
 
-    selectedResizeHandle = null;
-
-    return true;
+    return super.touchUp();
   }
 
   @Override
@@ -282,12 +288,12 @@ public class Elevator extends Transit {
 
   @Override
   public GridObjectPopOver makePopOver() {
-    return null;
+    return new ElevatorPopOver(this);
   }
 
   @Override
   protected boolean hasPopOver() {
-    return false;
+    return true;
   }
 
   public boolean addPassenger(AvatarSteeringManager avatarSteeringManager, int currentFloor, int destinationFloor, Runnable uponArrivalRunnable) {

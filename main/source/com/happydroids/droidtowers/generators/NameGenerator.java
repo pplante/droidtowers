@@ -19,11 +19,14 @@ public class NameGenerator {
   private static List<String> placeNames;
   private static List<String> corporationNames;
   private static List<String> femaleNames;
+  private static List<String> maleNames;
+
 
   public static void initialize() {
     placeNames = parseFile("generators/places.txt");
     corporationNames = parseFile("generators/corporations.txt");
     femaleNames = parseFile("generators/names-female.txt");
+    maleNames = parseFile("generators/names-male.txt");
   }
 
   private static List<String> parseFile(String fileName) {
@@ -63,5 +66,9 @@ public class NameGenerator {
 
   public static String randomFemaleName() {
     return randomEntry(femaleNames);
+  }
+
+  public static String randomMaleName() {
+    return randomEntry(maleNames);
   }
 }

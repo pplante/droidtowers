@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.generators;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.employee.Gender;
 import com.happydroids.droidtowers.employee.JobCandidate;
@@ -16,8 +17,8 @@ public class JobCandidateGenerator {
 
     for (int i = 0; i < numToGenerate; i++) {
       JobCandidate candidate = new JobCandidate();
-      candidate.setGender(Gender.FEMALE);
-      candidate.setName(generateUniqueName(candidates));
+      candidate.setGender(MathUtils.random(10) > 5 ? Gender.FEMALE : Gender.MALE);
+      candidate.setName(generateUniqueName(candidates, candidate.getGender()));
       candidate.randomizeAttributes();
 
       candidates.add(candidate);
@@ -26,10 +27,10 @@ public class JobCandidateGenerator {
     return candidates;
   }
 
-  private static String generateUniqueName(List<JobCandidate> candidates) {
+  private static String generateUniqueName(List<JobCandidate> candidates, Gender gender) {
     boolean hasDupes = true;
     while (hasDupes) {
-      String name = NameGenerator.randomFemaleName();
+      String name = gender.equals(Gender.FEMALE) ? NameGenerator.randomFemaleName() : NameGenerator.randomMaleName();
       hasDupes = false;
       for (JobCandidate candidate : candidates) {
         if (candidate.getName().equalsIgnoreCase(name)) {
