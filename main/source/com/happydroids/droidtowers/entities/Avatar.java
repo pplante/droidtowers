@@ -4,7 +4,6 @@
 
 package com.happydroids.droidtowers.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -111,7 +110,7 @@ public class Avatar extends GameObject {
             }
           }
         }
-        Gdx.app.log("Avatar", "Found: " + mostDesirable);
+
         if (mostDesirable != null) {
           navigateToGridObject(mostDesirable);
         }
