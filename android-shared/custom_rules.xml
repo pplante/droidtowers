@@ -26,7 +26,7 @@
   </path>
 
   <target name="-pre-build">
-    <delete dir="${droidtowers.android-shared}/gen"/>
+    <delete dir="${droidtowers.android-shared}/gen" failonerror="false"/>
 
     <mkdir dir="${out.dir}/classes-shared"/>
     <javac destdir="${out.dir}/classes" classpathref="happydroids-classpath">
