@@ -131,6 +131,8 @@ if __name__ == '__main__':
 
         ant('release', _fg=True)
 
+        cd(root_dir)
+
         tower_consts = open(TOWER_CONSTS_JAVA).read()
         tower_consts = debug_flag_re.sub('boolean DEBUG = true;', tower_consts)
         tower_consts = server_url_re.sub('String HAPPYDROIDS_SERVER = "local.happydroids.com";', tower_consts)

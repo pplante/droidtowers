@@ -26,7 +26,7 @@ public class CityScapeLayer extends GameLayer implements RespondsToWorldSizeChan
 
   @Override
   public void updateWorldSize(Vector2 worldSize) {
-    float worldWidth = worldSize.x + (Display.getBiggestScreenDimension() * 2);
+    float worldWidth = worldSize.x + (Display.getBiggestScreenDimension() * 4);
     float nextX = width() - Display.getBiggestScreenDimension() - (5f * gameObjects.size());
     while (width() - 64 < worldWidth) {
       GameObject sprite = new GameObject(regions.next());

@@ -39,7 +39,7 @@ public class SkyLayer extends GameLayer implements RespondsToWorldSizeChange {
 
   public void updateWorldSize(Vector2 worldSize) {
     sky.setPosition(-Display.getBiggestScreenDimension(), TowerConsts.GROUND_HEIGHT);
-    sky.setSize(worldSize.x + (Display.getBiggestScreenDimension() * 2), worldSize.y + Display.getBiggestScreenDimension());
+    sky.setSize(worldSize.x + (Display.getBiggestScreenDimension() * 4), worldSize.y + Display.getBiggestScreenDimension());
     sky.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
   }
 

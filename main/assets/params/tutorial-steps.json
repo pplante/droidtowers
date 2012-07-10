@@ -19,8 +19,8 @@
   {
     "id":"tutorial-purchased-lobby",
     "name":"Pillars of Success",
-    "description":"Your cursor now is in \"Placement\" mode. Tap to place the Lobby.\n\nPress the ESCAPE key to exit \"Placement\" mode.",
-    "descriptionMobile":"Your cursor now is in \"Placement\" mode. Tap to place the Lobby.\n\nPress the BACK button to exit \"Placement\" mode."
+    "description":"Your cursor now is in \"Placement\" mode. Double Tap to place the Lobby.\n\nPress the ESCAPE key to exit \"Placement\" mode.",
+    "descriptionMobile":"Your cursor now is in \"Placement\" mode. Double Tap to place the Lobby.\n\nPress the BACK button to exit \"Placement\" mode."
   },
   {
     "id":"tutorial-build-lobby",

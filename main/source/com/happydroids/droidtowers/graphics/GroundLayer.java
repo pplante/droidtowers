@@ -37,7 +37,7 @@ public class GroundLayer extends GameLayer implements RespondsToWorldSizeChange 
 
     GameObject tile = new GameObject(tileTexture);
     tile.setPosition(-Display.getBiggestScreenDimension(), 0);
-    tile.setSize(worldSize.x + (Display.getBiggestScreenDimension() * 2), tiledHeight);
+    tile.setSize(worldSize.x + (Display.getBiggestScreenDimension() * 4), tiledHeight);
     tile.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
     addChild(tile);

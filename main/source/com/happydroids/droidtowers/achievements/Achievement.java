@@ -102,8 +102,6 @@ public class Achievement {
         totalWeight += requirement.getAmount();
       }
     }
-
-    removeLock();
   }
 
   public String toRewardString() {

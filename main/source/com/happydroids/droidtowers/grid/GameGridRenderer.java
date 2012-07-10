@@ -174,14 +174,14 @@ public class GameGridRenderer extends GameLayer {
 
   public void setActiveOverlay(Overlays overlay) {
     if (activeOverlay == null && overlay.equals(POPULATION_LEVEL)) {
-          TutorialEngine.instance().moveToStepWhenReady("tutorial-finished");
-        }
+      TutorialEngine.instance().moveToStepWhenReady("tutorial-turn-off-population-overlay");
+    }
 
-        activeOverlay = overlay;
+    if (activeOverlay == POPULATION_LEVEL && overlay == null) {
+      TutorialEngine.instance().moveToStepWhenReady("tutorial-finished");
+    }
 
-        if (activeOverlay == POPULATION_LEVEL && overlay == null) {
-          TutorialEngine.instance().moveToStepWhenReady("tutorial-finished");
-        }
+    activeOverlay = overlay;
   }
 
   public void updateRenderOrder(ArrayList<GridObject> gridObjects) {

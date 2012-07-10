@@ -79,11 +79,10 @@ public class AchievementEngine {
   }
 
   public void complete(String achievementId) {
-    for (Achievement achievement : achievements) {
-      if (achievementId.equalsIgnoreCase(achievement.getId())) {
-        complete(achievement);
-        return;
-      }
+    Achievement achievement = findById(achievementId);
+    if (achievement != null) {
+      complete(achievement);
+      return;
     }
 
     throw new RuntimeException("Could not find achievement called: " + achievementId);

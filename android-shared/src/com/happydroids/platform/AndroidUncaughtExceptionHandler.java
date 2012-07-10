@@ -9,7 +9,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import com.badlogic.gdx.Gdx;
 import com.happydroids.server.CrashReport;
-import com.happydroids.utils.BackgroundTask;
 
 public class AndroidUncaughtExceptionHandler extends HappyDroidUncaughtExceptionHandler {
   private static final String TAG = AndroidUncaughtExceptionHandler.class.getSimpleName();
@@ -25,21 +24,16 @@ public class AndroidUncaughtExceptionHandler extends HappyDroidUncaughtException
 
     activity.runOnUiThread(new Runnable() {
       public void run() {
-        new BackgroundTask() {
-          @Override
-          protected void execute() throws Exception {
-            new CrashReport(throwable).save();
-          }
-        }.run();
-
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("Oooops!")
                 .setMessage(generateExceptionErrorString(throwable))
                 .setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
                   public void onClick(DialogInterface dialogInterface, int i) {
-                    System.exit(100);
+                    Gdx.app.exit();
                   }
                 }).show();
+
+        new CrashReport(throwable).save();
       }
     });
   }
