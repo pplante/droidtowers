@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.DifficultyLevel;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.GameSave;
+import com.happydroids.droidtowers.generators.NameGenerator;
 import com.happydroids.droidtowers.scenes.LoadTowerSplashScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import org.apache.commons.lang3.StringUtils;
@@ -30,16 +31,26 @@ public class NewTowerDialog extends Dialog {
 
     setTitle("Start a new Tower");
 
-    Table content = new Table();
-    content.defaults().top().left().space(ROW_SPACE);
-    content.row();
-    content.add(FontManager.RobotoBold18.makeLabel("Tower Name:")).right();
-
     final TextField nameField = FontManager.Roboto24.makeTextField("", "");
-    content.add(nameField).fillX().expandX().left();
-    content.row().space(ROW_SPACE);
 
-    content.add(FontManager.RobotoBold18.makeLabel("Difficulty:")).right();
+    TextButton randomNameButton = FontManager.Roboto12.makeTextButton("Random Name");
+    randomNameButton.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        nameField.setText(NameGenerator.randomCorporationName());
+      }
+    });
+
+    Table c = new Table();
+    c.defaults().top().left().space(ROW_SPACE);
+    c.row();
+    c.add(FontManager.RobotoBold18.makeLabel("Tower Name:")).right();
+
+    c.add(nameField).fillX().expandX().left().minWidth(350);
+    c.add(randomNameButton).fillY();
+
+    c.row().space(ROW_SPACE);
+    c.add(FontManager.RobotoBold18.makeLabel("Difficulty:")).right();
 
     TextButton easy = FontManager.RobotoBold18.makeTextButton("Easy");
     TextButton medium = FontManager.RobotoBold18.makeTextButton("Medium");
@@ -51,12 +62,12 @@ public class NewTowerDialog extends Dialog {
     buttonContainer.add(medium).expand();
     buttonContainer.add(hard).expand();
 
-    content.add(buttonContainer).fillX();
-    content.row();
+    c.add(buttonContainer).fillX().colspan(2);
+    c.row();
 
     final String moneyLabelPrefix = "Starting money: " + TowerConsts.CURRENCY_SYMBOL;
     final Label moneyLabel = FontManager.Roboto32.makeLabel(moneyLabelPrefix);
-    content.add(moneyLabel).center().colspan(2);
+    c.add(moneyLabel).center().colspan(3);
 
     final ButtonGroup difficultyGroup = new ButtonGroup(easy, medium, hard);
     difficultyGroup.setClickListener(new ClickListener() {
@@ -102,6 +113,8 @@ public class NewTowerDialog extends Dialog {
       }
     });
 
-    setView(content);
+    c.debug();
+
+    setView(c);
   }
 }
