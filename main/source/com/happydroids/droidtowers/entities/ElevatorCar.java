@@ -138,7 +138,7 @@ public class ElevatorCar extends GameObject {
     resetToBottomOfShaft();
   }
 
-  private void resetToBottomOfShaft() {
+  protected void resetToBottomOfShaft() {
     inUse = false;
     queue.informPassengersOfServiceChange();
     TweenSystem.manager().killTarget(this);
@@ -167,5 +167,9 @@ public class ElevatorCar extends GameObject {
 
   public int getNumPassengersWaiting() {
     return queue.getPassengersWaiting().size();
+  }
+
+  public boolean isInUse() {
+    return inUse;
   }
 }

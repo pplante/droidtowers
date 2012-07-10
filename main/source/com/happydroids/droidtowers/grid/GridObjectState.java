@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.grid;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.happydroids.droidtowers.employee.JobCandidate;
 import com.happydroids.droidtowers.entities.CommercialSpace;
+import com.happydroids.droidtowers.entities.Elevator;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.GridObjectType;
@@ -23,6 +24,7 @@ public class GridObjectState {
   private int variationId;
   private int loanFromCousinVinnie;
   private Set<JobCandidate> employees;
+  private int numberOfElevatorCars;
 
   public GridObjectState() {
 
@@ -38,6 +40,10 @@ public class GridObjectState {
 
     if (gridObject instanceof CommercialSpace) {
       employees = ((CommercialSpace) gridObject).getEmployees();
+    }
+
+    if (gridObject instanceof Elevator) {
+      numberOfElevatorCars = ((Elevator) gridObject).getNumElevatorCars();
     }
   }
 
@@ -61,6 +67,10 @@ public class GridObjectState {
 
         if (object instanceof CommercialSpace && employees != null) {
           ((CommercialSpace) object).setEmployees(employees);
+        }
+
+        if (object instanceof Elevator) {
+          ((Elevator) object).setNumElevatorCars(numberOfElevatorCars);
         }
 
         object.updateSprite();

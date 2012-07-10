@@ -70,7 +70,7 @@ public class TransitPathFinder extends AStar<GridPosition> {
     int x = point.x;
     int y = point.y;
 
-    if (point.elevator != null) {
+    if (point.elevator != null && point.elevator.getNumElevatorCars() > 0) {
       if ((canUseServiceRoutes && point.elevator.provides(SERVICE_ELEVATOR) || !canUseServiceRoutes && !point.elevator.provides(SERVICE_ELEVATOR))) {
         checkGridPositionY(successors, x, y + 1);
         checkGridPositionY(successors, x, y - 1);

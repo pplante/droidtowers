@@ -34,6 +34,7 @@ import java.util.List;
 import static com.happydroids.droidtowers.types.ResizeHandle.TOP;
 
 public class Elevator extends Transit {
+  public static final int MAX_NUMBER_OF_CARS = 10;
   private Sprite topSprite;
   private Sprite shaftSprite;
   private Sprite emptyShaftSprite;
@@ -45,7 +46,7 @@ public class Elevator extends Transit {
   static TextureAtlas elevatorAtlas;
   private GridPoint anchorPoint;
   private final HashMap<Integer, String> shaftLabels;
-  private final int numCars;
+  private int numCars;
   private final List<ElevatorCar> elevatorCars;
 
 
@@ -70,7 +71,7 @@ public class Elevator extends Transit {
     drawShaft = true;
 
     elevatorCars = Lists.newArrayList();
-    numCars = 3;
+    numCars = 1;
     for (int i = 0; i < numCars; i++) {
       elevatorCars.add(new ElevatorCar(this, elevatorAtlas));
     }
@@ -297,6 +298,16 @@ public class Elevator extends Transit {
   }
 
   public boolean addPassenger(AvatarSteeringManager avatarSteeringManager, int currentFloor, int destinationFloor, Runnable uponArrivalRunnable) {
+    if (elevatorCars.isEmpty()) {
+      return false;
+    }
+
+    for (ElevatorCar elevatorCar : elevatorCars) {
+      if (!elevatorCar.isInUse()) {
+        return elevatorCar.addPassenger(avatarSteeringManager, currentFloor, destinationFloor, uponArrivalRunnable);
+      }
+    }
+
     ElevatorCar elevatorCar = elevatorCars.get(MathUtils.random(0, elevatorCars.size() - 1));
     return elevatorCar.addPassenger(avatarSteeringManager, currentFloor, destinationFloor, uponArrivalRunnable);
   }
@@ -323,5 +334,37 @@ public class Elevator extends Transit {
     }
 
     return totalRiders;
+  }
+
+  public void addCar() {
+    numCars = MathUtils.clamp(numCars + 1, 0, MAX_NUMBER_OF_CARS);
+    elevatorCars.add(new ElevatorCar(this, elevatorAtlas));
+  }
+
+  public int getNumElevatorCars() {
+    return elevatorCars.size();
+  }
+
+  public void setNumElevatorCars(int numberOfElevatorCars) {
+    for (int i = numCars; i < numberOfElevatorCars; i++) {
+      addCar();
+    }
+  }
+
+  @Override
+  public int getUpkeepCost() {
+    return super.getUpkeepCost() + (gridObjectType.getCoins() / 20 * numCars);
+  }
+
+  public void removeCar() {
+    numCars = MathUtils.clamp(numCars - 1, 0, MAX_NUMBER_OF_CARS);
+    if (!elevatorCars.isEmpty()) {
+      ElevatorCar car = elevatorCars.remove(0);
+      car.resetToBottomOfShaft();
+    }
+  }
+
+  public boolean canAddElevatorCar() {
+    return elevatorCars.size() < MAX_NUMBER_OF_CARS;
   }
 }
