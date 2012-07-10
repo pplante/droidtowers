@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.actions.Action;
@@ -56,6 +57,7 @@ public abstract class GridObject {
   protected int loanFromCousinVinnie;
   private int variationId;
   private List<GridPoint> pointsTouched;
+  private Set<Avatar> visitorQueue;
 
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
@@ -66,6 +68,7 @@ public abstract class GridObject {
     position = new GridPoint(0, 0);
     size = new GridPoint(gridObjectType.getWidth(), gridObjectType.getHeight());
     bounds = new Rectangle(position.x, position.y, size.x, size.y);
+    visitorQueue = Sets.newHashSet();
 
     worldPosition = new Vector2();
     worldSize = new Vector2(size.getWorldX() * gameGrid.getGridScale(), size.getWorldY() * gameGrid.getGridScale());
@@ -399,6 +402,8 @@ public abstract class GridObject {
   }
 
   public void recordVisitor(Avatar avatar) {
+    visitorQueue.remove(avatar);
+
     if (Janitor.class.isInstance(avatar)) {
       numVisitors = 0;
       lastCleanedAt = System.currentTimeMillis();
@@ -468,4 +473,7 @@ public abstract class GridObject {
   }
 
 
+  public Set<Avatar> getVisitorQueue() {
+    return visitorQueue;
+  }
 }
