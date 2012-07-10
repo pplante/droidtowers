@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.achievements;
 
 import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Maps;
 import com.happydroids.droidtowers.events.AchievementCompletionEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -30,6 +31,11 @@ public class TutorialEngine extends AchievementEngine {
     try {
       ObjectMapper mapper = TowerGameService.instance().getObjectMapper();
       achievements = mapper.readValue(Gdx.files.internal("params/tutorial-steps.json").reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, TutorialStep.class));
+      achievementsById = Maps.newHashMap();
+
+      for (Achievement achievement : achievements) {
+        achievementsById.put(achievement.getId(), achievement);
+      }
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

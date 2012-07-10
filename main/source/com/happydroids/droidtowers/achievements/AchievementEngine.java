@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.achievements;
 
 import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.events.AchievementCompletionEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
@@ -15,6 +16,7 @@ import com.happydroids.droidtowers.gui.AchievementNotification;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AchievementEngine {
   private static final String TAG = AchievementEngine.class.getSimpleName();
@@ -22,6 +24,7 @@ public class AchievementEngine {
   protected static AchievementEngine instance;
   protected List<Achievement> achievements;
   protected EventBus eventBus;
+  protected Map<String, Achievement> achievementsById;
 
 
   public static AchievementEngine instance() {
@@ -37,6 +40,11 @@ public class AchievementEngine {
       eventBus = new EventBus();
       ObjectMapper mapper = TowerGameService.instance().getObjectMapper();
       achievements = mapper.readValue(Gdx.files.internal("params/achievements.json").reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, Achievement.class));
+      achievementsById = Maps.newHashMap();
+
+      for (Achievement achievement : achievements) {
+        achievementsById.put(achievement.getId(), achievement);
+      }
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -120,13 +128,7 @@ public class AchievementEngine {
   }
 
   public Achievement findById(String achievementId) {
-    for (Achievement achievement : achievements) {
-      if (achievement.getId().equalsIgnoreCase(achievementId)) {
-        return achievement;
-      }
-    }
-
-    return null;
+    return achievementsById.get(achievementId);
   }
 
   public boolean hasPendingAwards() {

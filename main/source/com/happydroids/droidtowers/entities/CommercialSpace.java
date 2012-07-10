@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.entities;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.google.common.collect.Sets;
+import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.employee.JobCandidate;
 import com.happydroids.droidtowers.events.EmployeeFiredEvent;
 import com.happydroids.droidtowers.events.EmployeeHiredEvent;
@@ -117,7 +118,9 @@ public class CommercialSpace extends Room {
       }
     }
 
-    if (getNumVisitors() > 0 && getDesirability() < 0.25f) {
+    boolean unlockedJanitors = AchievementEngine.instance().findById("build5commercialspaces").isCompleted();
+    boolean unlockedMaids = AchievementEngine.instance().findById("build8hotelroom").isCompleted();
+    if (unlockedJanitors && unlockedMaids && getNumVisitors() > 0 && getDesirability() < 0.25f) {
       decalsToDraw.add(DECAL_DIRTY);
     } else {
       decalsToDraw.remove(DECAL_DIRTY);
