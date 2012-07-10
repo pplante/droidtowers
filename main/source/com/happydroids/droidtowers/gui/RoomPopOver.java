@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.entities.Avatar;
 import com.happydroids.droidtowers.entities.Room;
 import com.happydroids.droidtowers.gui.controls.ButtonBar;
-import com.happydroids.droidtowers.gui.dialogs.CousinVinnieRepayLoanDialog;import sun.jvm.hotspot.debugger.win32.coff.COFFException;
+import com.happydroids.droidtowers.gui.dialogs.CousinVinnieRepayLoanDialog;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
