@@ -36,7 +36,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-shared/custom_rules.xml" afterPath="$PROJECT_DIR$/android-shared/custom_rules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/upload-releases.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/android-amazon/gen/com/happydroids/droidtowers/BuildConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/android-amazon/gen/com/happydroids/droidtowers/Manifest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/android-amazon/gen/com/happydroids/droidtowers/R.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-release.py" afterPath="$PROJECT_DIR$/build-release.py" />
     </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -167,103 +172,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RoomPopOver.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/RoomPopOver.java">
+      <file leaf-file-name="DroidTowersGame.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DroidTowersGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="7" selection-start="118" selection-end="118" vertical-scroll-proportion="0.0">
+            <state line="78" column="14" selection-start="3465" selection-end="3465" vertical-scroll-proportion="0.35820895">
               <folding>
-                <element signature="e#0#2291#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-                <element signature="e#1220#1407#0" expanded="true" />
-                <element signature="e#1398#1399#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="custom_rules.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/android-shared/custom_rules.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="0" selection-start="1348" selection-end="1348" vertical-scroll-proportion="0.32533333">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build-release.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build-release.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="67" selection-start="4605" selection-end="4605" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CousinVinnieRepayLoanDialog.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/dialogs/CousinVinnieRepayLoanDialog.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="54" selection-start="963" selection-end="963" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2331#2795#0" expanded="true" />
-                <element signature="e#2788#2789#0" expanded="true" />
-                <element signature="e#2828#2964#0" expanded="true" />
-                <element signature="e#2957#2958#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProgressDialog.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ProgressDialog.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="13" selection-start="1030" selection-end="1030" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#1214#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NewTowerDialog.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/NewTowerDialog.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="0" selection-start="4011" selection-end="4011" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#4033#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlatformProtocolHandlerFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/platform/PlatformProtocolHandlerFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="40" selection-start="345" selection-end="345" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#592#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Room.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Room.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="21" selection-start="1972" selection-end="1972" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#6848#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommercialSpacePopOver.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/CommercialSpacePopOver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="4" selection-start="1417" selection-end="1508" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#1701#0" expanded="true" />
+                <element signature="e#0#10396#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -282,7 +196,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
         <option value="$PROJECT_DIR$/main/assets/generators/corporations.txt" />
         <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DroidTowersApplet.java" />
@@ -296,8 +209,9 @@
         <option value="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/platform/PlatformProtocolHandlerFactory.java" />
         <option value="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/RoomPopOver.java" />
-        <option value="$PROJECT_DIR$/build-release.py" />
         <option value="$PROJECT_DIR$/android-shared/custom_rules.xml" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DroidTowersGame.java" />
+        <option value="$PROJECT_DIR$/build-release.py" />
       </list>
     </option>
   </component>
@@ -1521,25 +1435,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/GridObjectPopOver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="13" selection-start="877" selection-end="877" vertical-scroll-proportion="-0.7123473">
-          <folding>
-            <element signature="e#0#5700#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/CommercialSpacePopOver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="4" selection-start="1417" selection-end="1508" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#1701#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/money/CousinVinnieLoanDialog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="73" selection-start="1025" selection-end="1667" vertical-scroll-proportion="0.6567164">
@@ -1585,9 +1480,71 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="137" column="117" selection-start="5689" selection-end="5689" vertical-scroll-proportion="-4.72">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-shared/custom_rules.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="0" selection-start="1348" selection-end="1348" vertical-scroll-proportion="0.32533333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/RoomPopOver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="7" selection-start="118" selection-end="118" vertical-scroll-proportion="0.176">
+          <folding>
+            <element signature="e#0#2291#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1220#1407#0" expanded="true" />
+            <element signature="e#1398#1399#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/platform/PlatformProtocolHandlerFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="40" selection-start="345" selection-end="345" vertical-scroll-proportion="0.264">
+          <folding>
+            <element signature="e#0#592#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Room.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="21" selection-start="1972" selection-end="1972" vertical-scroll-proportion="0.029850746">
+          <folding>
+            <element signature="e#0#6848#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/NewTowerDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="115" column="0" selection-start="4011" selection-end="4011" vertical-scroll-proportion="0.736">
+          <folding>
+            <element signature="e#0#4033#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ProgressDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="13" selection-start="1030" selection-end="1030" vertical-scroll-proportion="0.58933336">
+          <folding>
+            <element signature="e#0#1214#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/dialogs/CousinVinnieRepayLoanDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="54" selection-start="963" selection-end="963" vertical-scroll-proportion="0.0">
+        <state line="23" column="54" selection-start="963" selection-end="963" vertical-scroll-proportion="0.24">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2331#2795#0" expanded="true" />
@@ -1598,72 +1555,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ProgressDialog.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/CommercialSpacePopOver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="13" selection-start="1030" selection-end="1030" vertical-scroll-proportion="0.0">
+        <state line="42" column="4" selection-start="1417" selection-end="1508" vertical-scroll-proportion="0.58666664">
           <folding>
-            <element signature="e#0#1214#0" expanded="true" />
+            <element signature="e#0#1701#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/NewTowerDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="0" selection-start="4011" selection-end="4011" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#4033#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Room.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="21" selection-start="1972" selection-end="1972" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#6848#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/platform/PlatformProtocolHandlerFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="40" selection-start="345" selection-end="345" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#592#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/RoomPopOver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="7" selection-start="118" selection-end="118" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#2291#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#1220#1407#0" expanded="true" />
-            <element signature="e#1398#1399#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="137" column="117" selection-start="5689" selection-end="5689" vertical-scroll-proportion="-4.72">
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build-release.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="67" selection-start="4605" selection-end="4605" vertical-scroll-proportion="0.0">
+        <state line="102" column="0" selection-start="3695" selection-end="3695" vertical-scroll-proportion="0.44266668">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android-shared/custom_rules.xml">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DroidTowersGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="1348" selection-end="1348" vertical-scroll-proportion="0.32533333">
-          <folding />
+        <state line="78" column="14" selection-start="3465" selection-end="3465" vertical-scroll-proportion="0.35820895">
+          <folding>
+            <element signature="e#0#10396#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
