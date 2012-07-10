@@ -36,11 +36,13 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
   private Label cousinVinniesHideout;
   private Label nameLabel;
   private float timeSinceUpdate;
+  private Vector3 gridObjectWorldToScreen;
 
 
   public GridObjectPopOver(T gridObject) {
     super();
     this.gridObject = gridObject;
+    gridObjectWorldToScreen = new Vector3();
 
     InputSystem.instance().addInputProcessor(new GridObjectPopOverCloser(this), 10);
 
@@ -114,10 +116,10 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
       updateControls();
     }
 
-    Vector3 vec = new Vector3(gridObject.getWorldCenter().x + (gridObject.getWorldBounds().width / 2), gridObject.getWorldCenter().y - getPrefHeight() / 2, 1f);
-    SceneManager.activeScene().getCamera().project(vec);
-    x = vec.x;
-    y = vec.y;
+    gridObjectWorldToScreen.set(gridObject.getWorldCenter().x + gridObject.getWorldBounds().width / 2, gridObject.getWorldCenter().y, 0);
+    SceneManager.activeScene().getCamera().project(gridObjectWorldToScreen);
+    x = gridObjectWorldToScreen.x;
+    y = gridObjectWorldToScreen.y - getPrefHeight() / 2;
   }
 
   protected void updateControls() {
