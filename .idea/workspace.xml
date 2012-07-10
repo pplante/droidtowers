@@ -184,7 +184,7 @@
       <file leaf-file-name="custom_rules.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/android-shared/custom_rules.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="70" selection-start="1337" selection-end="1337" vertical-scroll-proportion="0.26666668">
+            <state line="29" column="0" selection-start="1348" selection-end="1348" vertical-scroll-proportion="0.32533333">
               <folding />
             </state>
           </provider>
@@ -1662,7 +1662,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/android-shared/custom_rules.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="70" selection-start="1337" selection-end="1337" vertical-scroll-proportion="0.26666668">
+        <state line="29" column="0" selection-start="1348" selection-end="1348" vertical-scroll-proportion="0.32533333">
           <folding />
         </state>
       </provider>
