@@ -12,6 +12,7 @@ from pbs import git, ant, scp, pwd, cd
 SCP_TARGET_PATH = 'pplante@happydroids.com:/var/www/happydroids.com/public/alphas'
 TOWER_CONSTS_JAVA = './happydroids-common/src/com/happydroids/HappyDroidConsts.java'
 GOOGLE_MANIFEST_PATH = './android-google/AndroidManifest.xml'
+AMAZON_MANIFEST_PATH = './android-amazon/AndroidManifest.xml'
 
 debug_flag_re = re.compile(r'(boolean DEBUG = (?:true|false);)')
 server_url_re = re.compile(r'(String HAPPYDROIDS_SERVER = "(?:.+?)";)')
@@ -19,7 +20,7 @@ server_https_re = re.compile(r'(String HAPPYDROIDS_URI = "(?:.+?)" \+ HAPPYDROID
 version_re = re.compile(r'(String VERSION = "(?:.+?)";)')
 git_sha_re = re.compile(r'(String GIT_SHA = "(?:.+?)";)')
 
-android_manifest_re = re.compile(r'package="com.happydroids.droidtowers"\s+android:versionCode="102"\s+android:versionName=".+?">')
+android_manifest_re = re.compile(r'package="com.happydroids.droidtowers"\s+android:versionCode="\d+"\s+android:versionName=".+?">')
 
 def retrieve_git_revision():
     git_status = git.status('--porcelain').strip()
@@ -74,17 +75,27 @@ if __name__ == '__main__':
         tower_consts = version_re.sub('String VERSION = "%s";' % (new_build_number,), tower_consts)
         tower_consts = git_sha_re.sub('String GIT_SHA = "%s";' % (revision,), tower_consts)
 
-        android_version_code = open('build.code').read()
+        android_version_code = int(open('build.code').read().strip()) + 1
 
-        google_manifest = int(open(GOOGLE_MANIFEST_PATH).read().strip()) + 1
+        google_manifest = open(GOOGLE_MANIFEST_PATH).read().strip()
         google_manifest = android_manifest_re.sub('package="com.happydroids.droidtowers" android:versionCode="%s" android:versionName="%s">' %(android_version_code, new_build_number), google_manifest)
 
+        amazon_manifest = open(AMAZON_MANIFEST_PATH).read().strip()
+        amazon_manifest = android_manifest_re.sub('package="com.happydroids.droidtowers" android:versionCode="%s" android:versionName="%s">' %(android_version_code, new_build_number), amazon_manifest)
 
         print tower_consts
 
-        print '\n\nGOOGLE MANIFEST: \n\n'
+        if raw_input('Is this correct? [y/n]') == 'n':
+            print "\n\nABORTED!\n\n"
+            sys.exit(1)
 
         print google_manifest
+
+        if raw_input('Is this correct? [y/n]') == 'n':
+            print "\n\nABORTED!\n\n"
+            sys.exit(1)
+
+        print amazon_manifest
 
         if raw_input('Is this correct? [y/n]') == 'n':
             print "\n\nABORTED!\n\n"
@@ -93,8 +104,14 @@ if __name__ == '__main__':
         with open(TOWER_CONSTS_JAVA, 'w+') as fp:
             fp.write(tower_consts)
 
+        with open(GOOGLE_MANIFEST_PATH, 'w+') as fp:
+            fp.write(google_manifest)
+
         with open('build.ver', 'w') as fp:
             fp.write(new_build_number)
+
+        with open('build.code', 'w') as fp:
+            fp.write('%s' % android_version_code)        
 
         with open('release.properties', 'w') as fp:
             fp.write('project.version=%s' % (new_build_number))

@@ -35,7 +35,12 @@
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="" />
+    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-google/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android-google/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-release.py" afterPath="$PROJECT_DIR$/build-release.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.ver" afterPath="$PROJECT_DIR$/build.ver" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
+    </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -168,7 +173,7 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/android-google/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="10" selection-start="230" selection-end="344" vertical-scroll-proportion="0.20533334">
+            <state line="6" column="68" selection-start="219" selection-end="219" vertical-scroll-proportion="0.176">
               <folding />
             </state>
           </provider>
@@ -187,7 +192,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/assets/generators/corporations.txt" />
         <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DroidTowersApplet.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Room.java" />
@@ -203,6 +207,7 @@
         <option value="$PROJECT_DIR$/android-shared/custom_rules.xml" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DroidTowersGame.java" />
         <option value="$PROJECT_DIR$/build-release.py" />
+        <option value="$PROJECT_DIR$/android-google/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -1437,7 +1442,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="42" selection-start="427" selection-end="427" vertical-scroll-proportion="0.44989774">
           <folding>
-            <element signature="e#0#1148#0" expanded="true" />
+            <element signature="e#0#1149#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1564,7 +1569,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/android-google/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="10" selection-start="230" selection-end="344" vertical-scroll-proportion="0.20533334">
+        <state line="6" column="68" selection-start="219" selection-end="219" vertical-scroll-proportion="0.176">
           <folding />
         </state>
       </provider>
