@@ -57,7 +57,7 @@ public class ElevatorQueue {
     currentRiders.add(firstPassenger);
 
     for (Passenger otherPassenger : passengersWaiting) {
-      if (firstPassenger.travelContains(otherPassenger)) {
+      if (firstPassenger.travelContains(otherPassenger) && currentRiders.size() < 8) {
         currentRiders.add(otherPassenger);
       }
     }

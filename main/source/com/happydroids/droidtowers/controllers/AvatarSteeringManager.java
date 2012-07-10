@@ -81,7 +81,7 @@ public class AvatarSteeringManager {
     if (!running) return;
 
     if (currentPos != null && currentPos.elevator != null) {
-      currentPos.elevator.getCar().removePassenger(this);
+      currentPos.elevator.removePassenger(this);
     }
 
     gameGrid.events().unregister(this);
@@ -157,7 +157,7 @@ public class AvatarSteeringManager {
           return;
         }
 
-        boolean addedPassenger = currentPos.elevator.getCar().addPassenger(AvatarSteeringManager.this, currentPos.y, destination.y, uponArrivalAtElevatorDestination(destination));
+        boolean addedPassenger = currentPos.elevator.addPassenger(AvatarSteeringManager.this, currentPos.y, destination.y, uponArrivalAtElevatorDestination(destination));
         if (!addedPassenger) {
           Gdx.app.error(TAG, "ZOMG CANNOT REACH FLOOR!!!");
           finished();

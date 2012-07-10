@@ -10,11 +10,14 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.actions.Action;
+import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
 import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
 import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -25,6 +28,7 @@ import com.happydroids.droidtowers.types.ElevatorType;
 import com.happydroids.droidtowers.types.ResizeHandle;
 
 import java.util.HashMap;
+import java.util.List;
 
 import static com.happydroids.droidtowers.types.ResizeHandle.TOP;
 
@@ -37,10 +41,11 @@ public class Elevator extends Transit {
   private ResizeHandle selectedResizeHandle;
   private boolean drawShaft;
   private Action onResizeAction;
-  private ElevatorCar elevatorCar;
   static TextureAtlas elevatorAtlas;
   private GridPoint anchorPoint;
   private final HashMap<Integer, String> shaftLabels;
+  private final int numCars;
+  private final List<ElevatorCar> elevatorCars;
 
 
   public Elevator(ElevatorType elevatorType, final GameGrid gameGrid) {
@@ -63,7 +68,11 @@ public class Elevator extends Transit {
 
     drawShaft = true;
 
-    elevatorCar = new ElevatorCar(this, elevatorAtlas);
+    elevatorCars = Lists.newArrayList();
+    numCars = 3;
+    for (int i = 0; i < numCars; i++) {
+      elevatorCars.add(new ElevatorCar(this, elevatorAtlas));
+    }
 
     shaftLabels = Maps.newHashMap();
   }
@@ -77,7 +86,9 @@ public class Elevator extends Transit {
   public void update(float deltaTime) {
     super.update(deltaTime);
 
-    elevatorCar.update(deltaTime);
+    for (ElevatorCar elevatorCar : elevatorCars) {
+      elevatorCar.update(deltaTime);
+    }
   }
 
   @Override
@@ -128,8 +139,10 @@ public class Elevator extends Transit {
       floorFont.draw(spriteBatch, shaftLabels.get(normalizedWorldFloor), worldPosition.x + ((TowerConsts.GRID_UNIT_SIZE - textBounds.width) / 2), worldPosition.y + (scaledGridUnit() * localFloorNum) + ((TowerConsts.GRID_UNIT_SIZE - textBounds.height) / 2));
     }
 
-    elevatorCar.setColor(renderColor);
-    elevatorCar.draw(spriteBatch);
+    for (ElevatorCar elevatorCar : elevatorCars) {
+      elevatorCar.setColor(renderColor);
+      elevatorCar.draw(spriteBatch);
+    }
 
     if (selectedResizeHandle == TOP) {
       topSprite.setColor(Color.CYAN);
@@ -230,10 +243,6 @@ public class Elevator extends Transit {
     return cpy;
   }
 
-  public ElevatorCar getCar() {
-    return elevatorCar;
-  }
-
   public boolean servicesFloor(int floorNumber) {
     float minFloor = getContentPosition().y;
     float maxFloor = minFloor + getContentSize().y;
@@ -251,7 +260,9 @@ public class Elevator extends Transit {
 
   @Override
   public void adjustToNewLandSize() {
-    elevatorCar.clearQueue();
+    for (ElevatorCar elevatorCar : elevatorCars) {
+      elevatorCar.clearQueue();
+    }
   }
 
   @Override
@@ -261,12 +272,12 @@ public class Elevator extends Transit {
 
     Elevator elevator = (Elevator) o;
 
-    return !(elevatorCar != null ? !elevatorCar.equals(elevator.elevatorCar) : elevator.elevatorCar != null);
+    return !(elevatorCars != null ? !elevatorCars.equals(elevator.elevatorCars) : elevator.elevatorCars != null);
   }
 
   @Override
   public int hashCode() {
-    return elevatorCar != null ? elevatorCar.hashCode() : 0;
+    return elevatorCars != null ? elevatorCars.hashCode() : 0;
   }
 
   @Override
@@ -277,5 +288,16 @@ public class Elevator extends Transit {
   @Override
   protected boolean hasPopOver() {
     return false;
+  }
+
+  public boolean addPassenger(AvatarSteeringManager avatarSteeringManager, int currentFloor, int destinationFloor, Runnable uponArrivalRunnable) {
+    ElevatorCar elevatorCar = elevatorCars.get(MathUtils.random(0, elevatorCars.size() - 1));
+    return elevatorCar.addPassenger(avatarSteeringManager, currentFloor, destinationFloor, uponArrivalRunnable);
+  }
+
+  public void removePassenger(AvatarSteeringManager avatarSteeringManager) {
+    for (ElevatorCar elevatorCar : elevatorCars) {
+      elevatorCar.removePassenger(avatarSteeringManager);
+    }
   }
 }

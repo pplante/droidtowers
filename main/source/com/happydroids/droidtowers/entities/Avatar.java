@@ -98,7 +98,12 @@ public class Avatar extends GameObject {
       } else {
         GridObject mostDesirable = null;
         for (GridObject gridObject : objects) {
-          if (!gridObject.isConnectedToTransport() || lastVisitedPlaces.contains(gridObject)) continue;
+          if (!gridObject.isConnectedToTransport() || lastVisitedPlaces.contains(gridObject)) {
+            continue;
+          } else if (gridObject.getVisitorQueue().size() > 5) {
+//            should get rid of thundering herd problem?
+            continue;
+          }
 
           if (gridObject.provides(COMMERCIAL, RESTROOM)) {
             if (mostDesirable == null || mostDesirable.getDesirability() < gridObject.getDesirability()) {
@@ -129,6 +134,10 @@ public class Avatar extends GameObject {
       return;
     }
     movingTo = gridObject;
+
+    if (movingTo != null) {
+      movingTo.getVisitorQueue().add(this);
+    }
 
     GridPosition start = gameGrid.positionCache().getPosition(gameGrid.closestGridPoint(getX(), getY()));
     GridPosition goal = gameGrid.positionCache().getPosition(gridObject.getPosition());
@@ -246,6 +255,10 @@ public class Avatar extends GameObject {
 
     if (pathFinder != null) {
       PathSearchManager.instance().remove(pathFinder);
+    }
+
+    if (movingTo != null) {
+      movingTo.getVisitorQueue().remove(this);
     }
 
     lastPathFinderSearch = PATH_SEARCH_DELAY;
