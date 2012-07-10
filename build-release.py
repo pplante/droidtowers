@@ -11,12 +11,15 @@ from pbs import git, ant, scp, pwd, cd
 
 SCP_TARGET_PATH = 'pplante@happydroids.com:/var/www/happydroids.com/public/alphas'
 TOWER_CONSTS_JAVA = './happydroids-common/src/com/happydroids/HappyDroidConsts.java'
+GOOGLE_MANIFEST_PATH = './android-google/AndroidManifest.xml'
 
 debug_flag_re = re.compile(r'(boolean DEBUG = (?:true|false);)')
 server_url_re = re.compile(r'(String HAPPYDROIDS_SERVER = "(?:.+?)";)')
 server_https_re = re.compile(r'(String HAPPYDROIDS_URI = "(?:.+?)" \+ HAPPYDROIDS_SERVER;)')
 version_re = re.compile(r'(String VERSION = "(?:.+?)";)')
 git_sha_re = re.compile(r'(String GIT_SHA = "(?:.+?)";)')
+
+android_manifest_re = re.compile(r'package="com.happydroids.droidtowers"\s+android:versionCode="102"\s+android:versionName=".+?">')
 
 def retrieve_git_revision():
     git_status = git.status('--porcelain').strip()
@@ -71,7 +74,17 @@ if __name__ == '__main__':
         tower_consts = version_re.sub('String VERSION = "%s";' % (new_build_number,), tower_consts)
         tower_consts = git_sha_re.sub('String GIT_SHA = "%s";' % (revision,), tower_consts)
 
+        android_version_code = open('build.code').read()
+
+        google_manifest = int(open(GOOGLE_MANIFEST_PATH).read().strip()) + 1
+        google_manifest = android_manifest_re.sub('package="com.happydroids.droidtowers" android:versionCode="%s" android:versionName="%s">' %(android_version_code, new_build_number), google_manifest)
+
+
         print tower_consts
+
+        print '\n\nGOOGLE MANIFEST: \n\n'
+
+        print google_manifest
 
         if raw_input('Is this correct? [y/n]') == 'n':
             print "\n\nABORTED!\n\n"

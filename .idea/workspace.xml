@@ -35,14 +35,7 @@
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/upload-releases.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android-amazon/gen/com/happydroids/droidtowers/BuildConfig.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android-amazon/gen/com/happydroids/droidtowers/Manifest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android-amazon/gen/com/happydroids/droidtowers/R.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-release.py" afterPath="$PROJECT_DIR$/build-release.py" />
-    </list>
+    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="" />
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -172,13 +165,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DroidTowersGame.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DroidTowersGame.java">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/android-google/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="14" selection-start="3465" selection-end="3465" vertical-scroll-proportion="0.35820895">
-              <folding>
-                <element signature="e#0#10396#0" expanded="true" />
-              </folding>
+            <state line="7" column="10" selection-start="230" selection-end="344" vertical-scroll-proportion="0.20533334">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1435,15 +1426,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/money/CousinVinnieLoanDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="73" selection-start="1025" selection-end="1667" vertical-scroll-proportion="0.6567164">
-          <folding>
-            <element signature="e#0#2100#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GridObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="480" column="29" selection-start="12908" selection-end="12908" vertical-scroll-proportion="0.7910448">
@@ -1577,6 +1559,13 @@
           <folding>
             <element signature="e#0#10396#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-google/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="10" selection-start="230" selection-end="344" vertical-scroll-proportion="0.20533334">
+          <folding />
         </state>
       </provider>
     </entry>
