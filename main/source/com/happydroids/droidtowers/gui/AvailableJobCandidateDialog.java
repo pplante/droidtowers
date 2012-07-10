@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.gui;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.happydroids.droidtowers.employee.JobCandidate;
 import com.happydroids.droidtowers.entities.CommercialSpace;
@@ -18,7 +19,7 @@ public class AvailableJobCandidateDialog extends Dialog {
     this.commercialSpace = commercialSpace;
 
     candidateListView = new JobCandidateListView();
-    candidateListView.setCandidates(JobCandidateGenerator.generate(5));
+    candidateListView.setCandidates(JobCandidateGenerator.generate(MathUtils.random(1, 4)));
 
     addButton("Close", new CloseClickListener());
     addButton("Hire", new HireCandidateClickListener());

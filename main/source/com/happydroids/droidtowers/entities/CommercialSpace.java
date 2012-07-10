@@ -153,7 +153,7 @@ public class CommercialSpace extends Room {
     employees.clear();
   }
 
-  private void removeEmployee(JobCandidate employee) {
+  public void removeEmployee(JobCandidate employee) {
     employees.remove(employee);
     gameGrid.events().post(new EmployeeFiredEvent(this, employee));
   }

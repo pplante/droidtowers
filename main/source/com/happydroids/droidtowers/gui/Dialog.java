@@ -102,8 +102,8 @@ public class Dialog extends Table {
     int padSide = scale(32);
     int padTop = scale(20);
     if (view != null) {
-      row();
-      Cell viewCell = add(view).center();
+      row().fill();
+      Cell viewCell = add(view).center().expand();
 
       if (viewPadding) {
         viewCell.pad(padTop, padSide, padTop, padSide);

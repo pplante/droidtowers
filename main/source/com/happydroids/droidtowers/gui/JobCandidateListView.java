@@ -8,15 +8,17 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.employee.JobCandidate;
+import com.happydroids.droidtowers.gui.events.OnChangeCandidateCallback;
+import org.apache.commons.lang3.StringUtils;
 
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.ListIterator;
 
+import static com.happydroids.droidtowers.gui.FontManager.Roboto24;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class JobCandidateListView extends Table {
@@ -31,6 +33,10 @@ public class JobCandidateListView extends Table {
   private final Label candidateCountLabel;
   private String countLabelSuffix;
   private boolean shownNoCanidatesText;
+  private OnChangeCandidateCallback onChangeCandidateListener;
+  private final Table withCandidatesView;
+  private final Table withoutCandidatesView;
+  private final Label noCandidatesFoundLabel;
 
 
   public JobCandidateListView() {
@@ -49,10 +55,15 @@ public class JobCandidateListView extends Table {
     ColorizedImageButton nextButton = new ColorizedImageButton(TowerAssetManager.textureFromAtlas("large-right-arrow", "hud/menus.txt"), Colors.ICS_BLUE);
     nextButton.setClickListener(new NextCandidateClickListener());
 
-    row().space(scale(32));
-    add(prevButton).center();
-    add(makeInnerContentView());
-    add(nextButton).center();
+    withCandidatesView = newTable();
+    withCandidatesView.defaults().space(scale(32));
+    withCandidatesView.add(prevButton).center();
+    withCandidatesView.add(makeInnerContentView());
+    withCandidatesView.add(nextButton).center();
+
+    noCandidatesFoundLabel = Roboto24.makeLabel("No " + StringUtils.capitalize(countLabelSuffix) + " found.");
+    withoutCandidatesView = newTable();
+    withoutCandidatesView.add(noCandidatesFoundLabel).center();
   }
 
   private Actor makeInnerContentView() {
@@ -106,7 +117,11 @@ public class JobCandidateListView extends Table {
   }
 
   private void updateView() {
+    clear();
+
     if (selectedCandidate != null) {
+      add(withCandidatesView);
+
       nameLabel.setText(selectedCandidate.getName());
 
       experienceRating.setValue(selectedCandidate.getExperienceLevel());
@@ -116,17 +131,15 @@ public class JobCandidateListView extends Table {
 
       int candidateNum = candidates.indexOf(selectedCandidate) + 1;
       candidateCountLabel.setText(candidateNum + " of " + candidates.size() + " " + countLabelSuffix);
-    } else if (!shownNoCanidatesText) {
-      shownNoCanidatesText = true;
+    } else {
+      add(withoutCandidatesView);
+    }
 
-      Actor innerContentView = findActor("inner-content-view");
-      Cell contentCell = getCell(innerContentView);
-      int widgetHeight = contentCell.getWidgetHeight();
-      innerContentView.markToRemove(true);
+    invalidateHierarchy();
+    layout();
 
-      clear();
-      row();
-      add(FontManager.Roboto24.makeLabel("No Candidates found.")).minHeight(widgetHeight);
+    if (onChangeCandidateListener != null) {
+      onChangeCandidateListener.change(selectedCandidate);
     }
   }
 
@@ -135,6 +148,11 @@ public class JobCandidateListView extends Table {
 
     regenerateIterator(candidates);
   }
+
+  public void setOnChangeCandidateListener(OnChangeCandidateCallback onChangeCandidateListener) {
+    this.onChangeCandidateListener = onChangeCandidateListener;
+  }
+
 
   private class PreviousCandidateClickListener extends VibrateClickListener {
     @Override
@@ -158,5 +176,7 @@ public class JobCandidateListView extends Table {
 
   public void setCountLabelSuffix(String countLabelSuffix) {
     this.countLabelSuffix = countLabelSuffix;
+
+    noCandidatesFoundLabel.setText("No " + StringUtils.capitalize(countLabelSuffix) + " found.");
   }
 }
