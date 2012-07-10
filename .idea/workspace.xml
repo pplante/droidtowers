@@ -35,10 +35,7 @@
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/GridObjectPopOver.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/GridObjectPopOver.java" />
-    </list>
+    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="" />
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -168,13 +165,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GridObjectPopOver.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="GridObjectPopOver.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/GridObjectPopOver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="118" column="134" selection-start="4022" selection-end="4022" vertical-scroll-proportion="0.33333334">
+            <state line="118" column="134" selection-start="4022" selection-end="4022" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#0#5700#0" expanded="true" />
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainMenuScene.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="67" column="33" selection-start="2454" selection-end="2454" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#4390#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NewTowerDialog.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/NewTowerDialog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="49" column="35" selection-start="1678" selection-end="1678" vertical-scroll-proportion="0.21115538">
+              <folding>
+                <element signature="e#0#4049#0" expanded="true" />
+                <element signature="e#1236#1419#0" expanded="true" />
+                <element signature="e#1412#1413#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -226,9 +247,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/generators/NameGenerator.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/CommercialSpace.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementEngine.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/TutorialEngine.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/CommercialSpacePopOver.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HotelRoomPopOver.java" />
@@ -242,6 +260,9 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Elevator.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DroidTowersGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/GridObjectPopOver.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/NewTowerDialog.java" />
+        <option value="$PROJECT_DIR$/main/assets/generators/corporations.txt" />
       </list>
     </option>
   </component>
@@ -1159,7 +1180,15 @@
       <created>1341913688844</created>
       <updated>1341913688845</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="ZOMG MOLLYMUS fixed the popover position!!!">
+      <created>1341917543112</created>
+      <updated>1341917543112</updated>
+    </task>
+    <task id="LOCAL-00080" summary="random names for new tower">
+      <created>1341918652771</created>
+      <updated>1341918652772</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -1264,7 +1293,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="elevators can have cars added or removed&#10;the elevator car selection is slightly more intelligent since it will select a car that is not in use first." />
+    <option name="LAST_COMMIT_MESSAGE" value="random names for new tower" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1277,8 +1306,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="fixed a bug where grid object popover wouldn't be closed properly" />
-    <MESSAGE value="fixed purchase managers&#10;added the purchase thank you dialog" />
     <MESSAGE value="fixed the elevator pan npe bug&#10;improved the fireworks" />
     <MESSAGE value="what the fuck IDEA corrupted my project files?&#10;build script works again" />
     <MESSAGE value="manage hotel room dialog" />
@@ -1302,6 +1329,8 @@
     <MESSAGE value="dirty rooms require janitors and maids closets now" />
     <MESSAGE value="popovers now update every 2 seconds&#10;elevator popover shows some stats" />
     <MESSAGE value="elevators can have cars added or removed&#10;the elevator car selection is slightly more intelligent since it will select a car that is not in use first." />
+    <MESSAGE value="ZOMG MOLLYMUS fixed the popover position!!!" />
+    <MESSAGE value="random names for new tower" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1416,34 +1445,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/ElevatorQueue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="150" column="5" selection-start="3930" selection-end="4126" vertical-scroll-proportion="0.6853333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/elevator/Passenger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="14" selection-start="2255" selection-end="2255" vertical-scroll-proportion="0.9532374">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarSteeringManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="175" column="59" selection-start="5635" selection-end="5635" vertical-scroll-proportion="0.82822084">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/dialogs/ConfirmElevatorAddCarDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="30" selection-start="552" selection-end="552" vertical-scroll-proportion="0.49488753">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/ElevatorPopOver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="35" column="38" selection-start="1261" selection-end="1261" vertical-scroll-proportion="0.36055776">
@@ -1539,10 +1540,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/GridObjectPopOver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="118" column="134" selection-start="4022" selection-end="4022" vertical-scroll-proportion="0.33333334">
+        <state line="118" column="134" selection-start="4022" selection-end="4022" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#0#5700#0" expanded="true" />
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="33" selection-start="2454" selection-end="2454" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#4390#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Dialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="161" column="16" selection-start="4424" selection-end="4424" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/assets/generators/corporations.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="199" column="36" selection-start="5072" selection-end="5072" vertical-scroll-proportion="0.9123506">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/NewTowerDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="35" selection-start="1678" selection-end="1678" vertical-scroll-proportion="0.21115538">
+          <folding>
+            <element signature="e#0#4049#0" expanded="true" />
+            <element signature="e#1236#1419#0" expanded="true" />
+            <element signature="e#1412#1413#0" expanded="true" />
           </folding>
         </state>
       </provider>
