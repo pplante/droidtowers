@@ -306,4 +306,22 @@ public class Elevator extends Transit {
       elevatorCar.removePassenger(avatarSteeringManager);
     }
   }
+
+  public int getNumRiders() {
+    int totalRiders = 0;
+    for (ElevatorCar elevatorCar : elevatorCars) {
+      totalRiders += elevatorCar.getNumRiders();
+    }
+
+    return totalRiders;
+  }
+
+  public int getNumPassengersWaiting() {
+    int totalRiders = 0;
+    for (ElevatorCar elevatorCar : elevatorCars) {
+      totalRiders += elevatorCar.getNumPassengersWaiting();
+    }
+
+    return totalRiders;
+  }
 }

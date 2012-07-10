@@ -45,9 +45,7 @@ public class CommercialSpacePopOver extends GridObjectPopOver<CommercialSpace> {
   }
 
   @Override
-  public void act(float delta) {
-    super.act(delta);
-
+  protected void updateControls() {
     crimeBar.setValue(gridObject.getSurroundingCrimeLevel() * 5f);
     employmentBar.setValue(gridObject.getEmploymentLevel() * 5f);
   }

@@ -41,9 +41,7 @@ public class HotelRoomPopOver extends GridObjectPopOver<HotelRoom> {
   }
 
   @Override
-  public void act(float delta) {
-    super.act(delta);
-
+  protected void updateControls() {
     crimeBar.setValue(gridObject.getCrimeLevel() * 5f);
     cleanlinessBar.setValue(5 - gridObject.getNumVisitors());
   }

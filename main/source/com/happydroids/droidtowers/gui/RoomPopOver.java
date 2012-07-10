@@ -32,9 +32,7 @@ public class RoomPopOver extends GridObjectPopOver<Room> {
   }
 
   @Override
-  public void act(float delta) {
-    super.act(delta);
-
+  protected void updateControls() {
     crimeBar.setValue(gridObject.getSurroundingCrimeLevel() * 5f);
     residencyBar.setValue(gridObject.getResidencyLevel() * 5f);
 

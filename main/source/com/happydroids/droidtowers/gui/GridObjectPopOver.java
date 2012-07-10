@@ -30,11 +30,12 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
 
   private final Sprite triangle;
   protected final T gridObject;
-  private final StarRatingBar desirabilityBar;
-  private final StarRatingBar noiseBar;
-  protected final Label transitLabel;
-  private final Label cousinVinniesHideout;
-  private final Label nameLabel;
+  private StarRatingBar desirabilityBar;
+  private StarRatingBar noiseBar;
+  protected Label transitLabel;
+  private Label cousinVinniesHideout;
+  private Label nameLabel;
+  private float timeSinceUpdate;
 
 
   public GridObjectPopOver(T gridObject) {
@@ -59,6 +60,16 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     row().fillX().pad(-8).padTop(0).padBottom(0);
     add(new HorizontalRule()).expandX();
 
+    buildControls(gridObject);
+
+    setClickListener(new ClickListener() {
+      @Override
+      public void click(Actor actor, float x, float y) {
+      }
+    });
+  }
+
+  protected void buildControls(T gridObject) {
     row();
     transitLabel = FontManager.Default.makeLabel(CONNECTED_TO_TRANSIT);
     add(transitLabel);
@@ -68,13 +79,6 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
 
     desirabilityBar = makeStarRatingBar("Desirability");
     noiseBar = makeStarRatingBar("Noise");
-
-
-    setClickListener(new ClickListener() {
-      @Override
-      public void click(Actor actor, float x, float y) {
-      }
-    });
   }
 
   protected StarRatingBar makeStarRatingBar(String labelText) {
@@ -104,28 +108,50 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
   public void act(float delta) {
     super.act(delta);
 
-    desirabilityBar.setValue(gridObject.getDesirability() * 5f);
-    noiseBar.setValue(gridObject.getSurroundingNoiseLevel() * 5f);
-
-    boolean updatedData = false;
-    if (gridObject.isConnectedToTransport() && !transitLabel.getText().equals(CONNECTED_TO_TRANSIT)) {
-      transitLabel.setText(CONNECTED_TO_TRANSIT);
-      transitLabel.setColor(Color.WHITE);
-      updatedData = true;
-    } else if (!gridObject.isConnectedToTransport() && !transitLabel.getText().equals(NOT_CONNECTED_TO_TRANSIT)) {
-      transitLabel.setText(NOT_CONNECTED_TO_TRANSIT);
-      transitLabel.setColor(Color.RED);
-      updatedData = true;
+    timeSinceUpdate -= delta;
+    if (timeSinceUpdate <= 0f) {
+      timeSinceUpdate = 2f;
+      updateControls();
     }
 
-    if (gridObject.hasLoanFromCousinVinnie() && !cousinVinniesHideout.visible) {
-      cousinVinniesHideout.visible = true;
-      getCell(cousinVinniesHideout).ignore(false);
-      updatedData = true;
-    } else if (!gridObject.hasLoanFromCousinVinnie() && cousinVinniesHideout.visible) {
-      cousinVinniesHideout.visible = false;
-      getCell(cousinVinniesHideout).ignore(true);
-      updatedData = true;
+    Vector3 vec = new Vector3(gridObject.getWorldCenter().x + (gridObject.getWorldBounds().width / 2), gridObject.getWorldCenter().y - getPrefHeight() / 2, 1f);
+    SceneManager.activeScene().getCamera().project(vec);
+    x = vec.x;
+    y = vec.y;
+  }
+
+  protected void updateControls() {
+    boolean updatedData = false;
+
+    if (desirabilityBar != null) {
+      desirabilityBar.setValue(gridObject.getDesirability() * 5f);
+    }
+    if (noiseBar != null) {
+      noiseBar.setValue(gridObject.getSurroundingNoiseLevel() * 5f);
+    }
+
+    if (transitLabel != null) {
+      if (gridObject.isConnectedToTransport() && !transitLabel.getText().equals(CONNECTED_TO_TRANSIT)) {
+        transitLabel.setText(CONNECTED_TO_TRANSIT);
+        transitLabel.setColor(Color.WHITE);
+        updatedData = true;
+      } else if (!gridObject.isConnectedToTransport() && !transitLabel.getText().equals(NOT_CONNECTED_TO_TRANSIT)) {
+        transitLabel.setText(NOT_CONNECTED_TO_TRANSIT);
+        transitLabel.setColor(Color.RED);
+        updatedData = true;
+      }
+    }
+
+    if (cousinVinniesHideout != null) {
+      if (gridObject.hasLoanFromCousinVinnie() && !cousinVinniesHideout.visible) {
+        cousinVinniesHideout.visible = true;
+        getCell(cousinVinniesHideout).ignore(false);
+        updatedData = true;
+      } else if (!gridObject.hasLoanFromCousinVinnie() && cousinVinniesHideout.visible) {
+        cousinVinniesHideout.visible = false;
+        getCell(cousinVinniesHideout).ignore(true);
+        updatedData = true;
+      }
     }
 
     if (!gridObject.getName().equals(nameLabel.getText())) {
@@ -137,10 +163,5 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
       invalidateHierarchy();
       pack();
     }
-
-    Vector3 vec = new Vector3(gridObject.getWorldCenter().x + (gridObject.getWorldBounds().width / 2), gridObject.getWorldCenter().y - getPrefHeight() / 2, 1f);
-    SceneManager.activeScene().getCamera().project(vec);
-    x = vec.x;
-    y = vec.y;
   }
 }

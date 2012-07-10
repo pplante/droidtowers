@@ -160,4 +160,12 @@ public class ElevatorCar extends GameObject {
   public int hashCode() {
     return queue != null ? queue.hashCode() : 0;
   }
+
+  public int getNumRiders() {
+    return queue.getCurrentRiders().size();
+  }
+
+  public int getNumPassengersWaiting() {
+    return queue.getPassengersWaiting().size();
+  }
 }
