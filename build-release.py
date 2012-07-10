@@ -105,10 +105,15 @@ if __name__ == '__main__':
 
         upload('./out/DroidTowers.exe', '%s/DroidTowers.exe' % (SCP_TARGET_PATH,))
         upload('./out/DroidTowers.zip', '%s/DroidTowers.zip' % (SCP_TARGET_PATH,))
-        upload('./out/android_google/android_google-release.apk', '%s/android_google-release.apk' % (SCP_TARGET_PATH,))
+        upload('./out/desktop-jar/DroidTowers-release.jar', '%s/DroidTowers.jar' % (SCP_TARGET_PATH,))
+        upload('./out/android_google/android_google-release.apk', '%s/droidtowers-google.apk' % (SCP_TARGET_PATH,))
+        upload('./out/android_amazon/android_amazon-release.apk', '%s/droidtowers-amazon.apk' % (SCP_TARGET_PATH,))
 
         print "http://www.happydroids.com/alphas/DroidTowers.exe"
         print "http://www.happydroids.com/alphas/DroidTowers.zip"
+        print "http://www.happydroids.com/alphas/DroidTowers.jar"
+        print "http://www.happydroids.com/alphas/droidtowers-google.apk"
+        print "http://www.happydroids.com/alphas/droidtowers-amazon.apk"
 
         tower_consts = open(TOWER_CONSTS_JAVA).read()
         tower_consts = debug_flag_re.sub('boolean DEBUG = true;', tower_consts)
