@@ -66,7 +66,7 @@ public class MainMenuScene extends SplashScene {
 
       buildMenuComponents();
 //      DebugUtils.loadFirstGameFound();
-      DebugUtils.createNonSavableGame(true);
+//      DebugUtils.createNonSavableGame(true);
 //      new PurchaseDroidTowersUnlimitedPrompt().show();
     }
   }
