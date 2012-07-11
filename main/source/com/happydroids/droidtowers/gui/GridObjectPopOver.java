@@ -62,7 +62,8 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     row().fillX().pad(-8).padTop(0).padBottom(0);
     add(new HorizontalRule()).expandX();
 
-    buildControls(gridObject);
+    buildControls();
+    updateControls();
 
     setClickListener(new ClickListener() {
       @Override
@@ -71,7 +72,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     });
   }
 
-  protected void buildControls(T gridObject) {
+  protected void buildControls() {
     row();
     transitLabel = FontManager.Default.makeLabel(CONNECTED_TO_TRANSIT);
     add(transitLabel);

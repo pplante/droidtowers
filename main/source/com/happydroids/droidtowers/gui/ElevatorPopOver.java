@@ -24,7 +24,7 @@ public class ElevatorPopOver extends GridObjectPopOver<Elevator> {
   }
 
   @Override
-  protected void buildControls(final Elevator gridObject) {
+  protected void buildControls() {
     numCarsLabel = FontManager.Default.makeLabel("1");
     numRidersLabel = FontManager.Default.makeLabel("1");
     numPassengersWaitingLabel = FontManager.Default.makeLabel("1");

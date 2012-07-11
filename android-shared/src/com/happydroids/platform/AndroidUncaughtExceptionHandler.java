@@ -34,7 +34,7 @@ public class AndroidUncaughtExceptionHandler extends HappyDroidUncaughtException
                     pb.setMessage("Sending crash report...");
                     pb.setCancelable(false);
                     pb.show();
-                    
+
                     new CrashReport(throwable).save();
                     Gdx.app.exit();
                   }

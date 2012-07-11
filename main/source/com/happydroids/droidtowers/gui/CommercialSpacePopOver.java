@@ -4,41 +4,45 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.entities.CommercialSpace;
+import com.happydroids.droidtowers.gui.controls.ButtonBar;
+import com.happydroids.droidtowers.gui.dialogs.CousinVinnieRepayLoanDialog;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class CommercialSpacePopOver extends GridObjectPopOver<CommercialSpace> {
-  private final StarRatingBar crimeBar;
-  private final StarRatingBar employmentBar;
+  private StarRatingBar crimeBar;
+  private StarRatingBar employmentBar;
 
 
   public CommercialSpacePopOver(final CommercialSpace commercialSpace) {
     super(commercialSpace);
+  }
+
+  @Override
+  protected void buildControls() {
+    super.buildControls();
 
     crimeBar = makeStarRatingBar("Crime");
     employmentBar = makeStarRatingBar("Employment");
 
-    TransparentTextButton manageButton = FontManager.Default.makeTransparentButton("Manage", Color.CLEAR, Colors.ICS_BLUE);
-    manageButton.setClickListener(new VibrateClickListener() {
+    ButtonBar buttonBar = new ButtonBar();
+    buttonBar.addButton("Manage", new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
-        new ManageCommercialSpaceDialog(commercialSpace).show();
+        new ManageCommercialSpaceDialog(gridObject).show();
       }
     });
-    Table buttonBar = new Table();
-    buttonBar.defaults();
 
-    buttonBar.row().fillX();
-    buttonBar.add(new HorizontalRule(Color.GRAY, 1)).colspan(3).height(1);
-
-    buttonBar.row().fillX();
-    buttonBar.add(manageButton).expandX().uniformX();
-    buttonBar.pack();
+    if (gridObject.hasLoanFromCousinVinnie()) {
+      buttonBar.addButton("Repay Vinnie", new VibrateClickListener() {
+        @Override
+        public void onClick(Actor actor, float x, float y) {
+          new CousinVinnieRepayLoanDialog(gridObject).show();
+        }
+      });
+    }
 
     row().fillX().pad(scale(-8)).padTop(scale(16));
     add(buttonBar).expandX().minWidth(200);
@@ -46,6 +50,8 @@ public class CommercialSpacePopOver extends GridObjectPopOver<CommercialSpace> {
 
   @Override
   protected void updateControls() {
+    super.updateControls();
+
     crimeBar.setValue(gridObject.getSurroundingCrimeLevel() * 5f);
     employmentBar.setValue(gridObject.getEmploymentLevel() * 5f);
   }
