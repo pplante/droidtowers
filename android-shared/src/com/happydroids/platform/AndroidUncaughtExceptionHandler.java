@@ -6,6 +6,7 @@ package com.happydroids.platform;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import com.badlogic.gdx.Gdx;
 import com.happydroids.server.CrashReport;
@@ -29,11 +30,15 @@ public class AndroidUncaughtExceptionHandler extends HappyDroidUncaughtException
                 .setMessage(generateExceptionErrorString(throwable))
                 .setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
                   public void onClick(DialogInterface dialogInterface, int i) {
+                    ProgressDialog.Builder pb = new ProgressDialog.Builder(activity);
+                    pb.setMessage("Sending crash report...");
+                    pb.setCancelable(false);
+                    pb.show();
+                    
+                    new CrashReport(throwable).save();
                     Gdx.app.exit();
                   }
                 }).show();
-
-        new CrashReport(throwable).save();
       }
     });
   }
