@@ -36,11 +36,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/assets-raw/texturepacker/splash - happydroid.tps" afterPath="$PROJECT_DIR$/main/assets-raw/texturepacker/splash - happydroid.tps" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" afterPath="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/assets/happy-droid.txt" afterPath="$PROJECT_DIR$/main/assets/happy-droid.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" />
     </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -158,12 +155,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DesktopGame.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DesktopGame.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="26" selection-start="941" selection-end="941" vertical-scroll-proportion="0.0">
+            <state line="24" column="25" selection-start="940" selection-end="940" vertical-scroll-proportion="0.8747515">
               <folding>
-                <element signature="e#0#1666#0" expanded="true" />
+                <element signature="e#0#1665#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -178,10 +175,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SplashScene.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SplashScene.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="43" selection-start="2800" selection-end="2800" vertical-scroll-proportion="0.6918367">
+            <state line="76" column="43" selection-start="2800" selection-end="2800" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -214,8 +211,8 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HotelRoomPopOver.java" />
         <option value="$PROJECT_DIR$/desktop/source/com/happydroids/platform/DesktopUncaughtExceptionHandler.java" />
         <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/PlatformPurchaseManger.java" />
-        <option value="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" />
+        <option value="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" />
       </list>
     </option>
   </component>
@@ -1157,7 +1154,11 @@
       <created>1342131761159</created>
       <updated>1342131761160</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="git commit -am fixed stupid opengles 1.0 issues">
+      <created>1342132455777</created>
+      <updated>1342132455777</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -1262,7 +1263,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed secure preferences because android 2.2 is missing the crypto libs required" />
+    <option name="LAST_COMMIT_MESSAGE" value="git commit -am fixed stupid opengles 1.0 issues" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1275,7 +1276,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="cousin vinnie is complete" />
     <MESSAGE value="added variatons" />
     <MESSAGE value="avatars populations are more realistic&#10;business upkeep now depends on salaries paid&#10;split out all the assets&#10;changed the way decals are rendered&#10;added more decals" />
     <MESSAGE value="avatars now choose to live in most desirable places first" />
@@ -1300,6 +1300,7 @@
     <MESSAGE value="fixed the tutorial" />
     <MESSAGE value="bug fixes" />
     <MESSAGE value="removed secure preferences because android 2.2 is missing the crypto libs required" />
+    <MESSAGE value="git commit -am fixed stupid opengles 1.0 issues" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1531,12 +1532,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="26" selection-start="941" selection-end="941" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#1666#0" expanded="true" />
-          </folding>
+        <state line="76" column="43" selection-start="2800" selection-end="2800" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1547,10 +1546,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java">
+    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="43" selection-start="2800" selection-end="2800" vertical-scroll-proportion="0.6918367">
-          <folding />
+        <state line="24" column="25" selection-start="940" selection-end="940" vertical-scroll-proportion="0.8747515">
+          <folding>
+            <element signature="e#0#1665#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
