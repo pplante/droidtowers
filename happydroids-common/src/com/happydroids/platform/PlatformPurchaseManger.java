@@ -4,11 +4,12 @@
 
 package com.happydroids.platform;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.events.PurchaseEvent;
 import com.happydroids.platform.purchase.DroidTowerVersions;
-import com.happydroids.security.SecurePreferences;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,7 @@ import static com.happydroids.platform.purchase.DroidTowerVersions.UNLIMITED_299
 public abstract class PlatformPurchaseManger {
   private static Runnable initializeRunnable;
   protected final HashMap<DroidTowerVersions, String> itemSkus;
-  protected final SecurePreferences purchases;
+  protected final Preferences purchases;
   private boolean purchasesEnabled;
   private EventBus eventBus;
 
@@ -26,7 +27,7 @@ public abstract class PlatformPurchaseManger {
   public PlatformPurchaseManger() {
     eventBus = new EventBus(PlatformPurchaseManger.class.getSimpleName());
     purchasesEnabled = false;
-    purchases = new SecurePreferences("purchases");
+    purchases = Gdx.app.getPreferences("purchases");
     if (initializeRunnable != null) {
       initializeRunnable.run();
     }
@@ -63,7 +64,7 @@ public abstract class PlatformPurchaseManger {
     requestPurchase(getSkuForVersion(UNLIMITED_299));
   }
 
-  public SecurePreferences getPurchases() {
+  public Preferences getPurchases() {
     return purchases;
   }
 
