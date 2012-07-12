@@ -4,10 +4,7 @@
 
 package com.happydroids.platform;
 
-import com.happydroids.server.ApiRunnable;
 import com.happydroids.server.CrashReport;
-import com.happydroids.server.HappyDroidServiceObject;
-import org.apache.http.HttpResponse;
 
 import javax.swing.*;
 import java.util.logging.Level;
@@ -19,19 +16,7 @@ public class DesktopUncaughtExceptionHandler extends HappyDroidUncaughtException
   public void uncaughtException(Thread thread, final Throwable throwable) {
     Logger.getLogger(TAG).log(Level.SEVERE, "Uncaught exception!", throwable);
 
-    new CrashReport(throwable).save(new ApiRunnable() {
-      @Override
-      public void onError(HttpResponse response, int statusCode, HappyDroidServiceObject object) {
-        System.out.println(response);
-        System.exit(102);
-      }
-
-      @Override
-      public void onSuccess(HttpResponse response, HappyDroidServiceObject object) {
-        System.out.println(response);
-        System.exit(101);
-      }
-    });
+    new CrashReport(throwable).save();
 
     JOptionPane.showMessageDialog(null, generateExceptionErrorString(throwable), "Ooops!", JOptionPane.ERROR_MESSAGE);
   }
