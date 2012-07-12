@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.scenes;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenEquations;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -48,7 +49,9 @@ public abstract class SplashScene extends Scene {
   @Override
   public void create(Object... args) {
     makeSkyGradient();
-    makeSunburst();
+    if (Gdx.graphics.isGL20Available()) {
+      makeSunburst();
+    }
 
     container = new Group();
     addActor(container);
@@ -68,10 +71,10 @@ public abstract class SplashScene extends Scene {
     Texture skyGradient = new Texture("backgrounds/splash-skygradient.png");
     skyGradient.setFilter(Linear, Linear);
     Image skyImage = new Image(skyGradient, Scaling.stretch);
-    skyImage.width = getStage().width();
-    skyImage.height = getStage().height();
-    skyImage.x = -1;
-    skyImage.y = -1;
+    skyImage.width = getStage().width() * 1.05f;
+    skyImage.height = getStage().height() * 1.05f;
+    skyImage.x = -getStage().width() * 0.025f;
+    skyImage.y = -getStage().height() * 0.025f;
     addActor(skyImage);
   }
 
