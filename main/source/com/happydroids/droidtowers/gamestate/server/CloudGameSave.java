@@ -11,7 +11,7 @@ import com.google.common.collect.Lists;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.GameSaveFactory;
-import com.happydroids.droidtowers.utils.GZIPUtils;
+import org.apache.happydroids.commons.codec.binary.Base64;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -46,7 +46,6 @@ public class CloudGameSave extends TowerGameServiceObject {
       fileGeneration = gameSave.getFileGeneration();
       setResourceUri(gameSave.getCloudSaveUri());
       blob = getObjectMapper().writeValueAsString(gameSave);
-      image = GZIPUtils.compress(pngFile);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -117,6 +116,10 @@ public class CloudGameSave extends TowerGameServiceObject {
   }
 
   public byte[] getImage() {
-    return GZIPUtils.decompress(image);
+    return Base64.decodeBase64(image);
+  }
+
+  public void updateImage(FileHandle pngFile) {
+    image = Base64.encodeBase64URLSafeString(pngFile.readBytes());
   }
 }

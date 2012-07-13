@@ -104,6 +104,7 @@ public class GameState {
               stream.close();
 
               if (shouldForceCloudSave || currentGameSave.getCloudSaveUri() == null || currentGameSave.getFileGeneration() % 4 == 0) {
+                cloudGameSave.updateImage(pngFile);
                 cloudGameSave.save(new ApiRunnable() {
                   @Override
                   public void onSuccess(HttpResponse response, HappyDroidServiceObject object) {

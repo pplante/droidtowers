@@ -87,32 +87,36 @@ public abstract class HappyDroidServiceObject {
 
   @SuppressWarnings("unchecked")
   public void save(final ApiRunnable apiRunnable) {
-    if (!Platform.getConnectionMonitor().isConnectedOrConnecting()) {
-      apiRunnable.onError(null, HttpStatusCode.ClientClosedRequest, this);
-      return;
-    } else if (!beforeSaveValidation(apiRunnable)) {
-      apiRunnable.onError(null, HttpStatusCode.ClientValidationFailed, this);
-      return;
-    }
-
-    validateResourceUri();
-
-    HttpResponse response;
-    if (resourceUri == null) {
-      response = HappyDroidService.instance().makePostRequest(getBaseResourceUri(), this);
-      if (response != null && response.getStatusLine().getStatusCode() == 201) {
-        Header location = Iterables.getFirst(Lists.newArrayList(response.getHeaders("Location")), null);
-        if (location != null) {
-          resourceUri = location.getValue();
-        }
-
-        copyValuesFromResponse(response);
+    try {
+      if (!Platform.getConnectionMonitor().isConnectedOrConnecting()) {
+        apiRunnable.onError(null, HttpStatusCode.ClientClosedRequest, this);
+        return;
+      } else if (!beforeSaveValidation(apiRunnable)) {
+        apiRunnable.onError(null, HttpStatusCode.ClientValidationFailed, this);
+        return;
       }
-    } else {
-      response = HappyDroidService.instance().makePutRequest(resourceUri, this);
-    }
 
-    apiRunnable.handleResponse(response, HappyDroidServiceObject.this);
+      validateResourceUri();
+
+      HttpResponse response;
+      if (resourceUri == null) {
+        response = HappyDroidService.instance().makePostRequest(getBaseResourceUri(), this);
+        if (response != null && response.getStatusLine().getStatusCode() == 201) {
+          Header location = Iterables.getFirst(Lists.newArrayList(response.getHeaders("Location")), null);
+          if (location != null) {
+            resourceUri = location.getValue();
+          }
+
+          copyValuesFromResponse(response);
+        }
+      } else {
+        response = HappyDroidService.instance().makePutRequest(resourceUri, this);
+      }
+
+      apiRunnable.handleResponse(response, HappyDroidServiceObject.this);
+    } catch (Throwable throwable) {
+      throw new RuntimeException(throwable);
+    }
   }
 
   @SuppressWarnings("unchecked")
