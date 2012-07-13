@@ -36,7 +36,7 @@ public abstract class BackgroundTask {
   public synchronized void afterExecute() {
   }
 
-  public synchronized void onError(Exception e) {
+  public synchronized void onError(Throwable e) {
     throw new RuntimeException(e);
   }
 
@@ -69,7 +69,7 @@ public abstract class BackgroundTask {
               }
             });
           }
-        } catch (final Exception e) {
+        } catch (final Throwable e) {
           postExecuteManager.postRunnable(new Runnable() {
             public void run() {
               onError(e);

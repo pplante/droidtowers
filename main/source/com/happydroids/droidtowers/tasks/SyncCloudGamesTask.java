@@ -38,7 +38,7 @@ public class SyncCloudGamesTask extends BackgroundTask {
   }
 
   @Override
-  public synchronized void onError(Exception e) {
+  public synchronized void onError(Throwable e) {
     syncing = false;
   }
 
