@@ -5,6 +5,7 @@
 
 <project name="android_google-custom" default="help">
   <property name="root.dir" value="../"/>
+  <property name="tools.dir" value="${root.dir}/tools"/>
 
   <property name="droidtowers.android-shared" value="${root.dir}/android-shared"/>
   <property name="droidtowers.android-shared.source" value="${droidtowers.android-shared}/src"/>
@@ -14,7 +15,22 @@
   <property name="droidtowers.android-google.source" value="${droidtowers.android-google}/src"/>
   <property name="droidtowers.android-google.libs" value="${droidtowers.android-google}/libs"/>
 
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+    <classpath>
+      <pathelement location="${tools.dir}/ant-contrib/ant-contrib-1.0b3.jar"/>
+    </classpath>
+  </taskdef>
+
   <target name="-pre-build">
+    <trycatch>
+      <try>
+        <delete dir="${droidtowers.android-google}/gen"/>
+      </try>
+      <catch>
+        <echo message="gen dir not deleted."/>
+      </catch>
+    </trycatch>
+
     <mkdir dir="${droidtowers.android-google}/assets"/>
     <sync todir="${droidtowers.android-google}/assets" includeemptydirs="true" overwrite="true" failonerror="true">
       <fileset dir="${root.dir}/main/assets" followsymlinks="true"/>
