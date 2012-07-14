@@ -59,6 +59,11 @@ def prompt_for_new_build_number(previous_build_number):
 if __name__ == '__main__':
     try:
         root_dir = pwd().strip()
+        working_dir = tempfile.mkdtemp()
+
+        git.clone('%s %s' % (root_dir, working_dir))
+
+        cd(working_dir)
 
         revision = retrieve_git_revision()
 
