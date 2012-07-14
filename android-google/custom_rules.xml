@@ -15,22 +15,7 @@
   <property name="droidtowers.android-google.source" value="${droidtowers.android-google}/src"/>
   <property name="droidtowers.android-google.libs" value="${droidtowers.android-google}/libs"/>
 
-  <taskdef resource="net/sf/antcontrib/antcontrib.properties">
-    <classpath>
-      <pathelement location="${tools.dir}/ant-contrib/ant-contrib-1.0b3.jar"/>
-    </classpath>
-  </taskdef>
-
   <target name="-pre-build">
-    <trycatch>
-      <try>
-        <delete dir="${droidtowers.android-google}/gen" failonerror="false"/>
-      </try>
-      <catch>
-        <echo message="gen dir not deleted."/>
-      </catch>
-    </trycatch>
-
     <mkdir dir="${droidtowers.android-google}/assets"/>
     <sync todir="${droidtowers.android-google}/assets" includeemptydirs="true" overwrite="true" failonerror="true">
       <fileset dir="${root.dir}/main/assets" followsymlinks="true"/>

@@ -25,22 +25,7 @@
     <file file="${tools.dir}/jsr305-2.0.0.jar"/>
   </path>
 
-  <taskdef resource="net/sf/antcontrib/antcontrib.properties">
-    <classpath>
-      <pathelement location="${tools.dir}/ant-contrib/ant-contrib-1.0b3.jar"/>
-    </classpath>
-  </taskdef>
-
   <target name="-pre-build">
-    <trycatch>
-      <try>
-        <delete dir="${droidtowers.android-shared}/gen" failonerror="false"/>
-      </try>
-      <catch>
-        <echo message="gen dir not deleted."/>
-      </catch>
-    </trycatch>
-
     <mkdir dir="${out.dir}/classes-shared"/>
     <javac destdir="${out.dir}/classes" classpathref="happydroids-classpath">
       <src path="${happydroids.common.source}"/>

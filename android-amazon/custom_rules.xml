@@ -15,22 +15,7 @@
   <property name="droidtowers.android-amazon.source" value="${droidtowers.android-amazon}/src"/>
   <property name="droidtowers.android-amazon.libs" value="${droidtowers.android-amazon}/libs"/>
 
-  <taskdef resource="net/sf/antcontrib/antcontrib.properties">
-    <classpath>
-      <pathelement location="${tools.dir}/ant-contrib/ant-contrib-1.0b3.jar"/>
-    </classpath>
-  </taskdef>
-
   <target name="-pre-build">
-    <trycatch>
-      <try>
-        <delete dir="${droidtowers.android-amazon}/gen" failonerror="false"/>
-      </try>
-      <catch>
-        <echo message="gen dir not deleted."/>
-      </catch>
-    </trycatch>
-
     <mkdir dir="${droidtowers.android-amazon}/assets"/>
     <sync todir="${droidtowers.android-amazon}/assets" includeemptydirs="true" overwrite="true" failonerror="true">
       <fileset dir="${root.dir}/main/assets" followsymlinks="true"/>
