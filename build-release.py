@@ -107,6 +107,9 @@ if __name__ == '__main__':
         with open(GOOGLE_MANIFEST_PATH, 'w+') as fp:
             fp.write(google_manifest)
 
+        with open(AMAZON_MANIFEST_PATH, 'w+') as fp:
+            fp.write(amazon_manifest)
+
         with open('build.ver', 'w') as fp:
             fp.write(new_build_number)
 
