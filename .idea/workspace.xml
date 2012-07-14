@@ -35,7 +35,12 @@
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="" />
+    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-amazon/custom_rules.xml" afterPath="$PROJECT_DIR$/android-amazon/custom_rules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-google/custom_rules.xml" afterPath="$PROJECT_DIR$/android-google/custom_rules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-shared/custom_rules.xml" afterPath="$PROJECT_DIR$/android-shared/custom_rules.xml" />
+    </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -173,10 +178,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainMenuButtonPanel.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MainMenuButtonPanel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="1" selection-start="2739" selection-end="2739" vertical-scroll-proportion="0.2755102">
+            <state line="67" column="1" selection-start="2739" selection-end="2739" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#0#4851#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -195,6 +200,33 @@
                 <element signature="e#4209#4325#0" expanded="true" />
                 <element signature="e#4318#4319#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="custom_rules.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android-amazon/custom_rules.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="55" selection-start="1121" selection-end="1141" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="custom_rules.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android-google/custom_rules.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="75" selection-start="1141" selection-end="1141" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="custom_rules.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/android-shared/custom_rules.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="75" selection-start="1558" selection-end="1558" vertical-scroll-proportion="0.31654677">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -221,9 +253,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/utils/BackgroundTask.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DroidTowersGame.java" />
-        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidServiceObject.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameState.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/utils/GZIPUtils.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/CloudGameSave.java" />
@@ -237,6 +266,9 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementEngine.java" />
         <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java" />
+        <option value="$PROJECT_DIR$/android-amazon/custom_rules.xml" />
+        <option value="$PROJECT_DIR$/android-google/custom_rules.xml" />
+        <option value="$PROJECT_DIR$/android-shared/custom_rules.xml" />
       </list>
     </option>
   </component>
@@ -1244,19 +1276,19 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3011583" sideWeight="0.38235295" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24892396" sideWeight="0.63799745" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31788933" sideWeight="0.51508623" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31788933" sideWeight="0.51508623" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25997427" sideWeight="0.21807748" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20803443" sideWeight="0.6808237" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.63671374" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947233" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24967825" sideWeight="0.776901" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24967825" sideWeight="0.776901" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32303733" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32689834" sideWeight="0.49748382" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.6808237" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39885223" sideWeight="0.73745173" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20803443" sideWeight="0.68211067" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20803443" sideWeight="0.75032175" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35649934" sideWeight="0.91822094" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.81724584" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.6344916" order="10" side_tool="false" content_ui="tabs" />
@@ -1468,26 +1500,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/happydroids-common/src/org/apache/happydroids/commons/codec/binary/Base64.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="507" column="23" selection-start="21419" selection-end="21419" vertical-scroll-proportion="0.33265308" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/CloudGameSave.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="14" selection-start="1502" selection-end="1502" vertical-scroll-proportion="0.7435388" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="49" selection-start="4012" selection-end="4012" vertical-scroll-proportion="0.55714285" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/actions/GameSaveAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="16" selection-start="511" selection-end="511" vertical-scroll-proportion="0.6063618" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/server/HappyDroidService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="160" column="24" selection-start="5198" selection-end="5198" vertical-scroll-proportion="0.55714285" />
@@ -1568,9 +1580,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/android-shared/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-3.142857">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="1" selection-start="2739" selection-end="2739" vertical-scroll-proportion="0.2755102">
+        <state line="67" column="1" selection-start="2739" selection-end="2739" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#0#4851#0" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -1589,6 +1608,27 @@
             <element signature="e#4209#4325#0" expanded="true" />
             <element signature="e#4318#4319#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-amazon/custom_rules.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="55" selection-start="1121" selection-end="1141" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-google/custom_rules.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="75" selection-start="1141" selection-end="1141" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-shared/custom_rules.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="75" selection-start="1558" selection-end="1558" vertical-scroll-proportion="0.31654677">
+          <folding />
         </state>
       </provider>
     </entry>

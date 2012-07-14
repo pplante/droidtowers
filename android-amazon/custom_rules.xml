@@ -24,7 +24,7 @@
   <target name="-pre-build">
     <trycatch>
       <try>
-        <delete dir="${droidtowers.android-amazon}/gen"/>
+        <delete dir="${droidtowers.android-amazon}/gen" failonerror="false"/>
       </try>
       <catch>
         <echo message="gen dir not deleted."/>

@@ -34,7 +34,7 @@
   <target name="-pre-build">
     <trycatch>
       <try>
-        <delete dir="${droidtowers.android-shared}/gen"/>
+        <delete dir="${droidtowers.android-shared}/gen" failonerror="false"/>
       </try>
       <catch>
         <echo message="gen dir not deleted."/>
