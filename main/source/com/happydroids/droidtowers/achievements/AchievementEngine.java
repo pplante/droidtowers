@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
+import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.events.AchievementCompletionEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -15,8 +16,12 @@ import com.happydroids.droidtowers.gui.AchievementNotification;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import static com.happydroids.droidtowers.achievements.RequirementType.ADD_NEIGHBOR;
+import static com.happydroids.droidtowers.achievements.RequirementType.HAPPYDROIDS_CONNECT;
 
 public class AchievementEngine {
   private static final String TAG = AchievementEngine.class.getSimpleName();
@@ -40,8 +45,21 @@ public class AchievementEngine {
       eventBus = new EventBus();
       ObjectMapper mapper = TowerGameService.instance().getObjectMapper();
       achievements = mapper.readValue(Gdx.files.internal("params/achievements.json").reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, Achievement.class));
-      achievementsById = Maps.newHashMap();
 
+
+      if (!HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT) {
+        Iterator<Achievement> achievementIterator = achievements.iterator();
+        while (achievementIterator.hasNext()) {
+          Achievement achievement = achievementIterator.next();
+          for (Requirement requirement : achievement.getRequirements()) {
+            if (requirement.getType().equals(ADD_NEIGHBOR) || requirement.getType().equals(HAPPYDROIDS_CONNECT)) {
+              achievementIterator.remove();
+            }
+          }
+        }
+      }
+
+      achievementsById = Maps.newHashMap();
       for (Achievement achievement : achievements) {
         achievementsById.put(achievement.getId(), achievement);
       }

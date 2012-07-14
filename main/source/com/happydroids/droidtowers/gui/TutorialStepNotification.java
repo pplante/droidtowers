@@ -74,7 +74,7 @@ public class TutorialStepNotification extends Table {
               public void onEvent(int eventType, BaseTween source) {
                 TutorialStepNotification.this.markToRemove(true);
                 HeadsUpDisplay.instance().getAchievementButton().visible = true;
-                HeadsUpDisplay.instance().getViewNeighborsButton().visible = true;
+                HeadsUpDisplay.instance().toggleViewNeighborsButton(true);
               }
             })
             .setCallbackTriggers(TweenCallback.END)

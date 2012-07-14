@@ -183,4 +183,8 @@ public class Requirement {
   public int getProgress() {
     return (int) (((float) currentWeight / (float) getAmount()) * 100);
   }
+
+  public RequirementType getType() {
+    return type;
+  }
 }

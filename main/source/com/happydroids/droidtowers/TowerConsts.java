@@ -11,8 +11,6 @@ import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.math.GridPoint;
 
 public class TowerConsts extends HappyDroidConsts {
-  public static boolean ENABLE_HAPPYDROIDS_CONNECT = true;
-
   public static final float ONE_MEGABYTE = 1048576.0f;
 
   public static final int GRID_UNIT_SIZE = 64;

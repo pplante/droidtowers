@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Sets;
+import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
@@ -55,7 +56,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   private final StatusBarPanel statusBarPanel;
   private final HeaderButtonBar headerButtonBar;
   private AchievementButton achievementButton;
-  private final ImageButton viewNeighborsButton;
+  private ImageButton viewNeighborsButton;
   private GridObjectPopOver gridObjectPopOver;
 
   public HeadsUpDisplay(Stage stage, OrthographicCamera camera, CameraController cameraController, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine, final GameState gameState) {
@@ -94,20 +95,22 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     addActor(achievementButton);
 
-    viewNeighborsButton = TowerAssetManager.imageButton(hudAtlas.findRegion("view-neighbors"));
-    viewNeighborsButton.layout();
-    viewNeighborsButton.setClickListener(new VibrateClickListener() {
-      @Override
-      public void onClick(Actor actor, float x, float y) {
-        SceneManager.pushScene(ViewNeighborSplashScene.class, gameState);
-      }
-    });
+    if (HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT) {
+      viewNeighborsButton = TowerAssetManager.imageButton(hudAtlas.findRegion("view-neighbors"));
+      viewNeighborsButton.layout();
+      viewNeighborsButton.setClickListener(new VibrateClickListener() {
+        @Override
+        public void onClick(Actor actor, float x, float y) {
+          SceneManager.pushScene(ViewNeighborSplashScene.class, gameState);
+        }
+      });
 
-    viewNeighborsButton.visible = false;
-    viewNeighborsButton.x = 10;
-    viewNeighborsButton.y = stage.height() - statusBarPanel.height - achievementButton.height - viewNeighborsButton.height - 20;
+      viewNeighborsButton.visible = false;
+      viewNeighborsButton.x = 10;
+      viewNeighborsButton.y = stage.height() - statusBarPanel.height - achievementButton.height - viewNeighborsButton.height - 20;
 
-    addActor(viewNeighborsButton);
+      addActor(viewNeighborsButton);
+    }
 
     notificationStack.pad(10);
     notificationStack.x = 0;
@@ -282,11 +285,13 @@ public class HeadsUpDisplay extends WidgetGroup {
     return achievementButton;
   }
 
-  public ImageButton getViewNeighborsButton() {
-    return viewNeighborsButton;
-  }
-
   public GridObjectPopOver getGridObjectPopOver() {
     return gridObjectPopOver;
+  }
+
+  public void toggleViewNeighborsButton(boolean state) {
+    if (HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT && viewNeighborsButton != null) {
+      viewNeighborsButton.visible = state;
+    }
   }
 }
