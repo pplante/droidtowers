@@ -142,6 +142,7 @@ if __name__ == '__main__':
 
         git.commit(a=True, m='Artifacts from release-%s' % (new_build_number,))
         git.tag('release-%s' % (new_build_number,))
+        git.push('origin release-%s' % (new_build_number,))
 
         tower_consts = open(TOWER_CONSTS_JAVA).read()
         tower_consts = debug_flag_re.sub('boolean DEBUG = true;', tower_consts)
