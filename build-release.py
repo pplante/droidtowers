@@ -5,6 +5,7 @@ import sys
 import semver
 import requests
 import json
+import tempfile
 from datetime import datetime
 from getpass import getpass
 from pbs import git, ant, scp, pwd, cd
@@ -57,7 +58,10 @@ def prompt_for_new_build_number(previous_build_number):
 
 if __name__ == '__main__':
     try:
+        root_dir = pwd().strip()
+
         revision = retrieve_git_revision()
+
         previous_build_number = semver.from_string(retreive_build_number())
         print 'Previous build: ', previous_build_number
         new_build_number = '%d.%d.%d' % (
@@ -119,12 +123,7 @@ if __name__ == '__main__':
         with open('release.properties', 'w') as fp:
             fp.write('project.version=%s' % (new_build_number))
 
-        git.commit(a=True, m='Artifacts from release-%s' % (new_build_number,))
-        git.tag('release-%s' % (new_build_number,))
-
         ant('release', _fg=True)
-
-        root_dir = pwd().strip()
 
         cd('%s/android-google' % (root_dir,))
 
@@ -135,6 +134,9 @@ if __name__ == '__main__':
         ant('release', _fg=True)
 
         cd(root_dir)
+
+        git.commit(a=True, m='Artifacts from release-%s' % (new_build_number,))
+        git.tag('release-%s' % (new_build_number,))
 
         tower_consts = open(TOWER_CONSTS_JAVA).read()
         tower_consts = debug_flag_re.sub('boolean DEBUG = true;', tower_consts)
