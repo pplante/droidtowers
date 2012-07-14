@@ -8,7 +8,7 @@ import json
 import tempfile
 from datetime import datetime
 from getpass import getpass
-from pbs import git, ant, scp, pwd, cd
+from pbs import git, ant, scp, pwd, cd, mkdir
 
 SCP_TARGET_PATH = 'pplante@happydroids.com:/var/www/happydroids.com/public/alphas'
 TOWER_CONSTS_JAVA = './happydroids-common/src/com/happydroids/HappyDroidConsts.java'
@@ -19,6 +19,7 @@ debug_flag_re = re.compile(r'(boolean DEBUG = (?:true|false);)')
 server_url_re = re.compile(r'(String HAPPYDROIDS_SERVER = "(?:.+?)";)')
 server_https_re = re.compile(r'(String HAPPYDROIDS_URI = "(?:.+?)" \+ HAPPYDROIDS_SERVER;)')
 version_re = re.compile(r'(String VERSION = "(?:.+?)";)')
+version_code_re = re.compile(r'(int VERSION_CODE = \d+;)')
 git_sha_re = re.compile(r'(String GIT_SHA = "(?:.+?)";)')
 
 android_manifest_re = re.compile(r'package="com.happydroids.droidtowers"\s+android:versionCode="\d+"\s+android:versionName=".+?">')
@@ -59,11 +60,6 @@ def prompt_for_new_build_number(previous_build_number):
 if __name__ == '__main__':
     try:
         root_dir = pwd().strip()
-        working_dir = tempfile.mkdtemp()
-
-        git.clone('%s %s' % (root_dir, working_dir))
-
-        cd(working_dir)
 
         revision = retrieve_git_revision()
 
@@ -77,20 +73,21 @@ if __name__ == '__main__':
 
         git_check_for_tag_collision(new_build_number)
 
+        build_version_code = new_build_number.replace('.'. '')
+
         tower_consts = open(TOWER_CONSTS_JAVA).read()
         tower_consts = debug_flag_re.sub('boolean DEBUG = false;', tower_consts)
         tower_consts = server_https_re.sub('String HAPPYDROIDS_URI = "https://" + HAPPYDROIDS_SERVER;', tower_consts)
         tower_consts = server_url_re.sub('String HAPPYDROIDS_SERVER = "www.happydroids.com";', tower_consts)
         tower_consts = version_re.sub('String VERSION = "%s";' % (new_build_number,), tower_consts)
+        tower_consts = version_re.sub('int VERSION_CODE = %s;' % (build_version_code,), tower_consts)
         tower_consts = git_sha_re.sub('String GIT_SHA = "%s";' % (revision,), tower_consts)
 
-        android_version_code = int(open('build.code').read().strip()) + 1
-
         google_manifest = open(GOOGLE_MANIFEST_PATH).read().strip()
-        google_manifest = android_manifest_re.sub('package="com.happydroids.droidtowers" android:versionCode="%s" android:versionName="%s">' %(android_version_code, new_build_number), google_manifest)
+        google_manifest = android_manifest_re.sub('package="com.happydroids.droidtowers" android:versionCode="%s" android:versionName="%s">' %(build_version_code, new_build_number), google_manifest)
 
         amazon_manifest = open(AMAZON_MANIFEST_PATH).read().strip()
-        amazon_manifest = android_manifest_re.sub('package="com.happydroids.droidtowers" android:versionCode="%s" android:versionName="%s">' %(android_version_code, new_build_number), amazon_manifest)
+        amazon_manifest = android_manifest_re.sub('package="com.happydroids.droidtowers" android:versionCode="%s" android:versionName="%s">' %(build_version_code, new_build_number), amazon_manifest)
 
         print tower_consts
 
@@ -120,10 +117,7 @@ if __name__ == '__main__':
             fp.write(amazon_manifest)
 
         with open('build.ver', 'w') as fp:
-            fp.write(new_build_number)
-
-        with open('build.code', 'w') as fp:
-            fp.write('%s' % android_version_code)        
+            fp.write(new_build_number)   
 
         with open('release.properties', 'w') as fp:
             fp.write('project.version=%s' % (new_build_number))
@@ -142,7 +136,6 @@ if __name__ == '__main__':
 
         git.commit(a=True, m='Artifacts from release-%s' % (new_build_number,))
         git.tag('release-%s' % (new_build_number,))
-        git.push('origin release-%s' % (new_build_number,))
 
         tower_consts = open(TOWER_CONSTS_JAVA).read()
         tower_consts = debug_flag_re.sub('boolean DEBUG = true;', tower_consts)

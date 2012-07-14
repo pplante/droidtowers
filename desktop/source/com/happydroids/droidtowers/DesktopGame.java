@@ -38,7 +38,10 @@ public class DesktopGame {
         Platform.setBrowserUtil(new DesktopBrowserUtil());
         Platform.setConnectionMonitor(new DesktopConnectionMonitor());
         Platform.setPurchaseManager(new DebugPurchaseManager());
+
+        new GameVersionCheckTask().run();
       }
     })), config);
   }
+
 }
