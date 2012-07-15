@@ -80,7 +80,7 @@ if __name__ == '__main__':
         tower_consts = server_https_re.sub('String HAPPYDROIDS_URI = "https://" + HAPPYDROIDS_SERVER;', tower_consts)
         tower_consts = server_url_re.sub('String HAPPYDROIDS_SERVER = "www.happydroids.com";', tower_consts)
         tower_consts = version_re.sub('String VERSION = "%s";' % (new_build_number,), tower_consts)
-        tower_consts = version_re.sub('int VERSION_CODE = %s;' % (build_version_code,), tower_consts)
+        tower_consts = version_code_re.sub('int VERSION_CODE = %s;' % (build_version_code,), tower_consts)
         tower_consts = git_sha_re.sub('String GIT_SHA = "%s";' % (revision,), tower_consts)
 
         google_manifest = open(GOOGLE_MANIFEST_PATH).read().strip()
