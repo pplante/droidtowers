@@ -35,12 +35,7 @@
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" afterPath="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DroidTowersApplet.java" afterPath="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DroidTowersApplet.java" />
-    </list>
+    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="" />
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -169,7 +164,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TutorialStepNotification.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/Requirement.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementEngine.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java" />
@@ -185,6 +179,7 @@
         <option value="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DroidTowersApplet.java" />
         <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java" />
+        <option value="$PROJECT_DIR$/upload-releases.py" />
       </list>
     </option>
   </component>
@@ -1166,7 +1161,11 @@
       <created>1342245535563</created>
       <updated>1342245535563</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="applet works!">
+      <created>1342357833264</created>
+      <updated>1342357833264</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -1423,11 +1422,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/Requirement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="186" column="36" selection-start="5752" selection-end="5752" vertical-scroll-proportion="0.59484345" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/Dialog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="13" selection-start="1047" selection-end="1047" vertical-scroll-proportion="0.24309392" />
@@ -1518,6 +1512,13 @@
           <folding>
             <element signature="e#0#1059#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/upload-releases.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="41" selection-start="500" selection-end="500" vertical-scroll-proportion="0.4489796">
+          <folding />
         </state>
       </provider>
     </entry>

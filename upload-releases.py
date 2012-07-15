@@ -16,6 +16,8 @@ if __name__ == '__main__':
     try:
         upload = scp.bake(i='/Users/pplante/.ssh/id_rsa', _fg=True)
 
+        upload('./out/applet/*', 'pplante@happydroids.com:/var/www/happydroids.com/public/applet/')
+
         upload('./out/DroidTowers.exe', '%s/DroidTowers.exe' % (SCP_TARGET_PATH,))
         upload('./out/DroidTowers.zip', '%s/DroidTowers.zip' % (SCP_TARGET_PATH,))
         upload('./out/desktop-jar/DroidTowers-release.jar', '%s/DroidTowers.jar' % (SCP_TARGET_PATH,))
