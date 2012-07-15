@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="amazon-iap">
+  <library name="amazon">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/android-amazon/libs/in-app-purchasing-1.0.3.jar!/" />
     </CLASSES>

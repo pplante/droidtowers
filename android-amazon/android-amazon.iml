@@ -35,7 +35,7 @@
     <orderEntry type="jdk" jdkName="Android 2.3.3 Google APIs" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="android-shared" exported="" />
-    <orderEntry type="library" name="amazon-iap" level="project" />
+    <orderEntry type="library" name="amazon" level="project" />
   </component>
 </module>
 
