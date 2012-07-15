@@ -9,6 +9,9 @@
       <directory url="file://$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/android-amazon/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/android-shared/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/android-amazon/gen-idea" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/android-google/gen-idea" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/android-shared/gen-idea" includeSubdirectories="true" />
     </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>

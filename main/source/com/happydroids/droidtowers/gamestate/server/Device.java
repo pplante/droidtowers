@@ -16,7 +16,9 @@ public class Device extends HappyDroidServiceObject {
   public String market;
   public String osVersion;
   public String appVersion;
+  public final int appVersionCode;
   public boolean isAuthenticated;
+
 
 
   public Device() {
@@ -25,6 +27,7 @@ public class Device extends HappyDroidServiceObject {
     market = HappyDroidService.getDeviceOSMarketName();
     osVersion = HappyDroidService.getDeviceOSVersion();
     appVersion = HappyDroidConsts.VERSION;
+    appVersionCode = HappyDroidConsts.VERSION_CODE;
   }
 
   @Override

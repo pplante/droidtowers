@@ -3,6 +3,7 @@ Thumbs.db
 sparky/bin/
 out/
 gen
+gen-idea
 bin
 android-amazon/assets
 android-google/assets
