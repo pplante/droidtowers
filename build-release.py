@@ -73,7 +73,7 @@ if __name__ == '__main__':
 
         git_check_for_tag_collision(new_build_number)
 
-        build_version_code = new_build_number.replace('.'. '')
+        build_version_code = new_build_number.replace('.', '')
 
         tower_consts = open(TOWER_CONSTS_JAVA).read()
         tower_consts = debug_flag_re.sub('boolean DEBUG = false;', tower_consts)
