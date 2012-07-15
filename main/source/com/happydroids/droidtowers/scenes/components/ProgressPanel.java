@@ -25,7 +25,7 @@ public class ProgressPanel extends Table {
 
     messagesUsed = Sets.newHashSet();
 
-    loadingMessage = FontManager.Roboto64WithShadow.makeLabel(selectRandomMessage(), Color.WHITE, Align.CENTER);
+    loadingMessage = FontManager.Roboto32WithShadow.makeLabel(selectRandomMessage(), Color.WHITE, Align.CENTER);
     loadingMessage.setAlignment(Align.CENTER);
 
     progressLabel = FontManager.Roboto64WithShadow.makeLabel("0%", Color.WHITE, Align.CENTER);

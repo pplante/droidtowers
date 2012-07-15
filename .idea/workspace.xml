@@ -36,12 +36,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build.code" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/assets-raw/fonts/Roboto.GlyphProject" afterPath="$PROJECT_DIR$/main/assets-raw/fonts/Roboto.GlyphProject" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/upload-releases.py" afterPath="$PROJECT_DIR$/upload-releases.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/assets/fonts/roboto_white_with_shadow_32.fnt" afterPath="$PROJECT_DIR$/main/assets/fonts/roboto_white_with_shadow_32.fnt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/assets/fonts/roboto_white_with_shadow_32.png" afterPath="$PROJECT_DIR$/main/assets/fonts/roboto_white_with_shadow_32.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/assets/fonts/roboto_white_with_shadow_64.fnt" afterPath="$PROJECT_DIR$/main/assets/fonts/roboto_white_with_shadow_64.fnt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/assets/fonts/roboto_white_with_shadow_64.png" afterPath="$PROJECT_DIR$/main/assets/fonts/roboto_white_with_shadow_64.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/ProgressPanel.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/ProgressPanel.java" />
     </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -170,10 +170,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AssetLoadProgressPanel.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AssetLoadProgressPanel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/AssetLoadProgressPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="49" selection-start="304" selection-end="304" vertical-scroll-proportion="0.26242545">
+            <state line="10" column="56" selection-start="311" selection-end="311" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProgressPanel.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/ProgressPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="51" selection-start="799" selection-end="799" vertical-scroll-proportion="0.71836734">
               <folding />
             </state>
           </provider>
@@ -192,7 +201,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java" />
         <option value="$PROJECT_DIR$/android-shared/custom_rules.xml" />
         <option value="$PROJECT_DIR$/android-google/custom_rules.xml" />
         <option value="$PROJECT_DIR$/android-amazon/custom_rules.xml" />
@@ -208,6 +216,7 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/Device.java" />
         <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/ProgressPanel.java" />
       </list>
     </option>
   </component>
@@ -1537,15 +1546,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="34" selection-start="2152" selection-end="2152" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#8693#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/FontManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="55" selection-start="1146" selection-end="1146" vertical-scroll-proportion="0.33242875">
@@ -1562,16 +1562,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/ProgressPanel.java">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="39" selection-start="787" selection-end="787" vertical-scroll-proportion="0.7632653">
-          <folding />
+        <state line="58" column="34" selection-start="2152" selection-end="2152" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#8693#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/AssetLoadProgressPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="49" selection-start="304" selection-end="304" vertical-scroll-proportion="0.26242545">
+        <state line="10" column="56" selection-start="311" selection-end="311" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/ProgressPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="51" selection-start="799" selection-end="799" vertical-scroll-proportion="0.71836734">
           <folding />
         </state>
       </provider>
