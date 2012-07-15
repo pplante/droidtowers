@@ -229,4 +229,8 @@ public class TowerAssetManager {
     return assetManager().isLoaded(checkForHDPI(fileName));
   }
 
+
+  public static AssetList getAssetList() {
+    return assetList;
+  }
 }

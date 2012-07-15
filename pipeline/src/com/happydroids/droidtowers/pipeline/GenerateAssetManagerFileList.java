@@ -57,6 +57,10 @@ public class GenerateAssetManagerFileList {
     addFileEntry(assetsDir.child("tower-sign.png"), Texture.class);
     addFileEntry(assetsDir.child("tower-sign-poll.png"), Texture.class);
 
+    for (FileHandle file : assetsDir.child("sound/").child("music/").list()) {
+      managedFiles.addMusic(cleanFilename(file.path()));
+    }
+
     try {
       ObjectMapper mapper = new ObjectMapper();
       mapper.enable(SerializationFeature.INDENT_OUTPUT);

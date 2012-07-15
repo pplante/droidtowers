@@ -102,18 +102,6 @@
 
   <target name="compile">
     <mkdir dir="${classes.dir}"/>
-    <mkdir dir="${build.dir}/tool-classes"/>
-
-    <javac2 destdir="${build.dir}/tool-classes/" debug="${compiler.debug}">
-      <classpath refid="classpath"/>
-      <src path="${happydroids.common.source}"/>
-      <src path="${droidtowers.main.source}"/>
-      <src path="${droidtowers.desktop.source}"/>
-      <src path="${root.dir}/pipeline/src"/>
-    </javac2>
-    <java classname="com.happydroids.droidtowers.pipeline.GenerateAssetManagerFileList"
-          classpath="${build.dir}/tool-classes/"
-          failonerror="true" classpathref="classpath" fork="true" dir="${droidtowers.main}"/>
 
     <javac2 destdir="${classes.dir}" debug="${compiler.debug}">
       <classpath refid="classpath"/>
@@ -176,7 +164,6 @@
              keystore="release-key.keystore"
              storepass="happydroids2012"
              keypass="happydroids2012"
-             force="true"
              preservelastmodified="true">
       <path>
         <fileset dir="${applet.dir}" includes="**/*.jar"/>

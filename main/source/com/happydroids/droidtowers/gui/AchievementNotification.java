@@ -8,8 +8,6 @@ import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
@@ -28,7 +26,7 @@ public class AchievementNotification extends Table {
 
     defaults().top().left().pad(scale(4));
 
-    add(new Image(new Texture(Gdx.files.internal("hud/trophy.png")), Scaling.none)).minWidth(scale(64)).padRight(scale(8));
+    add(new Image(TowerAssetManager.textureFromAtlas("achievements-active", "hud/buttons.txt"), Scaling.none)).minWidth(scale(64)).padRight(scale(8));
 
     Table textTable = new Table();
     textTable.defaults().left().top();

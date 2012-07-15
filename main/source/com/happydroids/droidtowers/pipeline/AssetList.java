@@ -5,8 +5,10 @@
 package com.happydroids.droidtowers.pipeline;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import java.util.List;
 import java.util.Map;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PUBLIC_ONLY)
@@ -15,10 +17,13 @@ public class AssetList {
   public final Map<String, Class> normalFiles;
   public final Map<String, String> highDefFiles;
 
+  public final List<String> musicFiles;
+
   public AssetList() {
     preloadFiles = Maps.newHashMap();
     normalFiles = Maps.newHashMap();
     highDefFiles = Maps.newHashMap();
+    musicFiles = Lists.newArrayList();
   }
 
   public void preload(String fileName, String hdVersion, Class clazz) {
@@ -39,5 +44,9 @@ public class AssetList {
         highDefFiles.put(fileName, hdVersion);
       }
     }
+  }
+
+  public void addMusic(String fileName) {
+    musicFiles.add(fileName);
   }
 }

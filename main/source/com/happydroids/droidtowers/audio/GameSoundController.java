@@ -7,35 +7,34 @@ package com.happydroids.droidtowers.audio;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.files.FileHandle;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class GameSoundController {
+  private static final String TAG = GameSoundController.class.getSimpleName();
+
   public static final String CONSTRUCTION_PLACEMENT = "sound/effects/construction-placement-1.wav";
   public static final String CONSTRUCTION_DESTROY = "sound/effects/construction-destroy-1.wav";
 
+  private static boolean soundsAllowed;
   private boolean backgroundMusicEnabled;
   public boolean audioState;
   private Sound constructionSound;
   private Sound destructionSound;
   private Music activeSong;
-  private final Iterator<FileHandle> availableSongs;
-  private static boolean soundsAllowed;
+  private final Iterator<String> availableSongs;
+
 
   public GameSoundController() {
     audioState = TowerGameService.instance().getAudioState();
 
-    ArrayList<FileHandle> songs = Lists.newArrayList(Gdx.files.internal("sound/music/").list(".mp3"));
-    availableSongs = Iterables.cycle(songs).iterator();
+    availableSongs = Iterables.cycle(TowerAssetManager.getAssetList().musicFiles).iterator();
 
     moveToNextSong();
   }
@@ -47,7 +46,9 @@ public class GameSoundController {
     }
 
     if (availableSongs.hasNext()) {
-      activeSong = Gdx.audio.newMusic(availableSongs.next());
+      String songFilename = availableSongs.next();
+      Gdx.app.debug(TAG, "Now playing: " + songFilename);
+      activeSong = Gdx.audio.newMusic(Gdx.files.internal(songFilename));
       activeSong.setVolume(0.5f);
 
       if (audioState) {
