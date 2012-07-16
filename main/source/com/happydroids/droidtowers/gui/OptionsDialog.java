@@ -17,6 +17,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import javax.annotation.Nullable;
@@ -55,7 +56,7 @@ public class OptionsDialog extends Dialog {
     body.add();
     body.add(fullscreenCheckbox);
 
-    displayPrefs = Gdx.app.getPreferences("DISPLAY");
+    displayPrefs = TowerGameService.instance().getPreferences();
 
     setView(body);
 

@@ -8,7 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/android-google/android-google.iml" filepath="$PROJECT_DIR$/android-google/android-google.iml" group="android-platform" />
       <module fileurl="file://$PROJECT_DIR$/android-shared/android-shared.iml" filepath="$PROJECT_DIR$/android-shared/android-shared.iml" group="android-platform" />
       <module fileurl="file://$PROJECT_DIR$/desktop/desktop.iml" filepath="$PROJECT_DIR$/desktop/desktop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/happydroids-common/happydroids-common.iml" filepath="$PROJECT_DIR$/happydroids-common/happydroids-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/main/main.iml" filepath="$PROJECT_DIR$/main/main.iml" />
       <module fileurl="file://$PROJECT_DIR$/pipeline/pipeline.iml" filepath="$PROJECT_DIR$/pipeline/pipeline.iml" />
     </modules>

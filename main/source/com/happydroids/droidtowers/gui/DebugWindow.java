@@ -5,7 +5,6 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
@@ -163,9 +162,7 @@ public class DebugWindow extends ScrollableTowerWindow {
     button.setClickListener(new VibrateClickListener() {
       @Override
       public void onClick(Actor actor, float x, float y) {
-        Preferences preferences = Gdx.app.getPreferences("CONNECT");
-        preferences.clear();
-        preferences.flush();
+        TowerGameService.instance().setDeviceId(null);
       }
     });
     return button;

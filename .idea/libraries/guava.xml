@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="guava">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/happydroids-common/libs/main/guava-11.0.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/tools/jsr305-2.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/main/libs/main/guava-11.0.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/happydroids-common/libs/sources/guava-11.0.2-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/tools/jsr305-2.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/main/libs/sources/guava-11.0.2-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

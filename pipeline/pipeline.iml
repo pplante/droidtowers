@@ -9,7 +9,6 @@
     <orderEntry type="library" name="main" level="project" />
     <orderEntry type="library" name="guava" level="project" />
     <orderEntry type="library" name="jackson" level="project" />
-    <orderEntry type="library" name="commons-io" level="project" />
     <orderEntry type="library" name="apache-httpclient" level="project" />
     <orderEntry type="library" name="apache-commons" level="project" />
     <orderEntry type="module" module-name="main" />

@@ -18,7 +18,6 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="happydroids-common" />
     <orderEntry type="library" scope="TEST" name="desktop" level="project" />
     <orderEntry type="library" name="main" level="project" />
     <orderEntry type="module-library" exported="">
@@ -31,8 +30,11 @@
       </library>
     </orderEntry>
     <orderEntry type="library" scope="TEST" name="junit-mockito-great-expectations" level="project" />
-    <orderEntry type="library" scope="TEST" name="commons-io" level="project" />
     <orderEntry type="library" exported="" name="prettytime" level="project" />
+    <orderEntry type="library" name="guava" level="project" />
+    <orderEntry type="library" name="apache-commons" level="project" />
+    <orderEntry type="library" exported="" name="jackson" level="project" />
+    <orderEntry type="library" exported="" name="apache-httpclient" level="project" />
   </component>
 </module>
 

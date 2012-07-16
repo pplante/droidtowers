@@ -7,8 +7,13 @@ package com.happydroids.droidtowers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplet;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.droidtowers.gui.ProgressDialog;
 import com.happydroids.droidtowers.platform.purchase.AppletPurchaseManager;
-import com.happydroids.platform.*;
+import com.happydroids.droidtowers.tasks.VerifyPurchaseTask;
+import com.happydroids.platform.DesktopBrowserUtil;
+import com.happydroids.platform.DesktopConnectionMonitor;
+import com.happydroids.platform.DesktopUncaughtExceptionHandler;
+import com.happydroids.platform.Platform;
 import netscape.javascript.JSObject;
 
 public class DroidTowersApplet extends LwjglApplet {
@@ -47,6 +52,19 @@ public class DroidTowersApplet extends LwjglApplet {
         TowerGameService.instance().setSessionToken((String) happyDroids.getMember("sessionToken"));
 
         ((AppletPurchaseManager) Platform.getPurchaseManager()).setJavascriptInterface(happyDroids);
+      }
+    });
+  }
+
+  public void purchaseComplete(final String paymentUri) {
+    Gdx.app.postRunnable(new Runnable() {
+      @Override
+      public void run() {
+        ProgressDialog progressDialog = new ProgressDialog();
+        progressDialog.hideButtons(true)
+                .setMessage("Verifying Purchase")
+                .show();
+        new VerifyPurchaseTask(paymentUri, progressDialog).run();
       }
     });
   }

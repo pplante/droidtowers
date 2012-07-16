@@ -4,11 +4,11 @@
 
 package com.happydroids.platform;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.events.PurchaseEvent;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.platform.purchase.DroidTowerVersions;
 
 import java.util.HashMap;
@@ -27,7 +27,7 @@ public abstract class PlatformPurchaseManger {
   public PlatformPurchaseManger() {
     eventBus = new EventBus(PlatformPurchaseManger.class.getSimpleName());
     purchasesEnabled = false;
-    purchases = Gdx.app.getPreferences("purchases");
+    purchases = TowerGameService.instance().getPreferences();
     if (initializeRunnable != null) {
       initializeRunnable.run();
     }
@@ -40,14 +40,20 @@ public abstract class PlatformPurchaseManger {
   }
 
   public void purchaseItem(String source, String itemId, String purchaseToken) {
-    purchases.putString(itemId, purchaseToken);
-    purchases.flush();
+    purchaseItem(itemId, purchaseToken);
     eventBus.post(new PurchaseEvent(purchaseToken, source, itemId));
   }
 
-  public void revokeItem(String itemId) {
-    purchases.remove(itemId);
+  public void purchaseItem(String itemId, String purchaseToken) {
+    purchases.putString(itemId, purchaseToken);
     purchases.flush();
+  }
+
+  public void revokeItem(String itemId) {
+    if (purchases.contains(itemId)) {
+      purchases.remove(itemId);
+      purchases.flush();
+    }
   }
 
   public boolean hasPurchasedUnlimitedVersion() {

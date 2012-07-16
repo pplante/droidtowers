@@ -37,7 +37,7 @@ public class TowerGameService extends HappyDroidService {
   }
 
   public void initializePreferences() {
-    preferences = Gdx.app.getPreferences("CONNECT");
+    preferences = Gdx.app.getPreferences("com.happydroids.droidtowers");
     if (!preferences.contains(DEVICE_ID)) {
       preferences.putString(DEVICE_ID, UUID.randomUUID().toString().replaceAll("-", ""));
       preferences.flush();
@@ -131,5 +131,9 @@ public class TowerGameService extends HappyDroidService {
   public void setDeviceId(String deviceId) {
     preferences.putString(DEVICE_ID, deviceId);
     preferences.flush();
+  }
+
+  public Preferences getPreferences() {
+    return preferences;
   }
 }
