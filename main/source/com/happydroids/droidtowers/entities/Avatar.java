@@ -175,7 +175,7 @@ public class Avatar extends GameObject {
       movingTo.recordVisitor(this);
       lastVisitedPlaces.add(movingTo);
       if (lastVisitedPlaces.size() > 3) {
-        lastVisitedPlaces.pop();
+        lastVisitedPlaces.poll();
       }
     }
 

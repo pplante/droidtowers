@@ -16,9 +16,9 @@ import java.util.UUID;
 public class TowerGameService extends HappyDroidService {
   private static final String TAG = TowerGameService.class.getSimpleName();
   public static final String SESSION_TOKEN = "SESSION_TOKEN";
+  public static final String DEVICE_ID = "DEVICE_ID";
 
   private Preferences preferences;
-  private String deviceId;
   private boolean authenticated;
   private Device device;
   private RunnableQueue postAuthRunnables;
@@ -38,11 +38,10 @@ public class TowerGameService extends HappyDroidService {
 
   public void initializePreferences() {
     preferences = Gdx.app.getPreferences("CONNECT");
-    if (!preferences.contains("DEVICE_ID")) {
-      preferences.putString("DEVICE_ID", UUID.randomUUID().toString().replaceAll("-", ""));
+    if (!preferences.contains(DEVICE_ID)) {
+      preferences.putString(DEVICE_ID, UUID.randomUUID().toString().replaceAll("-", ""));
       preferences.flush();
     }
-    deviceId = preferences.getString("DEVICE_ID");
   }
 
   public static TowerGameService instance() {
@@ -58,7 +57,7 @@ public class TowerGameService extends HappyDroidService {
   }
 
   public String getDeviceId() {
-    return deviceId;
+    return preferences.getString(DEVICE_ID);
   }
 
   public synchronized void setSessionToken(String token) {
@@ -122,11 +121,15 @@ public class TowerGameService extends HappyDroidService {
     this.authenticated = authenticated;
 
     if (!this.authenticated) {
-      preferences.remove(SESSION_TOKEN);
-      preferences.flush();
+      setSessionToken(null);
     }
 
     authenticationFinished = true;
     postAuthRunnables.runAll();
+  }
+
+  public void setDeviceId(String deviceId) {
+    preferences.putString(DEVICE_ID, deviceId);
+    preferences.flush();
   }
 }

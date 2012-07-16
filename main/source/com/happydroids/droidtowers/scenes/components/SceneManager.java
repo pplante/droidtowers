@@ -29,7 +29,7 @@ public class SceneManager {
       if (activeScene != null) {
         activeScene.pause();
         InputSystem.instance().removeInputProcessor(activeScene.getStage());
-        pausedScenes.push(activeScene);
+        pausedScenes.addFirst(activeScene);
       }
 
       activeScene = sceneClass.newInstance();
@@ -53,7 +53,7 @@ public class SceneManager {
     }
 
     if (!pausedScenes.isEmpty()) {
-      activeScene = pausedScenes.pop();
+      activeScene = pausedScenes.poll();
       activeScene.resume();
       InputSystem.instance().addInputProcessor(activeScene.getStage(), 10);
       Gdx.app.error(TAG, "popScene resumed instance of: " + activeScene.getClass().getSimpleName());

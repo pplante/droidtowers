@@ -18,8 +18,11 @@ import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.*;
 import com.happydroids.droidtowers.scenes.HappyDroidConnect;
+import com.happydroids.platform.Platform;
 
+import static com.badlogic.gdx.Application.ApplicationType.Applet;
 import static com.badlogic.gdx.Application.ApplicationType.Desktop;
+import static com.happydroids.droidtowers.gui.FontManager.RobotoBold18;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class MainMenuButtonPanel extends Table {
@@ -36,16 +39,16 @@ public class MainMenuButtonPanel extends Table {
 
     pad(scale(16));
 
-    TextButton newGameButton = FontManager.RobotoBold18.makeTextButton("new tower");
+    TextButton newGameButton = RobotoBold18.makeTextButton("new tower");
     add(newGameButton).fill().width(BUTTON_WIDTH);
     row().padTop(BUTTON_SPACING);
 
-    TextButton loadGameButton = FontManager.RobotoBold18.makeTextButton("load tower");
+    TextButton loadGameButton = RobotoBold18.makeTextButton("load tower");
     add(loadGameButton).fill().width(BUTTON_WIDTH);
     row().padTop(BUTTON_SPACING);
 
     if (Gdx.app.getType().equals(Desktop)) {
-      TextButton optionsButton = FontManager.RobotoBold18.makeTextButton("options");
+      TextButton optionsButton = RobotoBold18.makeTextButton("options");
       add(optionsButton).fill().width(BUTTON_WIDTH);
       row().padTop(BUTTON_SPACING);
 
@@ -57,12 +60,12 @@ public class MainMenuButtonPanel extends Table {
       });
     }
 
-    TextButton aboutButton = FontManager.RobotoBold18.makeTextButton("about");
+    TextButton aboutButton = RobotoBold18.makeTextButton("about");
     add(aboutButton).fill().width(BUTTON_WIDTH);
     row().padTop(BUTTON_SPACING);
 
-    if (HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT) {
-      final TextButton connectToHappyDroids = FontManager.RobotoBold18.makeTextButton("login to happydroids.com");
+    if (HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT && !Gdx.app.getType().equals(Applet)) {
+      final TextButton connectToHappyDroids = RobotoBold18.makeTextButton("login to happydroids.com");
       connectToHappyDroids.visible = false;
       add(connectToHappyDroids).fill().width(BUTTON_WIDTH);
       row().padTop(BUTTON_SPACING);
@@ -84,9 +87,28 @@ public class MainMenuButtonPanel extends Table {
       });
     }
 
-    TextButton exitGameButton = FontManager.RobotoBold18.makeTextButton("exit");
-    add(exitGameButton).fill().width(BUTTON_WIDTH);
-    row();
+    if (!Gdx.app.getType().equals(Applet)) {
+      TextButton exitGameButton = RobotoBold18.makeTextButton("exit");
+      add(exitGameButton).fill().width(BUTTON_WIDTH);
+      row();
+
+      exitGameButton.setClickListener(new ClickListener() {
+        public void click(Actor actor, float x, float y) {
+          Gdx.app.exit();
+        }
+      });
+    } else {
+      TextButton purchaseButton = RobotoBold18.makeTextButton("upgrade to unlimited");
+      add(purchaseButton).fill().width(BUTTON_WIDTH);
+      row();
+
+      purchaseButton.setClickListener(new VibrateClickListener() {
+        @Override
+        public void onClick(Actor actor, float x, float y) {
+          Platform.getPurchaseManager().requestPurchaseForUnlimitedVersion();
+        }
+      });
+    }
 
     newGameButton.setClickListener(new VibrateClickListener() {
       @Override
@@ -105,12 +127,6 @@ public class MainMenuButtonPanel extends Table {
       @Override
       public void onClick(Actor actor, float x, float y) {
         new AboutWindow(getStage()).show();
-      }
-    });
-
-    exitGameButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        Gdx.app.exit();
       }
     });
   }

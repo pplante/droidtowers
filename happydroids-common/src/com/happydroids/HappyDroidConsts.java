@@ -5,12 +5,12 @@
 package com.happydroids;
 
 public class HappyDroidConsts {
-  public static final String HAPPYDROIDS_SERVER = "www.happydroids.com";
-  public static final String HAPPYDROIDS_URI = "https://" + HAPPYDROIDS_SERVER;
+  public static final String HAPPYDROIDS_SERVER = "local.happydroids.com";
+  public static final String HAPPYDROIDS_URI = "http://" + HAPPYDROIDS_SERVER;
   public static final String HAPPYDROIDS_API_KEY = "f88c02844c913c20f84ea29cbabec97c10c828a8caf204de41";
-  public static final boolean DEBUG = false;
+  public static final boolean DEBUG = true;
   public static boolean DISPLAY_DEBUG_INFO = true;
-  public static boolean ENABLE_HAPPYDROIDS_CONNECT = false;
+  public static boolean ENABLE_HAPPYDROIDS_CONNECT = true;
   public static String VERSION = "1.0.25";
   public static int VERSION_CODE = 1025;
   public static String GIT_SHA = "30bea732df747e4f06fe590234767519f9aa48af";

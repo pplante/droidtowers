@@ -6,8 +6,8 @@ package com.happydroids.droidtowers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplet;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.droidtowers.platform.purchase.AppletPurchaseManager;
 import com.happydroids.platform.*;
 import netscape.javascript.JSObject;
 
@@ -28,15 +28,26 @@ public class DroidTowersApplet extends LwjglApplet {
         Platform.setUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
         Platform.setBrowserUtil(new DesktopBrowserUtil());
         Platform.setConnectionMonitor(new DesktopConnectionMonitor());
-        Platform.setPurchaseManager(new DebugPurchaseManager());
+        Platform.setPurchaseManager(new AppletPurchaseManager());
       }
-    }), new LwjglApplicationConfiguration());
+    }), true);
   }
 
   @Override
   public void init() {
-    JSObject jsObject = JSObject.getWindow(this);
-    String happyDroidsSession = (String) jsObject.getMember("happyDroidsSession");
-    Gdx.app.error(TAG, "session: " + happyDroidsSession);
+    final JSObject javascript = JSObject.getWindow(this);
+    final JSObject happyDroids = (JSObject) javascript.getMember("happyDroids");
+    Gdx.app.error(TAG, "session: " + happyDroids);
+
+    Gdx.app.postRunnable(new Runnable() {
+      @Override
+      public void run() {
+        TowerGameService.setDeviceOSMarketName((String) happyDroids.getMember("marketName"));
+        TowerGameService.instance().setDeviceId((String) happyDroids.getMember("deviceUUID"));
+        TowerGameService.instance().setSessionToken((String) happyDroids.getMember("sessionToken"));
+
+        ((AppletPurchaseManager) Platform.getPurchaseManager()).setJavascriptInterface(happyDroids);
+      }
+    });
   }
 }

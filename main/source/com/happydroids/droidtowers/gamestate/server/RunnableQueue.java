@@ -16,12 +16,12 @@ public class RunnableQueue {
   }
 
   public void push(Runnable runnable) {
-    queue.push(runnable);
+    queue.add(runnable);
   }
 
   public void runAll() {
     while (queue.peek() != null) {
-      queue.pop().run();
+      queue.poll().run();
     }
   }
 

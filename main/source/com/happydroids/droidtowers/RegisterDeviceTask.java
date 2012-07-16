@@ -9,6 +9,8 @@ import com.happydroids.droidtowers.gamestate.server.Device;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.utils.BackgroundTask;
 
+import static com.badlogic.gdx.Application.ApplicationType.Applet;
+
 public class RegisterDeviceTask extends BackgroundTask {
   protected static final String TAG = RegisterDeviceTask.class.getSimpleName();
 
@@ -22,8 +24,12 @@ public class RegisterDeviceTask extends BackgroundTask {
 
   @Override
   public synchronized void afterExecute() {
+    if (Gdx.app.getType().equals(Applet)) {
+      // applets are authenticated via javascript :D
+      return;
+    }
+
     Gdx.app.debug(TAG, "Authentication finished, state: " + device.isAuthenticated);
     TowerGameService.instance().setAuthenticated(device.isAuthenticated);
-    TowerGameService.instance().getPostAuthRunnables().runAll();
   }
 }

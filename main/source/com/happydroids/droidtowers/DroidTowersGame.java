@@ -43,8 +43,7 @@ import com.happydroids.utils.BackgroundTask;
 
 import java.net.URI;
 
-import static com.badlogic.gdx.Application.ApplicationType.Android;
-import static com.badlogic.gdx.Application.ApplicationType.Desktop;
+import static com.badlogic.gdx.Application.ApplicationType.*;
 import static com.happydroids.HappyDroidConsts.DEBUG;
 import static com.happydroids.HappyDroidConsts.DISPLAY_DEBUG_INFO;
 
@@ -57,16 +56,15 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
   private SpriteBatch spriteBatchFBO;
   private FrameBuffer frameBuffer;
   private static GameSoundController soundController;
-  private final Runnable postCreateRunnable;
+  private final Runnable afterInitRunnable;
 
-  public DroidTowersGame(Runnable postCreateRunnable) {
-    this.postCreateRunnable = postCreateRunnable;
+  public DroidTowersGame(Runnable afterInitRunnable) {
+    this.afterInitRunnable = afterInitRunnable;
   }
 
   public void create() {
-
-    if (postCreateRunnable != null) {
-      postCreateRunnable.run();
+    if (afterInitRunnable != null) {
+      afterInitRunnable.run();
     }
 
     Thread.currentThread().setUncaughtExceptionHandler(Platform.uncaughtExceptionHandler);
@@ -85,7 +83,10 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
     BackgroundTask.setUncaughtExceptionHandler(Platform.uncaughtExceptionHandler);
 
     TowerGameService.setInstance(new TowerGameService());
-    new RegisterDeviceTask().run();
+
+    if (!Gdx.app.getType().equals(Applet)) {
+      new RegisterDeviceTask().run();
+    }
 
     if (Gdx.graphics.isGL20Available() && Gdx.app.getType().equals(Android) && Display.isXHDPIMode()) {
       float displayScalar = 0.75f;
@@ -151,12 +152,16 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
 
     Scene.setSpriteBatch(spriteBatch);
 
-
-    if (Platform.protocolHandler != null && Platform.protocolHandler.hasUri()) {
-      SceneManager.changeScene(LaunchUriScene.class, Platform.protocolHandler.consumeUri());
-    } else {
-      SceneManager.changeScene(MainMenuScene.class);
-    }
+    Gdx.app.postRunnable(new Runnable() {
+      @Override
+      public void run() {
+        if (Platform.protocolHandler != null && Platform.protocolHandler.hasUri()) {
+          SceneManager.changeScene(LaunchUriScene.class, Platform.protocolHandler.consumeUri());
+        } else {
+          SceneManager.changeScene(MainMenuScene.class);
+        }
+      }
+    });
   }
 
   public void render() {
@@ -220,11 +225,13 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
 
   public void resize(int width, int height) {
     Gdx.app.log("lifecycle", "resizing!");
-    SceneManager.activeScene().getCamera().viewportWidth = width;
-    SceneManager.activeScene().getCamera().viewportHeight = height;
-    spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
-    SceneManager.activeScene().getSpriteBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
-    Gdx.gl.glViewport(0, 0, width, height);
+    if (SceneManager.activeScene() != null) {
+      SceneManager.activeScene().getCamera().viewportWidth = width;
+      SceneManager.activeScene().getCamera().viewportHeight = height;
+      SceneManager.activeScene().getSpriteBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
+      Gdx.gl.glViewport(0, 0, width, height);
+      spriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
+    }
   }
 
 
