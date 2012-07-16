@@ -36,11 +36,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-amazon/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android-amazon/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-google/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android-google/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.ver" afterPath="$PROJECT_DIR$/build.ver" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release.properties" afterPath="$PROJECT_DIR$/release.properties" />
     </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -194,12 +190,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RunnableQueue.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="RunnableQueue.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/RunnableQueue.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="18" selection-start="478" selection-end="478" vertical-scroll-proportion="0.4031008">
+            <state line="23" column="18" selection-start="478" selection-end="478" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#0#546#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HappyDroidConsts.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="58" selection-start="539" selection-end="539" vertical-scroll-proportion="0.5248509">
+              <folding>
+                <element signature="e#0#1250#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -266,7 +273,6 @@
         <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AchievementNotification.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/RegisterAppletDeviceTask.java" />
-        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/RegisterDeviceTask.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DroidTowersGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/TowerGameService.java" />
@@ -278,6 +284,7 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/RunnableQueue.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/SceneManager.java" />
+        <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
       </list>
     </option>
   </component>
@@ -1524,13 +1531,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/LwjglApplicationShim.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="9" selection-start="741" selection-end="741" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/ApplicationAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="22" selection-start="187" selection-end="187" vertical-scroll-proportion="0.14666666">
@@ -1638,9 +1638,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/RunnableQueue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="18" selection-start="478" selection-end="478" vertical-scroll-proportion="0.4031008">
+        <state line="23" column="18" selection-start="478" selection-end="478" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#0#546#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="58" selection-start="539" selection-end="539" vertical-scroll-proportion="0.5248509">
+          <folding>
+            <element signature="e#0#1250#0" expanded="true" />
           </folding>
         </state>
       </provider>
