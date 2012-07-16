@@ -36,19 +36,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/platform/purchase/AppletPurchaseManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DroidTowersApplet.java" afterPath="$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DroidTowersApplet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-amazon/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android-amazon/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-google/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android-google/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.ver" afterPath="$PROJECT_DIR$/build.ver" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DroidTowersGame.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DroidTowersGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/RegisterDeviceTask.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/RegisterDeviceTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/RunnableQueue.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/RunnableQueue.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/TowerGameService.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/TowerGameService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/QuitGameInputAdapter.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/QuitGameInputAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pipeline/AssetList.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pipeline/AssetList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/SceneManager.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/SceneManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release.properties" afterPath="$PROJECT_DIR$/release.properties" />
     </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
