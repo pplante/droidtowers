@@ -4,7 +4,6 @@
 
 package com.happydroids.droidtowers.input;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
@@ -20,6 +19,7 @@ import com.happydroids.platform.Platform;
 
 import java.util.List;
 
+import static com.badlogic.gdx.Application.ApplicationType.Android;
 import static com.happydroids.droidtowers.TowerConsts.LIMITED_VERSION_MAX_FLOOR;
 import static com.happydroids.droidtowers.input.InputSystem.Keys;
 import static com.happydroids.droidtowers.types.ProviderType.SKY_LOBBY;
@@ -80,7 +80,7 @@ public class PlacementTool extends ToolBase {
 
   @Override
   public void update(float deltaTime) {
-    if (Gdx.app.getType().equals(Application.ApplicationType.Desktop)) {
+    if (!Gdx.app.getType().equals(Android)) {
       Vector3 worldPoint = camera.getPickRay(Gdx.input.getX(), Gdx.input.getY()).getEndPoint(1);
       GridPoint gridPointAtFinger = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
 
@@ -104,14 +104,7 @@ public class PlacementTool extends ToolBase {
   }
 
   public boolean tap(int x, int y, int count) {
-    switch (Gdx.app.getType()) {
-      case Android:
-        return count >= 2 && finishPurchase();
-      case Desktop:
-        return count >= 1 && finishPurchase();
-    }
-
-    return false;
+    return count >= 2 && finishPurchase();
   }
 
   private boolean finishPurchase() {

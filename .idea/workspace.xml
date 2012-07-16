@@ -35,7 +35,7 @@
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
+    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="asset list generator finds sound files now because the applet couldnt use list()&#10;changed the achievement notification to the same icon as button for now">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" afterPath="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
     </list>
     <ignored path="testgame.iws" />
@@ -154,103 +154,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainMenuButtonPanel.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="107" column="74" selection-start="4318" selection-end="4318" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#5476#0" expanded="true" />
-                <element signature="e#4136#4339#0" expanded="true" />
-                <element signature="e#4330#4331#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DroidTowersApplet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DroidTowersApplet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="98" selection-start="1929" selection-end="1929" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#1954#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppletPurchaseManager.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/platform/purchase/AppletPurchaseManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="101" selection-start="538" selection-end="538" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RunnableQueue.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/RunnableQueue.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="18" selection-start="478" selection-end="478" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#546#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="HappyDroidConsts.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="58" selection-start="539" selection-end="539" vertical-scroll-proportion="0.5248509">
+            <state line="12" column="58" selection-start="539" selection-end="539" vertical-scroll-proportion="0.41632652">
               <folding>
                 <element signature="e#0#1250#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Avatar.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="177" column="32" selection-start="6004" selection-end="6004" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AssetList.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pipeline/AssetList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="59" selection-start="1013" selection-end="1013" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#1443#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AvatarSteeringManager.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarSteeringManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="12" selection-start="3371" selection-end="3371" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DroidTowersGame.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DroidTowersGame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="232" column="45" selection-start="9380" selection-end="9380" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#4597#4800#0" expanded="false" />
-                <element signature="e#4793#4794#0" expanded="false" />
-                <element signature="e#6002#6340#0" expanded="false" />
-                <element signature="e#6333#6334#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -269,8 +178,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/audio/GameSoundController.java" />
-        <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AchievementNotification.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/RegisterAppletDeviceTask.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/RegisterDeviceTask.java" />
@@ -284,6 +191,8 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/RunnableQueue.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/SceneManager.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSaveFactory.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/PlacementTool.java" />
         <option value="$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java" />
       </list>
     </option>
@@ -1304,10 +1213,10 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32818532" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.81724584" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3011583" sideWeight="0.38235295" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3011583" sideWeight="0.38235295" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24892396" sideWeight="0.63799745" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31788933" sideWeight="0.51508623" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31788933" sideWeight="0.51508623" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25997427" sideWeight="0.21807748" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20803443" sideWeight="0.6808237" order="1" side_tool="true" content_ui="tabs" />
@@ -1531,97 +1440,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/ApplicationAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="22" selection-start="187" selection-end="187" vertical-scroll-proportion="0.14666666">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/PlatformPurchaseManger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="22" selection-start="526" selection-end="526" vertical-scroll-proportion="0.176">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DroidTowersApplet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="98" selection-start="1929" selection-end="1929" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#1954#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/platform/DesktopPurchaseManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="117" selection-end="117" vertical-scroll-proportion="0.11733333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/platform/DebugPurchaseManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="4" selection-start="308" selection-end="396" vertical-scroll-proportion="0.264">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/platform/purchase/AppletPurchaseManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="101" selection-start="538" selection-end="538" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/local/Cellar/android-sdk/r18/platforms/android-10/android.jar!/android/text/TextUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="155" selection-end="155" vertical-scroll-proportion="0.21868788">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidBillingLibrary/AndroidBillingLibrary/src/net/robotmedia/billing/BillingController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="343" column="17" selection-start="10966" selection-end="10966" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarSteeringManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="12" selection-start="3371" selection-end="3371" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pipeline/AssetList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="59" selection-start="1013" selection-end="1013" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#1443#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="177" column="32" selection-start="6004" selection-end="6004" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/LinkedList.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="14" selection-start="811" selection-end="811" vertical-scroll-proportion="0.9622266">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/SceneManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="31" column="21" selection-start="1079" selection-end="1079" vertical-scroll-proportion="0.33333334">
@@ -1638,16 +1456,123 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/RunnableQueue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="18" selection-start="478" selection-end="478" vertical-scroll-proportion="0.0">
+        <state line="23" column="18" selection-start="478" selection-end="478" vertical-scroll-proportion="0.4031008">
           <folding>
             <element signature="e#0#546#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="177" column="32" selection-start="6004" selection-end="6004" vertical-scroll-proportion="0.33200794">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/pipeline/AssetList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="59" selection-start="1013" selection-end="1013" vertical-scroll-proportion="0.33333334">
+          <folding>
+            <element signature="e#0#1443#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/controllers/AvatarSteeringManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="102" column="12" selection-start="3371" selection-end="3371" vertical-scroll-proportion="-1.2862823">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/platform/purchase/AppletPurchaseManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="101" selection-start="538" selection-end="538" vertical-scroll-proportion="0.4728682">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DroidTowersApplet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="98" selection-start="1929" selection-end="1929" vertical-scroll-proportion="1.1124032">
+          <folding>
+            <element signature="e#0#1954#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="107" column="74" selection-start="4318" selection-end="4318" vertical-scroll-proportion="0.91848904">
+          <folding>
+            <element signature="e#0#5476#0" expanded="true" />
+            <element signature="e#4136#4339#0" expanded="true" />
+            <element signature="e#4330#4331#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/LoadTowerWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.86567163">
+          <folding>
+            <element signature="e#0#7027#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/happydroids-common/src/sk/seges/acris/json/server/migrate/JacksonTransformer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="25" selection-start="1404" selection-end="1404" vertical-scroll-proportion="0.5973333">
+          <folding>
+            <element signature="e#0#2398#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/input/PlacementTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="30" selection-start="4145" selection-end="4145" vertical-scroll-proportion="0.49387756">
+          <folding>
+            <element signature="e#0#5255#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/main/libs/sources/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/PixmapPacker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="397" column="0" selection-start="14996" selection-end="14996" vertical-scroll-proportion="0.67346936">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSaveFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="23" selection-start="1237" selection-end="1237" vertical-scroll-proportion="0.5725646">
+          <folding>
+            <element signature="e#0#3020#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DroidTowersGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="232" column="45" selection-start="9380" selection-end="9380" vertical-scroll-proportion="4.8040814">
+          <folding>
+            <element signature="e#0#10550#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/happydroids-common/src/com/happydroids/HappyDroidConsts.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="58" selection-start="539" selection-end="539" vertical-scroll-proportion="0.5248509">
+        <state line="12" column="58" selection-start="539" selection-end="539" vertical-scroll-proportion="0.41632652">
           <folding>
             <element signature="e#0#1250#0" expanded="true" />
           </folding>
