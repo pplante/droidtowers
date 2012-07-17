@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.eventbus.Subscribe;
+import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
@@ -91,6 +92,14 @@ public class StatusBarPanel extends Table {
     add(employmentLabel);
     add(gameSpeedLabel);
     add(starWidget);
+
+    if (HappyDroidConsts.ENABLE_NEWS_TICKER) {
+      row().pad(scale(2)).padLeft(scale(-4)).padRight(scale(-4));
+      add(new HorizontalRule(Colors.ICS_BLUE_SEMI_TRANSPARENT, 1)).fillX().colspan(7);
+
+      row().pad(0);
+      add(new NewsTickerPanel()).colspan(7).left();
+    }
 
     dubai7StarWonder = AchievementEngine.instance().findById("dubai-7-star-wonder");
 
