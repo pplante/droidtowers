@@ -18,7 +18,7 @@ import com.happydroids.droidtowers.gui.events.OnChangeCandidateCallback;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class ManageCommercialSpaceDialog extends ScrollableTowerWindow {
+public class ManageCommercialSpaceDialog extends TowerWindow {
   private final CommercialSpace commercialSpace;
   private TextField textField;
   private final JobCandidateListView candidateListView;
@@ -62,7 +62,6 @@ public class ManageCommercialSpaceDialog extends ScrollableTowerWindow {
     add(candidateListView).spaceBottom(scale(20));
     add(fireButton).padLeft(scale(70));
 
-    shoveContentUp();
   }
 
   private Actor makeNameHeader() {
