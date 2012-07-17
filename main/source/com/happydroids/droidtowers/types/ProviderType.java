@@ -44,8 +44,10 @@ public enum ProviderType {
 
   public boolean matchesSubType(ProviderType... otherTypes) {
     if (subTypes != null) {
-      for (ProviderType subType : subTypes) {
-        for (ProviderType otherType : otherTypes) {
+      for (int i = 0, subTypesLength = subTypes.length; i < subTypesLength; i++) {
+        ProviderType subType = subTypes[i];
+        for (int i1 = 0, otherTypesLength = otherTypes.length; i1 < otherTypesLength; i1++) {
+          ProviderType otherType = otherTypes[i1];
           if (otherType.equals(subType)) {
             return true;
           }
@@ -57,7 +59,8 @@ public enum ProviderType {
   }
 
   public boolean matches(ProviderType... types) {
-    for (ProviderType type : types) {
+    for (int i = 0, typesLength = types.length; i < typesLength; i++) {
+      ProviderType type = types[i];
       if (type.equals(this) || type.matchesSubType(this)) {
         return true;
       }

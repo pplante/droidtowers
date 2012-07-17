@@ -32,7 +32,8 @@ public class GameLayer {
     if (!visible) return;
 
     spriteBatch.begin();
-    for (GameObject gameObject : gameObjects) {
+    for (int i = 0, gameObjectsSize = gameObjects.size(); i < gameObjectsSize; i++) {
+      GameObject gameObject = gameObjects.get(i);
       gameObject.draw(spriteBatch);
     }
 
@@ -40,7 +41,8 @@ public class GameLayer {
   }
 
   public void update(float timeDelta) {
-    for (GameObject gameObject : gameObjects) {
+    for (int i = 0, gameObjectsSize = gameObjects.size(); i < gameObjectsSize; i++) {
+      GameObject gameObject = gameObjects.get(i);
       if (gameObject.isMarkedForRemoval()) {
         if (deadObjects.size() < 5) {
           deadObjects.add(gameObject);
@@ -95,7 +97,8 @@ public class GameLayer {
   protected float width() {
     float w = 0;
 
-    for (GameObject gameObject : gameObjects) {
+    for (int i = 0, gameObjectsSize = gameObjects.size(); i < gameObjectsSize; i++) {
+      GameObject gameObject = gameObjects.get(i);
       w += gameObject.getWidth();
     }
 

@@ -115,7 +115,9 @@ public class GameGrid extends GameLayer {
     }
 
     Rectangle boundsOfGridObjectToCheck = gridObject.getBounds();
-    for (GridObject child : gridObjects.getInstances()) {
+    LinkedList<GridObject> instances = gridObjects.getInstances();
+    for (int i = 0, instancesSize = instances.size(); i < instancesSize; i++) {
+      GridObject child = instances.get(i);
       if (child != gridObject) {
         if (child.getBounds().contains(boundsOfGridObjectToCheck) && !child.canShareSpace(gridObject)) {
           return false;
@@ -144,7 +146,9 @@ public class GameGrid extends GameLayer {
       selectedGridObject = null;
     }
 
-    for (GridObject gridObject : gridObjects.getInstances()) {
+    LinkedList<GridObject> instances = gridObjects.getInstances();
+    for (int i = 0, instancesSize = instances.size(); i < instancesSize; i++) {
+      GridObject gridObject = instances.get(i);
       gridObject.update(deltaTime);
     }
   }
@@ -156,7 +160,8 @@ public class GameGrid extends GameLayer {
   public List<GridObject> getInstancesOf(Class... classes) {
     List<GridObject> found = Lists.newArrayList();
     if (classes != null) {
-      for (Class otherClass : classes) {
+      for (int i = 0, classesLength = classes.length; i < classesLength; i++) {
+        Class otherClass = classes[i];
         found.addAll(getInstancesOf(otherClass));
       }
     }

@@ -7,7 +7,6 @@ package com.happydroids.droidtowers.entities;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
 import com.happydroids.droidtowers.entities.elevator.Passenger;
 
@@ -15,14 +14,13 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import static com.happydroids.droidtowers.math.Direction.DOWN;
 
 public class ElevatorQueue {
   public static final int INVALID_FLOOR = -1;
   private LinkedList<Passenger> passengersWaiting;
-  private Set<Passenger> currentRiders;
+  private List<Passenger> currentRiders;
   private List<Integer> floorNumbers;
   private int currentFloor;
   public static final Predicate<Passenger> PASSENGER_REMOVAL_PREDICATE = new Predicate<Passenger>() {
@@ -34,7 +32,7 @@ public class ElevatorQueue {
 
   public ElevatorQueue(Elevator elevator) {
     passengersWaiting = Lists.newLinkedList();
-    currentRiders = Sets.newHashSet();
+    currentRiders = Lists.newArrayList();
     currentFloor = INVALID_FLOOR;
     floorNumbers = Lists.newArrayList();
   }
@@ -57,7 +55,7 @@ public class ElevatorQueue {
     currentRiders.add(firstPassenger);
 
     for (Passenger otherPassenger : passengersWaiting) {
-      if (firstPassenger.travelContains(otherPassenger) && currentRiders.size() < 8) {
+      if (firstPassenger.travelContains(otherPassenger) && currentRiders.size() < 8 && !currentRiders.contains(otherPassenger)) {
         currentRiders.add(otherPassenger);
       }
     }
@@ -94,7 +92,8 @@ public class ElevatorQueue {
   }
 
   public void informPassengersOfStop() {
-    for (Passenger currentRider : currentRiders) {
+    for (int i = 0, currentRidersSize = currentRiders.size(); i < currentRidersSize; i++) {
+      Passenger currentRider = currentRiders.get(i);
       if (currentRider.boardingFloor == currentFloor) {
         currentRider.boardNow();
       } else if (currentRider.destinationFloor == currentFloor) {
@@ -105,10 +104,26 @@ public class ElevatorQueue {
   }
 
   public boolean waitingOnRiders() {
-    Iterables.removeIf(passengersWaiting, PASSENGER_REMOVAL_PREDICATE);
-    Iterables.removeIf(currentRiders, PASSENGER_REMOVAL_PREDICATE);
+    for (int i1 = 0, passengersWaitingSize = passengersWaiting.size(); i1 < passengersWaitingSize; i1++) {
+      Passenger passenger = passengersWaiting.get(i1);
+      if (PASSENGER_REMOVAL_PREDICATE.apply(passenger)) {
+        passengersWaiting.remove(i1);
+        passengersWaitingSize--;
+        i1--;
+      }
+    }
 
-    for (Passenger currentRider : currentRiders) {
+    for (int i1 = 0, currentRidersSize1 = currentRiders.size(); i1 < currentRidersSize1; i1++) {
+      Passenger currentRider = currentRiders.get(i1);
+      if (PASSENGER_REMOVAL_PREDICATE.apply(currentRider)) {
+        currentRiders.remove(currentRider);
+        currentRidersSize1--;
+        i1--;
+      }
+    }
+
+    for (int i = 0, currentRidersSize = currentRiders.size(); i < currentRidersSize; i++) {
+      Passenger currentRider = currentRiders.get(i);
       if (currentRider.shouldWaitFor()) {
         return true;
       }
@@ -117,18 +132,20 @@ public class ElevatorQueue {
     return false;
   }
 
-  public Set<Passenger> getCurrentRiders() {
+  public List<Passenger> getCurrentRiders() {
     return currentRiders;
   }
 
   public void removePassenger(AvatarSteeringManager avatarSteeringManager) {
-    for (Passenger rider : currentRiders) {
+    for (int i = 0, currentRidersSize = currentRiders.size(); i < currentRidersSize; i++) {
+      Passenger rider = currentRiders.get(i);
       if (rider.getSteeringManager().equals(avatarSteeringManager)) {
         rider.markToRemove();
         return;
       }
     }
-    for (Passenger rider : passengersWaiting) {
+    for (int i = 0, passengersWaitingSize = passengersWaiting.size(); i < passengersWaitingSize; i++) {
+      Passenger rider = passengersWaiting.get(i);
       if (rider.getSteeringManager().equals(avatarSteeringManager)) {
         rider.markToRemove();
         return;

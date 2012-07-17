@@ -88,7 +88,8 @@ public class Elevator extends Transit {
   public void update(float deltaTime) {
     super.update(deltaTime);
 
-    for (ElevatorCar elevatorCar : elevatorCars) {
+    for (int i = 0, elevatorCarsSize = elevatorCars.size(); i < elevatorCarsSize; i++) {
+      ElevatorCar elevatorCar = elevatorCars.get(i);
       elevatorCar.update(deltaTime);
     }
   }

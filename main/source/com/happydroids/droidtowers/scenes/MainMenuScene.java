@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.HappyDroidConsts;
+import com.happydroids.droidtowers.DebugUtils;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gui.FontManager;
@@ -66,7 +67,7 @@ public class MainMenuScene extends SplashScene {
 
       buildMenuComponents(textureAtlas("hud/menus.txt"));
 
-//      DebugUtils.loadFirstGameFound();
+      DebugUtils.loadFirstGameFound();
 //      DebugUtils.createNonSavableGame(true);
 //      new PurchaseDroidTowersUnlimitedPrompt().show();
     }
@@ -84,7 +85,7 @@ public class MainMenuScene extends SplashScene {
 
     MainMenuButtonPanel menuButtonPanel = new MainMenuButtonPanel();
     menuButtonPanel.pack();
-    menuButtonPanel.y = 50;
+    menuButtonPanel.y = droidTowersLogo.y - menuButtonPanel.height;
     menuButtonPanel.x = -droidTowersLogo.getImageWidth();
     addActor(menuButtonPanel);
 

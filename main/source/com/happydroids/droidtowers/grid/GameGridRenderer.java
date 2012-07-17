@@ -20,10 +20,7 @@ import com.happydroids.droidtowers.graphics.Overlays;
 import com.happydroids.droidtowers.graphics.TransitLine;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
@@ -113,7 +110,9 @@ public class GameGridRenderer extends GameLayer {
 
     shapeRenderer.begin(ShapeType.FilledRectangle);
 
-    for (GridObject gridObject : gameGrid.getObjects()) {
+    LinkedList<GridObject> objects = gameGrid.getObjects();
+    for (int i = 0, objectsSize = objects.size(); i < objectsSize; i++) {
+      GridObject gridObject = objects.get(i);
       Float returnValue = function.apply(gridObject);
       if (returnValue != null) {
         baseColor.a = returnValue;
@@ -146,7 +145,8 @@ public class GameGridRenderer extends GameLayer {
   private void renderGridObjects(SpriteBatch spriteBatch) {
     spriteBatch.begin();
 
-    for (GridObject child : objectsRenderOrder) {
+    for (int i = 0, objectsRenderOrderSize = objectsRenderOrder.size(); i < objectsRenderOrderSize; i++) {
+      GridObject child = objectsRenderOrder.get(i);
       child.render(spriteBatch, renderTintColor);
     }
 
