@@ -7,10 +7,6 @@
   <property name="root.dir" value="../"/>
   <property name="tools.dir" value="${root.dir}/tools"/>
 
-  <property name="happydroids.common" value="${root.dir}/happydroids-common"/>
-  <property name="happydroids.common.source" value="${happydroids.common}/src"/>
-  <property name="happydroids.common.libs" value="${happydroids.common}/libs/main"/>
-
   <property name="droidtowers.main" value="${root.dir}/main"/>
   <property name="droidtowers.main.source" value="${droidtowers.main}/source"/>
   <property name="droidtowers.main.libs" value="${droidtowers.main}/libs/main"/>
@@ -20,7 +16,6 @@
   <property name="droidtowers.android-shared.libs" value="${droidtowers.android-shared}/libs"/>
 
   <path id="happydroids-classpath">
-    <fileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
     <fileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
     <file file="${tools.dir}/jsr305-2.0.0.jar"/>
   </path>
@@ -28,12 +23,10 @@
   <target name="-pre-build">
     <mkdir dir="${out.dir}/classes-shared"/>
     <javac destdir="${out.dir}/classes" classpathref="happydroids-classpath">
-      <src path="${happydroids.common.source}"/>
       <src path="${droidtowers.main.source}"/>
     </javac>
 
     <unjar dest="${out.dir}/classes" overwrite="false">
-      <fileset dir="${happydroids.common.libs}" includes="**/*.jar"/>
       <fileset dir="${droidtowers.main.libs}" includes="**/*.jar"/>
       <file file="${tools.dir}/jsr305-2.0.0.jar"/>
     </unjar>

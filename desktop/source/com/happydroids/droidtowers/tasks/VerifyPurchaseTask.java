@@ -30,10 +30,14 @@ public class VerifyPurchaseTask extends BackgroundTask {
     Gdx.app.postRunnable(new Runnable() {
       @Override
       public void run() {
-        if (!payment.wasRefunded()) {
-          Platform.getPurchaseManager().purchaseItem(payment.getItemId(), payment.getOrderId());
-        } else {
-          Platform.getPurchaseManager().revokeItem(payment.getItemId());
+        try {
+          if (!payment.wasRefunded()) {
+            Platform.getPurchaseManager().purchaseItem(payment.getItemId(), payment.getOrderId());
+          } else {
+            Platform.getPurchaseManager().revokeItem(payment.getItemId());
+          }
+        } catch (NullPointerException ignored) {
+          // TODO: FIX THIS SHIT.
         }
       }
     });

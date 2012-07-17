@@ -4,10 +4,9 @@
 
 package com.happydroids.droidtowers.gamestate.server;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.happydroids.droidtowers.jackson.Vector2Serializer;
 import com.happydroids.droidtowers.jackson.Vector3Serializer;
+import com.happydroids.security.SecurePreferences;
 import com.happydroids.server.HappyDroidService;
 import org.apache.http.client.methods.HttpRequestBase;
 
@@ -18,7 +17,7 @@ public class TowerGameService extends HappyDroidService {
   public static final String SESSION_TOKEN = "SESSION_TOKEN";
   public static final String DEVICE_ID = "DEVICE_ID";
 
-  private Preferences preferences;
+  private SecurePreferences preferences;
   private boolean authenticated;
   private Device device;
   private RunnableQueue postAuthRunnables;
@@ -32,16 +31,6 @@ public class TowerGameService extends HappyDroidService {
 //    getObjectMapper().addDeserializer(Class.class, new TowerGameClassDeserializer());
     getObjectMapper().addSerializer(new Vector3Serializer());
     getObjectMapper().addSerializer(new Vector2Serializer());
-
-    initializePreferences();
-  }
-
-  public void initializePreferences() {
-    preferences = Gdx.app.getPreferences("com.happydroids.droidtowers");
-    if (!preferences.contains(DEVICE_ID)) {
-      preferences.putString(DEVICE_ID, UUID.randomUUID().toString().replaceAll("-", ""));
-      preferences.flush();
-    }
   }
 
   public static TowerGameService instance() {
@@ -53,24 +42,24 @@ public class TowerGameService extends HappyDroidService {
   }
 
   public String getSessionToken() {
-    return preferences.getString(SESSION_TOKEN, null);
+    return getPreferences().getString(SESSION_TOKEN, null);
   }
 
   public String getDeviceId() {
-    return preferences.getString(DEVICE_ID);
+    return getPreferences().getString(DEVICE_ID);
   }
 
   public synchronized void setSessionToken(String token) {
     if (token != null) {
-      preferences.putString(SESSION_TOKEN, token);
-      preferences.flush();
+      getPreferences().putString(SESSION_TOKEN, token);
+      getPreferences().flush();
 
       authenticationFinished = true;
       authenticated = true;
       postAuthRunnables.runAll();
     } else {
-      preferences.remove(SESSION_TOKEN);
-      preferences.flush();
+      getPreferences().remove(SESSION_TOKEN);
+      getPreferences().flush();
     }
   }
 
@@ -105,12 +94,12 @@ public class TowerGameService extends HappyDroidService {
   }
 
   public void setAudioState(boolean audioEnabled) {
-    preferences.putBoolean("audioState", audioEnabled);
-    preferences.flush();
+    getPreferences().putBoolean("audioState", audioEnabled);
+    getPreferences().flush();
   }
 
   public boolean getAudioState() {
-    return preferences.getBoolean("audioState", true);
+    return getPreferences().getBoolean("audioState", true);
   }
 
   public RunnableQueue getPostAuthRunnables() {
@@ -129,11 +118,19 @@ public class TowerGameService extends HappyDroidService {
   }
 
   public void setDeviceId(String deviceId) {
-    preferences.putString(DEVICE_ID, deviceId);
-    preferences.flush();
+    getPreferences().putString(DEVICE_ID, deviceId);
+    getPreferences().flush();
   }
 
-  public Preferences getPreferences() {
+  public SecurePreferences getPreferences() {
+    if (preferences == null) {
+      preferences = new SecurePreferences("com.happydroids.droidtowers");
+      if (!preferences.contains(DEVICE_ID)) {
+        preferences.putString(DEVICE_ID, UUID.randomUUID().toString().replaceAll("-", ""));
+        preferences.flush();
+      }
+    }
+
     return preferences;
   }
 }

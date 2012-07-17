@@ -34,7 +34,7 @@ public class AmazonPurchaseObserver extends PurchasingObserver {
       case SUCCESSFUL:
         Receipt receipt = purchaseResponse.getReceipt();
         String purchaseToken = receipt != null ? receipt.getPurchaseToken() : "UNKNOWN_AMAZON?";
-        platformPurchaseManger.purchaseItem("amazon", itemSku, purchaseToken);
+        platformPurchaseManger.purchaseItem(itemSku, purchaseToken);
         break;
       case FAILED:
       case INVALID_SKU:

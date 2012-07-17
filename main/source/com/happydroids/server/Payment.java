@@ -39,7 +39,7 @@ public class Payment extends HappyDroidServiceObject {
   }
 
   public boolean wasRefunded() {
-    return refundedOn == null;
+    return refundedOn != null;
   }
 
   public String getOrderId() {

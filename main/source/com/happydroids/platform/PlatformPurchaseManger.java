@@ -4,12 +4,13 @@
 
 package com.happydroids.platform;
 
-import com.badlogic.gdx.Preferences;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.events.PurchaseEvent;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.platform.purchase.DroidTowerVersions;
+import com.happydroids.platform.purchase.RefundEvent;
+import com.happydroids.security.SecurePreferences;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +20,7 @@ import static com.happydroids.platform.purchase.DroidTowerVersions.UNLIMITED_299
 public abstract class PlatformPurchaseManger {
   private static Runnable initializeRunnable;
   protected final HashMap<DroidTowerVersions, String> itemSkus;
-  protected final Preferences purchases;
+  protected final SecurePreferences purchases;
   private boolean purchasesEnabled;
   private EventBus eventBus;
 
@@ -39,20 +40,21 @@ public abstract class PlatformPurchaseManger {
     PlatformPurchaseManger.initializeRunnable = initializeRunnable;
   }
 
-  public void purchaseItem(String source, String itemId, String purchaseToken) {
-    purchaseItem(itemId, purchaseToken);
-    eventBus.post(new PurchaseEvent(purchaseToken, source, itemId));
-  }
-
   public void purchaseItem(String itemId, String purchaseToken) {
-    purchases.putString(itemId, purchaseToken);
-    purchases.flush();
+    if (!purchases.contains(itemId)) {
+      purchases.putString(itemId, purchaseToken);
+      purchases.flush();
+
+      eventBus.post(new PurchaseEvent(purchaseToken, itemId));
+    }
   }
 
   public void revokeItem(String itemId) {
     if (purchases.contains(itemId)) {
       purchases.remove(itemId);
       purchases.flush();
+
+      eventBus.post(new RefundEvent(itemId));
     }
   }
 
@@ -70,7 +72,7 @@ public abstract class PlatformPurchaseManger {
     requestPurchase(getSkuForVersion(UNLIMITED_299));
   }
 
-  public Preferences getPurchases() {
+  public SecurePreferences getPurchases() {
     return purchases;
   }
 

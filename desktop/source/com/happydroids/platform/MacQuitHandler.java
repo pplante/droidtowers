@@ -4,10 +4,7 @@
 
 package com.happydroids.platform;
 
-import com.apple.eawt.AppEvent;
-import com.apple.eawt.Application;
-import com.apple.eawt.QuitHandler;
-import com.apple.eawt.QuitResponse;
+import com.apple.eawt.*;
 import com.badlogic.gdx.Gdx;
 
 public class MacQuitHandler {
@@ -18,5 +15,6 @@ public class MacQuitHandler {
         Gdx.app.exit();
       }
     });
+    Application.getApplication().setQuitStrategy(QuitStrategy.SYSTEM_EXIT_0);
   }
 }

@@ -8,7 +8,6 @@ import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -39,6 +38,7 @@ import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.types.*;
 import com.happydroids.platform.Platform;
+import com.happydroids.security.SecurePreferences;
 import com.happydroids.utils.BackgroundTask;
 
 import java.net.URI;
@@ -71,11 +71,11 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
 
     Gdx.app.error("lifecycle", "create");
     if (Gdx.app.getType().equals(Desktop)) {
-      Preferences displayPrefs = TowerGameService.instance().getPreferences();
+      SecurePreferences displayPrefs = TowerGameService.instance().getPreferences();
       if (displayPrefs.contains("width") && displayPrefs.contains("height") && displayPrefs.contains("fullscreen")) {
         Gdx.graphics.setDisplayMode(displayPrefs.getInteger("width"), displayPrefs.getInteger("height"), displayPrefs.getBoolean("fullscreen"));
       } else {
-        Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode());
+        Gdx.graphics.setDisplayMode(960, 540, false);
       }
     }
 

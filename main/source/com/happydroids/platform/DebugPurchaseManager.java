@@ -25,6 +25,6 @@ public class DebugPurchaseManager extends PlatformPurchaseManger {
 
   @Override
   public void requestPurchase(String itemId) {
-    purchaseItem("debugger", itemId, UUID.randomUUID().toString());
+    purchaseItem(itemId, UUID.randomUUID().toString());
   }
 }

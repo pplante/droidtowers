@@ -7,6 +7,9 @@ package com.happydroids.server;
 import com.happydroids.HappyDroidConsts;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
 
 public class ApiRunnable<T extends HappyDroidServiceObject> {
   public void onSuccess(HttpResponse response, T object) {
@@ -18,7 +21,11 @@ public class ApiRunnable<T extends HappyDroidServiceObject> {
     if (HappyDroidConsts.DEBUG) {
       System.out.println("HTTP ERR: " + statusCode);
       if (response != null) {
-        System.out.println("HTTP RES: " + response.getStatusLine());
+        try {
+          System.out.println("HTTP RES: " + response.getStatusLine() + "\n" + EntityUtils.toString(response.getEntity()));
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
       }
     }
   }

@@ -13,7 +13,7 @@ public class AppletPurchaseManager extends PlatformPurchaseManger {
 
   public AppletPurchaseManager() {
     super();
-    itemSkus.put(DroidTowerVersions.UNLIMITED_299, "com.happydroids.droidtowers.versions.unlimited299");
+    itemSkus.put(DroidTowerVersions.UNLIMITED_299, "com.happydroids.droidtowers.version.unlimited299");
   }
 
   @Override

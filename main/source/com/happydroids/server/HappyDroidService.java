@@ -224,4 +224,6 @@ public class HappyDroidService {
   public boolean isAuthenticated() {
     return false;
   }
+
+
 }

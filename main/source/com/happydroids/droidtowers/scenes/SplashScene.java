@@ -95,21 +95,26 @@ public abstract class SplashScene extends Scene {
   }
 
   private void makeCityScape() {
+
     Group cityScape = new Group();
 
-    Image cityScapeLeft = new Image(atlas2.findRegion("cityscape-left"), fit, Align.BOTTOM | Align.LEFT);
-    cityScapeLeft.height = ((int) Math.min(cityScapeLeft.getRegion().getRegionHeight(), getStage().height() * 0.45f));
-    cityScapeLeft.layout();
-
+    Image cityScapeLeft = new Image(atlas2.findRegion("cityscape-left"), fit, Align.BOTTOM);
     Image cityScapeRight = new Image(atlas2.findRegion("cityscape-right"), fit, Align.BOTTOM);
-    cityScapeRight.height = ((int) Math.min(cityScapeRight.getRegion().getRegionHeight(), getStage().height() * 0.45f));
-    cityScapeRight.layout();
-    cityScapeRight.x = ((int) (getStage().right() - cityScapeRight.getImageWidth()));
+    Image cityScapeMiddle = new Image(TowerAssetManager.texture("backgrounds/cityscape-middle.png"), stretchX, Align.BOTTOM);
+    cityScapeLeft.width = Math.min(getStage().width() * 0.33f, cityScapeLeft.getImageWidth());
+    cityScapeLeft.height = Math.min(getStage().height() * 0.33f, cityScapeLeft.getImageHeight());
+    cityScapeLeft.pack();
 
-    Image cityScapeMiddle = new Image(atlas1.findRegion("cityscape-middle"), stretchX, Align.BOTTOM);
-    cityScapeMiddle.x = ((int) (cityScapeLeft.getImageWidth() + 1));
-    cityScapeMiddle.width = ((int) getStage().width() - cityScapeLeft.getImageWidth() - cityScapeRight.getImageWidth() - 2);
-    cityScapeMiddle.layout();
+    cityScapeRight.width = Math.min(getStage().width() * 0.33f, cityScapeRight.getImageWidth());
+    cityScapeRight.height = Math.min(getStage().height() * 0.33f, cityScapeRight.getImageHeight());
+    cityScapeRight.pack();
+
+    cityScapeRight.x = getStage().right() - cityScapeRight.width;
+
+    cityScapeMiddle.width = getStage().width() * 0.33f;
+    cityScapeMiddle.height = getStage().height() * 0.33f;
+    cityScapeMiddle.x = cityScapeLeft.width;
+    cityScapeMiddle.width = getStage().width() - cityScapeLeft.width - cityScapeRight.width - 1;
 
     cityScape.addActor(cityScapeLeft);
     cityScape.addActor(cityScapeMiddle);
@@ -197,7 +202,7 @@ public abstract class SplashScene extends Scene {
   @Override
   public void render(float deltaTime) {
     if (!createdSplashScene) {
-      if (assetManager().isLoaded("backgrounds/splash1.txt") && assetManager().isLoaded("backgrounds/splash2.txt") && assetManager().isLoaded("happy-droid.txt")) {
+      if (assetManager().isLoaded("backgrounds/splash1.txt") && assetManager().isLoaded("backgrounds/splash2.txt") && assetManager().isLoaded("happy-droid.txt") && assetManager().isLoaded("backgrounds/cityscape-middle.png")) {
         buildSplashScene();
       }
     }

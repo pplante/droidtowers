@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
@@ -19,6 +18,7 @@ import com.google.common.collect.Ordering;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
+import com.happydroids.security.SecurePreferences;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.List;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class OptionsDialog extends Dialog {
-  private final Preferences displayPrefs;
+  private final SecurePreferences displayPrefs;
   private final CheckBox fullscreenCheckbox;
   private SelectBox displayResolution;
   private List<Graphics.DisplayMode> displayModeList;
@@ -72,12 +72,19 @@ public class OptionsDialog extends Dialog {
   }
 
   private SelectBox makeResolutionSelectBox() {
+    List<Graphics.DisplayMode> displayModes = Lists.newArrayList();
+    for (Graphics.DisplayMode displayMode : Gdx.graphics.getDisplayModes()) {
+      if (displayMode.width > 800 && displayMode.height > 480) {
+        displayModes.add(displayMode);
+      }
+    }
+
     displayModeList = Ordering.natural().onResultOf(new Function<Graphics.DisplayMode, Comparable>() {
       @Override
       public Comparable apply(@Nullable Graphics.DisplayMode input) {
         return input.width * input.height * input.bitsPerPixel;
       }
-    }).sortedCopy(Lists.newArrayList(Gdx.graphics.getDisplayModes()));
+    }).sortedCopy(Lists.newArrayList(displayModes));
 
     List<String> displayModeStrings = Lists.newArrayList();
     for (Graphics.DisplayMode displayMode : displayModeList) {
@@ -85,7 +92,10 @@ public class OptionsDialog extends Dialog {
     }
 
     displayResolution = new SelectBox(displayModeStrings.toArray(), TowerAssetManager.getCustomSkin());
-    displayResolution.setSelection(displayModeStrings.indexOf(Gdx.graphics.getWidth() + "x" + Gdx.graphics.getHeight()));
+    int currentResolution = displayModeStrings.indexOf(Gdx.graphics.getWidth() + "x" + Gdx.graphics.getHeight());
+    if (currentResolution > -1) {
+      displayResolution.setSelection(currentResolution);
+    }
 
     displayResolution.setSelectionListener(new SelectionListener() {
       @Override

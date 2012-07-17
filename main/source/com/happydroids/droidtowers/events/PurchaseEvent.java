@@ -6,12 +6,10 @@ package com.happydroids.droidtowers.events;
 
 public class PurchaseEvent {
   private final String purchaseToken;
-  private final String source;
   private final String itemId;
 
-  public PurchaseEvent(String purchaseToken, String source, String itemId) {
+  public PurchaseEvent(String purchaseToken, String itemId) {
     this.purchaseToken = purchaseToken;
-    this.source = source;
     this.itemId = itemId;
   }
 
@@ -21,9 +19,5 @@ public class PurchaseEvent {
 
   public String orderId() {
     return purchaseToken;
-  }
-
-  public String sourceMarket() {
-    return source;
   }
 }

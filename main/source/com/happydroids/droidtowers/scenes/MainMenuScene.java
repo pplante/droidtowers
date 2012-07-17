@@ -17,6 +17,7 @@ import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gui.FontManager;
+import com.happydroids.droidtowers.gui.VibrateClickListener;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
 import com.happydroids.droidtowers.scenes.components.MainMenuButtonPanel;
 import com.happydroids.droidtowers.tween.TweenSystem;
@@ -42,7 +43,7 @@ public class MainMenuScene extends SplashScene {
     cloudGameSaves = new CloudGameSaveCollection();
 
     Label versionLabel = FontManager.Default.makeLabel(String.format("v%s (%s, %s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA.substring(0, 8), HappyDroidService.getDeviceOSMarketName()));
-    versionLabel.setColor(Color.DARK_GRAY);
+    versionLabel.setColor(Color.LIGHT_GRAY);
     versionLabel.x = getStage().width() - versionLabel.width - 5;
     versionLabel.y = getStage().height() - versionLabel.height - 5;
     addActor(versionLabel);
@@ -63,34 +64,62 @@ public class MainMenuScene extends SplashScene {
     if (!builtOutMenu && preloadFinished()) {
       builtOutMenu = true;
 
-      buildMenuComponents();
+      buildMenuComponents(textureAtlas("hud/menus.txt"));
+
 //      DebugUtils.loadFirstGameFound();
 //      DebugUtils.createNonSavableGame(true);
 //      new PurchaseDroidTowersUnlimitedPrompt().show();
     }
   }
 
-  @Override
-  public void dispose() {
-  }
-
-  private void buildMenuComponents() {
+  private void buildMenuComponents(final TextureAtlas menuButtonAtlas) {
     progressPanel.markToRemove(true);
 
-    TextureAtlas menuButtonAtlas = textureAtlas("hud/menus.txt");
     addActor(makeLibGDXLogo(menuButtonAtlas));
     addActor(makeHappyDroidsLogo(menuButtonAtlas));
 
+    if (!Platform.getPurchaseManager().hasPurchasedUnlimitedVersion()) {
+      makeUpgradeToUnlimitedButton(menuButtonAtlas);
+    }
+
     MainMenuButtonPanel menuButtonPanel = new MainMenuButtonPanel();
     menuButtonPanel.pack();
-    menuButtonPanel.y = droidTowersLogo.y - menuButtonPanel.height + scale(30);
+    menuButtonPanel.y = 50;
     menuButtonPanel.x = -droidTowersLogo.getImageWidth();
     addActor(menuButtonPanel);
 
-    Tween.to(menuButtonPanel, WidgetAccessor.POSITION, 500)
+    Tween.to(menuButtonPanel, WidgetAccessor.POSITION, CAMERA_PAN_DOWN_DURATION)
             .target(50 + (45 * (droidTowersLogo.getImageWidth() / droidTowersLogo.getRegion().getRegionWidth())), menuButtonPanel.y)
             .ease(TweenEquations.easeInOutExpo)
             .start(TweenSystem.manager());
+  }
+
+  private void makeUpgradeToUnlimitedButton(TextureAtlas buttonAtlas) {
+    Image upgradeToUnlimited = new Image(buttonAtlas.findRegion("upgrade-to-unlimited"));
+    upgradeToUnlimited.pack();
+    upgradeToUnlimited.y = getStage().centerY() - (upgradeToUnlimited.getImageHeight() / 2);
+    upgradeToUnlimited.x = getStage().right() - (upgradeToUnlimited.width + scale(50));
+    upgradeToUnlimited.originX = upgradeToUnlimited.width / 2;
+    upgradeToUnlimited.originY = upgradeToUnlimited.height / 2;
+    addActor(upgradeToUnlimited);
+
+    Tween.to(upgradeToUnlimited, WidgetAccessor.SCALE, 2000)
+            .target(0.75f, 0.75f)
+            .delay(1.5f)
+            .repeatYoyo(Tween.INFINITY, 50)
+            .ease(TweenEquations.easeInElastic)
+            .start(TweenSystem.manager());
+
+    upgradeToUnlimited.setClickListener(new VibrateClickListener() {
+      @Override
+      public void onClick(Actor actor, float x, float y) {
+        Platform.getPurchaseManager().requestPurchaseForUnlimitedVersion();
+      }
+    });
+  }
+
+  @Override
+  public void dispose() {
   }
 
   private Image makeHappyDroidsLogo(TextureAtlas atlas) {

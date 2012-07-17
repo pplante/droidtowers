@@ -14,6 +14,7 @@ public class DesktopGame {
   public static void main(final String[] args) {
     PlatformQuitHandlerFactory.initialize();
 
+    TowerGameService.setDeviceOSMarketName("stripe");
     TowerGameService.setDeviceType(Platform.getOSType().name());
     TowerGameService.setDeviceOSVersion(System.getProperty("os.version"));
 
@@ -37,7 +38,7 @@ public class DesktopGame {
         Platform.setUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
         Platform.setBrowserUtil(new DesktopBrowserUtil());
         Platform.setConnectionMonitor(new DesktopConnectionMonitor());
-        Platform.setPurchaseManager(new DebugPurchaseManager());
+        Platform.setPurchaseManager(new DesktopPurchaseManager());
 
 //        new GameVersionCheckTask().run();
       }

@@ -110,7 +110,7 @@ public class DroidTowersGooglePlay extends AndroidApplication implements Billing
       case PURCHASED:
         List<Transaction> transactions = BillingController.getTransactions(this, itemId);
         for (Transaction transaction : transactions) {
-          purchaseManager.purchaseItem("googleplay", transaction.productId, transaction.orderId);
+          purchaseManager.purchaseItem(transaction.productId, transaction.orderId);
         }
         break;
       default:
