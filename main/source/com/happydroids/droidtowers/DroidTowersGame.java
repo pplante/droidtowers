@@ -57,9 +57,11 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
   private FrameBuffer frameBuffer;
   private static GameSoundController soundController;
   private final Runnable afterInitRunnable;
+  private final StringBuilder debugInfo;
 
   public DroidTowersGame(Runnable afterInitRunnable) {
     this.afterInitRunnable = afterInitRunnable;
+    debugInfo = new StringBuilder();
   }
 
   public void create() {
@@ -209,16 +211,19 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
       float javaHeapInBytes = Gdx.app.getJavaHeap() / TowerConsts.ONE_MEGABYTE;
       float nativeHeapInBytes = Gdx.app.getNativeHeap() / TowerConsts.ONE_MEGABYTE;
 
-      String infoText = String.format("fps: %02d, camera(%.1f, %.1f, %.1f)\nmem: (java %.1f Mb, native %.1f Mb, gpu %.1f Mb)",
-                                             Gdx.graphics.getFramesPerSecond(),
-                                             SceneManager.activeScene().getCamera().position.x,
-                                             SceneManager.activeScene().getCamera().position.y,
-                                             SceneManager.activeScene().getCamera().zoom,
-                                             javaHeapInBytes,
-                                             nativeHeapInBytes,
-                                             TowerAssetManager.assetManager().getMemoryInMegabytes());
+      debugInfo.delete(0, debugInfo.length());
+      debugInfo.append("fps: ");
+      debugInfo.append(Gdx.graphics.getFramesPerSecond());
+      debugInfo.append("\nmem: (java ");
+      debugInfo.append((int) javaHeapInBytes);
+      debugInfo.append("Mb, heap: ");
+      debugInfo.append((int) nativeHeapInBytes);
+      debugInfo.append("Mb, gpu: ");
+      debugInfo.append((int) TowerAssetManager.assetManager().getMemoryInMegabytes());
+      debugInfo.append("Mb)");
+
       spriteBatch.begin();
-      menloBitmapFont.drawMultiLine(spriteBatch, infoText, 5, 35);
+      menloBitmapFont.drawMultiLine(spriteBatch, debugInfo, 5, 35);
       spriteBatch.end();
     }
   }
