@@ -4,6 +4,7 @@
 
 package com.happydroids.platform;
 
+import com.badlogic.gdx.Gdx;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.platform.purchase.DroidTowerVersions;
 
@@ -15,8 +16,8 @@ public class DesktopPurchaseManager extends PlatformPurchaseManger {
   }
 
   @Override
-  public void requestPurchase(String itemId) {
-    Platform.getBrowserUtil().launchWebBrowser(HappyDroidConsts.HAPPYDROIDS_URI + "/droidtowers/purchase");
+  public void requestPurchase(final String itemId) {
+    Gdx.app.postRunnable(new LaunchBrowserAfterDelay(HappyDroidConsts.HAPPYDROIDS_URI + "/commerce/purchase/overview?sku=" + itemId, 0.5f));
   }
 
   @Override

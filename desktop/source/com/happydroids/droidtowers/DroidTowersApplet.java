@@ -15,6 +15,7 @@ import com.happydroids.platform.DesktopConnectionMonitor;
 import com.happydroids.platform.DesktopUncaughtExceptionHandler;
 import com.happydroids.platform.Platform;
 import netscape.javascript.JSObject;
+import org.apache.commons.lang3.StringUtils;
 
 public class DroidTowersApplet extends LwjglApplet {
 
@@ -52,11 +53,16 @@ public class DroidTowersApplet extends LwjglApplet {
         TowerGameService.instance().setSessionToken((String) happyDroids.getMember("sessionToken"));
 
         ((AppletPurchaseManager) Platform.getPurchaseManager()).setJavascriptInterface(happyDroids);
+
+        String serial = (String) happyDroids.getMember("sessionToken");
+        if (!StringUtils.isEmpty(serial)) {
+          purchaseComplete(serial);
+        }
       }
     });
   }
 
-  public void purchaseComplete(final String paymentUri) {
+  public void purchaseComplete(final String serial) {
     Gdx.app.postRunnable(new Runnable() {
       @Override
       public void run() {
@@ -64,7 +70,7 @@ public class DroidTowersApplet extends LwjglApplet {
         progressDialog.hideButtons(true)
                 .setMessage("Verifying Purchase")
                 .show();
-        new VerifyPurchaseTask(paymentUri, progressDialog).run();
+        new VerifyPurchaseTask(serial, progressDialog).run();
       }
     });
   }

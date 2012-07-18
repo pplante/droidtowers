@@ -4,6 +4,7 @@
 
 package com.happydroids.platform;
 
+import com.badlogic.gdx.Gdx;
 import com.happydroids.server.CrashReport;
 
 import javax.swing.*;
@@ -19,5 +20,7 @@ public class DesktopUncaughtExceptionHandler extends HappyDroidUncaughtException
     new CrashReport(throwable).save();
 
     JOptionPane.showMessageDialog(null, generateExceptionErrorString(throwable), "Ooops!", JOptionPane.ERROR_MESSAGE);
+    
+    Gdx.app.exit();
   }
 }

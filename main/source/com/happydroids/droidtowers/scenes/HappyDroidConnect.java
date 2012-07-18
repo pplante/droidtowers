@@ -19,7 +19,7 @@ public class HappyDroidConnect extends Scene {
     connectWindow = new ConnectToHappyDroidsWindow(getStage());
     connectWindow.setDismissCallback(new Runnable() {
       public void run() {
-        if (SceneManager.getPreviousScene() instanceof MainMenuScene) {
+        if (SceneManager.previousScene() instanceof MainMenuScene) {
           SceneManager.popScene();
         } else {
           SceneManager.changeScene(MainMenuScene.class);

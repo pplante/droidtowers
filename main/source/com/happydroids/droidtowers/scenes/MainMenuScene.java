@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.scenes;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenEquations;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -14,19 +15,23 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.droidtowers.DebugUtils;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.gui.VibrateClickListener;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
+import com.happydroids.droidtowers.gui.dialogs.ReviewDroidTowersPrompt;
 import com.happydroids.droidtowers.scenes.components.MainMenuButtonPanel;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.platform.Platform;
+import com.happydroids.security.SecurePreferences;
 import com.happydroids.server.HappyDroidService;
 
+import static com.badlogic.gdx.Application.ApplicationType.Desktop;
 import static com.happydroids.droidtowers.TowerAssetManager.preloadFinished;
 import static com.happydroids.droidtowers.TowerAssetManager.textureAtlas;
+import static com.happydroids.droidtowers.gui.dialogs.ReviewDroidTowersPrompt.RATING_TIMES_SINCE_PROMPTED;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class MainMenuScene extends SplashScene {
@@ -67,9 +72,18 @@ public class MainMenuScene extends SplashScene {
 
       buildMenuComponents(textureAtlas("hud/menus.txt"));
 
-      DebugUtils.loadFirstGameFound();
+      SecurePreferences preferences = TowerGameService.instance().getPreferences();
+
+      if (!preferences.getBoolean(ReviewDroidTowersPrompt.RATING_ADDED, false) && !preferences.getBoolean(ReviewDroidTowersPrompt.RATING_NEVER_ASK_AGAIN, false)) {
+        int timesSincePrompt = preferences.incrementInt(RATING_TIMES_SINCE_PROMPTED);
+        preferences.flush();
+
+        if (timesSincePrompt >= 3 && !Gdx.app.getType().equals(Desktop)) {
+          new ReviewDroidTowersPrompt(getStage()).show();
+        }
+      }
+//      DebugUtils.loadFirstGameFound();
 //      DebugUtils.createNonSavableGame(true);
-//      new PurchaseDroidTowersUnlimitedPrompt().show();
     }
   }
 

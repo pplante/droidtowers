@@ -25,6 +25,8 @@ public abstract class HappyDroidServiceObject {
 
   private long id;
   private String resourceUri;
+  private boolean fetchError;
+
 
   @JsonIgnore
   public abstract String getBaseResourceUri();
@@ -66,6 +68,8 @@ public abstract class HappyDroidServiceObject {
       throw new RuntimeException("resourceUri must not be null when using fetch()");
     }
 
+    fetchError = true;
+
     validateResourceUri();
 
     if (!Platform.getConnectionMonitor().isConnectedOrConnecting()) {
@@ -75,6 +79,7 @@ public abstract class HappyDroidServiceObject {
 
     HttpResponse response = HappyDroidService.instance().makeGetRequest(resourceUri, null);
     if (response != null && response.getStatusLine().getStatusCode() == 200) {
+      fetchError = false;
       copyValuesFromResponse(response);
     }
 
@@ -166,5 +171,9 @@ public abstract class HappyDroidServiceObject {
 
   public void fetch() {
     fetch(NO_OP_API_RUNNABLE);
+  }
+
+  public boolean errorWhileFetching() {
+    return fetchError;
   }
 }

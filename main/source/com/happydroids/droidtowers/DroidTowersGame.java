@@ -86,10 +86,6 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
 
     TowerGameService.setInstance(new TowerGameService());
 
-    if (!Gdx.app.getType().equals(Applet)) {
-      new RegisterDeviceTask().run();
-    }
-
     if (Gdx.graphics.isGL20Available() && Gdx.app.getType().equals(Android) && Display.isXHDPIMode()) {
       float displayScalar = 0.75f;
       frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, (int) (Gdx.graphics.getWidth() * displayScalar), (int) (Gdx.graphics.getHeight() * displayScalar), true);
@@ -161,6 +157,10 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
           SceneManager.changeScene(LaunchUriScene.class, Platform.protocolHandler.consumeUri());
         } else {
           SceneManager.changeScene(MainMenuScene.class);
+        }
+
+        if (!Gdx.app.getType().equals(Applet)) {
+          new RegisterDeviceTask().run();
         }
       }
     });
@@ -253,7 +253,7 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
 
     if (Platform.protocolHandler != null && Platform.protocolHandler.hasUri()) {
       URI launchUri = Platform.protocolHandler.consumeUri();
-      SceneManager.changeScene(LaunchUriScene.class, launchUri);
+      SceneManager.pushScene(LaunchUriScene.class, launchUri);
     } else {
       SceneManager.activeScene().resume();
     }

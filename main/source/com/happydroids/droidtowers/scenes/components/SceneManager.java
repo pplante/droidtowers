@@ -66,7 +66,7 @@ public class SceneManager {
     return activeScene;
   }
 
-  public static Scene getPreviousScene() {
+  public static Scene previousScene() {
     if (!pausedScenes.isEmpty()) {
       return pausedScenes.getFirst();
     }

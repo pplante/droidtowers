@@ -36,7 +36,11 @@ public class MainMenuButtonPanel extends Table {
     dropShadowPatch = TowerAssetManager.ninePatch("swatches/drop-shadow.png", Color.WHITE, 22, 22, 22, 22);
     setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Color.DARK_GRAY));
 
-    pad(scale(BUTTON_SPACING)).padBottom(0);
+    pad(scale(BUTTON_SPACING));
+
+    if (!Gdx.app.getType().equals(Applet)) {
+      padBottom(0);
+    }
 
     defaults().space(scale(BUTTON_SPACING));
 
@@ -68,6 +72,7 @@ public class MainMenuButtonPanel extends Table {
     TextButton aboutButton = RobotoBold18.makeTextButton("credits");
     optionsAndCreditsRow.add(aboutButton).expandX();
 
+    //noinspection PointlessBooleanExpression
     if (HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT && !Gdx.app.getType().equals(Applet)) {
       row();
       final TextButton connectToHappyDroids = RobotoBold18.makeTextButton("login to happydroids.com");

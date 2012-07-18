@@ -10,13 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.server.TemporaryToken;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.utils.PeriodicBackgroundTask;
-import com.happydroids.platform.Platform;
+import com.happydroids.platform.LaunchBrowserAfterDelay;
 import com.happydroids.server.ApiRunnable;
 import com.happydroids.server.HappyDroidServiceObject;
 import org.apache.http.HttpResponse;
@@ -25,35 +24,32 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
   private static final String TAG = ConnectToHappyDroidsWindow.class.getSimpleName();
   private TemporaryToken token;
   private PeriodicBackgroundTask periodicBackgroundTask;
-  private final TextButton accessTokenButton;
+  private final TextButton openBrowserButton;
   private Runnable postConnectRunnable;
+  private final Label sessionStatus;
 
   public ConnectToHappyDroidsWindow(Stage stage) {
     super("Connect to Happy Droids", stage);
 
+
+    openBrowserButton = FontManager.RobotoBold18.makeTextButton("Open my web browser");
+    openBrowserButton.visible = false;
+
+    sessionStatus = FontManager.Roboto24.makeLabel("Waiting for You to login...");
+
     clear();
-    row().pad(10);
-    add(FontManager.Roboto24.makeLabel("Connecting your Facebook account to Happy Droids will enable:\n\n* Towers to be stored in the cloud\n* Sharing towers with friends\n* Other stuff!")).expandX();
-    row().pad(10);
-    add(FontManager.Roboto24.makeLabel("To get started, goto happydroids.com\n then click the \"Connect to Facebook\" button."));
-    row().pad(10);
-    add(FontManager.Roboto24.makeLabel("After logging in, type the code below to connect your game."));
-    row().expand();
+    defaults().center();
+    add(FontManager.Roboto24.makeLabel("Connect to happydroids.com"));
 
-    accessTokenButton = FontManager.RobotoBold18.makeTextButton("CODE: Reticulating splines...");
-    accessTokenButton.visible = false;
+    row();
+    add(sessionStatus);
 
-    final Label sessionStatus = FontManager.Roboto24.makeLabel("Waiting for You to login...");
+    row();
+    add(openBrowserButton);
 
-    final Table bottom = new Table();
-    bottom.defaults();
-    bottom.row().space(20);
-    bottom.add(accessTokenButton);
-    bottom.add(sessionStatus).expand();
-    add(bottom).fill();
 
     token = new TemporaryToken();
-    token.save(new TemporaryTokenApiRunnable(sessionStatus, bottom));
+    token.save(new TemporaryTokenApiRunnable());
   }
 
   public void setPostConnectRunnable(Runnable postConnectRunnable) {
@@ -61,18 +57,9 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
   }
 
   private class TemporaryTokenApiRunnable extends ApiRunnable {
-    private final Label sessionStatus;
-    private final Table bottom;
-
-    public TemporaryTokenApiRunnable(Label sessionStatus, Table bottom) {
-      this.sessionStatus = sessionStatus;
-      this.bottom = bottom;
-    }
-
     @Override
     public void onError(HttpResponse response, int statusCode, HappyDroidServiceObject object) {
       sessionStatus.setText(String.format("Login failed: %d!", statusCode));
-      bottom.pack();
 
       new Dialog(DroidTowersGame.getRootUiStage())
               .setTitle("Connection Error")
@@ -88,17 +75,17 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
 
     @Override
     public void onSuccess(HttpResponse response, HappyDroidServiceObject object) {
-      accessTokenButton.setText("CODE: " + token.getValue());
-      accessTokenButton.visible = true;
+      openBrowserButton.setText("CODE: " + token.getValue());
+      openBrowserButton.visible = true;
       sessionStatus.visible = true;
 
-      accessTokenButton.setClickListener(new ClickListener() {
+      openBrowserButton.setClickListener(new ClickListener() {
         public void click(Actor actor, float x, float y) {
-          Platform.getBrowserUtil().launchWebBrowser(token.getClickableUri());
+          Gdx.app.postRunnable(new LaunchBrowserAfterDelay(token.getClickableUri(), 1.5f));
         }
       });
 
-      Platform.getBrowserUtil().launchWebBrowser(token.getClickableUri());
+      openBrowserButton.click(1, 1);
 
       periodicBackgroundTask = new AccessTokenCheckStateTask();
       periodicBackgroundTask.run();
@@ -137,10 +124,31 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
       @Override
       public synchronized void afterExecute() {
         if (token != null && token.hasSessionToken()) {
-          sessionStatus.setText("Login successful!");
           TowerGameService.instance().setSessionToken(token.getSessionToken());
+
+          new Dialog()
+                  .setTitle("Connect to happydroids.com")
+                  .setMessage("Congratulations, you are now connected to happydroids.com.\n\nYou can now share your Towers with friends\nby clicking the view neighbors button in game.")
+                  .addButton("Dismiss", new OnClickCallback() {
+                    @Override
+                    public void onClick(Dialog dialog) {
+                      dialog.dismiss();
+                      dismiss();
+                    }
+                  })
+                  .show();
         } else {
-          sessionStatus.setText("Login failed!");
+          new Dialog()
+                  .setTitle("Connect to happydroids.com")
+                  .setMessage("Sorry, but we were unable to connect to happydroids.com.\n\nPlease try again later.")
+                  .addButton("Dismiss", new OnClickCallback() {
+                    @Override
+                    public void onClick(Dialog dialog) {
+                      dialog.dismiss();
+                      dismiss();
+                    }
+                  })
+                  .show();
         }
 
         if (postConnectRunnable != null) {

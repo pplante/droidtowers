@@ -37,7 +37,9 @@ public class SecurePreferences {
   }
 
   public void putString(String key, String value) {
-    values.put(key, value);
+    if (key != null) {
+      values.put(key, value);
+    }
   }
 
   public void flush() {
@@ -86,5 +88,20 @@ public class SecurePreferences {
 
   public void putInteger(String key, int value) {
     values.put(key, String.valueOf(value));
+  }
+
+  public int incrementInt(String key) {
+    int integer = getInteger(key, 0) + 1;
+    putInteger(key, integer);
+
+    return integer;
+  }
+
+  private int getInteger(String key, int defaultValue) {
+    if (!values.containsKey(key)) {
+      return defaultValue;
+    }
+
+    return Integer.parseInt(values.get(key));
   }
 }

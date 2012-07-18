@@ -17,6 +17,7 @@ public class Payment extends HappyDroidServiceObject {
   protected String source;
   protected Date receivedOn;
   protected Date refundedOn;
+  protected String serial;
 
   public Payment(String itemId, String orderId, String source) {
     this.itemId = itemId;
@@ -48,5 +49,9 @@ public class Payment extends HappyDroidServiceObject {
 
   public String getItemId() {
     return itemId;
+  }
+
+  public String getSerial() {
+    return serial;
   }
 }
