@@ -15,7 +15,7 @@ def retreive_build_number():
 
 if __name__ == '__main__':
     try:
-        releases_root = '/var/www/happydroids.com/public/releases'
+        releases_root = '/apps/alf.happydroids.com/public/releases'
         new_release_root = '%s/%s' % (releases_root, retreive_build_number())
         SCP_TARGET_PATH = 'pplante@happydroids.com:%s' % (new_release_root,)
 
