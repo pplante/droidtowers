@@ -10,7 +10,6 @@ from datetime import datetime
 from getpass import getpass
 from pbs import git, ant, scp, pwd, cd, mkdir
 
-SCP_TARGET_PATH = 'pplante@happydroids.com:/var/www/happydroids.com/public/alphas'
 TOWER_CONSTS_JAVA = './main/source/com/happydroids/HappyDroidConsts.java'
 GOOGLE_MANIFEST_PATH = './android-google/AndroidManifest.xml'
 AMAZON_MANIFEST_PATH = './android-amazon/AndroidManifest.xml'
