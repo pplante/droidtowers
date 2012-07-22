@@ -26,7 +26,12 @@ public class CrashReport extends HappyDroidServiceObject {
     deviceOsVersion = HappyDroidService.getDeviceOSVersion();
     name = error.getClass().getCanonicalName();
     message = error.getMessage();
-    cause = error.getCause().toString();
+    Throwable errorCause = error.getCause();
+    if (errorCause != null) {
+      cause = errorCause.toString();
+    } else {
+      cause = null;
+    }
     try {
       stackTrace = HappyDroidService.instance().getObjectMapper().writeValueAsString(error.getStackTrace());
     } catch (IOException e) {

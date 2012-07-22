@@ -6,13 +6,14 @@ package com.happydroids.platform;
 
 import com.badlogic.gdx.Gdx;
 import com.happydroids.HappyDroidConsts;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.platform.purchase.DroidTowerVersions;
 
 public class DesktopPurchaseManager extends PlatformPurchaseManger {
   public DesktopPurchaseManager() {
     super();
 
-    itemSkus.put(DroidTowerVersions.UNLIMITED_299, "com.happydroids.droidtowers.version.unlimited299");
+    itemSkus.put(DroidTowerVersions.UNLIMITED_299, TowerGameService.getDeviceOSMarketName() + ".unlimited299");
   }
 
   @Override

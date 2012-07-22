@@ -4,6 +4,8 @@
 
 package com.happydroids.utils;
 
+import com.happydroids.error.ErrorUtil;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -37,7 +39,7 @@ public abstract class BackgroundTask {
   }
 
   public synchronized void onError(Throwable e) {
-    throw new RuntimeException(e);
+    ErrorUtil.rethrowError(e);
   }
 
   public final void run() {

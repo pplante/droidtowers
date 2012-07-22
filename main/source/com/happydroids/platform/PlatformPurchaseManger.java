@@ -20,7 +20,6 @@ import static com.happydroids.platform.purchase.DroidTowerVersions.UNLIMITED_299
 public abstract class PlatformPurchaseManger {
   private static Runnable initializeRunnable;
   protected final HashMap<DroidTowerVersions, String> itemSkus;
-  protected final SecurePreferences purchases;
   private boolean purchasesEnabled;
   private EventBus eventBus;
 
@@ -28,7 +27,6 @@ public abstract class PlatformPurchaseManger {
   public PlatformPurchaseManger() {
     eventBus = new EventBus(PlatformPurchaseManger.class.getSimpleName());
     purchasesEnabled = false;
-    purchases = TowerGameService.instance().getPreferences();
     if (initializeRunnable != null) {
       initializeRunnable.run();
     }
@@ -41,25 +39,25 @@ public abstract class PlatformPurchaseManger {
   }
 
   public void purchaseItem(String itemId, String purchaseToken) {
-    if (!purchases.contains(itemId)) {
-      purchases.putString(itemId, purchaseToken);
-      purchases.flush();
+    if (!TowerGameService.instance().getPreferences().contains(itemId)) {
+      TowerGameService.instance().getPreferences().putString(itemId, purchaseToken);
+      TowerGameService.instance().getPreferences().flush();
 
       eventBus.post(new PurchaseEvent(purchaseToken, itemId));
     }
   }
 
   public void revokeItem(String itemId) {
-    if (purchases.contains(itemId)) {
-      purchases.remove(itemId);
-      purchases.flush();
+    if (TowerGameService.instance().getPreferences().contains(itemId)) {
+      TowerGameService.instance().getPreferences().remove(itemId);
+      TowerGameService.instance().getPreferences().flush();
 
       eventBus.post(new RefundEvent(itemId));
     }
   }
 
   public boolean hasPurchasedUnlimitedVersion() {
-    return purchases.contains(getSkuForVersion(UNLIMITED_299));
+    return TowerGameService.instance().getPreferences().contains(getSkuForVersion(UNLIMITED_299));
   }
 
   public abstract void requestPurchase(String itemId);
@@ -73,7 +71,7 @@ public abstract class PlatformPurchaseManger {
   }
 
   public SecurePreferences getPurchases() {
-    return purchases;
+    return TowerGameService.instance().getPreferences();
   }
 
   public abstract void onStart();

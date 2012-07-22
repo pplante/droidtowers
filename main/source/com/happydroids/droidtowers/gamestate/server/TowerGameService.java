@@ -72,6 +72,7 @@ public class TowerGameService extends HappyDroidService {
     super.addDefaultHeaders(request);
 
     request.setHeader("X-Device-UUID", HappyDroidService.instance().getDeviceId());
+    request.setHeader("X-Device-Market", HappyDroidService.getDeviceOSMarketName());
     if (getSessionToken() != null) {
       request.setHeader("X-Token", getSessionToken());
     }
@@ -124,7 +125,7 @@ public class TowerGameService extends HappyDroidService {
 
   public SecurePreferences getPreferences() {
     if (preferences == null) {
-      preferences = new SecurePreferences("com.happydroids.droidtowers");
+      preferences = new SecurePreferences("com.happydroids.droidtowers." + getDeviceOSMarketName());
       if (!preferences.contains(DEVICE_ID)) {
         preferences.putString(DEVICE_ID, UUID.randomUUID().toString().replaceAll("-", ""));
         preferences.flush();

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+ */
+
 package com.happydroids.platform;/*
  * Copyright (c) 2012. HappyDroids LLC, All rights reserved.
  */
@@ -21,7 +25,7 @@ public class DesktopConnectionMonitor implements PlatformConnectionMonitor {
           networkState = response.getStatusLine().getStatusCode() == 200;
           try {
             Thread.yield();
-            Thread.sleep(5000);
+            Thread.sleep(300000);
           } catch (InterruptedException e) {
             e.printStackTrace();
           }

@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.platform.purchase;
 
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.platform.PlatformPurchaseManger;
 import com.happydroids.platform.purchase.DroidTowerVersions;
 import netscape.javascript.JSObject;
@@ -13,7 +14,7 @@ public class AppletPurchaseManager extends PlatformPurchaseManger {
 
   public AppletPurchaseManager() {
     super();
-    itemSkus.put(DroidTowerVersions.UNLIMITED_299, "com.happydroids.droidtowers.version.unlimited299");
+    itemSkus.put(DroidTowerVersions.UNLIMITED_299, TowerGameService.getDeviceOSMarketName() + ".unlimited299");
   }
 
   @Override

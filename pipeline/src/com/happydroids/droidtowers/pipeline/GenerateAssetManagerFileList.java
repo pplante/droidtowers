@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.GdxNativesLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.happydroids.droidtowers.utils.PNG;
+import com.happydroids.error.ErrorUtil;
 
 import java.io.IOException;
 
@@ -83,7 +84,7 @@ public class GenerateAssetManagerFileList {
       byte[] bytes = PNG.toPNG(pixmap);
       swatchFile.writeBytes(bytes, false);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      ErrorUtil.rethrowError(e);
     }
   }
 
