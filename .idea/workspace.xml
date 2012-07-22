@@ -34,7 +34,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="news ticker wip">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/assets/params/achievements.json" afterPath="$PROJECT_DIR$/main/assets/params/achievements.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/source/com/happydroids/platform/DesktopConnectionMonitor.java" afterPath="$PROJECT_DIR$/desktop/source/com/happydroids/platform/DesktopConnectionMonitor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/HappyDroidConsts.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/HappyDroidConsts.java" />
     </list>
     <ignored path="testgame.iws" />
@@ -141,8 +141,8 @@
       <property name="field_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByClasses" value="true" />
       <property name="exception_breakpoints_viewId" value="TABLE" />
-      <property name="field_breakpoints_viewId" value="TABLE" />
       <property name="exception_breakpoints_groupByClasses" value="true" />
+      <property name="field_breakpoints_viewId" value="TABLE" />
       <property name="method_breakpoints_groupByMethods" value="false" />
     </ui_properties>
   </component>
@@ -154,30 +154,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="achievements.json" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/assets/params/achievements.json">
+      <file leaf-file-name="HappyDroidConsts.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/HappyDroidConsts.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="150" column="16" selection-start="3588" selection-end="3588" vertical-scroll-proportion="-9.115385">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GridObjectType.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.062415197">
+            <state line="8" column="29" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#0#7453#0" expanded="true" />
+                <element signature="e#0#1312#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProviderType.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/ProviderType.java">
+      <file leaf-file-name="DesktopConnectionMonitor.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/platform/DesktopConnectionMonitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="12" selection-start="296" selection-end="296" vertical-scroll-proportion="0.0">
+            <state line="19" column="52" selection-start="671" selection-end="671" vertical-scroll-proportion="0.51934826">
               <folding />
             </state>
           </provider>
@@ -196,8 +187,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/desktop/source/com/happydroids/platform/DesktopUncaughtExceptionHandler.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/server/HappyDroidServiceObject.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/LaunchUriScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/VerifyPurchaseScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/PaymentCollection.java" />
@@ -212,6 +201,8 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/dialogs/ReviewDroidTowersPrompt.java" />
         <option value="$PROJECT_DIR$/main/assets/params/achievements.json" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/HappyDroidConsts.java" />
+        <option value="$PROJECT_DIR$/desktop/source/com/happydroids/platform/DesktopConnectionMonitor.java" />
       </list>
     </option>
   </component>
@@ -494,8 +485,8 @@
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="options.lastSelected" value="Images" />
     <property name="download.sources.last.used.dir" value="$PROJECT_DIR$/happydroids-common/libs/sources" />
+    <property name="options.lastSelected" value="Images" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="AndroidRunProguardForReleaseBuild" value="false" />
@@ -522,8 +513,8 @@
     <property name="KeystoreLocation" value="$PROJECT_DIR$/release-key.keystore" />
     <property name="KeyAlias" value="happydroids" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -681,6 +672,21 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method>
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -711,21 +717,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method>
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" />
@@ -739,6 +730,12 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
+      <method>
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GWT.ConfigurationType" factoryName="GWT Configuration">
+      <module name="" />
       <method>
         <option name="Make" enabled="true" />
       </method>
@@ -762,12 +759,6 @@
       </option>
       <envs />
       <patterns />
-      <method>
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="GWT.ConfigurationType" factoryName="GWT Configuration">
-      <module name="" />
       <method>
         <option name="Make" enabled="true" />
       </method>
@@ -1290,15 +1281,15 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32818532" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.81724584" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2998713" sideWeight="0.38235295" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24892396" sideWeight="0.63799745" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31660232" sideWeight="0.51508623" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31660232" sideWeight="0.51508623" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25997427" sideWeight="0.21807748" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20803443" sideWeight="0.6808237" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.63671374" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947233" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24710424" sideWeight="0.776901" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32092425" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32689834" sideWeight="0.49748382" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.6808237" order="0" side_tool="true" content_ui="tabs" />
@@ -1306,8 +1297,8 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39885223" sideWeight="0.73745173" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24677187" sideWeight="0.68292683" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35521236" sideWeight="0.91822094" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.6344916" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23601148" sideWeight="0.81724584" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.6344916" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.73745173" order="2" side_tool="false" content_ui="combo" />
@@ -1316,7 +1307,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.6344916" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3125" sideWeight="0.81724584" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24710424" sideWeight="0.776901" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2998713" sideWeight="0.38235295" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32991013" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
@@ -1517,123 +1508,99 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/VerifyPurchaseScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="26" selection-start="1549" selection-end="1549" vertical-scroll-proportion="1.2340425" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/dialogs/ReviewDroidTowersPrompt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="22" selection-start="2076" selection-end="2076" vertical-scroll-proportion="0.192673">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/security/SecurePreferences.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="0" selection-start="2247" selection-end="2247" vertical-scroll-proportion="0.25101763">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/MainMenuScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="37" selection-start="3346" selection-end="3346" vertical-scroll-proportion="0.13975577">
-          <folding />
-        </state>
+        <state line="81" column="37" selection-start="3346" selection-end="3346" vertical-scroll-proportion="0.13975577" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/MainMenuButtonPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="19" selection-start="1731" selection-end="1731" vertical-scroll-proportion="0.08548168">
-          <folding />
-        </state>
+        <state line="41" column="19" selection-start="1731" selection-end="1731" vertical-scroll-proportion="0.08548168" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/droidtowers/DesktopGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="17" selection-start="1757" selection-end="1757" vertical-scroll-proportion="0.6933333">
-          <folding />
-        </state>
+        <state line="44" column="17" selection-start="1757" selection-end="1757" vertical-scroll-proportion="0.6933333" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/RequirementType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="14" selection-start="152" selection-end="250" vertical-scroll-proportion="0.33733332">
-          <folding />
-        </state>
+        <state line="13" column="14" selection-start="152" selection-end="250" vertical-scroll-proportion="0.33733332" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/Requirement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="33" selection-start="1071" selection-end="1071" vertical-scroll-proportion="0.3432836">
-          <folding>
-            <element signature="e#0#5776#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="26" column="33" selection-start="1071" selection-end="1071" vertical-scroll-proportion="0.3432836" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/RewardType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="10" selection-start="147" selection-end="173" vertical-scroll-proportion="0.21466666">
-          <folding />
-        </state>
+        <state line="9" column="10" selection-start="147" selection-end="173" vertical-scroll-proportion="0.21466666" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/Reward.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="10" selection-start="747" selection-end="747" vertical-scroll-proportion="0.31207597">
-          <folding>
-            <element signature="e#0#5265#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="18" column="10" selection-start="747" selection-end="747" vertical-scroll-proportion="0.31207597" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/Achievement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="36" selection-start="736" selection-end="753" vertical-scroll-proportion="0.46">
-          <folding>
-            <element signature="e#0#4823#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="24" column="36" selection-start="736" selection-end="753" vertical-scroll-proportion="0.46" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/assets/params/tutorial-steps.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/AchievementThing.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="14" selection-start="598" selection-end="651" vertical-scroll-proportion="0.31207597">
+        <state line="22" column="14" selection-start="598" selection-end="651" vertical-scroll-proportion="0.31207597" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="4" selection-start="117" selection-end="117" vertical-scroll-proportion="0.18724559">
+          <folding>
+            <element signature="e#0#7453#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/assets/params/achievements.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="150" column="16" selection-start="3588" selection-end="3588" vertical-scroll-proportion="0.031207599">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/ProviderType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="12" selection-start="296" selection-end="296" vertical-scroll-proportion="0.0">
+        <state line="19" column="12" selection-start="296" selection-end="296" vertical-scroll-proportion="0.030666666">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/assets/params/achievements.json">
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/HappyDroidConsts.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="150" column="16" selection-start="3588" selection-end="3588" vertical-scroll-proportion="-9.115385">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/types/GridObjectType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.062415197">
+        <state line="8" column="29" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#0#7453#0" expanded="true" />
+            <element signature="e#0#1312#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/server/TowerGameService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="33" selection-start="1204" selection-end="1204" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desktop/source/com/happydroids/platform/DesktopConnectionMonitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="52" selection-start="671" selection-end="671" vertical-scroll-proportion="0.51934826">
+          <folding />
         </state>
       </provider>
     </entry>

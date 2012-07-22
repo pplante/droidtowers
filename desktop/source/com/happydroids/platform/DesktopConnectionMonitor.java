@@ -3,9 +3,8 @@ package com.happydroids.platform;/*
  */
 
 import com.happydroids.HappyDroidConsts;
-
-import java.io.IOException;
-import java.net.InetAddress;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import org.apache.http.HttpResponse;
 
 public class DesktopConnectionMonitor implements PlatformConnectionMonitor {
   private boolean checkedBefore;
@@ -18,12 +17,8 @@ public class DesktopConnectionMonitor implements PlatformConnectionMonitor {
       @Override
       public void run() {
         while (true) {
-          try {
-            networkState = InetAddress.getByName(HappyDroidConsts.HAPPYDROIDS_SERVER).isReachable(1500);
-          } catch (IOException e) {
-            networkState = false;
-          }
-
+          HttpResponse response = TowerGameService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + "/ping", null);
+          networkState = response.getStatusLine().getStatusCode() == 200;
           try {
             Thread.yield();
             Thread.sleep(5000);
