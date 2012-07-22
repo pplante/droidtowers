@@ -11,9 +11,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import com.happydroids.HappyDroidConsts;
-
-import java.io.IOException;
-import java.net.InetAddress;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import org.apache.http.HttpResponse;
 
 public class AndroidConnectionMonitor implements PlatformConnectionMonitor {
   private boolean checkedBefore;
@@ -35,17 +34,14 @@ public class AndroidConnectionMonitor implements PlatformConnectionMonitor {
     @Override
     public void run() {
       while (!context.isFinishing()) {
-        try {
-          if (haveNetworkConnection()) {
-            networkState = InetAddress.getByName(HappyDroidConsts.HAPPYDROIDS_SERVER).isReachable(1500);
-          }
-        } catch (IOException e) {
-          networkState = false;
+        if (haveNetworkConnection()) {
+          HttpResponse response = TowerGameService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + "/ping", null);
+          networkState = response.getStatusLine().getStatusCode() == 200;
         }
 
         try {
           Thread.yield();
-          Thread.sleep(5000);
+          Thread.sleep(300000);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
