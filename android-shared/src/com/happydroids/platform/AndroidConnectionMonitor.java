@@ -14,7 +14,7 @@ import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import org.apache.http.HttpResponse;
 
-public class AndroidConnectionMonitor implements PlatformConnectionMonitor {
+public class AndroidConnectionMonitor extends PlatformConnectionMonitor {
   private boolean checkedBefore;
   private boolean networkState;
   private final Activity context;
@@ -29,6 +29,16 @@ public class AndroidConnectionMonitor implements PlatformConnectionMonitor {
     return networkState;
   }
 
+  private boolean haveNetworkConnection() {
+    ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    if (cm != null) {
+      NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
+      return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
+    }
+
+    return false;
+  }
+
   @SuppressWarnings("FieldCanBeLocal")
   private final Thread monitorThread = new Thread() {
     @Override
@@ -37,6 +47,12 @@ public class AndroidConnectionMonitor implements PlatformConnectionMonitor {
         if (haveNetworkConnection()) {
           HttpResponse response = TowerGameService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + "/ping", null);
           networkState = response.getStatusLine().getStatusCode() == 200;
+
+          if(networkState) {
+            runAllPostConnectRunnables();
+          }
+        } else {
+          networkState = false;
         }
 
         try {
@@ -48,14 +64,4 @@ public class AndroidConnectionMonitor implements PlatformConnectionMonitor {
       }
     }
   };
-
-  private boolean haveNetworkConnection() {
-    ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-    if (cm != null) {
-      NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
-      return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
-    }
-
-    return false;
-  }
 }

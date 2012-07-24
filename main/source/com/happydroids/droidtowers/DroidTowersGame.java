@@ -160,7 +160,12 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
         }
 
         if (!Gdx.app.getType().equals(Applet)) {
-          new RegisterDeviceTask().run();
+          Platform.getConnectionMonitor().withConnection(new Runnable() {
+            @Override
+            public void run() {
+              new RegisterDeviceTask().run();
+            }
+          });
         }
       }
     });

@@ -13,6 +13,7 @@ import com.happydroids.droidtowers.gui.VibrateClickListener;
 import com.happydroids.platform.Platform;
 import com.happydroids.security.SecurePreferences;
 
+import static com.badlogic.gdx.Application.ApplicationType.Android;
 import static com.badlogic.gdx.Application.ApplicationType.Applet;
 
 public class ReviewDroidTowersPrompt extends Dialog {
@@ -50,12 +51,12 @@ public class ReviewDroidTowersPrompt extends Dialog {
   }
 
   private void gotoMarketForRating() {
-    if (Gdx.app.getType().equals(Applet)) {
-      Platform.getBrowserUtil().launchWebBrowser("http://www.facebook.com/droidtowers");
+    if (!Gdx.app.getType().equals(Android)) {
+      Platform.getBrowserUtil().launchWebBrowser("http://on.fb.me/M6pdp1");
     } else if (TowerGameService.getDeviceOSMarketName().equalsIgnoreCase("google-play")) {
-
-    } else if (TowerGameService.getDeviceOSMarketName().equalsIgnoreCase("google-play")) {
-
+      Platform.getBrowserUtil().launchWebBrowser("https://play.google.com/store/apps/details?id=com.happydroids.droidtowers");
+    } else if (TowerGameService.getDeviceOSMarketName().equalsIgnoreCase("amazon")) {
+      Platform.getBrowserUtil().launchWebBrowser("http://www.amazon.com/gp/mas/dl/android?p=com.happydroids.droidtowers.amazon");
     }
     SecurePreferences preferences = TowerGameService.instance().getPreferences();
     preferences.putBoolean(RATING_ADDED, true);

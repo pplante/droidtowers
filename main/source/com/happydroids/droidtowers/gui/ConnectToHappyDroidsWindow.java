@@ -14,6 +14,8 @@ import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.server.TemporaryToken;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.droidtowers.scenes.MainMenuScene;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.utils.PeriodicBackgroundTask;
 import com.happydroids.platform.LaunchBrowserAfterDelay;
 import com.happydroids.server.ApiRunnable;
@@ -30,7 +32,6 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
 
   public ConnectToHappyDroidsWindow(Stage stage) {
     super("Connect to Happy Droids", stage);
-
 
     openBrowserButton = FontManager.RobotoBold18.makeTextButton("Open my web browser");
     openBrowserButton.visible = false;
@@ -134,6 +135,10 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
                     public void onClick(Dialog dialog) {
                       dialog.dismiss();
                       dismiss();
+
+                      if(SceneManager.activeScene() instanceof MainMenuScene) {
+                        SceneManager.restartActiveScene();
+                      }
                     }
                   })
                   .show();

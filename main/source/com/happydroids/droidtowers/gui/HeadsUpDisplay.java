@@ -23,8 +23,10 @@ import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Room;
 import com.happydroids.droidtowers.gamestate.GameState;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
+import com.happydroids.droidtowers.gui.dialogs.ConnectToHappyDroidsPrompt;
 import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputSystem;
@@ -101,7 +103,11 @@ public class HeadsUpDisplay extends WidgetGroup {
       viewNeighborsButton.setClickListener(new VibrateClickListener() {
         @Override
         public void onClick(Actor actor, float x, float y) {
-          SceneManager.pushScene(ViewNeighborSplashScene.class, gameState);
+          if (TowerGameService.instance().isAuthenticated()) {
+            SceneManager.pushScene(ViewNeighborSplashScene.class, gameState);
+          } else {
+            new ConnectToHappyDroidsPrompt().show();
+          }
         }
       });
 
