@@ -194,6 +194,8 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     super.show();
 
     progressDialog.show();
+    progressDialog.clearActions();
+    progressDialog.color.a = 1f;
 
     return this;
   }

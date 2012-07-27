@@ -25,12 +25,16 @@ public class SyncCloudGamesTask extends BackgroundTask {
   protected void execute() throws Exception {
     syncing = true;
 
+    FileHandle storageRoot = GameSaveFactory.getStorageRoot();
+    FileHandle[] localSaveFiles = storageRoot.list(".json");
+    upgradeLocalFiles(localSaveFiles);
+
     Gdx.app.log(TAG, "Beginning sync!");
     if (Platform.getConnectionMonitor().isConnectedOrConnecting()) {
       CloudGameSaveCollection cloudGameSaves = new CloudGameSaveCollection();
       cloudGameSaves.fetch();
       Gdx.app.log(TAG, "Fetch complete.");
-      syncCloudGameSaves(cloudGameSaves);
+      syncCloudGameSaves(cloudGameSaves, storageRoot, localSaveFiles);
       Gdx.app.log(TAG, "Sync completed!");
     } else {
       Gdx.app.log(TAG, "Not syncing, no internet connection available.!");
@@ -47,10 +51,7 @@ public class SyncCloudGamesTask extends BackgroundTask {
     syncing = false;
   }
 
-  private void syncCloudGameSaves(CloudGameSaveCollection gameSaves) {
-    FileHandle storage = GameSaveFactory.getStorageRoot();
-    FileHandle[] files = storage.list(".json");
-
+  private void syncCloudGameSaves(CloudGameSaveCollection gameSaves, final FileHandle storage, final FileHandle[] files) {
     Set<String> towersProcessed = Sets.newHashSet();
     if (files != null && files.length > 0) {
       for (FileHandle file : files) {
@@ -79,6 +80,14 @@ public class SyncCloudGamesTask extends BackgroundTask {
           storage.child(gameSave.getBaseFilename() + ".png").writeBytes(cloudGameSave.getImage(), false);
         } catch (Exception ignored) {
         }
+      }
+    }
+  }
+
+  private void upgradeLocalFiles(FileHandle[] files) {
+    if (files != null && files.length > 0) {
+      for (FileHandle file : files) {
+        GameSaveFactory.upgradeGameSave(file.read(), file.name());
       }
     }
   }

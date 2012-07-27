@@ -29,14 +29,9 @@ public class GameSaveFactory {
     return readFile(fileHandle.read(), fileHandle.name());
   }
 
-  public static GameSave readFile(InputStream read, String fileName) {
+  public static GameSave readFile(InputStream inputStream, String fileName) {
     try {
-      JacksonTransformer transformer = new JacksonTransformer(read, fileName);
-      transformer.addTransform(Migration_GameSave_UnhappyrobotToDroidTowers.class);
-      transformer.addTransform(Migration_GameSave_RemoveObjectCounts.class);
-      transformer.addTransform(Migration_GameSave_MoveMetadata.class);
-
-      return TowerGameService.instance().getObjectMapper().readValue(transformer.process(), GameSave.class);
+      return TowerGameService.instance().getObjectMapper().readValue(inputStream, GameSave.class);
     } catch (Exception e) {
       throw new RuntimeException("There was a problem parsing: " + fileName, e);
     }
@@ -52,15 +47,10 @@ public class GameSaveFactory {
     stream.close();
   }
 
-  public static GameSave readMetadata(InputStream read) {
+  public static GameSave readMetadata(InputStream inputStream) {
     try {
-      JacksonTransformer transformer = new JacksonTransformer(read, null);
-      transformer.addTransform(Migration_GameSave_UnhappyrobotToDroidTowers.class);
-      transformer.addTransform(Migration_GameSave_RemoveObjectCounts.class);
-      transformer.addTransform(Migration_GameSave_MoveMetadata.class);
-
       HappyDroidObjectMapper objectMapper = TowerGameService.instance().getObjectMapper();
-      return objectMapper.reader(GameSave.class).withView(GameSave.Views.Metadata.class).readValue(transformer.process());
+      return objectMapper.reader(GameSave.class).withView(GameSave.Views.Metadata.class).readValue(inputStream);
     } catch (Exception e) {
       throw new RuntimeException("There was a problem parsing gamesave metadata.", e);
     }
@@ -68,5 +58,18 @@ public class GameSaveFactory {
 
   public static FileHandle getStorageRoot() {
     return Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
+  }
+
+  public static GameSave upgradeGameSave(InputStream inputStream, String fileName) {
+    try {
+      JacksonTransformer transformer = new JacksonTransformer(inputStream, fileName);
+      transformer.addTransform(Migration_GameSave_UnhappyrobotToDroidTowers.class);
+      transformer.addTransform(Migration_GameSave_RemoveObjectCounts.class);
+      transformer.addTransform(Migration_GameSave_MoveMetadata.class);
+
+      return TowerGameService.instance().getObjectMapper().readValue(transformer.process(), GameSave.class);
+    } catch (Exception e) {
+      throw new RuntimeException("There was a problem parsing: " + fileName, e);
+    }
   }
 }

@@ -28,6 +28,8 @@ public class CloudGameSave extends TowerGameServiceObject {
   protected int fileGeneration;
   private List<String> neighbors;
   private FriendCloudGameSaveCollection neighborGameSaves;
+  private boolean upgradedGameSave;
+
 
   public CloudGameSave() {
     neighborGameSaves = new FriendCloudGameSaveCollection();
@@ -63,7 +65,7 @@ public class CloudGameSave extends TowerGameServiceObject {
 
   @JsonIgnore
   public GameSave getGameSave() {
-    GameSave gameSave = GameSaveFactory.readFile(new ByteArrayInputStream(blob.getBytes()), "cloudGameSave_" + hashCode());
+    GameSave gameSave = GameSaveFactory.readFile(new ByteArrayInputStream(getBlob().getBytes()), "cloudGameSave_" + hashCode());
     gameSave.setCloudSaveUri(getResourceUri());
     return gameSave;
   }
@@ -94,7 +96,7 @@ public class CloudGameSave extends TowerGameServiceObject {
   }
 
   public GameSave getGameSaveMetadata() {
-    return GameSaveFactory.readMetadata(new ByteArrayInputStream(blob.getBytes()));
+    return GameSaveFactory.readMetadata(new ByteArrayInputStream(getBlob().getBytes()));
   }
 
   public int getFileGeneration() {
@@ -102,6 +104,15 @@ public class CloudGameSave extends TowerGameServiceObject {
   }
 
   public String getBlob() {
+    if (!upgradedGameSave) {
+      upgradedGameSave = true;
+      try {
+        blob = getObjectMapper().writeValueAsString(GameSaveFactory.upgradeGameSave(new ByteArrayInputStream(blob.getBytes()), null));
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
+
     return blob;
   }
 

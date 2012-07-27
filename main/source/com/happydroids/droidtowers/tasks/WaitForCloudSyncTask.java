@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.tasks;
 
+import com.badlogic.gdx.Gdx;
 import com.happydroids.droidtowers.gui.LoadTowerWindow;
 import com.happydroids.utils.BackgroundTask;
 
@@ -23,6 +24,11 @@ public class WaitForCloudSyncTask extends BackgroundTask {
 
   @Override
   public synchronized void afterExecute() {
-    loadTowerWindow.buildGameSaveList();
+    Gdx.app.postRunnable(new Runnable() {
+      @Override
+      public void run() {
+        loadTowerWindow.buildGameSaveList();
+      }
+    });
   }
 }

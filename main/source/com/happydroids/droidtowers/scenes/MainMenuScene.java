@@ -17,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.gamestate.server.CloudGameSaveCollection;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.gui.VibrateClickListener;
@@ -39,14 +38,11 @@ public class MainMenuScene extends SplashScene {
   public static final int BUTTON_WIDTH = scale(280);
   public static final int BUTTON_SPACING = scale(16);
 
-  private CloudGameSaveCollection cloudGameSaves;
   private boolean builtOutMenu;
 
   @Override
   public void create(Object... args) {
     super.create(args);
-
-    cloudGameSaves = new CloudGameSaveCollection();
 
     Label versionLabel = FontManager.Default.makeLabel(String.format("v%s (%s, %s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA.substring(0, 8), HappyDroidService.getDeviceOSMarketName()));
     versionLabel.setColor(Color.LIGHT_GRAY);
