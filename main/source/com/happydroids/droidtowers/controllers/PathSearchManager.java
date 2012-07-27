@@ -34,11 +34,13 @@ public class PathSearchManager {
 
   public void update(float deltaTime) {
     if (currentPathFinder != null) {
-      while (currentPathFinder.isWorking()) {
-        currentPathFinder.step();
-      }
-
-      if (!currentPathFinder.isWorking()) {
+      if (currentPathFinder.isWorking()) {
+        int times = 0;
+        while (currentPathFinder.isWorking() && times < 25) {
+          currentPathFinder.step();
+          times += 1;
+        }
+      } else {
         currentPathFinder.runCompleteCallback();
         currentPathFinder = null;
       }
