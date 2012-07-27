@@ -55,9 +55,11 @@ public class AvatarLayer extends GameLayer {
     } else if (gameObjects.size() - 1 > maxAvatars()) {
       int numToKill = gameObjects.size() - maxAvatars();
       for (int i = 0; i <= numToKill; i++) {
-        GameObject gameObject = gameObjects.get(i);
-        if (!(gameObject instanceof Janitor)) {
-          gameObject.markToRemove(true);
+        if (i < gameObjects.size()) {
+          GameObject gameObject = gameObjects.get(i);
+          if (!(gameObject instanceof Janitor)) {
+            gameObject.markToRemove(true);
+          }
         }
       }
     }

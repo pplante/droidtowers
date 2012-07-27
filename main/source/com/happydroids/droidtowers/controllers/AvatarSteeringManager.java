@@ -106,7 +106,7 @@ public class AvatarSteeringManager {
     }
 
     transitLine.highlightPoint(pointsTraveled++);
-    currentPos = path.pollFirst();
+    currentPos = path.poll();
 
     if (path.size() > 0) {
       if (currentPos.stair != null) {
