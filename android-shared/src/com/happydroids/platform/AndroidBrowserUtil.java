@@ -5,6 +5,8 @@
 package com.happydroids.platform;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 
 public class AndroidBrowserUtil implements PlatformBrowserUtil {
   private final Activity activity;
@@ -17,7 +19,14 @@ public class AndroidBrowserUtil implements PlatformBrowserUtil {
     activity.runOnUiThread(new Runnable() {
       @Override
       public void run() {
-        new TowerWebBrowser(activity, uriToLoad).show();
+        if (uriToLoad.startsWith("market")) {
+          //Pass it to the system, doesn't match your domain
+          Intent intent = new Intent(Intent.ACTION_VIEW);
+          intent.setData(Uri.parse(uriToLoad));
+          activity.startActivity(intent);
+        } else {
+          new TowerWebBrowser(activity, uriToLoad).show();
+        }
       }
     });
   }

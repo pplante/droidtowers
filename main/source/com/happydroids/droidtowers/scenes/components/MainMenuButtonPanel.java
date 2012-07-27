@@ -21,13 +21,13 @@ import com.happydroids.droidtowers.scenes.HappyDroidConnect;
 
 import static com.badlogic.gdx.Application.ApplicationType.Applet;
 import static com.badlogic.gdx.Application.ApplicationType.Desktop;
-import static com.happydroids.droidtowers.gui.FontManager.RobotoBold18;
+import static com.happydroids.droidtowers.gui.FontManager.Default;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class MainMenuButtonPanel extends Table {
   private static final String TAG = MainMenuButtonPanel.class.getSimpleName();
   public static final int BUTTON_WIDTH = scale(280);
-  public static final int BUTTON_SPACING = scale(16);
+  public static final int BUTTON_SPACING = scale(12);
   private NinePatch dropShadowPatch;
 
   public MainMenuButtonPanel() {
@@ -36,20 +36,20 @@ public class MainMenuButtonPanel extends Table {
     dropShadowPatch = TowerAssetManager.ninePatch("swatches/drop-shadow.png", Color.WHITE, 22, 22, 22, 22);
     setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Color.DARK_GRAY));
 
-    pad(scale(BUTTON_SPACING));
+    pad(BUTTON_SPACING);
 
     if (!Gdx.app.getType().equals(Applet)) {
       padBottom(0);
     }
 
-    defaults().space(scale(BUTTON_SPACING));
+    defaults().space(BUTTON_SPACING);
 
     row();
-    TextButton newGameButton = RobotoBold18.makeTextButton("new tower");
+    TextButton newGameButton = Default.makeTextButton("new tower");
     add(newGameButton).fill().width(BUTTON_WIDTH);
 
     row();
-    TextButton loadGameButton = RobotoBold18.makeTextButton("load tower");
+    TextButton loadGameButton = Default.makeTextButton("load tower");
     add(loadGameButton).fill().width(BUTTON_WIDTH);
 
     row();
@@ -58,7 +58,7 @@ public class MainMenuButtonPanel extends Table {
     add(optionsAndCreditsRow).width(BUTTON_WIDTH);
 
     if (Gdx.app.getType().equals(Desktop)) {
-      TextButton optionsButton = RobotoBold18.makeTextButton("options");
+      TextButton optionsButton = Default.makeTextButton("options");
       optionsAndCreditsRow.add(optionsButton).expandX();
 
       optionsButton.setClickListener(new VibrateClickListener() {
@@ -69,13 +69,13 @@ public class MainMenuButtonPanel extends Table {
       });
     }
 
-    TextButton aboutButton = RobotoBold18.makeTextButton("credits");
+    TextButton aboutButton = Default.makeTextButton("credits");
     optionsAndCreditsRow.add(aboutButton).expandX();
 
     //noinspection PointlessBooleanExpression
     if (HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT && !Gdx.app.getType().equals(Applet)) {
       row();
-      final TextButton connectToHappyDroids = RobotoBold18.makeTextButton("login to happydroids.com");
+      final TextButton connectToHappyDroids = Default.makeTextButton("login to happydroids.com");
       connectToHappyDroids.visible = false;
       add(connectToHappyDroids).fill().width(BUTTON_WIDTH);
       row().padTop(BUTTON_SPACING);
@@ -99,7 +99,7 @@ public class MainMenuButtonPanel extends Table {
 
     if (!Gdx.app.getType().equals(Applet)) {
       row();
-      TextButton exitGameButton = RobotoBold18.makeTextButton("exit");
+      TextButton exitGameButton = Default.makeTextButton("exit");
       add(exitGameButton).fill().width(BUTTON_WIDTH);
 
       exitGameButton.setClickListener(new ClickListener() {

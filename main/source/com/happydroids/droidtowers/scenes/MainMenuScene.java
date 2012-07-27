@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.scenes;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenEquations;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -28,7 +29,6 @@ import com.happydroids.platform.Platform;
 import com.happydroids.security.SecurePreferences;
 import com.happydroids.server.HappyDroidService;
 
-import static com.badlogic.gdx.Application.ApplicationType.Desktop;
 import static com.happydroids.droidtowers.TowerAssetManager.preloadFinished;
 import static com.happydroids.droidtowers.TowerAssetManager.textureAtlas;
 import static com.happydroids.droidtowers.gui.dialogs.ReviewDroidTowersPrompt.RATING_TIMES_SINCE_PROMPTED;
@@ -78,7 +78,7 @@ public class MainMenuScene extends SplashScene {
         int timesSincePrompt = preferences.incrementInt(RATING_TIMES_SINCE_PROMPTED);
         preferences.flush();
 
-        if (timesSincePrompt >= 3 && !Gdx.app.getType().equals(Desktop)) {
+        if (timesSincePrompt >= 3 && !Gdx.app.getType().equals(Application.ApplicationType.Desktop)) {
           new ReviewDroidTowersPrompt(getStage()).show();
         }
       }

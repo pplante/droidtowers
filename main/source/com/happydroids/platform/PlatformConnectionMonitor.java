@@ -9,6 +9,10 @@ import com.happydroids.droidtowers.gamestate.server.RunnableQueue;
 public abstract class PlatformConnectionMonitor {
   private RunnableQueue postConnectRunnables;
 
+  protected PlatformConnectionMonitor() {
+    postConnectRunnables = new RunnableQueue();
+  }
+
   public abstract boolean isConnectedOrConnecting();
 
   public void withConnection(Runnable runnable) {

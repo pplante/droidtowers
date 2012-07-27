@@ -26,7 +26,7 @@ public class ReviewDroidTowersPrompt extends Dialog {
 
     String ratingVerb = Gdx.app.getType().equals(Applet) ? "like" : "rate";
 
-    setMessage("Hello there!\n\nYou have been playing Droid Towers, and we're sure you have some feedback for us.\n\nWould you " + ratingVerb + " our app?");
+    setMessage("Hello there!\n\nYou have been playing Droid Towers a few times now.\nWe would love hear any feedback you might have.\n\nWill you " + ratingVerb + " our app?");
 
     addButton("Sure", new VibrateClickListener() {
       @Override
@@ -54,7 +54,7 @@ public class ReviewDroidTowersPrompt extends Dialog {
     if (!Gdx.app.getType().equals(Android)) {
       Platform.getBrowserUtil().launchWebBrowser("http://on.fb.me/M6pdp1");
     } else if (TowerGameService.getDeviceOSMarketName().equalsIgnoreCase("google-play")) {
-      Platform.getBrowserUtil().launchWebBrowser("https://play.google.com/store/apps/details?id=com.happydroids.droidtowers");
+      Platform.getBrowserUtil().launchWebBrowser("market://details?id=com.happydroids.droidtowers");
     } else if (TowerGameService.getDeviceOSMarketName().equalsIgnoreCase("amazon")) {
       Platform.getBrowserUtil().launchWebBrowser("http://www.amazon.com/gp/mas/dl/android?p=com.happydroids.droidtowers.amazon");
     }

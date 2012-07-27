@@ -14,6 +14,10 @@ import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import org.apache.http.HttpResponse;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 public class AndroidConnectionMonitor extends PlatformConnectionMonitor {
   private boolean checkedBefore;
   private boolean networkState;
@@ -44,22 +48,28 @@ public class AndroidConnectionMonitor extends PlatformConnectionMonitor {
     @Override
     public void run() {
       while (!context.isFinishing()) {
+        networkState = false;
+
         if (haveNetworkConnection()) {
-          HttpResponse response = TowerGameService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + "/ping", null);
-          networkState = response.getStatusLine().getStatusCode() == 200;
+          try {
+            InetAddress happyDroidServer = InetAddress.getByName(HappyDroidConsts.HAPPYDROIDS_SERVER);
+            if (happyDroidServer.isReachable(1500)) {
+              HttpResponse response = TowerGameService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + "/ping", null);
+              if (response != null) {
+                networkState = response.getStatusLine().getStatusCode() == 200;
 
-          if(networkState) {
-            runAllPostConnectRunnables();
+                if (networkState) {
+                  runAllPostConnectRunnables();
+                }
+              }
+            }
+          } catch (UnknownHostException ignored) {
+          } catch (IOException ignored) {
           }
-        } else {
-          networkState = false;
         }
-
         try {
-          Thread.yield();
           Thread.sleep(300000);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
+        } catch (InterruptedException ignored) {
         }
       }
     }
