@@ -14,9 +14,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
+import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
+import com.happydroids.droidtowers.events.SwitchToolEvent;
 import com.happydroids.droidtowers.graphics.Overlays;
 import com.happydroids.droidtowers.graphics.TransitLine;
 
@@ -26,6 +28,7 @@ import java.util.*;
 import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
 import static com.happydroids.droidtowers.graphics.Overlays.POPULATION_LEVEL;
+import static com.happydroids.droidtowers.input.GestureTool.PLACEMENT;
 
 public class GameGridRenderer extends GameLayer {
   protected GameGrid gameGrid;
@@ -45,7 +48,7 @@ public class GameGridRenderer extends GameLayer {
     this.camera = camera;
 
     renderTintColor = Color.WHITE;
-    shouldRenderGridLines = true;
+    shouldRenderGridLines = false;
     shapeRenderer = new ShapeRenderer();
 
     transitLines = Lists.newArrayList();
@@ -155,10 +158,9 @@ public class GameGridRenderer extends GameLayer {
   private void renderGridLines() {
     GLCommon gl = Gdx.graphics.getGLCommon();
     gl.glEnable(GL10.GL_BLEND);
-    gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE);
 
     shapeRenderer.begin(ShapeType.Line);
-    shapeRenderer.setColor(0.1f, 0.1f, 0.1f, 0.5f);
+    shapeRenderer.setColor(1f, 1f, 1f, 0.15f);
 
     for (int i = 0; i <= gameGrid.getGridSize().x; i++) {
       shapeRenderer.line(i * GRID_UNIT_SIZE, 0, i * GRID_UNIT_SIZE, gameGrid.getGridSize().y * GRID_UNIT_SIZE);
@@ -212,5 +214,10 @@ public class GameGridRenderer extends GameLayer {
 
   public Color getRenderTintColor() {
     return renderTintColor;
+  }
+
+  @Subscribe
+  public void InputSystem_onSwitchTool(SwitchToolEvent event) {
+    shouldRenderGridLines = event.selectedTool == PLACEMENT;
   }
 }

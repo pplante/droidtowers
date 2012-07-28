@@ -164,6 +164,23 @@ public class TowerScene extends Scene {
     ActionManager.instance().removeAction(saveAction);
   }
 
+  private void attachToInputSystem() {
+    InputSystem.instance().events().register(gameGridRenderer);
+
+    InputSystem.instance().addInputProcessor(gestureDetector, 100);
+    InputSystem.instance().setGestureDelegator(gestureDelegater);
+    keybindings.bindKeys();
+  }
+
+  private void detachFromInputSystem() {
+    InputSystem.instance().switchTool(GestureTool.PICKER, null);
+    InputSystem.instance().removeInputProcessor(gestureDetector);
+    InputSystem.instance().setGestureDelegator(null);
+    keybindings.unbindKeys();
+
+    InputSystem.instance().events().unregister(gameGridRenderer);
+  }
+
   @Override
   public void pause() {
     gameState.saveGame(false);
@@ -171,19 +188,6 @@ public class TowerScene extends Scene {
     detachActions();
 
     detachFromInputSystem();
-  }
-
-  private void attachToInputSystem() {
-    InputSystem.instance().addInputProcessor(gestureDetector, 100);
-    InputSystem.instance().setGestureDelegator(gestureDelegater);
-    InputSystem.instance().switchTool(GestureTool.PICKER, null);
-    keybindings.bindKeys();
-  }
-
-  private void detachFromInputSystem() {
-    InputSystem.instance().removeInputProcessor(gestureDetector);
-    InputSystem.instance().setGestureDelegator(null);
-    keybindings.unbindKeys();
   }
 
   @Override

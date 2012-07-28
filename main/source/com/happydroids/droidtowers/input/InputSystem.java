@@ -15,7 +15,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
+import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.entities.GameLayer;
+import com.happydroids.droidtowers.events.SwitchToolEvent;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import java.util.*;
@@ -36,6 +38,8 @@ public class InputSystem extends InputAdapter {
   private GestureDelegater gestureDelegater;
   private static InputSystem instance;
   private List<GameLayer> gameLayers;
+  private EventBus eventBus;
+
 
   public static InputSystem instance() {
     if (instance == null) {
@@ -48,6 +52,7 @@ public class InputSystem extends InputAdapter {
   public InputSystem() {
     inputProcessors = Lists.newArrayList();
     keyBindings = Maps.newHashMap();
+    eventBus = new EventBus(InputSystem.class.getSimpleName());
   }
 
   public void addInputProcessor(InputProcessor inputProcessor, int priority) {
@@ -85,6 +90,8 @@ public class InputSystem extends InputAdapter {
     if (gestureDelegater != null) {
       gestureDelegater.switchTool(SceneManager.activeScene().getCamera(), gestureDelegater.getGameLayers(), selectedTool, switchToolRunnable);
     }
+
+    eventBus.post(new SwitchToolEvent(selectedTool));
   }
 
   public GestureListener getCurrentTool() {
@@ -289,6 +296,10 @@ public class InputSystem extends InputAdapter {
     for (Map.Entry<Integer, ArrayList<InputCallback>> entry : keyBindings.entrySet()) {
       entry.getValue().removeAll(callbackHashSet);
     }
+  }
+
+  public EventBus events() {
+    return eventBus;
   }
 
   public static class Keys extends Input.Keys {

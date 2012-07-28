@@ -134,8 +134,11 @@ public class AvatarLayer extends GameLayer {
 
   @Subscribe
   public void GameGrid_onEmployeeFired(EmployeeFiredEvent event) {
-    if (event.gridObject instanceof CommercialSpace) {
-      event.employee.getAvatar().markToRemove(true);
+    if (event.gridObject instanceof CommercialSpace && event.employee != null) {
+      Avatar avatar = event.employee.getAvatar();
+      if (avatar != null) {
+        avatar.markToRemove(true);
+      }
     }
   }
 

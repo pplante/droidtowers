@@ -4,7 +4,6 @@
 
 package com.happydroids.droidtowers.entities;
 
-import com.badlogic.gdx.math.MathUtils;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.employee.JobCandidate;
@@ -63,7 +62,7 @@ public class CommercialSpace extends Room {
   @Override
   public int getCoinsEarned() {
     if (jobsFilled > 0 && isConnectedToTransport()) {
-      return (int) Math.ceil(gridObjectType.getCoinsEarned() * getEmploymentLevel());
+      return (int) Math.ceil(gridObjectType.getCoinsEarned() * getDesirability()) + getUpkeepCost();
     }
 
     return 0;
@@ -89,7 +88,7 @@ public class CommercialSpace extends Room {
       return 0f;
     }
 
-    return MathUtils.clamp(super.getDesirability() - (0.1f * getNumVisitors()), 0f, 1f);
+    return super.getDesirability();
   }
 
   public float getEmploymentLevel() {
