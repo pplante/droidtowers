@@ -45,12 +45,12 @@ public class MainMenuButtonPanel extends Table {
     defaults().space(BUTTON_SPACING);
 
     row();
-    TextButton newGameButton = Default.makeTextButton("new tower");
-    add(newGameButton).fill().width(BUTTON_WIDTH);
-
-    row();
     TextButton loadGameButton = Default.makeTextButton("load tower");
     add(loadGameButton).fill().width(BUTTON_WIDTH);
+
+    row();
+    TextButton newGameButton = Default.makeTextButton("new tower");
+    add(newGameButton).fill().width(BUTTON_WIDTH);
 
     row();
     Table optionsAndCreditsRow = newTable();

@@ -12,14 +12,13 @@ public class ServiceRoom extends CommercialSpace {
     super(serviceRoomType, gameGrid);
   }
 
-//  @Override
-//  public GridObjectPopOver makePopOver() {
-//    return new ServiceRoomPopOver(this);
-//  }
-
   @Override
   public int getCoinsEarned() {
     return 0;
   }
 
+  @Override
+  protected boolean canEmployDroids() {
+    return !gridObjectType.getId().equals("PUBLIC-RESTROOM");
+  }
 }

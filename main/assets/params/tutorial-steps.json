@@ -134,7 +134,7 @@
   {
     "id":"tutorial-finished",
     "name":"Congratulations!",
-    "description":"Congratulations! You are now ready to conquer the sky's! ",
+    "description":"Congratulations, you are now ready to conquer the sky!\n\nPS: Your Tower will be automatically saved.",
     "rewards":[
       {
         "type":"UNLOCK",
