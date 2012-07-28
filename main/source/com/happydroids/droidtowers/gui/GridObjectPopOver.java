@@ -84,8 +84,8 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     cousinVinniesHideout = FontManager.Default.makeLabel(COUSIN_VINNIES_HIDEOUT);
     add(cousinVinniesHideout);
 
-    incomeLabel = FontManager.Default.makeLabel("$0");
-    upkeepLabel = FontManager.Default.makeLabel("$0");
+    incomeLabel = FontManager.RobotoBold18.makeLabel("$0");
+    upkeepLabel = FontManager.RobotoBold18.makeLabel("$0");
 
     Table budgetTable = new Table();
     budgetTable.defaults().top().left().space(scale(8));
@@ -110,7 +110,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
 
   protected StarRatingBar makeStarRatingBar(String labelText) {
     row();
-    add(FontManager.Default.makeLabel(labelText));
+    add(FontManager.Roboto12.makeLabel(labelText.toUpperCase()));
     row();
     StarRatingBar ratingBar = new StarRatingBar(5f, 5);
     add(ratingBar);
@@ -141,7 +141,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
       updateControls();
     }
 
-    gridObjectWorldToScreen.set(gridObject.getWorldCenter().x + gridObject.getWorldBounds().width / 2, gridObject.getWorldCenter().y, 0);
+    gridObjectWorldToScreen.set(gridObject.getWorldCenter().x + triangle.getWidth(), gridObject.getWorldCenter().y, 0);
     SceneManager.activeScene().getCamera().project(gridObjectWorldToScreen);
     x = gridObjectWorldToScreen.x;
     y = gridObjectWorldToScreen.y - getPrefHeight() / 2;

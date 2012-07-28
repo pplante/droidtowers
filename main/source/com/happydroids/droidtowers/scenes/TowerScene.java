@@ -169,11 +169,11 @@ public class TowerScene extends Scene {
 
     InputSystem.instance().addInputProcessor(gestureDetector, 100);
     InputSystem.instance().setGestureDelegator(gestureDelegater);
+    InputSystem.instance().switchTool(GestureTool.PICKER, null);
     keybindings.bindKeys();
   }
 
   private void detachFromInputSystem() {
-    InputSystem.instance().switchTool(GestureTool.PICKER, null);
     InputSystem.instance().removeInputProcessor(gestureDetector);
     InputSystem.instance().setGestureDelegator(null);
     keybindings.unbindKeys();

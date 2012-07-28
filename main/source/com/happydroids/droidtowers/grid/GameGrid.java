@@ -17,6 +17,7 @@ import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.events.GridObjectAddedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
+import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.math.GridPoint;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import static com.happydroids.droidtowers.TowerConsts.SINGLE_POINT;
 
 
 public class GameGrid extends GameLayer {
-  private EventBus eventBus = new EventBus(GameGrid.class.getSimpleName());
+  private EventBus eventBus = new SafeEventBus(GameGrid.class.getSimpleName());
 
   protected float gridScale;
   protected GridPoint gridSize;
@@ -195,7 +196,6 @@ public class GameGrid extends GameLayer {
     for (GridObject gridObject : gridObjects) {
       if (gridObject.touchDown(gameGridPoint, worldPoint, pointer)) {
         selectedGridObject = gridObject;
-        System.out.println("Selected: " + gridObject);
         return true;
       }
     }

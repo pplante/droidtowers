@@ -10,6 +10,7 @@ import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.events.AchievementCompletionEvent;
+import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.AchievementNotification;
@@ -42,11 +43,12 @@ public class AchievementEngine {
 
   protected AchievementEngine() {
     try {
-      eventBus = new EventBus();
+      eventBus = new SafeEventBus();
       ObjectMapper mapper = TowerGameService.instance().getObjectMapper();
       achievements = mapper.readValue(Gdx.files.internal("params/achievements.json").reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, Achievement.class));
 
 
+      //noinspection PointlessBooleanExpression
       if (!HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT) {
         Iterator<Achievement> achievementIterator = achievements.iterator();
         while (achievementIterator.hasNext()) {

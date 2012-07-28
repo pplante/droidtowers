@@ -140,7 +140,7 @@ public class Room extends GridObject {
   @Override
   public int getCoinsEarned() {
     if (getNumResidents() > 0 && isConnectedToTransport()) {
-      return gridObjectType.getCoinsEarned() * getNumResidents();
+      return Math.round(gridObjectType.getCoinsEarned() * getNumResidents() * getResidencyLevel());
     }
 
     return 0;

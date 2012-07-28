@@ -25,9 +25,9 @@ public class ElevatorPopOver extends GridObjectPopOver<Elevator> {
 
   @Override
   protected void buildControls() {
-    numCarsLabel = FontManager.Default.makeLabel("1");
-    numRidersLabel = FontManager.Default.makeLabel("1");
-    numPassengersWaitingLabel = FontManager.Default.makeLabel("1");
+    numCarsLabel = FontManager.RobotoBold18.makeLabel("1");
+    numRidersLabel = FontManager.RobotoBold18.makeLabel("1");
+    numPassengersWaitingLabel = FontManager.RobotoBold18.makeLabel("1");
 
     ButtonBar buttonBar = new ButtonBar();
     buttonBar.addButton("Add Car", new VibrateClickListener() {
@@ -45,17 +45,17 @@ public class ElevatorPopOver extends GridObjectPopOver<Elevator> {
     });
 
     row();
-    add(FontManager.Default.makeLabel("Cars in Service"));
+    add(FontManager.Roboto12.makeLabel("NUM. CARS"));
     row();
     add(numCarsLabel);
 
     row();
-    add(FontManager.Default.makeLabel("Current Riders"));
+    add(FontManager.Roboto12.makeLabel("NUM. RIDERS"));
     row();
     add(numRidersLabel);
 
     row();
-    add(FontManager.Default.makeLabel("Passengers Waiting"));
+    add(FontManager.Roboto12.makeLabel("NUM. WAITING"));
     row();
     add(numPassengersWaitingLabel);
 

@@ -42,7 +42,7 @@ public class DesktopConnectionMonitor extends PlatformConnectionMonitor {
         } catch (Throwable ignored) {
         }
         try {
-          Thread.sleep(60000);
+          Thread.sleep(HappyDroidConsts.HAPPYDROIDS_PING_FREQUENCY);
         } catch (InterruptedException ignored) {
         }
       }

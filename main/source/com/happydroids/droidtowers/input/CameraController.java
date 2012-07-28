@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
+import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.gui.events.CameraControllerEvent;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.tween.TweenSystem;
@@ -25,7 +26,7 @@ public class CameraController implements GestureDetector.GestureListener {
 
   private OrthographicCamera camera;
   private BoundingBox cameraBounds;
-  private EventBus events = new EventBus(CameraController.class.getSimpleName());
+  private EventBus events = new SafeEventBus(CameraController.class.getSimpleName());
   private float initialScale = 1.0f;
   private boolean flinging = false;
   private float velX;

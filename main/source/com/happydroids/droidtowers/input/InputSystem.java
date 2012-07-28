@@ -17,6 +17,7 @@ import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.entities.GameLayer;
+import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.events.SwitchToolEvent;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 
@@ -52,7 +53,7 @@ public class InputSystem extends InputAdapter {
   public InputSystem() {
     inputProcessors = Lists.newArrayList();
     keyBindings = Maps.newHashMap();
-    eventBus = new EventBus(InputSystem.class.getSimpleName());
+    eventBus = new SafeEventBus(InputSystem.class.getSimpleName());
   }
 
   public void addInputProcessor(InputProcessor inputProcessor, int priority) {

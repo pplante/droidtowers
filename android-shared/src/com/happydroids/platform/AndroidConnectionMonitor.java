@@ -60,7 +60,7 @@ public class AndroidConnectionMonitor extends PlatformConnectionMonitor {
           }
         }
         try {
-          Thread.sleep(60000);
+          Thread.sleep(HappyDroidConsts.HAPPYDROIDS_PING_FREQUENCY);
         } catch (InterruptedException ignored) {
         }
       }

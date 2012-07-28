@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
+import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.events.CollectionChangeEvent;
 import com.happydroids.platform.Platform;
 import org.apache.http.HttpResponse;
@@ -132,7 +133,7 @@ public abstract class HappyDroidServiceCollection<CollectionType extends HappyDr
 
   public EventBus events() {
     if (eventBus == null) {
-      eventBus = new EventBus();
+      eventBus = new SafeEventBus();
     }
 
     return eventBus;

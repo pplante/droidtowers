@@ -16,10 +16,7 @@ import com.google.common.collect.Sets;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.actions.Action;
-import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
-import com.happydroids.droidtowers.events.GridObjectChangedEvent;
-import com.happydroids.droidtowers.events.GridObjectEvent;
-import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
+import com.happydroids.droidtowers.events.*;
 import com.happydroids.droidtowers.generators.NameGenerator;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
@@ -294,7 +291,7 @@ public abstract class GridObject {
 
   public EventBus eventBus() {
     if (myEventBus == null) {
-      myEventBus = new EventBus();
+      myEventBus = new SafeEventBus();
     }
 
     return myEventBus;

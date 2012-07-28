@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.events.GameSpeedChangeEvent;
+import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.graphics.Effects;
 import com.happydroids.droidtowers.input.CameraController;
 
@@ -34,7 +35,7 @@ public abstract class Scene {
     camera = new OrthographicCamera(graphics.getWidth(), graphics.getHeight());
     stage = new Stage(graphics.getWidth(), graphics.getHeight(), false, getSpriteBatch());
     cameraController = new CameraController(camera, new Vector2(graphics.getWidth(), graphics.getHeight()));
-    eventBus = new EventBus(getClass().getSimpleName());
+    eventBus = new SafeEventBus(getClass().getSimpleName());
     timeMultiplier = 1f;
 
     effects = new Effects();

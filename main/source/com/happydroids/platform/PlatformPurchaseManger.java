@@ -7,6 +7,7 @@ package com.happydroids.platform;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.events.PurchaseEvent;
+import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.platform.purchase.DroidTowerVersions;
 import com.happydroids.platform.purchase.RefundEvent;
@@ -25,7 +26,7 @@ public abstract class PlatformPurchaseManger {
 
 
   public PlatformPurchaseManger() {
-    eventBus = new EventBus(PlatformPurchaseManger.class.getSimpleName());
+    eventBus = new SafeEventBus(PlatformPurchaseManger.class.getSimpleName());
     purchasesEnabled = false;
     if (initializeRunnable != null) {
       initializeRunnable.run();
