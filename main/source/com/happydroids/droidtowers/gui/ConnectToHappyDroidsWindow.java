@@ -64,7 +64,7 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
 
       new Dialog(DroidTowersGame.getRootUiStage())
               .setTitle("Connection Error")
-              .setMessage("Could not contact happydroids.com, please check that you have internet access and try again.\n\nERROR:ETFAIL2FONHOME")
+              .setMessage("Could not contact happydroids.com, please your internet connection and try again.\n\nERROR:ETFAIL2FONHOME")
               .addButton("Dismiss", new OnClickCallback() {
                 @Override
                 public void onClick(Dialog dialog) {
@@ -136,7 +136,7 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
                       dialog.dismiss();
                       dismiss();
 
-                      if(SceneManager.activeScene() instanceof MainMenuScene) {
+                      if (SceneManager.activeScene() instanceof MainMenuScene) {
                         SceneManager.restartActiveScene();
                       }
                     }
