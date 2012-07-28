@@ -28,7 +28,7 @@ public class AndroidUncaughtExceptionHandler extends HappyDroidUncaughtException
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("Oooops!")
                 .setMessage(generateExceptionErrorString(throwable))
-                .setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Send Report", new DialogInterface.OnClickListener() {
                   public void onClick(DialogInterface dialogInterface, int i) {
                     ProgressDialog.Builder pb = new ProgressDialog.Builder(activity);
                     pb.setMessage("Sending crash report...");
@@ -36,6 +36,12 @@ public class AndroidUncaughtExceptionHandler extends HappyDroidUncaughtException
                     pb.show();
 
                     new CrashReport(throwable).save();
+                    Gdx.app.exit();
+                  }
+                })
+                .setNegativeButton("Just Exit", new DialogInterface.OnClickListener() {
+                  @Override
+                  public void onClick(DialogInterface dialogInterface, int i) {
                     Gdx.app.exit();
                   }
                 }).show();
