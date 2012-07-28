@@ -480,4 +480,8 @@ public abstract class GridObject {
   public void removeLoanFromVinnie() {
     loanFromCousinVinnie = 0;
   }
+
+  public boolean canEarnMoney() {
+    return true;
+  }
 }

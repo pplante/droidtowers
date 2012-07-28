@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.grid;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GLCommon;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -72,9 +73,7 @@ public class GameGridRenderer extends GameLayer {
   public void render(SpriteBatch spriteBatch) {
     shapeRenderer.setProjectionMatrix(camera.combined);
     if (shouldRenderGridLines) {
-      Gdx.graphics.getGLCommon().glEnable(GL10.GL_BLEND);
       renderGridLines();
-      Gdx.graphics.getGLCommon().glDisable(GL10.GL_BLEND);
     }
 
     renderGridObjects(spriteBatch);
@@ -154,8 +153,12 @@ public class GameGridRenderer extends GameLayer {
   }
 
   private void renderGridLines() {
+    GLCommon gl = Gdx.graphics.getGLCommon();
+    gl.glEnable(GL10.GL_BLEND);
+    gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE);
+
     shapeRenderer.begin(ShapeType.Line);
-    shapeRenderer.setColor(0.1f, 0.1f, 0.1f, 0.1f);
+    shapeRenderer.setColor(0.1f, 0.1f, 0.1f, 0.5f);
 
     for (int i = 0; i <= gameGrid.getGridSize().x; i++) {
       shapeRenderer.line(i * GRID_UNIT_SIZE, 0, i * GRID_UNIT_SIZE, gameGrid.getGridSize().y * GRID_UNIT_SIZE);
@@ -166,6 +169,8 @@ public class GameGridRenderer extends GameLayer {
     }
 
     shapeRenderer.end();
+
+    gl.glDisable(GL10.GL_BLEND);
   }
 
   public void toggleGridLines() {

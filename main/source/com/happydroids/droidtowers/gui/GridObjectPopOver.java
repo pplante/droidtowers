@@ -13,9 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
+import com.happydroids.droidtowers.utils.StringUtils;
 
 import static com.happydroids.droidtowers.TowerAssetManager.sprite;
 import static com.happydroids.droidtowers.platform.Display.scale;
@@ -37,6 +39,8 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
   private Label nameLabel;
   private float timeSinceUpdate;
   private Vector3 gridObjectWorldToScreen;
+  private Label incomeLabel;
+  private Label upkeepLabel;
 
 
   public GridObjectPopOver(T gridObject) {
@@ -79,6 +83,26 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     row();
     cousinVinniesHideout = FontManager.Default.makeLabel(COUSIN_VINNIES_HIDEOUT);
     add(cousinVinniesHideout);
+
+    incomeLabel = FontManager.Default.makeLabel("$0");
+    upkeepLabel = FontManager.Default.makeLabel("$0");
+
+    Table budgetTable = new Table();
+    budgetTable.defaults().top().left().space(scale(8));
+    budgetTable.row();
+    if (gridObject.canEarnMoney()) {
+      budgetTable.add(FontManager.Roboto12.makeLabel("INCOME"));
+    }
+    budgetTable.add(FontManager.Roboto12.makeLabel("COST"));
+
+    budgetTable.row();
+    if (gridObject.canEarnMoney()) {
+      budgetTable.add(incomeLabel);
+    }
+    budgetTable.add(upkeepLabel);
+
+    row();
+    add(budgetTable).left();
 
     desirabilityBar = makeStarRatingBar("Desirability");
     noiseBar = makeStarRatingBar("Noise");
@@ -154,6 +178,19 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
         cousinVinniesHideout.visible = false;
         getCell(cousinVinniesHideout).ignore(true);
         updatedData = true;
+      }
+    }
+
+    if (incomeLabel != null) {
+      incomeLabel.setText(TowerConsts.CURRENCY_SYMBOL + StringUtils.formatNumber(gridObject.getCoinsEarned()));
+    }
+
+    if (upkeepLabel != null) {
+      upkeepLabel.setText(TowerConsts.CURRENCY_SYMBOL + StringUtils.formatNumber(gridObject.getUpkeepCost()));
+      if (gridObject.canEarnMoney() && gridObject.getCoinsEarned() < gridObject.getUpkeepCost()) {
+        upkeepLabel.setColor(Color.RED);
+      } else {
+        upkeepLabel.setColor(Color.WHITE);
       }
     }
 

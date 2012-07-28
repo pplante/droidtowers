@@ -18,6 +18,11 @@ public class ServiceRoom extends CommercialSpace {
   }
 
   @Override
+  public boolean canEarnMoney() {
+    return false;
+  }
+
+  @Override
   protected boolean canEmployDroids() {
     return !gridObjectType.getId().equals("PUBLIC-RESTROOM");
   }

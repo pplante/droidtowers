@@ -33,7 +33,7 @@ import com.happydroids.droidtowers.scenes.LaunchUriScene;
 import com.happydroids.droidtowers.scenes.MainMenuScene;
 import com.happydroids.droidtowers.scenes.Scene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
-import com.happydroids.droidtowers.tasks.SyncCloudGamesTask;
+import com.happydroids.droidtowers.tasks.MigrateExistingGamesTask;import com.happydroids.droidtowers.tasks.SyncCloudGamesTask;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.types.*;
@@ -109,7 +109,9 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
       }
     });
 
-    TowerGameService.instance().afterAuthentication(new Runnable() {
+    new MigrateExistingGamesTask().run();
+
+    TowerGameService.instance().afterDeviceIdentification(new Runnable() {
       @Override
       public void run() {
         if (!TowerGameService.instance().isAuthenticated()) {

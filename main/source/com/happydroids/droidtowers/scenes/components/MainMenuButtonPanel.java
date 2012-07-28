@@ -80,7 +80,7 @@ public class MainMenuButtonPanel extends Table {
       add(connectToHappyDroids).fill().width(BUTTON_WIDTH);
       row().padTop(BUTTON_SPACING);
 
-      TowerGameService.instance().afterAuthentication(new Runnable() {
+      TowerGameService.instance().afterDeviceIdentification(new Runnable() {
         public void run() {
           Gdx.app.debug(TAG, "After auth, close/show connect button.");
           if (!TowerGameService.instance().isAuthenticated()) {

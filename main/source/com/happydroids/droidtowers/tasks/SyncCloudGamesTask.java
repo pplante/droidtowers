@@ -27,7 +27,6 @@ public class SyncCloudGamesTask extends BackgroundTask {
 
     FileHandle storageRoot = GameSaveFactory.getStorageRoot();
     FileHandle[] localSaveFiles = storageRoot.list(".json");
-    upgradeLocalFiles(localSaveFiles);
 
     Gdx.app.log(TAG, "Beginning sync!");
     if (Platform.getConnectionMonitor().isConnectedOrConnecting()) {
@@ -80,14 +79,6 @@ public class SyncCloudGamesTask extends BackgroundTask {
           storage.child(gameSave.getBaseFilename() + ".png").writeBytes(cloudGameSave.getImage(), false);
         } catch (Exception ignored) {
         }
-      }
-    }
-  }
-
-  private void upgradeLocalFiles(FileHandle[] files) {
-    if (files != null && files.length > 0) {
-      for (FileHandle file : files) {
-        GameSaveFactory.upgradeGameSave(file.read(), file.name());
       }
     }
   }

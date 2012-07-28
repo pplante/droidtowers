@@ -18,7 +18,7 @@ import org.apache.http.NameValuePair;
 
 public class LaunchGameUriAction {
   void checkAuthAndLoadGame(final NameValuePair gameId) {
-    TowerGameService.instance().afterAuthentication(new Runnable() {
+    TowerGameService.instance().afterDeviceIdentification(new Runnable() {
       public void run() {
         if (TowerGameService.instance().isAuthenticated()) {
           fetchAndLoadGameFromCloud(gameId);

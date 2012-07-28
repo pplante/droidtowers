@@ -26,4 +26,9 @@ public abstract class Transit extends GridObject {
   public float getSurroundingCrimeLevel() {
     return 0f;
   }
+
+  @Override
+  public boolean canEarnMoney() {
+    return false;
+  }
 }

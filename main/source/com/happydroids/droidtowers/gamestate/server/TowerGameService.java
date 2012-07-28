@@ -78,7 +78,7 @@ public class TowerGameService extends HappyDroidService {
     }
   }
 
-  public void afterAuthentication(Runnable runnable) {
+  public void afterDeviceIdentification(Runnable runnable) {
     if (!authenticationFinished) {
       postAuthRunnables.push(runnable);
     } else {

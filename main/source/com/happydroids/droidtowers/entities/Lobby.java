@@ -38,6 +38,11 @@ public class Lobby extends Room {
     return new GridObjectPopOver(this);
   }
 
+  @Override
+  public boolean canEarnMoney() {
+    return false;
+  }
+
   private void updatePopulation() {
     // do nothing!
   }
