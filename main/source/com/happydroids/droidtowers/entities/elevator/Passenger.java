@@ -35,9 +35,9 @@ public class Passenger {
 
     switch (travelDirection) {
       case UP:
-        return otherPassenger.boardingFloor >= boardingFloor && otherPassenger.destinationFloor <= destinationFloor;
+        return otherPassenger.boardingFloor >= boardingFloor;// && otherPassenger.destinationFloor <= destinationFloor;
       case DOWN:
-        return otherPassenger.boardingFloor <= boardingFloor && otherPassenger.destinationFloor >= destinationFloor;
+        return otherPassenger.boardingFloor <= boardingFloor;// && otherPassenger.destinationFloor >= destinationFloor;
     }
 
     return false;

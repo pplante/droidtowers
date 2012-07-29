@@ -12,14 +12,13 @@ import com.happydroids.droidtowers.entities.elevator.Passenger;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import static com.happydroids.droidtowers.math.Direction.DOWN;
 
 public class ElevatorQueue {
   public static final int INVALID_FLOOR = -1;
-  private LinkedList<Passenger> passengersWaiting;
+  private List<Passenger> passengersWaiting;
   private List<Passenger> currentRiders;
   private List<Integer> floorNumbers;
   private int currentFloor;
@@ -31,7 +30,7 @@ public class ElevatorQueue {
   };
 
   public ElevatorQueue(Elevator elevator) {
-    passengersWaiting = Lists.newLinkedList();
+    passengersWaiting = Lists.newArrayList();
     currentRiders = Lists.newArrayList();
     currentFloor = INVALID_FLOOR;
     floorNumbers = Lists.newArrayList();
@@ -50,19 +49,23 @@ public class ElevatorQueue {
 
     if (passengersWaiting.isEmpty()) return false;
 
-    Passenger firstPassenger = passengersWaiting.poll();
+    Passenger firstPassenger = passengersWaiting.remove(0);
     currentRiders.clear();
     currentRiders.add(firstPassenger);
 
-    for (Passenger otherPassenger : passengersWaiting) {
-      if (firstPassenger.travelContains(otherPassenger) && currentRiders.size() < 8 && !currentRiders.contains(otherPassenger)) {
+
+    for (int i = 0, passengersWaitingSize = passengersWaiting.size(); i < passengersWaitingSize; i++) {
+      Passenger otherPassenger = passengersWaiting.get(i);
+      if (firstPassenger.travelContains(otherPassenger)) {
         currentRiders.add(otherPassenger);
       }
     }
 
     passengersWaiting.removeAll(currentRiders);
+
     floorNumbers = Lists.newLinkedList();
-    for (Passenger passenger : currentRiders) {
+    for (int i = 0, currentRidersSize = currentRiders.size(); i < currentRidersSize; i++) {
+      Passenger passenger = currentRiders.get(i);
       floorNumbers.add(passenger.boardingFloor);
       floorNumbers.add(passenger.destinationFloor);
     }
@@ -159,11 +162,13 @@ public class ElevatorQueue {
   }
 
   public void informPassengersOfServiceChange() {
-    for (Passenger passenger : passengersWaiting) {
+    for (int i = 0, passengersWaitingSize = passengersWaiting.size(); i < passengersWaitingSize; i++) {
+      Passenger passenger = passengersWaiting.get(i);
       passenger.informOfServiceChange();
     }
 
-    for (Passenger currentRider : currentRiders) {
+    for (int i = 0, currentRidersSize = currentRiders.size(); i < currentRidersSize; i++) {
+      Passenger currentRider = currentRiders.get(i);
       currentRider.informOfServiceChange();
     }
 

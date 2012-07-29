@@ -258,10 +258,8 @@ public abstract class GridObject {
   public void updateGridPointsTouched() {
     pointsTouched = Lists.newArrayList();
 
-    GridPoint contentSize = getContentSize();
-    GridPoint contentPosition = getContentPosition();
-    for (int x = contentPosition.x; x < contentPosition.x + contentSize.x; x++) {
-      for (int y = contentPosition.y; y < contentPosition.y + contentSize.y; y++) {
+    for (int x = position.x; x < position.x + size.x; x++) {
+      for (int y = position.y; y < position.y + size.y; y++) {
         pointsTouched.add(new GridPoint(x, y));
       }
     }

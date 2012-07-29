@@ -56,7 +56,7 @@ public class ElevatorCar extends GameObject {
 
   public void moveToFloor(int nextFloor) {
     TweenSystem.manager().killTarget(this);
-    finalPosition.set(elevator.getContentPosition());
+    finalPosition.set(elevator.getPosition());
     finalPosition.y = nextFloor;
     float targetYPosition = finalPosition.getWorldY();
     int distanceBetweenStops = (int) (Math.abs(getY() - targetYPosition) * 2.5f);
@@ -111,7 +111,7 @@ public class ElevatorCar extends GameObject {
   }
 
   private void returnToLobby() {
-    moveToFloor(elevator.getContentPosition().y);
+    moveToFloor(elevator.getPosition().y);
   }
 
   public boolean addPassenger(AvatarSteeringManager steeringManager, int boarding, int destination, Runnable disembarkCallback) {

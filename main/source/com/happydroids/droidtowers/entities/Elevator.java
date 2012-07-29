@@ -237,23 +237,9 @@ public class Elevator extends Transit {
     newSize.y = Math.min(newSize.y, 20);
   }
 
-  @Override
-  public GridPoint getContentSize() {
-    GridPoint cpy = size.cpy();
-    cpy.sub(0, 2);
-    return cpy;
-  }
-
-  @Override
-  public GridPoint getContentPosition() {
-    GridPoint cpy = position.cpy();
-    cpy.add(0, 1);
-    return cpy;
-  }
-
   public boolean servicesFloor(int floorNumber) {
-    float minFloor = getContentPosition().y;
-    float maxFloor = minFloor + getContentSize().y;
+    float minFloor = getPosition().y + 1;
+    float maxFloor = minFloor + getSize().y - 2;
     return minFloor <= floorNumber && floorNumber <= maxFloor;
   }
 

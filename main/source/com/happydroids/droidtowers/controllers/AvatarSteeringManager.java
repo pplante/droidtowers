@@ -28,7 +28,6 @@ import com.happydroids.droidtowers.math.Direction;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.utils.Random;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -67,7 +66,8 @@ public class AvatarSteeringManager {
     currentState = Sets.newHashSet();
     transitLine = new TransitLine();
     transitLine.setColor(avatar.getColor());
-    for (GridPosition position : path) {
+    for (int i = 0, pathSize = path.size(); i < pathSize; i++) {
+      GridPosition position = path.get(i);
       transitLine.addPoint(position.toWorldVector2());
     }
 
@@ -118,13 +118,12 @@ public class AvatarSteeringManager {
       } else if (currentPos.elevator != null) {
         int before = path.size();
         GridPosition endOfElevator = null;
-        Iterator<GridPosition> iterator = path.iterator();
-        while (iterator.hasNext()) {
-          GridPosition next = iterator.next();
+        GridPosition next;
+        while ((next = path.peek()) != null) {
           if (next.elevator != null && next.elevator.equals(currentPos.elevator)) {
             transitLine.highlightPoint(pointsTraveled++);
             endOfElevator = next;
-            iterator.remove();
+            path.poll();
           } else {
             break;
           }
@@ -152,7 +151,7 @@ public class AvatarSteeringManager {
     moveAvatarTo(nextToElevator, new TweenCallback() {
       @Override
       public void onEvent(int type, BaseTween source) {
-        if (currentPos.elevator == null) {
+        if (currentPos.elevator == null || currentPos.y == destination.y) {
           finished();
           return;
         }

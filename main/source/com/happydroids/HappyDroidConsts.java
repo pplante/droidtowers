@@ -5,10 +5,10 @@
 package com.happydroids;
 
 public class HappyDroidConsts {
-  public static final String HAPPYDROIDS_SERVER = "alf.happydroids.com";
+  public static final String HAPPYDROIDS_SERVER = "local.happydroids.com";
   public static final String HAPPYDROIDS_URI = "http://" + HAPPYDROIDS_SERVER;
   public static final String HAPPYDROIDS_API_KEY = "f88c02844c913c20f84ea29cbabec97c10c828a8caf204de41";
-  public static final boolean DEBUG = false;
+  public static final boolean DEBUG = true;
   public static boolean DISPLAY_DEBUG_INFO = true;
   public static final long HAPPYDROIDS_PING_FREQUENCY = DEBUG ? 5000 : 60000;
   public static String VERSION = "1.0.40";
