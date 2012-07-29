@@ -106,6 +106,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
 
     desirabilityBar = makeStarRatingBar("Desirability");
     noiseBar = makeStarRatingBar("Noise");
+    noiseBar.setTextures("hud/no-sign.png", "hud/no-sign-white.png");
   }
 
   protected StarRatingBar makeStarRatingBar(String labelText) {

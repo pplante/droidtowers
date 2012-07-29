@@ -53,6 +53,8 @@ public class GenerateAssetManagerFileList {
     addFileEntry(assetsDir.child("characters.txt"), TextureAtlas.class);
     addFileEntry(assetsDir.child("transport.txt"), TextureAtlas.class);
     addFileEntry(assetsDir.child("rain-drop.png"), Texture.class);
+    addFileEntry(assetsDir.child("hud/no-sign.png"), Texture.class);
+    addFileEntry(assetsDir.child("hud/no-sign-white.png"), Texture.class);
     addFileEntry(assetsDir.child("hud/star.png"), Texture.class);
     addFileEntry(assetsDir.child("hud/star-white.png"), Texture.class);
     addFileEntry(assetsDir.child("decals.png"), Texture.class);

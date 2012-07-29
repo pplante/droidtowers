@@ -23,7 +23,7 @@ class StarRatingBar extends Widget {
   private int maxStars;
   private Texture starTexture;
   private Texture starTextureMask;
-  private final int starTextureWidth;
+  private int starTextureWidth;
   private final int starTextureHeight;
 
   StarRatingBar() {
@@ -35,11 +35,7 @@ class StarRatingBar extends Widget {
     this.stars = stars;
     this.maxStars = maxStars;
 
-    starTexture = TowerAssetManager.texture("hud/star.png");
-    starTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-    starTextureMask = TowerAssetManager.texture("hud/star-white.png");
-    starTextureMask.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-    starTextureWidth = starTexture.getWidth();
+    setTextures("hud/star.png", "hud/star-white.png");
 
     valueLabel = FontManager.RobotoBold18.makeLabel("5.0");
     valueLabel.setAlignment(Align.CENTER);
@@ -108,5 +104,13 @@ class StarRatingBar extends Widget {
 
   public void setValue(double experienceLevel) {
     setValue((float) experienceLevel);
+  }
+
+  public void setTextures(String coloredTexture, String maskTexture) {
+    starTexture = TowerAssetManager.texture(coloredTexture);
+    starTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+    starTextureMask = TowerAssetManager.texture(maskTexture);
+    starTextureMask.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+    starTextureWidth = starTexture.getWidth();
   }
 }

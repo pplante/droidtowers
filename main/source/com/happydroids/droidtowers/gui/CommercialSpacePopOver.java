@@ -25,6 +25,7 @@ public class CommercialSpacePopOver extends GridObjectPopOver<CommercialSpace> {
     super.buildControls();
 
     crimeBar = makeStarRatingBar("Crime");
+    crimeBar.setTextures("hud/no-sign.png", "hud/no-sign-white.png");
     employmentBar = makeStarRatingBar("Employment");
 
     ButtonBar buttonBar = new ButtonBar();

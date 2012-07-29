@@ -43,20 +43,24 @@
     "backgrounds/cityscape.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "sound/effects/construction-destroy-1.wav":"com.badlogic.gdx.audio.Sound",
     "tower-sign-poll.png":"com.badlogic.gdx.graphics.Texture",
+    "hud/no-sign.png":"com.badlogic.gdx.graphics.Texture",
     "backgrounds/tower-sign.png":"com.badlogic.gdx.graphics.Texture",
     "rooms/housing.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "sound/music/nighttime.mp3":"com.badlogic.gdx.audio.Music",
+    "hud/no-sign-white.png":"com.badlogic.gdx.graphics.Texture",
     "rooms/generic.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "rooms/decals.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "decals.png":"com.badlogic.gdx.graphics.Texture",
     "hud/star.png":"com.badlogic.gdx.graphics.Texture"
   },
   "highDefFiles":{
+    "hud/no-sign-white.png":"hud/no-sign-white-hd.png",
     "hud/star.png":"hud/star-hd.png",
     "hud/star-white.png":"hud/star-white-hd.png",
     "hud/buttons.txt":"hud/buttons-hd.txt",
     "swatches/swatch-white-triangle.png":"swatches/swatch-white-triangle-hd.png",
     "hud/menus.txt":"hud/menus-hd.txt",
+    "hud/no-sign.png":"hud/no-sign-hd.png",
     "swatches/swatch-white-triangle-left.png":"swatches/swatch-white-triangle-left-hd.png"
   },
   "musicFiles":[ "sound/music/happy-upbeat.mp3", "sound/music/nighttime.mp3", "sound/music/tower-jam.mp3" ]

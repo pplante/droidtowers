@@ -41,7 +41,7 @@ public class SellGridObjectConfirmationDialog extends Dialog {
         }
       });
     } else {
-      setMessage("Are you sure you want to recycle this " + objectToSell.getName() + "?\n\nRecycled materials price is: $" + NumberFormat.getInstance().format(sellPrice));
+      setMessage("Are you sure you want to recycle this " + objectToSell.getName() + "?\n\nRecycled materials price is: $" + NumberFormat.getInstance().format(sellPrice) + "\n\nThis will also fire Employees, or evict Residents.");
       addButton("Yes", new OnClickCallback() {
         @Override
         public void onClick(Dialog dialog) {

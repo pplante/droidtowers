@@ -7,11 +7,16 @@ package com.happydroids.droidtowers.input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Ordering;
+import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
+import com.happydroids.droidtowers.entities.Transit;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.math.GridPoint;
 
 import javax.annotation.Nullable;
@@ -38,15 +43,41 @@ public class SellTool extends ToolBase {
 
       if (zIndexSorted != null && zIndexSorted.size() > 0) {
         final GridObject objectToSell = zIndexSorted.get(0);
-        final int sellPrice = (int) (objectToSell.getGridObjectType().getCoins() * 0.5);
 
-        new SellGridObjectConfirmationDialog(gameGrid, objectToSell).show();
+        if (!checkAbove(objectToSell)) {
+          HeadsUpDisplay.showToast("You cannot sell this, something is above it.");
+        } else {
+          final int sellPrice = (int) (objectToSell.getGridObjectType().getCoins() * 0.5);
+          new SellGridObjectConfirmationDialog(gameGrid, objectToSell).show();
+        }
 
         return true;
       }
     }
 
     return false;
+  }
+
+  private boolean checkAbove(GridObject objectToSell) {
+    if (objectToSell instanceof Transit) {
+      return true;
+    }
+
+    GridPoint gridPointAbove = objectToSell.getPosition().cpy();
+    gridPointAbove.add(0, 1);
+    Set<GridObject> objectsAbove = objectToSell.getGameGrid().positionCache().getObjectsAt(gridPointAbove, objectToSell.getSize(), objectToSell);
+
+    if (!objectsAbove.isEmpty()) {
+      Set<GridObject> nonTransits = Sets.newHashSet(Iterables.filter(objectsAbove, new Predicate<GridObject>() {
+        @Override
+        public boolean apply(@Nullable GridObject input) {
+          return !(input instanceof Transit);
+        }
+      }));
+      return nonTransits.isEmpty();
+    }
+
+    return objectsAbove.isEmpty();
   }
 
 }

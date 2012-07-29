@@ -30,6 +30,8 @@ public class RoomPopOver extends GridObjectPopOver<Room> {
     super.buildControls();
 
     crimeBar = makeStarRatingBar("Crime");
+    crimeBar.setTextures("hud/no-sign.png", "hud/no-sign-white.png");
+
     residencyBar = makeStarRatingBar("Residents");
 
     residentImages = new Table();
