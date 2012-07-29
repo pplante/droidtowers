@@ -11,9 +11,9 @@ import com.happydroids.droidtowers.gui.ProgressDialog;
 import com.happydroids.droidtowers.platform.purchase.AppletPurchaseManager;
 import com.happydroids.droidtowers.tasks.VerifyPurchaseTask;
 import com.happydroids.platform.DesktopBrowserUtil;
-import com.happydroids.platform.DesktopConnectionMonitor;
 import com.happydroids.platform.DesktopUncaughtExceptionHandler;
 import com.happydroids.platform.Platform;
+import com.happydroids.platform.PlatformConnectionMonitor;
 import netscape.javascript.JSObject;
 import org.apache.commons.lang3.StringUtils;
 
@@ -32,7 +32,7 @@ public abstract class DroidTowersBaseApplet extends LwjglApplet {
 
         Platform.setUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
         Platform.setBrowserUtil(new DesktopBrowserUtil());
-        Platform.setConnectionMonitor(new DesktopConnectionMonitor());
+        Platform.setConnectionMonitor(new PlatformConnectionMonitor());
         Platform.setPurchaseManager(new AppletPurchaseManager());
       }
     }), true);

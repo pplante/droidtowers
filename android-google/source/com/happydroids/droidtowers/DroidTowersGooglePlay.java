@@ -42,7 +42,7 @@ public class DroidTowersGooglePlay extends AndroidApplication implements Billing
     initialize(new DroidTowersGame(new Runnable() {
       @Override
       public void run() {
-        Platform.setConnectionMonitor(new AndroidConnectionMonitor(DroidTowersGooglePlay.this));
+        Platform.setConnectionMonitor(new PlatformConnectionMonitor());
         Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(DroidTowersGooglePlay.this));
         Platform.setBrowserUtil(new AndroidBrowserUtil(DroidTowersGooglePlay.this));
         Platform.setPurchaseManager(new GooglePlayPurchaseManager(DroidTowersGooglePlay.this));

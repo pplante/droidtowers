@@ -37,7 +37,7 @@ public class DesktopGame {
 
         Platform.setUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
         Platform.setBrowserUtil(new DesktopBrowserUtil());
-        Platform.setConnectionMonitor(new DesktopConnectionMonitor());
+        Platform.setConnectionMonitor(new PlatformConnectionMonitor());
         Platform.setPurchaseManager(new DesktopPurchaseManager());
 
         new GameVersionCheckTask().run();

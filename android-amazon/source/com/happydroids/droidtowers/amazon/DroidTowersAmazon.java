@@ -13,9 +13,9 @@ import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.platform.AndroidBrowserUtil;
-import com.happydroids.platform.AndroidConnectionMonitor;
 import com.happydroids.platform.AndroidUncaughtExceptionHandler;
 import com.happydroids.platform.Platform;
+import com.happydroids.platform.PlatformConnectionMonitor;
 import com.happydroids.platform.purchase.AmazonAppStorePurchaseManager;
 
 public class DroidTowersAmazon extends AndroidApplication {
@@ -42,7 +42,7 @@ public class DroidTowersAmazon extends AndroidApplication {
         Gdx.input.setCatchBackKey(true);
         Gdx.input.setCatchMenuKey(true);
 
-        Platform.setConnectionMonitor(new AndroidConnectionMonitor(DroidTowersAmazon.this));
+        Platform.setConnectionMonitor(new PlatformConnectionMonitor());
         Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(DroidTowersAmazon.this));
         Platform.setBrowserUtil(new AndroidBrowserUtil(DroidTowersAmazon.this));
         Platform.setPurchaseManager(new AmazonAppStorePurchaseManager(DroidTowersAmazon.this));

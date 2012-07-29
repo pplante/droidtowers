@@ -10,7 +10,7 @@ public class HappyDroidConsts {
   public static final String HAPPYDROIDS_API_KEY = "f88c02844c913c20f84ea29cbabec97c10c828a8caf204de41";
   public static final boolean DEBUG = true;
   public static boolean DISPLAY_DEBUG_INFO = true;
-  public static final long HAPPYDROIDS_PING_FREQUENCY = DEBUG ? 5000 : 60000;
+  public static final long HAPPYDROIDS_PING_FREQUENCY = 60000;
   public static String VERSION = "1.0.40";
   public static int VERSION_CODE = 1040;
   public static String GIT_SHA = "f1693f95a52ac8096dba2ed4892cb61f64245ecd";

@@ -5,18 +5,18 @@
 package com.happydroids.droidtowers.grid;
 
 import com.badlogic.gdx.math.Vector2;
-import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.entities.Elevator;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Stair;
 import com.happydroids.droidtowers.math.GridPoint;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class GridPosition {
   public final int x;
   public final int y;
-  private List<GridObject> objects = Lists.newArrayList();
+  private Set<GridObject> objects = new HashSet<GridObject>();
   public Elevator elevator;
   public Stair stair;
   public boolean connectedToTransit;
@@ -35,7 +35,7 @@ public class GridPosition {
     this.y = y;
   }
 
-  public List<GridObject> getObjects() {
+  public Set<GridObject> getObjects() {
     return objects;
   }
 

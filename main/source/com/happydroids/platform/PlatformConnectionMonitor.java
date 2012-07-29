@@ -4,16 +4,24 @@
 
 package com.happydroids.platform;
 
+import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.server.RunnableQueue;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import org.apache.http.HttpResponse;
 
-public abstract class PlatformConnectionMonitor {
-  private RunnableQueue postConnectRunnables;
+public class PlatformConnectionMonitor {
+  protected RunnableQueue postConnectRunnables;
+  private boolean networkState;
 
-  protected PlatformConnectionMonitor() {
+  public PlatformConnectionMonitor() {
     postConnectRunnables = new RunnableQueue();
+    monitorThread.start();
   }
 
-  public abstract boolean isConnectedOrConnecting();
+
+  public boolean isConnectedOrConnecting() {
+    return networkState;
+  }
 
   public void withConnection(Runnable runnable) {
     if (postConnectRunnables == null) {
@@ -30,4 +38,35 @@ public abstract class PlatformConnectionMonitor {
   protected void runAllPostConnectRunnables() {
     postConnectRunnables.runAll();
   }
+
+  public void dispose() {
+    monitorThread.interrupt();
+  }
+
+  @SuppressWarnings("FieldCanBeLocal")
+  protected final Thread monitorThread = new Thread(PlatformConnectionMonitor.class.getSimpleName()) {
+    @Override
+    public void run() {
+      while (!Thread.currentThread().isInterrupted()) {
+        try {
+          HttpResponse response = TowerGameService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + "/ping", null);
+          if (response != null) {
+            networkState = response.getStatusLine().getStatusCode() == 200;
+
+            if (networkState) {
+              runAllPostConnectRunnables();
+            }
+          }
+        } catch (Throwable ignored) {
+          networkState = false;
+        } finally {
+          try {
+            Thread.sleep(HappyDroidConsts.HAPPYDROIDS_PING_FREQUENCY);
+          } catch (InterruptedException ignored) {
+
+          }
+        }
+      }
+    }
+  };
 }
