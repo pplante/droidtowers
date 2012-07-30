@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.entities;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -14,11 +15,13 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.controllers.AvatarState;
 import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
 import com.happydroids.droidtowers.controllers.PathSearchManager;
 import com.happydroids.droidtowers.generators.NameGenerator;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
+import com.happydroids.droidtowers.math.Direction;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.pathfinding.TransitPathFinder;
 import com.happydroids.droidtowers.utils.Random;
@@ -31,10 +34,10 @@ import static com.happydroids.droidtowers.types.ProviderType.FOOD;
 public class Avatar extends GameObject {
   public static final float FRAME_DURATION = 0.25f;
   public static final float WALKING_ANIMATION_DURATION = FRAME_DURATION * 3;
-  private static final float PATH_SEARCH_DELAY = 0f;
   private static final Set<Color> colors = Sets.newHashSet(Color.GREEN, Color.RED, Color.ORANGE, Color.MAGENTA, Color.PINK, Color.YELLOW);
   private static Iterator<Color> colorIterator = Iterables.cycle(colors).iterator();
   private final Animation walkAnimation;
+  private float walkAnimationTime;
 
   private AvatarSteeringManager steeringManager;
   protected final GameGrid gameGrid;
@@ -42,8 +45,6 @@ public class Avatar extends GameObject {
   private boolean isResident;
   private float satisfactionShops;
   private float satisfactionFood;
-  private Color myColor;
-  private float lastPathFinderSearch;
   protected GridObject movingTo;
   private TransitPathFinder pathFinder;
   private Room home;
@@ -124,7 +125,6 @@ public class Avatar extends GameObject {
   }
 
   protected void wanderAround() {
-    lastPathFinderSearch = 0f;
     GridPosition start = gameGrid.positionCache().getPosition(gameGrid.closestGridPoint(getX(), getY()));
 
     LinkedList<GridPosition> discoveredPath = Lists.newLinkedList();
@@ -219,10 +219,20 @@ public class Avatar extends GameObject {
 
     hungerLevel -= 0.001f * timeDelta;
 
-    lastPathFinderSearch += timeDelta;
-
     if (!steeringManager.isRunning()) {
       beginNextAction();
+    } else {
+      Set<AvatarState> steeringState = steeringManager.getCurrentState();
+      if (steeringState.contains(AvatarState.MOVING) && !steeringState.contains(AvatarState.USING_ELEVATOR)) {
+        walkAnimationTime += timeDelta;
+        if (walkAnimationTime >= WALKING_ANIMATION_DURATION) {
+          walkAnimationTime = 0f;
+        }
+
+        TextureRegion keyFrame = walkAnimation.getKeyFrame(walkAnimationTime, true);
+        setRegion(keyFrame);
+        flip(steeringManager.horizontalDirection() == Direction.LEFT, false);
+      }
     }
   }
 
@@ -289,8 +299,6 @@ public class Avatar extends GameObject {
     if (movingTo != null) {
       movingTo.getVisitorQueue().remove(this);
     }
-
-    lastPathFinderSearch = PATH_SEARCH_DELAY;
   }
 
   public void setHome(GridObject newHome) {

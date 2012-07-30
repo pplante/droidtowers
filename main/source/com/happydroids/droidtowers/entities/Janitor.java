@@ -5,14 +5,9 @@
 package com.happydroids.droidtowers.entities;
 
 import com.badlogic.gdx.graphics.Color;
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Ordering;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.types.ProviderType;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class Janitor extends Avatar {
@@ -32,18 +27,20 @@ public class Janitor extends Avatar {
   @Override
   protected void findPlaceToVisit() {
     List<GridObject> commercialSpaces = gameGrid.getObjects();
-    if (commercialSpaces != null) {
-      List<GridObject> sortedObjects = Ordering.natural().onResultOf(new Function<GridObject, Long>() {
-        public Long apply(@Nullable GridObject gridObject) {
-          return gridObject.getLastServicedAt();
+    if (commercialSpaces != null && !commercialSpaces.isEmpty()) {
+      GridObject oldestServicedSpace = null;
+      long oldestServiceTime = 0;
+      for (int i = 0, commercialSpacesSize = commercialSpaces.size(); i < commercialSpacesSize; i++) {
+        GridObject commercialSpace = commercialSpaces.get(i);
+        if (oldestServiceTime < commercialSpace.getLastServicedAt()) {
+          oldestServiceTime = commercialSpace.getLastServicedAt();
+          oldestServicedSpace = commercialSpace;
         }
-      }).sortedCopy(Iterables.filter(commercialSpaces, new Predicate<GridObject>() {
-        public boolean apply(@Nullable GridObject input) {
-          return input.getNumVisitors() > 0 && input.getGridObjectType().provides(servicesTheseProviderTypes);
-        }
-      }));
+      }
 
-      navigateToGridObject(Iterables.getFirst(sortedObjects, null));
+      if (oldestServicedSpace != null) {
+        navigateToGridObject(oldestServicedSpace);
+      }
     }
   }
 
