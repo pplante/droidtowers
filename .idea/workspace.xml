@@ -37,9 +37,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/assets/testers.txt" afterPath="$PROJECT_DIR$/main/assets/testers.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-amazon/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android-amazon/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-google/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android-google/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.ver" afterPath="$PROJECT_DIR$/build.ver" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/HappyDroidConsts.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/HappyDroidConsts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/release.properties" afterPath="$PROJECT_DIR$/release.properties" />
     </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -185,7 +187,7 @@
       <file leaf-file-name="AboutWindow.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AboutWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="54" selection-start="2099" selection-end="2099" vertical-scroll-proportion="0.36415634">
+            <state line="63" column="0" selection-start="2594" selection-end="2594" vertical-scroll-proportion="0.56148714">
               <folding>
                 <element signature="e#0#3165#0" expanded="true" />
               </folding>
@@ -1698,7 +1700,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AboutWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="54" selection-start="2099" selection-end="2099" vertical-scroll-proportion="0.36415634">
+        <state line="63" column="0" selection-start="2594" selection-end="2594" vertical-scroll-proportion="0.56148714">
           <folding>
             <element signature="e#0#3165#0" expanded="true" />
           </folding>
