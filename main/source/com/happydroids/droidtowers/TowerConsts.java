@@ -47,5 +47,5 @@ public class TowerConsts extends HappyDroidConsts {
   public static final float GAME_SPEED_MIN = DEBUG ? 0.05f : 0.5f;
 
   @SuppressWarnings("PointlessBooleanExpression")
-  public static final boolean ENABLE_AVATAR_LIST_WINDOW = !DEBUG;
+  public static final boolean ENABLE_AVATAR_LIST_WINDOW = DEBUG;
 }
