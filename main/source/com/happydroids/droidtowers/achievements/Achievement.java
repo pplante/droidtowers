@@ -61,7 +61,8 @@ public class Achievement {
 
     if (requirements != null) {
       finishedWeight = 0;
-      for (Requirement requirement : requirements) {
+      for (int i = 0, requirementsSize = requirements.size(); i < requirementsSize; i++) {
+        Requirement requirement = requirements.get(i);
         boolean completed = requirement.validate(gameGrid);
         finishedWeight += requirement.getCurrentWeight();
       }

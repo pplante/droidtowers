@@ -78,6 +78,43 @@
       {
         "type":"UNLOCK",
         "thing":"ACHIEVEMENT",
+        "thingId":"tutorial-build-pizza-place"
+      },
+      {
+        "type":"UNLOCK",
+        "thing":"OBJECT_TYPE",
+        "thingId":"PIZZA-PLACE"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-build-pizza-place",
+    "name":"Pizza, Pizza!",
+    "description":"Droids can get hungry over time.  Luckily they love Pizza!\n\nBuild a Pizza Place so they don't starve!",
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"ACHIEVEMENT",
+        "thingId":"tutorial-hire-employees"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-hire-employees",
+    "name":"Pizza Business 101",
+    "description":"Someone has to make the Pizza before it can be sold to hungry Droids.\n\nTap on the Pizza Place,\nthen click \"Manage\" to hire an employee.",
+    "requirements":[
+      {
+        "type":"BUILD",
+        "thing":"OBJECT_TYPE",
+        "thingId":"PIZZA-PLACE",
+        "amount":1
+      }
+    ],
+    "rewards":[
+      {
+        "type":"UNLOCK",
+        "thing":"ACHIEVEMENT",
         "thingId":"tutorial-pan"
       }
     ]
@@ -86,6 +123,13 @@
     "id":"tutorial-pan",
     "name":"Navigation",
     "description":"Now that your Tower is up and running, lets learn how to control your camera. To move the screen around, tap anywhere and drag.",
+    "requirements":[
+      {
+        "type":"HIRE",
+        "thing":"EMPLOYEE",
+        "amount":1
+      }
+    ],
     "rewards":[
       {
         "type":"UNLOCK",

@@ -260,6 +260,8 @@ public class Elevator extends Transit {
     for (ElevatorCar elevatorCar : elevatorCars) {
       elevatorCar.clearQueue();
     }
+
+    rebuildFloorLabelCache();
   }
 
   @Override

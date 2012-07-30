@@ -18,6 +18,7 @@ import java.util.Set;
 
 public enum AchievementThing {
   MONEY,
+  EMPLOYEE,
   PROVIDER_TYPE,
   OBJECT_TYPE,
   ACHIEVEMENT;

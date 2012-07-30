@@ -40,7 +40,7 @@ public class Room extends GridObject {
   private Set<Avatar> residents;
   protected Set<String> decalsToDraw;
   private static Map<String, TextureRegion> availableDecals;
-  private float lastCheckedDecals;
+  private float timeUntilDecalCheck = 0.05f;
 
 
   public Room(RoomType roomType, GameGrid gameGrid) {
@@ -104,9 +104,9 @@ public class Room extends GridObject {
   public void update(float deltaTime) {
     super.update(deltaTime);
 
-    lastCheckedDecals += deltaTime;
-    if (lastCheckedDecals >= 2.5f) {
-      lastCheckedDecals = 0f;
+    timeUntilDecalCheck -= deltaTime;
+    if (timeUntilDecalCheck <= 0) {
+      timeUntilDecalCheck = 2.5f;
       checkDecals();
     }
   }
@@ -221,6 +221,7 @@ public class Room extends GridObject {
 
   public void addResident(Avatar avatar) {
     residents.add(avatar);
+    decalsToDraw.remove(DECAL_NEEDS_DROIDS);
   }
 
   public boolean hasResidents() {

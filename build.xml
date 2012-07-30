@@ -201,4 +201,8 @@
       <fileset dir="main/assets" followsymlinks="true"/>
     </sync>
   </target>
+  <target name="clean-android-assets">
+    <delete dir="android-amazon/assets"/>
+    <delete dir="android-google/assets"/>
+  </target>
 </project>

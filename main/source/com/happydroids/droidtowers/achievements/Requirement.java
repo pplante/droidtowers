@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.achievements;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.gamestate.GameSave;
@@ -46,6 +47,8 @@ public class Requirement {
         return handleBuildRequirement(gameGrid);
       case UNLOCK:
         return handleUnlockRequirement(gameGrid);
+      case HIRE:
+        return handleHireRequirement(gameGrid);
       case HAPPYDROIDS_CONNECT:
         return TowerGameService.instance().isAuthenticated();
       case ADD_NEIGHBOR:
@@ -56,6 +59,23 @@ public class Requirement {
     }
 
     return false;
+  }
+
+  private boolean handleHireRequirement(GameGrid gameGrid) {
+    if (gameGrid == null) {
+      return false;
+    }
+
+    currentWeight = 0;
+    for (GridObject gridObject : gameGrid.getInstancesOf(CommercialSpace.class)) {
+      if (!gridObject.isPlaced()) {
+        continue;
+      }
+
+      currentWeight += ((CommercialSpace) gridObject).getEmployees().size();
+    }
+
+    return currentWeight >= amount;
   }
 
   private boolean handleAddNeighborRequirement() {

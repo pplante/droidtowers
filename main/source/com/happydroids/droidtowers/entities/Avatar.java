@@ -120,7 +120,11 @@ public class Avatar extends GameObject {
   protected void findPlaceToVisit() {
     ArrayList<GridObject> anyRoom = gameGrid.getInstancesOf(Room.class);
     if (!anyRoom.isEmpty()) {
-      navigateToGridObject(anyRoom.get(Random.randomInt(anyRoom.size() - 1)));
+      if (anyRoom.size() == 1) {
+        navigateToGridObject(anyRoom.get(0));
+      } else {
+        navigateToGridObject(anyRoom.get(MathUtils.random(0, anyRoom.size())));
+      }
     }
   }
 

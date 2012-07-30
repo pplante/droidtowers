@@ -9,6 +9,7 @@ import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
+import com.happydroids.droidtowers.events.EmployeeHiredEvent;
 import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 
@@ -30,10 +31,15 @@ public class AchievementEngineCheck extends GameGridAction {
   @Subscribe
   public void GameEvent_handleGridObjectEvent(GridObjectEvent event) {
     if (event instanceof ElevatorHeightChangeEvent) {
-      TutorialEngine.instance().moveToStepWhenReady("tutorial-pan");
+      TutorialEngine.instance().moveToStepWhenReady("tutorial-build-pizza-place");
     } else if (event.gridObject.isPlaced()) {
       Gdx.app.debug(TAG, "GameEvent_handleGridObjectEvent triggered by: " + event);
       run();
     }
+  }
+
+  @Subscribe
+  public void GameEvent_onEmployeeHired(EmployeeHiredEvent event) {
+    run();
   }
 }

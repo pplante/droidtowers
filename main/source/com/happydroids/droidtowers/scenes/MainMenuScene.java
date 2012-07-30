@@ -80,8 +80,8 @@ public class MainMenuScene extends SplashScene {
         }
       }
 
-      DebugUtils.loadFirstGameFound();
-//      DebugUtils.createNonSavableGame(true);
+//      DebugUtils.loadFirstGameFound();
+      DebugUtils.createNonSavableGame(true);
 //      DebugUtils.loadGameFromCloud(41);
     }
   }
