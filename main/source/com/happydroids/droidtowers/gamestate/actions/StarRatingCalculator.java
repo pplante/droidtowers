@@ -12,6 +12,8 @@ import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.math.StatLog;
 
+import java.util.LinkedList;
+
 public class StarRatingCalculator extends GameGridAction {
 
   private final StatLog roomDesirability;
@@ -29,7 +31,9 @@ public class StarRatingCalculator extends GameGridAction {
   @Override
   public void run() {
     roomDesirability.reset(gameGrid.getObjects().size());
-    for (GridObject gridObject : gameGrid.getObjects()) {
+    LinkedList<GridObject> objects = gameGrid.getObjects();
+    for (int i = 0, objectsSize = objects.size(); i < objectsSize; i++) {
+      GridObject gridObject = objects.get(i);
       roomDesirability.record(gridObject.getDesirability());
     }
 

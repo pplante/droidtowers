@@ -12,6 +12,10 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
 import com.happydroids.droidtowers.math.GridPoint;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import static com.happydroids.droidtowers.types.ProviderType.ELEVATOR;
 import static com.happydroids.droidtowers.types.ProviderType.SECURITY;
 
@@ -41,14 +45,20 @@ public class CrimeCalculator extends GameGridAction {
       }
     }
 
-    for (GridObject gridObject : gameGrid.getObjects()) {
+    LinkedList<GridObject> objects = gameGrid.getObjects();
+    for (int i = 0, objectsSize = objects.size(); i < objectsSize; i++) {
+      GridObject gridObject = objects.get(i);
       gridObject.setConnectedToSecurity(gridObject.provides(SECURITY, ELEVATOR));
     }
 
-    for (GridObject serviceRoom : gameGrid.getInstancesOf(ServiceRoom.class)) {
+    ArrayList<GridObject> instancesOf = gameGrid.getInstancesOf(ServiceRoom.class);
+    for (int i = 0, instancesOfSize = instancesOf.size(); i < instancesOfSize; i++) {
+      GridObject serviceRoom = instancesOf.get(i);
       if (!serviceRoom.isPlaced()) continue;
 
-      for (GridPoint gridPoint : serviceRoom.getGridPointsTouched()) {
+      List<GridPoint> gridPointsTouched = serviceRoom.getGridPointsTouched();
+      for (int i1 = 0, gridPointsTouchedSize = gridPointsTouched.size(); i1 < gridPointsTouchedSize; i1++) {
+        GridPoint gridPoint = gridPointsTouched.get(i1);
         int x = gridPoint.x;
         int y = gridPoint.y;
 

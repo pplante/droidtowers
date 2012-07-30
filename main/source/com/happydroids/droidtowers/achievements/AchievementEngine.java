@@ -76,7 +76,8 @@ public class AchievementEngine {
 
   public void checkAchievements(GameGrid gameGrid) {
     Gdx.app.debug(TAG, "Checking achievements...");
-    for (Achievement achievement : achievements) {
+    for (int i = 0, achievementsSize = achievements.size(); i < achievementsSize; i++) {
+      Achievement achievement = achievements.get(i);
       achievement.checkRequirements(gameGrid);
 
       if (achievement.isCompleted()) {
@@ -151,7 +152,8 @@ public class AchievementEngine {
   }
 
   public boolean hasPendingAwards() {
-    for (Achievement achievement : achievements) {
+    for (int i = 0, achievementsSize = achievements.size(); i < achievementsSize; i++) {
+      Achievement achievement = achievements.get(i);
       if (achievement.isCompleted() && !achievement.hasGivenReward()) {
         return true;
       }

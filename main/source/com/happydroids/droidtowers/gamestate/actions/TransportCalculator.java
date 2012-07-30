@@ -12,6 +12,8 @@ import com.happydroids.droidtowers.grid.GridPosition;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.ProviderType;
 
+import java.util.List;
+
 public class TransportCalculator extends GameGridAction {
   private static final String TAG = TransportCalculator.class.getSimpleName();
 
@@ -26,21 +28,29 @@ public class TransportCalculator extends GameGridAction {
 
   @Override
   public void run() {
-    for (GridPosition[] gridPositions : gameGrid.positionCache().getPositions()) {
+    GridPosition[][] positions = gameGrid.positionCache().getPositions();
+    for (int i = 0, positionsLength = positions.length; i < positionsLength; i++) {
+      GridPosition[] gridPositions = positions[i];
       for (GridPosition gridPosition : gridPositions) {
         gridPosition.connectedToTransit = false;
         gridPosition.distanceFromTransit = 0f;
       }
     }
 
-    for (GridObject gridObject : gameGrid.getInstancesOf(roomClasses)) {
+    List<GridObject> instancesOf = gameGrid.getInstancesOf(roomClasses);
+    for (int i = 0, instancesOfSize = instancesOf.size(); i < instancesOfSize; i++) {
+      GridObject gridObject = instancesOf.get(i);
       gridObject.setConnectedToTransport(gridObject.provides(ProviderType.LOBBY));
     }
 
-    for (GridObject transport : gameGrid.getInstancesOf(transportClasses)) {
+    List<GridObject> instancesOf1 = gameGrid.getInstancesOf(transportClasses);
+    for (int i = 0, instancesOf1Size = instancesOf1.size(); i < instancesOf1Size; i++) {
+      GridObject transport = instancesOf1.get(i);
       if (!transport.isPlaced()) continue;
 
-      for (GridPoint gridPoint : transport.getGridPointsTouched()) {
+      List<GridPoint> gridPointsTouched = transport.getGridPointsTouched();
+      for (int i1 = 0, gridPointsTouchedSize = gridPointsTouched.size(); i1 < gridPointsTouchedSize; i1++) {
+        GridPoint gridPoint = gridPointsTouched.get(i1);
         int x = gridPoint.x;
         int y = gridPoint.y;
 

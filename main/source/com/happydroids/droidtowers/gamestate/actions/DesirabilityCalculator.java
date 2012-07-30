@@ -25,7 +25,8 @@ public class DesirabilityCalculator extends GameGridAction {
 
     LinkedList<GridObject> rooms = gameGrid.getObjects();
     if (rooms != null) {
-      for (GridObject gridObject : rooms) {
+      for (int i = 0, roomsSize = rooms.size(); i < roomsSize; i++) {
+        GridObject gridObject = rooms.get(i);
         float maxNoiseLevel = 0f;
         float maxCrimeLevel = 0f;
 

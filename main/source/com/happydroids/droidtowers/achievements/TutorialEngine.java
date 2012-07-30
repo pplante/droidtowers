@@ -33,7 +33,8 @@ public class TutorialEngine extends AchievementEngine {
       achievements = mapper.readValue(Gdx.files.internal("params/tutorial-steps.json").reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, TutorialStep.class));
       achievementsById = Maps.newHashMap();
 
-      for (Achievement achievement : achievements) {
+      for (int i = 0, achievementsSize = achievements.size(); i < achievementsSize; i++) {
+        Achievement achievement = achievements.get(i);
         achievementsById.put(achievement.getId(), achievement);
       }
     } catch (IOException e) {
