@@ -30,7 +30,7 @@ public class Janitor extends Avatar {
   }
 
   @Override
-  public void beginNextAction() {
+  protected void findPlaceToVisit() {
     List<GridObject> commercialSpaces = gameGrid.getObjects();
     if (commercialSpaces != null) {
       List<GridObject> sortedObjects = Ordering.natural().onResultOf(new Function<GridObject, Long>() {
@@ -44,8 +44,6 @@ public class Janitor extends Avatar {
       }));
 
       navigateToGridObject(Iterables.getFirst(sortedObjects, null));
-    } else {
-      wanderAround();
     }
   }
 

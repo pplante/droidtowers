@@ -26,7 +26,7 @@ import com.happydroids.droidtowers.utils.Random;
 import javax.annotation.Nullable;
 import java.util.*;
 
-import static com.happydroids.droidtowers.types.ProviderType.*;
+import static com.happydroids.droidtowers.types.ProviderType.FOOD;
 
 public class Avatar extends GameObject {
   public static final float FRAME_DURATION = 0.25f;
@@ -35,8 +35,6 @@ public class Avatar extends GameObject {
   private static final Set<Color> colors = Sets.newHashSet(Color.GREEN, Color.RED, Color.ORANGE, Color.MAGENTA, Color.PINK, Color.YELLOW);
   private static Iterator<Color> colorIterator = Iterables.cycle(colors).iterator();
   private final Animation walkAnimation;
-
-  private float walkAnimationTime;
 
   private AvatarSteeringManager steeringManager;
   protected final GameGrid gameGrid;
@@ -48,7 +46,6 @@ public class Avatar extends GameObject {
   private float lastPathFinderSearch;
   protected GridObject movingTo;
   private TransitPathFinder pathFinder;
-  private boolean justWandered;
   private Room home;
   private float hungerLevel;
   private LinkedList<Object> lastVisitedPlaces;
@@ -73,7 +70,6 @@ public class Avatar extends GameObject {
     setRegion(stationary);
 
     walkAnimation = new Animation(FRAME_DURATION, droidAtlas.findRegions(addFramePrefix("walk")));
-    walkAnimationTime = 0f;
     lastVisitedPlaces = Lists.newLinkedList();
     satisfactionFood = 1f;
     satisfactionShops = 1f;
@@ -103,36 +99,27 @@ public class Avatar extends GameObject {
     return TowerAssetManager.textureAtlas("characters.txt");
   }
 
-  public void beginNextAction() {
-    justWandered = false;
+  private void beginNextAction() {
+    wanderAround();
 
-    LinkedList<GridObject> objects = gameGrid.getObjects();
-    if (objects != null) {
-      if (home != null && !lastVisitedPlaces.contains(home)) {
-        navigateToGridObject(home);
+    if (!pathFinder.isWorking()) {
+      if (hungerLevel <= 0.5f) {
+        GridObject closestFood = searchForFood();
+        navigateToGridObject(closestFood);
       } else {
-        GridObject mostDesirable = null;
-        for (GridObject gridObject : objects) {
-          if (!gridObject.isConnectedToTransport() || lastVisitedPlaces.contains(gridObject)) {
-            continue;
-          } else if (gridObject.getVisitorQueue().size() > 5) {
-//            should get rid of thundering herd problem?
-            continue;
-          }
-
-          if (gridObject.provides(COMMERCIAL, RESTROOM)) {
-            if (mostDesirable == null || mostDesirable.getDesirability() < gridObject.getDesirability()) {
-              mostDesirable = gridObject;
-            }
-          }
-        }
-
-        if (mostDesirable != null) {
-          navigateToGridObject(mostDesirable);
+        if (!lastVisitedPlaces.contains(home)) {
+          navigateToGridObject(home);
+        } else {
+          findPlaceToVisit();
         }
       }
-    } else {
-      wanderAround();
+    }
+  }
+
+  protected void findPlaceToVisit() {
+    ArrayList<GridObject> anyRoom = gameGrid.getInstancesOf(Room.class);
+    if (!anyRoom.isEmpty()) {
+      navigateToGridObject(anyRoom.get(Random.randomInt(anyRoom.size() - 1)));
     }
   }
 
@@ -235,23 +222,7 @@ public class Avatar extends GameObject {
     lastPathFinderSearch += timeDelta;
 
     if (!steeringManager.isRunning()) {
-      wanderAround();
-
-      if (!pathFinder.isWorking()) {
-        if (hungerLevel <= 0.5f) {
-          GridObject closestFood = searchForFood();
-          navigateToGridObject(closestFood);
-        } else {
-          if (!lastVisitedPlaces.contains(home)) {
-            navigateToGridObject(home);
-          } else {
-            ArrayList<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
-            if (!commercialSpaces.isEmpty()) {
-              navigateToGridObject(commercialSpaces.get(Random.randomInt(commercialSpaces.size() - 1)));
-            }
-          }
-        }
-      }
+      beginNextAction();
     }
   }
 
