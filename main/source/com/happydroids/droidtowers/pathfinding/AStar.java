@@ -46,6 +46,10 @@ public abstract class AStar<T> {
     this.goal = goal;
   }
 
+  public boolean isFinished() {
+    return !isWorking() && lastCost != Double.MAX_VALUE;
+  }
+
 
   private class Path implements Comparable {
 

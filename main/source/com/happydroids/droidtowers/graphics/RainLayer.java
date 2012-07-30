@@ -28,7 +28,6 @@ public class RainLayer extends GameLayer implements RespondsToWorldSizeChange {
 
     if (weatherService.currentState() == WeatherState.RAINING) {
       addChild(new Rain(worldSize));
-      addChild(new Rain(worldSize));
     } else if (weatherService.currentState() == WeatherState.SNOWING) {
       addChild(new Snow(worldSize));
     }

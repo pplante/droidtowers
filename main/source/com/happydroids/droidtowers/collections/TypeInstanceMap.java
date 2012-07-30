@@ -35,7 +35,6 @@ public class TypeInstanceMap<T> {
   }
 
   public ArrayList<T> setForType(Class instanceClass) {
-
     if (!instancesByType.containsKey(instanceClass)) {
       instancesByType.put(instanceClass, new ArrayList<T>());
     }

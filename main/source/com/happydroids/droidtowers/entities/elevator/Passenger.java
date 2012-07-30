@@ -67,7 +67,7 @@ public class Passenger {
 
   public void killByElevator() {
     waitFor = false;
-    steeringManager.getAvatar().murderDeathKill187();
+    steeringManager.getAvatar().markToRemove(true);
   }
 
   public AvatarSteeringManager getSteeringManager() {

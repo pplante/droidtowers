@@ -43,6 +43,8 @@ public class TowerConsts extends HappyDroidConsts {
   public static final GridPoint SINGLE_POINT = new GridPoint(1, 1);
   public static final int[] NEGATIVE_BUTTON_KEYS = new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE};
   public static final int LIMITED_VERSION_MAX_FLOOR = LOBBY_FLOOR + 15;
+  public static final float GAME_SPEED_MAX = DEBUG ? 12f : 4f;
+  public static final float GAME_SPEED_MIN = DEBUG ? 0.05f : 0.5f;
 
   private TowerConsts() {
 

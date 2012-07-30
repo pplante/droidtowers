@@ -4,23 +4,22 @@
 
 package com.happydroids.droidtowers.controllers;
 
-import com.badlogic.gdx.Gdx;
-import com.google.common.collect.Queues;
+import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.pathfinding.AStar;
 import com.happydroids.droidtowers.pathfinding.TransitPathFinder;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.ArrayList;
 
 public class PathSearchManager {
   private static PathSearchManager _instance;
 
-  private ConcurrentLinkedQueue<AStar> pathFinders;
+  private ArrayList<AStar> pathFinders;
   private AStar currentPathFinder;
   private int framesSinceUpdate;
 
 
   private PathSearchManager() {
-    pathFinders = Queues.newConcurrentLinkedQueue();
+    pathFinders = Lists.newArrayList();
   }
 
 
@@ -32,7 +31,7 @@ public class PathSearchManager {
     return _instance;
   }
 
-  public synchronized void queue(final AStar pathFinder) {
+  public void queue(final AStar pathFinder) {
     pathFinders.add(pathFinder);
   }
 
@@ -44,23 +43,19 @@ public class PathSearchManager {
     framesSinceUpdate = 0;
     if (currentPathFinder != null) {
       if (currentPathFinder.isWorking()) {
-        currentPathFinder.step();
+        for (int i = 0; i < 25 && currentPathFinder.isWorking(); i++) {
+          currentPathFinder.step();
+        }
       } else {
-        final AStar pathFinder = currentPathFinder;
-        Gdx.app.postRunnable(new Runnable() {
-          @Override
-          public void run() {
-            pathFinder.runCompleteCallback();
-          }
-        });
+        currentPathFinder.runCompleteCallback();
         currentPathFinder = null;
       }
     } else if (!pathFinders.isEmpty()) {
-      currentPathFinder = pathFinders.poll();
+      currentPathFinder = pathFinders.remove(0);
     }
   }
 
-  public synchronized void remove(TransitPathFinder pathFinder) {
+  public void remove(TransitPathFinder pathFinder) {
     pathFinders.remove(pathFinder);
 
     if (pathFinder.equals(currentPathFinder)) {

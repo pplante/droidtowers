@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.google.common.eventbus.EventBus;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.events.GameSpeedChangeEvent;
 import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.graphics.Effects;
@@ -56,7 +57,7 @@ public abstract class Scene {
   }
 
   public void setTimeMultiplier(float value) {
-    timeMultiplier = MathUtils.clamp(value, 0.5f, 4f);
+    timeMultiplier = MathUtils.clamp(value, TowerConsts.GAME_SPEED_MIN, TowerConsts.GAME_SPEED_MAX);
     events().post(new GameSpeedChangeEvent(this));
   }
 

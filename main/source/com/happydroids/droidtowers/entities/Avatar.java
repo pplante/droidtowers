@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerAssetManager;
@@ -22,20 +23,16 @@ import com.happydroids.droidtowers.pathfinding.TransitPathFinder;
 import com.happydroids.droidtowers.utils.Random;
 
 import javax.annotation.Nullable;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-import static com.happydroids.droidtowers.types.ProviderType.COMMERCIAL;
-import static com.happydroids.droidtowers.types.ProviderType.RESTROOM;
+import static com.happydroids.droidtowers.types.ProviderType.*;
 
 public class Avatar extends GameObject {
   public static final float FRAME_DURATION = 0.25f;
   public static final float WALKING_ANIMATION_DURATION = FRAME_DURATION * 3;
   private static final float PATH_SEARCH_DELAY = 0f;
   private static final Set<Color> colors = Sets.newHashSet(Color.GREEN, Color.RED, Color.ORANGE, Color.MAGENTA, Color.PINK, Color.YELLOW);
-  private static Iterator colorIterator;
+  private static Iterator<Color> colorIterator = Iterables.cycle(colors).iterator();
   private final Animation walkAnimation;
 
   private float walkAnimationTime;
@@ -64,7 +61,7 @@ public class Avatar extends GameObject {
 
     setPosition(-Random.randomInt(50, 200), TowerConsts.GROUND_HEIGHT);
 
-    pickColor();
+    setColor(colorIterator.next());
 
     TextureAtlas droidAtlas = getTextureAtlas();
     TextureAtlas.AtlasRegion stationary = droidAtlas.findRegion(addFramePrefix("stationary"));
@@ -76,7 +73,20 @@ public class Avatar extends GameObject {
     lastVisitedPlaces = Lists.newLinkedList();
 
     pathFinder = new TransitPathFinder(gameGrid, this instanceof Janitor);
+    pathFinder.setCompleteCallback(new Runnable() {
+      @Override
+      public void run() {
+        pathFinderComplete();
+      }
+    });
     steeringManager = new AvatarSteeringManager(this, gameGrid, null);
+  }
+
+  private void pathFinderComplete() {
+    if (pathFinder.isFinished()) {
+      steeringManager.setPath(pathFinder.getDiscoveredPath());
+      steeringManager.start();
+    }
   }
 
   protected String addFramePrefix(String frameName) {
@@ -162,6 +172,8 @@ public class Avatar extends GameObject {
   }
 
   protected void navigateToGridObject(GridObject gridObject) {
+    cancelMovement();
+
     if (gridObject == null) {
       wanderAround();
       return;
@@ -182,13 +194,6 @@ public class Avatar extends GameObject {
     PathSearchManager.instance().queue(pathFinder);
   }
 
-  private void createSteeringManagerFromPath() {
-    if (pathFinder != null && pathFinder.wasSuccessful()) {
-      steeringManager.setPath(pathFinder.getDiscoveredPath());
-      steeringManager.start();
-    }
-  }
-
   public void afterReachingTarget() {
     if (movingTo != null) {
       movingTo.recordVisitor(this);
@@ -196,11 +201,14 @@ public class Avatar extends GameObject {
       if (lastVisitedPlaces.size() > 3) {
         lastVisitedPlaces.poll();
       }
+
+      if (movingTo.provides(FOOD)) {
+        hungerLevel = 1f;
+      }
+
+
     }
 
-    if (!justWandered) {
-      wanderAround();
-    }
     movingTo = null;
   }
 
@@ -212,20 +220,7 @@ public class Avatar extends GameObject {
       lastSearchedForHome += timeDelta;
       if (lastSearchedForHome > 10f) {
         lastSearchedForHome = 0f;
-        List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
-        if (rooms != null) {
-          GridObject mostDesirable = rooms.get(0);
-          for (GridObject gridObject : rooms) {
-            Room room = (Room) gridObject;
-            if (room.isConnectedToTransport() && room.getNumSupportedResidents() > 0) {
-              if (room.getNumResidents() == 0 || (room.getNumResidents() < room.getNumSupportedResidents() && mostDesirable.getDesirability() < room.getDesirability())) {
-                mostDesirable = room;
-              }
-            }
-          }
-
-          setHome(mostDesirable);
-        }
+        searchForAHome();
       }
     }
 
@@ -233,18 +228,65 @@ public class Avatar extends GameObject {
 
     lastPathFinderSearch += timeDelta;
 
-
     if (!steeringManager.isRunning()) {
       wanderAround();
+
+      if (!pathFinder.isWorking()) {
+        if (hungerLevel <= 0.5f) {
+          GridObject closestFood = searchForFood();
+          navigateToGridObject(closestFood);
+        } else {
+          if (!lastVisitedPlaces.contains(home)) {
+            navigateToGridObject(home);
+          } else {
+            ArrayList<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
+            if (!commercialSpaces.isEmpty()) {
+              navigateToGridObject(commercialSpaces.get(Random.randomInt(commercialSpaces.size() - 1)));
+            }
+          }
+        }
+      }
     }
   }
 
-  protected void pickColor() {
-    if (colorIterator == null || !colorIterator.hasNext()) {
-      colorIterator = colors.iterator();
+  private GridObject searchForFood() {
+    ArrayList<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
+    if (commercialSpaces.isEmpty()) {
+      return null;
     }
 
-    setColor((Color) colorIterator.next());
+
+    final int avatarX = (int) Avatar.this.getX();
+    final int avatarY = (int) Avatar.this.getY();
+
+    GridObject closest = null;
+    int closestDist = Integer.MAX_VALUE;
+    for (GridObject commercialSpace : commercialSpaces) {
+      int distanceFromAvatar = commercialSpace.getPosition().dst(avatarX, avatarY);
+      if (distanceFromAvatar < closestDist) {
+        closest = commercialSpace;
+      }
+    }
+
+    return closest;
+  }
+
+  private void searchForAHome() {
+    List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
+    if (rooms != null) {
+      GridObject mostDesirable = rooms.get(0);
+      for (int i = 0, roomsSize = rooms.size(); i < roomsSize; i++) {
+        GridObject gridObject = rooms.get(i);
+        Room room = (Room) gridObject;
+        if (room.isConnectedToTransport() && room.getNumSupportedResidents() > 0) {
+          if (room.getNumResidents() == 0 || (room.getNumResidents() < room.getNumSupportedResidents() && mostDesirable.getDesirability() < room.getDesirability())) {
+            mostDesirable = room;
+          }
+        }
+      }
+
+      setHome(mostDesirable);
+    }
   }
 
   public void cancelMovement() {
@@ -261,10 +303,6 @@ public class Avatar extends GameObject {
     }
 
     lastPathFinderSearch = PATH_SEARCH_DELAY;
-  }
-
-  public void murderDeathKill187() {
-    markToRemove(true);
   }
 
   public void setHome(GridObject newHome) {
