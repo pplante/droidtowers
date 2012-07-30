@@ -91,6 +91,7 @@ public class GameSave {
       TutorialEngine.instance().setEnabled(true);
       TutorialEngine.instance().moveToStepWhenReady("tutorial-welcome");
     } else {
+      TutorialEngine.instance().setEnabled(false);
       TutorialEngine.instance().completeAll();
       HeadsUpDisplay.instance().getAchievementButton().visible = true;
       HeadsUpDisplay.instance().toggleViewNeighborsButton(true);
