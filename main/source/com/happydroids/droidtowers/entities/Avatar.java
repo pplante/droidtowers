@@ -123,7 +123,7 @@ public class Avatar extends GameObject {
       if (anyRoom.size() == 1) {
         navigateToGridObject(anyRoom.get(0));
       } else {
-        navigateToGridObject(anyRoom.get(MathUtils.random(0, anyRoom.size())));
+        navigateToGridObject(anyRoom.get(MathUtils.random(0, anyRoom.size() - 1)));
       }
     }
   }

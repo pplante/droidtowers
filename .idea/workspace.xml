@@ -38,9 +38,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/HappyDroidConsts.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/HappyDroidConsts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
     </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -192,11 +191,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameSave.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="GameSave.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="93" column="48" selection-start="3593" selection-end="3593" vertical-scroll-proportion="0.49761677">
+            <state line="85" column="46" selection-start="3374" selection-end="3374" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Avatar.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="125" column="79" selection-start="4365" selection-end="4365" vertical-scroll-proportion="0.3326791">
+              <folding>
+                <element signature="e#0#11006#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tutorial-steps.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/assets/params/tutorial-steps.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="142" column="22" selection-start="3917" selection-end="3917" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1343656890000" expanded="true" signature="4389:4407" placeholder="{&quot;type&quot;: &quot;UNLOCK&quot;...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -223,10 +245,8 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/AudioControl.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/audio/GameSoundController.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/TutorialStepNotification.java" />
-        <option value="$PROJECT_DIR$/main/assets/params/tutorial-steps.json" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gui/HeadsUpDisplay.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/achievements/Reward.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/CityScapeLayer.java" />
@@ -238,7 +258,9 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/TowerConsts.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/WeatherService.java" />
         <option value="$PROJECT_DIR$/main/assets/testers.txt" />
+        <option value="$PROJECT_DIR$/main/assets/params/tutorial-steps.json" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
       </list>
     </option>
   </component>
@@ -504,7 +526,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="664C002600000001" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
     <property name="KeystoreLocation" value="$PROJECT_DIR$/release-key.keystore" />
     <property name="KeyAlias" value="happydroids" />
     <property name="restartRequiresConfirmation" value="true" />
@@ -570,7 +592,7 @@
       <recent name="$PROJECT_DIR$/html5/src/com/happydroids/droidtowers" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DesktopGame">
+  <component name="RunManager" selected="Android Application.android-google">
     <configuration default="false" name="ProviderTypeTest.shouldMatchExactTypes" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -1363,7 +1385,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.81724584" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24892396" sideWeight="0.63799745" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18299165" sideWeight="0.51508623" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18299165" sideWeight="0.51508623" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2596811" sideWeight="0.21807748" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20803443" sideWeight="0.6808237" order="1" side_tool="true" content_ui="tabs" />
@@ -1376,7 +1398,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39885223" sideWeight="0.73745173" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24622115" sideWeight="0.7942293" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20577069" sideWeight="0.91822094" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20577069" sideWeight="0.91822094" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.6344916" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23601148" sideWeight="0.81724584" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Kahlua" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1588,16 +1610,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GameLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="11" selection-start="1485" selection-end="1485" vertical-scroll-proportion="0.3326978" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/FireWorksLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="30" selection-start="2482" selection-end="2482" vertical-scroll-proportion="0.7235462" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/graphics/effects/ParticleEffectManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="0" selection-start="950" selection-end="950" vertical-scroll-proportion="0.41658723" />
@@ -1671,10 +1683,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main/assets/params/tutorial-steps.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="142" column="22" selection-start="3917" selection-end="3917" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1343656890000" expanded="true" signature="4389:4407" placeholder="{&quot;type&quot;: &quot;UNLOCK&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/GameSave.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="48" selection-start="3593" selection-end="3593" vertical-scroll-proportion="0.49761677">
+        <state line="85" column="46" selection-start="3374" selection-end="3374" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="125" column="79" selection-start="4365" selection-end="4365" vertical-scroll-proportion="0.3326791">
+          <folding>
+            <element signature="e#0#11006#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
