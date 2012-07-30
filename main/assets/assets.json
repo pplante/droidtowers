@@ -48,6 +48,7 @@
     "rooms/housing.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "sound/music/nighttime.mp3":"com.badlogic.gdx.audio.Music",
     "hud/no-sign-white.png":"com.badlogic.gdx.graphics.Texture",
+    "snow.png":"com.badlogic.gdx.graphics.Texture",
     "rooms/generic.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "rooms/decals.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "decals.png":"com.badlogic.gdx.graphics.Texture",
