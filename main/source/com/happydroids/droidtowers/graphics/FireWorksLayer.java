@@ -31,7 +31,7 @@ import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
 import static com.happydroids.droidtowers.TowerConsts.LOBBY_FLOOR;
 
 public class FireWorksLayer extends GameLayer<ParticleEffectManager> implements RespondsToWorldSizeChange {
-  private static final float FIREWORK_DURATION = 5f;
+  private static final float FIREWORK_DURATION = 10f;
 
   private final Iterator<float[]> colorsIterator;
   private final Rectangle worldBounds;
@@ -71,6 +71,11 @@ public class FireWorksLayer extends GameLayer<ParticleEffectManager> implements 
     };
   }
 
+  @Override
+  protected boolean shouldCullObjects() {
+    return false;
+  }
+
   private void play() {
     playFireWorks = true;
     for (GameObject gameObject : gameObjects) {
@@ -99,7 +104,7 @@ public class FireWorksLayer extends GameLayer<ParticleEffectManager> implements 
   @Override
   public void updateWorldSize(Vector2 worldSize) {
     int groundHeight = GRID_UNIT_SIZE * LOBBY_FLOOR;
-    worldBounds.set(0, groundHeight + GRID_UNIT_SIZE * 5, worldSize.x, groundHeight + GRID_UNIT_SIZE * 10);
+    worldBounds.set(0, groundHeight + GRID_UNIT_SIZE * 5, worldSize.x, groundHeight + GRID_UNIT_SIZE * 20);
   }
 
   @Subscribe

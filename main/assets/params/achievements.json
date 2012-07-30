@@ -82,11 +82,6 @@
       {
         "type":"UNLOCK",
         "thing":"OBJECT_TYPE",
-        "thingId":"PIZZA-PLACE"
-      },
-      {
-        "type":"UNLOCK",
-        "thing":"OBJECT_TYPE",
         "thingId":"SUSHI-PLACE"
       },
       {
