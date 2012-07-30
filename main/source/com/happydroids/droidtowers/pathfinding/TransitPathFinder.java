@@ -17,8 +17,8 @@ public class TransitPathFinder extends AStar<GridPosition> {
   protected final GameGrid gameGrid;
   private final boolean canUseServiceRoutes;
 
-  public TransitPathFinder(GameGrid gameGrid, GridPosition start, GridPosition goal, boolean canUseServiceRoutes) {
-    super(start, goal);
+  public TransitPathFinder(GameGrid gameGrid, boolean canUseServiceRoutes) {
+    super();
     this.gameGrid = gameGrid;
     this.canUseServiceRoutes = canUseServiceRoutes;
   }

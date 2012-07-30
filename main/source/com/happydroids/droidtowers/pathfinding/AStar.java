@@ -19,8 +19,8 @@ public abstract class AStar<T> {
   protected LinkedList<T> discoveredPath;
   protected boolean working;
   private Runnable completeCallback;
-  protected final T start;
-  protected final T goal;
+  protected T start;
+  protected T goal;
 
   public boolean isWorking() {
     return working;
@@ -36,6 +36,14 @@ public abstract class AStar<T> {
     working = false;
     lastCost = Double.MAX_VALUE;
     paths.clear();
+  }
+
+  public void setStart(T start) {
+    this.start = start;
+  }
+
+  public void setGoal(T goal) {
+    this.goal = goal;
   }
 
 
@@ -124,10 +132,7 @@ public abstract class AStar<T> {
     return expandedCounter;
   }
 
-  public AStar(T start, T goal) {
-    this.start = start;
-    this.goal = goal;
-
+  public AStar() {
     paths = new PriorityQueue<Path>();
     minDistances = new HashMap<T, Double>();
     expandedCounter = 0;

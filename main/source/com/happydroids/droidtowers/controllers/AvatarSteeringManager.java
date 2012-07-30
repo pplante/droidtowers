@@ -43,7 +43,7 @@ public class AvatarSteeringManager {
 
   private final Avatar avatar;
   private final GameGrid gameGrid;
-  private final LinkedList<GridPosition> path;
+  private LinkedList<GridPosition> path;
   private boolean running;
   private GridPosition currentPos;
   private Vector2 currentWorldPos;
@@ -62,22 +62,25 @@ public class AvatarSteeringManager {
 
     currentWorldPos = new Vector2();
     nextWorldPos = new Vector2();
+
+    currentState = Sets.newHashSet();
+    transitLine = new TransitLine();
+    transitLine.setColor(avatar.getColor());
+
+    gameGrid.events().register(this);
+    gameGrid.getRenderer().addTransitLine(transitLine);
   }
 
   public void start() {
     running = true;
     pointsTraveled = 0;
 
-    currentState = Sets.newHashSet();
-    transitLine = new TransitLine();
-    transitLine.setColor(avatar.getColor());
+    currentState.clear();
+    transitLine.clear();
     for (int i = 0, pathSize = path.size(); i < pathSize; i++) {
       GridPosition position = path.get(i);
       transitLine.addPoint(position.worldPoint());
     }
-
-    gameGrid.events().register(this);
-    gameGrid.getRenderer().addTransitLine(transitLine);
 
     advancePosition();
   }
@@ -89,17 +92,11 @@ public class AvatarSteeringManager {
       currentPos.elevator.removePassenger(this);
     }
 
-    gameGrid.events().unregister(this);
-
     running = false;
     pointsTraveled = 0;
     TweenSystem.manager().killTarget(avatar);
-    gameGrid.getRenderer().removeTransitLine(transitLine);
 
-    if (completeCallback != null) {
-      completeCallback.run();
-      completeCallback = null;
-    }
+    avatar.afterReachingTarget();
   }
 
   private void advancePosition() {
@@ -324,5 +321,9 @@ public class AvatarSteeringManager {
         break;
       }
     }
+  }
+
+  public void setPath(LinkedList<GridPosition> path) {
+    this.path = path;
   }
 }

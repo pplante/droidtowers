@@ -8,7 +8,6 @@ import com.badlogic.gdx.Gdx;
 import com.google.common.collect.Queues;
 import com.happydroids.droidtowers.pathfinding.AStar;
 import com.happydroids.droidtowers.pathfinding.TransitPathFinder;
-import com.happydroids.droidtowers.pathfinding.WanderPathFinder;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -34,12 +33,7 @@ public class PathSearchManager {
   }
 
   public synchronized void queue(final AStar pathFinder) {
-    if (pathFinder instanceof WanderPathFinder) {
-      pathFinder.start();
-      pathFinder.runCompleteCallback();
-    } else {
-      pathFinders.add(pathFinder);
-    }
+    pathFinders.add(pathFinder);
   }
 
   public void update(float deltaTime) {
@@ -63,7 +57,6 @@ public class PathSearchManager {
       }
     } else if (!pathFinders.isEmpty()) {
       currentPathFinder = pathFinders.poll();
-      currentPathFinder.start();
     }
   }
 

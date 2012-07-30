@@ -7,20 +7,18 @@ package com.happydroids.droidtowers.entities;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
-import com.happydroids.droidtowers.controllers.AvatarState;
 import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
 import com.happydroids.droidtowers.controllers.PathSearchManager;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
+import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.pathfinding.TransitPathFinder;
-import com.happydroids.droidtowers.pathfinding.WanderPathFinder;
 import com.happydroids.droidtowers.utils.Random;
 
 import javax.annotation.Nullable;
@@ -29,7 +27,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import static com.happydroids.droidtowers.math.Direction.LEFT;
 import static com.happydroids.droidtowers.types.ProviderType.COMMERCIAL;
 import static com.happydroids.droidtowers.types.ProviderType.RESTROOM;
 
@@ -57,8 +54,8 @@ public class Avatar extends GameObject {
   private Room home;
   private float hungerLevel;
   private LinkedList<Object> lastVisitedPlaces;
-  private float lastSeachedForHome = Float.MAX_VALUE;
-
+  private float lastSearchedForHome = Float.MAX_VALUE;
+  private boolean wanderingAround;
 
   public Avatar(AvatarLayer avatarLayer) {
     super();
@@ -77,6 +74,9 @@ public class Avatar extends GameObject {
     walkAnimation = new Animation(FRAME_DURATION, droidAtlas.findRegions(addFramePrefix("walk")));
     walkAnimationTime = 0f;
     lastVisitedPlaces = Lists.newLinkedList();
+
+    pathFinder = new TransitPathFinder(gameGrid, this instanceof Janitor);
+    steeringManager = new AvatarSteeringManager(this, gameGrid, null);
   }
 
   protected String addFramePrefix(String frameName) {
@@ -124,7 +124,41 @@ public class Avatar extends GameObject {
     lastPathFinderSearch = 0f;
     GridPosition start = gameGrid.positionCache().getPosition(gameGrid.closestGridPoint(getX(), getY()));
 
-    setupPathFinder(new WanderPathFinder(gameGrid, start));
+    LinkedList<GridPosition> discoveredPath = Lists.newLinkedList();
+
+    GridPoint gridSize = gameGrid.getGridSize();
+
+    if (start.y == TowerConsts.LOBBY_FLOOR) {
+      discoveredPath.add(gameGrid.positionCache().getPosition(Random.randomInt(0, gridSize.x), TowerConsts.LOBBY_FLOOR));
+      discoveredPath.add(gameGrid.positionCache().getPosition(Random.randomInt(0, gridSize.x), TowerConsts.LOBBY_FLOOR));
+    } else {
+      for (int i = 1; i < 5; i++) {
+        GridPosition positionRight = gameGrid.positionCache().getPosition(start.x + i, start.y);
+        if (positionRight != null && positionRight.size() > 0) {
+          discoveredPath.add(positionRight);
+        } else {
+          break;
+        }
+      }
+
+      for (int i = 1; i < 5; i++) {
+        GridPosition positionLeft = gameGrid.positionCache().getPosition(start.x - i, start.y);
+        if (positionLeft != null && positionLeft.size() > 0) {
+          discoveredPath.add(positionLeft);
+        } else {
+          break;
+        }
+      }
+
+      List<GridPosition> positions = Lists.newArrayList(discoveredPath);
+      int numPositions = positions.size();
+      for (int i = 0; i < numPositions / 4; i++) {
+        discoveredPath.add(positions.get(Random.randomInt(numPositions - 1)));
+      }
+    }
+
+    steeringManager.setPath(discoveredPath);
+    steeringManager.start();
   }
 
   protected void navigateToGridObject(GridObject gridObject) {
@@ -141,36 +175,21 @@ public class Avatar extends GameObject {
     GridPosition start = gameGrid.positionCache().getPosition(gameGrid.closestGridPoint(getX(), getY()));
     GridPosition goal = gameGrid.positionCache().getPosition(gridObject.getPosition());
 
-    setupPathFinder(new TransitPathFinder(gameGrid, start, goal, this instanceof Janitor));
-  }
-
-  private void setupPathFinder(final TransitPathFinder finder) {
-    pathFinder = finder;
-    justWandered = pathFinder instanceof WanderPathFinder;
-    pathFinder.setCompleteCallback(new Runnable() {
-      public void run() {
-        createSteeringManagerFromPath();
-      }
-    });
+    pathFinder.setStart(start);
+    pathFinder.setGoal(goal);
+    pathFinder.start();
 
     PathSearchManager.instance().queue(pathFinder);
   }
 
   private void createSteeringManagerFromPath() {
     if (pathFinder != null && pathFinder.wasSuccessful()) {
-      steeringManager = new AvatarSteeringManager(this, gameGrid, pathFinder.getDiscoveredPath());
-      steeringManager.setCompleteCallback(new Runnable() {
-        public void run() {
-          afterReachingTarget();
-        }
-      });
+      steeringManager.setPath(pathFinder.getDiscoveredPath());
       steeringManager.start();
     }
-
-    pathFinder = null;
   }
 
-  private void afterReachingTarget() {
+  public void afterReachingTarget() {
     if (movingTo != null) {
       movingTo.recordVisitor(this);
       lastVisitedPlaces.add(movingTo);
@@ -190,9 +209,9 @@ public class Avatar extends GameObject {
     super.update(timeDelta);
 
     if (home == null) {
-      lastSeachedForHome += timeDelta;
-      if (lastSeachedForHome > 10f) {
-        lastSeachedForHome = 0f;
+      lastSearchedForHome += timeDelta;
+      if (lastSearchedForHome > 10f) {
+        lastSearchedForHome = 0f;
         List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
         if (rooms != null) {
           GridObject mostDesirable = rooms.get(0);
@@ -214,28 +233,9 @@ public class Avatar extends GameObject {
 
     lastPathFinderSearch += timeDelta;
 
-    if (steeringManager != null) {
-      if (steeringManager.isRunning()) {
-        Set<AvatarState> steeringState = steeringManager.getCurrentState();
-        if (steeringState.contains(AvatarState.MOVING) && !steeringState.contains(AvatarState.USING_ELEVATOR)) {
-          walkAnimationTime += timeDelta;
-          if (walkAnimationTime >= WALKING_ANIMATION_DURATION) {
-            walkAnimationTime = 0f;
-          }
 
-          TextureRegion keyFrame = walkAnimation.getKeyFrame(walkAnimationTime, true);
-          setRegion(keyFrame);
-          flip(steeringManager.horizontalDirection() == LEFT, false);
-        }
-      } else {
-        steeringManager = null;
-      }
-    } else if (pathFinder == null) {
-      if (lastPathFinderSearch >= PATH_SEARCH_DELAY) {
-        lastPathFinderSearch = 0f;
-
-        beginNextAction();
-      }
+    if (!steeringManager.isRunning()) {
+      wanderAround();
     }
   }
 
@@ -261,8 +261,6 @@ public class Avatar extends GameObject {
     }
 
     lastPathFinderSearch = PATH_SEARCH_DELAY;
-    steeringManager = null;
-    pathFinder = null;
   }
 
   public void murderDeathKill187() {
