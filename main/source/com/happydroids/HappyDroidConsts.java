@@ -11,9 +11,9 @@ public class HappyDroidConsts {
   public static final boolean DEBUG = false;
   public static boolean DISPLAY_DEBUG_INFO = true;
   public static final long HAPPYDROIDS_PING_FREQUENCY = 60000;
-  public static String VERSION = "1.0.41";
-  public static int VERSION_CODE = 1041;
-  public static String GIT_SHA = "2bb008e41f61645a956eca0446e5437007bf2121";
+  public static String VERSION = "1.0.42";
+  public static int VERSION_CODE = 1042;
+  public static String GIT_SHA = "8fb84c00b799bc7a956ec1cd85f3c3d32ca4caa2";
   public static final byte[] OBFUSCATION_SALT = "ad076e981c2ea4103f1a6e30b5e8d0bd81bca536".getBytes();
 
   public static final String OBFUSCATION_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr1epMa3vopbqUJAfVe90GqfjfYUQB7Edb5fBUfTyLJ6lXQORZyvpiF+vTtCA0FEHI4jB9V4TMaJcFrnTk5MZDUHi1zkj0cSn9OG7znzEvSFwfJ63b/UWBZIdgx5/bE63Mkv3LL87aNFWlg5TzgR7mQtIxHjP4iP0y4mxJJujt49ArFxYWoIIBZCv0e5zyUtQDLPYfirp3nNUPLg/wW1VNeUutkR+71r6+z/a1MeKMfUzVOoSJisnNhqWhlSkrN4Mlz5ehJhDt/ubf9n0AFafusGnmrdYFwGrOjpWDCkOpLEvkvlZiNV+sshRVaRUCwFKPBbjV/NFsDKlkdgZnms2WwIDAQAB";

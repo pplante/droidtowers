@@ -5,7 +5,7 @@
 
 <!--suppress AndroidDomInspection -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.happydroids.droidtowers" android:versionCode="1041" android:versionName="1.0.41">
+          package="com.happydroids.droidtowers" android:versionCode="1042" android:versionName="1.0.42">
 
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.INTERNET"/>
