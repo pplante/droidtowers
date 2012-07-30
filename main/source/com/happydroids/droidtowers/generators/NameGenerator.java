@@ -6,27 +6,28 @@ package com.happydroids.droidtowers.generators;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.types.GridObjectType;
-import com.happydroids.droidtowers.utils.Random;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Iterator;
 import java.util.List;
 
 import static com.happydroids.droidtowers.types.ProviderType.*;
 
 public class NameGenerator {
-  private static List<String> placeNames;
-  private static List<String> corporationNames;
-  private static List<String> femaleNames;
-  private static List<String> maleNames;
+  private static Iterator<String> placeNames;
+  private static Iterator<String> corporationNames;
+  private static Iterator<String> femaleNames;
+  private static Iterator<String> maleNames;
 
 
   public static void initialize() {
-    placeNames = parseFile("generators/places.txt");
-    corporationNames = parseFile("generators/corporations.txt");
-    femaleNames = parseFile("generators/names-female.txt");
-    maleNames = parseFile("generators/names-male.txt");
+    placeNames = Iterables.cycle(parseFile("generators/places.txt")).iterator();
+    corporationNames = Iterables.cycle(parseFile("generators/corporations.txt")).iterator();
+    femaleNames = Iterables.cycle(parseFile("generators/names-female.txt")).iterator();
+    maleNames = Iterables.cycle(parseFile("generators/names-male.txt")).iterator();
   }
 
   private static List<String> parseFile(String fileName) {
@@ -42,16 +43,12 @@ public class NameGenerator {
     return uniqueLines;
   }
 
-  private static String randomEntry(List<String> stringList) {
-    return stringList.get(Random.randomInt(stringList.size() - 1));
-  }
-
   public static String randomCorporationName() {
-    return randomEntry(corporationNames);
+    return corporationNames.next();
   }
 
   public static String randomFoodServiceName() {
-    return randomEntry(placeNames);
+    return placeNames.next();
   }
 
   public static String randomNameForGridObjectType(GridObjectType gridObjectType) {
@@ -65,10 +62,10 @@ public class NameGenerator {
   }
 
   public static String randomFemaleName() {
-    return randomEntry(femaleNames);
+    return femaleNames.next();
   }
 
   public static String randomMaleName() {
-    return randomEntry(maleNames);
+    return maleNames.next();
   }
 }

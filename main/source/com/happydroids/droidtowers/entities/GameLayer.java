@@ -13,9 +13,9 @@ import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameLayer {
-  protected List<GameObject> gameObjects;
-  private final ArrayList<Object> deadObjects;
+public class GameLayer<T extends GameObject> {
+  protected List<T> gameObjects;
+  private final ArrayList<T> deadObjects;
   private boolean visible;
   private boolean touchEnabled;
 
@@ -26,7 +26,7 @@ public class GameLayer {
     deadObjects = Lists.newArrayListWithCapacity(5);
   }
 
-  public void addChild(GameObject gameObject) {
+  public void addChild(T gameObject) {
     gameObjects.add(gameObject);
   }
 
@@ -50,7 +50,7 @@ public class GameLayer {
 
   public void update(float timeDelta) {
     for (int i = 0, gameObjectsSize = gameObjects.size(); i < gameObjectsSize; i++) {
-      GameObject gameObject = gameObjects.get(i);
+      T gameObject = gameObjects.get(i);
       if (gameObject.isMarkedForRemoval()) {
         if (deadObjects.size() < 5) {
           deadObjects.add(gameObject);
@@ -111,5 +111,9 @@ public class GameLayer {
     }
 
     return w;
+  }
+
+  public List<T> getObjects() {
+    return gameObjects;
   }
 }

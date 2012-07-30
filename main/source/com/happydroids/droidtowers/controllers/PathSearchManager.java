@@ -43,7 +43,7 @@ public class PathSearchManager {
     framesSinceUpdate = 0;
     if (currentPathFinder != null) {
       if (currentPathFinder.isWorking()) {
-        for (int i = 0; i < 25 && currentPathFinder.isWorking(); i++) {
+        while (currentPathFinder.isWorking()) {
           currentPathFinder.step();
         }
       } else {

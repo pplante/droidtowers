@@ -30,7 +30,7 @@ import java.util.Set;
 import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
 import static com.happydroids.droidtowers.TowerConsts.LOBBY_FLOOR;
 
-public class FireWorksLayer extends GameLayer implements RespondsToWorldSizeChange {
+public class FireWorksLayer extends GameLayer<ParticleEffectManager> implements RespondsToWorldSizeChange {
   private static final float FIREWORK_DURATION = 5f;
 
   private final Iterator<float[]> colorsIterator;

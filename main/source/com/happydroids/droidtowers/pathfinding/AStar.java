@@ -186,6 +186,12 @@ public abstract class AStar<T> {
   public void start() {
     try {
       working = true;
+
+      paths.clear();
+      minDistances.clear();
+      expandedCounter = 0;
+      lastCost = 0.0;
+
       Path root = new Path();
       root.setPoint(start);
 

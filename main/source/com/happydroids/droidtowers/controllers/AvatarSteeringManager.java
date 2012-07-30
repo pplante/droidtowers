@@ -290,7 +290,7 @@ public class AvatarSteeringManager {
     currentState.add(AvatarState.MOVING);
 
     nextWorldPos.set(currentPos.worldPoint());
-    nextWorldPos.x += Random.randomInt(8, 58);
+    nextWorldPos.x += Random.randomInt(8, 40);
     moveAvatarTo(nextWorldPos, new TweenCallback() {
       @Override
       public void onEvent(int type, BaseTween source) {

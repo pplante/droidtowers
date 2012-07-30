@@ -16,6 +16,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Sets;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
@@ -58,10 +59,12 @@ public class HeadsUpDisplay extends WidgetGroup {
   private final StatusBarPanel statusBarPanel;
   private final HeaderButtonBar headerButtonBar;
   private AchievementButton achievementButton;
+  private ImageButton avatarsButton;
   private ImageButton viewNeighborsButton;
   private GridObjectPopOver gridObjectPopOver;
 
-  public HeadsUpDisplay(Stage stage, OrthographicCamera camera, CameraController cameraController, GameGrid gameGrid, AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine, final GameState gameState) {
+
+  public HeadsUpDisplay(Stage stage, OrthographicCamera camera, CameraController cameraController, GameGrid gameGrid, final AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine, final GameState gameState) {
     super();
 
     HeadsUpDisplay.instance = this;
@@ -97,6 +100,21 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     addActor(achievementButton);
 
+    if (TowerConsts.ENABLE_AVATAR_LIST_WINDOW) {
+      avatarsButton = TowerAssetManager.imageButton(hudAtlas.findRegion("view-neighbors"));
+      avatarsButton.x = 10;
+      avatarsButton.y = achievementButton.y - avatarsButton.height - 10;
+
+      avatarsButton.setClickListener(new VibrateClickListener() {
+        @Override
+        public void onClick(Actor actor, float x, float y) {
+          new AvatarListWindow(getStage(), avatarLayer).show();
+        }
+      });
+
+      addActor(avatarsButton);
+    }
+
     if (HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT) {
       viewNeighborsButton = TowerAssetManager.imageButton(hudAtlas.findRegion("view-neighbors"));
       viewNeighborsButton.layout();
@@ -113,7 +131,12 @@ public class HeadsUpDisplay extends WidgetGroup {
 
       viewNeighborsButton.visible = false;
       viewNeighborsButton.x = 10;
-      viewNeighborsButton.y = stage.height() - statusBarPanel.height - achievementButton.height - viewNeighborsButton.height - 20;
+
+      if (TowerConsts.ENABLE_AVATAR_LIST_WINDOW) {
+        viewNeighborsButton.y = avatarsButton.y - viewNeighborsButton.height - 20;
+      } else {
+        viewNeighborsButton.y = achievementButton.y - viewNeighborsButton.height - 20;
+      }
 
       addActor(viewNeighborsButton);
     }

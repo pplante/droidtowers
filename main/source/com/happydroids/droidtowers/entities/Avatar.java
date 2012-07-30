@@ -7,15 +7,16 @@ package com.happydroids.droidtowers.entities;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
 import com.happydroids.droidtowers.controllers.PathSearchManager;
+import com.happydroids.droidtowers.generators.NameGenerator;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
 import com.happydroids.droidtowers.math.GridPoint;
@@ -53,11 +54,14 @@ public class Avatar extends GameObject {
   private LinkedList<Object> lastVisitedPlaces;
   private float lastSearchedForHome = Float.MAX_VALUE;
   private boolean wanderingAround;
+  private final String name;
 
-  public Avatar(AvatarLayer avatarLayer) {
+
+  public Avatar(final GameGrid gameGrid) {
     super();
 
-    gameGrid = avatarLayer.getGameGrid();
+    this.gameGrid = gameGrid;
+    name = NameGenerator.randomMaleName();
 
     setPosition(-Random.randomInt(50, 200), TowerConsts.GROUND_HEIGHT);
 
@@ -71,15 +75,17 @@ public class Avatar extends GameObject {
     walkAnimation = new Animation(FRAME_DURATION, droidAtlas.findRegions(addFramePrefix("walk")));
     walkAnimationTime = 0f;
     lastVisitedPlaces = Lists.newLinkedList();
+    satisfactionFood = 1f;
+    satisfactionShops = 1f;
 
-    pathFinder = new TransitPathFinder(gameGrid, this instanceof Janitor);
+    pathFinder = new TransitPathFinder(this.gameGrid, this instanceof Janitor);
     pathFinder.setCompleteCallback(new Runnable() {
       @Override
       public void run() {
         pathFinderComplete();
       }
     });
-    steeringManager = new AvatarSteeringManager(this, gameGrid, null);
+    steeringManager = new AvatarSteeringManager(this, this.gameGrid, null);
   }
 
   private void pathFinderComplete() {
@@ -261,11 +267,22 @@ public class Avatar extends GameObject {
 
     GridObject closest = null;
     int closestDist = Integer.MAX_VALUE;
-    for (GridObject commercialSpace : commercialSpaces) {
+    for (int i = 0, commercialSpacesSize = commercialSpaces.size(); i < commercialSpacesSize; i++) {
+      GridObject commercialSpace = commercialSpaces.get(i);
+      if (commercialSpace.getVisitorQueue().size() >= 5) {
+        continue;
+      }
+
       int distanceFromAvatar = commercialSpace.getPosition().dst(avatarX, avatarY);
       if (distanceFromAvatar < closestDist) {
         closest = commercialSpace;
       }
+    }
+
+    if (lastVisitedPlaces.contains(closest) || closest == null) {
+      satisfactionFood = MathUtils.clamp(satisfactionFood - 0.15f, 0f, 1f);
+    } else {
+      satisfactionFood = MathUtils.clamp(satisfactionFood + 0.15f, 0f, 1f);
     }
 
     return closest;
@@ -343,5 +360,25 @@ public class Avatar extends GameObject {
     super.markToRemove(b);
 
     cancelMovement();
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public GridObject getMovementTarget() {
+    return movingTo;
+  }
+
+  public float getHungerLevel() {
+    return hungerLevel;
+  }
+
+  public float getSatisfactionFood() {
+    return satisfactionFood;
+  }
+
+  public float getSatisfactionShops() {
+    return satisfactionShops;
   }
 }

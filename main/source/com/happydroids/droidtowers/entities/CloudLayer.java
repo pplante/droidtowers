@@ -24,7 +24,7 @@ import com.happydroids.droidtowers.utils.Random;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CloudLayer extends GameLayer implements RespondsToWorldSizeChange {
+public class CloudLayer extends GameLayer<GameObject> implements RespondsToWorldSizeChange {
   public static final int CLOUD_SPAWN_DELAY = 2;
   public static final String CLOUDS_ATLAS = "backgrounds/clouds.txt";
   public double CLOUD_SPAWN_MIN = 0.35;

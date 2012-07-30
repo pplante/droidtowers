@@ -20,7 +20,7 @@ import java.lang.reflect.Constructor;
 
 import static com.happydroids.droidtowers.types.ProviderType.JANITORS;
 
-public class AvatarLayer extends GameLayer {
+public class AvatarLayer extends GameLayer<Avatar> {
   private static final String TAG = AvatarLayer.class.getSimpleName();
 
   private final GameGrid gameGrid;
@@ -49,7 +49,7 @@ public class AvatarLayer extends GameLayer {
     if (gameObjects.size() < maxAvatars()) {
       int numToSpawn = maxAvatars() - gameObjects.size();
       for (int i = 0; i <= numToSpawn; i++) {
-        Avatar avatar = new Avatar(this);
+        Avatar avatar = new Avatar(this.getGameGrid());
         setupAvatar(avatar);
       }
     } else if (gameObjects.size() - 1 > maxAvatars()) {

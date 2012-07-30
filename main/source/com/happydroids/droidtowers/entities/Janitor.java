@@ -19,7 +19,7 @@ public class Janitor extends Avatar {
   protected ProviderType[] servicesTheseProviderTypes;
 
   public Janitor(AvatarLayer avatarLayer) {
-    super(avatarLayer);
+    super(avatarLayer.getGameGrid());
     setColor(Color.WHITE);
     setServicesTheseProviderTypes(ProviderType.FOOD, ProviderType.OFFICE_SERVICES, ProviderType.RESTROOM);
   }
