@@ -15,6 +15,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.eventbus.Subscribe;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
@@ -73,8 +74,8 @@ public class GameGridRenderer extends GameLayer {
   }
 
   @Override
-  public void render(SpriteBatch spriteBatch) {
-    shapeRenderer.setProjectionMatrix(camera.combined);
+  public void render(SpriteBatch spriteBatch, OrthographicCamera camera) {
+    shapeRenderer.setProjectionMatrix(this.camera.combined);
     if (shouldRenderGridLines) {
       renderGridLines();
     }
@@ -115,11 +116,14 @@ public class GameGridRenderer extends GameLayer {
     LinkedList<GridObject> objects = gameGrid.getObjects();
     for (int i = 0, objectsSize = objects.size(); i < objectsSize; i++) {
       GridObject gridObject = objects.get(i);
-      Float returnValue = function.apply(gridObject);
-      if (returnValue != null) {
-        baseColor.a = returnValue;
-        shapeRenderer.setColor(baseColor);
-        shapeRenderer.filledRect(gridObject.getPosition().getWorldX(), gridObject.getPosition().getWorldY(), gridObject.getSize().getWorldX(), gridObject.getSize().getWorldY());
+      tmp.set(gridObject.getWorldCenter().x, gridObject.getWorldCenter().y, 0);
+      if (camera.frustum.sphereInFrustum(tmp, Math.max(gridObject.getWorldBounds().width, gridObject.getWorldBounds().height))) {
+        Float returnValue = function.apply(gridObject);
+        if (returnValue != null) {
+          baseColor.a = returnValue;
+          shapeRenderer.setColor(baseColor);
+          shapeRenderer.filledRect(gridObject.getPosition().getWorldX(), gridObject.getPosition().getWorldY(), gridObject.getSize().getWorldX(), gridObject.getSize().getWorldY());
+        }
       }
     }
 
@@ -132,11 +136,13 @@ public class GameGridRenderer extends GameLayer {
     for (int x = 0; x < gameGrid.gridSize.x; x++) {
       for (int y = 0; y < gameGrid.gridSize.y; y++) {
         GridPosition position = gameGrid.positionCache().getPosition(x, y);
+
         if (position.getNoiseLevel() > 0.01f) {
-          shapeRenderer.filledRect(x * GRID_UNIT_SIZE, (y - 1) * GRID_UNIT_SIZE, GRID_UNIT_SIZE, GRID_UNIT_SIZE);
-          shapeRenderer.setColor(Overlays.NOISE_LEVEL.getColor(position.getNoiseLevel()));
-        } else {
-          shapeRenderer.setColor(Color.CLEAR);
+          tmp.set(position.worldPoint().x, position.worldPoint().y, 0);
+          if (camera.frustum.sphereInFrustum(tmp, TowerConsts.GRID_UNIT_SIZE)) {
+            shapeRenderer.setColor(Overlays.NOISE_LEVEL.getColor(position.getNoiseLevel()));
+            shapeRenderer.filledRect(x * GRID_UNIT_SIZE, y * GRID_UNIT_SIZE, GRID_UNIT_SIZE, GRID_UNIT_SIZE);
+          }
         }
       }
     }
@@ -149,7 +155,10 @@ public class GameGridRenderer extends GameLayer {
 
     for (int i = 0, objectsRenderOrderSize = objectsRenderOrder.size(); i < objectsRenderOrderSize; i++) {
       GridObject child = objectsRenderOrder.get(i);
-      child.render(spriteBatch, renderTintColor);
+      tmp.set(child.getWorldCenter().x, child.getWorldCenter().y, 0);
+      if (camera.frustum.sphereInFrustum(tmp, Math.max(child.getWorldBounds().width, child.getWorldBounds().height))) {
+        child.render(spriteBatch, renderTintColor);
+      }
     }
 
     spriteBatch.end();

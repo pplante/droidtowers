@@ -266,7 +266,6 @@ public class Avatar extends GameObject {
   }
 
   public void murderDeathKill187() {
-    cancelMovement();
     markToRemove(true);
   }
 
@@ -302,4 +301,11 @@ public class Avatar extends GameObject {
       return false;
     }
   };
+
+  @Override
+  public void markToRemove(boolean b) {
+    super.markToRemove(b);
+
+    cancelMovement();
+  }
 }

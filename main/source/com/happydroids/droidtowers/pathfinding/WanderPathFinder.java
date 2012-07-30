@@ -57,8 +57,9 @@ public class WanderPathFinder extends TransitPathFinder {
 
       discoveredPath = Lists.newLinkedList();
 
-      for (int i = 0; i < positions.size() / 4; i++) {
-        discoveredPath.add(positions.get(Random.randomInt(positions.size() - 1)));
+      int numPositions = positions.size();
+      for (int i = 0; i < numPositions / 4; i++) {
+        discoveredPath.add(positions.get(Random.randomInt(numPositions - 1)));
       }
     }
   }

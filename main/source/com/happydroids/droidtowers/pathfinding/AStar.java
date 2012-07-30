@@ -114,7 +114,7 @@ public abstract class AStar<T> {
   protected PriorityQueue<Path> paths;
 
 
-  private HashMap<T, Double> mindists;
+  private HashMap<T, Double> minDistances;
 
 
   protected Double lastCost;
@@ -129,7 +129,7 @@ public abstract class AStar<T> {
     this.goal = goal;
 
     paths = new PriorityQueue<Path>();
-    mindists = new HashMap<T, Double>();
+    minDistances = new HashMap<T, Double>();
     expandedCounter = 0;
     lastCost = 0.0;
   }
@@ -146,14 +146,14 @@ public abstract class AStar<T> {
 
   private void expand(Path path) {
     T p = path.getPoint();
-    Double min = mindists.get(path.getPoint());
+    Double min = minDistances.get(path.getPoint());
 
     /*
     * If a better path passing for this point already exists then
     * don't expand it.
     */
     if (min == null || min > path.f)
-      mindists.put(path.getPoint(), path.f);
+      minDistances.put(path.getPoint(), path.f);
     else
       return;
 
@@ -247,7 +247,7 @@ public abstract class AStar<T> {
       return false;
     if (goal != null ? !goal.equals(aStar.goal) : aStar.goal != null) return false;
     if (lastCost != null ? !lastCost.equals(aStar.lastCost) : aStar.lastCost != null) return false;
-    if (mindists != null ? !mindists.equals(aStar.mindists) : aStar.mindists != null) return false;
+    if (minDistances != null ? !minDistances.equals(aStar.minDistances) : aStar.minDistances != null) return false;
     if (paths != null ? !paths.equals(aStar.paths) : aStar.paths != null) return false;
     if (start != null ? !start.equals(aStar.start) : aStar.start != null) return false;
 
@@ -262,7 +262,7 @@ public abstract class AStar<T> {
     result = 31 * result + (start != null ? start.hashCode() : 0);
     result = 31 * result + (goal != null ? goal.hashCode() : 0);
     result = 31 * result + (paths != null ? paths.hashCode() : 0);
-    result = 31 * result + (mindists != null ? mindists.hashCode() : 0);
+    result = 31 * result + (minDistances != null ? minDistances.hashCode() : 0);
     result = 31 * result + (lastCost != null ? lastCost.hashCode() : 0);
     result = 31 * result + expandedCounter;
     return result;

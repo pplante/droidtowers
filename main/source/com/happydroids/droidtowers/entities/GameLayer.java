@@ -4,8 +4,10 @@
 
 package com.happydroids.droidtowers.entities;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -28,13 +30,19 @@ public class GameLayer {
     gameObjects.add(gameObject);
   }
 
-  public void render(SpriteBatch spriteBatch) {
+  protected Vector3 tmp = new Vector3();
+
+  public void render(SpriteBatch spriteBatch, OrthographicCamera camera) {
     if (!visible) return;
 
     spriteBatch.begin();
+    spriteBatch.enableBlending();
     for (int i = 0, gameObjectsSize = gameObjects.size(); i < gameObjectsSize; i++) {
       GameObject gameObject = gameObjects.get(i);
-      gameObject.draw(spriteBatch);
+      tmp.set(gameObject.getX(), gameObject.getY(), 0);
+      if (camera.frustum.sphereInFrustum(tmp, Math.max(gameObject.getWidth(), gameObject.getHeight()))) {
+        gameObject.draw(spriteBatch);
+      }
     }
 
     spriteBatch.end();

@@ -59,8 +59,8 @@ public class TransitPathFinder extends AStar<GridPosition> {
   @Override
   protected Double h(GridPosition from, GridPosition to) {
     /* Use the Manhattan distance heuristic.  */
-//    return (double) Math.abs(goal.x - to.x) + Math.abs(goal.y - to.y);
-    return Math.pow(goal.x - to.x, 2) + Math.pow(goal.y - to.y, 2);
+    return (double) Math.abs(goal.x - to.x) + Math.abs(goal.y - to.y);
+//    return Math.pow(goal.x - to.x, 2) + Math.pow(goal.y - to.y, 2);
   }
 
   @Override

@@ -23,6 +23,7 @@ public class GameSoundController {
   public static final String CONSTRUCTION_DESTROY = "sound/effects/construction-destroy-1.wav";
 
   private static boolean soundsAllowed;
+  private static Runnable afterInitRunnable;
   private boolean backgroundMusicEnabled;
   public boolean audioState;
   private Sound constructionSound;
@@ -37,6 +38,10 @@ public class GameSoundController {
     availableSongs = Iterables.cycle(TowerAssetManager.getAssetList().musicFiles).iterator();
 
     moveToNextSong();
+
+    if (afterInitRunnable != null) {
+      afterInitRunnable.run();
+    }
   }
 
   private void moveToNextSong() {
@@ -107,5 +112,9 @@ public class GameSoundController {
   @Subscribe
   public void GameGrid_onGridObjectRemoved(GridObjectRemovedEvent event) {
     playSound(destructionSound);
+  }
+
+  public static void runAfterInit(Runnable runnable) {
+    afterInitRunnable = runnable;
   }
 }

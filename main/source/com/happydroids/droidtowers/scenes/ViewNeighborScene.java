@@ -164,7 +164,7 @@ public class ViewNeighborScene extends Scene {
   public void render(float deltaTime) {
     for (GameLayer gameLayer : gameLayers) {
       gameLayer.update(deltaTime);
-      gameLayer.render(getSpriteBatch());
+      gameLayer.render(getSpriteBatch(), getCamera());
     }
   }
 

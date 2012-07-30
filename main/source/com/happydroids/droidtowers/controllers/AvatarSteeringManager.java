@@ -46,6 +46,8 @@ public class AvatarSteeringManager {
   private final LinkedList<GridPosition> path;
   private boolean running;
   private GridPosition currentPos;
+  private Vector2 currentWorldPos;
+  private Vector2 nextWorldPos;
   private TransitLine transitLine = new TransitLine();
   private boolean movingHorizontally;
   private Direction horizontalDirection;
@@ -57,6 +59,9 @@ public class AvatarSteeringManager {
     this.avatar = avatar;
     this.gameGrid = gameGrid;
     this.path = path;
+
+    currentWorldPos = new Vector2();
+    nextWorldPos = new Vector2();
   }
 
   public void start() {
@@ -68,7 +73,7 @@ public class AvatarSteeringManager {
     transitLine.setColor(avatar.getColor());
     for (int i = 0, pathSize = path.size(); i < pathSize; i++) {
       GridPosition position = path.get(i);
-      transitLine.addPoint(position.toWorldVector2());
+      transitLine.addPoint(position.worldPoint());
     }
 
     gameGrid.events().register(this);
@@ -107,6 +112,7 @@ public class AvatarSteeringManager {
 
     transitLine.highlightPoint(pointsTraveled++);
     currentPos = path.poll();
+    currentWorldPos.set(currentPos.worldPoint());
 
     if (path.size() > 0) {
       if (currentPos.stair != null) {
@@ -146,9 +152,9 @@ public class AvatarSteeringManager {
   private void traverseElevator(final GridPosition destination) {
     currentState.add(AvatarState.USING_ELEVATOR);
 
-    Vector2 nextToElevator = currentPos.toWorldVector2();
-    nextToElevator.x += Random.randomInt(0, TowerConsts.GRID_UNIT_SIZE);
-    moveAvatarTo(nextToElevator, new TweenCallback() {
+    nextWorldPos.set(currentPos.worldPoint());
+    nextWorldPos.x += Random.randomInt(0, TowerConsts.GRID_UNIT_SIZE);
+    moveAvatarTo(nextWorldPos, new TweenCallback() {
       @Override
       public void onEvent(int type, BaseTween source) {
         if (currentPos.elevator == null || currentPos.y == destination.y) {
@@ -203,7 +209,7 @@ public class AvatarSteeringManager {
 
 
     List<Vector2> points = Lists.newArrayList();
-    points.add(currentPos.toWorldVector2());
+    points.add(currentPos.worldPoint());
 
     if (verticalDir.equals(UP)) {
       points.add(stairBottomRight);
@@ -212,7 +218,7 @@ public class AvatarSteeringManager {
       points.add(stairTopLeft);
       points.add(stairBottomRight);
     }
-    points.add(nextPosition.toWorldVector2());
+    points.add(nextPosition.worldPoint());
 
     final TransitLine stairLine = new TransitLine();
     stairLine.addPoints(points);
@@ -221,7 +227,7 @@ public class AvatarSteeringManager {
 
     Timeline sequence = Timeline.createSequence();
 
-    Vector2 lastPos = currentPos.toWorldVector2();
+    Vector2 lastPos = currentPos.worldPoint();
     for (Vector2 point : points) {
       sequence.push(Tween.to(avatar, POSITION, lastPos.dst(point) * MOVEMENT_SPEED).target(point.x, point.y).ease(Linear.INOUT));
       lastPos = point;
@@ -238,7 +244,7 @@ public class AvatarSteeringManager {
   }
 
   public void moveAvatarTo(GridPosition gridPosition, TweenCallback endCallback) {
-    moveAvatarTo(gridPosition.toWorldVector2(), endCallback);
+    moveAvatarTo(nextWorldPos.set(gridPosition.worldPoint()), endCallback);
   }
 
   public void moveAvatarTo(Vector2 endPoint, final TweenCallback endCallback) {
@@ -286,9 +292,9 @@ public class AvatarSteeringManager {
     currentState.add(AvatarState.USING_ELEVATOR);
     currentState.add(AvatarState.MOVING);
 
-    Vector2 posInCar = currentPos.toWorldVector2();
-    posInCar.x += Random.randomInt(8, 58);
-    moveAvatarTo(posInCar, new TweenCallback() {
+    nextWorldPos.set(currentPos.worldPoint());
+    nextWorldPos.x += Random.randomInt(8, 58);
+    moveAvatarTo(nextWorldPos, new TweenCallback() {
       @Override
       public void onEvent(int type, BaseTween source) {
         currentState.remove(AvatarState.MOVING);

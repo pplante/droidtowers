@@ -29,7 +29,7 @@ public class MemoryTrackingAssetManager extends AssetManager {
   }
 
   @SuppressWarnings("unchecked")
-  private int calculateTextureSize(AssetManager assetManager, String fileName, Class type) {
+  private synchronized int calculateTextureSize(AssetManager assetManager, String fileName, Class type) {
     if (memoryPerFile.containsKey(fileName)) {
       return memoryPerFile.get(fileName);
     }
@@ -99,7 +99,7 @@ public class MemoryTrackingAssetManager extends AssetManager {
     }
   }
 
-  public float getMemoryInMegabytes() {
+  public synchronized float getMemoryInMegabytes() {
     return currentMemory / 1024f / 1024f;
   }
 

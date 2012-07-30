@@ -276,6 +276,7 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
     SceneManager.dispose();
     spriteBatch.dispose();
     Platform.getConnectionMonitor().dispose();
+    PathSearchManager.instance().dispose();
     BackgroundTask.dispose();
     TowerAssetManager.dispose();
     FontManager.resetAll();

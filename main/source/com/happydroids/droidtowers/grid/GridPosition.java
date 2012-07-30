@@ -13,9 +13,12 @@ import com.happydroids.droidtowers.math.GridPoint;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
+
 public class GridPosition {
   public final int x;
   public final int y;
+  private final Vector2 worldVector;
   private Set<GridObject> objects = new HashSet<GridObject>();
   public Elevator elevator;
   public Stair stair;
@@ -30,9 +33,11 @@ public class GridPosition {
   private float noiseLevel;
   private float crimeLevel;
 
+
   public GridPosition(int x, int y) {
     this.x = x;
     this.y = y;
+    worldVector = new Vector2(x * GRID_UNIT_SIZE, y * GRID_UNIT_SIZE);
   }
 
   public Set<GridObject> getObjects() {
@@ -77,37 +82,8 @@ public class GridPosition {
     return objects.contains(gridObject);
   }
 
-  public Vector2 toWorldVector2() {
-    return new GridPoint(x, y).toWorldVector2();
-  }
-
-  @SuppressWarnings("RedundantIfStatement")
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof GridPosition)) return false;
-
-    GridPosition that = (GridPosition) o;
-
-    if (connectedToTransit != that.connectedToTransit) return false;
-    if (x != that.x) return false;
-    if (y != that.y) return false;
-    if (elevator != null ? !elevator.equals(that.elevator) : that.elevator != null) return false;
-    if (objects != null ? !objects.equals(that.objects) : that.objects != null) return false;
-    if (stair != null ? !stair.equals(that.stair) : that.stair != null) return false;
-
-    return true;
-  }
-
-  @Override
-  public int hashCode() {
-    int result = x;
-    result = 31 * result + y;
-    result = 31 * result + (objects != null ? objects.hashCode() : 0);
-    result = 31 * result + (connectedToTransit ? 1 : 0);
-    result = 31 * result + (elevator != null ? elevator.hashCode() : 0);
-    result = 31 * result + (stair != null ? stair.hashCode() : 0);
-    return result;
+  public Vector2 worldPoint() {
+    return worldVector;
   }
 
   public void findMaxValues() {
@@ -146,5 +122,34 @@ public class GridPosition {
 
   public float getCrimeLevel() {
     return crimeLevel;
+  }
+
+  @SuppressWarnings("RedundantIfStatement")
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof GridPosition)) return false;
+
+    GridPosition that = (GridPosition) o;
+
+    if (connectedToTransit != that.connectedToTransit) return false;
+    if (x != that.x) return false;
+    if (y != that.y) return false;
+    if (elevator != null ? !elevator.equals(that.elevator) : that.elevator != null) return false;
+    if (objects != null ? !objects.equals(that.objects) : that.objects != null) return false;
+    if (stair != null ? !stair.equals(that.stair) : that.stair != null) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = x;
+    result = 31 * result + y;
+    result = 31 * result + (objects != null ? objects.hashCode() : 0);
+    result = 31 * result + (connectedToTransit ? 1 : 0);
+    result = 31 * result + (elevator != null ? elevator.hashCode() : 0);
+    result = 31 * result + (stair != null ? stair.hashCode() : 0);
+    return result;
   }
 }

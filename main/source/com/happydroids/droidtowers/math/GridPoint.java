@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.math;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Vector2;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
@@ -373,9 +372,5 @@ public class GridPoint implements Serializable {
   @JsonIgnore
   public float getWorldY() {
     return (GRID_UNIT_SIZE * y);
-  }
-
-  public Vector2 toWorldVector2() {
-    return new Vector2(getWorldX(), getWorldY());
   }
 }

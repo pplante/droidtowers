@@ -4,21 +4,26 @@
 
 package com.happydroids.droidtowers.controllers;
 
-import com.google.common.collect.Lists;
+import com.badlogic.gdx.Gdx;
+import com.google.common.collect.Queues;
 import com.happydroids.droidtowers.pathfinding.AStar;
 import com.happydroids.droidtowers.pathfinding.TransitPathFinder;
+import com.happydroids.droidtowers.pathfinding.WanderPathFinder;
 
-import java.util.LinkedList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class PathSearchManager {
   private static PathSearchManager _instance;
 
-  private LinkedList<AStar> pathFinders;
+  private ConcurrentLinkedQueue<AStar> pathFinders;
   private AStar currentPathFinder;
+  private int framesSinceUpdate;
+
 
   private PathSearchManager() {
-    pathFinders = Lists.newLinkedList();
+    pathFinders = Queues.newConcurrentLinkedQueue();
   }
+
 
   public static PathSearchManager instance() {
     if (_instance == null) {
@@ -28,20 +33,32 @@ public class PathSearchManager {
     return _instance;
   }
 
-  public void queue(final AStar pathFinder) {
-    pathFinders.add(pathFinder);
+  public synchronized void queue(final AStar pathFinder) {
+    if (pathFinder instanceof WanderPathFinder) {
+      pathFinder.start();
+      pathFinder.runCompleteCallback();
+    } else {
+      pathFinders.add(pathFinder);
+    }
   }
 
   public void update(float deltaTime) {
+    if (framesSinceUpdate++ < 2) {
+      return;
+    }
+
+    framesSinceUpdate = 0;
     if (currentPathFinder != null) {
       if (currentPathFinder.isWorking()) {
-        int times = 0;
-        while (currentPathFinder.isWorking() && times < 25) {
-          currentPathFinder.step();
-          times += 1;
-        }
+        currentPathFinder.step();
       } else {
-        currentPathFinder.runCompleteCallback();
+        final AStar pathFinder = currentPathFinder;
+        Gdx.app.postRunnable(new Runnable() {
+          @Override
+          public void run() {
+            pathFinder.runCompleteCallback();
+          }
+        });
         currentPathFinder = null;
       }
     } else if (!pathFinders.isEmpty()) {
@@ -50,7 +67,7 @@ public class PathSearchManager {
     }
   }
 
-  public void remove(TransitPathFinder pathFinder) {
+  public synchronized void remove(TransitPathFinder pathFinder) {
     pathFinders.remove(pathFinder);
 
     if (pathFinder.equals(currentPathFinder)) {
@@ -58,5 +75,9 @@ public class PathSearchManager {
     }
 
     pathFinder.cancel();
+  }
+
+  public void dispose() {
+    _instance = null;
   }
 }

@@ -4,6 +4,8 @@
 
 package com.happydroids.droidtowers.graphics;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Iterables;
@@ -21,6 +23,10 @@ public class CityScapeLayer extends GameLayer implements RespondsToWorldSizeChan
 
   public CityScapeLayer() {
     TextureAtlas cityScapeAtlas = TowerAssetManager.textureAtlas("backgrounds/cityscape.txt");
+    for (Texture texture : cityScapeAtlas.getTextures()) {
+      texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+    }
+
     regions = Iterables.cycle(cityScapeAtlas.getRegions()).iterator();
   }
 
@@ -30,8 +36,10 @@ public class CityScapeLayer extends GameLayer implements RespondsToWorldSizeChan
     float nextX = width() - Display.getBiggestScreenDimension() - (5f * gameObjects.size());
     while (width() - 64 < worldWidth) {
       GameObject sprite = new GameObject(regions.next());
+      sprite.setColor(Color.WHITE);
       sprite.setX(nextX);
       sprite.setY(TowerConsts.GROUND_HEIGHT - 5f);
+      sprite.setSize(sprite.getWidth() * 2, sprite.getHeight() * 2);
       addChild(sprite);
 
       nextX += sprite.getWidth() - 5f;

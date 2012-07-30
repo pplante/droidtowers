@@ -67,6 +67,7 @@ public class AvatarLayer extends GameLayer {
 
   private int maxAvatars() {
     return Player.instance().getSupportedResidency();
+//    return 0;
   }
 
   private void setupAvatar(Avatar avatar) {

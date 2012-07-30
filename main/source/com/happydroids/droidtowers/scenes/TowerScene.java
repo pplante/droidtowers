@@ -18,6 +18,7 @@ import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.actions.ActionManager;
 import com.happydroids.droidtowers.actions.GameSaveAction;
+import com.happydroids.droidtowers.audio.GameSoundController;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.entities.CloudLayer;
 import com.happydroids.droidtowers.entities.GameLayer;
@@ -92,7 +93,13 @@ public class TowerScene extends Scene {
     avatarLayer = new AvatarLayer(gameGrid);
 
     gameGrid.events().register(this);
-    gameGrid.events().register(DroidTowersGame.getSoundController());
+
+    GameSoundController.runAfterInit(new Runnable() {
+      @Override
+      public void run() {
+        gameGrid.events().register(DroidTowersGame.getSoundController());
+      }
+    });
 
     headsUpDisplay = new HeadsUpDisplay(getStage(), getCamera(), getCameraController(), gameGrid, avatarLayer, AchievementEngine.instance(), TutorialEngine.instance(), gameState);
     weatherService = new WeatherService();
@@ -202,7 +209,7 @@ public class TowerScene extends Scene {
     updateGameObjects(deltaTime);
 
     for (GameLayer layer : gameLayers) {
-      layer.render(getSpriteBatch());
+      layer.render(getSpriteBatch(), getCamera());
     }
   }
 
