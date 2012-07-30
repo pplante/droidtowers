@@ -6,14 +6,10 @@ package com.happydroids.droidtowers.entities;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.actions.Action;
@@ -28,7 +24,6 @@ import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.ElevatorType;
 import com.happydroids.droidtowers.types.ResizeHandle;
 
-import java.util.HashMap;
 import java.util.List;
 
 import static com.happydroids.droidtowers.types.ResizeHandle.TOP;
@@ -39,16 +34,15 @@ public class Elevator extends Transit {
   private Sprite shaftSprite;
   private Sprite emptyShaftSprite;
   private Sprite bottomSprite;
-  private final BitmapFont floorFont;
   private ResizeHandle selectedResizeHandle;
   private boolean drawShaft;
   private Action onResizeAction;
   static TextureAtlas elevatorAtlas;
   private GridPoint anchorPoint;
-  private final HashMap<Integer, String> shaftLabels;
   private int numCars;
   private final List<ElevatorCar> elevatorCars;
-
+  private final BitmapFontCache floorLabelCache;
+  private int numFloorsSinceLabelCacheBuilt;
 
   public Elevator(ElevatorType elevatorType, final GameGrid gameGrid) {
     super(elevatorType, gameGrid);
@@ -56,6 +50,8 @@ public class Elevator extends Transit {
     if (elevatorAtlas == null) {
       elevatorAtlas = TowerAssetManager.textureAtlas(elevatorType.getAtlasFilename());
     }
+
+    floorLabelCache = new BitmapFontCache(FontManager.BankGothic32.getFont(), true);
 
     size.set(1, 3);
     topSprite = elevatorAtlas.createSprite("elevator/top");
@@ -66,7 +62,6 @@ public class Elevator extends Transit {
     shaftSprite.setScale(getGridScale());
     emptyShaftSprite = TowerAssetManager.sprite("elevator/empty.png");
     emptyShaftSprite.setScale(getGridScale());
-    floorFont = FontManager.BankGothic32.getFont();
 
     drawShaft = true;
 
@@ -75,8 +70,6 @@ public class Elevator extends Transit {
     for (int i = 0; i < numCars; i++) {
       elevatorCars.add(new ElevatorCar(this, elevatorAtlas));
     }
-
-    shaftLabels = Maps.newHashMap();
   }
 
   @Override
@@ -91,6 +84,10 @@ public class Elevator extends Transit {
     for (int i = 0, elevatorCarsSize = elevatorCars.size(); i < elevatorCarsSize; i++) {
       ElevatorCar elevatorCar = elevatorCars.get(i);
       elevatorCar.update(deltaTime);
+    }
+
+    if (numFloorsSinceLabelCacheBuilt != size.y) {
+      rebuildFloorLabelCache();
     }
   }
 
@@ -123,28 +120,14 @@ public class Elevator extends Transit {
     setWrap(shaftToRender);
     shaftToRender.draw(spriteBatch);
 
-    for (int localFloorNum = 1; localFloorNum < size.y - 1; localFloorNum++) {
-      int worldFloorNum = position.y + localFloorNum;
-      int normalizedWorldFloor = worldFloorNum - TowerConsts.LOBBY_FLOOR;
-      if (!shaftLabels.containsKey(normalizedWorldFloor)) {
-        String labelText = String.valueOf(normalizedWorldFloor);
-        if (worldFloorNum == TowerConsts.LOBBY_FLOOR) {
-          labelText = "L";
-        } else if (worldFloorNum < TowerConsts.LOBBY_FLOOR) {
-          labelText = "B" + (TowerConsts.LOBBY_FLOOR - worldFloorNum);
-        }
-        shaftLabels.put(normalizedWorldFloor, labelText);
+    floorLabelCache.setColor(1, 1, 1, 0.5f);
+    floorLabelCache.draw(spriteBatch, renderColor.a);
+
+    if (isPlaced()) {
+      for (ElevatorCar elevatorCar : elevatorCars) {
+        elevatorCar.setColor(renderColor);
+        elevatorCar.draw(spriteBatch);
       }
-
-      textBounds = floorFont.getBounds(shaftLabels.get(normalizedWorldFloor));
-      floorFont.setColor(1, 1, 1, 0.5f);
-      floorFont.setScale(getGridScale());
-      floorFont.draw(spriteBatch, shaftLabels.get(normalizedWorldFloor), worldPosition.x + ((TowerConsts.GRID_UNIT_SIZE - textBounds.width) / 2), worldPosition.y + (scaledGridUnit() * localFloorNum) + ((TowerConsts.GRID_UNIT_SIZE - textBounds.height) / 2));
-    }
-
-    for (ElevatorCar elevatorCar : elevatorCars) {
-      elevatorCar.setColor(renderColor);
-      elevatorCar.draw(spriteBatch);
     }
 
     if (selectedResizeHandle == TOP) {
@@ -198,6 +181,26 @@ public class Elevator extends Transit {
     }
 
     return super.touchUp();
+  }
+
+  private void rebuildFloorLabelCache() {
+    StringBuilder floors = new StringBuilder(size.y * 3);
+    for (int localFloorNum = 1; localFloorNum < size.y - 1; localFloorNum++) {
+      int worldFloorNum = position.y + localFloorNum;
+      int normalizedWorldFloor = worldFloorNum - TowerConsts.LOBBY_FLOOR;
+      String labelText = String.valueOf(normalizedWorldFloor);
+      if (worldFloorNum == TowerConsts.LOBBY_FLOOR) {
+        labelText = "L";
+      } else if (worldFloorNum < TowerConsts.LOBBY_FLOOR) {
+        labelText = "B" + (TowerConsts.LOBBY_FLOOR - worldFloorNum);
+      }
+      floors.insert(0, labelText + "\n");
+    }
+
+    floorLabelCache.setMultiLineText(floors, getWorldCenterBottom().x, getWorldCenterBottom().y, 0f, BitmapFont.HAlignment.CENTER);
+    floorLabelCache.setPosition(0, floorLabelCache.getBounds().height + (TowerConsts.GRID_UNIT_SIZE * 1.25f));
+
+    numFloorsSinceLabelCacheBuilt = size.y;
   }
 
   @Override

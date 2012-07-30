@@ -24,8 +24,6 @@ import com.happydroids.droidtowers.utils.Random;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-
 public class CloudLayer extends GameLayer implements RespondsToWorldSizeChange {
   public static final int CLOUD_SPAWN_DELAY = 2;
   public static final String CLOUDS_ATLAS = "backgrounds/clouds.txt";
@@ -35,7 +33,7 @@ public class CloudLayer extends GameLayer implements RespondsToWorldSizeChange {
   private final TextureAtlas textureAtlas;
   private float timeSinceSpawn;
   protected Vector2 worldSize;
-  private List<GameObject> cloudsToRemove;
+  private List<GameObject> deadClouds;
   private final int numberOfCloudTypes;
   private final WeatherService weatherService;
 
@@ -45,7 +43,7 @@ public class CloudLayer extends GameLayer implements RespondsToWorldSizeChange {
 
     textureAtlas = TowerAssetManager.textureAtlas(CLOUDS_ATLAS);
     numberOfCloudTypes = textureAtlas.getRegions().size();
-    cloudsToRemove = new ArrayList<GameObject>(5);
+    deadClouds = new ArrayList<GameObject>(5);
 
     if (weatherService != null) {
       weatherService.events().register(this);
@@ -75,11 +73,12 @@ public class CloudLayer extends GameLayer implements RespondsToWorldSizeChange {
       return;
     }
 
-    AtlasRegion cloudRegion = textureAtlas.findRegion("cloud", Random.randomInt(1, numberOfCloudTypes));
-
-    float scale = Math.max(0.4f, Random.randomFloat());
-
-    GameObject cloud = new GameObject(cloudRegion);
+    GameObject cloud;
+    if (!deadClouds.isEmpty()) {
+      cloud = deadClouds.remove(0);
+    } else {
+      cloud = new GameObject(textureAtlas.findRegion("cloud", Random.randomInt(1, numberOfCloudTypes)));
+    }
 
     if (weatherService != null) {
       cloud.setColor(weatherService.currentState().cloudColor);
@@ -88,7 +87,7 @@ public class CloudLayer extends GameLayer implements RespondsToWorldSizeChange {
     if (spawnOnScreen) {
       cloud.setPosition(Random.randomInt(-cloud.getWidth(), worldSize.x), Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX));
     } else {
-      cloud.setPosition(-((cloudRegion.getRegionWidth() * scale) + Display.getBiggestScreenDimension()), Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX));
+      cloud.setPosition(-(cloud.getWidth() + Display.getBiggestScreenDimension()), Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX));
     }
     cloud.setVelocity(Random.randomInt(5, 25), 0);
     cloud.setScale(2f);
@@ -100,9 +99,8 @@ public class CloudLayer extends GameLayer implements RespondsToWorldSizeChange {
   }
 
   private void removeDeadClouds() {
-    if (cloudsToRemove.size() > 0) {
-      gameObjects.removeAll(cloudsToRemove);
-      cloudsToRemove.clear();
+    if (deadClouds.size() > 0) {
+      gameObjects.removeAll(deadClouds);
     }
 
     for (final GameObject cloud : gameObjects) {
@@ -121,7 +119,7 @@ public class CloudLayer extends GameLayer implements RespondsToWorldSizeChange {
   }
 
   private void markForRemoval(GameObject cloud) {
-    cloudsToRemove.add(cloud);
+    deadClouds.add(cloud);
   }
 
   @Subscribe

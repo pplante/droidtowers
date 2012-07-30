@@ -5,7 +5,6 @@
 package com.happydroids.droidtowers.amazon;
 
 
-import android.os.Debug;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import com.badlogic.gdx.Gdx;
@@ -42,8 +41,6 @@ public class DroidTowersAmazon extends AndroidApplication {
       public void run() {
         Gdx.input.setCatchBackKey(true);
         Gdx.input.setCatchMenuKey(true);
-
-        Debug.startAllocCounting();
 
         Platform.setConnectionMonitor(new PlatformConnectionMonitor());
         Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(DroidTowersAmazon.this));
@@ -82,11 +79,5 @@ public class DroidTowersAmazon extends AndroidApplication {
         }
       }
     }, 250);
-  }
-
-  @Override
-  protected void onPause() {
-    super.onPause();
-    Debug.stopAllocCounting();
   }
 }

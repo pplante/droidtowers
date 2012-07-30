@@ -15,7 +15,7 @@ public class WeatherService {
   private float timeSinceChange;
 
   public WeatherService() {
-    currentWeatherState = WeatherState.SUNNY;
+    currentWeatherState = WeatherState.SNOWING;
   }
 
   public EventBus events() {

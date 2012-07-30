@@ -25,6 +25,9 @@
     <option name="effort" value="default" />
     <option name="priority" value="Medium" />
   </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <type id="gwt" />
+  </component>
   <component name="IdProvider" IDEtalkID="986C226AFC45E38B199067AB4E134C53" />
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />

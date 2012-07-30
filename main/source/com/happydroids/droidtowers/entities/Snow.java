@@ -18,13 +18,13 @@ import com.happydroids.droidtowers.tween.GameObjectAccessor;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.droidtowers.utils.Random;
 
-public class Rain extends GameObject {
+public class Snow extends GameObject {
   public static final int RAIN_TEXURE_SIZE = 128;
 
-  public Rain(Vector2 worldSize) {
+  public Snow(Vector2 worldSize) {
     super();
 
-    Texture rainDropTexture = TowerAssetManager.texture("rain-drop.png");
+    Texture rainDropTexture = TowerAssetManager.texture("snow.png");
     rainDropTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
     setTexture(rainDropTexture);
@@ -35,7 +35,7 @@ public class Rain extends GameObject {
     setSize(width, height);
     setRegion(0, 0, width / RAIN_TEXURE_SIZE, height / RAIN_TEXURE_SIZE);
 
-    Tween.to(this, GameObjectAccessor.TEXTURE_VV2, Random.randomInt(10000, 12000))
+    Tween.to(this, GameObjectAccessor.TEXTURE_VV2, Random.randomInt(60000, 64000))
             .ease(Linear.INOUT)
             .target(-getV2(), 0f)
             .repeat(Tween.INFINITY, 0)

@@ -1,5 +1,5 @@
 info face="BankGothic-Medium" size=32 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=2,2
-common lineHeight=33 base=26 scaleW=256 scaleH=256 pages=1 packed=0
+common lineHeight=64 base=26 scaleW=256 scaleH=256 pages=1 packed=0
 page id=0 file="bank_gothic_32.png"
 chars count=95
 char id=124 x=2 y=2 width=4 height=33 xoffset=6 yoffset=1 xadvance=16 page=0 chnl=0 letter="|"

@@ -9,6 +9,7 @@ import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.WeatherService;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.Rain;
+import com.happydroids.droidtowers.entities.Snow;
 import com.happydroids.droidtowers.events.RespondsToWorldSizeChange;
 import com.happydroids.droidtowers.events.WeatherState;
 import com.happydroids.droidtowers.events.WeatherStateChangeEvent;
@@ -28,6 +29,8 @@ public class RainLayer extends GameLayer implements RespondsToWorldSizeChange {
     if (weatherService.currentState() == WeatherState.RAINING) {
       addChild(new Rain(worldSize));
       addChild(new Rain(worldSize));
+    } else if (weatherService.currentState() == WeatherState.SNOWING) {
+      addChild(new Snow(worldSize));
     }
   }
 
