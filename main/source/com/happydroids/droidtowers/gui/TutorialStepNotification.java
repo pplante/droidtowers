@@ -8,51 +8,66 @@ import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.Colors;
-import com.happydroids.droidtowers.Strings;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.TutorialStep;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class TutorialStepNotification extends Table {
   private boolean allowDismiss;
+  private final TutorialStep tutorialStep;
 
-  public TutorialStepNotification(TutorialStep step) {
+  public TutorialStepNotification(final TutorialStep tutorialStep) {
     super();
+    this.tutorialStep = tutorialStep;
 
-    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.TRANSPARENT_BLACK));
+    setBackground(TowerAssetManager.ninePatch("hud/dialog-bg.png", Color.WHITE, 1, 1, 1, 1));
 
-    defaults().top().left();
-
-    int padding = scale(10);
-    row().pad(padding);
-    add(FontManager.RobotoBold18.makeLabel(step.getName()));
+    pad(scale(8));
+    defaults().top().left().space(scale(6));
 
     row();
-    add(new HorizontalRule());
+    add(FontManager.Default.makeLabel(tutorialStep.getName().toUpperCase(), Colors.ICS_BLUE));
+
+    row();
+    add(new HorizontalRule()).fillX();
+
+    Label descLabel = FontManager.Default.makeLabel(tutorialStep.getDescription());
+    row();
+    add(descLabel);
 
 
-    Label descLabel = FontManager.Default.makeLabel(Strings.wrap(step.getDescription(), 40));
+    if (tutorialStep.requiresTapToGiveReward()) {
+      final boolean isTutorialCompleteStep = tutorialStep.getId().equals("tutorial-finished");
 
-    row().pad(padding);
-    add(descLabel).fillX();
+      TextButton tapToDismissButton = FontManager.Default.makeTextButton(isTutorialCompleteStep ? "tap to dismiss" : "continue");
+      tapToDismissButton.setClickListener(new VibrateClickListener() {
+        @Override
+        public void onClick(Actor actor, float x, float y) {
+          tutorialStep.giveReward();
 
-    if (step.getId().equalsIgnoreCase("tutorial-finished")) {
-      row().pad(padding);
-      add(FontManager.Default.makeLabel("[ tap to dismiss ]"));
+          if (isTutorialCompleteStep) {
+            hide();
+          }
+        }
+      });
 
-      allowDismiss = true;
+      row();
+      add(tapToDismissButton).center();
     }
-
-    pack();
   }
 
   public void show() {
-    HeadsUpDisplay.setTutorialStepNotification(this);
+    HeadsUpDisplay.instance().setTutorialStepNotification(this);
 
     Timeline.createSequence()
             .push(Tween.set(this, WidgetAccessor.OPACITY).target(0.0f))
@@ -82,11 +97,9 @@ public class TutorialStepNotification extends Table {
   }
 
   @Override
-  public boolean touchDown(float x, float y, int pointer) {
-    if (allowDismiss) {
-      hide();
-    }
+  protected void drawBackground(SpriteBatch batch, float parentAlpha) {
+    SceneManager.activeScene().effects().drawDropShadow(batch, parentAlpha, this);
 
-    return true;
+    super.drawBackground(batch, parentAlpha);
   }
 }

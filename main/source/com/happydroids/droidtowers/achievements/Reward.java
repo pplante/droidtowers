@@ -59,9 +59,13 @@ public class Reward {
 
       case COMPLETE:
         if (thing.equals(ACHIEVEMENT)) {
-          Achievement achievement = Achievement.findById(thingId);
-          achievement.setCompleted(true);
-          achievement.giveReward();
+          if (AchievementEngine.instance().findById(thingId) != null) {
+            AchievementEngine.instance().complete(thingId);
+          } else if (TutorialEngine.instance().findById(thingId) != null) {
+            TutorialEngine.instance().complete(thingId);
+          } else {
+            throw new RuntimeException("Could not find Achievement with id: " + thingId);
+          }
         }
         break;
     }
@@ -109,7 +113,7 @@ public class Reward {
           if (gridObjectType.provides(providerType)) {
             if (locked) {
               gridObjectType.addLock(this);
-            } else {
+            } else if (gridObjectType.getLock() == this) {
               gridObjectType.removeLock();
             }
           }

@@ -13,11 +13,11 @@ public class PlatformConnectionMonitor {
   protected RunnableQueue postConnectRunnables;
   private boolean networkState;
 
+
   public PlatformConnectionMonitor() {
     postConnectRunnables = new RunnableQueue();
     monitorThread.start();
   }
-
 
   public boolean isConnectedOrConnecting() {
     return networkState;
@@ -40,14 +40,14 @@ public class PlatformConnectionMonitor {
   }
 
   public void dispose() {
-    monitorThread.interrupt();
+    monitorThread = null;
   }
 
   @SuppressWarnings("FieldCanBeLocal")
-  protected final Thread monitorThread = new Thread(PlatformConnectionMonitor.class.getSimpleName()) {
+  protected Thread monitorThread = new Thread(PlatformConnectionMonitor.class.getSimpleName()) {
     @Override
     public void run() {
-      while (!Thread.currentThread().isInterrupted()) {
+      while (monitorThread == Thread.currentThread()) {
         try {
           HttpResponse response = TowerGameService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + "/ping", null);
           if (response != null) {
@@ -63,7 +63,7 @@ public class PlatformConnectionMonitor {
           try {
             Thread.sleep(HappyDroidConsts.HAPPYDROIDS_PING_FREQUENCY);
           } catch (InterruptedException ignored) {
-
+            monitorThread = null;
           }
         }
       }

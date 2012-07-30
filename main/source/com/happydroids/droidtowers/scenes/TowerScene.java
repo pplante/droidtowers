@@ -87,6 +87,16 @@ public class TowerScene extends Scene {
       throw new RuntimeException("Cannot load game with no GameSave passed.");
     }
 
+
+    for (GridObjectTypeFactory typeFactory : GridObjectTypeFactory.allFactories()) {
+      for (Object gridObjectType : typeFactory.all()) {
+        ((GridObjectType) gridObjectType).removeLock();
+      }
+    }
+
+    AchievementEngine.instance().resetState();
+    TutorialEngine.instance().resetState();
+
     gameGrid = new GameGrid(camera);
     gameGridRenderer = gameGrid.getRenderer();
     gameState = new GameState(camera, cameraController, gameSaveLocation, gameSave, gameGrid);

@@ -12,8 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.Colors;
-import com.happydroids.droidtowers.Strings;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.droidtowers.utils.StringUtils;
 import com.happydroids.platform.Platform;
 
 import java.io.IOException;
@@ -52,7 +52,7 @@ public class AboutWindow extends ScrollableTowerWindow {
 
     addLabel("Thank you to the following Friends who helped test:", FontManager.RobotoBold18);
     addHorizontalRule(Colors.DARK_GRAY, 1, 1);
-    addLabel(Strings.wrap(Gdx.files.internal("testers.txt").readString(), 60), FontManager.Roboto18);
+    addLabel(StringUtils.wrap(Gdx.files.internal("testers.txt").readString(), 60), FontManager.Roboto18);
 
     addHorizontalRule(Colors.DARK_GRAY, 1, 1).padTop(scale(50));
     addLabel("Device ID: " + TowerGameService.instance().getDeviceId(), FontManager.Roboto18);

@@ -55,17 +55,23 @@ public class TutorialEngine extends AchievementEngine {
 
   @Override
   protected void complete(Achievement achievement) {
-    if (achievement.isLocked() || achievement.hasGivenReward()) {
+    TutorialStep tutorialStep = (TutorialStep) achievement;
+
+    if (tutorialStep.isLocked() || tutorialStep.hasGivenReward() || tutorialStep.hasShownNotification()) {
       return;
     }
 
-    achievement.setCompleted(true);
-    achievement.giveReward();
+    tutorialStep.setCompleted(true);
+
+    if (!tutorialStep.requiresTapToGiveReward()) {
+      tutorialStep.giveReward();
+    }
 
     if (enabled) {
-      new TutorialStepNotification((TutorialStep) achievement).show();
+      tutorialStep.shownNotification();
+      new TutorialStepNotification(tutorialStep).show();
 
-      eventBus.post(new AchievementCompletionEvent(achievement));
+      eventBus.post(new AchievementCompletionEvent(tutorialStep));
     }
   }
 

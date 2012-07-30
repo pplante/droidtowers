@@ -15,10 +15,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.droidtowers.Colors;
-import com.happydroids.droidtowers.Strings;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.utils.StringUtils;
 
 import static com.happydroids.droidtowers.ColorUtil.rgba;
 import static com.happydroids.droidtowers.gui.FontManager.Roboto18;
@@ -46,7 +46,7 @@ public class TowerWindow {
     this.stage = stage;
 
     wrapper = new Table() {
-//      TODO: GROT, I have no clue why this texture is blending with the stuff behind it..
+      //      TODO: GROT, I have no clue why this texture is blending with the stuff behind it..
       @Override
       protected void drawBackground(SpriteBatch batch, float parentAlpha) {
         batch.disableBlending();
@@ -68,7 +68,7 @@ public class TowerWindow {
     wrapper.setBackground(new NinePatch(texture));
     wrapper.size((int) stage.width(), (int) stage.height());
 
-    titleLabel = Roboto32.makeLabel(Strings.truncate(title, 40));
+    titleLabel = Roboto32.makeLabel(StringUtils.truncate(title, 40));
     closeButton = Roboto18.makeTransparentButton("< back", rgba("#007399"), Colors.DARK_GRAY);
     closeButtonLine = new VerticalRule(scale(2));
 

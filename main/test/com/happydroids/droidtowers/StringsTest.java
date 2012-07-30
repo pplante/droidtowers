@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers;
 
+import com.happydroids.droidtowers.utils.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
@@ -14,7 +15,7 @@ import static com.happydroids.droidtowers.Expect.expect;
 public class StringsTest {
   @Test
   public void wrap_shouldWork() {
-    expect(Strings.wrap("this is a test.", 4)).toEqual("this\nis a\ntest.");
-    expect(Strings.wrap("this is a, test.", 4)).toEqual("this\nis a,\ntest.");
+    expect(StringUtils.wrap("this is a test.", 4)).toEqual("this\nis a\ntest.");
+    expect(StringUtils.wrap("this is a, test.", 4)).toEqual("this\nis a,\ntest.");
   }
 }

@@ -12,6 +12,7 @@ import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
+import com.happydroids.droidtowers.gamestate.server.RunnableQueue;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 
 import java.util.Iterator;
@@ -23,7 +24,7 @@ public class GameSoundController {
   public static final String CONSTRUCTION_DESTROY = "sound/effects/construction-destroy-1.wav";
 
   private static boolean soundsAllowed;
-  private static Runnable afterInitRunnable;
+  private static RunnableQueue afterInitRunnables = new RunnableQueue();
   private boolean backgroundMusicEnabled;
   public boolean audioState;
   private Sound constructionSound;
@@ -39,9 +40,8 @@ public class GameSoundController {
 
     moveToNextSong();
 
-    if (afterInitRunnable != null) {
-      afterInitRunnable.run();
-    }
+    afterInitRunnables.runAll();
+    afterInitRunnables = null;
   }
 
   private void moveToNextSong() {
@@ -115,6 +115,10 @@ public class GameSoundController {
   }
 
   public static void runAfterInit(Runnable runnable) {
-    afterInitRunnable = runnable;
+    if (afterInitRunnables != null) {
+      afterInitRunnables.push(runnable);
+    } else {
+      runnable.run();
+    }
   }
 }

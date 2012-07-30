@@ -35,7 +35,9 @@ public class AndroidUncaughtExceptionHandler extends HappyDroidUncaughtException
                     pb.setCancelable(false);
                     pb.show();
 
-                    new CrashReport(throwable).save();
+                    if (Platform.getConnectionMonitor().isConnectedOrConnecting()) {
+                      new CrashReport(throwable).save();
+                    }
                     Gdx.app.exit();
                   }
                 })

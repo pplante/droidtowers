@@ -55,13 +55,13 @@ public class HeadsUpDisplay extends WidgetGroup {
   private final StackGroup notificationStack;
   private HudToolButton toolButton;
   private ImageButtonStyle toolButtonStyle;
-  private TutorialStepNotification tutorialStep;
   private final StatusBarPanel statusBarPanel;
   private final HeaderButtonBar headerButtonBar;
   private AchievementButton achievementButton;
   private ImageButton avatarsButton;
   private ImageButton viewNeighborsButton;
   private GridObjectPopOver gridObjectPopOver;
+  private TutorialStepNotification tutorialStep;
 
 
   public HeadsUpDisplay(Stage stage, OrthographicCamera camera, CameraController cameraController, GameGrid gameGrid, final AvatarLayer avatarLayer, AchievementEngine achievementEngine, TutorialEngine tutorialEngine, final GameState gameState) {
@@ -295,19 +295,18 @@ public class HeadsUpDisplay extends WidgetGroup {
     return instance;
   }
 
-  public static void setTutorialStepNotification(TutorialStepNotification nextStep) {
-    if (instance.tutorialStep != null) {
-      instance.tutorialStep.markToRemove(true);
+  public void setTutorialStepNotification(TutorialStepNotification nextStep) {
+    if (tutorialStep != null) {
+      tutorialStep.markToRemove(true);
     }
 
-    instance.tutorialStep = nextStep;
+    tutorialStep = nextStep;
 
-    if (instance.tutorialStep != null) {
-      instance.getStage().addActor(instance.tutorialStep);
+    addActor(nextStep);
 
-      instance.tutorialStep.x = 10;
-      instance.tutorialStep.y = ((int) (instance.getStage().height() - (instance.statusBarPanel.height + instance.tutorialStep.height + 6)));
-    }
+    nextStep.pack();
+    nextStep.x = 20;
+    nextStep.y = statusBarPanel.y - nextStep.height - 20;
   }
 
   public AchievementButton getAchievementButton() {
@@ -319,6 +318,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   }
 
   public void toggleViewNeighborsButton(boolean state) {
+    //noinspection PointlessBooleanExpression
     if (HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT && viewNeighborsButton != null) {
       viewNeighborsButton.visible = state;
     }

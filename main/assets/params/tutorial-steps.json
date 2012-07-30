@@ -2,12 +2,12 @@
   {
     "id":"tutorial-welcome",
     "name":"Welcome to Droid Towers!",
-    "description":"To start building your Tower, tap the Build menu in the bottom right."
+    "description":"To start building your Tower,\ntap the Build menu in the bottom right."
   },
   {
     "id":"tutorial-unlock-lobby",
     "name":"Breaking ground",
-    "description":"Tap on the house icon to open the buy menu. Then tap \"BUY\" next to the Lobby.",
+    "description":"Tap on the house icon to open the buy menu.\n\nThen tap \"BUY\" next to the Lobby.",
     "rewards":[
       {
         "type":"UNLOCK",
@@ -19,13 +19,13 @@
   {
     "id":"tutorial-purchased-lobby",
     "name":"Pillars of Success",
-    "description":"Your cursor now is in \"Placement\" mode. Double Tap to place the Lobby.\n\nPress the ESCAPE key to exit \"Placement\" mode.",
-    "descriptionMobile":"Your cursor now is in \"Placement\" mode. Double Tap to place the Lobby.\n\nPress the BACK button to exit \"Placement\" mode."
+    "description":"Your cursor now is in \"Placement\" mode.\nDouble Tap to place the Lobby.\n\nPress the ESCAPE key to exit \"Placement\" mode.",
+    "descriptionMobile":"Your cursor now is in \"Placement\" mode.\nDouble Tap to place the Lobby.\n\nPress the BACK button to exit \"Placement\" mode."
   },
   {
     "id":"tutorial-build-lobby",
     "name":"There is no place like Home",
-    "description":"The Lobby serves as the base for a Tower. Droids need a place to call home. You should buy an Apartment for them.",
+    "description":"The Lobby serves as the base for a Tower.\n\nDroids need a place to call home.\nYou should build an Apartment for them.",
     "requirements":[
       {
         "type":"BUILD",
@@ -45,7 +45,7 @@
   {
     "id":"tutorial-build-apartment",
     "name":"Beam me up, Scotty",
-    "description":"Notice the little red box on your Apartment? That means it is not connected to the Main Lobby. Lets build an Elevator so the Droids can move in.",
+    "description":"See the red sign on your Apartment?\nThis means it has no transit connection.\n\nBuild an Elevator so the Droids can move in.",
     "requirements":[
       {
         "type":"BUILD",
@@ -65,7 +65,7 @@
   {
     "id":"tutorial-stretch-elevator",
     "name":"Sky's the limit!",
-    "description":"Elevators need to service each floor of your Tower. Connect your elevator by dragging the top or bottom of the elevator shaft.",
+    "description":"Elevators need to service\neach floor of your Tower.\n\nConnect your elevator by dragging\nthe top or bottom of the elevator shaft.",
     "requirements":[
       {
         "type":"BUILD",
@@ -90,7 +90,7 @@
   {
     "id":"tutorial-build-pizza-place",
     "name":"Pizza, Pizza!",
-    "description":"Droids can get hungry over time.  Luckily they love Pizza!\n\nBuild a Pizza Place so they don't starve!",
+    "description":"Droids will get hungry over time.\n\n Luckily they love Pizza!\n\nBuild a Pizza Place so they don't starve!",
     "rewards":[
       {
         "type":"UNLOCK",
@@ -102,7 +102,7 @@
   {
     "id":"tutorial-hire-employees",
     "name":"Pizza Business 101",
-    "description":"Someone has to make the Pizza before it can be sold to hungry Droids.\n\nTap on the Pizza Place,\nthen click \"Manage\" to hire an employee.",
+    "description":"Someone has to make the Pizza before\nit can be sold to hungry Droids.\n\nTap on the Pizza Place,\nthen click \"Manage\" to hire an employee.",
     "requirements":[
       {
         "type":"BUILD",
@@ -115,14 +115,15 @@
       {
         "type":"UNLOCK",
         "thing":"ACHIEVEMENT",
-        "thingId":"tutorial-pan"
+        "thingId":"tutorial-management101"
       }
     ]
   },
   {
-    "id":"tutorial-pan",
-    "name":"Navigation",
-    "description":"Now that your Tower is up and running, lets learn how to control your camera. To move the screen around, tap anywhere and drag.",
+    "id":"tutorial-management101",
+    "name":"Business Management 101",
+    "description":"Your Tower now has its own Small Business.\n\nUnfortunately running a small business\nis more complicated than just hiring employees.",
+    "tapToGiveReward":true,
     "requirements":[
       {
         "type":"HIRE",
@@ -130,6 +131,31 @@
         "amount":1
       }
     ],
+    "rewards":[
+      {
+        "type":"COMPLETE",
+        "thing":"ACHIEVEMENT",
+        "thingId":"tutorial-management103"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-management103",
+    "name":"Profit and Loss Statement",
+    "description":"A thriving business should make a profit.\n\nThe info panel for the Pizza Place\nprovides income and cost info.\n\nThe cost comes from employees you hire.\nIf you have too many employees,\nor not enough business the cost will\nappear in red.\n\nYou must balance your population\nand demand for consumer goods by not\nover building in any category.",
+    "tapToGiveReward":true,
+    "rewards":[
+      {
+        "type":"COMPLETE",
+        "thing":"ACHIEVEMENT",
+        "thingId":"tutorial-pan"
+      }
+    ]
+  },
+  {
+    "id":"tutorial-pan",
+    "name":"Navigation",
+    "description":"Now that your Tower is up and running,\nlets learn how to control your camera.\n\nTo move the screen around,\ntap anywhere and drag.",
     "rewards":[
       {
         "type":"UNLOCK",
@@ -141,8 +167,8 @@
   {
     "id":"tutorial-zoom",
     "name":"Magnification",
-    "description":"Great! You can also zoom in via your mouse's scroll wheel. It works just like scrolling a document. Try it now.",
-    "descriptionMobile":"Great! You can also zoom in & out by pinching the screen. Try it now.",
+    "description":"Great job!\n\nYou can also zoom in via your mouse's scroll wheel.\nIt works just like scrolling a document.\n\nTry it now.",
+    "descriptionMobile":"Great job!\n\nYou can also zoom the camera\nby pinching the screen.\n\nTry it now.",
     "rewards":[
       {
         "type":"UNLOCK",
@@ -154,7 +180,7 @@
   {
     "id":"tutorial-turn-on-population-overlay",
     "name":"Population Overlays",
-    "description":"Now that you've mastered the camera controls, it is time to introduce the data overlays. In the top right corner tap the Overlays button.",
+    "description":"Now that you've mastered the camera controls,\nit is time to introduce the data overlays.\n\nIn the top right corner tap the Overlays button.",
     "rewards":[
       {
         "type":"UNLOCK",
@@ -166,7 +192,7 @@
   {
     "id":"tutorial-turn-off-population-overlay",
     "name":"Population Overlays",
-    "description":"Look at the Apartment you built, notice the blue coloring? This shows there are Droids living there. Overlays provide insight into the management of your Tower's overall success. Now turn off the Population overlay.",
+    "description":"Look at the Apartment you built,\nsee the blue coloring?\nThis shows there are Droids living there.\n\nOverlays provide insight into the management\nof your Tower's overall success.\n\nNow turn off the Population overlay.",
     "rewards":[
       {
         "type":"UNLOCK",
@@ -179,6 +205,7 @@
     "id":"tutorial-finished",
     "name":"Congratulations!",
     "description":"Congratulations, you are now ready to conquer the sky!\n\nPS: Your Tower will be automatically saved.",
+    "tapToGiveReward":true,
     "rewards":[
       {
         "type":"UNLOCK",

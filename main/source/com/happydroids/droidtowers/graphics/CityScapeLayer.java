@@ -39,7 +39,6 @@ public class CityScapeLayer extends GameLayer implements RespondsToWorldSizeChan
       sprite.setColor(Color.WHITE);
       sprite.setX(nextX);
       sprite.setY(TowerConsts.GROUND_HEIGHT - 5f);
-      sprite.setSize(sprite.getWidth() * 2, sprite.getHeight() * 2);
       addChild(sprite);
 
       nextX += sprite.getWidth() - 5f;

@@ -131,10 +131,6 @@ public class AchievementEngine {
   }
 
   public void resetState() {
-    for (Achievement completedAchievement : achievements) {
-      completedAchievement.setCompleted(false);
-    }
-
     for (Achievement achievement : achievements) {
       achievement.resetState();
     }
