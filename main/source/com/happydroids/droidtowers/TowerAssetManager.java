@@ -148,6 +148,7 @@ public class TowerAssetManager {
 
   public static void dispose() {
     assetManager.dispose();
+    assetManager = null;
   }
 
   public static BitmapFont bitmapFont(String s) {

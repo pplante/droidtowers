@@ -25,6 +25,7 @@ import com.happydroids.droidtowers.math.Direction;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.pathfinding.TransitPathFinder;
 import com.happydroids.droidtowers.utils.Random;
+import com.happydroids.error.ErrorUtil;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -101,19 +102,25 @@ public class Avatar extends GameObject {
   }
 
   private void beginNextAction() {
-    wanderAround();
+    try {
+      wanderAround();
 
-    if (!pathFinder.isWorking()) {
-      if (hungerLevel <= 0.5f) {
-        GridObject closestFood = searchForFood();
-        navigateToGridObject(closestFood);
-      } else {
-        if (!lastVisitedPlaces.contains(home)) {
-          navigateToGridObject(home);
+      if (!pathFinder.isWorking()) {
+        if (hungerLevel <= 0.5f) {
+          GridObject closestFood = searchForFood();
+          navigateToGridObject(closestFood);
         } else {
-          findPlaceToVisit();
+          if (!lastVisitedPlaces.contains(home)) {
+            navigateToGridObject(home);
+          } else {
+
+            findPlaceToVisit();
+
+          }
         }
       }
+    } catch (Throwable throwable) {
+      ErrorUtil.sendErrorToServer(throwable);
     }
   }
 
@@ -123,7 +130,7 @@ public class Avatar extends GameObject {
       if (anyRoom.size() == 1) {
         navigateToGridObject(anyRoom.get(0));
       } else {
-        navigateToGridObject(anyRoom.get(MathUtils.random(0, anyRoom.size() - 1)));
+        navigateToGridObject(anyRoom.get(Random.randomInt(anyRoom.size() - 1)));
       }
     }
   }
