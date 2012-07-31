@@ -16,8 +16,8 @@ import com.happydroids.droidtowers.gui.dialogs.CousinVinnieRepayLoanDialog;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class RoomPopOver extends GridObjectPopOver<Room> {
-  private StarRatingBar residencyBar;
-  private StarRatingBar crimeBar;
+  private RatingBar residencyBar;
+  private RatingBar crimeBar;
   private Table residentImages;
 
 
@@ -30,7 +30,7 @@ public class RoomPopOver extends GridObjectPopOver<Room> {
     super.buildControls();
 
     crimeBar = makeStarRatingBar("Crime");
-    crimeBar.setTextures("hud/no-sign.png", "hud/no-sign-white.png");
+    crimeBar.setTextures(RatingBar.SECURITY_ICON);
 
     residencyBar = makeStarRatingBar("Residents");
 

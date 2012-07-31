@@ -41,16 +41,16 @@ public class StatusBarPanel extends Table {
   private final Label employmentLabel;
   private final Label moneyIncomeLabel;
   private final Label moneyExpensesLabel;
-  private final StarRatingBar starWidget;
+  private final RatingBar widget;
   private float lastUpdated = TowerConsts.HUD_UPDATE_FREQUENCY;
   private float starRating;
-  private StarRatingBar budgetRatingBar;
+  private RatingBar budgetRatingBar;
   private final PopOverLayer ratingOverlay;
   private final Texture whiteSwatch;
   private final PopOverLayer gameSpeedOverlay;
-  private StarRatingBar desirabilityRatingBar;
-  private StarRatingBar populationRatingBar;
-  private StarRatingBar employmentRatingBar;
+  private RatingBar desirabilityRatingBar;
+  private RatingBar populationRatingBar;
+  private RatingBar employmentRatingBar;
   private final Texture backgroundTexture;
   private final Slider gameSpeedSlider;
   private final Achievement dubai7StarWonder;
@@ -65,7 +65,7 @@ public class StatusBarPanel extends Table {
     populationLabel = makeValueLabel("0");
     employmentLabel = makeValueLabel("0");
     gameSpeedLabel = makeValueLabel(SceneManager.activeScene().getTimeMultiplier() + "x");
-    starWidget = new StarRatingBar(0, 5);
+    widget = new RatingBar(0, 5);
 
     whiteSwatch = TowerAssetManager.texture(TowerAssetManager.WHITE_SWATCH);
     backgroundTexture = TowerAssetManager.texture("hud/window-bg.png");
@@ -91,7 +91,7 @@ public class StatusBarPanel extends Table {
     add(populationLabel);
     add(employmentLabel);
     add(gameSpeedLabel);
-    add(starWidget);
+    add(widget);
 
     if (HappyDroidConsts.ENABLE_NEWS_TICKER) {
       row().pad(scale(2)).padLeft(scale(-4)).padRight(scale(-4));
@@ -122,10 +122,10 @@ public class StatusBarPanel extends Table {
 
     SceneManager.activeScene().events().register(this);
 
-    budgetRatingBar = new StarRatingBar();
-    populationRatingBar = new StarRatingBar();
-    employmentRatingBar = new StarRatingBar();
-    desirabilityRatingBar = new StarRatingBar();
+    budgetRatingBar = new RatingBar();
+    populationRatingBar = new RatingBar();
+    employmentRatingBar = new RatingBar();
+    desirabilityRatingBar = new RatingBar();
 
     ratingOverlay = new PopOverLayer();
     ratingOverlay.row();
@@ -174,10 +174,10 @@ public class StatusBarPanel extends Table {
     if (lastUpdated >= TowerConsts.HUD_UPDATE_FREQUENCY) {
       lastUpdated = 0f;
       Player player = Player.instance();
-      starWidget.setValue(player.getStarRating());
+      widget.setValue(player.getStarRating());
 
-      if (dubai7StarWonder.isCompleted() && starWidget.getMaxStars() == 5) {
-        starWidget.setMaxStars(7);
+      if (dubai7StarWonder.isCompleted() && widget.getMaxValue() == 5) {
+        widget.setMaxValue(7);
       }
 
       budgetRatingBar.setValue(player.getBudgetRating() * 5f);
@@ -200,10 +200,10 @@ public class StatusBarPanel extends Table {
   public boolean touchDown(float x, float y, int pointer) {
     Actor touched = hit(x, y);
 
-    if (touched == starWidget || touched == gameSpeedLabel) {
+    if (touched == widget || touched == gameSpeedLabel) {
       Gdx.input.vibrate(15);
-      if (touched == starWidget) {
-        ratingOverlay.toggle(this, starWidget);
+      if (touched == widget) {
+        ratingOverlay.toggle(this, widget);
       } else if (touched == gameSpeedLabel) {
         gameSpeedOverlay.toggle(this, gameSpeedLabel);
       }

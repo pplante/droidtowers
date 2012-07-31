@@ -12,8 +12,9 @@ import com.happydroids.droidtowers.gui.dialogs.CousinVinnieRepayLoanDialog;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class HotelRoomPopOver extends GridObjectPopOver<HotelRoom> {
-  private StarRatingBar crimeBar;
-  private StarRatingBar cleanlinessBar;
+  private RatingBar crimeBar;
+  private RatingBar dirtLevelBar;
+
 
   public HotelRoomPopOver(final HotelRoom hotelRoom) {
     super(hotelRoom);
@@ -24,7 +25,10 @@ public class HotelRoomPopOver extends GridObjectPopOver<HotelRoom> {
     super.buildControls();
 
     crimeBar = makeStarRatingBar("Crime");
-    cleanlinessBar = makeStarRatingBar("Cleanliness");
+    crimeBar.setTextures(RatingBar.SECURITY_ICON);
+
+    dirtLevelBar = makeStarRatingBar("Dirt");
+    dirtLevelBar.setTextures(RatingBar.COCKROACH_ICON);
 
     ButtonBar buttonBar = new ButtonBar();
     buttonBar.addButton("Manage", new VibrateClickListener() {
@@ -58,6 +62,6 @@ public class HotelRoomPopOver extends GridObjectPopOver<HotelRoom> {
     super.updateControls();
 
     crimeBar.setValue(gridObject.getCrimeLevel() * 5f);
-    cleanlinessBar.setValue(5 - gridObject.getNumVisitors());
+    dirtLevelBar.setValue(gridObject.getDirtLevel() * 5f);
   }
 }

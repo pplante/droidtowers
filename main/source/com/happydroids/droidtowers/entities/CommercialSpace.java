@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.entities;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.employee.JobCandidate;
@@ -21,6 +22,7 @@ public class CommercialSpace extends Room {
   private int jobsFilled;
   private long lastJobUpdateTime;
   protected Set<JobCandidate> employees;
+  public static final float VISITORS_PER_CLEANING = 15f;
 
   public CommercialSpace(CommercialType commercialType, GameGrid gameGrid) {
     super(commercialType, gameGrid);
@@ -119,7 +121,7 @@ public class CommercialSpace extends Room {
 
     boolean unlockedJanitors = AchievementEngine.instance().findById("build5commercialspaces").isCompleted();
     boolean unlockedMaids = AchievementEngine.instance().findById("build8hotelroom").isCompleted();
-    if (unlockedJanitors && unlockedMaids && getNumVisitors() > 0 && getDesirability() < 0.25f) {
+    if (unlockedJanitors && unlockedMaids && getDirtLevel() >= 0.95f && !getEmployees().isEmpty()) {
       decalsToDraw.add(DECAL_DIRTY);
     } else {
       decalsToDraw.remove(DECAL_DIRTY);
@@ -158,5 +160,9 @@ public class CommercialSpace extends Room {
   public void removeEmployee(JobCandidate employee) {
     employees.remove(employee);
     gameGrid.events().post(new EmployeeFiredEvent(this, employee));
+  }
+
+  public float getDirtLevel() {
+    return 1f - (MathUtils.clamp(5 - getNumVisitors(), 0, VISITORS_PER_CLEANING) / VISITORS_PER_CLEANING);
   }
 }

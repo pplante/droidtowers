@@ -16,37 +16,41 @@ import com.happydroids.droidtowers.TowerAssetManager;
 import static com.happydroids.droidtowers.ColorUtil.rgba;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
-class StarRatingBar extends Widget {
-  public static final Color STAR_COLOR = rgba("#ffbb33");
+class RatingBar extends Widget {
+  public static final Color MASK_COLOR = rgba("#ffbb33");
+  public static final String STAR_ICON = "hud/rating-bars/star.png";
+  public static final String NO_SIGN_ICON = "hud/rating-bars/no-sign.png";
+  public static final String COCKROACH_ICON = "hud/rating-bars/cockroach.png";
+  public static final String SECURITY_ICON = "hud/rating-bars/security.png";
   private final Label valueLabel;
   private float stars;
-  private int maxStars;
-  private Texture starTexture;
+  private int maxValue;
+  private Texture maskTexture;
   private Texture starTextureMask;
-  private int starTextureWidth;
+  private int textureWidth;
   private final int starTextureHeight;
 
-  StarRatingBar() {
+  RatingBar() {
     this(5, 5);
   }
 
-  public StarRatingBar(float stars, int maxStars) {
+  public RatingBar(float stars, int maxValue) {
     super();
     this.stars = stars;
-    this.maxStars = maxStars;
+    this.maxValue = maxValue;
 
-    setTextures("hud/star.png", "hud/star-white.png");
+    setTextures(STAR_ICON);
 
     valueLabel = FontManager.RobotoBold18.makeLabel("5.0");
     valueLabel.setAlignment(Align.CENTER);
 
     setValue(stars);
-    starTextureHeight = starTexture.getHeight();
+    starTextureHeight = maskTexture.getHeight();
   }
 
   @Override
   public float getMinWidth() {
-    return maxStars * starTextureWidth + valueLabel.getMinWidth() + scale(8);
+    return maxValue * textureWidth + valueLabel.getMinWidth() + scale(8);
   }
 
   @Override
@@ -55,7 +59,7 @@ class StarRatingBar extends Widget {
   }
 
   public void setValue(float value) {
-    this.stars = MathUtils.clamp(value, 0, maxStars);
+    this.stars = MathUtils.clamp(value, 0, maxValue);
 
     valueLabel.setText(String.format("%.1f", stars));
   }
@@ -63,21 +67,21 @@ class StarRatingBar extends Widget {
   @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
     batch.setColor(1, 1, 1, 0.35f * parentAlpha);
-    batch.draw(starTextureMask,
-                      x,
-                      y,
-                      starTextureWidth * maxStars,
-                      height,
+    batch.draw(maskTexture,
+                      (int) x,
+                      (int) y,
+                      textureWidth * maxValue,
+                      (int) height,
                       0, 0,
-                      maxStars,
+                      maxValue,
                       -1f);
 
-    float starWidth = Math.round(stars * starTextureWidth);
-    batch.setColor(1, 1, 1, 1 * parentAlpha);
-    batch.draw(starTexture,
-                      x,
-                      y,
-                      starWidth,
+    float starWidth = Math.round(stars * textureWidth);
+    batch.setColor(MASK_COLOR.r, MASK_COLOR.g, MASK_COLOR.b, MASK_COLOR.a * parentAlpha);
+    batch.draw(maskTexture,
+                      (int) x,
+                      (int) y,
+                      (int) starWidth,
                       starTextureHeight,
                       0f, 0f,
                       stars, -1f);
@@ -89,28 +93,26 @@ class StarRatingBar extends Widget {
 
   @Override
   public void layout() {
-    valueLabel.width = starTextureWidth;
+    valueLabel.width = textureWidth;
     valueLabel.height = height;
   }
 
 
-  public int getMaxStars() {
-    return maxStars;
+  public int getMaxValue() {
+    return maxValue;
   }
 
-  public void setMaxStars(int maxStars) {
-    this.maxStars = maxStars;
+  public void setMaxValue(int maxValue) {
+    this.maxValue = maxValue;
   }
 
   public void setValue(double experienceLevel) {
     setValue((float) experienceLevel);
   }
 
-  public void setTextures(String coloredTexture, String maskTexture) {
-    starTexture = TowerAssetManager.texture(coloredTexture);
-    starTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-    starTextureMask = TowerAssetManager.texture(maskTexture);
-    starTextureMask.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-    starTextureWidth = starTexture.getWidth();
+  public void setTextures(String maskTextureFilename) {
+    this.maskTexture = TowerAssetManager.texture(maskTextureFilename);
+    this.maskTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+    textureWidth = this.maskTexture.getWidth();
   }
 }

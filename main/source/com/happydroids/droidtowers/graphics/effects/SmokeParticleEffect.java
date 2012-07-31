@@ -48,4 +48,9 @@ public class SmokeParticleEffect extends GameObject {
   public void start() {
     particleEffect.start();
   }
+
+  @Override
+  public boolean shouldBeCulled() {
+    return false;
+  }
 }

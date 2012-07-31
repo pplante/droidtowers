@@ -260,8 +260,8 @@ public class Avatar extends GameObject {
     GridObject closest = null;
     int closestDist = Integer.MAX_VALUE;
     for (int i = 0, commercialSpacesSize = commercialSpaces.size(); i < commercialSpacesSize; i++) {
-      GridObject commercialSpace = commercialSpaces.get(i);
-      if (commercialSpace.getVisitorQueue().size() >= 5) {
+      CommercialSpace commercialSpace = (CommercialSpace) commercialSpaces.get(i);
+      if (commercialSpace.getVisitorQueue().size() >= 5 || commercialSpace.getEmployees().isEmpty()) {
         continue;
       }
 

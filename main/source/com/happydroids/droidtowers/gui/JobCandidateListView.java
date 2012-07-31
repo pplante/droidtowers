@@ -28,8 +28,8 @@ public class JobCandidateListView extends Table {
 
   private final Label nameLabel;
   private final Label salaryLabel;
-  private final StarRatingBar workEthicRating;
-  private final StarRatingBar experienceRating;
+  private final RatingBar workEthicRating;
+  private final RatingBar experienceRating;
   private final Label candidateCountLabel;
   private String countLabelSuffix;
   private boolean shownNoCanidatesText;
@@ -45,8 +45,8 @@ public class JobCandidateListView extends Table {
 
     nameLabel = FontManager.Roboto18.makeLabel("");
     salaryLabel = FontManager.RobotoBold18.makeLabel("");
-    workEthicRating = new StarRatingBar(0, 5);
-    experienceRating = new StarRatingBar(0, 5);
+    workEthicRating = new RatingBar(0, 5);
+    experienceRating = new RatingBar(0, 5);
     candidateCountLabel = FontManager.Roboto12.makeLabel("");
 
     ColorizedImageButton prevButton = new ColorizedImageButton(TowerAssetManager.textureFromAtlas("large-left-arrow", "hud/menus.txt"), Colors.ICS_BLUE);

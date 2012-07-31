@@ -82,6 +82,20 @@ public enum Overlays {
         }
       };
     }
+  },
+  DIRT_LEVEL("#6f5506") {
+    @Override
+    public Function<GridObject, Float> getMethod() {
+      return new Function<GridObject, Float>() {
+        public Float apply(@Nullable GridObject gridObject) {
+          if (gridObject instanceof CommercialSpace) {
+            return ((CommercialSpace) gridObject).getDirtLevel();
+          }
+
+          return null;
+        }
+      };
+    }
   };
 
   private Overlays(Color color) {

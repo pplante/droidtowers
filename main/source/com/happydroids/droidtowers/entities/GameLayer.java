@@ -39,7 +39,7 @@ public class GameLayer<T extends GameObject> {
     spriteBatch.enableBlending();
     for (int i = 0, gameObjectsSize = gameObjects.size(); i < gameObjectsSize; i++) {
       GameObject gameObject = gameObjects.get(i);
-      if (shouldCullObjects()) {
+      if (shouldCullObjects() && gameObject.shouldBeCulled()) {
         tmp.set(gameObject.getX(), gameObject.getY(), 0);
         if (camera.frustum.sphereInFrustum(tmp, Math.max(gameObject.getWidth(), gameObject.getHeight()))) {
           gameObject.draw(spriteBatch);

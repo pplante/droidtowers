@@ -347,16 +347,6 @@ public abstract class GridObject {
   }
 
   @Override
-  public int hashCode() {
-    int result = gridObjectType != null ? gridObjectType.hashCode() : 0;
-    result = 31 * result + (gameGrid != null ? gameGrid.hashCode() : 0);
-    result = 31 * result + (position != null ? position.hashCode() : 0);
-    result = 31 * result + (size != null ? size.hashCode() : 0);
-    result = 31 * result + (placed ? 1 : 0);
-    return result;
-  }
-
-  @Override
   public String toString() {
     return "GridObject{" +
                    "position=" + position +

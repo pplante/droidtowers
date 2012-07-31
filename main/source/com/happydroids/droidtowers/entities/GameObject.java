@@ -101,4 +101,8 @@ public class GameObject extends Sprite {
   public boolean isMarkedForRemoval() {
     return markedForRemoval;
   }
+
+  public boolean shouldBeCulled() {
+    return true;
+  }
 }

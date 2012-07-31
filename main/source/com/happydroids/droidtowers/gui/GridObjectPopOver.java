@@ -32,8 +32,8 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
 
   private final Sprite triangle;
   protected final T gridObject;
-  private StarRatingBar desirabilityBar;
-  private StarRatingBar noiseBar;
+  private RatingBar desirabilityBar;
+  private RatingBar noiseBar;
   protected Label transitLabel;
   private Label cousinVinniesHideout;
   private Label nameLabel;
@@ -106,14 +106,14 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
 
     desirabilityBar = makeStarRatingBar("Desirability");
     noiseBar = makeStarRatingBar("Noise");
-    noiseBar.setTextures("hud/no-sign.png", "hud/no-sign-white.png");
+    noiseBar.setTextures(RatingBar.NO_SIGN_ICON);
   }
 
-  protected StarRatingBar makeStarRatingBar(String labelText) {
+  protected RatingBar makeStarRatingBar(String labelText) {
     row();
     add(FontManager.Roboto12.makeLabel(labelText.toUpperCase()));
     row();
-    StarRatingBar ratingBar = new StarRatingBar(5f, 5);
+    RatingBar ratingBar = new RatingBar(5f, 5);
     add(ratingBar);
 
     return ratingBar;

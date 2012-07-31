@@ -12,9 +12,9 @@ import com.happydroids.droidtowers.gui.dialogs.CousinVinnieRepayLoanDialog;
 import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class CommercialSpacePopOver extends GridObjectPopOver<CommercialSpace> {
-  private StarRatingBar crimeBar;
-  private StarRatingBar employmentBar;
-
+  private RatingBar crimeBar;
+  private RatingBar employmentBar;
+  private RatingBar dirtLevelBar;
 
   public CommercialSpacePopOver(final CommercialSpace commercialSpace) {
     super(commercialSpace);
@@ -24,9 +24,11 @@ public class CommercialSpacePopOver extends GridObjectPopOver<CommercialSpace> {
   protected void buildControls() {
     super.buildControls();
 
-    crimeBar = makeStarRatingBar("Crime");
-    crimeBar.setTextures("hud/no-sign.png", "hud/no-sign-white.png");
     employmentBar = makeStarRatingBar("Employment");
+    crimeBar = makeStarRatingBar("Crime");
+    crimeBar.setTextures(RatingBar.SECURITY_ICON);
+    dirtLevelBar = makeStarRatingBar("Dirt");
+    dirtLevelBar.setTextures(RatingBar.COCKROACH_ICON);
 
     ButtonBar buttonBar = new ButtonBar();
     buttonBar.addButton("Manage", new VibrateClickListener() {
@@ -55,5 +57,6 @@ public class CommercialSpacePopOver extends GridObjectPopOver<CommercialSpace> {
 
     crimeBar.setValue(gridObject.getSurroundingCrimeLevel() * 5f);
     employmentBar.setValue(gridObject.getEmploymentLevel() * 5f);
+    dirtLevelBar.setValue(gridObject.getDirtLevel() * 5f);
   }
 }

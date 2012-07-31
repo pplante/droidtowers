@@ -105,6 +105,7 @@ public class GameGridRenderer extends GameLayer {
     overlayFunctions.put(Overlays.EMPLOYMENT_LEVEL, Overlays.EMPLOYMENT_LEVEL.getMethod());
     overlayFunctions.put(Overlays.POPULATION_LEVEL, Overlays.POPULATION_LEVEL.getMethod());
     overlayFunctions.put(Overlays.DESIRABILITY_LEVEL, Overlays.DESIRABILITY_LEVEL.getMethod());
+    overlayFunctions.put(Overlays.DIRT_LEVEL, Overlays.DIRT_LEVEL.getMethod());
   }
 
   private void renderGenericOverlay(Overlays overlay) {
@@ -155,6 +156,7 @@ public class GameGridRenderer extends GameLayer {
 
     for (int i = 0, objectsRenderOrderSize = objectsRenderOrder.size(); i < objectsRenderOrderSize; i++) {
       GridObject child = objectsRenderOrder.get(i);
+
       tmp.set(child.getWorldCenter().x, child.getWorldCenter().y, 0);
       if (camera.frustum.sphereInFrustum(tmp, Math.max(child.getWorldBounds().width, child.getWorldBounds().height))) {
         child.render(spriteBatch, renderTintColor);
