@@ -20,18 +20,13 @@ import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.math.GridPoint;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
-import static com.happydroids.droidtowers.TowerConsts.SINGLE_POINT;
+import java.util.*;
 
 
 public class GameGrid extends GameLayer {
   private EventBus eventBus = new SafeEventBus(GameGrid.class.getSimpleName());
-
   protected float gridScale;
+
   protected GridPoint gridSize;
   private int highestPoint;
   private GridPoint gridOrigin;
@@ -174,7 +169,8 @@ public class GameGrid extends GameLayer {
   public boolean tap(Vector2 worldPoint, int count) {
     GridPoint gridPointAtFinger = closestGridPoint(worldPoint);
 
-    Set<GridObject> gridObjects = positionCache.getObjectsAt(gridPointAtFinger, SINGLE_POINT);
+    List<GridObject> gridObjects = positionCache.getObjectsAt(gridPointAtFinger);
+    Collections.sort(gridObjects, GRID_OBJECT_ZINDEX_SORT);
     for (GridObject gridObject : gridObjects) {
       if (gridObject.tap(gridPointAtFinger, count)) {
         return true;
@@ -192,7 +188,9 @@ public class GameGrid extends GameLayer {
   public boolean touchDown(Vector2 worldPoint, int pointer) {
     GridPoint gameGridPoint = closestGridPoint(worldPoint);
 
-    Set<GridObject> gridObjects = positionCache.getObjectsAt(gameGridPoint, SINGLE_POINT);
+    List<GridObject> gridObjects = positionCache.getObjectsAt(gameGridPoint);
+    Collections.sort(gridObjects, GRID_OBJECT_ZINDEX_SORT);
+
     for (GridObject gridObject : gridObjects) {
       if (gridObject.touchDown(gameGridPoint, worldPoint, pointer)) {
         selectedGridObject = gridObject;
@@ -204,7 +202,6 @@ public class GameGrid extends GameLayer {
 
     return false;
   }
-
 
   @Override
   public boolean pan(Vector2 worldPoint, Vector2 deltaPoint) {
@@ -220,6 +217,7 @@ public class GameGrid extends GameLayer {
 
     return false;
   }
+
 
   public GridPoint closestGridPoint(float x, float y) {
     int gridX = (int) Math.floor((int) (x - gridOrigin.x) / TowerConsts.GRID_UNIT_SIZE);
@@ -272,12 +270,19 @@ public class GameGrid extends GameLayer {
     return TowerConsts.GRID_UNIT_SIZE * gridSpaces * gridScale;
   }
 
-
   public String getTowerName() {
     return towerName;
   }
 
+
   public void setTowerName(String towerName) {
     this.towerName = towerName;
   }
+
+  public static final Comparator<GridObject> GRID_OBJECT_ZINDEX_SORT = new Comparator<GridObject>() {
+    @Override
+    public int compare(GridObject left, GridObject right) {
+      return right.getGridObjectType().getZIndex() - left.getGridObjectType().getZIndex();
+    }
+  };
 }

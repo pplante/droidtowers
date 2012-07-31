@@ -6,7 +6,6 @@ package com.happydroids.droidtowers.grid;
 
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
-import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
@@ -14,6 +13,7 @@ import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.math.GridPoint;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -139,8 +139,8 @@ public class GridPositionCache {
     return objects;
   }
 
-  public Set<GridObject> getObjectsAt(GridPoint gridPoint) {
-    return getObjectsAt(gridPoint, TowerConsts.SINGLE_POINT);
+  public ArrayList<GridObject> getObjectsAt(GridPoint gridPoint) {
+    return Lists.newArrayList(getObjectSetForPosition(gridPoint).getObjects());
   }
 
   public GridPosition getPosition(GridPoint gridPoint) {
