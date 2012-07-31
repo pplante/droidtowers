@@ -40,7 +40,7 @@ public class PopOverLayer extends WidgetGroup {
   private int arrowAlignment;
   private final Texture swatch;
   private final Texture background;
-  private Table content;
+  protected Table content;
 
   public PopOverLayer() {
     triangle = texture(TowerAssetManager.WHITE_SWATCH_TRIANGLE);
@@ -105,7 +105,7 @@ public class PopOverLayer extends WidgetGroup {
     }
   }
 
-  private void show(Actor parentWidget, Actor relativeTo) {
+  protected void show(Actor parentWidget, Actor relativeTo) {
     parentWidget.getStage().addActor(this);
     parentWidget.getStage().addActor(content);
 

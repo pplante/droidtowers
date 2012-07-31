@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.google.common.base.Function;
 import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.entities.GridObject;
+import com.happydroids.droidtowers.entities.HotelRoom;
 import com.happydroids.droidtowers.entities.Room;
 import com.happydroids.droidtowers.types.CommercialType;
 import com.happydroids.droidtowers.types.RoomType;
@@ -88,7 +89,7 @@ public enum Overlays {
     public Function<GridObject, Float> getMethod() {
       return new Function<GridObject, Float>() {
         public Float apply(@Nullable GridObject gridObject) {
-          if (gridObject instanceof CommercialSpace) {
+          if (gridObject instanceof CommercialSpace || gridObject instanceof HotelRoom) {
             return ((CommercialSpace) gridObject).getDirtLevel();
           }
 

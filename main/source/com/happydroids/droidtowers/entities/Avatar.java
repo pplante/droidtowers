@@ -30,6 +30,7 @@ import com.happydroids.error.ErrorUtil;
 import javax.annotation.Nullable;
 import java.util.*;
 
+import static com.happydroids.droidtowers.types.ProviderType.COMMERCIAL;
 import static com.happydroids.droidtowers.types.ProviderType.FOOD;
 
 public class Avatar extends GameObject {
@@ -123,12 +124,17 @@ public class Avatar extends GameObject {
   }
 
   protected void findPlaceToVisit() {
-    ArrayList<GridObject> anyRoom = gameGrid.getInstancesOf(Room.class);
+    List<GridObject> anyRoom = gameGrid.getObjects();
     if (!anyRoom.isEmpty()) {
       if (anyRoom.size() == 1) {
         navigateToGridObject(anyRoom.get(0));
       } else {
-        navigateToGridObject(anyRoom.get(Random.randomInt(anyRoom.size() - 1)));
+        GridObject randomRoom;
+        do {
+          randomRoom = anyRoom.get(Random.randomInt(anyRoom.size() - 1));
+        } while (!randomRoom.provides(COMMERCIAL) && randomRoom.getDirtLevel() < 1f);
+
+        navigateToGridObject(randomRoom);
       }
     }
   }
@@ -258,7 +264,6 @@ public class Avatar extends GameObject {
     if (commercialSpaces.isEmpty()) {
       return null;
     }
-
 
     final int avatarX = (int) Avatar.this.getX();
     final int avatarY = (int) Avatar.this.getY();

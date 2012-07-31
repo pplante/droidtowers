@@ -22,6 +22,7 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.math.StatLog;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.ProviderType;
 
@@ -29,6 +30,7 @@ import java.util.List;
 import java.util.Set;
 
 public abstract class GridObject {
+  public static final float VISITORS_PER_CLEANING = 35f;
   protected final GridObjectType gridObjectType;
   protected final GameGrid gameGrid;
   protected GridPoint position;
@@ -56,6 +58,7 @@ public abstract class GridObject {
   private List<GridPoint> pointsTouched;
   private Set<Avatar> visitorQueue;
   private Avatar beingServicedBy;
+  private StatLog averageNumVisitors;
 
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
@@ -67,6 +70,8 @@ public abstract class GridObject {
     size = new GridPoint(gridObjectType.getWidth(), gridObjectType.getHeight());
     bounds = new Rectangle(position.x, position.y, size.x, size.y);
     visitorQueue = Sets.newHashSet();
+    averageNumVisitors = new StatLog();
+    averageNumVisitors.reset(5);
 
     worldPosition = new Vector2();
     worldSize = new Vector2(size.getWorldX() * gameGrid.getGridScale(), size.getWorldY() * gameGrid.getGridScale());
@@ -392,10 +397,11 @@ public abstract class GridObject {
 
     numVisitors += 1;
 
-    if (avatar instanceof Janitor && !(avatar instanceof SecurityGuard)) {
+    if (avatar instanceof Janitor || avatar instanceof Maid) {
       Janitor janitor = (Janitor) avatar;
       if (provides(janitor.servicesTheseProviderTypes)) {
         lastCleanedAt = System.currentTimeMillis();
+        averageNumVisitors.record(numVisitors);
         numVisitors = 0;
       }
     }
@@ -491,5 +497,13 @@ public abstract class GridObject {
 
   public boolean isBeingServiced() {
     return beingServicedBy != null;
+  }
+
+  protected float getAvgNumVisitors() {
+    return averageNumVisitors.getAverage();
+  }
+
+  public float getDirtLevel() {
+    return MathUtils.clamp(getNumVisitors(), 0, VISITORS_PER_CLEANING) / VISITORS_PER_CLEANING;
   }
 }

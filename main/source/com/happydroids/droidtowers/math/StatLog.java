@@ -24,6 +24,11 @@ public class StatLog {
     max = Math.max(value, min);
     total += value;
     values[idx++] = value;
+
+    if (idx == values.length) {
+      total -= values[0];
+      idx = 0;
+    }
   }
 
   public float normalize(float value) {

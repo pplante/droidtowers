@@ -4,7 +4,6 @@
 
 package com.happydroids.droidtowers.entities;
 
-import com.badlogic.gdx.math.MathUtils;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.employee.JobCandidate;
@@ -22,7 +21,6 @@ public class CommercialSpace extends Room {
   private int jobsFilled;
   private long lastJobUpdateTime;
   protected Set<JobCandidate> employees;
-  public static final float VISITORS_PER_CLEANING = 35f;
 
   public CommercialSpace(CommercialType commercialType, GameGrid gameGrid) {
     super(commercialType, gameGrid);
@@ -119,8 +117,8 @@ public class CommercialSpace extends Room {
       }
     }
 
-    boolean unlockedJanitors = AchievementEngine.instance().findById("build5commercialspaces").isCompleted();
-    boolean unlockedMaids = AchievementEngine.instance().findById("build8hotelroom").isCompleted();
+    boolean unlockedJanitors = AchievementEngine.instance().findById("build5commercialspaces").hasGivenReward();
+    boolean unlockedMaids = AchievementEngine.instance().findById("build8hotelroom").hasGivenReward();
     if (unlockedJanitors && unlockedMaids && getDirtLevel() >= 0.95f && !getEmployees().isEmpty()) {
       decalsToDraw.add(DECAL_DIRTY);
     } else {
@@ -162,11 +160,12 @@ public class CommercialSpace extends Room {
     gameGrid.events().post(new EmployeeFiredEvent(this, employee));
   }
 
+  @Override
   public float getDirtLevel() {
-    if (getEmployees().isEmpty()) {
+    if (canEmployDroids() && getEmployees().isEmpty()) {
       return 0;
     }
 
-    return MathUtils.clamp(getNumVisitors(), 0, VISITORS_PER_CLEANING) / VISITORS_PER_CLEANING;
+    return super.getDirtLevel();
   }
 }

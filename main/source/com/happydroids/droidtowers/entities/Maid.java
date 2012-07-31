@@ -5,16 +5,22 @@
 package com.happydroids.droidtowers.entities;
 
 import com.happydroids.droidtowers.controllers.AvatarLayer;
-import com.happydroids.droidtowers.types.ProviderType;
+
+import static com.happydroids.droidtowers.types.ProviderType.HOTEL_ROOMS;
 
 public class Maid extends Janitor {
   public Maid(AvatarLayer avatarLayer) {
     super(avatarLayer);
 
-    setServicesTheseProviderTypes(ProviderType.HOTEL_ROOMS, ProviderType.OFFICE_SERVICES);
+    setServicesTheseProviderTypes(HOTEL_ROOMS);
   }
 
   protected String addFramePrefix(String frameName) {
     return "maid/" + frameName;
+  }
+
+  @Override
+  protected boolean canService(CommercialSpace commercialSpace) {
+    return !commercialSpace.isBeingServiced() && commercialSpace.provides(HOTEL_ROOMS) || super.canService(commercialSpace);
   }
 }

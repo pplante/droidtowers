@@ -23,4 +23,18 @@ public class HotelRoom extends CommercialSpace {
   protected boolean canEmployDroids() {
     return false;
   }
+
+  @Override
+  public int getCoinsEarned() {
+    if (isConnectedToTransport()) {
+      return (int) Math.ceil(gridObjectType.getCoinsEarned() * getNumVisitors() * 0.5f);
+    }
+
+    return 0;
+  }
+
+  @Override
+  public int getUpkeepCost() {
+    return 0;
+  }
 }
