@@ -36,11 +36,6 @@ public class PathSearchManager {
   }
 
   public void update(float deltaTime) {
-    if (framesSinceUpdate++ < 2) {
-      return;
-    }
-
-    framesSinceUpdate = 0;
     if (currentPathFinder != null) {
       if (currentPathFinder.isWorking()) {
         while (currentPathFinder.isWorking()) {
@@ -67,5 +62,9 @@ public class PathSearchManager {
 
   public void dispose() {
     _instance = null;
+  }
+
+  public int queueLength() {
+    return pathFinders.size();
   }
 }

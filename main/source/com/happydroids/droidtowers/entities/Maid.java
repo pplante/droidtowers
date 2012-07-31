@@ -11,7 +11,7 @@ public class Maid extends Janitor {
   public Maid(AvatarLayer avatarLayer) {
     super(avatarLayer);
 
-    setServicesTheseProviderTypes(ProviderType.HOTEL_ROOMS);
+    setServicesTheseProviderTypes(ProviderType.HOTEL_ROOMS, ProviderType.OFFICE_SERVICES);
   }
 
   protected String addFramePrefix(String frameName) {

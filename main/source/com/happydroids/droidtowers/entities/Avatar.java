@@ -113,9 +113,7 @@ public class Avatar extends GameObject {
           if (!lastVisitedPlaces.contains(home)) {
             navigateToGridObject(home);
           } else {
-
             findPlaceToVisit();
-
           }
         }
       }
@@ -185,7 +183,7 @@ public class Avatar extends GameObject {
     movingTo = gridObject;
 
     if (movingTo != null) {
-      movingTo.getVisitorQueue().add(this);
+      movingTo.addToVisitorQueue(this);
     }
 
     GridPosition start = gameGrid.positionCache().getPosition(gameGrid.closestGridPoint(getX(), getY()));
@@ -195,7 +193,15 @@ public class Avatar extends GameObject {
     pathFinder.setGoal(goal);
     pathFinder.start();
 
-    PathSearchManager.instance().queue(pathFinder);
+    if (this instanceof Janitor) {
+      while (pathFinder.isWorking()) {
+        pathFinder.step();
+      }
+
+      pathFinder.runCompleteCallback();
+    } else {
+      PathSearchManager.instance().queue(pathFinder);
+    }
   }
 
   public void afterReachingTarget() {
@@ -261,7 +267,7 @@ public class Avatar extends GameObject {
     int closestDist = Integer.MAX_VALUE;
     for (int i = 0, commercialSpacesSize = commercialSpaces.size(); i < commercialSpacesSize; i++) {
       CommercialSpace commercialSpace = (CommercialSpace) commercialSpaces.get(i);
-      if (commercialSpace.getVisitorQueue().size() >= 5 || commercialSpace.getEmployees().isEmpty()) {
+      if (commercialSpace.getVisitorQueueSize() >= 5 || commercialSpace.getEmployees().isEmpty()) {
         continue;
       }
 
@@ -280,6 +286,20 @@ public class Avatar extends GameObject {
     return closest;
   }
 
+  public void cancelMovement() {
+    if (steeringManager != null) {
+      steeringManager.finished();
+    }
+
+    if (pathFinder != null) {
+      PathSearchManager.instance().remove(pathFinder);
+    }
+
+    if (movingTo != null) {
+      movingTo.removeFromVisitorQueue(this);
+    }
+  }
+
   private void searchForAHome() {
     List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
     if (rooms != null) {
@@ -295,20 +315,6 @@ public class Avatar extends GameObject {
       }
 
       setHome(mostDesirable);
-    }
-  }
-
-  public void cancelMovement() {
-    if (steeringManager != null) {
-      steeringManager.finished();
-    }
-
-    if (pathFinder != null) {
-      PathSearchManager.instance().remove(pathFinder);
-    }
-
-    if (movingTo != null) {
-      movingTo.getVisitorQueue().remove(this);
     }
   }
 

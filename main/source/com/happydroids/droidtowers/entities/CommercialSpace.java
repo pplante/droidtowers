@@ -22,7 +22,7 @@ public class CommercialSpace extends Room {
   private int jobsFilled;
   private long lastJobUpdateTime;
   protected Set<JobCandidate> employees;
-  public static final float VISITORS_PER_CLEANING = 15f;
+  public static final float VISITORS_PER_CLEANING = 35f;
 
   public CommercialSpace(CommercialType commercialType, GameGrid gameGrid) {
     super(commercialType, gameGrid);
@@ -163,6 +163,10 @@ public class CommercialSpace extends Room {
   }
 
   public float getDirtLevel() {
-    return 1f - (MathUtils.clamp(5 - getNumVisitors(), 0, VISITORS_PER_CLEANING) / VISITORS_PER_CLEANING);
+    if (getEmployees().isEmpty()) {
+      return 0;
+    }
+
+    return MathUtils.clamp(getNumVisitors(), 0, VISITORS_PER_CLEANING) / VISITORS_PER_CLEANING;
   }
 }

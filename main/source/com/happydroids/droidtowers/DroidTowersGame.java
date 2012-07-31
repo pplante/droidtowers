@@ -230,6 +230,9 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
       debugInfo.append((int) TowerAssetManager.assetManager().getMemoryInMegabytes());
       debugInfo.append("Mb)");
 
+      debugInfo.append(" psm: ");
+      debugInfo.append(PathSearchManager.instance().queueLength());
+
       spriteBatch.begin();
       menloBitmapFont.drawMultiLine(spriteBatch, debugInfo, 5, 35);
       spriteBatch.end();

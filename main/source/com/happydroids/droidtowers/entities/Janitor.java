@@ -26,20 +26,20 @@ public class Janitor extends Avatar {
 
   @Override
   protected void findPlaceToVisit() {
-    List<GridObject> commercialSpaces = gameGrid.getObjects();
+    List<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
     if (commercialSpaces != null && !commercialSpaces.isEmpty()) {
-      GridObject oldestServicedSpace = null;
-      long oldestServiceTime = 0;
+      GridObject dirtiestPlace = null;
+      float highestDirtLevel = 0;
       for (int i = 0, commercialSpacesSize = commercialSpaces.size(); i < commercialSpacesSize; i++) {
-        GridObject commercialSpace = commercialSpaces.get(i);
-        if (oldestServiceTime < commercialSpace.getLastServicedAt()) {
-          oldestServiceTime = commercialSpace.getLastServicedAt();
-          oldestServicedSpace = commercialSpace;
+        CommercialSpace commercialSpace = (CommercialSpace) commercialSpaces.get(i);
+        if (!commercialSpace.getEmployees().isEmpty() && !commercialSpace.isBeingServiced() && commercialSpace.provides(this.servicesTheseProviderTypes) && highestDirtLevel < commercialSpace.getDirtLevel()) {
+          highestDirtLevel = commercialSpace.getLastServicedAt();
+          dirtiestPlace = commercialSpace;
         }
       }
 
-      if (oldestServicedSpace != null) {
-        navigateToGridObject(oldestServicedSpace);
+      if (dirtiestPlace != null) {
+        navigateToGridObject(dirtiestPlace);
       }
     }
   }

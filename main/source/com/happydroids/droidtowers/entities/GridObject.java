@@ -55,6 +55,7 @@ public abstract class GridObject {
   private int variationId;
   private List<GridPoint> pointsTouched;
   private Set<Avatar> visitorQueue;
+  private Avatar beingServicedBy;
 
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
@@ -387,13 +388,16 @@ public abstract class GridObject {
   }
 
   public void recordVisitor(Avatar avatar) {
-    visitorQueue.remove(avatar);
+    removeFromVisitorQueue(avatar);
 
-    if (Janitor.class.isInstance(avatar)) {
-      numVisitors = 0;
-      lastCleanedAt = System.currentTimeMillis();
-    } else {
-      numVisitors += 1;
+    numVisitors += 1;
+
+    if (avatar instanceof Janitor && !(avatar instanceof SecurityGuard)) {
+      Janitor janitor = (Janitor) avatar;
+      if (provides(janitor.servicesTheseProviderTypes)) {
+        lastCleanedAt = System.currentTimeMillis();
+        numVisitors = 0;
+      }
     }
   }
 
@@ -457,16 +461,35 @@ public abstract class GridObject {
     this.variationId = variationId;
   }
 
-
-  public Set<Avatar> getVisitorQueue() {
-    return visitorQueue;
-  }
-
   public void removeLoanFromVinnie() {
     loanFromCousinVinnie = 0;
   }
 
   public boolean canEarnMoney() {
     return true;
+  }
+
+  public void addToVisitorQueue(Avatar avatar) {
+    visitorQueue.add(avatar);
+
+    if (avatar instanceof Janitor && !(avatar instanceof SecurityGuard)) {
+      beingServicedBy = avatar;
+    }
+  }
+
+  public void removeFromVisitorQueue(Avatar avatar) {
+    visitorQueue.remove(avatar);
+
+    if (beingServicedBy == avatar) {
+      beingServicedBy = null;
+    }
+  }
+
+  public int getVisitorQueueSize() {
+    return visitorQueue.size();
+  }
+
+  public boolean isBeingServiced() {
+    return beingServicedBy != null;
   }
 }
