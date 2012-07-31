@@ -35,6 +35,15 @@
     <orderEntry type="library" exported="" name="apache-commons" level="project" />
     <orderEntry type="library" exported="" name="jackson" level="project" />
     <orderEntry type="library" exported="" name="apache-httpclient" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/main/raven-java-0.6-SNAPSHOT-jar-with-dependencies.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 

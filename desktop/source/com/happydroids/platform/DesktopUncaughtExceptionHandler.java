@@ -4,7 +4,7 @@
 
 package com.happydroids.platform;
 
-import com.happydroids.server.CrashReport;
+import com.happydroids.error.ErrorUtil;
 
 import javax.swing.*;
 import java.util.logging.Level;
@@ -17,7 +17,7 @@ public class DesktopUncaughtExceptionHandler extends HappyDroidUncaughtException
     Logger.getLogger(TAG).log(Level.SEVERE, "Uncaught exception!", throwable);
 
     if (Platform.getConnectionMonitor().isConnectedOrConnecting()) {
-      new CrashReport(throwable).save();
+      ErrorUtil.sendErrorToServer(throwable);
     }
 
     JOptionPane.showMessageDialog(null, generateExceptionErrorString(throwable), "Ooops!", JOptionPane.ERROR_MESSAGE);

@@ -9,7 +9,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import com.badlogic.gdx.Gdx;
-import com.happydroids.server.CrashReport;
+import com.happydroids.error.ErrorUtil;
 
 public class AndroidUncaughtExceptionHandler extends HappyDroidUncaughtExceptionHandler {
   private static final String TAG = AndroidUncaughtExceptionHandler.class.getSimpleName();
@@ -36,7 +36,7 @@ public class AndroidUncaughtExceptionHandler extends HappyDroidUncaughtException
                     pb.show();
 
                     if (Platform.getConnectionMonitor().isConnectedOrConnecting()) {
-                      new CrashReport(throwable).save();
+                      ErrorUtil.sendErrorToServer(throwable);
                     }
                     Gdx.app.exit();
                   }

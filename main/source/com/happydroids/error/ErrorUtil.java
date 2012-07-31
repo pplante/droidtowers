@@ -4,9 +4,10 @@
 
 package com.happydroids.error;
 
+import com.happydroids.HappyDroidConsts;
 import com.happydroids.platform.Platform;
-import com.happydroids.server.CrashReport;
 import com.happydroids.utils.BackgroundTask;
+import net.kencochrane.sentry.RavenClient;
 
 public class ErrorUtil {
   public static void rethrowError(Throwable throwable) {
@@ -17,7 +18,8 @@ public class ErrorUtil {
     new BackgroundTask() {
       @Override
       protected void execute() throws Exception {
-        new CrashReport(throwable).save();
+        RavenClient ravenClient = new RavenClient(HappyDroidConsts.SENTRY_DSN);
+        ravenClient.captureException(throwable);
       }
     }.run();
   }
