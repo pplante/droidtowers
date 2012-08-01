@@ -4,11 +4,11 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.gamestate.GameState;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 public class ViewNeighborHUD extends Table {
@@ -41,7 +41,7 @@ public class ViewNeighborHUD extends Table {
 
   @Override
   public float getPrefWidth() {
-    return Gdx.graphics.getWidth();
+    return Display.getWidth();
   }
 
   public void showToast(String toastText) {

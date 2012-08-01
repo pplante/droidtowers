@@ -27,6 +27,7 @@ import com.happydroids.droidtowers.gui.NeighborMenuBuilder;
 import com.happydroids.droidtowers.gui.ViewNeighborHUD;
 import com.happydroids.droidtowers.input.*;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.types.TowerNameBillboard;
 import com.happydroids.events.CollectionChangeEvent;
@@ -144,7 +145,7 @@ public class ViewNeighborScene extends Scene {
 
     cameraController.updateCameraConstraints(worldSize);
     camera.zoom = CameraController.ZOOM_MAX / 2;
-    camera.position.set(worldSize.x / 2 - Gdx.graphics.getWidth() / 2, TowerConsts.GROUND_HEIGHT, 0f);
+    camera.position.set(worldSize.x / 2 - Display.getWidth() / 2, TowerConsts.GROUND_HEIGHT, 0f);
   }
 
   @Override

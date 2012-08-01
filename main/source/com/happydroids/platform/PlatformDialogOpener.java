@@ -4,5 +4,6 @@
 
 package com.happydroids.platform;
 
-public class Display {
+public interface PlatformDialogOpener {
+  void showAlert(String title, String message);
 }

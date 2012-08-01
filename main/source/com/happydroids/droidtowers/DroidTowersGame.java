@@ -87,10 +87,16 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
 
     TowerGameService.setInstance(new TowerGameService());
 
-    if (Gdx.graphics.isGL20Available() && Gdx.app.getType().equals(Android) && Display.isXHDPIMode()) {
-      float displayScalar = 0.75f;
-      frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, (int) (Gdx.graphics.getWidth() * displayScalar), (int) (Gdx.graphics.getHeight() * displayScalar), true);
-      spriteBatchFBO = new SpriteBatch();
+    if (Gdx.graphics.isGL20Available() && Gdx.app.getType().equals(Android)) {
+      Display.setup();
+      if (Display.isXHDPIMode()) {
+        float displayScalar = 0.75f;
+        frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, (int) (Display.getWidth() * displayScalar), (int) (Display.getHeight() * displayScalar), true);
+        spriteBatchFBO = new SpriteBatch();
+      } else if (Display.isInCompatibilityMode()) {
+        frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, Display.getWidth(), Display.getHeight(), true);
+        spriteBatchFBO = new SpriteBatch();
+      }
     }
 
     if (DEBUG) {
@@ -140,7 +146,7 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
 
     menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_14_bold_white.fnt"), false);
     spriteBatch = new SpriteBatch();
-    rootUiStage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false, spriteBatch);
+    rootUiStage = new Stage(Display.getWidth(), Display.getHeight(), false, spriteBatch);
 
     Gdx.input.setInputProcessor(InputSystem.instance());
     InputSystem.instance().addInputProcessor(rootUiStage, 0);

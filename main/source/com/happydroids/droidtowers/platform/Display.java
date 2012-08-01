@@ -10,6 +10,22 @@ public class Display {
   private static float scaledDensity = 1f;
   private static boolean xHdpiMode;
   private static int biggestScreenDimension = -1;
+  private static int actualWidth;
+  private static int actualHeight;
+  private static int scaledWidth;
+  private static int scaledHeight;
+
+  public static void setup() {
+    actualWidth = Gdx.graphics.getWidth();
+    actualHeight = Gdx.graphics.getHeight();
+    scaledWidth = actualWidth;
+    scaledHeight = actualHeight;
+
+    if (actualWidth < 800) {
+      scaledWidth = 800;
+      scaledHeight = 480;
+    }
+  }
 
   public static int scale(float pixels) {
     return scale((int) pixels);
@@ -29,7 +45,7 @@ public class Display {
 
 
   public static int percentOfScreen(float percent) {
-    return (int) (Gdx.graphics.getWidth() * percent);
+    return (int) (Display.getWidth() * percent);
   }
 
   public static void setXHDPI(boolean hdpi) {
@@ -42,9 +58,23 @@ public class Display {
 
   public static int getBiggestScreenDimension() {
     if (biggestScreenDimension == -1) {
-      biggestScreenDimension = Math.max(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()) / 2;
+      biggestScreenDimension = Math.max(Display.getWidth(), Display.getHeight()) / 2;
     }
 
     return biggestScreenDimension;
+  }
+
+  public static int getWidth() {
+//    return Gdx.graphics.getWidth();
+    return scaledWidth;
+  }
+
+  public static int getHeight() {
+//    return Gdx.graphics.getHeight();
+    return scaledHeight;
+  }
+
+  public static boolean isInCompatibilityMode() {
+    return scaledWidth < actualWidth;
   }
 }

@@ -9,13 +9,11 @@ import android.os.Handler;
 import android.util.DisplayMetrics;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
+import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.platform.Display;
-import com.happydroids.platform.AndroidBrowserUtil;
-import com.happydroids.platform.AndroidUncaughtExceptionHandler;
-import com.happydroids.platform.Platform;
-import com.happydroids.platform.PlatformConnectionMonitor;
+import com.happydroids.platform.*;
 import com.happydroids.platform.purchase.AmazonAppStorePurchaseManager;
 
 public class DroidTowersAmazon extends AndroidApplication {
@@ -36,18 +34,22 @@ public class DroidTowersAmazon extends AndroidApplication {
     TowerGameService.setDeviceOSMarketName("amazon");
     TowerGameService.setDeviceOSVersion("sdk" + getVersion());
 
+    AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+    config.useGL20 = true;
+
     initialize(new DroidTowersGame(new Runnable() {
       @Override
       public void run() {
         Gdx.input.setCatchBackKey(true);
         Gdx.input.setCatchMenuKey(true);
 
+        Platform.setDialogOpener(new AndroidDialogOpener(DroidTowersAmazon.this));
         Platform.setConnectionMonitor(new PlatformConnectionMonitor());
         Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(DroidTowersAmazon.this));
         Platform.setBrowserUtil(new AndroidBrowserUtil(DroidTowersAmazon.this));
         Platform.setPurchaseManager(new AmazonAppStorePurchaseManager(DroidTowersAmazon.this));
       }
-    }), true);
+    }), config);
   }
 
   @Override

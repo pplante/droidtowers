@@ -16,13 +16,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.droidtowers.DebugUtils;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.gui.VibrateClickListener;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
 import com.happydroids.droidtowers.gui.dialogs.ReviewDroidTowersPrompt;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.MainMenuButtonPanel;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.platform.Platform;
@@ -80,7 +80,19 @@ public class MainMenuScene extends SplashScene {
         }
       }
 
-      DebugUtils.loadFirstGameFound();
+      if (Display.isInCompatibilityMode()) {
+        if (!preferences.getBoolean("ANDROID_WARNED_ABOUT_DISPLAY_MODE", false)) {
+          preferences.putBoolean("ANDROID_WARNED_ABOUT_DISPLAY_MODE", true);
+          Platform.getDialogOpener().showAlert("Compatibility Mode",
+                                                      "Hello,\n\nWe're sorry but this game is designed for a device with a higher resolution screen.  " +
+                                                              "It is impossible for us to restrict these devices from the market, so we have " +
+                                                              "designed a compatability mode as a work around.\n\nYou can continue to play the game, " +
+                                                              "but please understand your experience will be degraded.  Most commonly the text will be rather difficult to read.\n\n" +
+                                                              "Thank you,\nDroid Towers Team");
+        }
+      }
+
+//      DebugUtils.loadFirstGameFound();
 //      DebugUtils.createNonSavableGame(true);
 //      DebugUtils.loadGameFromCloud(41);
     }

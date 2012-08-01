@@ -24,6 +24,7 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.events.CameraControllerEvent;
 import com.happydroids.droidtowers.input.CameraController;
 import com.happydroids.droidtowers.math.GridPoint;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.platform.Platform;
 
 import static com.happydroids.droidtowers.TowerConsts.GAME_GRID_EXPAND_LAND_SIZE;
@@ -50,8 +51,8 @@ public class ExpandLandOverlay extends WidgetGroup {
 
     rightButton = new ExpandLandButton("right");
     rightButton.visible = false;
-    rightButton.x = Gdx.graphics.getWidth() - rightButton.width - 5;
-    rightButton.y = (Gdx.graphics.getHeight() - rightButton.height) / 2;
+    rightButton.x = Display.getWidth() - rightButton.width - 5;
+    rightButton.y = (Display.getHeight() - rightButton.height) / 2;
     addActor(rightButton);
 
     leftButton.setClickListener(new ClickListener() {

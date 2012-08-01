@@ -4,10 +4,10 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.happydroids.droidtowers.platform.Display;
 
 public class TiledImage extends Image {
   private final Texture texture;
@@ -26,8 +26,8 @@ public class TiledImage extends Image {
     u = 0;
     v = 0;
 
-    u2 = Gdx.graphics.getWidth() / texture.getWidth();
-    v2 = Gdx.graphics.getHeight() / texture.getHeight();
+    u2 = Display.getWidth() / texture.getWidth();
+    v2 = Display.getHeight() / texture.getHeight();
   }
 
   @Override
@@ -35,6 +35,6 @@ public class TiledImage extends Image {
     validate();
 
     batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-    batch.draw(texture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), u, v, u2, v2);
+    batch.draw(texture, 0, 0, Display.getWidth(), Display.getHeight(), u, v, u2, v2);
   }
 }

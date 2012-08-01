@@ -17,6 +17,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.security.SecurePreferences;
 
@@ -92,7 +93,7 @@ public class OptionsDialog extends Dialog {
     }
 
     displayResolution = new SelectBox(displayModeStrings.toArray(), TowerAssetManager.getCustomSkin());
-    int currentResolution = displayModeStrings.indexOf(Gdx.graphics.getWidth() + "x" + Gdx.graphics.getHeight());
+    int currentResolution = displayModeStrings.indexOf(Display.getWidth() + "x" + Gdx.graphics.getHeight());
     if (currentResolution > -1) {
       displayResolution.setSelection(currentResolution);
     }

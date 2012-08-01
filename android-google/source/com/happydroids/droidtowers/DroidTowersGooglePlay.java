@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.util.DisplayMetrics;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
+import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.platform.Display;
@@ -39,9 +40,13 @@ public class DroidTowersGooglePlay extends AndroidApplication implements Billing
     TowerGameService.setDeviceOSMarketName("google-play");
     TowerGameService.setDeviceOSVersion("sdk" + getVersion());
 
+    AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+    config.useGL20 = true;
+
     initialize(new DroidTowersGame(new Runnable() {
       @Override
       public void run() {
+        Platform.setDialogOpener(new AndroidDialogOpener(DroidTowersGooglePlay.this));
         Platform.setConnectionMonitor(new PlatformConnectionMonitor());
         Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(DroidTowersGooglePlay.this));
         Platform.setBrowserUtil(new AndroidBrowserUtil(DroidTowersGooglePlay.this));
@@ -54,7 +59,7 @@ public class DroidTowersGooglePlay extends AndroidApplication implements Billing
           }
         });
       }
-    }), true);
+    }), config);
 
     Gdx.input.setCatchBackKey(true);
     Gdx.input.setCatchMenuKey(true);

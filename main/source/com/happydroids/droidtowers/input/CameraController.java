@@ -5,7 +5,6 @@
 package com.happydroids.droidtowers.input;
 
 import aurelienribon.tweenengine.Tween;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.MathUtils;
@@ -139,8 +138,8 @@ public class CameraController implements GestureDetector.GestureListener {
   }
 
   public void checkBounds() {
-    float halfWidth = Gdx.graphics.getWidth() / 2 * camera.zoom;
-    float halfHeight = Gdx.graphics.getHeight() / 2 * camera.zoom;
+    float halfWidth = Display.getWidth() / 2 * camera.zoom;
+    float halfHeight = Display.getHeight() / 2 * camera.zoom;
 
     Vector3 min = cameraBounds.getMin().cpy().add(halfWidth, halfHeight, 0);
     Vector3 max = cameraBounds.getMax().cpy().sub(halfWidth, halfHeight, 0);

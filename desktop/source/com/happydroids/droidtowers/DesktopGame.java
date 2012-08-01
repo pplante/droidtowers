@@ -35,6 +35,7 @@ public class DesktopGame {
           Platform.setProtocolHandler(protocolHandler);
         }
 
+        Platform.setDialogOpener(new DesktopDialogOpener());
         Platform.setUncaughtExceptionHandler(new DesktopUncaughtExceptionHandler());
         Platform.setBrowserUtil(new DesktopBrowserUtil());
         Platform.setConnectionMonitor(new PlatformConnectionMonitor());

@@ -14,6 +14,7 @@ public class Platform {
   public static PlatformProtocolHandler protocolHandler;
   private static PlatformConnectionMonitor connectionMonitor;
   private static PlatformPurchaseManger purchaseManager;
+  private static PlatformDialogOpener dialogOpener;
 
   public static Thread.UncaughtExceptionHandler getUncaughtExceptionHandler() {
     return uncaughtExceptionHandler;
@@ -108,5 +109,13 @@ public class Platform {
 
   public static void setPurchaseManager(PlatformPurchaseManger purchaseManager) {
     Platform.purchaseManager = purchaseManager;
+  }
+
+  public static PlatformDialogOpener getDialogOpener() {
+    return dialogOpener;
+  }
+
+  public static void setDialogOpener(PlatformDialogOpener dialogOpener) {
+    Platform.dialogOpener = dialogOpener;
   }
 }

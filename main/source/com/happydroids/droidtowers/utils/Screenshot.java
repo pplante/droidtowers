@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.happydroids.droidtowers.platform.Display;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -16,7 +17,7 @@ import static com.badlogic.gdx.Application.ApplicationType.Android;
 
 public class ScreenShot {
   public static void capture() {
-    Pixmap pixmap = captureFromBuffer(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+    Pixmap pixmap = captureFromBuffer(0, 0, Display.getWidth(), Display.getHeight(), true);
 
     try {
       String fileName = "DroidTowers_" + System.currentTimeMillis() + ".png";
