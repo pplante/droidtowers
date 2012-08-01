@@ -9,6 +9,8 @@ import com.badlogic.gdx.InputProcessor;
 class InputProcessorEntry {
   private InputProcessor inputProcessor;
   private int priority;
+  private boolean markedForRemoval;
+
 
   public InputProcessorEntry(InputProcessor inputProcessor, int priority) {
     this.inputProcessor = inputProcessor;
@@ -21,5 +23,13 @@ class InputProcessorEntry {
 
   public int getPriority() {
     return priority;
+  }
+
+  public void markForRemoval() {
+    markedForRemoval = true;
+  }
+
+  public boolean isMarkedForRemoval() {
+    return markedForRemoval;
   }
 }

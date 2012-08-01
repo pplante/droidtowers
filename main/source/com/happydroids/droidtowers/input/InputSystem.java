@@ -11,9 +11,10 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.entities.GameLayer;
@@ -21,26 +22,26 @@ import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.events.SwitchToolEvent;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 import static com.badlogic.gdx.input.GestureDetector.GestureListener;
 
 public class InputSystem extends InputAdapter {
   private static final String TAG = InputSystem.class.getSimpleName();
-
   private List<InputProcessorEntry> inputProcessors;
-  private List<InputProcessorEntry> inputProcessorsSorted;
 
   private HashMap<Integer, ArrayList<InputCallback>> keyBindings;
+
   private OrthographicCamera camera;
   private CameraController cameraController;
   private GestureDetector gestureDetector;
-
   private GestureDelegater gestureDelegater;
+
   private static InputSystem instance;
   private List<GameLayer> gameLayers;
   private EventBus eventBus;
-
+  private float timeUntilProcessorCleanup;
 
   public static InputSystem instance() {
     if (instance == null) {
@@ -57,33 +58,21 @@ public class InputSystem extends InputAdapter {
   }
 
   public void addInputProcessor(InputProcessor inputProcessor, int priority) {
-    if (inputProcessors != null) {
-      inputProcessors.add(new InputProcessorEntry(inputProcessor, priority));
+    inputProcessors.add(new InputProcessorEntry(inputProcessor, priority));
 
-      sortInputProcessors();
-    }
-  }
-
-  private void sortInputProcessors() {
-    inputProcessorsSorted = Ordering.from(new Comparator<InputProcessorEntry>() {
+    Collections.sort(inputProcessors, new Comparator<InputProcessorEntry>() {
+      @Override
       public int compare(InputProcessorEntry entryA, InputProcessorEntry entryB) {
         return entryA.getPriority() - entryB.getPriority();
       }
-    }).sortedCopy(inputProcessors);
+    });
   }
 
   public void removeInputProcessor(InputProcessor inputProcessor) {
-    if (inputProcessors != null) {
-      Iterator<InputProcessorEntry> iterator = inputProcessors.iterator();
-
-      while (iterator.hasNext()) {
-        InputProcessorEntry entry = iterator.next();
-        if (entry.getInputProcessor().equals(inputProcessor)) {
-          iterator.remove();
-        }
+    for (InputProcessorEntry processorEntry : inputProcessors) {
+      if (processorEntry.getInputProcessor() == inputProcessor) {
+        processorEntry.markForRemoval();
       }
-
-      sortInputProcessors();
     }
   }
 
@@ -140,7 +129,7 @@ public class InputSystem extends InputAdapter {
     if (keyBindings != null && keyBindings.containsKey(keycode)) {
       float deltaTime = Gdx.graphics.getDeltaTime();
 
-      List<InputCallback> actionsForKeyCode = Lists.newArrayList(keyBindings.get(keycode));
+      List<InputCallback> actionsForKeyCode = keyBindings.get(keycode);
       for (int i = 0, actionsForKeyCodeSize = actionsForKeyCode.size(); i < actionsForKeyCodeSize; i++) {
         InputCallback inputCallback = actionsForKeyCode.get(i);
         if (inputCallback.run(deltaTime)) {
@@ -149,10 +138,10 @@ public class InputSystem extends InputAdapter {
       }
     }
 
-    if (inputProcessorsSorted != null) {
-      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
-        InputProcessorEntry entry = inputProcessorsSorted.get(i);
-        if (entry.getInputProcessor().keyDown(keycode)) {
+    if (inputProcessors != null) {
+      for (int i = 0, inputProcessorsSize = inputProcessors.size(); i < inputProcessorsSize; i++) {
+        InputProcessorEntry entry = inputProcessors.get(i);
+        if (!entry.isMarkedForRemoval() && entry.getInputProcessor().keyDown(keycode)) {
           return true;
         }
       }
@@ -163,10 +152,10 @@ public class InputSystem extends InputAdapter {
 
   @Override
   public boolean keyTyped(char character) {
-    if (inputProcessorsSorted != null) {
-      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
-        InputProcessorEntry entry = inputProcessorsSorted.get(i);
-        if (entry.getInputProcessor().keyTyped(character)) {
+    if (inputProcessors != null) {
+      for (int i = 0, inputProcessorsSize = inputProcessors.size(); i < inputProcessorsSize; i++) {
+        InputProcessorEntry entry = inputProcessors.get(i);
+        if (!entry.isMarkedForRemoval() && entry.getInputProcessor().keyTyped(character)) {
           return true;
         }
       }
@@ -177,10 +166,10 @@ public class InputSystem extends InputAdapter {
 
   @Override
   public boolean keyUp(int keycode) {
-    if (inputProcessorsSorted != null) {
-      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
-        InputProcessorEntry entry = inputProcessorsSorted.get(i);
-        if (entry.getInputProcessor().keyUp(keycode)) {
+    if (inputProcessors != null) {
+      for (int i = 0, inputProcessorsSize = inputProcessors.size(); i < inputProcessorsSize; i++) {
+        InputProcessorEntry entry = inputProcessors.get(i);
+        if (!entry.isMarkedForRemoval() && entry.getInputProcessor().keyUp(keycode)) {
           return true;
         }
       }
@@ -190,10 +179,10 @@ public class InputSystem extends InputAdapter {
   }
 
   public boolean touchDown(int x, int y, int pointer, int button) {
-    if (inputProcessorsSorted != null) {
-      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
-        InputProcessorEntry entry = inputProcessorsSorted.get(i);
-        if (entry.getInputProcessor().touchDown(x, y, pointer, button)) {
+    if (inputProcessors != null) {
+      for (int i = 0, inputProcessorsSize = inputProcessors.size(); i < inputProcessorsSize; i++) {
+        InputProcessorEntry entry = inputProcessors.get(i);
+        if (!entry.isMarkedForRemoval() && entry.getInputProcessor().touchDown(x, y, pointer, button)) {
           return true;
         }
       }
@@ -203,10 +192,10 @@ public class InputSystem extends InputAdapter {
   }
 
   public boolean touchUp(int x, int y, int pointer, int button) {
-    if (inputProcessorsSorted != null) {
-      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
-        InputProcessorEntry entry = inputProcessorsSorted.get(i);
-        if (entry.getInputProcessor().touchUp(x, y, pointer, button)) {
+    if (inputProcessors != null) {
+      for (int i = 0, inputProcessorsSize = inputProcessors.size(); i < inputProcessorsSize; i++) {
+        InputProcessorEntry entry = inputProcessors.get(i);
+        if (!entry.isMarkedForRemoval() && entry.getInputProcessor().touchUp(x, y, pointer, button)) {
           return true;
         }
       }
@@ -216,10 +205,10 @@ public class InputSystem extends InputAdapter {
   }
 
   public boolean touchDragged(int x, int y, int pointer) {
-    if (inputProcessorsSorted != null) {
-      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
-        InputProcessorEntry entry = inputProcessorsSorted.get(i);
-        if (entry.getInputProcessor().touchDragged(x, y, pointer)) {
+    if (inputProcessors != null) {
+      for (int i = 0, inputProcessorsSize = inputProcessors.size(); i < inputProcessorsSize; i++) {
+        InputProcessorEntry entry = inputProcessors.get(i);
+        if (!entry.isMarkedForRemoval() && entry.getInputProcessor().touchDragged(x, y, pointer)) {
           return true;
         }
       }
@@ -229,10 +218,10 @@ public class InputSystem extends InputAdapter {
   }
 
   public boolean touchMoved(int x, int y) {
-    if (inputProcessorsSorted != null) {
-      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
-        InputProcessorEntry entry = inputProcessorsSorted.get(i);
-        if (entry.getInputProcessor().touchMoved(x, y)) {
+    if (inputProcessors != null) {
+      for (int i = 0, inputProcessorsSize = inputProcessors.size(); i < inputProcessorsSize; i++) {
+        InputProcessorEntry entry = inputProcessors.get(i);
+        if (!entry.isMarkedForRemoval() && entry.getInputProcessor().touchMoved(x, y)) {
           return true;
         }
       }
@@ -242,10 +231,10 @@ public class InputSystem extends InputAdapter {
   }
 
   public boolean scrolled(int amount) {
-    if (inputProcessorsSorted != null) {
-      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
-        InputProcessorEntry entry = inputProcessorsSorted.get(i);
-        if (entry.getInputProcessor().scrolled(amount)) {
+    if (inputProcessors != null) {
+      for (int i = 0, inputProcessorsSize = inputProcessors.size(); i < inputProcessorsSize; i++) {
+        InputProcessorEntry entry = inputProcessors.get(i);
+        if (!entry.isMarkedForRemoval() && entry.getInputProcessor().scrolled(amount)) {
           return true;
         }
       }
@@ -255,6 +244,12 @@ public class InputSystem extends InputAdapter {
   }
 
   public void update(float deltaTime) {
+    timeUntilProcessorCleanup -= deltaTime;
+    if (timeUntilProcessorCleanup <= 0) {
+      timeUntilProcessorCleanup = 3f;
+      Iterables.removeIf(inputProcessors, INPUT_PROCESSOR_CLEANER);
+    }
+
     if (gestureDelegater != null) {
       gestureDelegater.update(deltaTime);
     }
@@ -316,5 +311,13 @@ public class InputSystem extends InputAdapter {
   }
 
   public static class Keys extends Input.Keys {
+
   }
+
+  public static final Predicate<InputProcessorEntry> INPUT_PROCESSOR_CLEANER = new Predicate<InputProcessorEntry>() {
+    @Override
+    public boolean apply(@Nullable InputProcessorEntry input) {
+      return input.isMarkedForRemoval();
+    }
+  };
 }
