@@ -307,7 +307,7 @@ public class Avatar extends GameObject {
 
   private void searchForAHome() {
     List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
-    if (rooms != null) {
+    if (rooms != null && !rooms.isEmpty()) {
       GridObject mostDesirable = rooms.get(0);
       for (int i = 0, roomsSize = rooms.size(); i < roomsSize; i++) {
         GridObject gridObject = rooms.get(i);

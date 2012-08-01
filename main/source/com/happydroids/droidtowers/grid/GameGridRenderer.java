@@ -191,7 +191,7 @@ public class GameGridRenderer extends GameLayer {
   }
 
   public void setActiveOverlay(Overlays overlay) {
-    if (activeOverlay == null && overlay.equals(POPULATION_LEVEL)) {
+    if (activeOverlay == null && overlay == POPULATION_LEVEL) {
       TutorialEngine.instance().moveToStepWhenReady("tutorial-turn-off-population-overlay");
     }
 

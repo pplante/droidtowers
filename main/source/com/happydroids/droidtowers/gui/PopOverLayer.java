@@ -128,7 +128,7 @@ public class PopOverLayer extends WidgetGroup {
     content.action(FadeIn.$(BUTTON_FADE_DURATION));
   }
 
-  private void hide() {
+  protected void hide() {
     if (!visible) return;
 
     InputSystem.instance().unbind(new int[]{ESCAPE, BACK}, inputCallback);

@@ -33,6 +33,13 @@ class DataOverlayLayer extends PopOverLayer {
     super.show(parentWidget, relativeTo);
   }
 
+  @Override
+  protected void hide() {
+    super.hide();
+
+    gameGridRenderer.setActiveOverlay(null);
+  }
+
   private void buildControls() {
     boolean unlockedJanitors = AchievementEngine.instance().findById("build5commercialspaces").hasGivenReward();
     boolean unlockedMaids = AchievementEngine.instance().findById("build8hotelroom").hasGivenReward();
@@ -78,4 +85,6 @@ class DataOverlayLayer extends PopOverLayer {
               .height(16);
     }
   }
+
+
 }

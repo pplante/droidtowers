@@ -13,12 +13,14 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Janitor extends Avatar {
+  public static final ProviderType[] JANITOR_SERVICES_PROVIDER_TYPES = new ProviderType[]{ProviderType.FOOD, ProviderType.OFFICE_SERVICES, ProviderType.RESTROOM};
+
   protected ProviderType[] servicesTheseProviderTypes;
 
   public Janitor(AvatarLayer avatarLayer) {
     super(avatarLayer.getGameGrid());
     setColor(Color.WHITE);
-    setServicesTheseProviderTypes(ProviderType.FOOD, ProviderType.OFFICE_SERVICES, ProviderType.RESTROOM);
+    setServicesTheseProviderTypes(JANITOR_SERVICES_PROVIDER_TYPES);
   }
 
   @Override

@@ -108,7 +108,8 @@ public class InputSystem extends InputAdapter {
   }
 
   public void bind(int[] keyCodes, InputCallback inputCallback) {
-    for (int keyCode : keyCodes) {
+    for (int i = 0, keyCodesLength = keyCodes.length; i < keyCodesLength; i++) {
+      int keyCode = keyCodes[i];
       bind(keyCode, inputCallback);
     }
   }
@@ -140,7 +141,8 @@ public class InputSystem extends InputAdapter {
       float deltaTime = Gdx.graphics.getDeltaTime();
 
       List<InputCallback> actionsForKeyCode = Lists.newArrayList(keyBindings.get(keycode));
-      for (InputCallback inputCallback : actionsForKeyCode) {
+      for (int i = 0, actionsForKeyCodeSize = actionsForKeyCode.size(); i < actionsForKeyCodeSize; i++) {
+        InputCallback inputCallback = actionsForKeyCode.get(i);
         if (inputCallback.run(deltaTime)) {
           return true;
         }
@@ -148,7 +150,8 @@ public class InputSystem extends InputAdapter {
     }
 
     if (inputProcessorsSorted != null) {
-      for (InputProcessorEntry entry : inputProcessorsSorted) {
+      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
+        InputProcessorEntry entry = inputProcessorsSorted.get(i);
         if (entry.getInputProcessor().keyDown(keycode)) {
           return true;
         }
@@ -161,7 +164,8 @@ public class InputSystem extends InputAdapter {
   @Override
   public boolean keyTyped(char character) {
     if (inputProcessorsSorted != null) {
-      for (InputProcessorEntry entry : inputProcessorsSorted) {
+      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
+        InputProcessorEntry entry = inputProcessorsSorted.get(i);
         if (entry.getInputProcessor().keyTyped(character)) {
           return true;
         }
@@ -174,7 +178,8 @@ public class InputSystem extends InputAdapter {
   @Override
   public boolean keyUp(int keycode) {
     if (inputProcessorsSorted != null) {
-      for (InputProcessorEntry entry : inputProcessorsSorted) {
+      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
+        InputProcessorEntry entry = inputProcessorsSorted.get(i);
         if (entry.getInputProcessor().keyUp(keycode)) {
           return true;
         }
@@ -186,7 +191,8 @@ public class InputSystem extends InputAdapter {
 
   public boolean touchDown(int x, int y, int pointer, int button) {
     if (inputProcessorsSorted != null) {
-      for (InputProcessorEntry entry : inputProcessorsSorted) {
+      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
+        InputProcessorEntry entry = inputProcessorsSorted.get(i);
         if (entry.getInputProcessor().touchDown(x, y, pointer, button)) {
           return true;
         }
@@ -198,7 +204,8 @@ public class InputSystem extends InputAdapter {
 
   public boolean touchUp(int x, int y, int pointer, int button) {
     if (inputProcessorsSorted != null) {
-      for (InputProcessorEntry entry : inputProcessorsSorted) {
+      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
+        InputProcessorEntry entry = inputProcessorsSorted.get(i);
         if (entry.getInputProcessor().touchUp(x, y, pointer, button)) {
           return true;
         }
@@ -210,7 +217,8 @@ public class InputSystem extends InputAdapter {
 
   public boolean touchDragged(int x, int y, int pointer) {
     if (inputProcessorsSorted != null) {
-      for (InputProcessorEntry entry : inputProcessorsSorted) {
+      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
+        InputProcessorEntry entry = inputProcessorsSorted.get(i);
         if (entry.getInputProcessor().touchDragged(x, y, pointer)) {
           return true;
         }
@@ -222,7 +230,8 @@ public class InputSystem extends InputAdapter {
 
   public boolean touchMoved(int x, int y) {
     if (inputProcessorsSorted != null) {
-      for (InputProcessorEntry entry : inputProcessorsSorted) {
+      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
+        InputProcessorEntry entry = inputProcessorsSorted.get(i);
         if (entry.getInputProcessor().touchMoved(x, y)) {
           return true;
         }
@@ -234,7 +243,8 @@ public class InputSystem extends InputAdapter {
 
   public boolean scrolled(int amount) {
     if (inputProcessorsSorted != null) {
-      for (InputProcessorEntry entry : inputProcessorsSorted) {
+      for (int i = 0, inputProcessorsSortedSize = inputProcessorsSorted.size(); i < inputProcessorsSortedSize; i++) {
+        InputProcessorEntry entry = inputProcessorsSorted.get(i);
         if (entry.getInputProcessor().scrolled(amount)) {
           return true;
         }
@@ -265,7 +275,8 @@ public class InputSystem extends InputAdapter {
   }
 
   public void unbind(int[] keyCodes, InputCallback inputCallback) {
-    for (int keyCode : keyCodes) {
+    for (int i = 0, keyCodesLength = keyCodes.length; i < keyCodesLength; i++) {
+      int keyCode = keyCodes[i];
       unbind(keyCode, inputCallback);
     }
   }
@@ -281,7 +292,8 @@ public class InputSystem extends InputAdapter {
       gestureDetector.reset();
     }
 
-    for (InputProcessorEntry entry : inputProcessors) {
+    for (int i = 0, inputProcessorsSize = inputProcessors.size(); i < inputProcessorsSize; i++) {
+      InputProcessorEntry entry = inputProcessors.get(i);
       if (entry.getInputProcessor() instanceof Stage) {
         ((Stage) entry.getInputProcessor()).unfocusAll();
       }

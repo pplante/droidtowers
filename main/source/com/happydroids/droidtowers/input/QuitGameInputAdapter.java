@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.happydroids.droidtowers.DroidTowersGame;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.OnClickCallback;
 import com.happydroids.droidtowers.scenes.MainMenuScene;
@@ -22,7 +23,8 @@ public class QuitGameInputAdapter extends InputAdapter {
 
   @Override
   public boolean keyDown(int keycode) {
-    if (keycode != Input.Keys.ESCAPE && keycode != Input.Keys.BACK) return false;
+    if (keycode != Input.Keys.ESCAPE && keycode != Input.Keys.BACK || !TowerAssetManager.preloadFinished())
+      return false;
 
     mainMenuIsActive = SceneManager.activeScene() instanceof MainMenuScene;
 

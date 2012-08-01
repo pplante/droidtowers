@@ -2,6 +2,7 @@
   {
     "id":"SMALL-OFFICE",
     "name":"Small Office",
+    "description":"A high efficiency office space for startup companies.",
     "coins":25000,
     "height":1,
     "width":3,
@@ -17,6 +18,7 @@
   {
     "id":"LARGE-OFFICE",
     "name":"Large Office",
+    "description":"A spacious office space for established companies.",
     "coins":50000,
     "height":1,
     "width":5,
@@ -32,6 +34,8 @@
   {
     "id":"HOTEL-ROOM",
     "name":"Hotel Room",
+    "description":"A cozy home away from home for Droids who are traveling.",
+    "statsLine":"MAX INCOME: {maxIncome}\nSERVICED BY: {servicedBy}",
     "coins":8000,
     "experienceAward":1500,
     "populationMax":2,
@@ -46,6 +50,7 @@
   {
     "id":"BURGER-JOINT",
     "name":"Burger Joint",
+    "description":"A greasy burger for Droids on the go.",
     "coins":10000,
     "height":1,
     "width":3,
@@ -61,6 +66,7 @@
   {
     "id":"PIZZA-PLACE",
     "name":"Pizza Place",
+    "description":"High quality pizza for hungry Droids.",
     "coins":12500,
     "height":1,
     "width":3,
@@ -76,6 +82,7 @@
   {
     "id":"SUSHI-PLACE",
     "name":"Sushi",
+    "description":"Droids in high society love to eat fancy food and pay high prices.",
     "coins":19599,
     "experienceAward":1500,
     "populationMax":2,
@@ -91,6 +98,7 @@
   {
     "id":"COCKTAIL-BAR",
     "name":"Cocktail Bar",
+    "description":"Serves handmade cocktails, where Droids seek refuge from their busy lives.",
     "coins":22399,
     "experienceAward":1500,
     "populationMax":2,
@@ -107,6 +115,7 @@
   {
     "id":"MOVIE-THEATER",
     "name":"Movie Theater",
+    "description":"Offers an escape from reality with the latest movies.",
     "coins":32399,
     "experienceAward":2500,
     "populationAttraction":35,

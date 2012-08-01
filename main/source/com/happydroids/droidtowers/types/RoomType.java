@@ -16,10 +16,14 @@ import static com.happydroids.droidtowers.types.ProviderType.SKY_LOBBY;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class RoomType extends GridObjectType {
+  public static final String HOUSING_STATS_LINE = "MAX RESIDENTS: {maxResidents}\nMAX INCOME: {maxIncome}";
   private boolean isLobby;
-  private boolean isSkyLobby;
   private int populationMax;
   private int populationRequired;
+
+  public RoomType() {
+    statsLine = HOUSING_STATS_LINE;
+  }
 
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {

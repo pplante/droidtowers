@@ -25,6 +25,8 @@ public abstract class GridObjectType {
 
   protected String id;
   protected String name;
+  protected String description;
+  protected String statsLine;
   protected int height;
   protected int width;
   protected int coins;
@@ -34,8 +36,8 @@ public abstract class GridObjectType {
   protected String imageFilename;
   protected boolean canShareSpace;
   protected float noiseLevel;
-  protected float crimeLevel;
 
+  protected float crimeLevel;
   protected boolean unlimitedVersion = false;
   protected ProviderType provides;
   private static WeakHashMap<String, TextureAtlas> atlases;
@@ -245,5 +247,21 @@ public abstract class GridObjectType {
 
   public int getNumVariations() {
     return numVariations;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public boolean hasDescription() {
+    return description != null;
+  }
+
+  public String getStatsLine() {
+    return statsLine;
+  }
+
+  public boolean hasStatsLine() {
+    return statsLine != null;
   }
 }

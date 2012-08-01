@@ -15,8 +15,13 @@ import static com.happydroids.droidtowers.types.ProviderType.HOTEL_ROOMS;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class CommercialType extends RoomType {
+  public static final String COMMERCIAL_STATS_LINE = "MAX EMPLOYEES: {maxEmployees}\nMAX INCOME: {maxIncome}\nSERVICED BY: {servicedBy}";
   private int jobsProvided;
   private int populationAttraction;
+
+  public CommercialType() {
+    statsLine = COMMERCIAL_STATS_LINE;
+  }
 
   @Override
   public GridObject makeGridObject(GameGrid gameGrid) {

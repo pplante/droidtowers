@@ -2,6 +2,7 @@
   {
     "id":"ELEVATOR",
     "name":"Elevator",
+    "description":"Can be built to span up to 15 floors",
     "canShareSpace":true,
     "coins":15000,
     "experienceAward":2000,
@@ -15,6 +16,7 @@
   {
     "id":"SERVICE-ELEVATOR",
     "name":"Service Elevator",
+    "description":"Can be built to span up to 15 floors, only can be used by Janitors, Maids, and Security Guards.",
     "canShareSpace":true,
     "coins":15000,
     "experienceAward":2000,

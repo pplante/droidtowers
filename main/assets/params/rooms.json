@@ -2,6 +2,8 @@
   {
     "id":"GROUND-FLOOR-LOBBY",
     "name":"Main Lobby",
+    "description":"Provides a nice ground floor entrance for your Tower.",
+    "statsLine":null,
     "isLobby":true,
     "coins":5000,
     "experienceAward":1000,
@@ -14,7 +16,8 @@
   {
     "id":"SKY-LOBBY",
     "name":"Sky Lobby",
-    "isSkyLobby":true,
+    "description":"Provides a nice viewing point for Droids, can be built every 15 floors.",
+    "statsLine":null,
     "coins":15000,
     "experienceAward":1000,
     "height":1,
@@ -27,6 +30,7 @@
   {
     "id":"SMALL-APARTMENT",
     "name":"Small Apartment",
+    "description":"A small cozy apartment for a few Droids.",
     "coins":8000,
     "experienceAward":1000,
     "populationMax":2,
@@ -40,6 +44,7 @@
   {
     "id":"LARGE-APARTMENT",
     "name":"Large Apartment",
+    "description":"A larger apartment for a family of Droids.",
     "coins":14000,
     "height":1,
     "experienceAward":2200,
@@ -52,6 +57,7 @@
   {
     "id":"SMALL-CONDO",
     "name":"Small Condo",
+    "description":"A small high class home for Droids.",
     "coins":16000,
     "height":1,
     "experienceAward":1400,
@@ -64,6 +70,7 @@
   {
     "id":"LARGE-CONDO",
     "name":"Large Condo",
+    "description":"A large very high class home for a family of Droids.",
     "coins":28000,
     "height":1,
     "experienceAward":5000,
@@ -76,6 +83,7 @@
   {
     "id":"PENTHOUSE",
     "name":"Penthouse",
+    "description":"The highest quality granite counter tops, hardwood floors, and luxurious furniture.",
     "coins":60000,
     "height":1,
     "experienceAward":5000,

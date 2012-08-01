@@ -17,6 +17,7 @@
   {
     "id":"JANITORS-CLOSET",
     "name":"Janitors Closet",
+    "description":"Droids are messy, hire Janitors to clean up after them.\nCleans restaurants, offices, and restrooms.",
     "coins":20000,
     "height":1,
     "width":3,
@@ -32,6 +33,7 @@
   {
     "id":"MAIDS-CLOSET",
     "name":"Maids Closet",
+    "description":"Droids are messy, hire Maids to clean up some of their messes.\nCleans hotel rooms and offices.",
     "coins":20000,
     "height":1,
     "width":2,
@@ -47,6 +49,7 @@
   {
     "id":"SECURITY-CENTER",
     "name":"Security Center",
+    "description":"As your Tower grows, so will crime.\nHire Security Guards to patrol your Tower and lower crime.",
     "coins":60000,
     "height":1,
     "width":4,

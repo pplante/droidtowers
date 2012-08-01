@@ -5,6 +5,8 @@
 package com.happydroids.droidtowers.utils;
 
 
+import com.happydroids.droidtowers.TowerConsts;
+
 import java.text.NumberFormat;
 
 public class StringUtils {
@@ -45,5 +47,13 @@ public class StringUtils {
     }
 
     return title.substring(0, finalSize - 3) + "...";
+  }
+
+  public static String currencyFormat(int value) {
+    return TowerConsts.CURRENCY_SYMBOL + NumberFormat.getInstance().format(value);
+  }
+
+  public static CharSequence join(Iterable<String> strings, final String separator) {
+    return org.apache.commons.lang3.StringUtils.join(strings, separator);
   }
 }

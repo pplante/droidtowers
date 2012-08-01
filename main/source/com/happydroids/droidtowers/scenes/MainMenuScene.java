@@ -87,7 +87,9 @@ public class MainMenuScene extends SplashScene {
   }
 
   private void buildMenuComponents(final TextureAtlas menuButtonAtlas) {
-    progressPanel.markToRemove(true);
+    if (progressPanel != null) {
+      progressPanel.markToRemove(true);
+    }
 
     addActor(makeLibGDXLogo(menuButtonAtlas));
     addActor(makeHappyDroidsLogo(menuButtonAtlas));
