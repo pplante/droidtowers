@@ -22,7 +22,7 @@ import static com.happydroids.droidtowers.platform.Display.scale;
 public enum FontManager {
   Default("fonts/roboto_white_14.fnt", "fonts/roboto_white_24.fnt", 8, 16),
   Roboto18("fonts/roboto_white_18.fnt", "fonts/roboto_white_32.fnt", 8, 16),
-  RobotoBold18("fonts/roboto_bold_white_18.fnt", "fonts/roboto_white_32.fnt", 8, 16),
+  RobotoBold18("fonts/roboto_bold_white_18.fnt", "fonts/roboto_white_24.fnt", 8, 16),
   Roboto32("fonts/roboto_white_32.fnt", "fonts/roboto_white_48.fnt", 16, 32),
   Roboto64("fonts/roboto_white_64.fnt", "fonts/roboto_white_96.fnt"),
   Roboto32WithShadow("fonts/roboto_white_with_shadow_32.fnt", "fonts/roboto_white_with_shadow_64.fnt"),
