@@ -61,6 +61,8 @@ public class ElevatorPopOver extends GridObjectPopOver<Elevator> {
 
     row().fillX().pad(scale(-8)).padTop(scale(16));
     add(buttonBar).expandX().minWidth(200);
+
+    pack();
   }
 
   @Override

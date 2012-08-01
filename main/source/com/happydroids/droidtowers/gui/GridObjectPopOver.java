@@ -41,14 +41,14 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
   private Vector3 gridObjectWorldToScreen;
   private Label incomeLabel;
   private Label upkeepLabel;
-
+  private boolean builtControls;
 
   public GridObjectPopOver(T gridObject) {
     super();
     this.gridObject = gridObject;
     gridObjectWorldToScreen = new Vector3();
 
-    InputSystem.instance().addInputProcessor(new GridObjectPopOverCloser(this), 10);
+    InputSystem.instance().addInputProcessor(new GridObjectPopOverCloser(this), 20);
 
     touchable = true;
     triangle = sprite(TowerAssetManager.WHITE_SWATCH_TRIANGLE_LEFT);
@@ -65,9 +65,6 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
 
     row().fillX().pad(-8).padTop(0).padBottom(0);
     add(new HorizontalRule()).expandX();
-
-    buildControls();
-    updateControls();
 
     setClickListener(new ClickListener() {
       @Override
@@ -135,6 +132,11 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
   @Override
   public void act(float delta) {
     super.act(delta);
+
+    if (!builtControls) {
+      builtControls = true;
+      buildControls();
+    }
 
     timeSinceUpdate -= delta;
     if (timeSinceUpdate <= 0f) {

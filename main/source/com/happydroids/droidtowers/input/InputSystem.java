@@ -63,7 +63,7 @@ public class InputSystem extends InputAdapter {
     Collections.sort(inputProcessors, new Comparator<InputProcessorEntry>() {
       @Override
       public int compare(InputProcessorEntry entryA, InputProcessorEntry entryB) {
-        return entryA.getPriority() - entryB.getPriority();
+        return entryA.getPriority() > entryB.getPriority() ? 1 : -1;
       }
     });
   }
