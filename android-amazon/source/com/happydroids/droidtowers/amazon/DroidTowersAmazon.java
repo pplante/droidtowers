@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.util.DisplayMetrics;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
-import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.platform.Display;
@@ -34,9 +33,6 @@ public class DroidTowersAmazon extends AndroidApplication {
     TowerGameService.setDeviceOSMarketName("amazon");
     TowerGameService.setDeviceOSVersion("sdk" + getVersion());
 
-    AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-    config.useGL20 = true;
-
     initialize(new DroidTowersGame(new Runnable() {
       @Override
       public void run() {
@@ -49,7 +45,7 @@ public class DroidTowersAmazon extends AndroidApplication {
         Platform.setBrowserUtil(new AndroidBrowserUtil(DroidTowersAmazon.this));
         Platform.setPurchaseManager(new AmazonAppStorePurchaseManager(DroidTowersAmazon.this));
       }
-    }), config);
+    }), true);
   }
 
   @Override
