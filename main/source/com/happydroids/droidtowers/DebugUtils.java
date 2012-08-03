@@ -93,4 +93,12 @@ public class DebugUtils {
               }
             });
   }
+
+  public static void loadGameByFilename(String fileName) {
+    try {
+      SceneManager.changeScene(LoadTowerSplashScene.class, GameSaveFactory.readFile(GameSaveFactory.getStorageRoot().child(fileName)));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }

@@ -12,6 +12,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.DroidTowersGame;
+import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.WeatherService;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
@@ -216,6 +217,8 @@ public class TowerScene extends Scene {
 
   @Override
   public void render(float deltaTime) {
+    TowerAssetManager.assetManager().update();
+
     updateGameObjects(deltaTime);
 
     for (GameLayer layer : gameLayers) {
