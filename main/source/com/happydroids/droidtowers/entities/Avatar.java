@@ -124,17 +124,19 @@ public class Avatar extends GameObject {
   }
 
   protected void findPlaceToVisit() {
-    List<GridObject> anyRoom = gameGrid.getObjects();
-    if (!anyRoom.isEmpty()) {
-      if (anyRoom.size() == 1) {
-        navigateToGridObject(anyRoom.get(0));
+    List<GridObject> gridObjects = gameGrid.getObjects();
+    if (!gridObjects.isEmpty()) {
+      if (gridObjects.size() == 1) {
+        navigateToGridObject(gridObjects.get(0));
       } else {
-        GridObject randomRoom;
-        do {
-          randomRoom = anyRoom.get(Random.randomInt(anyRoom.size() - 1));
-        } while (!randomRoom.provides(COMMERCIAL) && randomRoom.getDirtLevel() < 1f);
-
-        navigateToGridObject(randomRoom);
+        int idx = 0;
+        for (int i = 0, gridObjectsSize = gridObjects.size(); i < gridObjectsSize; i++) {
+          GridObject gridObject = gridObjects.get(i);
+          if (gridObject.provides(COMMERCIAL) && gridObject.getDirtLevel() < 1f) {
+            navigateToGridObject(gridObject);
+            break;
+          }
+        }
       }
     }
   }

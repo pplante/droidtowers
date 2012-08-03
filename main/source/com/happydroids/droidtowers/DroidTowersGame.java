@@ -82,13 +82,14 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
       }
     }
 
+    Display.setup();
+
     BackgroundTask.setPostExecuteManager(this);
     BackgroundTask.setUncaughtExceptionHandler(Platform.uncaughtExceptionHandler);
 
     TowerGameService.setInstance(new TowerGameService());
 
     if (Gdx.graphics.isGL20Available() && Gdx.app.getType().equals(Android)) {
-      Display.setup();
       if (Display.isXHDPIMode()) {
         float displayScalar = 0.75f;
         frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, (int) (Display.getWidth() * displayScalar), (int) (Display.getHeight() * displayScalar), true);

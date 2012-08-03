@@ -14,7 +14,7 @@ import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.gui.TowerWindow;
 import com.happydroids.droidtowers.scenes.TowerScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
-import com.happydroids.droidtowers.utils.ScreenShot;
+import com.happydroids.droidtowers.utils.Screenshot;
 
 public class DebugInputAdapter extends InputAdapter {
   public StringBuilder keys = new StringBuilder();
@@ -32,7 +32,7 @@ public class DebugInputAdapter extends InputAdapter {
         return true;
 
       case Input.Keys.F6:
-        ScreenShot.capture();
+        Screenshot.capture();
         return true;
 
       case Input.Keys.ALT_RIGHT:

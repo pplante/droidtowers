@@ -17,7 +17,7 @@ import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.scenes.TowerScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
-import com.happydroids.droidtowers.utils.ScreenShot;
+import com.happydroids.droidtowers.utils.Screenshot;
 import com.happydroids.platform.Platform;
 import com.happydroids.platform.PlatformPurchaseManger;
 import com.happydroids.platform.purchase.DroidTowerVersions;
@@ -119,7 +119,7 @@ public class DebugWindow extends ScrollableTowerWindow {
         Gdx.app.postRunnable(new Runnable() {
           @Override
           public void run() {
-            ScreenShot.capture();
+            Screenshot.capture();
           }
         });
       }

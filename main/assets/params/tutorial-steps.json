@@ -102,7 +102,7 @@
   {
     "id":"tutorial-hire-employees",
     "name":"Pizza Business 101",
-    "description":"Someone has to make the Pizza before\nit can be sold to hungry Droids.\n\nTap on the Pizza Place,\nthen click \"Manage\" to hire an employee.",
+    "description":"Someone has to make the Pizza before\nit can be sold to hungry Droids.\n\nTake a look at your Pizza Place.\nSee the blue and green icon displayed?\nThis means there are no Droids employed there.\n\nTap on the Pizza Place,\nthen click \"Manage\" to hire an employee.",
     "requirements":[
       {
         "type":"BUILD",
@@ -180,7 +180,7 @@
   {
     "id":"tutorial-turn-on-population-overlay",
     "name":"Population Overlays",
-    "description":"Now that you've mastered the camera controls,\nit is time to introduce the data overlays.\n\nIn the top right corner tap the Overlays button.",
+    "description":"Now that you've mastered the camera controls,\nit is time to introduce the data overlays.\n\nIn the top right corner tap the Overlays button then,\nturn on the Population overlay by tapping the toggle switch.",
     "rewards":[
       {
         "type":"UNLOCK",

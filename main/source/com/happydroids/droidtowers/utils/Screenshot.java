@@ -15,7 +15,7 @@ import java.nio.ByteBuffer;
 
 import static com.badlogic.gdx.Application.ApplicationType.Android;
 
-public class ScreenShot {
+public class Screenshot {
   public static void capture() {
     Pixmap pixmap = captureFromBuffer(0, 0, Display.getWidth(), Display.getHeight(), true);
 

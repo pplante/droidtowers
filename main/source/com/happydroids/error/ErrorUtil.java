@@ -15,12 +15,13 @@ public class ErrorUtil {
   }
 
   public static void sendErrorToServer(final Throwable throwable) {
+    throwable.printStackTrace();
+
     new BackgroundTask() {
       @Override
       protected void execute() throws Exception {
         RavenClient ravenClient = new RavenClient(HappyDroidConsts.SENTRY_DSN);
         ravenClient.captureException(throwable);
-        throwable.printStackTrace();
       }
     }.run();
   }

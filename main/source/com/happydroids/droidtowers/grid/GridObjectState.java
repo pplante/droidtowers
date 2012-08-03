@@ -12,6 +12,7 @@ import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
+import com.happydroids.droidtowers.types.ProviderType;
 
 import java.util.Set;
 
@@ -65,7 +66,7 @@ public class GridObjectState {
         object.addLoanFromCousinVinnie(loanFromCousinVinnie);
 
 
-        if (object instanceof CommercialSpace && employees != null) {
+        if (object instanceof CommercialSpace && !object.provides(ProviderType.RESTROOM) && employees != null) {
           ((CommercialSpace) object).setEmployees(employees);
         }
 

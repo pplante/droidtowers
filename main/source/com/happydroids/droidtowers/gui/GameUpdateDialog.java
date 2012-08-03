@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.happydroids.HappyDroidConsts;
 import com.happydroids.platform.Platform;
 import com.happydroids.server.GameUpdate;
 
@@ -22,7 +23,7 @@ public class GameUpdateDialog extends Dialog {
           @Override
           public void onClick(Dialog dialog) {
             dismiss();
-            Platform.getBrowserUtil().launchWebBrowser("https://www.droidtowersgame.com/download-latest");
+            Platform.getBrowserUtil().launchWebBrowser(HappyDroidConsts.HAPPYDROIDS_URI + "/droidtowers/download-latest");
           }
         });
         break;

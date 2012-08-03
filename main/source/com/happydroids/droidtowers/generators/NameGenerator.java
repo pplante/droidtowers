@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.types.GridObjectType;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -36,9 +37,13 @@ public class NameGenerator {
 
     List<String> uniqueLines = Lists.newArrayList();
     for (String placeName : placesContent) {
-      if (StringUtils.isEmpty(placeName)) continue;
+      if (StringUtils.isEmpty(placeName)) {
+        continue;
+      }
       uniqueLines.add(placeName);
     }
+
+    Collections.shuffle(uniqueLines);
 
     return uniqueLines;
   }

@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.entities;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.gui.HotelRoomPopOver;
@@ -27,7 +28,7 @@ public class HotelRoom extends CommercialSpace {
   @Override
   public int getCoinsEarned() {
     if (isConnectedToTransport()) {
-      return (int) Math.ceil(gridObjectType.getCoinsEarned() * getNumVisitors() * 0.5f);
+      return (int) MathUtils.clamp(gridObjectType.getCoinsEarned() * 0.25f * getNumVisitors(), 0, 3600);
     }
 
     return 0;
