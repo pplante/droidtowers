@@ -6,12 +6,12 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.entities.Avatar;
 import com.happydroids.droidtowers.entities.GridObject;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
+import com.happydroids.droidtowers.platform.Display;
 
 public class AvatarInfoRow extends Table {
 
@@ -30,9 +30,9 @@ public class AvatarInfoRow extends Table {
     restaurantsSatsifaction = new ProgressBar((int) (avatar.getSatisfactionFood() * 100));
     movingToLabel = FontManager.Roboto12.makeLabel("");
 
-    row().fillX().space(scale(8));
-    Image avatarImage = new Image(avatar, Scaling.none);
-    avatarImage.color.set(avatar.getColor());
+    row().fillX().space(Display.scale(8));
+    Image avatarImage = new Image(new TextureRegionDrawable(avatar), Scaling.none);
+    avatarImage.setColor(avatar.getColor());
     add(avatarImage);
     add(FontManager.Default.makeLabel(avatar.getName())).expandX();
     add(hungerBar);

@@ -20,10 +20,10 @@ public class Effects {
     if (this.dropShadowPatch != null) {
       batch.setColor(1, 1, 1, 1f * parentAlpha);
       this.dropShadowPatch.draw(batch,
-                                       (int) (actor.x - dropShadowPatch.getLeftWidth()),
-                                       ((int) (actor.y - dropShadowPatch.getTopHeight())),
-                                       ((int) (actor.width + dropShadowPatch.getRightWidth() + dropShadowPatch.getLeftWidth())),
-                                       ((int) (actor.height - 2 + dropShadowPatch.getBottomHeight() + dropShadowPatch.getTopHeight())));
+                                       (int) (actor.getX() - dropShadowPatch.getLeftWidth()),
+                                       (int) (actor.getY() - dropShadowPatch.getTopHeight()),
+                                       (int) (actor.getWidth() + dropShadowPatch.getRightWidth() + dropShadowPatch.getLeftWidth()),
+                                       (int) (actor.getHeight() - 2 + dropShadowPatch.getBottomHeight() + dropShadowPatch.getTopHeight()));
     }
   }
 

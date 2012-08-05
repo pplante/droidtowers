@@ -217,19 +217,6 @@ public class InputSystem extends InputAdapter {
     return false;
   }
 
-  public boolean touchMoved(int x, int y) {
-    if (inputProcessors != null) {
-      for (int i = 0, inputProcessorsSize = inputProcessors.size(); i < inputProcessorsSize; i++) {
-        InputProcessorEntry entry = inputProcessors.get(i);
-        if (!entry.isMarkedForRemoval() && entry.getInputProcessor().touchMoved(x, y)) {
-          return true;
-        }
-      }
-    }
-
-    return false;
-  }
-
   public boolean scrolled(int amount) {
     if (inputProcessors != null) {
       for (int i = 0, inputProcessorsSize = inputProcessors.size(); i < inputProcessorsSize; i++) {

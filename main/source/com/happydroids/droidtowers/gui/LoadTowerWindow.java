@@ -8,18 +8,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Align;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.gamestate.GameSaveFactory;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.LoadTowerSplashScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.tasks.WaitForCloudSyncTask;
@@ -28,7 +31,6 @@ import org.ocpsoft.pretty.time.PrettyTime;
 import java.util.Date;
 import java.util.Set;
 
-import static com.happydroids.droidtowers.platform.Display.scale;
 import static java.text.NumberFormat.getNumberInstance;
 
 public class LoadTowerWindow extends ScrollableTowerWindow {
@@ -97,7 +99,7 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     Actor imageActor = null;
     if (imageFile.exists()) {
       try {
-        imageActor = new Image(loadTowerImage(imageFile), Scaling.fit, Align.TOP);
+        imageActor = new Image(loadTowerImage(imageFile), Scaling.fit, Align.top);
       } catch (Exception ignored) {
         imageActor = null;
       }
@@ -108,9 +110,9 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     }
 
     Table fileRow = new Table();
-    fileRow.defaults().fillX().pad(scale(10)).space(scale(10));
+    fileRow.defaults().fillX().pad(Display.scale(10)).space(Display.scale(10));
     fileRow.row();
-    fileRow.add(imageActor).width(scale(64)).height(scale(64)).center();
+    fileRow.add(imageActor).width(Display.scale(64)).height(Display.scale(64)).center();
     fileRow.add(makeGameFileInfoBox(fileRow, gameSaveFile, towerData)).expandX().top();
     fileRow.row().fillX();
     fileRow.add(new HorizontalRule(Color.DARK_GRAY, 2)).colspan(2);
@@ -118,16 +120,17 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     return fileRow;
   }
 
-  private Texture loadTowerImage(FileHandle imageFile) {
+  private TextureRegionDrawable loadTowerImage(FileHandle imageFile) {
     Texture texture = new Texture(imageFile);
     towerImageTextures.add(texture);
-    return texture;
+    return new TextureRegionDrawable(new TextureRegion(texture));
   }
 
   private Table makeGameFileInfoBox(final Table fileRow, final FileHandle savedGameFile, GameSave towerData) {
     TextButton launchButton = FontManager.RobotoBold18.makeTextButton("Play");
-    launchButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
+    launchButton.addListener(new VibrateClickListener() {
+      @Override
+      public void onClick(InputEvent event, float x, float y) {
         dismiss();
         try {
           SceneManager.changeScene(LoadTowerSplashScene.class, GameSaveFactory.readFile(savedGameFile));
@@ -138,8 +141,9 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     });
 
     TextButton deleteButton = FontManager.RobotoBold18.makeTextButton("Delete");
-    deleteButton.setClickListener(new ClickListener() {
-      public void click(final Actor actor, float x, float y) {
+    deleteButton.addListener(new VibrateClickListener() {
+      @Override
+      public void onClick(InputEvent event, float x, float y) {
         new Dialog().setTitle("Are you sure you want to delete this Tower?")
                 .setMessage("If you delete this tower, it will disappear forever.\n\nAre you sure?")
                 .addButton("Yes, delete it", new OnClickCallback() {
@@ -175,11 +179,11 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     }
 
     Table box = new Table();
-    box.defaults().fillX().space(scale(5));
+    box.defaults().fillX().space(Display.scale(5));
     box.row().top().left().fillX();
     box.add(metadata).top().left().expandX();
-    box.add(deleteButton).width(scale(80));
-    box.add(launchButton).width(scale(80));
+    box.add(deleteButton).width(Display.scale(80));
+    box.add(launchButton).width(Display.scale(80));
 
     return box;
   }
@@ -195,7 +199,7 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
 
     progressDialog.show();
     progressDialog.clearActions();
-    progressDialog.color.a = 1f;
+    progressDialog.getColor().a = 1f;
 
     return this;
   }

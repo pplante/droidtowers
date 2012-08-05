@@ -14,9 +14,9 @@ public class TransparentTextButton extends TextButton {
     super(text, skin);
 
     TextButtonStyle style = new TextButtonStyle(getStyle());
-    style.down = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, upColor);
-    style.up = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, downColor);
-    style.checked = TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, downColor);
+    style.down = TowerAssetManager.ninePatchDrawable(TowerAssetManager.WHITE_SWATCH, upColor);
+    style.up = TowerAssetManager.ninePatchDrawable(TowerAssetManager.WHITE_SWATCH, downColor);
+    style.checked = TowerAssetManager.ninePatchDrawable(TowerAssetManager.WHITE_SWATCH, downColor);
 
     setStyle(style);
   }

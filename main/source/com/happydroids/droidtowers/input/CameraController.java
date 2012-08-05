@@ -47,21 +47,21 @@ public class CameraController implements GestureDetector.GestureListener {
     checkBounds();
   }
 
-  public boolean touchDown(int x, int y, int pointer) {
+  public boolean touchDown(float x, float y, int pointer) {
     flinging = false;
     initialScale = camera.zoom;
     return false;
   }
 
-  public boolean tap(int x, int y, int count) {
+  public boolean tap(float x, float y, int count, int pointer, int button) {
     return false;
   }
 
-  public boolean longPress(int x, int y) {
+  public boolean longPress(float x, float y) {
     return false;
   }
 
-  public boolean fling(float velocityX, float velocityY) {
+  public boolean fling(float velocityX, float velocityY, int pointer, int button) {
     if (Math.abs(velocityX) >= 300) {
       flinging = true;
       velX = camera.zoom * velocityX * 0.5f;
@@ -75,7 +75,7 @@ public class CameraController implements GestureDetector.GestureListener {
     return false;
   }
 
-  public boolean pan(int x, int y, int changeX, int changeY) {
+  public boolean pan(float x, float y, float changeX, float changeY) {
     float deltaX = -changeX * camera.zoom;
     float deltaY = changeY * camera.zoom;
 
@@ -164,19 +164,19 @@ public class CameraController implements GestureDetector.GestureListener {
   }
 
   public void panTo(float x, float y, boolean animate) {
-    if (animate) {
-      TweenSystem.manager().killTarget(this);
-      Tween.to(this, CameraControllerAccessor.PAN, 500)
-              .target(x, y)
-              .start(TweenSystem.manager());
-    } else {
-      camera.position.set(x, y, 0f);
-      checkBounds();
-    }
+    panTo(new Vector3(x, y, 0), animate);
   }
 
   public void panTo(Vector3 position, boolean animate) {
-    panTo(position.x, position.y, animate);
+    if (animate) {
+      TweenSystem.manager().killTarget(this);
+      Tween.to(this, CameraControllerAccessor.PAN, 750)
+              .target(position.x, position.y)
+              .start(TweenSystem.manager());
+    } else {
+      camera.position.set(position.x, position.y, 0f);
+      checkBounds();
+    }
   }
 
   public void stopMovement() {

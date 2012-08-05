@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 
@@ -32,13 +32,13 @@ public class AchievementButton extends ColorizedImageButton {
     particleEffect = new ParticleEffect();
     particleEffect.load(Gdx.files.internal("particles/sparkle.p"), Gdx.files.internal("particles"));
 
-    setClickListener(new VibrateClickListener() {
-      public void onClick(Actor actor, float x, float y) {
+    addListener(new VibrateClickListener() {
+      public void onClick(InputEvent event, float x, float y) {
         new AchievementListView(getStage()).show();
       }
     });
 
-    visible = false;
+    setVisible(false);
   }
 
   @Override
@@ -63,8 +63,8 @@ public class AchievementButton extends ColorizedImageButton {
   public void draw(SpriteBatch batch, float parentAlpha) {
     if (AchievementEngine.instance().hasPendingAwards()) {
       particleEffect.draw(batch);
-      batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-      batch.draw(activeAnimation.getKeyFrame(animationTime, false), x, y, width, height);
+      batch.setColor(getColor().r, getColor().g, getColor().b, getColor().a * parentAlpha);
+      batch.draw(activeAnimation.getKeyFrame(animationTime, false), getX(), getY(), getWidth(), getHeight());
     } else {
       super.draw(batch, parentAlpha);
     }

@@ -93,7 +93,7 @@ public class GameSave {
     } else {
       TutorialEngine.instance().setEnabled(false);
       TutorialEngine.instance().completeAll();
-      HeadsUpDisplay.instance().getAchievementButton().visible = true;
+      HeadsUpDisplay.instance().getAchievementButton().setVisible(true);
       HeadsUpDisplay.instance().toggleViewNeighborsButton(true);
     }
 

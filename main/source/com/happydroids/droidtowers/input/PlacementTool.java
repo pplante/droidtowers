@@ -49,7 +49,7 @@ public class PlacementTool extends ToolBase {
     this.gridObjectType = gridObjectType;
   }
 
-  public boolean touchDown(int x, int y, int pointer) {
+  public boolean touchDown(float x, float y, int pointer) {
     Vector3 worldPoint = camera.getPickRay(x, y).getEndPoint(1);
     GridPoint gridPointAtFinger = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
     makeGridObjectAtFinger_whenGridObjectIsNull(gridPointAtFinger);
@@ -59,7 +59,11 @@ public class PlacementTool extends ToolBase {
     return true;
   }
 
-  public boolean pan(int x, int y, int deltaX, int deltaY) {
+  public boolean tap(float x, float y, int count, int pointer, int button) {
+    return count >= 2 && finishPurchase();
+  }
+
+  public boolean pan(float x, float y, float deltaX, float deltaY) {
     if (isDraggingGridObject) {
       Vector3 worldPoint = camera.getPickRay(x, y).getEndPoint(1);
       Vector3 deltaPoint = camera.getPickRay(x + -deltaX, y + deltaY).getEndPoint(1);
@@ -101,10 +105,6 @@ public class PlacementTool extends ToolBase {
     } else {
       touchDownPointDelta = gridPointAtFinger.cpy().sub(gridObject.getPosition());
     }
-  }
-
-  public boolean tap(int x, int y, int count) {
-    return count >= 2 && finishPurchase();
   }
 
   private boolean finishPurchase() {

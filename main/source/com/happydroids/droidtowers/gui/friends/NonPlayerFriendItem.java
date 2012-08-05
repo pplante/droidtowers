@@ -4,7 +4,7 @@
 
 package com.happydroids.droidtowers.gui.friends;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.GameState;
@@ -35,9 +35,9 @@ public class NonPlayerFriendItem extends PlayerFriendItem {
   @Override
   protected TextButton makeActionButton() {
     TextButton inviteButton = FontManager.Roboto18.makeTextButton("Invite to Play");
-    inviteButton.setClickListener(new VibrateClickListener() {
+    inviteButton.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
 //        new InviteNonPlayerFriendWindow(profile).show();
         Platform.getBrowserUtil().launchWebBrowser(HappyDroidConsts.HAPPYDROIDS_URI + "/login?token=" + TowerGameService.instance().getSessionToken() + "&next=/friend/" + profile.getId() + "/invite/");
       }

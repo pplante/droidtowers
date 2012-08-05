@@ -10,17 +10,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.Requirement;
 import com.happydroids.droidtowers.achievements.Reward;
+import com.happydroids.droidtowers.platform.Display;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class AchievementDetailView extends ScrollableTowerWindow {
   public AchievementDetailView(Achievement achievement, Stage stage) {
     super(achievement.getName(), stage);
 
-    defaults().top().left().space(scale(6));
+    defaults().top().left().space(Display.scale(6));
 
     makeDivider();
 
@@ -57,7 +56,7 @@ public class AchievementDetailView extends ScrollableTowerWindow {
   }
 
   private void makeDivider() {
-    row().height(scale(22));
+    row().height(Display.scale(22));
     add(new NoOpWidget());
   }
 

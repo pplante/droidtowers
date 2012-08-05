@@ -23,23 +23,23 @@ public class ToolBase implements GestureDetector.GestureListener {
     this.gameGrid = gameGrid;
   }
 
-  public boolean touchDown(int x, int y, int pointer) {
+  public boolean touchDown(float x, float y, int pointer) {
     return false;
   }
 
-  public boolean tap(int x, int y, int count) {
+  public boolean tap(float x, float y, int count, int pointer, int button) {
     return false;
   }
 
-  public boolean longPress(int x, int y) {
+  public boolean longPress(float x, float y) {
     return false;
   }
 
-  public boolean fling(float velocityX, float velocityY) {
+  public boolean fling(float velocityX, float velocityY, int pointer, int button) {
     return false;
   }
 
-  public boolean pan(int x, int y, int deltaX, int deltaY) {
+  public boolean pan(float x, float y, float deltaX, float deltaY) {
     return false;
   }
 

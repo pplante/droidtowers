@@ -8,13 +8,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Widget;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.platform.Display;
 
 import static com.happydroids.droidtowers.ColorUtil.rgba;
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 class RatingBar extends Widget {
   public static final Color MASK_COLOR = rgba("#ffbb33");
@@ -42,7 +42,7 @@ class RatingBar extends Widget {
     setTextures(STAR_ICON);
 
     valueLabel = FontManager.RobotoBold18.makeLabel("5.0");
-    valueLabel.setAlignment(Align.CENTER);
+    valueLabel.setAlignment(Align.center);
 
     setValue(stars);
     starTextureHeight = maskTexture.getHeight();
@@ -50,7 +50,7 @@ class RatingBar extends Widget {
 
   @Override
   public float getMinWidth() {
-    return maxValue * textureWidth + valueLabel.getMinWidth() + scale(8);
+    return maxValue * textureWidth + valueLabel.getMinWidth() + Display.scale(8);
   }
 
   @Override
@@ -68,10 +68,10 @@ class RatingBar extends Widget {
   public void draw(SpriteBatch batch, float parentAlpha) {
     batch.setColor(1, 1, 1, 0.35f * parentAlpha);
     batch.draw(maskTexture,
-                      (int) x,
-                      (int) y,
+                      (int) getX(),
+                      (int) getY(),
                       textureWidth * maxValue,
-                      (int) height,
+                      (int) getHeight(),
                       0, 0,
                       maxValue,
                       -1f);
@@ -79,22 +79,22 @@ class RatingBar extends Widget {
     float starWidth = Math.round(stars * textureWidth);
     batch.setColor(MASK_COLOR.r, MASK_COLOR.g, MASK_COLOR.b, MASK_COLOR.a * parentAlpha);
     batch.draw(maskTexture,
-                      (int) x,
-                      (int) y,
+                      (int) getX(),
+                      (int) getY(),
                       (int) starWidth,
                       starTextureHeight,
                       0f, 0f,
                       stars, -1f);
 
-    valueLabel.x = x + width - valueLabel.getMinWidth();
-    valueLabel.y = y;
+    valueLabel.setX((getX() + getWidth()) - valueLabel.getMinWidth());
+    valueLabel.setY(getY());
     valueLabel.draw(batch, parentAlpha);
   }
 
   @Override
   public void layout() {
-    valueLabel.width = textureWidth;
-    valueLabel.height = height;
+    valueLabel.setWidth(textureWidth);
+    valueLabel.setHeight(getHeight());
   }
 
 

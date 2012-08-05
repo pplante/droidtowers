@@ -18,7 +18,7 @@ public class WidgetAccessor implements TweenAccessor<Actor> {
   public static final int COLOR = 6;
 
   public int getValues(Actor target, int tweenType, float[] returnValues) {
-    Color color = target.color;
+    Color color = target.getColor();
     switch (tweenType) {
       case COLOR:
         if (target instanceof Label) {
@@ -36,22 +36,22 @@ public class WidgetAccessor implements TweenAccessor<Actor> {
         return 1;
 
       case POSITION:
-        returnValues[0] = target.x;
-        returnValues[1] = target.y;
+        returnValues[0] = target.getX();
+        returnValues[1] = target.getY();
         return 2;
 
       case ROTATION:
-        returnValues[0] = target.rotation;
+        returnValues[0] = target.getRotation();
         return 1;
 
       case SCALE:
-        returnValues[0] = target.scaleX;
-        returnValues[1] = target.scaleY;
+        returnValues[0] = target.getScaleX();
+        returnValues[1] = target.getScaleY();
         return 2;
 
       case SIZE:
-        returnValues[0] = target.width;
-        returnValues[1] = target.height;
+        returnValues[0] = target.getWidth();
+        returnValues[1] = target.getHeight();
         return 2;
 
       default:
@@ -66,33 +66,33 @@ public class WidgetAccessor implements TweenAccessor<Actor> {
         if (target instanceof Label) {
           ((Label) target).setColor(newValues[0], newValues[1], newValues[2], newValues[3]);
         } else {
-          target.color.set(newValues[0], newValues[1], newValues[2], newValues[3]);
+          target.setColor(newValues[0], newValues[1], newValues[2], newValues[3]);
         }
         break;
 
       case OPACITY:
-        target.color.a = newValues[0];
+        target.getColor().a = newValues[0];
         break;
 
       case POSITION:
-        target.x = newValues[0];
-        target.y = newValues[1];
+        target.setX(newValues[0]);
+        target.setY(newValues[1]);
         break;
 
       case ROTATION:
-        target.rotation = newValues[0];
+        target.setRotation(newValues[0]);
         break;
 
       case SCALE:
-        target.scaleX = newValues[0];
-        target.scaleY = newValues[1];
+        target.setScaleX(newValues[0]);
+        target.setScaleY(newValues[1]);
         break;
 
       case SIZE:
-        target.x += target.width - newValues[0];
-        target.y += target.height - newValues[1];
-        target.width = newValues[0];
-        target.height = newValues[1];
+        target.setX(target.getWidth() - newValues[0]);
+        target.setY(target.getHeight() - newValues[1]);
+        target.setWidth(newValues[0]);
+        target.setHeight(newValues[1]);
         break;
 
       default:

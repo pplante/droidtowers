@@ -4,7 +4,7 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
 
@@ -15,7 +15,7 @@ public class ConfirmRedecorationDialog extends Dialog {
     setMessage("Would you like to redecorate this room?\n\nIt will cost $1,000.");
     addButton("Yes", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         dismiss();
 
         int variationId = gridObject.getVariationId() + 1;
@@ -32,7 +32,7 @@ public class ConfirmRedecorationDialog extends Dialog {
 
     addButton("No", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         dismiss();
       }
     });

@@ -8,7 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
@@ -39,8 +39,6 @@ import com.happydroids.droidtowers.scenes.components.SceneManager;
 import java.util.Set;
 
 import static com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
-import static com.happydroids.HappyDroidConsts.DEBUG;
-import static com.happydroids.HappyDroidConsts.DISPLAY_DEBUG_INFO;
 
 public class HeadsUpDisplay extends WidgetGroup {
   private static final String TAG = HeadsUpDisplay.class.getSimpleName();
@@ -71,15 +69,15 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     notificationStack = new StackGroup();
 
-    this.stage = stage;
+    this.setStage(stage);
     this.camera = camera;
     this.gameGrid = gameGrid;
 
     hudAtlas = TowerAssetManager.textureAtlas("hud/buttons.txt");
 
     statusBarPanel = new StatusBarPanel();
-    statusBarPanel.x = 0;
-    statusBarPanel.y = stage.height() - statusBarPanel.height;
+    statusBarPanel.setX(0);
+    statusBarPanel.setY(stage.getHeight() - statusBarPanel.getHeight());
     addActor(statusBarPanel);
 
     mouseToolTip = new ToolTip();
@@ -90,24 +88,24 @@ public class HeadsUpDisplay extends WidgetGroup {
 
     headerButtonBar = new HeaderButtonBar(hudAtlas, gameGrid);
     addActor(headerButtonBar);
-    headerButtonBar.x = stage.width() - headerButtonBar.width - 10;
-    headerButtonBar.y = stage.height() - headerButtonBar.height - 10;
+    headerButtonBar.setX(stage.getWidth() - headerButtonBar.getWidth() - 10);
+    headerButtonBar.setY(stage.getHeight() - headerButtonBar.getHeight() - 10);
 
     achievementButton = new AchievementButton(hudAtlas, achievementEngine);
-    achievementButton.x = 10;
-    achievementButton.y = stage.height() - statusBarPanel.height - achievementButton.height - 10;
-    achievementButton.getParticleEffect().setPosition(achievementButton.x + achievementButton.width / 2, achievementButton.y + achievementButton.height / 2);
+    achievementButton.setX(10);
+    achievementButton.setY(stage.getHeight() - statusBarPanel.getHeight() - achievementButton.getHeight() - 10);
+    achievementButton.getParticleEffect().setPosition(achievementButton.getX() + achievementButton.getWidth() / 2, achievementButton.getY() + achievementButton.getHeight() / 2);
 
     addActor(achievementButton);
 
     if (TowerConsts.ENABLE_AVATAR_LIST_WINDOW) {
       avatarsButton = TowerAssetManager.imageButton(hudAtlas.findRegion("view-neighbors"));
-      avatarsButton.x = 10;
-      avatarsButton.y = achievementButton.y - avatarsButton.height - 10;
+      avatarsButton.setX(10);
+      avatarsButton.setY(achievementButton.getY() - avatarsButton.getHeight() - 10);
 
-      avatarsButton.setClickListener(new VibrateClickListener() {
+      avatarsButton.addListener(new VibrateClickListener() {
         @Override
-        public void onClick(Actor actor, float x, float y) {
+        public void onClick(InputEvent event, float x, float y) {
           new AvatarListWindow(getStage(), avatarLayer).show();
         }
       });
@@ -118,9 +116,9 @@ public class HeadsUpDisplay extends WidgetGroup {
     if (HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT) {
       viewNeighborsButton = TowerAssetManager.imageButton(hudAtlas.findRegion("view-neighbors"));
       viewNeighborsButton.layout();
-      viewNeighborsButton.setClickListener(new VibrateClickListener() {
+      viewNeighborsButton.addListener(new VibrateClickListener() {
         @Override
-        public void onClick(Actor actor, float x, float y) {
+        public void onClick(InputEvent event, float x, float y) {
           if (TowerGameService.instance().isAuthenticated()) {
             SceneManager.pushScene(ViewNeighborSplashScene.class, gameState);
           } else {
@@ -129,47 +127,47 @@ public class HeadsUpDisplay extends WidgetGroup {
         }
       });
 
-      viewNeighborsButton.visible = false;
-      viewNeighborsButton.x = 10;
+      viewNeighborsButton.setVisible(false);
+      viewNeighborsButton.setX(10);
 
       if (TowerConsts.ENABLE_AVATAR_LIST_WINDOW) {
-        viewNeighborsButton.y = avatarsButton.y - viewNeighborsButton.height - 20;
+        viewNeighborsButton.setY(avatarsButton.getY() - viewNeighborsButton.getHeight() - 20);
       } else {
-        viewNeighborsButton.y = achievementButton.y - viewNeighborsButton.height - 20;
+        viewNeighborsButton.setY(achievementButton.getY() - viewNeighborsButton.getHeight() - 20);
       }
 
       addActor(viewNeighborsButton);
     }
 
     notificationStack.pad(10);
-    notificationStack.x = 0;
-    notificationStack.y = 0;
+    notificationStack.setX(0);
+    notificationStack.setY(0);
     addActor(notificationStack);
 
-    this.stage.addActor(this);
+    this.getStage().addActor(this);
   }
 
   private void buildToolButtonMenu() {
     toolButton = new HudToolButton(hudAtlas);
-    toolButton.x = stage.right() - toolButton.width - 10;
-    toolButton.y = 10;
+    toolButton.setX(getStage().getWidth() - toolButton.getWidth() - 10);
+    toolButton.setY(10);
     addActor(toolButton);
 
     toolMenu = new ToolMenu(hudAtlas, toolButton);
 
 
     toolButtonStyle = toolButton.getStyle();
-    toolButton.setClickListener(new VibrateClickListener() {
-      public void onClick(Actor actor, float x, float y) {
+    toolButton.addListener(new VibrateClickListener() {
+      public void onClick(InputEvent event, float x, float y) {
         Gdx.app.log(TAG, "Current tool: " + InputSystem.instance().getCurrentTool());
         if (InputSystem.instance().getCurrentTool() instanceof PickerTool) {
-          if (toolMenu.visible) {
+          if (toolMenu.isVisible()) {
             toolMenu.close();
-            toolMenu.markToRemove(true);
+            toolMenu.remove();
           } else {
-            stage.addActor(toolMenu);
-            toolMenu.x = toolButton.x + 20f;
-            toolMenu.y = toolButton.y;
+            getStage().addActor(toolMenu);
+            toolMenu.setX(toolButton.getX() + 20f);
+            toolMenu.setY(toolButton.getY());
             toolMenu.show();
             TutorialEngine.instance().moveToStepWhenReady("tutorial-unlock-lobby");
           }
@@ -178,21 +176,6 @@ public class HeadsUpDisplay extends WidgetGroup {
         }
       }
     });
-  }
-
-  @Override
-  public boolean touchMoved(float x, float y) {
-    //noinspection PointlessBooleanExpression
-    if (DEBUG && DISPLAY_DEBUG_INFO) {
-//      Actor hit = hit(x, y);
-//      if (hit == null || hit == mouseToolTip) {
-//        updateGridPointTooltip(x, y);
-//      } else {
-//        mouseToolTip.visible = false;
-//      }
-    }
-
-    return super.touchMoved(x, y);
   }
 
   private void updateGridPointTooltip(float x, float y) {
@@ -222,7 +205,7 @@ public class HeadsUpDisplay extends WidgetGroup {
       }
 
 
-      mouseToolTip.visible = true;
+      mouseToolTip.setVisible(true);
       mouseToolTip.setText(String.format("%s\n" +
                                                  "objects: %s\n" +
                                                  "%s\n" +
@@ -255,10 +238,10 @@ public class HeadsUpDisplay extends WidgetGroup {
                                                 desirabilityLevel,
                                                 gridPosition.distanceFromTransit,
                                                 gridPosition.distanceFromSecurity));
-      mouseToolTip.x = x + 15;
-      mouseToolTip.y = y + 15;
+      mouseToolTip.setX(x + 15);
+      mouseToolTip.setY(y + 15);
     } else {
-      mouseToolTip.visible = false;
+      mouseToolTip.setVisible(false);
     }
 
   }
@@ -266,25 +249,16 @@ public class HeadsUpDisplay extends WidgetGroup {
   public static void showToast(String message, Object... objects) {
     Toast toast = new Toast();
     toast.setMessage(String.format(message, objects));
-    instance().stage.addActor(toast);
+    instance().getStage().addActor(toast);
     toast.show();
   }
 
   public float getPrefWidth() {
-    return stage.width();
+    return getStage().getWidth();
   }
 
   public float getPrefHeight() {
-    return stage.height();
-  }
-
-  public void showTipBubble(GridObject gridObject, String message) {
-    SpeechBubble bubble = new SpeechBubble(camera);
-    bubble.setText(message);
-    bubble.followObject(gridObject);
-    bubble.show();
-    System.out.println("Bubble: " + message);
-    addActor(bubble);
+    return getStage().getHeight();
   }
 
   public static StackGroup getNotificationStack() {
@@ -297,7 +271,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
   public void setTutorialStepNotification(TutorialStepNotification nextStep) {
     if (tutorialStep != null) {
-      tutorialStep.markToRemove(true);
+      tutorialStep.remove();
     }
 
     tutorialStep = nextStep;
@@ -305,8 +279,8 @@ public class HeadsUpDisplay extends WidgetGroup {
     addActor(nextStep);
 
     nextStep.pack();
-    nextStep.x = 20;
-    nextStep.y = statusBarPanel.y - nextStep.height - 20;
+    nextStep.setX(20);
+    nextStep.setY(statusBarPanel.getY() - nextStep.getHeight() - 20);
   }
 
   public AchievementButton getAchievementButton() {
@@ -320,7 +294,7 @@ public class HeadsUpDisplay extends WidgetGroup {
   public void toggleViewNeighborsButton(boolean state) {
     //noinspection PointlessBooleanExpression
     if (HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT && viewNeighborsButton != null) {
-      viewNeighborsButton.visible = state;
+      viewNeighborsButton.setVisible(state);
     }
   }
 }

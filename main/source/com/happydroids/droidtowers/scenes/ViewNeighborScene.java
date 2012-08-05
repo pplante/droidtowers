@@ -53,8 +53,8 @@ public class ViewNeighborScene extends Scene {
 
     neighborHUD = new ViewNeighborHUD(playerGameState);
     neighborHUD.pack();
-    neighborHUD.x = 0;
-    neighborHUD.y = Gdx.graphics.getHeight() - neighborHUD.height;
+    neighborHUD.setX(0);
+    neighborHUD.setY(Gdx.graphics.getHeight() - neighborHUD.getHeight());
     getStage().addActor(neighborHUD);
 
     InputSystem.instance().bind(TowerConsts.NEGATIVE_BUTTON_KEYS, goBackHomeCallback);
@@ -120,7 +120,7 @@ public class ViewNeighborScene extends Scene {
     neighborGameGridX += (neighborGameGrid.getGridSize().x + 6) * GRID_UNIT_SIZE;
 
     neighborGameGrid.setOwnerName(friendCloudGameSave.getOwner().getFirstName());
-    neighborGameGrid.setClickListener(new NeighborMenuBuilder(this));
+    neighborGameGrid.addListener(new NeighborMenuBuilder(this));
 
 
     TowerNameBillboard billboard = new TowerNameBillboard(neighborGameGrid);

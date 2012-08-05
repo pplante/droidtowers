@@ -10,17 +10,16 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.TutorialStep;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.tween.TweenSystem;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class TutorialStepNotification extends Table {
   private boolean allowDismiss;
@@ -30,10 +29,10 @@ public class TutorialStepNotification extends Table {
     super();
     this.tutorialStep = tutorialStep;
 
-    setBackground(TowerAssetManager.ninePatch("hud/dialog-bg.png", Color.WHITE, 1, 1, 1, 1));
+    setBackground(TowerAssetManager.ninePatchDrawable("hud/dialog-bg.png", Color.WHITE, 1, 1, 1, 1));
 
-    pad(scale(8));
-    defaults().top().left().space(scale(6));
+    pad(Display.scale(8));
+    defaults().top().left().space(Display.scale(6));
 
     row();
     add(FontManager.Default.makeLabel(tutorialStep.getName().toUpperCase(), Colors.ICS_BLUE));
@@ -50,9 +49,9 @@ public class TutorialStepNotification extends Table {
       final boolean isTutorialCompleteStep = tutorialStep.getId().equals("tutorial-finished");
 
       TextButton tapToDismissButton = FontManager.Default.makeTextButton(isTutorialCompleteStep ? "tap to dismiss" : "continue");
-      tapToDismissButton.setClickListener(new VibrateClickListener() {
+      tapToDismissButton.addListener(new VibrateClickListener() {
         @Override
-        public void onClick(Actor actor, float x, float y) {
+        public void onClick(InputEvent event, float x, float y) {
           tutorialStep.giveReward();
 
           if (isTutorialCompleteStep) {
@@ -80,15 +79,15 @@ public class TutorialStepNotification extends Table {
     TweenSystem.manager().killTarget(this);
 
     Timeline.createSequence()
-            .push(Tween.set(this, WidgetAccessor.SIZE).target(this.width, this.height))
+            .push(Tween.set(this, WidgetAccessor.SIZE).target(this.getWidth(), this.getHeight()))
             .beginParallel()
-            .push(Tween.to(this, WidgetAccessor.SIZE, 300).target(this.width, 0))
+            .push(Tween.to(this, WidgetAccessor.SIZE, 300).target(this.getWidth(), 0))
             .push(Tween.to(this, WidgetAccessor.OPACITY, 300).target(0))
             .end()
             .setCallback(new TweenCallback() {
               public void onEvent(int eventType, BaseTween source) {
-                TutorialStepNotification.this.markToRemove(true);
-                HeadsUpDisplay.instance().getAchievementButton().visible = true;
+                TutorialStepNotification.this.remove();
+                HeadsUpDisplay.instance().getAchievementButton().setVisible(true);
                 HeadsUpDisplay.instance().toggleViewNeighborsButton(true);
               }
             })

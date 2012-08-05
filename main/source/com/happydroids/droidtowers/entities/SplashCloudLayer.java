@@ -7,29 +7,31 @@ package com.happydroids.droidtowers.entities;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.*;
-import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveTo;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.google.common.collect.Iterables;
 import com.happydroids.droidtowers.utils.Random;
 
-import java.util.List;
-
-public class SplashCloudLayer extends Group {
+public class SplashCloudLayer extends WidgetGroup {
   public static final int CLOUD_SPAWN_DELAY = 2;
   public static final double CLOUD_SPAWN_MIN = 0.4;
   public static final double CLOUD_SPAWN_MAX = 0.8;
   public static final int MAX_ACTIVE_CLOUDS = 6;
   private float timeSinceSpawn;
   protected Vector2 worldSize;
-  private final List<TextureAtlas.AtlasRegion> cloudRegions;
+  private final Array<TextureAtlas.AtlasRegion> cloudRegions;
 
-  public SplashCloudLayer(Stage stage, List<TextureAtlas.AtlasRegion> cloudRegions) {
+  public SplashCloudLayer(Stage stage, Array<TextureAtlas.AtlasRegion> cloudRegions) {
     super();
-    this.stage = stage;
-    worldSize = new Vector2(stage.width(), stage.height());
+    this.setStage(stage);
+    worldSize = new Vector2(stage.getWidth(), stage.getHeight());
     this.cloudRegions = cloudRegions;
 
 
@@ -39,13 +41,13 @@ public class SplashCloudLayer extends Group {
     }
 
     float cloudWidths = 0;
-    for (Actor cloud : children) {
+    for (Actor cloud : getChildren()) {
       cloudWidths += ((Image) cloud).getImageWidth();
     }
 
     float spawnDistanceX = (worldSize.x - cloudWidths) / cloudsToSpawn;
-    for (int i = 0; i < children.size(); i++) {
-      children.get(i).x = spawnDistanceX * i;
+    for (int i = 0; i < getChildren().size; i++) {
+      getChildren().get(i).setX(spawnDistanceX * i);
     }
   }
 
@@ -54,33 +56,34 @@ public class SplashCloudLayer extends Group {
       return null;
     }
 
-    final Image cloud = new Image(Iterables.get(cloudRegions, MathUtils.random(cloudRegions.size() - 1)), Scaling.fit);
-    cloud.height = Math.min(cloud.getRegion().getRegionHeight(), stage.height() * 0.18f);
+    final Image cloud = new Image(Iterables.get(cloudRegions, MathUtils.random(cloudRegions.size - 1)));
+    cloud.setScaling(Scaling.fit);
+    cloud.setHeight(Math.min(cloud.getHeight(), getStage().getHeight() * 0.18f));
     if (spawnOnScreen) {
-      cloud.x = Random.randomInt(0, worldSize.x);
-      cloud.y = Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX);
+      cloud.setX(Random.randomInt(0, worldSize.x));
+      cloud.setY(Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX));
     } else {
-      cloud.x = -cloud.width;
-      cloud.y = Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX);
+      cloud.setX(-cloud.getWidth());
+      cloud.setY(Random.randomInt(worldSize.y * CLOUD_SPAWN_MIN, worldSize.y * CLOUD_SPAWN_MAX));
     }
 
-    cloud.color.a = 0f;
-    cloud.action(FadeIn.$(0.5f));
-    cloud.action(makeFlyAction(cloud));
+    cloud.getColor().a = 0f;
+    cloud.addAction(makeFlyAction(cloud));
     addActor(cloud);
 
     return cloud;
   }
 
-  private MoveTo makeFlyAction(final Image cloud) {
-    MoveTo moveTo = MoveTo.$(worldSize.x, cloud.y, MathUtils.random(30f, 45f));
-    moveTo.setCompletionListener(new OnActionCompleted() {
+  private Action makeFlyAction(final Image cloud) {
+    Action moveTo = Actions.moveTo(worldSize.x, cloud.getY(), MathUtils.random(30f, 45f));
+    RunnableAction finished = Actions.run(new Runnable() {
       @Override
-      public void completed(Action action) {
-        cloud.markToRemove(true);
+      public void run() {
+        cloud.remove();
       }
     });
-    return moveTo;
+
+    return Actions.sequence(Actions.fadeIn(0.15f), moveTo, finished);
   }
 
   public void update(float deltaTime) {
@@ -90,5 +93,15 @@ public class SplashCloudLayer extends Group {
       timeSinceSpawn = 0;
       spawnCloudNow(false);
     }
+  }
+
+  @Override
+  public float getPrefWidth() {
+    return getStage().getWidth();
+  }
+
+  @Override
+  public float getPrefHeight() {
+    return getStage().getHeight();
   }
 }

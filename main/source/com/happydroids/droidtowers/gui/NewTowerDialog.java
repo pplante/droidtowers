@@ -4,27 +4,24 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.DifficultyLevel;
-import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.GameSave;
 import com.happydroids.droidtowers.generators.NameGenerator;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.LoadTowerSplashScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
-import org.apache.commons.lang3.StringUtils;
-
-import java.text.NumberFormat;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
+import com.happydroids.droidtowers.utils.StringUtils;
 
 public class NewTowerDialog extends Dialog {
-
-  public static final int ROW_SPACE = scale(16);
+  public static final String MONEY_LABEL_PREFIX = "Starting money: ";
+  public static final int ROW_SPACE = Display.scale(16);
 
   private DifficultyLevel difficultyLevel;
+  private final Label moneyLabel;
 
   public NewTowerDialog(Stage stage) {
     super(stage);
@@ -34,9 +31,9 @@ public class NewTowerDialog extends Dialog {
     final TextField nameField = FontManager.Roboto24.makeTextField("", "");
 
     TextButton randomNameButton = FontManager.Roboto12.makeTextButton("Random Name");
-    randomNameButton.setClickListener(new VibrateClickListener() {
+    randomNameButton.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         nameField.setText(NameGenerator.randomCorporationName());
       }
     });
@@ -52,41 +49,35 @@ public class NewTowerDialog extends Dialog {
     c.row().space(ROW_SPACE);
     c.add(FontManager.RobotoBold18.makeLabel("Difficulty:")).right();
 
-    TextButton easy = FontManager.RobotoBold18.makeTextButton("Easy");
-    TextButton medium = FontManager.RobotoBold18.makeTextButton("Medium");
-    TextButton hard = FontManager.RobotoBold18.makeTextButton("Hard");
+    TextButton easyButton = FontManager.RobotoBold18.makeTextToggleButton("Easy");
+    TextButton mediumButton = FontManager.RobotoBold18.makeTextToggleButton("Medium");
+    TextButton hardButton = FontManager.RobotoBold18.makeTextToggleButton("Hard");
 
     Table buttonContainer = new Table();
     buttonContainer.row().pad(4).fill();
-    buttonContainer.add(easy).expand();
-    buttonContainer.add(medium).expand();
-    buttonContainer.add(hard).expand();
+    buttonContainer.add(easyButton).expand();
+    buttonContainer.add(mediumButton).expand();
+    buttonContainer.add(hardButton).expand();
 
     c.add(buttonContainer).fillX().colspan(2);
     c.row();
 
-    final String moneyLabelPrefix = "Starting money: " + TowerConsts.CURRENCY_SYMBOL;
-    final Label moneyLabel = FontManager.Roboto32.makeLabel(moneyLabelPrefix);
+    moneyLabel = FontManager.Roboto32.makeLabel(MONEY_LABEL_PREFIX);
     c.add(moneyLabel).center().colspan(3);
 
-    final ButtonGroup difficultyGroup = new ButtonGroup(easy, medium, hard);
-    difficultyGroup.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-        Button checked = difficultyGroup.getChecked();
-        if (checked != null) {
-          String buttonText = ((TextButton) checked).getText().toString();
-          difficultyLevel = DifficultyLevel.valueOf(buttonText.toUpperCase());
-          moneyLabel.setText(moneyLabelPrefix + NumberFormat.getInstance().format(difficultyLevel.getStartingMoney()));
-          NewTowerDialog.this.pack();
-        }
-      }
-    });
+    easyButton.setChecked(true);
+    easyButton.addListener(new DifficultyLevelButtonListener(DifficultyLevel.EASY, moneyLabel));
+    mediumButton.addListener(new DifficultyLevelButtonListener(DifficultyLevel.MEDIUM, moneyLabel));
+    hardButton.addListener(new DifficultyLevelButtonListener(DifficultyLevel.HARD, moneyLabel));
 
-    difficultyGroup.setChecked("Easy");
+    final ButtonGroup difficultyGroup = new ButtonGroup(easyButton, mediumButton, hardButton);
+    difficultyGroup.setUncheckLast(true);
+    difficultyGroup.setMaxCheckCount(1);
 
     TextButton cancelButton = FontManager.RobotoBold18.makeTextButton("cancel");
-    cancelButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
+    cancelButton.addListener(new VibrateClickListener() {
+      @Override
+      public void onClick(InputEvent event, float x, float y) {
         dismiss();
       }
     });
@@ -106,13 +97,34 @@ public class NewTowerDialog extends Dialog {
                   .setTitle("Error")
                   .setMessage("You need to provide a name for your Tower!")
                   .show();
-          return;
+        } else {
+          dismiss();
+          SceneManager.changeScene(LoadTowerSplashScene.class, new GameSave(nameField.getText(), difficultyLevel));
         }
-        dismiss();
-        SceneManager.changeScene(LoadTowerSplashScene.class, new GameSave(nameField.getText(), difficultyLevel));
       }
     });
 
     setView(c);
+
+    easyButton.toggle();
+  }
+
+  private class DifficultyLevelButtonListener extends InputListener {
+    private final DifficultyLevel buttonDifficultyLevel;
+
+    public DifficultyLevelButtonListener(DifficultyLevel buttonDifficultyLevel, Label moneyLabel) {
+      this.buttonDifficultyLevel = buttonDifficultyLevel;
+    }
+
+    @Override
+    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+      setDifficultyLevel(buttonDifficultyLevel);
+      return true;
+    }
+  }
+
+  public void setDifficultyLevel(DifficultyLevel difficultyLevel) {
+    this.difficultyLevel = difficultyLevel;
+    moneyLabel.setText(MONEY_LABEL_PREFIX + StringUtils.currencyFormat(difficultyLevel.getStartingMoney()));
   }
 }

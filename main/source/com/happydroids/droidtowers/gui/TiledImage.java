@@ -34,7 +34,7 @@ public class TiledImage extends Image {
   public void draw(SpriteBatch batch, float parentAlpha) {
     validate();
 
-    batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
+    batch.setColor(getColor().r, getColor().g, getColor().b, getColor().a * parentAlpha);
     batch.draw(texture, 0, 0, Display.getWidth(), Display.getHeight(), u, v, u2, v2);
   }
 }

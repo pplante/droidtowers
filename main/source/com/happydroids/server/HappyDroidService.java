@@ -19,7 +19,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.client.utils.URIUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.entity.BufferedHttpEntity;
@@ -212,7 +211,7 @@ public class HappyDroidService {
           pairs.add(new BasicNameValuePair(paramName, queryParams.get(paramName)));
         }
 
-        uri = URIUtils.createURI(uri.getScheme(), uri.getHost(), uri.getPort(), uri.getPath(), URLEncodedUtils.format(pairs, "UTF-8"), uri.getFragment());
+        uri = new URI(uri.getScheme(), uri.getUserInfo(), uri.getHost(), uri.getPort(), uri.getPath(), URLEncodedUtils.format(pairs, "UTF-8"), uri.getFragment());
       }
 
       HttpGet request = new HttpGet(uri);

@@ -38,7 +38,7 @@ echo
 echo "* Copying android libs..."
 echo
 
-ANDROID_LIBS_PATH="${PROJECT_DIR}/android/libs/."
+ANDROID_LIBS_PATH="${PROJECT_DIR}/android-shared/libs/."
 cp -R "${EXTRACT_PATH}/armeabi" $ANDROID_LIBS_PATH
 cp -R "${EXTRACT_PATH}/armeabi-v7a" $ANDROID_LIBS_PATH
 cp "${EXTRACT_PATH}/gdx-backend-android.jar" $ANDROID_LIBS_PATH

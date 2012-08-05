@@ -87,12 +87,12 @@ public abstract class Scene {
   }
 
   protected void centerHorizontally(Actor actor) {
-    actor.x = (int) (getStage().width() - actor.width) / 2;
+    actor.setX((int) (getStage().getWidth() - actor.getWidth()) / 2);
   }
 
 
   protected void centerVertically(Actor actor) {
-    actor.y = (int) (getStage().height() - actor.height) / 2;
+    actor.setY((int) (getStage().getHeight() - actor.getHeight()) / 2);
   }
 
   public EventBus events() {

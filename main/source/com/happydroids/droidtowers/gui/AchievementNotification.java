@@ -8,25 +8,25 @@ import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.Achievement;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.tween.TweenSystem;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class AchievementNotification extends Table {
 
   public AchievementNotification(Achievement achievement) {
-    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.TRANSPARENT_BLACK));
+    setBackground(TowerAssetManager.ninePatchDrawable(TowerAssetManager.WHITE_SWATCH, Colors.TRANSPARENT_BLACK));
 
-    defaults().top().left().pad(scale(4));
+    defaults().top().left().pad(Display.scale(4));
 
-    add(new Image(TowerAssetManager.textureFromAtlas("achievements-active", "hud/buttons.txt"), Scaling.none)).minWidth(scale(64)).padRight(scale(8));
+    add(new Image(TowerAssetManager.drawableFromAtlas("achievements-active", "hud/buttons.txt"), Scaling.none)).minWidth(Display.scale(64)).padRight(Display.scale(8));
 
     Table textTable = new Table();
     textTable.defaults().left().top();
@@ -38,6 +38,13 @@ public class AchievementNotification extends Table {
     textTable.pack();
     setClip(true);
     pack();
+
+    addListener(new VibrateClickListener() {
+      @Override
+      public void onClick(InputEvent event, float x, float y) {
+        hide(false);
+      }
+    });
   }
 
   public void show() {
@@ -58,12 +65,12 @@ public class AchievementNotification extends Table {
   public void hide(final boolean useDelay) {
     TweenSystem.manager().killTarget(this);
 
-    final WidgetGroup targetParent = (WidgetGroup) AchievementNotification.this.parent;
+    final WidgetGroup targetParent = (WidgetGroup) AchievementNotification.this.getParent();
 
     Timeline.createSequence()
-            .push(Tween.set(this, WidgetAccessor.SIZE).target(this.width, this.height).delay(useDelay ? 4000 : 0))
+            .push(Tween.set(this, WidgetAccessor.SIZE).target(this.getWidth(), this.getHeight()).delay(useDelay ? 4000 : 0))
             .beginParallel()
-            .push(Tween.to(this, WidgetAccessor.SIZE, 300).target(this.width, 0))
+            .push(Tween.to(this, WidgetAccessor.SIZE, 300).target(this.getWidth(), 0))
             .push(Tween.to(this, WidgetAccessor.OPACITY, 300).target(0))
             .end()
             .setCallback(new TweenCallback() {
@@ -77,11 +84,5 @@ public class AchievementNotification extends Table {
             })
             .setCallbackTriggers(TweenCallback.END)
             .start(TweenSystem.manager());
-  }
-
-  @Override
-  public boolean touchDown(float x, float y, int pointer) {
-    hide(false);
-    return true;
   }
 }

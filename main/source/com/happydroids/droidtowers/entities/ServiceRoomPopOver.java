@@ -4,7 +4,7 @@
 
 package com.happydroids.droidtowers.entities;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.gui.ManageServiceRoomDialog;
 import com.happydroids.droidtowers.gui.VibrateClickListener;
@@ -17,7 +17,7 @@ public class ServiceRoomPopOver extends GridObjectPopOver<ServiceRoom> {
     ButtonBar buttonBar = new ButtonBar();
     buttonBar.addButton("Manage", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         new ManageServiceRoomDialog(serviceRoom).show();
       }
     });

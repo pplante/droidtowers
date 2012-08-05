@@ -8,33 +8,32 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.*;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.HappyDroidConnect;
 
 import static com.badlogic.gdx.Application.ApplicationType.Applet;
 import static com.badlogic.gdx.Application.ApplicationType.Desktop;
 import static com.happydroids.droidtowers.gui.FontManager.Default;
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class MainMenuButtonPanel extends Table {
   private static final String TAG = MainMenuButtonPanel.class.getSimpleName();
-  public static final int BUTTON_WIDTH = scale(280);
-  public static final int BUTTON_SPACING = scale(12);
+  public static final int BUTTON_WIDTH = Display.scale(280);
+  public static final int BUTTON_SPACING = Display.scale(12);
   private NinePatch dropShadowPatch;
 
   public MainMenuButtonPanel() {
     super();
 
     dropShadowPatch = TowerAssetManager.ninePatch("swatches/drop-shadow.png", Color.WHITE, 22, 22, 22, 22);
-    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Color.DARK_GRAY));
+    setBackground(TowerAssetManager.ninePatchDrawable(TowerAssetManager.WHITE_SWATCH, Color.DARK_GRAY));
 
     pad(BUTTON_SPACING);
 
@@ -53,7 +52,7 @@ public class MainMenuButtonPanel extends Table {
     add(newGameButton).fill().width(BUTTON_WIDTH);
 
     row();
-    Table optionsAndCreditsRow = newTable();
+    Table optionsAndCreditsRow = new Table();
     optionsAndCreditsRow.row().fill().space(BUTTON_SPACING);
     add(optionsAndCreditsRow).width(BUTTON_WIDTH);
 
@@ -61,9 +60,9 @@ public class MainMenuButtonPanel extends Table {
       TextButton optionsButton = Default.makeTextButton("options");
       optionsAndCreditsRow.add(optionsButton).expandX();
 
-      optionsButton.setClickListener(new VibrateClickListener() {
+      optionsButton.addListener(new VibrateClickListener() {
         @Override
-        public void onClick(Actor actor, float x, float y) {
+        public void onClick(InputEvent event, float x, float y) {
           new OptionsDialog(getStage()).show();
         }
       });
@@ -76,7 +75,7 @@ public class MainMenuButtonPanel extends Table {
     if (HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT && !Gdx.app.getType().equals(Applet)) {
       row();
       final TextButton connectToHappyDroids = Default.makeTextButton("login to happydroids.com");
-      connectToHappyDroids.visible = false;
+      connectToHappyDroids.setVisible(false);
       add(connectToHappyDroids).fill().width(BUTTON_WIDTH);
       row().padTop(BUTTON_SPACING);
 
@@ -84,14 +83,14 @@ public class MainMenuButtonPanel extends Table {
         public void run() {
           Gdx.app.debug(TAG, "After auth, close/show connect button.");
           if (!TowerGameService.instance().isAuthenticated()) {
-            connectToHappyDroids.visible = true;
-            connectToHappyDroids.setClickListener(new VibrateClickListener() {
+            connectToHappyDroids.setVisible(true);
+            connectToHappyDroids.addListener(new VibrateClickListener() {
               @Override
-              public void onClick(Actor actor, float x, float y) {
+              public void onClick(InputEvent event, float x, float y) {
                 SceneManager.pushScene(HappyDroidConnect.class);
               }
             });
-            connectToHappyDroids.action(FadeIn.$(0.25f));
+            connectToHappyDroids.addAction(Actions.fadeIn(0.25f));
           }
         }
       });
@@ -102,29 +101,30 @@ public class MainMenuButtonPanel extends Table {
       TextButton exitGameButton = Default.makeTextButton("exit");
       add(exitGameButton).fill().width(BUTTON_WIDTH);
 
-      exitGameButton.setClickListener(new ClickListener() {
-        public void click(Actor actor, float x, float y) {
+      exitGameButton.addListener(new VibrateClickListener() {
+        @Override
+        public void onClick(InputEvent event, float x, float y) {
           Gdx.app.exit();
         }
       });
     }
 
-    newGameButton.setClickListener(new VibrateClickListener() {
+    newGameButton.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         new NewTowerDialog(getStage()).show();
       }
     });
-    loadGameButton.setClickListener(new VibrateClickListener() {
+    loadGameButton.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         new LoadTowerWindow(getStage()).show();
       }
     });
 
-    aboutButton.setClickListener(new VibrateClickListener() {
+    aboutButton.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         new AboutWindow(getStage()).show();
       }
     });
@@ -133,8 +133,11 @@ public class MainMenuButtonPanel extends Table {
   @Override
   protected void drawBackground(SpriteBatch batch, float parentAlpha) {
     if (this.dropShadowPatch != null) {
-      batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-      this.dropShadowPatch.draw(batch, x - dropShadowPatch.getLeftWidth(), y - dropShadowPatch.getTopHeight(), width + dropShadowPatch.getRightWidth() + dropShadowPatch.getLeftWidth(), height + dropShadowPatch.getBottomHeight() + dropShadowPatch.getTopHeight());
+      batch.setColor(getColor().r, getColor().g, getColor().b, getColor().a * parentAlpha);
+      this.dropShadowPatch.draw(batch, getX() - dropShadowPatch.getLeftWidth(),
+                                       getY() - dropShadowPatch.getTopHeight(),
+                                       getWidth() + dropShadowPatch.getRightWidth() + dropShadowPatch.getLeftWidth(),
+                                       getHeight() + dropShadowPatch.getBottomHeight() + dropShadowPatch.getTopHeight());
     }
 
     super.drawBackground(batch, parentAlpha);

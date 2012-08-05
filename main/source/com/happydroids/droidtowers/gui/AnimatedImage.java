@@ -7,8 +7,8 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-
-import java.util.List;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 
 public class AnimatedImage extends Image {
   private final Animation animation;
@@ -17,7 +17,7 @@ public class AnimatedImage extends Image {
   private boolean hasPlaybackDelay;
   private final boolean shouldLoop;
 
-  public AnimatedImage(List<TextureAtlas.AtlasRegion> frames, float frameDuration, boolean shouldLoop) {
+  public AnimatedImage(Array<TextureAtlas.AtlasRegion> frames, float frameDuration, boolean shouldLoop) {
     super(frames.get(0));
     this.shouldLoop = shouldLoop;
 
@@ -38,7 +38,7 @@ public class AnimatedImage extends Image {
       }
     }
 
-    setRegion(animation.getKeyFrame(playbackTime, shouldLoop));
+    ((TextureRegionDrawable) getDrawable()).setRegion(animation.getKeyFrame(playbackTime, shouldLoop));
   }
 
   public void delayAfterPlayback(float delay) {

@@ -19,7 +19,7 @@ public class PickerTool extends ToolBase {
   }
 
   @Override
-  public boolean longPress(int x, int y) {
+  public boolean longPress(float x, float y) {
     Vector2 worldPoint = cameraPickRayToWorldPoint(x, y);
 
     for (GameLayer gameLayer : gameLayers) {
@@ -32,7 +32,7 @@ public class PickerTool extends ToolBase {
   }
 
   @Override
-  public boolean pan(int x, int y, int deltaX, int deltaY) {
+  public boolean pan(float x, float y, float deltaX, float deltaY) {
     Vector2 worldPoint = cameraPickRayToWorldPoint(x, y);
     Vector2 deltaPoint = cameraPickRayToWorldPoint(x + -deltaX, y + deltaY);
 
@@ -46,7 +46,7 @@ public class PickerTool extends ToolBase {
   }
 
   @Override
-  public boolean tap(int x, int y, int count) {
+  public boolean tap(float x, float y, int count, int pointer, int button) {
     Vector2 worldPoint = cameraPickRayToWorldPoint(x, y);
 
     for (GameLayer gameLayer : gameLayers) {
@@ -58,9 +58,8 @@ public class PickerTool extends ToolBase {
     return false;
   }
 
-
   @Override
-  public boolean touchDown(int x, int y, int pointer) {
+  public boolean touchDown(float x, float y, int pointer) {
     Vector2 worldPoint = cameraPickRayToWorldPoint(x, y);
 
     for (GameLayer gameLayer : gameLayers) {
@@ -72,7 +71,7 @@ public class PickerTool extends ToolBase {
     return false;
   }
 
-  private Vector2 cameraPickRayToWorldPoint(int x, int y) {
+  private Vector2 cameraPickRayToWorldPoint(float x, float y) {
     Ray pickRay = camera.getPickRay(x, y);
     Vector3 pickRayEndPoint = pickRay.getEndPoint(1);
     return new Vector2(pickRayEndPoint.x, pickRayEndPoint.y);

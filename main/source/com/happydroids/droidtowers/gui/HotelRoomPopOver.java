@@ -4,12 +4,11 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.happydroids.droidtowers.entities.HotelRoom;
 import com.happydroids.droidtowers.gui.controls.ButtonBar;
 import com.happydroids.droidtowers.gui.dialogs.CousinVinnieRepayLoanDialog;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
+import com.happydroids.droidtowers.platform.Display;
 
 public class HotelRoomPopOver extends GridObjectPopOver<HotelRoom> {
   private RatingBar crimeBar;
@@ -33,13 +32,13 @@ public class HotelRoomPopOver extends GridObjectPopOver<HotelRoom> {
     ButtonBar buttonBar = new ButtonBar();
     buttonBar.addButton("Manage", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         new ManageHotelRoomDialog(gridObject).show();
       }
     });
     buttonBar.addButton("Redecorate", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         new ConfirmRedecorationDialog(gridObject).show();
       }
     });
@@ -47,13 +46,13 @@ public class HotelRoomPopOver extends GridObjectPopOver<HotelRoom> {
     if (gridObject.hasLoanFromCousinVinnie()) {
       buttonBar.addButton("Repay Vinnie", new VibrateClickListener() {
         @Override
-        public void onClick(Actor actor, float x, float y) {
+        public void onClick(InputEvent event, float x, float y) {
           new CousinVinnieRepayLoanDialog(gridObject).show();
         }
       });
     }
 
-    row().fillX().pad(scale(-8)).padTop(scale(16));
+    row().fillX().pad(Display.scale(-8)).padTop(Display.scale(16));
     add(buttonBar).expandX().minWidth(200);
   }
 

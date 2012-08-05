@@ -16,7 +16,7 @@ class GridObjectPopOverCloser extends InputAdapter {
   }
 
   private boolean closePopOver() {
-    objectPopOver.markToRemove(true);
+    objectPopOver.remove();
 
     InputSystem.instance().removeInputProcessor(this);
 

@@ -1,0 +1,9 @@
+<!--
+  ~ Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+  -->
+
+<resources>
+  <style name="NoActionBar" parent="@android:style/Theme">
+    <!-- Inherits the default theme for pre-HC (no action bar) -->
+  </style>
+</resources>

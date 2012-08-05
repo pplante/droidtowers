@@ -25,7 +25,7 @@ public class ViewNeighborSplashScene extends SplashScene {
   public void create(Object... args) {
     super.create(args);
 
-    progressPanel.markToRemove(true);
+    progressPanel.remove();
     progressPanel = null;
 
     progressPanel = new ProgressPanel();

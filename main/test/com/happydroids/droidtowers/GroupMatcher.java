@@ -16,15 +16,15 @@ import static com.happydroids.droidtowers.Expect.expect;
 public class GroupMatcher<T extends Group, M extends GroupMatcher<T, M>> extends ObjectMatcher<T, M> {
   @Override
   public boolean toEqual(T expected) {
-    return actual.x == expected.x && actual.y == expected.y;
+    return actual.getX() == expected.getX() && actual.getY() == expected.getY();
   }
 
   public boolean toHaveChildren(int numChildren) {
-    return actual.getActors().size() == numChildren;
+    return actual.getChildren().size == numChildren;
   }
 
   public boolean toHaveLabelWithText(String text) {
-    for (Actor actor : actual.getActors()) {
+    for (Actor actor : actual.getChildren()) {
       if (actor instanceof Label) {
         Label label = (Label) actor;
         if (label.getText().equals(text)) {

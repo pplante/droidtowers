@@ -7,11 +7,12 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectionListener;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
@@ -23,8 +24,6 @@ import com.happydroids.security.SecurePreferences;
 
 import javax.annotation.Nullable;
 import java.util.List;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class OptionsDialog extends Dialog {
   private final SecurePreferences displayPrefs;
@@ -39,7 +38,7 @@ public class OptionsDialog extends Dialog {
     setTitle("Options");
 
     Table body = new Table();
-    body.defaults().top().left().space(scale(16));
+    body.defaults().top().left().space(Display.scale(16));
 
     body.row().fillX();
     body.add(FontManager.RobotoBold18.makeLabel("Resolution: "));
@@ -47,9 +46,9 @@ public class OptionsDialog extends Dialog {
 
     fullscreenCheckbox = FontManager.RobotoBold18.makeCheckBox("Fullscreen");
     fullscreenCheckbox.setChecked(Gdx.graphics.isFullscreen());
-    fullscreenCheckbox.setClickListener(new VibrateClickListener() {
+    fullscreenCheckbox.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         saveDisplayChanges(displayModeList.get(displayResolution.getSelectionIndex()));
       }
     });
@@ -98,9 +97,9 @@ public class OptionsDialog extends Dialog {
       displayResolution.setSelection(currentResolution);
     }
 
-    displayResolution.setSelectionListener(new SelectionListener() {
+    displayResolution.addListener(new ChangeListener() {
       @Override
-      public void selected(Actor actor, int index, String value) {
+      public void changed(ChangeEvent event, Actor actor) {
         saveDisplayChanges(displayModeList.get(displayResolution.getSelectionIndex()));
       }
     });

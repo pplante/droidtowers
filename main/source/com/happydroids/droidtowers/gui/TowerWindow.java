@@ -9,21 +9,23 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.utils.StringUtils;
 
 import static com.happydroids.droidtowers.ColorUtil.rgba;
 import static com.happydroids.droidtowers.gui.FontManager.Roboto18;
 import static com.happydroids.droidtowers.gui.FontManager.Roboto32;
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class TowerWindow {
   private static final int[] DIALOG_CLOSE_KEYCODES = new int[]{InputSystem.Keys.ESCAPE, InputSystem.Keys.BACK};
@@ -56,46 +58,41 @@ public class TowerWindow {
     };
     wrapper.setFillParent(true);
     wrapper.defaults().top().left();
-    wrapper.touchable = true;
-    wrapper.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
-
-      }
-    });
+    wrapper.setTouchable(Touchable.childrenOnly);
 
     Texture texture = TowerAssetManager.texture("hud/window-bg.png");
     texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-    wrapper.setBackground(new NinePatch(texture));
-    wrapper.size((int) stage.width(), (int) stage.height());
+    wrapper.setBackground(new NinePatchDrawable(new NinePatch(texture)));
+    wrapper.size((int) stage.getWidth(), (int) stage.getHeight());
 
     titleLabel = Roboto32.makeLabel(StringUtils.truncate(title, 40));
     closeButton = Roboto18.makeTransparentButton("< back", rgba("#007399"), Colors.DARK_GRAY);
-    closeButtonLine = new VerticalRule(scale(2));
+    closeButtonLine = new VerticalRule(Display.scale(2));
 
     Table topBar = new Table();
     topBar.row().fill();
     topBar.add(closeButton).fill();
     topBar.add(closeButtonLine).fillY();
-    topBar.add(titleLabel).center().left().expand().pad(scale(4)).padLeft(scale(12));
+    topBar.add(titleLabel).center().left().expand().pad(Display.scale(4)).padLeft(Display.scale(12));
 
     wrapper.add(topBar).fill();
 
     wrapper.row().fillX();
-    wrapper.add(new HorizontalRule(scale(2))).expandX();
+    wrapper.add(new HorizontalRule(Display.scale(2))).expandX();
 
     wrapper.row().fillX();
     actionBarCell = wrapper.add();
 
     contentRow = wrapper.row();
-    contentRow.fill().padLeft(scale(24)).padRight(scale(24));
+    contentRow.fill().padLeft(Display.scale(24)).padRight(Display.scale(24));
     wrapper.add(makeContentContainer()).expand();
 
     wrapper.row().fillX();
     footerBarCell = wrapper.add();
 
-    closeButton.setClickListener(new VibrateClickListener() {
+    closeButton.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         dismiss();
       }
     });
@@ -122,14 +119,14 @@ public class TowerWindow {
 
     wrapper.invalidate();
     wrapper.pack();
-    wrapper.color.set(Color.WHITE);
+    wrapper.setColor(Color.WHITE);
     stage.addActor(wrapper);
 
     return this;
   }
 
   public void dismiss() {
-    wrapper.visible = false;
+    wrapper.setVisible(false);
     unbindKeys();
 
     if (dismissCallback != null) {
@@ -139,7 +136,7 @@ public class TowerWindow {
     stage.setScrollFocus(null);
     stage.setKeyboardFocus(null);
 
-    wrapper.markToRemove(true);
+    wrapper.remove();
   }
 
   public TowerWindow setDismissCallback(Runnable dismissCallback) {
@@ -214,5 +211,9 @@ public class TowerWindow {
 
   public Cell addLabel(String text, FontManager labelFont) {
     return addLabel(text, labelFont, Color.WHITE);
+  }
+
+  public Table getContent() {
+    return content;
   }
 }

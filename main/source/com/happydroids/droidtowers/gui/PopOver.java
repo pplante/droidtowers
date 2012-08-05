@@ -9,29 +9,28 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.OnActionCompleted;
-import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
-import com.badlogic.gdx.scenes.scene2d.actions.FadeOut;
-import com.badlogic.gdx.scenes.scene2d.ui.Align;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
-
-import java.util.List;
 
 import static com.happydroids.droidtowers.TowerAssetManager.texture;
 import static com.happydroids.droidtowers.input.InputSystem.Keys.BACK;
 import static com.happydroids.droidtowers.input.InputSystem.Keys.ESCAPE;
-import static com.happydroids.droidtowers.platform.Display.scale;
 
-public class PopOverLayer extends WidgetGroup {
+public class PopOver extends WidgetGroup {
   public static final float INACTIVE_BUTTON_ALPHA = 0.5f;
   public static final float ACTIVE_BUTTON_ALPHA = 0.85f;
   public static final float BUTTON_FADE_DURATION = 0.125f;
@@ -42,16 +41,23 @@ public class PopOverLayer extends WidgetGroup {
   private final Texture background;
   protected Table content;
 
-  public PopOverLayer() {
+  public PopOver() {
     triangle = texture(TowerAssetManager.WHITE_SWATCH_TRIANGLE);
     swatch = texture(TowerAssetManager.WHITE_SWATCH);
     background = TowerAssetManager.texture("hud/window-bg.png");
     background.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
     content = new Table();
-    content.defaults().top().left().space(scale(6));
+    content.defaults().top().left().space(Display.scale(6));
 
-    touchable = true;
+    setTouchable(Touchable.enabled);
+    addCaptureListener(new EventListener() {
+      @Override
+      public boolean handle(Event event) {
+        event.stop();
+        return true;
+      }
+    });
   }
 
   public Cell row() {
@@ -66,24 +72,24 @@ public class PopOverLayer extends WidgetGroup {
     return content.add(actor);
   }
 
-  public List<Actor> getActors() {
-    return content.getActors();
+  public Array<Actor> getActors() {
+    return content.getChildren();
   }
 
   @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
     SceneManager.activeScene().effects().drawDropShadow(batch, parentAlpha, this);
 
-    float xOffset = (arrowAlignment & Align.RIGHT) != 0 ? width - triangle.getWidth() - 8 : 8;
+    float xOffset = (arrowAlignment & Align.right) != 0 ? getWidth() - triangle.getWidth() - 8 : 8;
     batch.setColor(Colors.ICS_BLUE);
-    batch.draw(triangle, x + xOffset + 2, y + height + 2, 2, 3, triangle.getWidth() - 4, triangle.getHeight() - 6);
-    batch.draw(swatch, x - 2, y - 2, width + 4, height + 4);
+    batch.draw(triangle, getX() + xOffset + 2, getY() + getHeight() + 2, 2, 3, triangle.getWidth() - 4, triangle.getHeight() - 6);
+    batch.draw(swatch, getX() - 2, getY() - 2, getWidth() + 4, getHeight() + 4);
 
     batch.setColor(Colors.DARKER_GRAY);
-    batch.draw(triangle, x + xOffset, y + height - 4);
+    batch.draw(triangle, getX() + xOffset, getY() + getHeight() - 4);
 
     batch.setColor(Color.WHITE);
-    batch.draw(background, x, y, width, height);
+    batch.draw(background, getX(), getY(), getWidth(), getHeight());
   }
 
   public int getOffset() {
@@ -95,10 +101,7 @@ public class PopOverLayer extends WidgetGroup {
   }
 
   public void toggle(Actor parentWidget, Actor relativeTo) {
-    visible = !visible;
-    content.visible = visible;
-
-    if (visible) {
+    if (!isVisible()) {
       show(parentWidget, relativeTo);
     } else {
       hide();
@@ -106,53 +109,54 @@ public class PopOverLayer extends WidgetGroup {
   }
 
   protected void show(Actor parentWidget, Actor relativeTo) {
+    setVisible(true);
+    content.setVisible(true);
+
     parentWidget.getStage().addActor(this);
     parentWidget.getStage().addActor(content);
 
     content.pack();
     pack();
-    float relativeX = relativeTo.x + parentWidget.x;
-    if ((arrowAlignment & Align.RIGHT) != 0) {
-      x = relativeX - width + relativeTo.width - ((relativeTo.width - triangle.getWidth()) / 2) + 8;
+    float relativeX = relativeTo.getX() + parentWidget.getX();
+    if ((arrowAlignment & Align.right) != 0) {
+      setX(relativeX - getWidth() + relativeTo.getWidth() - ((relativeTo.getWidth() - triangle.getWidth()) / 2) + 8);
     } else {
-      x = relativeX + ((relativeTo.width - triangle.getWidth()) / 2) - 8;
+      setX(relativeX + ((relativeTo.getWidth() - triangle.getWidth()) / 2) - 8);
     }
-    y = relativeTo.y + parentWidget.y - height;
-    content.x = x + scale(10);
-    content.y = y + scale(10);
+    setY(relativeTo.getY() + parentWidget.getY() - getHeight() - relativeTo.getHeight() / 2);
+    content.setX(getX() + Display.scale(10));
+    content.setY(getY() + Display.scale(10));
 
     InputSystem.instance().bind(new int[]{ESCAPE, BACK}, inputCallback);
     InputSystem.instance().addInputProcessor(clickCallback, 0);
 
-    action(FadeIn.$(BUTTON_FADE_DURATION));
-    content.action(FadeIn.$(BUTTON_FADE_DURATION));
+    addAction(Actions.fadeIn(BUTTON_FADE_DURATION));
+    content.addAction(Actions.fadeIn(BUTTON_FADE_DURATION));
   }
 
   protected void hide() {
-    if (!visible) return;
-
     InputSystem.instance().unbind(new int[]{ESCAPE, BACK}, inputCallback);
     InputSystem.instance().removeInputProcessor(clickCallback);
 
-    action(FadeOut.$(BUTTON_FADE_DURATION).setCompletionListener(new OnActionCompleted() {
+    addAction(Actions.sequence(Actions.fadeOut(BUTTON_FADE_DURATION), Actions.run(new Runnable() {
       @Override
-      public void completed(Action action) {
-        visible = false;
+      public void run() {
+        setVisible(false);
       }
-    }));
+    })));
 
-    content.action(FadeOut.$(BUTTON_FADE_DURATION).setCompletionListener(new OnActionCompleted() {
+    content.addAction(Actions.sequence(Actions.fadeOut(BUTTON_FADE_DURATION), Actions.run(new Runnable() {
       @Override
-      public void completed(Action action) {
-        content.visible = false;
+      public void run() {
+        content.setVisible(false);
       }
-    }));
+    })));
   }
 
   private final InputCallback inputCallback = new InputCallback() {
     @Override
     public boolean run(float timeDelta) {
-      boolean menuWasVisible = visible;
+      boolean menuWasVisible = isVisible();
       hide();
       return menuWasVisible;
     }
@@ -161,9 +165,9 @@ public class PopOverLayer extends WidgetGroup {
   private final InputAdapter clickCallback = new InputAdapter() {
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
-      Vector2 touchDown = new Vector2();
-      getStage().toStageCoordinates(x, y, touchDown);
-      toLocalCoordinates(touchDown);
+      Vector2 touchDown = new Vector2(x, y);
+      getStage().screenToStageCoordinates(touchDown);
+      stageToLocalCoordinates(touchDown);
 
       if (hit(touchDown.x, touchDown.y) == null) {
         hide();
@@ -175,18 +179,11 @@ public class PopOverLayer extends WidgetGroup {
 
   @Override
   public float getPrefWidth() {
-    return content.getPrefWidth() + scale(20);
+    return content.getPrefWidth() + Display.scale(20);
   }
 
   @Override
   public float getPrefHeight() {
-    return content.getPrefHeight() + scale(20);
-  }
-
-  @Override
-  public boolean touchDown(float x, float y, int pointer) {
-    super.touchDown(x, y, pointer);
-
-    return true;
+    return content.getPrefHeight() + Display.scale(20);
   }
 }

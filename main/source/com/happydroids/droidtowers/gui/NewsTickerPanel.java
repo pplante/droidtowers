@@ -5,11 +5,9 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.OnActionCompleted;
-import com.badlogic.gdx.scenes.scene2d.actions.*;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -41,18 +39,19 @@ public class NewsTickerPanel extends Table {
 
     label.setText(storiesIterator.next());
 
-    label.color.a = 0f;
+    label.getColor().a = 0f;
 
-    label.action(Forever.$(Sequence.$(
-                                             FadeIn.$(0.35f),
-                                             Delay.$(5f),
-                                             FadeOut.$(0.35f)
-    ).setCompletionListener(new OnActionCompleted() {
-      @Override
-      public void completed(Action action) {
-        label.setText(storiesIterator.next());
-      }
-    })));
+    label.addAction(Actions.forever(Actions.sequence(
+                                                            Actions.fadeIn(0.35f),
+                                                            Actions.delay(5f),
+                                                            Actions.fadeOut(0.35f),
+                                                            Actions.run(new Runnable() {
+                                                              @Override
+                                                              public void run() {
+                                                                label.setText(storiesIterator.next());
+                                                              }
+                                                            })
+    )));
   }
 
   private void addStory(String storyText) {

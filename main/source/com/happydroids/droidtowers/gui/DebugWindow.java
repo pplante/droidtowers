@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.happydroids.HappyDroidConsts;
@@ -15,14 +16,13 @@ import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.TowerScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.utils.Screenshot;
 import com.happydroids.platform.Platform;
 import com.happydroids.platform.PlatformPurchaseManger;
 import com.happydroids.platform.purchase.DroidTowerVersions;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class DebugWindow extends ScrollableTowerWindow {
   public DebugWindow(Stage stage) {
@@ -33,7 +33,7 @@ public class DebugWindow extends ScrollableTowerWindow {
       throw new RuntimeException("ZOMG WUT?");
     }
 
-    defaults().pad(scale(10)).left().expandX().fillX();
+    defaults().pad(Display.scale(10)).left().expandX().fillX();
 
     if (SceneManager.activeScene() instanceof TowerScene) {
       row();
@@ -71,9 +71,9 @@ public class DebugWindow extends ScrollableTowerWindow {
 
   private Actor makeTakeAllMoneyButton() {
     TextButton button = FontManager.Roboto24.makeTextButton("Take ALL Money");
-    button.setClickListener(new VibrateClickListener() {
+    button.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         Player.instance().subtractCurrency(Player.instance().getCoins());
       }
     });
@@ -84,9 +84,9 @@ public class DebugWindow extends ScrollableTowerWindow {
     final PlatformPurchaseManger purchaseManger = Platform.getPurchaseManager();
 
     final TextButton button = FontManager.Roboto24.makeTextButton(purchaseManger.hasPurchasedUnlimitedVersion() ? "Refund" : "Purchase" + " Unlimited Version");
-    button.setClickListener(new VibrateClickListener() {
+    button.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         if (purchaseManger.hasPurchasedUnlimitedVersion()) {
           purchaseManger.revokeItem(purchaseManger.getSkuForVersion(DroidTowerVersions.UNLIMITED_299));
         } else {
@@ -101,9 +101,9 @@ public class DebugWindow extends ScrollableTowerWindow {
 
   private TextButton makeToggleDebugInfoButton() {
     TextButton button = FontManager.Roboto24.makeTextButton("Toggle Debug Info");
-    button.setClickListener(new VibrateClickListener() {
+    button.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         HappyDroidConsts.DISPLAY_DEBUG_INFO = !HappyDroidConsts.DISPLAY_DEBUG_INFO;
       }
     });
@@ -112,9 +112,9 @@ public class DebugWindow extends ScrollableTowerWindow {
 
   private Actor makeTakeScreenshotButton() {
     TextButton button = FontManager.Roboto24.makeTextButton("Take Screenshot");
-    button.setClickListener(new VibrateClickListener() {
+    button.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         dismiss();
         Gdx.app.postRunnable(new Runnable() {
           @Override
@@ -129,9 +129,9 @@ public class DebugWindow extends ScrollableTowerWindow {
 
   private Actor makeGenerateNewDeviceIdButton() {
     TextButton button = FontManager.Roboto24.makeTextButton("Generate new Device ID");
-    button.setClickListener(new VibrateClickListener() {
+    button.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         TowerGameService.instance().setDeviceId(null);
       }
     });
@@ -140,9 +140,9 @@ public class DebugWindow extends ScrollableTowerWindow {
 
   private Actor makeDisconnectHappyDroidsButton() {
     TextButton button = FontManager.Roboto24.makeTextButton("Disconnect from happydroids");
-    button.setClickListener(new VibrateClickListener() {
+    button.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         TowerGameService.instance().setSessionToken(null);
       }
     });
@@ -151,9 +151,9 @@ public class DebugWindow extends ScrollableTowerWindow {
 
   private TextButton makeRestartActiveSceneButton() {
     TextButton button = FontManager.Roboto24.makeTextButton("Restart Active Scene");
-    button.setClickListener(new VibrateClickListener() {
+    button.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         SceneManager.restartActiveScene();
       }
     });
@@ -162,9 +162,9 @@ public class DebugWindow extends ScrollableTowerWindow {
 
   private TextButton makeInvalidateTexturesButton() {
     TextButton button = FontManager.Roboto24.makeTextButton("Invalidate Textures");
-    button.setClickListener(new VibrateClickListener() {
+    button.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         TowerAssetManager.assetManager().invalidateAllTextures();
       }
     });
@@ -173,9 +173,9 @@ public class DebugWindow extends ScrollableTowerWindow {
 
   private Actor makeCompleteAllAchievementsButton() {
     TextButton button = FontManager.Roboto24.makeTextButton("Complete all achievements");
-    button.setClickListener(new VibrateClickListener() {
+    button.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         AchievementEngine.instance().completeAll();
         TutorialEngine.instance().completeAll();
       }
@@ -185,9 +185,9 @@ public class DebugWindow extends ScrollableTowerWindow {
 
   private TextButton makeGiveMoneyButton() {
     TextButton button = FontManager.Roboto24.makeTextButton("Give $100K");
-    button.setClickListener(new VibrateClickListener() {
+    button.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         Player.instance().addCurrency(100000);
       }
     });
@@ -196,9 +196,9 @@ public class DebugWindow extends ScrollableTowerWindow {
 
   private TextButton makeResetAchievementsButton() {
     TextButton resetAchievements = FontManager.Roboto24.makeTextButton("Reset all achievements");
-    resetAchievements.setClickListener(new VibrateClickListener() {
+    resetAchievements.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         AchievementEngine.instance().resetState();
         TutorialEngine.instance().resetState();
       }

@@ -35,7 +35,7 @@ public class HorizontalRule extends Widget {
   public void draw(SpriteBatch batch, float parentAlpha) {
     Color prevColor = batch.getColor();
     batch.setColor(desiredColor);
-    batch.draw(texture, x, y, width, height);
+    batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     batch.setColor(prevColor);
   }
 

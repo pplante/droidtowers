@@ -4,7 +4,7 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputSystem;
@@ -23,7 +23,7 @@ class SelectGridItemForPurchaseClickListener extends VibrateClickListener {
   }
 
   @Override
-  public void onClick(Actor actor, float x, float y) {
+  public void onClick(InputEvent event, float x, float y) {
     InputSystem.instance().switchTool(GestureTool.PLACEMENT, toolCleanupRunnable);
 
     PlacementTool placementTool = (PlacementTool) InputSystem.instance().getCurrentTool();

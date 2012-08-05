@@ -15,7 +15,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.actions.ActionManager;
 import com.happydroids.droidtowers.actions.TimeDelayedAction;

@@ -6,17 +6,16 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.input.PickerTool;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.types.*;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class ToolMenu extends RadialMenu {
   private static final String TAG = ToolMenu.class.getSimpleName();
@@ -36,8 +35,8 @@ public class ToolMenu extends RadialMenu {
 
     arc = 35f;
     arcStart = -3.5f;
-    radius = scale(180);
-    rotation = 0;
+    radius = Display.scale(180);
+    setRotation(0);
 
     housingButton = new ColorizedImageButton(hudAtlas.findRegion("tool-housing"), Colors.ICS_BLUE);
     transitButton = new ColorizedImageButton(hudAtlas.findRegion("tool-transit"), Colors.ICS_BLUE);
@@ -55,12 +54,12 @@ public class ToolMenu extends RadialMenu {
   }
 
   private void makeClickListeners() {
-    housingButton.setClickListener(makePurchaseButtonClickListener("Housing", RoomTypeFactory.instance()));
-    transitButton.setClickListener(makePurchaseButtonClickListener("Transit", TransitTypeFactory.instance()));
-    commerceButton.setClickListener(makePurchaseButtonClickListener("Commerce", CommercialTypeFactory.instance()));
-    servicesButton.setClickListener(makePurchaseButtonClickListener("Services", ServiceRoomTypeFactory.instance()));
-    sellButton.setClickListener(new VibrateClickListener() {
-      public void onClick(Actor actor, float x, float y) {
+    housingButton.addListener(makePurchaseButtonClickListener("Housing", RoomTypeFactory.instance()));
+    transitButton.addListener(makePurchaseButtonClickListener("Transit", TransitTypeFactory.instance()));
+    commerceButton.addListener(makePurchaseButtonClickListener("Commerce", CommercialTypeFactory.instance()));
+    servicesButton.addListener(makePurchaseButtonClickListener("Services", ServiceRoomTypeFactory.instance()));
+    sellButton.addListener(new VibrateClickListener() {
+      public void onClick(InputEvent event, float x, float y) {
         close();
 
         hudToolButton.setStyle(sellButton.getStyle());
@@ -77,7 +76,7 @@ public class ToolMenu extends RadialMenu {
 
   private ClickListener makePurchaseButtonClickListener(final String dialogTitle, final GridObjectTypeFactory typeFactory) {
     return new VibrateClickListener() {
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         close();
 
         if (purchaseDialog == null) {
@@ -85,7 +84,7 @@ public class ToolMenu extends RadialMenu {
             TutorialEngine.instance().moveToStepWhenReady("tutorial-unlock-lobby");
           }
 
-          makePurchaseDialog(dialogTitle, typeFactory, ((ImageButton) actor).getStyle());
+          makePurchaseDialog(dialogTitle, typeFactory, ((ImageButton) event.getListenerActor()).getStyle());
         } else {
           purchaseDialog.dismiss();
           purchaseDialog = null;

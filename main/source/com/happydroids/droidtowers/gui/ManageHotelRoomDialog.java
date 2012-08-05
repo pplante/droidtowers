@@ -5,13 +5,14 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.entities.HotelRoom;
 import com.happydroids.droidtowers.generators.NameGenerator;
+import com.happydroids.droidtowers.platform.Display;
 
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class ManageHotelRoomDialog extends Dialog {
   private final HotelRoom hotelRoom;
@@ -44,7 +45,7 @@ public class ManageHotelRoomDialog extends Dialog {
 
   private Actor makeContentView() {
     Table content = new Table();
-    content.defaults().pad(scale(4));
+    content.defaults().pad(Display.scale(4));
 
     content.row().fillX();
     content.add(FontManager.Roboto18.makeLabel("Name of " + hotelRoom.getGridObjectType().getName())).expandX().colspan(2);
@@ -64,9 +65,9 @@ public class ManageHotelRoomDialog extends Dialog {
 
   private TextButton makeRandomNameButton() {
     TextButton randomNameButton = FontManager.Roboto12.makeTextButton("Random Name");
-    randomNameButton.setClickListener(new VibrateClickListener() {
+    randomNameButton.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         textField.setText(NameGenerator.randomCorporationName());
       }
     });

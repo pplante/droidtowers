@@ -8,7 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.events.WeatherState;
 import com.happydroids.droidtowers.grid.GameGrid;

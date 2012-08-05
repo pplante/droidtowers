@@ -4,7 +4,7 @@
 
 package com.happydroids.platform;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.happydroids.droidtowers.actions.ActionManager;
 import com.happydroids.droidtowers.actions.TimeDelayedAction;
 import com.happydroids.droidtowers.gui.ProgressDialog;
@@ -32,7 +32,7 @@ public class LaunchBrowserAfterDelay implements Runnable {
     progressDialog.setMessage("Opening Browser")
             .addButton("Launch Now", new VibrateClickListener() {
               @Override
-              public void onClick(Actor actor, float x, float y) {
+              public void onClick(InputEvent event, float x, float y) {
                 progressDialog.dismiss();
                 ActionManager.instance().removeAction(launchAction);
               }

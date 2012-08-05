@@ -29,8 +29,8 @@ public class NeighborMenuBuilder implements GameGridClickListener {
     Vector3 pos = new Vector3(x, y, 0f);
 
     viewNeighborScene.getCamera().project(pos);
-    menu.x = pos.x;
-    menu.y = pos.y;
+    menu.setX(pos.x);
+    menu.setY(pos.y);
 
     System.out.println("pos = " + pos);
 

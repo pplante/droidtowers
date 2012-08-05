@@ -28,7 +28,7 @@ public class SellTool extends ToolBase {
     super(camera, gameLayers, gameGrid);
   }
 
-  public boolean touchDown(int x, int y, int pointer) {
+  public boolean touchDown(float x, float y, int pointer) {
     Vector3 worldPoint = camera.getPickRay(x, y).getEndPoint(1);
     GridPoint gridPointAtFinger = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
 

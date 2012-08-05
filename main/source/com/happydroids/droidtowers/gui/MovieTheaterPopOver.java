@@ -4,12 +4,11 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.happydroids.droidtowers.entities.MovieTheater;
 import com.happydroids.droidtowers.gui.controls.ButtonBar;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.platform.Platform;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class MovieTheaterPopOver extends GridObjectPopOver {
   public MovieTheaterPopOver(MovieTheater movieTheater) {
@@ -23,18 +22,18 @@ public class MovieTheaterPopOver extends GridObjectPopOver {
     ButtonBar buttonBar = new ButtonBar();
     buttonBar.addButton("Watch Trailer", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         Platform.getBrowserUtil().launchWebBrowser(((MovieTheater) gridObject).getMovie().getYoutubeTrailerUrl());
       }
     });
     buttonBar.addButton("Get Tickets", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         Platform.getBrowserUtil().launchWebBrowser(((MovieTheater) gridObject).getMovie().getTicketsPurchaseUrl());
       }
     });
 
-    row().fillX().pad(scale(-8)).padTop(scale(16));
+    row().fillX().pad(Display.scale(-8)).padTop(Display.scale(16));
     add(buttonBar).expandX().minWidth(200);
   }
 }

@@ -8,19 +8,20 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.utils.StringUtils;
 
 import static com.happydroids.droidtowers.TowerAssetManager.sprite;
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class GridObjectPopOver<T extends GridObject> extends Table {
   public static final float INACTIVE_BUTTON_ALPHA = 0.5f;
@@ -50,14 +51,14 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
 
     InputSystem.instance().addInputProcessor(new GridObjectPopOverCloser(this), 20);
 
-    touchable = true;
+    setTouchable(Touchable.enabled);
     triangle = sprite(TowerAssetManager.WHITE_SWATCH_TRIANGLE_LEFT);
     triangle.setColor(Color.DARK_GRAY);
 
-    setBackground(TowerAssetManager.ninePatch("hud/dialog-bg.png", Color.WHITE, 1, 1, 1, 1));
-    defaults().left().space(scale(6));
+    setBackground(TowerAssetManager.ninePatchDrawable("hud/dialog-bg.png", Color.WHITE, 1, 1, 1, 1));
+    defaults().left().space(Display.scale(6));
 
-    pad(scale(8));
+    pad(Display.scale(8));
 
     row();
     nameLabel = FontManager.RobotoBold18.makeLabel(gridObject.getName());
@@ -66,9 +67,10 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     row().fillX().pad(-8).padTop(0).padBottom(0);
     add(new HorizontalRule()).expandX();
 
-    setClickListener(new ClickListener() {
+    addListener(new InputListener(){
       @Override
-      public void click(Actor actor, float x, float y) {
+      public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        return true;
       }
     });
   }
@@ -85,7 +87,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     upkeepLabel = FontManager.RobotoBold18.makeLabel("$0");
 
     Table budgetTable = new Table();
-    budgetTable.defaults().top().left().space(scale(8));
+    budgetTable.defaults().top().left().space(Display.scale(8));
     budgetTable.row();
     if (gridObject.canEarnMoney()) {
       budgetTable.add(FontManager.Roboto12.makeLabel("INCOME"));
@@ -123,10 +125,10 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     super.drawBackground(batch, parentAlpha);
 
     batch.setColor(0.364f, 0.364f, 0.364f, parentAlpha);
-    batch.draw(triangle, x - triangle.getWidth() + 1, y + ((height - triangle.getHeight()) / 2));
+    batch.draw(triangle, getX() - triangle.getWidth() + 1, getY() + ((getHeight() - triangle.getHeight()) / 2));
 
     batch.setColor(0.2666f, 0.2666f, 0.2666f, parentAlpha);
-    batch.draw(triangle, x - triangle.getWidth() + 2, y + ((height - triangle.getHeight()) / 2));
+    batch.draw(triangle, getX() - triangle.getWidth() + 2, getY() + ((getHeight() - triangle.getHeight()) / 2));
   }
 
   @Override
@@ -146,8 +148,8 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
 
     gridObjectWorldToScreen.set(gridObject.getWorldCenter().x + triangle.getWidth(), gridObject.getWorldCenter().y, 0);
     SceneManager.activeScene().getCamera().project(gridObjectWorldToScreen);
-    x = gridObjectWorldToScreen.x;
-    y = gridObjectWorldToScreen.y - getPrefHeight() / 2;
+    setX(gridObjectWorldToScreen.x);
+    setY(gridObjectWorldToScreen.y - getPrefHeight() / 2);
   }
 
   protected void updateControls() {
@@ -173,12 +175,12 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     }
 
     if (cousinVinniesHideout != null) {
-      if (gridObject.hasLoanFromCousinVinnie() && !cousinVinniesHideout.visible) {
-        cousinVinniesHideout.visible = true;
+      if (gridObject.hasLoanFromCousinVinnie() && !cousinVinniesHideout.isVisible()) {
+        cousinVinniesHideout.setVisible(true);
         getCell(cousinVinniesHideout).ignore(false);
         updatedData = true;
-      } else if (!gridObject.hasLoanFromCousinVinnie() && cousinVinniesHideout.visible) {
-        cousinVinniesHideout.visible = false;
+      } else if (!gridObject.hasLoanFromCousinVinnie() && cousinVinniesHideout.isVisible()) {
+        cousinVinniesHideout.setVisible(false);
         getCell(cousinVinniesHideout).ignore(true);
         updatedData = true;
       }

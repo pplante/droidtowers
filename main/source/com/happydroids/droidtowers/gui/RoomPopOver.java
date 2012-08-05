@@ -4,16 +4,16 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.entities.Avatar;
 import com.happydroids.droidtowers.entities.Room;
 import com.happydroids.droidtowers.gui.controls.ButtonBar;
 import com.happydroids.droidtowers.gui.dialogs.CousinVinnieRepayLoanDialog;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
+import com.happydroids.droidtowers.platform.Display;
 
 public class RoomPopOver extends GridObjectPopOver<Room> {
   private RatingBar residencyBar;
@@ -35,7 +35,7 @@ public class RoomPopOver extends GridObjectPopOver<Room> {
     residencyBar = makeStarRatingBar("Residents");
 
     residentImages = new Table();
-    residentImages.defaults().pad(scale(2));
+    residentImages.defaults().pad(Display.scale(2));
 
     row().fillX();
     add(residentImages).center();
@@ -44,12 +44,12 @@ public class RoomPopOver extends GridObjectPopOver<Room> {
       ButtonBar buttonBar = new ButtonBar();
       buttonBar.addButton("Repay loan from Vinnie", new VibrateClickListener() {
         @Override
-        public void onClick(Actor actor, float x, float y) {
+        public void onClick(InputEvent event, float x, float y) {
           new CousinVinnieRepayLoanDialog(gridObject).show();
         }
       });
 
-      row().fillX().pad(scale(-8)).padTop(scale(16));
+      row().fillX().pad(Display.scale(-8)).padTop(Display.scale(16));
       add(buttonBar).expandX().minWidth(200);
     }
   }
@@ -64,12 +64,12 @@ public class RoomPopOver extends GridObjectPopOver<Room> {
     boolean updatedLayout = false;
 
     if (gridObject.hasResidents()) {
-      if (residentImages.getActors().size() < gridObject.getResidents().size()) {
+      if (residentImages.getChildren().size < gridObject.getResidents().size()) {
         residentImages.clear();
 
         for (Avatar avatar : gridObject.getResidents()) {
-          Image image = new Image(avatar, Scaling.none);
-          image.color.set(avatar.getColor());
+          Image image = new Image(new TextureRegionDrawable(avatar), Scaling.none);
+          image.getColor().set(avatar.getColor());
           residentImages.add(image).width((int) avatar.getWidth());
         }
         residentImages.pack();

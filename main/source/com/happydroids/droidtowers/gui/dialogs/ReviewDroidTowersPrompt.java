@@ -5,7 +5,7 @@
 package com.happydroids.droidtowers.gui.dialogs;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.Dialog;
@@ -30,21 +30,21 @@ public class ReviewDroidTowersPrompt extends Dialog {
 
     addButton("Sure", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         gotoMarketForRating();
       }
     });
 
     addButton("Maybe later", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         resetCounter();
       }
     });
 
     addButton("Never ask again", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         neverAskAgain();
       }
     });

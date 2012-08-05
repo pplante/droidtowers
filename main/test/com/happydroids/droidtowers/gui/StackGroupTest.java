@@ -24,8 +24,8 @@ public class StackGroupTest {
   public void layout_shouldVerticallyStackChildren() {
     stackGroup.layout();
 
-    expect(stackGroup.getActors().get(0)).toBeAt(0.0f, 0.0f);
-    expect(stackGroup.getActors().get(1)).toBeAt(0.0f, 50.0f);
+    expect(stackGroup.getChildren().get(0)).toBeAt(0.0f, 0.0f);
+    expect(stackGroup.getChildren().get(1)).toBeAt(0.0f, 50.0f);
   }
 
   @Test
@@ -33,14 +33,14 @@ public class StackGroupTest {
     stackGroup.pad(10);
     stackGroup.layout();
 
-    expect(stackGroup.getActors().get(0)).toBeAt(10.0f, 10.0f);
-    expect(stackGroup.getActors().get(1)).toBeAt(10.0f, 70.0f);
+    expect(stackGroup.getChildren().get(0)).toBeAt(10.0f, 10.0f);
+    expect(stackGroup.getChildren().get(1)).toBeAt(10.0f, 70.0f);
   }
 
   private Group makeGroup() {
     Group group = new Group();
-    group.height = 50;
-    group.width = 150;
+    group.setHeight(50);
+    group.setWidth(150);
     return group;
   }
 }

@@ -42,7 +42,7 @@ public class CloudLayer extends GameLayer<GameObject> implements RespondsToWorld
     this.weatherService = weatherService;
 
     textureAtlas = TowerAssetManager.textureAtlas(CLOUDS_ATLAS);
-    numberOfCloudTypes = textureAtlas.getRegions().size();
+    numberOfCloudTypes = textureAtlas.getRegions().size;
     deadClouds = new ArrayList<GameObject>(5);
 
     if (weatherService != null) {

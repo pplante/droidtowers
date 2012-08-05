@@ -4,7 +4,7 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
@@ -19,7 +19,7 @@ class GridObjectTypeLockedClickListener extends VibrateClickListener {
   }
 
   @Override
-  public void onClick(Actor actor, float x, float y) {
+  public void onClick(InputEvent event, float x, float y) {
     if (gridObjectType.requiresUnlimitedVersion() && !Platform.getPurchaseManager().hasPurchasedUnlimitedVersion()) {
       showLockedByUnlimitedVersionDialog();
       return;

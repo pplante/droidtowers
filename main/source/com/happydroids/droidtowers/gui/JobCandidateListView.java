@@ -6,12 +6,14 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.employee.JobCandidate;
 import com.happydroids.droidtowers.gui.events.OnChangeCandidateCallback;
+import com.happydroids.droidtowers.platform.Display;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.NumberFormat;
@@ -19,7 +21,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import static com.happydroids.droidtowers.gui.FontManager.Roboto24;
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class JobCandidateListView extends Table {
   private List<JobCandidate> candidates;
@@ -32,7 +33,7 @@ public class JobCandidateListView extends Table {
   private final RatingBar experienceRating;
   private final Label candidateCountLabel;
   private String countLabelSuffix;
-  private boolean shownNoCanidatesText;
+  private boolean shownNoCandidatesText;
   private OnChangeCandidateCallback onChangeCandidateListener;
   private final Table withCandidatesView;
   private final Table withoutCandidatesView;
@@ -50,24 +51,24 @@ public class JobCandidateListView extends Table {
     candidateCountLabel = FontManager.Roboto12.makeLabel("");
 
     ColorizedImageButton prevButton = new ColorizedImageButton(TowerAssetManager.textureFromAtlas("large-left-arrow", "hud/menus.txt"), Colors.ICS_BLUE);
-    prevButton.setClickListener(new PreviousCandidateClickListener());
+    prevButton.addListener(new PreviousCandidateClickListener());
 
     ColorizedImageButton nextButton = new ColorizedImageButton(TowerAssetManager.textureFromAtlas("large-right-arrow", "hud/menus.txt"), Colors.ICS_BLUE);
-    nextButton.setClickListener(new NextCandidateClickListener());
+    nextButton.addListener(new NextCandidateClickListener());
 
-    withCandidatesView = newTable();
-    withCandidatesView.defaults().space(scale(32));
-    withCandidatesView.add(prevButton).center();
+    withCandidatesView = new Table();
+    withCandidatesView.defaults();
+    withCandidatesView.add(prevButton).width(64).height(128).center();
     withCandidatesView.add(makeInnerContentView());
-    withCandidatesView.add(nextButton).center();
+    withCandidatesView.add(nextButton).width(64).height(128).center();
 
     noCandidatesFoundLabel = Roboto24.makeLabel("No " + StringUtils.capitalize(countLabelSuffix) + " found.");
-    withoutCandidatesView = newTable();
+    withoutCandidatesView = new Table();
     withoutCandidatesView.add(noCandidatesFoundLabel).center();
   }
 
   private Actor makeInnerContentView() {
-    Table c = new Table("inner-content-view");
+    Table c = new Table();
     c.defaults().top().left().expandX().fillX();
 
     c.row().minWidth(400);
@@ -84,14 +85,14 @@ public class JobCandidateListView extends Table {
     c.add(experienceRating);
     c.add(workEthicRating);
 
-    c.row().spaceTop(scale(16));
+    c.row().spaceTop(Display.scale(16));
     c.add(FontManager.Default.makeLabel("Salary", Color.LIGHT_GRAY));
 
     c.row();
     c.add(salaryLabel).left();
 
     c.row().fillX();
-    c.add(candidateCountLabel).padTop(scale(20)).colspan(2).right().fillX();
+    c.add(candidateCountLabel).padTop(Display.scale(20)).colspan(2).right().fillX();
 
     return c;
   }
@@ -156,7 +157,7 @@ public class JobCandidateListView extends Table {
 
   private class PreviousCandidateClickListener extends VibrateClickListener {
     @Override
-    public void onClick(Actor actor, float x, float y) {
+    public void onClick(InputEvent event, float x, float y) {
       if (candidateIterator.hasPrevious()) {
         selectedCandidate = candidateIterator.previous();
         updateView();
@@ -166,7 +167,7 @@ public class JobCandidateListView extends Table {
 
   private class NextCandidateClickListener extends VibrateClickListener {
     @Override
-    public void onClick(Actor actor, float x, float y) {
+    public void onClick(InputEvent event, float x, float y) {
       if (candidateIterator.hasNext()) {
         selectedCandidate = candidateIterator.next();
         updateView();

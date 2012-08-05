@@ -8,10 +8,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
@@ -44,25 +44,27 @@ public class ExpandLandOverlay extends WidgetGroup {
     cameraController.events().register(this);
 
     leftButton = new ExpandLandButton("left");
-    leftButton.visible = false;
-    leftButton.x = 5;
-    leftButton.y = (Gdx.graphics.getHeight() - leftButton.height) / 2;
+    leftButton.setVisible(false);
+    leftButton.setX(5);
+    leftButton.setY((Gdx.graphics.getHeight() - leftButton.getHeight()) / 2);
     addActor(leftButton);
 
     rightButton = new ExpandLandButton("right");
-    rightButton.visible = false;
-    rightButton.x = Display.getWidth() - rightButton.width - 5;
-    rightButton.y = (Display.getHeight() - rightButton.height) / 2;
+    rightButton.setVisible(false);
+    rightButton.setX(Display.getWidth() - rightButton.getWidth() - 5);
+    rightButton.setY((Display.getHeight() - rightButton.getHeight()) / 2);
     addActor(rightButton);
 
-    leftButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
+    leftButton.addListener(new VibrateClickListener() {
+      @Override
+      public void onClick(InputEvent event, float x, float y) {
         expandLandToWest();
       }
     });
 
-    rightButton.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
+    rightButton.addListener(new VibrateClickListener() {
+      @Override
+      public void onClick(InputEvent event, float x, float y) {
         expandLandToEast();
       }
     });
@@ -129,15 +131,15 @@ public class ExpandLandOverlay extends WidgetGroup {
       ));
     }
 
-    private static NinePatch makeNinePatch(String textureSuffix, Color color) {
-      return new NinePatch(TowerAssetManager.textureFromAtlas("expand-land-" + textureSuffix, "hud/buttons.txt"), color);
+    private static NinePatchDrawable makeNinePatch(String textureSuffix, Color color) {
+      return new NinePatchDrawable(new NinePatch(TowerAssetManager.textureFromAtlas("expand-land-" + textureSuffix, "hud/buttons.txt"), color));
     }
 
   }
 
   @Subscribe
   public void CameraController_onPan(CameraControllerEvent event) {
-    leftButton.visible = event.position.x <= PADDING * event.zoom;
-    rightButton.visible = event.position.x + (PADDING * event.zoom) >= gameGrid.getWorldSize().x;
+    leftButton.setVisible(event.position.x <= PADDING * event.zoom);
+    rightButton.setVisible(event.position.x + (PADDING * event.zoom) >= gameGrid.getWorldSize().x);
   }
 }

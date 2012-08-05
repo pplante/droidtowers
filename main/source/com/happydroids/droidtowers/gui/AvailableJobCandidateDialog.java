@@ -5,7 +5,7 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.happydroids.droidtowers.employee.JobCandidate;
 import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.generators.JobCandidateGenerator;
@@ -29,7 +29,7 @@ public class AvailableJobCandidateDialog extends Dialog {
 
   private class HireCandidateClickListener extends VibrateClickListener {
     @Override
-    public void onClick(Actor actor, float x, float y) {
+    public void onClick(InputEvent event, float x, float y) {
       JobCandidate selectedCandidate = candidateListView.getSelectedCandidate();
       if (selectedCandidate != null) {
         candidateListView.removeCandidate(selectedCandidate);

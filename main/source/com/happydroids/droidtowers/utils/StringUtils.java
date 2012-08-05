@@ -9,13 +9,17 @@ import com.happydroids.droidtowers.TowerConsts;
 
 import java.text.NumberFormat;
 
-public class StringUtils {
+public class StringUtils extends org.apache.commons.lang3.StringUtils {
   public static CharSequence formatNumber(long i) {
     return NumberFormat.getInstance().format(i);
   }
 
   public static CharSequence formatNumber(double i) {
     return NumberFormat.getInstance().format(i);
+  }
+
+  public static String currencyFormat(int value) {
+    return TowerConsts.CURRENCY_SYMBOL + NumberFormat.getInstance().format(value);
   }
 
   public static String wrap(String text, int wrapAt) {
@@ -47,13 +51,5 @@ public class StringUtils {
     }
 
     return title.substring(0, finalSize - 3) + "...";
-  }
-
-  public static String currencyFormat(int value) {
-    return TowerConsts.CURRENCY_SYMBOL + NumberFormat.getInstance().format(value);
-  }
-
-  public static CharSequence join(Iterable<String> strings, final String separator) {
-    return org.apache.commons.lang3.StringUtils.join(strings, separator);
   }
 }

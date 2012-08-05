@@ -5,24 +5,25 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Align;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.graphics.Overlays;
 import com.happydroids.droidtowers.grid.GameGridRenderer;
+import com.happydroids.droidtowers.platform.Display;
 
-import static com.happydroids.droidtowers.TowerAssetManager.texture;
-import static com.happydroids.droidtowers.platform.Display.scale;
+import static com.happydroids.droidtowers.TowerAssetManager.drawable;
 
-class DataOverlayLayer extends PopOverLayer {
+class DataOverlayPopOver extends PopOver {
   private final GameGridRenderer gameGridRenderer;
 
-  DataOverlayLayer(final GameGridRenderer gameGridRenderer) {
+  DataOverlayPopOver(final GameGridRenderer gameGridRenderer) {
     this.gameGridRenderer = gameGridRenderer;
-    alignArrow(Align.RIGHT);
+    alignArrow(Align.right);
   }
 
   @Override
@@ -50,10 +51,10 @@ class DataOverlayLayer extends PopOverLayer {
       }
 
       final CheckBox checkBox = FontManager.Roboto18.makeCheckBox(overlay.toString());
-      checkBox.align(Align.LEFT);
-      checkBox.getLabelCell().padLeft(0).spaceLeft(scale(8));
-      checkBox.setClickListener(new VibrateClickListener() {
-        public void onClick(Actor actor, float x, float y) {
+      checkBox.align(Align.left);
+      checkBox.getLabelCell().padLeft(0).spaceLeft(Display.scale(8));
+      checkBox.addListener(new VibrateClickListener() {
+        public void onClick(InputEvent event, float x, float y) {
           if (checkBox.isChecked()) {
             for (Actor otherCheckbox : getActors()) {
               if (otherCheckbox instanceof CheckBox && otherCheckbox != checkBox) {
@@ -69,14 +70,8 @@ class DataOverlayLayer extends PopOverLayer {
       });
 
 
-      Image colorSwatch = new Image(texture(TowerAssetManager.WHITE_SWATCH), Scaling.stretch);
-      colorSwatch.color.set(overlay.getColor(1f));
-      colorSwatch.setClickListener(new VibrateClickListener() {
-        @Override
-        public void onClick(Actor actor, float x, float y) {
-          checkBox.click(x, y);
-        }
-      });
+      Image colorSwatch = new Image(drawable(TowerAssetManager.WHITE_SWATCH), Scaling.stretch);
+      colorSwatch.setColor(overlay.getColor(1f));
 
       row().left();
       add(checkBox).pad(0).fillX();

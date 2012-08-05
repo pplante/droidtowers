@@ -11,7 +11,7 @@ import com.pivotallabs.greatexpectations.matchers.ObjectMatcher;
 @MatcherOf(Actor.class)
 public class ActorMatcher<T extends Actor, M extends ActorMatcher<T, M>> extends ObjectMatcher<T, M> {
   public boolean toBeAt(float x, float y) {
-    return actual.x == x && actual.y == y;
+    return actual.getX() == x && actual.getY() == y;
   }
 }
 

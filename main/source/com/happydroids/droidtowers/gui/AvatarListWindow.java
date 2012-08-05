@@ -8,16 +8,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.entities.Avatar;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
+import com.happydroids.droidtowers.platform.Display;
 
 public class AvatarListWindow extends ScrollableTowerWindow {
   public AvatarListWindow(Stage stage, AvatarLayer avatarLayer) {
     super("Droids", stage);
 
-    defaults().space(scale(8));
+    defaults().space(Display.scale(8));
 
-    row().fillX().padTop(scale(8));
+    row().fillX().padTop(Display.scale(8));
     add(FontManager.Default.makeLabel("NAME")).expandX();
     add(FontManager.Default.makeLabel("HUNGER")).width(100);
     add(FontManager.Default.makeLabel("HAPPINESS")).width(100);

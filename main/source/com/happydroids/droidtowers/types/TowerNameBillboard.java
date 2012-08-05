@@ -40,12 +40,12 @@ public class TowerNameBillboard extends GameObject {
   @Override
   public void draw(SpriteBatch spriteBatch) {
     spriteBatch.setColor(Color.WHITE);
-    spriteBatch.draw(pollTexture, getX() + 12 + towerNameLabel.width / 2, getY(), 8, towerNameLabel.height + 100);
+    spriteBatch.draw(pollTexture, getX() + 12 + towerNameLabel.getWidth() / 2, getY(), 8, towerNameLabel.getHeight() + 100);
 
-    billboardArea.draw(spriteBatch, getX(), getY() + 100, towerNameLabel.width + 32, towerNameLabel.height + 8);
+    billboardArea.draw(spriteBatch, getX(), getY() + 100, towerNameLabel.getWidth() + 32, towerNameLabel.getHeight() + 8);
 
-    towerNameLabel.x = getX() + 16;
-    towerNameLabel.y = getY() + 4 + 100;
+    towerNameLabel.setX(getX() + 16);
+    towerNameLabel.setY(getY() + 4 + 100);
     towerNameLabel.draw(spriteBatch, 1f);
   }
 }

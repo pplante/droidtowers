@@ -4,14 +4,13 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.droidtowers.entities.Elevator;
 import com.happydroids.droidtowers.gui.controls.ButtonBar;
 import com.happydroids.droidtowers.gui.dialogs.ConfirmElevatorAddCarDialog;
 import com.happydroids.droidtowers.gui.dialogs.ConfirmElevatorRemoveCarDialog;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
+import com.happydroids.droidtowers.platform.Display;
 
 public class ElevatorPopOver extends GridObjectPopOver<Elevator> {
   private Label numRidersLabel;
@@ -32,14 +31,14 @@ public class ElevatorPopOver extends GridObjectPopOver<Elevator> {
     ButtonBar buttonBar = new ButtonBar();
     buttonBar.addButton("Add Car", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         new ConfirmElevatorAddCarDialog(gridObject).show();
       }
     });
 
     buttonBar.addButton("Remove Car", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         new ConfirmElevatorRemoveCarDialog(gridObject).show();
       }
     });
@@ -59,7 +58,7 @@ public class ElevatorPopOver extends GridObjectPopOver<Elevator> {
     row();
     add(numPassengersWaitingLabel);
 
-    row().fillX().pad(scale(-8)).padTop(scale(16));
+    row().fillX().pad(Display.scale(-8)).padTop(Display.scale(16));
     add(buttonBar).expandX().minWidth(200);
 
     pack();

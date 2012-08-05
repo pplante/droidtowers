@@ -5,9 +5,9 @@
 package com.happydroids.droidtowers.scenes.components;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.utils.Random;
@@ -25,11 +25,11 @@ public class ProgressPanel extends Table {
 
     messagesUsed = Sets.newHashSet();
 
-    loadingMessage = FontManager.Roboto32WithShadow.makeLabel(selectRandomMessage(), Color.WHITE, Align.CENTER);
-    loadingMessage.setAlignment(Align.CENTER);
+    loadingMessage = FontManager.Roboto32WithShadow.makeLabel(selectRandomMessage(), Color.WHITE, Align.center);
+    loadingMessage.setAlignment(Align.center);
 
-    progressLabel = FontManager.Roboto64WithShadow.makeLabel("0%", Color.WHITE, Align.CENTER);
-    progressLabel.setAlignment(Align.CENTER);
+    progressLabel = FontManager.Roboto64WithShadow.makeLabel("0%", Color.WHITE, Align.center);
+    progressLabel.setAlignment(Align.center);
 
     row();
     add(loadingMessage).center();

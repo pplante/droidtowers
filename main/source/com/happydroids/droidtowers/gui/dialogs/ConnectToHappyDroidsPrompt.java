@@ -4,7 +4,7 @@
 
 package com.happydroids.droidtowers.gui.dialogs;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.happydroids.droidtowers.gui.ConnectToHappyDroidsWindow;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.VibrateClickListener;
@@ -17,7 +17,7 @@ public class ConnectToHappyDroidsPrompt extends Dialog {
 
     addButton("Sure", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         new ConnectToHappyDroidsWindow(getStage()).show();
 
         dismiss();
@@ -26,7 +26,7 @@ public class ConnectToHappyDroidsPrompt extends Dialog {
 
     addButton("No", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         dismiss();
       }
     });

@@ -131,11 +131,11 @@ public enum FontManager {
 
   public TextField makeTextField(String labelText, String hintText) {
     if (textFieldStyle == null) {
-      TextField.TextFieldStyle defaultStyle = TowerAssetManager.getCustomSkin().getStyle(TextField.TextFieldStyle.class);
+      TextField.TextFieldStyle defaultStyle = TowerAssetManager.getCustomSkin().get(TextField.TextFieldStyle.class);
       textFieldStyle = new TextField.TextFieldStyle(getFont(), defaultStyle.fontColor, getFont(), defaultStyle.messageFontColor, defaultStyle.cursor, defaultStyle.selection, defaultStyle.background);
     }
 
-    return new TextField(labelText, hintText, textFieldStyle);
+    return new TextField(labelText, textFieldStyle);
   }
 
   public static void resetAll() {
@@ -153,5 +153,9 @@ public enum FontManager {
     Label label = new Label(text, labelStyle(fontColor));
     label.setAlignment(textAlignment);
     return label;
+  }
+
+  public TextButton makeTextToggleButton(String labelText) {
+    return applyTextButtonLabelStyle(new TextButton(labelText, TowerAssetManager.getCustomSkin().get("toggle-button", TextButton.TextButtonStyle.class)), Color.WHITE);
   }
 }

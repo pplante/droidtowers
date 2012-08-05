@@ -5,16 +5,15 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.types.RoomTypeFactory;
 import com.happydroids.platform.Platform;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
 
@@ -23,10 +22,10 @@ public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
 
     TowerAssetManager.assetManager().finishLoading();
 
-    defaults().top().left().pad(scale(4));
+    defaults().top().left().pad(Display.scale(4));
 
-    addLabel("All these features will be enabled:", FontManager.RobotoBold18).expandX().padTop(scale(8));
-    int indentPixels = scale(64);
+    addLabel("All these features will be enabled:", FontManager.RobotoBold18).expandX().padTop(Display.scale(8));
+    int indentPixels = Display.scale(64);
     addLabel("* Towers taller up to 250 floors", FontManager.RobotoBold18).padLeft(indentPixels);
     addLabel("* Unlock the Sky Lobby:", FontManager.RobotoBold18).padLeft(indentPixels);
     row();
@@ -39,24 +38,24 @@ public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
     shoveContentUp();
 
     TextButton purchaseButton = FontManager.Roboto32.makeTextButton("Purchase for: $2.99", Color.GREEN);
-    purchaseButton.setClickListener(new VibrateClickListener() {
+    purchaseButton.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         dismiss();
         Platform.getPurchaseManager().requestPurchaseForUnlimitedVersion();
       }
     });
 
     TextButton dismissButton = FontManager.Roboto18.makeTextButton("No Thanks");
-    dismissButton.setClickListener(new VibrateClickListener() {
+    dismissButton.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         dismiss();
       }
     });
 
     Table buttons = new Table();
-    buttons.row().pad(scale(12)).fill();
+    buttons.row().pad(Display.scale(12)).fill();
     buttons.add(purchaseButton).expandX();
     buttons.add(dismissButton);
     setStaticFooter(buttons);

@@ -45,7 +45,7 @@ public class NeighborGameGrid extends GameGrid {
     }
   }
 
-  public void setClickListener(GameGridClickListener clickListener) {
+  public void addListener(GameGridClickListener clickListener) {
     this.clickListener = clickListener;
   }
 

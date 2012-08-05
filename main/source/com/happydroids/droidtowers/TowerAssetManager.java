@@ -12,6 +12,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Logger;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
@@ -26,7 +29,6 @@ import java.util.Map;
 
 import static com.badlogic.gdx.graphics.Texture.TextureFilter.Linear;
 import static com.badlogic.gdx.graphics.Texture.TextureFilter.MipMapNearestNearest;
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class TowerAssetManager {
   private static final String TAG = TowerAssetManager.class.getSimpleName();
@@ -86,20 +88,22 @@ public class TowerAssetManager {
     ResolutionIndependentAtlas skinAtlas = new ResolutionIndependentAtlas(Gdx.files.internal("hud/skin.txt"));
 
     int size = 4;
-    NinePatch buttonNormal = new NinePatch(skinAtlas.findRegion("button"), size, size, size, size);
-    NinePatch buttonDown = new NinePatch(skinAtlas.findRegion("button-down"), size, size, size, size);
+    NinePatchDrawable buttonNormal = new NinePatchDrawable(new NinePatch(skinAtlas.findRegion("button"), size, size, size, size));
+    NinePatchDrawable buttonDown = new NinePatchDrawable(new NinePatch(skinAtlas.findRegion("button-down"), size, size, size, size));
+    NinePatchDrawable buttonDisabled = new NinePatchDrawable(new NinePatch(skinAtlas.findRegion("button"), size, size, size, size));
+    buttonDisabled.getPatch().getColor().a = 0.75f;
 
     customSkin = new Skin();
 
     CheckBox.CheckBoxStyle checkBoxStyle = new CheckBox.CheckBoxStyle();
-    checkBoxStyle.checkboxOn = skinAtlas.findRegion("checkbox-on");
-    checkBoxStyle.checkboxOff = skinAtlas.findRegion("checkbox-off");
+    checkBoxStyle.checkboxOn = new NinePatchDrawable(new NinePatch(skinAtlas.findRegion("checkbox-on")));
+    checkBoxStyle.checkboxOff = new NinePatchDrawable(new NinePatch(skinAtlas.findRegion("checkbox-off")));
     checkBoxStyle.font = FontManager.Default.getFont();
     checkBoxStyle.fontColor = Color.WHITE;
-    customSkin.addStyle("default", checkBoxStyle);
+    customSkin.add("default", checkBoxStyle);
 
-    Slider.SliderStyle sliderStyle = new Slider.SliderStyle(new NinePatch(new Texture(Gdx.files.internal(WHITE_SWATCH)), Color.LIGHT_GRAY), skinAtlas.findRegion("slider-handle"));
-    customSkin.addStyle("default", sliderStyle);
+    Slider.SliderStyle sliderStyle = new Slider.SliderStyle(new NinePatchDrawable(new NinePatch(new Texture(WHITE_SWATCH), Color.LIGHT_GRAY)), new NinePatchDrawable(new NinePatch(skinAtlas.findRegion("slider-handle"))));
+    customSkin.add("default", sliderStyle);
 
     TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
     textButtonStyle.up = buttonNormal;
@@ -107,8 +111,20 @@ public class TowerAssetManager {
     textButtonStyle.fontColor = Color.WHITE;
     textButtonStyle.down = buttonDown;
     textButtonStyle.downFontColor = Color.WHITE;
+    textButtonStyle.disabled = buttonDisabled;
 
-    customSkin.addStyle("default", textButtonStyle);
+    customSkin.add("default", textButtonStyle);
+
+    textButtonStyle = new TextButton.TextButtonStyle();
+    textButtonStyle.up = buttonNormal;
+    textButtonStyle.font = FontManager.Roboto18.getFont();
+    textButtonStyle.fontColor = Color.WHITE;
+    textButtonStyle.down = buttonDown;
+    textButtonStyle.downFontColor = Color.WHITE;
+    textButtonStyle.checked = buttonDown;
+    textButtonStyle.checkedFontColor = Color.WHITE;
+
+    customSkin.add("toggle-button", textButtonStyle);
 
     TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
     textFieldStyle.background = buttonNormal;
@@ -116,20 +132,20 @@ public class TowerAssetManager {
     textFieldStyle.fontColor = Color.WHITE;
     textFieldStyle.messageFont = FontManager.Roboto18.getFont();
     textFieldStyle.messageFontColor = Color.LIGHT_GRAY;
-    textFieldStyle.cursor = new NinePatch(skinAtlas.findRegion("text-cursor"), size, size, size, size);
-    textFieldStyle.selection = skinAtlas.findRegion("text-selection");
+    textFieldStyle.cursor = new NinePatchDrawable(new NinePatch(skinAtlas.findRegion("text-cursor"), size, size, size, size));
+    textFieldStyle.selection = new NinePatchDrawable(new NinePatch(skinAtlas.findRegion("text-selection")));
 
-    customSkin.addStyle("default", textFieldStyle);
+    customSkin.add("default", textFieldStyle);
 
     SelectBox.SelectBoxStyle selectBoxStyle = new SelectBox.SelectBoxStyle();
     selectBoxStyle.background = buttonNormal;
     selectBoxStyle.font = FontManager.Roboto18.getFont();
     selectBoxStyle.fontColor = Color.WHITE;
-    selectBoxStyle.itemSpacing = scale(5);
+    selectBoxStyle.itemSpacing = Display.scale(5);
     selectBoxStyle.listBackground = buttonNormal;
     selectBoxStyle.listSelection = buttonDown;
 
-    customSkin.addStyle("default", selectBoxStyle);
+    customSkin.add("default", selectBoxStyle);
   }
 
   private static void addToAssetManager(Map<String, Class> preloadFiles, Map<String, String> highDefFiles) {
@@ -233,5 +249,21 @@ public class TowerAssetManager {
 
   public static AssetList getAssetList() {
     return assetList;
+  }
+
+  public static Drawable ninePatchDrawable(String fileName, Color color, int left, int right, int top, int bottom) {
+    return new NinePatchDrawable(ninePatch(fileName, color, left, right, top, bottom));
+  }
+
+  public static Drawable ninePatchDrawable(String fileName, Color color) {
+    return new NinePatchDrawable(ninePatch(fileName, color));
+  }
+
+  public static TextureRegionDrawable drawableFromAtlas(String drawableName, String atlasFileName) {
+    return new TextureRegionDrawable(textureFromAtlas(drawableName, atlasFileName));
+  }
+
+  public static Drawable drawable(String fileName) {
+    return new TextureRegionDrawable(new TextureRegion(texture(fileName)));
   }
 }

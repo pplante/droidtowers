@@ -5,9 +5,9 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.grid.GameGrid;
 
@@ -16,14 +16,15 @@ public class HeaderButtonBar extends Table {
   public static final float BUTTON_FADE_DURATION = 0.25f;
 
   private final ImageButton dataOverlayButton;
-  private final DataOverlayLayer dataOverlayMenu;
+  private final DataOverlayPopOver dataOverlayPopOverMenu;
+
 
   public HeaderButtonBar(TextureAtlas hudAtlas, final GameGrid gameGrid) {
     AudioControl audioControl = new AudioControl(hudAtlas);
     dataOverlayButton = TowerAssetManager.imageButton(hudAtlas.findRegion("overlay-button"));
 
-    dataOverlayMenu = new DataOverlayLayer(gameGrid.getRenderer());
-    dataOverlayMenu.visible = false;
+    dataOverlayPopOverMenu = new DataOverlayPopOver(gameGrid.getRenderer());
+    dataOverlayPopOverMenu.setVisible(false);
 
     defaults().space(6);
     row().right();
@@ -32,10 +33,10 @@ public class HeaderButtonBar extends Table {
 
     pack();
 
-    dataOverlayButton.setClickListener(new VibrateClickListener() {
+    dataOverlayButton.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
-        dataOverlayMenu.toggle(HeaderButtonBar.this, dataOverlayButton);
+      public void onClick(InputEvent event, float x, float y) {
+        dataOverlayPopOverMenu.toggle(HeaderButtonBar.this, dataOverlayButton);
       }
     });
   }

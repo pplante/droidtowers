@@ -218,9 +218,6 @@
       {
         "type":"POPULATION",
         "amount":120
-      },
-      {
-        "type":"HAPPYDROIDS_CONNECT"
       }
     ],
     "rewards":[

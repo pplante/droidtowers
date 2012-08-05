@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.gamestate.GameState;
@@ -15,16 +16,15 @@ import com.happydroids.droidtowers.gamestate.server.PlayerFriendCollection;
 import com.happydroids.droidtowers.gamestate.server.PlayerProfile;
 import com.happydroids.droidtowers.gui.friends.NonPlayerFriendItem;
 import com.happydroids.droidtowers.gui.friends.PlayerFriendItem;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.server.HappyDroidServiceCollection;
 import com.happydroids.utils.BackgroundTask;
 
 import java.util.List;
 
-import static com.happydroids.droidtowers.platform.Display.scale;
-
 public class FriendsListWindow extends ScrollableTowerWindow {
 
-  private final TextureAtlas.AtlasRegion facebookIcon;
+  private final TextureRegionDrawable facebookIcon;
   private List<PlayerFriendItem> playerFriendRows;
   private List<PlayerFriendItem> nonPlayerFriendRows;
   private boolean playerFriendsFetched;
@@ -35,11 +35,11 @@ public class FriendsListWindow extends ScrollableTowerWindow {
     super("My Friends", stage);
     playerGameState = gameState;
 
-    facebookIcon = TowerAssetManager.textureFromAtlas("facebook-logo", "hud/menus.txt");
+    facebookIcon = TowerAssetManager.drawableFromAtlas("facebook-logo", "hud/menus.txt");
     playerFriendRows = Lists.newArrayList();
     nonPlayerFriendRows = Lists.newArrayList();
 
-    defaults().left().space(scale(6));
+    defaults().left().space(Display.scale(6));
 
     add(FontManager.Roboto32.makeLabel("making friends :]"));
 
@@ -127,7 +127,7 @@ public class FriendsListWindow extends ScrollableTowerWindow {
       add(FontManager.Roboto18.makeLabel("You should invite some of your friends to play with.")).expandX();
     }
 
-    row().fillX().padTop(scale(32));
+    row().fillX().padTop(Display.scale(32));
     add(FontManager.Roboto24.makeLabel("Friends on Facebook")).expandX();
     row().fillX();
     add(new HorizontalRule()).expandX();

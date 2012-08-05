@@ -24,34 +24,37 @@ public class RadialMenu extends WidgetGroup {
   public float arc;
   public float arcStart;
 
+
+
   public RadialMenu() {
-    visible = false;
+    setVisible(false);
     arc = 60f;
   }
 
   public float getPrefWidth() {
-    return children.size();
+    return getChildren().size;
   }
 
   public float getPrefHeight() {
-    return children.size();
+    return getChildren().size;
   }
 
   public void show() {
     InputSystem.instance().bind(InputSystem.Keys.ESCAPE, closeMenuInputCallback);
     InputSystem.instance().addInputProcessor(closeMenuInputAdapter, 0);
 
-    visible = true;
+    setVisible(true);
 
-    float angle = arc / children.size();
+    float angle = arc / getChildren().size;
 
-    color.a = 1f;
+    getColor().a = 1f;
 
     Timeline timeline = Timeline.createParallel();
     int index = 0;
-    for (Actor child : children) {
-      child.color.a = 0;
-      child.x = child.y = 0;
+    for (Actor child : getChildren()) {
+      child.getColor().a = 0;
+      child.setX(0);
+      child.setY(0);
 
       float radian = (float) ((arcStart + (angle * index + angle / 2)) * (Math.PI / 180f));
 
@@ -73,7 +76,7 @@ public class RadialMenu extends WidgetGroup {
             .target(0.0f)
             .setCallback(new TweenCallback() {
               public void onEvent(int eventType, BaseTween source) {
-                visible = false;
+                setVisible(false);
               }
             })
             .setCallbackTriggers(TweenCallback.COMPLETE)
@@ -83,9 +86,9 @@ public class RadialMenu extends WidgetGroup {
   private InputAdapter closeMenuInputAdapter = new InputAdapter() {
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
-      Vector2 touchDown = new Vector2();
-      getStage().toStageCoordinates(x, y, touchDown);
-      toLocalCoordinates(touchDown);
+      Vector2 touchDown = new Vector2(x, y);
+      getStage().screenToStageCoordinates(touchDown);
+      stageToLocalCoordinates(touchDown);
 
       if (hit(touchDown.x, touchDown.y) == null) {
         close();

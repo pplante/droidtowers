@@ -5,7 +5,7 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.platform.Platform;
 import com.happydroids.server.GameUpdate;
@@ -35,7 +35,7 @@ public class GameUpdateDialog extends Dialog {
 
     addButton("Not now", new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         dismiss();
       }
     });

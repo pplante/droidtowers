@@ -5,8 +5,8 @@
 package com.happydroids.droidtowers.gui.controls;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.gui.FontManager;
@@ -31,7 +31,7 @@ public class ButtonBar extends Table {
 
   public ButtonBar addButton(String labelText, VibrateClickListener clickListener) {
     TextButton button = FontManager.Roboto18.makeTransparentButton(labelText, Color.CLEAR, Colors.ICS_BLUE);
-    button.setClickListener(clickListener);
+    button.addListener(clickListener);
 
     buttons.add(button);
 

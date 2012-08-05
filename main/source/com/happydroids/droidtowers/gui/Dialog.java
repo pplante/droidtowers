@@ -8,10 +8,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.*;
-import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
-import com.badlogic.gdx.scenes.scene2d.actions.FadeOut;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
 import com.esotericsoftware.tablelayout.Cell;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.DroidTowersGame;
@@ -19,11 +18,10 @@ import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.gui.controls.ButtonBar;
 import com.happydroids.droidtowers.input.InputCallback;
 import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 
 import java.util.List;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class Dialog extends Table {
   private String title;
@@ -44,8 +42,8 @@ public class Dialog extends Table {
 
   public Dialog(Stage stage) {
     super();
-    this.stage = stage;
-    touchable = true;
+    this.setStage(stage);
+    setTouchable(Touchable.childrenOnly);
     hideButtons = false;
     viewPadding = true;
 
@@ -54,11 +52,11 @@ public class Dialog extends Table {
     modalNoiseTexture = TowerAssetManager.texture("swatches/modal-noise.png");
     modalNoiseTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
-    setBackground(TowerAssetManager.ninePatch("hud/dialog-bg.png", Color.WHITE, 1, 1, 1, 1));
+    setBackground(TowerAssetManager.ninePatchDrawable("hud/dialog-bg.png", Color.WHITE, 1, 1, 1, 1));
 
     youCantTouchThis = new TouchSwallower();
-    youCantTouchThis.width = getStage().width();
-    youCantTouchThis.height = getStage().height();
+    youCantTouchThis.setWidth(getStage().getWidth());
+    youCantTouchThis.setHeight(getStage().getHeight());
 
     dismissInputCallback = new InputCallback() {
       @Override
@@ -85,22 +83,22 @@ public class Dialog extends Table {
     clearActions();
     clear();
 
-    stage.addActor(youCantTouchThis);
-    stage.addActor(this);
+    getStage().addActor(youCantTouchThis);
+    getStage().addActor(this);
 
     defaults().top().left();
 
-    color.a = 0f;
-    action(FadeIn.$(0.25f));
+    getColor().a = 0f;
+    addAction(Actions.fadeIn(0.25f));
 
     if (title != null) {
-      add(FontManager.Default.makeLabel(title, Colors.ICS_BLUE)).pad(scale(6));
+      add(FontManager.Default.makeLabel(title, Colors.ICS_BLUE)).pad(Display.scale(6));
       row().fillX();
       add(new HorizontalRule()).expandX();
     }
 
-    int padSide = scale(32);
-    int padTop = scale(20);
+    int padSide = Display.scale(32);
+    int padTop = Display.scale(20);
     if (view != null) {
       row().fill();
       Cell viewCell = add(view).center().expand();
@@ -131,8 +129,8 @@ public class Dialog extends Table {
 
     pack();
 
-    x = getStage().centerX() - width / 2;
-    y = getStage().centerY() - height / 2;
+    setX((getStage().getWidth() / 2) - (getWidth() / 2));
+    setY((getStage().getHeight() / 2) - (getHeight() / 2));
 
     if (!hideButtons) {
       InputSystem.instance().bind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, dismissInputCallback);
@@ -142,16 +140,9 @@ public class Dialog extends Table {
   }
 
   @Override
-  public boolean touchDown(float x, float y, int pointer) {
-    super.touchDown(x, y, pointer);
-
-    return true;
-  }
-
-  @Override
   protected void drawBackground(SpriteBatch batch, float parentAlpha) {
-    batch.setColor(1, 1, 1, 0.45f * color.a);
-    batch.draw(modalNoiseTexture, 0, 0, getStage().width(), getStage().height(), 0, 0, getStage().width() / modalNoiseTexture.getWidth(), getStage().height() / modalNoiseTexture.getHeight());
+    batch.setColor(1, 1, 1, 0.45f * getColor().a);
+    batch.draw(modalNoiseTexture, 0, 0, getStage().getWidth(), getStage().getHeight(), 0, 0, getStage().getWidth() / modalNoiseTexture.getWidth(), getStage().getHeight() / modalNoiseTexture.getHeight());
 
     SceneManager.activeScene().effects().drawDropShadow(batch, parentAlpha, this);
 
@@ -162,7 +153,7 @@ public class Dialog extends Table {
   public Dialog addButton(String buttonText, final OnClickCallback clickCallback) {
     return addButton(buttonText, new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         clickCallback.onClick(Dialog.this);
       }
     });
@@ -177,15 +168,14 @@ public class Dialog extends Table {
   public void dismiss() {
     InputSystem.instance().unbind(new int[]{InputSystem.Keys.BACK, InputSystem.Keys.ESCAPE}, dismissInputCallback);
 
-
-    action(FadeOut.$(0.125f).setCompletionListener(new OnActionCompleted() {
+    addAction(Actions.sequence(Actions.fadeOut(0.125f), Actions.run(new Runnable() {
       @Override
-      public void completed(Action action) {
-        markToRemove(true);
+      public void run() {
+        remove();
       }
-    }));
+    })));
 
-    youCantTouchThis.markToRemove(true);
+    youCantTouchThis.remove();
 
     if (dismissCallback != null) {
       dismissCallback.run();

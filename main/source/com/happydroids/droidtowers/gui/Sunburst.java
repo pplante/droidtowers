@@ -22,8 +22,8 @@ public class Sunburst extends Actor {
   private final Matrix4 transformMatrix;
 
   public Sunburst(Stage stage) {
-    this.x = stage.centerX();
-    this.y = stage.centerY();
+    this.setX(stage.getWidth() / 2);
+    this.setY(stage.getHeight() / 2);
     String vertexShader = "attribute vec4 " + ShaderProgram.POSITION_ATTRIBUTE + ";\n" //
                                   + "attribute vec4 " + ShaderProgram.COLOR_ATTRIBUTE + ";\n" //
                                   + "uniform mat4 u_transformMatrix;\n" //
@@ -48,14 +48,14 @@ public class Sunburst extends Actor {
                                     + "}";
     shader = new ShaderProgram(vertexShader, fragmentShader);
 
-    float radius = stage.width();
+    float radius = stage.getWidth();
     int i = 0;
     float[] vertices = new float[378];
     for (int angle = 0; angle < 360; angle += 20) {
       i = makePoint(radius, i, vertices, angle);
       i = makePoint(radius, i, vertices, angle + 10);
-      vertices[i++] = x;
-      vertices[i++] = y;
+      vertices[i++] = getX();
+      vertices[i++] = getY();
       vertices[i++] = 0f;
       vertices[i++] = 0f;
       vertices[i++] = 0f;
@@ -69,8 +69,8 @@ public class Sunburst extends Actor {
   }
 
   private int makePoint(float radius, int i, float[] vertices, int angle) {
-    vertices[i++] = x + radius * MathUtils.cosDeg(angle);
-    vertices[i++] = y + radius * MathUtils.sinDeg(angle);
+    vertices[i++] = getX() + radius * MathUtils.cosDeg(angle);
+    vertices[i++] = getY() + radius * MathUtils.sinDeg(angle);
     vertices[i++] = 0f;
     vertices[i++] = 0f;
     vertices[i++] = 0f;
@@ -85,7 +85,7 @@ public class Sunburst extends Actor {
     Gdx.gl.glEnable(GL10.GL_BLEND);
     Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
     shader.begin();
-    shader.setUniformMatrix("u_transformMatrix", transformMatrix.setToRotation(0, 0, 1, rotation));
+    shader.setUniformMatrix("u_transformMatrix", transformMatrix.setToRotation(0, 0, 1, getRotation()));
     shader.setUniformMatrix("u_projectionViewMatrix", getStage().getCamera().combined);
     mesh.render(shader, GL10.GL_TRIANGLES);
     shader.end();

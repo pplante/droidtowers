@@ -4,11 +4,11 @@
 
 package com.happydroids.droidtowers.gui.friends;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.gamestate.GameState;
 import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSave;
@@ -16,6 +16,7 @@ import com.happydroids.droidtowers.gamestate.server.FriendCloudGameSaveCollectio
 import com.happydroids.droidtowers.gamestate.server.PlayerProfile;
 import com.happydroids.droidtowers.gui.HorizontalRule;
 import com.happydroids.droidtowers.gui.VibrateClickListener;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.server.ApiCollectionRunnable;
 import com.happydroids.server.HappyDroidServiceCollection;
 import org.apache.http.HttpResponse;
@@ -24,7 +25,6 @@ import java.net.URI;
 
 import static com.happydroids.droidtowers.Colors.DARK_GRAY;
 import static com.happydroids.droidtowers.gui.FontManager.Roboto18;
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class PlayerFriendItem extends Table {
   private PlayerProfile profile;
@@ -43,12 +43,12 @@ public class PlayerFriendItem extends Table {
     return profile.getFullName();
   }
 
-  public void createChildren(TextureAtlas.AtlasRegion facebookIcon) {
+  public void createChildren(TextureRegionDrawable facebookIcon) {
     clear();
-    defaults().pad(scale(4));
+    defaults().pad(Display.scale(4));
 
     row().fill();
-    add(new Image(facebookIcon, Scaling.none)).spaceRight(scale(10));
+    add(new Image(facebookIcon, Scaling.none)).spaceRight(Display.scale(10));
     add(Roboto18.makeLabel(getPlayerName())).expandX();
     add(makeActionButton());
 
@@ -58,9 +58,9 @@ public class PlayerFriendItem extends Table {
 
   protected TextButton makeActionButton() {
     TextButton button = Roboto18.makeTextButton("Add Neighbor");
-    button.setClickListener(new VibrateClickListener() {
+    button.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         new FriendCloudGameSaveCollection()
                 .filterBy("owner_resource_uri", URI.create(profile.getResourceUri()).getPath())
                 .fetch(new ApiCollectionRunnable<HappyDroidServiceCollection<FriendCloudGameSave>>() {

@@ -8,27 +8,38 @@ import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.PressedListener;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.tween.TweenSystem;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class Toast extends Table {
   private final Label label;
 
   public Toast() {
-    visible = false;
+    setVisible(false);
     label = FontManager.RobotoBold18.makeLabel("");
 
     defaults();
-    setBackground(TowerAssetManager.ninePatch(TowerAssetManager.WHITE_SWATCH, Colors.DARKER_GRAY));
-    pad(scale(12));
+    setBackground(TowerAssetManager.ninePatchDrawable(TowerAssetManager.WHITE_SWATCH, Colors.DARKER_GRAY));
+    pad(Display.scale(12));
     add(label);
     pack();
+    setTouchable(Touchable.enabled);
+    addListener(new PressedListener() {
+      @Override
+      public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        removeListener(this);
+        fadeOut();
+        return true;
+      }
+    });
   }
 
   public void setMessage(String message) {
@@ -39,11 +50,11 @@ public class Toast extends Table {
   public void show() {
     pack();
 
-    x = (SceneManager.activeScene().getStage().width() - width) / 2;
-    y = height + scale(10);
+    setX((SceneManager.activeScene().getStage().getWidth() - getWidth()) / 2);
+    setY(getHeight() + Display.scale(10));
 
-    color.a = 0f;
-    visible = true;
+    getColor().a = 0f;
+    setVisible(true);
 
     fadeIn();
   }
@@ -66,7 +77,7 @@ public class Toast extends Table {
             .delay(3000)
             .setCallback(new TweenCallback() {
               public void onEvent(int eventType, BaseTween source) {
-                markToRemove(true);
+                remove();
               }
             })
             .setCallbackTriggers(TweenCallback.COMPLETE)
@@ -75,15 +86,8 @@ public class Toast extends Table {
 
   @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
-    if (color.a > 0.01f) {
-      super.draw(batch, color.a);
+    if (getColor().a > 0.01f) {
+      super.draw(batch, getColor().a);
     }
-  }
-
-  @Override
-  public boolean touchDown(float x, float y, int pointer) {
-    visible = false;
-
-    return true;
   }
 }

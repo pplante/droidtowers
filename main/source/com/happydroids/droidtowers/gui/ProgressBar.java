@@ -7,9 +7,9 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Widget;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 
@@ -31,7 +31,7 @@ class ProgressBar extends Widget {
     patch = new NinePatch(TowerAssetManager.texture(TowerAssetManager.WHITE_SWATCH));
 
     valueLabel = FontManager.Default.makeLabel("100%");
-    valueLabel.setAlignment(Align.CENTER);
+    valueLabel.setAlignment(Align.center);
 
     setValue(progress);
   }
@@ -56,24 +56,24 @@ class ProgressBar extends Widget {
     validate();
 
     patch.setColor(Color.DARK_GRAY);
-    patch.draw(batch, x, y, width, height);
+    patch.draw(batch, getX(), getY(), getWidth(), getHeight());
 
     if (value > 0) {
       patch.setColor(Colors.ICS_BLUE);
-      patch.draw(batch, x + padding,
-                        y + padding,
-                        Math.min(((width / 100) * value), width) - (padding * 2),
-                        height - (padding * 2));
+      patch.draw(batch, getX() + padding,
+                        getY() + padding,
+                        Math.min(((getWidth() / 100) * value), getWidth()) - (padding * 2),
+                        getHeight() - (padding * 2));
     }
 
-    valueLabel.x = x;
-    valueLabel.y = y;
+    valueLabel.setX(getX());
+    valueLabel.setY(getY());
     valueLabel.draw(batch, parentAlpha);
   }
 
   @Override
   public void layout() {
-    valueLabel.width = width;
-    valueLabel.height = height;
+    valueLabel.setWidth(getWidth());
+    valueLabel.setHeight(getHeight());
   }
 }

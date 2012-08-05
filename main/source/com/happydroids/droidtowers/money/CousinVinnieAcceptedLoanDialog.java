@@ -7,7 +7,7 @@ package com.happydroids.droidtowers.money;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.google.common.collect.Iterables;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.entities.GridObject;
@@ -15,8 +15,7 @@ import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.Dialog;
 import com.happydroids.droidtowers.gui.FontManager;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
+import com.happydroids.droidtowers.platform.Display;
 
 public class CousinVinnieAcceptedLoanDialog extends Dialog {
   public CousinVinnieAcceptedLoanDialog(GameGrid gameGrid, int amountToLoan) {
@@ -36,19 +35,19 @@ public class CousinVinnieAcceptedLoanDialog extends Dialog {
       TextureAtlas.AtlasRegion cousinVinnieTexture = TowerAssetManager.textureFromAtlas("droid-cousin-vinnie", "hud/menus.txt");
       Image cousinVinnieImage = new Image(cousinVinnieTexture);
 
-      Table c = newTable();
-      c.pad(scale(4));
+      Table c = new Table();
+      c.pad(Display.scale(4));
       c.defaults().top().left();
 
       c.row();
       c.add(FontManager.Roboto18.makeLabel("I am glad you made the right choice.\n\nI have selected my new hideout:"));
-      c.add(cousinVinnieImage).spaceLeft(scale(20)).top().width(scale(96));
+      c.add(cousinVinnieImage).spaceLeft(Display.scale(20)).top().width(Display.scale(96));
 
       c.row();
       c.add(new Image(gridObject.getSprite()));
       c.add();
 
-      c.row().spaceTop(scale(20));
+      c.row().spaceTop(Display.scale(20));
       c.add(FontManager.Roboto18.makeLabel("Remember, we're business partners now. So keep\nthose security guards away from me.")).colspan(2);
 
       setView(c);

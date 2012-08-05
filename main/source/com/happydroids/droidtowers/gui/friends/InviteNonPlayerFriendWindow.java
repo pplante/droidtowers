@@ -7,9 +7,8 @@ package com.happydroids.droidtowers.gui.friends;
 import com.happydroids.droidtowers.gamestate.server.NonPlayerFriend;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.gui.TowerWindow;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class InviteNonPlayerFriendWindow extends TowerWindow {
   @SuppressWarnings("StringBufferReplaceableByString")
@@ -29,6 +28,6 @@ public class InviteNonPlayerFriendWindow extends TowerWindow {
 
     add(FontManager.Roboto18.makeLabel("Message that will be sent to: " + profile.getFriendName())).expandX();
     row().fillX();
-    add(FontManager.Roboto18.makeLabel(inviteText)).height(scale(250)).expandX();
+    add(FontManager.Roboto18.makeLabel(inviteText)).height(Display.scale(250)).expandX();
   }
 }

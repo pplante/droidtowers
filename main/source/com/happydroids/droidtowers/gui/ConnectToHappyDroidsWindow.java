@@ -5,9 +5,8 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.happydroids.droidtowers.DroidTowersGame;
@@ -34,7 +33,7 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
     super("Connect to Happy Droids", stage);
 
     openBrowserButton = FontManager.RobotoBold18.makeTextButton("Open my web browser");
-    openBrowserButton.visible = false;
+    openBrowserButton.setVisible(false);
 
     sessionStatus = FontManager.Roboto24.makeLabel("Waiting for You to login...");
 
@@ -77,16 +76,19 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
     @Override
     public void onSuccess(HttpResponse response, HappyDroidServiceObject object) {
       openBrowserButton.setText("CODE: " + token.getValue());
-      openBrowserButton.visible = true;
-      sessionStatus.visible = true;
+      openBrowserButton.setVisible(true);
+      sessionStatus.setVisible(true);
 
-      openBrowserButton.setClickListener(new ClickListener() {
-        public void click(Actor actor, float x, float y) {
+      openBrowserButton.addListener(new VibrateClickListener() {
+        @Override
+        public void onClick(InputEvent event, float x, float y) {
           Gdx.app.postRunnable(new LaunchBrowserAfterDelay(token.getClickableUri(), 1.5f));
         }
       });
 
-      openBrowserButton.click(1, 1);
+      InputEvent event = new InputEvent();
+      event.setType(InputEvent.Type.touchDown);
+      openBrowserButton.fire(event);
 
       periodicBackgroundTask = new AccessTokenCheckStateTask();
       periodicBackgroundTask.run();

@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 
 public class ScrollableTowerWindow extends TowerWindow {
   public ScrollableTowerWindow(String title, Stage stage) {
@@ -14,10 +15,8 @@ public class ScrollableTowerWindow extends TowerWindow {
 
   @Override
   protected Actor makeContentContainer() {
-    WheelScrollFlickScrollPane scrollPane = new WheelScrollFlickScrollPane();
-    scrollPane.setScrollingDisabled(true, false);
-    scrollPane.setWidget(super.makeContentContainer());
-
+    ScrollPane scrollPane = new ScrollPane(super.makeContentContainer());
+    scrollPane.setFlickScroll(true);
     return scrollPane;
   }
 

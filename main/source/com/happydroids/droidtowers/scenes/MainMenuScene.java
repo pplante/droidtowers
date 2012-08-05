@@ -10,9 +10,8 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.HappyDroidConsts;
@@ -33,12 +32,11 @@ import com.happydroids.server.HappyDroidService;
 import static com.happydroids.droidtowers.TowerAssetManager.preloadFinished;
 import static com.happydroids.droidtowers.TowerAssetManager.textureAtlas;
 import static com.happydroids.droidtowers.gui.dialogs.ReviewDroidTowersPrompt.RATING_TIMES_SINCE_PROMPTED;
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class MainMenuScene extends SplashScene {
   private static final String TAG = MainMenuScene.class.getSimpleName();
-  public static final int BUTTON_WIDTH = scale(280);
-  public static final int BUTTON_SPACING = scale(16);
+  public static final int BUTTON_WIDTH = Display.scale(280);
+  public static final int BUTTON_SPACING = Display.scale(16);
 
   private boolean builtOutMenu;
 
@@ -48,8 +46,8 @@ public class MainMenuScene extends SplashScene {
 
     Label versionLabel = FontManager.Default.makeLabel(String.format("v%s (%s, %s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA.substring(0, 8), HappyDroidService.getDeviceOSMarketName()));
     versionLabel.setColor(Color.LIGHT_GRAY);
-    versionLabel.x = getStage().width() - versionLabel.width - 5;
-    versionLabel.y = getStage().height() - versionLabel.height - 5;
+    versionLabel.setX(getStage().getWidth() - versionLabel.getWidth() - 5);
+    versionLabel.setY(getStage().getHeight() - versionLabel.getHeight() - 5);
     addActor(versionLabel);
   }
 
@@ -102,7 +100,7 @@ public class MainMenuScene extends SplashScene {
 
   private void buildMenuComponents(final TextureAtlas menuButtonAtlas) {
     if (progressPanel != null) {
-      progressPanel.markToRemove(true);
+      progressPanel.remove();
     }
 
     addActor(makeLibGDXLogo(menuButtonAtlas));
@@ -114,12 +112,12 @@ public class MainMenuScene extends SplashScene {
 
     MainMenuButtonPanel menuButtonPanel = new MainMenuButtonPanel();
     menuButtonPanel.pack();
-    menuButtonPanel.y = droidTowersLogo.y - menuButtonPanel.height;
-    menuButtonPanel.x = -droidTowersLogo.getImageWidth();
+    menuButtonPanel.setY(droidTowersLogo.getY() - menuButtonPanel.getHeight());
+    menuButtonPanel.setX(-droidTowersLogo.getImageWidth());
     addActor(menuButtonPanel);
 
     Tween.to(menuButtonPanel, WidgetAccessor.POSITION, CAMERA_PAN_DOWN_DURATION)
-            .target(50 + (45 * (droidTowersLogo.getImageWidth() / droidTowersLogo.getRegion().getRegionWidth())), menuButtonPanel.y)
+            .target(50 + (45 * (droidTowersLogo.getImageWidth() / droidTowersLogo.getWidth())), menuButtonPanel.getY())
             .ease(TweenEquations.easeInOutExpo)
             .start(TweenSystem.manager());
   }
@@ -127,10 +125,10 @@ public class MainMenuScene extends SplashScene {
   private void makeUpgradeToUnlimitedButton(TextureAtlas buttonAtlas) {
     Image upgradeToUnlimited = new Image(buttonAtlas.findRegion("upgrade-to-unlimited"));
     upgradeToUnlimited.pack();
-    upgradeToUnlimited.y = getStage().centerY() - (upgradeToUnlimited.getImageHeight() / 2);
-    upgradeToUnlimited.x = getStage().right() - (upgradeToUnlimited.width + scale(50));
-    upgradeToUnlimited.originX = upgradeToUnlimited.width / 2;
-    upgradeToUnlimited.originY = upgradeToUnlimited.height / 2;
+    upgradeToUnlimited.setY(getStage().getHeight() / 2 - (upgradeToUnlimited.getImageHeight() / 2));
+    upgradeToUnlimited.setX(getStage().getWidth() - (upgradeToUnlimited.getWidth() + Display.scale(50)));
+    upgradeToUnlimited.setOriginX(upgradeToUnlimited.getWidth() / 2);
+    upgradeToUnlimited.setOriginY(upgradeToUnlimited.getHeight() / 2);
     addActor(upgradeToUnlimited);
 
     Tween.to(upgradeToUnlimited, WidgetAccessor.SCALE, 2000)
@@ -140,9 +138,9 @@ public class MainMenuScene extends SplashScene {
             .ease(TweenEquations.easeInElastic)
             .start(TweenSystem.manager());
 
-    upgradeToUnlimited.setClickListener(new VibrateClickListener() {
+    upgradeToUnlimited.addListener(new VibrateClickListener() {
       @Override
-      public void onClick(Actor actor, float x, float y) {
+      public void onClick(InputEvent event, float x, float y) {
         Platform.getPurchaseManager().requestPurchaseForUnlimitedVersion();
       }
     });
@@ -154,12 +152,13 @@ public class MainMenuScene extends SplashScene {
 
   private Image makeHappyDroidsLogo(TextureAtlas atlas) {
     Image happyDroidsLogo = new Image(atlas.findRegion("happy-droids-logo"));
-    happyDroidsLogo.color.a = 0f;
-    happyDroidsLogo.action(FadeIn.$(0.125f));
-    happyDroidsLogo.x = getStage().width() - happyDroidsLogo.width - scale(5);
-    happyDroidsLogo.y = scale(5);
-    happyDroidsLogo.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
+    happyDroidsLogo.getColor().a = 0f;
+    happyDroidsLogo.addAction(Actions.fadeIn(0.125f));
+    happyDroidsLogo.setX(getStage().getWidth() - happyDroidsLogo.getWidth() - Display.scale(5));
+    happyDroidsLogo.setY(Display.scale(5));
+    happyDroidsLogo.addListener(new VibrateClickListener() {
+      @Override
+      public void onClick(InputEvent event, float x, float y) {
         Platform.getBrowserUtil().launchWebBrowser(TowerConsts.HAPPYDROIDS_URI);
       }
     });
@@ -168,11 +167,13 @@ public class MainMenuScene extends SplashScene {
 
   private Image makeLibGDXLogo(TextureAtlas atlas) {
     Image libGdxLogo = new Image(atlas.findRegion("powered-by-libgdx"));
-    libGdxLogo.color.a = 0f;
-    libGdxLogo.action(FadeIn.$(0.125f));
-    libGdxLogo.x = libGdxLogo.y = scale(5);
-    libGdxLogo.setClickListener(new ClickListener() {
-      public void click(Actor actor, float x, float y) {
+    libGdxLogo.getColor().a = 0f;
+    libGdxLogo.addAction(Actions.fadeIn(0.125f));
+    libGdxLogo.setY(Display.scale(5));
+    libGdxLogo.setX(Display.scale(5));
+    libGdxLogo.addListener(new VibrateClickListener() {
+      @Override
+      public void onClick(InputEvent event, float x, float y) {
         Platform.getBrowserUtil().launchWebBrowser("http://libgdx.badlogicgames.com");
       }
     });

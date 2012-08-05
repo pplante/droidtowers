@@ -6,10 +6,9 @@ package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
-
-import static com.happydroids.droidtowers.platform.Display.scale;
 
 public class GridObjectPurchaseMenu extends ScrollableTowerWindow {
   private Class gridObjectTypeClass;
@@ -25,7 +24,7 @@ public class GridObjectPurchaseMenu extends ScrollableTowerWindow {
       purchaseItem.setBuyClickListener(new SelectGridItemForPurchaseClickListener(this, toolCleanupRunnable, gridObjectType));
 
       row().fillX();
-      add(purchaseItem).top().left().padBottom(scale(8)).padTop(scale(8)).expandX();
+      add(purchaseItem).top().left().padBottom(Display.scale(8)).padTop(Display.scale(8)).expandX();
       row().fillX();
       add(new HorizontalRule(Color.DARK_GRAY, 2));
     }

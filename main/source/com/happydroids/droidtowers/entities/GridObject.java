@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.actions.FadeIn;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.EventBus;
@@ -23,6 +23,7 @@ import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.math.StatLog;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.ProviderType;
 
@@ -142,10 +143,11 @@ public abstract class GridObject {
   public boolean touchUp() {
     GridObjectPopOver popOver = makePopOver();
     if (popOver != null) {
+      SceneManager.activeScene().getCameraController().panTo(getWorldCenter().x, getWorldCenter().y, true);
       displayedPopOver = true;
       popOver.pack();
-      popOver.color.a = 0f;
-      popOver.action(FadeIn.$(0.125f));
+      popOver.getColor().a = 0f;
+      popOver.addAction(Actions.fadeIn(0.125f));
       HeadsUpDisplay.instance().addActor(popOver);
       return true;
     }
