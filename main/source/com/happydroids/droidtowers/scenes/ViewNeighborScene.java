@@ -73,7 +73,7 @@ public class ViewNeighborScene extends Scene {
     gestureDelegater = new GestureDelegater(camera, gameLayers, null, getCameraController());
     gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, gestureDelegater);
     InputSystem.instance().addInputProcessor(gestureDetector, 100);
-    InputSystem.instance().setGestureDelegator(gestureDelegater);
+    InputSystem.instance().setGestureDelegate(gestureDelegater);
     InputSystem.instance().switchTool(GestureTool.PICKER, null);
 
     updateWorldSize(new Vector2(4000, 4000));
@@ -151,13 +151,13 @@ public class ViewNeighborScene extends Scene {
   @Override
   public void pause() {
     InputSystem.instance().removeInputProcessor(gestureDetector);
-    InputSystem.instance().setGestureDelegator(null);
+    InputSystem.instance().setGestureDelegate(null);
   }
 
   @Override
   public void resume() {
     InputSystem.instance().addInputProcessor(gestureDetector, 100);
-    InputSystem.instance().setGestureDelegator(gestureDelegater);
+    InputSystem.instance().setGestureDelegate(gestureDelegater);
     InputSystem.instance().switchTool(GestureTool.PICKER, null);
   }
 

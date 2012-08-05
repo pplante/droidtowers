@@ -263,8 +263,8 @@ public class InputSystem extends InputAdapter {
     }
   }
 
-  public void setGestureDelegator(GestureDelegater gestureDelegator) {
-    this.gestureDelegater = gestureDelegator;
+  public void setGestureDelegate(GestureDelegater gestureDelegate) {
+    this.gestureDelegater = gestureDelegate;
   }
 
   public void unfocusAll() {

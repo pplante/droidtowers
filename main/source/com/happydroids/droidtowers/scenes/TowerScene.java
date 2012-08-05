@@ -127,7 +127,7 @@ public class TowerScene extends Scene {
     gameLayers.add(avatarLayer);
 
     gestureDelegater = new GestureDelegater(camera, gameLayers, gameGrid, getCameraController());
-    gestureDetector = new GestureDetector(20, 0.5f, 2, 0.15f, gestureDelegater);
+    gestureDetector = new GestureDetector(20, 0.5f, 1, 0.15f, gestureDelegater);
     keybindings = new DefaultKeybindings(this);
 
     attachToInputSystem();
@@ -186,14 +186,14 @@ public class TowerScene extends Scene {
     InputSystem.instance().events().register(gameGridRenderer);
 
     InputSystem.instance().addInputProcessor(gestureDetector, 100);
-    InputSystem.instance().setGestureDelegator(gestureDelegater);
+    InputSystem.instance().setGestureDelegate(gestureDelegater);
     InputSystem.instance().switchTool(GestureTool.PICKER, null);
     keybindings.bindKeys();
   }
 
   private void detachFromInputSystem() {
     InputSystem.instance().removeInputProcessor(gestureDetector);
-    InputSystem.instance().setGestureDelegator(null);
+    InputSystem.instance().setGestureDelegate(null);
     keybindings.unbindKeys();
 
     InputSystem.instance().events().unregister(gameGridRenderer);

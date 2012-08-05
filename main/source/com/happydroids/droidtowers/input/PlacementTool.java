@@ -63,6 +63,11 @@ public class PlacementTool extends ToolBase {
     return count >= 2 && finishPurchase();
   }
 
+  @Override
+  public boolean longPress(float x, float y) {
+    return finishPurchase();
+  }
+
   public boolean pan(float x, float y, float deltaX, float deltaY) {
     if (isDraggingGridObject) {
       Vector3 worldPoint = camera.getPickRay(x, y).getEndPoint(1);
