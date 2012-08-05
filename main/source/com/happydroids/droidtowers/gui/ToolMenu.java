@@ -35,7 +35,7 @@ public class ToolMenu extends RadialMenu {
 
     arc = 35f;
     arcStart = -3.5f;
-    radius = Display.scale(180);
+    radius = Display.devicePixel(180);
     setRotation(0);
 
     housingButton = new ColorizedImageButton(hudAtlas.findRegion("tool-housing"), Colors.ICS_BLUE);

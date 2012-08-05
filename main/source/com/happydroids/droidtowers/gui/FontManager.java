@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -17,19 +18,23 @@ import com.happydroids.droidtowers.platform.Display;
 
 import java.util.HashMap;
 
-import static com.happydroids.droidtowers.platform.Display.scale;
-
 public enum FontManager {
-  Default("fonts/roboto_white_14.fnt", "fonts/roboto_white_24.fnt", 8, 16),
-  Roboto18("fonts/roboto_white_18.fnt", "fonts/roboto_white_32.fnt", 8, 16),
-  RobotoBold18("fonts/roboto_bold_white_18.fnt", "fonts/roboto_white_24.fnt", 8, 16),
-  Roboto32("fonts/roboto_white_32.fnt", "fonts/roboto_white_48.fnt", 16, 32),
-  Roboto64("fonts/roboto_white_64.fnt", "fonts/roboto_white_96.fnt"),
+  Default("fonts/Roboto-Regular.ttf", 16, 8, 16),
+  Roboto18("fonts/Roboto-Regular.ttf", 18, 8, 16),
+  RobotoBold18("fonts/Roboto-Bold.ttf", 18, 8, 16),
+  Roboto32("fonts/Roboto-Regular.ttf", 32, 16, 326),
+  Roboto64("fonts/Roboto-Regular.ttf", 64, 16, 32),
+  Roboto24("fonts/Roboto-Regular.ttf", 24, 8, 16),
+  Roboto12("fonts/Roboto-Regular.ttf", 14, 8, 16),
+  //  Roboto18("fonts/roboto_white_18.fnt", "fonts/roboto_white_32.fnt", 8, 16),
+//  RobotoBold18("fonts/roboto_bold_white_18.fnt", "fonts/roboto_white_24.fnt", 8, 16),
+//  Roboto32("fonts/roboto_white_32.fnt", "fonts/roboto_white_48.fnt", 16, 32),
+//  Roboto64("fonts/roboto_white_64.fnt", "fonts/roboto_white_96.fnt"),
   Roboto32WithShadow("fonts/roboto_white_with_shadow_32.fnt", "fonts/roboto_white_with_shadow_64.fnt"),
   Roboto64WithShadow("fonts/roboto_white_with_shadow_64.fnt", "fonts/roboto_white_with_shadow_64.fnt"),
-  Roboto24("fonts/roboto_white_24.fnt", "fonts/roboto_white_36.fnt", 8, 16),
-  Roboto12("fonts/roboto_white_12.fnt", "fonts/roboto_white_18.fnt", 4, 8),
-  BankGothic32("fonts/bank_gothic_32.fnt", Color.WHITE); // elevators shouldn't scale!
+  //  Roboto24("fonts/roboto_white_24.fnt", "fonts/roboto_white_36.fnt", 8, 16),
+//  Roboto12("fonts/roboto_white_12.fnt", "fonts/roboto_white_18.fnt", 4, 8),
+  BankGothic32("fonts/bank_gothic_32.fnt", Color.WHITE); // elevators shouldn't devicePixel!
 
   private static HashMap<String, BitmapFont> bitmapFonts = Maps.newHashMap();
   private Label.LabelStyle labelStyle;
@@ -37,6 +42,8 @@ public enum FontManager {
   private final int buttonPadTop;
   private final int buttonPadLeft;
   private TextField.TextFieldStyle textFieldStyle;
+  private float pixelHeight;
+  private FreeTypeFontGenerator fontGenerator;
 
   FontManager(String fontPath, Color color) {
     this(fontPath, fontPath, 0, 0);
@@ -44,12 +51,19 @@ public enum FontManager {
 
   FontManager(String mdpiFontPath, String hdpiFontPath, int buttonPadTop, int buttonPadLeft) {
     this.fontPath = Display.getScaledDensity() > 1f ? hdpiFontPath : mdpiFontPath;
-    this.buttonPadTop = scale(buttonPadTop);
-    this.buttonPadLeft = scale(buttonPadLeft);
+    this.buttonPadTop = Display.devicePixel(buttonPadTop);
+    this.buttonPadLeft = Display.devicePixel(buttonPadLeft);
   }
 
   FontManager(String mdpiFontPath, String hdpiFontPath) {
     this(mdpiFontPath, hdpiFontPath, 0, 0);
+  }
+
+  FontManager(String fileName, int pixelHeight, int buttonPadTop, int buttonPadLeft) {
+    this.fontPath = fileName;
+    this.pixelHeight = pixelHeight * Display.getScaledDensity();
+    this.buttonPadTop = Display.devicePixel(buttonPadTop);
+    this.buttonPadLeft = Display.devicePixel(buttonPadLeft);
   }
 
   private Label.LabelStyle labelStyle() {
@@ -67,7 +81,12 @@ public enum FontManager {
   public BitmapFont getFont() {
     if (!bitmapFonts.containsKey(fontPath)) {
       BitmapFont font;
-      if (TowerAssetManager.assetManager().isLoaded(fontPath)) {
+      if (pixelHeight > 0) {
+        fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
+        font = fontGenerator.generateFont((int) pixelHeight);
+        font.setUseIntegerPositions(true);
+        bitmapFonts.put(fontPath, font);
+      } else if (TowerAssetManager.assetManager().isLoaded(fontPath)) {
         font = TowerAssetManager.bitmapFont(fontPath);
         font.setUseIntegerPositions(true);
         bitmapFonts.put(fontPath, font);

@@ -35,7 +35,7 @@ public class RoomPopOver extends GridObjectPopOver<Room> {
     residencyBar = makeStarRatingBar("Residents");
 
     residentImages = new Table();
-    residentImages.defaults().pad(Display.scale(2));
+    residentImages.defaults().pad(Display.devicePixel(2));
 
     row().fillX();
     add(residentImages).center();
@@ -49,7 +49,7 @@ public class RoomPopOver extends GridObjectPopOver<Room> {
         }
       });
 
-      row().fillX().pad(Display.scale(-8)).padTop(Display.scale(16));
+      row().fillX().pad(Display.devicePixel(-8)).padTop(Display.devicePixel(16));
       add(buttonBar).expandX().minWidth(200);
     }
   }

@@ -25,7 +25,7 @@ class AchievementListViewItem extends Table {
   public AchievementListViewItem(AchievementListView achievementListView, Achievement achievement, final Drawable itemSelectBackground) {
     this.achievementListView = achievementListView;
 
-    row().pad(Display.scale(16), Display.scale(8), Display.scale(16), Display.scale(8)).fillX();
+    row().pad(Display.devicePixel(16), Display.devicePixel(8), Display.devicePixel(16), Display.devicePixel(8)).fillX();
     add(FontManager.Roboto18.makeLabel(achievement.getName())).expandX().left();
 
     Actor actor;
@@ -40,7 +40,7 @@ class AchievementListViewItem extends Table {
     } else {
       actor = new ProgressBar(achievement.getPercentComplete());
     }
-    add(actor).width(Display.scale(200));
+    add(actor).width(Display.devicePixel(200));
 
     Image arrowImg = new Image(TowerAssetManager.drawableFromAtlas("right-arrow", "hud/menus.txt"), Scaling.fit);
     add(arrowImg).width((int) arrowImg.getWidth());
@@ -51,10 +51,12 @@ class AchievementListViewItem extends Table {
     addListener(new EventListener() {
       @Override
       public boolean handle(Event e) {
-        if (!(e instanceof InputEvent)) return false;
+        if (!(e instanceof InputEvent)) {
+          return false;
+        }
         InputEvent event = (InputEvent) e;
 
-        if(event.getType().equals(InputEvent.Type.touchDown)) {
+        if (event.getType().equals(InputEvent.Type.touchDown)) {
           addAction(Actions.sequence(Actions.delay(0.125f), Actions.run(new Runnable() {
             @Override
             public void run() {
@@ -70,6 +72,7 @@ class AchievementListViewItem extends Table {
       }
     });
   }
+
   private void setChildrenColor(Color color) {
     for (Actor child : getChildren()) {
       if (child instanceof Label) {

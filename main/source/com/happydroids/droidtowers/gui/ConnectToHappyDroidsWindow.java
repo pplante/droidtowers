@@ -47,9 +47,13 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
     row();
     add(openBrowserButton);
 
-
-    token = new TemporaryToken();
-    token.save(new TemporaryTokenApiRunnable());
+    Gdx.app.postRunnable(new Runnable() {
+      @Override
+      public void run() {
+        token = new TemporaryToken();
+        token.save(new TemporaryTokenApiRunnable());
+      }
+    });
   }
 
   public void setPostConnectRunnable(Runnable postConnectRunnable) {
@@ -107,7 +111,9 @@ public class ConnectToHappyDroidsWindow extends TowerWindow {
 
       @Override
       public boolean update() {
-        if (token == null) return false;
+        if (token == null) {
+          return false;
+        }
         try {
           token.validate();
           Gdx.app.debug(TAG, "Checking token: " + token);

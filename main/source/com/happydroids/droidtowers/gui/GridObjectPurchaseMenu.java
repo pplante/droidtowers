@@ -24,7 +24,7 @@ public class GridObjectPurchaseMenu extends ScrollableTowerWindow {
       purchaseItem.setBuyClickListener(new SelectGridItemForPurchaseClickListener(this, toolCleanupRunnable, gridObjectType));
 
       row().fillX();
-      add(purchaseItem).top().left().padBottom(Display.scale(8)).padTop(Display.scale(8)).expandX();
+      add(purchaseItem).top().left().padBottom(Display.devicePixel(8)).padTop(Display.devicePixel(8)).expandX();
       row().fillX();
       add(new HorizontalRule(Color.DARK_GRAY, 2));
     }

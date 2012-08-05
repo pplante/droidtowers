@@ -45,10 +45,10 @@ public class PlayerFriendItem extends Table {
 
   public void createChildren(TextureRegionDrawable facebookIcon) {
     clear();
-    defaults().pad(Display.scale(4));
+    defaults().pad(Display.devicePixel(4));
 
     row().fill();
-    add(new Image(facebookIcon, Scaling.none)).spaceRight(Display.scale(10));
+    add(new Image(facebookIcon, Scaling.none)).spaceRight(Display.devicePixel(10));
     add(Roboto18.makeLabel(getPlayerName())).expandX();
     add(makeActionButton());
 

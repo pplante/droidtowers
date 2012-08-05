@@ -29,11 +29,11 @@ public class CousinVinnieLoanDialog extends Dialog {
     Image cousinVinnieImage = new Image(cousinVinnieTexture, Scaling.none);
 
     Table c = new Table();
-    c.pad(Display.scale(4));
+    c.pad(Display.devicePixel(4));
 
     c.row();
     c.add(FontManager.Roboto18.makeLabel("Hey Cousin,\n\nLooks like you're out of money.\n\nI would be willing to loan you " + TowerConsts.CURRENCY_SYMBOL + StringUtils.formatNumber(amountToLoan) + ",\nin return I need somewhere to setup a hideout.\n\nI promise you wont regret it.\n\nRegards,\nVinnie "));
-    c.add(cousinVinnieImage).spaceLeft(Display.scale(20)).top().width(Display.scale(96));
+    c.add(cousinVinnieImage).spaceLeft(Display.devicePixel(20)).top().width(Display.devicePixel(96));
 
 
     addButton("Accept", new VibrateClickListener() {

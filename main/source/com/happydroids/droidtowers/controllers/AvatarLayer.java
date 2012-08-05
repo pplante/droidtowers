@@ -66,8 +66,8 @@ public class AvatarLayer extends GameLayer<Avatar> {
   }
 
   private int maxAvatars() {
-    return Player.instance().getSupportedResidency();
-//    return 0;
+//    return Player.instance().getSupportedResidency();
+    return 0;
   }
 
   private void setupAvatar(Avatar avatar) {
@@ -94,7 +94,9 @@ public class AvatarLayer extends GameLayer<Avatar> {
 
   private void setupSpecialAvatar(CommercialSpace commercialSpace, Class<? extends Avatar> avatarClass) {
     for (JobCandidate employee : commercialSpace.getEmployees()) {
-      if (employee.hasAvatar()) continue;
+      if (employee.hasAvatar()) {
+        continue;
+      }
 
       try {
         Constructor<? extends Avatar> constructor = avatarClass.getDeclaredConstructor(AvatarLayer.class);
@@ -135,8 +137,9 @@ public class AvatarLayer extends GameLayer<Avatar> {
 
   @Subscribe
   public void GameGrid_onEmployeeFired(EmployeeFiredEvent event) {
+    Avatar avatar;
     if (event.gridObject instanceof CommercialSpace && event.employee != null) {
-      Avatar avatar = event.employee.getAvatar();
+      avatar = event.employee.getAvatar();
       if (avatar != null) {
         avatar.markToRemove(true);
       }

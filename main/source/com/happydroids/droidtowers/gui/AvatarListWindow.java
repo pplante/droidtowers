@@ -14,9 +14,9 @@ public class AvatarListWindow extends ScrollableTowerWindow {
   public AvatarListWindow(Stage stage, AvatarLayer avatarLayer) {
     super("Droids", stage);
 
-    defaults().space(Display.scale(8));
+    defaults().space(Display.devicePixel(8));
 
-    row().fillX().padTop(Display.scale(8));
+    row().fillX().padTop(Display.devicePixel(8));
     add(FontManager.Default.makeLabel("NAME")).expandX();
     add(FontManager.Default.makeLabel("HUNGER")).width(100);
     add(FontManager.Default.makeLabel("HAPPINESS")).width(100);

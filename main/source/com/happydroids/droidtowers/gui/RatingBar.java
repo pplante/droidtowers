@@ -50,7 +50,7 @@ class RatingBar extends Widget {
 
   @Override
   public float getMinWidth() {
-    return maxValue * textureWidth + valueLabel.getMinWidth() + Display.scale(8);
+    return maxValue * textureWidth + valueLabel.getMinWidth() + Display.devicePixel(8);
   }
 
   @Override

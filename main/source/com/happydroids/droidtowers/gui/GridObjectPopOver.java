@@ -56,9 +56,9 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     triangle.setColor(Color.DARK_GRAY);
 
     setBackground(TowerAssetManager.ninePatchDrawable("hud/dialog-bg.png", Color.WHITE, 1, 1, 1, 1));
-    defaults().left().space(Display.scale(6));
+    defaults().left().space(Display.devicePixel(6));
 
-    pad(Display.scale(8));
+    pad(Display.devicePixel(8));
 
     row();
     nameLabel = FontManager.RobotoBold18.makeLabel(gridObject.getName());
@@ -67,7 +67,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     row().fillX().pad(-8).padTop(0).padBottom(0);
     add(new HorizontalRule()).expandX();
 
-    addListener(new InputListener(){
+    addListener(new InputListener() {
       @Override
       public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         return true;
@@ -87,7 +87,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     upkeepLabel = FontManager.RobotoBold18.makeLabel("$0");
 
     Table budgetTable = new Table();
-    budgetTable.defaults().top().left().space(Display.scale(8));
+    budgetTable.defaults().top().left().space(Display.devicePixel(8));
     budgetTable.row();
     if (gridObject.canEarnMoney()) {
       budgetTable.add(FontManager.Roboto12.makeLabel("INCOME"));

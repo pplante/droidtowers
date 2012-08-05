@@ -33,7 +33,7 @@ public class DebugWindow extends ScrollableTowerWindow {
       throw new RuntimeException("ZOMG WUT?");
     }
 
-    defaults().pad(Display.scale(10)).left().expandX().fillX();
+    defaults().pad(Display.devicePixel(10)).left().expandX().fillX();
 
     if (SceneManager.activeScene() instanceof TowerScene) {
       row();

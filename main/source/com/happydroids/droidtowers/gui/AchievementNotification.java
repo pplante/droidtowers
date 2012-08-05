@@ -24,9 +24,9 @@ public class AchievementNotification extends Table {
   public AchievementNotification(Achievement achievement) {
     setBackground(TowerAssetManager.ninePatchDrawable(TowerAssetManager.WHITE_SWATCH, Colors.TRANSPARENT_BLACK));
 
-    defaults().top().left().pad(Display.scale(4));
+    defaults().top().left().pad(Display.devicePixel(4));
 
-    add(new Image(TowerAssetManager.drawableFromAtlas("achievements-active", "hud/buttons.txt"), Scaling.none)).minWidth(Display.scale(64)).padRight(Display.scale(8));
+    add(new Image(TowerAssetManager.drawableFromAtlas("achievements-active", "hud/buttons.txt"), Scaling.none)).minWidth(Display.devicePixel(64)).padRight(Display.devicePixel(8));
 
     Table textTable = new Table();
     textTable.defaults().left().top();

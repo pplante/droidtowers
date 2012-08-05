@@ -39,7 +39,7 @@ public class ManageCommercialSpaceDialog extends TowerWindow {
     fireButton.addListener(new FireCandidateClickListener());
 
     candidateListView = new JobCandidateListView();
-    candidateListView.pad(Display.scale(20));
+    candidateListView.pad(Display.devicePixel(20));
     candidateListView.setCountLabelSuffix("employees");
     candidateListView.setOnChangeCandidateListener(new OnChangeCandidateCallback() {
       @Override
@@ -49,7 +49,7 @@ public class ManageCommercialSpaceDialog extends TowerWindow {
     });
     candidateListView.setCandidates(Lists.newArrayList(this.commercialSpace.getEmployees()));
 
-    defaults().pad(Display.scale(4));
+    defaults().pad(Display.devicePixel(4));
 
     setStaticHeader(makeNameHeader());
 
@@ -59,14 +59,14 @@ public class ManageCommercialSpaceDialog extends TowerWindow {
     addHorizontalRule(Colors.ICS_BLUE, 2, 2);
 
     row();
-    add(candidateListView).spaceBottom(Display.scale(20));
-    add(fireButton).padLeft(Display.scale(70));
+    add(candidateListView).spaceBottom(Display.devicePixel(20));
+    add(fireButton).padLeft(Display.devicePixel(70));
   }
 
   private Actor makeNameHeader() {
     Table c = new Table();
-    c.pad(Display.scale(22));
-    c.defaults().space(Display.scale(4)).top().left();
+    c.pad(Display.devicePixel(22));
+    c.defaults().space(Display.devicePixel(4)).top().left();
 
     c.row();
     c.add(FontManager.Roboto18.makeLabel("Name of " + this.commercialSpace.getGridObjectType().getName())).colspan(2);

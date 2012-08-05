@@ -36,18 +36,18 @@ public class CousinVinnieAcceptedLoanDialog extends Dialog {
       Image cousinVinnieImage = new Image(cousinVinnieTexture);
 
       Table c = new Table();
-      c.pad(Display.scale(4));
+      c.pad(Display.devicePixel(4));
       c.defaults().top().left();
 
       c.row();
       c.add(FontManager.Roboto18.makeLabel("I am glad you made the right choice.\n\nI have selected my new hideout:"));
-      c.add(cousinVinnieImage).spaceLeft(Display.scale(20)).top().width(Display.scale(96));
+      c.add(cousinVinnieImage).spaceLeft(Display.devicePixel(20)).top().width(Display.devicePixel(96));
 
       c.row();
       c.add(new Image(gridObject.getSprite()));
       c.add();
 
-      c.row().spaceTop(Display.scale(20));
+      c.row().spaceTop(Display.devicePixel(20));
       c.add(FontManager.Roboto18.makeLabel("Remember, we're business partners now. So keep\nthose security guards away from me.")).colspan(2);
 
       setView(c);

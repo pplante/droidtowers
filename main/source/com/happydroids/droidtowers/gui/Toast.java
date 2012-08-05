@@ -28,7 +28,7 @@ public class Toast extends Table {
 
     defaults();
     setBackground(TowerAssetManager.ninePatchDrawable(TowerAssetManager.WHITE_SWATCH, Colors.DARKER_GRAY));
-    pad(Display.scale(12));
+    pad(Display.devicePixel(12));
     add(label);
     pack();
     setTouchable(Touchable.enabled);
@@ -51,7 +51,7 @@ public class Toast extends Table {
     pack();
 
     setX((SceneManager.activeScene().getStage().getWidth() - getWidth()) / 2);
-    setY(getHeight() + Display.scale(10));
+    setY(getHeight() + Display.devicePixel(10));
 
     getColor().a = 0f;
     setVisible(true);

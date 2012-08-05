@@ -4,7 +4,6 @@
 
 package com.happydroids.droidtowers.gui;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.google.common.collect.Lists;
@@ -39,7 +38,7 @@ public class FriendsListWindow extends ScrollableTowerWindow {
     playerFriendRows = Lists.newArrayList();
     nonPlayerFriendRows = Lists.newArrayList();
 
-    defaults().left().space(Display.scale(6));
+    defaults().left().space(Display.devicePixel(6));
 
     add(FontManager.Roboto32.makeLabel("making friends :]"));
 
@@ -127,7 +126,7 @@ public class FriendsListWindow extends ScrollableTowerWindow {
       add(FontManager.Roboto18.makeLabel("You should invite some of your friends to play with.")).expandX();
     }
 
-    row().fillX().padTop(Display.scale(32));
+    row().fillX().padTop(Display.devicePixel(32));
     add(FontManager.Roboto24.makeLabel("Friends on Facebook")).expandX();
     row().fillX();
     add(new HorizontalRule()).expandX();

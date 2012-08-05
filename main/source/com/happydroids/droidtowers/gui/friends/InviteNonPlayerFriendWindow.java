@@ -28,6 +28,6 @@ public class InviteNonPlayerFriendWindow extends TowerWindow {
 
     add(FontManager.Roboto18.makeLabel("Message that will be sent to: " + profile.getFriendName())).expandX();
     row().fillX();
-    add(FontManager.Roboto18.makeLabel(inviteText)).height(Display.scale(250)).expandX();
+    add(FontManager.Roboto18.makeLabel(inviteText)).height(Display.devicePixel(250)).expandX();
   }
 }

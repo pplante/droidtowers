@@ -110,9 +110,9 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     }
 
     Table fileRow = new Table();
-    fileRow.defaults().fillX().pad(Display.scale(10)).space(Display.scale(10));
+    fileRow.defaults().fillX().pad(Display.devicePixel(10)).space(Display.devicePixel(10));
     fileRow.row();
-    fileRow.add(imageActor).width(Display.scale(64)).height(Display.scale(64)).center();
+    fileRow.add(imageActor).width(Display.devicePixel(64)).height(Display.devicePixel(64)).center();
     fileRow.add(makeGameFileInfoBox(fileRow, gameSaveFile, towerData)).expandX().top();
     fileRow.row().fillX();
     fileRow.add(new HorizontalRule(Color.DARK_GRAY, 2)).colspan(2);
@@ -179,11 +179,11 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     }
 
     Table box = new Table();
-    box.defaults().fillX().space(Display.scale(5));
+    box.defaults().fillX().space(Display.devicePixel(5));
     box.row().top().left().fillX();
     box.add(metadata).top().left().expandX();
-    box.add(deleteButton).width(Display.scale(80));
-    box.add(launchButton).width(Display.scale(80));
+    box.add(deleteButton).width(Display.devicePixel(80));
+    box.add(launchButton).width(Display.devicePixel(80));
 
     return box;
   }

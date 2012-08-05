@@ -57,14 +57,14 @@ public class JobCandidateListView extends Table {
     nextButton.addListener(new NextCandidateClickListener());
 
     withCandidatesView = new Table();
-    withCandidatesView.defaults();
-    withCandidatesView.add(prevButton).width(64).height(128).center();
+    withCandidatesView.defaults().fill();
+    withCandidatesView.add(prevButton).width(Display.getScaledDensity() * 64).minHeight(128).expand().left();
     withCandidatesView.add(makeInnerContentView());
-    withCandidatesView.add(nextButton).width(64).height(128).center();
+    withCandidatesView.add(nextButton).width(Display.getScaledDensity() * 64).minHeight(128).expand().right();
 
     noCandidatesFoundLabel = Roboto24.makeLabel("No " + StringUtils.capitalize(countLabelSuffix) + " found.");
     withoutCandidatesView = new Table();
-    withoutCandidatesView.add(noCandidatesFoundLabel).center();
+    withoutCandidatesView.add(noCandidatesFoundLabel).expand().center();
   }
 
   private Actor makeInnerContentView() {
@@ -85,14 +85,14 @@ public class JobCandidateListView extends Table {
     c.add(experienceRating);
     c.add(workEthicRating);
 
-    c.row().spaceTop(Display.scale(16));
+    c.row().spaceTop(Display.devicePixel(16));
     c.add(FontManager.Default.makeLabel("Salary", Color.LIGHT_GRAY));
 
     c.row();
     c.add(salaryLabel).left();
 
     c.row().fillX();
-    c.add(candidateCountLabel).padTop(Display.scale(20)).colspan(2).right().fillX();
+    c.add(candidateCountLabel).padTop(Display.devicePixel(20)).colspan(2).right().fillX();
 
     return c;
   }

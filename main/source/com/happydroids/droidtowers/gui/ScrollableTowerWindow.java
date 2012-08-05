@@ -17,6 +17,7 @@ public class ScrollableTowerWindow extends TowerWindow {
   protected Actor makeContentContainer() {
     ScrollPane scrollPane = new ScrollPane(super.makeContentContainer());
     scrollPane.setFlickScroll(true);
+    scrollPane.setFlingTime(0.75f);
     return scrollPane;
   }
 

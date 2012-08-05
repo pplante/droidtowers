@@ -92,13 +92,13 @@ public class Dialog extends Table {
     addAction(Actions.fadeIn(0.25f));
 
     if (title != null) {
-      add(FontManager.Default.makeLabel(title, Colors.ICS_BLUE)).pad(Display.scale(6));
+      add(FontManager.Default.makeLabel(title, Colors.ICS_BLUE)).pad(Display.devicePixel(6));
       row().fillX();
       add(new HorizontalRule()).expandX();
     }
 
-    int padSide = Display.scale(32);
-    int padTop = Display.scale(20);
+    int padSide = Display.devicePixel(32);
+    int padTop = Display.devicePixel(20);
     if (view != null) {
       row().fill();
       Cell viewCell = add(view).center().expand();

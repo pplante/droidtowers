@@ -28,10 +28,10 @@ public class Display {
   }
 
   public static int scale(float pixels) {
-    return scale((int) pixels);
+    return devicePixel((int) pixels);
   }
 
-  public static int scale(int pixels) {
+  public static int devicePixel(int pixels) {
     return (int) ((float) pixels * scaledDensity);
   }
 

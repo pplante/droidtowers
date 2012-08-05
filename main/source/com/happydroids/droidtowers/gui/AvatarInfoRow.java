@@ -30,7 +30,7 @@ public class AvatarInfoRow extends Table {
     restaurantsSatsifaction = new ProgressBar((int) (avatar.getSatisfactionFood() * 100));
     movingToLabel = FontManager.Roboto12.makeLabel("");
 
-    row().fillX().space(Display.scale(8));
+    row().fillX().space(Display.devicePixel(8));
     Image avatarImage = new Image(new TextureRegionDrawable(avatar), Scaling.none);
     avatarImage.setColor(avatar.getColor());
     add(avatarImage);

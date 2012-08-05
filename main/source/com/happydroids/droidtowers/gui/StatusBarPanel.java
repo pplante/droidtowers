@@ -7,7 +7,9 @@ package com.happydroids.droidtowers.gui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -24,9 +26,9 @@ import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.events.GameSpeedChangeEvent;
-import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 
+import static com.happydroids.droidtowers.platform.Display.devicePixel;
 import static com.happydroids.droidtowers.utils.StringUtils.formatNumber;
 
 public class StatusBarPanel extends Table {
@@ -70,9 +72,8 @@ public class StatusBarPanel extends Table {
 
     defaults();
     center();
-    pad(Display.scale(4), Display.scale(8), Display.scale(4), Display.scale(8));
 
-    row().spaceRight(Display.scale(10));
+    row().pad(devicePixel(2)).padBottom(0);
     add(makeHeader("COINS", Color.LIGHT_GRAY)).center();
     add(makeHeader("INCOME", Color.LIGHT_GRAY)).center();
     add(makeHeader("EXPENSES", Color.LIGHT_GRAY)).center();
@@ -83,7 +84,7 @@ public class StatusBarPanel extends Table {
     Label starRatingHeader = makeHeader("STAR RATING", Color.LIGHT_GRAY);
     add(starRatingHeader).center();
 
-    row().spaceRight(Display.scale(10));
+    row().pad(devicePixel(2)).padTop(0);
     add(moneyLabel);
     add(moneyIncomeLabel);
     add(moneyExpensesLabel);
@@ -93,7 +94,7 @@ public class StatusBarPanel extends Table {
     add(starRatingBar);
 
     if (HappyDroidConsts.ENABLE_NEWS_TICKER) {
-      row().pad(Display.scale(2)).padLeft(Display.scale(-4)).padRight(Display.scale(-4));
+      row().pad(devicePixel(2)).padLeft(devicePixel(-4)).padRight(devicePixel(-4));
       add(new HorizontalRule(Colors.ICS_BLUE_SEMI_TRANSPARENT, 1)).fillX().colspan(7);
 
       row().pad(0);
@@ -106,7 +107,7 @@ public class StatusBarPanel extends Table {
     gameSpeedOverlay.alignArrow(Align.left);
     gameSpeedOverlay.add(new Image(TowerAssetManager.textureFromAtlas("snail", "hud/buttons.txt"))).center();
     gameSpeedSlider = new Slider(TowerConsts.GAME_SPEED_MIN, TowerConsts.GAME_SPEED_MAX, 0.5f, TowerAssetManager.getCustomSkin());
-    gameSpeedOverlay.add(gameSpeedSlider).width(Display.scale(150));
+    gameSpeedOverlay.add(gameSpeedSlider).width(devicePixel(150));
     gameSpeedOverlay.add(new Image(TowerAssetManager.textureFromAtlas("rabbit", "hud/buttons.txt"))).center();
     gameSpeedOverlay.pack();
     gameSpeedOverlay.setVisible(false);
@@ -184,9 +185,10 @@ public class StatusBarPanel extends Table {
       }
 
       experienceLabel.setText(formatNumber(player.getExperience()));
-      moneyLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + formatNumber(player.getCoins()));
-      moneyIncomeLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + formatNumber(player.getCurrentIncome()));
-      moneyExpensesLabel.setText(TowerConsts.CURRENCY_SYMBOL + " " + formatNumber(player.getCurrentExpenses()));
+
+      moneyLabel.setText(TowerConsts.CURRENCY_SYMBOL + formatNumber(player.getCoins()));
+      moneyIncomeLabel.setText(TowerConsts.CURRENCY_SYMBOL + formatNumber(player.getCurrentIncome()));
+      moneyExpensesLabel.setText(TowerConsts.CURRENCY_SYMBOL + formatNumber(player.getCurrentExpenses()));
       populationLabel.setText(formatNumber(player.getPopulationResidency()) + "/" + formatNumber(player.getMaxPopulation()));
       employmentLabel.setText(formatNumber(player.getJobsFilled()) + "/" + formatNumber(player.getJobsMax()));
 

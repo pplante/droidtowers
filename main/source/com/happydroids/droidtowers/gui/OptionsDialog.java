@@ -38,7 +38,7 @@ public class OptionsDialog extends Dialog {
     setTitle("Options");
 
     Table body = new Table();
-    body.defaults().top().left().space(Display.scale(16));
+    body.defaults().top().left().space(Display.devicePixel(16));
 
     body.row().fillX();
     body.add(FontManager.RobotoBold18.makeLabel("Resolution: "));

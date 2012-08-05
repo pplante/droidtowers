@@ -11,7 +11,22 @@ import java.text.NumberFormat;
 
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
   public static CharSequence formatNumber(long i) {
-    return NumberFormat.getInstance().format(i);
+    float value = i;
+    String suffix;
+    if (value >= 1000000000) {
+      value = value / 1000000000f;
+      suffix = "b";
+    } else if (value >= 1000000) {
+      value = value / 1000000f;
+      suffix = "m";
+    } else if (value > 1000) {
+      value = i / 1000f;
+      suffix = "k";
+    } else {
+      return String.valueOf(i);
+    }
+
+    return String.format("%.1f%s", value, suffix);
   }
 
   public static CharSequence formatNumber(double i) {

@@ -31,8 +31,8 @@ public class TutorialStepNotification extends Table {
 
     setBackground(TowerAssetManager.ninePatchDrawable("hud/dialog-bg.png", Color.WHITE, 1, 1, 1, 1));
 
-    pad(Display.scale(8));
-    defaults().top().left().space(Display.scale(6));
+    pad(Display.devicePixel(8));
+    defaults().top().left().space(Display.devicePixel(6));
 
     row();
     add(FontManager.Default.makeLabel(tutorialStep.getName().toUpperCase(), Colors.ICS_BLUE));

@@ -27,7 +27,7 @@ public class CousinVinnieRepayLoanDialog extends Dialog {
     Image cousinVinnieImage = new Image(cousinVinnieTexture, Scaling.none);
 
     final Table c = new Table();
-    c.pad(Display.scale(4));
+    c.pad(Display.devicePixel(4));
 
     c.row();
     String loanAmount = TowerConsts.CURRENCY_SYMBOL + StringUtils.formatNumber(gridObject.getAmountLoanedFromCousinVinnie());
@@ -42,7 +42,7 @@ public class CousinVinnieRepayLoanDialog extends Dialog {
                                                  "\n" +
                                                  "Regards,\n" +
                                                  "Vinnie "));
-    c.add(cousinVinnieImage).spaceLeft(Display.scale(20)).top().width(Display.scale(96));
+    c.add(cousinVinnieImage).spaceLeft(Display.devicePixel(20)).top().width(Display.devicePixel(96));
 
     addButton("Pay " + repayAmountStr, new VibrateClickListener() {
       @Override

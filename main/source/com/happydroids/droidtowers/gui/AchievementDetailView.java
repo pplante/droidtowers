@@ -19,7 +19,7 @@ public class AchievementDetailView extends ScrollableTowerWindow {
   public AchievementDetailView(Achievement achievement, Stage stage) {
     super(achievement.getName(), stage);
 
-    defaults().top().left().space(Display.scale(6));
+    defaults().top().left().space(Display.devicePixel(6));
 
     makeDivider();
 
@@ -56,7 +56,7 @@ public class AchievementDetailView extends ScrollableTowerWindow {
   }
 
   private void makeDivider() {
-    row().height(Display.scale(22));
+    row().height(Display.devicePixel(22));
     add(new NoOpWidget());
   }
 

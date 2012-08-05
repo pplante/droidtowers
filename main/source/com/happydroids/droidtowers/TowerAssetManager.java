@@ -141,7 +141,7 @@ public class TowerAssetManager {
     selectBoxStyle.background = buttonNormal;
     selectBoxStyle.font = FontManager.Roboto18.getFont();
     selectBoxStyle.fontColor = Color.WHITE;
-    selectBoxStyle.itemSpacing = Display.scale(5);
+    selectBoxStyle.itemSpacing = Display.devicePixel(5);
     selectBoxStyle.listBackground = buttonNormal;
     selectBoxStyle.listSelection = buttonDown;
 

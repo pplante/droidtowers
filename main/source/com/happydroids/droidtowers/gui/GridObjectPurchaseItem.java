@@ -39,16 +39,16 @@ class GridObjectPurchaseItem extends Table {
     Image gridObjectImage = new Image(new TextureRegionDrawable(gridObjectType.getTextureRegion(0)), Scaling.fit, Align.left | Align.top);
     Label nameLabel = FontManager.RobotoBold18.makeLabel(gridObjectType.getName());
     Label priceLabel = FontManager.RobotoBold18.makeLabel(StringUtils.currencyFormat(gridObjectType.getCoins()), Color.WHITE, Align.right);
-    buyButton = FontManager.RobotoBold18.makeTextButton(gridObjectType.isLocked() ? "Info" : "Buy");
+    buyButton = FontManager.RobotoBold18.makeTextButton(gridObjectType.isLocked() ? "View\nAchievement" : "Buy");
 
-    defaults().top().left().space(Display.scale(8));
+    defaults().top().left().space(Display.devicePixel(8));
 
     Table left = new Table();
-    left.setWidth(Display.scale(200));
+    left.setWidth(Display.devicePixel(200));
     left.row().fillX();
     left.add(nameLabel).expandX();
     left.row().fillX();
-    left.add(gridObjectImage).height(Display.scale(40)).expand();
+    left.add(gridObjectImage).height(Display.devicePixel(40)).expand();
 
 
     Table center = new Table();
@@ -65,13 +65,13 @@ class GridObjectPurchaseItem extends Table {
     }
 
     Table right = new Table();
-    right.row().width(Display.scale(100));
-    right.add(priceLabel).right().width(Display.scale(100));
+    right.row().width(Display.devicePixel(100));
+    right.add(priceLabel).right().width(Display.devicePixel(100));
     right.row().fillX();
     right.add(buyButton).right();
 
     row().fill();
-    add(left).width(Display.scale(200));
+    add(left).width(Display.devicePixel(200));
     add(center).expand();
     add(right);
   }

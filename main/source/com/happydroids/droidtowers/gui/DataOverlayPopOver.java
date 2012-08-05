@@ -52,7 +52,7 @@ class DataOverlayPopOver extends PopOver {
 
       final CheckBox checkBox = FontManager.Roboto18.makeCheckBox(overlay.toString());
       checkBox.align(Align.left);
-      checkBox.getLabelCell().padLeft(0).spaceLeft(Display.scale(8));
+      checkBox.getLabelCell().padLeft(0).spaceLeft(Display.devicePixel(8));
       checkBox.addListener(new VibrateClickListener() {
         public void onClick(InputEvent event, float x, float y) {
           if (checkBox.isChecked()) {

@@ -16,10 +16,10 @@ class NonPlayerFriendSearchBox extends Table {
   NonPlayerFriendSearchBox(final FriendsListWindow friendsListWindow) {
     TextField searchField = FontManager.Roboto24.makeTextField("", "Filter friends by name");
 
-    defaults().pad(Display.scale(10));
+    defaults().pad(Display.devicePixel(10));
     row().right().fillX();
-    add(searchField).width(Display.scale(400)).right().expandX();
-    add(FontManager.Roboto18.makeTextButton("Apply")).padRight(Display.scale(24));
+    add(searchField).width(Display.devicePixel(400)).right().expandX();
+    add(FontManager.Roboto18.makeTextButton("Apply")).padRight(Display.devicePixel(24));
 
     searchField.setTextFieldListener(new TextFieldListener() {
       @Override

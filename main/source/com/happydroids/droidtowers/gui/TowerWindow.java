@@ -67,24 +67,24 @@ public class TowerWindow {
 
     titleLabel = Roboto32.makeLabel(StringUtils.truncate(title, 40));
     closeButton = Roboto18.makeTransparentButton("< back", rgba("#007399"), Colors.DARK_GRAY);
-    closeButtonLine = new VerticalRule(Display.scale(2));
+    closeButtonLine = new VerticalRule(Display.devicePixel(2));
 
     Table topBar = new Table();
     topBar.row().fill();
     topBar.add(closeButton).fill();
     topBar.add(closeButtonLine).fillY();
-    topBar.add(titleLabel).center().left().expand().pad(Display.scale(4)).padLeft(Display.scale(12));
+    topBar.add(titleLabel).center().left().expand().pad(Display.devicePixel(4)).padLeft(Display.devicePixel(12));
 
     wrapper.add(topBar).fill();
 
     wrapper.row().fillX();
-    wrapper.add(new HorizontalRule(Display.scale(2))).expandX();
+    wrapper.add(new HorizontalRule(Display.devicePixel(2))).expandX();
 
     wrapper.row().fillX();
     actionBarCell = wrapper.add();
 
     contentRow = wrapper.row();
-    contentRow.fill().padLeft(Display.scale(24)).padRight(Display.scale(24));
+    contentRow.fill().padLeft(Display.devicePixel(24)).padRight(Display.devicePixel(24));
     wrapper.add(makeContentContainer()).expand();
 
     wrapper.row().fillX();

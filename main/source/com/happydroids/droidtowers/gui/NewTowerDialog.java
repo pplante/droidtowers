@@ -18,7 +18,7 @@ import com.happydroids.droidtowers.utils.StringUtils;
 
 public class NewTowerDialog extends Dialog {
   public static final String MONEY_LABEL_PREFIX = "Starting money: ";
-  public static final int ROW_SPACE = Display.scale(16);
+  public static final int ROW_SPACE = Display.devicePixel(16);
 
   private DifficultyLevel difficultyLevel;
   private final Label moneyLabel;

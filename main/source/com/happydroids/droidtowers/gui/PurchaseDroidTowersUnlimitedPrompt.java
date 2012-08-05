@@ -22,10 +22,10 @@ public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
 
     TowerAssetManager.assetManager().finishLoading();
 
-    defaults().top().left().pad(Display.scale(4));
+    defaults().top().left().pad(Display.devicePixel(4));
 
-    addLabel("All these features will be enabled:", FontManager.RobotoBold18).expandX().padTop(Display.scale(8));
-    int indentPixels = Display.scale(64);
+    addLabel("All these features will be enabled:", FontManager.RobotoBold18).expandX().padTop(Display.devicePixel(8));
+    int indentPixels = Display.devicePixel(64);
     addLabel("* Towers taller up to 250 floors", FontManager.RobotoBold18).padLeft(indentPixels);
     addLabel("* Unlock the Sky Lobby:", FontManager.RobotoBold18).padLeft(indentPixels);
     row();
@@ -55,7 +55,7 @@ public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
     });
 
     Table buttons = new Table();
-    buttons.row().pad(Display.scale(12)).fill();
+    buttons.row().pad(Display.devicePixel(12)).fill();
     buttons.add(purchaseButton).expandX();
     buttons.add(dismissButton);
     setStaticFooter(buttons);

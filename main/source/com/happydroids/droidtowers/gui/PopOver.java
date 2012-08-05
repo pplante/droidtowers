@@ -10,8 +10,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -48,13 +48,12 @@ public class PopOver extends WidgetGroup {
     background.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
     content = new Table();
-    content.defaults().top().left().space(Display.scale(6));
+    content.defaults().top().left().space(Display.devicePixel(6));
 
     setTouchable(Touchable.enabled);
-    addCaptureListener(new EventListener() {
+    addListener(new InputListener() {
       @Override
-      public boolean handle(Event event) {
-        event.stop();
+      public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         return true;
       }
     });
@@ -124,8 +123,8 @@ public class PopOver extends WidgetGroup {
       setX(relativeX + ((relativeTo.getWidth() - triangle.getWidth()) / 2) - 8);
     }
     setY(relativeTo.getY() + parentWidget.getY() - getHeight() - relativeTo.getHeight() / 2);
-    content.setX(getX() + Display.scale(10));
-    content.setY(getY() + Display.scale(10));
+    content.setX(getX() + Display.devicePixel(10));
+    content.setY(getY() + Display.devicePixel(10));
 
     InputSystem.instance().bind(new int[]{ESCAPE, BACK}, inputCallback);
     InputSystem.instance().addInputProcessor(clickCallback, 0);
@@ -179,11 +178,11 @@ public class PopOver extends WidgetGroup {
 
   @Override
   public float getPrefWidth() {
-    return content.getPrefWidth() + Display.scale(20);
+    return content.getPrefWidth() + Display.devicePixel(20);
   }
 
   @Override
   public float getPrefHeight() {
-    return content.getPrefHeight() + Display.scale(20);
+    return content.getPrefHeight() + Display.devicePixel(20);
   }
 }

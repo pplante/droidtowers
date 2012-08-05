@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.HappyDroidConsts;
-import com.happydroids.droidtowers.DebugUtils;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.FontManager;
@@ -35,8 +34,8 @@ import static com.happydroids.droidtowers.gui.dialogs.ReviewDroidTowersPrompt.RA
 
 public class MainMenuScene extends SplashScene {
   private static final String TAG = MainMenuScene.class.getSimpleName();
-  public static final int BUTTON_WIDTH = Display.scale(280);
-  public static final int BUTTON_SPACING = Display.scale(16);
+  public static final int BUTTON_WIDTH = Display.devicePixel(280);
+  public static final int BUTTON_SPACING = Display.devicePixel(16);
 
   private boolean builtOutMenu;
 
@@ -91,7 +90,7 @@ public class MainMenuScene extends SplashScene {
         }
       }
 
-      DebugUtils.loadGameByFilename("3880fb3ea8df473685cf0d34ef60baae.json");
+//      DebugUtils.loadGameByFilename("3880fb3ea8df473685cf0d34ef60baae.json");
 //      DebugUtils.loadFirstGameFound();
 //      DebugUtils.createNonSavableGame(true);
 //      DebugUtils.loadGameFromCloud(41);
@@ -126,7 +125,7 @@ public class MainMenuScene extends SplashScene {
     Image upgradeToUnlimited = new Image(buttonAtlas.findRegion("upgrade-to-unlimited"));
     upgradeToUnlimited.pack();
     upgradeToUnlimited.setY(getStage().getHeight() / 2 - (upgradeToUnlimited.getImageHeight() / 2));
-    upgradeToUnlimited.setX(getStage().getWidth() - (upgradeToUnlimited.getWidth() + Display.scale(50)));
+    upgradeToUnlimited.setX(getStage().getWidth() - (upgradeToUnlimited.getWidth() + Display.devicePixel(50)));
     upgradeToUnlimited.setOriginX(upgradeToUnlimited.getWidth() / 2);
     upgradeToUnlimited.setOriginY(upgradeToUnlimited.getHeight() / 2);
     addActor(upgradeToUnlimited);
@@ -154,8 +153,8 @@ public class MainMenuScene extends SplashScene {
     Image happyDroidsLogo = new Image(atlas.findRegion("happy-droids-logo"));
     happyDroidsLogo.getColor().a = 0f;
     happyDroidsLogo.addAction(Actions.fadeIn(0.125f));
-    happyDroidsLogo.setX(getStage().getWidth() - happyDroidsLogo.getWidth() - Display.scale(5));
-    happyDroidsLogo.setY(Display.scale(5));
+    happyDroidsLogo.setX(getStage().getWidth() - happyDroidsLogo.getWidth() - Display.devicePixel(5));
+    happyDroidsLogo.setY(Display.devicePixel(5));
     happyDroidsLogo.addListener(new VibrateClickListener() {
       @Override
       public void onClick(InputEvent event, float x, float y) {
@@ -169,8 +168,8 @@ public class MainMenuScene extends SplashScene {
     Image libGdxLogo = new Image(atlas.findRegion("powered-by-libgdx"));
     libGdxLogo.getColor().a = 0f;
     libGdxLogo.addAction(Actions.fadeIn(0.125f));
-    libGdxLogo.setY(Display.scale(5));
-    libGdxLogo.setX(Display.scale(5));
+    libGdxLogo.setY(Display.devicePixel(5));
+    libGdxLogo.setX(Display.devicePixel(5));
     libGdxLogo.addListener(new VibrateClickListener() {
       @Override
       public void onClick(InputEvent event, float x, float y) {

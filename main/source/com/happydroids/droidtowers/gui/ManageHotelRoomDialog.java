@@ -45,7 +45,7 @@ public class ManageHotelRoomDialog extends Dialog {
 
   private Actor makeContentView() {
     Table content = new Table();
-    content.defaults().pad(Display.scale(4));
+    content.defaults().pad(Display.devicePixel(4));
 
     content.row().fillX();
     content.add(FontManager.Roboto18.makeLabel("Name of " + hotelRoom.getGridObjectType().getName())).expandX().colspan(2);

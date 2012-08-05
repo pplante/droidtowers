@@ -26,8 +26,9 @@ public class DroidTowersAmazon extends AndroidApplication {
     DisplayMetrics metrics = new DisplayMetrics();
     getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-    Display.setXHDPI(metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH);
-    Display.setScaledDensity(metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH ? 1.5f : 1f);
+//    Display.setXHDPI(metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH);
+//    Display.setScaledDensity(metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH ? 1.5f : 1f);
+    Display.setScaledDensity(metrics.scaledDensity);
 
     TowerGameService.setDeviceType("android");
     TowerGameService.setDeviceOSMarketName("amazon");

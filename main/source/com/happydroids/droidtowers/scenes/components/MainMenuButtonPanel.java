@@ -25,8 +25,8 @@ import static com.happydroids.droidtowers.gui.FontManager.Default;
 
 public class MainMenuButtonPanel extends Table {
   private static final String TAG = MainMenuButtonPanel.class.getSimpleName();
-  public static final int BUTTON_WIDTH = Display.scale(280);
-  public static final int BUTTON_SPACING = Display.scale(12);
+  public static final int BUTTON_WIDTH = Display.devicePixel(280);
+  public static final int BUTTON_SPACING = Display.devicePixel(12);
   private NinePatch dropShadowPatch;
 
   public MainMenuButtonPanel() {
