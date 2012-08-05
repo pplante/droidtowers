@@ -120,8 +120,12 @@ public class CameraController implements GestureDetector.GestureListener {
       velY *= 0.95f;
       float deltaX = -velX * deltaTime;
       float deltaY = velY * deltaTime;
-      if (Math.abs(velX) < 0.01f) velX = 0;
-      if (Math.abs(velY) < 0.01f) velY = 0;
+      if (Math.abs(velX) < 0.01f) {
+        velX = 0;
+      }
+      if (Math.abs(velY) < 0.01f) {
+        velY = 0;
+      }
 
       camera.position.add(deltaX, deltaY, 0);
       checkBounds();
@@ -141,14 +145,8 @@ public class CameraController implements GestureDetector.GestureListener {
     float halfWidth = Display.getWidth() / 2 * camera.zoom;
     float halfHeight = Display.getHeight() / 2 * camera.zoom;
 
-    Vector3 min = cameraBounds.getMin().cpy().add(halfWidth, halfHeight, 0);
-    Vector3 max = cameraBounds.getMax().cpy().sub(halfWidth, halfHeight, 0);
-
-    camera.position.x = Math.max(min.x, camera.position.x);
-    camera.position.x = Math.min(max.x, camera.position.x);
-
-    camera.position.y = Math.max(min.y, camera.position.y);
-    camera.position.y = Math.min(max.y, camera.position.y);
+    camera.position.x = MathUtils.clamp(camera.position.x, cameraBounds.getMin().x + halfWidth, cameraBounds.getMax().x - halfWidth);
+    camera.position.y = MathUtils.clamp(camera.position.y, cameraBounds.getMin().y + halfHeight, cameraBounds.getMax().y - halfHeight);
   }
 
   public BoundingBox getCameraBounds() {
