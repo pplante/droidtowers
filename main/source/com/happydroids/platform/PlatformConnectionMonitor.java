@@ -49,7 +49,7 @@ public class PlatformConnectionMonitor {
     public void run() {
       while (monitorThread == Thread.currentThread()) {
         try {
-          HttpResponse response = TowerGameService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + "/ping", null);
+          HttpResponse response = TowerGameService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + "/ping", null, false, -1);
           if (response != null) {
             networkState = response.getStatusLine().getStatusCode() == 200;
 

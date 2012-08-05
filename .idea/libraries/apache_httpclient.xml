@@ -1,13 +1,14 @@
 <component name="libraryTable">
   <library name="apache-httpclient">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/main/libs/main/httpclient-4.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/main/libs/main/httpcore-4.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/main/libs/main/httpmime-4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/main/libs/main/httpclient-4.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/main/libs/main/httpclient-cache-4.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/main/libs/main/httpcore-4.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/main/libs/main/httpmime-4.2.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/main/libs/sources/httpclient-4.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/main/libs/sources/httpclient-cache-4.2.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

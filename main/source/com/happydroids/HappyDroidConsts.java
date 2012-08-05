@@ -20,4 +20,5 @@ public class HappyDroidConsts {
   public static final boolean ENABLE_HAPPYDROIDS_CONNECT = true;
   public static final boolean ENABLE_NEWS_TICKER = false;
   public static final String SENTRY_DSN = "http://5a007db6832348879a35ab0ccd4db39b:36c43e145c4a40a4ba4a8b9dda8d837a@www.crashdroid.com/4";
+  public static final int ONE_DAY = 86400;
 }

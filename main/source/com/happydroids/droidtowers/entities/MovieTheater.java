@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.grid.GameGrid;
+import com.happydroids.droidtowers.gui.GridObjectPopOver;
+import com.happydroids.droidtowers.gui.MovieTheaterPopOver;
 import com.happydroids.droidtowers.server.Movie;
 import com.happydroids.droidtowers.server.MovieServer;
 import com.happydroids.droidtowers.types.CommercialType;
@@ -61,14 +63,12 @@ public class MovieTheater extends CommercialSpace {
       if (isPlaying) {
         animationTime += Gdx.graphics.getDeltaTime();
         if (animationTime >= animation.animationDuration) {
-          nextShowTime = System.currentTimeMillis() + (Random.randomInt(30, 60) * 1000);
-          isPlaying = false;
           getSprite().setRegion(gridObjectType.getTextureAtlas().findRegion("4x1-movie-theater"));
+          loadMovie();
+          isPlaying = false;
         } else {
           Vector2 worldCenter = getWorldCenter();
           spriteBatch.draw(animation.getKeyFrame(animationTime, false), worldCenter.x - 53.5f * getGridScale(), worldCenter.y - 19 * getGridScale(), 107 * getGridScale(), 44 * getGridScale());
-
-
         }
       } else if (!isPlaying) {
         long millis = System.currentTimeMillis();
@@ -82,11 +82,18 @@ public class MovieTheater extends CommercialSpace {
 
     super.render(spriteBatch, renderTintColor);
   }
-/*
+
   @Override
-  public boolean touchDown(Vector2 gameGridPoint) {
-    DroidTowersGame.getBrowserUtil().launchWebBrowser("http://www.tkqlhce.com/da74cy63y5LRTPTMPTLNMRVVTUR");
-    return true;
+  public GridObjectPopOver makePopOver() {
+    return new MovieTheaterPopOver(this);
   }
- */
+
+  public Movie getMovie() {
+    return movie;
+  }
+
+  @Override
+  public String getName() {
+    return movie != null ? "Now Playing: " + movie.getTitle() : "Coming Soon";
+  }
 }

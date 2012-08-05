@@ -17,4 +17,14 @@ public class MovieCollection extends HappyDroidServiceCollection<Movie> {
   public String getBaseResourceUri() {
     return HappyDroidConsts.HAPPYDROIDS_URI + "/api/v1/movie/";
   }
+
+  @Override
+  protected int getCacheMaxAge() {
+    return HappyDroidConsts.ONE_DAY;
+  }
+
+  @Override
+  protected boolean isCachingAllowed() {
+    return true;
+  }
 }

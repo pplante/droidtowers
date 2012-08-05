@@ -85,7 +85,7 @@ public abstract class HappyDroidServiceCollection<CollectionType extends HappyDr
     }
 
     fetching = true;
-    HttpResponse response = HappyDroidService.instance().makeGetRequest(getBaseResourceUri(), currentFilters);
+    HttpResponse response = HappyDroidService.instance().makeGetRequest(getBaseResourceUri(), currentFilters, isCachingAllowed(), getCacheMaxAge());
     fetching = false;
     if (response != null && response.getStatusLine() != null && response.getStatusLine().getStatusCode() == 200) {
       ObjectMapper objectMapper = HappyDroidService.instance().getObjectMapper();
@@ -97,6 +97,14 @@ public abstract class HappyDroidServiceCollection<CollectionType extends HappyDr
     }
 
     apiRunnable.handleResponse(response, this);
+  }
+
+  protected int getCacheMaxAge() {
+    return -1;
+  }
+
+  protected boolean isCachingAllowed() {
+    return false;
   }
 
   public HappyDroidServiceCollection<CollectionType> filterBy(final String fieldName, final String filterValue) {

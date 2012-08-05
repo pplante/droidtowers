@@ -27,11 +27,11 @@ public abstract class GridObjectType {
   protected String name;
   protected String description;
   protected String statsLine;
-  protected int height;
-  protected int width;
+  protected byte height;
+  protected byte width;
   protected int coins;
   protected int experienceAward;
-  protected int numVariations;
+  protected byte numVariations;
   protected String atlasFilename;
   protected String imageFilename;
   protected boolean canShareSpace;
@@ -52,11 +52,11 @@ public abstract class GridObjectType {
     return name;
   }
 
-  public int getHeight() {
+  public byte getHeight() {
     return height;
   }
 
-  public int getWidth() {
+  public byte getWidth() {
     return width;
   }
 
@@ -245,7 +245,7 @@ public abstract class GridObjectType {
   }
 
 
-  public int getNumVariations() {
+  public byte getNumVariations() {
     return numVariations;
   }
 

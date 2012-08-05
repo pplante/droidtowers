@@ -24,7 +24,7 @@ class TestTowerGameService extends TowerGameService {
   }
 
   @Override
-  public HttpResponse makeGetRequest(String uri, HashMap<String, String> queryParams) {
+  public HttpResponse makeGetRequest(String uri, HashMap<String, String> queryParams, boolean enableCache, int cacheMaxAge) {
     return HttpTestHelper.instance().makeGetRequest(uri);
   }
 

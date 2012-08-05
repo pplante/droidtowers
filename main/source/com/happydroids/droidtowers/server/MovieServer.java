@@ -4,13 +4,17 @@
 
 package com.happydroids.droidtowers.server;
 
+import com.google.common.collect.Iterators;
 import com.happydroids.droidtowers.gamestate.server.RunnableQueue;
 import com.happydroids.utils.BackgroundTask;
+
+import java.util.Iterator;
 
 public class MovieServer {
   private static MovieServer _instance;
   private MovieCollection moviesList;
   private RunnableQueue afterFetchRunnables;
+  private Iterator<Movie> moviesIterator;
 
   public static MovieServer instance() {
     if (_instance == null) {
@@ -45,7 +49,10 @@ public class MovieServer {
   }
 
   public Movie getMovie() {
-    Movie movie = moviesList.getObjects().get(0);
+    if (moviesIterator == null) {
+      moviesIterator = Iterators.cycle(moviesList.getObjects());
+    }
+    Movie movie = moviesIterator.next();
     movie.queueForDownload();
     return movie;
   }

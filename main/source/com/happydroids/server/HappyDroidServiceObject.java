@@ -77,13 +77,21 @@ public abstract class HappyDroidServiceObject {
       return;
     }
 
-    HttpResponse response = HappyDroidService.instance().makeGetRequest(resourceUri, null);
+    HttpResponse response = HappyDroidService.instance().makeGetRequest(resourceUri, null, isCachingAllowed(), getCacheMaxAge());
     if (response != null && response.getStatusLine().getStatusCode() == 200) {
       fetchError = false;
       copyValuesFromResponse(response);
     }
 
     apiRunnable.handleResponse(response, HappyDroidServiceObject.this);
+  }
+
+  protected int getCacheMaxAge() {
+    return -1;
+  }
+
+  protected boolean isCachingAllowed() {
+    return false;
   }
 
   public void save() {

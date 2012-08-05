@@ -14,6 +14,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.cache.CacheResponseStatus;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -24,13 +25,19 @@ import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.cache.CacheConfig;
+import org.apache.http.impl.client.cache.CachingHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.util.EntityUtils;
 
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+
+import static org.apache.http.client.cache.CacheResponseStatus.CACHE_HIT;
+import static org.apache.http.impl.client.cache.CachingHttpClient.CACHE_RESPONSE_STATUS;
 
 public class HappyDroidService {
   private static final String TAG = HappyDroidService.class.getSimpleName();
@@ -191,8 +198,11 @@ public class HappyDroidService {
     request.setHeader("Content-Type", "application/json");
   }
 
-  public HttpResponse makeGetRequest(String urlString, HashMap<String, String> queryParams) {
-    HttpClient client = new DefaultHttpClient();
+  public HttpResponse makeGetRequest(String url, HashMap<String, String> objectForServer) {
+    return makeGetRequest(url, objectForServer, false, -1);
+  }
+
+  public HttpResponse makeGetRequest(String urlString, HashMap<String, String> queryParams, boolean enableCache, int cacheMaxAge) {
     try {
       URI uri = new URI(urlString);
 
@@ -208,8 +218,28 @@ public class HappyDroidService {
       HttpGet request = new HttpGet(uri);
       addDefaultHeaders(request);
       Gdx.app.debug(TAG, "REQ: GET " + uri);
-      HttpResponse response = client.execute(request);
-      Gdx.app.debug(TAG, "RES: GET " + uri + ", " + response.getStatusLine());
+
+      HttpClient client = new DefaultHttpClient();
+      if (enableCache) {
+        CacheConfig config = new CacheConfig();
+        config.setSharedCache(true);
+        config.setMaxCacheEntries(256);
+        config.setMaxObjectSize(10485760);
+        config.setHeuristicCachingEnabled(true);
+        config.setHeuristicDefaultLifetime(cacheMaxAge);
+        client = new CachingHttpClient(client, new HttpCacheDiskStorage(), config);
+      }
+
+      BasicHttpContext context = new BasicHttpContext();
+      HttpResponse response = client.execute(request, context);
+      CacheResponseStatus responseStatus = (CacheResponseStatus) context.getAttribute(CACHE_RESPONSE_STATUS);
+
+      if (responseStatus == CACHE_HIT) {
+        Gdx.app.debug(TAG, "CACHED: GET " + uri + ", " + response.getStatusLine());
+      } else {
+        Gdx.app.debug(TAG, "RES: GET " + uri + ", " + response.getStatusLine());
+      }
+
       return response;
     } catch (Exception ignored) {
       Gdx.app.error(TAG, "Connection failed for: " + urlString, ignored);
@@ -221,9 +251,8 @@ public class HappyDroidService {
     return null;
   }
 
+
   public boolean isAuthenticated() {
     return false;
   }
-
-
 }

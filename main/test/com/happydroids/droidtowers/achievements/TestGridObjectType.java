@@ -43,7 +43,7 @@ public class TestGridObjectType extends GridObjectType {
     this.experienceAward = experienceAward;
   }
 
-  public void setHeight(int height) {
+  public void setHeight(byte height) {
     this.height = height;
   }
 
@@ -67,7 +67,7 @@ public class TestGridObjectType extends GridObjectType {
     this.provides = provides;
   }
 
-  public void setWidth(int width) {
+  public void setWidth(byte width) {
     this.width = width;
   }
 }

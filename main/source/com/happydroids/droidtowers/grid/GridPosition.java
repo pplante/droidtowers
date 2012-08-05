@@ -16,8 +16,8 @@ import java.util.Set;
 import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
 
 public class GridPosition {
-  public final int x;
-  public final int y;
+  public final short x;
+  public final short y;
   private final Vector2 worldVector;
   private Set<GridObject> objects = new HashSet<GridObject>();
   public Elevator elevator;
@@ -34,7 +34,7 @@ public class GridPosition {
   private float crimeLevel;
 
 
-  public GridPosition(int x, int y) {
+  public GridPosition(short x, short y) {
     this.x = x;
     this.y = y;
     worldVector = new Vector2(x * GRID_UNIT_SIZE, y * GRID_UNIT_SIZE);

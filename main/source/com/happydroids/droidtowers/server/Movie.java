@@ -19,6 +19,8 @@ import com.happydroids.utils.BackgroundTask;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.http.HttpResponse;
 
+import static com.happydroids.HappyDroidConsts.ONE_DAY;
+
 public class Movie extends HappyDroidServiceObject {
   protected String title;
   protected int atlasFps;
@@ -45,6 +47,16 @@ public class Movie extends HappyDroidServiceObject {
   @Override
   protected boolean requireAuthentication() {
     return false;
+  }
+
+  @Override
+  protected int getCacheMaxAge() {
+    return HappyDroidConsts.ONE_DAY;
+  }
+
+  @Override
+  protected boolean isCachingAllowed() {
+    return true;
   }
 
   public void afterDownload(Runnable runnable) {
@@ -75,12 +87,12 @@ public class Movie extends HappyDroidServiceObject {
     new BackgroundTask() {
       @Override
       protected void execute() throws Exception {
-        HttpResponse atlasTxtResp = TowerGameService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + atlasTxt, null);
+        HttpResponse atlasTxtResp = TowerGameService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + atlasTxt, null, true, ONE_DAY * 90);
         if (atlasTxtResp != null && atlasTxtResp.getStatusLine() != null && atlasTxtResp.getStatusLine().getStatusCode() == 200) {
           atlasTxtFile.write(atlasTxtResp.getEntity().getContent(), false);
         }
 
-        HttpResponse atlasPngResp = TowerGameService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + atlasPng, null);
+        HttpResponse atlasPngResp = TowerGameService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + atlasPng, null, true, ONE_DAY * 90);
         if (atlasPngResp != null && atlasPngResp.getStatusLine() != null && atlasPngResp.getStatusLine().getStatusCode() == 200) {
           atlasPngFile.write(atlasPngResp.getEntity().getContent(), false);
         }
@@ -111,5 +123,17 @@ public class Movie extends HappyDroidServiceObject {
 
   public int getAtlasFps() {
     return atlasFps;
+  }
+
+  public String getYoutubeTrailerUrl() {
+    return youtubeTrailerUrl;
+  }
+
+  public String getTicketsPurchaseUrl() {
+    return ticketsPurchaseUrl;
+  }
+
+  public String getTitle() {
+    return title;
   }
 }

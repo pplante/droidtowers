@@ -52,8 +52,8 @@ public class GridPositionCache {
       }
     }
 
-    for (int x = 0; x <= gridSize.x; x++) {
-      for (int y = 0; y <= gridSize.y; y++) {
+    for (short x = 0; x <= gridSize.x; x++) {
+      for (short y = 0; y <= gridSize.y; y++) {
         if (gridPositions[x][y] == null) {
           gridPositions[x][y] = new GridPosition(x, y);
         }
