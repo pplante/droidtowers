@@ -37,10 +37,13 @@
     <bookmark url="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/TowerScene.java" line="0" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
+    <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="android exception handler exits now?">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/libs/sources/gdx-freetype-sources.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidBillingLibrary" afterPath="$PROJECT_DIR$/AndroidBillingLibrary" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-shared/src/com/happydroids/platform/AndroidUncaughtExceptionHandler.java" afterPath="$PROJECT_DIR$/android-shared/src/com/happydroids/platform/AndroidUncaughtExceptionHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-amazon/android-amazon.iml" afterPath="$PROJECT_DIR$/android-amazon/android-amazon.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-google/android-google.iml" afterPath="$PROJECT_DIR$/android-google/android-google.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridObjectState.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridObjectState.java" />
     </list>
     <ignored path="testgame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -197,7 +200,19 @@
     <favorites_list name="droidtowers" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="GridObjectState.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridObjectState.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="65" column="61" selection-start="2233" selection-end="2233" vertical-scroll-proportion="0.33392072">
+              <folding>
+                <element signature="e#0#2723#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -210,9 +225,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/GridObject.java" />
-        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/DroidTowersGame.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/TowerScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/LoadTowerSplashScene.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/components/SceneManager.java" />
@@ -226,6 +238,9 @@
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Room.java" />
         <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/entities/Avatar.java" />
         <option value="$PROJECT_DIR$/android-shared/src/com/happydroids/platform/AndroidUncaughtExceptionHandler.java" />
+        <option value="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridObjectState.java" />
+        <option value="$PROJECT_DIR$/android-google/source/com/happydroids/droidtowers/DroidTowersGooglePlay.java" />
+        <option value="$PROJECT_DIR$/android-google/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -563,14 +578,14 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="AndroidRunProguardForReleaseBuild" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit3" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/main/libs/sources/gdx-freetype-sources.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/android-google/libs/kiip-1.0.14.jar!/" />
     <property name="DEBUGGABLE_DEVICE" value="664C002600000001" />
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -584,7 +599,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="664C002600000001 0123456789ABCDEF 0146BF4F17012018" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="0146BF4F17012018" />
     <property name="KeystoreLocation" value="$PROJECT_DIR$/release-key.keystore" />
     <property name="KeyAlias" value="happydroids" />
     <property name="restartRequiresConfirmation" value="true" />
@@ -1467,7 +1482,11 @@
       <created>1344337894329</created>
       <updated>1344337894329</updated>
     </task>
-    <option name="localTasksCounter" value="135" />
+    <task id="LOCAL-00135" summary="android exception handler exits now?">
+      <created>1344338737305</created>
+      <updated>1344338737305</updated>
+    </task>
+    <option name="localTasksCounter" value="136" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -1492,7 +1511,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="2560" height="1414" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3267627" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1506,7 +1525,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20745543" sideWeight="0.7065959" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.63671374" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328279" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27975738" sideWeight="0.776901" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27975738" sideWeight="0.776901" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31539044" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32689834" sideWeight="0.49748382" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.6808237" order="0" side_tool="true" content_ui="tabs" />
@@ -1572,7 +1591,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="load time speed up a bit, switched to gdx array class for gamelayer and gamegrid." />
+    <option name="LAST_COMMIT_MESSAGE" value="android exception handler exits now?" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1585,7 +1604,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="AVATARS FIXED" />
     <MESSAGE value="tutorial builds a pizza place and hires an employee" />
     <MESSAGE value="tutorial pizzas" />
     <MESSAGE value="tutorial now takes players through creating a pizza place and learning how to hire employees" />
@@ -1610,6 +1628,7 @@
     <MESSAGE value="fixed the fonts&#10;fixed a bug in sound controller where it would crash on resume" />
     <MESSAGE value="fixed the grid object pop over not always being visible on screen." />
     <MESSAGE value="load time speed up a bit, switched to gdx array class for gamelayer and gamegrid." />
+    <MESSAGE value="android exception handler exits now?" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1724,34 +1743,6 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/collections/TypeInstanceMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="50" selection-start="955" selection-end="955" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/EmploymentCalculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="46" selection-start="784" selection-end="784" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/gamestate/actions/DesirabilityCalculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="44" selection-start="799" selection-end="799" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GameGridRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="0" selection-start="6851" selection-end="6851" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/main/libs/sources/guava-11.0.2-sources.jar!/com/google/common/collect/Lists.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="88" column="33" selection-start="3004" selection-end="3004" vertical-scroll-proportion="0.33333334">
@@ -1861,6 +1852,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/android-google/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="63" selection-start="467" selection-end="467" vertical-scroll-proportion="0.23788546">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-google/source/com/happydroids/droidtowers/DroidTowersGooglePlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="44" selection-start="3147" selection-end="3147" vertical-scroll-proportion="1.554185">
+          <folding>
+            <element signature="e#0#5695#0" expanded="true" />
+            <element signature="e#1640#2312#0" expanded="true" />
+            <element signature="e#2173#2296#0" expanded="true" />
+            <element signature="e#2285#2286#0" expanded="true" />
+            <element signature="e#2305#2306#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/grid/GridObjectState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="61" selection-start="2233" selection-end="2233" vertical-scroll-proportion="0.33392072">
+          <folding>
+            <element signature="e#0#2723#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>
@@ -1914,7 +1934,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>main</last-edited>
+          <last-edited>android-amazon</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1926,7 +1946,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>raven-java</last-edited>
+          <last-edited>main</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

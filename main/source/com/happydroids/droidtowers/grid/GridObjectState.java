@@ -67,7 +67,7 @@ public class GridObjectState {
 
 
         if (object instanceof CommercialSpace && !object.provides(ProviderType.RESTROOM) && employees != null) {
-//          ((CommercialSpace) object).setEmployees(employees);
+          ((CommercialSpace) object).setEmployees(employees);
         }
 
         if (object instanceof Elevator) {
