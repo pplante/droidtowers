@@ -196,7 +196,8 @@ public class AvatarSteeringManager {
       return;
     }
 
-    currentState |= AvatarState.USING_STAIRS & AvatarState.MOVING;
+    currentState |= AvatarState.USING_STAIRS;
+    currentState |= AvatarState.MOVING;
 
     Direction verticalDir = nextPosition.y < currentPos.y ? DOWN : UP;
     Stair stair = verticalDir.equals(UP) ? currentPos.stair : nextPosition.stair;
@@ -239,6 +240,7 @@ public class AvatarSteeringManager {
       public void onEvent(int type, BaseTween source) {
         gameGrid.getRenderer().removeTransitLine(stairLine);
         currentState &= ~AvatarState.USING_STAIRS;
+        currentState &= ~AvatarState.MOVING;
         advancePosition();
       }
     });
