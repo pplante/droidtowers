@@ -7,7 +7,6 @@ package com.happydroids.droidtowers.entities;
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.eventbus.Subscribe;
@@ -54,7 +53,7 @@ public class ElevatorCar extends GameObject {
     super.finalize();
   }
 
-  public void moveToFloor(int nextFloor) {
+  public void moveToFloor(final int nextFloor) {
     TweenSystem.manager().killTarget(this);
     finalPosition.set(elevator.getPosition());
     finalPosition.y = nextFloor;
@@ -65,7 +64,7 @@ public class ElevatorCar extends GameObject {
             .delay(500f)
             .setCallback(new TweenCallback() {
               public void onEvent(int type, BaseTween source) {
-                queue.informPassengersOfStop();
+                queue.arrivedAt(nextFloor);
                 inUse = false;
               }
             })
@@ -75,12 +74,17 @@ public class ElevatorCar extends GameObject {
 
   @Override
   public void update(float timeDelta) {
-    if (queue.waitingOnRiders()) return;
+    if (queue.waitingOnRiders()) {
+      return;
+    }
 
     List<Passenger> currentRiders = queue.getCurrentRiders();
+    Passenger passenger;
     for (int i = 0, currentRidersSize = currentRiders.size(); i < currentRidersSize; i++) {
-      Passenger passenger = currentRiders.get(i);
-      passenger.updatePosition(getY());
+      passenger = currentRiders.get(i);
+      if (passenger.isRiding()) {
+        passenger.updatePosition(getY());
+      }
     }
 
     if (!inUse) {
@@ -88,25 +92,10 @@ public class ElevatorCar extends GameObject {
         queue.determinePickups();
       }
 
-      if (queue.getCurrentFloor() != ElevatorQueue.INVALID_FLOOR) {
+      if (queue.getNextFloor() != ElevatorQueue.INVALID_FLOOR) {
         inUse = true;
-        moveToFloor(queue.getCurrentFloor());
+        moveToFloor(queue.getNextFloor());
       }
-    }
-  }
-
-  private void moveToNext() {
-    if (inUse) return;
-
-    if (!queue.moveToNextStop()) {
-      setColor(Color.WHITE);
-      queue.determinePickups();
-    }
-
-    if (queue.getCurrentFloor() != ElevatorQueue.INVALID_FLOOR) {
-      inUse = true;
-      setColor(Color.CYAN);
-      moveToFloor(queue.getCurrentFloor());
     }
   }
 
@@ -152,8 +141,12 @@ public class ElevatorCar extends GameObject {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof ElevatorCar)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof ElevatorCar)) {
+      return false;
+    }
 
     ElevatorCar that = (ElevatorCar) o;
 

@@ -14,7 +14,7 @@ import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
 import com.happydroids.droidtowers.types.ProviderType;
 
-import java.util.Set;
+import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class GridObjectState {
@@ -24,7 +24,7 @@ public class GridObjectState {
   private String name;
   private int variationId;
   private int loanFromCousinVinnie;
-  private Set<JobCandidate> employees;
+  private List<JobCandidate> employees;
   private int numberOfElevatorCars;
 
   public GridObjectState() {

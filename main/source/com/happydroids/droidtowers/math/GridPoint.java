@@ -295,7 +295,9 @@ public class GridPoint implements Serializable {
    */
   public int angle() {
     int angle = (int) (Math.atan2(y, x) * MathUtils.radiansToDegrees);
-    if (angle < 0) angle += 360;
+    if (angle < 0) {
+      angle += 360;
+    }
     return angle;
   }
 
@@ -344,12 +346,15 @@ public class GridPoint implements Serializable {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (obj == null)
+    }
+    if (obj == null) {
       return false;
-    if (getClass() != obj.getClass())
+    }
+    if (getClass() != obj.getClass()) {
       return false;
+    }
     GridPoint other = (GridPoint) obj;
     return x == other.x && y == other.y;
   }
@@ -366,11 +371,11 @@ public class GridPoint implements Serializable {
 
   @JsonIgnore
   public float getWorldX() {
-    return (GRID_UNIT_SIZE * x);
+    return GRID_UNIT_SIZE * x;
   }
 
   @JsonIgnore
   public float getWorldY() {
-    return (GRID_UNIT_SIZE * y);
+    return GRID_UNIT_SIZE * y;
   }
 }

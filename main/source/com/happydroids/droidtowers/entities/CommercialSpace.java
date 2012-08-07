@@ -4,7 +4,7 @@
 
 package com.happydroids.droidtowers.entities;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.employee.JobCandidate;
 import com.happydroids.droidtowers.events.EmployeeFiredEvent;
@@ -15,16 +15,16 @@ import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.types.CommercialType;
 import com.happydroids.droidtowers.utils.Random;
 
-import java.util.Set;
+import java.util.List;
 
 public class CommercialSpace extends Room {
   private int jobsFilled;
   private long lastJobUpdateTime;
-  protected Set<JobCandidate> employees;
+  protected List<JobCandidate> employees;
 
   public CommercialSpace(CommercialType commercialType, GameGrid gameGrid) {
     super(commercialType, gameGrid);
-    employees = Sets.newHashSet();
+    employees = Lists.newArrayListWithCapacity(commercialType.getJobsProvided());
   }
 
   @Override
@@ -135,20 +135,24 @@ public class CommercialSpace extends Room {
     gameGrid.events().post(new EmployeeHiredEvent(this, selectedCandidate));
   }
 
-  public Set<JobCandidate> getEmployees() {
+  public List<JobCandidate> getEmployees() {
     return employees;
   }
 
-  public void setEmployees(Set<JobCandidate> employees) {
+  public void setEmployees(List<JobCandidate> employees) {
     this.employees.clear();
 
-    for (JobCandidate employee : employees) {
+    JobCandidate employee;
+    for (int i = 0, employeesSize = employees.size(); i < employeesSize; i++) {
+      employee = employees.get(i);
       addEmployee(employee);
     }
   }
 
   public void fireAllEmployees() {
-    for (JobCandidate employee : employees) {
+    JobCandidate employee;
+    for (int i = 0, employeesSize = employees.size(); i < employeesSize; i++) {
+      employee = employees.get(i);
       gameGrid.events().post(new EmployeeFiredEvent(this, employee));
     }
 

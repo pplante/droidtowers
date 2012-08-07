@@ -18,6 +18,8 @@ public class Passenger {
   private final AvatarSteeringManager steeringManager;
   private boolean waitFor;
   private boolean markedForRemoval;
+  private boolean riding;
+
 
   public Passenger(AvatarSteeringManager steeringManager, int boarding, int destination, Runnable disembarkCallback) {
     this.steeringManager = steeringManager;
@@ -49,11 +51,13 @@ public class Passenger {
       @Override
       public void run() {
         waitFor = false;
+        riding = true;
       }
     });
   }
 
   public void disembarkNow() {
+    riding = false;
     disembarkCallback.run();
   }
 
@@ -84,5 +88,9 @@ public class Passenger {
 
   public void informOfServiceChange() {
     steeringManager.getAvatar().recalculateCurrentPath();
+  }
+
+  public boolean isRiding() {
+    return riding;
   }
 }

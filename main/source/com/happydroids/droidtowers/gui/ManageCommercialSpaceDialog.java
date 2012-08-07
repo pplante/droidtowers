@@ -126,10 +126,16 @@ public class ManageCommercialSpaceDialog extends TowerWindow {
               .setDismissCallback(new Runnable() {
                 @Override
                 public void run() {
-                  candidateListView.setCandidates(Lists.newArrayList(commercialSpace.getEmployees()));
+                  updateEmployeeList();
                 }
               })
               .show();
     }
+  }
+
+  private void updateEmployeeList() {
+    candidateListView.setCandidates(commercialSpace.getEmployees());
+    fireButton.setVisible(!commercialSpace.getEmployees().isEmpty());
+    hireButton.setVisible(commercialSpace.getEmploymentLevel() < 1f);
   }
 }
