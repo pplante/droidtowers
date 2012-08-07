@@ -39,11 +39,12 @@ class GridObjectPurchaseItem extends Table {
     Image gridObjectImage = new Image(new TextureRegionDrawable(gridObjectType.getTextureRegion(0)), Scaling.fit, Align.left | Align.top);
     Label nameLabel = FontManager.RobotoBold18.makeLabel(gridObjectType.getName());
     Label priceLabel = FontManager.RobotoBold18.makeLabel(StringUtils.currencyFormat(gridObjectType.getCoins()), Color.WHITE, Align.right);
-    buyButton = FontManager.RobotoBold18.makeTextButton(gridObjectType.isLocked() ? "View\nAchievement" : "Buy");
+    buyButton = FontManager.RobotoBold18.makeTextButton(gridObjectType.isLocked() ? "How to\nunlock" : "Buy");
 
     defaults().top().left().space(Display.devicePixel(8));
 
     Table left = new Table();
+    left.defaults().space(Display.devicePixel(8));
     left.setWidth(Display.devicePixel(200));
     left.row().fillX();
     left.add(nameLabel).expandX();
@@ -52,6 +53,7 @@ class GridObjectPurchaseItem extends Table {
 
 
     Table center = new Table();
+    center.defaults().space(Display.devicePixel(8));
     center.row().fillX();
     if (gridObjectType.hasDescription()) {
       Label label = FontManager.Roboto18.makeLabel(gridObjectType.getDescription());
@@ -65,10 +67,11 @@ class GridObjectPurchaseItem extends Table {
     }
 
     Table right = new Table();
-    right.row().width(Display.devicePixel(100));
-    right.add(priceLabel).right().width(Display.devicePixel(100));
-    right.row().fillX();
-    right.add(buyButton).right();
+    right.defaults().right().width(Display.devicePixel(130)).space(Display.devicePixel(8));
+    right.row();
+    right.add(priceLabel);
+    right.row();
+    right.add(buyButton);
 
     row().fill();
     add(left).width(Display.devicePixel(200));
@@ -117,7 +120,7 @@ class GridObjectPurchaseItem extends Table {
 
   public void setBuyClickListener(ClickListener clickListener) {
     if (gridObjectType.isLocked()) {
-      getColor().a = 0.5f;
+      getColor().a = 0.65f;
       buyButton.addListener(new GridObjectTypeLockedClickListener(gridObjectType));
     } else {
       buyButton.addListener(clickListener);

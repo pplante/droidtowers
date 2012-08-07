@@ -204,7 +204,13 @@ public abstract class SplashScene extends Scene {
   @Override
   public void render(float deltaTime) {
     if (!createdSplashScene) {
-      if (assetManager().isLoaded("backgrounds/splash1.txt") && assetManager().isLoaded("backgrounds/splash2.txt") && assetManager().isLoaded("happy-droid.txt") && assetManager().isLoaded("backgrounds/cityscape-middle.png")) {
+      if (assetManager().isLoaded("backgrounds/splash1.txt") &&
+                  assetManager().isLoaded("backgrounds/splash1.png") &&
+                  assetManager().isLoaded("backgrounds/splash2.txt") &&
+                  assetManager().isLoaded("backgrounds/splash2.png") &&
+                  assetManager().isLoaded("happy-droid.txt") &&
+                  assetManager().isLoaded("happy-droid.png") &&
+                  assetManager().isLoaded("backgrounds/cityscape-middle.png")) {
         buildSplashScene();
       }
     }

@@ -71,7 +71,6 @@ public class TowerScene extends Scene {
   private Set<ParticleEffect> reactivatedEffects;
   private Iterator<float[]> colorsIterator;
 
-
   public TowerScene() {
     gameSaveLocation = Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
   }

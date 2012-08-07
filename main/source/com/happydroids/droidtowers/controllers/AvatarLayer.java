@@ -147,6 +147,6 @@ public class AvatarLayer extends GameLayer<Avatar> {
   }
 
   public int getNumAvatars() {
-    return gameObjects.size() - 1;
+    return gameObjects.size();
   }
 }

@@ -204,12 +204,12 @@ public class TowerWindow {
     return add(new HorizontalRule(darkGray, desiredHeight)).expandX().colspan(colspan);
   }
 
-  protected Cell addLabel(String labelText, FontManager labelFont, Color fontColor) {
+  protected Cell addLabel(String labelText, FontHelper labelFont, Color fontColor) {
     row();
     return add(labelFont.makeLabel(labelText, fontColor));
   }
 
-  public Cell addLabel(String text, FontManager labelFont) {
+  public Cell addLabel(String text, FontHelper labelFont) {
     return addLabel(text, labelFont, Color.WHITE);
   }
 

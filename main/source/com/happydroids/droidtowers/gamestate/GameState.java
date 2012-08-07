@@ -87,7 +87,7 @@ public class GameState {
   }
 
   public void saveGame(final boolean shouldForceCloudSave) {
-    if (shouldSaveGame) {
+    if (shouldSaveGame && !currentGameSave.isSaveToDiskDisabled()) {
       if (!gameGrid.isEmpty()) {
         currentGameSave.update(camera, gameGrid, cloudGameSave.getNeighbors());
 

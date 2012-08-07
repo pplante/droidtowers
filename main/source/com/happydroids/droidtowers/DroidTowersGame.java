@@ -29,6 +29,7 @@ import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
 import com.happydroids.droidtowers.input.*;
 import com.happydroids.droidtowers.platform.Display;
+import com.happydroids.droidtowers.scenes.ApplicationResumeScene;
 import com.happydroids.droidtowers.scenes.LaunchUriScene;
 import com.happydroids.droidtowers.scenes.MainMenuScene;
 import com.happydroids.droidtowers.scenes.Scene;
@@ -41,8 +42,6 @@ import com.happydroids.droidtowers.types.*;
 import com.happydroids.platform.Platform;
 import com.happydroids.security.SecurePreferences;
 import com.happydroids.utils.BackgroundTask;
-
-import java.net.URI;
 
 import static com.badlogic.gdx.Application.ApplicationType.*;
 import static com.happydroids.HappyDroidConsts.DEBUG;
@@ -267,18 +266,8 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
     Gdx.app.error("lifecycle", "resuming!");
 
     FontManager.resetAll();
-    TowerAssetManager.assetManager().finishLoading();
 
-    if (Platform.protocolHandler != null && Platform.protocolHandler.hasUri()) {
-      URI launchUri = Platform.protocolHandler.consumeUri();
-      SceneManager.pushScene(LaunchUriScene.class, launchUri);
-    } else {
-      if (SceneManager.activeScene() != null) {
-        SceneManager.activeScene().resume();
-      } else {
-        SceneManager.changeScene(MainMenuScene.class);
-      }
-    }
+    SceneManager.pushScene(ApplicationResumeScene.class);
   }
 
   public void dispose() {

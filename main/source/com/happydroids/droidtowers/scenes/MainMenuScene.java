@@ -91,9 +91,9 @@ public class MainMenuScene extends SplashScene {
         }
       }
 
-      DebugUtils.loadGameByFilename("2609ce4659004cd29b06b62aa9a8852a.json");
+//      DebugUtils.loadGameByFilename("2609ce4659004cd29b06b62aa9a8852a.json");
 //      DebugUtils.loadFirstGameFound();
-//      DebugUtils.createNonSavableGame(true);
+      DebugUtils.createNonSavableGame(false);
 //      DebugUtils.loadGameFromCloud(41);
     }
   }

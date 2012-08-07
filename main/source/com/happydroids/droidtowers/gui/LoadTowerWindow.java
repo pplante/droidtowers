@@ -188,7 +188,7 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     return box;
   }
 
-  private void addLabelRow(Table table, String content, FontManager font, Color fontColor) {
+  private void addLabelRow(Table table, String content, FontHelper font, Color fontColor) {
     table.row().fillX();
     table.add(font.makeLabel(content, fontColor)).expandX();
   }

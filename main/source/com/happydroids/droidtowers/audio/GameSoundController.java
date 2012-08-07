@@ -40,8 +40,10 @@ public class GameSoundController {
 
     moveToNextSong();
 
-    afterInitRunnables.runAll();
-    afterInitRunnables = null;
+    if (afterInitRunnables != null) {
+      afterInitRunnables.runAll();
+      afterInitRunnables = null;
+    }
   }
 
   private void moveToNextSong() {
@@ -67,7 +69,9 @@ public class GameSoundController {
   }
 
   private void playSound(Sound sound) {
-    if (!audioState || !soundsAllowed || sound == null) return;
+    if (!audioState || !soundsAllowed || sound == null) {
+      return;
+    }
 
     sound.play();
   }

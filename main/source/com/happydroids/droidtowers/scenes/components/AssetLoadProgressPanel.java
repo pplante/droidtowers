@@ -14,7 +14,6 @@ public class AssetLoadProgressPanel extends ProgressPanel {
     super.act(delta);
 
     TowerAssetManager.assetManager().update();
-    Thread.yield();
 
     setProgress((int) (assetManager().getProgress() * 100f));
   }
