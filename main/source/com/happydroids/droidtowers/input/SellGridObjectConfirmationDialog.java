@@ -9,6 +9,7 @@ import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
+import com.happydroids.droidtowers.entities.Transit;
 import com.happydroids.droidtowers.graphics.effects.SmokeParticleEffect;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.Dialog;
@@ -41,7 +42,14 @@ public class SellGridObjectConfirmationDialog extends Dialog {
         }
       });
     } else {
-      setMessage("Are you sure you want to recycle this " + objectToSell.getName() + "?\n\nRecycled materials price is: $" + NumberFormat.getInstance().format(sellPrice) + "\n\nThis will also fire Employees, or evict Residents.");
+      String message = "Are you sure you want to recycle this " + objectToSell.getName() + "?" +
+                               "\n\nRecycled materials price is: $" + NumberFormat.getInstance().format(sellPrice);
+
+      if (!(objectToSell instanceof Transit)) {
+        message += "\n\nThis will also fire Employees, or evict Residents.";
+      }
+
+      setMessage(message);
       addButton("Yes", new OnClickCallback() {
         @Override
         public void onClick(Dialog dialog) {
