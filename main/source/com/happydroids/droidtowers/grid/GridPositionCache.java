@@ -85,7 +85,7 @@ public class GridPositionCache {
 
   @Subscribe
   public void GameGrid_onGridObjectPlaced(GridObjectPlacedEvent event) {
-    GridObject gridObject = event.gridObject;
+    GridObject gridObject = event.getGridObject();
     if (!gridObject.isPlaced()) {
       return;
     }
@@ -95,19 +95,19 @@ public class GridPositionCache {
 
   @Subscribe
   public void GameGrid_onGridObjectBoundsChange(GridObjectBoundsChangeEvent event) {
-    GridObject gridObject = event.gridObject;
+    GridObject gridObject = event.getGridObject();
     if (!gridObject.isPlaced()) {
       return;
     }
 
-    removeGridObjectFromPosition(gridObject, event.prevPosition, event.prevSize);
+    removeGridObjectFromPosition(gridObject, event.getPrevPosition(), event.getPrevSize());
 
     addGridObjectToPosition(gridObject);
   }
 
   @Subscribe
   public void GameGrid_onGridObjectRemoved(GridObjectRemovedEvent event) {
-    removeGridObjectFromPosition(event.gridObject, event.gridObject.getPosition(), event.gridObject.getSize());
+    removeGridObjectFromPosition(event.getGridObject(), event.getGridObject().getPosition(), event.getGridObject().getSize());
   }
 
   private GridPosition getObjectSetForPosition(GridPoint gridPoint) {

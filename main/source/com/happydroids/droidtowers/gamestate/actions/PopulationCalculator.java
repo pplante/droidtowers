@@ -28,8 +28,7 @@ public class PopulationCalculator extends GameGridAction {
     int maxPopulation = 0;
 
     if (rooms != null) {
-      for (int i = 0, roomsSize = rooms.size; i < roomsSize; i++) {
-        GridObject gridObject = rooms.get(i);
+      for (GridObject gridObject : rooms) {
         maxPopulation += ((RoomType) gridObject.getGridObjectType()).getPopulationMax();
         supportedResidency += ((Room) gridObject).getNumSupportedResidents();
       }

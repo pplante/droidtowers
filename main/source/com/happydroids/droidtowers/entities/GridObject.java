@@ -11,12 +11,16 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.utils.Pools;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.actions.Action;
-import com.happydroids.droidtowers.events.*;
+import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
+import com.happydroids.droidtowers.events.GridObjectEvent;
+import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
+import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.generators.NameGenerator;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
@@ -42,8 +46,9 @@ public abstract class GridObject implements Comparable {
   protected Rectangle bounds;
   private Set<Action> actions;
   private EventBus myEventBus;
-  private Vector2 worldCenter;
   private Vector2 worldTop;
+  private Vector2 worldCenter;
+  private Vector2 worldCenterBottom;
   private Rectangle worldBounds;
   protected boolean placed;
   protected boolean connectedToTransport;
@@ -77,6 +82,7 @@ public abstract class GridObject implements Comparable {
     worldPosition = new Vector2();
     worldSize = new Vector2(size.getWorldX() * gameGrid.getGridScale(), size.getWorldY() * gameGrid.getGridScale());
     worldCenter = new Vector2();
+    worldCenterBottom = new Vector2();
     worldTop = new Vector2();
     worldBounds = new Rectangle();
 
@@ -164,9 +170,14 @@ public abstract class GridObject implements Comparable {
   }
 
   public void setSize(int x, int y) {
+    GridObjectBoundsChangeEvent event = Pools.obtain(GridObjectBoundsChangeEvent.class);
+    event.setGridObject(this);
+
     size.set(x, y);
     updateWorldCoordinates();
-    broadcastEvent(new GridObjectBoundsChangeEvent(this, size, position));
+
+    broadcastEvent(event);
+    Pools.free(event);
   }
 
   public GridPoint getPosition() {
@@ -178,16 +189,16 @@ public abstract class GridObject implements Comparable {
   }
 
   public void setPosition(int x, int y) {
-    GridPoint prevPosition = position.cpy();
+    GridObjectBoundsChangeEvent event = Pools.obtain(GridObjectBoundsChangeEvent.class);
+    event.setGridObject(this);
 
     position.set(x, y);
     clampPosition();
     updateWorldCoordinates();
 
-    if (!position.equals(prevPosition)) {
-      checkPlacement(placed);
-      broadcastEvent(new GridObjectBoundsChangeEvent(this, size, prevPosition));
-    }
+    checkPlacement(placed);
+    broadcastEvent(event);
+    Pools.free(event);
   }
 
   public void updateWorldCoordinates() {
@@ -195,6 +206,7 @@ public abstract class GridObject implements Comparable {
     worldSize.set(size.getWorldX() * gameGrid.getGridScale(), size.getWorldY() * gameGrid.getGridScale());
     worldBounds.set(worldPosition.x, worldPosition.y, worldSize.x, worldSize.y);
     worldCenter.set(worldPosition.x + worldSize.x / 2, worldPosition.y + worldSize.y / 2);
+    worldCenterBottom.set(worldCenter.cpy().sub(0, TowerConsts.GRID_UNIT_SIZE * size.y / 2));
     worldTop.set(worldPosition.x + worldSize.x / 2, worldPosition.y + worldSize.y);
 
     updateGridPointsTouched();
@@ -232,13 +244,12 @@ public abstract class GridObject implements Comparable {
   private void checkPlacement(boolean prevState) {
     if (placed) {
       setRenderColor(Color.WHITE);
-      broadcastEvent(new GridObjectPlacedEvent(this));
+      GridObjectPlacedEvent event = Pools.obtain(GridObjectPlacedEvent.class);
+      event.setGridObject(this);
+      broadcastEvent(event);
+      Pools.free(event);
     } else {
       setRenderColor(gameGrid.canObjectBeAt(this) ? Color.CYAN : Color.RED);
-    }
-
-    if (placed != prevState) {
-      broadcastEvent(new GridObjectChangedEvent(this, "placementStatus"));
     }
   }
 
@@ -333,7 +344,7 @@ public abstract class GridObject implements Comparable {
   }
 
   public Vector2 getWorldCenterBottom() {
-    return worldCenter.cpy().sub(0, TowerConsts.GRID_UNIT_SIZE * size.y / 2);
+    return worldCenterBottom;
   }
 
   @SuppressWarnings("RedundantIfStatement")

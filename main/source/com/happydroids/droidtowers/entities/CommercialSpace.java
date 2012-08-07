@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.entities;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Pools;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.employee.JobCandidate;
@@ -133,7 +134,10 @@ public class CommercialSpace extends Room {
 
   public void addEmployee(JobCandidate selectedCandidate) {
     employees.add(selectedCandidate);
-    gameGrid.events().post(new EmployeeHiredEvent(this, selectedCandidate));
+    EmployeeHiredEvent event = Pools.obtain(EmployeeHiredEvent.class);
+    event.setEmployee(selectedCandidate);
+    gameGrid.events().post(event);
+    Pools.free(event);
   }
 
   public List<JobCandidate> getEmployees() {
@@ -152,17 +156,26 @@ public class CommercialSpace extends Room {
 
   public void fireAllEmployees() {
     JobCandidate employee;
+    EmployeeFiredEvent event = Pools.obtain(EmployeeFiredEvent.class);
     for (int i = 0, employeesSize = employees.size(); i < employeesSize; i++) {
       employee = employees.get(i);
-      gameGrid.events().post(new EmployeeFiredEvent(this, employee));
+      event.setGridObject(this);
+      event.setEmployee(employee);
+      gameGrid.events().post(event);
     }
+
+    Pools.free(event);
 
     employees.clear();
   }
 
   public void removeEmployee(JobCandidate employee) {
     employees.remove(employee);
-    gameGrid.events().post(new EmployeeFiredEvent(this, employee));
+    EmployeeFiredEvent event = Pools.obtain(EmployeeFiredEvent.class);
+    event.setGridObject(this);
+    event.setEmployee(employee);
+    gameGrid.events().post(event);
+    Pools.free(event);
   }
 
   @Override

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Pools;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
@@ -43,6 +44,7 @@ public class Elevator extends Transit {
   private final List<ElevatorCar> elevatorCars;
   private final BitmapFontCache floorLabelCache;
   private int numFloorsSinceLabelCacheBuilt;
+  private final Vector2 tmpVector;
 
   public Elevator(ElevatorType elevatorType, final GameGrid gameGrid) {
     super(elevatorType, gameGrid);
@@ -70,6 +72,7 @@ public class Elevator extends Transit {
     for (int i = 0; i < numCars; i++) {
       elevatorCars.add(new ElevatorCar(this, elevatorAtlas));
     }
+    tmpVector = new Vector2();
   }
 
   @Override
@@ -98,24 +101,23 @@ public class Elevator extends Transit {
 
   @Override
   public void render(SpriteBatch spriteBatch, Color renderTintColor) {
-    GridPoint renderPosition = position.cpy();
-    Vector2 localPoint = worldPosition.cpy();
+    tmpVector.set(worldPosition);
 
     if (selectedResizeHandle == ResizeHandle.BOTTOM) {
       bottomSprite.setColor(Color.CYAN);
     } else {
       bottomSprite.setColor(renderColor);
     }
-    bottomSprite.setPosition(localPoint.x, localPoint.y);
+    bottomSprite.setPosition(tmpVector.x, tmpVector.y);
     bottomSprite.draw(spriteBatch);
 
     Sprite shaftToRender = drawShaft ? shaftSprite : emptyShaftSprite;
     BitmapFont.TextBounds textBounds;
 
 
-    localPoint.add(0, scaledGridUnit());
+    tmpVector.add(0, scaledGridUnit());
     shaftToRender.setColor(renderColor);
-    shaftToRender.setPosition(localPoint.x, localPoint.y);
+    shaftToRender.setPosition(tmpVector.x, tmpVector.y);
     shaftToRender.setSize(worldSize.x, worldSize.y - scaledGridUnit());
     setWrap(shaftToRender);
     shaftToRender.draw(spriteBatch);
@@ -175,7 +177,10 @@ public class Elevator extends Transit {
   public boolean touchUp() {
     if (selectedResizeHandle != null) {
       selectedResizeHandle = null;
-      broadcastEvent(new ElevatorHeightChangeEvent(this));
+      ElevatorHeightChangeEvent event = Pools.obtain(ElevatorHeightChangeEvent.class);
+      event.setGridObject(this);
+      broadcastEvent(event);
+      Pools.free(event);
 
       return true;
     }
@@ -209,35 +214,35 @@ public class Elevator extends Transit {
       return false;
     }
 
-    GridPoint newSize = size.cpy();
-    GridPoint prevSize = size.cpy();
-    GridPoint newPosition = position.cpy();
-    GridPoint oldPosition = position.cpy();
+    GridObjectBoundsChangeEvent event = Pools.obtain(GridObjectBoundsChangeEvent.class);
+    event.setGridObject(this);
 
     switch (selectedResizeHandle) {
       case BOTTOM:
-        newPosition.y = gridPointAtFinger.y;
-        newSize.y = anchorPoint.y - newPosition.y + 1;
-        checkSize(newSize);
-        newPosition.y = anchorPoint.y - newSize.y;
+        position.y = gridPointAtFinger.y;
+        size.y = anchorPoint.y - position.y + 1;
+        checkSize();
+        position.y = anchorPoint.y - size.y;
         break;
 
       case TOP:
-        newSize.y = gridPointAtFinger.y - anchorPoint.y;
-        checkSize(newSize);
+        size.y = gridPointAtFinger.y - anchorPoint.y;
+        checkSize();
         break;
     }
 
-    size.set(newSize);
-    setPosition(newPosition);
-    broadcastEvent(new GridObjectBoundsChangeEvent(this, prevSize, oldPosition));
+    clampPosition();
+    updateWorldCoordinates();
+
+    broadcastEvent(event);
+    Pools.free(event);
 
     return true;
   }
 
-  private void checkSize(GridPoint newSize) {
-    newSize.y = Math.max(newSize.y, 3);
-    newSize.y = Math.min(newSize.y, 20);
+  private void checkSize() {
+    size.y = Math.max(size.y, 3);
+    size.y = Math.min(size.y, 20);
   }
 
   public boolean servicesFloor(int floorNumber) {
@@ -266,8 +271,12 @@ public class Elevator extends Transit {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof Elevator)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Elevator)) {
+      return false;
+    }
 
     Elevator elevator = (Elevator) o;
 

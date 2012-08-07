@@ -4,10 +4,7 @@
 
 package com.happydroids.droidtowers.events;
 
-import com.happydroids.droidtowers.entities.GridObject;
-
 public class GridObjectRemovedEvent extends GridObjectEvent {
-  public GridObjectRemovedEvent(GridObject gridObject) {
-    super(gridObject);
+  public GridObjectRemovedEvent() {
   }
 }

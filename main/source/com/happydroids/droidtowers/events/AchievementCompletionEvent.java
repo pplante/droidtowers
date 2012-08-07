@@ -4,13 +4,27 @@
 
 package com.happydroids.droidtowers.events;
 
+import com.badlogic.gdx.utils.Pool;
 import com.happydroids.droidtowers.achievements.Achievement;
 
 @SuppressWarnings("FieldCanBeLocal")
-public class AchievementCompletionEvent {
-  public final Achievement achievement;
+public class AchievementCompletionEvent implements Pool.Poolable {
+  private Achievement achievement;
 
   public AchievementCompletionEvent(Achievement achievement) {
     this.achievement = achievement;
+  }
+
+  public Achievement getAchievement() {
+    return achievement;
+  }
+
+  public void setAchievement(Achievement achievement) {
+    this.achievement = achievement;
+  }
+
+  @Override
+  public void reset() {
+    achievement = null;
   }
 }

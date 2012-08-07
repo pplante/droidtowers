@@ -321,14 +321,14 @@ public class AvatarSteeringManager {
   }
 
   private void handleGridObjectEvents(GridObjectEvent event) {
-    if (!event.gridObject.isPlaced()) {
+    if (!event.getGridObject().isPlaced()) {
       return;
     }
 
     GridPosition position;
     for (int i = 0, pathSize = path.size(); i < pathSize; i++) {
       position = path.get(i);
-      if (position.contains(event.gridObject)) {
+      if (position.contains(event.getGridObject())) {
         finished();
         break;
       }

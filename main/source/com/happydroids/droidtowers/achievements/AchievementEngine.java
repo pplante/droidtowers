@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.achievements;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Pools;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
@@ -96,7 +97,10 @@ public class AchievementEngine {
 
   public void displayNotification(Achievement achievement) {
     new AchievementNotification(achievement).show();
-    eventBus.post(new AchievementCompletionEvent(achievement));
+    AchievementCompletionEvent event = Pools.obtain(AchievementCompletionEvent.class);
+    event.setAchievement(achievement);
+    eventBus.post(event);
+    Pools.free(event);
   }
 
   public void complete(String achievementId) {

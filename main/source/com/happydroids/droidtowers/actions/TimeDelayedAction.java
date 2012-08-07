@@ -61,4 +61,8 @@ public abstract class TimeDelayedAction extends Action {
   public void setFrequency(float frequency) {
     this.updateFrequency = frequency;
   }
+
+  protected void scheduleToRunIn(float delay) {
+    currentTime = updateFrequency - delay;
+  }
 }

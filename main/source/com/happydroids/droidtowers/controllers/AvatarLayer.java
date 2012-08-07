@@ -123,10 +123,10 @@ public class AvatarLayer extends GameLayer<Avatar> {
 
   @Subscribe
   public void GameEvent_GridObjectRemoved(GridObjectRemovedEvent event) {
-    GridObject gridObject = event.gridObject;
+    GridObject gridObject = event.getGridObject();
 
     if ((gridObject instanceof Room) && gridObject.isPlaced()) {
-      Room room = (Room) event.gridObject;
+      Room room = (Room) event.getGridObject();
       for (Avatar avatar : room.getResidents()) {
         avatar.markToRemove(true);
       }
@@ -135,8 +135,8 @@ public class AvatarLayer extends GameLayer<Avatar> {
 
   @Subscribe
   public void GameGrid_onEmployeeHired(EmployeeHiredEvent event) {
-    if (event.gridObject instanceof CommercialSpace) {
-      CommercialSpace commercialSpace = (CommercialSpace) event.gridObject;
+    if (event.getGridObject() instanceof CommercialSpace) {
+      CommercialSpace commercialSpace = (CommercialSpace) event.getGridObject();
       if (commercialSpace.provides(JANITORS)) {
         setupSpecialAvatar(commercialSpace, Janitor.class);
       } else if (commercialSpace.provides(ProviderType.MAIDS)) {
@@ -150,8 +150,8 @@ public class AvatarLayer extends GameLayer<Avatar> {
   @Subscribe
   public void GameGrid_onEmployeeFired(EmployeeFiredEvent event) {
     Avatar avatar;
-    if (event.gridObject instanceof CommercialSpace && event.employee != null) {
-      avatar = event.employee.getAvatar();
+    if (event.getGridObject() instanceof CommercialSpace && event.getEmployee() != null) {
+      avatar = event.getEmployee().getAvatar();
       if (avatar != null) {
         avatar.markToRemove(true);
       }

@@ -36,7 +36,7 @@
       <sourceFolder url="file://$MODULE_DIR$/gen-idea" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />
     </content>
-    <orderEntry type="jdk" jdkName="Android 2.3.3 Google APIs" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android SDK" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="main" exported="" />
     <orderEntry type="library" exported="" name="gdx-android" level="project" />

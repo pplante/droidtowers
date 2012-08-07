@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Pools;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.collections.TypeInstanceMap;
@@ -78,7 +79,7 @@ public class GameGrid extends GameLayer {
   }
 
   public Vector2 getWorldSize() {
-    return worldSize.cpy();
+    return worldSize;
   }
 
   public GridPoint getGridSize() {
@@ -97,7 +98,9 @@ public class GameGrid extends GameLayer {
       }
     }
 
-    events().post(new GridObjectAddedEvent(gridObject));
+    GridObjectAddedEvent event = Pools.obtain(GridObjectAddedEvent.class);
+    events().post(event);
+//    Pools.free(event);
     gridObjects.getInstances().sort();
 
     return true;
@@ -128,7 +131,10 @@ public class GameGrid extends GameLayer {
 
   public void removeObject(GridObject gridObject) {
     gridObjects.remove(gridObject);
-    events().post(new GridObjectRemovedEvent(gridObject));
+    GridObjectRemovedEvent event = Pools.obtain(GridObjectRemovedEvent.class);
+    event.setGridObject(gridObject);
+    events().post(event);
+    Pools.free(event);
   }
 
   public void update(float deltaTime) {

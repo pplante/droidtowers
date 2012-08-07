@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
+import com.badlogic.gdx.utils.Pools;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
@@ -41,7 +42,7 @@ public class CameraController implements GestureDetector.GestureListener {
   }
 
   public void updateCameraConstraints(Vector2 newWorldSize) {
-    worldSize = newWorldSize.cpy();
+    worldSize = newWorldSize;
     int gameWorldPadding = Display.getBiggestScreenDimension();
     this.cameraBounds = new BoundingBox(new Vector3(-gameWorldPadding, -gameWorldPadding, 0), new Vector3(worldSize.x + gameWorldPadding, worldSize.y + gameWorldPadding, 0));
     checkBounds();
@@ -132,7 +133,12 @@ public class CameraController implements GestureDetector.GestureListener {
     }
 
     if (!lastCameraPosition.equals(camera.position)) {
-      events.post(new CameraControllerEvent(camera.position, lastCameraPosition.sub(camera.position), camera.zoom));
+      CameraControllerEvent event = Pools.obtain(CameraControllerEvent.class);
+      event.setPosition(camera.position);
+      event.setDelta(lastCameraPosition.sub(camera.position));
+      event.setZoom(camera.zoom);
+      events.post(event);
+      Pools.free(event);
       lastCameraPosition.set(camera.position);
     }
   }

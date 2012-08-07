@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.achievements;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Pools;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
 import com.happydroids.droidtowers.events.AchievementCompletionEvent;
@@ -71,7 +72,10 @@ public class TutorialEngine extends AchievementEngine {
       tutorialStep.shownNotification();
       new TutorialStepNotification(tutorialStep).show();
 
-      eventBus.post(new AchievementCompletionEvent(tutorialStep));
+      AchievementCompletionEvent event = Pools.obtain(AchievementCompletionEvent.class);
+      event.setAchievement(tutorialStep);
+      eventBus.post(event);
+      Pools.free(event);
     }
   }
 

@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
+import com.badlogic.gdx.utils.Pools;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
@@ -81,8 +82,13 @@ public class ExpandLandOverlay extends WidgetGroup {
     gameGrid.updateWorldSize(false);
 
     for (GridObject gridObject : gameGrid.getObjects()) {
+      GridObjectBoundsChangeEvent event = Pools.obtain(GridObjectBoundsChangeEvent.class);
+      event.setGridObject(gridObject);
+
       gridObject.setPosition(gridObject.getPosition());
-      gridObject.broadcastEvent(new GridObjectBoundsChangeEvent(gridObject, gridObject.getSize(), gridObject.getPosition()));
+
+      gridObject.broadcastEvent(event);
+      Pools.free(event);
     }
 
     cameraController.panTo(gameGrid.getWorldSize().x, cameraController.getCamera().position.y, true);
@@ -139,7 +145,7 @@ public class ExpandLandOverlay extends WidgetGroup {
 
   @Subscribe
   public void CameraController_onPan(CameraControllerEvent event) {
-    leftButton.setVisible(event.position.x <= PADDING * event.zoom);
-    rightButton.setVisible(event.position.x + (PADDING * event.zoom) >= gameGrid.getWorldSize().x);
+    leftButton.setVisible(event.getPosition().x <= PADDING * event.getZoom());
+    rightButton.setVisible(event.getPosition().x + (PADDING * event.getZoom()) >= gameGrid.getWorldSize().x);
   }
 }

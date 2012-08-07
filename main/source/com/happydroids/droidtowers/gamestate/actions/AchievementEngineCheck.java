@@ -32,9 +32,9 @@ public class AchievementEngineCheck extends GameGridAction {
   public void GameEvent_handleGridObjectEvent(GridObjectEvent event) {
     if (event instanceof ElevatorHeightChangeEvent) {
       TutorialEngine.instance().moveToStepWhenReady("tutorial-build-pizza-place");
-    } else if (event.gridObject.isPlaced()) {
+    } else if (event.getGridObject().isPlaced()) {
       Gdx.app.debug(TAG, "GameEvent_handleGridObjectEvent triggered by: " + event);
-      run();
+      scheduleToRunIn(0.25f);
     }
   }
 

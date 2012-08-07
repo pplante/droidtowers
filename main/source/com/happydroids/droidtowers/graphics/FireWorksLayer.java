@@ -119,8 +119,8 @@ public class FireWorksLayer extends GameLayer<ParticleEffectManager> implements 
 
   @Subscribe
   public void AchievementEngine_onAchievementCompletion(AchievementCompletionEvent event) {
-    if (event.achievement instanceof TutorialStep) {
-      if (event.achievement.getId().equalsIgnoreCase("tutorial-finished")) {
+    if (event.getAchievement() instanceof TutorialStep) {
+      if (event.getAchievement().getId().equalsIgnoreCase("tutorial-finished")) {
         play();
       }
     } else {
