@@ -154,9 +154,9 @@ public class GameGridRenderer extends GameLayer {
   private void renderGridObjects(SpriteBatch spriteBatch) {
     spriteBatch.begin();
 
+    GridObject child;
     for (int i = 0, objectsRenderOrderSize = objectsRenderOrder.size(); i < objectsRenderOrderSize; i++) {
-      GridObject child = objectsRenderOrder.get(i);
-
+      child = objectsRenderOrder.get(i);
       tmp.set(child.getWorldCenter().x, child.getWorldCenter().y, 0);
       if (camera.frustum.sphereInFrustum(tmp, Math.max(child.getWorldBounds().width, child.getWorldBounds().height))) {
         child.render(spriteBatch, renderTintColor);

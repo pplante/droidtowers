@@ -33,12 +33,15 @@ public class GameLayer<T extends GameObject> {
   protected Vector3 tmp = new Vector3();
 
   public void render(SpriteBatch spriteBatch, OrthographicCamera camera) {
-    if (!visible) return;
+    if (!visible) {
+      return;
+    }
 
     spriteBatch.begin();
     spriteBatch.enableBlending();
+    GameObject gameObject;
     for (int i = 0, gameObjectsSize = gameObjects.size(); i < gameObjectsSize; i++) {
-      GameObject gameObject = gameObjects.get(i);
+      gameObject = gameObjects.get(i);
       if (shouldCullObjects() && gameObject.shouldBeCulled()) {
         tmp.set(gameObject.getX(), gameObject.getY(), 0);
         if (camera.frustum.sphereInFrustum(tmp, Math.max(gameObject.getWidth(), gameObject.getHeight()))) {

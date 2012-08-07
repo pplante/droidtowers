@@ -13,7 +13,8 @@ public class ConnectToHappyDroidsPrompt extends Dialog {
   public ConnectToHappyDroidsPrompt() {
     super();
 
-    setMessage("Sorry this feature requires you to login to happydroids.com first.\n\nWould you like to do so now?");
+    setTitle("View other towers in your neighborhood");
+    setMessage("Viewing the towers made by your friends requires you to\nlogin via happydroids.com with a Facebook account.\n\nAfter doing so, you can see the towers that your\nfriends have been creating.\n\nWould you like to login now?");
 
     addButton("Sure", new VibrateClickListener() {
       @Override

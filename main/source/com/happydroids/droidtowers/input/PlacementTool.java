@@ -132,20 +132,17 @@ public class PlacementTool extends ToolBase {
     gridObject = null;
     touchDownPointDelta = null;
 
-    verifyAbilityToPurchase();
-    return false;
-  }
+    InputSystem.instance().switchTool(GestureTool.PICKER, null);
 
-  private void verifyAbilityToPurchase() {
-    if (gridObjectPurchaseChecker != null && !gridObjectPurchaseChecker.canPurchase()) {
-      InputSystem.instance().switchTool(GestureTool.PICKER, null);
-    }
+    return false;
   }
 
   public void enterPurchaseMode() {
     gridObjectPurchaseChecker = new GridObjectPurchaseChecker(gameGrid, gridObjectType);
 
-    verifyAbilityToPurchase();
+    if (gridObjectPurchaseChecker != null && !gridObjectPurchaseChecker.canPurchase()) {
+      InputSystem.instance().switchTool(GestureTool.PICKER, null);
+    }
   }
 
   @Override

@@ -91,9 +91,9 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
 
     if (Gdx.graphics.isGL20Available() && Gdx.app.getType().equals(Android)) {
       if (Display.isXHDPIMode()) {
-//        float displayScalar = 0.75f;
-//        frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, (int) (Display.getWidth() * displayScalar), (int) (Display.getHeight() * displayScalar), true);
-//        spriteBatchFBO = new SpriteBatch();
+        float displayScalar = 0.75f;
+        frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, (int) (Display.getWidth() * displayScalar), (int) (Display.getHeight() * displayScalar), true);
+        spriteBatchFBO = new SpriteBatch();
       } else if (Display.isInCompatibilityMode()) {
         frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, Display.getWidth(), Display.getHeight(), true);
         spriteBatchFBO = new SpriteBatch();

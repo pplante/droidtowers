@@ -4,9 +4,9 @@
 
 package com.happydroids.droidtowers.controllers;
 
-public enum AvatarState {
-  STATIONARY,
-  MOVING,
-  USING_STAIRS,
-  USING_ELEVATOR,
+public class AvatarState {
+  public static final int STATIONARY = 1;
+  public static final int MOVING = 1 << 1;
+  public static final int USING_STAIRS = 1 << 2;
+  public static final int USING_ELEVATOR = 1 << 3;
 }

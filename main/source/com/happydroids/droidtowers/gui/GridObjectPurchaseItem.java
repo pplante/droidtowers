@@ -118,7 +118,6 @@ class GridObjectPurchaseItem extends Table {
   public void setBuyClickListener(ClickListener clickListener) {
     if (gridObjectType.isLocked()) {
       getColor().a = 0.5f;
-      buyButton.setDisabled(true);
       buyButton.addListener(new GridObjectTypeLockedClickListener(gridObjectType));
     } else {
       buyButton.addListener(clickListener);

@@ -247,8 +247,7 @@ public class Avatar extends GameObject {
     if (!steeringManager.isRunning()) {
       beginNextAction();
     } else {
-      Set<AvatarState> steeringState = steeringManager.getCurrentState();
-      if (steeringState.contains(AvatarState.MOVING) && !steeringState.contains(AvatarState.USING_ELEVATOR)) {
+      if ((steeringManager.getCurrentState() & AvatarState.MOVING) != 0 || (steeringManager.getCurrentState() & AvatarState.USING_STAIRS) != 0) {
         walkAnimationTime += timeDelta;
         if (walkAnimationTime >= WALKING_ANIMATION_DURATION) {
           walkAnimationTime = 0f;

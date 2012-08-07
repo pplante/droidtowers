@@ -35,7 +35,7 @@
     <orderEntry type="library" exported="" name="apache-commons" level="project" />
     <orderEntry type="library" exported="" name="jackson" level="project" />
     <orderEntry type="library" exported="" name="apache-httpclient" level="project" />
-    <orderEntry type="library" name="raven-java" level="project" />
+    <orderEntry type="library" exported="" name="raven-java" level="project" />
   </component>
 </module>
 
