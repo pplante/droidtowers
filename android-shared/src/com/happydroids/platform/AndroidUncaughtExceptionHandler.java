@@ -38,15 +38,21 @@ public class AndroidUncaughtExceptionHandler extends HappyDroidUncaughtException
                     if (Platform.getConnectionMonitor().isConnectedOrConnecting()) {
                       ErrorUtil.sendErrorToServer(throwable);
                     }
-                    Gdx.app.exit();
+                    dialogInterface.dismiss();
                   }
                 })
                 .setNegativeButton("Just Exit", new DialogInterface.OnClickListener() {
                   @Override
                   public void onClick(DialogInterface dialogInterface, int i) {
-                    Gdx.app.exit();
+                    dialogInterface.dismiss();
                   }
-                }).show();
+                }).show()
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                  @Override
+                  public void onDismiss(DialogInterface dialog) {
+                    System.exit(0);
+                  }
+                });
       }
     });
   }
