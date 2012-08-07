@@ -43,7 +43,7 @@ public class Dialog extends Table {
   public Dialog(Stage stage) {
     super();
     this.setStage(stage);
-    setTouchable(Touchable.childrenOnly);
+    setTouchable(Touchable.enabled);
     hideButtons = false;
     viewPadding = true;
 
@@ -65,6 +65,8 @@ public class Dialog extends Table {
         return true;
       }
     };
+
+    addListener(new InputEventBlackHole());
   }
 
   public Dialog setTitle(String title) {

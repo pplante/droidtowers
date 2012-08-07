@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.gui;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -15,15 +16,14 @@ import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.employee.JobCandidate;
 import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.generators.NameGenerator;
-import com.happydroids.droidtowers.gui.events.OnChangeCandidateCallback;
 import com.happydroids.droidtowers.platform.Display;
+import com.happydroids.droidtowers.types.CommercialType;
 
 public class ManageCommercialSpaceDialog extends TowerWindow {
   private final CommercialSpace commercialSpace;
   private TextField textField;
   private final JobCandidateListView candidateListView;
   private final TextButton hireButton;
-  private final TextButton fireButton;
 
   public ManageCommercialSpaceDialog(final CommercialSpace commercialSpace) {
     super("Manage " + commercialSpace.getName(), DroidTowersGame.getRootUiStage());
@@ -34,19 +34,9 @@ public class ManageCommercialSpaceDialog extends TowerWindow {
     hireButton = FontManager.Default.makeTextButton("Employee Search");
     hireButton.addListener(new HireCandidateDialogOpener());
 
-    fireButton = FontManager.Roboto18.makeTextButton("Fire Employee");
-    fireButton.setVisible(false);
-    fireButton.addListener(new FireCandidateClickListener());
-
     candidateListView = new JobCandidateListView();
-    candidateListView.pad(Display.devicePixel(20));
     candidateListView.setCountLabelSuffix("employees");
-    candidateListView.setOnChangeCandidateListener(new OnChangeCandidateCallback() {
-      @Override
-      public void change(JobCandidate candidate) {
-        fireButton.setVisible(candidate != null);
-      }
-    });
+    candidateListView.addCandidateButton("Fire", new FireCandidateClickListener());
     candidateListView.setCandidates(Lists.newArrayList(this.commercialSpace.getEmployees()));
 
     defaults().pad(Display.devicePixel(4));
@@ -58,9 +48,17 @@ public class ManageCommercialSpaceDialog extends TowerWindow {
 
     addHorizontalRule(Colors.ICS_BLUE, 2, 2);
 
+    Table right = new Table();
+    right.row();
+    right.add(FontManager.Default.makeLabel("Max Employees", Color.LIGHT_GRAY));
+    right.row();
+    right.add(FontManager.Default.makeLabel("" + ((CommercialType) commercialSpace.getGridObjectType()).getJobsProvided()));
+
     row();
-    add(candidateListView).spaceBottom(Display.devicePixel(20));
-    add(fireButton).padLeft(Display.devicePixel(70));
+    add(candidateListView);
+    add(right).padLeft(Display.devicePixel(70));
+
+    updateEmployeeList();
   }
 
   private Actor makeNameHeader() {
@@ -107,6 +105,7 @@ public class ManageCommercialSpaceDialog extends TowerWindow {
                   dialog.dismiss();
                   commercialSpace.removeEmployee(selectedCandidate);
                   candidateListView.removeCandidate(selectedCandidate);
+                  updateEmployeeList();
                 }
               })
               .addButton("No", new OnClickCallback() {
@@ -122,7 +121,7 @@ public class ManageCommercialSpaceDialog extends TowerWindow {
   private class HireCandidateDialogOpener extends VibrateClickListener {
     @Override
     public void onClick(InputEvent event, float x, float y) {
-      new AvailableJobCandidateDialog(ManageCommercialSpaceDialog.this.commercialSpace)
+      new AvailableJobCandidateDialog(commercialSpace)
               .setDismissCallback(new Runnable() {
                 @Override
                 public void run() {
@@ -135,7 +134,6 @@ public class ManageCommercialSpaceDialog extends TowerWindow {
 
   private void updateEmployeeList() {
     candidateListView.setCandidates(commercialSpace.getEmployees());
-    fireButton.setVisible(!commercialSpace.getEmployees().isEmpty());
     hireButton.setVisible(commercialSpace.getEmploymentLevel() < 1f);
   }
 }

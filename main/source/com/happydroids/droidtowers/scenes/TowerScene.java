@@ -126,7 +126,7 @@ public class TowerScene extends Scene {
     gameLayers.add(avatarLayer);
 
     gestureDelegater = new GestureDelegater(camera, gameLayers, gameGrid, getCameraController());
-    gestureDetector = new GestureDetector(20, 0.5f, 1, 0.15f, gestureDelegater);
+    gestureDetector = new GestureDetector(20, 0.35f, 1, 0.15f, gestureDelegater);
     keybindings = new DefaultKeybindings(this);
 
     attachToInputSystem();

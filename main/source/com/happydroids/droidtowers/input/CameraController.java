@@ -43,7 +43,7 @@ public class CameraController implements GestureDetector.GestureListener {
   public void updateCameraConstraints(Vector2 newWorldSize) {
     worldSize = newWorldSize.cpy();
     int gameWorldPadding = Display.getBiggestScreenDimension();
-    this.cameraBounds = new BoundingBox(new Vector3(-gameWorldPadding, 0, 0), new Vector3(worldSize.x + gameWorldPadding, worldSize.y + gameWorldPadding, 0));
+    this.cameraBounds = new BoundingBox(new Vector3(-gameWorldPadding, -gameWorldPadding, 0), new Vector3(worldSize.x + gameWorldPadding, worldSize.y + gameWorldPadding, 0));
     checkBounds();
   }
 

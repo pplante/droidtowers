@@ -27,8 +27,9 @@ public class GroundLayer extends GameLayer implements RespondsToWorldSizeChange 
     float tiledHeight = TowerConsts.GROUND_HEIGHT - topTexture.getHeight();
 
     GameObject top = new GameObject(topTexture);
-    top.setPosition(-Display.getBiggestScreenDimension(), tiledHeight);
-    top.setSize(worldSize.x + (Display.getBiggestScreenDimension() * 2), topTexture.getHeight());
+    int biggestScreenDimension = Display.getBiggestScreenDimension();
+    top.setPosition(-biggestScreenDimension, tiledHeight);
+    top.setSize(worldSize.x + (biggestScreenDimension * 2), topTexture.getHeight());
     top.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.ClampToEdge);
 
     addChild(top);
@@ -36,8 +37,8 @@ public class GroundLayer extends GameLayer implements RespondsToWorldSizeChange 
     Texture tileTexture = TowerAssetManager.texture("backgrounds/ground-tile.png");
 
     GameObject tile = new GameObject(tileTexture);
-    tile.setPosition(-Display.getBiggestScreenDimension(), 0);
-    tile.setSize(worldSize.x + (Display.getBiggestScreenDimension() * 4), tiledHeight);
+    tile.setPosition(-biggestScreenDimension, -biggestScreenDimension);
+    tile.setSize(worldSize.x + (biggestScreenDimension * 4), tiledHeight + biggestScreenDimension);
     tile.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
     addChild(tile);

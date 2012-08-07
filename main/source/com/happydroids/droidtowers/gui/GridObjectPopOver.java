@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.google.common.collect.Maps;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.GridObject;
@@ -20,6 +21,8 @@ import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.utils.StringUtils;
+
+import java.util.Map;
 
 import static com.happydroids.droidtowers.TowerAssetManager.sprite;
 
@@ -43,11 +46,16 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
   private Label incomeLabel;
   private Label upkeepLabel;
   private boolean builtControls;
+  private Map<String, RatingBar> ratingBars;
+  private Table ratingBarContainer;
+  private float offsetY;
 
   public GridObjectPopOver(T gridObject) {
     super();
     this.gridObject = gridObject;
     gridObjectWorldToScreen = new Vector3();
+    ratingBars = Maps.newHashMap();
+    ratingBarContainer = new Table();
 
     InputSystem.instance().addInputProcessor(new GridObjectPopOverCloser(this), 20);
 
@@ -88,7 +96,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
 
     Table budgetTable = new Table();
     budgetTable.defaults().top().left().space(Display.devicePixel(8));
-    budgetTable.row();
+    budgetTable.row().fillX();
     if (gridObject.canEarnMoney()) {
       budgetTable.add(FontManager.Roboto12.makeLabel("INCOME"));
     }
@@ -96,12 +104,15 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
 
     budgetTable.row();
     if (gridObject.canEarnMoney()) {
-      budgetTable.add(incomeLabel);
+      budgetTable.add(incomeLabel).expandX();
     }
-    budgetTable.add(upkeepLabel);
+    budgetTable.add(upkeepLabel).expandX();
 
     row();
     add(budgetTable).left();
+
+    row();
+    add(ratingBarContainer);
 
     desirabilityBar = makeStarRatingBar("Desirability");
     noiseBar = makeStarRatingBar("Noise");
@@ -109,11 +120,9 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
   }
 
   protected RatingBar makeStarRatingBar(String labelText) {
-    row();
-    add(FontManager.Roboto12.makeLabel(labelText.toUpperCase()));
-    row();
     RatingBar ratingBar = new RatingBar(5f, 5);
-    add(ratingBar);
+    ratingBar.setUnitLabel(FontManager.Roboto12.makeLabel(labelText, Color.LIGHT_GRAY));
+    ratingBars.put(labelText, ratingBar);
 
     return ratingBar;
   }
@@ -125,31 +134,10 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     super.drawBackground(batch, parentAlpha);
 
     batch.setColor(0.364f, 0.364f, 0.364f, parentAlpha);
-    batch.draw(triangle, getX() - triangle.getWidth() + 1, getY() + ((getHeight() - triangle.getHeight()) / 2));
+    batch.draw(triangle, getX() - triangle.getWidth() + 1, getY() + ((getHeight() - triangle.getHeight()) / 2) + offsetY);
 
     batch.setColor(0.2666f, 0.2666f, 0.2666f, parentAlpha);
-    batch.draw(triangle, getX() - triangle.getWidth() + 2, getY() + ((getHeight() - triangle.getHeight()) / 2));
-  }
-
-  @Override
-  public void act(float delta) {
-    super.act(delta);
-
-    if (!builtControls) {
-      builtControls = true;
-      buildControls();
-    }
-
-    timeSinceUpdate -= delta;
-    if (timeSinceUpdate <= 0f) {
-      timeSinceUpdate = 2f;
-      updateControls();
-    }
-
-    gridObjectWorldToScreen.set(gridObject.getWorldCenter().x + triangle.getWidth(), gridObject.getWorldCenter().y, 0);
-    SceneManager.activeScene().getCamera().project(gridObjectWorldToScreen);
-    setX(gridObjectWorldToScreen.x);
-    setY(gridObjectWorldToScreen.y - getPrefHeight() / 2);
+    batch.draw(triangle, getX() - triangle.getWidth() + 2, getY() + ((getHeight() - triangle.getHeight()) / 2) + offsetY);
   }
 
   protected void updateControls() {
@@ -208,5 +196,44 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
       invalidateHierarchy();
       pack();
     }
+  }
+
+  @Override
+  public void act(float delta) {
+    super.act(delta);
+
+    if (!builtControls) {
+      builtControls = true;
+      buildControls();
+      ratingBarContainer.clear();
+      ratingBarContainer.defaults().space(Display.devicePixel(4));
+
+      int idx = 0;
+      for (Map.Entry<String, RatingBar> entry : ratingBars.entrySet()) {
+        if (idx % 3 == 0) {
+          ratingBarContainer.row().fillX();
+        }
+
+        ratingBarContainer.add(entry.getValue()).expandX().right();
+
+        idx += 1;
+      }
+    }
+
+    timeSinceUpdate -= delta;
+    if (timeSinceUpdate <= 0f) {
+      timeSinceUpdate = 2f;
+      updateControls();
+    }
+
+    gridObjectWorldToScreen.set(gridObject.getWorldCenter().x + triangle.getWidth(), gridObject.getWorldCenter().y, 0);
+    SceneManager.activeScene().getCamera().project(gridObjectWorldToScreen);
+    setX(gridObjectWorldToScreen.x);
+    float targetY = gridObjectWorldToScreen.y - getPrefHeight() / 2;
+    if (targetY < 0) {
+      offsetY = targetY;
+      targetY = 0;
+    }
+    setY(targetY);
   }
 }

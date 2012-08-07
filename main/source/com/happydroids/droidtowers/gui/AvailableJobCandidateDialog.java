@@ -30,10 +30,16 @@ public class AvailableJobCandidateDialog extends Dialog {
   private class HireCandidateClickListener extends VibrateClickListener {
     @Override
     public void onClick(InputEvent event, float x, float y) {
-      JobCandidate selectedCandidate = candidateListView.getSelectedCandidate();
-      if (selectedCandidate != null) {
-        candidateListView.removeCandidate(selectedCandidate);
-        commercialSpace.addEmployee(selectedCandidate);
+      if (commercialSpace.getEmploymentLevel() == 1f) {
+        new Dialog()
+                .setMessage("There are no more positions available.")
+                .show();
+      } else {
+        JobCandidate selectedCandidate = candidateListView.getSelectedCandidate();
+        if (selectedCandidate != null) {
+          candidateListView.removeCandidate(selectedCandidate);
+          commercialSpace.addEmployee(selectedCandidate);
+        }
       }
     }
   }

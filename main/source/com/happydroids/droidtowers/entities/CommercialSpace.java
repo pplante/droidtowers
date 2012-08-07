@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.entities;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.employee.JobCandidate;
@@ -95,7 +96,7 @@ public class CommercialSpace extends Room {
     int jobsProvided = ((CommercialType) gridObjectType).getJobsProvided();
 
     if (jobsProvided > 0) {
-      return employees.size() / (float) jobsProvided;
+      return MathUtils.clamp(employees.size() / (float) jobsProvided, 0, 1);
     }
 
     return 0;

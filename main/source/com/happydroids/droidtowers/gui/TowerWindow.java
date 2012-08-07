@@ -58,7 +58,7 @@ public class TowerWindow {
     };
     wrapper.setFillParent(true);
     wrapper.defaults().top().left();
-    wrapper.setTouchable(Touchable.childrenOnly);
+    wrapper.setTouchable(Touchable.enabled);
 
     Texture texture = TowerAssetManager.texture("hud/window-bg.png");
     texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -96,6 +96,8 @@ public class TowerWindow {
         dismiss();
       }
     });
+
+    wrapper.addListener(new InputEventBlackHole());
   }
 
   protected Actor makeContentContainer() {

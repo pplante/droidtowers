@@ -9,6 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.employee.JobCandidate;
@@ -27,40 +30,40 @@ public class JobCandidateListView extends Table {
   private ListIterator<JobCandidate> candidateIterator;
   private JobCandidate selectedCandidate;
 
-  private final Label nameLabel;
-  private final Label salaryLabel;
-  private final RatingBar workEthicRating;
-  private final RatingBar experienceRating;
-  private final Label candidateCountLabel;
+  private Label nameLabel;
+  private Label salaryLabel;
+  private RatingBar workEthicRating;
+  private RatingBar experienceRating;
+  private Label candidateCountLabel;
   private String countLabelSuffix;
   private boolean shownNoCandidatesText;
   private OnChangeCandidateCallback onChangeCandidateListener;
-  private final Table withCandidatesView;
-  private final Table withoutCandidatesView;
-  private final Label noCandidatesFoundLabel;
+  private Table withCandidatesView;
+  private Table withoutCandidatesView;
+  private Label noCandidatesFoundLabel;
+  private List<TextButton> candidateButtons;
+  private ColorizedImageButton prevButton;
+  private ColorizedImageButton nextButton;
 
 
   public JobCandidateListView() {
     super();
     countLabelSuffix = "candidates";
-
     nameLabel = FontManager.Roboto18.makeLabel("");
     salaryLabel = FontManager.RobotoBold18.makeLabel("");
     workEthicRating = new RatingBar(0, 5);
     experienceRating = new RatingBar(0, 5);
     candidateCountLabel = FontManager.Roboto12.makeLabel("");
+    candidateButtons = Lists.newArrayList();
 
-    ColorizedImageButton prevButton = new ColorizedImageButton(TowerAssetManager.textureFromAtlas("large-left-arrow", "hud/menus.txt"), Colors.ICS_BLUE);
+    prevButton = new ColorizedImageButton(TowerAssetManager.textureFromAtlas("large-left-arrow", "hud/menus.txt"), Colors.ICS_BLUE);
     prevButton.addListener(new PreviousCandidateClickListener());
 
-    ColorizedImageButton nextButton = new ColorizedImageButton(TowerAssetManager.textureFromAtlas("large-right-arrow", "hud/menus.txt"), Colors.ICS_BLUE);
+    nextButton = new ColorizedImageButton(TowerAssetManager.textureFromAtlas("large-right-arrow", "hud/menus.txt"), Colors.ICS_BLUE);
     nextButton.addListener(new NextCandidateClickListener());
 
     withCandidatesView = new Table();
     withCandidatesView.defaults().fill();
-    withCandidatesView.add(prevButton).width(Display.getScaledDensity() * 64).minHeight(128).expand().left();
-    withCandidatesView.add(makeInnerContentView());
-    withCandidatesView.add(nextButton).width(Display.getScaledDensity() * 64).minHeight(128).expand().right();
 
     noCandidatesFoundLabel = Roboto24.makeLabel("No " + StringUtils.capitalize(countLabelSuffix) + " found.");
     withoutCandidatesView = new Table();
@@ -69,7 +72,7 @@ public class JobCandidateListView extends Table {
 
   private Actor makeInnerContentView() {
     Table c = new Table();
-    c.defaults().top().left().expandX().fillX();
+    c.defaults().top().left().expandX().fillX().pad(Display.devicePixel(2));
 
     c.row().minWidth(400);
     c.add(nameLabel).colspan(2);
@@ -85,11 +88,17 @@ public class JobCandidateListView extends Table {
     c.add(experienceRating);
     c.add(workEthicRating);
 
-    c.row().spaceTop(Display.devicePixel(16));
-    c.add(FontManager.Default.makeLabel("Salary", Color.LIGHT_GRAY));
+    Table left = new Table();
+    left.defaults().left().expandX();
+    left.add(FontManager.Default.makeLabel("Salary", Color.LIGHT_GRAY));
+    left.row();
+    left.add(salaryLabel).expandX();
 
-    c.row();
-    c.add(salaryLabel).left();
+    c.row().spaceTop(Display.devicePixel(16));
+    c.add(left);
+    for (TextButton button : candidateButtons) {
+      c.add(button).width(Display.devicePixel(80));
+    }
 
     c.row().fillX();
     c.add(candidateCountLabel).padTop(Display.devicePixel(20)).colspan(2).right().fillX();
@@ -121,6 +130,11 @@ public class JobCandidateListView extends Table {
     clear();
 
     if (selectedCandidate != null) {
+      withCandidatesView.clear();
+      withCandidatesView.add(prevButton).width(Display.getScaledDensity() * 64).minHeight(128).expand().left();
+      withCandidatesView.add(makeInnerContentView());
+      withCandidatesView.add(nextButton).width(Display.getScaledDensity() * 64).minHeight(128).expand().right();
+
       add(withCandidatesView);
 
       nameLabel.setText(selectedCandidate.getName());
@@ -152,6 +166,12 @@ public class JobCandidateListView extends Table {
 
   public void setOnChangeCandidateListener(OnChangeCandidateCallback onChangeCandidateListener) {
     this.onChangeCandidateListener = onChangeCandidateListener;
+  }
+
+  public void addCandidateButton(String buttonLabelText, ClickListener listener) {
+    TextButton button = FontManager.Default.makeTextButton(buttonLabelText);
+    button.addListener(listener);
+    candidateButtons.add(button);
   }
 
 
