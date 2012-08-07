@@ -5,14 +5,13 @@
 package com.happydroids.droidtowers.gamestate.actions;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Array;
 import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.math.StatLog;
-
-import java.util.LinkedList;
 
 public class StarRatingCalculator extends GameGridAction {
 
@@ -30,9 +29,9 @@ public class StarRatingCalculator extends GameGridAction {
 
   @Override
   public void run() {
-    roomDesirability.reset(gameGrid.getObjects().size());
-    LinkedList<GridObject> objects = gameGrid.getObjects();
-    for (int i = 0, objectsSize = objects.size(); i < objectsSize; i++) {
+    roomDesirability.reset(gameGrid.getObjects().size);
+    Array<GridObject> objects = gameGrid.getObjects();
+    for (int i = 0, objectsSize = objects.size; i < objectsSize; i++) {
       GridObject gridObject = objects.get(i);
       roomDesirability.record(gridObject.getDesirability());
     }

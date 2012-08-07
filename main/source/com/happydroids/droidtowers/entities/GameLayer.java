@@ -8,13 +8,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
 public class GameLayer<T extends GameObject> {
-  protected List<T> gameObjects;
+  protected Array<T> gameObjects;
   private final ArrayList<T> deadObjects;
   private boolean visible;
   private boolean touchEnabled;
@@ -22,7 +23,7 @@ public class GameLayer<T extends GameObject> {
 
   public GameLayer() {
     visible = true;
-    gameObjects = Lists.newLinkedList();
+    gameObjects = new Array<T>();
     deadObjects = Lists.newArrayListWithCapacity(5);
   }
 
@@ -39,9 +40,7 @@ public class GameLayer<T extends GameObject> {
 
     spriteBatch.begin();
     spriteBatch.enableBlending();
-    GameObject gameObject;
-    for (int i = 0, gameObjectsSize = gameObjects.size(); i < gameObjectsSize; i++) {
-      gameObject = gameObjects.get(i);
+    for (T gameObject : gameObjects) {
       if (shouldCullObjects() && gameObject.shouldBeCulled()) {
         tmp.set(gameObject.getX(), gameObject.getY(), 0);
         if (camera.frustum.sphereInFrustum(tmp, Math.max(gameObject.getWidth(), gameObject.getHeight()))) {
@@ -60,20 +59,14 @@ public class GameLayer<T extends GameObject> {
   }
 
   public void update(float timeDelta) {
-    for (int i = 0, gameObjectsSize = gameObjects.size(); i < gameObjectsSize; i++) {
-      T gameObject = gameObjects.get(i);
+    Iterator<T> iterator = gameObjects.iterator();
+    while (iterator.hasNext()) {
+      T gameObject = iterator.next();
       if (gameObject.isMarkedForRemoval()) {
-        if (deadObjects.size() < 5) {
-          deadObjects.add(gameObject);
-        }
+        iterator.remove();
       } else {
         gameObject.update(timeDelta);
       }
-    }
-
-    if (!deadObjects.isEmpty()) {
-      gameObjects.removeAll(deadObjects);
-      deadObjects.clear();
     }
   }
 
@@ -116,15 +109,14 @@ public class GameLayer<T extends GameObject> {
   protected float width() {
     float w = 0;
 
-    for (int i = 0, gameObjectsSize = gameObjects.size(); i < gameObjectsSize; i++) {
-      GameObject gameObject = gameObjects.get(i);
+    for (T gameObject : gameObjects) {
       w += gameObject.getWidth();
     }
 
     return w;
   }
 
-  public List<T> getObjects() {
+  public Array<T> getObjects() {
     return gameObjects;
   }
 }

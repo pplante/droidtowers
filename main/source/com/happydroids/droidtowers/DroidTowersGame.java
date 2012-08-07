@@ -8,6 +8,7 @@ import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -51,7 +52,6 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
   private static final String TAG = DroidTowersGame.class.getSimpleName();
 
   private SpriteBatch spriteBatch;
-  private BitmapFont menloBitmapFont;
   private static Stage rootUiStage;
   private SpriteBatch spriteBatchFBO;
   private FrameBuffer frameBuffer;
@@ -144,7 +144,6 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
     Tween.registerAccessor(GameObject.class, new GameObjectAccessor());
     Tween.registerAccessor(Actor.class, new WidgetAccessor());
 
-    menloBitmapFont = new BitmapFont(Gdx.files.internal("fonts/menlo_14_bold_white.fnt"), false);
     spriteBatch = new SpriteBatch();
     rootUiStage = new Stage(Display.getWidth(), Display.getHeight(), false, spriteBatch);
 
@@ -240,7 +239,12 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
       debugInfo.append(PathSearchManager.instance().queueLength());
 
       spriteBatch.begin();
-      menloBitmapFont.drawMultiLine(spriteBatch, debugInfo, 5, 35);
+      BitmapFont font = FontManager.Roboto12.getFont();
+      font.setColor(Color.BLACK);
+      font.drawMultiLine(spriteBatch, debugInfo, 6, 35);
+      font.setColor(Color.CYAN);
+      font.drawMultiLine(spriteBatch, debugInfo, 5, 36);
+      font.setColor(Color.WHITE);
       spriteBatch.end();
     }
   }

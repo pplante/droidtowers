@@ -11,9 +11,9 @@ import com.badlogic.gdx.graphics.GLCommon;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.Array;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Ordering;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
@@ -23,8 +23,9 @@ import com.happydroids.droidtowers.events.SwitchToolEvent;
 import com.happydroids.droidtowers.graphics.Overlays;
 import com.happydroids.droidtowers.graphics.TransitLine;
 
-import javax.annotation.Nullable;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
@@ -55,20 +56,6 @@ public class GameGridRenderer extends GameLayer {
     transitLines = Lists.newArrayList();
 
     activeOverlay = null;
-
-    objectsRenderOrder = Lists.newArrayList();
-    objectRenderSortFunction = new Function<GridObject, Integer>() {
-      public Integer apply(@Nullable GridObject gridObject) {
-        if (gridObject != null) {
-          if (gridObject.isPlaced()) {
-            return gridObject.getGridObjectType().getZIndex();
-          } else {
-            return Integer.MAX_VALUE;
-          }
-        }
-        return 0;
-      }
-    };
 
     makeOverlayFunctions();
   }
@@ -114,8 +101,8 @@ public class GameGridRenderer extends GameLayer {
 
     shapeRenderer.begin(ShapeType.FilledRectangle);
 
-    LinkedList<GridObject> objects = gameGrid.getObjects();
-    for (int i = 0, objectsSize = objects.size(); i < objectsSize; i++) {
+    Array<GridObject> objects = gameGrid.getObjects();
+    for (int i = 0, objectsSize = objects.size; i < objectsSize; i++) {
       GridObject gridObject = objects.get(i);
       tmp.set(gridObject.getWorldCenter().x, gridObject.getWorldCenter().y, 0);
       if (camera.frustum.sphereInFrustum(tmp, Math.max(gridObject.getWorldBounds().width, gridObject.getWorldBounds().height))) {
@@ -154,12 +141,10 @@ public class GameGridRenderer extends GameLayer {
   private void renderGridObjects(SpriteBatch spriteBatch) {
     spriteBatch.begin();
 
-    GridObject child;
-    for (int i = 0, objectsRenderOrderSize = objectsRenderOrder.size(); i < objectsRenderOrderSize; i++) {
-      child = objectsRenderOrder.get(i);
-      tmp.set(child.getWorldCenter().x, child.getWorldCenter().y, 0);
-      if (camera.frustum.sphereInFrustum(tmp, Math.max(child.getWorldBounds().width, child.getWorldBounds().height))) {
-        child.render(spriteBatch, renderTintColor);
+    for (GridObject gridObject : gameGrid.getObjects()) {
+      tmp.set(gridObject.getWorldCenter().x, gridObject.getWorldCenter().y, 0);
+      if (camera.frustum.sphereInFrustum(tmp, Math.max(gridObject.getWorldBounds().width, gridObject.getWorldBounds().height))) {
+        gridObject.render(spriteBatch, renderTintColor);
       }
     }
 
@@ -200,10 +185,6 @@ public class GameGridRenderer extends GameLayer {
     }
 
     activeOverlay = overlay;
-  }
-
-  public void updateRenderOrder(ArrayList<GridObject> gridObjects) {
-    objectsRenderOrder = Ordering.natural().onResultOf(objectRenderSortFunction).sortedCopy(gridObjects);
   }
 
   public void removeTransitLine(TransitLine transitLine) {

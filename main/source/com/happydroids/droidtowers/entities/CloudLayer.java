@@ -61,7 +61,7 @@ public class CloudLayer extends GameLayer<GameObject> implements RespondsToWorld
   private void spawnCloudWhenItsTime(float timeDelta) {
     timeSinceSpawn += timeDelta;
 
-    if (timeSinceSpawn > CLOUD_SPAWN_DELAY && gameObjects.size() < MAX_ACTIVE_CLOUDS) {
+    if (timeSinceSpawn > CLOUD_SPAWN_DELAY && gameObjects.size < MAX_ACTIVE_CLOUDS) {
       timeSinceSpawn = 0;
 
       spawnCloudNow(false);
@@ -99,27 +99,19 @@ public class CloudLayer extends GameLayer<GameObject> implements RespondsToWorld
   }
 
   private void removeDeadClouds() {
-    if (deadClouds.size() > 0) {
-      gameObjects.removeAll(deadClouds);
-    }
-
     for (final GameObject cloud : gameObjects) {
       if (cloud.getX() >= worldSize.x + Display.getBiggestScreenDimension()) {
         Tween.to(cloud, GameObjectAccessor.OPACITY, 2000)
                 .target(0f)
                 .setCallback(new TweenCallback() {
                   public void onEvent(int eventType, BaseTween source) {
-                    markForRemoval(cloud);
+                    cloud.markToRemove(true);
                   }
                 })
                 .setCallbackTriggers(TweenCallback.COMPLETE)
                 .start(TweenSystem.manager());
       }
     }
-  }
-
-  private void markForRemoval(GameObject cloud) {
-    deadClouds.add(cloud);
   }
 
   @Subscribe
@@ -153,7 +145,7 @@ public class CloudLayer extends GameLayer<GameObject> implements RespondsToWorld
   public void updateWorldSize(Vector2 worldSize) {
     this.worldSize = worldSize;
 
-    if (gameObjects.isEmpty()) {
+    if (gameObjects.size == 0) {
       for (int i = 0; i < MAX_ACTIVE_CLOUDS; i++) {
         spawnCloudNow(true);
       }

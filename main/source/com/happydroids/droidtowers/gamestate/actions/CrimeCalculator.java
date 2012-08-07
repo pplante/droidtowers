@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.gamestate.actions;
 
+import com.badlogic.gdx.utils.Array;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.ServiceRoom;
@@ -12,8 +13,6 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
 import com.happydroids.droidtowers.math.GridPoint;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static com.happydroids.droidtowers.types.ProviderType.ELEVATOR;
@@ -30,7 +29,9 @@ public class CrimeCalculator extends GameGridAction {
 
   @Subscribe
   public void update(GridObjectEvent event) {
-    if (isPaused()) return;
+    if (isPaused()) {
+      return;
+    }
 
     reset();
   }
@@ -45,16 +46,17 @@ public class CrimeCalculator extends GameGridAction {
       }
     }
 
-    LinkedList<GridObject> objects = gameGrid.getObjects();
-    for (int i = 0, objectsSize = objects.size(); i < objectsSize; i++) {
+    Array<GridObject> objects = gameGrid.getObjects();
+    for (int i = 0, objectsSize = objects.size; i < objectsSize; i++) {
       GridObject gridObject = objects.get(i);
       gridObject.setConnectedToSecurity(gridObject.provides(SECURITY, ELEVATOR));
     }
 
-    ArrayList<GridObject> instancesOf = gameGrid.getInstancesOf(ServiceRoom.class);
-    for (int i = 0, instancesOfSize = instancesOf.size(); i < instancesOfSize; i++) {
-      GridObject serviceRoom = instancesOf.get(i);
-      if (!serviceRoom.isPlaced()) continue;
+    Array<GridObject> instancesOf = gameGrid.getInstancesOf(ServiceRoom.class);
+    for (GridObject serviceRoom : instancesOf) {
+      if (!serviceRoom.isPlaced()) {
+        continue;
+      }
 
       List<GridPoint> gridPointsTouched = serviceRoom.getGridPointsTouched();
       for (int i1 = 0, gridPointsTouchedSize = gridPointsTouched.size(); i1 < gridPointsTouchedSize; i1++) {

@@ -22,7 +22,7 @@ public class CousinVinnieAcceptedLoanDialog extends Dialog {
     super();
 
     if (!gameGrid.isEmpty()) {
-      int numGridObjects = gameGrid.getObjects().size() - 1;
+      int numGridObjects = gameGrid.getObjects().size - 1;
       GridObject gridObject;
       gridObject = Iterables.get(gameGrid.getObjects(), MathUtils.random(numGridObjects));
       while (gridObject.getAmountLoanedFromCousinVinnie() > 0) {

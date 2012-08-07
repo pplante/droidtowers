@@ -30,7 +30,7 @@ import com.happydroids.droidtowers.types.ProviderType;
 import java.util.List;
 import java.util.Set;
 
-public abstract class GridObject {
+public abstract class GridObject implements Comparable {
   public static final float VISITORS_PER_CLEANING = 35f;
   protected final GridObjectType gridObjectType;
   protected final GameGrid gameGrid;
@@ -339,17 +339,30 @@ public abstract class GridObject {
   @SuppressWarnings("RedundantIfStatement")
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof GridObject)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof GridObject)) {
+      return false;
+    }
 
     GridObject that = (GridObject) o;
 
-    if (gameGrid != null ? !gameGrid.equals(that.gameGrid) : that.gameGrid != null) return false;
-    if (gridObjectType != null ? !gridObjectType.equals(that.gridObjectType) : that.gridObjectType != null)
+    if (gameGrid != null ? !gameGrid.equals(that.gameGrid) : that.gameGrid != null) {
       return false;
-    if (placed != that.placed) return false;
-    if (position != null ? !position.equals(that.position) : that.position != null) return false;
-    if (size != null ? !size.equals(that.size) : that.size != null) return false;
+    }
+    if (gridObjectType != null ? !gridObjectType.equals(that.gridObjectType) : that.gridObjectType != null) {
+      return false;
+    }
+    if (placed != that.placed) {
+      return false;
+    }
+    if (position != null ? !position.equals(that.position) : that.position != null) {
+      return false;
+    }
+    if (size != null ? !size.equals(that.size) : that.size != null) {
+      return false;
+    }
 
     return true;
   }
@@ -507,5 +520,14 @@ public abstract class GridObject {
 
   public float getDirtLevel() {
     return MathUtils.clamp(getNumVisitors(), 0, VISITORS_PER_CLEANING) / VISITORS_PER_CLEANING;
+  }
+
+  @Override
+  public int compareTo(Object o) {
+    if (o instanceof GridObject) {
+      return gridObjectType.getZIndex() > ((GridObject) o).gridObjectType.getZIndex() ? 1 : -1;
+    }
+
+    return 0;
   }
 }

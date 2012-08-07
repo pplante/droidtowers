@@ -99,8 +99,8 @@ public class TowerScene extends Scene {
 
     gameGrid = new GameGrid(camera);
     gameGridRenderer = gameGrid.getRenderer();
-    gameState = new GameState(camera, cameraController, gameSaveLocation, gameSave, gameGrid);
     avatarLayer = new AvatarLayer(gameGrid);
+    gameState = new GameState(camera, cameraController, gameSaveLocation, gameSave, gameGrid);
 
     gameGrid.events().register(this);
 
@@ -126,7 +126,7 @@ public class TowerScene extends Scene {
     gameLayers.add(avatarLayer);
 
     gestureDelegater = new GestureDelegater(camera, gameLayers, gameGrid, getCameraController());
-    gestureDetector = new GestureDetector(20, 0.35f, 1, 0.15f, gestureDelegater);
+    gestureDetector = new GestureDetector(20, 0.5f, 1, 0.15f, gestureDelegater);
     keybindings = new DefaultKeybindings(this);
 
     attachToInputSystem();
@@ -144,6 +144,10 @@ public class TowerScene extends Scene {
     crimeCalculator = new CrimeCalculator(gameGrid, TowerConsts.CRIME_CALCULATOR_FREQUENCY);
 
     attachActions();
+
+    if (avatarLayer != null) {
+      avatarLayer.setupInitialAvatars();
+    }
   }
 
   private void attachActions() {

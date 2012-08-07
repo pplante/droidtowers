@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Array;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -28,7 +29,10 @@ import com.happydroids.droidtowers.utils.Random;
 import com.happydroids.error.ErrorUtil;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 import static com.happydroids.droidtowers.types.ProviderType.COMMERCIAL;
 import static com.happydroids.droidtowers.types.ProviderType.FOOD;
@@ -111,7 +115,7 @@ public class Avatar extends GameObject {
           GridObject closestFood = searchForFood();
           navigateToGridObject(closestFood);
         } else {
-          if (!lastVisitedPlaces.contains(home)) {
+          if (home != null && !lastVisitedPlaces.contains(home)) {
             navigateToGridObject(home);
           } else {
             findPlaceToVisit();
@@ -124,18 +128,15 @@ public class Avatar extends GameObject {
   }
 
   protected void findPlaceToVisit() {
-    List<GridObject> gridObjects = gameGrid.getObjects();
-    if (!gridObjects.isEmpty()) {
-      if (gridObjects.size() == 1) {
-        navigateToGridObject(gridObjects.get(0));
-      } else {
-        int idx = 0;
-        for (int i = 0, gridObjectsSize = gridObjects.size(); i < gridObjectsSize; i++) {
-          GridObject gridObject = gridObjects.get(i);
-          if (gridObject.provides(COMMERCIAL) && gridObject.getDirtLevel() < 1f) {
-            navigateToGridObject(gridObject);
-            break;
-          }
+    Array<GridObject> gridObjects = gameGrid.getObjects();
+    if (gridObjects.size == 1) {
+      navigateToGridObject(gridObjects.get(0));
+    } else if (gridObjects.size > 0) {
+      int idx = 0;
+      for (GridObject gridObject : gridObjects) {
+        if (gridObject.provides(COMMERCIAL) && gridObject.getDirtLevel() < 1f) {
+          navigateToGridObject(gridObject);
+          break;
         }
       }
     }
@@ -261,8 +262,8 @@ public class Avatar extends GameObject {
   }
 
   private GridObject searchForFood() {
-    ArrayList<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
-    if (commercialSpaces.isEmpty()) {
+    Array<GridObject> commercialSpaces = gameGrid.getInstancesOf(CommercialSpace.class);
+    if (commercialSpaces.size == 0) {
       return null;
     }
 
@@ -271,8 +272,8 @@ public class Avatar extends GameObject {
 
     GridObject closest = null;
     int closestDist = Integer.MAX_VALUE;
-    for (int i = 0, commercialSpacesSize = commercialSpaces.size(); i < commercialSpacesSize; i++) {
-      CommercialSpace commercialSpace = (CommercialSpace) commercialSpaces.get(i);
+    for (GridObject gridObject : commercialSpaces) {
+      CommercialSpace commercialSpace = (CommercialSpace) gridObject;
       if (commercialSpace.getVisitorQueueSize() >= 5 || commercialSpace.getEmployees().isEmpty()) {
         continue;
       }
@@ -306,12 +307,15 @@ public class Avatar extends GameObject {
     }
   }
 
-  private void searchForAHome() {
-    List<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
-    if (rooms != null && !rooms.isEmpty()) {
+  public void searchForAHome() {
+    if (home != null) {
+      return;
+    }
+
+    Array<GridObject> rooms = gameGrid.getInstancesOf(Room.class);
+    if (rooms != null && rooms.size > 0) {
       GridObject mostDesirable = rooms.get(0);
-      for (int i = 0, roomsSize = rooms.size(); i < roomsSize; i++) {
-        GridObject gridObject = rooms.get(i);
+      for (GridObject gridObject : rooms) {
         Room room = (Room) gridObject;
         if (room.isConnectedToTransport() && room.getNumSupportedResidents() > 0) {
           if (room.getNumResidents() == 0 || (room.getNumResidents() < room.getNumSupportedResidents() && mostDesirable.getDesirability() < room.getDesirability())) {
@@ -327,8 +331,7 @@ public class Avatar extends GameObject {
   public void setHome(GridObject newHome) {
     home = (Room) newHome;
 
-    if (home != null) {
-      home.addResident(this);
+    if (home != null && home.addResident(this)) {
       cancelMovement();
       setPosition(home.getWorldCenterBottom());
     }

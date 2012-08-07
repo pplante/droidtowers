@@ -4,11 +4,10 @@
 
 package com.happydroids.droidtowers.gamestate.actions;
 
+import com.badlogic.gdx.utils.Array;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.math.GridPoint;
-
-import java.util.LinkedList;
 
 public class DesirabilityCalculator extends GameGridAction {
   private float[][] noiseLevels;
@@ -23,9 +22,9 @@ public class DesirabilityCalculator extends GameGridAction {
   public void run() {
     gameGrid.positionCache().updateNoiseLevels();
 
-    LinkedList<GridObject> rooms = gameGrid.getObjects();
+    Array<GridObject> rooms = gameGrid.getObjects();
     if (rooms != null) {
-      for (int i = 0, roomsSize = rooms.size(); i < roomsSize; i++) {
+      for (int i = 0, roomsSize = rooms.size; i < roomsSize; i++) {
         GridObject gridObject = rooms.get(i);
         float maxNoiseLevel = 0f;
         float maxCrimeLevel = 0f;

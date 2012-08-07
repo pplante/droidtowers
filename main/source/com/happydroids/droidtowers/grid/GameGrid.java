@@ -8,7 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.google.common.collect.Lists;
+import com.badlogic.gdx.utils.Array;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.collections.TypeInstanceMap;
@@ -20,7 +20,9 @@ import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.math.GridPoint;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 
 public class GameGrid extends GameLayer {
@@ -85,7 +87,6 @@ public class GameGrid extends GameLayer {
 
   public boolean addObject(GridObject gridObject) {
     gridObjects.add(gridObject);
-    gameGridRenderer.updateRenderOrder(Lists.newArrayList(gridObjects.getInstances()));
 
     int objectYPos = gridObject.getPosition().y;
     if (objectYPos > highestPoint) {
@@ -97,11 +98,12 @@ public class GameGrid extends GameLayer {
     }
 
     events().post(new GridObjectAddedEvent(gridObject));
+    gridObjects.getInstances().sort();
 
     return true;
   }
 
-  public LinkedList<GridObject> getObjects() {
+  public Array<GridObject> getObjects() {
     return gridObjects.getInstances();
   }
 
@@ -111,8 +113,8 @@ public class GameGrid extends GameLayer {
     }
 
     Rectangle boundsOfGridObjectToCheck = gridObject.getBounds();
-    LinkedList<GridObject> instances = gridObjects.getInstances();
-    for (int i = 0, instancesSize = instances.size(); i < instancesSize; i++) {
+    Array<GridObject> instances = gridObjects.getInstances();
+    for (int i = 0, instancesSize = instances.size; i < instancesSize; i++) {
       GridObject child = instances.get(i);
       if (child != gridObject) {
         if (child.getBounds().contains(boundsOfGridObjectToCheck) && !child.canShareSpace(gridObject)) {
@@ -126,10 +128,6 @@ public class GameGrid extends GameLayer {
 
   public void removeObject(GridObject gridObject) {
     gridObjects.remove(gridObject);
-    ArrayList<GridObject> arrayList = Lists.newArrayList(gridObjects.getInstances());
-    arrayList.remove(gridObject);
-    gameGridRenderer.updateRenderOrder(arrayList);
-
     events().post(new GridObjectRemovedEvent(gridObject));
   }
 
@@ -142,19 +140,18 @@ public class GameGrid extends GameLayer {
       selectedGridObject = null;
     }
 
-    LinkedList<GridObject> instances = gridObjects.getInstances();
-    for (int i = 0, instancesSize = instances.size(); i < instancesSize; i++) {
-      GridObject gridObject = instances.get(i);
+    Array<GridObject> instances = gridObjects.getInstances();
+    for (GridObject gridObject : instances) {
       gridObject.update(deltaTime);
     }
   }
 
-  public ArrayList<GridObject> getInstancesOf(Class aClass) {
+  public Array<GridObject> getInstancesOf(Class aClass) {
     return gridObjects.setForType(aClass);
   }
 
-  public List<GridObject> getInstancesOf(Class... classes) {
-    List<GridObject> found = Lists.newArrayList();
+  public Array<GridObject> getInstancesOf(Class... classes) {
+    Array<GridObject> found = new Array<GridObject>();
     if (classes != null) {
       for (int i = 0, classesLength = classes.length; i < classesLength; i++) {
         Class otherClass = classes[i];

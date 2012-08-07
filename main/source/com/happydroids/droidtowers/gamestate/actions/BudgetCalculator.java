@@ -5,13 +5,12 @@
 package com.happydroids.droidtowers.gamestate.actions;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Array;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.platform.Platform;
-
-import java.util.LinkedList;
 
 public class BudgetCalculator extends GameGridAction {
   public static final String TAG = BudgetCalculator.class.getSimpleName();
@@ -25,8 +24,8 @@ public class BudgetCalculator extends GameGridAction {
   public void run() {
     int coinsEarnedFromRent = 0;
     int coinsSpentOnUpkeep = 0;
-    LinkedList<GridObject> objects = gameGrid.getObjects();
-    for (int i = 0, objectsSize = objects.size(); i < objectsSize; i++) {
+    Array<GridObject> objects = gameGrid.getObjects();
+    for (int i = 0, objectsSize = objects.size; i < objectsSize; i++) {
       GridObject object = objects.get(i);
       coinsEarnedFromRent += object.getCoinsEarned();
       coinsSpentOnUpkeep += object.getUpkeepCost();
@@ -37,8 +36,9 @@ public class BudgetCalculator extends GameGridAction {
       coinsSpentOnUpkeep *= 0.5f;
     }
 
-    if (HappyDroidConsts.DEBUG)
+    if (HappyDroidConsts.DEBUG) {
       Gdx.app.debug(TAG, String.format("Income report: %d earned, %d spent on upkeep", coinsEarnedFromRent, coinsSpentOnUpkeep));
+    }
 
     Player.instance().addCurrency(coinsEarnedFromRent - coinsSpentOnUpkeep);
     Player.instance().setCurrentIncome(coinsEarnedFromRent);

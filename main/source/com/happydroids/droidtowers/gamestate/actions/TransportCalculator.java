@@ -37,16 +37,14 @@ public class TransportCalculator extends GameGridAction {
       }
     }
 
-    List<GridObject> instancesOf = gameGrid.getInstancesOf(roomClasses);
-    for (int i = 0, instancesOfSize = instancesOf.size(); i < instancesOfSize; i++) {
-      GridObject gridObject = instancesOf.get(i);
+    for (GridObject gridObject : gameGrid.getInstancesOf(roomClasses)) {
       gridObject.setConnectedToTransport(gridObject.provides(ProviderType.LOBBY));
     }
 
-    List<GridObject> instancesOf1 = gameGrid.getInstancesOf(transportClasses);
-    for (int i = 0, instancesOf1Size = instancesOf1.size(); i < instancesOf1Size; i++) {
-      GridObject transport = instancesOf1.get(i);
-      if (!transport.isPlaced()) continue;
+    for (GridObject transport : gameGrid.getInstancesOf(transportClasses)) {
+      if (!transport.isPlaced()) {
+        continue;
+      }
 
       List<GridPoint> gridPointsTouched = transport.getGridPointsTouched();
       for (int i1 = 0, gridPointsTouchedSize = gridPointsTouched.size(); i1 < gridPointsTouchedSize; i1++) {
@@ -68,7 +66,9 @@ public class TransportCalculator extends GameGridAction {
 
   @Subscribe
   public void update(GridObjectEvent event) {
-    if (isPaused()) return;
+    if (isPaused()) {
+      return;
+    }
 
     reset();
   }

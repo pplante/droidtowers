@@ -219,9 +219,15 @@ public class Room extends GridObject {
                    '}';
   }
 
-  public void addResident(Avatar avatar) {
-    residents.add(avatar);
-    decalsToDraw.remove(DECAL_NEEDS_DROIDS);
+  public boolean addResident(Avatar avatar) {
+    if (getNumResidents() < getNumSupportedResidents()) {
+      residents.add(avatar);
+      decalsToDraw.remove(DECAL_NEEDS_DROIDS);
+
+      return true;
+    }
+
+    return false;
   }
 
   public boolean hasResidents() {

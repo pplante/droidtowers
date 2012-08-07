@@ -86,4 +86,9 @@ public class ProgressPanel extends Table {
                                                              "de-fuzzing logic pathways",
                                                              "cleaning the tubes",
   };
+
+
+  public void setProgress(float v) {
+    setProgress((int) v);
+  }
 }

@@ -4,19 +4,18 @@
 
 package com.happydroids.droidtowers.collections;
 
-import com.google.common.collect.Lists;
+import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.Maps;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Map;
 
 public class TypeInstanceMap<T> {
-  private LinkedList<T> instances;
-  private Map<Class, ArrayList<T>> instancesByType;
+  private Array<T> instances;
+  private Map<Class, Array<T>> instancesByType;
 
   public TypeInstanceMap() {
-    instances = Lists.newLinkedList();
+    instances = new Array<T>();
+    instances.ordered = true;
     instancesByType = Maps.newHashMap();
   }
 
@@ -26,17 +25,17 @@ public class TypeInstanceMap<T> {
   }
 
   public void remove(T instance) {
-    instances.remove(instance);
-    setForType(instance.getClass()).remove(instance);
+    instances.removeValue(instance, false);
+    setForType(instance.getClass()).removeValue(instance, false);
   }
 
-  public LinkedList<T> getInstances() {
+  public Array<T> getInstances() {
     return instances;
   }
 
-  public ArrayList<T> setForType(Class instanceClass) {
+  public Array<T> setForType(Class instanceClass) {
     if (!instancesByType.containsKey(instanceClass)) {
-      instancesByType.put(instanceClass, new ArrayList<T>());
+      instancesByType.put(instanceClass, new Array<T>());
     }
     return instancesByType.get(instanceClass);
   }
@@ -47,6 +46,6 @@ public class TypeInstanceMap<T> {
   }
 
   public boolean isEmpty() {
-    return instances.isEmpty() && instancesByType.isEmpty();
+    return instances.size == 0 && instancesByType.isEmpty();
   }
 }

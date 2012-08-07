@@ -4,13 +4,12 @@
 
 package com.happydroids.droidtowers.gamestate.actions;
 
+import com.badlogic.gdx.utils.Array;
 import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.types.CommercialType;
-
-import java.util.LinkedList;
 
 public class EmploymentCalculator extends GameGridAction {
   public EmploymentCalculator(GameGrid gameGrid, float frequency) {
@@ -22,8 +21,8 @@ public class EmploymentCalculator extends GameGridAction {
     int jobsFilled = 0;
     int maxJobs = 0;
 
-    LinkedList<GridObject> objects = gameGrid.getObjects();
-    for (int i = 0, objectsSize = objects.size(); i < objectsSize; i++) {
+    Array<GridObject> objects = gameGrid.getObjects();
+    for (int i = 0, objectsSize = objects.size; i < objectsSize; i++) {
       GridObject gridObject = objects.get(i);
       if (gridObject instanceof CommercialSpace) {
         CommercialSpace commercialSpace = (CommercialSpace) gridObject;

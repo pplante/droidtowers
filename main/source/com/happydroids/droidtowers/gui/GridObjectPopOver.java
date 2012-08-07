@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.GridObject;
@@ -22,7 +22,7 @@ import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.utils.StringUtils;
 
-import java.util.Map;
+import java.util.List;
 
 import static com.happydroids.droidtowers.TowerAssetManager.sprite;
 
@@ -46,7 +46,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
   private Label incomeLabel;
   private Label upkeepLabel;
   private boolean builtControls;
-  private Map<String, RatingBar> ratingBars;
+  private List<RatingBar> ratingBars;
   private Table ratingBarContainer;
   private float offsetY;
 
@@ -54,7 +54,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     super();
     this.gridObject = gridObject;
     gridObjectWorldToScreen = new Vector3();
-    ratingBars = Maps.newHashMap();
+    ratingBars = Lists.newArrayList();
     ratingBarContainer = new Table();
 
     InputSystem.instance().addInputProcessor(new GridObjectPopOverCloser(this), 20);
@@ -122,7 +122,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
   protected RatingBar makeStarRatingBar(String labelText) {
     RatingBar ratingBar = new RatingBar(5f, 5);
     ratingBar.setUnitLabel(FontManager.Roboto12.makeLabel(labelText, Color.LIGHT_GRAY));
-    ratingBars.put(labelText, ratingBar);
+    ratingBars.add(ratingBar);
 
     return ratingBar;
   }
@@ -207,16 +207,15 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
       buildControls();
       ratingBarContainer.clear();
       ratingBarContainer.defaults().space(Display.devicePixel(4));
+      ratingBarContainer.row().fillX();
 
-      int idx = 0;
-      for (Map.Entry<String, RatingBar> entry : ratingBars.entrySet()) {
-        if (idx % 3 == 0) {
+      for (int i = 0, ratingBarsSize = ratingBars.size(); i < ratingBarsSize; i++) {
+        RatingBar ratingBar = ratingBars.get(i);
+        if (i % 3 == 0) {
           ratingBarContainer.row().fillX();
         }
 
-        ratingBarContainer.add(entry.getValue()).expandX().right();
-
-        idx += 1;
+        ratingBarContainer.add(ratingBar).expandX().right();
       }
     }
 

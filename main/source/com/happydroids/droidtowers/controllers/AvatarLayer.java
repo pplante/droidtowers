@@ -5,6 +5,9 @@
 package com.happydroids.droidtowers.controllers;
 
 import com.badlogic.gdx.math.Vector2;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.employee.JobCandidate;
@@ -16,7 +19,12 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.types.ProviderType;
 import com.happydroids.droidtowers.utils.Random;
 
+import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
 import static com.happydroids.droidtowers.types.ProviderType.JANITORS;
 
@@ -46,16 +54,16 @@ public class AvatarLayer extends GameLayer<Avatar> {
   }
 
   private void maintainAvatars() {
-    if (gameObjects.size() < maxAvatars()) {
-      int numToSpawn = maxAvatars() - gameObjects.size();
+    if (shouldSpawnMoreAvatars()) {
+      int numToSpawn = maxAvatars() - gameObjects.size;
       for (int i = 0; i <= numToSpawn; i++) {
         Avatar avatar = new Avatar(this.getGameGrid());
         setupAvatar(avatar);
       }
-    } else if (gameObjects.size() - 1 > maxAvatars()) {
-      int numToKill = gameObjects.size() - maxAvatars();
+    } else if (gameObjects.size - 1 > maxAvatars()) {
+      int numToKill = gameObjects.size - maxAvatars();
       for (int i = 0; i <= numToKill; i++) {
-        if (i < gameObjects.size()) {
+        if (i < gameObjects.size) {
           GameObject gameObject = gameObjects.get(i);
           if (!(gameObject instanceof Janitor)) {
             gameObject.markToRemove(true);
@@ -63,6 +71,10 @@ public class AvatarLayer extends GameLayer<Avatar> {
         }
       }
     }
+  }
+
+  private boolean shouldSpawnMoreAvatars() {
+    return gameObjects.size < maxAvatars();
   }
 
   private int maxAvatars() {
@@ -147,6 +159,40 @@ public class AvatarLayer extends GameLayer<Avatar> {
   }
 
   public int getNumAvatars() {
-    return gameObjects.size();
+    return gameObjects.size;
+  }
+
+  public void setupInitialAvatars() {
+    maintainAvatars();
+
+    List<GridObject> rooms = Lists.newArrayList(gameGrid.getInstancesOf(Room.class).items);
+    Iterables.removeIf(rooms, new Predicate<GridObject>() {
+      @Override
+      public boolean apply(@Nullable GridObject input) {
+        return input == null;
+      }
+    });
+
+    if (rooms != null && !rooms.isEmpty()) {
+      Collections.sort(rooms, new Comparator<GridObject>() {
+        @Override
+        public int compare(GridObject gridObject, GridObject gridObject1) {
+          return gridObject.getDesirability() > gridObject1.getDesirability() ? 1 : -1;
+        }
+      });
+      Iterator<GridObject> iterator = rooms.iterator();
+
+      for (Avatar avatar : gameObjects) {
+        if (iterator.hasNext()) {
+          Room newHome = (Room) iterator.next();
+          avatar.setHome(newHome);
+          if (newHome.getNumResidents() >= newHome.getNumSupportedResidents()) {
+            iterator.remove();
+          }
+        } else {
+          break;
+        }
+      }
+    }
   }
 }
