@@ -20,7 +20,6 @@ public class GameLayer<T extends GameObject> {
   private boolean visible;
   private boolean touchEnabled;
 
-
   public GameLayer() {
     visible = true;
     gameObjects = new Array<T>();
@@ -82,7 +81,7 @@ public class GameLayer<T extends GameObject> {
     return false;
   }
 
-  public boolean tap(Vector2 worldPoint, int count) {
+  public boolean tap(Vector2 worldPoint, int count, int pointer, int button) {
     return false;
   }
 

@@ -6,7 +6,7 @@ package com.happydroids.droidtowers.input;
 
 import com.badlogic.gdx.InputProcessor;
 
-class InputProcessorEntry {
+class InputProcessorEntry implements Comparable<InputProcessorEntry> {
   private InputProcessor inputProcessor;
   private int priority;
   private boolean markedForRemoval;
@@ -31,5 +31,10 @@ class InputProcessorEntry {
 
   public boolean isMarkedForRemoval() {
     return markedForRemoval;
+  }
+
+  @Override
+  public int compareTo(InputProcessorEntry other) {
+    return getPriority() > other.getPriority() ? 1 : -1;
   }
 }

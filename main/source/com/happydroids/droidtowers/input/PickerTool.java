@@ -50,7 +50,7 @@ public class PickerTool extends ToolBase {
     Vector2 worldPoint = cameraPickRayToWorldPoint(x, y);
 
     for (GameLayer gameLayer : gameLayers) {
-      if (gameLayer.isTouchEnabled() && gameLayer.tap(worldPoint, count)) {
+      if (gameLayer.isTouchEnabled() && gameLayer.tap(worldPoint, count, pointer, button)) {
         return true;
       }
     }

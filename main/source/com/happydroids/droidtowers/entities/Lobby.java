@@ -85,7 +85,7 @@ public class Lobby extends Room {
     left.sub(2, 0);
 
     float gridScale = getGridScale();
-    if (gameGrid.positionCache().getObjectsAt(left, TWO_WIDE).size() == 0) {
+    if (gameGrid.positionCache().getObjectsAt(left, TWO_WIDE).size == 0) {
       leftCap.setColor(renderColor);
       leftCap.setPosition(worldPosition.x - (leftCap.getWidth() * gridScale), worldPosition.y);
       leftCap.draw(spriteBatch);
@@ -94,7 +94,7 @@ public class Lobby extends Room {
     GridPoint right = getPosition().cpy();
     right.add(size.x, 0);
 
-    if (gameGrid.positionCache().getObjectsAt(right, TWO_WIDE).size() == 0) {
+    if (gameGrid.positionCache().getObjectsAt(right, TWO_WIDE).size == 0) {
       rightCap.setColor(renderColor);
       rightCap.setOrigin(0, 0);
       rightCap.setPosition(worldPosition.x + worldSize.x, worldPosition.y);

@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.types;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.happydroids.droidtowers.TowerAssetManager;
@@ -16,7 +17,6 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.platform.Platform;
 
-import java.util.Set;
 import java.util.WeakHashMap;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.PROTECTED_AND_PUBLIC)
@@ -100,27 +100,27 @@ public abstract class GridObjectType {
     GridPoint gridPointBelow = gridObject.getPosition().cpy();
     gridPointBelow.sub(0, 1);
 
-    Set<GridObject> objectsBelow = gridObject.getGameGrid().positionCache().getObjectsAt(gridPointBelow, gridObject.getSize(), gridObject);
-    if (!objectsBelow.isEmpty()) {
+    Array<GridObject> objectsBelow = gridObject.getGameGrid().positionCache().getObjectsAt(gridPointBelow, gridObject.getSize(), gridObject);
+    if (objectsBelow.size > 0) {
       return true;
     }
 
     GridPoint gridPointAbove = gridObject.getPosition().cpy();
     gridPointAbove.add(0, 1);
-    Set<GridObject> objectsAbove = gridObject.getGameGrid().positionCache().getObjectsAt(gridPointAbove, gridObject.getSize(), gridObject);
+    Array<GridObject> objectsAbove = gridObject.getGameGrid().positionCache().getObjectsAt(gridPointAbove, gridObject.getSize(), gridObject);
 
-    return !objectsAbove.isEmpty();
+    return objectsAbove.size > 0;
   }
 
   protected boolean checkForOverlap(GridObject gridObject) {
-    Set<GridObject> objectsOverlapped = gridObject.getGameGrid().positionCache().getObjectsAt(gridObject.getPosition(), gridObject.getSize(), gridObject);
+    Array<GridObject> objectsOverlapped = gridObject.getGameGrid().positionCache().getObjectsAt(gridObject.getPosition(), gridObject.getSize(), gridObject);
     for (GridObject object : objectsOverlapped) {
       if (!gridObject.canShareSpace(object)) {
         return false;
       }
     }
 
-    return objectsOverlapped.size() > 0;
+    return objectsOverlapped.size > 0;
   }
 
   public TextureRegion getTextureRegion(int variationId) {
@@ -191,24 +191,54 @@ public abstract class GridObjectType {
   @SuppressWarnings("RedundantIfStatement")
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof GridObjectType)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof GridObjectType)) {
+      return false;
+    }
 
     GridObjectType that = (GridObjectType) o;
 
-    if (canShareSpace != that.canShareSpace) return false;
-    if (coins != that.coins) return false;
-    if (experienceAward != that.experienceAward) return false;
-    if (height != that.height) return false;
-    if (Float.compare(that.noiseLevel, noiseLevel) != 0) return false;
-    if (width != that.width) return false;
-    if (atlasFilename != null ? !atlasFilename.equals(that.atlasFilename) : that.atlasFilename != null) return false;
-    if (id != null ? !id.equals(that.id) : that.id != null) return false;
-    if (imageFilename != null ? !imageFilename.equals(that.imageFilename) : that.imageFilename != null) return false;
-    if (lock != null ? !lock.equals(that.lock) : that.lock != null) return false;
-    if (name != null ? !name.equals(that.name) : that.name != null) return false;
-    if (provides != that.provides) return false;
-    if (textureAtlas != null ? !textureAtlas.equals(that.textureAtlas) : that.textureAtlas != null) return false;
+    if (canShareSpace != that.canShareSpace) {
+      return false;
+    }
+    if (coins != that.coins) {
+      return false;
+    }
+    if (experienceAward != that.experienceAward) {
+      return false;
+    }
+    if (height != that.height) {
+      return false;
+    }
+    if (Float.compare(that.noiseLevel, noiseLevel) != 0) {
+      return false;
+    }
+    if (width != that.width) {
+      return false;
+    }
+    if (atlasFilename != null ? !atlasFilename.equals(that.atlasFilename) : that.atlasFilename != null) {
+      return false;
+    }
+    if (id != null ? !id.equals(that.id) : that.id != null) {
+      return false;
+    }
+    if (imageFilename != null ? !imageFilename.equals(that.imageFilename) : that.imageFilename != null) {
+      return false;
+    }
+    if (lock != null ? !lock.equals(that.lock) : that.lock != null) {
+      return false;
+    }
+    if (name != null ? !name.equals(that.name) : that.name != null) {
+      return false;
+    }
+    if (provides != that.provides) {
+      return false;
+    }
+    if (textureAtlas != null ? !textureAtlas.equals(that.textureAtlas) : that.textureAtlas != null) {
+      return false;
+    }
 
     return true;
   }

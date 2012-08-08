@@ -64,7 +64,7 @@ public class CommercialSpace extends Room {
   @Override
   public int getCoinsEarned() {
     if (jobsFilled > 0 && isConnectedToTransport()) {
-      return (int) Math.ceil(gridObjectType.getCoinsEarned() * getDesirability()) + getUpkeepCost();
+      return (int) Math.ceil(gridObjectType.getCoinsEarned() * getDesirability() + getUpkeepCost() + gridObjectType.getCoinsEarned() * 0.06125f * getNumVisitors());
     }
 
     return 0;

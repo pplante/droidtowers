@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.pathfinding;
 
 import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.entities.Elevator;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
 
@@ -35,7 +36,7 @@ public class TransitPathFinder extends AStar<GridPosition> {
     }
 
     if (to != null) {
-      if (to.elevator != null) {
+      if (to.elevator != null && to.elevator.servicesFloor(to.y) && to.elevator.getNumElevatorCars() > 0) {
         if (canUseServiceRoutes && to.elevator.provides(SERVICE_ELEVATOR)) {
           return 0.05;
         }
@@ -70,10 +71,15 @@ public class TransitPathFinder extends AStar<GridPosition> {
     int x = point.x;
     int y = point.y;
 
-    if (point.elevator != null && point.elevator.getNumElevatorCars() > 0) {
-      if ((canUseServiceRoutes && point.elevator.provides(SERVICE_ELEVATOR) || !canUseServiceRoutes && !point.elevator.provides(SERVICE_ELEVATOR))) {
-        checkGridPositionY(successors, x, y + 1);
-        checkGridPositionY(successors, x, y - 1);
+    Elevator elevator = point.elevator;
+    if (elevator != null && elevator.getNumElevatorCars() > 0) {
+      if ((canUseServiceRoutes && elevator.provides(SERVICE_ELEVATOR) || !canUseServiceRoutes && !elevator.provides(SERVICE_ELEVATOR))) {
+        if (elevator.servicesFloor(y + 1)) {
+          checkGridPositionY(successors, x, y + 1);
+        }
+        if (elevator.servicesFloor(y - 1)) {
+          checkGridPositionY(successors, x, y - 1);
+        }
       }
     } else if (point.stair != null) {
       checkGridPositionY(successors, x, y + 1);

@@ -5,7 +5,10 @@
 package com.happydroids.droidtowers.gamestate.actions;
 
 import com.google.common.eventbus.Subscribe;
-import com.happydroids.droidtowers.entities.*;
+import com.happydroids.droidtowers.entities.Elevator;
+import com.happydroids.droidtowers.entities.GridObject;
+import com.happydroids.droidtowers.entities.Room;
+import com.happydroids.droidtowers.entities.Stair;
 import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.grid.GridPosition;
@@ -18,7 +21,6 @@ public class TransportCalculator extends GameGridAction {
   private static final String TAG = TransportCalculator.class.getSimpleName();
 
   private final Class transportClasses[] = {Elevator.class, Stair.class};
-  private final Class roomClasses[] = {Room.class, CommercialSpace.class};
 
   public TransportCalculator(GameGrid gameGrid, float frequency) {
     super(gameGrid, frequency, false);
@@ -37,7 +39,7 @@ public class TransportCalculator extends GameGridAction {
       }
     }
 
-    for (GridObject gridObject : gameGrid.getInstancesOf(roomClasses)) {
+    for (GridObject gridObject : gameGrid.getObjects()) {
       gridObject.setConnectedToTransport(gridObject.provides(ProviderType.LOBBY));
     }
 
@@ -54,9 +56,12 @@ public class TransportCalculator extends GameGridAction {
 
         GridPosition gridPosition = gameGrid.positionCache().getPosition(x, y);
         if (gridPosition != null) {
-          gridPosition.connectedToTransit = true;
-          scanForRooms(x, y, -1, gridPosition.x);
-          scanForRooms(x, y, 1, gridPosition.x);
+          gridPosition.connectedToTransit = !(transport instanceof Elevator) || ((Elevator) transport).servicesFloor(gridPosition.y);
+
+          if (gridPosition.connectedToTransit) {
+            scanForRooms(x, y, -1, gridPosition.x);
+            scanForRooms(x, y, 1, gridPosition.x);
+          }
         }
       }
     }

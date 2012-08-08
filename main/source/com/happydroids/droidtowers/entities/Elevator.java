@@ -9,8 +9,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
-import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.actions.Action;
@@ -24,8 +24,6 @@ import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.ElevatorType;
 import com.happydroids.droidtowers.types.ResizeHandle;
-
-import java.util.List;
 
 import static com.happydroids.droidtowers.types.ResizeHandle.TOP;
 
@@ -41,7 +39,7 @@ public class Elevator extends Transit {
   static TextureAtlas elevatorAtlas;
   private GridPoint anchorPoint;
   private int numCars;
-  private final List<ElevatorCar> elevatorCars;
+  private final Array<ElevatorCar> elevatorCars;
   private final BitmapFontCache floorLabelCache;
   private int numFloorsSinceLabelCacheBuilt;
   private final Vector2 tmpVector;
@@ -67,11 +65,9 @@ public class Elevator extends Transit {
 
     drawShaft = true;
 
-    elevatorCars = Lists.newArrayList();
     numCars = 1;
-    for (int i = 0; i < numCars; i++) {
-      elevatorCars.add(new ElevatorCar(this, elevatorAtlas));
-    }
+    elevatorCars = new Array<ElevatorCar>(numCars);
+    elevatorCars.add(new ElevatorCar(this, elevatorAtlas));
     tmpVector = new Vector2();
   }
 
@@ -84,8 +80,7 @@ public class Elevator extends Transit {
   public void update(float deltaTime) {
     super.update(deltaTime);
 
-    for (int i = 0, elevatorCarsSize = elevatorCars.size(); i < elevatorCarsSize; i++) {
-      ElevatorCar elevatorCar = elevatorCars.get(i);
+    for (ElevatorCar elevatorCar : elevatorCars) {
       elevatorCar.update(deltaTime);
     }
 
@@ -125,7 +120,7 @@ public class Elevator extends Transit {
     floorLabelCache.setColor(1, 1, 1, 0.5f);
     floorLabelCache.draw(spriteBatch, renderColor.a);
 
-    if (isPlaced()) {
+    if (isPlaced() && selectedResizeHandle == null) {
       for (ElevatorCar elevatorCar : elevatorCars) {
         elevatorCar.setColor(renderColor);
         elevatorCar.draw(spriteBatch);
@@ -149,9 +144,10 @@ public class Elevator extends Transit {
   public boolean tap(GridPoint gridPointAtFinger, int count) {
     if (count >= 2) {
       drawShaft = !drawShaft;
+      return true;
     }
 
-    return true;
+    return super.tap(gridPointAtFinger, count);
   }
 
   @Override
@@ -247,7 +243,8 @@ public class Elevator extends Transit {
 
   public boolean servicesFloor(int floorNumber) {
     float minFloor = getPosition().y + 1;
-    float maxFloor = minFloor + getSize().y - 2;
+    float maxFloor = minFloor + getSize().y - 3;
+
     return minFloor <= floorNumber && floorNumber <= maxFloor;
   }
 
@@ -299,7 +296,7 @@ public class Elevator extends Transit {
   }
 
   public boolean addPassenger(AvatarSteeringManager avatarSteeringManager, int currentFloor, int destinationFloor, Runnable uponArrivalRunnable) {
-    if (elevatorCars.isEmpty()) {
+    if (elevatorCars.size == 0) {
       return false;
     }
 
@@ -309,7 +306,7 @@ public class Elevator extends Transit {
       }
     }
 
-    ElevatorCar elevatorCar = elevatorCars.get(MathUtils.random(0, elevatorCars.size() - 1));
+    ElevatorCar elevatorCar = elevatorCars.get(MathUtils.random(0, elevatorCars.size - 1));
     return elevatorCar.addPassenger(avatarSteeringManager, currentFloor, destinationFloor, uponArrivalRunnable);
   }
 
@@ -343,7 +340,7 @@ public class Elevator extends Transit {
   }
 
   public int getNumElevatorCars() {
-    return elevatorCars.size();
+    return elevatorCars.size;
   }
 
   public void setNumElevatorCars(int numberOfElevatorCars) {
@@ -359,13 +356,13 @@ public class Elevator extends Transit {
 
   public void removeCar() {
     numCars = MathUtils.clamp(numCars - 1, 0, MAX_NUMBER_OF_CARS);
-    if (!elevatorCars.isEmpty()) {
-      ElevatorCar car = elevatorCars.remove(0);
+    if (elevatorCars.size > 0) {
+      ElevatorCar car = elevatorCars.removeIndex(0);
       car.resetToBottomOfShaft();
     }
   }
 
   public boolean canAddElevatorCar() {
-    return elevatorCars.size() < MAX_NUMBER_OF_CARS;
+    return elevatorCars.size < MAX_NUMBER_OF_CARS;
   }
 }

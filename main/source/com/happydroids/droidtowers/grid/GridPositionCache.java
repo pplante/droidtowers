@@ -4,7 +4,7 @@
 
 package com.happydroids.droidtowers.grid;
 
-import com.google.common.collect.Lists;
+import com.badlogic.gdx.utils.Array;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
@@ -12,10 +12,6 @@ import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
 import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.math.GridPoint;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class GridPositionCache {
   private GridPosition[][] gridPositions;
@@ -114,8 +110,8 @@ public class GridPositionCache {
     return !checkBounds(gridPoint.x, gridPoint.y) ? null : gridPositions[gridPoint.x][gridPoint.y];
   }
 
-  public Set<GridObject> getObjectsAt(GridPoint position, GridPoint size, GridObject... gridObjectsToIgnore) {
-    Set<GridObject> objects = new HashSet<GridObject>();
+  public Array<GridObject> getObjectsAt(GridPoint position, GridPoint size, GridObject... gridObjectsToIgnore) {
+    Array<GridObject> objects = new Array<GridObject>();
 
     int maxX = Math.min(gridSize.x, position.x + size.x);
     int maxY = Math.min(gridSize.y, position.y + size.y);
@@ -127,20 +123,31 @@ public class GridPositionCache {
 
         GridPosition forPosition = getObjectSetForPosition(currentPos);
         if (forPosition != null) {
-          objects.addAll(forPosition.getObjects());
+          for (GridObject object : forPosition.getObjects()) {
+            if (!objects.contains(object, false)) {
+              objects.add(object);
+            }
+          }
         }
       }
     }
 
-    if (gridObjectsToIgnore != null) {
-      objects.removeAll(Lists.newArrayList(gridObjectsToIgnore));
+    if (gridObjectsToIgnore != null && gridObjectsToIgnore.length > 0) {
+      for (GridObject gridObject : gridObjectsToIgnore) {
+        objects.removeValue(gridObject, false);
+      }
     }
 
     return objects;
   }
 
-  public ArrayList<GridObject> getObjectsAt(GridPoint gridPoint) {
-    return Lists.newArrayList(getObjectSetForPosition(gridPoint).getObjects());
+  public Array<GridObject> getObjectsAt(GridPoint gridPoint) {
+    GridPosition objectsAt = getObjectSetForPosition(gridPoint);
+    if (objectsAt != null) {
+      return objectsAt.getObjects();
+    }
+
+    return null;
   }
 
   public GridPosition getPosition(GridPoint gridPoint) {

@@ -4,11 +4,10 @@
 
 package com.happydroids.droidtowers.types;
 
+import com.badlogic.gdx.utils.Array;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.happydroids.droidtowers.entities.*;
 import com.happydroids.droidtowers.grid.GameGrid;
-
-import java.util.Set;
 
 import static com.happydroids.droidtowers.TowerConsts.LOBBY_FLOOR;
 import static com.happydroids.droidtowers.types.ProviderType.LOBBY;
@@ -57,7 +56,7 @@ public class RoomType extends GridObjectType {
 
   @Override
   protected boolean checkForOverlap(GridObject gridObject) {
-    Set<GridObject> objectsOverlapped = gridObject.getGameGrid().positionCache().getObjectsAt(gridObject.getPosition(), gridObject.getSize(), gridObject);
+    Array<GridObject> objectsOverlapped = gridObject.getGameGrid().positionCache().getObjectsAt(gridObject.getPosition(), gridObject.getSize(), gridObject);
     for (GridObject object : objectsOverlapped) {
       if (!object.canShareSpace(gridObject)) {
         return false;

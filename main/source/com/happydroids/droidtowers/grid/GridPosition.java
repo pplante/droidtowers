@@ -5,13 +5,11 @@
 package com.happydroids.droidtowers.grid;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.happydroids.droidtowers.entities.Elevator;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.entities.Stair;
 import com.happydroids.droidtowers.math.GridPoint;
-
-import java.util.HashSet;
-import java.util.Set;
 
 import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
 
@@ -19,7 +17,7 @@ public class GridPosition {
   public final short x;
   public final short y;
   private final Vector2 worldVector;
-  private Set<GridObject> objects = new HashSet<GridObject>();
+  private Array<GridObject> objects = new Array<GridObject>();
   public Elevator elevator;
   public Stair stair;
   public boolean connectedToTransit;
@@ -40,12 +38,14 @@ public class GridPosition {
     worldVector = new Vector2(x * GRID_UNIT_SIZE, y * GRID_UNIT_SIZE);
   }
 
-  public Set<GridObject> getObjects() {
+  public Array<GridObject> getObjects() {
     return objects;
   }
 
   public void add(GridObject gridObject) {
-    if (objects.add(gridObject)) {
+    if (!objects.contains(gridObject, false)) {
+      objects.add(gridObject);
+
       if (gridObject instanceof Elevator) {
         GridPoint position = gridObject.getPosition();
         GridPoint size = gridObject.getSize();
@@ -61,7 +61,9 @@ public class GridPosition {
   }
 
   public void remove(GridObject gridObject) {
-    if (objects.remove(gridObject)) {
+    if (objects.contains(gridObject, false)) {
+      objects.removeValue(gridObject, false);
+
       if (gridObject instanceof Elevator) {
         elevator = null;
       } else if (gridObject instanceof Stair) {
@@ -71,15 +73,15 @@ public class GridPosition {
   }
 
   public int size() {
-    return objects.size();
+    return objects.size;
   }
 
   public boolean isEmpty() {
-    return objects.isEmpty();
+    return objects.size == 0;
   }
 
   public boolean contains(GridObject gridObject) {
-    return objects.contains(gridObject);
+    return objects.contains(gridObject, false);
   }
 
   public Vector2 worldPoint() {
@@ -104,8 +106,12 @@ public class GridPosition {
     int distance = 2;
     for (int xx = x - distance; xx < x + distance; xx++) {
       for (int yy = y - distance; yy < y + distance; yy++) {
-        if (xx < 0 || yy < 0 || xx >= gridPositions.length || yy >= gridPositions[xx].length) continue;
-        if (xx == x && yy == y) continue;
+        if (xx < 0 || yy < 0 || xx >= gridPositions.length || yy >= gridPositions[xx].length) {
+          continue;
+        }
+        if (xx == x && yy == y) {
+          continue;
+        }
 
         totalNoise += gridPositions[xx][yy].maxNoiseLevel;
         totalCrime += gridPositions[xx][yy].maxCrimeLevel;
@@ -127,17 +133,33 @@ public class GridPosition {
   @SuppressWarnings("RedundantIfStatement")
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof GridPosition)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof GridPosition)) {
+      return false;
+    }
 
     GridPosition that = (GridPosition) o;
 
-    if (connectedToTransit != that.connectedToTransit) return false;
-    if (x != that.x) return false;
-    if (y != that.y) return false;
-    if (elevator != null ? !elevator.equals(that.elevator) : that.elevator != null) return false;
-    if (objects != null ? !objects.equals(that.objects) : that.objects != null) return false;
-    if (stair != null ? !stair.equals(that.stair) : that.stair != null) return false;
+    if (connectedToTransit != that.connectedToTransit) {
+      return false;
+    }
+    if (x != that.x) {
+      return false;
+    }
+    if (y != that.y) {
+      return false;
+    }
+    if (elevator != null ? !elevator.equals(that.elevator) : that.elevator != null) {
+      return false;
+    }
+    if (objects != null ? !objects.equals(that.objects) : that.objects != null) {
+      return false;
+    }
+    if (stair != null ? !stair.equals(that.stair) : that.stair != null) {
+      return false;
+    }
 
     return true;
   }

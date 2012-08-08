@@ -21,9 +21,7 @@ import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.math.GridPoint;
 
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 
 public class GameGrid extends GameLayer {
@@ -169,14 +167,16 @@ public class GameGrid extends GameLayer {
   }
 
   @Override
-  public boolean tap(Vector2 worldPoint, int count) {
+  public boolean tap(Vector2 worldPoint, int count, int pointer, int button) {
     GridPoint gridPointAtFinger = closestGridPoint(worldPoint);
 
-    List<GridObject> gridObjects = positionCache.getObjectsAt(gridPointAtFinger);
-    Collections.sort(gridObjects, GRID_OBJECT_ZINDEX_SORT);
-    for (GridObject gridObject : gridObjects) {
-      if (gridObject.tap(gridPointAtFinger, count)) {
-        return true;
+    Array<GridObject> gridObjects = positionCache.getObjectsAt(gridPointAtFinger);
+    if (gridObjects != null) {
+      gridObjects.sort();
+      for (GridObject gridObject : gridObjects) {
+        if (gridObject.tap(gridPointAtFinger, count)) {
+          return true;
+        }
       }
     }
 
@@ -191,13 +191,15 @@ public class GameGrid extends GameLayer {
   public boolean touchDown(Vector2 worldPoint, int pointer) {
     GridPoint gameGridPoint = closestGridPoint(worldPoint);
 
-    List<GridObject> gridObjects = positionCache.getObjectsAt(gameGridPoint);
-    Collections.sort(gridObjects, GRID_OBJECT_ZINDEX_SORT);
+    Array<GridObject> gridObjects = positionCache.getObjectsAt(gameGridPoint);
+    if (gridObjects != null) {
+      gridObjects.sort();
 
-    for (GridObject gridObject : gridObjects) {
-      if (gridObject.touchDown(gameGridPoint, worldPoint, pointer)) {
-        selectedGridObject = gridObject;
-        return true;
+      for (GridObject gridObject : gridObjects) {
+        if (gridObject.touchDown(gameGridPoint, worldPoint, pointer)) {
+          selectedGridObject = gridObject;
+          return true;
+        }
       }
     }
 

@@ -6,10 +6,9 @@ package com.happydroids.droidtowers.input;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
-import com.google.common.base.Function;
+import com.badlogic.gdx.utils.Array;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.GameLayer;
@@ -32,29 +31,22 @@ public class SellTool extends ToolBase {
     Vector3 worldPoint = camera.getPickRay(x, y).getEndPoint(1);
     GridPoint gridPointAtFinger = gameGrid.closestGridPoint(worldPoint.x, worldPoint.y);
 
-    Set<GridObject> gridObjects = gameGrid.positionCache().getObjectsAt(gridPointAtFinger, TowerConsts.SINGLE_POINT);
+    Array<GridObject> gridObjects = gameGrid.positionCache().getObjectsAt(gridPointAtFinger, TowerConsts.SINGLE_POINT);
 
     if (gridObjects != null) {
-      List<GridObject> zIndexSorted = Ordering.natural().reverse().onResultOf(new Function<GridObject, Integer>() {
-        public Integer apply(@Nullable GridObject o) {
-          return o.getGridObjectType().getZIndex();
-        }
-      }).sortedCopy(gridObjects);
+      gridObjects.sort();
 
-      if (zIndexSorted != null && zIndexSorted.size() > 0) {
-        final GridObject objectToSell = zIndexSorted.get(0);
-
-        if (objectToSell.getPosition().y >= TowerConsts.LOBBY_FLOOR && !checkAboveOrBelow(objectToSell, objectToSell.getPosition().cpy().add(0, 1))) {
-          HeadsUpDisplay.showToast("You cannot sell this, something is above it.");
-        } else if (objectToSell.getPosition().y < TowerConsts.LOBBY_FLOOR && !checkAboveOrBelow(objectToSell, objectToSell.getPosition().cpy().sub(0, 1))) {
-          HeadsUpDisplay.showToast("You cannot sell this, something is below it.");
-        } else {
-          final int sellPrice = (int) (objectToSell.getGridObjectType().getCoins() * 0.5);
-          new SellGridObjectConfirmationDialog(gameGrid, objectToSell).show();
-        }
-
-        return true;
+      final GridObject objectToSell = gridObjects.get(0);
+      if (objectToSell.getPosition().y >= TowerConsts.LOBBY_FLOOR && !checkAboveOrBelow(objectToSell, objectToSell.getPosition().cpy().add(0, 1))) {
+        HeadsUpDisplay.showToast("You cannot sell this, something is above it.");
+      } else if (objectToSell.getPosition().y < TowerConsts.LOBBY_FLOOR && !checkAboveOrBelow(objectToSell, objectToSell.getPosition().cpy().sub(0, 1))) {
+        HeadsUpDisplay.showToast("You cannot sell this, something is below it.");
+      } else {
+        final int sellPrice = (int) (objectToSell.getGridObjectType().getCoins() * 0.5);
+        new SellGridObjectConfirmationDialog(gameGrid, objectToSell).show();
       }
+
+      return true;
     }
 
     return false;
@@ -65,9 +57,9 @@ public class SellTool extends ToolBase {
       return true;
     }
 
-    Set<GridObject> objectsAbove = objectToSell.getGameGrid().positionCache().getObjectsAt(gridPointAbove, objectToSell.getSize(), objectToSell);
+    Array<GridObject> objectsAbove = objectToSell.getGameGrid().positionCache().getObjectsAt(gridPointAbove, objectToSell.getSize(), objectToSell);
 
-    if (!objectsAbove.isEmpty()) {
+    if (objectsAbove.size > 0) {
       Set<GridObject> nonTransits = Sets.newHashSet(Iterables.filter(objectsAbove, new Predicate<GridObject>() {
         @Override
         public boolean apply(@Nullable GridObject input) {
@@ -77,6 +69,6 @@ public class SellTool extends ToolBase {
       return nonTransits.isEmpty();
     }
 
-    return objectsAbove.isEmpty();
+    return objectsAbove.size == 0;
   }
 }

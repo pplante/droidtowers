@@ -321,7 +321,7 @@ public class AvatarSteeringManager {
   }
 
   private void handleGridObjectEvents(GridObjectEvent event) {
-    if (!event.getGridObject().isPlaced()) {
+    if (event.getGridObject() == null || !event.getGridObject().isPlaced()) {
       return;
     }
 

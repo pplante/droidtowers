@@ -130,34 +130,23 @@ public abstract class GridObject implements Comparable {
   }
 
   public boolean tap(GridPoint gridPointAtFinger, int count) {
+    if (count == 1 && hasPopOver()) {
+      GridObjectPopOver popOver = makePopOver();
+      if (popOver != null) {
+        SceneManager.activeScene().getCameraController().panTo(getWorldCenter().x, getWorldCenter().y, true);
+        displayedPopOver = true;
+        popOver.pack();
+        popOver.getColor().a = 0f;
+        popOver.addAction(Actions.fadeIn(0.125f));
+        HeadsUpDisplay.instance().addActor(popOver);
+        return true;
+      }
+    }
+
     return false;
   }
 
   public boolean pan(GridPoint gridPointAtFinger, GridPoint gridPointDelta) {
-    return false;
-  }
-
-  public boolean touchDown(GridPoint gameGridPoint, Vector2 worldPoint, int pointer) {
-    if (displayedPopOver) {
-      displayedPopOver = false;
-      return false;
-    }
-
-    return hasPopOver();
-  }
-
-  public boolean touchUp() {
-    GridObjectPopOver popOver = makePopOver();
-    if (popOver != null) {
-      SceneManager.activeScene().getCameraController().panTo(getWorldCenter().x, getWorldCenter().y, true);
-      displayedPopOver = true;
-      popOver.pack();
-      popOver.getColor().a = 0f;
-      popOver.addAction(Actions.fadeIn(0.125f));
-      HeadsUpDisplay.instance().addActor(popOver);
-      return true;
-    }
-
     return false;
   }
 
@@ -540,5 +529,13 @@ public abstract class GridObject implements Comparable {
     }
 
     return 0;
+  }
+
+  public boolean touchDown(GridPoint gameGridPoint, Vector2 worldPoint, int pointer) {
+    return false;
+  }
+
+  public boolean touchUp() {
+    return false;
   }
 }

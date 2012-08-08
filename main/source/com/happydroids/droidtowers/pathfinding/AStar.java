@@ -50,6 +50,10 @@ public abstract class AStar<T> {
     return !isWorking() && lastCost != Double.MAX_VALUE;
   }
 
+  public Runnable getCompleteCallback() {
+    return completeCallback;
+  }
+
 
   private class Path implements Comparable {
 
@@ -161,10 +165,11 @@ public abstract class AStar<T> {
     * If a better path passing for this point already exists then
     * don't expand it.
     */
-    if (min == null || min > path.f)
+    if (min == null || min > path.f) {
       minDistances.put(path.getPoint(), path.f);
-    else
+    } else {
       return;
+    }
 
     List<T> successors = generateSuccessors(p);
 
@@ -206,7 +211,9 @@ public abstract class AStar<T> {
   }
 
   public void step() {
-    if (!working) return;
+    if (!working) {
+      return;
+    }
 
     Path p = paths.poll();
 
@@ -249,22 +256,42 @@ public abstract class AStar<T> {
   @SuppressWarnings("RedundantIfStatement")
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof AStar)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof AStar)) {
+      return false;
+    }
 
     AStar aStar = (AStar) o;
 
-    if (expandedCounter != aStar.expandedCounter) return false;
-    if (working != aStar.working) return false;
-    if (completeCallback != null ? !completeCallback.equals(aStar.completeCallback) : aStar.completeCallback != null)
+    if (expandedCounter != aStar.expandedCounter) {
       return false;
-    if (discoveredPath != null ? !discoveredPath.equals(aStar.discoveredPath) : aStar.discoveredPath != null)
+    }
+    if (working != aStar.working) {
       return false;
-    if (goal != null ? !goal.equals(aStar.goal) : aStar.goal != null) return false;
-    if (lastCost != null ? !lastCost.equals(aStar.lastCost) : aStar.lastCost != null) return false;
-    if (minDistances != null ? !minDistances.equals(aStar.minDistances) : aStar.minDistances != null) return false;
-    if (paths != null ? !paths.equals(aStar.paths) : aStar.paths != null) return false;
-    if (start != null ? !start.equals(aStar.start) : aStar.start != null) return false;
+    }
+    if (completeCallback != null ? !completeCallback.equals(aStar.completeCallback) : aStar.completeCallback != null) {
+      return false;
+    }
+    if (discoveredPath != null ? !discoveredPath.equals(aStar.discoveredPath) : aStar.discoveredPath != null) {
+      return false;
+    }
+    if (goal != null ? !goal.equals(aStar.goal) : aStar.goal != null) {
+      return false;
+    }
+    if (lastCost != null ? !lastCost.equals(aStar.lastCost) : aStar.lastCost != null) {
+      return false;
+    }
+    if (minDistances != null ? !minDistances.equals(aStar.minDistances) : aStar.minDistances != null) {
+      return false;
+    }
+    if (paths != null ? !paths.equals(aStar.paths) : aStar.paths != null) {
+      return false;
+    }
+    if (start != null ? !start.equals(aStar.start) : aStar.start != null) {
+      return false;
+    }
 
     return true;
   }
