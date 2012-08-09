@@ -11,8 +11,7 @@ import com.happydroids.droidtowers.achievements.Achievement;
 public class AchievementCompletionEvent implements Pool.Poolable {
   private Achievement achievement;
 
-  public AchievementCompletionEvent(Achievement achievement) {
-    this.achievement = achievement;
+  public AchievementCompletionEvent() {
   }
 
   public Achievement getAchievement() {

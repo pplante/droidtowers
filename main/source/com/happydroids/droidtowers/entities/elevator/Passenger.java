@@ -87,7 +87,7 @@ public class Passenger {
   }
 
   public void informOfServiceChange() {
-    steeringManager.getAvatar().recalculateCurrentPath();
+    steeringManager.getAvatar().cancelMovement();
   }
 
   public boolean isRiding() {

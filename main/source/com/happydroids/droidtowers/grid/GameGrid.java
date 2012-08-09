@@ -39,6 +39,7 @@ public class GameGrid extends GameLayer {
   private GridObject selectedGridObject;
   private String towerName;
 
+
   public GameGrid(OrthographicCamera camera) {
     this();
     gameGridRenderer = new GameGridRenderer(this, camera);
@@ -168,13 +169,11 @@ public class GameGrid extends GameLayer {
 
   @Override
   public boolean tap(Vector2 worldPoint, int count, int pointer, int button) {
-    GridPoint gridPointAtFinger = closestGridPoint(worldPoint);
-
-    Array<GridObject> gridObjects = positionCache.getObjectsAt(gridPointAtFinger);
-    if (gridObjects != null) {
-      gridObjects.sort();
-      for (GridObject gridObject : gridObjects) {
-        if (gridObject.tap(gridPointAtFinger, count)) {
+    GridPoint gridPointAtFinger = closestGridPoint(worldPoint.x, worldPoint.y);
+    Array<GridObject> objectsNear = findObjectsNear(worldPoint, gridPointAtFinger.y, gridPointAtFinger.x);
+    if (objectsNear != null) {
+      for (int i = 0; i < objectsNear.size; i++) {
+        if (objectsNear.get(i).tap(gridPointAtFinger, count)) {
           return true;
         }
       }
@@ -183,21 +182,14 @@ public class GameGrid extends GameLayer {
     return false;
   }
 
-  public GridPoint closestGridPoint(Vector2 worldPoint) {
-    return closestGridPoint(worldPoint.x, worldPoint.y);
-  }
-
   @Override
   public boolean touchDown(Vector2 worldPoint, int pointer) {
-    GridPoint gameGridPoint = closestGridPoint(worldPoint);
-
-    Array<GridObject> gridObjects = positionCache.getObjectsAt(gameGridPoint);
-    if (gridObjects != null) {
-      gridObjects.sort();
-
-      for (GridObject gridObject : gridObjects) {
-        if (gridObject.touchDown(gameGridPoint, worldPoint, pointer)) {
-          selectedGridObject = gridObject;
+    GridPoint gridPointAtFinger = closestGridPoint(worldPoint.x, worldPoint.y);
+    Array<GridObject> objectsNear = findObjectsNear(worldPoint, gridPointAtFinger.y, gridPointAtFinger.x);
+    if (objectsNear != null) {
+      for (int i = 0; i < objectsNear.size; i++) {
+        if (objectsNear.get(i).touchDown(gridPointAtFinger, worldPoint, pointer)) {
+          selectedGridObject = objectsNear.get(i);
           return true;
         }
       }
@@ -211,8 +203,8 @@ public class GameGrid extends GameLayer {
   @Override
   public boolean pan(Vector2 worldPoint, Vector2 deltaPoint) {
     if (selectedGridObject != null) {
-      GridPoint gridPointAtFinger = closestGridPoint(worldPoint);
-      GridPoint gridPointDelta = closestGridPoint(deltaPoint);
+      GridPoint gridPointAtFinger = closestGridPoint(worldPoint.x, worldPoint.y);
+      GridPoint gridPointDelta = closestGridPoint(deltaPoint.x, deltaPoint.y);
       if (selectedGridObject.pan(gridPointAtFinger, gridPointDelta)) {
         return true;
       }
@@ -221,6 +213,27 @@ public class GameGrid extends GameLayer {
     selectedGridObject = null;
 
     return false;
+  }
+
+  private Array<GridObject> findObjectsNear(Vector2 worldPoint, final int y, final int x) {
+    Array<GridObject> objects = new Array<GridObject>(2);
+    for (int x2 = x - 1; x2 < x + 1; x2++) {
+      for (int y2 = y - 1; y2 < y + 1; y2++) {
+        GridPosition position = positionCache.getPosition(x2, y2);
+        if (position != null && !position.isEmpty()) {
+          for (GridObject object : position.getObjects()) {
+            if (object.getWorldBounds().contains(worldPoint.x, worldPoint.y)) {
+              objects.add(object);
+            }
+          }
+        }
+      }
+    }
+
+    objects.sort();
+    objects.reverse();
+
+    return objects;
   }
 
 

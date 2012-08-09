@@ -25,16 +25,12 @@ class GridObjectPopOverCloser extends InputAdapter {
 
   @Override
   public boolean touchDown(int x, int y, int pointer, int button) {
-    closePopOver();
-
-    return false;
+    return closePopOver();
   }
 
   @Override
   public boolean touchDragged(int x, int y, int pointer) {
-    closePopOver();
-
-    return false;
+    return closePopOver();
   }
 
   @Override

@@ -245,4 +245,7 @@ public class Room extends GridObject {
   }
 
 
+  public void removeResident(Avatar avatar) {
+    residents.remove(avatar);
+  }
 }

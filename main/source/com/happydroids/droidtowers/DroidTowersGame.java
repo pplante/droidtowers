@@ -213,8 +213,10 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
     SceneManager.activeScene().getStage().act(deltaTime);
     SceneManager.activeScene().getStage().draw();
 
-    rootUiStage.act(deltaTime);
-    rootUiStage.draw();
+    if (rootUiStage.getActors().size > 0) {
+      rootUiStage.act(deltaTime);
+      rootUiStage.draw();
+    }
 
     //noinspection PointlessBooleanExpression
     if (DEBUG && DISPLAY_DEBUG_INFO) {

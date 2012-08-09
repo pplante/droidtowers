@@ -33,7 +33,7 @@ public class SellTool extends ToolBase {
 
     Array<GridObject> gridObjects = gameGrid.positionCache().getObjectsAt(gridPointAtFinger, TowerConsts.SINGLE_POINT);
 
-    if (gridObjects != null) {
+    if (gridObjects != null && gridObjects.size > 0) {
       gridObjects.sort();
 
       final GridObject objectToSell = gridObjects.get(0);

@@ -131,15 +131,19 @@ public abstract class GridObject implements Comparable {
 
   public boolean tap(GridPoint gridPointAtFinger, int count) {
     if (count == 1 && hasPopOver()) {
-      GridObjectPopOver popOver = makePopOver();
-      if (popOver != null) {
-        SceneManager.activeScene().getCameraController().panTo(getWorldCenter().x, getWorldCenter().y, true);
-        displayedPopOver = true;
-        popOver.pack();
-        popOver.getColor().a = 0f;
-        popOver.addAction(Actions.fadeIn(0.125f));
-        HeadsUpDisplay.instance().addActor(popOver);
-        return true;
+      if (displayedPopOver) {
+        displayedPopOver = false;
+      } else {
+        GridObjectPopOver popOver = makePopOver();
+        if (popOver != null) {
+          SceneManager.activeScene().getCameraController().panTo(getWorldCenter().x, getWorldCenter().y, true);
+          displayedPopOver = true;
+          popOver.pack();
+          popOver.getColor().a = 0f;
+          popOver.addAction(Actions.fadeIn(0.125f));
+          HeadsUpDisplay.instance().addActor(popOver);
+          return true;
+        }
       }
     }
 

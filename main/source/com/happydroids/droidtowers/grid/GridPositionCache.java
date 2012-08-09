@@ -4,8 +4,10 @@
 
 package com.happydroids.droidtowers.grid;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.google.common.eventbus.Subscribe;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
@@ -229,5 +231,9 @@ public class GridPositionCache {
         }
       }
     }
+  }
+
+  public GridPosition getPosition(Vector2 worldPoint) {
+    return getPosition((int) worldPoint.x / TowerConsts.GRID_UNIT_SIZE, (int) worldPoint.y / TowerConsts.GRID_UNIT_SIZE);
   }
 }

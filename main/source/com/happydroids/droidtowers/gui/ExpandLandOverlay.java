@@ -15,9 +15,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Pools;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.Colors;
+import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.audio.GameSoundController;
 import com.happydroids.droidtowers.controllers.AvatarLayer;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.events.GridObjectBoundsChangeEvent;
@@ -77,7 +77,7 @@ public class ExpandLandOverlay extends WidgetGroup {
       return;
     }
 
-    GameSoundController.setSoundsAllowed(false);
+    gameGrid.events().unregister(DroidTowersGame.getSoundController());
     gameGrid.getGridSize().x += GAME_GRID_EXPAND_LAND_SIZE;
     gameGrid.updateWorldSize(false);
 
@@ -92,7 +92,7 @@ public class ExpandLandOverlay extends WidgetGroup {
     }
 
     cameraController.panTo(gameGrid.getWorldSize().x, cameraController.getCamera().position.y, true);
-    GameSoundController.setSoundsAllowed(true);
+    gameGrid.events().register(DroidTowersGame.getSoundController());
   }
 
   private void expandLandToWest() {
@@ -101,7 +101,7 @@ public class ExpandLandOverlay extends WidgetGroup {
       return;
     }
 
-    GameSoundController.setSoundsAllowed(false);
+    gameGrid.events().unregister(DroidTowersGame.getSoundController());
     gameGrid.getGridSize().x += GAME_GRID_EXPAND_LAND_SIZE;
     gameGrid.updateWorldSize(false);
 
@@ -115,7 +115,7 @@ public class ExpandLandOverlay extends WidgetGroup {
     Vector3 cameraPosition = cameraController.getCamera().position.cpy();
     cameraController.getCamera().position.set(cameraPosition.x + (TowerConsts.GRID_UNIT_SIZE * GAME_GRID_EXPAND_LAND_SIZE), cameraPosition.y, cameraPosition.z);
     cameraController.panTo(0, cameraController.getCamera().position.y, true);
-    GameSoundController.setSoundsAllowed(true);
+    gameGrid.events().register(DroidTowersGame.getSoundController());
   }
 
   public float getPrefWidth() {

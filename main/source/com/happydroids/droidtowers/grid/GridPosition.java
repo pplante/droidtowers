@@ -14,8 +14,8 @@ import com.happydroids.droidtowers.math.GridPoint;
 import static com.happydroids.droidtowers.TowerConsts.GRID_UNIT_SIZE;
 
 public class GridPosition {
-  public final short x;
-  public final short y;
+  public final int x;
+  public final int y;
   private final Vector2 worldVector;
   private Array<GridObject> objects = new Array<GridObject>();
   public Elevator elevator;
@@ -32,7 +32,7 @@ public class GridPosition {
   private float crimeLevel;
 
 
-  public GridPosition(short x, short y) {
+  public GridPosition(int x, int y) {
     this.x = x;
     this.y = y;
     worldVector = new Vector2(x * GRID_UNIT_SIZE, y * GRID_UNIT_SIZE);
@@ -43,7 +43,7 @@ public class GridPosition {
   }
 
   public void add(GridObject gridObject) {
-    if (!objects.contains(gridObject, false)) {
+    if (!objects.contains(gridObject, true)) {
       objects.add(gridObject);
 
       if (gridObject instanceof Elevator) {
@@ -61,8 +61,8 @@ public class GridPosition {
   }
 
   public void remove(GridObject gridObject) {
-    if (objects.contains(gridObject, false)) {
-      objects.removeValue(gridObject, false);
+    if (objects.contains(gridObject, true)) {
+      objects.removeValue(gridObject, true);
 
       if (gridObject instanceof Elevator) {
         elevator = null;
@@ -81,7 +81,7 @@ public class GridPosition {
   }
 
   public boolean contains(GridObject gridObject) {
-    return objects.contains(gridObject, false);
+    return objects.contains(gridObject, true);
   }
 
   public Vector2 worldPoint() {

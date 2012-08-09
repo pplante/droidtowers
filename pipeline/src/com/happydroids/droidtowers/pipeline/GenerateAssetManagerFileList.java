@@ -4,8 +4,6 @@
 
 package com.happydroids.droidtowers.pipeline;
 
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -48,8 +46,6 @@ public class GenerateAssetManagerFileList {
     addDirectoryToAssetManager("hud/rating-bars/", ".png", Texture.class);
     addDirectoryToAssetManager("hud/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("rooms/", ".txt", TextureAtlas.class);
-    addDirectoryToAssetManager("sound/effects/", ".wav", Sound.class);
-    addDirectoryToAssetManager("sound/music/", ".mp3", Music.class);
 
     addFileEntry(assetsDir.child("characters.txt"), TextureAtlas.class);
     addFileEntry(assetsDir.child("transport.txt"), TextureAtlas.class);
@@ -74,7 +70,9 @@ public class GenerateAssetManagerFileList {
 
   private static void makeSwatch(FileHandle swatchesDir, String swatchFilename, Color color) {
     FileHandle swatchFile = swatchesDir.child(swatchFilename);
-    if (swatchFile.exists()) return;
+    if (swatchFile.exists()) {
+      return;
+    }
 
     try {
       Pixmap pixmap = new Pixmap(2, 2, Pixmap.Format.RGB888);

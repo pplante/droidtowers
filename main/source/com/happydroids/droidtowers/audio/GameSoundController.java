@@ -23,7 +23,6 @@ public class GameSoundController {
   public static final String CONSTRUCTION_PLACEMENT = "sound/effects/construction-placement-1.wav";
   public static final String CONSTRUCTION_DESTROY = "sound/effects/construction-destroy-1.wav";
 
-  private static boolean soundsAllowed;
   private static RunnableQueue afterInitRunnables = new RunnableQueue();
   private boolean backgroundMusicEnabled;
   public boolean audioState;
@@ -39,6 +38,9 @@ public class GameSoundController {
     availableSongs = Iterables.cycle(TowerAssetManager.getAssetList().musicFiles).iterator();
 
     moveToNextSong();
+
+    constructionSound = Gdx.audio.newSound(Gdx.files.internal(CONSTRUCTION_PLACEMENT));
+    destructionSound = Gdx.audio.newSound(Gdx.files.internal(CONSTRUCTION_DESTROY));
 
     if (afterInitRunnables != null) {
       afterInitRunnables.runAll();
@@ -64,12 +66,8 @@ public class GameSoundController {
     }
   }
 
-  public static void setSoundsAllowed(boolean soundsAllowed) {
-    GameSoundController.soundsAllowed = soundsAllowed;
-  }
-
   private void playSound(Sound sound) {
-    if (!audioState || !soundsAllowed || sound == null) {
+    if (!audioState || sound == null) {
       return;
     }
 
@@ -93,14 +91,6 @@ public class GameSoundController {
   public void update(float deltaTime) {
     if (audioState && activeSong != null && !activeSong.isPlaying()) {
       moveToNextSong();
-    }
-
-    if (constructionSound == null && TowerAssetManager.isLoaded(CONSTRUCTION_PLACEMENT)) {
-      constructionSound = TowerAssetManager.sound(CONSTRUCTION_PLACEMENT);
-    }
-
-    if (destructionSound == null && TowerAssetManager.isLoaded(CONSTRUCTION_DESTROY)) {
-      destructionSound = TowerAssetManager.sound(CONSTRUCTION_DESTROY);
     }
   }
 

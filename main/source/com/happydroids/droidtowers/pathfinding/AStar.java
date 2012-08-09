@@ -4,9 +4,9 @@
 
 package com.happydroids.droidtowers.pathfinding;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectIntMap;
+
 import java.util.PriorityQueue;
 
 /**
@@ -16,7 +16,7 @@ import java.util.PriorityQueue;
  */
 public abstract class AStar<T> {
 
-  protected LinkedList<T> discoveredPath;
+  protected Array<T> discoveredPath;
   protected boolean working;
   private Runnable completeCallback;
   protected T start;
@@ -34,7 +34,7 @@ public abstract class AStar<T> {
 
   public void cancel() {
     working = false;
-    lastCost = Double.MAX_VALUE;
+    lastCost = Integer.MAX_VALUE;
     paths.clear();
   }
 
@@ -47,7 +47,7 @@ public abstract class AStar<T> {
   }
 
   public boolean isFinished() {
-    return !isWorking() && lastCost != Double.MAX_VALUE;
+    return !isWorking() && lastCost != Integer.MAX_VALUE;
   }
 
   public Runnable getCompleteCallback() {
@@ -59,14 +59,14 @@ public abstract class AStar<T> {
 
     public T point;
 
-    public Double f;
-    public Double g;
+    public int f;
+    public int g;
     public Path parent;
 
     public Path() {
       parent = null;
       point = null;
-      g = f = 0.0;
+      g = f = 0;
     }
 
     public Path(Path p) {
@@ -82,7 +82,7 @@ public abstract class AStar<T> {
     @SuppressWarnings("unchecked")
     public int compareTo(Object o) {
       Path p = (Path) o;
-      return (int) (f - p.f);
+      return f - p.f;
     }
 
     /**
@@ -101,6 +101,9 @@ public abstract class AStar<T> {
       point = p;
     }
 
+    public void setParent(Path parent) {
+      this.parent = parent;
+    }
   }
 
   /**
@@ -112,7 +115,7 @@ public abstract class AStar<T> {
    * Cost for the operation to go to <code>to</code> from
    * <code>from</from>.
    */
-  protected abstract Double g(T from, T to);
+  protected abstract int g(T from, T to);
 
   /**
    * Estimated cost to reach a goal node.
@@ -120,20 +123,20 @@ public abstract class AStar<T> {
    * one.
    * <code>from</from>.
    */
-  protected abstract Double h(T from, T to);
+  protected abstract int h(T from, T to);
 
   /**
    * Generate the successors for a given node.
    */
-  protected abstract List<T> generateSuccessors(T node);
+  protected abstract Array<T> generateSuccessors(T node);
 
   protected PriorityQueue<Path> paths;
 
 
-  private HashMap<T, Double> minDistances;
+  private ObjectIntMap<T> minDistances;
 
 
-  protected Double lastCost;
+  protected int lastCost;
   private int expandedCounter;
 
   public int getExpandedCounter() {
@@ -142,14 +145,14 @@ public abstract class AStar<T> {
 
   public AStar() {
     paths = new PriorityQueue<Path>();
-    minDistances = new HashMap<T, Double>();
+    minDistances = new ObjectIntMap<T>();
     expandedCounter = 0;
-    lastCost = 0.0;
+    lastCost = 0;
   }
 
-  protected Double f(Path p, T from, T to) {
-    Double g = g(from, to) + ((p.parent != null) ? p.parent.g : 0.0);
-    Double h = h(from, to);
+  protected int f(Path p, T from, T to) {
+    int g = g(from, to) + ((p.parent != null) ? p.parent.g : 0);
+    int h = h(from, to);
 
     p.g = g;
     p.f = g + h;
@@ -159,19 +162,19 @@ public abstract class AStar<T> {
 
   private void expand(Path path) {
     T p = path.getPoint();
-    Double min = minDistances.get(path.getPoint());
+    int min = minDistances.get(path.getPoint(), Integer.MAX_VALUE);
 
     /*
     * If a better path passing for this point already exists then
     * don't expand it.
     */
-    if (min == null || min > path.f) {
+    if (min == Integer.MAX_VALUE || min > path.f) {
       minDistances.put(path.getPoint(), path.f);
     } else {
       return;
     }
 
-    List<T> successors = generateSuccessors(p);
+    Array<T> successors = generateSuccessors(p);
 
     for (T t : successors) {
       Path newPath = new Path(path);
@@ -184,7 +187,7 @@ public abstract class AStar<T> {
   }
 
 
-  public Double getCost() {
+  public int getCost() {
     return lastCost;
   }
 
@@ -195,7 +198,7 @@ public abstract class AStar<T> {
       paths.clear();
       minDistances.clear();
       expandedCounter = 0;
-      lastCost = 0.0;
+      lastCost = 0;
 
       Path root = new Path();
       root.setPoint(start);
@@ -218,7 +221,7 @@ public abstract class AStar<T> {
     Path p = paths.poll();
 
     if (p == null) {
-      lastCost = Double.MAX_VALUE;
+      lastCost = Integer.MAX_VALUE;
       working = false;
       return;
     }
@@ -228,10 +231,10 @@ public abstract class AStar<T> {
     lastCost = p.g;
 
     if (isGoal(last)) {
-      discoveredPath = new LinkedList<T>();
+      discoveredPath = new Array<T>(true, 20);
       for (Path i = p; i != null; i = i.parent) {
         T point = i.getPoint();
-        discoveredPath.addFirst(point);
+        discoveredPath.insert(0, point);
       }
 
       working = false;
@@ -246,67 +249,10 @@ public abstract class AStar<T> {
   }
 
   public boolean wasSuccessful() {
-    return lastCost != Double.MAX_VALUE;
+    return lastCost != Integer.MAX_VALUE;
   }
 
-  public LinkedList<T> getDiscoveredPath() {
+  public Array<T> getDiscoveredPath() {
     return discoveredPath;
-  }
-
-  @SuppressWarnings("RedundantIfStatement")
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof AStar)) {
-      return false;
-    }
-
-    AStar aStar = (AStar) o;
-
-    if (expandedCounter != aStar.expandedCounter) {
-      return false;
-    }
-    if (working != aStar.working) {
-      return false;
-    }
-    if (completeCallback != null ? !completeCallback.equals(aStar.completeCallback) : aStar.completeCallback != null) {
-      return false;
-    }
-    if (discoveredPath != null ? !discoveredPath.equals(aStar.discoveredPath) : aStar.discoveredPath != null) {
-      return false;
-    }
-    if (goal != null ? !goal.equals(aStar.goal) : aStar.goal != null) {
-      return false;
-    }
-    if (lastCost != null ? !lastCost.equals(aStar.lastCost) : aStar.lastCost != null) {
-      return false;
-    }
-    if (minDistances != null ? !minDistances.equals(aStar.minDistances) : aStar.minDistances != null) {
-      return false;
-    }
-    if (paths != null ? !paths.equals(aStar.paths) : aStar.paths != null) {
-      return false;
-    }
-    if (start != null ? !start.equals(aStar.start) : aStar.start != null) {
-      return false;
-    }
-
-    return true;
-  }
-
-  @Override
-  public int hashCode() {
-    int result = discoveredPath != null ? discoveredPath.hashCode() : 0;
-    result = 31 * result + (working ? 1 : 0);
-    result = 31 * result + (completeCallback != null ? completeCallback.hashCode() : 0);
-    result = 31 * result + (start != null ? start.hashCode() : 0);
-    result = 31 * result + (goal != null ? goal.hashCode() : 0);
-    result = 31 * result + (paths != null ? paths.hashCode() : 0);
-    result = 31 * result + (minDistances != null ? minDistances.hashCode() : 0);
-    result = 31 * result + (lastCost != null ? lastCost.hashCode() : 0);
-    result = 31 * result + expandedCounter;
-    return result;
   }
 }

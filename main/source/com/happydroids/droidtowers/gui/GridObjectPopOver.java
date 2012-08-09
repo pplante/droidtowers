@@ -57,7 +57,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     ratingBars = Lists.newArrayList();
     ratingBarContainer = new Table();
 
-    InputSystem.instance().addInputProcessor(new GridObjectPopOverCloser(this), 20);
+    InputSystem.instance().addInputProcessor(new GridObjectPopOverCloser(this), 1);
 
     setTouchable(Touchable.enabled);
     triangle = sprite(TowerAssetManager.WHITE_SWATCH_TRIANGLE_LEFT);

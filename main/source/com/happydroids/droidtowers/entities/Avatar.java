@@ -16,7 +16,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.controllers.AvatarState;
 import com.happydroids.droidtowers.controllers.AvatarSteeringManager;
 import com.happydroids.droidtowers.controllers.PathSearchManager;
 import com.happydroids.droidtowers.generators.NameGenerator;
@@ -34,6 +33,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import static com.happydroids.droidtowers.controllers.AvatarState.MOVING;
+import static com.happydroids.droidtowers.controllers.AvatarState.USING_STAIRS;
 import static com.happydroids.droidtowers.types.ProviderType.COMMERCIAL;
 import static com.happydroids.droidtowers.types.ProviderType.FOOD;
 
@@ -59,7 +60,7 @@ public class Avatar extends GameObject {
   private float lastSearchedForHome = Float.MAX_VALUE;
   private boolean wanderingAround;
   private final String name;
-
+  private float timeUntilPathSearch;
 
   public Avatar(final GameGrid gameGrid) {
     super();
@@ -75,6 +76,7 @@ public class Avatar extends GameObject {
     TextureAtlas.AtlasRegion stationary = droidAtlas.findRegion(addFramePrefix("stationary"));
     setSize(stationary.originalWidth, stationary.originalHeight);
     setRegion(stationary);
+    setOrigin(stationary.originalWidth / 2, 0);
 
     walkAnimation = new Animation(FRAME_DURATION, droidAtlas.findRegions(addFramePrefix("walk")));
     lastVisitedPlaces = Lists.newLinkedList();
@@ -88,7 +90,7 @@ public class Avatar extends GameObject {
         pathFinderComplete();
       }
     });
-    steeringManager = new AvatarSteeringManager(this, this.gameGrid, null);
+    steeringManager = new AvatarSteeringManager(this, this.gameGrid);
   }
 
   private void pathFinderComplete() {
@@ -109,6 +111,10 @@ public class Avatar extends GameObject {
   private void beginNextAction() {
     try {
       wanderAround();
+
+      if (timeUntilPathSearch > 0) {
+        return;
+      }
 
       if (!pathFinder.isWorking()) {
         if (hungerLevel <= 0.5f) {
@@ -145,7 +151,7 @@ public class Avatar extends GameObject {
   protected void wanderAround() {
     GridPosition start = gameGrid.positionCache().getPosition(gameGrid.closestGridPoint(getX(), getY()));
 
-    LinkedList<GridPosition> discoveredPath = Lists.newLinkedList();
+    Array<GridPosition> discoveredPath = new Array<GridPosition>(5);
 
     GridPoint gridSize = gameGrid.getGridSize();
 
@@ -195,11 +201,8 @@ public class Avatar extends GameObject {
       movingTo.addToVisitorQueue(this);
     }
 
-    GridPosition start = gameGrid.positionCache().getPosition(gameGrid.closestGridPoint(getX(), getY()));
-    GridPosition goal = gameGrid.positionCache().getPosition(gridObject.getPosition());
-
-    pathFinder.setStart(start);
-    pathFinder.setGoal(goal);
+    pathFinder.setStart(gameGrid.positionCache().getPosition(gameGrid.closestGridPoint(getX(), getY())));
+    pathFinder.setGoal(gameGrid.positionCache().getPosition(gridObject.getPosition()));
     pathFinder.start();
 
     if (this instanceof Janitor) {
@@ -224,8 +227,6 @@ public class Avatar extends GameObject {
       if (movingTo.provides(FOOD)) {
         hungerLevel = 1f;
       }
-
-
     }
 
     movingTo = null;
@@ -234,6 +235,8 @@ public class Avatar extends GameObject {
   @Override
   public void update(float timeDelta) {
     super.update(timeDelta);
+
+    timeUntilPathSearch -= timeDelta;
 
     if (home == null) {
       lastSearchedForHome += timeDelta;
@@ -248,7 +251,12 @@ public class Avatar extends GameObject {
     if (!steeringManager.isRunning()) {
       beginNextAction();
     } else {
-      if ((steeringManager.getCurrentState() & AvatarState.MOVING) != 0 || (steeringManager.getCurrentState() & AvatarState.USING_STAIRS) != 0) {
+      int gridX = (int) getX() / TowerConsts.GRID_UNIT_SIZE;
+      int gridY = (int) getY() / TowerConsts.GRID_UNIT_SIZE;
+      GridPosition currentGridSquare = gameGrid.positionCache().getPosition(gridX, gridY);
+      if (currentGridSquare != null && currentGridSquare.isEmpty()) {
+        murderDeathKill187();
+      } else if ((steeringManager.getCurrentState() & MOVING) != 0 || (steeringManager.getCurrentState() & USING_STAIRS) != 0) {
         walkAnimationTime += timeDelta;
         if (walkAnimationTime >= WALKING_ANIMATION_DURATION) {
           walkAnimationTime = 0f;
@@ -305,6 +313,8 @@ public class Avatar extends GameObject {
     if (movingTo != null) {
       movingTo.removeFromVisitorQueue(this);
     }
+
+    timeUntilPathSearch = 5f;
   }
 
   public void searchForAHome() {
@@ -385,5 +395,13 @@ public class Avatar extends GameObject {
 
   public float getSatisfactionShops() {
     return satisfactionShops;
+  }
+
+  public void murderDeathKill187() {
+    cancelMovement();
+    if (home != null) {
+      home.removeResident(this);
+    }
+    markToRemove(true);
   }
 }
