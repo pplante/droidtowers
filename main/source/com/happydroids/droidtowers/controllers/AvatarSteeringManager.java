@@ -118,29 +118,28 @@ public class AvatarSteeringManager {
     currentWorldPos.set(currentPos.worldPoint());
 
     if (path.size() > 0) {
-      if (currentPos.stair != null) {
-        GridPosition next = path.peek();
-        if (next.y != currentPos.y) {
+      GridPosition next = path.peek();
+      if (next.y != currentPos.y) {
+        if (currentPos.stair != null) {
           traverseStair(next);
           return;
-        }
-      } else if (currentPos.elevator != null) {
-        int before = path.size();
-        GridPosition endOfElevator = null;
-        GridPosition next;
-        while ((next = path.peek()) != null) {
-          if (next.elevator != null && next.elevator.equals(currentPos.elevator)) {
-            transitLine.highlightPoint(pointsTraveled++);
-            endOfElevator = next;
-            path.poll();
-          } else {
-            break;
+        } else if (currentPos.elevator != null) {
+          int before = path.size();
+          GridPosition endOfElevator = null;
+          while ((next = path.peek()) != null) {
+            if (next.elevator != null && next.elevator.equals(currentPos.elevator) && currentPos.y != next.y) {
+              transitLine.highlightPoint(pointsTraveled++);
+              endOfElevator = next;
+              path.poll();
+            } else {
+              break;
+            }
           }
-        }
 
-        if (endOfElevator != null) {
-          traverseElevator(endOfElevator);
-          return;
+          if (endOfElevator != null) {
+            traverseElevator(endOfElevator);
+            return;
+          }
         }
       }
     }
@@ -155,16 +154,13 @@ public class AvatarSteeringManager {
   private void traverseElevator(final GridPosition destination) {
     currentState |= AvatarState.USING_ELEVATOR;
 
+    int offsetX = TowerConsts.GRID_UNIT_SIZE + Random.randomInt(0, TowerConsts.GRID_UNIT_SIZE);
     nextWorldPos.set(currentPos.worldPoint());
-    nextWorldPos.x += Random.randomInt(0, TowerConsts.GRID_UNIT_SIZE);
+    nextWorldPos.x += currentWorldPos.x < nextWorldPos.x ? -offsetX : offsetX;
+
     moveAvatarTo(nextWorldPos, new TweenCallback() {
       @Override
       public void onEvent(int type, BaseTween source) {
-        if (currentPos.elevator == null || currentPos.y == destination.y) {
-          finished();
-          return;
-        }
-
         boolean addedPassenger = currentPos.elevator.addPassenger(AvatarSteeringManager.this, currentPos.y, destination.y, uponArrivalAtElevatorDestination(destination));
         if (!addedPassenger) {
           Gdx.app.error(TAG, "ZOMG CANNOT REACH FLOOR!!!");

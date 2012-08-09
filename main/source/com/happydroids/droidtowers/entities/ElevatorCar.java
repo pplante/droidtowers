@@ -104,12 +104,9 @@ public class ElevatorCar extends GameObject {
   }
 
   public boolean addPassenger(AvatarSteeringManager steeringManager, int boarding, int destination, Runnable disembarkCallback) {
-    if (elevator.servicesFloor(boarding) && elevator.servicesFloor(destination)) {
-      queue.add(new Passenger(steeringManager, boarding, destination, disembarkCallback));
-      return true;
-    }
+    queue.add(new Passenger(steeringManager, boarding, destination, disembarkCallback));
 
-    return false;
+    return true;
   }
 
 
