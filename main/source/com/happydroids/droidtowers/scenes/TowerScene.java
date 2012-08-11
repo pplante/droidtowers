@@ -104,13 +104,6 @@ public class TowerScene extends Scene {
 
     gameGrid.events().register(this);
 
-    GameSoundController.runAfterInit(new Runnable() {
-      @Override
-      public void run() {
-        gameGrid.events().register(DroidTowersGame.getSoundController());
-      }
-    });
-
     headsUpDisplay = new HeadsUpDisplay(getStage(), getCamera(), getCameraController(), gameGrid, avatarLayer, AchievementEngine.instance(), TutorialEngine.instance(), gameState);
     weatherService = new WeatherService();
 
@@ -148,6 +141,13 @@ public class TowerScene extends Scene {
     if (avatarLayer != null) {
       avatarLayer.setupInitialAvatars();
     }
+
+    GameSoundController.runAfterInit(new Runnable() {
+      @Override
+      public void run() {
+        gameGrid.events().register(DroidTowersGame.getSoundController());
+      }
+    });
   }
 
   private void attachActions() {

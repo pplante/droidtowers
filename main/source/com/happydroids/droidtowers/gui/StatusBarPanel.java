@@ -106,7 +106,7 @@ public class StatusBarPanel extends Table {
     gameSpeedOverlay = new PopOver();
     gameSpeedOverlay.alignArrow(Align.left);
     gameSpeedOverlay.add(new Image(TowerAssetManager.textureFromAtlas("snail", "hud/buttons.txt"))).center();
-    gameSpeedSlider = new Slider(TowerConsts.GAME_SPEED_MIN, TowerConsts.GAME_SPEED_MAX, 0.5f, TowerAssetManager.getCustomSkin());
+    gameSpeedSlider = new Slider(TowerConsts.GAME_SPEED_MIN, TowerConsts.GAME_SPEED_MAX, 0.5f, false, TowerAssetManager.getCustomSkin());
     gameSpeedOverlay.add(gameSpeedSlider).width(devicePixel(150));
     gameSpeedOverlay.add(new Image(TowerAssetManager.textureFromAtlas("rabbit", "hud/buttons.txt"))).center();
     gameSpeedOverlay.pack();

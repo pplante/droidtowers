@@ -107,4 +107,16 @@ public class SecurePreferences {
 
     return Integer.parseInt(values.get(key));
   }
+
+  public void putFloat(String key, float value) {
+    values.put(key, String.valueOf(value));
+  }
+
+  public float getFloat(String key, float defaultValue) {
+    if (!values.containsKey(key)) {
+      return defaultValue;
+    }
+
+    return Float.parseFloat(values.get(key));
+  }
 }

@@ -106,7 +106,7 @@ public class NewTowerDialog extends Dialog {
 
     setView(c);
 
-    easyButton.toggle();
+    setDifficultyLevel(DifficultyLevel.EASY);
   }
 
   private class DifficultyLevelButtonListener extends InputListener {

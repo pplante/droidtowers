@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.platform.Display;
 
@@ -112,18 +113,19 @@ public class FontHelper {
   public TextField makeTextField(String labelText, String hintText) {
     if (textFieldStyle == null) {
       TextField.TextFieldStyle defaultStyle = TowerAssetManager.getCustomSkin().get(TextField.TextFieldStyle.class);
-      textFieldStyle = new TextField.TextFieldStyle(getFont(), defaultStyle.fontColor, getFont(), defaultStyle.messageFontColor, defaultStyle.cursor, defaultStyle.selection, defaultStyle.background);
+      textFieldStyle = new TextField.TextFieldStyle(getFont(), defaultStyle.fontColor, defaultStyle.cursor, defaultStyle.selection, defaultStyle.background);
     }
 
     return new TextField(labelText, textFieldStyle);
   }
 
   public Label makeLabel(String text, Color fontColor) {
-    return new Label(text, labelStyle(fontColor));
+    return makeLabel(text, fontColor, Align.center);
   }
 
   public Label makeLabel(String text, Color fontColor, int textAlignment) {
-    Label label = new Label(text, labelStyle(fontColor));
+    Label label = new Label(text, labelStyle());
+    label.setColor(fontColor);
     label.setAlignment(textAlignment);
     return label;
   }
@@ -134,12 +136,12 @@ public class FontHelper {
   }
 
   public void dispose() {
-    if (bitmapFont != null) {
-      bitmapFont.dispose();
-    }
-
-    bitmapFont = null;
-    labelStyle = null;
-    textFieldStyle = null;
+//    if (bitmapFont != null) {
+//      bitmapFont.dispose();
+//    }
+//
+//    bitmapFont = null;
+//    labelStyle = null;
+//    textFieldStyle = null;
   }
 }

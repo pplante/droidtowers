@@ -20,7 +20,6 @@ import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.HappyDroidConnect;
 
 import static com.badlogic.gdx.Application.ApplicationType.Applet;
-import static com.badlogic.gdx.Application.ApplicationType.Desktop;
 import static com.happydroids.droidtowers.gui.FontManager.Default;
 
 public class MainMenuButtonPanel extends Table {
@@ -56,17 +55,15 @@ public class MainMenuButtonPanel extends Table {
     optionsAndCreditsRow.row().fill().space(BUTTON_SPACING);
     add(optionsAndCreditsRow).width(BUTTON_WIDTH);
 
-    if (Gdx.app.getType().equals(Desktop)) {
-      TextButton optionsButton = Default.makeTextButton("options");
-      optionsAndCreditsRow.add(optionsButton).expandX();
+    TextButton optionsButton = Default.makeTextButton("options");
+    optionsAndCreditsRow.add(optionsButton).expandX();
 
-      optionsButton.addListener(new VibrateClickListener() {
-        @Override
-        public void onClick(InputEvent event, float x, float y) {
-          new OptionsDialog(getStage()).show();
-        }
-      });
-    }
+    optionsButton.addListener(new VibrateClickListener() {
+      @Override
+      public void onClick(InputEvent event, float x, float y) {
+        new OptionsDialog(getStage()).show();
+      }
+    });
 
     TextButton aboutButton = Default.makeTextButton("credits");
     optionsAndCreditsRow.add(aboutButton).expandX();

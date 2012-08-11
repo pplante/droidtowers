@@ -25,10 +25,12 @@ public class ProgressPanel extends Table {
 
     messagesUsed = Sets.newHashSet();
 
-    loadingMessage = FontManager.Roboto32WithShadow.makeLabel(selectRandomMessage(), Color.WHITE, Align.center);
+    loadingMessage = FontManager.Roboto32.makeLabel(selectRandomMessage(), Color.WHITE, Align.center);
+    loadingMessage.setColor(Color.DARK_GRAY);
     loadingMessage.setAlignment(Align.center);
 
-    progressLabel = FontManager.Roboto64WithShadow.makeLabel("0%", Color.WHITE, Align.center);
+    progressLabel = FontManager.Roboto64.makeLabel("0%", Color.WHITE, Align.center);
+    progressLabel.setColor(Color.DARK_GRAY);
     progressLabel.setAlignment(Align.center);
 
     row();

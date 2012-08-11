@@ -98,6 +98,7 @@ public class GameGrid extends GameLayer {
     }
 
     GridObjectAddedEvent event = Pools.obtain(GridObjectAddedEvent.class);
+    event.setGridObject(gridObject);
     events().post(event);
 //    Pools.free(event);
     gridObjects.getInstances().sort();

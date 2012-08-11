@@ -14,6 +14,7 @@ import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.gamestate.server.RunnableQueue;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
+import com.happydroids.security.SecurePreferences;
 
 import java.util.Iterator;
 
@@ -30,10 +31,16 @@ public class GameSoundController {
   private Sound destructionSound;
   private Music activeSong;
   private final Iterator<String> availableSongs;
+  private float musicVolume;
+  private float effectsVolume;
+  private final SecurePreferences preferences;
 
 
   public GameSoundController() {
+    preferences = TowerGameService.instance().getPreferences();
     audioState = TowerGameService.instance().getAudioState();
+    musicVolume = preferences.getFloat("musicVolume", 0.5f);
+    effectsVolume = preferences.getFloat("effectsVolume", 0.5f);
 
     availableSongs = Iterables.cycle(TowerAssetManager.getAssetList().musicFiles).iterator();
 
@@ -58,7 +65,7 @@ public class GameSoundController {
       String songFilename = availableSongs.next();
       Gdx.app.debug(TAG, "Now playing: " + songFilename);
       activeSong = Gdx.audio.newMusic(Gdx.files.internal(songFilename));
-      activeSong.setVolume(0.5f);
+      activeSong.setVolume(musicVolume);
 
       if (audioState) {
         activeSong.play();
@@ -71,7 +78,7 @@ public class GameSoundController {
       return;
     }
 
-    sound.play();
+    sound.play(effectsVolume, 1, 0);
   }
 
   public void toggleAudio() {
@@ -114,5 +121,29 @@ public class GameSoundController {
     } else {
       runnable.run();
     }
+  }
+
+  public void setMusicVolume(float musicVolume) {
+    this.musicVolume = musicVolume;
+    preferences.putFloat("musicVolume", musicVolume);
+    preferences.flush();
+
+    if (activeSong != null && activeSong.isPlaying()) {
+      activeSong.setVolume(musicVolume);
+    }
+  }
+
+  public void setEffectsVolume(float effectsVolume) {
+    this.effectsVolume = effectsVolume;
+    preferences.putFloat("effectsVolume", effectsVolume);
+    preferences.flush();
+  }
+
+  public float getMusicVolume() {
+    return musicVolume;
+  }
+
+  public float getEffectsVolume() {
+    return effectsVolume;
   }
 }

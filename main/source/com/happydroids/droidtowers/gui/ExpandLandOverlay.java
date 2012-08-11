@@ -132,9 +132,7 @@ public class ExpandLandOverlay extends WidgetGroup {
       super(new ButtonStyle(
                                    makeNinePatch(textureSuffix, new Color(1f, 1f, 1f, 0.5f)),
                                    makeNinePatch(textureSuffix, Colors.ICS_BLUE),
-                                   makeNinePatch(textureSuffix, new Color(1f, 1f, 1f, 0.75f)),
-                                   0, 0, 0, 0
-      ));
+                                   makeNinePatch(textureSuffix, new Color(1f, 1f, 1f, 0.75f))));
     }
 
     private static NinePatchDrawable makeNinePatch(String textureSuffix, Color color) {

@@ -25,7 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.happydroids.android.R;
 
-import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.view.Window.FEATURE_NO_TITLE;
 import static android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN;
@@ -33,7 +33,7 @@ import static android.webkit.WebSettings.RenderPriority.HIGH;
 
 public class TowerWebBrowser extends Dialog {
   static final FrameLayout.LayoutParams FILL =
-          new FrameLayout.LayoutParams(FILL_PARENT, FILL_PARENT);
+          new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
 
   private WebView webView;
   private Activity activity;
@@ -71,7 +71,7 @@ public class TowerWebBrowser extends Dialog {
 
     progressDialog = new ProgressDialog(getContext());
     progressDialog.requestWindowFeature(FEATURE_NO_TITLE);
-    progressDialog.getWindow().setLayout(FILL_PARENT, FILL_PARENT);
+    progressDialog.getWindow().setLayout(MATCH_PARENT, MATCH_PARENT);
     progressDialog.setIndeterminate(true);
     progressDialog.setOnCancelListener(new OnCancelListener() {
       @Override

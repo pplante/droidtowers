@@ -57,7 +57,6 @@ public class GameState {
     try {
       Gdx.app.debug(TAG, "Loading: " + currentGameSave.getBaseFilename());
       currentGameSave.attachToGame(gameGrid, camera, cameraController);
-
     } catch (Exception e) {
       shouldSaveGame = false;
 

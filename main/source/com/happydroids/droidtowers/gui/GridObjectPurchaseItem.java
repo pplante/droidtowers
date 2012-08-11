@@ -51,13 +51,12 @@ class GridObjectPurchaseItem extends Table {
     left.row().fillX();
     left.add(gridObjectImage).height(Display.devicePixel(40)).expand();
 
-
     Table center = new Table();
     center.defaults().space(Display.devicePixel(8));
     center.row().fillX();
     if (gridObjectType.hasDescription()) {
-      Label label = FontManager.Roboto18.makeLabel(gridObjectType.getDescription());
-      label.setWrap(true);
+      Label label = FontManager.Roboto18.makeLabel(gridObjectType.getDescription() + "\n");
+//      label.setWrap(true);
       center.add(label).expandX();
     }
 
@@ -111,8 +110,8 @@ class GridObjectPurchaseItem extends Table {
       description = description.replace("{servicedBy}", StringUtils.join(servicedBy, ", "));
     }
 
-    descriptionLabel.setText(description);
-    descriptionLabel.setWrap(true);
+    descriptionLabel.setText(description + "\n");
+//    descriptionLabel.setWrap(true);
 
 //    c.debug();
     return descriptionLabel;

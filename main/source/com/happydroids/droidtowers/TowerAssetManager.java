@@ -103,7 +103,7 @@ public class TowerAssetManager {
     customSkin.add("default", checkBoxStyle);
 
     Slider.SliderStyle sliderStyle = new Slider.SliderStyle(new NinePatchDrawable(new NinePatch(new Texture(WHITE_SWATCH), Color.LIGHT_GRAY)), new NinePatchDrawable(new NinePatch(skinAtlas.findRegion("slider-handle"))));
-    customSkin.add("default", sliderStyle);
+    customSkin.add("default-horizontal", sliderStyle);
 
     TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
     textButtonStyle.up = buttonNormal;

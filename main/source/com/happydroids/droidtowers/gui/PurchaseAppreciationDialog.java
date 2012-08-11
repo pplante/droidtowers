@@ -5,10 +5,7 @@
 package com.happydroids.droidtowers.gui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
-import com.happydroids.droidtowers.TowerAssetManager;
-
-import static com.badlogic.gdx.utils.Scaling.none;
+import com.happydroids.droidtowers.gui.controls.AnimatedHappyDroid;
 
 public class PurchaseAppreciationDialog extends Dialog {
   public PurchaseAppreciationDialog() {
@@ -18,13 +15,12 @@ public class PurchaseAppreciationDialog extends Dialog {
     Table content = new Table();
     content.defaults().left();
     content.row().fill();
-    AnimatedImage droidAnim = new AnimatedImage(TowerAssetManager.textureAtlas("happy-droid.txt").findRegions("happy-droid"), 0.05f, true);
-    droidAnim.delayAfterPlayback(2f);
-    droidAnim.setAlign(Align.right);
-    droidAnim.setScaling(none);
-    droidAnim.layout();
+    AnimatedHappyDroid happyDroidImage = new AnimatedHappyDroid();
+    happyDroidImage.setScale((getStage().getHeight() * 0.33f) / happyDroidImage.getHeight());
+    happyDroidImage.setPosition(getStage().getWidth() / 2, 0);
+
     content.add(FontManager.RobotoBold18.makeLabel("Thank you for purchasing Droid Towers: Unlimited!\n\nAs promised, all limitations have been lifted!\n\nHappy Building,\nHappy Droids Team")).expand();
-    content.add(droidAnim).width(252).height(228);
+    content.add(happyDroidImage).width(252).height(228);
 
     setView(content);
   }

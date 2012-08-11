@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.gui;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -11,11 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
+import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.platform.Display;
@@ -26,7 +29,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class OptionsDialog extends Dialog {
-  private final SecurePreferences displayPrefs;
+  private final SecurePreferences preferences;
   private final CheckBox fullscreenCheckbox;
   private SelectBox displayResolution;
   private List<Graphics.DisplayMode> displayModeList;
@@ -35,40 +38,75 @@ public class OptionsDialog extends Dialog {
   public OptionsDialog(Stage stage) {
     super(stage);
 
-    setTitle("Options");
-
-    Table body = new Table();
-    body.defaults().top().left().space(Display.devicePixel(16));
-
-    body.row().fillX();
-    body.add(FontManager.RobotoBold18.makeLabel("Resolution: "));
-    body.add(makeResolutionSelectBox());
-
+    preferences = TowerGameService.instance().getPreferences();
     fullscreenCheckbox = FontManager.RobotoBold18.makeCheckBox("Fullscreen");
     fullscreenCheckbox.setChecked(Gdx.graphics.isFullscreen());
-    fullscreenCheckbox.addListener(new VibrateClickListener() {
-      @Override
-      public void onClick(InputEvent event, float x, float y) {
-        saveDisplayChanges(displayModeList.get(displayResolution.getSelectionIndex()));
-      }
-    });
-    body.row();
-    body.add();
-    body.add(fullscreenCheckbox);
 
-    displayPrefs = TowerGameService.instance().getPreferences();
+    setTitle("Options");
 
-    setView(body);
+    Table c = new Table();
+    c.defaults().top().left().space(Display.devicePixel(16));
 
-    setDismissCallback(new Runnable() {
-      @Override
-      public void run() {
-        if (displayModeChanged) {
-          Gdx.graphics.setDisplayMode(displayPrefs.getInteger("width"), displayPrefs.getInteger("height"), displayPrefs.getBoolean("fullscreen"));
-          SceneManager.restartActiveScene();
+    c.row().fillX();
+    c.add(FontManager.Default.makeLabel("Music Volume"));
+    c.add(makeMusicVolumeSlider());
+
+    c.row().fillX();
+    c.add(FontManager.Default.makeLabel("Effects Volume"));
+    c.add(makeSoundEffectsVolumeSlider());
+
+    if (Gdx.app.getType().equals(Application.ApplicationType.Desktop)) {
+      c.row().fillX();
+      c.add(FontManager.RobotoBold18.makeLabel("Resolution: "));
+      c.add(makeResolutionSelectBox());
+
+      fullscreenCheckbox.addListener(new VibrateClickListener() {
+        @Override
+        public void onClick(InputEvent event, float x, float y) {
+          saveDisplayChanges(displayModeList.get(displayResolution.getSelectionIndex()));
         }
+      });
+      c.row();
+      c.add();
+      c.add(fullscreenCheckbox);
+
+      setDismissCallback(new Runnable() {
+        @Override
+        public void run() {
+          if (displayModeChanged) {
+            Gdx.graphics.setDisplayMode(preferences.getInteger("width"), preferences.getInteger("height"), preferences.getBoolean("fullscreen"));
+            SceneManager.restartActiveScene();
+          }
+        }
+      });
+    }
+
+    setView(c);
+  }
+
+  private Slider makeMusicVolumeSlider() {
+    final Slider slider = new Slider(0f, 1f, 0.1f, false, TowerAssetManager.getCustomSkin());
+    slider.setValue(DroidTowersGame.getSoundController().getMusicVolume());
+    slider.addListener(new ChangeListener() {
+      @Override
+      public void changed(ChangeEvent event, Actor actor) {
+        DroidTowersGame.getSoundController().setMusicVolume(slider.getValue());
       }
     });
+    return slider;
+  }
+
+  private Slider makeSoundEffectsVolumeSlider() {
+    final Slider slider = new Slider(0f, 1f, 0.1f, false, TowerAssetManager.getCustomSkin());
+    slider.setValue(DroidTowersGame.getSoundController().getEffectsVolume());
+    slider.addListener(new ChangeListener() {
+      @Override
+      public void changed(ChangeEvent event, Actor actor) {
+        preferences.putFloat("effectsVolume", slider.getValue());
+        DroidTowersGame.getSoundController().setEffectsVolume(slider.getValue());
+      }
+    });
+    return slider;
   }
 
   private SelectBox makeResolutionSelectBox() {
@@ -113,10 +151,10 @@ public class OptionsDialog extends Dialog {
 
   private void saveDisplayChanges(Graphics.DisplayMode displayMode) {
     displayModeChanged = true;
-    displayPrefs.putInteger("width", displayMode.width);
-    displayPrefs.putInteger("height", displayMode.height);
-    displayPrefs.putBoolean("fullscreen", fullscreenCheckbox.isChecked());
-    displayPrefs.flush();
+    preferences.putInteger("width", displayMode.width);
+    preferences.putInteger("height", displayMode.height);
+    preferences.putBoolean("fullscreen", fullscreenCheckbox.isChecked());
+    preferences.flush();
   }
 
 }

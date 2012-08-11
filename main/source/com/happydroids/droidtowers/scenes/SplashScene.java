@@ -19,10 +19,10 @@ import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.entities.SplashCloudLayer;
-import com.happydroids.droidtowers.gui.AnimatedImage;
 import com.happydroids.droidtowers.gui.AudioControl;
 import com.happydroids.droidtowers.gui.Sunburst;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
+import com.happydroids.droidtowers.gui.controls.AnimatedHappyDroid;
 import com.happydroids.droidtowers.scenes.components.AssetLoadProgressPanel;
 import com.happydroids.droidtowers.scenes.components.ProgressPanel;
 import com.happydroids.droidtowers.tween.TweenSystem;
@@ -172,13 +172,9 @@ public abstract class SplashScene extends Scene {
   }
 
   private void makeHappyDroid(boolean animateBuildOut) {
-    AnimatedImage happyDroidImage = new AnimatedImage(happyDroidAtlas.findRegions("happy-droid"), 0.05f, true);
-    happyDroidImage.setAlign(Align.right);
-    happyDroidImage.setScaling(fit);
-    happyDroidImage.delayAfterPlayback(5f);
-    happyDroidImage.setHeight((int) Math.min(getStage().getHeight() * 0.25f, happyDroidImage.getHeight()));
-    happyDroidImage.layout();
-    happyDroidImage.setX((int) getStage().getWidth() / 2);
+    AnimatedHappyDroid happyDroidImage = new AnimatedHappyDroid();
+    happyDroidImage.setHeight(getStage().getHeight() * 0.33f);
+    happyDroidImage.setPosition(getStage().getWidth() / 2, 0);
 
     if (animateBuildOut) {
       happyDroidImage.setY(-getStage().getHeight());
@@ -208,8 +204,8 @@ public abstract class SplashScene extends Scene {
                   assetManager().isLoaded("backgrounds/splash1.png") &&
                   assetManager().isLoaded("backgrounds/splash2.txt") &&
                   assetManager().isLoaded("backgrounds/splash2.png") &&
-                  assetManager().isLoaded("happy-droid.txt") &&
-                  assetManager().isLoaded("happy-droid.png") &&
+                  assetManager().isLoaded("happydroid.txt") &&
+                  assetManager().isLoaded("happydroid.png") &&
                   assetManager().isLoaded("backgrounds/cityscape-middle.png")) {
         buildSplashScene();
       }
@@ -231,7 +227,7 @@ public abstract class SplashScene extends Scene {
 
     atlas1 = TowerAssetManager.textureAtlas("backgrounds/splash1.txt");
     atlas2 = TowerAssetManager.textureAtlas("backgrounds/splash2.txt");
-    happyDroidAtlas = TowerAssetManager.textureAtlas("happy-droid.txt");
+    happyDroidAtlas = TowerAssetManager.textureAtlas("happydroid.txt");
 
     changeAtlasTextureFilter(atlas1);
     changeAtlasTextureFilter(atlas2);
