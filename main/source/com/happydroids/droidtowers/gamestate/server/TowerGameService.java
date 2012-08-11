@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.gamestate.server;
 
+import com.happydroids.droidtowers.gui.VibrateClickListener;
 import com.happydroids.droidtowers.jackson.Vector2Serializer;
 import com.happydroids.droidtowers.jackson.Vector3Serializer;
 import com.happydroids.security.SecurePreferences;
@@ -130,6 +131,8 @@ public class TowerGameService extends HappyDroidService {
         preferences.putString(DEVICE_ID, UUID.randomUUID().toString().replaceAll("-", ""));
         preferences.flush();
       }
+
+      VibrateClickListener.setVibrateEnabled(preferences.getBoolean("vibrateOnTouch", true));
     }
 
     return preferences;
