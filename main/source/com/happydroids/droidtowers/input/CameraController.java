@@ -144,7 +144,7 @@ public class CameraController implements GestureDetector.GestureListener {
   }
 
   private void checkZoom() {
-    camera.zoom = MathUtils.clamp(camera.zoom, ZOOM_MIN, ZOOM_MAX);
+    camera.zoom = MathUtils.clamp(camera.zoom, ZOOM_MIN / Display.getScaledDensity(), ZOOM_MAX / Display.getScaledDensity());
   }
 
   public void checkBounds() {

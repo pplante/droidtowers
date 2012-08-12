@@ -96,7 +96,7 @@ public class Elevator extends Transit {
 
   @Override
   public boolean shouldUseSpriteCache() {
-    return true;
+    return false;
   }
 
   @Override

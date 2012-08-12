@@ -38,6 +38,7 @@ public class TowerConsts extends HappyDroidConsts {
   public static final String GAME_SAVE_DIRECTORY = Gdx.app.getType() == Application.ApplicationType.Android ? "towergame/" : ".towergame/";
   public static final String FANDANGO_COMMISSION_JUNCTION_ID = "5737037";
   public static final float ACHIEVEMENT_ENGINE_FREQUENCY = 5f;
+  public static final float AVATAR_SPAWN_DELAY = 5f;
   public static final int MAX_AVATARS = (Gdx.app.getType() == Application.ApplicationType.Android ? 20 : 120);
   public static final float AVATAR_POPULATION_SCALE = 0.25f;
   public static final GridPoint SINGLE_POINT = new GridPoint(1, 1);

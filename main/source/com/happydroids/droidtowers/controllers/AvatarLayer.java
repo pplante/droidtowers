@@ -4,6 +4,8 @@
 
 package com.happydroids.droidtowers.controllers;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.google.common.base.Predicate;
@@ -29,6 +31,8 @@ public class AvatarLayer extends GameLayer<Avatar> {
   private static final String TAG = AvatarLayer.class.getSimpleName();
 
   private final GameGrid gameGrid;
+  private float timeUntilAvatarMaintenance;
+
 
   public AvatarLayer(GameGrid gameGrid) {
     super();
@@ -47,7 +51,29 @@ public class AvatarLayer extends GameLayer<Avatar> {
   public void update(float timeDelta) {
     super.update(timeDelta);
 
-    maintainAvatars();
+    timeUntilAvatarMaintenance -= timeDelta;
+    if (timeUntilAvatarMaintenance <= 0) {
+      timeUntilAvatarMaintenance = TowerConsts.AVATAR_SPAWN_DELAY;
+      maintainAvatars();
+    }
+  }
+
+  @Override
+  public void render(SpriteBatch spriteBatch, OrthographicCamera camera) {
+    if (!isVisible()) {
+      return;
+    }
+
+    spriteBatch.begin();
+    spriteBatch.enableBlending();
+    for (Avatar gameObject : gameObjects) {
+      tmp.set(gameObject.getX(), gameObject.getY(), 0);
+      if (camera.frustum.sphereInFrustum(tmp, Math.max(gameObject.getWidth(), gameObject.getHeight()))) {
+        gameObject.draw(spriteBatch);
+      }
+    }
+
+    spriteBatch.end();
   }
 
   private void maintainAvatars() {

@@ -96,7 +96,7 @@ public class DebugUtils {
 
   public static void loadGameByFilename(String fileName) {
     try {
-      SceneManager.changeScene(LoadTowerSplashScene.class, GameSaveFactory.readFile(GameSaveFactory.getStorageRoot().child(fileName)));
+      SceneManager.changeScene(LoadTowerSplashScene.class, GameSaveFactory.readFile(Gdx.files.internal("testgames/" + fileName)));
     } catch (Exception e) {
       e.printStackTrace();
     }
