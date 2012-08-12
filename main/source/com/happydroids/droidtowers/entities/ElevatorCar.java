@@ -17,8 +17,6 @@ import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.tween.TweenSystem;
 
-import java.util.List;
-
 import static aurelienribon.tweenengine.TweenCallback.COMPLETE;
 import static com.happydroids.droidtowers.tween.GameObjectAccessor.POSITION_Y;
 
@@ -78,14 +76,14 @@ public class ElevatorCar extends GameObject {
       return;
     }
 
-    List<Passenger> currentRiders = queue.getCurrentRiders();
-    Passenger passenger;
-    for (int i = 0, currentRidersSize = currentRiders.size(); i < currentRidersSize; i++) {
-      passenger = currentRiders.get(i);
-      if (passenger.isRiding()) {
-        passenger.updatePosition(getY());
-      }
-    }
+//    List<Passenger> currentRiders = queue.getCurrentRiders();
+//    Passenger passenger;
+//    for (int i = 0, currentRidersSize = currentRiders.size(); i < currentRidersSize; i++) {
+//      passenger = currentRiders.get(i);
+//      if (passenger.isRiding()) {
+//        passenger.updatePosition(getY());
+//      }
+//    }
 
     if (!inUse) {
       if (!queue.moveToNextStop()) {

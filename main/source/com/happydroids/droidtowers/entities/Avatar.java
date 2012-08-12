@@ -233,31 +233,33 @@ public class Avatar extends GameObject {
   }
 
   @Override
-  public void update(float timeDelta) {
-    super.update(timeDelta);
+  public void update(float delta) {
+    super.update(delta);
 
-    timeUntilPathSearch -= timeDelta;
+    timeUntilPathSearch -= delta;
 
     if (home == null) {
-      lastSearchedForHome += timeDelta;
+      lastSearchedForHome += delta;
       if (lastSearchedForHome > 10f) {
         lastSearchedForHome = 0f;
         searchForAHome();
       }
     }
 
-    hungerLevel -= 0.001f * timeDelta;
+    hungerLevel -= 0.001f * delta;
 
     if (!steeringManager.isRunning()) {
       beginNextAction();
     } else {
-      int gridX = (int) getX() / TowerConsts.GRID_UNIT_SIZE;
-      int gridY = (int) getY() / TowerConsts.GRID_UNIT_SIZE;
-      GridPosition currentGridSquare = gameGrid.positionCache().getPosition(gridX, gridY);
-      if (currentGridSquare != null && currentGridSquare.isEmpty()) {
-        murderDeathKill187();
-      } else if ((steeringManager.getCurrentState() & MOVING) != 0 || (steeringManager.getCurrentState() & USING_STAIRS) != 0) {
-        walkAnimationTime += timeDelta;
+//      int gridX = (int) getX() / TowerConsts.GRID_UNIT_SIZE;
+//            int gridY = (int) getY() / TowerConsts.GRID_UNIT_SIZE;
+//            GridPosition currentGridSquare = gameGrid.positionCache().getPosition(gridX, gridY);
+//            if (currentGridSquare != null && currentGridSquare.isEmpty()) {
+//              murderDeathKill187();
+//            } else
+
+      if ((steeringManager.getCurrentState() & MOVING) != 0 || (steeringManager.getCurrentState() & USING_STAIRS) != 0) {
+        walkAnimationTime += delta;
         if (walkAnimationTime >= WALKING_ANIMATION_DURATION) {
           walkAnimationTime = 0f;
         }

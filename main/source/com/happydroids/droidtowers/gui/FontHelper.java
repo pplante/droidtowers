@@ -120,7 +120,7 @@ public class FontHelper {
   }
 
   public Label makeLabel(String text, Color fontColor) {
-    return makeLabel(text, fontColor, Align.center);
+    return makeLabel(text, fontColor, Align.left);
   }
 
   public Label makeLabel(String text, Color fontColor, int textAlignment) {

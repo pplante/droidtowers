@@ -15,13 +15,12 @@ import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.collections.TypeInstanceMap;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
+import com.happydroids.droidtowers.entities.GridObjectSort;
 import com.happydroids.droidtowers.events.GameGridResizeEvent;
 import com.happydroids.droidtowers.events.GridObjectAddedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.math.GridPoint;
-
-import java.util.Comparator;
 
 
 public class GameGrid extends GameLayer {
@@ -101,7 +100,7 @@ public class GameGrid extends GameLayer {
     event.setGridObject(gridObject);
     events().post(event);
 //    Pools.free(event);
-    gridObjects.getInstances().sort();
+    gridObjects.getInstances().sort(GridObjectSort.byZIndex);
 
     return true;
   }
@@ -231,7 +230,7 @@ public class GameGrid extends GameLayer {
       }
     }
 
-    objects.sort();
+    objects.sort(GridObjectSort.byZIndex);
     objects.reverse();
 
     return objects;
@@ -293,15 +292,7 @@ public class GameGrid extends GameLayer {
     return towerName;
   }
 
-
   public void setTowerName(String towerName) {
     this.towerName = towerName;
   }
-
-  public static final Comparator<GridObject> GRID_OBJECT_ZINDEX_SORT = new Comparator<GridObject>() {
-    @Override
-    public int compare(GridObject left, GridObject right) {
-      return right.getGridObjectType().getZIndex() - left.getGridObjectType().getZIndex();
-    }
-  };
 }

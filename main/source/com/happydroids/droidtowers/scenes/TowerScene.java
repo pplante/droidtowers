@@ -36,6 +36,7 @@ import com.happydroids.droidtowers.input.DefaultKeybindings;
 import com.happydroids.droidtowers.input.GestureDelegater;
 import com.happydroids.droidtowers.input.GestureTool;
 import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.GridObjectTypeFactory;
 
@@ -119,7 +120,7 @@ public class TowerScene extends Scene {
     gameLayers.add(avatarLayer);
 
     gestureDelegater = new GestureDelegater(camera, gameLayers, gameGrid, getCameraController());
-    gestureDetector = new GestureDetector(20, 0.5f, 1, 0.15f, gestureDelegater);
+    gestureDetector = new GestureDetector(20 * Display.getScaledDensity(), 0.5f, 1, 0.15f, gestureDelegater);
     keybindings = new DefaultKeybindings(this);
 
     attachToInputSystem();

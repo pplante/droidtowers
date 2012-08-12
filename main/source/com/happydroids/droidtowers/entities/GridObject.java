@@ -34,7 +34,7 @@ import com.happydroids.droidtowers.types.ProviderType;
 import java.util.List;
 import java.util.Set;
 
-public abstract class GridObject implements Comparable {
+public abstract class GridObject {
   public static final float VISITORS_PER_CLEANING = 35f;
   protected final GridObjectType gridObjectType;
   protected final GameGrid gameGrid;
@@ -524,15 +524,6 @@ public abstract class GridObject implements Comparable {
 
   public float getDirtLevel() {
     return MathUtils.clamp(getNumVisitors(), 0, VISITORS_PER_CLEANING) / VISITORS_PER_CLEANING;
-  }
-
-  @Override
-  public int compareTo(Object o) {
-    if (o instanceof GridObject) {
-      return gridObjectType.getZIndex() > ((GridObject) o).gridObjectType.getZIndex() ? 1 : -1;
-    }
-
-    return 0;
   }
 
   public boolean touchDown(GridPoint gameGridPoint, Vector2 worldPoint, int pointer) {

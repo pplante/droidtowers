@@ -56,7 +56,7 @@ class GridObjectPurchaseItem extends Table {
     center.row().fillX();
     if (gridObjectType.hasDescription()) {
       Label label = FontManager.Roboto18.makeLabel(gridObjectType.getDescription() + "\n");
-      label.setWrap(true);
+//      label.setWrap(true);
       center.add(label).expandX();
     }
 
@@ -110,8 +110,8 @@ class GridObjectPurchaseItem extends Table {
       description = description.replace("{servicedBy}", StringUtils.join(servicedBy, ", "));
     }
 
-    descriptionLabel.setText(description + "\n");
-    descriptionLabel.setWrap(true);
+    descriptionLabel.setText(description);
+//    descriptionLabel.setWrap(true);
 
 //    c.debug();
     return descriptionLabel;
