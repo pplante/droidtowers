@@ -82,7 +82,7 @@
   {
     "id":"SUSHI-PLACE",
     "name":"Sushi",
-    "description":"Droids in high society love to eat fancy food and pay high prices.",
+    "description":"Droids in high society love to eat fancy food.",
     "coins":19599,
     "experienceAward":1500,
     "populationMax":2,
@@ -115,7 +115,7 @@
   {
     "id":"MOVIE-THEATER",
     "name":"Movie Theater",
-    "description":"Offers an escape from reality with the latest movies.",
+    "description":"Offers an escape from reality with the latest films.",
     "coins":32399,
     "experienceAward":2500,
     "populationAttraction":35,

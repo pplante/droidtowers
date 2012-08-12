@@ -58,6 +58,8 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
   private static GameSoundController soundController;
   private final Runnable afterInitRunnable;
   private final StringBuilder debugInfo;
+  private float timeUntilDebugInfoUpdate;
+
 
   public DroidTowersGame(Runnable afterInitRunnable) {
     this.afterInitRunnable = afterInitRunnable;
@@ -226,20 +228,23 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
       float javaHeapInBytes = Gdx.app.getJavaHeap() / TowerConsts.ONE_MEGABYTE;
       float nativeHeapInBytes = Gdx.app.getNativeHeap() / TowerConsts.ONE_MEGABYTE;
 
-      debugInfo.delete(0, debugInfo.length());
-      debugInfo.append("fps: ");
-      debugInfo.append(Gdx.graphics.getFramesPerSecond());
-      debugInfo.append("\nmem: (java ");
-      debugInfo.append((int) javaHeapInBytes);
-      debugInfo.append("Mb, heap: ");
-      debugInfo.append((int) nativeHeapInBytes);
-      debugInfo.append("Mb, gpu: ");
-      debugInfo.append((int) TowerAssetManager.assetManager().getMemoryInMegabytes());
-      debugInfo.append("Mb)");
+      timeUntilDebugInfoUpdate -= deltaTime;
+      if (timeUntilDebugInfoUpdate <= 0f) {
+        timeUntilDebugInfoUpdate = 3f;
+        debugInfo.delete(0, debugInfo.length());
+        debugInfo.append("fps: ");
+        debugInfo.append(Gdx.graphics.getFramesPerSecond());
+        debugInfo.append("\nmem: (java ");
+        debugInfo.append((int) javaHeapInBytes);
+        debugInfo.append("Mb, heap: ");
+        debugInfo.append((int) nativeHeapInBytes);
+        debugInfo.append("Mb, gpu: ");
+        debugInfo.append((int) TowerAssetManager.assetManager().getMemoryInMegabytes());
+        debugInfo.append("Mb)");
 
-      debugInfo.append(" psm: ");
-      debugInfo.append(PathSearchManager.instance().queueLength());
-
+        debugInfo.append(" psm: ");
+        debugInfo.append(PathSearchManager.instance().queueLength());
+      }
       spriteBatch.begin();
       BitmapFont font = FontManager.Roboto12.getFont();
       font.setColor(Color.BLACK);

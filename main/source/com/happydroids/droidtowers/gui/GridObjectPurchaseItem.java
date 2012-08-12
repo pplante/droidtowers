@@ -55,7 +55,7 @@ class GridObjectPurchaseItem extends Table {
     center.defaults().space(Display.devicePixel(8));
     center.row().fillX();
     if (gridObjectType.hasDescription()) {
-      Label label = FontManager.Roboto18.makeLabel(gridObjectType.getDescription() + "\n");
+      Label label = FontManager.Roboto18.makeLabel(StringUtils.wrap(gridObjectType.getDescription(), 35));
 //      label.setWrap(true);
       center.add(label).expandX();
     }
@@ -80,20 +80,20 @@ class GridObjectPurchaseItem extends Table {
 
   private Actor makeGridObjectInfo() {
     Label descriptionLabel = FontManager.Default.makeLabel("");
-    String description = gridObjectType.getStatsLine();
+    String statsLine = gridObjectType.getStatsLine();
 
     int maxIncome = 0;
     if (gridObjectType.provides(HOUSING)) {
       maxIncome = ((RoomType) gridObjectType).getPopulationMax() * gridObjectType.getCoinsEarned();
-      description = description.replace("{maxResidents}", "" + ((RoomType) gridObjectType).getPopulationMax());
+      statsLine = statsLine.replace("{maxResidents}", "" + ((RoomType) gridObjectType).getPopulationMax());
     } else if (gridObjectType.provides(COMMERCIAL)) {
       maxIncome = ((RoomType) gridObjectType).getPopulationMax() * gridObjectType.getCoinsEarned();
-      description = description.replace("{maxEmployees}", "" + ((CommercialType) gridObjectType).getJobsProvided());
+      statsLine = statsLine.replace("{maxEmployees}", "" + ((CommercialType) gridObjectType).getJobsProvided());
     }
 
-    description = description.replace("{maxIncome}", StringUtils.currencyFormat(maxIncome));
+    statsLine = statsLine.replace("{maxIncome}", StringUtils.currencyFormat(maxIncome));
 
-    if (description.contains("{servicedBy}")) {
+    if (statsLine.contains("{servicedBy}")) {
       List<String> servicedBy = Lists.newArrayList();
       if (gridObjectType.provides(Janitor.JANITOR_SERVICES_PROVIDER_TYPES)) {
         servicedBy.add("Janitors");
@@ -107,10 +107,10 @@ class GridObjectPurchaseItem extends Table {
         servicedBy.add("Security Guards");
       }
 
-      description = description.replace("{servicedBy}", StringUtils.join(servicedBy, ", "));
+      statsLine = statsLine.replace("{servicedBy}", StringUtils.join(servicedBy, ", "));
     }
 
-    descriptionLabel.setText(description);
+    descriptionLabel.setText(statsLine);
 //    descriptionLabel.setWrap(true);
 
 //    c.debug();
