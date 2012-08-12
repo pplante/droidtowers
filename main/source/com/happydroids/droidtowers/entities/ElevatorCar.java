@@ -76,14 +76,11 @@ public class ElevatorCar extends GameObject {
       return;
     }
 
-//    List<Passenger> currentRiders = queue.getCurrentRiders();
-//    Passenger passenger;
-//    for (int i = 0, currentRidersSize = currentRiders.size(); i < currentRidersSize; i++) {
-//      passenger = currentRiders.get(i);
-//      if (passenger.isRiding()) {
-//        passenger.updatePosition(getY());
-//      }
-//    }
+    for (Passenger currentRider : queue.getCurrentRiders()) {
+      if (currentRider.isRiding()) {
+        currentRider.updatePosition(getY());
+      }
+    }
 
     if (!inUse) {
       if (!queue.moveToNextStop()) {
@@ -154,11 +151,11 @@ public class ElevatorCar extends GameObject {
   }
 
   public int getNumRiders() {
-    return queue.getCurrentRiders().size();
+    return queue.getCurrentRiders().size;
   }
 
   public int getNumPassengersWaiting() {
-    return queue.getPassengersWaiting().size();
+    return queue.getPassengersWaiting().size;
   }
 
   public boolean isInUse() {
