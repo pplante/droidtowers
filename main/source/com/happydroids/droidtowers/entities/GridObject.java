@@ -548,7 +548,7 @@ public abstract class GridObject {
   }
 
   public boolean shouldUseSpriteCache() {
-    return true;
+    return isPlaced();
   }
 
   public int getSpriteCacheId() {

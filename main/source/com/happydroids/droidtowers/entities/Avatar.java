@@ -30,7 +30,6 @@ import com.happydroids.error.ErrorUtil;
 import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import static com.happydroids.droidtowers.controllers.AvatarState.MOVING;
@@ -161,7 +160,7 @@ public class Avatar extends GameObject {
     } else {
       for (int i = 1; i < 5; i++) {
         GridPosition positionRight = gameGrid.positionCache().getPosition(start.x + i, start.y);
-        if (positionRight != null && positionRight.size() > 0) {
+        if (positionRight != null && !positionRight.isEmpty()) {
           discoveredPath.add(positionRight);
         } else {
           break;
@@ -170,17 +169,11 @@ public class Avatar extends GameObject {
 
       for (int i = 1; i < 5; i++) {
         GridPosition positionLeft = gameGrid.positionCache().getPosition(start.x - i, start.y);
-        if (positionLeft != null && positionLeft.size() > 0) {
+        if (positionLeft != null && !positionLeft.isEmpty()) {
           discoveredPath.add(positionLeft);
         } else {
           break;
         }
-      }
-
-      List<GridPosition> positions = Lists.newArrayList(discoveredPath);
-      int numPositions = positions.size();
-      for (int i = 0; i < numPositions / 4; i++) {
-        discoveredPath.add(positions.get(Random.randomInt(numPositions - 1)));
       }
     }
 
@@ -230,6 +223,7 @@ public class Avatar extends GameObject {
     }
 
     movingTo = null;
+    timeUntilPathSearch = 5f + MathUtils.random(1, 5f);
   }
 
   @Override
@@ -309,7 +303,7 @@ public class Avatar extends GameObject {
       movingTo.removeFromVisitorQueue(this);
     }
 
-    timeUntilPathSearch = 5f;
+    timeUntilPathSearch = 5f + MathUtils.random(1, 5f);
   }
 
   public void searchForAHome() {

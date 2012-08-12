@@ -9,21 +9,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-import com.google.common.collect.Lists;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class GameLayer<T extends GameObject> {
   protected Array<T> gameObjects;
-  private final ArrayList<T> deadObjects;
   private boolean visible;
   private boolean touchEnabled;
 
   public GameLayer() {
     visible = true;
     gameObjects = new Array<T>();
-    deadObjects = Lists.newArrayListWithCapacity(5);
   }
 
   public void addChild(T gameObject) {

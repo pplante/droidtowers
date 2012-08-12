@@ -1,0 +1,18 @@
+happydroid.png
+format: RGBA8888
+filter: MipMapNearestNearest,Linear
+repeat: none
+left-arm
+  rotate: false
+  xy: 405, 1
+  size: 57, 167
+  orig: 57, 167
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 1, 1
+  size: 403, 464
+  orig: 403, 464
+  offset: 0, 0
+  index: -1
