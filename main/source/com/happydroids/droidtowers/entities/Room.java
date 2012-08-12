@@ -5,10 +5,7 @@
 package com.happydroids.droidtowers.entities;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.MathUtils;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -71,8 +68,8 @@ public class Room extends GridObject {
   }
 
   @Override
-  public void render(SpriteBatch spriteBatch, Color renderTintColor) {
-    super.render(spriteBatch, renderTintColor);
+  public void render(SpriteBatch spriteBatch, SpriteCache spriteCache, Color renderTintColor) {
+    super.render(spriteBatch, spriteCache, renderTintColor);
 
 
     if (!decalsToDraw.isEmpty()) {

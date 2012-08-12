@@ -251,13 +251,6 @@ public class Avatar extends GameObject {
     if (!steeringManager.isRunning()) {
       beginNextAction();
     } else {
-//      int gridX = (int) getX() / TowerConsts.GRID_UNIT_SIZE;
-//            int gridY = (int) getY() / TowerConsts.GRID_UNIT_SIZE;
-//            GridPosition currentGridSquare = gameGrid.positionCache().getPosition(gridX, gridY);
-//            if (currentGridSquare != null && currentGridSquare.isEmpty()) {
-//              murderDeathKill187();
-//            } else
-
       if ((steeringManager.getCurrentState() & MOVING) != 0 || (steeringManager.getCurrentState() & USING_STAIRS) != 0) {
         walkAnimationTime += delta;
         if (walkAnimationTime >= WALKING_ANIMATION_DURATION) {

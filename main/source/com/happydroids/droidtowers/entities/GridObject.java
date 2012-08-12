@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.entities;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.SpriteCache;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -65,6 +66,7 @@ public abstract class GridObject {
   private Set<Avatar> visitorQueue;
   private Avatar beingServicedBy;
   private StatLog averageNumVisitors;
+  private int spriteCacheId = -1;
 
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
@@ -119,13 +121,24 @@ public abstract class GridObject {
     return gameGrid;
   }
 
-  public void render(SpriteBatch spriteBatch, Color renderTintColor) {
-    Sprite sprite = getSprite();
-    if (sprite != null) {
-      sprite.setColor(renderColor);
-      sprite.setPosition(worldPosition.x, worldPosition.y);
-      sprite.setSize(worldSize.x, worldSize.y);
-      sprite.draw(spriteBatch);
+  public void render(SpriteBatch spriteBatch, SpriteCache spriteCache, Color renderTintColor) {
+    if (getSpriteCacheId() != -1) {
+      spriteCache.draw(getSpriteCacheId());
+    } else {
+      Sprite sprite = getSprite();
+      if (sprite != null) {
+        sprite.setColor(renderColor);
+        sprite.setPosition(worldPosition.x, worldPosition.y);
+        sprite.setSize(worldSize.x, worldSize.y);
+
+        if (shouldUseSpriteCache()) {
+          spriteCache.beginCache();
+          spriteCache.add(sprite);
+          setSpriteCacheId(spriteCache.endCache());
+        } else {
+          sprite.draw(spriteBatch);
+        }
+      }
     }
   }
 
@@ -532,5 +545,17 @@ public abstract class GridObject {
 
   public boolean touchUp() {
     return false;
+  }
+
+  public boolean shouldUseSpriteCache() {
+    return true;
+  }
+
+  public int getSpriteCacheId() {
+    return spriteCacheId;
+  }
+
+  public void setSpriteCacheId(int spriteCacheId) {
+    this.spriteCacheId = spriteCacheId;
   }
 }

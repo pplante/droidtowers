@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.SpriteCache;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.grid.GameGrid;
@@ -57,7 +58,7 @@ public class MovieTheater extends CommercialSpace {
   }
 
   @Override
-  public void render(SpriteBatch spriteBatch, Color renderTintColor) {
+  public void render(SpriteBatch spriteBatch, SpriteCache spriteCache, Color renderTintColor) {
     if (animation != null) {
 
       if (isPlaying) {
@@ -80,7 +81,7 @@ public class MovieTheater extends CommercialSpace {
       }
     }
 
-    super.render(spriteBatch, renderTintColor);
+    super.render(spriteBatch, spriteCache, renderTintColor);
   }
 
   @Override

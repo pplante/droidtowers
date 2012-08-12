@@ -95,7 +95,12 @@ public class Elevator extends Transit {
   }
 
   @Override
-  public void render(SpriteBatch spriteBatch, Color renderTintColor) {
+  public boolean shouldUseSpriteCache() {
+    return true;
+  }
+
+  @Override
+  public void render(SpriteBatch spriteBatch, SpriteCache spriteCache, Color renderTintColor) {
     tmpVector.set(worldPosition);
 
     if (selectedResizeHandle == ResizeHandle.BOTTOM) {

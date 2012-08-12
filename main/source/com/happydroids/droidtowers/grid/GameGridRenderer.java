@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GLCommon;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.SpriteCache;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.google.common.base.Function;
@@ -44,6 +45,7 @@ public class GameGridRenderer extends GameLayer {
   private List<TransitLine> transitLines;
   private boolean shouldRenderTransitLines;
   protected Color renderTintColor;
+  private final SpriteCache spriteCache;
 
   public GameGridRenderer(GameGrid gameGrid, OrthographicCamera camera) {
     this.gameGrid = gameGrid;
@@ -58,6 +60,9 @@ public class GameGridRenderer extends GameLayer {
     activeOverlay = null;
 
     makeOverlayFunctions();
+    spriteCache = new SpriteCache();
+
+    gameGrid.events().register(this);
   }
 
   @Override
@@ -139,12 +144,32 @@ public class GameGridRenderer extends GameLayer {
   }
 
   private void renderGridObjects(SpriteBatch spriteBatch) {
+    Gdx.gl.glEnable(GL10.GL_BLEND);
+    spriteCache.setProjectionMatrix(camera.combined);
+    spriteCache.begin();
+
+    for (GridObject gridObject : gameGrid.getObjects()) {
+      if (gridObject.shouldUseSpriteCache() && gridObject.getSpriteCacheId() != -1) {
+        tmp.set(gridObject.getWorldCenter().x, gridObject.getWorldCenter().y, 0);
+        if (camera.frustum.sphereInFrustum(tmp, Math.max(gridObject.getWorldBounds().width, gridObject.getWorldBounds().height))) {
+          spriteCache.draw(gridObject.getSpriteCacheId());
+        }
+      }
+    }
+
+    spriteCache.end();
+
+
     spriteBatch.begin();
 
     for (GridObject gridObject : gameGrid.getObjects()) {
+      if (gridObject.shouldUseSpriteCache() && gridObject.getSpriteCacheId() != -1) {
+        continue;
+      }
+
       tmp.set(gridObject.getWorldCenter().x, gridObject.getWorldCenter().y, 0);
       if (camera.frustum.sphereInFrustum(tmp, Math.max(gridObject.getWorldBounds().width, gridObject.getWorldBounds().height))) {
-        gridObject.render(spriteBatch, renderTintColor);
+        gridObject.render(spriteBatch, spriteCache, renderTintColor);
       }
     }
 

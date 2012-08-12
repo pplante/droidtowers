@@ -7,6 +7,7 @@ package com.happydroids.droidtowers.entities;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.SpriteCache;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
@@ -73,8 +74,8 @@ public class Lobby extends Room {
   }
 
   @Override
-  public void render(SpriteBatch spriteBatch, Color renderTintColor) {
-    super.render(spriteBatch, renderTintColor);
+  public void render(SpriteBatch spriteBatch, SpriteCache spriteCache, Color renderTintColor) {
+    super.render(spriteBatch, spriteCache, renderTintColor);
 
 //    drawEndCaps(spriteBatch);
   }
