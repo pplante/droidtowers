@@ -60,7 +60,6 @@ public class MovieTheater extends CommercialSpace {
   @Override
   public void render(SpriteBatch spriteBatch, SpriteCache spriteCache, Color renderTintColor) {
     if (animation != null) {
-
       if (isPlaying) {
         animationTime += Gdx.graphics.getDeltaTime();
         if (animationTime >= animation.animationDuration) {
@@ -82,6 +81,11 @@ public class MovieTheater extends CommercialSpace {
     }
 
     super.render(spriteBatch, spriteCache, renderTintColor);
+  }
+
+  @Override
+  public boolean shouldUseSpriteCache() {
+    return false;
   }
 
   @Override

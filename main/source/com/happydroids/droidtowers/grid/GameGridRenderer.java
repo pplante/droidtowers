@@ -163,13 +163,15 @@ public class GameGridRenderer extends GameLayer {
     spriteBatch.begin();
 
     for (GridObject gridObject : gameGrid.getObjects()) {
-      if (gridObject.shouldUseSpriteCache() && gridObject.getSpriteCacheId() != -1) {
-        continue;
-      }
-
       tmp.set(gridObject.getWorldCenter().x, gridObject.getWorldCenter().y, 0);
       if (camera.frustum.sphereInFrustum(tmp, Math.max(gridObject.getWorldBounds().width, gridObject.getWorldBounds().height))) {
-        gridObject.render(spriteBatch, spriteCache, renderTintColor);
+        if (!gridObject.shouldUseSpriteCache() || gridObject.getSpriteCacheId() == -1) {
+          gridObject.render(spriteBatch, spriteCache, renderTintColor);
+        }
+
+        if (gridObject.hasDecals()) {
+          gridObject.renderDecals(spriteBatch);
+        }
       }
     }
 

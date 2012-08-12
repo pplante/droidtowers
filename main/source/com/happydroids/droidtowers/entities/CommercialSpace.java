@@ -135,6 +135,7 @@ public class CommercialSpace extends Room {
   public void addEmployee(JobCandidate selectedCandidate) {
     employees.add(selectedCandidate);
     EmployeeHiredEvent event = Pools.obtain(EmployeeHiredEvent.class);
+    event.setGridObject(this);
     event.setEmployee(selectedCandidate);
     gameGrid.events().post(event);
     Pools.free(event);

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteCache;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -33,10 +34,12 @@ import com.happydroids.droidtowers.types.GridObjectType;
 import com.happydroids.droidtowers.types.ProviderType;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public abstract class GridObject {
   public static final float VISITORS_PER_CLEANING = 35f;
+  protected static Map<String, TextureRegion> availableDecals;
   protected final GridObjectType gridObjectType;
   protected final GameGrid gameGrid;
   protected GridPoint position;
@@ -67,6 +70,7 @@ public abstract class GridObject {
   private Avatar beingServicedBy;
   private StatLog averageNumVisitors;
   private int spriteCacheId = -1;
+  protected Set<String> decalsToDraw;
 
 
   public GridObject(GridObjectType gridObjectType, GameGrid gameGrid) {
@@ -93,6 +97,7 @@ public abstract class GridObject {
     }
 
     setRenderColor(Color.WHITE);
+    decalsToDraw = Sets.newHashSet();
   }
 
   public boolean canShareSpace(GridObject gridObject) {
@@ -122,24 +127,50 @@ public abstract class GridObject {
   }
 
   public void render(SpriteBatch spriteBatch, SpriteCache spriteCache, Color renderTintColor) {
-    if (getSpriteCacheId() != -1) {
-      spriteCache.draw(getSpriteCacheId());
-    } else {
-      Sprite sprite = getSprite();
-      if (sprite != null) {
-        sprite.setColor(renderColor);
-        sprite.setPosition(worldPosition.x, worldPosition.y);
-        sprite.setSize(worldSize.x, worldSize.y);
+    Sprite sprite = getSprite();
+    if (sprite != null) {
+      sprite.setColor(renderColor);
+      sprite.setPosition(worldPosition.x, worldPosition.y);
+      sprite.setSize(worldSize.x, worldSize.y);
 
-        if (shouldUseSpriteCache()) {
-          spriteCache.beginCache();
-          spriteCache.add(sprite);
-          setSpriteCacheId(spriteCache.endCache());
-        } else {
-          sprite.draw(spriteBatch);
+      if (shouldUseSpriteCache()) {
+        spriteCache.beginCache();
+        spriteCache.add(sprite);
+        setSpriteCacheId(spriteCache.endCache());
+      } else {
+        sprite.draw(spriteBatch);
+      }
+    }
+  }
+
+  public void renderDecals(SpriteBatch spriteBatch) {
+    if (hasDecals()) {
+      spriteBatch.setColor(Color.WHITE);
+
+      if (decalsToDraw.size() == 1) {
+        for (String regionName : decalsToDraw) {
+          TextureRegion region = availableDecals.get(regionName);
+          spriteBatch.draw(region, getWorldCenter().x - region.getRegionWidth() / 2, getWorldCenter().y - region.getRegionHeight() / 2);
+        }
+      } else {
+        int decalsWidth = 0;
+        for (String regionName : decalsToDraw) {
+          TextureRegion region = availableDecals.get(regionName);
+          decalsWidth = region.getRegionWidth();
+        }
+
+        float startX = getWorldCenter().x - decalsWidth;
+        for (String regionName : decalsToDraw) {
+          TextureRegion region = availableDecals.get(regionName);
+          spriteBatch.draw(region, startX, getWorldCenter().y - region.getRegionHeight() / 2);
+          startX += region.getRegionWidth();
         }
       }
     }
+  }
+
+  public boolean hasDecals() {
+    return !decalsToDraw.isEmpty();
   }
 
   public boolean tap(GridPoint gridPointAtFinger, int count) {
@@ -263,10 +294,10 @@ public abstract class GridObject {
     return placed;
   }
 
+
   public float getNoiseLevel() {
     return gridObjectType.getNoiseLevel();
   }
-
 
   public GridPoint getContentSize() {
     return size;
@@ -280,6 +311,7 @@ public abstract class GridObject {
     return pointsTouched;
   }
 
+
   public void updateGridPointsTouched() {
     pointsTouched = Lists.newArrayList();
 
@@ -289,7 +321,6 @@ public abstract class GridObject {
       }
     }
   }
-
 
   public float distanceToLobby() {
     return position.y - TowerConsts.LOBBY_FLOOR;

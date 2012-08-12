@@ -5,7 +5,10 @@
 package com.happydroids.droidtowers.entities;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.SpriteCache;
 import com.badlogic.gdx.math.MathUtils;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -17,7 +20,6 @@ import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.ProviderType;
 import com.happydroids.droidtowers.types.RoomType;
 
-import java.util.Map;
 import java.util.Set;
 
 import static com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
@@ -35,8 +37,6 @@ public class Room extends GridObject {
   private int populationRequired;
 
   private Set<Avatar> residents;
-  protected Set<String> decalsToDraw;
-  private static Map<String, TextureRegion> availableDecals;
   private float timeUntilDecalCheck = 0.05f;
 
 
@@ -53,7 +53,6 @@ public class Room extends GridObject {
 
     sprite = new Sprite(roomType.getTextureRegion(getVariationId()));
 
-    decalsToDraw = Sets.newHashSet();
     residents = Sets.newHashSet();
   }
 
@@ -70,31 +69,7 @@ public class Room extends GridObject {
   @Override
   public void render(SpriteBatch spriteBatch, SpriteCache spriteCache, Color renderTintColor) {
     super.render(spriteBatch, spriteCache, renderTintColor);
-
-
-    if (!decalsToDraw.isEmpty()) {
-      spriteBatch.setColor(Color.WHITE);
-
-      if (decalsToDraw.size() == 1) {
-        for (String regionName : decalsToDraw) {
-          TextureRegion region = availableDecals.get(regionName);
-          spriteBatch.draw(region, getWorldCenter().x - region.getRegionWidth() / 2, getWorldCenter().y - region.getRegionHeight() / 2);
-        }
-      } else {
-        int decalsWidth = 0;
-        for (String regionName : decalsToDraw) {
-          TextureRegion region = availableDecals.get(regionName);
-          decalsWidth = region.getRegionWidth();
-        }
-
-        float startX = getWorldCenter().x - decalsWidth;
-        for (String regionName : decalsToDraw) {
-          TextureRegion region = availableDecals.get(regionName);
-          spriteBatch.draw(region, startX, getWorldCenter().y - region.getRegionHeight() / 2);
-          startX += region.getRegionWidth();
-        }
-      }
-    }
+    renderDecals(spriteBatch);
   }
 
   @Override
