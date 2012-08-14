@@ -12,8 +12,8 @@ import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.events.CollectionChangeEvent;
 import com.happydroids.platform.Platform;
-import org.apache.http.HttpResponse;
-import org.apache.http.entity.BufferedHttpEntity;
+import org.apach3.http.HttpResponse;
+import org.apach3.http.entity.BufferedHttpEntity;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -41,7 +41,9 @@ public abstract class HappyDroidServiceCollection<CollectionType extends HappyDr
   }
 
   private void copyValuesFromResponse(HttpResponse response) throws IOException {
-    HappyDroidServiceCollection collection = HappyDroidService.instance().getObjectMapper().readValue(new BufferedHttpEntity(response.getEntity()).getContent(), getClass());
+    HappyDroidServiceCollection collection = HappyDroidService.instance()
+                                                     .getObjectMapper()
+                                                     .readValue(new BufferedHttpEntity(response.getEntity()).getContent(), getClass());
     if (collection != null) {
       Class<?> currentClass = collection.getClass();
 
@@ -85,7 +87,8 @@ public abstract class HappyDroidServiceCollection<CollectionType extends HappyDr
     }
 
     fetching = true;
-    HttpResponse response = HappyDroidService.instance().makeGetRequest(getBaseResourceUri(), currentFilters, isCachingAllowed(), getCacheMaxAge());
+    HttpResponse response = HappyDroidService.instance()
+                                    .makeGetRequest(getBaseResourceUri(), currentFilters, isCachingAllowed(), getCacheMaxAge());
     fetching = false;
     if (response != null && response.getStatusLine() != null && response.getStatusLine().getStatusCode() == 200) {
       ObjectMapper objectMapper = HappyDroidService.instance().getObjectMapper();

@@ -2,8 +2,8 @@
 
 -dontwarn java.awt.**
 -dontnote java.awt.**
--dontnote org.apache.**
--dontwarn org.apache.**
+-dontnote org.apach3.**
+-dontwarn org.apach3.**
 -dontwarn com.badlogic.gdx.jnigen.**
 -dontwarn org.ocpsoft.pretty.time.**
 -dontwarn com.google.**
@@ -11,7 +11,7 @@
 -dontwarn sk.seges.acris.**
 
 -keep class com.google.**
--keep class org.apache.http.HttpResponse
+-keep class org.apach3.http.HttpResponse
 -keepnames class com.fasterxml.** { *; }
 -keep class com.esotericsoftware.**
 -keep class com.badlogic.**

@@ -35,6 +35,7 @@ import com.happydroids.droidtowers.scenes.LaunchUriScene;
 import com.happydroids.droidtowers.scenes.MainMenuScene;
 import com.happydroids.droidtowers.scenes.Scene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
+import com.happydroids.droidtowers.server.MovieServer;
 import com.happydroids.droidtowers.tasks.MigrateExistingGamesTask;
 import com.happydroids.droidtowers.tasks.SyncCloudGamesTask;
 import com.happydroids.droidtowers.tween.GameObjectAccessor;
@@ -77,7 +78,8 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
     if (Gdx.app.getType().equals(Desktop)) {
       SecurePreferences displayPrefs = TowerGameService.instance().getPreferences();
       if (displayPrefs.contains("width") && displayPrefs.contains("height") && displayPrefs.contains("fullscreen")) {
-        Gdx.graphics.setDisplayMode(displayPrefs.getInteger("width"), displayPrefs.getInteger("height"), displayPrefs.getBoolean("fullscreen"));
+        Gdx.graphics
+                .setDisplayMode(displayPrefs.getInteger("width"), displayPrefs.getInteger("height"), displayPrefs.getBoolean("fullscreen"));
       } else {
         Gdx.graphics.setDisplayMode(960, 540, false);
       }
@@ -206,7 +208,8 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
       frameBuffer.end();
 
       spriteBatchFBO.begin();
-      spriteBatchFBO.draw(frameBuffer.getColorBufferTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0, 0, 1, 1);
+      spriteBatchFBO.draw(frameBuffer.getColorBufferTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics
+                                                                                                      .getHeight(), 0, 0, 1, 1);
       spriteBatchFBO.end();
     } else {
       SceneManager.activeScene().render(deltaTime);
@@ -292,6 +295,7 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
     Platform.getConnectionMonitor().dispose();
     PathSearchManager.instance().dispose();
     BackgroundTask.dispose();
+    MovieServer.dispose();
     TowerAssetManager.dispose();
     FontManager.resetAll();
 

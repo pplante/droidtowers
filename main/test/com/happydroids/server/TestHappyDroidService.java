@@ -7,7 +7,7 @@ package com.happydroids.server;
 import com.happydroids.HttpTestHelper;
 import com.happydroids.platform.Platform;
 import com.happydroids.platform.PlatformConnectionMonitor;
-import org.apache.http.HttpResponse;
+import org.apach3.http.HttpResponse;
 
 import java.util.HashMap;
 

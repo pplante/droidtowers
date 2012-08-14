@@ -5,11 +5,11 @@
 package com.happydroids;
 
 import com.google.common.collect.Maps;
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.ProtocolVersion;
-import org.apache.http.message.BasicStatusLine;
+import org.apach3.http.Header;
+import org.apach3.http.HttpEntity;
+import org.apach3.http.HttpResponse;
+import org.apach3.http.ProtocolVersion;
+import org.apach3.http.message.BasicStatusLine;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -57,7 +57,8 @@ public class HttpTestHelper {
       Mockito.when(entity.getContentLength()).thenReturn((long) bytes.length);
       HttpResponse response = Mockito.mock(HttpResponse.class);
       Mockito.when(response.getEntity()).thenReturn(entity);
-      Mockito.when(response.getStatusLine()).thenReturn(new BasicStatusLine(new ProtocolVersion("http", 1, 1), statusCode, reasonPhrase));
+      Mockito.when(response.getStatusLine())
+              .thenReturn(new BasicStatusLine(new ProtocolVersion("http", 1, 1), statusCode, reasonPhrase));
       Mockito.when(response.getHeaders(anyString())).thenAnswer(new Answer<Header[]>() {
         public Header[] answer(InvocationOnMock invocation) throws Throwable {
           Object[] arguments = invocation.getArguments();

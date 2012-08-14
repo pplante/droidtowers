@@ -11,7 +11,7 @@ import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.achievements.Requirement;
 import com.happydroids.droidtowers.achievements.Reward;
 import com.happydroids.droidtowers.platform.Display;
-import org.apache.commons.lang3.StringUtils;
+import org.apach3.commons.lang3.StringUtils;
 
 import java.util.List;
 

@@ -12,8 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.*;
 import com.happydroids.droidtowers.platform.Display;
@@ -69,7 +69,7 @@ public class MainMenuButtonPanel extends Table {
     optionsAndCreditsRow.add(aboutButton).expandX();
 
     //noinspection PointlessBooleanExpression
-    if (HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT && !Gdx.app.getType().equals(Applet)) {
+    if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT && !Gdx.app.getType().equals(Applet)) {
       row();
       final TextButton connectToHappyDroids = Default.makeTextButton("login to happydroids.com");
       connectToHappyDroids.setVisible(false);

@@ -6,9 +6,9 @@ package com.happydroids.server;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.happydroids.droidtowers.gamestate.GameSaveFactory;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.http.client.cache.*;
-import org.apache.http.impl.client.cache.DefaultHttpCacheEntrySerializer;
+import org.apach3.commons.codec.digest.DigestUtils;
+import org.apach3.http.client.cache.*;
+import org.apach3.http.impl.client.cache.DefaultHttpCacheEntrySerializer;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -28,17 +28,18 @@ public class HttpCacheDiskStorage implements HttpCacheStorage {
     }
   }
 
+  private String getKey(String key) {
+    return DigestUtils.md5Hex(key);
+  }
+
   @Override
   public void putEntry(String key, HttpCacheEntry entry) throws IOException {
     if (entry.getStatusCode() == 200) {
       ByteArrayOutputStream bos = new ByteArrayOutputStream();
       serializer.writeTo(entry, bos);
+      System.out.println(bos);
       cacheDir.child(getKey(key)).writeBytes(bos.toByteArray(), false);
     }
-  }
-
-  private String getKey(String key) {
-    return DigestUtils.md5Hex(key);
   }
 
   @Override

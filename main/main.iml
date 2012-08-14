@@ -33,9 +33,17 @@
     <orderEntry type="library" exported="" name="prettytime" level="project" />
     <orderEntry type="library" exported="" name="guava" level="project" />
     <orderEntry type="library" exported="" name="apache-commons" level="project" />
-    <orderEntry type="library" exported="" name="jackson" level="project" />
     <orderEntry type="library" exported="" name="apache-httpclient" level="project" />
     <orderEntry type="library" exported="" name="raven-java" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/main/avalon-logkit-1.2.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 

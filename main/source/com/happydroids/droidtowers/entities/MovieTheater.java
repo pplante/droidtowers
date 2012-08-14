@@ -9,18 +9,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteCache;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.gui.MovieTheaterPopOver;
 import com.happydroids.droidtowers.server.Movie;
 import com.happydroids.droidtowers.server.MovieServer;
+import com.happydroids.droidtowers.tasks.MovieState;
 import com.happydroids.droidtowers.types.CommercialType;
-import com.happydroids.droidtowers.utils.Random;
 
 public class MovieTheater extends CommercialSpace {
-  private TextureAtlas movieAtlas;
   private Animation animation;
   private long nextShowTime;
   private float animationTime;
@@ -33,25 +31,23 @@ public class MovieTheater extends CommercialSpace {
 
     nextShowTime = System.currentTimeMillis();
     animationTime = 0f;
-
-    MovieServer.instance().afterFetchingMovies(new Runnable() {
-      @Override
-      public void run() {
-        loadMovie();
-      }
-    });
   }
 
   private void loadMovie() {
     if (MovieServer.instance().hasMovies()) {
       movie = MovieServer.instance().getMovie();
-      movie.afterDownload(new Runnable() {
+      movie.loadAssets(new Runnable() {
         @Override
         public void run() {
-          float fps = 1f / movie.getAtlasFps();
-          movieAtlas = movie.getTextureAtlas();
-          animation = new Animation(fps, movieAtlas.getRegions());
-          nextShowTime = System.currentTimeMillis() + (Random.randomInt(5, 15) * 1000);
+          if (movie.getState().equals(MovieState.Loaded)) {
+            movie.incrementRefCount();
+            animation = new Animation(1f / movie.getAtlasFps(), movie.getTextureAtlas().getRegions());
+            animationTime = 0f;
+            isPlaying = true;
+            getSprite().setRegion(gridObjectType.getTextureAtlas().findRegion("4x1-movie-theater-on"));
+          } else {
+            endPlayback();
+          }
         }
       });
     }
@@ -63,24 +59,34 @@ public class MovieTheater extends CommercialSpace {
       if (isPlaying) {
         animationTime += Gdx.graphics.getDeltaTime();
         if (animationTime >= animation.animationDuration) {
-          getSprite().setRegion(gridObjectType.getTextureAtlas().findRegion("4x1-movie-theater"));
-          loadMovie();
-          isPlaying = false;
+          endPlayback();
         } else {
           Vector2 worldCenter = getWorldCenter();
           spriteBatch.draw(animation.getKeyFrame(animationTime, false), worldCenter.x - 53.5f * getGridScale(), worldCenter.y - 19 * getGridScale(), 107 * getGridScale(), 44 * getGridScale());
         }
-      } else if (!isPlaying) {
-        long millis = System.currentTimeMillis();
-        if (nextShowTime <= millis) {
-          animationTime = 0f;
-          isPlaying = true;
-          getSprite().setRegion(gridObjectType.getTextureAtlas().findRegion("4x1-movie-theater-on"));
-        }
+      }
+    }
+
+    if (!isPlaying && movie == null) {
+      long millis = System.currentTimeMillis();
+      if (nextShowTime <= millis) {
+        loadMovie();
       }
     }
 
     super.render(spriteBatch, spriteCache, renderTintColor);
+  }
+
+  private void endPlayback() {
+    if (movie != null) {
+      movie.decrementRefCount();
+      movie = null;
+      animation = null;
+    }
+
+    getSprite().setRegion(gridObjectType.getTextureAtlas().findRegion("4x1-movie-theater"));
+    nextShowTime = System.currentTimeMillis();// + (Random.randomInt(5, 15) * 1000);
+    isPlaying = false;
   }
 
   @Override
@@ -99,6 +105,14 @@ public class MovieTheater extends CommercialSpace {
 
   @Override
   public String getName() {
-    return movie != null ? "Now Playing: " + movie.getTitle() : "Coming Soon";
+    if (movie != null) {
+      if (isPlaying) {
+        return "Now Playing: " + movie.getTitle();
+      }
+
+      return "Coming Soon: " + movie.getTitle();
+    } else {
+      return "Looking for Movies";
+    }
   }
 }

@@ -18,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.google.common.eventbus.Subscribe;
-import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
@@ -93,7 +92,7 @@ public class StatusBarPanel extends Table {
     add(gameSpeedLabel);
     add(starRatingBar);
 
-    if (HappyDroidConsts.ENABLE_NEWS_TICKER) {
+    if (TowerConsts.ENABLE_NEWS_TICKER) {
       row().pad(devicePixel(2)).padLeft(devicePixel(-4)).padRight(devicePixel(-4));
       add(new HorizontalRule(Colors.ICS_BLUE_SEMI_TRANSPARENT, 1)).fillX().colspan(7);
 

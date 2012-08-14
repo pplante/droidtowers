@@ -17,7 +17,7 @@ import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.employee.JobCandidate;
 import com.happydroids.droidtowers.gui.events.OnChangeCandidateCallback;
 import com.happydroids.droidtowers.platform.Display;
-import org.apache.commons.lang3.StringUtils;
+import org.apach3.commons.lang3.StringUtils;
 
 import java.text.NumberFormat;
 import java.util.List;

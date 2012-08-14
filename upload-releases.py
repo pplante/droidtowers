@@ -28,8 +28,8 @@ if __name__ == '__main__':
 
         upload('./out/DroidTowers.exe', '%s/DroidTowers.exe' % (SCP_TARGET_PATH,))
         upload('./out/DroidTowers.zip', '%s/DroidTowers.zip' % (SCP_TARGET_PATH,))
-        #upload('./out/android_google/android_google-release.apk', '%s/droidtowers-google.apk' % (SCP_TARGET_PATH,))
-        #upload('./out/android_amazon/android_amazon-release.apk', '%s/droidtowers-amazon.apk' % (SCP_TARGET_PATH,))
+        upload('./out/android_google/android_google-release.apk', '%s/droidtowers-google.apk' % (SCP_TARGET_PATH,))
+        upload('./out/android_amazon/android_amazon-release.apk', '%s/droidtowers-amazon.apk' % (SCP_TARGET_PATH,))
 
         remote_cmd('rm %s/current' % (releases_root,))
         remote_cmd('ln -s %s %s/current' % (new_release_root, releases_root,))
@@ -37,8 +37,8 @@ if __name__ == '__main__':
         print "http://www.happydroids.com/releases/current/DroidTowers.exe"
         print "http://www.happydroids.com/releases/current/DroidTowers.zip"
         # print "http://www.happydroids.com/releases/current/DroidTowers.jar"
-        # print "http://www.happydroids.com/releases/current/droidtowers-google.apk"
-        # print "http://www.happydroids.com/releases/current/droidtowers-amazon.apk"
+        print "http://www.happydroids.com/releases/current/droidtowers-google.apk"
+        print "http://www.happydroids.com/releases/current/droidtowers-amazon.apk"
     except Exception, e:
         print e
         sys.exit(1)

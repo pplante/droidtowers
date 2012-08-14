@@ -1,0 +1,1 @@
+[{"id":"GLASS-STAIRS","name":"Glass Stairs","description":null,"statsLine":null,"height":1,"width":2,"coins":5000,"experienceAward":500,"numVariations":0,"atlasFilename":"transport.txt","imageFilename":"stairs","canShareSpace":true,"noiseLevel":0.0,"crimeLevel":0.0,"unlimitedVersion":false,"provides":"STAIRS","lock":null,"zindex":80,"coinsEarned":0,"locked":false}]

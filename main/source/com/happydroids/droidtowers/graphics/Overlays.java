@@ -12,7 +12,7 @@ import com.happydroids.droidtowers.entities.HotelRoom;
 import com.happydroids.droidtowers.entities.Room;
 import com.happydroids.droidtowers.types.CommercialType;
 import com.happydroids.droidtowers.types.RoomType;
-import org.apache.commons.lang3.StringUtils;
+import org.apach3.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 

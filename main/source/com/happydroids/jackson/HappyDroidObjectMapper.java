@@ -19,7 +19,6 @@ public class HappyDroidObjectMapper extends ObjectMapper {
   public HappyDroidObjectMapper() {
     super();
 
-//    setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);
     configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     happyModules = new SimpleModule();
     happyModules.addSerializer(new StackTraceSerializer());

@@ -9,7 +9,7 @@ import com.happydroids.droidtowers.jackson.Vector2Serializer;
 import com.happydroids.droidtowers.jackson.Vector3Serializer;
 import com.happydroids.security.SecurePreferences;
 import com.happydroids.server.HappyDroidService;
-import org.apache.http.client.methods.HttpRequestBase;
+import org.apach3.http.client.methods.HttpRequestBase;
 
 import java.util.UUID;
 

@@ -12,8 +12,8 @@ import com.happydroids.droidtowers.gui.OnClickCallback;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.server.ApiCollectionRunnable;
 import com.happydroids.server.HappyDroidServiceCollection;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
+import org.apach3.http.HttpResponse;
+import org.apach3.http.NameValuePair;
 
 
 public class LaunchGameUriAction {

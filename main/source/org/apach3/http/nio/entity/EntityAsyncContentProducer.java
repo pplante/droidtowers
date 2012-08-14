@@ -1,0 +1,91 @@
+/*
+ * ====================================================================
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Apache Software Foundation.  For more
+ * information on the Apache Software Foundation, please see
+ * <http://www.apache.org/>.
+ *
+ */
+
+package org.apach3.http.nio.entity;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+
+import org.apach3.http.HttpEntity;
+import org.apach3.http.annotation.NotThreadSafe;
+import org.apach3.http.nio.ContentEncoder;
+import org.apach3.http.nio.IOControl;
+
+/**
+ * Basic implementation of {@link HttpAsyncContentProducer} that relies on
+ * inefficient and potentially blocking I/O operation redirection through
+ * {@link Channels#newChannel(java.io.InputStream)}.
+ *
+ * @since 4.2
+ */
+@NotThreadSafe
+public class EntityAsyncContentProducer implements HttpAsyncContentProducer {
+
+    private final HttpEntity entity;
+    private final ByteBuffer buffer;
+    private ReadableByteChannel channel;
+
+    public EntityAsyncContentProducer(final HttpEntity entity) {
+        super();
+        if (entity == null) {
+            throw new IllegalArgumentException("HTTP entity may not be null");
+        }
+        this.entity = entity;
+        this.buffer = ByteBuffer.allocate(4096);
+    }
+
+    public void produceContent(
+            final ContentEncoder encoder, final IOControl ioctrl) throws IOException {
+        if (this.channel == null) {
+            this.channel = Channels.newChannel(this.entity.getContent());
+        }
+        int i = this.channel.read(this.buffer);
+        this.buffer.flip();
+        encoder.write(this.buffer);
+        boolean buffering = this.buffer.hasRemaining();
+        this.buffer.compact();
+        if (i == -1 && !buffering) {
+            encoder.complete();
+            close();
+        }
+    }
+
+    public boolean isRepeatable() {
+        return this.entity.isRepeatable();
+    }
+
+    public void close() throws IOException {
+        ReadableByteChannel local = this.channel;
+        this.channel = null;
+        if (local != null) {
+            local.close();
+        }
+    }
+
+}

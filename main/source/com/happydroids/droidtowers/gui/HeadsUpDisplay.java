@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Sets;
-import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
@@ -94,7 +93,9 @@ public class HeadsUpDisplay extends WidgetGroup {
     achievementButton = new AchievementButton(hudAtlas, achievementEngine);
     achievementButton.setX(10);
     achievementButton.setY(stage.getHeight() - statusBarPanel.getHeight() - achievementButton.getHeight() - 10);
-    achievementButton.getParticleEffect().setPosition(achievementButton.getX() + achievementButton.getWidth() / 2, achievementButton.getY() + achievementButton.getHeight() / 2);
+    achievementButton.getParticleEffect()
+            .setPosition(achievementButton.getX() + achievementButton.getWidth() / 2, achievementButton.getY() + achievementButton
+                                                                                                                         .getHeight() / 2);
 
     addActor(achievementButton);
 
@@ -113,7 +114,7 @@ public class HeadsUpDisplay extends WidgetGroup {
       addActor(avatarsButton);
     }
 
-    if (HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT) {
+    if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT) {
       viewNeighborsButton = TowerAssetManager.imageButton(hudAtlas.findRegion("view-neighbors"));
       viewNeighborsButton.layout();
       viewNeighborsButton.addListener(new VibrateClickListener() {
@@ -293,7 +294,7 @@ public class HeadsUpDisplay extends WidgetGroup {
 
   public void toggleViewNeighborsButton(boolean state) {
     //noinspection PointlessBooleanExpression
-    if (HappyDroidConsts.ENABLE_HAPPYDROIDS_CONNECT && viewNeighborsButton != null) {
+    if (TowerConsts.ENABLE_HAPPYDROIDS_CONNECT && viewNeighborsButton != null) {
       viewNeighborsButton.setVisible(state);
     }
   }

@@ -5,9 +5,9 @@
 package com.happydroids.droidtowers.utils;
 
 import com.badlogic.gdx.files.FileHandle;
-import org.apache.commons.codec.binary.StringUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.happydroids.commons.codec.binary.Base64;
+import org.apach3.commons.codec.binary.Base64;
+import org.apach3.commons.codec.binary.StringUtils;
+import org.apach3.commons.io.IOUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

@@ -155,13 +155,17 @@ public class Avatar extends GameObject {
     GridPoint gridSize = gameGrid.getGridSize();
 
     if (start.y == TowerConsts.LOBBY_FLOOR) {
-      discoveredPath.add(gameGrid.positionCache().getPosition(Random.randomInt(0, gridSize.x), TowerConsts.LOBBY_FLOOR));
-      discoveredPath.add(gameGrid.positionCache().getPosition(Random.randomInt(0, gridSize.x), TowerConsts.LOBBY_FLOOR));
+      discoveredPath.add(gameGrid.positionCache()
+                                 .getPosition(Random.randomInt(0, gridSize.x), TowerConsts.LOBBY_FLOOR));
+      discoveredPath.add(gameGrid.positionCache()
+                                 .getPosition(Random.randomInt(0, gridSize.x), TowerConsts.LOBBY_FLOOR));
     } else {
       for (int i = 1; i < 5; i++) {
         GridPosition positionRight = gameGrid.positionCache().getPosition(start.x + i, start.y);
         if (positionRight != null && !positionRight.isEmpty()) {
-          discoveredPath.add(positionRight);
+          if (positionRight.elevator == null) {
+            discoveredPath.add(positionRight);
+          }
         } else {
           break;
         }
@@ -170,7 +174,9 @@ public class Avatar extends GameObject {
       for (int i = 1; i < 5; i++) {
         GridPosition positionLeft = gameGrid.positionCache().getPosition(start.x - i, start.y);
         if (positionLeft != null && !positionLeft.isEmpty()) {
-          discoveredPath.add(positionLeft);
+          if (positionLeft.elevator == null) {
+            discoveredPath.add(positionLeft);
+          }
         } else {
           break;
         }
@@ -223,7 +229,7 @@ public class Avatar extends GameObject {
     }
 
     movingTo = null;
-    timeUntilPathSearch = 5f + MathUtils.random(1, 5f);
+    timeUntilPathSearch = PathSearchManager.instance().queueLength() > 5 ? 5f + MathUtils.random(1, 5f) : 0f;
   }
 
   @Override

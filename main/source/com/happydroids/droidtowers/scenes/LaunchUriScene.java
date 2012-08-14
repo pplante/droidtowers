@@ -7,8 +7,8 @@ package com.happydroids.droidtowers.scenes;
 import com.badlogic.gdx.Gdx;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.utils.URLEncodedUtils;
+import org.apach3.http.NameValuePair;
+import org.apach3.http.client.utils.URLEncodedUtils;
 
 import java.net.URI;
 import java.util.List;

@@ -44,7 +44,10 @@ public class MainMenuScene extends SplashScene {
   public void create(Object... args) {
     super.create(args);
 
-    Label versionLabel = FontManager.Default.makeLabel(String.format("v%s (%s, %s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA.substring(0, 8), HappyDroidService.getDeviceOSMarketName()));
+    Label versionLabel = FontManager.Default
+                                 .makeLabel(String.format("v%s (%s, %s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA
+                                                                                                            .substring(0, 8), HappyDroidService
+                                                                                                                                      .getDeviceOSMarketName()));
     versionLabel.setColor(Color.LIGHT_GRAY);
     versionLabel.setX(getStage().getWidth() - versionLabel.getWidth() - 5);
     versionLabel.setY(getStage().getHeight() - versionLabel.getHeight() - 5);
@@ -91,8 +94,8 @@ public class MainMenuScene extends SplashScene {
         }
       }
 
-      DebugUtils.loadGameByFilename("2609ce4659004cd29b06b62aa9a8852a.json");
-//      DebugUtils.loadFirstGameFound();
+//      DebugUtils.loadGameByFilename("2609ce4659004cd29b06b62aa9a8852a.json");
+      DebugUtils.loadFirstGameFound();
 //      DebugUtils.createNonSavableGame(false);
 //      DebugUtils.loadGameFromCloud(41);
     }

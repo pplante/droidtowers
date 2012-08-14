@@ -11,6 +11,7 @@ import com.happydroids.droidtowers.entities.Room;
 import com.happydroids.droidtowers.gui.controls.ButtonBar;
 import com.happydroids.droidtowers.gui.dialogs.CousinVinnieRepayLoanDialog;
 import com.happydroids.droidtowers.platform.Display;
+import com.happydroids.droidtowers.server.Movie;
 import com.happydroids.droidtowers.utils.StringUtils;
 import com.happydroids.platform.Platform;
 
@@ -40,7 +41,18 @@ public class MovieTheaterPopOver extends GridObjectPopOver {
       });
     }
 
-    final String youtubeTrailerUrl = ((MovieTheater) gridObject).getMovie().getYoutubeTrailerUrl();
+    Movie movie = ((MovieTheater) gridObject).getMovie();
+    if (movie != null) {
+      makeYouTubeTrailerButton(buttonBar, movie);
+      makeMovieTicketsPurchaseButton(buttonBar, movie);
+    }
+
+    row().fillX().pad(Display.devicePixel(-8)).padTop(Display.devicePixel(16));
+    add(buttonBar).expandX().minWidth(200);
+  }
+
+  private void makeYouTubeTrailerButton(ButtonBar buttonBar, Movie movie) {
+    final String youtubeTrailerUrl = movie.getYoutubeTrailerUrl();
     if (!StringUtils.isEmpty(youtubeTrailerUrl)) {
       buttonBar.addButton("Watch Trailer", new VibrateClickListener() {
         @Override
@@ -49,8 +61,10 @@ public class MovieTheaterPopOver extends GridObjectPopOver {
         }
       });
     }
+  }
 
-    final String ticketsPurchaseUrl = ((MovieTheater) gridObject).getMovie().getTicketsPurchaseUrl();
+  private void makeMovieTicketsPurchaseButton(ButtonBar buttonBar, Movie movie) {
+    final String ticketsPurchaseUrl = movie.getTicketsPurchaseUrl();
     if (!StringUtils.isEmpty(ticketsPurchaseUrl)) {
       buttonBar.addButton("Get Tickets", new VibrateClickListener() {
         @Override
@@ -60,8 +74,5 @@ public class MovieTheaterPopOver extends GridObjectPopOver {
         }
       });
     }
-
-    row().fillX().pad(Display.devicePixel(-8)).padTop(Display.devicePixel(16));
-    add(buttonBar).expandX().minWidth(200);
   }
 }

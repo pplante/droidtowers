@@ -7,7 +7,7 @@ package com.happydroids.platform;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.server.RunnableQueue;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
-import org.apache.http.HttpResponse;
+import org.apach3.http.HttpResponse;
 
 public class PlatformConnectionMonitor {
   protected RunnableQueue postConnectRunnables;
@@ -49,7 +49,8 @@ public class PlatformConnectionMonitor {
     public void run() {
       while (monitorThread == Thread.currentThread()) {
         try {
-          HttpResponse response = TowerGameService.instance().makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + "/ping", null, false, -1);
+          HttpResponse response = TowerGameService.instance()
+                                          .makeGetRequest(HappyDroidConsts.HAPPYDROIDS_URI + "/ping", null, false, -1);
           if (response != null) {
             networkState = response.getStatusLine().getStatusCode() == 200;
 

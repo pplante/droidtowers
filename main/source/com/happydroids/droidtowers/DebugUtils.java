@@ -16,7 +16,7 @@ import com.happydroids.droidtowers.scenes.LoadTowerSplashScene;
 import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.server.ApiCollectionRunnable;
 import com.happydroids.server.HappyDroidServiceCollection;
-import org.apache.http.HttpResponse;
+import org.apach3.http.HttpResponse;
 
 import static com.happydroids.HappyDroidConsts.DEBUG;
 
@@ -96,7 +96,8 @@ public class DebugUtils {
 
   public static void loadGameByFilename(String fileName) {
     try {
-      SceneManager.changeScene(LoadTowerSplashScene.class, GameSaveFactory.readFile(Gdx.files.internal("testgames/" + fileName)));
+      SceneManager.changeScene(LoadTowerSplashScene.class, GameSaveFactory.readFile(Gdx.files
+                                                                                            .internal("testgames/" + fileName)));
     } catch (Exception e) {
       e.printStackTrace();
     }

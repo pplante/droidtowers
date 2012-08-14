@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.*;
 
-import static org.apache.happydroids.commons.codec.binary.Base64.encodeBase64String;
+import static org.apach3.commons.codec.binary.Base64.encodeBase64String;
 
 /**
  * User: ken cochrane

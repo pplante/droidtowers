@@ -10,33 +10,33 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.jackson.HappyDroidObjectMapper;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.cache.CacheResponseStatus;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.conn.HttpHostConnectException;
-import org.apache.http.entity.BufferedHttpEntity;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.cache.CacheConfig;
-import org.apache.http.impl.client.cache.CachingHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.util.EntityUtils;
+import org.apach3.http.HttpEntity;
+import org.apach3.http.HttpResponse;
+import org.apach3.http.NameValuePair;
+import org.apach3.http.client.HttpClient;
+import org.apach3.http.client.cache.CacheResponseStatus;
+import org.apach3.http.client.methods.HttpGet;
+import org.apach3.http.client.methods.HttpPost;
+import org.apach3.http.client.methods.HttpPut;
+import org.apach3.http.client.methods.HttpRequestBase;
+import org.apach3.http.client.utils.URLEncodedUtils;
+import org.apach3.http.conn.HttpHostConnectException;
+import org.apach3.http.entity.BufferedHttpEntity;
+import org.apach3.http.entity.StringEntity;
+import org.apach3.http.impl.client.DefaultHttpClient;
+import org.apach3.http.impl.client.cache.CacheConfig;
+import org.apach3.http.impl.client.cache.CachingHttpClient;
+import org.apach3.http.message.BasicNameValuePair;
+import org.apach3.http.protocol.BasicHttpContext;
+import org.apach3.http.util.EntityUtils;
 
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import static org.apache.http.client.cache.CacheResponseStatus.CACHE_HIT;
-import static org.apache.http.impl.client.cache.CachingHttpClient.CACHE_RESPONSE_STATUS;
+import static org.apach3.http.client.cache.CacheResponseStatus.CACHE_HIT;
+import static org.apach3.http.impl.client.cache.CachingHttpClient.CACHE_RESPONSE_STATUS;
 
 public class HappyDroidService {
   private static final String TAG = HappyDroidService.class.getSimpleName();
@@ -106,8 +106,9 @@ public class HappyDroidService {
         BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
         if (entity != null && entity.getContentLength() > 0) {
           String content = EntityUtils.toString(entity);
-          if (HappyDroidConsts.DEBUG)
+          if (HappyDroidConsts.DEBUG) {
             System.out.println("\tResponse: " + content);
+          }
           return mapper.readValue(content, aClazz);
         }
       } catch (Exception e) {
@@ -121,8 +122,9 @@ public class HappyDroidService {
   public HttpResponse makePutRequest(String uri, Object objectForServer) {
     HttpClient client = new DefaultHttpClient();
     try {
-      if (HappyDroidConsts.DEBUG)
+      if (HappyDroidConsts.DEBUG) {
         System.out.println("PUT " + uri);
+      }
       HttpPut request = new HttpPut(uri);
       addDefaultHeaders(request);
 
@@ -130,8 +132,9 @@ public class HappyDroidService {
         ObjectMapper mapper = getObjectMapper();
         String apiObjectAsString = mapper.writeValueAsString(objectForServer);
         StringEntity entity = new StringEntity(apiObjectAsString, "UTF-8");
-        if (HappyDroidConsts.DEBUG)
+        if (HappyDroidConsts.DEBUG) {
           System.out.println("HTTP ENTITY: " + apiObjectAsString);
+        }
         entity.setContentType("application/x-www-form-urlencoded");
         request.setEntity(entity);
       }
@@ -150,8 +153,9 @@ public class HappyDroidService {
       }
       return response;
     } catch (HttpHostConnectException ignored) {
-      if (HappyDroidConsts.DEBUG)
+      if (HappyDroidConsts.DEBUG) {
         System.out.println("Connection failed for: " + uri);
+      }
     } catch (Exception e) {
       e.printStackTrace();
     }

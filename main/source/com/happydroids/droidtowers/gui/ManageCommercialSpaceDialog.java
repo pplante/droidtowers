@@ -15,6 +15,7 @@ import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.employee.JobCandidate;
 import com.happydroids.droidtowers.entities.CommercialSpace;
+import com.happydroids.droidtowers.entities.MovieTheater;
 import com.happydroids.droidtowers.generators.NameGenerator;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.types.CommercialType;
@@ -41,7 +42,9 @@ public class ManageCommercialSpaceDialog extends TowerWindow {
 
     defaults().pad(Display.devicePixel(4));
 
-    setStaticHeader(makeNameHeader());
+    if (!(commercialSpace instanceof MovieTheater)) {
+      setStaticHeader(makeNameHeader());
+    }
 
     addLabel("Current Employees", FontManager.Roboto24).bottom();
     add(hireButton).fillY().right();
@@ -52,7 +55,8 @@ public class ManageCommercialSpaceDialog extends TowerWindow {
     right.row();
     right.add(FontManager.Default.makeLabel("Max Employees", Color.LIGHT_GRAY));
     right.row();
-    right.add(FontManager.Default.makeLabel("" + ((CommercialType) commercialSpace.getGridObjectType()).getJobsProvided()));
+    right.add(FontManager.Default
+                      .makeLabel("" + ((CommercialType) commercialSpace.getGridObjectType()).getJobsProvided()));
 
     row();
     add(candidateListView);

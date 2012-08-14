@@ -19,7 +19,7 @@ import com.happydroids.droidtowers.gui.VibrateClickListener;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.server.ApiCollectionRunnable;
 import com.happydroids.server.HappyDroidServiceCollection;
-import org.apache.http.HttpResponse;
+import org.apach3.http.HttpResponse;
 
 import java.net.URI;
 

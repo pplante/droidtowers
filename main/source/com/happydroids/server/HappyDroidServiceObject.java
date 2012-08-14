@@ -12,8 +12,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.platform.Platform;
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
+import org.apach3.http.Header;
+import org.apach3.http.HttpResponse;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -77,7 +77,8 @@ public abstract class HappyDroidServiceObject {
       return;
     }
 
-    HttpResponse response = HappyDroidService.instance().makeGetRequest(resourceUri, null, isCachingAllowed(), getCacheMaxAge());
+    HttpResponse response = HappyDroidService.instance()
+                                    .makeGetRequest(resourceUri, null, isCachingAllowed(), getCacheMaxAge());
     if (response != null && response.getStatusLine().getStatusCode() == 200) {
       fetchError = false;
       copyValuesFromResponse(response);

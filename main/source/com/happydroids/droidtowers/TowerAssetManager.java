@@ -5,7 +5,6 @@
 package com.happydroids.droidtowers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -17,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Logger;
 import com.happydroids.HappyDroidConsts;
+import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.graphics.ResolutionIndependentAtlas;
 import com.happydroids.droidtowers.gui.ColorizedImageButton;
@@ -41,6 +41,8 @@ public class TowerAssetManager {
   private static AssetList assetList;
   private static Skin customSkin;
   private static Skin defaultSkin;
+  private static SafeEventBus eventBus = new SafeEventBus(TowerAssetManager.class.getSimpleName());
+
 
   public static MemoryTrackingAssetManager assetManager() {
     if (assetManager == null) {
@@ -52,7 +54,9 @@ public class TowerAssetManager {
       Texture.setAssetManager(assetManager);
 
       try {
-        assetList = TowerGameService.instance().getObjectMapper().readValue(Gdx.files.internal("assets.json").read(), AssetList.class);
+        assetList = TowerGameService.instance()
+                            .getObjectMapper()
+                            .readValue(Gdx.files.internal("assets.json").read(), AssetList.class);
 
         ensureAssetsAreLoaded();
       } catch (IOException e) {
@@ -65,12 +69,6 @@ public class TowerAssetManager {
       parameter.magFilter = Linear;
       assetManager.load(checkForHDPI("elevator/shaft.png"), Texture.class, parameter);
       assetManager.load(checkForHDPI("elevator/empty.png"), Texture.class, parameter);
-
-      assetManager.setErrorListener(new AssetErrorListener() {
-        public void error(String fileName, Class type, Throwable throwable) {
-          throw new RuntimeException("Error loading: " + fileName, throwable);
-        }
-      });
 
       defaultSkin = new Skin(Gdx.files.internal("default-skin.json"));
       makeCustomGUISkin();
@@ -102,7 +100,8 @@ public class TowerAssetManager {
     checkBoxStyle.fontColor = Color.WHITE;
     customSkin.add("default", checkBoxStyle);
 
-    Slider.SliderStyle sliderStyle = new Slider.SliderStyle(new NinePatchDrawable(new NinePatch(new Texture(WHITE_SWATCH), Color.LIGHT_GRAY)), new NinePatchDrawable(new NinePatch(skinAtlas.findRegion("slider-handle"))));
+    Slider.SliderStyle sliderStyle = new Slider.SliderStyle(new NinePatchDrawable(new NinePatch(new Texture(WHITE_SWATCH), Color.LIGHT_GRAY)), new NinePatchDrawable(new NinePatch(skinAtlas
+                                                                                                                                                                                           .findRegion("slider-handle"))));
     customSkin.add("default-horizontal", sliderStyle);
 
     TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
@@ -265,5 +264,9 @@ public class TowerAssetManager {
 
   public static Drawable drawable(String fileName) {
     return new TextureRegionDrawable(new TextureRegion(texture(fileName)));
+  }
+
+  public static SafeEventBus events() {
+    return eventBus;
   }
 }

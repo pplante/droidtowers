@@ -21,6 +21,8 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.ElevatorPopOver;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
+import com.happydroids.droidtowers.input.InputSystem;
+import com.happydroids.droidtowers.input.PlacementTool;
 import com.happydroids.droidtowers.math.GridPoint;
 import com.happydroids.droidtowers.types.ElevatorType;
 import com.happydroids.droidtowers.types.ResizeHandle;
@@ -111,9 +113,12 @@ public class Elevator extends Transit {
     bottomSprite.setPosition(tmpVector.x, tmpVector.y);
     bottomSprite.draw(spriteBatch);
 
-    Sprite shaftToRender = drawShaft ? shaftSprite : emptyShaftSprite;
-    BitmapFont.TextBounds textBounds;
-
+    Sprite shaftToRender;
+    if (drawShaft && !(InputSystem.instance().getCurrentTool() instanceof PlacementTool)) {
+      shaftToRender = shaftSprite;
+    } else {
+      shaftToRender = emptyShaftSprite;
+    }
 
     tmpVector.add(0, scaledGridUnit());
     shaftToRender.setColor(renderColor);
@@ -125,7 +130,8 @@ public class Elevator extends Transit {
     floorLabelCache.setColor(1, 1, 1, 0.5f);
     floorLabelCache.draw(spriteBatch, renderColor.a);
 
-    if (isPlaced() && selectedResizeHandle == null) {
+    if (isPlaced() && selectedResizeHandle == null && !(InputSystem.instance()
+                                                                .getCurrentTool() instanceof PlacementTool)) {
       for (ElevatorCar elevatorCar : elevatorCars) {
         elevatorCar.setColor(renderColor);
         elevatorCar.draw(spriteBatch);

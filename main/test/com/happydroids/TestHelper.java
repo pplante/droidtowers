@@ -6,9 +6,9 @@ package com.happydroids;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
-import org.apache.commons.io.FileUtils;
-import org.apache.http.Header;
-import org.apache.http.message.BasicHeader;
+import org.apach3.commons.io.FileUtils;
+import org.apach3.http.Header;
+import org.apach3.http.message.BasicHeader;
 
 import java.io.File;
 import java.io.IOException;

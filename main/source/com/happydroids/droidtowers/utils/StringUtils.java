@@ -9,7 +9,7 @@ import com.happydroids.droidtowers.TowerConsts;
 
 import java.text.NumberFormat;
 
-public class StringUtils extends org.apache.commons.lang3.StringUtils {
+public class StringUtils extends org.apach3.commons.lang3.StringUtils {
   public static CharSequence formatNumber(long i) {
     float value = i;
     String suffix;

@@ -10,8 +10,10 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -106,6 +108,13 @@ public class TowerWebBrowser extends Dialog {
     container.addView(closeImage, new ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
 
     addContentView(container, FILL);
+
+    setOnDismissListener(new OnDismissListener() {
+      @Override
+      public void onDismiss(DialogInterface dialog) {
+        webView.loadUrl("about:blank");
+      }
+    });
   }
 
   private void buildWebView() {
@@ -128,6 +137,14 @@ public class TowerWebBrowser extends Dialog {
     webView.setWebViewClient(new WebViewClient() {
       @Override
       public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        if (url.contains("youtube.com")) {
+          Intent intent = new Intent(Intent.ACTION_VIEW);
+          intent.setData(Uri.parse(url));
+          activity.startActivity(intent);
+          dismiss();
+          return true;
+        }
+
         return false;
       }
 

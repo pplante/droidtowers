@@ -35,7 +35,8 @@ public class TowerConsts extends HappyDroidConsts {
   public static final float GAME_SAVE_FREQUENCY = 15f;
   public static final long FACEBOOK_CONNECT_DELAY_BETWEEN_TOKEN_CHECK = 3500;
   public static final float MINI_MAP_REDRAW_FREQUENCY = 1f;
-  public static final String GAME_SAVE_DIRECTORY = Gdx.app.getType() == Application.ApplicationType.Android ? "towergame/" : ".towergame/";
+  public static final String GAME_SAVE_DIRECTORY = Gdx.app
+                                                           .getType() == Application.ApplicationType.Android ? "towergame/" : ".towergame/";
   public static final String FANDANGO_COMMISSION_JUNCTION_ID = "5737037";
   public static final float ACHIEVEMENT_ENGINE_FREQUENCY = 5f;
   public static final float AVATAR_SPAWN_DELAY = 5f;
@@ -48,5 +49,7 @@ public class TowerConsts extends HappyDroidConsts {
   public static final float GAME_SPEED_MIN = DEBUG ? 0.05f : 0.5f;
 
   @SuppressWarnings("PointlessBooleanExpression")
-  public static final boolean ENABLE_AVATAR_LIST_WINDOW = DEBUG;
+  public static final boolean ENABLE_AVATAR_LIST_WINDOW = false;
+  public static final boolean ENABLE_HAPPYDROIDS_CONNECT = true;
+  public static final boolean ENABLE_NEWS_TICKER = false;
 }

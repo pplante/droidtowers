@@ -19,7 +19,7 @@ import com.happydroids.droidtowers.utils.PeriodicBackgroundTask;
 import com.happydroids.platform.LaunchBrowserAfterDelay;
 import com.happydroids.server.ApiRunnable;
 import com.happydroids.server.HappyDroidServiceObject;
-import org.apache.http.HttpResponse;
+import org.apach3.http.HttpResponse;
 
 public class ConnectToHappyDroidsWindow extends TowerWindow {
   private static final String TAG = ConnectToHappyDroidsWindow.class.getSimpleName();

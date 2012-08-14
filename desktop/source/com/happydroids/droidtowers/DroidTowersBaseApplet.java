@@ -15,7 +15,7 @@ import com.happydroids.platform.DesktopUncaughtExceptionHandler;
 import com.happydroids.platform.Platform;
 import com.happydroids.platform.PlatformConnectionMonitor;
 import netscape.javascript.JSObject;
-import org.apache.commons.lang3.StringUtils;
+import org.apach3.commons.lang3.StringUtils;
 
 public abstract class DroidTowersBaseApplet extends LwjglApplet {
   public static final String TAG = DroidTowersBaseApplet.class.getSimpleName();

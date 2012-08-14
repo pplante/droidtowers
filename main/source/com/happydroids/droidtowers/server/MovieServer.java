@@ -4,8 +4,7 @@
 
 package com.happydroids.droidtowers.server;
 
-import com.google.common.collect.Iterators;
-import com.happydroids.droidtowers.gamestate.server.RunnableQueue;
+import com.badlogic.gdx.utils.Array;
 import com.happydroids.utils.BackgroundTask;
 
 import java.util.Iterator;
@@ -13,8 +12,8 @@ import java.util.Iterator;
 public class MovieServer {
   private static MovieServer _instance;
   private MovieCollection moviesList;
-  private RunnableQueue afterFetchRunnables;
-  private Iterator<Movie> moviesIterator;
+  private Iterator<Movie> playQueueIterator;
+  private Array<Movie> playQueue;
 
   public static MovieServer instance() {
     if (_instance == null) {
@@ -24,44 +23,42 @@ public class MovieServer {
     return _instance;
   }
 
+  public static void dispose() {
+    _instance = null;
+  }
+
   public MovieServer() {
-    afterFetchRunnables = new RunnableQueue();
+    playQueue = new Array<Movie>();
+    playQueueIterator = playQueue.iterator();
     moviesList = new MovieCollection();
-    new BackgroundTask() {
-      @Override
-      protected void execute() throws Exception {
-        moviesList.fetch();
 
-        for (Movie movie : moviesList.getObjects()) {
-          movie.queueForDownload();
-        }
-      }
-
-      @Override
-      public synchronized void afterExecute() {
-        afterFetchRunnables.runAll();
-      }
-    }.run();
+    new FetchMovieListTask().run();
   }
 
   public boolean hasMovies() {
-    return moviesList != null && !moviesList.isEmpty();
+    return playQueue.size > 0;
   }
 
   public Movie getMovie() {
-    if (moviesIterator == null) {
-      moviesIterator = Iterators.cycle(moviesList.getObjects());
+    if (!playQueueIterator.hasNext()) {
+      ((Array.ArrayIterator) playQueueIterator).reset();
     }
-    Movie movie = moviesIterator.next();
-    movie.queueForDownload();
-    return movie;
+
+    return playQueueIterator.next();
   }
 
-  public void afterFetchingMovies(Runnable runnable) {
-    if (!hasMovies()) {
-      afterFetchRunnables.push(runnable);
-    } else {
-      runnable.run();
+  public void addMovieToPlayQueue(Movie movie) {
+    playQueue.add(movie);
+  }
+
+  private class FetchMovieListTask extends BackgroundTask {
+    @Override
+    protected void execute() throws Exception {
+      moviesList.fetch();
+
+      for (Movie movie : moviesList.getObjects()) {
+        movie.queueForDownload();
+      }
     }
   }
 }
