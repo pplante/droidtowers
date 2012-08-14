@@ -37,7 +37,6 @@ public class HttpCacheDiskStorage implements HttpCacheStorage {
     if (entry.getStatusCode() == 200) {
       ByteArrayOutputStream bos = new ByteArrayOutputStream();
       serializer.writeTo(entry, bos);
-      System.out.println(bos);
       cacheDir.child(getKey(key)).writeBytes(bos.toByteArray(), false);
     }
   }

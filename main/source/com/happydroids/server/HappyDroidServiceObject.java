@@ -72,11 +72,6 @@ public abstract class HappyDroidServiceObject {
 
     validateResourceUri();
 
-    if (!Platform.getConnectionMonitor().isConnectedOrConnecting()) {
-      apiRunnable.onError(null, HttpStatusCode.ClientClosedRequest, this);
-      return;
-    }
-
     HttpResponse response = HappyDroidService.instance()
                                     .makeGetRequest(resourceUri, null, isCachingAllowed(), getCacheMaxAge());
     if (response != null && response.getStatusLine().getStatusCode() == 200) {

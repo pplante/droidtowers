@@ -65,6 +65,7 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
   public DroidTowersGame(Runnable afterInitRunnable) {
     this.afterInitRunnable = afterInitRunnable;
     debugInfo = new StringBuilder();
+    TowerGameService.instance();
   }
 
   public void create() {

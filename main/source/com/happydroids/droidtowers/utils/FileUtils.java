@@ -10,7 +10,7 @@ import org.apach3.http.HttpResponse;
 
 import java.io.IOException;
 
-public class FileUtils {
+public class FileUtils extends org.apach3.commons.io.FileUtils {
   public static void downloadAndCacheFile(final String urlString, final int cacheMaxAge, final FileHandle fileHandle) throws IOException {
     HttpResponse atlasPngResp = TowerGameService.instance().makeGetRequest(urlString, null, true, cacheMaxAge);
     if (atlasPngResp != null && atlasPngResp.getStatusLine() != null && atlasPngResp.getStatusLine()

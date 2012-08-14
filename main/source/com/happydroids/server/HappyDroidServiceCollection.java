@@ -11,7 +11,6 @@ import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.events.CollectionChangeEvent;
-import com.happydroids.platform.Platform;
 import org.apach3.http.HttpResponse;
 import org.apach3.http.entity.BufferedHttpEntity;
 
@@ -81,11 +80,6 @@ public abstract class HappyDroidServiceCollection<CollectionType extends HappyDr
   }
 
   public void fetchBlocking(ApiCollectionRunnable<HappyDroidServiceCollection<CollectionType>> apiRunnable) {
-    if (!Platform.getConnectionMonitor().isConnectedOrConnecting()) {
-      apiRunnable.onError(null, HttpStatusCode.ClientClosedRequest, this);
-      return;
-    }
-
     fetching = true;
     HttpResponse response = HappyDroidService.instance()
                                     .makeGetRequest(getBaseResourceUri(), currentFilters, isCachingAllowed(), getCacheMaxAge());
