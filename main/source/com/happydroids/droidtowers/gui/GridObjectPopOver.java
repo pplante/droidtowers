@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.entities.CommercialSpace;
 import com.happydroids.droidtowers.entities.GridObject;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.platform.Display;
@@ -25,6 +26,7 @@ import com.happydroids.droidtowers.utils.StringUtils;
 import java.util.List;
 
 import static com.happydroids.droidtowers.TowerAssetManager.sprite;
+import static com.happydroids.droidtowers.gui.FontManager.Default;
 
 public class GridObjectPopOver<T extends GridObject> extends Table {
   public static final float INACTIVE_BUTTON_ALPHA = 0.5f;
@@ -39,6 +41,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
   private RatingBar desirabilityBar;
   private RatingBar noiseBar;
   protected Label transitLabel;
+  private Label needsDroidsLabel;
   private Label cousinVinniesHideout;
   private Label nameLabel;
   private float timeSinceUpdate;
@@ -50,6 +53,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
   private Table ratingBarContainer;
   private float offsetY;
 
+
   public GridObjectPopOver(T gridObject) {
     super();
     this.gridObject = gridObject;
@@ -57,7 +61,7 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
     ratingBars = Lists.newArrayList();
     ratingBarContainer = new Table();
 
-    InputSystem.instance().addInputProcessor(new GridObjectPopOverCloser(this), 20);
+    InputSystem.instance().addInputProcessor(new GridObjectPopOverCloser(this), 0);
 
     setTouchable(Touchable.enabled);
     triangle = sprite(TowerAssetManager.WHITE_SWATCH_TRIANGLE_LEFT);
@@ -85,10 +89,15 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
 
   protected void buildControls() {
     row();
-    transitLabel = FontManager.Default.makeLabel(CONNECTED_TO_TRANSIT);
+    transitLabel = Default.makeLabel(CONNECTED_TO_TRANSIT);
     add(transitLabel);
+
     row();
-    cousinVinniesHideout = FontManager.Default.makeLabel(COUSIN_VINNIES_HIDEOUT);
+    needsDroidsLabel = Default.makeLabel("Needs " + (gridObject instanceof CommercialSpace ? "employees" : "residents"), Color.RED);
+    add(needsDroidsLabel);
+
+    row();
+    cousinVinniesHideout = Default.makeLabel(COUSIN_VINNIES_HIDEOUT);
     add(cousinVinniesHideout);
 
     incomeLabel = FontManager.RobotoBold18.makeLabel("$0");
@@ -158,6 +167,18 @@ public class GridObjectPopOver<T extends GridObject> extends Table {
       } else if (!gridObject.isConnectedToTransport() && !transitLabel.getText().equals(NOT_CONNECTED_TO_TRANSIT)) {
         transitLabel.setText(NOT_CONNECTED_TO_TRANSIT);
         transitLabel.setColor(Color.RED);
+        updatedData = true;
+      }
+    }
+
+    if (needsDroidsLabel != null) {
+      if (gridObject.needsDroids() && !needsDroidsLabel.isVisible()) {
+        needsDroidsLabel.setVisible(true);
+        getCell(needsDroidsLabel).ignore(false);
+        updatedData = true;
+      } else if (!gridObject.needsDroids() && needsDroidsLabel.isVisible()) {
+        needsDroidsLabel.setVisible(false);
+        getCell(needsDroidsLabel).ignore(true);
         updatedData = true;
       }
     }

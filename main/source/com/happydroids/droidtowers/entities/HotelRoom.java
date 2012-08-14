@@ -25,6 +25,10 @@ public class HotelRoom extends CommercialSpace {
     return false;
   }
 
+  @Override public boolean needsDroids() {
+    return false;
+  }
+
   @Override
   public int getCoinsEarned() {
     if (isConnectedToTransport()) {

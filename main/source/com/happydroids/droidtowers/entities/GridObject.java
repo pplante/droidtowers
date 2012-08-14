@@ -472,7 +472,8 @@ public abstract class GridObject {
 
   public float getNormalizedCrimeLevel() {
     if (getCrimeLevel() > 0f) {
-      return getCrimeLevel() * Math.max(1, getNumVisitors()) - gameGrid.positionCache().getPosition(position).normalizedDistanceFromSecurity;
+      return getCrimeLevel() * Math.max(1, getNumVisitors()) - gameGrid.positionCache()
+                                                                       .getPosition(position).normalizedDistanceFromSecurity;
     } else {
       return 0;
     }
@@ -588,5 +589,9 @@ public abstract class GridObject {
 
   public void setSpriteCacheId(int spriteCacheId) {
     this.spriteCacheId = spriteCacheId;
+  }
+
+  public boolean needsDroids() {
+    return false;
   }
 }

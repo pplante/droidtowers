@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Logger;
 import com.happydroids.HappyDroidConsts;
+import com.happydroids.droidtowers.disk.FileResolverMultiplexer;
 import com.happydroids.droidtowers.events.SafeEventBus;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.graphics.ResolutionIndependentAtlas;
@@ -46,7 +47,7 @@ public class TowerAssetManager {
 
   public static MemoryTrackingAssetManager assetManager() {
     if (assetManager == null) {
-      assetManager = new MemoryTrackingAssetManager();
+      assetManager = new MemoryTrackingAssetManager(new FileResolverMultiplexer());
       if (HappyDroidConsts.DEBUG) {
         assetManager.getLogger().setLevel(Logger.ERROR);
       }

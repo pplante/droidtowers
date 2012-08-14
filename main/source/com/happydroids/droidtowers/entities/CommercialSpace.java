@@ -34,6 +34,10 @@ public class CommercialSpace extends Room {
     return new CommercialSpacePopOver(this);
   }
 
+  @Override public boolean needsDroids() {
+    return employees.isEmpty();
+  }
+
   public void updateJobs() {
     jobsFilled = 0;
     if (isConnectedToTransport()) {

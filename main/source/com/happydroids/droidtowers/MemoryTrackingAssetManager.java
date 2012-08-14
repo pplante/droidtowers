@@ -19,6 +19,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pools;
 import com.google.common.eventbus.EventBus;
+import com.happydroids.droidtowers.disk.FileResolverMultiplexer;
 import com.happydroids.droidtowers.events.AssetLoadCompleteEvent;
 import com.happydroids.droidtowers.events.AssetLoadErrorEvent;
 import com.happydroids.droidtowers.events.SafeEventBus;
@@ -34,8 +35,8 @@ public class MemoryTrackingAssetManager extends AssetManager {
   private final SafeEventBus eventBus;
 
 
-  public MemoryTrackingAssetManager() {
-    super();
+  public MemoryTrackingAssetManager(FileResolverMultiplexer fileResolverMultiplexer) {
+    super(fileResolverMultiplexer);
 
     currentMemory = 0;
     memoryPerFile = new HashMap<String, Integer>();

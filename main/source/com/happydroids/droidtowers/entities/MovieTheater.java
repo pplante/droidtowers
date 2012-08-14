@@ -67,7 +67,7 @@ public class MovieTheater extends CommercialSpace {
       }
     }
 
-    if (!isPlaying && movie == null) {
+    if (!isPlaying && movie == null && getEmploymentLevel() > 0f) {
       long millis = System.currentTimeMillis();
       if (nextShowTime <= millis) {
         loadMovie();

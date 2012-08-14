@@ -31,6 +31,10 @@ public class SkyLobby extends Room {
     return 1f;
   }
 
+  @Override public boolean needsDroids() {
+    return false;
+  }
+
   @Override
   public float getNoiseLevel() {
     return 0f;

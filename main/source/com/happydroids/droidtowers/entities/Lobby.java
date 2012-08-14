@@ -39,6 +39,10 @@ public class Lobby extends Room {
     return new GridObjectPopOver(this);
   }
 
+  @Override public boolean needsDroids() {
+    return false;
+  }
+
   @Override
   public boolean canEarnMoney() {
     return false;

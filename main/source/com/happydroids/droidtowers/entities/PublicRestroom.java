@@ -18,6 +18,10 @@ public class PublicRestroom extends ServiceRoom {
     return false;
   }
 
+  @Override public boolean needsDroids() {
+    return false;
+  }
+
   @Override
   public boolean canEarnMoney() {
     return false;

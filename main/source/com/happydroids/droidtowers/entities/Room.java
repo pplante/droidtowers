@@ -17,7 +17,6 @@ import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.gui.RoomPopOver;
 import com.happydroids.droidtowers.math.GridPoint;
-import com.happydroids.droidtowers.types.ProviderType;
 import com.happydroids.droidtowers.types.RoomType;
 
 import java.util.Set;
@@ -96,12 +95,10 @@ public class Room extends GridObject {
       decalsToDraw.remove(DECAL_TRANSPORT_DISCONNECTED);
     }
 
-    if (provides(ProviderType.HOUSING) && loanFromCousinVinnie == 0) {
-      if (residents.size() == 0) {
-        decalsToDraw.add(DECAL_NEEDS_DROIDS);
-      } else {
-        decalsToDraw.remove(DECAL_NEEDS_DROIDS);
-      }
+    if (needsDroids()) {
+      decalsToDraw.add(DECAL_NEEDS_DROIDS);
+    } else {
+      decalsToDraw.remove(DECAL_NEEDS_DROIDS);
     }
   }
 
@@ -158,6 +155,10 @@ public class Room extends GridObject {
   @Override
   protected boolean hasPopOver() {
     return true;
+  }
+
+  @Override public boolean needsDroids() {
+    return residents.size() == 0;
   }
 
   private float getTransportModifier() {

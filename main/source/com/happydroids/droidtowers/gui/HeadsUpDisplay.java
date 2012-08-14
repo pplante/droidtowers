@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Sets;
+import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
@@ -138,6 +139,20 @@ public class HeadsUpDisplay extends WidgetGroup {
       }
 
       addActor(viewNeighborsButton);
+    }
+
+    if (TowerConsts.DEBUG) {
+      ImageButton debugButton = TowerAssetManager.imageButton(hudAtlas.findRegion("debug-menu"));
+      debugButton.layout();
+      debugButton.setX(achievementButton.getX() + achievementButton.getWidth() + 10);
+      debugButton.setY(achievementButton.getY());
+      debugButton.addListener(new VibrateClickListener() {
+        @Override public void onClick(InputEvent event, float x, float y) {
+          new DebugWindow(DroidTowersGame.getRootUiStage()).show();
+        }
+      });
+
+      addActor(debugButton);
     }
 
     notificationStack.pad(10);
