@@ -43,7 +43,6 @@ public abstract class SplashScene extends Scene {
   protected SplashCloudLayer cloudLayer;
   private TextureAtlas atlas1;
   private TextureAtlas atlas2;
-  private TextureAtlas happyDroidAtlas;
   protected Image droidTowersLogo;
   protected ProgressPanel progressPanel;
   private Image mainBuilding;
@@ -65,12 +64,6 @@ public abstract class SplashScene extends Scene {
     progressPanel = new AssetLoadProgressPanel();
     center(progressPanel);
     addActor(progressPanel);
-  }
-
-  private void changeAtlasTextureFilter(TextureAtlas atlas) {
-    for (Texture texture : atlas.getTextures()) {
-      texture.setFilter(Linear, Linear);
-    }
   }
 
   private void makeSkyGradient() {
@@ -242,11 +235,6 @@ public abstract class SplashScene extends Scene {
 
     atlas1 = TowerAssetManager.textureAtlas("backgrounds/splash1.txt");
     atlas2 = TowerAssetManager.textureAtlas("backgrounds/splash2.txt");
-    happyDroidAtlas = TowerAssetManager.textureAtlas("happydroid.txt");
-
-    changeAtlasTextureFilter(atlas1);
-    changeAtlasTextureFilter(atlas2);
-    changeAtlasTextureFilter(happyDroidAtlas);
 
     makeCloudLayer();
     makeCityScape();

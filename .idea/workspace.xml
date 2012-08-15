@@ -38,9 +38,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df564ff2-5100-46cd-81c7-438d1ebfd432" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/assets-raw/hud/buttons-hd.tps" afterPath="$PROJECT_DIR$/main/assets-raw/hud/buttons-hd.tps" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/assets-raw/texturepacker/menus.tps" afterPath="$PROJECT_DIR$/main/assets-raw/texturepacker/menus.tps" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/assets/happydroid.txt" afterPath="$PROJECT_DIR$/main/assets/happydroid.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" afterPath="$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java" />
     </list>
     <ignored path="testgame.iws" />
@@ -202,9 +200,9 @@
       <file leaf-file-name="SplashScene.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="178" column="4" selection-start="7345" selection-end="7345" vertical-scroll-proportion="0.051039696">
+            <state line="68" column="2" selection-start="2530" selection-end="2530" vertical-scroll-proportion="0.3327032">
               <folding>
-                <element signature="e#0#9953#0" expanded="true" />
+                <element signature="e#0#9553#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -1693,7 +1691,7 @@
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3106547" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32689834" sideWeight="0.49748382" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.6808237" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.73230374" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39885223" sideWeight="0.73745173" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32352942" sideWeight="0.73170733" order="2" side_tool="false" content_ui="combo" x="239" y="105" width="347" height="1319" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33119383" sideWeight="0.91822094" order="2" side_tool="false" content_ui="tabs" />
@@ -2003,9 +2001,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/source/com/happydroids/droidtowers/scenes/SplashScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="178" column="4" selection-start="7345" selection-end="7345" vertical-scroll-proportion="0.051039696">
+        <state line="68" column="2" selection-start="2530" selection-end="2530" vertical-scroll-proportion="0.3327032">
           <folding>
-            <element signature="e#0#9953#0" expanded="true" />
+            <element signature="e#0#9553#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>

@@ -1,6 +1,6 @@
 happydroid.png
 format: RGBA8888
-filter: MipMapNearestNearest,Linear
+filter: Linear,Linear
 repeat: none
 left-arm
   rotate: false
