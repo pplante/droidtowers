@@ -8,6 +8,8 @@ import com.happydroids.HappyDroidConsts;
 import com.happydroids.platform.Platform;
 import com.happydroids.utils.BackgroundTask;
 import net.kencochrane.sentry.RavenClient;
+import net.kencochrane.sentry.RavenUtils;
+import org.apach3.commons.lang3.exception.ExceptionUtils;
 
 public class ErrorUtil {
   public static void rethrowError(Throwable throwable) {
@@ -21,7 +23,7 @@ public class ErrorUtil {
       @Override
       protected void execute() throws Exception {
         RavenClient ravenClient = new RavenClient(HappyDroidConsts.SENTRY_DSN);
-        ravenClient.captureException(throwable);
+        ravenClient.captureException(ExceptionUtils.getMessage(throwable), RavenUtils.getTimestampLong(), "root", 50, null, throwable);
       }
     }.run();
   }
