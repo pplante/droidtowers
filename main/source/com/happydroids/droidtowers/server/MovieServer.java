@@ -51,6 +51,10 @@ public class MovieServer {
     playQueue.add(movie);
   }
 
+  public void removeMovieFromPlayQueue(Movie movie) {
+    playQueue.removeValue(movie, false);
+  }
+
   private class FetchMovieListTask extends BackgroundTask {
     @Override
     protected void execute() throws Exception {

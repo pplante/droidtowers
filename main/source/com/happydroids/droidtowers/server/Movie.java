@@ -161,6 +161,19 @@ public class Movie extends HappyDroidServiceObject {
 
     TowerAssetManager.events().unregister(this);
     setState(event instanceof AssetLoadErrorEvent ? MovieState.Failed : MovieState.Loaded);
+
+    if (getState().equals(MovieState.Failed)) {
+      if (atlasPngFile.exists()) {
+        atlasPngFile.delete();
+      }
+
+      if (atlasTxtFile.exists()) {
+        atlasTxtFile.delete();
+      }
+
+      MovieServer.instance().removeMovieFromPlayQueue(this);
+    }
+
     postLoad.runAll();
   }
 }
