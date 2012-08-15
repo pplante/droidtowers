@@ -6,13 +6,16 @@ package com.happydroids.droidtowers.scenes;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenEquations;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.HeyZapCheckInButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
@@ -22,7 +25,7 @@ import com.happydroids.droidtowers.entities.SplashCloudLayer;
 import com.happydroids.droidtowers.gui.AudioControl;
 import com.happydroids.droidtowers.gui.Sunburst;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
-import com.happydroids.droidtowers.gui.controls.AnimatedHappyDroid;
+import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.AssetLoadProgressPanel;
 import com.happydroids.droidtowers.scenes.components.ProgressPanel;
 import com.happydroids.droidtowers.tween.TweenSystem;
@@ -215,10 +218,21 @@ public abstract class SplashScene extends Scene {
     if (!createdAudioControls && TowerAssetManager.isLoaded("hud/buttons.txt") && DroidTowersGame.getSoundController() != null) {
       createdAudioControls = true;
 
-      AudioControl audioControl = new AudioControl(TowerAssetManager.textureAtlas("hud/buttons.txt"));
-      audioControl.setX(getStage().getWidth() - audioControl.getWidth() - 16);
-      audioControl.setY(getStage().getHeight() - audioControl.getHeight() - 32);
-      addActor(audioControl);
+      TextureAtlas buttonsAtlas = TowerAssetManager.textureAtlas("hud/buttons.txt");
+      AudioControl audioControl = new AudioControl(buttonsAtlas);
+
+      Table c = new Table();
+      c.row().space(Display.devicePixel(8));
+      if (Gdx.app.getType().equals(Application.ApplicationType.Android)) {
+        c.add(new HeyZapCheckInButton(buttonsAtlas));
+      }
+      c.add(audioControl);
+
+      c.pack();
+      c.setX(getStage().getWidth() - c.getWidth() - 16);
+      c.setY(getStage().getHeight() - c.getHeight() - 32);
+
+      addActor(c);
     }
   }
 

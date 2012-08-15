@@ -7,6 +7,7 @@ package com.happydroids.droidtowers;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.DisplayMetrics;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -14,8 +15,10 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.platform.Display;
+import com.happydroids.droidtowers.platform.HeyZapCheckInManager;
 import com.happydroids.platform.*;
 import com.happydroids.platform.purchase.GooglePlayPurchaseManager;
+import com.heyzap.sdk.HeyzapLib;
 import net.robotmedia.billing.BillingController;
 import net.robotmedia.billing.BillingRequest;
 import net.robotmedia.billing.helper.AbstractBillingObserver;
@@ -52,6 +55,7 @@ public class DroidTowersGooglePlay extends AndroidApplication implements Billing
         Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(DroidTowersGooglePlay.this));
         Platform.setBrowserUtil(new AndroidBrowserUtil(DroidTowersGooglePlay.this));
         Platform.setPurchaseManager(new GooglePlayPurchaseManager(DroidTowersGooglePlay.this));
+        Platform.setCheckInManager(new HeyZapCheckInManager(DroidTowersGooglePlay.this));
 
         runOnUiThread(new Runnable() {
           @Override
@@ -64,6 +68,12 @@ public class DroidTowersGooglePlay extends AndroidApplication implements Billing
 
     Gdx.input.setCatchBackKey(true);
     Gdx.input.setCatchMenuKey(true);
+  }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data){
+      HeyzapLib.onActivityResult(requestCode, resultCode, data);
+      super.onActivityResult(requestCode, resultCode, data);
   }
 
   private void setupAndroidBilling() {

@@ -5,63 +5,63 @@ repeat: none
 upgrade-to-unlimited
   rotate: false
   xy: 2, 2
-  size: 420, 160
-  orig: 420, 160
-  offset: 3, 4
+  size: 419, 159
+  orig: 419, 159
+  offset: 4, 5
   index: -1
 happy-droids-logo
   rotate: false
-  xy: 2, 375
-  size: 196, 124
-  orig: 196, 124
-  offset: 8, 3
+  xy: 2, 373
+  size: 196, 123
+  orig: 196, 123
+  offset: 8, 4
   index: -1
 facebook-logo
   rotate: false
-  xy: 424, 68
+  xy: 423, 68
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 google-play-large
   rotate: false
-  xy: 188, 236
+  xy: 187, 235
   size: 172, 60
   orig: 172, 60
   offset: 0, 0
   index: -1
 droid-cousin-vinnie
   rotate: false
-  xy: 2, 164
-  size: 184, 209
-  orig: 184, 209
-  offset: 4, 0
+  xy: 2, 163
+  size: 183, 208
+  orig: 183, 208
+  offset: 5, 1
   index: -1
 large-left-arrow
   rotate: false
-  xy: 458, 2
+  xy: 457, 2
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: -1
 right-arrow
   rotate: false
-  xy: 458, 68
-  size: 28, 32
-  orig: 28, 32
-  offset: 2, 0
+  xy: 457, 68
+  size: 27, 32
+  orig: 27, 32
+  offset: 3, 0
   index: -1
 large-right-arrow
   rotate: false
-  xy: 424, 2
+  xy: 423, 2
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: -1
 powered-by-libgdx
   rotate: false
-  xy: 200, 164
-  size: 234, 70
-  orig: 234, 70
+  xy: 200, 163
+  size: 233, 70
+  orig: 233, 70
   offset: 0, 0
   index: -1
