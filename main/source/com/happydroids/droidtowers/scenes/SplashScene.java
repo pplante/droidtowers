@@ -25,6 +25,7 @@ import com.happydroids.droidtowers.entities.SplashCloudLayer;
 import com.happydroids.droidtowers.gui.AudioControl;
 import com.happydroids.droidtowers.gui.Sunburst;
 import com.happydroids.droidtowers.gui.WidgetAccessor;
+import com.happydroids.droidtowers.gui.controls.AnimatedHappyDroid;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.AssetLoadProgressPanel;
 import com.happydroids.droidtowers.scenes.components.ProgressPanel;
