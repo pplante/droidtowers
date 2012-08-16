@@ -16,6 +16,7 @@
     "swatches/swatch-white-triangle.png" : "com.badlogic.gdx.graphics.Texture",
     "swatches/swatch-white-black-border.png" : "com.badlogic.gdx.graphics.Texture",
     "backgrounds/splash2.txt" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
+    "hud/heyzap-checkin.txt" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "hud/menus.txt" : "com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "default-skin.json" : "com.badlogic.gdx.scenes.scene2d.ui.Skin"
   },
@@ -54,6 +55,7 @@
     "hud/rating-bars/security.png" : "hud/rating-bars/security-hd.png",
     "hud/buttons.txt" : "hud/buttons-hd.txt",
     "swatches/swatch-white-triangle.png" : "swatches/swatch-white-triangle-hd.png",
+    "hud/heyzap-checkin.txt" : "hud/heyzap-checkin-hd.txt",
     "hud/rating-bars/cockroach.png" : "hud/rating-bars/cockroach-hd.png",
     "hud/menus.txt" : "hud/menus-hd.txt",
     "swatches/swatch-white-triangle-left.png" : "swatches/swatch-white-triangle-left-hd.png"

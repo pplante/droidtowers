@@ -37,6 +37,7 @@ public class GenerateAssetManagerFileList {
     preloadFile(assetsDir.child("hud/skin.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("hud/menus.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("hud/buttons.txt"), TextureAtlas.class);
+    preloadFile(assetsDir.child("hud/heyzap-checkin.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("hud/window-bg.png"), Texture.class);
     preloadFile(assetsDir.child("hud/dialog-bg.png"), Texture.class);
 

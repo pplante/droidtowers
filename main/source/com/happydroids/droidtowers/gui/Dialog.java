@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.esotericsoftware.tablelayout.Cell;
@@ -143,13 +144,17 @@ public class Dialog extends Table {
 
   @Override
   protected void drawBackground(SpriteBatch batch, float parentAlpha) {
-    batch.setColor(1, 1, 1, 0.45f * getColor().a);
-    batch.draw(modalNoiseTexture, 0, 0, getStage().getWidth(), getStage().getHeight(), 0, 0, getStage().getWidth() / modalNoiseTexture.getWidth(), getStage().getHeight() / modalNoiseTexture.getHeight());
+    drawModalNoise(batch);
 
     SceneManager.activeScene().effects().drawDropShadow(batch, parentAlpha, this);
 
     batch.setColor(Color.WHITE);
     super.drawBackground(batch, parentAlpha);
+  }
+
+  protected void drawModalNoise(SpriteBatch batch) {
+    batch.setColor(1, 1, 1, 0.45f * getColor().a);
+    batch.draw(modalNoiseTexture, 0, 0, getStage().getWidth(), getStage().getHeight(), 0, 0, getStage().getWidth() / modalNoiseTexture.getWidth(), getStage().getHeight() / modalNoiseTexture.getHeight());
   }
 
   public Dialog addButton(String buttonText, final OnClickCallback clickCallback) {
@@ -206,5 +211,9 @@ public class Dialog extends Table {
 
   protected void useViewPadding(boolean b) {
     viewPadding = b;
+  }
+
+  protected void addButton(Button button) {
+    buttonBar.addButton(button);
   }
 }

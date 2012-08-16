@@ -1,0 +1,18 @@
+heyzap-checkin-hd.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+heyzap-checkin
+  rotate: false
+  xy: 2, 2
+  size: 274, 52
+  orig: 284, 52
+  offset: 10, 0
+  index: -1
+heyzap-checkin-down
+  rotate: false
+  xy: 2, 56
+  size: 274, 52
+  orig: 284, 52
+  offset: 10, 0
+  index: -1

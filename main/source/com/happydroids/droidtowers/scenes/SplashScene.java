@@ -35,7 +35,7 @@ import com.happydroids.platform.Platform;
 import static com.badlogic.gdx.graphics.Texture.TextureFilter.Linear;
 import static com.badlogic.gdx.utils.Scaling.fit;
 import static com.badlogic.gdx.utils.Scaling.stretchX;
-import static com.happydroids.droidtowers.TowerAssetManager.assetManager;
+import static com.happydroids.droidtowers.TowerAssetManager.isLoaded;
 
 public abstract class SplashScene extends Scene {
   public static final int CAMERA_PAN_DOWN_DURATION = 1000;
@@ -197,19 +197,22 @@ public abstract class SplashScene extends Scene {
   @Override
   public void render(float deltaTime) {
     if (!createdSplashScene) {
-      if (assetManager().isLoaded("backgrounds/splash1.txt") &&
-                  assetManager().isLoaded("backgrounds/splash1.png") &&
-                  assetManager().isLoaded("backgrounds/splash2.txt") &&
-                  assetManager().isLoaded("backgrounds/splash2.png") &&
-                  assetManager().isLoaded("happydroid.txt") &&
-                  assetManager().isLoaded("happydroid.png") &&
-                  assetManager().isLoaded("backgrounds/cityscape-middle.png")) {
+      if (isLoaded("backgrounds/splash1.txt") &&
+                  isLoaded("backgrounds/splash1.png") &&
+                  isLoaded("backgrounds/splash2.txt") &&
+                  isLoaded("backgrounds/splash2.png") &&
+                  isLoaded("happydroid.txt") &&
+                  isLoaded("happydroid.png") &&
+                  isLoaded("backgrounds/cityscape-middle.png")) {
         buildSplashScene();
       }
     }
 
 
-    if (!createdAudioControls && TowerAssetManager.isLoaded("hud/buttons.txt") && DroidTowersGame.getSoundController() != null) {
+    if (!createdAudioControls &&
+                isLoaded("hud/buttons.txt") &&
+                isLoaded("hud/heyzap-checkin.txt") &&
+                DroidTowersGame.getSoundController() != null) {
       createdAudioControls = true;
 
       TextureAtlas buttonsAtlas = TowerAssetManager.textureAtlas("hud/buttons.txt");
@@ -218,7 +221,7 @@ public abstract class SplashScene extends Scene {
       Table c = new Table();
       c.row().space(Display.devicePixel(8));
       if (Gdx.app.getType().equals(Application.ApplicationType.Android)) {
-        c.add(new HeyZapCheckInButton(buttonsAtlas));
+        c.add(new HeyZapCheckInButton());
       }
       c.add(audioControl);
 

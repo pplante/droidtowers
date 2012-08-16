@@ -4,85 +4,66 @@
 
 package com.happydroids.droidtowers.gui;
 
-import aurelienribon.tweenengine.BaseTween;
-import aurelienribon.tweenengine.Timeline;
-import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenCallback;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.HeyZapCheckInButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.Scaling;
-import com.happydroids.droidtowers.Colors;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.achievements.Achievement;
 import com.happydroids.droidtowers.platform.Display;
-import com.happydroids.droidtowers.tween.TweenSystem;
 
-public class AchievementNotification extends Table {
+public class AchievementNotification extends Dialog {
+  private final ParticleEffect particleEffect;
 
   public AchievementNotification(Achievement achievement) {
-    setBackground(TowerAssetManager.ninePatchDrawable(TowerAssetManager.WHITE_SWATCH, Colors.TRANSPARENT_BLACK));
+    super();
 
-    defaults().top().left().pad(Display.devicePixel(4));
+    particleEffect = new ParticleEffect();
+    particleEffect.load(Gdx.files.internal("particles/sparkle-dialog.p"), Gdx.files.internal("particles"));
 
-    add(new Image(TowerAssetManager.drawableFromAtlas("achievements-active", "hud/buttons.txt"), Scaling.none)).minWidth(Display.devicePixel(64)).padRight(Display.devicePixel(8));
+    setTitle("Achievement Complete: " + achievement.getName());
 
-    Table textTable = new Table();
-    textTable.defaults().left().top();
-    add(textTable);
+    Table t = new Table();
+    t.defaults().left().top().space(Display.devicePixel(8)).expandX();
+    t.add(FontManager.Roboto24.makeLabel("Great job!")).top();
+    t.row();
+    t.add(new HorizontalRule(Color.GRAY, 1)).fillX();
+    t.row();
+    t.add(FontManager.Default.makeLabel(achievement.toRewardString())).top();
 
-    textTable.add(FontManager.Roboto18.makeLabel(achievement.getName())).top();
-    textTable.row();
-    textTable.add(FontManager.Default.makeLabel(achievement.toRewardString())).top();
-    textTable.pack();
-    setClip(true);
-    pack();
+    Table c = new Table();
+    c.defaults().top().left();
+    c.row().fillX();
+    c.add(new Image(TowerAssetManager.drawableFromAtlas("trophy", "hud/menus.txt"), Scaling.none))
+            .padRight(Display.devicePixel(8));
+    c.add(t).expandX().minWidth(300);
+    c.setClip(true);
+    c.pack();
 
-    addListener(new VibrateClickListener() {
-      @Override
-      public void onClick(InputEvent event, float x, float y) {
-        hide(false);
+
+    addButton("Dismiss", new VibrateClickListener() {
+      @Override public void onClick(InputEvent event, float x, float y) {
+        dismiss();
       }
     });
+    addButton(new HeyZapCheckInButton("Completed achievement: "+ achievement.getName()));
+
+    setView(c);
   }
 
-  public void show() {
-    HeadsUpDisplay.getNotificationStack().addActor(this);
-
-    Timeline.createSequence()
-            .push(Tween.set(this, WidgetAccessor.OPACITY).target(0.0f))
-            .push(Tween.to(this, WidgetAccessor.OPACITY, 200).target(1.0f))
-            .setCallback(new TweenCallback() {
-              public void onEvent(int eventType, BaseTween source) {
-                hide(true);
-              }
-            })
-            .setCallbackTriggers(TweenCallback.END)
-            .start(TweenSystem.manager());
+  @Override public void act(float delta) {
+    super.act(delta);
+    particleEffect.setPosition(getX() + getWidth() / 2, getY() + getHeight() / 2);
+    particleEffect.update(delta);
   }
 
-  public void hide(final boolean useDelay) {
-    TweenSystem.manager().killTarget(this);
-
-    final WidgetGroup targetParent = (WidgetGroup) AchievementNotification.this.getParent();
-
-    Timeline.createSequence()
-            .push(Tween.set(this, WidgetAccessor.SIZE).target(this.getWidth(), this.getHeight()).delay(useDelay ? 4000 : 0))
-            .beginParallel()
-            .push(Tween.to(this, WidgetAccessor.SIZE, 300).target(this.getWidth(), 0))
-            .push(Tween.to(this, WidgetAccessor.OPACITY, 300).target(0))
-            .end()
-            .setCallback(new TweenCallback() {
-              public void onEvent(int eventType, BaseTween source) {
-                if (targetParent != null) {
-                  targetParent.removeActor(AchievementNotification.this);
-                  targetParent.invalidate();
-                  targetParent.layout();
-                }
-              }
-            })
-            .setCallbackTriggers(TweenCallback.END)
-            .start(TweenSystem.manager());
+  @Override protected void drawModalNoise(SpriteBatch batch) {
+    super.drawModalNoise(batch);
+    particleEffect.draw(batch);
   }
 }

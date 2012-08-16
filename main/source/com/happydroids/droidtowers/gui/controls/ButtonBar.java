@@ -5,6 +5,7 @@
 package com.happydroids.droidtowers.gui.controls;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.google.common.collect.Lists;
@@ -17,7 +18,7 @@ import com.happydroids.droidtowers.gui.VibrateClickListener;
 import java.util.List;
 
 public class ButtonBar extends Table {
-  private List<TextButton> buttons;
+  private List<Button> buttons;
   private boolean showTopLine;
   private boolean showBottomLine;
 
@@ -49,11 +50,11 @@ public class ButtonBar extends Table {
       add(new HorizontalRule(Color.GRAY, 1)).height(1).fillX().colspan(lineColSpan);
     }
 
-    row().fillX();
+    row().fill();
 
     int numButtons = buttons.size();
     for (int i = 0; i < numButtons; i++) {
-      add(buttons.get(i)).expandX().uniformX();
+      add(buttons.get(i)).expandX().uniform();
 
       if (i < numButtons - 1) {
         add(new VerticalRule(Color.GRAY, 1)).width(1).fillY();
@@ -76,5 +77,10 @@ public class ButtonBar extends Table {
 
   public void toggleBottomLine(boolean b) {
     showBottomLine = b;
+  }
+
+  public void addButton(Button button) {
+    buttons.add(button);
+    updateLayout();
   }
 }

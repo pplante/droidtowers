@@ -52,7 +52,7 @@ public class AchievementNotificationTest {
 
   @Test
   public void hide_shouldQueueTweenThatModifiesAlpha() {
-    notification.hide(false);
+    notification.dismiss();
 
     expect(TweenSystem.manager().containsTarget(notification)).toBeTrue();
 

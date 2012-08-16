@@ -22,7 +22,7 @@
         <key>dataFormat</key>
         <string>libgdx</string>
         <key>textureFileName</key>
-        <filename>../../assets/hud/buttons-hd.png</filename>
+        <filename>../../assets/hud/heyzap-checkin.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>ditherType</key>
@@ -40,7 +40,7 @@
             </struct>
         </struct>
         <key>shapePadding</key>
-        <uint>1</uint>
+        <uint>2</uint>
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>textureSubPath</key>
@@ -48,13 +48,13 @@
         <key>textureFormat</key>
         <enum type="SettingsBase::TextureFormat">png</enum>
         <key>borderPadding</key>
-        <uint>1</uint>
+        <uint>2</uint>
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
-            <int>1024</int>
+            <int>2048</int>
             <key>height</key>
-            <int>1024</int>
+            <int>2048</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -64,7 +64,7 @@
             <int>-1</int>
         </QSize>
         <key>reduceBorderArtifacts</key>
-        <true/>
+        <false/>
         <key>algorithmSettings</key>
         <struct type="AlgorithmSettings">
             <key>algorithm</key>
@@ -91,7 +91,7 @@
             <key>packageName</key>
             <string>Texture</string>
             <key>javaFileName</key>
-            <filename>buttons.java</filename>
+            <filename>../../assets/hud/heyzap-checkin.java</filename>
             <key>wrap</key>
             <struct type="AndEngineWrap">
                 <key>s</key>
@@ -103,19 +103,19 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>../../assets/hud/buttons-hd.txt</filename>
+        <filename>../../assets/hud/heyzap-checkin.txt</filename>
         <key>defaultExtension</key>
         <string></string>
         <key>outputFormat</key>
         <enum type="SettingsBase::OutputFormat">RGBA8888</enum>
         <key>autoAliasEnabled</key>
-        <false/>
-        <key>trimSpriteNames</key>
         <true/>
+        <key>trimSpriteNames</key>
+        <false/>
         <key>globalSpriteSettings</key>
         <struct type="SpriteSettings">
             <key>scale</key>
-            <double>0.83333</double>
+            <double>1</double>
             <key>scaleMode</key>
             <enum type="ScaleMode">Smooth</enum>
             <key>crop</key>
@@ -133,9 +133,10 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>buttons</filename>
-            <filename>rabbit.png</filename>
-            <filename>snail.png</filename>
+            <filename>../hud/heyzap/heyzap-checkin-down.png</filename>
+            <filename>../hud/heyzap/heyzap-checkin.png</filename>
+            <filename>../hud/heyzap/heyzap-checkin-down.png</filename>
+            <filename>../hud/heyzap/heyzap-checkin.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

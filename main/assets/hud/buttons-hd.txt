@@ -4,7 +4,7 @@ filter: Linear,Linear
 repeat: none
 snail
   rotate: false
-  xy: 90, 63
+  xy: 1, 471
   size: 24, 16
   orig: 24, 24
   offset: 0, 8
@@ -25,21 +25,21 @@ achievements-active
   index: 6
 rabbit
   rotate: false
-  xy: 115, 63
+  xy: 1, 446
   size: 21, 24
   orig: 24, 24
   offset: 1, 0
   index: -1
 view-neighbors
   rotate: false
-  xy: 139, 1
+  xy: 1, 1
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
   index: -1
 tool-services
   rotate: false
-  xy: 317, 1
+  xy: 1, 268
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
@@ -67,7 +67,7 @@ achievements-active
   index: 5
 overlay-button
   rotate: false
-  xy: 1, 330
+  xy: 268, 1
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
@@ -81,14 +81,14 @@ expand-land-right
   index: -1
 tool-sell
   rotate: false
-  xy: 406, 1
+  xy: 1, 357
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
   index: -1
 debug-menu
   rotate: false
-  xy: 1, 419
+  xy: 357, 1
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
@@ -100,13 +100,6 @@ audio-on
   orig: 96, 96
   offset: 4, 4
   index: -1
-heyzap-checkin
-  rotate: false
-  xy: 1, 1
-  size: 137, 61
-  orig: 137, 61
-  offset: 0, 0
-  index: -1
 achievements-active
   rotate: false
   xy: 357, 90
@@ -116,7 +109,7 @@ achievements-active
   index: 4
 tool-commerce
   rotate: false
-  xy: 1, 241
+  xy: 179, 1
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
@@ -130,14 +123,14 @@ audio-off
   index: -1
 tool-sprite
   rotate: false
-  xy: 228, 1
+  xy: 1, 179
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
   index: -1
 tool-transit
   rotate: false
-  xy: 1, 63
+  xy: 1, 90
   size: 88, 88
   orig: 96, 96
   offset: 4, 4
@@ -165,7 +158,7 @@ achievements-active
   index: 7
 tool-housing
   rotate: false
-  xy: 1, 152
+  xy: 90, 1
   size: 88, 88
   orig: 96, 96
   offset: 4, 4

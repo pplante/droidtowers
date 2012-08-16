@@ -2,6 +2,13 @@ menus-hd.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+trophy
+  rotate: false
+  xy: 187, 163
+  size: 150, 170
+  orig: 150, 170
+  offset: 0, 0
+  index: -1
 upgrade-to-unlimited
   rotate: false
   xy: 2, 2
@@ -25,7 +32,7 @@ facebook-logo
   index: -1
 google-play-large
   rotate: false
-  xy: 187, 235
+  xy: 200, 407
   size: 172, 60
   orig: 172, 60
   offset: 0, 0
@@ -60,7 +67,7 @@ large-right-arrow
   index: -1
 powered-by-libgdx
   rotate: false
-  xy: 200, 163
+  xy: 200, 335
   size: 233, 70
   orig: 233, 70
   offset: 0, 0
