@@ -1,0 +1,67 @@
+cheap.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+apartment_0002_stove
+  rotate: false
+  xy: 218, 110
+  size: 32, 90
+  orig: 32, 90
+  offset: 0, 0
+  index: -1
+apartment_0004_curtains
+  rotate: false
+  xy: 2, 2
+  size: 96, 86
+  orig: 96, 86
+  offset: 0, 0
+  index: -1
+apartment_0006_Radiator
+  rotate: false
+  xy: 218, 90
+  size: 36, 18
+  orig: 36, 18
+  offset: 0, 0
+  index: -1
+apartment_0000_kitchen-upper-cabinet
+  rotate: false
+  xy: 178, 56
+  size: 62, 32
+  orig: 62, 32
+  offset: 0, 0
+  index: -1
+apartment_0007_Bed
+  rotate: false
+  xy: 100, 2
+  size: 88, 50
+  orig: 88, 50
+  offset: 0, 0
+  index: -1
+apartment_0008_Fridge
+  rotate: false
+  xy: 178, 90
+  size: 38, 84
+  orig: 38, 84
+  offset: 0, 0
+  index: -1
+apartment_0005_tall-wardrobe
+  rotate: false
+  xy: 2, 176
+  size: 32, 58
+  orig: 32, 58
+  offset: 0, 0
+  index: -1
+apartment_0001_kitchen-lower-cabinet
+  rotate: false
+  xy: 190, 2
+  size: 62, 52
+  orig: 62, 52
+  offset: 0, 0
+  index: -1
+apartment_0003_window
+  rotate: false
+  xy: 100, 54
+  size: 76, 48
+  orig: 76, 48
+  offset: 0, 0
+  index: -1

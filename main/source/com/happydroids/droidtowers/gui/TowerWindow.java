@@ -84,7 +84,7 @@ public class TowerWindow {
     actionBarCell = wrapper.add();
 
     contentRow = wrapper.row();
-    contentRow.fill().padLeft(Display.devicePixel(24)).padRight(Display.devicePixel(24));
+    padding(24);
     wrapper.add(makeContentContainer()).expand();
 
     wrapper.row().fillX();
@@ -98,6 +98,10 @@ public class TowerWindow {
     });
 
     wrapper.addListener(new InputEventBlackHole());
+  }
+
+  protected void padding(final int pixels) {
+    contentRow.fill().padLeft(Display.devicePixel(pixels)).padRight(Display.devicePixel(pixels));
   }
 
   protected Actor makeContentContainer() {

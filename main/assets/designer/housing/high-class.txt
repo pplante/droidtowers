@@ -1,0 +1,165 @@
+high-class.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+apartment_0002s_0004_Layer-
+  rotate: false
+  xy: 92, 236
+  size: 22, 8
+  orig: 22, 8
+  offset: 0, 0
+  index: 18
+apartment_0001s_0000_vase
+  rotate: false
+  xy: 248, 54
+  size: 6, 18
+  orig: 6, 18
+  offset: 0, 0
+  index: -1
+apartment_0002s_0002_knife-rack
+  rotate: false
+  xy: 100, 210
+  size: 28, 22
+  orig: 28, 22
+  offset: 0, 0
+  index: -1
+apartment_0000s_0004_wall-shelf
+  rotate: false
+  xy: 40, 236
+  size: 36, 14
+  orig: 36, 14
+  offset: 0, 0
+  index: -1
+apartment_0001s_0002_dining-room-table
+  rotate: false
+  xy: 152, 112
+  size: 40, 28
+  orig: 40, 28
+  offset: 0, 0
+  index: -1
+apartment_0002s_0003_stove-vent
+  rotate: false
+  xy: 100, 152
+  size: 42, 56
+  orig: 42, 56
+  offset: 0, 0
+  index: -1
+apartment_0000s_0001_blue-floor-lamp
+  rotate: false
+  xy: 248, 2
+  size: 6, 50
+  orig: 6, 50
+  offset: 0, 0
+  index: -1
+apartment_0000s_0005_book-case
+  rotate: false
+  xy: 104, 96
+  size: 46, 46
+  orig: 46, 46
+  offset: 0, 0
+  index: -1
+apartment_0002s_0001_water-faucet
+  rotate: false
+  xy: 78, 236
+  size: 12, 14
+  orig: 12, 14
+  offset: 0, 0
+  index: -1
+apartment_0003_Radiator
+  rotate: false
+  xy: 2, 236
+  size: 36, 18
+  orig: 36, 18
+  offset: 0, 0
+  index: -1
+apartment_0000s_0000_coffee-table
+  rotate: false
+  xy: 130, 210
+  size: 38, 32
+  orig: 38, 32
+  offset: 0, 0
+  index: -1
+apartment_0000_short-curtains
+  rotate: false
+  xy: 2, 42
+  size: 104, 26
+  orig: 104, 26
+  offset: 0, 0
+  index: -1
+apartment_0001s_0001_dining-room-chair
+  rotate: false
+  xy: 170, 204
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
+apartment_0000s_0007_leather-chair
+  rotate: false
+  xy: 144, 144
+  size: 44, 28
+  orig: 44, 28
+  offset: 0, 0
+  index: -1
+apartment_0000s_0003_orange-tapestry
+  rotate: false
+  xy: 108, 42
+  size: 16, 52
+  orig: 16, 52
+  offset: 0, 0
+  index: -1
+apartment_0002s_0005_Layer-
+  rotate: false
+  xy: 128, 2
+  size: 118, 30
+  orig: 118, 30
+  offset: 0, 0
+  index: 10
+apartment_0005_double-pane-window
+  rotate: false
+  xy: 2, 70
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+apartment_0000s_0006_gray-couch
+  rotate: false
+  xy: 152, 82
+  size: 90, 28
+  orig: 90, 28
+  offset: 0, 0
+  index: -1
+apartment_0004_balcony-door-and-window
+  rotate: false
+  xy: 2, 152
+  size: 96, 82
+  orig: 96, 82
+  offset: 0, 0
+  index: -1
+apartment_0001s_0003_dining-room-chair
+  rotate: false
+  xy: 144, 174
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
+apartment_0002s_0000_overhead-lights
+  rotate: false
+  xy: 2, 2
+  size: 124, 38
+  orig: 124, 38
+  offset: 0, 0
+  index: -1
+apartment_0001_long-curtains
+  rotate: false
+  xy: 128, 34
+  size: 104, 46
+  orig: 104, 46
+  offset: 0, 0
+  index: -1
+apartment_0000s_0002_pictures
+  rotate: false
+  xy: 234, 34
+  size: 12, 46
+  orig: 12, 46
+  offset: 0, 0
+  index: -1

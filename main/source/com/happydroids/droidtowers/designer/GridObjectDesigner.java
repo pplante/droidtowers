@@ -32,12 +32,17 @@ public class GridObjectDesigner extends TowerWindow {
 
     Table sidebar = new Table();
     sidebar.defaults().center().space(Display.devicePixel(8));
-    sidebar.setBackground(TowerAssetManager.ninePatchDrawable(TowerAssetManager.WHITE_SWATCH, Color.LIGHT_GRAY));
     addAtlasItemsToSidebar(sidebar, "designer/housing/cheap.txt");
     addAtlasItemsToSidebar(sidebar, "designer/housing/high-class.txt");
 
+    padding(0);
+    debug();
     row().fill();
-    add(new ScrollPane(sidebar));
+    ScrollPane scrollPane = new ScrollPane(sidebar);
+    ScrollPane.ScrollPaneStyle paneStyle = new ScrollPane.ScrollPaneStyle(scrollPane.getStyle());
+    paneStyle.background = TowerAssetManager.ninePatchDrawable(TowerAssetManager.WHITE_SWATCH, Color.LIGHT_GRAY);
+    scrollPane.setStyle(paneStyle);
+    add(scrollPane).width(180);
     canvas = new Canvas();
     add(canvas).width(512).height(128).expand().center();
 
@@ -74,6 +79,8 @@ public class GridObjectDesigner extends TowerWindow {
 
       image.addListener(new InputListener() {
         @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+          event.cancel();
+
           Image selectedItem = new Image(region);
           selectedItem.setScaling(Scaling.none);
           float width = selectedItem.getWidth();

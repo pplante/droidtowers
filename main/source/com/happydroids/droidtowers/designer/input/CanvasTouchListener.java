@@ -64,6 +64,15 @@ public class CanvasTouchListener extends InputListener {
     }
   }
 
+  @Override public boolean scrolled(InputEvent event, int amount) {
+    float scale = canvas.getScaleX();
+    scale += (float) amount / 10;
+    System.out.println("scale = " + scale);
+    canvas.setScale(scale);
+
+    return true;
+  }
+
   public void setSelectedObject(Actor selectedObject) {
     this.selectedObject = selectedObject;
   }
