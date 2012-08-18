@@ -5,18 +5,27 @@
 package com.happydroids.droidtowers.designer;
 
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 class DesignerInputAdapter extends InputAdapter {
   private final Canvas canvas;
+  private final Stage stage;
+  private final OrthographicCamera camera;
   private Actor selectedItem;
-  private Vector2 touchOffset;
-  private Vector2 originalPosition;
+  private final Vector2 touchOffset;
+  private final Vector2 originalPosition;
 
-  public DesignerInputAdapter(Canvas canvas) {
+  public DesignerInputAdapter(Canvas canvas, Stage stage, OrthographicCamera camera) {
     this.canvas = canvas;
+    this.stage = stage;
+    this.camera = camera;
+    touchOffset = new Vector2();
+    originalPosition = new Vector2();
   }
 
   public Actor getSelectedItem() {
@@ -28,36 +37,38 @@ class DesignerInputAdapter extends InputAdapter {
   }
 
   public void setTouchOffset(Vector2 touchOffset) {
-    this.touchOffset = touchOffset;
+    this.touchOffset.set(touchOffset);
   }
 
   public void setOriginalPosition(Vector2 originalPosition) {
-    this.originalPosition = originalPosition;
+    this.originalPosition.set(originalPosition);
   }
 
   @Override public boolean touchDragged(int screenX, int screenY, int pointer) {
     if (selectedItem != null) {
       Vector2 screenCoords = new Vector2(screenX, screenY);
-      canvas.getStage().screenToStageCoordinates(screenCoords);
+      stage.screenToStageCoordinates(screenCoords);
       float xPos = screenCoords.x - touchOffset.x;
       float yPos = screenCoords.y - touchOffset.y;
       xPos = 16 * MathUtils.floor(xPos / 16);
       yPos = 16 * MathUtils.floor(yPos / 16);
       selectedItem.setPosition(xPos, yPos);
+
+      return true;
     }
 
-    return selectedItem != null;
+    return false;
   }
 
   @Override public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-    boolean hadItem = selectedItem != null;
-
-    if (hadItem) {
+    if (selectedItem != null) {
       Vector2 screenCoords = new Vector2(screenX, screenY);
-      canvas.getStage().screenToStageCoordinates(screenCoords);
+      stage.screenToStageCoordinates(screenCoords);
       canvas.stageToLocalCoordinates(screenCoords);
-      float xPos = screenCoords.x - touchOffset.x;
-      float yPos = screenCoords.y - touchOffset.y;
+      Vector3 vec = new Vector3(screenX, screenY, 1f);
+      camera.unproject(vec);
+      float xPos = vec.x - touchOffset.x;
+      float yPos = vec.y - touchOffset.y;
       xPos = 16 * MathUtils.floor(xPos / 16);
       yPos = 16 * MathUtils.floor(yPos / 16);
       if (xPos > 0 && yPos > 0) {
@@ -68,8 +79,19 @@ class DesignerInputAdapter extends InputAdapter {
       }
 
       selectedItem = null;
+
+      return true;
     }
 
-    return hadItem;
+    return false;
+  }
+
+  @Override public boolean scrolled(int amount) {
+    float scale = canvas.getScaleX();
+    scale = MathUtils.clamp(scale + (float) amount / 10, 1f, 2f);
+    canvas.setScale(scale);
+    canvas.setPosition((-canvas.getWidth() / 2) * canvas.getScaleX(), (-canvas.getHeight() / 2) * canvas.getScaleX());
+
+    return true;
   }
 }

@@ -191,7 +191,6 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
 
     float deltaTime = Gdx.graphics.getDeltaTime();
 
-    SceneManager.activeScene().getCamera().update();
     ActionManager.instance().update(deltaTime);
     InputSystem.instance().update(deltaTime);
     PathSearchManager.instance().update(deltaTime);
@@ -200,6 +199,7 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
       soundController.update(deltaTime);
     }
 
+    SceneManager.activeScene().getCamera().update(true);
     spriteBatch.setProjectionMatrix(SceneManager.activeScene().getCamera().combined);
 
     if (frameBuffer != null) {

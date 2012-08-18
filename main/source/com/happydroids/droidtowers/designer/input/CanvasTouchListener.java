@@ -25,10 +25,10 @@ public class CanvasTouchListener extends InputListener {
     Rectangle rect = new Rectangle();
     float scale = canvas.getScaleX();
     for (Actor child : canvas.getChildren()) {
-      rect.set(child.getX() * scale, child.getY() * scale, child.getWidth() * scale, child.getHeight() * scale);
+      rect.set(child.getX(), child.getY(), child.getWidth(), child.getHeight());
       if (rect.contains(x, y)) {
         selectedObject = child;
-        touchOffset = new Vector2(x - child.getX() * scale, y - child.getY() * scale);
+        touchOffset = new Vector2(x - child.getX(), y - child.getY());
         event.stop();
         break;
       }
@@ -42,13 +42,15 @@ public class CanvasTouchListener extends InputListener {
       float xPos = x - touchOffset.x;
       float yPos = y - touchOffset.y;
 
+      System.out.println(String.format("pos [%.1f, %.1f]", x, y));
+
       int step = 8;
       xPos = step * MathUtils.floor(xPos / step);
       yPos = step * MathUtils.floor(yPos / step);
 
       float scale = canvas.getScaleX();
-      xPos = MathUtils.clamp(xPos, 0, (canvas.getWidth() - selectedObject.getWidth()) * scale);
-      yPos = MathUtils.clamp(yPos, 0, (canvas.getHeight() - selectedObject.getHeight()) * scale);
+      xPos = MathUtils.clamp(xPos, 0, (canvas.getWidth() - selectedObject.getWidth()));
+      yPos = MathUtils.clamp(yPos, 0, (canvas.getHeight() - selectedObject.getHeight()));
 
       selectedObject.setPosition(xPos, yPos);
 
@@ -60,17 +62,9 @@ public class CanvasTouchListener extends InputListener {
     if (selectedObject != null) {
       canvas.addActor(selectedObject);
       selectedObject = null;
+      touchOffset = null;
       event.stop();
     }
-  }
-
-  @Override public boolean scrolled(InputEvent event, int amount) {
-    float scale = canvas.getScaleX();
-    scale += (float) amount / 10;
-    System.out.println("scale = " + scale);
-    canvas.setScale(scale);
-
-    return true;
   }
 
   public void setSelectedObject(Actor selectedObject) {

@@ -44,7 +44,8 @@ public class CameraController implements GestureDetector.GestureListener {
   public void updateCameraConstraints(Vector2 newWorldSize) {
     worldSize = newWorldSize;
     int gameWorldPadding = Display.getBiggestScreenDimension();
-    this.cameraBounds = new BoundingBox(new Vector3(-gameWorldPadding, -gameWorldPadding, 0), new Vector3(worldSize.x + gameWorldPadding, worldSize.y + gameWorldPadding, 0));
+//    this.cameraBounds = new BoundingBox(new Vector3(-gameWorldPadding, -gameWorldPadding, 0), new Vector3(worldSize.x + gameWorldPadding, worldSize.y + gameWorldPadding, 0));
+    this.cameraBounds = new BoundingBox(new Vector3(0, 0, 0), new Vector3(worldSize.x * 2, worldSize.y * 2, 0));
     checkBounds();
   }
 
@@ -151,8 +152,8 @@ public class CameraController implements GestureDetector.GestureListener {
     float halfWidth = Display.getWidth() / 2 * camera.zoom;
     float halfHeight = Display.getHeight() / 2 * camera.zoom;
 
-    camera.position.x = MathUtils.clamp(camera.position.x, cameraBounds.getMin().x + halfWidth, cameraBounds.getMax().x - halfWidth);
-    camera.position.y = MathUtils.clamp(camera.position.y, cameraBounds.getMin().y + halfHeight, cameraBounds.getMax().y - halfHeight);
+    camera.position.x = MathUtils.clamp(camera.position.x, cameraBounds.getMin().x, cameraBounds.getMax().x);
+    camera.position.y = MathUtils.clamp(camera.position.y, cameraBounds.getMin().y, cameraBounds.getMax().y);
   }
 
   public BoundingBox getCameraBounds() {

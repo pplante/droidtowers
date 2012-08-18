@@ -271,10 +271,6 @@ public class InputSystem extends InputAdapter {
   public void unfocusAll() {
     Gdx.app.debug(TAG, "unfocusAll()");
 
-    if (gestureDetector != null) {
-      gestureDetector.reset();
-    }
-
     for (int i = 0, inputProcessorsSize = inputProcessors.size; i < inputProcessorsSize; i++) {
       InputProcessorEntry entry = inputProcessors.get(i);
       if (entry.getInputProcessor() instanceof Stage) {

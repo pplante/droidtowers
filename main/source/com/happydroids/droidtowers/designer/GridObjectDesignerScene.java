@@ -5,73 +5,101 @@
 package com.happydroids.droidtowers.designer;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.gui.TowerWindow;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.platform.Display;
+import com.happydroids.droidtowers.scenes.Scene;
 
-public class GridObjectDesigner extends TowerWindow {
-  private final Canvas canvas;
-  private final DesignerInputAdapter inputProcessor;
+public class GridObjectDesignerScene extends Scene {
+  private Canvas canvas;
+  private DesignerInputAdapter inputProcessor;
+  private GestureDetector gestureDetector;
+  private ShapeRenderer shapeRenderer;
 
-  public GridObjectDesigner(Stage stage) {
-    super("Designer", stage);
+  public GridObjectDesignerScene() {
+    super();
+  }
+
+  @Override public void create(Object... args) {
+    shapeRenderer = new ShapeRenderer();
 
     Table sidebar = new Table();
-    sidebar.defaults().center().space(Display.devicePixel(8));
+    sidebar.defaults().center().pad(Display.devicePixel(8));
     addAtlasItemsToSidebar(sidebar, "designer/housing/cheap.txt");
     addAtlasItemsToSidebar(sidebar, "designer/housing/high-class.txt");
 
-    padding(0);
-    debug();
-    row().fill();
     ScrollPane scrollPane = new ScrollPane(sidebar);
     ScrollPane.ScrollPaneStyle paneStyle = new ScrollPane.ScrollPaneStyle(scrollPane.getStyle());
     paneStyle.background = TowerAssetManager.ninePatchDrawable(TowerAssetManager.WHITE_SWATCH, Color.LIGHT_GRAY);
     scrollPane.setStyle(paneStyle);
-    add(scrollPane).width(180);
+    scrollPane.setSize(180, getStage().getHeight());
+
+    getStage().addActor(scrollPane);
+
     canvas = new Canvas();
-    add(canvas).width(512).height(128).expand().center();
+    canvas.setSize(512, 128);
+//    canvas.setPosition(-256, -64);
+    canvas.setOriginX(180);
 
-    inputProcessor = new DesignerInputAdapter(canvas);
+    cameraController.updateCameraConstraints(new Vector2(128, 128));
+    cameraController.panTo(0, 0, false);
+    gestureDetector = new GestureDetector(20 * Display.getScaledDensity(), 0.5f, 1, 0.15f, cameraController);
+
+    inputProcessor = new DesignerInputAdapter(canvas, getStage(), getCamera());
     InputSystem.instance().addInputProcessor(inputProcessor, 5);
+    InputSystem.instance().addInputProcessor(gestureDetector, 20);
+  }
 
-    getContent().addListener(new ActorGestureListener() {
-      private float initialZoom = 1f;
+  @Override public void pause() {
+  }
 
-      @Override public void touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        super.touchDown(event, x, y, pointer, button);
-        initialZoom = canvas.getScaleX();
-      }
+  @Override public void resume() {
+  }
 
-      @Override public void zoom(InputEvent event, float initialDistance, float distance) {
-        float zoom = MathUtils.clamp(initialZoom * distance / initialDistance, 1f, 1.5f);
-        canvas.setScale(zoom);
-      }
-    });
+  @Override public void render(float deltaTime) {
+    getSpriteBatch().begin();
+    canvas.draw(getSpriteBatch(), 1f);
+    getSpriteBatch().end();
 
-    setDismissCallback(new Runnable() {
-      @Override public void run() {
-        InputSystem.instance().removeInputProcessor(inputProcessor);
-      }
-    });
+    shapeRenderer.setProjectionMatrix(getCamera().combined);
+    shapeRenderer.begin(ShapeRenderer.ShapeType.FilledCircle);
+    shapeRenderer.setColor(Color.RED);
+    shapeRenderer.filledCircle(0, 0, 4);
+    shapeRenderer.end();
+
+
+    shapeRenderer.begin(ShapeRenderer.ShapeType.Rectangle);
+    BoundingBox cameraBounds = cameraController.getCameraBounds();
+    shapeRenderer.rect(cameraBounds.getMin().x, cameraBounds.getMin().y, cameraBounds.getMax().x, cameraBounds.getMax().y);
+    shapeRenderer.end();
+
+    getStage().draw();
+  }
+
+  @Override public void dispose() {
+    InputSystem.instance().removeInputProcessor(inputProcessor);
+    InputSystem.instance().removeInputProcessor(gestureDetector);
   }
 
   private void addAtlasItemsToSidebar(Table sidebar, final String atlasFileName) {
     TextureAtlas atlas = new TextureAtlas(atlasFileName);
+    for (Texture texture : atlas.getTextures()) {
+      texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+    }
     for (final TextureAtlas.AtlasRegion region : atlas.getRegions()) {
       sidebar.row();
       final Image image = new Image(new TextureRegionDrawable(region), Scaling.fit);

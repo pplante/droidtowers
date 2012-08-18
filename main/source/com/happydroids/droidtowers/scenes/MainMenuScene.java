@@ -16,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.designer.GridObjectDesigner;
+import com.happydroids.droidtowers.designer.GridObjectDesignerScene;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.gui.VibrateClickListener;
@@ -24,6 +24,7 @@ import com.happydroids.droidtowers.gui.WidgetAccessor;
 import com.happydroids.droidtowers.gui.dialogs.ReviewDroidTowersPrompt;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.components.MainMenuButtonPanel;
+import com.happydroids.droidtowers.scenes.components.SceneManager;
 import com.happydroids.droidtowers.tween.TweenSystem;
 import com.happydroids.platform.Platform;
 import com.happydroids.security.SecurePreferences;
@@ -99,7 +100,7 @@ public class MainMenuScene extends SplashScene {
 //      DebugUtils.createNonSavableGame(false);
 //      DebugUtils.loadGameFromCloud(41);
 
-      new GridObjectDesigner(getStage()).show();
+      SceneManager.changeScene(GridObjectDesignerScene.class);
     }
   }
 
