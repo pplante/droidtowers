@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.TowerConsts;
+import com.happydroids.droidtowers.designer.GridObjectDesigner;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.FontManager;
 import com.happydroids.droidtowers.gui.VibrateClickListener;
@@ -93,10 +94,12 @@ public class MainMenuScene extends SplashScene {
         }
       }
 
-//      DebugUtils.loadGameByFilename("2609ce4659004cd29b06b62aa9a8852a.json");
+//      DebugUtils.loadGameByFilename("d955373bf7864c3a92dbfa0410f7ddf5.json");
 //      DebugUtils.loadFirstGameFound();
 //      DebugUtils.createNonSavableGame(false);
 //      DebugUtils.loadGameFromCloud(41);
+
+      new GridObjectDesigner(getStage()).show();
     }
   }
 
