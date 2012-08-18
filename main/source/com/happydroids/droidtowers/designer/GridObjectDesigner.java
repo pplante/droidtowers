@@ -6,6 +6,7 @@ package com.happydroids.droidtowers.designer;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.TowerAssetManager;
@@ -42,6 +44,20 @@ public class GridObjectDesigner extends TowerWindow {
     inputProcessor = new DesignerInputAdapter(canvas);
     InputSystem.instance().addInputProcessor(inputProcessor, 5);
 
+    getContent().addListener(new ActorGestureListener() {
+      private float initialZoom = 1f;
+
+      @Override public void touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        super.touchDown(event, x, y, pointer, button);
+        initialZoom = canvas.getScaleX();
+      }
+
+      @Override public void zoom(InputEvent event, float initialDistance, float distance) {
+        float zoom = MathUtils.clamp(initialZoom * distance / initialDistance, 1f, 1.5f);
+        canvas.setScale(zoom);
+      }
+    });
+
     setDismissCallback(new Runnable() {
       @Override public void run() {
         InputSystem.instance().removeInputProcessor(inputProcessor);
@@ -59,6 +75,16 @@ public class GridObjectDesigner extends TowerWindow {
       image.addListener(new InputListener() {
         @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
           Image selectedItem = new Image(region);
+          selectedItem.setScaling(Scaling.none);
+          float width = selectedItem.getWidth();
+          float height = selectedItem.getHeight();
+          if (width < 32) {
+            selectedItem.setWidth(32);
+          }
+          if (height < 32) {
+            selectedItem.setHeight(32);
+          }
+          selectedItem.setOrigin(width / 2, height / 2);
           selectedItem.addAction(Actions.sequence(Actions.scaleTo(1.25f, 1.25f, 0.15f),
                                                          Actions.scaleTo(1f, 1f, 0.15f)));
           selectedItem.setPosition(event.getStageX() - x, event.getStageY() - y);

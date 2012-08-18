@@ -40,7 +40,8 @@ public class Canvas extends WidgetGroup {
 
   @Override public void draw(SpriteBatch batch, float parentAlpha) {
     batch.setColor(getColor());
-    background.draw(batch, getX(), getY(), getWidth(), getHeight());
+    float scale = getScaleX();
+    background.draw(batch, getX() * scale, getY() * scale, getWidth() * scale, getHeight() * scale);
 
     super.draw(batch, parentAlpha);
   }
