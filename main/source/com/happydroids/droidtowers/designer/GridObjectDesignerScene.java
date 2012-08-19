@@ -132,8 +132,10 @@ public class GridObjectDesignerScene extends Scene {
     for (Texture texture : atlas.getTextures()) {
       texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
     }
+
     for (final TextureAtlas.AtlasRegion region : atlas.getRegions()) {
       sidebar.row();
+
       final Image image = new Image(new TextureRegionDrawable(region), Scaling.fit);
       sidebar.add(image).minWidth(32).minHeight(32);
 

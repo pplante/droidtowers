@@ -34,8 +34,7 @@ class GridObjectDesignerItemTouchListener extends InputListener {
     if (height < 32) {
       selectedItem.setHeight(32);
     }
-    selectedItem.setOrigin(-width / 2, -height / 2);
-    selectedItem.addAction(Actions.sequence(Actions.scaleTo(1.25f, 1.25f, 0.15f),
+    selectedItem.addAction(Actions.sequence(Actions.scaleTo(1.5f, 1.5f, 0.25f),
                                                    Actions.scaleTo(1f, 1f, 0.15f)));
     selectedItem.setPosition(event.getStageX() - x, event.getStageY() - y);
 
