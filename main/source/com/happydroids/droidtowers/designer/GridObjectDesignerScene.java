@@ -11,13 +11,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.collision.BoundingBox;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.input.InputSystem;
@@ -39,8 +37,7 @@ public class GridObjectDesignerScene extends Scene {
 
     Table sidebar = new Table();
     sidebar.defaults().center().pad(Display.devicePixel(8));
-    addAtlasItemsToSidebar(sidebar, "designer/housing/cheap.txt");
-    addAtlasItemsToSidebar(sidebar, "designer/housing/high-class.txt");
+
 
     ScrollPane scrollPane = new ScrollPane(sidebar);
     ScrollPane.ScrollPaneStyle paneStyle = new ScrollPane.ScrollPaneStyle(scrollPane.getStyle());
@@ -48,12 +45,29 @@ public class GridObjectDesignerScene extends Scene {
     scrollPane.setStyle(paneStyle);
     scrollPane.setSize(180, getStage().getHeight());
 
-    getStage().addActor(scrollPane);
+    LayeredDrawable layers = new LayeredDrawable();
+    layers.add(new DropShadow());
+    layers.add(new TiledDrawable(TowerAssetManager.drawable("swatches/modal-noise-purple.png")));
+
+    paneStyle.background = layers;
+
 
     canvas = new Canvas();
     canvas.setSize(512, 128);
-//    canvas.setPosition(-256, -64);
-    canvas.setOriginX(180);
+
+    Table widget = new Table();
+
+    widget.setBackground(new TiledDrawable(TowerAssetManager.drawable("swatches/modal-noise-light.png")));
+    widget.setFillParent(true);
+    widget.add(canvas).center();
+    widget.setSize(canvas.getWidth() * 2, canvas.getHeight() * 2);
+    ScrollPane canvasScrollPane = new ScrollPane(widget);
+    canvasScrollPane.setSize(getStage().getWidth() - 180, getStage().getHeight());
+    canvasScrollPane.setPosition(180, 0);
+    canvasScrollPane.setOverscroll(true);
+
+    getStage().addActor(canvasScrollPane);
+    getStage().addActor(scrollPane);
 
     cameraController.updateCameraConstraints(new Vector2(128, 128));
     cameraController.panTo(0, 0, false);
@@ -61,7 +75,9 @@ public class GridObjectDesignerScene extends Scene {
 
     inputProcessor = new DesignerInputAdapter(canvas, getStage(), getCamera());
     InputSystem.instance().addInputProcessor(inputProcessor, 5);
-    InputSystem.instance().addInputProcessor(gestureDetector, 20);
+
+    addAtlasItemsToSidebar(sidebar, "designer/housing/cheap.txt");
+    addAtlasItemsToSidebar(sidebar, "designer/housing/high-class.txt");
   }
 
   @Override public void pause() {
@@ -71,9 +87,13 @@ public class GridObjectDesignerScene extends Scene {
   }
 
   @Override public void render(float deltaTime) {
-    getSpriteBatch().begin();
-    canvas.draw(getSpriteBatch(), 1f);
-    getSpriteBatch().end();
+//    camera.translate(-90, 0, 0);
+//    camera.update();
+//    getSpriteBatch().setProjectionMatrix(camera.combined);
+//    getSpriteBatch().begin();
+//    canvas.draw(getSpriteBatch(), 1f);
+//    getSpriteBatch().end();
+
 
     shapeRenderer.setProjectionMatrix(getCamera().combined);
     shapeRenderer.begin(ShapeRenderer.ShapeType.FilledCircle);
@@ -84,10 +104,22 @@ public class GridObjectDesignerScene extends Scene {
 
     shapeRenderer.begin(ShapeRenderer.ShapeType.Rectangle);
     BoundingBox cameraBounds = cameraController.getCameraBounds();
-    shapeRenderer.rect(cameraBounds.getMin().x, cameraBounds.getMin().y, cameraBounds.getMax().x, cameraBounds.getMax().y);
+    shapeRenderer.rect(cameraBounds.getMin().x,
+                              cameraBounds.getMin().y,
+                              cameraBounds.getMax().x * 2,
+                              cameraBounds.getMax().y * 2);
     shapeRenderer.end();
 
+    camera.translate(90, 0, 0);
+    camera.update();
+
     getStage().draw();
+
+    shapeRenderer.setProjectionMatrix(getStage().getCamera().combined);
+    shapeRenderer.begin(ShapeRenderer.ShapeType.FilledCircle);
+    shapeRenderer.setColor(Color.GREEN);
+    shapeRenderer.filledCircle(getStage().getWidth() / 2 + 90, getStage().getHeight() / 2, 4);
+    shapeRenderer.end();
   }
 
   @Override public void dispose() {
@@ -105,36 +137,7 @@ public class GridObjectDesignerScene extends Scene {
       final Image image = new Image(new TextureRegionDrawable(region), Scaling.fit);
       sidebar.add(image).minWidth(32).minHeight(32);
 
-      image.addListener(new InputListener() {
-        @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-          event.cancel();
-
-          Image selectedItem = new Image(region);
-          selectedItem.setScaling(Scaling.none);
-          float width = selectedItem.getWidth();
-          float height = selectedItem.getHeight();
-          if (width < 32) {
-            selectedItem.setWidth(32);
-          }
-          if (height < 32) {
-            selectedItem.setHeight(32);
-          }
-          selectedItem.setOrigin(width / 2, height / 2);
-          selectedItem.addAction(Actions.sequence(Actions.scaleTo(1.25f, 1.25f, 0.15f),
-                                                         Actions.scaleTo(1f, 1f, 0.15f)));
-          selectedItem.setPosition(event.getStageX() - x, event.getStageY() - y);
-
-          event.getStage().addActor(selectedItem);
-
-          inputProcessor.setSelectedItem(selectedItem);
-          inputProcessor.setTouchOffset(new Vector2(x, y));
-          inputProcessor.setOriginalPosition(new Vector2(event.getStageX(), event.getStageY()));
-
-          return true;
-        }
-      });
+      image.addListener(new GridObjectDesignerItemTouchListener(inputProcessor, region));
     }
   }
-
-
 }

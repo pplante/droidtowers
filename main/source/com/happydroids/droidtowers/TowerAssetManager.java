@@ -263,7 +263,7 @@ public class TowerAssetManager {
     return new TextureRegionDrawable(textureFromAtlas(drawableName, atlasFileName));
   }
 
-  public static Drawable drawable(String fileName) {
+  public static TextureRegionDrawable drawable(String fileName) {
     return new TextureRegionDrawable(new TextureRegion(texture(fileName)));
   }
 
