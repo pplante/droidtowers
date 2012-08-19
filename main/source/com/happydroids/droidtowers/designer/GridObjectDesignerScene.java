@@ -10,7 +10,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.collision.BoundingBox;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -21,6 +22,8 @@ import com.happydroids.droidtowers.TowerAssetManager;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.Scene;
+
+import static com.happydroids.droidtowers.TowerAssetManager.ninePatchDrawable;
 
 public class GridObjectDesignerScene extends Scene {
   private Canvas canvas;
@@ -40,8 +43,11 @@ public class GridObjectDesignerScene extends Scene {
 
 
     ScrollPane scrollPane = new ScrollPane(sidebar);
+    scrollPane.setFadeScrollBars(true);
+    scrollPane.setupFadeScrollBars(0.5f, 1f);
     ScrollPane.ScrollPaneStyle paneStyle = new ScrollPane.ScrollPaneStyle(scrollPane.getStyle());
-    paneStyle.background = TowerAssetManager.ninePatchDrawable(TowerAssetManager.WHITE_SWATCH, Color.LIGHT_GRAY);
+    paneStyle.background = ninePatchDrawable(TowerAssetManager.WHITE_SWATCH, Color.LIGHT_GRAY);
+    paneStyle.vScrollKnob = paneStyle.hScrollKnob = ninePatchDrawable("hud/scroll-bar.png", Color.DARK_GRAY, 3, 3, 3, 3);
     scrollPane.setStyle(paneStyle);
     scrollPane.setSize(180, getStage().getHeight());
 
@@ -51,20 +57,29 @@ public class GridObjectDesignerScene extends Scene {
 
     paneStyle.background = layers;
 
-
     canvas = new Canvas();
     canvas.setSize(512, 128);
 
+    Group widgetGroup = new Group();
+    widgetGroup.addActor(canvas);
+    widgetGroup.setSize(512, 128);
     Table widget = new Table();
-
+    widget.pad(512);
     widget.setBackground(new TiledDrawable(TowerAssetManager.drawable("swatches/modal-noise-light.png")));
-    widget.setFillParent(true);
-    widget.add(canvas).center();
-    widget.setSize(canvas.getWidth() * 2, canvas.getHeight() * 2);
-    ScrollPane canvasScrollPane = new ScrollPane(widget);
+    widget.add(widgetGroup).center().pad(512);
+    final ScrollPane canvasScrollPane = new ScrollPane(widget);
+    canvasScrollPane.setStyle(paneStyle);
     canvasScrollPane.setSize(getStage().getWidth() - 180, getStage().getHeight());
     canvasScrollPane.setPosition(180, 0);
-    canvasScrollPane.setOverscroll(true);
+    canvasScrollPane.setOverscroll(false);
+
+    canvasScrollPane.addAction(Actions.sequence(Actions.delay(0.15f),
+                                                       Actions.run(new Runnable() {
+                                                         @Override public void run() {
+                                                           canvasScrollPane.setScrollPercentX(0.5f);
+                                                           canvasScrollPane.setScrollPercentY(0.5f);
+                                                         }
+                                                       })));
 
     getStage().addActor(canvasScrollPane);
     getStage().addActor(scrollPane);
@@ -87,39 +102,7 @@ public class GridObjectDesignerScene extends Scene {
   }
 
   @Override public void render(float deltaTime) {
-//    camera.translate(-90, 0, 0);
-//    camera.update();
-//    getSpriteBatch().setProjectionMatrix(camera.combined);
-//    getSpriteBatch().begin();
-//    canvas.draw(getSpriteBatch(), 1f);
-//    getSpriteBatch().end();
-
-
-    shapeRenderer.setProjectionMatrix(getCamera().combined);
-    shapeRenderer.begin(ShapeRenderer.ShapeType.FilledCircle);
-    shapeRenderer.setColor(Color.RED);
-    shapeRenderer.filledCircle(0, 0, 4);
-    shapeRenderer.end();
-
-
-    shapeRenderer.begin(ShapeRenderer.ShapeType.Rectangle);
-    BoundingBox cameraBounds = cameraController.getCameraBounds();
-    shapeRenderer.rect(cameraBounds.getMin().x,
-                              cameraBounds.getMin().y,
-                              cameraBounds.getMax().x * 2,
-                              cameraBounds.getMax().y * 2);
-    shapeRenderer.end();
-
-    camera.translate(90, 0, 0);
-    camera.update();
-
     getStage().draw();
-
-    shapeRenderer.setProjectionMatrix(getStage().getCamera().combined);
-    shapeRenderer.begin(ShapeRenderer.ShapeType.FilledCircle);
-    shapeRenderer.setColor(Color.GREEN);
-    shapeRenderer.filledCircle(getStage().getWidth() / 2 + 90, getStage().getHeight() / 2, 4);
-    shapeRenderer.end();
   }
 
   @Override public void dispose() {
@@ -139,7 +122,7 @@ public class GridObjectDesignerScene extends Scene {
       final Image image = new Image(new TextureRegionDrawable(region), Scaling.fit);
       sidebar.add(image).minWidth(32).minHeight(32);
 
-      image.addListener(new GridObjectDesignerItemTouchListener(inputProcessor, region));
+      image.addListener(new GridObjectDesignerItemTouchListener(canvas, inputProcessor, region));
     }
   }
 }

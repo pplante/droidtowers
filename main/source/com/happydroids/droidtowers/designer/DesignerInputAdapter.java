@@ -76,6 +76,7 @@ class DesignerInputAdapter extends InputAdapter {
       Rectangle itemRect = new Rectangle(xPos, yPos, selectedItem.getWidth(), selectedItem.getHeight());
       Rectangle canvasRect = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
       if (canvasRect.overlaps(itemRect)) {
+        selectedItem.setScale(1f);
         selectedItem.setPosition(xPos, yPos);
         xPos = MathUtils.clamp(xPos, 0f, canvas.getWidth() - selectedItem.getWidth());
         yPos = MathUtils.clamp(yPos, 0f, canvas.getHeight() - selectedItem.getHeight());

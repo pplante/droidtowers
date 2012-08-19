@@ -11,6 +11,7 @@
     "backgrounds/clouds.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "swatches/swatch-white-semi-black-border.png":"com.badlogic.gdx.graphics.Texture",
     "swatches/swatch-white-triangle-left.png":"com.badlogic.gdx.graphics.Texture",
+    "hud/scroll-bar.png":"com.badlogic.gdx.graphics.Texture",
     "hud/dialog-bg.png":"com.badlogic.gdx.graphics.Texture",
     "hud/window-bg.png":"com.badlogic.gdx.graphics.Texture",
     "hud/skin.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",

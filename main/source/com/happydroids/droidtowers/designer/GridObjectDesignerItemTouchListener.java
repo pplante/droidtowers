@@ -13,10 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Scaling;
 
 class GridObjectDesignerItemTouchListener extends InputListener {
+  private final Canvas canvas;
   private final DesignerInputAdapter inputProcessor;
   private final TextureAtlas.AtlasRegion region;
 
-  public GridObjectDesignerItemTouchListener(DesignerInputAdapter inputProcessor, TextureAtlas.AtlasRegion region) {
+  public GridObjectDesignerItemTouchListener(Canvas canvas, DesignerInputAdapter inputProcessor, TextureAtlas.AtlasRegion region) {
+    this.canvas = canvas;
     this.inputProcessor = inputProcessor;
     this.region = region;
   }
@@ -35,7 +37,7 @@ class GridObjectDesignerItemTouchListener extends InputListener {
       selectedItem.setHeight(32);
     }
     selectedItem.addAction(Actions.sequence(Actions.scaleTo(1.5f, 1.5f, 0.25f),
-                                                   Actions.scaleTo(1f, 1f, 0.15f)));
+                                                   Actions.scaleTo(canvas.getScaleX(), canvas.getScaleY(), 0.15f)));
     selectedItem.setPosition(event.getStageX() - x, event.getStageY() - y);
 
     event.getStage().addActor(selectedItem);
