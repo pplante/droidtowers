@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Scaling;
 
+import static com.badlogic.gdx.math.MathUtils.floor;
+
 class GridObjectDesignerItemTouchListener extends InputListener {
   private final Canvas canvas;
   private final DesignerInputAdapter inputProcessor;
@@ -27,7 +29,8 @@ class GridObjectDesignerItemTouchListener extends InputListener {
     event.cancel();
 
     Image selectedItem = new Image(region);
-    selectedItem.setScaling(Scaling.none);
+    selectedItem.setScale(2f);
+    selectedItem.setScaling(Scaling.fit);
     float width = selectedItem.getWidth();
     float height = selectedItem.getHeight();
     if (width < 32) {
@@ -36,15 +39,19 @@ class GridObjectDesignerItemTouchListener extends InputListener {
     if (height < 32) {
       selectedItem.setHeight(32);
     }
-    selectedItem.addAction(Actions.sequence(Actions.scaleTo(1.5f, 1.5f, 0.25f),
-                                                   Actions.scaleTo(canvas.getScaleX(), canvas.getScaleY(), 0.15f)));
-    selectedItem.setPosition(event.getStageX() - x, event.getStageY() - y);
+    selectedItem.addAction(Actions.scaleTo(1, 1, 0.35f));
 
-    event.getStage().addActor(selectedItem);
+
+    Vector2 stageCoords = new Vector2(event.getStageX(), event.getStageY());
+    canvas.stageToLocalCoordinates(stageCoords);
+    int step = 2;
+    selectedItem.setPosition((float) (step * floor((stageCoords.x - x) / step)),
+                                    (float) (step * floor((stageCoords.y - y) / step)));
+    canvas.addActor(selectedItem);
 
     inputProcessor.setSelectedItem(selectedItem);
     inputProcessor.setTouchOffset(new Vector2(x, y));
-    inputProcessor.setOriginalPosition(new Vector2(event.getStageX(), event.getStageY()));
+    inputProcessor.setOriginalPosition(stageCoords);
 
     return true;
   }

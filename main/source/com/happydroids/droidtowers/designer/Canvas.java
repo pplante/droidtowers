@@ -71,10 +71,10 @@ public class Canvas extends WidgetGroup {
     walls.draw(batch, getX(), getY(), getWidth() * scale, getHeight() * scale);
 
     batch.setColor(floorColor);
-    floor.draw(batch, getX(), getY(), getWidth() * scale, 20 * scale);
+    floor.draw(batch, getX(), getY(), getWidth() * scale, 10 * scale);
 
     batch.setColor(ceilingColor);
-    batch.draw(ceiling, getX(), getY() + (getHeight() - 14) * scale, getWidth() * scale, 14 * scale);
+    batch.draw(ceiling, getX(), getY() + (getHeight() - 7) * scale, getWidth() * scale, 7 * scale);
 
     batch.setColor(Color.WHITE);
     super.draw(batch, parentAlpha);

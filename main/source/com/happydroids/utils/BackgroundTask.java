@@ -4,6 +4,7 @@
 
 package com.happydroids.utils;
 
+import com.happydroids.droidtowers.gamestate.server.RunnableQueue;
 import com.happydroids.error.ErrorUtil;
 
 import java.util.concurrent.ExecutorService;
@@ -20,7 +21,7 @@ public abstract class BackgroundTask {
   private static Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
   private static PostExecuteManager postExecuteManager;
   private boolean canceled;
-
+  private RunnableQueue postExecuteRunnables;
 
   public BackgroundTask() {
 
@@ -36,6 +37,16 @@ public abstract class BackgroundTask {
   protected abstract void execute() throws Exception;
 
   public synchronized void afterExecute() {
+  }
+
+  public BackgroundTask addPostExecuteRunnable(Runnable runnable) {
+    if (postExecuteRunnables == null) {
+      postExecuteRunnables = new RunnableQueue();
+    }
+
+    postExecuteRunnables.push(runnable);
+
+    return this;
   }
 
   public synchronized void onError(Throwable e) {
@@ -68,6 +79,10 @@ public abstract class BackgroundTask {
             postExecuteManager.postRunnable(new Runnable() {
               public void run() {
                 afterExecute();
+
+                if (postExecuteRunnables != null) {
+                  postExecuteRunnables.runAll();
+                }
               }
             });
           }

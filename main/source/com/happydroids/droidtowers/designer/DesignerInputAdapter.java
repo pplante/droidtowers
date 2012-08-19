@@ -49,11 +49,12 @@ class DesignerInputAdapter extends InputAdapter {
     if (selectedItem != null) {
       Vector2 screenCoords = new Vector2(screenX, screenY);
       stage.screenToStageCoordinates(screenCoords);
-
-      float xPos = screenCoords.x - touchOffset.x;
-      float yPos = screenCoords.y - touchOffset.y;
-      xPos = 16 * MathUtils.floor(xPos / 16);
-      yPos = 16 * MathUtils.floor(yPos / 16);
+      canvas.stageToLocalCoordinates(screenCoords);
+      float xPos;
+      float yPos;
+      int step = 2;
+      xPos = step * MathUtils.floor((screenCoords.x - touchOffset.x) / step);
+      yPos = step * MathUtils.floor((screenCoords.y - touchOffset.y) / step);
 
       selectedItem.setPosition(xPos, yPos);
 
