@@ -1,0 +1,74 @@
+floors.png
+format: RGB888
+filter: Nearest,Nearest
+repeat: none
+pattern
+  rotate: false
+  xy: 0, 15
+  size: 15, 15
+  orig: 15, 15
+  offset: 0, 0
+  index: 8
+pattern
+  rotate: false
+  xy: 0, 30
+  size: 15, 15
+  orig: 15, 15
+  offset: 0, 0
+  index: 7
+pattern
+  rotate: false
+  xy: 0, 0
+  size: 15, 15
+  orig: 15, 15
+  offset: 0, 0
+  index: 9
+pattern
+  rotate: false
+  xy: 15, 0
+  size: 15, 15
+  orig: 15, 15
+  offset: 0, 0
+  index: 10
+pattern
+  rotate: false
+  xy: 15, 15
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: 2
+pattern
+  rotate: false
+  xy: 42, 12
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: 1
+pattern
+  rotate: false
+  xy: 42, 0
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: 4
+pattern
+  rotate: false
+  xy: 30, 12
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: 3
+pattern
+  rotate: false
+  xy: 0, 45
+  size: 15, 15
+  orig: 15, 15
+  offset: 0, 0
+  index: 6
+pattern
+  rotate: false
+  xy: 30, 0
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: 5

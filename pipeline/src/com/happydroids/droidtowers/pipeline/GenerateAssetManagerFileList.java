@@ -50,6 +50,7 @@ public class GenerateAssetManagerFileList {
     addDirectoryToAssetManager("hud/", ".txt", TextureAtlas.class);
     addDirectoryToAssetManager("rooms/", ".txt", TextureAtlas.class);
 
+    addFileEntry(assetsDir.child("designer/floors.txt"), TextureAtlas.class);
     addFileEntry(assetsDir.child("characters.txt"), TextureAtlas.class);
     addFileEntry(assetsDir.child("transport.txt"), TextureAtlas.class);
     addFileEntry(assetsDir.child("rain-drop.png"), Texture.class);

@@ -42,9 +42,7 @@ public class CanvasTouchListener extends InputListener {
       float xPos = x - touchOffset.x;
       float yPos = y - touchOffset.y;
 
-      System.out.println(String.format("pos [%.1f, %.1f]", x, y));
-
-      int step = 8;
+      int step = 2;
       xPos = step * MathUtils.floor(xPos / step);
       yPos = step * MathUtils.floor(yPos / step);
 

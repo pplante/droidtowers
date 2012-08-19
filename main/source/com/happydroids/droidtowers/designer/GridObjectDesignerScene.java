@@ -36,6 +36,8 @@ public class GridObjectDesignerScene extends Scene {
   }
 
   @Override public void create(Object... args) {
+    TowerAssetManager.assetManager().finishLoading();
+
     shapeRenderer = new ShapeRenderer();
 
     Table sidebar = new Table();

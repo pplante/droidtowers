@@ -39,6 +39,7 @@
     "backgrounds/cityscape.png":"com.badlogic.gdx.graphics.Texture",
     "hud/rating-bars/security.png":"com.badlogic.gdx.graphics.Texture",
     "hud/misc.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
+    "designer/floors.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "rooms/commercial.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "hud/rating-bars/cockroach.png":"com.badlogic.gdx.graphics.Texture",
     "backgrounds/ground-tile.png":"com.badlogic.gdx.graphics.Texture",

@@ -70,8 +70,9 @@ class DesignerInputAdapter extends InputAdapter {
       canvas.stageToLocalCoordinates(screenCoords);
       float xPos;
       float yPos;
-      xPos = 16 * MathUtils.floor((screenCoords.x - touchOffset.x) / 16);
-      yPos = 16 * MathUtils.floor((screenCoords.y - touchOffset.y) / 16);
+      int step = 2;
+      xPos = step * MathUtils.floor((screenCoords.x - touchOffset.x) / step);
+      yPos = step * MathUtils.floor((screenCoords.y - touchOffset.y) / step);
 
       Rectangle itemRect = new Rectangle(xPos, yPos, selectedItem.getWidth(), selectedItem.getHeight());
       Rectangle canvasRect = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
