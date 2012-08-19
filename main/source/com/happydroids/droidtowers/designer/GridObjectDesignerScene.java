@@ -7,9 +7,6 @@ package com.happydroids.droidtowers.designer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -28,8 +25,6 @@ import static com.happydroids.droidtowers.TowerAssetManager.ninePatchDrawable;
 public class GridObjectDesignerScene extends Scene {
   private Canvas canvas;
   private DesignerInputAdapter inputProcessor;
-  private GestureDetector gestureDetector;
-  private ShapeRenderer shapeRenderer;
 
   public GridObjectDesignerScene() {
     super();
@@ -37,8 +32,6 @@ public class GridObjectDesignerScene extends Scene {
 
   @Override public void create(Object... args) {
     TowerAssetManager.assetManager().finishLoading();
-
-    shapeRenderer = new ShapeRenderer();
 
     Table sidebar = new Table();
     sidebar.defaults().center().pad(Display.devicePixel(8));
@@ -86,10 +79,6 @@ public class GridObjectDesignerScene extends Scene {
     getStage().addActor(canvasScrollPane);
     getStage().addActor(scrollPane);
 
-    cameraController.updateCameraConstraints(new Vector2(128, 128));
-    cameraController.panTo(0, 0, false);
-    gestureDetector = new GestureDetector(20 * Display.getScaledDensity(), 0.5f, 1, 0.15f, cameraController);
-
     inputProcessor = new DesignerInputAdapter(canvas, getStage(), getCamera());
     InputSystem.instance().addInputProcessor(inputProcessor, 5);
 
@@ -109,7 +98,6 @@ public class GridObjectDesignerScene extends Scene {
 
   @Override public void dispose() {
     InputSystem.instance().removeInputProcessor(inputProcessor);
-    InputSystem.instance().removeInputProcessor(gestureDetector);
   }
 
   private void addAtlasItemsToSidebar(Table sidebar, final String atlasFileName) {
