@@ -6,5 +6,6 @@ package com.happydroids.droidtowers.platform;
 
 public interface PlatformCheckInManager {
   public void checkInNow();
+
   public void checkInNow(String message);
 }

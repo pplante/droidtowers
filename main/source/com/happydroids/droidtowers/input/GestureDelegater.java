@@ -28,7 +28,9 @@ public class GestureDelegater implements GestureListener {
   }
 
   public void switchTool(OrthographicCamera camera, List<GameLayer> gameLayers, GestureTool tool, Runnable switchToolRunnable) {
-    if (HappyDroidConsts.DEBUG) System.out.println("tool = " + tool);
+    if (HappyDroidConsts.DEBUG) {
+      System.out.println("tool = " + tool);
+    }
     if (beforeSwitchToolRunnable != null) {
       beforeSwitchToolRunnable.run();
       beforeSwitchToolRunnable = null;

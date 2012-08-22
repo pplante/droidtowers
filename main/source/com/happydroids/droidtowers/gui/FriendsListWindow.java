@@ -138,7 +138,8 @@ public class FriendsListWindow extends ScrollableTowerWindow {
     } else {
       row().fillX();
       if (playerFriendRows.isEmpty()) {
-        add(FontManager.Roboto18.makeLabel("Wow, terribly sorry to tell you this..\n\nBut you appear to have no friends.\n\n")).expandX();
+        add(FontManager.Roboto18
+                    .makeLabel("Wow, terribly sorry to tell you this..\n\nBut you appear to have no friends.\n\n")).expandX();
       } else {
         add(FontManager.Roboto18.makeLabel("You have already invited everyone, thanks!")).expandX();
       }

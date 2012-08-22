@@ -27,7 +27,9 @@ public class SellGridObjectConfirmationDialog extends Dialog {
     setTitle("Are you sure?");
 
     if (objectToSell.getAmountLoanedFromCousinVinnie() > 0) {
-      setMessage("You must pay back Cousin Vinnie before you can sell his hideout in: " + objectToSell.getName() + "\n\nDo you want to pay him back: " + TowerConsts.CURRENCY_SYMBOL + StringUtils.formatNumber(objectToSell.getAmountLoanedFromCousinVinnie()) + "?");
+      setMessage("You must pay back Cousin Vinnie before you can sell his hideout in: " + objectToSell.getName() + "\n\nDo you want to pay him back: " + TowerConsts.CURRENCY_SYMBOL + StringUtils
+                                                                                                                                                                                               .formatNumber(objectToSell
+                                                                                                                                                                                                                     .getAmountLoanedFromCousinVinnie()) + "?");
       addButton("Yes", new OnClickCallback() {
         @Override
         public void onClick(Dialog dialog) {

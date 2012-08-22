@@ -10,6 +10,6 @@ public class UnlockDroidTowersWindow extends TowerWindow {
   public UnlockDroidTowersWindow(Stage stage) {
     super("Unlock Droid Towers", stage);
 
-    
+
   }
 }

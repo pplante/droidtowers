@@ -80,7 +80,8 @@ public class OptionsDialog extends Dialog {
         @Override
         public void run() {
           if (displayModeChanged) {
-            Gdx.graphics.setDisplayMode(preferences.getInteger("width"), preferences.getInteger("height"), preferences.getBoolean("fullscreen"));
+            Gdx.graphics
+                    .setDisplayMode(preferences.getInteger("width"), preferences.getInteger("height"), preferences.getBoolean("fullscreen"));
             SceneManager.restartActiveScene();
           }
         }

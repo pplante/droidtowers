@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="android-acra">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/android-shared/libs/acra-4.3.0b2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/android-shared/libs/acra-4.3.0b2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

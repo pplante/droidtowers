@@ -171,7 +171,8 @@ public class LoadTowerWindow extends ScrollableTowerWindow {
     Table metadata = new Table();
     metadata.defaults().top().left().fillX();
     addLabelRow(metadata, towerData.getTowerName(), FontManager.RobotoBold18, Color.WHITE);
-    addLabelRow(metadata, "Population: " + getNumberInstance().format(towerData.getPlayer().getTotalPopulation()), FontManager.Default, Color.GRAY);
+    addLabelRow(metadata, "Population: " + getNumberInstance().format(towerData.getPlayer()
+                                                                              .getTotalPopulation()), FontManager.Default, Color.GRAY);
     Date lastPlayed = towerData.getMetadata().lastPlayed;
     if (lastPlayed != null) {
       PrettyTime prettyTime = new PrettyTime();

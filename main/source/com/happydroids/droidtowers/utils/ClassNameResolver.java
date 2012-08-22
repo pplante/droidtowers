@@ -22,7 +22,9 @@ public class ClassNameResolver {
   };
 
   public static Class tryToLoadClass(String className) throws IOException {
-    if (HappyDroidConsts.DEBUG) System.out.println("Looking for: " + className);
+    if (HappyDroidConsts.DEBUG) {
+      System.out.println("Looking for: " + className);
+    }
     try {
       return Class.forName(className, true, Thread.currentThread().getContextClassLoader());
     } catch (ClassNotFoundException e) {

@@ -48,7 +48,9 @@ public class CousinVinnieAcceptedLoanDialog extends Dialog {
       c.add();
 
       c.row().spaceTop(Display.devicePixel(20));
-      c.add(FontManager.Roboto18.makeLabel("Remember, we're business partners now. So keep\nthose security guards away from me.")).colspan(2);
+      c.add(FontManager.Roboto18
+                    .makeLabel("Remember, we're business partners now. So keep\nthose security guards away from me."))
+              .colspan(2);
 
       setView(c);
     } else {

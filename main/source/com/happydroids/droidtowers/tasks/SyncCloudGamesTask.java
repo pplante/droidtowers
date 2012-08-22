@@ -57,7 +57,8 @@ public class SyncCloudGamesTask extends BackgroundTask {
         try {
           GameSave towerData = GameSaveFactory.readMetadata(file.read());
           for (CloudGameSave cloudGameSave : gameSaves.getObjects()) {
-            if (towerData.getCloudSaveUri() != null && towerData.getCloudSaveUri().equals(cloudGameSave.getResourceUri())) {
+            if (towerData.getCloudSaveUri() != null && towerData.getCloudSaveUri()
+                                                               .equals(cloudGameSave.getResourceUri())) {
               if (towerData.getFileGeneration() < cloudGameSave.getFileGeneration()) {
                 file.writeString(cloudGameSave.getBlob(), false);
               }

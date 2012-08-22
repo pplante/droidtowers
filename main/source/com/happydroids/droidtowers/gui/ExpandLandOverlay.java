@@ -113,7 +113,9 @@ public class ExpandLandOverlay extends WidgetGroup {
     avatarLayer.adjustAvatarPositions(GAME_GRID_EXPAND_LAND_SIZE);
 
     Vector3 cameraPosition = cameraController.getCamera().position.cpy();
-    cameraController.getCamera().position.set(cameraPosition.x + (TowerConsts.GRID_UNIT_SIZE * GAME_GRID_EXPAND_LAND_SIZE), cameraPosition.y, cameraPosition.z);
+    cameraController.getCamera()
+            .position
+            .set(cameraPosition.x + (TowerConsts.GRID_UNIT_SIZE * GAME_GRID_EXPAND_LAND_SIZE), cameraPosition.y, cameraPosition.z);
     cameraController.panTo(0, cameraController.getCamera().position.y, true);
     gameGrid.events().register(DroidTowersGame.getSoundController());
   }

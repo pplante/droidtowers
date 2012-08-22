@@ -39,7 +39,9 @@ public class GameSaveFactory {
 
   @SuppressWarnings("PointlessBooleanExpression")
   public static void save(GameSave gameSave, FileHandle gameFile) throws IOException {
-    if (TowerConsts.DEBUG && gameSave.isSaveToDiskDisabled()) return;
+    if (TowerConsts.DEBUG && gameSave.isSaveToDiskDisabled()) {
+      return;
+    }
     gameSave.getMetadata().lastPlayed = new Date();
     OutputStream stream = gameFile.write(false);
     TowerGameService.instance().getObjectMapper().writeValue(stream, gameSave);

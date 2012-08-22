@@ -110,12 +110,17 @@ public class GameGridRenderer extends GameLayer {
     for (int i = 0, objectsSize = objects.size; i < objectsSize; i++) {
       GridObject gridObject = objects.get(i);
       tmp.set(gridObject.getWorldCenter().x, gridObject.getWorldCenter().y, 0);
-      if (camera.frustum.sphereInFrustum(tmp, Math.max(gridObject.getWorldBounds().width, gridObject.getWorldBounds().height))) {
+      if (camera.frustum
+                  .sphereInFrustum(tmp, Math.max(gridObject.getWorldBounds().width, gridObject.getWorldBounds().height))) {
         Float returnValue = function.apply(gridObject);
         if (returnValue != null) {
           baseColor.a = returnValue;
           shapeRenderer.setColor(baseColor);
-          shapeRenderer.filledRect(gridObject.getPosition().getWorldX(), gridObject.getPosition().getWorldY(), gridObject.getSize().getWorldX(), gridObject.getSize().getWorldY());
+          shapeRenderer.filledRect(gridObject.getPosition().getWorldX(), gridObject.getPosition()
+                                                                                 .getWorldY(), gridObject.getSize()
+                                                                                                       .getWorldX(), gridObject
+                                                                                                                             .getSize()
+                                                                                                                             .getWorldY());
         }
       }
     }
@@ -151,7 +156,8 @@ public class GameGridRenderer extends GameLayer {
     for (GridObject gridObject : gameGrid.getObjects()) {
       if (gridObject.shouldUseSpriteCache() && gridObject.getSpriteCacheId() != -1) {
         tmp.set(gridObject.getWorldCenter().x, gridObject.getWorldCenter().y, 0);
-        if (camera.frustum.sphereInFrustum(tmp, Math.max(gridObject.getWorldBounds().width, gridObject.getWorldBounds().height))) {
+        if (camera.frustum
+                    .sphereInFrustum(tmp, Math.max(gridObject.getWorldBounds().width, gridObject.getWorldBounds().height))) {
           spriteCache.draw(gridObject.getSpriteCacheId());
         }
       }
@@ -164,7 +170,8 @@ public class GameGridRenderer extends GameLayer {
 
     for (GridObject gridObject : gameGrid.getObjects()) {
       tmp.set(gridObject.getWorldCenter().x, gridObject.getWorldCenter().y, 0);
-      if (camera.frustum.sphereInFrustum(tmp, Math.max(gridObject.getWorldBounds().width, gridObject.getWorldBounds().height))) {
+      if (camera.frustum
+                  .sphereInFrustum(tmp, Math.max(gridObject.getWorldBounds().width, gridObject.getWorldBounds().height))) {
         if (!gridObject.shouldUseSpriteCache() || gridObject.getSpriteCacheId() == -1) {
           gridObject.render(spriteBatch, spriteCache, renderTintColor);
         }

@@ -19,7 +19,9 @@ public class PurchaseAppreciationDialog extends Dialog {
     happyDroidImage.setScale((getStage().getHeight() * 0.33f) / happyDroidImage.getHeight());
     happyDroidImage.setPosition(getStage().getWidth() / 2, 0);
 
-    content.add(FontManager.RobotoBold18.makeLabel("Thank you for purchasing Droid Towers: Unlimited!\n\nAs promised, all limitations have been lifted!\n\nHappy Building,\nHappy Droids Team")).expand();
+    content.add(FontManager.RobotoBold18
+                        .makeLabel("Thank you for purchasing Droid Towers: Unlimited!\n\nAs promised, all limitations have been lifted!\n\nHappy Building,\nHappy Droids Team"))
+            .expand();
     content.add(happyDroidImage).width(252).height(228);
 
     setView(content);

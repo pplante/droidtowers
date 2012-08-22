@@ -114,7 +114,8 @@ public class PlacementTool extends ToolBase {
 
   private boolean finishPurchase() {
     if (gridObject != null) {
-      if (gridObject.getPosition().y > LIMITED_VERSION_MAX_FLOOR && !Platform.getPurchaseManager().hasPurchasedUnlimitedVersion()) {
+      if (gridObject.getPosition().y > LIMITED_VERSION_MAX_FLOOR && !Platform.getPurchaseManager()
+                                                                             .hasPurchasedUnlimitedVersion()) {
         new PurchaseDroidTowersUnlimitedPrompt().show();
         return true;
       } else if (!gameGrid.canObjectBeAt(gridObject)) {

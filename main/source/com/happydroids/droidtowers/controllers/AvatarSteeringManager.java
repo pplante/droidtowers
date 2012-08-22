@@ -123,7 +123,8 @@ public class AvatarSteeringManager {
         } else if (currentPos.elevator != null) {
           GridPosition endOfElevator = null;
           do {
-            if (next != null && next.elevator != null && next.elevator.equals(currentPos.elevator) && currentPos.y != next.y) {
+            if (next != null && next.elevator != null && next.elevator
+                                                                 .equals(currentPos.elevator) && currentPos.y != next.y) {
               transitLine.highlightPoint(pointsTraveled++);
               endOfElevator = next;
             } else {
@@ -173,7 +174,8 @@ public class AvatarSteeringManager {
           return;
         }
 
-        boolean addedPassenger = currentPos.elevator.addPassenger(AvatarSteeringManager.this, currentPos.y, destination.y, uponArrivalAtElevatorDestination(destination));
+        boolean addedPassenger = currentPos.elevator
+                                         .addPassenger(AvatarSteeringManager.this, currentPos.y, destination.y, uponArrivalAtElevatorDestination(destination));
         if (!addedPassenger) {
           Gdx.app.error(TAG, "ZOMG CANNOT REACH FLOOR!!!");
           finished();
@@ -240,7 +242,9 @@ public class AvatarSteeringManager {
 
     Vector2 lastPos = currentPos.worldPoint();
     for (Vector2 point : points) {
-      sequence.push(Tween.to(avatar, POSITION, lastPos.dst(point) * MOVEMENT_SPEED * randomSpeedModifier).target(point.x, point.y).ease(Linear.INOUT));
+      sequence.push(Tween.to(avatar, POSITION, lastPos.dst(point) * MOVEMENT_SPEED * randomSpeedModifier)
+                            .target(point.x, point.y)
+                            .ease(Linear.INOUT));
       lastPos = point;
     }
 

@@ -83,7 +83,8 @@ public class DebugWindow extends ScrollableTowerWindow {
   private Actor makeTogglePurchaseUnlimitedButton() {
     final PlatformPurchaseManger purchaseManger = Platform.getPurchaseManager();
 
-    final TextButton button = FontManager.Roboto24.makeTextButton(purchaseManger.hasPurchasedUnlimitedVersion() ? "Refund" : "Purchase" + " Unlimited Version");
+    final TextButton button = FontManager.Roboto24
+                                      .makeTextButton(purchaseManger.hasPurchasedUnlimitedVersion() ? "Refund" : "Purchase" + " Unlimited Version");
     button.addListener(new VibrateClickListener() {
       @Override
       public void onClick(InputEvent event, float x, float y) {

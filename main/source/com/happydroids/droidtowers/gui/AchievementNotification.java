@@ -51,7 +51,7 @@ public class AchievementNotification extends Dialog {
         dismiss();
       }
     });
-    addButton(new HeyZapCheckInButton("Completed achievement: "+ achievement.getName()));
+    addButton(new HeyZapCheckInButton("Completed achievement: " + achievement.getName()));
 
     setView(c);
   }

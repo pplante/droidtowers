@@ -105,7 +105,8 @@ public class GridPositionCache {
 
   @Subscribe
   public void GameGrid_onGridObjectRemoved(GridObjectRemovedEvent event) {
-    removeGridObjectFromPosition(event.getGridObject(), event.getGridObject().getPosition(), event.getGridObject().getSize());
+    removeGridObjectFromPosition(event.getGridObject(), event.getGridObject().getPosition(), event.getGridObject()
+                                                                                                     .getSize());
   }
 
   private GridPosition getObjectSetForPosition(GridPoint gridPoint) {

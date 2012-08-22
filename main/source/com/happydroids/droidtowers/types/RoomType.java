@@ -56,7 +56,9 @@ public class RoomType extends GridObjectType {
 
   @Override
   protected boolean checkForOverlap(GridObject gridObject) {
-    Array<GridObject> objectsOverlapped = gridObject.getGameGrid().positionCache().getObjectsAt(gridObject.getPosition(), gridObject.getSize(), gridObject);
+    Array<GridObject> objectsOverlapped = gridObject.getGameGrid()
+                                                  .positionCache()
+                                                  .getObjectsAt(gridObject.getPosition(), gridObject.getSize(), gridObject);
     for (GridObject object : objectsOverlapped) {
       if (!object.canShareSpace(gridObject)) {
         return false;

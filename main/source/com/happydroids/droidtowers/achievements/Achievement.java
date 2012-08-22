@@ -93,7 +93,9 @@ public class Achievement {
         reward.resetState();
       }
     } else {
-      if (TowerConsts.DEBUG) System.out.println("Achievement has no rewards: " + getId());
+      if (TowerConsts.DEBUG) {
+        System.out.println("Achievement has no rewards: " + getId());
+      }
     }
 
     totalWeight = 0;

@@ -17,7 +17,8 @@ public class ProgressDialog extends Dialog {
   public ProgressDialog() {
     super();
 
-    ResolutionIndependentAtlas resolutionIndependentAtlas = new ResolutionIndependentAtlas(Gdx.files.internal("hud/skin.txt"));
+    ResolutionIndependentAtlas resolutionIndependentAtlas = new ResolutionIndependentAtlas(Gdx.files
+                                                                                                   .internal("hud/skin.txt"));
     Image progressSpinner = new Image(new TextureRegionDrawable(resolutionIndependentAtlas.findRegion("progress-indeterminate")), Scaling.none);
     progressSpinner.layout();
     progressSpinner.setOriginX(progressSpinner.getImageWidth() / 2);

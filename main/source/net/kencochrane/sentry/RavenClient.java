@@ -97,9 +97,9 @@ public class RavenClient {
    * @param loggerClass The class associated with the log message
    * @param logLevel    int value for Log level for message (DEBUG, ERROR, INFO, etc.)
    * @param culprit     Who we think caused the problem.
-   * @return JSON String of message body
+   * @param extras      @return JSON String of message body
    */
-  private String buildJSON(String message, String timestamp, String loggerClass, int logLevel, String culprit, Throwable exception) {
+  private String buildJSON(String message, String timestamp, String loggerClass, int logLevel, String culprit, Throwable exception, JSONObject extras) {
     JSONObject obj = new JSONObject();
     String lastID = RavenUtils.getRandomUUID();
     obj.put("event_id", lastID); //Hexadecimal string representing a uuid4 value.
@@ -117,6 +117,11 @@ public class RavenClient {
     obj.put("level", logLevel);
     obj.put("logger", loggerClass);
     obj.put("server_name", RavenUtils.getHostname());
+
+    if (extras != null) {
+      obj.put("extra", extras);
+    }
+
     setLastID(lastID);
     return obj.toJSONString();
   }
@@ -205,11 +210,11 @@ public class RavenClient {
    * @param logLevel    int value for Log level for message (DEBUG, ERROR, INFO, etc.)
    * @param culprit     Who we think caused the problem.
    * @param exception   exception causing the problem
-   * @return Encode and compressed version of the JSON Message body
+   * @param extras      @return Encode and compressed version of the JSON Message body
    */
-  private String buildMessage(String message, String timestamp, String loggerClass, int logLevel, String culprit, Throwable exception) {
+  private String buildMessage(String message, String timestamp, String loggerClass, int logLevel, String culprit, Throwable exception, JSONObject extras) {
     // get the json version of the body
-    String jsonMessage = buildJSON(message, timestamp, loggerClass, logLevel, culprit, exception);
+    String jsonMessage = buildJSON(message, timestamp, loggerClass, logLevel, culprit, exception, extras);
 
     // compress and encode the json message.
     return buildMessageBody(jsonMessage);
@@ -244,7 +249,7 @@ public class RavenClient {
    * @deprecated
    */
   public void logMessage(String theLogMessage, long timestamp, String loggerClass, int logLevel, String culprit, Throwable exception) {
-    String message = buildMessage(theLogMessage, RavenUtils.getTimestampString(timestamp), loggerClass, logLevel, culprit, exception);
+    String message = buildMessage(theLogMessage, RavenUtils.getTimestampString(timestamp), loggerClass, logLevel, culprit, exception, null);
     sendMessage(message, timestamp);
   }
 
@@ -260,7 +265,7 @@ public class RavenClient {
    * @return lastID       The ID for the last message.
    */
   public String captureMessage(String message, long timestamp, String loggerClass, int logLevel, String culprit) {
-    String body = buildMessage(message, RavenUtils.getTimestampString(timestamp), loggerClass, logLevel, culprit, null);
+    String body = buildMessage(message, RavenUtils.getTimestampString(timestamp), loggerClass, logLevel, culprit, null, null);
     sendMessage(body, timestamp);
     return getLastID();
   }
@@ -284,10 +289,9 @@ public class RavenClient {
    * @param logLevel    int value for Log level for message (DEBUG, ERROR, INFO, etc.)
    * @param culprit     Who we think caused the problem.
    * @param exception   exception that occurred
-   * @return lastID       The ID for the last message.
    */
-  public String captureException(String message, long timestamp, String loggerClass, int logLevel, String culprit, Throwable exception) {
-    String body = buildMessage(message, RavenUtils.getTimestampString(timestamp), loggerClass, logLevel, culprit, exception);
+  public String captureException(String message, long timestamp, String loggerClass, int logLevel, String culprit, Throwable exception, JSONObject extra) {
+    String body = buildMessage(message, RavenUtils.getTimestampString(timestamp), loggerClass, logLevel, culprit, exception, extra);
     sendMessage(body, timestamp);
     return getLastID();
   }
@@ -299,7 +303,7 @@ public class RavenClient {
    * @return lastID       The ID for the last message.
    */
   public String captureException(Throwable exception) {
-    return captureException(exception.getMessage(), RavenUtils.getTimestampLong(), "root", 50, null, exception);
+    return captureException(exception.getMessage(), RavenUtils.getTimestampLong(), "root", 50, null, exception, null);
   }
 
   public static class MessageSender {

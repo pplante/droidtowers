@@ -19,23 +19,28 @@ public final class TestGdxFileHandle extends FileHandle {
   }
 
   public FileHandle child(String name) {
-    if (file.getPath().length() == 0) return new TestGdxFileHandle(new File(name), type);
+    if (file.getPath().length() == 0) {
+      return new TestGdxFileHandle(new File(name), type);
+    }
     return new TestGdxFileHandle(new File(file, name), type);
   }
 
   public FileHandle parent() {
     File parent = file.getParentFile();
     if (parent == null) {
-      if (type == Files.FileType.Absolute)
+      if (type == Files.FileType.Absolute) {
         parent = new File("/");
-      else
+      } else {
         parent = new File("");
+      }
     }
     return new TestGdxFileHandle(parent, type);
   }
 
   public File file() {
-    if (type == Files.FileType.External) return new File(TestGdxFiles.externalPath, file.getPath());
+    if (type == Files.FileType.External) {
+      return new File(TestGdxFiles.externalPath, file.getPath());
+    }
     return file;
   }
 }

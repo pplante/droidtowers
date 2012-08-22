@@ -73,7 +73,7 @@ public class DroidTowersGame implements ApplicationListener, BackgroundTask.Post
       afterInitRunnable.run();
     }
 
-    Thread.currentThread().setUncaughtExceptionHandler(Platform.uncaughtExceptionHandler);
+    Thread.currentThread().setUncaughtExceptionHandler(Platform.getUncaughtExceptionHandler());
 
     Gdx.app.error("lifecycle", "create");
     if (Gdx.app.getType().equals(Desktop)) {

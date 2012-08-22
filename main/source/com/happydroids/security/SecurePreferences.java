@@ -24,7 +24,8 @@ public class SecurePreferences {
       mapper = TowerGameService.instance().getObjectMapper();
       storage = GameSaveFactory.getStorageRoot().child(fileName);
       if (storage.exists()) {
-        values = mapper.readValue(storage.readBytes(), mapper.getTypeFactory().constructMapType(HashMap.class, String.class, String.class));
+        values = mapper.readValue(storage.readBytes(), mapper.getTypeFactory()
+                                                               .constructMapType(HashMap.class, String.class, String.class));
       } else {
         values = Maps.newHashMap();
       }

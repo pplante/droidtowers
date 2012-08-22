@@ -13,7 +13,9 @@ public class Migration_GameSave_MoveMetadata extends JacksonTransformationScript
   @Override
   protected void process(ObjectNode node, String fileName) {
     ObjectNode gameSaveNode = getGameSaveUnlessFileFormatIsNewer(node, "com.happydroids.droidtowers.gamestate.GameSave", 3);
-    if (gameSaveNode == null) return;
+    if (gameSaveNode == null) {
+      return;
+    }
 
     GameSaveMetadata metadata = new GameSaveMetadata();
     metadata.towerName = gameSaveNode.remove("towerName").asText();

@@ -1,0 +1,13 @@
+<!--
+  ~ Copyright (c) 2012. HappyDroids LLC, All rights reserved.
+  -->
+
+<resources>
+  <string name="crash_dialog_text">Sorry, an unknown error occurred.</string>
+  <string name="crash_toast_text">Oops, an error occurred.  Please wait while we generate a report.</string>
+  <string name="crash_dialog_title">Droid Towers</string>
+  <string name="crash_dialog_comment_prompt">Can you describe what you were doing before the game crashed?</string>
+  <string name="crash_dialog_ok_toast">Thank you for submitting the crash report. You can now restart Droid Towers.
+  </string>
+  <string name="crash_dialog_email_prompt">Your Email</string>
+</resources>

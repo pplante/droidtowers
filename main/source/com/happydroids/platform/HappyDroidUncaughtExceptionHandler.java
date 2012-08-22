@@ -17,7 +17,7 @@ public abstract class HappyDroidUncaughtExceptionHandler implements Thread.Uncau
   protected StringBuilder generateExceptionErrorString(Throwable throwable) {
     StringBuilder message = new StringBuilder();
     message.append("Wow, terribly sorry about this, but an unknown error has occurred.\n\n");
-    if(Gdx.app.getType().equals(Android)) {
+    if (Gdx.app.getType().equals(Android)) {
       message.append("Would you mind if we sent some anonymous data to happydroids.com for analysis?\n\n");
     } else {
       message.append("Some anonymous data about this crash has been sent to happydroids.com for analysis.\n\n");

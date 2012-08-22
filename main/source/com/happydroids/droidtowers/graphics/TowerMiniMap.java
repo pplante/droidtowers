@@ -61,7 +61,9 @@ public class TowerMiniMap extends Table {
     GridPosition[][] positions = gameGrid.positionCache().getPositions();
     for (GridPosition[] row : positions) {
       for (GridPosition position : row) {
-        if (position.size() == 0) continue;
+        if (position.size() == 0) {
+          continue;
+        }
 
         pixmap.setColor(Color.GRAY);
 

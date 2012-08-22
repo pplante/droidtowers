@@ -23,7 +23,7 @@ public class ErrorUtil {
       @Override
       protected void execute() throws Exception {
         RavenClient ravenClient = new RavenClient(HappyDroidConsts.SENTRY_DSN);
-        ravenClient.captureException(ExceptionUtils.getMessage(throwable), RavenUtils.getTimestampLong(), "root", 50, null, throwable);
+        ravenClient.captureException(ExceptionUtils.getMessage(throwable), RavenUtils.getTimestampLong(), "root", 50, null, throwable, null);
       }
     }.run();
   }

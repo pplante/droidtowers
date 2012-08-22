@@ -7,4 +7,5 @@
           package="com.happydroids.android"
           android:versionCode="1"
           android:versionName="1.0">
+  <application android:name="com.happydroids.droidtowers.DroidTowersAndroidApplication"/>
 </manifest>
