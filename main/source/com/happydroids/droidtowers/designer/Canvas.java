@@ -4,22 +4,26 @@
 
 package com.happydroids.droidtowers.designer;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.happydroids.droidtowers.TowerAssetManager;
-import com.happydroids.droidtowers.designer.input.CanvasTouchListener;
+import com.happydroids.droidtowers.designer.input.CanvasMouseZoomListener;
+import com.happydroids.droidtowers.designer.input.CanvasObjectTouchListener;
+import com.happydroids.droidtowers.designer.input.CanvasTouchZoomListener;
 
+import static com.badlogic.gdx.Application.ApplicationType;
 import static com.happydroids.droidtowers.ColorUtil.rgba;
 
 public class Canvas extends WidgetGroup {
   private final LayeredDrawable background;
-  private final CanvasTouchListener touchListener;
+  private final CanvasObjectTouchListener objectObjectTouchListener;
   private final TiledDrawable floor;
   private final Texture ceiling;
   private final TiledDrawable walls;
@@ -43,23 +47,19 @@ public class Canvas extends WidgetGroup {
     floorColor = rgba("#e0b048");
     ceilingColor = rgba("#d6d0bc");
 
-    setTouchable(Touchable.enabled);
-    touchListener = new CanvasTouchListener(this);
-    addListener(touchListener);
+    if (Gdx.app.getType() == ApplicationType.Android) {
+      addListener(new CanvasTouchZoomListener(this));
+
+    } else if (Gdx.app.getType() == ApplicationType.Desktop || Gdx.app.getType() == ApplicationType.Applet) {
+      addListener(new CanvasMouseZoomListener(this));
+    }
+
+    objectObjectTouchListener = new CanvasObjectTouchListener(this);
   }
 
   public void add(Actor actor) {
     addActor(actor);
-
-    actor.setTouchable(Touchable.disabled);
-  }
-
-  @Override public float getPrefWidth() {
-    return 512;
-  }
-
-  @Override public float getPrefHeight() {
-    return 128;
+    actor.addListener(objectObjectTouchListener);
   }
 
   @Override public void draw(SpriteBatch batch, float parentAlpha) {
@@ -80,7 +80,22 @@ public class Canvas extends WidgetGroup {
     super.draw(batch, parentAlpha);
   }
 
-  public CanvasTouchListener getTouchListener() {
-    return touchListener;
+
+  @Override public void setScale(float scale) {
+    super.setScale(MathUtils.clamp(scale, 1f, 4f));
+
+
+    if (hasParent()) {
+//      getParent().setSize(getWidth() * getScaleX(), getHeight() * getScaleY());
+      invalidateHierarchy();
+    }
+  }
+
+  @Override public float getPrefWidth() {
+    return getWidth();
+  }
+
+  @Override public float getPrefHeight() {
+    return getHeight();
   }
 }

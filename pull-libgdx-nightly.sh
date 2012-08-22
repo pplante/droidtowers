@@ -60,7 +60,6 @@ echo "* Copying shared libs..."
 echo
 
 SHARED_LIBS_PATH="${PROJECT_DIR}/main/libs/"
-cp "${EXTRACT_PATH}/sources/gdx-sources.jar" "${SHARED_LIBS_PATH}/sources"
 cp "${EXTRACT_PATH}/gdx.jar" "${SHARED_LIBS_PATH}/main"
 
 echo

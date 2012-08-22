@@ -104,13 +104,4 @@ class DesignerInputAdapter extends InputAdapter {
 
     return false;
   }
-
-  @Override public boolean scrolled(int amount) {
-    float scale = canvas.getScaleX();
-    scale = MathUtils.clamp(scale + (float) amount / 10, 1f, 2f);
-    canvas.setScale(scale);
-//    canvas.setPosition((-canvas.getWidth() / 2) * canvas.getScaleX(), (-canvas.getHeight() / 2) * canvas.getScaleX());
-
-    return true;
-  }
 }

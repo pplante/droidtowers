@@ -32,8 +32,6 @@
     <orderEntry type="library" scope="TEST" name="junit-mockito-great-expectations" level="project" />
     <orderEntry type="library" exported="" name="prettytime" level="project" />
     <orderEntry type="library" exported="" name="guava" level="project" />
-    <orderEntry type="library" exported="" name="apache-commons" level="project" />
-    <orderEntry type="library" exported="" name="apache-httpclient" level="project" />
     <orderEntry type="library" exported="" name="raven-java" level="project" />
     <orderEntry type="module-library">
       <library>

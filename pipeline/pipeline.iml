@@ -8,8 +8,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="main" level="project" />
     <orderEntry type="library" name="guava" level="project" />
-    <orderEntry type="library" name="apache-httpclient" level="project" />
-    <orderEntry type="library" name="apache-commons" level="project" />
     <orderEntry type="module" module-name="main" />
     <orderEntry type="library" name="desktop" level="project" />
   </component>

@@ -5,6 +5,7 @@
     "swatches/modal-noise-purple.png":"com.badlogic.gdx.graphics.Texture",
     "swatches/swatch-white.png":"com.badlogic.gdx.graphics.Texture",
     "backgrounds/cityscape-middle.png":"com.badlogic.gdx.graphics.Texture",
+    "swatches/inner-shadow.png":"com.badlogic.gdx.graphics.Texture",
     "swatches/drop-shadow.png":"com.badlogic.gdx.graphics.Texture",
     "backgrounds/splash1.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",
     "happydroid.txt":"com.badlogic.gdx.graphics.g2d.TextureAtlas",

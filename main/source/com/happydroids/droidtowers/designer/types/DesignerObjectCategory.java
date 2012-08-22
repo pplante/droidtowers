@@ -5,10 +5,8 @@
 package com.happydroids.droidtowers.designer.types;
 
 public enum DesignerObjectCategory {
-  CHAIR,
-  TABLE,
-  CABINET,
-  BED,
+  BEDROOM,
+  KITCHEN,
   WINDOW,
   DOOR,
   DECORATION

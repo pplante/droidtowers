@@ -2,6 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/AndroidBillingLibrary" vcs="Git" />
+    <mapping directory="$USER_HOME$/Sources/libgdx" vcs="Git" />
   </component>
 </project>
 

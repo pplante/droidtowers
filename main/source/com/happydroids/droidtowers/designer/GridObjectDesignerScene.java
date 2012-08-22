@@ -5,10 +5,7 @@
 package com.happydroids.droidtowers.designer;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -21,7 +18,6 @@ import com.happydroids.droidtowers.designer.types.DesignerObjectCategory;
 import com.happydroids.droidtowers.designer.types.DesignerObjectType;
 import com.happydroids.droidtowers.designer.types.DesignerObjectTypeFactory;
 import com.happydroids.droidtowers.gui.FontManager;
-import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.scenes.Scene;
 
@@ -56,40 +52,38 @@ public class GridObjectDesignerScene extends Scene {
     scrollPane.setSize(180, getStage().getHeight());
 
     LayeredDrawable layers = new LayeredDrawable();
-    layers.add(new DropShadow());
     layers.add(new TiledDrawable(TowerAssetManager.drawable("swatches/modal-noise-purple.png")));
-
     paneStyle.background = layers;
 
     canvas = new Canvas();
+    canvas.setScale(1);
     canvas.setSize(256, 64);
 
-    Group widgetGroup = new Group();
-    widgetGroup.addActor(canvas);
-    widgetGroup.setSize(canvas.getWidth(), canvas.getHeight());
     Table widget = new Table();
-    widget.pad(512);
-    widget.setBackground(new TiledDrawable(TowerAssetManager.drawable("swatches/modal-noise-light.png")));
-    widget.add(widgetGroup).center().pad(512);
+    widget.debug();
+    widget.pad(180);
+    widget.add(canvas);
     final ScrollPane canvasScrollPane = new ScrollPane(widget);
+    paneStyle = new ScrollPane.ScrollPaneStyle(paneStyle);
+    layers = new LayeredDrawable();
+    layers.add(new TiledDrawable(TowerAssetManager.drawable("swatches/modal-noise-light.png")));
+    layers.add(new InnerShadow());
+    paneStyle.background = layers;
     canvasScrollPane.setStyle(paneStyle);
     canvasScrollPane.setSize(getStage().getWidth() - 180, getStage().getHeight());
     canvasScrollPane.setPosition(180, 0);
-    canvasScrollPane.setOverscroll(false);
+    canvasScrollPane.setOverscroll(true, true);
 
-    canvasScrollPane.addAction(Actions.sequence(Actions.delay(0.15f),
-                                                       Actions.run(new Runnable() {
-                                                         @Override public void run() {
-                                                           canvasScrollPane.setScrollPercentX(0.5f);
-                                                           canvasScrollPane.setScrollPercentY(0.5f);
-                                                         }
-                                                       })));
+//    canvasScrollPane.addAction(Actions.sequence(Actions.delay(0.15f),
+//                                                       Actions.run(new Runnable() {
+//                                                         @Override public void run() {
+//                                                           canvasScrollPane.setScrollPercentX(0.5f);
+//                                                           canvasScrollPane.setScrollPercentY(0.5f);
+//                                                         }
+//                                                       })));
 
     getStage().addActor(canvasScrollPane);
     getStage().addActor(scrollPane);
-
-    inputProcessor = new DesignerInputAdapter(canvas, getStage(), getCamera());
-    InputSystem.instance().addInputProcessor(inputProcessor, 5);
 
     objectTypeAtlas = new TextureAtlas();
     new SyncDesignerObjectTypeTask(objectTypeAtlas)
@@ -108,23 +102,7 @@ public class GridObjectDesignerScene extends Scene {
   }
 
   @Override public void dispose() {
-    InputSystem.instance().removeInputProcessor(inputProcessor);
-  }
-
-  private void addAtlasItemsToSidebar(Table sidebar, final String atlasFileName) {
-    TextureAtlas atlas = new TextureAtlas(atlasFileName);
-    for (Texture texture : atlas.getTextures()) {
-      texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-    }
-
-    for (final TextureAtlas.AtlasRegion region : atlas.getRegions()) {
-      sidebar.row();
-
-      final Image image = new Image(new TextureRegionDrawable(region), Scaling.fit);
-      sidebar.add(image).minWidth(32).minHeight(32);
-
-      image.addListener(new GridObjectDesignerItemTouchListener(canvas, inputProcessor, region));
-    }
+//    InputSystem.instance().removeInputProcessor(inputProcessor);
   }
 
   private class AddObjectTypesToSidebar implements Runnable {
@@ -142,7 +120,7 @@ public class GridObjectDesignerScene extends Scene {
             final Image image = new Image(new TextureRegionDrawable(region), Scaling.fit);
             sidebar.add(image).size(image.getWidth() * 2, image.getHeight() * 2);
 
-            image.addListener(new GridObjectDesignerItemTouchListener(canvas, inputProcessor, region));
+            image.addListener(new GridObjectDesignerItemTouchListener(canvas, region));
           }
         }
       }
