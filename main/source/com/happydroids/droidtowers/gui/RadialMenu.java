@@ -25,7 +25,6 @@ public class RadialMenu extends WidgetGroup {
   public float arcStart;
 
 
-
   public RadialMenu() {
     setVisible(false);
     arc = 60f;

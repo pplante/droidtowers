@@ -23,7 +23,8 @@ public class GameUpdateDialog extends Dialog {
           @Override
           public void onClick(Dialog dialog) {
             dismiss();
-            Platform.getBrowserUtil().launchWebBrowser(HappyDroidConsts.HAPPYDROIDS_URI + "/droidtowers/download-latest");
+            Platform.getBrowserUtil()
+                    .launchWebBrowser(HappyDroidConsts.HAPPYDROIDS_URI + "/droidtowers/download-latest");
           }
         });
         break;

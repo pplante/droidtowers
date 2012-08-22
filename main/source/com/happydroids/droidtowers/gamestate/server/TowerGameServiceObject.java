@@ -12,7 +12,9 @@ import com.happydroids.server.HttpStatusCode;
 public abstract class TowerGameServiceObject extends HappyDroidServiceObject {
   @Override
   protected boolean beforeSaveValidation(ApiRunnable afterSave) {
-    if (!super.beforeSaveValidation(afterSave)) return false;
+    if (!super.beforeSaveValidation(afterSave)) {
+      return false;
+    }
 
     if (requireAuthentication() && !TowerGameService.instance().isAuthenticated()) {
       afterSave.onError(null, HttpStatusCode.NetworkAuthenticationRequired, this);

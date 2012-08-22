@@ -18,7 +18,9 @@ public class SceneManager {
   private static LinkedList<Scene> pausedScenes = Lists.newLinkedList();
 
   public static void changeScene(Class<? extends Scene> sceneClass, Object... args) {
-    if (HappyDroidConsts.DEBUG) System.out.println("Switching scene to: " + sceneClass.getSimpleName());
+    if (HappyDroidConsts.DEBUG) {
+      System.out.println("Switching scene to: " + sceneClass.getSimpleName());
+    }
 
     popScene();
     pushScene(sceneClass, args);

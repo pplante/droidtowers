@@ -27,7 +27,8 @@ public abstract class GridObjectTypeFactory<T extends GridObjectType> {
   protected boolean parseTypesFile(FileHandle fileHandle) {
     try {
       ObjectMapper mapper = new ObjectMapper();
-      List<T> newObjectTypes = mapper.readValue(fileHandle.reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, gridObjectTypeClass));
+      List<T> newObjectTypes = mapper.readValue(fileHandle.reader(), mapper.getTypeFactory()
+                                                                             .constructCollectionType(ArrayList.class, gridObjectTypeClass));
 
       if (objectTypes != null) {
         objectTypes.addAll(newObjectTypes);

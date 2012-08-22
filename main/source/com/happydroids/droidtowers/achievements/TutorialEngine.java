@@ -31,7 +31,8 @@ public class TutorialEngine extends AchievementEngine {
   protected TutorialEngine() {
     try {
       ObjectMapper mapper = TowerGameService.instance().getObjectMapper();
-      achievements = mapper.readValue(Gdx.files.internal("params/tutorial-steps.json").reader(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, TutorialStep.class));
+      achievements = mapper.readValue(Gdx.files.internal("params/tutorial-steps.json").reader(), mapper.getTypeFactory()
+                                                                                                         .constructCollectionType(ArrayList.class, TutorialStep.class));
       achievementsById = Maps.newHashMap();
 
       for (int i = 0, achievementsSize = achievements.size(); i < achievementsSize; i++) {

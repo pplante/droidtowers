@@ -55,7 +55,8 @@ public class AboutWindow extends ScrollableTowerWindow {
 
     addHorizontalRule(Colors.DARK_GRAY, 1, 1).padTop(Display.devicePixel(50));
     addLabel("Device ID: " + TowerGameService.instance().getDeviceId(), FontManager.Roboto18);
-    addLabel("Game Version: " + HappyDroidConsts.VERSION + " (" + HappyDroidConsts.GIT_SHA.substring(0, 8) + ")", FontManager.Roboto18);
+    addLabel("Game Version: " + HappyDroidConsts.VERSION + " (" + HappyDroidConsts.GIT_SHA
+                                                                          .substring(0, 8) + ")", FontManager.Roboto18);
 
     row().spaceTop(Display.devicePixel(40));
     add(FontManager.RobotoBold18.makeLabel("Software Licenses"));
@@ -63,7 +64,10 @@ public class AboutWindow extends ScrollableTowerWindow {
 
     try {
       ObjectMapper mapper = new ObjectMapper();
-      List<String> licenseFiles = mapper.readValue(Gdx.files.internal("licenses/index.json").readBytes(), mapper.getTypeFactory().constructCollectionType(ArrayList.class, String.class));
+      List<String> licenseFiles = mapper.readValue(Gdx.files
+                                                           .internal("licenses/index.json")
+                                                           .readBytes(), mapper.getTypeFactory()
+                                                                                 .constructCollectionType(ArrayList.class, String.class));
       for (String licenseFile : licenseFiles) {
         FileHandle licenseFileHandle = Gdx.files.internal(licenseFile);
         if (licenseFileHandle.exists()) {

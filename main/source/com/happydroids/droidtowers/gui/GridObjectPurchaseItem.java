@@ -38,7 +38,8 @@ class GridObjectPurchaseItem extends Table {
 
     Image gridObjectImage = new Image(new TextureRegionDrawable(gridObjectType.getTextureRegion(0)), Scaling.fit, Align.left | Align.top);
     Label nameLabel = FontManager.RobotoBold18.makeLabel(gridObjectType.getName());
-    Label priceLabel = FontManager.RobotoBold18.makeLabel(StringUtils.currencyFormat(gridObjectType.getCoins()), Color.WHITE, Align.right);
+    Label priceLabel = FontManager.RobotoBold18
+                               .makeLabel(StringUtils.currencyFormat(gridObjectType.getCoins()), Color.WHITE, Align.right);
     buyButton = FontManager.RobotoBold18.makeTextButton(gridObjectType.isLocked() ? "How to\nunlock" : "Buy");
 
     defaults().top().left().space(Display.devicePixel(8));

@@ -48,7 +48,8 @@ public class TutorialStepNotification extends Table {
     if (tutorialStep.requiresTapToGiveReward()) {
       final boolean isTutorialCompleteStep = tutorialStep.getId().equals("tutorial-finished");
 
-      TextButton tapToDismissButton = FontManager.Default.makeTextButton(isTutorialCompleteStep ? "tap to dismiss" : "continue");
+      TextButton tapToDismissButton = FontManager.Default
+                                              .makeTextButton(isTutorialCompleteStep ? "tap to dismiss" : "continue");
       tapToDismissButton.addListener(new VibrateClickListener() {
         @Override
         public void onClick(InputEvent event, float x, float y) {

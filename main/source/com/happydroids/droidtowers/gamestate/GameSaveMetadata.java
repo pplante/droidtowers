@@ -33,18 +33,30 @@ public class GameSaveMetadata {
   @SuppressWarnings("RedundantIfStatement")
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof GameSaveMetadata)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof GameSaveMetadata)) {
+      return false;
+    }
 
     GameSaveMetadata metadata = (GameSaveMetadata) o;
 
-    if (fileGeneration != metadata.fileGeneration) return false;
-    if (baseFilename != null ? !baseFilename.equals(metadata.baseFilename) : metadata.baseFilename != null)
+    if (fileGeneration != metadata.fileGeneration) {
       return false;
-    if (cloudSaveUri != null ? !cloudSaveUri.equals(metadata.cloudSaveUri) : metadata.cloudSaveUri != null)
+    }
+    if (baseFilename != null ? !baseFilename.equals(metadata.baseFilename) : metadata.baseFilename != null) {
       return false;
-    if (difficultyLevel != metadata.difficultyLevel) return false;
-    if (towerName != null ? !towerName.equals(metadata.towerName) : metadata.towerName != null) return false;
+    }
+    if (cloudSaveUri != null ? !cloudSaveUri.equals(metadata.cloudSaveUri) : metadata.cloudSaveUri != null) {
+      return false;
+    }
+    if (difficultyLevel != metadata.difficultyLevel) {
+      return false;
+    }
+    if (towerName != null ? !towerName.equals(metadata.towerName) : metadata.towerName != null) {
+      return false;
+    }
 
     return true;
   }

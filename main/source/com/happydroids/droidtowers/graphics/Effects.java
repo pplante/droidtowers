@@ -23,7 +23,8 @@ public class Effects {
                                        (int) (actor.getX() - dropShadowPatch.getLeftWidth()),
                                        (int) (actor.getY() - dropShadowPatch.getTopHeight()),
                                        (int) (actor.getWidth() + dropShadowPatch.getRightWidth() + dropShadowPatch.getLeftWidth()),
-                                       (int) (actor.getHeight() - 2 + dropShadowPatch.getBottomHeight() + dropShadowPatch.getTopHeight()));
+                                       (int) (actor.getHeight() - 2 + dropShadowPatch.getBottomHeight() + dropShadowPatch
+                                                                                                                  .getTopHeight()));
     }
   }
 

@@ -100,20 +100,26 @@ public abstract class GridObjectType {
     GridPoint gridPointBelow = gridObject.getPosition().cpy();
     gridPointBelow.sub(0, 1);
 
-    Array<GridObject> objectsBelow = gridObject.getGameGrid().positionCache().getObjectsAt(gridPointBelow, gridObject.getSize(), gridObject);
+    Array<GridObject> objectsBelow = gridObject.getGameGrid()
+                                             .positionCache()
+                                             .getObjectsAt(gridPointBelow, gridObject.getSize(), gridObject);
     if (objectsBelow.size > 0) {
       return true;
     }
 
     GridPoint gridPointAbove = gridObject.getPosition().cpy();
     gridPointAbove.add(0, 1);
-    Array<GridObject> objectsAbove = gridObject.getGameGrid().positionCache().getObjectsAt(gridPointAbove, gridObject.getSize(), gridObject);
+    Array<GridObject> objectsAbove = gridObject.getGameGrid()
+                                             .positionCache()
+                                             .getObjectsAt(gridPointAbove, gridObject.getSize(), gridObject);
 
     return objectsAbove.size > 0;
   }
 
   protected boolean checkForOverlap(GridObject gridObject) {
-    Array<GridObject> objectsOverlapped = gridObject.getGameGrid().positionCache().getObjectsAt(gridObject.getPosition(), gridObject.getSize(), gridObject);
+    Array<GridObject> objectsOverlapped = gridObject.getGameGrid()
+                                                  .positionCache()
+                                                  .getObjectsAt(gridObject.getPosition(), gridObject.getSize(), gridObject);
     for (GridObject object : objectsOverlapped) {
       if (!gridObject.canShareSpace(object)) {
         return false;

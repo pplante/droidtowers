@@ -39,7 +39,9 @@ public class NonPlayerFriendItem extends PlayerFriendItem {
       @Override
       public void onClick(InputEvent event, float x, float y) {
 //        new InviteNonPlayerFriendWindow(profile).show();
-        Platform.getBrowserUtil().launchWebBrowser(HappyDroidConsts.HAPPYDROIDS_URI + "/login?token=" + TowerGameService.instance().getSessionToken() + "&next=/friend/" + profile.getId() + "/invite/");
+        Platform.getBrowserUtil()
+                .launchWebBrowser(HappyDroidConsts.HAPPYDROIDS_URI + "/login?token=" + TowerGameService.instance()
+                                                                                               .getSessionToken() + "&next=/friend/" + profile.getId() + "/invite/");
       }
     });
     return inviteButton;

@@ -154,7 +154,10 @@ public class Dialog extends Table {
 
   protected void drawModalNoise(SpriteBatch batch) {
     batch.setColor(1, 1, 1, 0.45f * getColor().a);
-    batch.draw(modalNoiseTexture, 0, 0, getStage().getWidth(), getStage().getHeight(), 0, 0, getStage().getWidth() / modalNoiseTexture.getWidth(), getStage().getHeight() / modalNoiseTexture.getHeight());
+    batch.draw(modalNoiseTexture, 0, 0, getStage().getWidth(), getStage().getHeight(), 0, 0, getStage().getWidth() / modalNoiseTexture
+                                                                                                                             .getWidth(), getStage()
+                                                                                                                                                  .getHeight() / modalNoiseTexture
+                                                                                                                                                                         .getHeight());
   }
 
   public Dialog addButton(String buttonText, final OnClickCallback clickCallback) {

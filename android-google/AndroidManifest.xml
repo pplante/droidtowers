@@ -6,8 +6,8 @@
 <!--suppress AndroidDomInspection -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.happydroids.droidtowers"
-          android:versionCode="1111"
-          android:versionName="1.1.11">
+          android:versionCode="1113"
+          android:versionName="1.1.13">
 
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.WAKE_LOCK"/>
@@ -31,6 +31,7 @@
   <application android:icon="@drawable/icon"
                android:label="@string/app_name"
                android:theme="@style/NoActionBar"
+               android:name=".DroidTowersAndroidApplication"
           >
     <activity android:name=".DroidTowersGooglePlay"
               android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
@@ -42,6 +43,11 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+    <activity android:name="org.acra.CrashReportDialog"
+              android:theme="@android:style/Theme.Dialog"
+              android:launchMode="singleInstance"
+              android:excludeFromRecents="true"
+              android:finishOnTaskLaunch="true"/>
     <service android:name="net.robotmedia.billing.BillingService"/>
     <receiver android:name="net.robotmedia.billing.BillingReceiver">
       <intent-filter>

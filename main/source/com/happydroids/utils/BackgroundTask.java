@@ -6,6 +6,7 @@ package com.happydroids.utils;
 
 import com.happydroids.droidtowers.gamestate.server.RunnableQueue;
 import com.happydroids.error.ErrorUtil;
+import com.happydroids.platform.Platform;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -58,7 +59,7 @@ public abstract class BackgroundTask {
       threadPool = Executors.newFixedThreadPool(1, new ThreadFactory() {
         public Thread newThread(Runnable r) {
           Thread thread = new Thread(r, "BackgroundTaskThread");
-          thread.setUncaughtExceptionHandler(uncaughtExceptionHandler);
+          thread.setUncaughtExceptionHandler(Platform.getUncaughtExceptionHandler());
           thread.setPriority(Thread.MIN_PRIORITY);
           thread.setDaemon(true);
           return thread;

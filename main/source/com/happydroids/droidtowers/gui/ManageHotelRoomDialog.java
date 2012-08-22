@@ -48,7 +48,9 @@ public class ManageHotelRoomDialog extends Dialog {
     content.defaults().pad(Display.devicePixel(4));
 
     content.row().fillX();
-    content.add(FontManager.Roboto18.makeLabel("Name of " + hotelRoom.getGridObjectType().getName())).expandX().colspan(2);
+    content.add(FontManager.Roboto18.makeLabel("Name of " + hotelRoom.getGridObjectType().getName()))
+            .expandX()
+            .colspan(2);
 
     content.row();
     content.add(textField).width(400);

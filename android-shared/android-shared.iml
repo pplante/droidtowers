@@ -40,6 +40,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="main" exported="" />
     <orderEntry type="library" exported="" name="gdx-android" level="project" />
+    <orderEntry type="library" exported="" name="android-acra" level="project" />
   </component>
 </module>
 

@@ -43,7 +43,8 @@ public class Janitor extends Avatar {
   }
 
   protected boolean canService(CommercialSpace commercialSpace) {
-    return !commercialSpace.isBeingServiced() && commercialSpace.canEmployDroids() && commercialSpace.getJobsFilled() > 0 && commercialSpace.provides(servicesTheseProviderTypes);
+    return !commercialSpace.isBeingServiced() && commercialSpace.canEmployDroids() && commercialSpace.getJobsFilled() > 0 && commercialSpace
+                                                                                                                                     .provides(servicesTheseProviderTypes);
   }
 
   public void setServicesTheseProviderTypes(ProviderType... types) {

@@ -23,8 +23,9 @@ public class QuitGameInputAdapter extends InputAdapter {
 
   @Override
   public boolean keyDown(int keycode) {
-    if (keycode != Input.Keys.ESCAPE && keycode != Input.Keys.BACK || !TowerAssetManager.preloadFinished())
+    if (keycode != Input.Keys.ESCAPE && keycode != Input.Keys.BACK || !TowerAssetManager.preloadFinished()) {
       return false;
+    }
 
     mainMenuIsActive = SceneManager.activeScene() instanceof MainMenuScene;
 

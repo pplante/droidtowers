@@ -11,7 +11,9 @@ public class Migration_GameSave_RemoveObjectCounts extends JacksonTransformation
   @Override
   protected void process(ObjectNode node, String fileName) {
     ObjectNode gameSaveNode = getGameSaveUnlessFileFormatIsNewer(node, "com.happydroids.droidtowers.gamestate.GameSave", 2);
-    if (gameSaveNode == null) return;
+    if (gameSaveNode == null) {
+      return;
+    }
 
     gameSaveNode.remove("objectCounts");
     gameSaveNode.remove("neighborhoodUri");

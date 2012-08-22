@@ -47,7 +47,7 @@ public class DroidTowersAmazon extends AndroidApplication {
 
         Platform.setDialogOpener(new AndroidDialogOpener(DroidTowersAmazon.this));
         Platform.setConnectionMonitor(new PlatformConnectionMonitor());
-        Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler(DroidTowersAmazon.this));
+        Platform.setUncaughtExceptionHandler(new AndroidUncaughtExceptionHandler());
         Platform.setBrowserUtil(new AndroidBrowserUtil(DroidTowersAmazon.this));
         Platform.setPurchaseManager(new AmazonAppStorePurchaseManager(DroidTowersAmazon.this));
       }

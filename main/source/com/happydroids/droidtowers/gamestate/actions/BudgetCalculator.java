@@ -37,7 +37,8 @@ public class BudgetCalculator extends GameGridAction {
     }
 
     if (HappyDroidConsts.DEBUG) {
-      Gdx.app.debug(TAG, String.format("Income report: %d earned, %d spent on upkeep", coinsEarnedFromRent, coinsSpentOnUpkeep));
+      Gdx.app
+              .debug(TAG, String.format("Income report: %d earned, %d spent on upkeep", coinsEarnedFromRent, coinsSpentOnUpkeep));
     }
 
     Player.instance().addCurrency(coinsEarnedFromRent - coinsSpentOnUpkeep);

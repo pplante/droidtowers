@@ -132,7 +132,8 @@ public class FontHelper {
 
 
   public TextButton makeTextToggleButton(String labelText) {
-    return applyTextButtonLabelStyle(new TextButton(labelText, TowerAssetManager.getCustomSkin().get("toggle-button", TextButton.TextButtonStyle.class)), Color.WHITE);
+    return applyTextButtonLabelStyle(new TextButton(labelText, TowerAssetManager.getCustomSkin()
+                                                                       .get("toggle-button", TextButton.TextButtonStyle.class)), Color.WHITE);
   }
 
   public void dispose() {

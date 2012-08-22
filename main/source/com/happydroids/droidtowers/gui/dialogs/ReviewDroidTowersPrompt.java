@@ -56,7 +56,8 @@ public class ReviewDroidTowersPrompt extends Dialog {
     } else if (TowerGameService.getDeviceOSMarketName().equalsIgnoreCase("google-play")) {
       Platform.getBrowserUtil().launchWebBrowser("market://details?id=com.happydroids.droidtowers");
     } else if (TowerGameService.getDeviceOSMarketName().equalsIgnoreCase("amazon")) {
-      Platform.getBrowserUtil().launchWebBrowser("http://www.amazon.com/gp/mas/dl/android?p=com.happydroids.droidtowers.amazon");
+      Platform.getBrowserUtil()
+              .launchWebBrowser("http://www.amazon.com/gp/mas/dl/android?p=com.happydroids.droidtowers.amazon");
     }
     SecurePreferences preferences = TowerGameService.instance().getPreferences();
     preferences.putBoolean(RATING_ADDED, true);

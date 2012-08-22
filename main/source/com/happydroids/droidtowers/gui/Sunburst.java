@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.happydroids.error.ErrorUtil;
 
 public class Sunburst extends Actor {
 
@@ -81,16 +82,21 @@ public class Sunburst extends Actor {
 
   @Override
   public void draw(SpriteBatch batch, float parentAlpha) {
-    batch.end();
-    Gdx.gl.glEnable(GL10.GL_BLEND);
-    Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
-    shader.begin();
-    shader.setUniformMatrix("u_transformMatrix", transformMatrix.setToRotation(0, 0, 1, getRotation()));
-    shader.setUniformMatrix("u_projectionViewMatrix", getStage().getCamera().combined);
-    mesh.render(shader, GL10.GL_TRIANGLES);
-    shader.end();
-    Gdx.gl.glDisable(GL10.GL_BLEND);
-    batch.begin();
+    try {
+      batch.end();
+      Gdx.gl.glEnable(GL10.GL_BLEND);
+      Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+      shader.begin();
+      shader.setUniformMatrix("u_transformMatrix", transformMatrix.setToRotation(0, 0, 1, getRotation()));
+      shader.setUniformMatrix("u_projectionViewMatrix", getStage().getCamera().combined);
+      mesh.render(shader, GL10.GL_TRIANGLES);
+      shader.end();
+      Gdx.gl.glDisable(GL10.GL_BLEND);
+      batch.begin();
+    } catch (IllegalArgumentException iae) {
+      // shader is probably waiting to be reloaded after a context change.
+      ErrorUtil.rethrowErrorInDebugMode(iae);
+    }
   }
 
   @Override
