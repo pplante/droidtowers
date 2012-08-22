@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Array;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.GameLayer;
 import com.happydroids.droidtowers.entities.GridObject;
+import com.happydroids.droidtowers.entities.GridObjectSort;
 import com.happydroids.droidtowers.entities.Transit;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
@@ -29,8 +30,7 @@ public class SellTool extends ToolBase {
     Array<GridObject> gridObjects = gameGrid.positionCache().getObjectsAt(gridPointAtFinger, TowerConsts.SINGLE_POINT);
 
     if (gridObjects != null && gridObjects.size > 0) {
-      gridObjects.sort();
-//      gridObjects.sort(GridObjectSort.byZIndex);
+      gridObjects.sort(GridObjectSort.byZIndex);
 
       final GridObject objectToSell = gridObjects.get(0);
       if (objectToSell.getPosition().y >= TowerConsts.LOBBY_FLOOR && !checkAboveOrBelow(objectToSell, objectToSell.getPosition()
