@@ -27,4 +27,10 @@ public class ErrorUtil {
       }
     }.run();
   }
+
+  public static void rethrowErrorInDebugMode(Throwable throwable) {
+    if (HappyDroidConsts.DEBUG) {
+      rethrowError(throwable);
+    }
+  }
 }
