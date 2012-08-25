@@ -19,7 +19,7 @@ public class AndroidBrowserUtil implements PlatformBrowserUtil {
     activity.runOnUiThread(new Runnable() {
       @Override
       public void run() {
-        if (uriToLoad.startsWith("market") || uriToLoad.contains("youtube.com")) {
+        if (uriToLoad.startsWith("market") || uriToLoad.startsWith("amzn") || uriToLoad.contains("youtube.com")) {
           //Pass it to the system, doesn't match your domain
           Intent intent = new Intent(Intent.ACTION_VIEW);
           intent.setData(Uri.parse(uriToLoad));
