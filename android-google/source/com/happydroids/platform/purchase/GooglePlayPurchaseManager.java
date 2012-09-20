@@ -7,6 +7,7 @@ package com.happydroids.platform.purchase;
 import com.happydroids.droidtowers.DroidTowersGooglePlay;
 import com.happydroids.platform.PlatformPurchaseManger;
 
+import static com.happydroids.platform.purchase.DroidTowerVersions.ONE_TIME_DISCOUNT_199;
 import static com.happydroids.platform.purchase.DroidTowerVersions.UNLIMITED_299;
 
 public class GooglePlayPurchaseManager extends PlatformPurchaseManger {
@@ -16,6 +17,7 @@ public class GooglePlayPurchaseManager extends PlatformPurchaseManger {
   public GooglePlayPurchaseManager(DroidTowersGooglePlay droidTowersGooglePlay) {
     this.droidTowersGooglePlay = droidTowersGooglePlay;
     itemSkus.put(UNLIMITED_299, "com.happydroids.droidtowers.version.unlimited299");
+    itemSkus.put(ONE_TIME_DISCOUNT_199, "com.happydroids.droidtowers.version.unlimited199");
   }
 
   @Override

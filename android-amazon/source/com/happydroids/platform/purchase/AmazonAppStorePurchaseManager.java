@@ -9,6 +9,7 @@ import com.amazon.inapp.purchasing.PurchasingObserver;
 import com.happydroids.droidtowers.amazon.DroidTowersAmazon;
 import com.happydroids.platform.PlatformPurchaseManger;
 
+import static com.happydroids.platform.purchase.DroidTowerVersions.ONE_TIME_DISCOUNT_199;
 import static com.happydroids.platform.purchase.DroidTowerVersions.UNLIMITED_299;
 
 public class AmazonAppStorePurchaseManager extends PlatformPurchaseManger {
@@ -20,6 +21,7 @@ public class AmazonAppStorePurchaseManager extends PlatformPurchaseManger {
     purchaseObserver = new AmazonPurchaseObserver(droidTowersAmazon);
 
     itemSkus.put(UNLIMITED_299, "com.happydroids.droidtowers.amazon.purchase.unlimited299");
+    itemSkus.put(ONE_TIME_DISCOUNT_199, "com.happydroids.droidtowers.amazon.purchase.unlimited199");
   }
 
   @Override

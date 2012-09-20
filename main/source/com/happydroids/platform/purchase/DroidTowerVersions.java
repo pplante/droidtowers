@@ -6,4 +6,5 @@ package com.happydroids.platform.purchase;
 
 public enum DroidTowerVersions {
   UNLIMITED_299,
+  ONE_TIME_DISCOUNT_199,
 }

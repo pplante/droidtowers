@@ -11,9 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.happydroids.droidtowers.DroidTowersGame;
 import com.happydroids.droidtowers.TowerAssetManager;
+import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.platform.Display;
 import com.happydroids.droidtowers.types.RoomTypeFactory;
 import com.happydroids.platform.Platform;
+import com.happydroids.security.SecurePreferences;
 
 public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
 
@@ -50,6 +52,7 @@ public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
     dismissButton.addListener(new VibrateClickListener() {
       @Override
       public void onClick(InputEvent event, float x, float y) {
+        determineIfSpecialOfferIsAvailable();
         dismiss();
       }
     });
@@ -59,6 +62,34 @@ public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
     buttons.add(purchaseButton).expandX();
     buttons.add(dismissButton);
     setStaticFooter(buttons);
+  }
+
+  private void determineIfSpecialOfferIsAvailable() {
+    SecurePreferences preferences = TowerGameService.instance().getPreferences();
+
+    if (!preferences.contains("SHOWN_ONE_TIME_OFFER")) {
+      preferences.putBoolean("SHOWN_ONE_TIME_OFFER", true);
+
+      displaySpecialOfferDialog();
+    }
+  }
+
+  private void displaySpecialOfferDialog() {
+    new Dialog()
+            .setTitle("One Time Offer!")
+            .setMessage("SPECIAL ONE TIME OFFER!\n\nIf you are unsure about purchasing Droid Towers,\nhow about a special discount to sweeten the deal?\n\n* YOU WILL NEVER SEE THIS OFFER AGAIN *")
+            .addButton("Purchase for $1.99", new OnClickCallback() {
+              @Override public void onClick(Dialog dialog) {
+                dialog.dismiss();
+                Platform.getPurchaseManager().requestPurchaseForDiscountedOffer();
+              }
+            })
+            .addButton("Never ask again", new OnClickCallback() {
+              @Override public void onClick(Dialog dialog) {
+                dialog.dismiss();
+              }
+            })
+            .show();
   }
 
 }

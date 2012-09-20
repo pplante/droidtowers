@@ -95,4 +95,8 @@ public abstract class PlatformPurchaseManger {
   public EventBus events() {
     return eventBus;
   }
+
+  public void requestPurchaseForDiscountedOffer() {
+    requestPurchase(getSkuForVersion(DroidTowerVersions.ONE_TIME_DISCOUNT_199));
+  }
 }
