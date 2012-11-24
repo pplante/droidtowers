@@ -35,7 +35,7 @@ stairs
   xy: 1, 1
   size: 120, 78
   orig: 120, 78
-  offset: 0, 50
+  offset: 0, -50
   index: -1
 elevator/empty
   rotate: false

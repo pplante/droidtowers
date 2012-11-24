@@ -16,6 +16,7 @@ public class GridObjectPurchaseChecker {
 
   private final GameGrid gameGrid;
   private GridObjectType gridObjectType;
+  private int numPurchases;
 
   public GridObjectPurchaseChecker(GameGrid gameGrid, GridObjectType gridObjectType) {
     this.gameGrid = gameGrid;
@@ -26,6 +27,8 @@ public class GridObjectPurchaseChecker {
     Gdx.app.log(LOG_TAG, "Checking purchase: " + gridObjectType.getName());
     if (gridObjectType.getCoins() != 0 && Player.instance().getCoins() < gridObjectType.getCoins()) {
       displayCurrencyDialog();
+      return false;
+    } else if (numPurchases >= 1 && !gridObjectType.allowContinuousPurchase()) {
       return false;
     }
 
@@ -48,5 +51,6 @@ public class GridObjectPurchaseChecker {
 
     player.subtractCurrency(gridObjectType.getCoins());
     player.addExperience(gridObjectType.getExperienceAward());
+    numPurchases += 1;
   }
 }

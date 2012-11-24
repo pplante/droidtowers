@@ -133,7 +133,7 @@ public abstract class GridObjectType {
     if (atlasFilename != null) {
       TextureRegion region;
       if (numVariations > 0 && variationId > 0) {
-        region = getTextureAtlas().findRegion(imageFilename, variationId);
+        region = getTextureAtlas().findRegion(imageFilename + variationId);
       } else {
         region = getTextureAtlas().findRegion(imageFilename);
       }
@@ -299,5 +299,9 @@ public abstract class GridObjectType {
 
   public boolean hasStatsLine() {
     return statsLine != null;
+  }
+
+  public boolean allowContinuousPurchase() {
+    return true;
   }
 }
