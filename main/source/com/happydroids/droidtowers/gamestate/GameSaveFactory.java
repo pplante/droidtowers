@@ -59,7 +59,13 @@ public class GameSaveFactory {
   }
 
   public static FileHandle getStorageRoot() {
-    return Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
+    if (Gdx.files.isExternalStorageAvailable()) {
+      return Gdx.files.external(TowerConsts.GAME_SAVE_DIRECTORY);
+    } else if (Gdx.files.isLocalStorageAvailable()) {
+      return Gdx.files.local(TowerConsts.GAME_SAVE_DIRECTORY);
+    }
+
+    throw new RuntimeException("No storage device available.");
   }
 
   public static GameSave upgradeGameSave(InputStream inputStream, String fileName) {
