@@ -1,0 +1,158 @@
+services.png
+format: RGBA8888
+filter: MipMapNearestNearest,Linear
+repeat: none
+vehicle
+  rotate: false
+  xy: 64, 220
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: 2
+vehicle
+  rotate: false
+  xy: 92, 192
+  size: 28, 26
+  orig: 28, 26
+  offset: 0, 0
+  index: 6
+vehicle
+  rotate: false
+  xy: 202, 192
+  size: 26, 24
+  orig: 26, 24
+  offset: 0, 0
+  index: 11
+vehicle
+  rotate: false
+  xy: 228, 214
+  size: 13, 22
+  orig: 13, 22
+  offset: 0, 0
+  index: 15
+vehicle
+  rotate: false
+  xy: 174, 218
+  size: 26, 25
+  orig: 26, 25
+  offset: 0, 0
+  index: 1
+2x1-garage-ramp
+  rotate: false
+  xy: 128, 128
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+vehicle
+  rotate: false
+  xy: 92, 218
+  size: 28, 26
+  orig: 28, 26
+  offset: 0, 0
+  index: 5
+vehicle
+  rotate: false
+  xy: 228, 192
+  size: 13, 22
+  orig: 13, 22
+  offset: 0, 0
+  index: 9
+4x1-security-center
+  rotate: false
+  xy: 0, 0
+  size: 256, 64
+  orig: 256, 64
+  offset: 0, 0
+  index: -1
+1x1-bathroom
+  rotate: false
+  xy: 0, 192
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+vehicle
+  rotate: false
+  xy: 148, 192
+  size: 28, 26
+  orig: 28, 26
+  offset: 0, 0
+  index: 10
+vehicle
+  rotate: false
+  xy: 241, 214
+  size: 13, 22
+  orig: 13, 22
+  offset: 0, 0
+  index: 14
+vehicle
+  rotate: false
+  xy: 176, 192
+  size: 26, 24
+  orig: 26, 24
+  offset: 0, 0
+  index: 4
+vehicle
+  rotate: false
+  xy: 64, 192
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: 8
+vehicle
+  rotate: false
+  xy: 120, 192
+  size: 28, 26
+  orig: 28, 26
+  offset: 0, 0
+  index: 13
+vehicle
+  rotate: false
+  xy: 241, 192
+  size: 13, 22
+  orig: 13, 22
+  offset: 0, 0
+  index: 3
+1x1-garage-space
+  rotate: false
+  xy: 192, 64
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+vehicle
+  rotate: false
+  xy: 148, 218
+  size: 26, 25
+  orig: 26, 25
+  offset: 0, 0
+  index: 7
+vehicle
+  rotate: false
+  xy: 120, 218
+  size: 28, 26
+  orig: 28, 26
+  offset: 0, 0
+  index: 12
+2x1-maids-closet
+  rotate: false
+  xy: 0, 128
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+vehicle
+  rotate: false
+  xy: 200, 216
+  size: 26, 24
+  orig: 26, 24
+  offset: 0, 0
+  index: 16
+4x1-janitors-closet
+  rotate: false
+  xy: 0, 64
+  size: 192, 64
+  orig: 192, 64
+  offset: 0, 0
+  index: -1

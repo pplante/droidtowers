@@ -127,13 +127,15 @@ public class PlacementTool extends ToolBase {
 
       if (gridObjectPurchaseChecker != null) {
         gridObjectPurchaseChecker.makePurchase();
+
+        if (!gridObjectType.allowContinuousPurchase()) {
+          InputSystem.instance().switchTool(GestureTool.PICKER, null);
+        }
       }
     }
 
     gridObject = null;
     touchDownPointDelta = null;
-
-    InputSystem.instance().switchTool(GestureTool.PICKER, null);
 
     return false;
   }

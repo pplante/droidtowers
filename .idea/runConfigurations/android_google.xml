@@ -4,7 +4,7 @@
     <option name="ACTIVITY_CLASS" value="" />
     <option name="MODE" value="default_activity" />
     <option name="DEPLOY" value="true" />
-    <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+    <option name="TARGET_SELECTION_MODE" value="USB_DEVICE" />
     <option name="PREFERRED_AVD" value="" />
     <option name="COMMAND_LINE" value="" />
     <option name="WIPE_USER_DATA" value="false" />
@@ -20,9 +20,6 @@
     <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
     <ConfigurationWrapper RunnerId="Profile " />
     <ConfigurationWrapper RunnerId="Run" />
-    <method>
-      <option name="AntTarget" enabled="true" antfile="file://$PROJECT_DIR$/build.xml" target="sync-android-assets" />
-      <option name="Make" enabled="true" />
-    </method>
+    <method />
   </configuration>
 </component>

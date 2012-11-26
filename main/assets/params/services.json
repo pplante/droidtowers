@@ -11,7 +11,7 @@
     "jobsProvided": 0,
     "noiseLevel": 0.3,
     "provides": "RESTROOM",
-    "atlasFilename": "rooms/commercial.txt",
+    "atlasFilename": "rooms/services.txt",
     "imageFilename": "1x1-bathroom"
   },
   {
@@ -27,7 +27,7 @@
     "jobsProvided": 4,
     "noiseLevel": 0.2,
     "provides": "JANITORS",
-    "atlasFilename": "rooms/commercial.txt",
+    "atlasFilename": "rooms/services.txt",
     "imageFilename": "4x1-janitors-closet"
   },
   {
@@ -43,7 +43,7 @@
     "jobsProvided": 4,
     "noiseLevel": 0.3,
     "provides": "MAIDS",
-    "atlasFilename": "rooms/commercial.txt",
+    "atlasFilename": "rooms/services.txt",
     "imageFilename": "2x1-maids-closet"
   },
   {
@@ -59,13 +59,13 @@
     "jobsProvided": 6,
     "noiseLevel": 0.5,
     "provides": "SECURITY",
-    "atlasFilename": "rooms/commercial.txt",
+    "atlasFilename": "rooms/services.txt",
     "imageFilename": "4x1-security-center"
   },
   {
     "id": "PARKING-GARAGE-RAMP",
     "name": "Parking Garage Ramp",
-    "description": "Droids love to drive on the open road,\nbut they don't like circling the block looking for\na parking space.  Build a Parking Garage by\nbuilding ramps and spaces.",
+    "description": "Build a Parking Garage by building ramps and spaces.  First ramp must be built on ground floor.",
     "coins": 60000,
     "height": 1,
     "width": 2,
@@ -74,8 +74,8 @@
     "populationRequired": 40,
     "jobsProvided": 0,
     "noiseLevel": 0.75,
-    "provides": "PARKING",
-    "atlasFilename": "rooms/commercial.txt",
+    "provides": "PARKING_RAMP",
+    "atlasFilename": "rooms/services.txt",
     "imageFilename": "2x1-garage-ramp"
   },
   {
@@ -90,8 +90,8 @@
     "populationRequired": 40,
     "jobsProvided": 0,
     "noiseLevel": 0.45,
-    "provides": "PARKING",
-    "atlasFilename": "rooms/commercial.txt",
+    "provides": "PARKING_SPACE",
+    "atlasFilename": "rooms/services.txt",
     "imageFilename": "1x1-garage-space"
   }
 ]

@@ -11,6 +11,8 @@ import com.happydroids.droidtowers.types.ServiceRoomType;
 public class ParkingGarageRamp extends ServiceRoom {
   public ParkingGarageRamp(ServiceRoomType serviceRoomType, GameGrid gameGrid) {
     super(serviceRoomType, gameGrid);
+
+    connectedToTransport = true;
   }
 
   @Override

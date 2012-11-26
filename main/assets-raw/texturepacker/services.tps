@@ -22,7 +22,7 @@
         <key>dataFormat</key>
         <string>libgdx</string>
         <key>textureFileName</key>
-        <filename>../../assets/rooms/commercial.png</filename>
+        <filename>../../assets/rooms/services.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>ditherType</key>
@@ -105,7 +105,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>../../assets/rooms/commercial.txt</filename>
+        <filename>../../assets/rooms/services.txt</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -137,7 +137,7 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>../rooms/commercial</filename>
+            <filename>../rooms/services</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -11,6 +11,7 @@
       <directory url="file://$PROJECT_DIR$/android-amazon/gen-idea" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/android-google/gen-idea" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/android-shared/gen-idea" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/android-shared/gen" includeSubdirectories="true" />
     </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>
