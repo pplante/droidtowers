@@ -168,7 +168,7 @@ public class GameGrid extends GameLayer {
   }
 
   @Override
-  public boolean tap(Vector2 worldPoint, int count, int pointer, int button) {
+  public boolean tap(Vector2 worldPoint, int count, int button) {
     GridPoint gridPointAtFinger = closestGridPoint(worldPoint.x, worldPoint.y);
     Array<GridObject> objectsNear = findObjectsNear(worldPoint, gridPointAtFinger.y, gridPointAtFinger.x);
     if (objectsNear != null) {

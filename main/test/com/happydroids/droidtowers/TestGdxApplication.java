@@ -7,6 +7,7 @@ package com.happydroids.droidtowers;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglGraphics;
+import com.badlogic.gdx.utils.Clipboard;
 
 public class TestGdxApplication implements Application {
 
@@ -29,6 +30,10 @@ public class TestGdxApplication implements Application {
   }
 
   public Files getFiles() {
+    return null;
+  }
+
+  @Override public Net getNet() {
     return null;
   }
 
@@ -71,6 +76,10 @@ public class TestGdxApplication implements Application {
 
   public Preferences getPreferences(String name) {
     return preferences;
+  }
+
+  @Override public Clipboard getClipboard() {
+    return null;
   }
 
   public void postRunnable(Runnable runnable) {

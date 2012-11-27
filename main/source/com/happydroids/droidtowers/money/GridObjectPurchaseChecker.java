@@ -9,6 +9,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
+import com.happydroids.droidtowers.input.GestureTool;
+import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.types.GridObjectType;
 
 public class GridObjectPurchaseChecker {
@@ -27,8 +29,6 @@ public class GridObjectPurchaseChecker {
     Gdx.app.log(LOG_TAG, "Checking purchase: " + gridObjectType.getName());
     if (gridObjectType.getCoins() != 0 && Player.instance().getCoins() < gridObjectType.getCoins()) {
       displayCurrencyDialog();
-      return false;
-    } else if (numPurchases >= 1 && !gridObjectType.allowContinuousPurchase()) {
       return false;
     }
 
@@ -52,5 +52,9 @@ public class GridObjectPurchaseChecker {
     player.subtractCurrency(gridObjectType.getCoins());
     player.addExperience(gridObjectType.getExperienceAward());
     numPurchases += 1;
+
+    if (!gridObjectType.allowContinuousPurchase()) {
+      InputSystem.instance().switchTool(GestureTool.PICKER, null);
+    }
   }
 }

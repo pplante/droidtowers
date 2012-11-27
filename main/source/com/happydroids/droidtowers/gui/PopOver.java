@@ -168,7 +168,7 @@ public class PopOver extends WidgetGroup {
       getStage().screenToStageCoordinates(touchDown);
       stageToLocalCoordinates(touchDown);
 
-      if (hit(touchDown.x, touchDown.y) == null) {
+      if (hit(touchDown.x, touchDown.y, true) == null) {
         hide();
       }
 

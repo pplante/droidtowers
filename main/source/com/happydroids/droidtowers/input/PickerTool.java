@@ -46,11 +46,11 @@ public class PickerTool extends ToolBase {
   }
 
   @Override
-  public boolean tap(float x, float y, int count, int pointer, int button) {
+  public boolean tap(float x, float y, int count, int button) {
     Vector2 worldPoint = cameraPickRayToWorldPoint(x, y);
 
     for (GameLayer gameLayer : gameLayers) {
-      if (gameLayer.isTouchEnabled() && gameLayer.tap(worldPoint, count, pointer, button)) {
+      if (gameLayer.isTouchEnabled() && gameLayer.tap(worldPoint, count, button)) {
         return true;
       }
     }
@@ -59,7 +59,7 @@ public class PickerTool extends ToolBase {
   }
 
   @Override
-  public boolean touchDown(float x, float y, int pointer) {
+  public boolean touchDown(float x, float y, int pointer, int button) {
     Vector2 worldPoint = cameraPickRayToWorldPoint(x, y);
 
     for (GameLayer gameLayer : gameLayers) {

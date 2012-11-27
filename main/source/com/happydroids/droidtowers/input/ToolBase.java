@@ -23,11 +23,11 @@ public class ToolBase implements GestureDetector.GestureListener {
     this.gameGrid = gameGrid;
   }
 
-  public boolean touchDown(float x, float y, int pointer) {
+  public boolean touchDown(float x, float y, int pointer, int button) {
     return false;
   }
 
-  public boolean tap(float x, float y, int count, int pointer, int button) {
+  public boolean tap(float x, float y, int count, int button) {
     return false;
   }
 
@@ -35,7 +35,7 @@ public class ToolBase implements GestureDetector.GestureListener {
     return false;
   }
 
-  public boolean fling(float velocityX, float velocityY, int pointer, int button) {
+  public boolean fling(float velocityX, float velocityY, int button) {
     return false;
   }
 
