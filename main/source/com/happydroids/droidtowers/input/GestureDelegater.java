@@ -49,20 +49,20 @@ public class GestureDelegater implements GestureListener {
   }
 
   // GO AWAY, DEMONS AHEAD!
-  public boolean touchDown(float x, float y, int pointer) {
-    return currentTool != null && currentTool.touchDown(x, y, pointer) || cameraController.touchDown(x, y, pointer);
+  public boolean touchDown(float x, float y, int pointer, int button) {
+    return currentTool != null && currentTool.touchDown(x, y, pointer, button) || cameraController.touchDown(x, y, pointer);
   }
 
-  public boolean tap(float x, float y, int count, int pointer, int button) {
-    return currentTool != null && currentTool.tap(x, y, count, pointer, button) || cameraController.tap(x, y, count, pointer, button);
+  public boolean tap(float x, float y, int count, int button) {
+    return currentTool != null && currentTool.tap(x, y, count, button) || cameraController.tap(x, y, count, button);
   }
 
   public boolean longPress(float x, float y) {
     return currentTool != null && currentTool.longPress(x, y) || cameraController.longPress(x, y);
   }
 
-  public boolean fling(float velocityX, float velocityY, int pointer, int button) {
-    return currentTool != null && currentTool.fling(velocityX, velocityY, pointer, button) || cameraController.fling(velocityX, velocityY, pointer, button);
+  public boolean fling(float velocityX, float velocityY, int button) {
+    return currentTool != null && currentTool.fling(velocityX, velocityY, button) || cameraController.fling(velocityX, velocityY, button);
   }
 
   public boolean pan(float x, float y, float deltaX, float deltaY) {

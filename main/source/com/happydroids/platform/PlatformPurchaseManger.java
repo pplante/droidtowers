@@ -16,6 +16,7 @@ import com.happydroids.security.SecurePreferences;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.happydroids.platform.purchase.DroidTowerVersions.ONE_TIME_DISCOUNT_199;
 import static com.happydroids.platform.purchase.DroidTowerVersions.UNLIMITED_299;
 
 public abstract class PlatformPurchaseManger {
@@ -58,7 +59,11 @@ public abstract class PlatformPurchaseManger {
   }
 
   public boolean hasPurchasedUnlimitedVersion() {
-    return TowerGameService.instance().getPreferences().contains(getSkuForVersion(UNLIMITED_299));
+    return TowerGameService.instance()
+                   .getPreferences()
+                   .contains(getSkuForVersion(UNLIMITED_299)) || TowerGameService.instance()
+                                                                         .getPreferences()
+                                                                         .contains(getSkuForVersion(ONE_TIME_DISCOUNT_199));
   }
 
   public abstract void requestPurchase(String itemId);
@@ -94,5 +99,9 @@ public abstract class PlatformPurchaseManger {
 
   public EventBus events() {
     return eventBus;
+  }
+
+  public void requestPurchaseForDiscountedOffer() {
+    requestPurchase(getSkuForVersion(DroidTowerVersions.ONE_TIME_DISCOUNT_199));
   }
 }

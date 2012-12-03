@@ -25,7 +25,9 @@ public class RavenReportSender implements ReportSender {
     extra.put("user_email", data.getProperty(ReportField.USER_EMAIL));
     extra.put("user_comment", data.getProperty(ReportField.USER_COMMENT));
     extra.put("display", data.getProperty(ReportField.DISPLAY));
-    extra.put("device_id", TowerGameService.instance().getDeviceId());
+    if (TowerGameService.hasBeenInitialised()) {
+      extra.put("device_id", TowerGameService.instance().getDeviceId());
+    }
     extra.put("device_build", data.getProperty(ReportField.BUILD));
     extra.put("device_brand", data.getProperty(ReportField.BRAND));
     extra.put("device_product", data.getProperty(ReportField.PRODUCT));

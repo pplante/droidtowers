@@ -44,7 +44,7 @@ import java.util.Vector;
  * <li>Use the <code>org.apach3.commons.logging.Log</code> system property
  *     to identify the requested implementation class.</li>
  * <li>If <em>Log4J</em> is available, return an instance of
- *     <code>org.apach3.commons.logging.impl.∂Log4JLogger</code>.</li>
+ *     <code>org.apach3.commons.logging.impl.Log4JLogger</code>.</li>
  * <li>If <em>JDK 1.4 or later</em> is available, return an instance of
  *     <code>org.apach3.commons.logging.impl.Jdk14Logger</code>.</li>
  * <li>Otherwise, return an instance of

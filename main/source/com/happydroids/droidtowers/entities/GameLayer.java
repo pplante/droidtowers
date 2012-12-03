@@ -77,7 +77,7 @@ public class GameLayer<T extends GameObject> {
     return false;
   }
 
-  public boolean tap(Vector2 worldPoint, int count, int pointer, int button) {
+  public boolean tap(Vector2 worldPoint, int count, int button) {
     return false;
   }
 

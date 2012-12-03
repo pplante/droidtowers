@@ -6,6 +6,8 @@ package com.happydroids.droidtowers;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.Array;
 import com.happydroids.HappyDroidConsts;
 import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.math.GridPoint;
@@ -52,4 +54,5 @@ public class TowerConsts extends HappyDroidConsts {
   public static final boolean ENABLE_AVATAR_LIST_WINDOW = false;
   public static final boolean ENABLE_HAPPYDROIDS_CONNECT = true;
   public static final boolean ENABLE_NEWS_TICKER = false;
+  public static final Array<Color> COLORS = new Array<Color>(new Color[]{Color.RED, Color.GREEN, Color.PINK, Color.WHITE, Color.BLUE, Color.LIGHT_GRAY, Color.GRAY, Color.DARK_GRAY, Color.ORANGE, Color.YELLOW, Color.MAGENTA, Color.CYAN});
 }

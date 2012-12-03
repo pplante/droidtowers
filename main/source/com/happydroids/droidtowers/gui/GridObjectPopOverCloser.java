@@ -21,7 +21,7 @@ class GridObjectPopOverCloser extends InputAdapter {
     objectPopOver.getStage().screenToStageCoordinates(touchDown);
     objectPopOver.stageToLocalCoordinates(touchDown);
 
-    if (objectPopOver.hit(touchDown.x, touchDown.y) == null) {
+    if (objectPopOver.hit(touchDown.x, touchDown.y, true) == null) {
       closePopOver();
     }
 

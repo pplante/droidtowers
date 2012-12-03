@@ -22,6 +22,10 @@ public class ElevatorType extends TransitType {
     return gridObject instanceof Room;
   }
 
+  @Override public boolean allowContinuousPurchase() {
+    return false;
+  }
+
   @Override
   public boolean canBeAt(GridObject gridObject) {
     return checkForOverlap(gridObject);

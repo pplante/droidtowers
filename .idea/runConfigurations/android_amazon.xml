@@ -20,9 +20,6 @@
     <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
     <ConfigurationWrapper RunnerId="Profile " />
     <ConfigurationWrapper RunnerId="Run" />
-    <method>
-      <option name="AntTarget" enabled="true" antfile="file://$PROJECT_DIR$/build.xml" target="sync-android-assets" />
-      <option name="Make" enabled="true" />
-    </method>
+    <method />
   </configuration>
 </component>

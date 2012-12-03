@@ -300,4 +300,8 @@ public abstract class GridObjectType {
   public boolean hasStatsLine() {
     return statsLine != null;
   }
+
+  public boolean allowContinuousPurchase() {
+    return true;
+  }
 }

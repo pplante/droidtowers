@@ -9,6 +9,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.happydroids.droidtowers.entities.Player;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.HeadsUpDisplay;
+import com.happydroids.droidtowers.input.GestureTool;
+import com.happydroids.droidtowers.input.InputSystem;
 import com.happydroids.droidtowers.types.GridObjectType;
 
 public class GridObjectPurchaseChecker {
@@ -16,6 +18,7 @@ public class GridObjectPurchaseChecker {
 
   private final GameGrid gameGrid;
   private GridObjectType gridObjectType;
+  private int numPurchases;
 
   public GridObjectPurchaseChecker(GameGrid gameGrid, GridObjectType gridObjectType) {
     this.gameGrid = gameGrid;
@@ -48,5 +51,10 @@ public class GridObjectPurchaseChecker {
 
     player.subtractCurrency(gridObjectType.getCoins());
     player.addExperience(gridObjectType.getExperienceAward());
+    numPurchases += 1;
+
+    if (!gridObjectType.allowContinuousPurchase()) {
+      InputSystem.instance().switchTool(GestureTool.PICKER, null);
+    }
   }
 }

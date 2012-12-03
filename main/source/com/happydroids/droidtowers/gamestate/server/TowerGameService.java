@@ -42,6 +42,11 @@ public class TowerGameService extends HappyDroidService {
     return (TowerGameService) _instance;
   }
 
+
+  public static boolean hasBeenInitialised() {
+    return _instance != null;
+  }
+
   public String getSessionToken() {
     return getPreferences().getString(SESSION_TOKEN, null);
   }

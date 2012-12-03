@@ -59,11 +59,19 @@ public class CameraController implements GestureDetector.GestureListener {
     return false;
   }
 
+  @Override public boolean touchDown(float x, float y, int pointer, int button) {
+    return false;
+  }
+
+  @Override public boolean tap(float x, float y, int count, int button) {
+    return false;
+  }
+
   public boolean longPress(float x, float y) {
     return false;
   }
 
-  public boolean fling(float velocityX, float velocityY, int pointer, int button) {
+  public boolean fling(float velocityX, float velocityY, int button) {
     if (Math.abs(velocityX) >= 300) {
       flinging = true;
       velX = camera.zoom * velocityX * 0.5f;
