@@ -39,7 +39,7 @@ public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
 
     shoveContentUp();
 
-    TextButton purchaseButton = FontManager.Roboto32.makeTextButton("Purchase for: $2.99", Color.GREEN);
+    TextButton purchaseButton = FontManager.Roboto32.makeTextButton("Purchase for: $0.99", Color.GREEN);
     purchaseButton.addListener(new VibrateClickListener() {
       @Override
       public void onClick(InputEvent event, float x, float y) {
@@ -52,7 +52,7 @@ public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
     dismissButton.addListener(new VibrateClickListener() {
       @Override
       public void onClick(InputEvent event, float x, float y) {
-        determineIfSpecialOfferIsAvailable();
+//        determineIfSpecialOfferIsAvailable();
         dismiss();
       }
     });

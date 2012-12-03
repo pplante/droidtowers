@@ -16,8 +16,7 @@ import com.happydroids.security.SecurePreferences;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.happydroids.platform.purchase.DroidTowerVersions.ONE_TIME_DISCOUNT_199;
-import static com.happydroids.platform.purchase.DroidTowerVersions.UNLIMITED_299;
+import static com.happydroids.platform.purchase.DroidTowerVersions.*;
 
 public abstract class PlatformPurchaseManger {
   private static Runnable initializeRunnable;
@@ -59,11 +58,11 @@ public abstract class PlatformPurchaseManger {
   }
 
   public boolean hasPurchasedUnlimitedVersion() {
-    return TowerGameService.instance()
-                   .getPreferences()
-                   .contains(getSkuForVersion(UNLIMITED_299)) || TowerGameService.instance()
-                                                                         .getPreferences()
-                                                                         .contains(getSkuForVersion(ONE_TIME_DISCOUNT_199));
+    SecurePreferences preferences = TowerGameService.instance().getPreferences();
+
+    return preferences.contains(getSkuForVersion(UNLIMITED_299)) ||
+        preferences.contains(getSkuForVersion(ONE_TIME_DISCOUNT_199)) ||
+        preferences.contains(getSkuForVersion(UNLIMITED_99_XMAS));
   }
 
   public abstract void requestPurchase(String itemId);
@@ -73,7 +72,7 @@ public abstract class PlatformPurchaseManger {
   }
 
   public void requestPurchaseForUnlimitedVersion() {
-    requestPurchase(getSkuForVersion(UNLIMITED_299));
+    requestPurchase(getSkuForVersion(UNLIMITED_99_XMAS));
   }
 
   public SecurePreferences getPurchases() {

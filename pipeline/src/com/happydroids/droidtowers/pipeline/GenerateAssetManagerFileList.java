@@ -31,6 +31,7 @@ public class GenerateAssetManagerFileList {
     preloadFile(assetsDir.child("backgrounds/splash2.txt"), TextureAtlas.class);
     preloadFile(assetsDir.child("backgrounds/cityscape-middle.png"), Texture.class);
     preloadFile(assetsDir.child("happydroid.txt"), TextureAtlas.class);
+    preloadFile(assetsDir.child("droid-santa-hat.png"), Texture.class);
 
     preloadFile(assetsDir.child("default-skin.json"), Skin.class);
     preloadFile(assetsDir.child("backgrounds/clouds.txt"), TextureAtlas.class);
