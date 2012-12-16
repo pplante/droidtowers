@@ -103,6 +103,14 @@
     "id": "tutorial-pan",
     "name": "Navigation",
     "description": "Now that your Tower is up and running,\nlets learn how to control your camera.\n\nTo move the screen around,\ntap anywhere and drag.",
+    "requirements": [
+      {
+        "type": "BUILD",
+        "thing": "OBJECT_TYPE",
+        "thingId": "PIZZA-PLACE",
+        "amount": 1
+      }
+    ],
     "rewards": [
       {
         "type": "UNLOCK",
