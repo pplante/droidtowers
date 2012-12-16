@@ -25,13 +25,6 @@ public class MovieTheaterPopOver extends GridObjectPopOver {
     super.buildControls();
 
     ButtonBar buttonBar = new ButtonBar();
-    buttonBar.addButton("Manage", new VibrateClickListener() {
-      @Override
-      public void onClick(InputEvent event, float x, float y) {
-        new ManageCommercialSpaceDialog((CommercialSpace) gridObject).show();
-      }
-    });
-
     if (gridObject.hasLoanFromCousinVinnie()) {
       buttonBar.addButton("Repay Vinnie", new VibrateClickListener() {
         @Override

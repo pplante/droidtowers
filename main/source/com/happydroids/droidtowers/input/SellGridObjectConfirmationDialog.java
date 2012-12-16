@@ -73,10 +73,6 @@ public class SellGridObjectConfirmationDialog extends Dialog {
     dismiss();
     Gdx.input.vibrate(100);
 
-    if (objectToSell instanceof CommercialSpace) {
-      ((CommercialSpace) objectToSell).fireAllEmployees();
-    }
-
     gameGrid.removeObject(objectToSell);
     Player.instance().addCurrency(sellPrice);
 

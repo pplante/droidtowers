@@ -30,13 +30,6 @@ public class CommercialSpacePopOver extends GridObjectPopOver<CommercialSpace> {
     dirtLevelBar.setTextures(RatingBar.COCKROACH_ICON);
 
     ButtonBar buttonBar = new ButtonBar();
-    buttonBar.addButton("Manage", new VibrateClickListener() {
-      @Override
-      public void onClick(InputEvent event, float x, float y) {
-        new ManageCommercialSpaceDialog(gridObject).show();
-      }
-    });
-
     if (gridObject.hasLoanFromCousinVinnie()) {
       buttonBar.addButton("Repay Vinnie", new VibrateClickListener() {
         @Override

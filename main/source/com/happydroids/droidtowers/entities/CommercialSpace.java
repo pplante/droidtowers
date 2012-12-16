@@ -5,37 +5,24 @@
 package com.happydroids.droidtowers.entities;
 
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.Pools;
-import com.google.common.collect.Lists;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
-import com.happydroids.droidtowers.employee.JobCandidate;
-import com.happydroids.droidtowers.events.EmployeeFiredEvent;
-import com.happydroids.droidtowers.events.EmployeeHiredEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.gui.CommercialSpacePopOver;
 import com.happydroids.droidtowers.gui.GridObjectPopOver;
 import com.happydroids.droidtowers.types.CommercialType;
 import com.happydroids.droidtowers.utils.Random;
 
-import java.util.List;
-
 public class CommercialSpace extends Room {
   private int jobsFilled;
   private long lastJobUpdateTime;
-  protected List<JobCandidate> employees;
 
   public CommercialSpace(CommercialType commercialType, GameGrid gameGrid) {
     super(commercialType, gameGrid);
-    employees = Lists.newArrayListWithCapacity(commercialType.getJobsProvided());
   }
 
   @Override
   public GridObjectPopOver makePopOver() {
     return new CommercialSpacePopOver(this);
-  }
-
-  @Override public boolean needsDroids() {
-    return employees.isEmpty();
   }
 
   public void updateJobs() {
@@ -53,7 +40,7 @@ public class CommercialSpace extends Room {
   }
 
   public int getJobsFilled() {
-    return employees.size();
+    return jobsFilled;
   }
 
   @Override
@@ -76,21 +63,16 @@ public class CommercialSpace extends Room {
 
   @Override
   public int getUpkeepCost() {
-    if (employees.isEmpty()) {
+    if (jobsFilled == 0) {
       return 0;
     }
 
-    int totalSalaries = 0;
-    for (JobCandidate employee : employees) {
-      totalSalaries += employee.getSalary();
-    }
-
-    return totalSalaries;
+    return jobsFilled * 500;
   }
 
   @Override
   public float getDesirability() {
-    if (canEmployDroids() && getEmployees().isEmpty()) {
+    if (canEmployDroids() && jobsFilled == 0) {
       return 0f;
     }
 
@@ -101,7 +83,7 @@ public class CommercialSpace extends Room {
     int jobsProvided = ((CommercialType) gridObjectType).getJobsProvided();
 
     if (jobsProvided > 0) {
-      return MathUtils.clamp(employees.size() / (float) jobsProvided, 0, 1);
+      return MathUtils.clamp(jobsFilled / (float) jobsProvided, 0, 1);
     }
 
     return 0;
@@ -115,77 +97,26 @@ public class CommercialSpace extends Room {
   protected void checkDecals() {
     super.checkDecals();
 
-    if (canEmployDroids()) {
-      if (employees.size() == 0) {
-        decalsToDraw.add(DECAL_NEEDS_DROIDS);
-      } else {
-        decalsToDraw.remove(DECAL_NEEDS_DROIDS);
-      }
-    }
-
     boolean unlockedJanitors = AchievementEngine.instance().findById("build5commercialspaces").hasGivenReward();
     boolean unlockedMaids = AchievementEngine.instance().findById("build8hotelroom").hasGivenReward();
-    if (unlockedJanitors && unlockedMaids && getDirtLevel() >= 0.95f && !getEmployees().isEmpty()) {
+    if (unlockedJanitors && unlockedMaids && getDirtLevel() >= 0.95f && jobsFilled > 0) {
       decalsToDraw.add(DECAL_DIRTY);
     } else {
       decalsToDraw.remove(DECAL_DIRTY);
     }
   }
 
+  @Override public boolean needsDroids() {
+    return false;
+  }
+
   protected boolean canEmployDroids() {
     return true;
   }
 
-  public void addEmployee(JobCandidate selectedCandidate) {
-    employees.add(selectedCandidate);
-    EmployeeHiredEvent event = Pools.obtain(EmployeeHiredEvent.class);
-    event.setGridObject(this);
-    event.setEmployee(selectedCandidate);
-    gameGrid.events().post(event);
-    Pools.free(event);
-  }
-
-  public List<JobCandidate> getEmployees() {
-    return employees;
-  }
-
-  public void setEmployees(List<JobCandidate> employees) {
-    this.employees.clear();
-
-    JobCandidate employee;
-    for (int i = 0, employeesSize = employees.size(); i < employeesSize; i++) {
-      employee = employees.get(i);
-      addEmployee(employee);
-    }
-  }
-
-  public void fireAllEmployees() {
-    JobCandidate employee;
-    EmployeeFiredEvent event = Pools.obtain(EmployeeFiredEvent.class);
-    for (int i = 0, employeesSize = employees.size(); i < employeesSize; i++) {
-      employee = employees.get(i);
-      event.setGridObject(this);
-      event.setEmployee(employee);
-      gameGrid.events().post(event);
-    }
-
-    Pools.free(event);
-
-    employees.clear();
-  }
-
-  public void removeEmployee(JobCandidate employee) {
-    employees.remove(employee);
-    EmployeeFiredEvent event = Pools.obtain(EmployeeFiredEvent.class);
-    event.setGridObject(this);
-    event.setEmployee(employee);
-    gameGrid.events().post(event);
-    Pools.free(event);
-  }
-
   @Override
   public float getDirtLevel() {
-    if (canEmployDroids() && getEmployees().isEmpty()) {
+    if (canEmployDroids() && jobsFilled == 0) {
       return 0;
     }
 

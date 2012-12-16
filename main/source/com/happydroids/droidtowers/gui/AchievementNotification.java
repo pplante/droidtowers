@@ -4,6 +4,7 @@
 
 package com.happydroids.droidtowers.gui;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
@@ -40,7 +41,7 @@ public class AchievementNotification extends Dialog {
     c.defaults().top().left();
     c.row().fillX();
     c.add(new Image(TowerAssetManager.drawableFromAtlas("trophy", "hud/menus.txt"), Scaling.none))
-            .padRight(Display.devicePixel(8));
+        .padRight(Display.devicePixel(8));
     c.add(t).expandX().minWidth(300);
     c.setClip(true);
     c.pack();
@@ -51,7 +52,9 @@ public class AchievementNotification extends Dialog {
         dismiss();
       }
     });
-    addButton(new HeyZapCheckInButton("Completed achievement: " + achievement.getName()));
+    if (Gdx.app.getType().equals(Application.ApplicationType.Android)) {
+      addButton(new HeyZapCheckInButton("Completed achievement: " + achievement.getName()));
+    }
 
     setView(c);
   }

@@ -41,7 +41,7 @@ public class DesktopGame {
         Platform.setConnectionMonitor(new PlatformConnectionMonitor());
         Platform.setPurchaseManager(new DesktopPurchaseManager());
 
-        new GameVersionCheckTask().run();
+//        new GameVersionCheckTask().run();
       }
     })), config);
   }

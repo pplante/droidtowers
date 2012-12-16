@@ -39,10 +39,6 @@ public class GridObjectState {
     variationId = gridObject.getVariationId();
     loanFromCousinVinnie = gridObject.getAmountLoanedFromCousinVinnie();
 
-    if (gridObject instanceof CommercialSpace) {
-      employees = ((CommercialSpace) gridObject).getEmployees();
-    }
-
     if (gridObject instanceof Elevator) {
       numberOfElevatorCars = ((Elevator) gridObject).getNumElevatorCars();
     }
@@ -64,11 +60,6 @@ public class GridObjectState {
           object.setVariationId(variationId);
         }
         object.addLoanFromCousinVinnie(loanFromCousinVinnie);
-
-
-        if (object instanceof CommercialSpace && !object.provides(ProviderType.RESTROOM) && employees != null) {
-          ((CommercialSpace) object).setEmployees(employees);
-        }
 
         if (object instanceof Elevator) {
           ((Elevator) object).setNumElevatorCars(numberOfElevatorCars);

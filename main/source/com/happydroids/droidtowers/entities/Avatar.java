@@ -156,9 +156,9 @@ public class Avatar extends GameObject {
 
     if (start.y == TowerConsts.LOBBY_FLOOR) {
       discoveredPath.add(gameGrid.positionCache()
-                                 .getPosition(Random.randomInt(0, gridSize.x), TowerConsts.LOBBY_FLOOR));
+          .getPosition(Random.randomInt(0, gridSize.x), TowerConsts.LOBBY_FLOOR));
       discoveredPath.add(gameGrid.positionCache()
-                                 .getPosition(Random.randomInt(0, gridSize.x), TowerConsts.LOBBY_FLOOR));
+          .getPosition(Random.randomInt(0, gridSize.x), TowerConsts.LOBBY_FLOOR));
     } else {
       for (int i = 1; i < 5; i++) {
         GridPosition positionRight = gameGrid.positionCache().getPosition(start.x + i, start.y);
@@ -277,7 +277,7 @@ public class Avatar extends GameObject {
     int closestDist = Integer.MAX_VALUE;
     for (GridObject gridObject : commercialSpaces) {
       CommercialSpace commercialSpace = (CommercialSpace) gridObject;
-      if (commercialSpace.getVisitorQueueSize() >= 5 || commercialSpace.getEmployees().isEmpty()) {
+      if (commercialSpace.getVisitorQueueSize() >= 5 || commercialSpace.getEmploymentLevel() > 0.0f) {
         continue;
       }
 
