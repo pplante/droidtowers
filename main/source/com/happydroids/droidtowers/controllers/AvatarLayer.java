@@ -12,7 +12,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
-import com.happydroids.droidtowers.employee.JobCandidate;
 import com.happydroids.droidtowers.entities.*;
 import com.happydroids.droidtowers.events.EmployeeFiredEvent;
 import com.happydroids.droidtowers.events.EmployeeHiredEvent;
@@ -128,19 +127,12 @@ public class AvatarLayer extends GameLayer<Avatar> {
   }
 
   private void setupSpecialAvatar(CommercialSpace commercialSpace, Class<? extends Avatar> avatarClass) {
-    for (JobCandidate employee : commercialSpace.getEmployees()) {
-      if (employee.hasAvatar()) {
-        continue;
-      }
-
-      try {
-        Constructor<? extends Avatar> constructor = avatarClass.getDeclaredConstructor(AvatarLayer.class);
-        Avatar avatar = constructor.newInstance(this);
-        setupAvatar(avatar);
-        employee.setAvatar(avatar);
-      } catch (Exception e) {
-        throw new RuntimeException(e);
-      }
+    try {
+      Constructor<? extends Avatar> constructor = avatarClass.getDeclaredConstructor(AvatarLayer.class);
+      Avatar avatar = constructor.newInstance(this);
+      setupAvatar(avatar);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
   }
 
