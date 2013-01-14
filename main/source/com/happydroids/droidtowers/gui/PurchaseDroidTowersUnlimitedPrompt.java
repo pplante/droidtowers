@@ -35,7 +35,7 @@ public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
     addLabel("* Unlock Land expansions", FontManager.RobotoBold18).padLeft(indentPixels);
     addLabel("* Earn income 50% faster", FontManager.RobotoBold18).padLeft(indentPixels);
     addLabel("* Feeds the developers for less than $0.01 USD per day!", FontManager.RobotoBold18).padLeft(indentPixels);
-    addLabel("* FREE monthly content updates!", FontManager.Roboto24, Color.CYAN).padLeft(indentPixels);
+    addLabel("* FREE content updates!", FontManager.Roboto24, Color.CYAN).padLeft(indentPixels);
 
     shoveContentUp();
 
@@ -76,20 +76,20 @@ public class PurchaseDroidTowersUnlimitedPrompt extends ScrollableTowerWindow {
 
   private void displaySpecialOfferDialog() {
     new Dialog()
-            .setTitle("One Time Offer!")
-            .setMessage("SPECIAL ONE TIME OFFER!\n\nIf you are unsure about purchasing Droid Towers,\nhow about a special discount to sweeten the deal?\n\n* YOU WILL NEVER SEE THIS OFFER AGAIN *")
-            .addButton("Purchase for $1.99", new OnClickCallback() {
-              @Override public void onClick(Dialog dialog) {
-                dialog.dismiss();
-                Platform.getPurchaseManager().requestPurchaseForDiscountedOffer();
-              }
-            })
-            .addButton("Never ask again", new OnClickCallback() {
-              @Override public void onClick(Dialog dialog) {
-                dialog.dismiss();
-              }
-            })
-            .show();
+        .setTitle("One Time Offer!")
+        .setMessage("SPECIAL ONE TIME OFFER!\n\nIf you are unsure about purchasing Droid Towers,\nhow about a special discount to sweeten the deal?\n\n* YOU WILL NEVER SEE THIS OFFER AGAIN *")
+        .addButton("Purchase for $1.99", new OnClickCallback() {
+          @Override public void onClick(Dialog dialog) {
+            dialog.dismiss();
+            Platform.getPurchaseManager().requestPurchaseForDiscountedOffer();
+          }
+        })
+        .addButton("Never ask again", new OnClickCallback() {
+          @Override public void onClick(Dialog dialog) {
+            dialog.dismiss();
+          }
+        })
+        .show();
   }
 
 }

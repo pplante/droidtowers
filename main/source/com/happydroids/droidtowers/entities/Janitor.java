@@ -18,6 +18,7 @@ public class Janitor extends Avatar {
     super(avatarLayer.getGameGrid());
     setColor(Color.WHITE);
     setServicesTheseProviderTypes(JANITOR_SERVICES_PROVIDER_TYPES);
+    setVisible(true);
   }
 
   @Override
@@ -29,7 +30,9 @@ public class Janitor extends Avatar {
   protected void findPlaceToVisit() {
     Array<GridObject> gridObjects = gameGrid.getInstancesOf(CommercialSpace.class, HotelRoom.class);
     if (gridObjects != null && gridObjects.size > 0) {
-      gridObjects.sort(GridObjectSort.byDirtLevel);
+      if (gridObjects.size > 1) {
+        gridObjects.sort(GridObjectSort.byDirtLevel);
+      }
 
       for (int i = 0, gridObjectsSize = gridObjects.size; i < gridObjectsSize; i++) {
         GridObject gridObject = gridObjects.get(i);
@@ -43,8 +46,7 @@ public class Janitor extends Avatar {
   }
 
   protected boolean canService(CommercialSpace commercialSpace) {
-    return !commercialSpace.isBeingServiced() && commercialSpace.canEmployDroids() && commercialSpace.getJobsFilled() > 0 && commercialSpace
-                                                                                                                                     .provides(servicesTheseProviderTypes);
+    return !commercialSpace.isBeingServiced() && commercialSpace.provides(servicesTheseProviderTypes);
   }
 
   public void setServicesTheseProviderTypes(ProviderType... types) {

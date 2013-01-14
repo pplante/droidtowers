@@ -9,7 +9,6 @@ import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.achievements.AchievementEngine;
 import com.happydroids.droidtowers.achievements.TutorialEngine;
 import com.happydroids.droidtowers.events.ElevatorHeightChangeEvent;
-import com.happydroids.droidtowers.events.EmployeeHiredEvent;
 import com.happydroids.droidtowers.events.GridObjectEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 
@@ -36,10 +35,5 @@ public class AchievementEngineCheck extends GameGridAction {
       Gdx.app.debug(TAG, "GameEvent_handleGridObjectEvent triggered by: " + event);
       scheduleToRunIn(0.25f);
     }
-  }
-
-  @Subscribe
-  public void GameEvent_onEmployeeHired(EmployeeHiredEvent event) {
-    run();
   }
 }

@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.happydroids.droidtowers.entities.GridObject;
 
 import java.util.List;
 
@@ -17,10 +16,9 @@ import static com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class TransitLine {
   private List<Vector2> points;
-  private GridObject startObject;
-  private GridObject endObject;
   private Color color = Color.RED;
   private int highlightPoint;
+  private boolean visible;
 
   public TransitLine() {
     points = Lists.newArrayList();
@@ -31,7 +29,7 @@ public class TransitLine {
   }
 
   public void render(ShapeRenderer shapeRenderer) {
-    if (points.size() < 2) {
+    if (!visible || points.size() < 2) {
       return;
     }
 
@@ -78,5 +76,9 @@ public class TransitLine {
 
   public void highlightPoint(int highlightPoint) {
     this.highlightPoint = highlightPoint;
+  }
+
+  public void setVisible(boolean visible) {
+    this.visible = visible;
   }
 }

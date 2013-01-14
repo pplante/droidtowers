@@ -13,8 +13,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.eventbus.Subscribe;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.entities.*;
-import com.happydroids.droidtowers.events.EmployeeFiredEvent;
-import com.happydroids.droidtowers.events.EmployeeHiredEvent;
+import com.happydroids.droidtowers.events.GridObjectPlacedEvent;
 import com.happydroids.droidtowers.events.GridObjectRemovedEvent;
 import com.happydroids.droidtowers.grid.GameGrid;
 import com.happydroids.droidtowers.types.ProviderType;
@@ -126,13 +125,29 @@ public class AvatarLayer extends GameLayer<Avatar> {
     return false;
   }
 
-  private void setupSpecialAvatar(CommercialSpace commercialSpace, Class<? extends Avatar> avatarClass) {
+  private void setupSpecialAvatar(CommercialSpace commercialSpace, Class<? extends Avatar> avatarClass, int numToCreate) {
     try {
       Constructor<? extends Avatar> constructor = avatarClass.getDeclaredConstructor(AvatarLayer.class);
-      Avatar avatar = constructor.newInstance(this);
-      setupAvatar(avatar);
+      for (int i = 0; i < numToCreate; i++) {
+        Avatar avatar = constructor.newInstance(this);
+        setupAvatar(avatar);
+      }
     } catch (Exception e) {
       throw new RuntimeException(e);
+    }
+  }
+
+  @Subscribe
+  public void GameEvent_GridObjectPlaced(GridObjectPlacedEvent event) {
+    if (event.getGridObject() instanceof ServiceRoom) {
+      ServiceRoom commercialSpace = (ServiceRoom) event.getGridObject();
+      if (commercialSpace.provides(JANITORS)) {
+        setupSpecialAvatar(commercialSpace, Janitor.class, 3);
+      } else if (commercialSpace.provides(ProviderType.MAIDS)) {
+        setupSpecialAvatar(commercialSpace, Maid.class, 2);
+      } else if (commercialSpace.provides(ProviderType.SECURITY)) {
+        setupSpecialAvatar(commercialSpace, SecurityGuard.class, 2);
+      }
     }
   }
 
@@ -143,31 +158,6 @@ public class AvatarLayer extends GameLayer<Avatar> {
     if ((gridObject instanceof Room) && gridObject.isPlaced()) {
       Room room = (Room) event.getGridObject();
       for (Avatar avatar : room.getResidents()) {
-        avatar.markToRemove(true);
-      }
-    }
-  }
-
-  @Subscribe
-  public void GameGrid_onEmployeeHired(EmployeeHiredEvent event) {
-    if (event.getGridObject() instanceof CommercialSpace) {
-      CommercialSpace commercialSpace = (CommercialSpace) event.getGridObject();
-      if (commercialSpace.provides(JANITORS)) {
-        setupSpecialAvatar(commercialSpace, Janitor.class);
-      } else if (commercialSpace.provides(ProviderType.MAIDS)) {
-        setupSpecialAvatar(commercialSpace, Maid.class);
-      } else if (commercialSpace.provides(ProviderType.SECURITY)) {
-        setupSpecialAvatar(commercialSpace, SecurityGuard.class);
-      }
-    }
-  }
-
-  @Subscribe
-  public void GameGrid_onEmployeeFired(EmployeeFiredEvent event) {
-    Avatar avatar;
-    if (event.getGridObject() instanceof CommercialSpace && event.getEmployee() != null) {
-      avatar = event.getEmployee().getAvatar();
-      if (avatar != null) {
         avatar.markToRemove(true);
       }
     }

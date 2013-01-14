@@ -76,6 +76,7 @@ public class Avatar extends GameObject {
     setSize(stationary.originalWidth, stationary.originalHeight);
     setRegion(stationary);
     setOrigin(stationary.originalWidth / 2, 0);
+//    setVisible(false);
 
     walkAnimation = new Animation(FRAME_DURATION, droidAtlas.findRegions(addFramePrefix("walk")));
     lastVisitedPlaces = Lists.newLinkedList();

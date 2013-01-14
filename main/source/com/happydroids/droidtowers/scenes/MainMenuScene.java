@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.happydroids.HappyDroidConsts;
+import com.happydroids.droidtowers.DebugUtils;
 import com.happydroids.droidtowers.TowerConsts;
 import com.happydroids.droidtowers.gamestate.server.TowerGameService;
 import com.happydroids.droidtowers.gui.FontManager;
@@ -44,9 +45,9 @@ public class MainMenuScene extends SplashScene {
     super.create(args);
 
     Label versionLabel = FontManager.Default
-                                 .makeLabel(String.format("v%s (%s, %s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA
-                                                                                                            .substring(0, 8), HappyDroidService
-                                                                                                                                      .getDeviceOSMarketName()));
+        .makeLabel(String.format("v%s (%s, %s)", HappyDroidConsts.VERSION, HappyDroidConsts.GIT_SHA
+            .substring(0, 8), HappyDroidService
+            .getDeviceOSMarketName()));
     versionLabel.setColor(Color.LIGHT_GRAY);
     versionLabel.setX(getStage().getWidth() - versionLabel.getWidth() - 5);
     versionLabel.setY(getStage().getHeight() - versionLabel.getHeight() - 5);
@@ -85,16 +86,16 @@ public class MainMenuScene extends SplashScene {
         if (!preferences.getBoolean("ANDROID_WARNED_ABOUT_DISPLAY_MODE", false)) {
           preferences.putBoolean("ANDROID_WARNED_ABOUT_DISPLAY_MODE", true);
           Platform.getDialogOpener().showAlert("Compatibility Mode",
-                                                      "Hello,\n\nWe're sorry but this game is designed for a device with a higher resolution screen.  " +
-                                                              "It is impossible for us to restrict these devices from the market, so we have " +
-                                                              "designed a compatability mode as a work around.\n\nYou can continue to play the game, " +
-                                                              "but please understand your experience will be degraded.  Most commonly the text will be rather difficult to read.\n\n" +
-                                                              "Thank you,\nDroid Towers Team");
+              "Hello,\n\nWe're sorry but this game is designed for a device with a higher resolution screen.  " +
+                  "It is impossible for us to restrict these devices from the market, so we have " +
+                  "designed a compatability mode as a work around.\n\nYou can continue to play the game, " +
+                  "but please understand your experience will be degraded.  Most commonly the text will be rather difficult to read.\n\n" +
+                  "Thank you,\nDroid Towers Team");
         }
       }
 
 //      DebugUtils.loadGameByFilename("d955373bf7864c3a92dbfa0410f7ddf5.json");
-//      DebugUtils.loadFirstGameFound();
+      DebugUtils.loadFirstGameFound();
 //      DebugUtils.createNonSavableGame(false);
 //      DebugUtils.loadGameFromCloud(41);
 
@@ -121,9 +122,9 @@ public class MainMenuScene extends SplashScene {
     addActor(menuButtonPanel);
 
     Tween.to(menuButtonPanel, WidgetAccessor.POSITION, CAMERA_PAN_DOWN_DURATION)
-            .target(50 + (45 * (droidTowersLogo.getImageWidth() / droidTowersLogo.getWidth())), menuButtonPanel.getY())
-            .ease(TweenEquations.easeInOutExpo)
-            .start(TweenSystem.manager());
+        .target(50 + (45 * (droidTowersLogo.getImageWidth() / droidTowersLogo.getWidth())), menuButtonPanel.getY())
+        .ease(TweenEquations.easeInOutExpo)
+        .start(TweenSystem.manager());
   }
 
   private void makeUpgradeToUnlimitedButton(TextureAtlas buttonAtlas) {
@@ -136,11 +137,11 @@ public class MainMenuScene extends SplashScene {
     addActor(upgradeToUnlimited);
 
     Tween.to(upgradeToUnlimited, WidgetAccessor.SCALE, 2000)
-            .target(0.75f, 0.75f)
-            .delay(1.5f)
-            .repeatYoyo(Tween.INFINITY, 50)
-            .ease(TweenEquations.easeInElastic)
-            .start(TweenSystem.manager());
+        .target(0.75f, 0.75f)
+        .delay(1.5f)
+        .repeatYoyo(Tween.INFINITY, 50)
+        .ease(TweenEquations.easeInElastic)
+        .start(TweenSystem.manager());
 
     upgradeToUnlimited.addListener(new VibrateClickListener() {
       @Override
