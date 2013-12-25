@@ -1,5 +1,21 @@
-This is my skeleton project for LibGDX for use in IntelliJ/Textmate, also included is an ant build script to compile everything.
+This is the source code for Droid Towers, a game for Android.  It is a 
+tower building simulation inspired by SimTower.  I have added my own game play
+elements that I felt improved on the original game.
 
-Included is the nightly build from 2011-08-12 of LibGDX.
+I am looking for someone to maybe take over the game.  It makes around $200 a month with zero
+advertising.  I never really did much promotion beyond a reddit post.  I would love to see
+someone take this over and make it much bigger.  If you're interested in this, email me phil@happydroids.com
+so we can chat about the details.
 
-Enjoy!
+I have not made the game free on Google Play yet as I am waiting to see if there is interest in
+the project.  If anyone knows of a way I could provide visibility into the financial details of the
+game easily for public consumption I would happily do so.  Until then I plan to donate the funds to
+Childs Play (http://www.childsplaycharity.org/).
+
+The game is licensed under creative commons, see the LICENSE file for details.
+
+
+I originally released this on July 10, 2012 as a sort of tribute to my Father whom shares the same birthday.
+
+
+Link to Google Play: https://play.google.com/store/apps/details?id=com.happydroids.droidtowers
