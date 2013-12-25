@@ -17,7 +17,12 @@ public class TestGdxApplication implements Application {
     preferences = new GdxTestPreferences();
   }
 
-  public LwjglGraphics getGraphics() {
+    @Override
+    public ApplicationListener getApplicationListener() {
+        return null;
+    }
+
+    public LwjglGraphics getGraphics() {
     return null;
   }
 
@@ -40,7 +45,12 @@ public class TestGdxApplication implements Application {
   public void log(String tag, String message) {
   }
 
-  public void log(String tag, String message, Exception exception) {
+    @Override
+    public void log(String tag, String message, Throwable exception) {
+
+    }
+
+    public void log(String tag, String message, Exception exception) {
   }
 
   public void error(String tag, String message) {
@@ -58,7 +68,12 @@ public class TestGdxApplication implements Application {
   public void setLogLevel(int logLevel) {
   }
 
-  public ApplicationType getType() {
+    @Override
+    public int getLogLevel() {
+        return 0;
+    }
+
+    public ApplicationType getType() {
     return null;
   }
 
@@ -87,4 +102,14 @@ public class TestGdxApplication implements Application {
 
   public void exit() {
   }
+
+    @Override
+    public void addLifecycleListener(LifecycleListener listener) {
+
+    }
+
+    @Override
+    public void removeLifecycleListener(LifecycleListener listener) {
+
+    }
 }

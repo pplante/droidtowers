@@ -6,7 +6,6 @@
     <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/main/libs/sources/tween-engine-api-sources.jar!/" />
-      <root url="file://$USER_HOME$/Sources/libgdx/gdx/src" />
     </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/main/libs/main" recursive="false" />
   </library>

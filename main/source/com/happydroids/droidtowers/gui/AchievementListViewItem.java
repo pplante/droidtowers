@@ -65,7 +65,7 @@ class AchievementListViewItem extends Table {
           })));
         } else {
           clearActions();
-          setBackground(null);
+          setBackground((Drawable) null);
         }
 
         return false;

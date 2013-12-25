@@ -45,10 +45,10 @@ public class TransitLine {
 
     shapeRenderer.end();
 
-    shapeRenderer.begin(ShapeType.FilledCircle);
+    shapeRenderer.begin(ShapeType.Filled);
     for (Vector2 point : points) {
       shapeRenderer.setColor(color);
-      shapeRenderer.filledCircle(point.x, point.y, points.indexOf(point) == highlightPoint ? 8f : 5f);
+      shapeRenderer.circle(point.x, point.y, points.indexOf(point) == highlightPoint ? 8f : 5f);
     }
 
     shapeRenderer.end();

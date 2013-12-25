@@ -96,7 +96,12 @@ public class CameraController implements GestureDetector.GestureListener {
     return false;
   }
 
-  public boolean zoom(float originalDistance, float currentDistance) {
+    @Override
+    public boolean panStop(float x, float y, int pointer, int button) {
+        return false;
+    }
+
+    public boolean zoom(float originalDistance, float currentDistance) {
     float ratio = originalDistance / currentDistance;
     camera.zoom = initialScale * ratio;
 
